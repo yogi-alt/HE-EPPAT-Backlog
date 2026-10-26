@@ -1,0 +1,1524 @@
+<!doctype html>
+<html lang="id" data-brand="eppat" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Backlog E-PPAT Peruri — Platform · Monitoring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- CSS resmi IDDS (design.inadigital.go.id/getting-started/code/js), versi dikunci -->
+<link href="https://unpkg.com/@idds/styles@1.6.38/dist/index.min.css" rel="stylesheet">
+<!-- Brand mode E-PPAT (brand-eppat-idds/eppat.css) -->
+<style id="brand-eppat">
+/**
+ * E-PPAT Brand Theme untuk INA Digital Design System (IDDS)
+ * --------------------------------------------------------------------------
+ * Format mengikuti brand bawaan IDDS (@idds/styles: [data-brand='inagov'], 'panrb', dll.).
+ * Hanya token brand (primary, secondary, hover) yang diganti; warna netral, sentimen
+ * (positive/negative/warning/guide), tipografi, spacing, dan komponen tetap milik IDDS.
+ *
+ * Pemakaian:
+ *   1. import '@idds/react/index.css'            (atau @idds/styles/dist/index.css)
+ *   2. import './eppat.css'                       (berkas ini, SETELAH CSS IDDS)
+ *   3. document.documentElement.setAttribute('data-brand', 'eppat')
+ *      — atau setCustomTheme(eppatTheme) dari eppat-theme.ts (tanpa dukungan mode gelap)
+ *
+ * Sumber warna: tema aktif E-PPAT (CMS › Setting Theme) di dev-app.eppat.id, dibaca 23 Okt 2026:
+ *   --eppat-brand-rgb 61 107 94 (#3D6B5E), --eppat-brand-hover-rgb 52 93 82 (#345D52),
+ *   --eppat-sidebar-bg #2C3C42, --eppat-sidebar-hover #3A4D54, --eppat-line-sand-rgb 210 221 217,
+ *   --eppat-paper-cream-rgb 238 243 241, --eppat-paper-vanilla-rgb 245 248 247, kartu kantor #DAC999.
+ * Kontras (WCAG 2.2): teks putih di atas primary-500 #3D6B5E = 6,06:1 (AA); hover #345D52 = 7,41:1;
+ *   primary-400 #4E7C6F = 4,73:1 (dipakai sebagai warna utama mode gelap).
+ */
+
+/* E-PPAT Theme - Pejabat Pembuat Akta Tanah */
+[data-brand='eppat'] {
+  /* Primary Colors - Hijau E-PPAT */
+  --ina-primary-25: #f5f8f7;
+  --ina-primary-50: #eef3f1;
+  --ina-primary-100: #dde5e2;
+  --ina-primary-200: #c2d3cc;
+  --ina-primary-300: #9db8ae;
+  --ina-primary-400: #4e7c6f;
+  --ina-primary-500: #3d6b5e;
+  --ina-primary-600: #345d52;
+  --ina-primary-700: #2a4b42;
+  --ina-primary-800: #1d3530;
+  --ina-primary-900: #0f1c19;
+  --ina-primary-primary: #3d6b5e;
+
+  /* Secondary Colors - Emas kartu kantor E-PPAT */
+  --ina-secondary-25: #fcfbf6;
+  --ina-secondary-50: #f8f4e7;
+  --ina-secondary-100: #f0e8cc;
+  --ina-secondary-200: #e6dab2;
+  --ina-secondary-300: #dac999;
+  --ina-secondary-400: #c7b077;
+  --ina-secondary-500: #ae9358;
+  --ina-secondary-600: #8c7444;
+  --ina-secondary-700: #6a5733;
+  --ina-secondary-800: #483b23;
+  --ina-secondary-900: #272013;
+
+  /* Accent Colors (legacy IDDS, disamakan dengan secondary) */
+  --ina-accent-100: #fcfbf6 !important;
+  --ina-accent-200: #f8f4e7 !important;
+  --ina-accent-300: #f0e8cc !important;
+  --ina-accent-400: #e6dab2 !important;
+  --ina-accent-500: #dac999 !important;
+  --ina-accent-600: #ae9358 !important;
+  --ina-accent-700: #6a5733 !important;
+
+  /* Interactive Colors */
+  --ina-brand-primary: #3d6b5e;
+  --ina-brand-hover: #345d52 !important;
+  --ina-neutral-hover: var(--ina-neutral-100) !important;
+
+  /* Brand-specific colors (seperti --ina-bgn-brand-primary pada brand BGN) */
+  --ina-eppat-sidebar-bg: #2c3c42;
+  --ina-eppat-sidebar-hover: #3a4d54;
+  --ina-eppat-sidebar-active: var(--ina-primary-500);
+  --ina-eppat-sidebar-content: rgba(255, 255, 255, 0.8);
+  --ina-eppat-office-card: var(--ina-secondary-300);
+  --ina-eppat-stroke-brand: #d2ddd9;
+  --ina-eppat-surface-cream: var(--ina-primary-50);
+}
+
+/* Aksen komponen mengikuti brand E-PPAT.
+   IDDS memakai biru "guide" atau hitam untuk elemen penunjuk berikut; di E-PPAT diganti hijau brand.
+   Warna status (positive/negative/warning/info pada Alert, Badge, Toast) TIDAK diubah. */
+[data-brand='eppat'] .ina-button.ina-button--link { color: var(--ina-primary-500) !important; }
+[data-brand='eppat'] .ina-button--link:hover:not(:disabled),
+[data-brand='eppat'] .ina-button--link:focus:not(:disabled) { color: var(--ina-primary-600); }
+[data-brand='eppat'] .ina-stepper__item--active .ina-stepper__icon-wrapper {
+  border-color: var(--ina-primary-500); color: var(--ina-primary-500); background-color: var(--ina-primary-50);
+}
+[data-brand='eppat'] .ina-stepper__item--active .ina-stepper__label { color: var(--ina-primary-500); }
+[data-brand='eppat'] .ina-stepper__item--completed .ina-stepper__icon-wrapper {
+  border-color: var(--ina-primary-500); color: #fff; background-color: var(--ina-primary-500);
+}
+[data-brand='eppat'] .ina-stepper__item--completed .ina-stepper__label { color: var(--ina-primary-600); }
+[data-brand='eppat'] .ina-stepper__separator--completed { background-color: var(--ina-primary-500); }
+[data-brand='eppat'] .ina-checkbox__box--checked {
+  background-color: var(--ina-primary-500); border-color: var(--ina-primary-500);
+  box-shadow: inset 0 0 0 1px #fff, inset 0 0 0 2px var(--ina-primary-500);
+}
+[data-brand='eppat'] .ina-pagination__page-button--active { border-color: var(--ina-primary-500); color: var(--ina-primary-600); }
+[data-brand='eppat'] .ina-breadcrumb__link--active { color: var(--ina-primary-600); }
+
+/* Penyesuaian kontras (WCAG 2.2 AA, minimal 4,5:1 untuk teks biasa).
+   Warna bawaan IDDS berikut di bawah standar pada latar terang; diganti dengan corak lebih gelap
+   dari keluarga warna yang SAMA sehingga arti warna tidak berubah. */
+[data-brand='eppat'] .ina-stepper__item:not(.ina-stepper__item--active):not(.ina-stepper__item--completed):not(.ina-stepper__item--error) .ina-stepper__label,
+[data-brand='eppat'] .ina-stepper__item:not(.ina-stepper__item--active):not(.ina-stepper__item--completed):not(.ina-stepper__item--error) .ina-stepper__icon-wrapper {
+  color: var(--ina-content-secondary);                  /* #a3a3a3 2,5:1 → #525252 7,8:1 */
+}
+[data-brand='eppat'] .ina-text-field__required,
+[data-brand='eppat'] .ina-text-area__required,
+[data-brand='eppat'] .ina-select-dropdown__required,
+[data-brand='eppat'] .ina-password-input__required,
+[data-brand='eppat'] .ina-input-search__asterisk { color: var(--ina-negative-600); }      /* #f02d2d 4,1:1 → #d50b0b */
+[data-brand='eppat'] .ina-select-dropdown__trigger-text--placeholder,
+[data-brand='eppat'] .ina-date-picker__trigger-text--placeholder { color: var(--ina-content-secondary) !important; } /* IDDS memakai !important */
+[data-brand='eppat'] .ina-alert--caution .ina-alert__title { color: var(--ina-warning-600); } /* #eebb04 1,7:1 → #855f00 */
+[data-brand='eppat'] .ina-alert--info .ina-alert__title { color: var(--ina-guide-600); }
+[data-brand='eppat'] .ina-alert--critical .ina-alert__title { color: var(--ina-negative-600); } /* #f02d2d 3,6:1 di atas latar alert → #d50b0b */
+/* teks galat isian (#f02d2d 4,1:1 → negative-600 #d50b0b) */
+[data-brand='eppat'] .ina-one-time-password__helper-text--error,
+[data-brand='eppat'] .ina-text-area__helper-text--error,
+[data-brand='eppat'] .ina-phone-input__helper-text--error,
+[data-brand='eppat'] .ina-text-field .ina-text-field__helper-text.ina-text-field__helper-text--error,
+[data-brand='eppat'] .ina-file-upload__file-error,
+[data-brand='eppat'] .ina-file-upload__file--error .ina-file-upload__file-name,
+[data-brand='eppat'] .ina-file-upload__error-message { color: var(--ina-negative-600); }
+[data-brand='eppat'] .ina-file-upload__error-message:empty { display: none; }
+[data-brand='eppat'] .ina-password-input__status-message--error,
+[data-brand='eppat'] .ina-password-input .ina-password-input__status-area .ina-password-input__status-message.ina-password-input__status-message--error,
+[data-brand='eppat'] .ina-password-input__character-count--error { color: var(--ina-negative-600); }
+/* teks peringatan isian (#eebb04 1,8:1 → warning-600) */
+[data-brand='eppat'] .ina-text-field .ina-text-field__helper-text.ina-text-field__helper-text--warning,
+[data-brand='eppat'] .ina-text-area__helper-text--warning,
+[data-brand='eppat'] .ina-password-input__status-message--warning,
+[data-brand='eppat'] .ina-password-input__character-count--warning { color: var(--ina-warning-600); }
+[data-brand='eppat'] .ina-password-input__status-message--success { color: var(--ina-content-positive); }
+
+/* E-PPAT Dark Mode Overrides */
+[data-theme='dark'][data-brand='eppat'] {
+  --ina-primary-primary: var(--ina-primary-400);
+  --ina-brand-hover: var(--ina-primary-500) !important;
+  --ina-neutral-hover: var(--ina-neutral-800) !important;
+  --ina-eppat-sidebar-bg: #141c1f;
+  --ina-eppat-sidebar-hover: #22302d;
+  --ina-eppat-sidebar-active: var(--ina-primary-400);
+  --ina-eppat-stroke-brand: #2a3a36;
+  --ina-eppat-surface-cream: #18211f;
+}
+
+
+/* Bantuan dalam IDDS Drawer + Accordion */
+.ina-drawer__content .bantu-langkah{margin:4px 0 4px;padding-left:20px;font-size:14px;line-height:21px}
+.ina-drawer__content .bantu-langkah li{margin-bottom:8px}
+.ina-drawer__content > p{margin:0 0 8px;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+.ina-drawer__content .bantu-sub{margin:20px 0 8px}
+.ina-drawer__content .bantu-kontak{grid-template-columns:1fr}
+.ina-drawer__content .ina-accordion{border-bottom:1px solid var(--ina-stroke-primary)}
+.ina-drawer__content .ina-accordion__body p{margin:0;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+
+.judul-halaman{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.judul-halaman .judul-kiri{min-width:0}
+</style>
+<style id="kerangka-css">
+/* ===== Order AJB — komponen IDDS + brand E-PPAT (HE-UMUM-01)
+   + usulan dari laporan Heuristic Evaluation INA Digital hal. 23–24 (HE-ORDER-01…05)
+   Kerangka & teks mengikuti layar live Peruri (dilihat 23 Okt 2026, akun Asisten). ===== */
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+button,input,select,textarea{font-family:inherit}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ina-content-primary);background:var(--ina-background-secondary);-webkit-font-smoothing:antialiased}
+
+/* protobar (khusus prototipe) */
+.protobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 16px;background:#0f1a17;color:#E6EDEA;font-size:12px;position:relative;z-index:60}
+.protobar a{color:#E6EDEA;text-decoration:none;border:1px dashed rgba(255,255,255,.3);border-radius:999px;padding:4px 10px;font:500 11px Inter,sans-serif}
+.protobar b{color:#fff}
+.protobar .sep{opacity:.35}
+.protobar button.pil{border:1px solid rgba(255,255,255,.25);background:transparent;color:#E6EDEA;font:500 11px Inter,sans-serif;padding:4px 10px;border-radius:999px;cursor:pointer}
+.protobar button.pil[aria-pressed="true"]{background:#3D6B5E;border-color:#3D6B5E;color:#fff}
+.protobar .kanan{margin-left:auto;display:inline-flex;gap:8px;flex-wrap:wrap}
+.protobar .utama{background:#3D6B5E!important;border-color:#3D6B5E!important;color:#fff!important;font-weight:600!important}
+.tag-usulan{display:none!important;align-items:center;font:600 10px Inter,sans-serif;letter-spacing:.6px;text-transform:uppercase;color:#2563EB;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:999px;padding:1px 7px;margin-left:6px;vertical-align:middle;white-space:nowrap}
+body.penanda .tag-usulan{display:inline-flex!important}
+body.penanda .ditandai{outline:2px dashed rgba(37,99,235,.45);outline-offset:4px;border-radius:10px}
+.sorot{outline:3px solid #2563EB!important;outline-offset:4px;border-radius:12px}
+
+/* kerangka aplikasi — struktur pola Sidebar & Header IDDS, warna dari brand E-PPAT (--ina-eppat-*, --ina-primary-*) */
+.app{display:flex;min-height:100vh}
+.sidebar{width:240px;flex:none;background:var(--ina-eppat-sidebar-bg);border-right:0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow:auto;padding:0 16px}
+.brand{display:flex;align-items:center;height:76px;flex:none;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:16px}
+.brand img{width:150px;display:block}
+.kantor.ina-card{flex:none;background:var(--ina-eppat-office-card);border:0;border-radius:12px;padding:12px 16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.kantor .ina-card__content{padding:0;gap:0}
+.kantor .eyebrow{font:600 10px/15px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#1f1f1f;opacity:.7}
+.kantor .ina-card__title{margin:4px 0 0;font:600 10px/1.375 Inter,sans-serif;color:#1f1f1f}
+.kantor .ina-card__description{-webkit-line-clamp:unset;line-clamp:unset;display:block;overflow:visible;margin:0;font-size:12px;line-height:18px;color:#1f1f1f}
+.kantor .kantor-info{display:flex;flex-direction:column;gap:4px;margin-top:8px;font-size:9px;line-height:13px;opacity:.8}
+.kantor .baris-kantor{display:flex;align-items:flex-start;gap:6px;font-size:9px;line-height:13px;font-weight:500;color:#1f1f1f}
+.kantor .baris-kantor svg{flex:none;width:10px;height:10px;margin-top:1px}
+#nav{flex:1;display:flex;flex-direction:column;gap:2px;padding-bottom:12px}
+.grp{display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:0;cursor:pointer;padding:16px 8px 6px;color:rgba(255,255,255,.72);font:500 12px/16px Inter,sans-serif;letter-spacing:0;text-transform:none} /* label grup sentence case (pola Sidebar IDDS) */
+.grp svg{flex:none;color:var(--eppat-sidebar-icon)}
+.grp > span:not(.chev){flex:1;min-width:0;text-align:left;line-height:16px} /* label grup rata kiri, sejajar ikon */
+/* ikon sidebar satu warna (pola backlog Perdana Niaga) — nanti dari Konten Situs › Tema Tampilan */
+:root{--eppat-sidebar-icon:#C2BB4B;--eppat-sidebar-active-icon:#FFFFFF}
+.grp .chev{margin-left:auto;transition:.15s;display:grid}
+.grp[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.items{display:flex;flex-direction:column;gap:2px}
+.sidebar .items a.nav-item{display:flex;justify-content:flex-start;gap:8px;width:100%;padding:8px;max-height:none;border-radius:8px;text-decoration:none;font-weight:500;color:var(--ina-eppat-sidebar-content)!important;background:transparent}
+.sidebar .items a.nav-item svg{width:16px;height:16px;flex:none;color:var(--eppat-sidebar-icon)}
+.sidebar .items a.nav-item:hover{background:var(--ina-eppat-sidebar-hover);color:#fff!important}
+.sidebar .items a.nav-item.on{background:var(--ina-eppat-sidebar-active);color:#fff!important;font-weight:600}
+.sidebar .items a.nav-item.on svg{color:var(--eppat-sidebar-active-icon)}
+.sidefoot{flex:none;padding:12px 8px;border-top:1px solid rgba(255,255,255,.1);font-size:11px;color:rgba(255,255,255,.75)}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+header.top{height:64px;flex:none;display:flex;align-items:center;gap:12px;padding:0 24px;background:var(--ina-background-primary);border-bottom:1px solid var(--ina-stroke-primary);position:sticky;top:0;z-index:20}
+.spacer{margin-left:auto}
+.user{position:relative;display:flex;align-items:center;gap:10px;padding:4px 8px;border-radius:8px}
+.ava{width:32px;height:32px;font:600 12px Inter,sans-serif;background:var(--ina-primary-primary)!important;color:#fff!important;border-color:var(--ina-primary-primary)!important}
+.uname{display:block;font:600 12px/14px Inter,sans-serif;color:var(--ina-primary-primary)}
+.urole{font:400 10px Inter,sans-serif;color:var(--ina-content-secondary);letter-spacing:1.4px;text-transform:uppercase}
+.content{flex:1;background-color:var(--ina-background-secondary);background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHCAkIBgoJCAkMCwoMDxoRDw4ODx8WGBMaJSEnJiQhJCMpLjsyKSw4LCMkM0Y0OD0/QkNCKDFITUhATTtBQj//2wBDAQsMDA8NDx4RER4/KiQqPz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz//wgARCAMqBaADASIAAhEBAxEB/8QAGgABAQEBAQEBAAAAAAAAAAAAAAECAwUGBP/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/2gAMAwEAAhADEAAAAfqysywCksAFlhYCwWAAURYCksApLAAABAAAJYAgCWAAAgAAFQAACAAAgAACAAAgFAAIAACAAAIAACAAACACAIAUAIAACAAAgAAAgAAJYAACUAABAAAesOegFgVBZSAKIsCwAWUlQLABYAAAEsAABAEAEAAAEAABLKAASwAAEAAAEAABCgABAAAQAAAgAAEAABLAAEEAoACAAAgAAEsAABAAACAACkAABAAAEPXHPQCwWKSwAAWAUIApCkAAqAAAEAAAggACAAAlgAAJQAAEAAAgAAJYAAJYBQAEAABAAAJYAAJYAAAQAIBABQCWAACWAACWAAAEAAAgAAJZQAAgAAAgeuOerAAAAFICkACiWCywAsAAABAAAQAAQQAAEAAApAAAQAAEsAABAAACCgAEAABAAAEAABAAABAABEsAoAQAAEAAAIAABAAAEAAAIKAAgAAEsAPXWc9AAAACiAAsAABYFgAAAIAAAQAIAgAAIAACWUAAIAAAQAACWAACFAACAAAgAAAgAAIAAAgCACAUAAgAAIAACWAAAgAAAgAAIUAAIAACAAHrrOelgAWCxSWCwBRLAsFgFIsAAAIAABABAEsAABAAAKgAAEAABAAAEAABAKAAgAAEAABLAAAQAAAgAQBACgEsAABAAAQAAAQAABAAASgAAIAABAAA9iHPSwWAWFQCiAUAQBRCkAAAlgAAIAgAEAABAAAIUAAIAACAAACAAAhQACWAACWAAAgAAAgAAIAIAIBQAgAABAAAIAACWAAAEAAFIAACAAAIAACHsyuepZSFIsAAFgAAWAAAAAQAAAgQABAAASwAAEoAACAAAgAAEsAAEsAoAQAAAgAAEsAAEsAABAAEAQAoBAAASwAASwAAAgAAEAAASgAAIAACAAAQPYHPQCoWAWAApCkAAAAAAgAAJYAgAgAAIAABSAAAgAAJYAAAQAAEFAAIAACAAAIAACAAACACAIAUAIAACAAAEAAAlgAAIAACUAAAgAAIAACWAHsWOerLAsALAAWAUgLAAAASwAAEAQACAAAQAAEsoAAQAAAgAAEAABCgABAAACAAAQAAEAABLAEAEAAoBAAAQAAEAAAQAAAgAAEKAAEAABAAACAA9ixz0BYFgLAABYAolgAAIAAAIAIAlgAAIAACUAABAAAIAAAgAAIBQACAAAgAACAACWAAAEACAIAUAlgAAIAAAQAACAAAlgAAJQAAEAAAgAAJYAAews56AWACwFQVBUAAAAEAAAQABAIAACAAAQoABLAAAQAAAgAAEKAAQAAEsAAAIAACAAAQAARLAKAEAAAIAABAAAEAAAIAABCgAEAABLAAAQAAA9gvPUsApLABZYVAsFgAACAAAEACAIAACWAAAlAACAAAEAAAgAAJYBQAgAAAgAAJYAAJYAACAAIBABQCAAAlgAAIAACAAACAAAhQAAgAABAAAIAACWHsjnoBYFQWUgCiLAAABAAAQAQAQAAEAAAIKAAQAAEsAAAIAACCgAEsAAEsAABAAAQAAAQAARACgEsAABAAACAAAQAABAAASgAAEAABAAASwAAEAPZHPQCwWKSwAAWAAAlgAAIAAgEAAAgAAIUAAIAACAAACAAAhQACWAAAgAAAgAAIAAAgCACAUABAAAQAACWAAAgAAAgAAIUAAlgAAIAAAQAACAB7I56sAAAAUgAAAIAABABAEsAAEsAABKAAAgAAEAABLAABLAKAAQAAEAABLAABLAAAQsAEAQAoAQAAEAAAIAABAAASwAASygAAIAACAAAQAABAAD2VnPQAAAApAAAIAAAgCACAAAEAAAhQACAAAIAACAAAEFAAIAAAgAAIAAAQAACWAIAlgFACAAAEAAAgAAJYAACAAAEFAAIAACWAAAgAABAAAeys56WABYLFIAAAQAAAgQABAAASwAAEoAAQAAAQAAEAABLKAAAgABAAABAAASwAASwABBAAKAQAAEAABLAAAQAAAQAAEsoABLAAACAAAQAAEsAABD24c9LBYBYVAAAAgAAIAIAIAACAAAVAAAIAACWAAAgAAIBQACAAAgAACAAAgAAAgAgCAFAC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PWXSalle2OVEAAAIAABCgAEsAABAAACAAAQoABAAAEAABAAACAAAQAQAQCgBAAAQAAAgAAEAAAQAAAgoABAAASwAAEAMxqXVk53lenLc3VyvM0QuIuCzUWaExbbWKJvGklmV6XGpejnvFucZq9eXUzjrzqs61PbHOoAACWAAAlAACAAACAAAgAAJYBQAgAABAAAIAACAAAIAAggAFAIAACAAAIAACAAACAAAhQAAgAAIAAAQgzrI6ZuKxqxz3z6VcFM3NzqZG80iXdvPUqopi6iZsJNAIaZs105bZt55tdZncctM7nvSznQAAIAAKgAAEAABLAAAQAAEAoABAAAQAABAAAQAAAQAQBACgEsAABAAABAAAQAABAAASgAAEAABAAASwQMypd8+kyxvOa3WYks1mSxSw1l1sZlXUz0MFNYsLzaJJWSaVJDe+es6x0SLMytZ6c690YAAQAACFAACAAAgAAAgAAIUAAlgAAIAAAIAACAAAIAgCWAUAAgAAIAACAAAIAAAIAACFAACAAAgAABAZBnWOmbMaya1z3FxZUzqXOdZqqWbmsrNskudGdZpN89mW8km+aWXJZuLLnRrOsZu5im83J7oyASwAAEoAACAAAQAAEsAABAKAAgAAIAABLAAAQAAAgAQCACgEAABLAAAQAAAgAAEsAABKAAAgAAEAABAS5JLBvGs0IAzLnUk1AoCzphF3m0xWjnpo56miTWDpy1goQzszZTUms6560pLI9wZAQAAUgAAJYAACAAAEAAAhQACAAAlgAABAAAQAACACAJYBQAgAABAAAIAAAgAAIAABUAAAlgAAgAACADOskzYXWbm5zVN43GZc2JrJbFlQdM3C7mdmK0YspKBIdOWslliXKquaXWUupmG2dJ7gxUsAABKAAEAAAIAABAAAQoAACAAAgAAEAABAAAEAAQQACgEAACAAAEAABAAABAAAQoABLAAAQAAAQAGN4JLBrNlszC6zqJmyxLKqChJZVuVCUEALlSBALEWpRZYMU0g94mKAAJQAACAAAlgAAIAACAUAAgAAIAAAgAAIAAAQAIBABQAgAAIAAAQAACAAAIAABUAABAAAIAACAAAzrJgE1jUWQtZoIglWSlQgFSrFgqADNAiKi2ABqJAtJZHvDFAAQoABLAAAQAAAgAAEKAASwAAEAABCwAAEAABABAEsAoACAAA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");background-size:cover;background-position:center;background-repeat:no-repeat}
+.page{padding:24px 32px 56px}
+.page .ina-breadcrumb{margin-bottom:8px;display:flex;justify-content:flex-start}
+.page .ina-breadcrumb__list{justify-content:flex-start;margin:0;padding:0}
+h1{margin:0;font:500 28px/36px Inter,sans-serif;letter-spacing:-.3px;color:var(--ina-primary-primary)}
+.sub{margin:2px 0 0;font-size:14px;color:var(--ina-content-secondary)}
+.kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px}
+
+/* daftar order */
+.daftar-atas{display:flex;justify-content:flex-end;margin-top:20px}
+.saring{display:grid;grid-template-columns:minmax(0,1fr) 220px auto;gap:12px;align-items:end;margin-top:16px}
+.saring .ina-text-field__label{display:block}
+.saring .cari-wadah .ina-input-search{width:100%;margin-top:6px} /* IDDS Input Search, sama dengan Minuta & Verifikasi */
+.tabel-wadah{margin-top:16px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;overflow:hidden}
+.tabel-gulir{overflow-x:auto}
+table.tb{width:100%;border-collapse:collapse;font-size:14px}
+.tabel-wadah .ina-table{border:0;border-radius:0}
+table.tb td{vertical-align:middle}
+table.tb td .kd{font-weight:600;color:var(--ina-primary-primary);cursor:pointer}
+table.tb td .kc{font-size:12px;color:var(--ina-content-secondary)}
+table.tb tr.klik{cursor:pointer}
+table.tb tr.klik:hover td{background:var(--ina-primary-25)}
+.aksi-baris{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.kosong{padding:28px;text-align:center;color:var(--ina-content-secondary)}
+.halaman{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--ina-stroke-primary);font-size:13px;color:var(--ina-content-secondary)}
+.halaman > span{white-space:nowrap}
+[data-merah]{color:var(--ina-negative-600)!important}
+.tb .ina-table__cell,.tb .ina-table__header-cell{padding:12px 16px}
+.tb .ina-table__cell{white-space:normal}
+.lengkap{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.lengkap.ok{color:var(--ina-content-positive)}
+.lengkap.kurang{color:var(--ina-content-secondary)}
+.lengkap svg{flex:none}
+
+/* detail order */
+.det-kepala{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px}
+.det-kepala .kode{font:600 14px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary);margin-top:12px}
+.det-kepala h2{margin:2px 0 0;font:600 20px/28px Inter,sans-serif}
+.status-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px 28px}
+.status-kartu .ina-stepper{align-items:flex-start;min-height:92px;padding:4px 64px 0}
+.status-kartu .ina-stepper__separator{align-self:flex-start;margin-top:11px}
+.status-kartu .ina-stepper__label small{display:block;margin-top:3px;font-size:12px;line-height:16px;font-weight:400;color:var(--ina-content-secondary)}
+.status-kaki{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ina-stroke-primary);margin-top:8px;padding-top:16px}
+.status-kaki p{margin:0;font-size:14px;color:var(--ina-content-secondary)}
+.status-kaki p b{color:var(--ina-content-primary)}
+.status-kaki .kanan{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.status-kaki .alasan{font-size:12.5px;color:var(--ina-content-secondary)}
+.syarat{margin-top:16px;padding:14px 16px;border:1px solid var(--ina-stroke-primary);border-radius:12px;background:var(--ina-background-secondary)}
+.syarat h4{margin:0 0 10px;font:600 13px Inter,sans-serif;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.syarat h4 .hit{font-weight:500;color:var(--ina-content-secondary)}
+.syarat ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 16px}
+.syarat li{display:flex;align-items:center;gap:8px;font-size:13.5px;min-width:0}
+.syarat li .ik{width:20px;height:20px;border-radius:999px;display:grid;place-items:center;flex:none}
+.syarat li.ok .ik{background:var(--ina-positive-100);color:var(--ina-content-positive)}
+.syarat li.kurang .ik{background:var(--ina-warning-100);color:var(--ina-warning-600)}
+.syarat li.ok span.t{color:var(--ina-content-secondary)}
+.syarat li .ina-button{padding:0;height:auto;min-height:0}
+.syarat-alert{margin-top:16px}
+.syarat-alert .ina-alert__description{display:flex;flex-direction:column;gap:10px}
+.syarat-daftar{display:flex;flex-wrap:wrap;gap:8px 16px}
+.syarat-item{display:inline-flex;align-items:center;gap:4px}
+.syarat-item .ina-badge{display:inline-flex;align-items:center;gap:4px}
+.syarat-item .ina-button{padding:0 4px}
+.langkah-berikut{color:var(--ina-content-primary)}
+.info-baris{margin-top:16px}
+.info-baris .ina-alert__content{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;width:100%}
+.info-baris .ina-alert__text-section{flex:1;min-width:220px}
+
+.tab-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;overflow:hidden}
+.tab-kartu > .ina-tab-horizontal{padding:0 12px;border-bottom:1px solid var(--ina-stroke-primary)}
+.tab-kartu .ina-tab-horizontal__tab{gap:8px;display:inline-flex;align-items:center}
+.tab-kartu .tanda{font:600 11px Inter,sans-serif;border-radius:999px;padding:1px 7px}
+.tab-kartu .tanda.ok{background:var(--ina-positive-100);color:var(--ina-content-positive)}
+.tab-kartu .tanda.kurang{background:var(--ina-warning-100);color:var(--ina-warning-700)}
+.tab-kartu .tanda.netral{background:var(--ina-neutral-100);color:var(--ina-content-secondary)}
+.tab-isi{padding:20px}
+.tab-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.tab-bar p{margin:0;font-size:13px;color:var(--ina-content-secondary)}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f-grid .lebar{grid-column:1/-1}
+.ina-text-field textarea.ina-text-field__input{min-height:80px;resize:vertical;padding:0}
+.f-kaki{display:flex;justify-content:flex-end;margin-top:16px}
+.tb .nm{font-weight:500}
+.tb .sub2{font-size:12px;color:var(--ina-content-secondary)}
+.kunci{margin-bottom:16px}
+
+/* dialog */
+.ina-modal__body p{margin:0 0 8px;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+.seg{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary)}
+.seg button{border:0;border-radius:7px;background:transparent;padding:7px 14px;font:500 14px Inter,sans-serif;color:var(--ina-content-secondary);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ina-primary-primary);color:#fff}
+.fld{margin-bottom:16px}
+.fld > .ina-text-field__label{display:flex;align-items:center;gap:6px}
+.select-wadah{position:relative;display:block;width:100%}
+.select-wadah .ina-select-dropdown__panel{top:calc(100% + 4px);left:0;right:0;max-height:240px}
+.cari-panel{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:5;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:8px;box-shadow:0 10px 24px rgba(0,0,0,.1);padding:4px;max-height:220px;overflow:auto}
+.cari-panel button{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;border:0;background:transparent;text-align:left;padding:8px 10px;border-radius:6px;cursor:pointer;font-size:14px}
+.cari-panel button:hover{background:var(--ina-background-tertiary)}
+.cari-panel small{display:block;font-size:12px;color:var(--ina-content-secondary)}
+.kartu-pihak{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:12px 14px;background:var(--ina-background-secondary);font-size:13.5px}
+.kartu-pihak b{display:block;font-size:14px;margin-bottom:6px}
+.kartu-pihak dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;margin:0}
+.kartu-pihak dt{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.kartu-pihak dd{margin:0}
+.belum-ada{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 14px;padding:10px 12px;border-radius:10px;background:var(--ina-primary-25);border:1px solid var(--ina-primary-100);font-size:13px}
+.ringkas-kv{display:grid;grid-template-columns:140px 1fr;gap:8px 12px;margin:12px 0 14px;padding:12px 14px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);font-size:14px}
+.ringkas-kv dt{color:var(--ina-content-secondary)}
+.ringkas-kv dd{margin:0;font-weight:500}
+.cek-setuju{display:flex;gap:10px;align-items:flex-start;margin-top:10px;font-size:14px;cursor:pointer}
+
+.daftar-ubah{display:flex;flex-direction:column;gap:10px}
+.daftar-ubah .it{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:12px 14px}
+.daftar-ubah .it .a{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.daftar-ubah .it code{font:600 11.5px ui-monospace,Menlo,monospace;color:#2563EB}
+.daftar-ubah .it b{font-size:14px}
+.daftar-ubah .it p{margin:6px 0 4px;font-size:13px;line-height:19px;color:var(--ina-content-primary)}
+.daftar-ubah .it .lama{font-size:12.5px;line-height:18px;color:var(--ina-content-secondary)}
+.bantu-langkah{margin:8px 0 4px;padding-left:20px;font-size:14px;line-height:21px}
+.bantu-langkah li{margin-bottom:6px}
+.bantu-sub{margin:18px 0 8px;font:600 14px Inter,sans-serif;display:flex;align-items:center}
+.bantu-faq{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:14px}
+.bantu-faq summary{cursor:pointer;font-weight:500}
+.bantu-faq p{margin:8px 0 0!important}
+.bantu-kontak{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.bantu-kontak div{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:10px 12px;background:var(--ina-background-secondary)}
+.bantu-kontak b{display:block;font-size:12px;font-weight:500;color:var(--ina-content-secondary)}
+.bantu-kontak span{font-size:14px}
+.isi-tim{border-bottom:1px dashed currentColor;cursor:help}
+.toast-wadah{position:fixed;bottom:24px;right:24px;z-index:100;max-width:calc(100vw - 32px)}
+.tip{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:999px;border:1px solid var(--ina-stroke-secondary);color:var(--ina-content-secondary);font:600 10px Inter,sans-serif;cursor:help;background:transparent;padding:0}
+.ina-tooltip__bubble{max-width:260px;white-space:normal}
+
+@media (max-width:1024px){
+  .sidebar{position:fixed;z-index:40;left:0;top:0;transform:translateX(-100%);transition:.22s}
+  .sidebar.open{transform:none}
+  .scrim{position:fixed;inset:0;background:rgba(15,26,23,.45);z-index:35;opacity:0;pointer-events:none;transition:.22s}
+  .scrim.on{opacity:1;pointer-events:auto}
+  .syarat ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  header.top{padding:0 16px}
+  .user .txt,#bukaBantuan span{display:none}
+  .page{padding:20px 16px 40px}
+  h1{font-size:23px;line-height:32px}
+  .saring{grid-template-columns:1fr}
+  .f-grid,.syarat ul,.kartu-pihak dl,.bantu-kontak{grid-template-columns:1fr}
+  .status-kartu{padding:18px 16px}
+  .status-kartu .stepper-h{display:none}
+  .status-kartu .stepper-v{display:flex!important;padding:4px 0}
+  .ringkas-kv{grid-template-columns:1fr;gap:2px}
+  .protobar .kanan{margin-left:0}
+  table.tb thead{display:none}
+  table.tb tr{display:block;border-top:1px solid var(--ina-stroke-primary);padding:8px 0}
+  table.tb td{display:block;border:0;padding:4px 16px}
+  .aksi-baris{justify-content:flex-start}
+}
+.status-kartu .stepper-v{display:none}
+.status-kartu .stepper-v .ina-stepper__label small{display:inline;margin:0 0 0 8px}
+.status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
+</style>
+<style id="pl-monitoring-css">
+/* ===== Platform · Monitoring (Admin Platform): Dasbor, Daftar PPAT, Paket Langganan, Log Aktivitas — penyesuaian IDDS (IDDS-PL-11…20)
+   Menu ini tidak dinilai HE. Isi, kolom, dan perilaku mengikuti kode live dev-app.eppat.id/platform;
+   yang disesuaikan hanya komponen (IDDS + brand E-PPAT), kejujuran label, bahasa, status sistem, dan Bantuan per halaman. ===== */
+.ina-tooltip:not(:hover):not(:focus-within) .ina-tooltip__content{display:none}
+.ina-tooltip__bubble{display:block;width:max-content;max-width:min(260px,80vw);white-space:normal;text-align:left;line-height:1.45;font-weight:400;text-transform:none;letter-spacing:0}
+.ina-modal-confirmation{max-width:560px}
+.modal-gap>*+*{margin-top:12px}
+.eb{font:600 11px Inter,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.blok{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px}
+.blok h2{margin:6px 0 4px;font:500 20px/28px Inter,sans-serif;color:var(--ina-primary-primary)}
+.blok .ket{margin:0;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+.blok-atas{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* kepala: menu pengguna (IDDS Action Dropdown) */
+.user-tombol{display:flex;align-items:center;gap:10px;padding:4px 8px;border:0;border-radius:8px;background:transparent;cursor:pointer;text-align:left;color:inherit}
+.user-tombol:hover{background:var(--ina-background-secondary)}
+.user-tombol:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px}
+.user-tombol .chev-u{color:var(--ina-content-secondary);display:grid}
+.user .ina-action-dropdown__menu{position:absolute;right:0;left:auto;top:calc(100% + 6px);min-width:220px;z-index:30;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.user a.ina-action-dropdown__item{text-decoration:none;color:inherit}
+.user .menu-kepala{display:flex;flex-direction:column;gap:2px;padding:8px 12px}
+.user .menu-kepala b{font:600 14px Inter,sans-serif;color:var(--ina-primary-primary)}
+.user .menu-kepala span{font-size:12px;color:var(--ina-content-secondary)}
+
+/* Dasbor */
+.kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:24px}
+.kpi > div{position:relative;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:20px}
+.kpi small{display:block;max-width:72%;font:600 11px/16px Inter,sans-serif;letter-spacing:1.4px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.kpi i{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:999px;background:var(--ina-primary-50);display:grid;place-items:center;color:var(--ina-primary-primary)}
+.kpi i svg{width:15px;height:15px}
+.kpi b{display:block;margin-top:18px;font:400 30px Inter,sans-serif;color:var(--ina-primary-primary)}
+.kpi span{font-size:12.5px;color:var(--ina-content-secondary)}
+.dua-kartu{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.kartu-st{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:18px 20px}
+.kartu-st .bulat{width:46px;height:46px;border-radius:999px;display:grid;place-items:center;flex:none;background:var(--ina-primary-50);color:var(--ina-primary-primary)}
+.kartu-st .bulat.sehat{background:var(--ina-positive-100,#dcf5e5);color:var(--ina-content-positive)}
+.kartu-st .bulat.periksa{background:var(--ina-neutral-100,#eee);color:var(--ina-content-secondary)}
+.kartu-st .isi{flex:1;min-width:160px}
+.kartu-st .nilai{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px;font:600 16px Inter,sans-serif;color:var(--ina-primary-primary)}
+.kartu-st .nilai.besar{font:600 24px Inter,sans-serif}
+.kartu-st .kt{display:block;margin-top:2px;font-size:12.5px;color:var(--ina-content-secondary)}
+.dasbor-dua{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:24px;margin-top:24px}
+.dasbor-dua .blok{margin:0}
+.akt{list-style:none;margin:12px 0 0;padding:0;font-size:14px}
+.akt li{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--ina-stroke-primary)}
+.akt li:first-child{border-top:0}
+.akt .titik{width:8px;height:8px;border-radius:999px;background:var(--ina-primary-primary);margin-top:7px;flex:none}
+.akt .titik.gagal{background:var(--ina-negative-600,#d50b0b)}
+.akt .baris1{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.akt b{font-weight:600;color:var(--ina-primary-primary)}
+.akt .baris2{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px}
+.akt .wkt{font-size:12px;color:var(--ina-content-secondary)}
+.teramai{list-style:none;margin:12px 0 0;padding:0}
+.teramai li + li{margin-top:4px}
+.teramai a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 8px;border-radius:10px;text-decoration:none;color:inherit}
+.teramai a:hover{background:var(--ina-primary-25,#f5f8f7)}
+.teramai a:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:1px}
+.teramai .nm{display:block;font:600 14px Inter,sans-serif;color:var(--ina-primary-primary)}
+.teramai .sl{display:block;font:12px ui-monospace,Menlo,monospace;color:var(--ina-content-secondary)}
+.teramai .ina-badge{flex:none}
+.lihat-semua{margin-top:12px}
+
+/* tabel & saringan */
+.mono{font:12px ui-monospace,Menlo,monospace;color:var(--ina-content-secondary)}
+.info-pl{margin-top:20px}
+.info-pl .ina-alert__content{display:flex;flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap;width:100%}
+.info-pl .ina-alert__text-section{flex:1;min-width:240px}
+.info-pl .aksi-info{display:flex;gap:8px;flex-wrap:wrap}
+.saring-pl{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-top:16px;padding:12px 16px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px}
+.saring-pl .lbl{display:block;margin-bottom:6px;font-size:13px;font-weight:500;color:var(--ina-content-primary)}
+.saring-pl .ina-input-search{width:320px}
+.saring-pl .jumlah{margin-left:auto;align-self:center;font-size:13px;color:var(--ina-content-secondary)}
+.pilih-wadah{position:relative}
+.pilih-wadah .ina-select-dropdown__trigger{min-width:250px}
+.pilih-wadah .ina-select-dropdown__panel{top:calc(100% + 4px);left:0;right:auto;min-width:260px;max-height:300px;overflow:auto;z-index:20}
+.kosong{text-align:center;padding:28px 12px;color:var(--ina-content-secondary)}
+.halaman{flex-wrap:wrap}
+.tb th .tip-kol{display:inline-flex;align-items:center;gap:4px}
+.nilai-batas{display:inline-flex;align-items:center;gap:4px}
+
+@media (max-width:1200px){ .kpi{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:1024px){ .dasbor-dua{grid-template-columns:1fr} }
+@media (max-width:760px){
+  .kpi,.dua-kartu{grid-template-columns:1fr}
+  .saring-pl > div,.saring-pl .ina-input-search,.pilih-wadah,.pilih-wadah .ina-select-dropdown__trigger{width:100%;min-width:0}
+  .pilih-wadah .ina-select-dropdown__panel{min-width:0;right:0}
+  .saring-pl .jumlah{margin-left:0}
+  .user-tombol .chev-u{display:none}
+  .halaman > span{white-space:normal}
+}
+.bantu-istilah{display:grid;grid-template-columns:max-content 1fr;gap:6px 12px;margin:8px 0 4px;padding:12px 14px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);font-size:13.5px;line-height:20px}
+.bantu-istilah dt{font-weight:600}
+.bantu-istilah dd{margin:0;color:var(--ina-content-secondary)}
+ol.bantu-langkah{padding-left:22px}
+@media (max-width:760px){ .bantu-istilah{grid-template-columns:1fr} .bantu-istilah dd{margin-bottom:6px} }
+</style>
+</head>
+<body>
+
+<div class="protobar">
+  <a href="index.html#platform">&#9776; Daftar prototipe</a>
+  <span class="sep">&bull;</span><b>Platform · Monitoring</b><span class="sep">&bull;</span><span>Peran: Admin Platform</span>
+  <span class="sep">&bull;</span><span>Layar:</span><span id="pilLayar"></span>
+  <span class="kanan">
+    <button class="pil" id="aturUlang">Atur ulang contoh</button>
+    <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai penyesuaian</button>
+    <button class="pil utama" id="bukaUbah">Daftar penyesuaian</button>
+  </span>
+</div>
+
+<div class="app">
+  <div class="scrim" id="scrim"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><img src="data:image/png;base64,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" alt="E-PPAT"></div>
+    <nav id="nav" aria-label="Menu platform"></nav>
+    <div class="sidefoot">E-PPAT</div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Tampilkan atau sembunyikan menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="spacer"></div>
+      <button class="ina-button ina-button--tertiary ina-button--md" aria-label="Notifikasi"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+      <div class="user ina-action-dropdown" id="user">
+        <button type="button" class="user-tombol" id="userTombol" aria-haspopup="menu" aria-expanded="false" aria-label="Menu akun Admin Contoh"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Admin Contoh</span><span class="urole">Platform Admin</span></span><span class="chev-u"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div id="menuProfil"></div>
+      </div>
+    </header>
+    <div class="content"><div class="page" id="halaman"></div></div>
+  </div>
+</div>
+
+<div id="lapisan"></div>
+<div id="lapisanDrawer"></div>
+<div class="toast-wadah" id="toastWadah"></div>
+
+<script>
+(() => {
+/* ---------------- ikon & util (sama dengan prototipe Tenant · System) ---------------- */
+const I = {
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+  user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>',
+  log:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>',
+  palet:'<circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1 0 1.7-.8 1.7-1.7 0-1 .8-1.7 1.7-1.7H17a5 5 0 0 0 5-5C22 6 17.5 2 12 2z"/>',
+  daftar:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+  gedung:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01"/>',
+  bintang:'<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.7 1.8 1.8.7-1.8.7L19 20l-.7-1.8-1.8-.7 1.8-.7z"/>',
+  stempel:'<path d="M9 3h6v4l-1 5h-4L9 7z"/><path d="M4 16a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H4z"/><path d="M4 21h16"/>',
+  monitor:'<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
+  tameng:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  peringatan:'<path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>',
+  keluar:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/>',
+  luar:'<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14L21 3"/>',
+  ulang:'<path d="M23 4v6h-6"/><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/>',
+  panah:'<path d="M5 12h14M13 6l6 6-6 6"/>', kiri:'<path d="M15 18l-6-6 6-6"/>', x:'<path d="M18 6L6 18M6 6l12 12"/>', info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+  centang:'<path d="M20 6L9 17l-5-5"/>', chev:'<path d="M9 18l6-6-6-6"/>', bawah:'<path d="M6 9l6 6 6-6"/>',
+  cari:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>', jam:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>', naik:'<path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/>'
+};
+const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const usulan = kode => `<span class="tag-usulan">penyesuaian &middot; ${kode}</span>`;
+const badge = (t, j, uk = 'md', atr = '', kls = '') => `<span class="ina-badge ina-badge--soft ina-badge--${j} ina-badge--${uk} ina-badge--rounded-full ${kls}" ${atr}>${t}</span>`;
+const tombol = (t, h = 'primary', uk = 'md', atr = '', ikon = '') => { let k = ''; atr = atr.replace(/class="([^"]*)"/, (m, c) => { k = ' ' + c; return ''; }); return `<button type="button" class="ina-button ina-button--${h} ina-button--${uk}${k}" ${atr}>${ikon}${t}</button>`; };
+const alert = (j, judul, isi, ekstra = '') => `<div class="ina-alert ina-alert--${j}" role="status"><div class="ina-alert__content"><div class="ina-alert__text-section">${judul ? `<div class="ina-alert__title">${judul}</div>` : ''}<div class="ina-alert__description">${isi}</div></div>${ekstra}</div></div>`;
+const est = t => `<span class="isi-tim" title="Data contoh. Ganti dengan data resmi dari tim E-PPAT.">${t}</span>`;
+const denganTip = (isi, t, letak = 'top') => `<span class="ina-tooltip ina-tooltip--placement-${letak}">${isi}<span class="ina-tooltip__content"><span class="ina-tooltip__bubble">${t}</span></span></span>`;
+const cariIsian = (id, ph, v, label) => `<div class="ina-input-search"><div class="ina-input-search__wrapper"><span class="ina-input-search__search-icon">${ik('cari', 20)}</span><input id="${id}" class="ina-input-search__input" type="search" placeholder="${ph}" aria-label="${label}" value="${esc(v)}" autocomplete="off"></div></div>`;
+const remah = t => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#dasbor" class="ina-breadcrumb__link"><span class="ina-breadcrumb__text">Monitoring</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active" aria-current="page"><span class="ina-breadcrumb__text">${t}</span></span></li></ol></nav>`;
+
+/* ---------------- daftar penyesuaian ---------------- */
+const UBAH = [
+  { kode:'IDDS-PL-11', judul:'Dasbor: kartu ringkasan memakai IDDS Card',
+    isi:'Empat kartu ringkasan (Total PPAT, PPAT Aktif, PPAT Ditangguhkan, Total Pengguna) memakai IDDS Card dengan ikon garis. Keterangan kartu memakai bahasa biasa: "Kantor PPAT terdaftar", "Berstatus aktif", "Berstatus ditangguhkan", dan "Di semua kantor PPAT". Kartu PPAT Baru (30 hari) menyebut periode hitungnya.',
+    lama:'Keterangan kartu memakai kode dan istilah teknis: "Tenant terdaftar", "Status ACTIVE", "Status SUSPENDED".', ke:'dasbor', sorot:'#kpi' },
+  { kode:'IDDS-PL-12', judul:'Dasbor: status sistem dengan waktu pemeriksaan',
+    isi:'Kartu Status Sistem menampilkan hasil dengan ikon dan teks ("Sehat" atau "Terganggu"), komponen yang diperiksa ("Basis data & Redis"), dan waktu pemeriksaan terakhir. Tombol "Periksa Ulang" menjalankan pemeriksaan lagi dan menampilkan "Memeriksa…" selama berjalan. Perubahan status diumumkan ke pembaca layar (aria-live).',
+    lama:'Status hanya diperiksa sekali saat halaman dibuka, tanpa waktu pemeriksaan dan tanpa cara memeriksa ulang. Status buruk berlabel "Degraded".', ke:'dasbor', sorot:'#kartuStatus' },
+  { kode:'IDDS-PL-13', judul:'Dasbor: aktivitas dan PPAT teramai dapat ditindaklanjuti',
+    isi:'Aktivitas lintas-PPAT memakai nama aktivitas yang sama dengan Log Aktivitas (misalnya "Masuk", "Unduh dokumen akta"). Aktivitas gagal diberi IDDS Badge "Gagal", bukan hanya titik merah. Kantor PPAT ditampilkan dengan IDDS Badge berisi alamatnya. Tombol "Lihat Semua" membuka Log Aktivitas. Setiap kantor di "PPAT teramai" dapat diklik untuk membuka Daftar PPAT dengan pencarian kantor tersebut.',
+    lama:'Aktivitas tampil sebagai kode sistem (LOGIN, DRAFT_DOWNLOAD, TOKEN_REFRESH). Aktivitas gagal dan berhasil hanya dibedakan dengan warna titik. Daftar "Top by user" tidak dapat diklik.', ke:'dasbor', sorot:'#aktLintas' },
+  { kode:'IDDS-PL-14', judul:'Daftar PPAT: subjudul yang tepat dan rujukan ke aplikasi Onboarding',
+    isi:'Subjudul menyebut apa yang benar-benar dapat dilakukan: "Lihat dan cari kantor PPAT yang terdaftar di E-PPAT." Judul ganda dihapus. IDDS Alert menjelaskan bahwa kantor PPAT baru, perubahan paket, dan admin kantor diatur di aplikasi Onboarding (konsol operator). Alert itu memuat tombol "Buka Onboarding" dan tautan ke Pengaturan Global, tempat alamat Onboarding diatur.',
+    lama:'Subjudul berbunyi "Kelola kantor PPAT (tenant)", padahal halaman hanya dapat dibaca. Paragraf di bawahnya merujuk "server onboarding" tanpa tautan.', ke:'ppat', sorot:'#infoPpat' },
+  { kode:'IDDS-PL-15', judul:'Daftar PPAT: tabel, lencana, pencarian, dan halaman IDDS',
+    isi:'Tabel memakai IDDS Table. Nama kantor ditulis tebal dengan alamat /t/… di bawahnya. Lencana dibuat konsisten: Paket memakai nama paket ("Enterprise", "Gratis"), Status memakai "Aktif" (hijau) dan "Ditangguhkan" (kuning), dan Registrasi memakai "Dibuka" (hijau) dan "Ditutup" (abu-abu). Masa berlaku yang lewat diberi lencana "Kedaluwarsa". Pencarian memakai IDDS Input Search berlabel "Cari PPAT", dan jumlah kantor yang tampil ada di kanannya. Hasil kosong menawarkan "Hapus Pencarian". Navigasi memakai IDDS Pagination (20 per halaman). Saringan status dan paket tidak ditambahkan karena API live belum menyediakannya.',
+    lama:'Paket tampil sebagai kode mentah ("ENTERPRISE", "FREE"). Ejaan "Kadaluarsa" tidak baku. Navigasi "‹ Sebelumnya · Hal 1/51 · Berikutnya ›" berupa tombol polos.', ke:'ppat', sorot:'#tabelPpat' },
+  { kode:'IDDS-PL-16', judul:'Paket Langganan: katalog hanya baca dengan lencana yang jelas',
+    isi:'Subjudul menggambarkan isi halaman dengan tepat: "Lihat batas order, pengguna, masa berlaku, dan registrasi CA setiap paket." Judul kolom memakai singkatan baku "Maks. Order" dan "Maks. Pengguna". Keterangan "dikelola di Onboarding" memakai IDDS Alert dengan tombol "Buka Onboarding". Tabel memakai IDDS Table dengan jumlah paket di bawahnya. Kolom Registrasi CA memakai lencana "Aktif"/"Nonaktif" sehingga sepadan dengan kolom Status. Judul kolom Registrasi CA dan nilai "Tanpa batas" diberi tooltip penjelasan.',
+    lama:'Subjudul berbunyi "Kelola batas fitur per paket", padahal paket tidak dapat diubah. Registrasi CA berlabel "Mati", sedangkan status paket berlabel "Nonaktif". Singkatan CA tidak dijelaskan.', ke:'paket', sorot:'#tabelPaket' },
+  { kode:'IDDS-PL-17', judul:'Log Aktivitas: saringan berlabel memakai IDDS Select Dropdown',
+    isi:'Dua saringan memakai IDDS Select Dropdown dengan label dan nilai awal yang terlihat: PPAT ("Semua PPAT") dan Jenis aktivitas ("Semua aktivitas"). Opsi jenis aktivitas memakai label yang sama dengan kolom Aksi. Jumlah hasil tampil di kanan, dan tombol "Hapus Saringan" muncul bila saringan aktif. Panel dapat dipakai dengan keyboard (panah, Enter, Esc).',
+    lama:'Dua kotak pilihan tidak punya teks awal (kosong). Opsinya berbahasa Inggris ("Login", "Logout", "Refresh token") dan tidak sama dengan isi kolom Aksi.', ke:'log', sorot:'#saringLog' },
+  { kode:'IDDS-PL-18', judul:'Log Aktivitas: tabel dan halaman mudah dibaca',
+    isi:'Tabel memakai IDDS Table. Waktu ditulis lengkap dengan tahun ("26 Okt 2026, 19.06"). Kolom PPAT menampilkan nama kantor dan alamat /t/… (aktivitas admin platform berlabel "Platform"), sehingga sama dengan saringan. Aksi memakai label bahasa Indonesia; status memakai IDDS Badge "Berhasil"/"Gagal". Navigasi memakai IDDS Pagination 20 per halaman.',
+    lama:'Waktu ditulis tanpa tahun. Kolom PPAT berisi slug, sedangkan saringan memakai nama. Aksi berupa kode sistem, status berbunyi "Sukses", dan navigasi berupa tombol polos.', ke:'log', sorot:'#tabelLog' },
+  { kode:'IDDS-PL-19', judul:'Menu Monitoring: istilah dibakukan',
+    isi:'Istilah teknis dan bahasa Inggris diganti. Kata "tenant" menjadi "kantor PPAT", "Degraded" menjadi "Terganggu", "Top by user" menjadi "Pengguna terbanyak", "Database" menjadi "Basis data", "Kadaluarsa" menjadi "Kedaluwarsa", "Mati" menjadi "Nonaktif", dan "Sukses" menjadi "Berhasil". Kata "user" menjadi "pengguna" di kartu Total Pengguna, lencana "N pengguna", kolom Maks. Pengguna, label aktivitas Tambah/Ubah/Hapus pengguna, dan Bantuan. Kode aksi LOGIN, LOGOUT, LOGIN_FAILED, TOKEN_REFRESH, PASSWORD_CHANGE, DRAFT_PREVIEW, dan DRAFT_DOWNLOAD menjadi Masuk, Keluar, Gagal masuk, Sesi diperpanjang, Ganti kata sandi, Pratinjau draf, dan Unduh dokumen akta. Subjudul setiap halaman berupa satu kalimat yang menyebut apa yang dapat dilakukan.',
+    lama:'Istilah bercampur bahasa Inggris, misalnya "Ringkasan & monitoring seluruh PPAT", "Audit aktivitas lintas-PPAT", "Status ACTIVE", "Top by user", dan "Refresh token".', ke:'log', sorot:null },
+  { kode:'IDDS-PL-20', judul:'Bantuan di setiap halaman Monitoring',
+    isi:'Setiap halaman (Dasbor, Daftar PPAT, Paket Langganan, Log Aktivitas) memiliki tombol Bantuan di kanan judul. Tombol ini membuka IDDS Drawer berisi penjelasan isi halaman, langkah, daftar istilah, pertanyaan umum (IDDS Accordion), dan kontak dukungan.',
+    lama:'Tidak ada panduan atau kontak dukungan di area platform.', ke:'bantuan', sorot:null },
+  { kode:'IDDS-PL-41', judul:'Kerangka: menu samping pola Sidebar IDDS',
+    isi:'Kerangka menu samping mengikuti pola Sidebar IDDS dengan warna brand E-PPAT tetap: label grup kecil berhuruf biasa dengan chevron buka/tutup, menu berupa ikon dan label dengan tanda arahkan dan tanda menu aktif, paling banyak dua tingkat (grup lalu menu), dan kartu profil pengguna (inisial, nama, peran) di bagian bawah dengan versi aplikasi di bawahnya. Tombol di samping logo menciutkan menu menjadi ikon saja; nama menu tampil sebagai tooltip dan tetap dibacakan pembaca layar. Pilihan ciut diingat peramban. Di layar sempit menu tetap berupa laci. Kartu profil membuka menu akun yang sama dengan kepala halaman. Berlaku di Monitoring, Jenis Akta, dan Sistem.',
+    lama:'Menu samping gelap ala live dengan label grup berhuruf kapital, tanpa kartu profil pengguna, dan tanpa mode ciut.', ke:'dasbor', sorot:'#sidebar' }
+];
+
+/* ---------------- data contoh (netral) ---------------- */
+const SEKARANG = new Date('2026-10-26T19:06');
+const BLN = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+const jam = d => `${String(d.getHours()).padStart(2, '0')}.${String(d.getMinutes()).padStart(2, '0')}`;
+const tglPendek = w => { const d = new Date(w); return `${d.getDate()} ${BLN[d.getMonth()]} ${d.getFullYear()}`; };
+const tglJam = w => { const d = new Date(w); return `${tglPendek(w)}, ${jam(d)}`; };
+const lalu = w => { const m = Math.floor((SEKARANG - new Date(w)) / 6e4); if (m < 1) return 'Baru saja'; if (m < 60) return `${m} menit lalu`; const j = Math.floor(m / 60); return j < 24 ? `${j} jam lalu` : `${Math.floor(j / 24)} hari lalu`; };
+const hariLalu = n => { const d = new Date(SEKARANG); d.setDate(d.getDate() - n); return d.toISOString().slice(0, 10); };
+const hariLagi = n => hariLalu(-n);
+
+/* Paket Langganan (live: kode, nama, max_orders, max_users, max_days, ca_enabled, is_active; −1 = tanpa batas) */
+const PAKET = [
+  { kode:'FREE', nama:'Gratis', order:1, user:5, hari:30, ca:false, aktif:true },
+  { kode:'SATU_BULAN', nama:'Satu Bulan', order:5, user:5, hari:30, ca:true, aktif:true },
+  { kode:'ENTERPRISE', nama:'Enterprise', order:-1, user:-1, hari:-1, ca:true, aktif:true },
+  { kode:'PAKET_LAMA', nama:'Paket Lama 2025', order:10, user:10, hari:365, ca:false, aktif:false }
+];
+const NM_PAKET = Object.fromEntries(PAKET.map(p => [p.kode, p.nama]));
+
+/* Daftar PPAT (live: name, slug, plan_code, plan_expires_at, status, allow_register, created_at, user_count) */
+function contohPpat() {
+  const T = (nama, slug, paket, exp, status, reg, dibuat, user) => ({ nama, slug, paket, exp, status, reg, dibuat, user });
+  const a = [
+    T('Kantor PPAT Contoh Satu', 'ppat-contoh-satu', 'ENTERPRISE', null, 'ACTIVE', true, hariLalu(210), 186),
+    T('Kantor PPAT Contoh Dua', 'ppat-contoh-dua', 'ENTERPRISE', null, 'ACTIVE', false, hariLalu(180), 48),
+    T('Kantor PPAT Contoh Tiga', 'ppat-contoh-tiga', 'SATU_BULAN', hariLagi(12), 'ACTIVE', true, hariLalu(18), 21),
+    T('Kantor PPAT Contoh Empat', 'ppat-contoh-empat', 'FREE', hariLalu(6), 'SUSPENDED', false, hariLalu(36), 4),
+    T('Kantor PPAT Contoh Lima', 'ppat-contoh-lima', 'ENTERPRISE', null, 'ACTIVE', false, hariLalu(120), 17),
+    T('Kantor PPAT Contoh Enam', 'ppat-contoh-enam', 'FREE', hariLagi(25), 'ACTIVE', true, hariLalu(5), 3),
+    T('Kantor PPAT Contoh Tujuh', 'ppat-contoh-tujuh', 'FREE', hariLalu(2), 'SUSPENDED', false, hariLalu(32), 2),
+    T('Kantor PPAT Contoh Delapan', 'ppat-contoh-delapan', 'ENTERPRISE', null, 'ACTIVE', false, hariLalu(95), 12)
+  ];
+  for (let i = 9; i <= 46; i++) {
+    const free = i % 3 !== 0, susp = i % 13 === 0, umur = 46 - i;
+    a.push(T(`Kantor PPAT Contoh ${i}`, `ppat-contoh-${String(i).padStart(2, '0')}`, free ? 'FREE' : 'ENTERPRISE', free ? (susp ? hariLalu(3) : hariLagi(Math.max(4, 30 - umur))) : null, susp ? 'SUSPENDED' : 'ACTIVE', false, hariLalu(umur), 1 + (i * 7) % 9));
+  }
+  return a.sort((x, y) => y.dibuat.localeCompare(x.dibuat));
+}
+let PPAT = contohPpat();
+const NM_PPAT = slug => (PPAT.find(t => t.slug === slug) || {}).nama || slug;
+
+/* Log aktivitas: kode live → label (peta AKT sama dengan Tenant · System) */
+const AKT = { LOGIN:'Masuk', LOGOUT:'Keluar', LOGIN_FAILED:'Gagal masuk', TOKEN_REFRESH:'Sesi diperpanjang', PASSWORD_CHANGE:'Ganti kata sandi', '2FA_ENABLED':'Aktifkan verifikasi 2 faktor', '2FA_DISABLED':'Nonaktifkan verifikasi 2 faktor', NIK_VIEW:'Buka NIK lengkap', DRAFT_EDIT:'Ubah pasal draf', DRAFT_PREVIEW:'Pratinjau draf', DRAFT_DOWNLOAD:'Unduh dokumen akta', ORDER_FINALIZE:'Finalisasi akta', USER_CREATE:'Tambah pengguna', USER_UPDATE:'Ubah pengguna', USER_DELETE:'Hapus pengguna', USER_RESET_PW:'Atur ulang kata sandi pengguna', ROLE_CREATE:'Tambah peran', ROLE_UPDATE:'Ubah peran', ROLE_DELETE:'Hapus peran', PERMISSION_UPDATE:'Ubah izin peran' };
+/* opsi saringan live: hanya 5 aksi autentikasi */
+const OPSI_AKT = [['', 'Semua aktivitas'], ['LOGIN', AKT.LOGIN], ['LOGOUT', AKT.LOGOUT], ['LOGIN_FAILED', AKT.LOGIN_FAILED], ['TOKEN_REFRESH', AKT.TOKEN_REFRESH], ['PASSWORD_CHANGE', AKT.PASSWORD_CHANGE]];
+function contohLog() {
+  const pola = [
+    ['-', 'Admin Contoh', 'LOGIN', true, '10.0.0.5'], ['-', 'Admin Contoh', 'LOGIN_FAILED', false, '10.0.0.5'],
+    ['ppat-contoh-satu', 'PPAT Contoh Satu', 'DRAFT_DOWNLOAD', true, ''], ['ppat-contoh-satu', 'PPAT Contoh Satu', 'DRAFT_PREVIEW', true, ''],
+    ['ppat-contoh-satu', 'PPAT Contoh Satu', 'TOKEN_REFRESH', true, '10.0.0.20'], ['ppat-contoh-dua', 'Asisten Contoh', 'LOGIN', true, '10.0.0.31'],
+    ['ppat-contoh-dua', 'Asisten Contoh', 'LOGIN_FAILED', false, '10.0.0.31'], ['ppat-contoh-satu', 'Admin Kantor Contoh', 'PASSWORD_CHANGE', true, '10.0.0.12'],
+    ['ppat-contoh-tiga', 'PPAT Contoh Tiga', 'LOGIN', true, '10.0.0.44'], ['ppat-contoh-tiga', 'PPAT Contoh Tiga', 'LOGOUT', true, '10.0.0.44'],
+    ['ppat-contoh-satu', 'Admin Kantor Contoh', 'TOKEN_REFRESH', true, '10.0.0.12'], ['ppat-contoh-empat', 'PPAT Contoh Empat', 'LOGIN_FAILED', false, '10.0.0.77']
+  ];
+  const menit = [0, 0, 2, 3, 3, 17, 18, 19, 41, 52, 64, 70];
+  const out = [];
+  for (let i = 0; i < 46; i++) {
+    const [t, aktor, kode, ok, ip] = pola[i % pola.length], d = new Date(SEKARANG);
+    d.setMinutes(d.getMinutes() - (menit[i % menit.length] + Math.floor(i / pola.length) * 95));
+    out.push({ w:d.getTime(), tenant:t, aktor, kode, ok, ip });
+  }
+  return out;
+}
+let LOG = contohLog();
+
+/* ---------------- keadaan ---------------- */
+const LAYAR = [['dasbor', 'Dasbor'], ['ppat', 'Daftar PPAT'], ['paket', 'Paket Langganan'], ['log', 'Log Aktivitas']];
+const PER_HAL = 20;
+const S0 = () => ({ layar:'dasbor', cari:'', halPpat:1, fPpat:'', fAkt:'', halLog:1, buka:null, menu:false, cekStatus:'sehat', waktuCek:new Date(SEKARANG) });
+let S = S0();
+
+/* ---------------- sidebar (menu live Admin Platform) ---------------- */
+const BERKAS = 'Backlog-IDDS-PL-MONITORING-Prototype.html';
+const NAV = [
+  { g:'Monitoring', ik:'monitor', m:[['Dasbor', 'grid', 'dasbor'], ['Daftar PPAT', 'gedung', 'ppat'], ['Paket Langganan', 'bintang', 'paket'], ['Log Aktivitas', 'daftar', 'log']] },
+  { g:'Akta', ik:'stempel', m:[['Jenis Akta', 'stempel']] },
+  { g:'Sistem', ik:'gear', m:[['Setting Theme', 'palet'], ['Pengaturan Global', 'gear']] }
+];
+const PROTO = { 'Jenis Akta':'Backlog-IDDS-PL-AKTA-Prototype.html#jenis', 'Setting Theme':'Backlog-IDDS-PL-SISTEM-Prototype.html#tema', 'Pengaturan Global':'Backlog-IDDS-PL-SISTEM-Prototype.html#pengaturan' };
+const grupBuka = new Set([0, 1, 2]);
+function gambarNav() {
+  $('#nav').innerHTML = NAV.map((g, i) => `
+    <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
+    <div class="items" ${grupBuka.has(i) ? '' : 'hidden'}>${g.m.map(([t, k, ke]) => `<a href="${ke ? '#' + ke : PROTO[t]}" class="ina-button ina-button--link ina-button--md nav-item ${ke && ke === S.layar ? 'on' : ''}" data-ke="${ke || ''}" ${ke === S.layar ? 'aria-current="page"' : ''}>${ik(k)}<span>${t}</span></a>`).join('')}</div>`).join('');
+}
+$('#nav').addEventListener('click', e => {
+  const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
+  const a = e.target.closest('a'); if (!a) return; e.preventDefault();
+  if (!a.dataset.ke) { keLuar(a.getAttribute('href')); return; }
+  pindah(a.dataset.ke);
+  $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on');
+});
+
+/* pindah layar (menu Monitoring hanya baca: tidak ada perubahan yang perlu dijaga) */
+function pindah(ke, lanjut) {
+  S.layar = ke; S.buka = null; history.replaceState(null, '', '#' + ke); gambar(); window.scrollTo({ top:0 }); lanjut && lanjut();
+}
+function keLuar(url) { location.href = url; }
+
+/* ---------------- menu akun (IDDS Action Dropdown) ---------------- */
+function gambarMenu() {
+  $('#menuProfil').innerHTML = S.menu ? `<div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible"><div class="menu-kepala"><b>Admin Contoh</b><span>Platform Admin</span></div>
+    <div class="ina-action-dropdown__divider" role="separator"></div><div role="menu" aria-label="Menu akun">
+    <a class="ina-action-dropdown__item" role="menuitem" href="Backlog-IDDS-PL-SISTEM-Prototype.html#akun"><span class="ina-action-dropdown__item-icon">${ik('user')}</span><span class="ina-action-dropdown__item-content">Akun Saya</span></a>
+    <a class="ina-action-dropdown__item" role="menuitem" href="Backlog-IDDS-PL-MASUK-Prototype.html"><span class="ina-action-dropdown__item-icon">${ik('keluar')}</span><span class="ina-action-dropdown__item-content">Keluar</span></a></div></div>` : '';
+  $('#userTombol').setAttribute('aria-expanded', String(S.menu));
+}
+$('#userTombol').addEventListener('click', () => { S.menu = !S.menu; gambarMenu(); if (S.menu) $('#menuProfil [role=menuitem]').focus(); });
+$('#user').addEventListener('keydown', e => {
+  if (e.key === 'Escape' && S.menu) { e.stopPropagation(); S.menu = false; gambarMenu(); $('#userTombol').focus(); return; }
+  if (!S.menu || (e.key !== 'ArrowDown' && e.key !== 'ArrowUp')) return;
+  e.preventDefault(); const it = [...document.querySelectorAll('#menuProfil [role=menuitem]')], i = it.indexOf(document.activeElement);
+  it[(i + (e.key === 'ArrowDown' ? 1 : it.length - 1)) % it.length].focus();
+});
+document.addEventListener('click', e => { if (S.menu && !e.target.closest('#user')) { S.menu = false; gambarMenu(); } });
+
+/* ---------------- komponen bersama halaman ---------------- */
+function paginasi(jenis, hal, n) {
+  const jh = Math.max(1, Math.ceil(n / PER_HAL)), a = n ? (hal - 1) * PER_HAL + 1 : 0, b = Math.min(n, hal * PER_HAL);
+  let hs = []; for (let i = 1; i <= jh; i++) if (i === 1 || i === jh || Math.abs(i - hal) <= 1) hs.push(i); else if (hs[hs.length - 1] !== '…') hs.push('…');
+  return `<div class="halaman"><span>Menampilkan ${a}–${b} dari ${n}</span><nav class="ina-pagination" aria-label="Navigasi halaman"><div class="ina-pagination__nav-container"><div class="ina-pagination__page-info">Halaman ${hal} dari ${jh}</div><div class="ina-pagination__nav-buttons">
+    <button type="button" class="ina-pagination__nav-button ${hal > 1 ? '' : 'ina-pagination__nav-button--disabled'}" ${hal > 1 ? `data-hal="${jenis}:${hal - 1}"` : 'disabled'} aria-label="Halaman sebelumnya">${ik('kiri', 16)}</button>
+    ${hs.map(i => i === '…' ? '<span class="ina-pagination__page-info" aria-hidden="true">…</span>' : `<button type="button" class="ina-pagination__page-button ${i === hal ? 'ina-pagination__page-button--active' : ''}" data-hal="${jenis}:${i}" ${i === hal ? 'aria-current="page"' : ''} aria-label="Halaman ${i}">${i}</button>`).join('')}
+    <button type="button" class="ina-pagination__nav-button ${hal < jh ? '' : 'ina-pagination__nav-button--disabled'}" ${hal < jh ? `data-hal="${jenis}:${hal + 1}"` : 'disabled'} aria-label="Halaman berikutnya">${ik('chev', 16)}</button></div></div></nav></div>`;
+}
+const th = t => `<th class="ina-table__header-cell" scope="col">${t}</th>`;
+const lencanaStatus = s => s === 'ACTIVE' ? badge('Aktif', 'success', 'sm') : badge('Ditangguhkan', 'warning', 'sm');
+const lencanaPaket = k => badge(NM_PAKET[k] || k || 'Gratis', k === 'ENTERPRISE' ? 'info' : 'neutral', 'sm');
+const batas = (v, sat = '') => v < 0 ? denganTip(`<span class="nilai-batas" tabindex="0">Tanpa batas</span>`, 'Tidak ada batas untuk paket ini.') : `${v}${sat}`;
+
+/* ---------------- layar: Dasbor Platform ---------------- */
+function layarDasbor() {
+  const total = PPAT.length, aktif = PPAT.filter(t => t.status === 'ACTIVE').length, tangguh = total - aktif;
+  const user = PPAT.reduce((a, t) => a + t.user, 0), baru = PPAT.filter(t => t.dibuat >= hariLalu(30)).length;
+  const akt = LOG.slice(0, 8), top = [...PPAT].sort((a, b) => b.user - a.user).slice(0, 5);
+  const st = S.cekStatus, stTeks = { periksa:'Memeriksa…', sehat:'Sehat', ganggu:'Terganggu' }[st];
+  return `${remah('Dasbor')}<h1>Dasbor Platform</h1><p class="sub">Pantau jumlah kantor PPAT, pengguna, kesehatan sistem, dan aktivitas terbaru di seluruh E-PPAT.</p>
+    <div class="kpi ditandai" id="kpi">${[['Total PPAT', total, 'Kantor PPAT terdaftar', 'gedung'], ['PPAT Aktif', aktif, 'Berstatus aktif', 'centang'], ['PPAT Ditangguhkan', tangguh, 'Berstatus ditangguhkan', 'peringatan'], ['Total Pengguna', user, 'Di semua kantor PPAT', 'users']]
+      .map(([t, n, s, i]) => `<div class="ina-card ina-card--variant-basic"><small>${t}</small><i>${ik(i)}</i><b>${n.toLocaleString('id-ID')}</b><span>${s}</span></div>`).join('')}</div>
+    ${usulan('IDDS-PL-11')}
+    <div class="dua-kartu">
+      <section class="kartu-st ditandai" id="kartuStatus" aria-labelledby="jdStatus">
+        <span class="bulat ${st === 'sehat' ? 'sehat' : st === 'periksa' ? 'periksa' : ''}" ${st === 'ganggu' ? 'style="background:var(--ina-negative-100,#fde3e3);color:var(--ina-negative-600)"' : ''}>${ik(st === 'sehat' ? 'centang' : st === 'periksa' ? 'jam' : 'peringatan', 20)}</span>
+        <div class="isi"><div class="eb" id="jdStatus">Status sistem</div>
+          <div class="nilai" aria-live="polite">${stTeks}</div>
+          <span class="kt">Basis data &amp; Redis · ${st === 'periksa' ? 'sedang diperiksa' : `diperiksa pukul ${jam(S.waktuCek)}`}</span></div>
+        ${tombol(st === 'periksa' ? 'Memeriksa…' : 'Periksa Ulang', 'secondary', 'sm', `id="periksaUlang" ${st === 'periksa' ? 'disabled' : ''}`, ik('ulang', 14))}${usulan('IDDS-PL-12')}
+      </section>
+      <section class="kartu-st" aria-labelledby="jdBaru">
+        <span class="bulat">${ik('naik', 20)}</span>
+        <div class="isi"><div class="eb" id="jdBaru">PPAT baru (30 hari)</div><div class="nilai besar">${baru}</div><span class="kt">Kantor PPAT yang mendaftar sejak ${tglPendek(hariLalu(30))}</span></div>
+      </section>
+    </div>
+    <div class="dasbor-dua">
+      <section class="blok ditandai" id="aktLintas" aria-labelledby="jdAkt">
+        <div class="blok-atas"><div><div class="eb">Aktivitas lintas-PPAT</div><h2 id="jdAkt">Pantau penggunaan</h2></div>
+          ${tombol('Lihat Semua', 'secondary', 'sm', 'data-ke-layar="log" aria-label="Lihat semua aktivitas di Log Aktivitas"', ik('panah', 14))}</div>${usulan('IDDS-PL-13')}
+        <ul class="akt">${akt.length ? akt.map(a => `<li><span class="titik ${a.ok ? '' : 'gagal'}" aria-hidden="true"></span><div>
+          <div class="baris1"><b>${esc(a.aktor)}</b><span>· ${AKT[a.kode] || a.kode}</span>${a.ok ? '' : badge('Gagal', 'error', 'sm')}</div>
+          <div class="baris2">${badge(a.tenant === '-' ? 'Platform' : '/t/' + a.tenant, 'neutral', 'sm')}<span class="wkt">${lalu(a.w)}</span></div></div></li>`).join('') : '<li class="wkt">Belum ada aktivitas.</li>'}</ul>
+      </section>
+      <section class="blok" aria-labelledby="jdTop"><div class="eb">PPAT teramai</div><h2 id="jdTop">Pengguna terbanyak</h2>
+        <ul class="teramai">${top.length ? top.map(t => `<li><a href="#ppat" data-cari-ppat="${t.slug}" aria-label="${esc(t.nama)}, ${t.user} pengguna. Buka di Daftar PPAT"><span><span class="nm">${esc(t.nama)}</span><span class="sl">/t/${t.slug}</span></span>${badge(`${t.user} pengguna`, 'brand', 'sm')}</a></li>`).join('') : '<li class="wkt">Belum ada PPAT.</li>'}</ul>
+      </section>
+    </div>`;
+}
+
+/* ---------------- layar: Daftar PPAT (hanya baca) ---------------- */
+const tampilPpat = () => { const q = S.cari.trim().toLowerCase(); return PPAT.filter(t => !q || `${t.nama} ${t.slug}`.toLowerCase().includes(q)); };
+function layarPpat() {
+  const rows = tampilPpat(), n = rows.length, hal = Math.min(S.halPpat, Math.max(1, Math.ceil(n / PER_HAL))), isi = rows.slice((hal - 1) * PER_HAL, hal * PER_HAL);
+  S.halPpat = hal;
+  return `${remah('Daftar PPAT')}<h1>Daftar PPAT</h1><p class="sub">Lihat dan cari kantor PPAT yang terdaftar di E-PPAT.</p>
+    <div class="info-pl ditandai" id="infoPpat">${alert('info', 'Halaman ini hanya untuk melihat data', 'Kantor PPAT baru, perubahan paket, dan admin kantor diatur di aplikasi Onboarding (konsol operator). Alamat aplikasi Onboarding diatur di <a href="Backlog-IDDS-PL-SISTEM-Prototype.html#pengaturan">Pengaturan Global</a>.' + usulan('IDDS-PL-14'),
+      `<div class="aksi-info">${tombol('Buka Onboarding', 'secondary', 'sm', 'id="bukaOnboarding"', ik('luar', 14))}</div>`)}</div>
+    <div class="saring-pl" role="search">
+      <div><label class="lbl" for="cariPpat">Cari PPAT</label>${cariIsian('cariPpat', 'Cari nama atau alamat kantor PPAT…', S.cari, 'Cari nama atau alamat kantor PPAT')}</div>
+      <span class="jumlah">${n} kantor PPAT</span>
+    </div>
+    <div class="tabel-wadah ditandai" id="tabelPpat"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Daftar kantor PPAT">
+      <thead class="ina-table__header"><tr>${['Nama PPAT', 'Paket', 'Masa Berlaku', 'Status', 'Registrasi', 'Dibuat'].map(th).join('')}</tr></thead>
+      <tbody class="ina-table__body">${isi.length ? isi.map(t => `<tr class="ina-table__row">
+        <td class="ina-table__cell"><span class="kd" style="cursor:auto">${esc(t.nama)}</span><div class="kc mono">/t/${t.slug}</div></td>
+        <td class="ina-table__cell">${lencanaPaket(t.paket)}</td>
+        <td class="ina-table__cell" style="white-space:nowrap">${t.exp ? `${tglPendek(t.exp)}${t.exp < SEKARANG.toISOString().slice(0, 10) ? `<div style="margin-top:4px">${badge('Kedaluwarsa', 'warning', 'sm')}</div>` : ''}` : 'Tanpa batas'}</td>
+        <td class="ina-table__cell">${lencanaStatus(t.status)}</td>
+        <td class="ina-table__cell">${t.reg ? badge('Dibuka', 'success', 'sm') : badge('Ditutup', 'neutral', 'sm')}</td>
+        <td class="ina-table__cell" style="white-space:nowrap">${tglPendek(t.dibuat)}</td></tr>`).join('')
+        : `<tr><td colspan="6" class="ina-table__empty-cell kosong">${S.cari ? `Tidak ada kantor PPAT yang cocok dengan "${esc(S.cari)}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : 'Belum ada kantor PPAT terdaftar.'}</td></tr>`}</tbody></table></div></div>
+      ${paginasi('ppat', hal, n)}</div>${usulan('IDDS-PL-15')}`;
+}
+
+/* ---------------- layar: Paket Langganan (hanya baca) ---------------- */
+function layarPaket() {
+  return `${remah('Paket Langganan')}<h1>Paket Langganan</h1><p class="sub">Lihat batas order, pengguna, masa berlaku, dan registrasi CA setiap paket.</p>
+    <div class="info-pl">${alert('info', 'Katalog hanya untuk dilihat', 'Paket dibuat dan diubah di aplikasi Onboarding (konsol operator). Halaman ini menampilkan paket yang berlaku saat ini.', `<div class="aksi-info">${tombol('Buka Onboarding', 'secondary', 'sm', 'id="bukaOnboarding"', ik('luar', 14))}</div>`)}</div>
+    <div class="tabel-wadah ditandai" id="tabelPaket"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Katalog paket langganan">
+      <thead class="ina-table__header"><tr>${th('Kode')}${th('Nama Paket')}${th('Maks. Order')}${th('Maks. Pengguna')}${th('Masa Berlaku')}${th(denganTip(`<span class="tip-kol" tabindex="0">Registrasi CA ${ik('info', 13)}</span>`, 'Registrasi CA: kantor dengan paket ini dapat mendaftarkan sertifikat elektronik (CA) Peruri untuk tanda tangan elektronik.', 'bottom'))}${th('Status')}</tr></thead>
+      <tbody class="ina-table__body">${PAKET.length ? PAKET.map(p => `<tr class="ina-table__row">
+        <td class="ina-table__cell"><span class="kd mono" style="cursor:auto;color:var(--ina-primary-primary);font-weight:600">${p.kode}</span></td>
+        <td class="ina-table__cell">${esc(p.nama)}</td>
+        <td class="ina-table__cell">${batas(p.order)}</td>
+        <td class="ina-table__cell">${batas(p.user)}</td>
+        <td class="ina-table__cell" style="white-space:nowrap">${batas(p.hari, ' hari')}</td>
+        <td class="ina-table__cell">${p.ca ? badge('Aktif', 'success', 'sm') : badge('Nonaktif', 'neutral', 'sm')}</td>
+        <td class="ina-table__cell">${p.aktif ? badge('Aktif', 'success', 'sm') : badge('Nonaktif', 'neutral', 'sm')}</td></tr>`).join('')
+        : `<tr><td colspan="7" class="ina-table__empty-cell kosong">Belum ada paket.</td></tr>`}</tbody></table></div></div>
+      <div class="halaman"><span>${PAKET.length} paket</span></div></div>${usulan('IDDS-PL-16')}`;
+}
+
+/* ---------------- layar: Log Aktivitas ---------------- */
+const OPSI_PPAT = () => [['', 'Semua PPAT'], ...PPAT.map(t => [t.slug, `${t.nama} (/t/${t.slug})`])];
+const tampilLog = () => LOG.filter(a => (!S.fPpat || a.tenant === S.fPpat) && (!S.fAkt || a.kode === S.fAkt));
+function pilihDropdown(nama, label, opsi, nilai) {
+  const buka = S.buka === nama, teks = (opsi.find(o => o[0] === nilai) || opsi[0])[1];
+  return `<div><span class="lbl" id="lbl-${nama}">${label}</span><div class="ina-select-dropdown pilih-wadah" data-dd="${nama}"><button type="button" class="ina-select-dropdown__trigger ina-select-dropdown__trigger--size-md" id="dd-${nama}" aria-haspopup="listbox" aria-expanded="${buka}" aria-labelledby="lbl-${nama} dd-${nama}"><span class="ina-select-dropdown__trigger-text ina-select-dropdown__trigger-text--selected">${esc(teks)}</span>${ik('bawah')}</button>
+    ${buka ? `<div class="ina-select-dropdown__panel"><div class="ina-select-dropdown__options" role="listbox" aria-labelledby="lbl-${nama}">${opsi.map(([v, t]) => `<button type="button" role="option" aria-selected="${v === nilai}" class="ina-select-dropdown__option ${v === nilai ? 'ina-select-dropdown__option--selected-single' : ''}" data-opsi="${nama}" data-v="${v}">${esc(t)}</button>`).join('')}</div></div>` : ''}</div></div>`;
+}
+function layarLog() {
+  const rows = tampilLog(), n = rows.length, hal = Math.min(S.halLog, Math.max(1, Math.ceil(n / PER_HAL))), isi = rows.slice((hal - 1) * PER_HAL, hal * PER_HAL), disaring = S.fPpat || S.fAkt;
+  S.halLog = hal;
+  return `${remah('Log Aktivitas')}<h1>Log Aktivitas</h1><p class="sub">Telusuri aktivitas masuk dan penggunaan di semua kantor PPAT.</p>
+    <div class="saring-pl ditandai" id="saringLog" role="search">
+      ${pilihDropdown('ppat', 'PPAT', OPSI_PPAT(), S.fPpat)}
+      ${pilihDropdown('akt', 'Jenis aktivitas', OPSI_AKT, S.fAkt)}
+      ${disaring ? tombol('Hapus Saringan', 'tertiary', 'md', 'id="hapusSaring"', ik('x', 14)) : ''}
+      ${usulan('IDDS-PL-17')}
+      <span class="jumlah" aria-live="polite">${n} aktivitas</span>
+    </div>
+    <div class="tabel-wadah ditandai" id="tabelLog"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Log aktivitas lintas kantor PPAT">
+      <thead class="ina-table__header"><tr>${['Waktu', 'PPAT', 'Aktor', 'Aksi', 'Status', 'IP'].map(th).join('')}</tr></thead>
+      <tbody class="ina-table__body">${isi.length ? isi.map(a => `<tr class="ina-table__row">
+        <td class="ina-table__cell" style="white-space:nowrap">${tglJam(a.w)}</td>
+        <td class="ina-table__cell">${a.tenant === '-' ? `<div>Platform</div><div class="kc">Admin platform</div>` : `<div>${esc(NM_PPAT(a.tenant))}</div><div class="kc mono">/t/${a.tenant}</div>`}</td>
+        <td class="ina-table__cell">${esc(a.aktor)}</td>
+        <td class="ina-table__cell">${AKT[a.kode] || a.kode}</td>
+        <td class="ina-table__cell">${a.ok ? badge('Berhasil', 'success', 'sm') : badge('Gagal', 'error', 'sm')}</td>
+        <td class="ina-table__cell mono">${a.ip || '—'}</td></tr>`).join('')
+        : `<tr><td colspan="6" class="ina-table__empty-cell kosong">${disaring ? `Tidak ada aktivitas yang cocok dengan saringan.<div style="margin-top:10px">${tombol('Hapus Saringan', 'secondary', 'sm', 'data-hapus-saring')}</div>` : 'Belum ada aktivitas.'}</td></tr>`}</tbody></table></div></div>
+      ${paginasi('log', hal, n)}</div>${usulan('IDDS-PL-18')}`;
+}
+
+/* ---------------- gambar ---------------- */
+const RENDER = { dasbor:layarDasbor, ppat:layarPpat, paket:layarPaket, log:layarLog };
+function gambar() {
+  gambarNav();
+  $('#pilLayar').innerHTML = LAYAR.map(([k, t]) => `<button class="pil" data-pil="${k}" aria-pressed="${S.layar === k}">${t}</button>`).join(' ');
+  $('#halaman').innerHTML = RENDER[S.layar]();
+  pasangPanduan();
+}
+
+/* ---------------- interaksi ---------------- */
+const H = $('#halaman');
+function bukaDd(nama) { S.buka = nama; gambar(); ($(`[data-dd="${nama}"] [role=option][aria-selected="true"]`) || $(`[data-dd="${nama}"] [role=option]`))?.focus(); }
+function pilihOpsi(nama, v) { if (nama === 'ppat') S.fPpat = v; else S.fAkt = v; S.halLog = 1; S.buka = null; gambar(); $(`#dd-${nama}`).focus(); }
+H.addEventListener('click', e => {
+  const t = e.target;
+  const kl = t.closest('[data-ke-layar]'); if (kl) { e.preventDefault(); pindah(kl.dataset.keLayar); return; }
+  if (t.closest('.ina-breadcrumb__link[href="#dasbor"]')) { e.preventDefault(); pindah('dasbor'); return; }
+  /* Dasbor */
+  const cp = t.closest('[data-cari-ppat]'); if (cp) { e.preventDefault(); S.cari = cp.dataset.cariPpat; S.halPpat = 1; pindah('ppat', () => $('#cariPpat').focus()); return; }
+  if (t.closest('#periksaUlang')) {
+    S.cekStatus = 'periksa'; gambar();
+    setTimeout(() => { S.cekStatus = 'sehat'; S.waktuCek = new Date(S.waktuCek.getTime() + 60000); if (S.layar === 'dasbor') { gambar(); $('#periksaUlang')?.focus(); } toast('Status sistem diperiksa: Sehat.', 'positive', 3000, 'Basis data dan Redis berjalan normal.'); }, 900);
+    return;
+  }
+  /* Daftar PPAT & Paket */
+  if (t.closest('#bukaOnboarding')) { toast('Aplikasi Onboarding tidak termasuk prototipe ini.', 'default', 4000, 'Di aplikasi asli, tombol ini membuka konsol operator Onboarding di tab baru.'); return; }
+  if (t.closest('#hapusCari')) { S.cari = ''; S.halPpat = 1; gambar(); $('#cariPpat').focus(); return; }
+  const hl = t.closest('[data-hal]'); if (hl) { const [j, n] = hl.dataset.hal.split(':'); if (j === 'ppat') S.halPpat = +n; else S.halLog = +n; gambar(); (document.querySelector(`[data-hal="${j}:${n}"]`) || $('.halaman'))?.focus?.(); return; }
+  /* Log */
+  const dd = t.closest('.ina-select-dropdown__trigger'); if (dd) { const nm = dd.closest('[data-dd]').dataset.dd; if (S.buka === nm) { S.buka = null; gambar(); $(`#dd-${nm}`).focus(); } else bukaDd(nm); return; }
+  const op = t.closest('[data-opsi]'); if (op) { pilihOpsi(op.dataset.opsi, op.dataset.v); return; }
+  if (t.closest('#hapusSaring') || t.closest('[data-hapus-saring]')) { S.fPpat = ''; S.fAkt = ''; S.halLog = 1; gambar(); $('#dd-ppat').focus(); return; }
+});
+/* Select Dropdown: panah atas/bawah, Enter/Spasi, Esc */
+H.addEventListener('keydown', e => {
+  const w = e.target.closest('[data-dd]'); if (!w) return;
+  const nm = w.dataset.dd, opsi = [...w.querySelectorAll('[role=option]')];
+  if (e.key === 'Escape' && S.buka) { e.preventDefault(); e.stopPropagation(); S.buka = null; gambar(); $(`#dd-${nm}`).focus(); return; }
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (S.buka !== nm) { bukaDd(nm); return; }
+    const i = opsi.indexOf(document.activeElement), n = opsi.length;
+    opsi[i < 0 ? 0 : (e.key === 'ArrowDown' ? Math.min(n - 1, i + 1) : Math.max(0, i - 1))]?.focus(); return;
+  }
+  const op = e.target.closest('[role=option]');
+  if (op && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); pilihOpsi(nm, op.dataset.v); }
+});
+H.addEventListener('input', e => {
+  if (e.target.id === 'cariPpat') { S.cari = e.target.value; S.halPpat = 1; const pos = e.target.selectionStart; gambar(); const i = $('#cariPpat'); i.focus(); i.setSelectionRange(pos, pos); }
+});
+document.addEventListener('click', e => { if (S.buka && !e.target.closest('.pilih-wadah')) { S.buka = null; gambar(); } });
+$('#pilLayar').addEventListener('click', e => { const b = e.target.closest('[data-pil]'); if (b) pindah(b.dataset.pil); });
+
+/* ---------------- tombol Bantuan di judul halaman ---------------- */
+function pasangPanduan() {
+  const h = document.querySelector('#halaman h1'); if (!h || h.parentElement.classList.contains('judul-kiri')) return;
+  const w = document.createElement('div'); w.className = 'judul-halaman';
+  const kiri = document.createElement('div'); kiri.className = 'judul-kiri';
+  const sub = h.nextElementSibling && h.nextElementSibling.classList.contains('sub') ? h.nextElementSibling : null;
+  h.before(w); w.append(kiri); kiri.append(h); if (sub) kiri.append(sub);
+  w.insertAdjacentHTML('beforeend', `<button type="button" class="ina-button ina-button--secondary ina-button--md ditandai" id="bukaBantuan" aria-label="Bantuan untuk halaman ini"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg><span>Bantuan</span></button>`);
+}
+document.addEventListener('click', e => { if (e.target.closest('#bukaBantuan')) bukaBantuan(); });
+
+/* ---------------- IDDS Drawer ---------------- */
+function drawer({ judul, isi }) {
+  const D = $('#lapisanDrawer'), hp = window.matchMedia('(max-width:760px)').matches;
+  D.innerHTML = `<div class="ina-drawer ina-drawer--position-${hp ? 'bottom' : 'right'}" role="dialog" aria-modal="true" aria-labelledby="drwJudul">
+    <div class="ina-drawer__backdrop" data-tutup-drawer></div>
+    <div class="ina-drawer__panel ina-drawer__panel--width-md">
+      <div class="ina-drawer__header"><h2 class="ina-drawer__title" id="drwJudul">${judul}</h2>
+        <button type="button" class="ina-drawer__close-button" aria-label="Tutup bantuan" data-tutup-drawer><svg class="ina-drawer__close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      <div class="ina-drawer__content">${isi}</div>
+    </div></div>`;
+  D.querySelector('.ina-drawer__close-button').focus();
+}
+function tutupDrawer() { $('#lapisanDrawer').innerHTML = ''; $('#bukaBantuan')?.focus(); }
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-tutup-drawer]')) { tutupDrawer(); return; }
+  const tg = e.target.closest('#lapisanDrawer .ina-accordion__toggle'); if (!tg) return;
+  const b = tg.getAttribute('aria-expanded') !== 'true';
+  tg.setAttribute('aria-expanded', b);
+  tg.querySelector('.ina-accordion__icon').classList.toggle('ina-accordion__icon--open', b);
+  tg.nextElementSibling.classList.toggle('ina-accordion__content--open', b);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisanDrawer').innerHTML) tutupDrawer(); });
+
+/* ---------------- IDDS Modal & Toast ---------------- */
+let asalDialog = null;
+function tutupDialog() { $('#lapisan').innerHTML = ''; const a = asalDialog; asalDialog = null; if (a && a.isConnected) a.focus(); }
+function dialog({ judul, isi, tombol: tb, lebar, konfirmasi, bahaya }) {
+  const Lp = $('#lapisan'); asalDialog = document.activeElement;
+  Lp.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-i="-1"></div><div class="ina-modal__container">
+    <div class="ina-modal__dialog ina-modal__dialog--size-${lebar ? 'lg' : 'md'} ${konfirmasi ? 'ina-modal-confirmation' : ''}" role="${konfirmasi ? 'alertdialog' : 'dialog'}" aria-modal="true" aria-labelledby="dlgJudul">
+      <div class="ina-modal__header"><h2 class="ina-modal__title" id="dlgJudul">${judul}</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-i="-1">${ik('x', 22)}</button></div>
+      <div class="ina-modal__body">${isi}</div>
+      <div class="ina-modal__footer">${tb.map(([t, h, , , kls, ikon], i) => `<button type="button" class="ina-button ina-button--${h} ina-button--md ${kls || ''}" data-i="${i}" ${bahaya && i === tb.length - 1 ? 'style="background:var(--ina-negative-600);border-color:var(--ina-negative-600)"' : ''}>${ikon || ''}${t}</button>`).join('')}</div></div></div></div>`;
+  Lp.onclick = e => {
+    const b = e.target.closest('[data-i]'); if (!b || b.disabled) return;
+    const i = +b.dataset.i; if (i < 0) { tutupDialog(); return; }
+    const [, , fn, tahan] = tb[i]; if (tahan) { fn && fn(); return; }
+    tutupDialog(); fn && fn();
+  };
+  Lp.querySelector('.ina-modal__close-button').focus();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisan').innerHTML) tutupDialog(); });
+let tt;
+function toast(teks, state = 'default', ms = 3000, ket = '') {
+  $('#toastWadah').innerHTML = `<div class="ina-toast ina-toast--state-${state} ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${ik(state === 'positive' ? 'centang' : 'info', 20)}</div>
+    <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p>${ket ? `<p class="ina-toast__description">${ket}</p>` : ''}</div></div><button class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast>${ik('x', 16)}</button></div>`;
+  clearTimeout(tt); tt = setTimeout(() => $('#toastWadah').innerHTML = '', ms);
+}
+$('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tutup-toast]')) $('#toastWadah').innerHTML = ''; });
+
+/* ---------------- Bantuan per halaman (IDDS-PL-20) ---------------- */
+const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
+const kontak = () => `<h4 class="bantu-sub">Kontak dukungan ${usulan('IDDS-PL-20')}</h4>
+  <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>`;
+const lgkh = a => `<ol class="bantu-langkah">${a.map(x => `<li>${x}</li>`).join('')}</ol>`;
+const istilah = a => `<dl class="bantu-istilah">${a.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
+const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
+const BANTUAN = {
+  dasbor:() => ({ judul:'Bantuan Dasbor Platform', isi:`<p>Dasbor merangkum keadaan seluruh E-PPAT: jumlah kantor PPAT dan pengguna, kesehatan sistem, serta aktivitas terbaru di semua kantor.</p>
+    <h4 class="bantu-sub">Isi halaman</h4>
+    <ul class="bantu-langkah"><li><b>Total PPAT</b>: semua kantor PPAT yang terdaftar, aktif maupun ditangguhkan.</li><li><b>PPAT Aktif</b> dan <b>PPAT Ditangguhkan</b>: jumlah kantor menurut statusnya.</li><li><b>Total Pengguna</b>: jumlah akun di semua kantor PPAT.</li><li><b>Status Sistem</b>: hasil pemeriksaan basis data dan Redis, beserta waktu pemeriksaannya.</li><li><b>PPAT baru (30 hari)</b>: kantor yang mendaftar dalam 30 hari terakhir.</li><li><b>Pantau penggunaan</b>: delapan aktivitas terbaru dari semua kantor.</li><li><b>Pengguna terbanyak</b>: lima kantor PPAT dengan pengguna terbanyak.</li></ul>
+    <h4 class="bantu-sub">Istilah</h4>
+    ${istilah([['Platform', 'Aktivitas admin platform, bukan aktivitas kantor PPAT.'], ['/t/…', 'Alamat kantor PPAT di E-PPAT, misalnya /t/ppat-contoh-satu.'], ['Redis', 'Layanan penyimpanan sementara yang dipakai aplikasi, misalnya untuk sesi masuk.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('d', [
+      ['Apa arti status sistem Terganggu?', 'Basis data atau Redis tidak menjawab saat diperiksa. Pengguna bisa gagal masuk atau menyimpan data. Klik "Periksa Ulang" setelah beberapa saat; bila tetap terganggu, hubungi tim teknis.'],
+      ['Kapan status sistem diperiksa?', 'Saat dasbor dibuka dan setiap kali Anda mengklik "Periksa Ulang". Waktu pemeriksaan terakhir tertulis di kartu.'],
+      ['Mengapa ada kantor PPAT yang ditangguhkan?', 'Biasanya karena masa berlaku paket sudah lewat atau kantor dinonaktifkan oleh operator. Lihat kolom Masa Berlaku di Daftar PPAT.'],
+      ['Bagaimana menangguhkan atau mengaktifkan kantor PPAT?', 'Tidak dari sini. Status kantor diatur di aplikasi Onboarding (konsol operator).'],
+      ['Apa arti aktivitas bertanda Gagal?', 'Aktivitas tidak berhasil, misalnya kata sandi salah saat masuk. Beberapa kegagalan berturut-turut dari akun yang sama perlu diperiksa di Log Aktivitas.'],
+      ['Bagaimana melihat semua aktivitas?', 'Klik "Lihat Semua" untuk membuka Log Aktivitas. Di sana Anda dapat menyaring per kantor PPAT dan jenis aktivitas.'],
+      ['Bisakah saya membuka data kantor dari daftar Pengguna terbanyak?', 'Ya. Klik nama kantor untuk membuka Daftar PPAT yang langsung mencari kantor tersebut.'],
+      ['Mengapa angka belum berubah?', 'Angka dimuat saat halaman dibuka. Muat ulang halaman untuk melihat data terbaru.']])}
+    ${kontak()}` }),
+  ppat:() => ({ judul:'Bantuan Daftar PPAT', isi:`<p>Daftar PPAT menampilkan semua kantor PPAT yang terdaftar di E-PPAT beserta paket, masa berlaku, dan statusnya. Halaman ini hanya untuk melihat data.</p>
+    <h4 class="bantu-sub">Langkah mencari kantor</h4>
+    ${lgkh(['Ketik nama kantor atau alamatnya (mis. <b>ppat-contoh-satu</b>) di kotak <b>Cari PPAT</b>.', 'Hasil langsung tersaring. Pindah halaman di bawah tabel bila hasilnya lebih dari 20.', 'Klik <b>Hapus Pencarian</b> bila tidak ada hasil.'])}
+    <h4 class="bantu-sub">Arti kolom</h4>
+    ${istilah([['Paket', 'Paket langganan kantor. Rincian batasnya ada di Paket Langganan.'], ['Masa Berlaku', 'Tanggal paket berakhir. "Tanpa batas" berarti tidak ada tanggal akhir. Lencana Kedaluwarsa berarti tanggalnya sudah lewat.'], ['Status', 'Aktif: kantor dapat dipakai. Ditangguhkan: pengguna kantor tidak dapat masuk.'], ['Registrasi', 'Dibuka: calon pengguna dapat mendaftar sendiri ke kantor itu. Ditutup: akun hanya dibuat admin kantor.'], ['Dibuat', 'Tanggal kantor didaftarkan.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('p', [
+      ['Bagaimana menambah kantor PPAT baru?', 'Kantor PPAT baru dibuat lewat aplikasi Onboarding (konsol operator), bukan dari halaman ini. Klik "Buka Onboarding".'],
+      ['Bagaimana mengganti paket atau memperpanjang masa berlaku?', 'Lewat aplikasi Onboarding. Setelah diubah di sana, data di halaman ini ikut berubah.'],
+      ['Di mana alamat aplikasi Onboarding diatur?', 'Di Sistem › Pengaturan Global, tab Umum, isian URL aplikasi Onboarding.'],
+      ['Apa yang terjadi bila masa berlaku sudah lewat?', 'Kantor diberi lencana Kedaluwarsa dan dapat ditangguhkan sampai paketnya diperpanjang di Onboarding.'],
+      ['Bisakah menyaring berdasarkan status atau paket?', 'Belum. Saat ini hanya tersedia pencarian nama dan alamat kantor.'],
+      ['Bagaimana membuka aplikasi kantor tertentu?', 'Tambahkan alamat yang tertulis di bawah nama kantor, misalnya /t/ppat-contoh-satu, di belakang alamat E-PPAT. Anda perlu akun di kantor itu untuk masuk.'],
+      ['Mengapa kantor yang saya cari tidak muncul?', 'Periksa ejaan nama atau alamatnya. Pencarian tidak membedakan huruf besar dan kecil.']])}
+    ${kontak()}` }),
+  paket:() => ({ judul:'Bantuan Paket Langganan', isi:`<p>Paket Langganan menampilkan katalog paket beserta batas pemakaiannya. Katalog ini hanya untuk dilihat; paket dibuat dan diubah di aplikasi Onboarding.</p>
+    <h4 class="bantu-sub">Arti kolom</h4>
+    ${istilah([['Kode', 'Kode paket yang dipakai sistem, mis. FREE atau ENTERPRISE.'], ['Maks. Order', 'Jumlah order akta paling banyak untuk satu kantor.'], ['Maks. Pengguna', 'Jumlah akun paling banyak di satu kantor.'], ['Masa Berlaku', 'Lama paket berlaku sejak diaktifkan.'], ['Registrasi CA', 'Aktif: kantor dapat mendaftarkan sertifikat elektronik (CA) Peruri untuk tanda tangan elektronik.'], ['Status', 'Aktif: paket dapat dipilih kantor. Nonaktif: paket tidak ditawarkan lagi.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('k', [
+      ['Apa arti "Tanpa batas"?', 'Paket tidak membatasi jumlah atau waktu untuk kolom tersebut.'],
+      ['Bagaimana mengubah batas sebuah paket?', 'Lewat aplikasi Onboarding (konsol operator). Klik "Buka Onboarding".'],
+      ['Apa beda kolom Registrasi CA dan Status?', 'Registrasi CA menunjukkan fitur sertifikat elektronik di paket itu. Status menunjukkan apakah paket itu masih ditawarkan.'],
+      ['Apa yang terjadi pada kantor yang memakai paket Nonaktif?', 'Kantor tetap memakai paketnya sampai masa berlaku habis. Paket nonaktif hanya tidak dapat dipilih kantor baru.'],
+      ['Apa itu CA?', 'CA (Certificate Authority) adalah sertifikat elektronik dari Peruri. Sertifikat ini diperlukan untuk menandatangani akta secara elektronik.'],
+      ['Di mana melihat paket yang dipakai sebuah kantor?', 'Di Daftar PPAT, kolom Paket.']])}
+    ${kontak()}` }),
+  log:() => ({ judul:'Bantuan Log Aktivitas', isi:`<p>Log Aktivitas mencatat aktivitas di semua kantor PPAT dan aktivitas admin platform, misalnya masuk, keluar, dan unduh dokumen akta.</p>
+    <h4 class="bantu-sub">Langkah mencari</h4>
+    ${lgkh(['Pilih kantor di saringan <b>PPAT</b>, atau biarkan <b>Semua PPAT</b>.', 'Pilih <b>Jenis aktivitas</b>, misalnya Gagal masuk.', 'Pindah halaman di bawah tabel untuk aktivitas yang lebih lama.', 'Klik <b>Hapus Saringan</b> untuk kembali ke semua aktivitas.'])}
+    <h4 class="bantu-sub">Arti aktivitas</h4>
+    ${istilah([['Masuk / Keluar', 'Pengguna masuk atau keluar dari aplikasi.'], ['Gagal masuk', 'Percobaan masuk ditolak, mis. kata sandi salah.'], ['Sesi diperpanjang', 'Sistem memperpanjang sesi masuk pengguna secara otomatis.'], ['Ganti kata sandi', 'Pengguna mengganti kata sandinya.'], ['Pratinjau draf', 'Pengguna membuka pratinjau draf akta.'], ['Unduh dokumen akta', 'Pengguna mengunduh dokumen akta.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('l', [
+      ['Apa arti PPAT "Platform"?', 'Aktivitas dilakukan oleh admin platform, bukan oleh pengguna kantor PPAT.'],
+      ['Mengapa kolom IP kosong (—)?', 'Beberapa aktivitas, misalnya pratinjau dan unduh draf, tidak mencatat alamat IP.'],
+      ['Apa itu kolom IP?', 'Alamat jaringan perangkat yang dipakai saat aktivitas terjadi. Gunakan untuk menelusuri akses yang mencurigakan.'],
+      ['Mengapa jenis aktivitas di saringan hanya lima?', 'Saringan saat ini mencakup aktivitas masuk dan keamanan akun. Aktivitas lain tetap tampil di tabel bila saringan jenis aktivitas tidak dipilih.'],
+      ['Bagaimana menelusuri banyak Gagal masuk?', 'Pilih Jenis aktivitas "Gagal masuk", lalu lihat Aktor dan IP. Bila percobaan berulang dari IP yang sama, hubungi admin kantor terkait.'],
+      ['Bisakah log diubah, dihapus, atau diunduh?', 'Tidak. Log hanya dapat dibaca agar riwayat tetap utuh. Bila butuh salinan log, hubungi dukungan.']])}
+    ${kontak()}` })
+};
+function bukaBantuan() { drawer(BANTUAN[S.layar]()); }
+
+/* ---------------- protobar & daftar penyesuaian ---------------- */
+$('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
+$('#bukaUbah').addEventListener('click', () => {
+  dialog({ judul:'Daftar penyesuaian menu Monitoring', lebar:true,
+    isi:`<p>Menu Monitoring di area platform tidak dinilai dalam laporan Heuristic Evaluation. Isi, kolom, dan perilaku mengikuti kode live dev-app.eppat.id/platform; yang disesuaikan adalah komponen IDDS dengan brand E-PPAT, kejujuran label, bahasa, status sistem, dan Bantuan per halaman. Data di prototipe ini adalah data contoh.</p>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+        <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
+    tombol:[['Tutup', 'secondary', null]] });
+  $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });
+});
+function lihat(u) {
+  const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
+  if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  pindah(u.ke, sorot);
+}
+$('#aturUlang').addEventListener('click', () => { PPAT = contohPpat(); LOG = contohLog(); const l = S.layar; S = S0(); S.layar = l; gambar(); gambarMenu(); toast('Data contoh dikembalikan ke awal.'); });
+$('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
+$('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
+$('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+const awal = (location.hash || '').slice(1); if (RENDER[awal]) S.layar = awal;
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (RENDER[h] && h !== S.layar) pindah(h); });
+gambar();
+})();
+</script>
+<!-- ===== Notifikasi bersama (lonceng di header) — IDDS-TN-39
+     Disisipkan otomatis oleh rakit-idds.js di akhir body pada prototipe yang punya tombol
+     lonceng Notifikasi di header.top. Mandiri: CSS sendiri (awalan .notif-) dan skrip IIFE sendiri.
+     Live (dev-app.eppat.id): GET /me/notifications?limit=20 {items, unread}, tandai dibaca, tandai semua dibaca,
+     polling 60 dtk, badge "9+". Penyesuaian: ikon & label jenis, filter, loading/error/kosong, Esc & fokus,
+     aria-expanded/aria-haspopup, jumlah belum dibaca terbaca pembaca layar, item tanpa tautan tidak tampak bisa diklik.
+     Status dibaca disimpan di localStorage 'eppat-notif-dibaca' (dipakai bersama semua prototipe). ===== -->
+<style id="notif-bersama-css">
+.notif-jangkar{position:relative;display:inline-flex;align-items:center}
+.notif-lencana{position:absolute;top:2px;right:2px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--ina-negative-600,#d50b0b);color:#fff;font:700 10px/18px Inter,system-ui,sans-serif;text-align:center;box-shadow:0 0 0 2px var(--ina-background-primary,#fff);pointer-events:none}
+.notif-lencana[hidden]{display:none!important}
+.notif-panel{position:absolute;top:calc(100% + 8px);right:0;z-index:45;width:360px;max-width:calc(100vw - 16px);display:flex;flex-direction:column;max-height:min(560px,calc(100vh - 96px));background:var(--ina-background-primary,#fff);color:var(--ina-content-primary,#1f1f1f);border:1px solid var(--ina-stroke-primary,#e3e7e6);border-radius:12px;box-shadow:0 12px 32px rgba(15,26,23,.16),0 2px 6px rgba(15,26,23,.08);text-align:left;font-family:Inter,system-ui,sans-serif}
+.notif-panel[hidden]{display:none!important}
+.notif-kepala{flex:none;padding:14px 16px 10px;border-bottom:1px solid var(--ina-stroke-primary,#e3e7e6)}
+.notif-baris{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.notif-judul{margin:0;font:600 16px/24px Inter,system-ui,sans-serif;color:var(--ina-primary-primary,#1f4d40);outline:0}
+.notif-judul:focus-visible{outline:2px solid var(--ina-primary-500,#3D6B5E);outline-offset:2px;border-radius:4px}
+.notif-jumlah{margin:0;font-size:12.5px;line-height:18px;color:var(--ina-content-secondary,#5c6663)}
+.notif-saring{margin-top:10px}
+.notif-saring .ina-button-group{width:100%}
+.notif-saring .ina-button-group__button{flex:1}
+.notif-isi{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain}
+.notif-daftar{list-style:none;margin:0;padding:0}
+.notif-daftar>li+li{border-top:1px solid var(--ina-stroke-primary,#e3e7e6)}
+.notif-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;color:inherit;text-decoration:none;position:relative}
+a.notif-item{cursor:pointer}
+a.notif-item:hover{background:var(--ina-background-secondary,#f5f7f6)}
+a.notif-item:focus-visible{outline:2px solid var(--ina-primary-500,#3D6B5E);outline-offset:-2px}
+.notif-item.belum{background:var(--ina-primary-25,#f5f8f7)}
+a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
+.notif-ikon{flex:none;width:36px;height:36px;border-radius:999px;display:grid;place-items:center;background:var(--ina-primary-50,#eaf1ef);color:var(--ina-primary-primary,#1f4d40)}
+.notif-ikon svg{width:16px;height:16px}
+.notif-teks{flex:1;min-width:0}
+.notif-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.notif-waktu{font-size:12px;line-height:16px;color:var(--ina-content-secondary,#5c6663)}
+.notif-t{display:block;margin-top:4px;font:600 13.5px/19px Inter,system-ui,sans-serif;color:var(--ina-content-primary,#1f1f1f)}
+.notif-b{display:block;margin-top:2px;font-size:12.5px;line-height:18px;color:var(--ina-content-secondary,#5c6663)}
+.notif-tandai{margin-top:8px}
+.notif-kanan{flex:none;display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:4px;color:var(--ina-content-tertiary,#8a9390)}
+.notif-titik{width:8px;height:8px;border-radius:999px;background:var(--ina-primary-primary,#1f4d40)}
+.notif-vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.notif-status{padding:28px 16px;text-align:center;font-size:13.5px;line-height:20px;color:var(--ina-content-secondary,#5c6663)}
+.notif-status svg{display:block;margin:0 auto 8px;color:var(--ina-content-tertiary,#8a9390)}
+.notif-rangka{list-style:none;margin:0;padding:4px 0}
+.notif-rangka li{display:flex;gap:12px;padding:12px 16px}
+.notif-rangka i{display:block;border-radius:8px;background:var(--ina-background-secondary,#eef1f0);animation:notif-denyut 1.2s ease-in-out infinite}
+.notif-rangka .b1{width:36px;height:36px;border-radius:999px;flex:none}
+.notif-rangka .b2{height:10px;margin-top:6px}
+@keyframes notif-denyut{50%{opacity:.5}}
+@media (prefers-reduced-motion:reduce){.notif-rangka i{animation:none}}
+.notif-galat{padding:16px}
+.notif-galat .ina-alert__content{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.notif-kaki{flex:none;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--ina-stroke-primary,#e3e7e6);font-size:12px;line-height:16px;color:var(--ina-content-secondary,#5c6663)}
+.notif-kaki .tag-usulan{margin-left:0}
+@media (max-width:760px){
+  .notif-panel{position:fixed;left:0;right:0;width:auto;max-width:none;border-radius:0 0 16px 16px;border-left:0;border-right:0;max-height:calc(100vh - var(--notif-atas,72px) - 8px)}
+}
+</style>
+<script id="notif-bersama">
+(() => {
+  if (window.__notifBersama) return;
+  window.__notifBersama = true;
+
+  const KUNCI = 'eppat-notif-dibaca';
+  const MENIT = 60000, JAM = 60 * MENIT;
+  const sekarang = Date.now();
+
+  /* ikon garis 24×24 (currentColor) */
+  const IK = {
+    order: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15h6"/>',
+    verif: '<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
+    ttd: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+    akta: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/>',
+    salinan: '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>',
+    sistem: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+    lonceng: '<path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>',
+    chevron: '<path d="M9 18l6-6-6-6"/>',
+    cek: '<path d="M20 6L9 17l-5-5"/>'
+  };
+  const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${IK[n]}</svg>`;
+
+  /* jenis notifikasi: label singkat, ikon, varian badge IDDS */
+  const JENIS = {
+    order: ['Permohonan baru', 'order', 'brand'],
+    verifikasi: ['Verifikasi', 'verif', 'warning'],
+    giliran: ['Giliran tanda tangan', 'ttd', 'info'],
+    ttd_selesai: ['Tanda tangan selesai', 'ttd', 'success'],
+    akta: ['Akta selesai', 'akta', 'success'],
+    salinan: ['Salinan dibuka', 'salinan', 'neutral'],
+    sistem: ['Sistem', 'sistem', 'neutral'],
+    kantor: ['PPAT baru', 'order', 'brand'],
+    keamanan: ['Keamanan', 'sistem', 'warning'],
+    paket: ['Paket', 'sistem', 'info'],
+    template: ['Template akta', 'akta', 'success']
+  };
+
+  /* contoh data: Klien (para pihak) hanya menerima notifikasi tentang akta dan akunnya sendiri */
+  const KLIEN = /Peran:\s*Klien/.test((document.querySelector('.protobar') || {}).textContent || '');
+  const DATA_KLIEN = [
+    { id: 'k4', jenis: 'giliran', judul: 'Giliran Anda menandatangani akta', isi: 'Akta Jual Beli ORD-CONTOH-007 menunggu tanda tangan elektronik Anda.', lalu: 3 * MENIT, baca: false, ke: 'Backlog-HE-EAWK-Prototype.html' },
+    { id: 'k3', jenis: 'sistem', judul: 'Lengkapi registrasi sertifikat elektronik', isi: 'Selesaikan eKYC di portal Peruri agar Anda dapat menandatangani akta.', lalu: 2 * JAM, baca: false, ke: 'Backlog-HE-CA-Prototype.html' },
+    { id: 'k2', jenis: 'ttd_selesai', judul: 'Semua pihak sudah menandatangani', isi: 'Akta Jual Beli ORD-CONTOH-005 sudah ditandatangani semua pihak dan sedang difinalisasi kantor PPAT.', lalu: 30 * JAM, baca: true, ke: 'Backlog-HE-EAWK-Prototype.html' },
+    { id: 'k1', jenis: 'akta', judul: 'Salinan akta dikirim ke email Anda', isi: 'Buka tautan di email untuk mengunduh salinan akta ORD-CONTOH-005. Tautan berlaku 7 hari.', lalu: 50 * JAM, baca: true, ke: '' }
+  ].map(d => Object.assign({}, d, { waktu: sekarang - d.lalu }));
+
+  /* contoh data bersama staf kantor (netral; sama untuk semua prototipe staf) */
+  const DATA_STAF = [
+    { id: 'n8', jenis: 'giliran', judul: 'Giliran Anda menandatangani akta', isi: 'Akta Jual Beli ORD-CONTOH-009 menunggu tanda tangan elektronik Anda.', lalu: 20 * 1000, baca: false, ke: 'Backlog-HE-EAW-Prototype.html' },
+    { id: 'n7', jenis: 'order', judul: 'Permohonan baru ORD-CONTOH-014', isi: 'Asisten Contoh membuat permohonan Akta Jual Beli untuk Contoh Penjual Satu.', lalu: 5 * MENIT, baca: false, ke: 'Backlog-HE-ORDER-Prototype.html' },
+    { id: 'n6', jenis: 'verifikasi', judul: 'Berkas ORD-CONTOH-012 perlu diverifikasi', isi: 'Contoh Penjual Satu mengunggah KTP dan sertipikat. Periksa berkas sebelum akta disusun.', lalu: 42 * MENIT, baca: false, ke: 'Backlog-HE-VERIF-Prototype.html' },
+    { id: 'n5', jenis: 'sistem', judul: 'Pemeliharaan sistem terjadwal', isi: 'E-PPAT tidak dapat diakses pada Sabtu, 31 Oktober 2026, pukul 22.00–23.00 WIB.', lalu: 2 * JAM, baca: false, ke: '' },
+    { id: 'n4', jenis: 'sistem', judul: 'Pendaftaran TERA kantor diproses Peruri', isi: 'Peruri sedang memeriksa data TERA kantor Anda. Hasilnya akan dikirim lewat notifikasi dan email.', lalu: 3 * JAM, baca: true, ke: 'Backlog-HE-TERA-Prototype.html' },
+    { id: 'n3', jenis: 'akta', judul: 'Akta ORD-CONTOH-005 selesai', isi: 'Akta sudah difinalisasi. Unggah scan akta, lalu kirim salinannya di menu Salinan Akta.', lalu: 7 * JAM, baca: true, ke: 'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan' },
+    { id: 'n2', jenis: 'salinan', judul: 'Salinan akta ORD-CONTOH-005 dibuka', isi: 'Contoh Penjual Satu membuka tautan salinan akta.', lalu: 26 * JAM, baca: true, ke: 'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan' },
+    { id: 'n1', jenis: 'sistem', judul: 'Layanan e-Meterai belum aktif', isi: 'Aktifkan e-Meterai agar akta dapat dibubuhi meterai elektronik.', lalu: 50 * JAM, baca: true, ke: 'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai' }
+  ].map(d => Object.assign({}, d, { waktu: sekarang - d.lalu }));
+  /* Admin Platform: notifikasi tingkat platform (bukan notifikasi kantor) */
+  const PLATFORM = /Peran:\s*Admin Platform/.test((document.querySelector('.protobar') || {}).textContent || '');
+  const DATA_PLATFORM = [
+    { id: 'p4', jenis: 'kantor', judul: 'Kantor PPAT baru terdaftar', isi: 'Kantor PPAT Contoh Dua selesai onboarding dengan paket Enterprise.', lalu: 15 * MENIT, baca: false, ke: 'Backlog-IDDS-PL-MONITORING-Prototype.html#ppat' },
+    { id: 'p3', jenis: 'keamanan', judul: 'Gagal masuk berulang', isi: 'Ada 5 percobaan masuk gagal dari akun yang sama di Kantor PPAT Contoh Tiga dalam 10 menit.', lalu: 1 * JAM, baca: false, ke: 'Backlog-IDDS-PL-MONITORING-Prototype.html#log' },
+    { id: 'p2', jenis: 'paket', judul: 'Masa berlaku paket segera habis', isi: '12 kantor PPAT berpaket Gratis akan habis masa berlakunya dalam 7 hari.', lalu: 5 * JAM, baca: true, ke: 'Backlog-IDDS-PL-MONITORING-Prototype.html#ppat' },
+    { id: 'p1', jenis: 'template', judul: 'Template akta diperbarui', isi: 'Template Akta Jual Beli versi terbaru sudah dipakai semua kantor PPAT.', lalu: 30 * JAM, baca: true, ke: 'Backlog-IDDS-PL-AKTA-Prototype.html#jenis' }
+  ].map(d => Object.assign({}, d, { waktu: sekarang - d.lalu }));
+  const DATA = PLATFORM ? DATA_PLATFORM : KLIEN ? DATA_KLIEN : DATA_STAF;
+
+  /* penyimpanan status dibaca (aman bila localStorage tidak tersedia) */
+  let simpanan = {};
+  try { simpanan = JSON.parse(localStorage.getItem(KUNCI) || '{}') || {}; } catch (e) { simpanan = {}; }
+  const simpan = () => { try { localStorage.setItem(KUNCI, JSON.stringify(simpanan)); } catch (e) { /* tanpa storage tetap jalan */ } };
+  const dibaca = d => d.baca || simpanan[d.id] === 1;
+  const tandai = id => { simpanan[id] = 1; simpan(); };
+  const jumlahBelum = () => DATA.filter(d => !dibaca(d)).length;
+
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const waktuRelatif = t => {
+    const s = Date.now() - t;
+    if (s < MENIT) return 'Baru saja';
+    if (s < JAM) return Math.floor(s / MENIT) + ' menit lalu';
+    if (s < 24 * JAM) return Math.floor(s / JAM) + ' jam lalu';
+    try { return new Date(t).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }).replace(/\./g, ''); }
+    catch (e) { return new Date(t).toDateString(); }
+  };
+
+  let gagalSimulasi = false;
+  try { gagalSimulasi = new URLSearchParams(location.search).get('notifgagal') === '1'; } catch (e) { /* abaikan */ }
+
+  const mulai = () => {
+    const bel = document.querySelector('header.top button[aria-label="Notifikasi"]');
+    if (!bel || bel.hasAttribute('data-notif')) return;
+    bel.setAttribute('data-notif', '1');
+
+    /* jangkar: bungkus tombol lonceng agar panel tepat di bawahnya dan urutan Tab alami */
+    const jangkar = document.createElement('span');
+    jangkar.className = 'notif-jangkar';
+    bel.parentNode.insertBefore(jangkar, bel);
+    jangkar.appendChild(bel);
+
+    const lencana = document.createElement('span');
+    lencana.className = 'notif-lencana';
+    lencana.setAttribute('aria-hidden', 'true');
+    jangkar.appendChild(lencana);
+
+    const panel = document.createElement('div');
+    panel.className = 'notif-panel';
+    panel.id = 'notifPanel';
+    panel.hidden = true;
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-modal', 'false');
+    panel.setAttribute('aria-labelledby', 'notifJudul');
+    panel.innerHTML = `
+      <div class="notif-kepala">
+        <div class="notif-baris">
+          <div>
+            <h2 class="notif-judul" id="notifJudul" tabindex="-1">Notifikasi</h2>
+            <p class="notif-jumlah" id="notifJumlah" aria-live="polite"></p>
+          </div>
+          <button type="button" class="ina-button ina-button--tertiary ina-button--sm" id="notifSemua" hidden><span>Tandai Semua Dibaca</span></button>
+        </div>
+        <div class="notif-saring">
+          <div class="ina-button-group" role="group" aria-label="Saring notifikasi">
+            <button type="button" class="ina-button-group__button" data-saring="semua"><span class="ina-button-group__button-content">Semua</span></button>
+            <button type="button" class="ina-button-group__button" data-saring="belum"><span class="ina-button-group__button-content">Belum dibaca</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="notif-isi" id="notifIsi"></div>
+      <div class="notif-kaki"><span>Notifikasi diperbarui otomatis setiap menit.</span><span class="tag-usulan">penyesuaian · IDDS-TN-39</span></div>`;
+    jangkar.appendChild(panel);
+
+    bel.setAttribute('aria-haspopup', 'dialog');
+    bel.setAttribute('aria-expanded', 'false');
+    bel.setAttribute('aria-controls', panel.id);
+    bel.setAttribute('title', 'Notifikasi');
+
+    const isi = panel.querySelector('#notifIsi');
+    const elJumlah = panel.querySelector('#notifJumlah');
+    const tSemua = panel.querySelector('#notifSemua');
+    const judul = panel.querySelector('#notifJudul');
+
+    let saring = 'semua';
+    let kondisi = 'baru'; // baru | muat | galat | siap
+
+    const perbaruiBel = () => {
+      const n = jumlahBelum();
+      lencana.textContent = n > 9 ? '9+' : String(n);
+      lencana.hidden = n === 0;
+      bel.setAttribute('aria-label', n ? `Notifikasi, ${n} belum dibaca` : 'Notifikasi, tidak ada yang belum dibaca');
+      elJumlah.textContent = n ? `${n} belum dibaca` : 'Semua sudah dibaca';
+      tSemua.hidden = n === 0 || kondisi !== 'siap';
+    };
+
+    const itemHtml = d => {
+      const [label, ikon, varian] = JENIS[d.jenis] || JENIS.sistem;
+      const belum = !dibaca(d);
+      const meta = `<span class="notif-meta"><span class="ina-badge ina-badge--soft ina-badge--${varian} ina-badge--sm ina-badge--rounded-full">${esc(label)}</span><span class="notif-waktu">${esc(waktuRelatif(d.waktu))}</span></span>`;
+      const teks = `<span class="notif-teks">${meta}<span class="notif-t">${esc(d.judul)}</span><span class="notif-b">${esc(d.isi)}</span>${belum ? '<span class="notif-vh">Belum dibaca.</span>' : ''}`;
+      const titik = belum ? '<span class="notif-titik" aria-hidden="true"></span>' : '';
+      if (d.ke) {
+        return `<li><a class="notif-item${belum ? ' belum' : ''}" href="${esc(d.ke)}" data-notif-id="${esc(d.id)}"><span class="notif-ikon" aria-hidden="true">${ik(ikon)}</span>${teks}</span><span class="notif-kanan">${titik}${ik('chevron', 16)}</span></a></li>`;
+      }
+      const tombol = belum ? `<button type="button" class="ina-button ina-button--secondary ina-button--sm notif-tandai" data-tandai="${esc(d.id)}"><span>Tandai dibaca</span></button>` : '';
+      return `<li><div class="notif-item${belum ? ' belum' : ''}"><span class="notif-ikon" aria-hidden="true">${ik(ikon)}</span>${teks}${tombol}</span><span class="notif-kanan">${titik}</span></div></li>`;
+    };
+
+    const render = () => {
+      perbaruiBel();
+      panel.querySelectorAll('[data-saring]').forEach(b => {
+        const on = b.dataset.saring === saring;
+        b.classList.toggle('ina-button-group__button--selected', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+      if (kondisi === 'muat') {
+        isi.innerHTML = `<p class="notif-vh" role="status">Memuat notifikasi…</p><ul class="notif-rangka" aria-hidden="true">${'<li><i class="b1"></i><span style="flex:1"><i class="b2" style="width:40%"></i><i class="b2" style="width:85%"></i><i class="b2" style="width:65%"></i></span></li>'.repeat(3)}</ul><p class="notif-status" style="padding-top:4px" aria-hidden="true">Memuat notifikasi…</p>`;
+        return;
+      }
+      if (kondisi === 'galat') {
+        isi.innerHTML = `<div class="notif-galat"><div class="ina-alert ina-alert--critical" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Notifikasi gagal dimuat.</div><div class="ina-alert__description">Periksa koneksi Anda, lalu coba lagi.</div></div><button type="button" class="ina-button ina-button--secondary ina-button--sm" id="notifUlang"><span>Coba Lagi</span></button></div></div></div>`;
+        return;
+      }
+      const daftar = DATA.filter(d => saring === 'semua' || !dibaca(d));
+      if (!daftar.length) {
+        isi.innerHTML = `<div class="notif-status">${ik('lonceng', 24)}${saring === 'belum' ? 'Tidak ada notifikasi yang belum dibaca.' : 'Belum ada notifikasi.'}</div>`;
+        return;
+      }
+      isi.innerHTML = `<ul class="notif-daftar">${daftar.map(itemHtml).join('')}</ul>`;
+    };
+
+    const muat = () => {
+      kondisi = 'muat';
+      render();
+      setTimeout(() => {
+        if (gagalSimulasi) { gagalSimulasi = false; kondisi = 'galat'; } // gagal sekali, "Coba Lagi" berhasil
+        else kondisi = 'siap';
+        render();
+      }, 300);
+    };
+
+    const atur = () => {
+      if (panel.hidden) return;
+      if (window.matchMedia && window.matchMedia('(max-width:760px)').matches) {
+        const r = bel.getBoundingClientRect();
+        const atas = Math.max(0, Math.round(r.bottom + 8));
+        panel.style.top = atas + 'px';
+        panel.style.setProperty('--notif-atas', atas + 'px');
+      } else {
+        panel.style.top = '';
+        panel.style.removeProperty('--notif-atas');
+      }
+    };
+
+    const buka = () => {
+      panel.hidden = false;
+      bel.setAttribute('aria-expanded', 'true');
+      atur();
+      if (kondisi === 'baru') muat(); else render();
+      judul.focus();
+    };
+    const tutup = (kembali) => {
+      if (panel.hidden) return;
+      panel.hidden = true;
+      bel.setAttribute('aria-expanded', 'false');
+      if (kembali) bel.focus();
+    };
+
+    bel.addEventListener('click', e => { e.preventDefault(); panel.hidden ? buka() : tutup(false); });
+
+    panel.addEventListener('click', e => {
+      const sar = e.target.closest('[data-saring]');
+      if (sar) { saring = sar.dataset.saring; render(); return; }
+      if (e.target.closest('#notifSemua')) {
+        DATA.forEach(d => { simpanan[d.id] = 1; });
+        simpan(); render(); judul.focus(); return;
+      }
+      if (e.target.closest('#notifUlang')) { muat(); judul.focus(); return; }
+      const tnd = e.target.closest('[data-tandai]');
+      if (tnd) { tandai(tnd.dataset.tandai); render(); judul.focus(); return; }
+      const a = e.target.closest('a[data-notif-id]');
+      if (a) { tandai(a.dataset.notifId); perbaruiBel(); tutup(false); /* lanjut navigasi bawaan tautan */ }
+    });
+
+    document.addEventListener('keydown', e => {
+      if ((e.key === 'Escape' || e.key === 'Esc') && !panel.hidden) { e.stopPropagation(); tutup(true); }
+    }, true);
+    document.addEventListener('click', e => {
+      if (!panel.hidden && !jangkar.contains(e.target)) tutup(false);
+    }, true);
+    jangkar.addEventListener('focusout', e => {
+      if (!panel.hidden && e.relatedTarget && !jangkar.contains(e.relatedTarget)) tutup(false);
+    });
+    window.addEventListener('resize', atur);
+    window.addEventListener('scroll', atur, { passive: true });
+
+    /* live: polling 60 dtk — di prototipe hanya memperbarui waktu relatif & jumlah */
+    setInterval(() => { if (kondisi === 'siap' && !panel.hidden) render(); else perbaruiBel(); }, 60000);
+    /* status dibaca dari tab/prototipe lain */
+    window.addEventListener('storage', e => {
+      if (e.key !== KUNCI) return;
+      try { simpanan = JSON.parse(e.newValue || '{}') || {}; } catch (er) { simpanan = {}; }
+      if (!panel.hidden && kondisi === 'siap') render(); else perbaruiBel();
+    });
+
+    perbaruiBel();
+  };
+
+  try {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mulai);
+    else mulai();
+  } catch (e) { /* jangan pernah memecah halaman */ }
+})();
+</script>
+
+<!-- ===== Sidebar pola IDDS (sidebar-idds.html, disisipkan rakit-idds.js ke setiap prototipe bersidebar) =====
+     Struktur mengikuti pola Sidebar IDDS (design.inadigital.go.id/pattern/sidebar): label grup kecil sentence case + chevron,
+     item ikon + label (default/hover/terpilih), kartu profil pengguna di bawah, kategori Expand/Collapse, laci di layar sempit.
+     WARNA TETAP brand E-PPAT (--ina-eppat-sidebar-*, --eppat-sidebar-icon, --eppat-sidebar-active-icon). Kartu profil kantor tetap. -->
+<style id="sidebar-idds-css">
+/* label grup: kecil, sentence case, rata kiri, chevron tepat setelah label */
+.sidebar .grp{padding:16px 8px 6px;font:500 12px/16px Inter,sans-serif;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.72)}
+.sidebar .grp > svg{display:none}
+.sidebar .grp > span:not(.chev){flex:0 1 auto}
+.sidebar .grp .chev{margin-left:0;color:currentColor}
+.sidebar .grp .chev svg{color:currentColor;width:12px;height:12px}
+.sidebar .grp:hover{color:#fff}
+.sidebar .grp:focus-visible,.sidebar a.nav-item:focus-visible,.sidebar .nav-induk:focus-visible,.sb-ciut-btn:focus-visible,.sb-profil-btn:focus-visible{outline:2px solid #fff;outline-offset:-2px;border-radius:8px}
+.side-ob .grp-lbl{margin:16px 8px 6px;font:500 12px/16px Inter,sans-serif;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.72)}
+/* item menu: ikon + label */
+.sidebar .items a.nav-item{min-height:40px;align-items:center;padding:8px 10px}
+.sidebar .items a.nav-item.nav-anak{padding-left:10px}
+.sidebar .items a.nav-item.nav-anak svg{width:16px;height:16px}
+.sidebar .items a.nav-item > span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* kepala sidebar: logo + tombol ciut */
+.sidebar .brand{gap:8px}
+.sidebar .brand img{flex:none}
+.sb-ciut-btn{margin-left:auto;flex:none;display:grid;place-items:center;width:32px;height:32px;border:0;border-radius:8px;background:transparent;color:rgba(255,255,255,.8);cursor:pointer}
+.sb-ciut-btn:hover{background:var(--ina-eppat-sidebar-hover);color:#fff}
+.sb-ciut-btn svg{width:18px;height:18px}
+/* kartu profil pengguna (bawah) */
+.sb-profil{flex:none;margin-top:auto;position:sticky;bottom:0;z-index:1;margin-left:-16px;margin-right:-16px;padding:12px 16px 0;background:var(--ina-eppat-sidebar-bg);border-top:1px solid rgba(255,255,255,.1)}
+.sb-profil-btn{display:flex;align-items:center;gap:10px;width:100%;padding:8px;border:0;border-radius:8px;background:transparent;color:#fff;text-align:left;font:inherit}
+button.sb-profil-btn{cursor:pointer}
+button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
+.sb-ava{flex:none;width:32px;height:32px;border-radius:999px;display:grid;place-items:center;background:var(--ina-primary-500);color:#fff;font:600 12px Inter,sans-serif}
+.sb-teks{flex:1;min-width:0;display:flex;flex-direction:column}
+.sb-nama{font:600 13px/18px Inter,sans-serif;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-peran{font:400 12px/16px Inter,sans-serif;color:rgba(255,255,255,.75);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-profil-btn .sb-pilih{flex:none;display:grid;color:rgba(255,255,255,.75)}
+.sidebar .sidefoot,.side-ob .versi{margin-top:0;border-top:0;padding:4px 8px 12px;font-size:11px;color:rgba(255,255,255,.72)}
+/* tooltip mode Collapse */
+#sbTip{position:fixed;z-index:200;pointer-events:none;background:#1f2a2e;color:#fff;font:500 12px/16px Inter,sans-serif;padding:6px 10px;border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,.2);white-space:nowrap}
+#sbTip[hidden]{display:none}
+.sb-sr{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important}
+@media (max-width:1024px){ .sb-ciut-btn{display:none} }
+/* kategori Collapse (ikon saja) — hanya layar lebar; layar sempit tetap laci */
+@media (min-width:1025px){
+  .sidebar{transition:width .18s}
+  .sidebar.sb-ciut{width:72px;padding:0 12px;overflow-x:hidden}
+  .sidebar.sb-ciut .brand{flex-direction:column;justify-content:center;height:auto;padding:14px 0 10px;gap:8px}
+  .sidebar.sb-ciut .brand img{width:34px;height:44px;object-fit:cover;object-position:left center}
+  .sidebar.sb-ciut .sb-ciut-btn{margin:0}
+  .sidebar.sb-ciut .kantor,.sidebar.sb-ciut .grp,.sidebar.sb-ciut .grp-lbl,.sidebar.sb-ciut .sidefoot,.sidebar.sb-ciut .versi,.sidebar.sb-ciut .sb-teks,.sidebar.sb-ciut .sb-pilih,.sidebar.sb-ciut .tag-usulan{display:none!important}
+  .sidebar.sb-ciut .items,.sidebar.sb-ciut .items[hidden]{display:flex!important}
+  .sidebar.sb-ciut #nav > .items + .items,.sidebar.sb-ciut #nav > .grp + .items:not(:first-of-type),.sidebar.sb-ciut nav > .items ~ .items{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1)}
+  .sidebar.sb-ciut .items a.nav-item,.sidebar.sb-ciut .items button.nav-induk{justify-content:center;padding:10px 0;gap:0}
+  .sidebar.sb-ciut .items a.nav-item svg{width:18px;height:18px}
+  .sidebar.sb-ciut .sb-profil-btn{justify-content:center;padding:8px 0}
+  .sidebar.sb-ciut .sb-profil{margin-left:-12px;margin-right:-12px;padding:12px 12px 12px}
+}
+</style>
+<script id="sidebar-idds-js">
+(() => {
+  const KUNCI = 'eppat-sidebar-ciut';
+  const baca = () => { try { return localStorage.getItem(KUNCI) === '1'; } catch (e) { return false; } };
+  const tulis = v => { try { localStorage.setItem(KUNCI, v ? '1' : '0'); } catch (e) {} };
+  const SVG = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+  const IK_CIUT = '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16"/><path d="M15 10l-2 2 2 2"/>';
+  const IK_BENTANG = '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16"/><path d="M14 10l2 2-2 2"/>';
+  const IK_PILIH = '<path d="M8 9l4-4 4 4"/><path d="M16 15l-4 4-4-4"/>';
+  const daftar = [...document.querySelectorAll('aside.sidebar')];
+  if (!daftar.length) return;
+  let ciut = baca();
+  const tip = document.createElement('div'); tip.id = 'sbTip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true; document.body.appendChild(tip);
+
+  daftar.forEach((sb, n) => {
+    if (sb.dataset.sbIdds) return; sb.dataset.sbIdds = '1';
+    if (!sb.id) sb.id = 'sidebar-' + n;
+    /* tombol ciut di kepala sidebar */
+    const brand = sb.querySelector('.brand');
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'sb-ciut-btn'; btn.setAttribute('aria-controls', sb.id);
+    if (brand) brand.appendChild(btn); else sb.prepend(btn);
+    /* kartu profil pengguna: nama & peran dari kepala halaman (satu sumber) */
+    const app = sb.closest('.app') || document;
+    const kepala = app.querySelector('header .user');
+    if (kepala) {
+      const pemicu = kepala.querySelector('.user-tombol') || (kepala.matches('[aria-haspopup], [role="button"]') ? kepala : null);
+      const wadah = document.createElement('div'); wadah.className = 'sb-profil';
+      const el = document.createElement(pemicu ? 'button' : 'div');
+      el.className = 'sb-profil-btn';
+      if (pemicu) { el.type = 'button'; el.setAttribute('aria-haspopup', 'menu'); }
+      wadah.appendChild(el);
+      const kaki = sb.querySelector(':scope > .sidefoot, :scope > .versi');
+      sb.appendChild(wadah); if (kaki) wadah.appendChild(kaki); /* versi aplikasi tetap kecil di bawah kartu */
+      const isi = () => {
+        const nama = (kepala.querySelector('.uname') || {}).textContent || '', peran = (kepala.querySelector('.urole') || {}).textContent || '';
+        const ava = (kepala.querySelector('.ava') || {}).textContent || nama.trim().charAt(0);
+        el.innerHTML = `<span class="sb-ava" aria-hidden="true">${ava.trim()}</span><span class="sb-teks"><span class="sb-nama">${nama.trim()}</span><span class="sb-peran">${peran.trim()}</span></span>${pemicu ? `<span class="sb-pilih">${SVG(IK_PILIH).replace('<svg', '<svg width="16" height="16"')}</span>` : ''}`;
+        el.dataset.tip = nama.trim();
+        if (pemicu) el.setAttribute('aria-label', `Menu akun ${nama.trim()}, ${peran.trim()}`);
+      };
+      isi();
+      new MutationObserver(isi).observe(kepala.querySelector('.txt') || kepala, { subtree: true, characterData: true, childList: true });
+      if (pemicu) el.addEventListener('click', e => {
+        e.stopPropagation(); /* jangan ditutup oleh penangan "klik di luar menu" */
+        sb.classList.remove('open'); const scrim = app.querySelector('.scrim'); if (scrim) scrim.classList.remove('on');
+        pemicu.click(); if (pemicu === kepala) pemicu.focus();
+      });
+    }
+  });
+
+  const terap = () => {
+    daftar.forEach(sb => {
+      sb.classList.toggle('sb-ciut', ciut);
+      const b = sb.querySelector('.sb-ciut-btn');
+      b.setAttribute('aria-expanded', String(!ciut));
+      b.setAttribute('aria-label', ciut ? 'Bentangkan menu samping' : 'Ciutkan menu samping');
+      b.innerHTML = SVG(ciut ? IK_BENTANG : IK_CIUT);
+      b.dataset.tip = ciut ? 'Bentangkan menu' : 'Ciutkan menu';
+    });
+    labelSr();
+  };
+  /* mode ciut: label disembunyikan secara visual saja (tetap dibacakan pembaca layar) */
+  const labelSr = () => daftar.forEach(sb => sb.querySelectorAll('a.nav-item > span, .nav-induk > span:not(.chev)').forEach(s => s.classList.toggle('sb-sr', ciut && matchMedia('(min-width:1025px)').matches)));
+  daftar.forEach(sb => new MutationObserver(() => { if (ciut) labelSr(); }).observe(sb, { childList: true, subtree: true }));
+  matchMedia('(min-width:1025px)').addEventListener('change', labelSr);
+  document.addEventListener('click', e => {
+    const b = e.target.closest('.sb-ciut-btn'); if (!b) return;
+    ciut = !ciut; tulis(ciut); tip.hidden = true; terap(); b.focus();
+  });
+  /* tooltip: label menu saat ciut */
+  const tampil = el => {
+    const sb = el.closest('.sidebar'); if (!sb || !sb.classList.contains('sb-ciut') || !matchMedia('(min-width:1025px)').matches) return;
+    const teks = el.dataset.tip || el.getAttribute('aria-label') || (el.querySelector(':scope > span:not(.chev)') || el).textContent.trim(); if (!teks) return;
+    tip.textContent = teks; tip.hidden = false;
+    const r = el.getBoundingClientRect(); tip.style.left = (r.right + 8) + 'px'; tip.style.top = (r.top + r.height / 2 - tip.offsetHeight / 2) + 'px';
+  };
+  const SEL = '.sidebar a.nav-item, .sidebar .nav-induk, .sidebar .sb-profil-btn, .sidebar .sb-ciut-btn';
+  document.addEventListener('mouseover', e => { const el = e.target.closest(SEL); if (el) tampil(el); else tip.hidden = true; });
+  document.addEventListener('focusin', e => { const el = e.target.closest(SEL); if (el) tampil(el); else tip.hidden = true; });
+  document.addEventListener('focusout', () => { tip.hidden = true; });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') tip.hidden = true; });
+  document.addEventListener('scroll', () => { tip.hidden = true; }, true);
+  terap();
+})();
+</script>
+
+</body>
+</html>

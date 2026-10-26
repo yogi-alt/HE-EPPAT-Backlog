@@ -1,0 +1,1668 @@
+<!doctype html>
+<html lang="id" data-brand="eppat" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Backlog E-PPAT Peruri — Onboarding · Pengaturan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- CSS resmi IDDS (design.inadigital.go.id/getting-started/code/js), versi dikunci -->
+<link href="https://unpkg.com/@idds/styles@1.6.38/dist/index.min.css" rel="stylesheet">
+<!-- Brand mode E-PPAT (brand-eppat-idds/eppat.css) -->
+<style id="brand-eppat">
+__EPPAT_CSS__
+
+/* Bantuan dalam IDDS Drawer + Accordion */
+.ina-drawer__content .bantu-langkah{margin:4px 0 4px;padding-left:20px;font-size:14px;line-height:21px}
+.ina-drawer__content .bantu-langkah li{margin-bottom:8px}
+.ina-drawer__content > p{margin:0 0 8px;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+.ina-drawer__content .bantu-sub{margin:20px 0 8px}
+.ina-drawer__content .bantu-kontak{grid-template-columns:1fr}
+.ina-drawer__content .ina-accordion{border-bottom:1px solid var(--ina-stroke-primary)}
+.ina-drawer__content .ina-accordion__body p{margin:0;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+
+.judul-halaman{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.judul-halaman .judul-kiri{min-width:0}
+</style>
+<style id="kerangka-css">
+/* ===== Order AJB — komponen IDDS + brand E-PPAT (HE-UMUM-01)
+   + usulan dari laporan Heuristic Evaluation INA Digital hal. 23–24 (HE-ORDER-01…05)
+   Kerangka & teks mengikuti layar live Peruri (dilihat 23 Okt 2026, akun Asisten). ===== */
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+button,input,select,textarea{font-family:inherit}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ina-content-primary);background:var(--ina-background-secondary);-webkit-font-smoothing:antialiased}
+
+/* protobar (khusus prototipe) */
+.protobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 16px;background:#0f1a17;color:#E6EDEA;font-size:12px;position:relative;z-index:60}
+.protobar a{color:#E6EDEA;text-decoration:none;border:1px dashed rgba(255,255,255,.3);border-radius:999px;padding:4px 10px;font:500 11px Inter,sans-serif}
+.protobar b{color:#fff}
+.protobar .sep{opacity:.35}
+.protobar button.pil{border:1px solid rgba(255,255,255,.25);background:transparent;color:#E6EDEA;font:500 11px Inter,sans-serif;padding:4px 10px;border-radius:999px;cursor:pointer}
+.protobar button.pil[aria-pressed="true"]{background:#3D6B5E;border-color:#3D6B5E;color:#fff}
+.protobar .kanan{margin-left:auto;display:inline-flex;gap:8px;flex-wrap:wrap}
+.protobar .utama{background:#3D6B5E!important;border-color:#3D6B5E!important;color:#fff!important;font-weight:600!important}
+.tag-usulan{display:none!important;align-items:center;font:600 10px Inter,sans-serif;letter-spacing:.6px;text-transform:uppercase;color:#2563EB;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:999px;padding:1px 7px;margin-left:6px;vertical-align:middle;white-space:nowrap}
+body.penanda .tag-usulan{display:inline-flex!important}
+body.penanda .ditandai{outline:2px dashed rgba(37,99,235,.45);outline-offset:4px;border-radius:10px}
+.sorot{outline:3px solid #2563EB!important;outline-offset:4px;border-radius:12px}
+
+/* kerangka aplikasi — struktur pola Sidebar & Header IDDS, warna dari brand E-PPAT (--ina-eppat-*, --ina-primary-*) */
+.app{display:flex;min-height:100vh}
+.sidebar{width:240px;flex:none;background:var(--ina-eppat-sidebar-bg);border-right:0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow:auto;padding:0 16px}
+.brand{display:flex;align-items:center;height:76px;flex:none;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:16px}
+.brand img{width:150px;display:block}
+.kantor.ina-card{flex:none;background:var(--ina-eppat-office-card);border:0;border-radius:12px;padding:12px 16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.kantor .ina-card__content{padding:0;gap:0}
+.kantor .eyebrow{font:600 10px/15px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#1f1f1f;opacity:.7}
+.kantor .ina-card__title{margin:4px 0 0;font:600 10px/1.375 Inter,sans-serif;color:#1f1f1f}
+.kantor .ina-card__description{-webkit-line-clamp:unset;line-clamp:unset;display:block;overflow:visible;margin:0;font-size:12px;line-height:18px;color:#1f1f1f}
+.kantor .kantor-info{display:flex;flex-direction:column;gap:4px;margin-top:8px;font-size:9px;line-height:13px;opacity:.8}
+.kantor .baris-kantor{display:flex;align-items:flex-start;gap:6px;font-size:9px;line-height:13px;font-weight:500;color:#1f1f1f}
+.kantor .baris-kantor svg{flex:none;width:10px;height:10px;margin-top:1px}
+#nav{flex:1;display:flex;flex-direction:column;gap:2px;padding-bottom:12px}
+.grp{display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:0;cursor:pointer;padding:16px 8px 6px;color:rgba(255,255,255,.72);font:500 12px/16px Inter,sans-serif;letter-spacing:0;text-transform:none} /* label grup sentence case (pola Sidebar IDDS) */
+.grp svg{flex:none;color:var(--eppat-sidebar-icon)}
+.grp > span:not(.chev){flex:1;min-width:0;text-align:left;line-height:16px} /* label grup rata kiri, sejajar ikon */
+/* ikon sidebar satu warna (pola backlog Perdana Niaga) — nanti dari Konten Situs › Tema Tampilan */
+:root{--eppat-sidebar-icon:#C2BB4B;--eppat-sidebar-active-icon:#FFFFFF}
+.grp .chev{margin-left:auto;transition:.15s;display:grid}
+.grp[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.items{display:flex;flex-direction:column;gap:2px}
+.sidebar .items a.nav-item{display:flex;justify-content:flex-start;gap:8px;width:100%;padding:8px;max-height:none;border-radius:8px;text-decoration:none;font-weight:500;color:var(--ina-eppat-sidebar-content)!important;background:transparent}
+.sidebar .items a.nav-item svg{width:16px;height:16px;flex:none;color:var(--eppat-sidebar-icon)}
+.sidebar .items a.nav-item:hover{background:var(--ina-eppat-sidebar-hover);color:#fff!important}
+.sidebar .items a.nav-item.on{background:var(--ina-eppat-sidebar-active);color:#fff!important;font-weight:600}
+.sidebar .items a.nav-item.on svg{color:var(--eppat-sidebar-active-icon)}
+.sidefoot{flex:none;padding:12px 8px;border-top:1px solid rgba(255,255,255,.1);font-size:11px;color:rgba(255,255,255,.75)}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+header.top{height:64px;flex:none;display:flex;align-items:center;gap:12px;padding:0 24px;background:var(--ina-background-primary);border-bottom:1px solid var(--ina-stroke-primary);position:sticky;top:0;z-index:20}
+.spacer{margin-left:auto}
+.user{position:relative;display:flex;align-items:center;gap:10px;padding:4px 8px;border-radius:8px}
+.ava{width:32px;height:32px;font:600 12px Inter,sans-serif;background:var(--ina-primary-primary)!important;color:#fff!important;border-color:var(--ina-primary-primary)!important}
+.uname{display:block;font:600 12px/14px Inter,sans-serif;color:var(--ina-primary-primary)}
+.urole{font:400 10px Inter,sans-serif;color:var(--ina-content-secondary);letter-spacing:1.4px;text-transform:uppercase}
+.content{flex:1;background-color:var(--ina-background-secondary);__BG__}
+.page{padding:24px 32px 56px}
+.page .ina-breadcrumb{margin-bottom:8px;display:flex;justify-content:flex-start}
+.page .ina-breadcrumb__list{justify-content:flex-start;margin:0;padding:0}
+h1{margin:0;font:500 28px/36px Inter,sans-serif;letter-spacing:-.3px;color:var(--ina-primary-primary)}
+.sub{margin:2px 0 0;font-size:14px;color:var(--ina-content-secondary)}
+.kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px}
+
+/* daftar order */
+.daftar-atas{display:flex;justify-content:flex-end;margin-top:20px}
+.saring{display:grid;grid-template-columns:minmax(0,1fr) 220px auto;gap:12px;align-items:end;margin-top:16px}
+.saring .ina-text-field__label{display:block}
+.saring .cari-wadah .ina-input-search{width:100%;margin-top:6px} /* IDDS Input Search, sama dengan Minuta & Verifikasi */
+.tabel-wadah{margin-top:16px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;overflow:hidden}
+.tabel-gulir{overflow-x:auto}
+table.tb{width:100%;border-collapse:collapse;font-size:14px}
+.tabel-wadah .ina-table{border:0;border-radius:0}
+table.tb td{vertical-align:middle}
+table.tb td .kd{font-weight:600;color:var(--ina-primary-primary);cursor:pointer}
+table.tb td .kc{font-size:12px;color:var(--ina-content-secondary)}
+table.tb tr.klik{cursor:pointer}
+table.tb tr.klik:hover td{background:var(--ina-primary-25)}
+.aksi-baris{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.kosong{padding:28px;text-align:center;color:var(--ina-content-secondary)}
+.halaman{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--ina-stroke-primary);font-size:13px;color:var(--ina-content-secondary)}
+.halaman > span{white-space:nowrap}
+[data-merah]{color:var(--ina-negative-600)!important}
+.tb .ina-table__cell,.tb .ina-table__header-cell{padding:12px 16px}
+.tb .ina-table__cell{white-space:normal}
+.lengkap{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.lengkap.ok{color:var(--ina-content-positive)}
+.lengkap.kurang{color:var(--ina-content-secondary)}
+.lengkap svg{flex:none}
+
+/* detail order */
+.det-kepala{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px}
+.det-kepala .kode{font:600 14px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary);margin-top:12px}
+.det-kepala h2{margin:2px 0 0;font:600 20px/28px Inter,sans-serif}
+.status-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px 28px}
+.status-kartu .ina-stepper{align-items:flex-start;min-height:92px;padding:4px 64px 0}
+.status-kartu .ina-stepper__separator{align-self:flex-start;margin-top:11px}
+.status-kartu .ina-stepper__label small{display:block;margin-top:3px;font-size:12px;line-height:16px;font-weight:400;color:var(--ina-content-secondary)}
+.status-kaki{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ina-stroke-primary);margin-top:8px;padding-top:16px}
+.status-kaki p{margin:0;font-size:14px;color:var(--ina-content-secondary)}
+.status-kaki p b{color:var(--ina-content-primary)}
+.status-kaki .kanan{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.status-kaki .alasan{font-size:12.5px;color:var(--ina-content-secondary)}
+.syarat{margin-top:16px;padding:14px 16px;border:1px solid var(--ina-stroke-primary);border-radius:12px;background:var(--ina-background-secondary)}
+.syarat h4{margin:0 0 10px;font:600 13px Inter,sans-serif;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.syarat h4 .hit{font-weight:500;color:var(--ina-content-secondary)}
+.syarat ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 16px}
+.syarat li{display:flex;align-items:center;gap:8px;font-size:13.5px;min-width:0}
+.syarat li .ik{width:20px;height:20px;border-radius:999px;display:grid;place-items:center;flex:none}
+.syarat li.ok .ik{background:var(--ina-positive-100);color:var(--ina-content-positive)}
+.syarat li.kurang .ik{background:var(--ina-warning-100);color:var(--ina-warning-600)}
+.syarat li.ok span.t{color:var(--ina-content-secondary)}
+.syarat li .ina-button{padding:0;height:auto;min-height:0}
+.syarat-alert{margin-top:16px}
+.syarat-alert .ina-alert__description{display:flex;flex-direction:column;gap:10px}
+.syarat-daftar{display:flex;flex-wrap:wrap;gap:8px 16px}
+.syarat-item{display:inline-flex;align-items:center;gap:4px}
+.syarat-item .ina-badge{display:inline-flex;align-items:center;gap:4px}
+.syarat-item .ina-button{padding:0 4px}
+.langkah-berikut{color:var(--ina-content-primary)}
+.info-baris{margin-top:16px}
+.info-baris .ina-alert__content{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;width:100%}
+.info-baris .ina-alert__text-section{flex:1;min-width:220px}
+
+.tab-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;overflow:hidden}
+.tab-kartu > .ina-tab-horizontal{padding:0 12px;border-bottom:1px solid var(--ina-stroke-primary)}
+.tab-kartu .ina-tab-horizontal__tab{gap:8px;display:inline-flex;align-items:center}
+.tab-kartu .tanda{font:600 11px Inter,sans-serif;border-radius:999px;padding:1px 7px}
+.tab-kartu .tanda.ok{background:var(--ina-positive-100);color:var(--ina-content-positive)}
+.tab-kartu .tanda.kurang{background:var(--ina-warning-100);color:var(--ina-warning-700)}
+.tab-kartu .tanda.netral{background:var(--ina-neutral-100);color:var(--ina-content-secondary)}
+.tab-isi{padding:20px}
+.tab-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.tab-bar p{margin:0;font-size:13px;color:var(--ina-content-secondary)}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f-grid .lebar{grid-column:1/-1}
+.ina-text-field textarea.ina-text-field__input{min-height:80px;resize:vertical;padding:0}
+.f-kaki{display:flex;justify-content:flex-end;margin-top:16px}
+.tb .nm{font-weight:500}
+.tb .sub2{font-size:12px;color:var(--ina-content-secondary)}
+.kunci{margin-bottom:16px}
+
+/* dialog */
+.ina-modal__body p{margin:0 0 8px;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+.seg{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary)}
+.seg button{border:0;border-radius:7px;background:transparent;padding:7px 14px;font:500 14px Inter,sans-serif;color:var(--ina-content-secondary);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ina-primary-primary);color:#fff}
+.fld{margin-bottom:16px}
+.fld > .ina-text-field__label{display:flex;align-items:center;gap:6px}
+.select-wadah{position:relative;display:block;width:100%}
+.select-wadah .ina-select-dropdown__panel{top:calc(100% + 4px);left:0;right:0;max-height:240px}
+.cari-panel{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:5;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:8px;box-shadow:0 10px 24px rgba(0,0,0,.1);padding:4px;max-height:220px;overflow:auto}
+.cari-panel button{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;border:0;background:transparent;text-align:left;padding:8px 10px;border-radius:6px;cursor:pointer;font-size:14px}
+.cari-panel button:hover{background:var(--ina-background-tertiary)}
+.cari-panel small{display:block;font-size:12px;color:var(--ina-content-secondary)}
+.kartu-pihak{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:12px 14px;background:var(--ina-background-secondary);font-size:13.5px}
+.kartu-pihak b{display:block;font-size:14px;margin-bottom:6px}
+.kartu-pihak dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;margin:0}
+.kartu-pihak dt{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.kartu-pihak dd{margin:0}
+.belum-ada{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 14px;padding:10px 12px;border-radius:10px;background:var(--ina-primary-25);border:1px solid var(--ina-primary-100);font-size:13px}
+.ringkas-kv{display:grid;grid-template-columns:140px 1fr;gap:8px 12px;margin:12px 0 14px;padding:12px 14px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);font-size:14px}
+.ringkas-kv dt{color:var(--ina-content-secondary)}
+.ringkas-kv dd{margin:0;font-weight:500}
+.cek-setuju{display:flex;gap:10px;align-items:flex-start;margin-top:10px;font-size:14px;cursor:pointer}
+
+.daftar-ubah{display:flex;flex-direction:column;gap:10px}
+.daftar-ubah .it{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:12px 14px}
+.daftar-ubah .it .a{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.daftar-ubah .it code{font:600 11.5px ui-monospace,Menlo,monospace;color:#2563EB}
+.daftar-ubah .it b{font-size:14px}
+.daftar-ubah .it p{margin:6px 0 4px;font-size:13px;line-height:19px;color:var(--ina-content-primary)}
+.daftar-ubah .it .lama{font-size:12.5px;line-height:18px;color:var(--ina-content-secondary)}
+.bantu-langkah{margin:8px 0 4px;padding-left:20px;font-size:14px;line-height:21px}
+.bantu-langkah li{margin-bottom:6px}
+.bantu-sub{margin:18px 0 8px;font:600 14px Inter,sans-serif;display:flex;align-items:center}
+.bantu-faq{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:14px}
+.bantu-faq summary{cursor:pointer;font-weight:500}
+.bantu-faq p{margin:8px 0 0!important}
+.bantu-kontak{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.bantu-kontak div{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:10px 12px;background:var(--ina-background-secondary)}
+.bantu-kontak b{display:block;font-size:12px;font-weight:500;color:var(--ina-content-secondary)}
+.bantu-kontak span{font-size:14px}
+.isi-tim{border-bottom:1px dashed currentColor;cursor:help}
+.toast-wadah{position:fixed;bottom:24px;right:24px;z-index:100;max-width:calc(100vw - 32px)}
+.tip{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:999px;border:1px solid var(--ina-stroke-secondary);color:var(--ina-content-secondary);font:600 10px Inter,sans-serif;cursor:help;background:transparent;padding:0}
+.ina-tooltip__bubble{max-width:260px;white-space:normal}
+
+@media (max-width:1024px){
+  .sidebar{position:fixed;z-index:40;left:0;top:0;transform:translateX(-100%);transition:.22s}
+  .sidebar.open{transform:none}
+  .scrim{position:fixed;inset:0;background:rgba(15,26,23,.45);z-index:35;opacity:0;pointer-events:none;transition:.22s}
+  .scrim.on{opacity:1;pointer-events:auto}
+  .syarat ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  header.top{padding:0 16px}
+  .user .txt,#bukaBantuan span{display:none}
+  .page{padding:20px 16px 40px}
+  h1{font-size:23px;line-height:32px}
+  .saring{grid-template-columns:1fr}
+  .f-grid,.syarat ul,.kartu-pihak dl,.bantu-kontak{grid-template-columns:1fr}
+  .status-kartu{padding:18px 16px}
+  .status-kartu .stepper-h{display:none}
+  .status-kartu .stepper-v{display:flex!important;padding:4px 0}
+  .ringkas-kv{grid-template-columns:1fr;gap:2px}
+  .protobar .kanan{margin-left:0}
+  table.tb thead{display:none}
+  table.tb tr{display:block;border-top:1px solid var(--ina-stroke-primary);padding:8px 0}
+  table.tb td{display:block;border:0;padding:4px 16px}
+  .aksi-baris{justify-content:flex-start}
+}
+.status-kartu .stepper-v{display:none}
+.status-kartu .stepper-v .ina-stepper__label small{display:inline;margin:0 0 0 8px}
+.status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
+</style>
+<style id="ob-pengaturan-css">
+/* ===== Onboarding · Pengaturan (Admin Onboarding, dev.eppat.id): Menu, Daftar Pengguna, Edit Pengguna, Peran Pengguna, Harga Produk, Paket Langganan — penyesuaian IDDS (IDDS-OB-31…45)
+   Isi, kolom, isian, tab, dan alur mengikuti live dev.eppat.id; yang disesuaikan hanya komponen (IDDS + brand E-PPAT), bahasa,
+   galat di bawah isian, konfirmasi aksi berdampak, penjaga perubahan, status sistem, dan Bantuan per halaman.
+   Kerangka staf (CSS/HTML/JS) disalin PERSIS dari ob-monitor-badan.html lewat rakitBadan.cjs. ===== */
+.ina-tooltip:not(:hover):not(:focus-within) .ina-tooltip__content{display:none}
+.ina-tooltip:hover .ina-tooltip__content,.ina-tooltip:focus-within .ina-tooltip__content{visibility:visible;opacity:1}
+.ina-tooltip__bubble{display:block;width:max-content;max-width:min(280px,80vw);white-space:normal;text-align:left;line-height:1.45;font-weight:400;text-transform:none;letter-spacing:0}
+.ina-modal-confirmation{max-width:560px}
+.modal-gap>*+*{margin-top:12px}
+.eb{font:600 11px Inter,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.blok{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px}
+.blok h2{margin:0;font:600 18px/26px Inter,sans-serif;color:var(--ina-primary-primary)}
+
+/* ---------- kerangka staf Onboarding (salin persis) ---------- */
+/* sidebar: grup + menu induk bertingkat (Verifikasi, Menu, Daftar Pengguna, Peran Pengguna) */
+.sidebar .items[hidden],.sidebar .anak[hidden]{display:none}
+.sidebar .items button.nav-induk{display:flex;align-items:center;gap:8px;width:100%;padding:8px;border:0;border-radius:8px;background:transparent;cursor:pointer;text-align:left;font:500 14px Inter,sans-serif;color:var(--ina-eppat-sidebar-content)}
+.sidebar .items button.nav-induk svg{width:16px;height:16px;flex:none;color:currentColor}
+.sidebar .items button.nav-induk:hover{background:var(--ina-eppat-sidebar-hover);color:#fff}
+.sidebar .items button.nav-induk:focus-visible,.sidebar .grp:focus-visible{outline:2px solid #fff;outline-offset:1px}
+.sidebar .items button.nav-induk.berisi-aktif{color:#fff;font-weight:600}
+.sidebar .nav-induk .chev{margin-left:auto;display:grid;transition:.15s}
+.sidebar .nav-induk .chev svg{width:12px;height:12px}
+.sidebar .nav-induk[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.sidebar .anak{display:flex;flex-direction:column;gap:2px}
+.sidebar .items a.nav-item.nav-anak{padding-left:28px}
+.sidebar .items a.nav-item.nav-anak svg{width:15px;height:15px}
+.sidebar .grp .tag-usulan{margin-left:0}
+/* kepala: menu akun (IDDS Action Dropdown) */
+.user-tombol{display:flex;align-items:center;gap:10px;padding:4px 8px;border:0;border-radius:8px;background:transparent;cursor:pointer;text-align:left;color:inherit}
+.user-tombol:hover{background:var(--ina-background-secondary)}
+.user-tombol:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px}
+.user-tombol .chev-u{color:var(--ina-content-secondary);display:grid}
+.user .ina-action-dropdown__menu{position:absolute;right:0;left:auto;top:calc(100% + 6px);min-width:220px;z-index:30;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.user a.ina-action-dropdown__item{text-decoration:none;color:inherit}
+.user .menu-kepala{display:flex;flex-direction:column;gap:2px;padding:8px 12px}
+.user .menu-kepala b{font:600 14px Inter,sans-serif;color:var(--ina-primary-primary)}
+.user .menu-kepala span{font-size:12px;color:var(--ina-content-secondary)}
+/* ---------- akhir kerangka staf ---------- */
+
+/* saringan & tabel (pola OB-MONITOR) */
+.saring-ob{display:flex;flex-direction:column;gap:14px;margin-top:20px;padding:14px 16px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px}
+.saring-ob .baris{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.saring-ob .lbl{display:block;margin-bottom:6px;font-size:13px;font-weight:500;color:var(--ina-content-primary)}
+.saring-ob .ina-input-search{width:340px}
+.saring-ob .jumlah{align-self:center;font-size:13px;color:var(--ina-content-secondary)}
+.saring-ob .kanan{margin-left:auto}
+.saring-ob .ina-chip__list{display:flex;flex-wrap:wrap;gap:8px}
+.saring-ob .ina-chip__item{cursor:pointer}
+.saring-ob .ina-chip__item:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px}
+.saring-ob .ina-chip__item .jml{margin-left:6px;font-weight:600}
+.kosong{text-align:center;padding:28px 12px;color:var(--ina-content-secondary)}
+.halaman{flex-wrap:wrap}
+.aksi-baris{display:flex;justify-content:flex-end;gap:4px;align-items:center}
+.ikon-saja.ina-button{padding:6px;min-width:0}
+.tb .ina-table__cell{vertical-align:middle}
+.mono{font:12.5px ui-monospace,Menlo,monospace;color:var(--ina-content-secondary)}
+.tb .email{overflow-wrap:anywhere}
+.alasan{margin-top:4px;font-size:12px;color:var(--ina-content-secondary);text-align:right}
+/* pohon menu */
+.pohon-nama{display:flex;align-items:center;gap:6px;min-width:220px}
+.pohon-nama .jarak{display:inline-block;flex:none}
+.pohon-nama .nm-induk{font-weight:600;color:var(--ina-content-primary)}
+.pohon-nama svg{flex:none}
+.btn-buka{display:grid;place-items:center;width:26px;height:26px;border:0;border-radius:6px;background:transparent;color:var(--ina-content-secondary);cursor:pointer;flex:none}
+.btn-buka:hover{background:var(--ina-background-secondary)}
+.btn-buka:focus-visible{outline:2px solid var(--ina-primary-500)}
+.btn-buka svg{transition:.15s}
+.btn-buka[aria-expanded="true"] svg{transform:rotate(90deg)}
+.btn-buka-ganti{display:inline-block;width:26px;flex:none}
+/* formulir dialog & halaman */
+.form-d{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 16px}
+.form-d.tiga{grid-template-columns:repeat(3,minmax(0,1fr))}
+.form-d .lebar{grid-column:1/-1}
+.form-d .ina-text-field,.form-d .ina-password-input,.form-d .ina-text-area,.form-d fieldset{margin-top:12px}
+.ina-text-field select.ina-text-field__input{appearance:auto;background:transparent;border:0;width:100%;height:100%;font:inherit;font-size:14px;color:inherit;outline:0}
+.ina-text-field__wrapper--disabled{background:var(--ina-background-secondary)}
+.ina-text-area textarea{width:100%;font:inherit;font-size:14px}
+.awalan{padding-left:12px;font-size:14px;color:var(--ina-content-secondary)}
+fieldset.ikon-grup{border:0;padding:0;margin:0;min-width:0}
+fieldset.ikon-grup legend{padding:0;margin-bottom:8px;font-size:14px;font-weight:500;color:var(--ina-content-primary)}
+.ikon-pilih{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.ikon-pilih label{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border:1px solid var(--ina-stroke-primary);border-radius:10px;cursor:pointer;font-size:11.5px;text-align:center;color:var(--ina-content-primary)}
+.ikon-pilih input{position:absolute;opacity:0;pointer-events:none}
+.ikon-pilih label:has(input:checked){background:var(--ina-primary-600);border-color:var(--ina-primary-600);color:#fff}
+.ikon-pilih label:has(input:focus-visible){outline:2px solid var(--ina-primary-500);outline-offset:2px}
+.batas-baris{display:flex;align-items:flex-start;gap:12px}
+.batas-baris .ina-text-field{flex:1;margin-top:0}
+.batas-baris .ina-checkbox{margin-top:10px;white-space:nowrap}
+.cek-baris{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px}
+.ina-checkbox{cursor:pointer}
+.ina-toggle{cursor:pointer}
+.ina-toggle .ina-toggle__input{pointer-events:none}
+.ina-toggle:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:3px;border-radius:999px}
+.ket-toggle{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--ina-content-primary)}
+.pilih-berkas{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}
+.pilih-berkas .nama-berkas{font-size:13px;color:var(--ina-content-secondary)}
+.lbl-isian{display:block;margin-top:12px;font-size:14px;font-weight:500;color:var(--ina-content-primary)}
+/* avatar & foto */
+.ava-kecil{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:999px;background:var(--ina-primary-50);color:var(--ina-primary-700,#1f4d36);font:600 12px Inter,sans-serif}
+.foto-produk{display:inline-grid;place-items:center;width:38px;height:38px;border:1px solid var(--ina-stroke-primary);border-radius:10px;color:var(--ina-content-secondary);background:var(--ina-background-secondary)}
+/* halaman Edit Pengguna (pola Profil Saya di OB-MASUK) */
+.profil-grid{display:grid;grid-template-columns:minmax(220px,300px) minmax(0,1fr);gap:20px;margin-top:20px;align-items:start}
+.kartu-p{background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;overflow:hidden}
+.kepala-hijau{display:flex;align-items:center;gap:8px;margin:0;padding:14px 18px;background:var(--ina-primary-600);color:#fff;font:600 15px Inter,sans-serif}
+.foto-isi{padding:16px}
+.foto-area{display:grid;place-items:center;width:100%;aspect-ratio:4/5;border:1.5px dashed var(--ina-stroke-secondary);border-radius:12px;background:var(--ina-background-secondary);color:var(--ina-content-secondary);cursor:pointer;padding:0;font:inherit}
+.foto-area:hover{border-color:var(--ina-primary-500)}
+.foto-area:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px}
+.foto-ket{margin:10px 0 0;text-align:center;font-size:12.5px;line-height:18px;color:var(--ina-content-secondary)}
+.foto-area .nama-kantor{display:block;margin-top:10px;font:600 14px Inter,sans-serif;color:var(--ina-content-primary)}
+.foto-area .kode-kantor{display:block;font:12px ui-monospace,Menlo,monospace;color:var(--ina-content-secondary)}
+/* Lokasi Kantor & syarat kata sandi (salinan Profil Saya di OB-MASUK) */
+.lokasi{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+.peta{position:relative;margin-top:12px;border:1px solid var(--ina-stroke-primary);border-radius:12px;overflow:hidden;background:#eef1ec;min-height:300px}
+.peta svg.dasar{display:block;width:100%;height:300px;cursor:crosshair}
+.peta .cari-peta{position:absolute;top:10px;left:56px;right:10px}
+.peta .zoom{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:4px}
+.peta .zoom button{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--ina-stroke-primary);border-radius:8px;background:#fff;cursor:pointer;color:var(--ina-content-primary)}
+.peta .zoom button:focus-visible{outline:2px solid var(--ina-primary-500)}
+.peta-ket{margin:6px 0 0;font-size:12.5px;color:var(--ina-content-secondary)}
+.ikon-saja.ina-button{padding:6px;min-width:0}
+.syarat-pw{list-style:none;margin:8px 0 0;padding:10px 12px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:4px 12px}
+.syarat-pw li{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ina-content-secondary)}
+.syarat-pw .tanda{width:15px;height:15px;border-radius:999px;border:1.5px solid var(--ina-stroke-secondary);display:grid;place-items:center;flex:none}
+.syarat-pw li.ok{color:var(--ina-content-positive)}
+.syarat-pw li.ok .tanda{border-color:var(--ina-content-positive);background:var(--ina-positive-100)}
+.kartu-tab{padding:16px 20px 22px}
+.tab-wadah{background:var(--ina-background-primary);border-bottom:1px solid var(--ina-stroke-primary);overflow-x:auto}
+.tab-wadah .ina-tab-horizontal{border-bottom:0;padding:0}
+.tab-wadah .ina-tab-horizontal__tab{gap:8px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
+.titik-ubah{width:8px;height:8px;border-radius:999px;background:var(--ina-warning-500,#e6a700);display:inline-block}
+.titik-ubah[hidden]{display:none}
+.sub-blok{border:1px solid var(--ina-stroke-primary);border-radius:14px;padding:18px 20px;margin-top:16px}
+.sub-kepala{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px;padding-bottom:12px;border-bottom:1px solid var(--ina-stroke-primary);font:600 16px Inter,sans-serif;color:var(--ina-primary-primary)}
+.sub-kepala .kanan{margin-left:auto}
+.sub-judul{margin:18px 0 0;font:600 14px Inter,sans-serif;color:var(--ina-primary-primary)}
+.kartu-kaki{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:18px;padding-top:16px;border-top:1px solid var(--ina-stroke-primary)}
+.kaki-st{margin-right:auto;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ina-content-secondary)}
+.kaki-st.ada{color:var(--ina-warning-700,#6b4c00)}
+.mfa-baris{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:10px}
+.mfa-baris p{margin:0 0 6px;font-size:14px;color:var(--ina-content-primary)}
+.mfa-baris p.ket{font-size:13px;color:var(--ina-content-secondary);max-width:460px}
+.kembali{margin-top:4px}
+/* kartu formulir Harga Produk */
+.kartu-form{margin-top:16px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:20px 24px 24px}
+.kartu-form .kepala-form{display:flex;align-items:center;gap:10px;margin:0 0 4px;font:600 18px Inter,sans-serif;color:var(--ina-content-primary)}
+.tambah-harga{display:flex;align-items:flex-end;gap:12px;margin-top:16px;padding:14px 16px;border:1px solid var(--ina-stroke-primary);border-radius:12px;background:var(--ina-background-secondary)}
+.tambah-harga .ina-text-field{flex:1;margin:0}
+.tambah-harga .ina-button{margin-bottom:22px}
+/* Peran Pengguna */
+.status-simpan{display:flex;align-items:center;gap:8px;margin-top:16px;padding:10px 14px;border:1px solid var(--ina-stroke-primary);border-radius:12px;background:var(--ina-background-primary);font-size:13.5px;color:var(--ina-content-primary)}
+.status-simpan.ok{border-color:var(--ina-positive-300,#9fd8b4);background:var(--ina-positive-50,#effaf3)}
+.status-simpan svg{flex:none;color:var(--ina-primary-primary)}
+#tabelPeran table.tb{min-width:0}
+#tabelPeran th,#tabelPeran td{text-align:center;white-space:nowrap}
+#tabelPeran .kol-user{position:sticky;left:0;z-index:2;background:var(--ina-background-primary);text-align:left;border-right:1px solid var(--ina-stroke-primary);min-width:190px;white-space:normal}
+#tabelPeran thead .kol-user{background:var(--ina-background-secondary)}
+#tabelPeran .grup{border-left:1px solid var(--ina-stroke-primary);color:var(--ina-content-primary)}
+#tabelPeran thead small{display:block;font-size:11px;font-weight:400;color:var(--ina-content-secondary)}
+#tabelPeran .kol-user b{display:block;font-weight:600;color:var(--ina-content-primary)}
+.ringkas-peran{padding:10px 16px;border-top:1px solid var(--ina-stroke-primary);font-size:12.5px;color:var(--ina-content-secondary)}
+
+@media (max-width:1100px){ .profil-grid{grid-template-columns:1fr} }
+@media (max-width:760px){
+  .saring-ob .baris > div,.saring-ob .ina-input-search{width:100%;min-width:0}
+  .saring-ob .kanan{margin-left:0}
+  .form-d,.form-d.tiga,.lokasi{grid-template-columns:1fr}
+  .ikon-pilih{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .halaman > span{white-space:normal}
+  .user-tombol .chev-u{display:none}
+  .tambah-harga{flex-direction:column;align-items:stretch}
+  .tambah-harga .ina-button{margin-bottom:0}
+  .kartu-form{padding:16px}
+  .batas-baris{flex-direction:column;gap:4px}
+  #tabelPeran .kol-user{min-width:140px}
+}
+.bantu-istilah{display:grid;grid-template-columns:max-content 1fr;gap:6px 12px;margin:8px 0 4px;padding:12px 14px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);font-size:13.5px;line-height:20px}
+.bantu-istilah dt{font-weight:600}
+.bantu-istilah dd{margin:0;color:var(--ina-content-secondary)}
+ol.bantu-langkah{padding-left:22px}
+@media (max-width:760px){ .bantu-istilah{grid-template-columns:1fr} .bantu-istilah dd{margin-bottom:6px} }
+</style>
+</head>
+<body>
+
+<!-- ===== KERANGKA STAF ONBOARDING · HTML (salin persis; ganti judul berkas di protobar) ===== -->
+<div class="protobar">
+  <a href="index.html#onboarding">&#9776; Daftar prototipe</a>
+  <span class="sep">&bull;</span><b>Onboarding · Pengaturan</b><span class="sep">&bull;</span><span>Peran: Admin Onboarding</span>
+  <span class="sep">&bull;</span><span>Layar:</span><span id="pilLayar"></span>
+  <span class="kanan">
+    <button class="pil" id="aturUlang">Atur ulang contoh</button>
+    <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai penyesuaian</button>
+    <button class="pil utama" id="bukaUbah">Daftar penyesuaian</button>
+  </span>
+</div>
+
+<div class="app">
+  <div class="scrim" id="scrim"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><img src="__LOGO__" alt="E-PPAT"></div>
+    <nav id="nav" aria-label="Menu Onboarding"></nav>
+    <div class="sidefoot">e-PPAT v1.0.1</div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Tampilkan atau sembunyikan menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="spacer"></div>
+      <div class="user ina-action-dropdown" id="user">
+        <button type="button" class="user-tombol" id="userTombol" aria-haspopup="menu" aria-expanded="false" aria-label="Menu akun Admin Contoh"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Admin Contoh</span><span class="urole">Admin</span></span><span class="chev-u"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div id="menuProfil"></div>
+      </div>
+    </header>
+    <div class="content"><div class="page" id="halaman"></div></div>
+  </div>
+</div>
+
+<div id="lapisan"></div>
+<div id="lapisanDrawer"></div>
+<div class="toast-wadah" id="toastWadah"></div>
+<!-- ===== akhir kerangka HTML ===== -->
+
+<script>
+(() => {
+/* ---------------- ikon & util (sama dengan Platform · Monitoring) ---------------- */
+const I = {
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+  user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  keluar:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/>',
+  luar:'<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14L21 3"/>',
+  ulang:'<path d="M23 4v6h-6"/><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/>',
+  panah:'<path d="M5 12h14M13 6l6 6-6 6"/>', kiri:'<path d="M15 18l-6-6 6-6"/>', x:'<path d="M18 6L6 18M6 6l12 12"/>', info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+  centang:'<path d="M20 6L9 17l-5-5"/>', chev:'<path d="M9 18l6-6-6-6"/>', bawah:'<path d="M6 9l6 6 6-6"/>', mata:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>',
+  cari:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>', jam:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>'
+};
+const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const usulan = kode => `<span class="tag-usulan">penyesuaian &middot; ${kode}</span>`;
+const badge = (t, j, uk = 'md', atr = '', kls = '') => `<span class="ina-badge ina-badge--soft ina-badge--${j} ina-badge--${uk} ina-badge--rounded-full ${kls}" ${atr}>${t}</span>`;
+const tombol = (t, h = 'primary', uk = 'md', atr = '', ikon = '') => { let k = ''; atr = atr.replace(/class="([^"]*)"/, (m, c) => { k = ' ' + c; return ''; }); return `<button type="button" class="ina-button ina-button--${h} ina-button--${uk}${k}" ${atr}>${ikon}${t}</button>`; };
+const alert = (j, judul, isi, ekstra = '') => `<div class="ina-alert ina-alert--${j}" role="status"><div class="ina-alert__content"><div class="ina-alert__text-section">${judul ? `<div class="ina-alert__title">${judul}</div>` : ''}<div class="ina-alert__description">${isi}</div></div>${ekstra}</div></div>`;
+const est = t => `<span class="isi-tim" title="Data contoh. Ganti dengan data resmi dari tim E-PPAT.">${t}</span>`;
+const cariIsian = (id, ph, v, label) => `<div class="ina-input-search"><div class="ina-input-search__wrapper"><span class="ina-input-search__search-icon">${ik('cari', 20)}</span><input id="${id}" class="ina-input-search__input" type="search" placeholder="${ph}" aria-label="${label}" value="${esc(v)}" autocomplete="off"></div></div>`;
+const PEMISAH_REMAH = `<span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+/* remah: [['Manajemen Onboarding', '#onboarding'], ['Detail Pendaftar']] → Beranda › … (item terakhir = halaman aktif) */
+const remah = (...jejak) => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#dasbor" class="ina-breadcrumb__link" data-remah="dasbor"><span class="ina-breadcrumb__text">Beranda</span></a>${PEMISAH_REMAH}</li>${jejak.map(([t, h], i) => i < jejak.length - 1
+  ? `<li class="ina-breadcrumb__item"><a href="${h}" class="ina-breadcrumb__link" data-remah="${h.slice(1)}"><span class="ina-breadcrumb__text">${t}</span></a>${PEMISAH_REMAH}</li>`
+  : `<li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active" aria-current="page"><span class="ina-breadcrumb__text">${t}</span></span></li>`).join('')}</ol></nav>`;
+Object.assign(I, {
+  tambah:'<path d="M12 5v14M5 12h14"/>',
+  pena:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+  sampah:'<path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6M10 11v6M14 11v6"/>',
+  gedung:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/>',
+  kunci:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  kamera:'<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>',
+  telepon:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',
+  surat:'<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/>',
+  simpan:'<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/>',
+  rumah:'<path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+  gerigi:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>',
+  setel:'<path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/>',
+  pohon:'<path d="M3 5h4M7 5v14M7 12h4M7 19h4M11 5h10M15 12h6M15 19h6"/>',
+  kuitansi:'<path d="M4 2v20l3-2 3 2 3-2 3 2 3-2 1 2V2l-1 2-3-2-3 2-3-2-3 2-3-2z"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+  lingkar:'<circle cx="12" cy="12" r="9"/>',
+  kisi:'<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>',
+  aturUser:'<circle cx="10" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6"/><circle cx="18" cy="17" r="3"/>',
+  gambar:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>',
+  pin:'<path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>', plus:'<path d="M12 5v14M5 12h14"/>', minus:'<path d="M5 12h14"/>'
+});
+const denganTip = (isi, t, letak = 'top') => `<span class="ina-tooltip ina-tooltip--placement-${letak}">${isi}<span class="ina-tooltip__content"><span class="ina-tooltip__bubble">${t}</span></span></span>`;
+const spinner = `<span class="ina-spinner ina-spinner--spinner-only" aria-hidden="true"><span class="ina-spinner__element ina-spinner__element--size-xs ina-spinner__element--color-primary"></span></span>`;
+/* komponen isian IDDS (salinan OB-MASUK & PL-SISTEM) */
+const tf = (id, l, v = '', ph = '', wajib = false, bantu = '', atr = '', tipe = 'text') => `<div class="ina-text-field" id="f-${id}">${l ? `<label class="ina-text-field__label" for="${id}">${l}${wajib ? '<span class="ina-text-field__required">*</span>' : ''}</label>` : ''}
+  <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ${/\bdisabled\b/.test(atr) ? 'ina-text-field__wrapper--disabled' : ''}"><input id="${id}" type="${tipe}" class="ina-text-field__input" value="${esc(v)}" placeholder="${esc(ph)}" aria-describedby="h-${id}" ${wajib ? 'aria-required="true"' : ''} ${atr}></div>
+  <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div></div>`;
+const tfRp = (id, l, v = '', bantu = '', atr = '') => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}</label>
+  <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><span class="awalan" aria-hidden="true">Rp</span><input id="${id}" type="text" inputmode="numeric" class="ina-text-field__input" value="${esc(v)}" placeholder="0" aria-describedby="h-${id}" ${atr}></div>
+  <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div></div>`;
+const ta = (id, l, v = '', ph = '', bantu = '', atr = '', baris = 3) => `<div class="ina-text-area" id="f-${id}"><label class="ina-text-area__label" for="${id}">${l}</label><div class="ina-text-area__wrapper ina-text-area__wrapper--status-neutral"><textarea id="${id}" class="ina-text-area__input" rows="${baris}" placeholder="${esc(ph)}" aria-describedby="h-${id}" ${atr}>${esc(v)}</textarea></div><div class="ina-text-area__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div>`;
+const pilihan = (id, l, opsi, v, bantu = '', atr = '', wajib = false) => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}${wajib ? '<span class="ina-text-field__required">*</span>' : ''}</label>
+  <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><select id="${id}" class="ina-text-field__input" aria-describedby="h-${id}" ${atr}>${opsi.map(([ov, ot]) => `<option value="${esc(ov)}" ${String(ov) === String(v) ? 'selected' : ''}>${ot}</option>`).join('')}</select></div>
+  <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div></div>`;
+const pwIsian = (id, l, ph, bantu = '', atr = '') => `<div class="ina-password-input" id="f-${id}"><label class="ina-password-input__label" for="${id}">${l}<span class="ina-password-input__required">*</span></label>
+  <div class="ina-password-input__wrapper ina-password-input__wrapper--size-md ina-password-input__wrapper--neutral"><input id="${id}" type="password" class="ina-password-input__input" placeholder="${ph}" autocomplete="new-password" aria-describedby="h-${id}" aria-required="true" ${atr}>
+  <div class="ina-password-input__actions"><button type="button" class="ina-password-input__toggle-button" data-lihat-pw="${id}" aria-label="Tampilkan ${l.toLowerCase()}" aria-pressed="false">${ik('mata', 18)}</button></div></div>
+  <div class="ina-password-input__status-area"><span class="ina-password-input__status-message" id="h-${id}" data-bantu="${esc(bantu)}" aria-live="polite">${bantu}</span></div></div>`;
+const sakelar = (atr, label, on) => `<span class="ina-toggle ina-toggle--size-sm ${on ? 'ina-toggle--checked' : ''}" role="switch" aria-checked="${on}" tabindex="0" aria-label="${esc(label)}" ${atr}><input type="checkbox" class="ina-toggle__input" tabindex="-1" aria-hidden="true" ${on ? 'checked' : ''}><span class="ina-toggle__track ${on ? 'ina-toggle__track--checked' : ''}" style="pointer-events:none"><span class="ina-toggle__thumb ${on ? 'ina-toggle__thumb--checked' : ''}"></span></span></span>`;
+const cekBox = (id, cek, label, atr = '') => `<label class="ina-checkbox" for="${id}"><input type="checkbox" id="${id}" class="ina-checkbox__input peer" ${cek ? 'checked' : ''} ${atr}><div class="ina-checkbox__box ina-checkbox__box--${cek ? 'checked' : 'unchecked'}">${cek ? ik('centang', 12) : ''}</div><div class="ina-checkbox__content"><span class="ina-checkbox__label">${label}</span></div></label>`;
+/* daftar centang syarat kata sandi: sama dengan layar Registrasi dan Profil Saya (OB-MASUK) */
+const SYARAT_DAFTAR = [['Minimal 12 karakter', s => s.length >= 12], ['Mengandung huruf besar', s => /[A-Z]/.test(s)], ['Mengandung huruf kecil', s => /[a-z]/.test(s)], ['Mengandung angka', s => /[0-9]/.test(s)], ['Mengandung simbol', s => /[^A-Za-z0-9]/.test(s)]];
+const syaratPw = (id, nilai = '') => `<ul class="syarat-pw" id="${id}" aria-live="polite" aria-label="Syarat kata sandi">${SYARAT_DAFTAR.map(([l, uji], i) => `<li data-syarat="${i}" class="${uji(nilai) ? 'ok' : ''}"><span class="tanda" aria-hidden="true">${uji(nilai) ? ik('centang', 11) : ''}</span>${l}</li>`).join('')}</ul>`;
+function cekSyarat(daftarId, nilai) {
+  const ok = SYARAT_DAFTAR.map(([, uji]) => uji(nilai));
+  document.querySelectorAll(`#${daftarId} li`).forEach((li, i) => { li.classList.toggle('ok', ok[i]); li.querySelector('.tanda').innerHTML = ok[i] ? ik('centang', 11) : ''; });
+  return ok.every(Boolean);
+}
+const ikonTombol = (ikon, label, atr = '') => tombol(ik(ikon, 16), 'tertiary', 'sm', `class="ikon-saja" aria-label="${esc(label)}" title="${esc(label)}" ${atr}`);
+
+/* ---------------- daftar penyesuaian ---------------- */
+const UBAH = [
+  { kode:'IDDS-OB-31', judul:'Menu: judul, subjudul, dan kolom berbahasa Indonesia',
+    isi:'Halaman Menu Admin, Menu Operator, dan Menu Customer memakai remah IDDS "Beranda › Menu Admin" dan subjudul satu kalimat: "Atur susunan menu samping aplikasi admin." Kolom tabel menjadi Kode, Nama Menu, URL, Deskripsi, Status, dan Aksi; kolom aksi kini berjudul. Data menu ikut dibakukan seperti di menu samping: "Navigation" menjadi "Utama" dan "Dashboard" menjadi "Dasbor". Nilai kosong ditulis "Belum ada", bukan "-".',
+    lama:'Remah berbunyi "Home › Menu Admin" dengan subjudul "Kelola menu navigasi aplikasi admin". Kolom tabel berbunyi "CODE", "NAMA MENU", "URL", "DESKRIPSI", dan "STATUS", sedangkan kolom aksi tidak berjudul. Data memuat "Navigation" dan "Dashboard", dan nilai kosong ditulis "-".', ke:'menu-admin', sorot:'#pohonMenu' },
+  { kode:'IDDS-OB-32', judul:'Menu: pohon menu dengan tombol buka/tutup dan pencarian berlabel',
+    isi:'Menu induk memiliki tombol panah dengan aria-expanded dan label "Tutup sub-menu Verifikasi" atau "Buka sub-menu Verifikasi", sehingga keadaannya dibacakan. Sub-menu tampil menjorok di bawah induknya. Pencarian memakai IDDS Input Search dengan label "Cari menu". Hasil pencarian menampilkan menu yang cocok beserta induknya, dan jumlah menu yang tampil diumumkan.',
+    lama:'Panah buka/tutup tidak berlabel, dan garis pohon "├─" ikut dibacakan pembaca layar. Kotak cari "Cari nama atau code menu..." tidak berlabel dan tidak menampilkan jumlah hasil.', ke:'menu-admin', sorot:'#saringMenu' },
+  { kode:'IDDS-OB-33', judul:'Menu: aksi baris menyebut nama menu',
+    isi:'Ikon Tambah Sub-menu, Edit Menu, dan Hapus Menu memakai IDDS Button dengan aria-label dan IDDS Tooltip yang menyebut nama menu, misalnya "Hapus menu Harga Produk". Tambah Sub-menu hanya tampil di menu tingkat pertama dan kedua, sama seperti live.',
+    lama:'Tiga ikon aksi (+, pensil, tempat sampah) tidak bertuliskan teks, tidak memiliki tooltip, dan tidak menyebut nama menu untuk pembaca layar.', ke:'menu-admin', sorot:'#pohonMenu' },
+  { kode:'IDDS-OB-34', judul:'Menu: formulir Tambah/Edit Menu dengan pesan galat di bawah isian',
+    isi:'Formulir memakai IDDS Modal dan IDDS Text Field berlabel Indonesia: Kode Menu Induk, Kode Menu, Status, Nama Menu, URL / Path, Deskripsi Menu, dan Ikon Navigasi. Kode baru terisi otomatis. Pesan galat tampil di bawah isian (aria-invalid), misalnya "Kode Menu sudah dipakai menu Dasbor." atau "URL harus diawali garis miring (/).". Pilihan ikon berupa grup radio berlabel Indonesia ("Tanpa Ikon", "Dasbor", "Pengaturan", …) yang dapat dipilih dengan tombol panah. Pada Edit Menu, kode dikunci karena menjadi dasar kode sub-menu.',
+    lama:'Formulir memakai label "Code Menu *", "Parent Menu Code", "Status Aktif", dan "Icon Navigasi". Ikon dipilih dari nama teknis berbahasa Inggris ("LayoutDashboard", "Settings2", "UserCog", "ListTree"). Pesan galat tidak menempel pada isian.', ke:'menu-admin', sorot:'#tambahMenuUtama' },
+  { kode:'IDDS-OB-35', judul:'Menu: konfirmasi Hapus Menu yang menyebut dampaknya',
+    isi:'Hapus Menu membuka IDDS Modal konfirmasi "Hapus menu Verifikasi?". Dialog menyebut kode menu, jumlah sub-menu yang ikut terhapus, dan bahwa menu hilang dari menu samping dan Peran Pengguna. Tombol konfirmasi "Hapus Menu" berwarna merah. Batal atau Esc mengembalikan fokus ke tombol asal. Setelah menu terhapus, IDDS Toast mengumumkan hasilnya.',
+    lama:'Konfirmasi hanya berisi "Ya, Hapus" / "Batal" tanpa menyebut sub-menu yang ikut terhapus.', ke:'menu-admin', sorot:'#pohonMenu' },
+  { kode:'IDDS-OB-36', judul:'Daftar Pengguna: label berbahasa Indonesia, saringan IDDS Chip, dan pencarian berlabel',
+    isi:'Halaman berjudul "Daftar Pengguna Customer" dengan subjudul "Tambah, ubah, atau hapus akun pengguna customer." Kolom menjadi Kode, Avatar, Nama, Email, Dibuat, Tipe, Status, MFA, dan Aksi. Saringan Semua/Aktif/Nonaktif memakai IDDS Chip (aria-pressed) dengan jumlahnya. Pencarian berlabel "Cari pengguna", dan jumlah hasil diumumkan. MFA kosong ditulis "Belum diatur", bukan "—". Tombol "Add User" menjadi "Tambah Pengguna".',
+    lama:'Judul berbunyi "Customer" dengan subjudul "Kelola data pengguna customer". Kolom berbunyi "Code", "Name", "Created", "Type", dan "Actions", dan MFA kosong ditulis "—". Tombol berlabel "Add User", dan teks paginasi berbunyi "Menampilkan 1–10 dari total 760".', ke:'pengguna-customer', sorot:'#saringPengguna' },
+  { kode:'IDDS-OB-37', judul:'Daftar Pengguna: dialog Tambah Pengguna dengan pesan galat di bawah isian',
+    isi:'Dialog Tambah Pengguna memakai IDDS Modal dengan isian yang sama dengan live: Nama Depan, Nama Tengah, Nama Belakang, Avatar, Email, Kata Sandi, Tipe, Jenis Kelamin, dan Deskripsi. Pesan galat tampil di bawah isian yang salah. Kesalahan yang diperiksa adalah nama depan kosong, format email salah, email sudah terdaftar, atau kata sandi kurang dari 12 karakter tanpa huruf besar, huruf kecil, angka, dan simbol. Fokus pindah ke isian pertama yang salah.',
+    lama:'Dialog berjudul "Tambah User" dengan isian "Password", contoh "email@example.com", dan tombol "Tambah User". Pesan galat tidak menempel pada isian.', ke:'pengguna-customer', sorot:'#tambahPengguna' },
+  { kode:'IDDS-OB-38', judul:'Daftar Pengguna: aksi Edit dan Hapus menyebut nama pengguna',
+    isi:'Ikon Edit dan Hapus memakai aria-label dan IDDS Tooltip berisi nama pengguna. Hapus membuka konfirmasi "Hapus pengguna Calon PPAT Contoh Satu?" yang menyebut email dan dampaknya. Dialog memuat tombol "Hapus Pengguna" berwarna merah dan saran menonaktifkan akun bila hanya ingin menghentikan sementara. Akun yang sedang dipakai (Admin Contoh) tidak dapat dihapus, dan alasannya tertulis di baris tersebut.',
+    lama:'Ikon pensil dan tempat sampah tidak bertuliskan teks. Konfirmasi berbunyi "Hapus User?" dengan tombol "Ya, Hapus" dan "Batal".', ke:'pengguna-admin', sorot:'#tabelPengguna' },
+  { kode:'IDDS-OB-39', judul:'Edit Pengguna: halaman bertab IDDS Tabs berbahasa Indonesia',
+    isi:'Edit Pengguna memakai pola yang sama dengan Profil Saya: kartu kiri dan IDDS Tabs "PPAT", "Kantor PPAT", dan "Kata Sandi". Saat tab Kantor PPAT dibuka, kartu kiri "Foto Profil" berganti menjadi "Logo Kantor" (nama kantor dan ID PPAT), sama dengan live. Remah berbunyi "Beranda › Daftar Pengguna Customer › Edit Pengguna", dan tombol kembali berlabel "Kembali ke Daftar Pengguna Customer". Blok "Data Remarks" menjadi "Status Akun" dengan sakelar berlabel "Akun aktif" dan teks Aktif/Nonaktif. Tab Kantor PPAT memuat semua isi live dengan markup yang sama dengan Profil Saya. Nama Kantor diberi lencana status kantor (IDDS Badge) dengan tooltip yang menjelaskan kapan kantor aktif. Isi lainnya: Detail Registrasi (ID PPAT / Kode Kantor dan URL Web terkunci dengan keterangan, Bank, Nomor Rekening); Info Kontak Kantor; dan Lokasi Kantor (Alamat Lengkap, Kelurahan, Kecamatan, Kota/Kabupaten, GPS Lat, GPS Long). Peta contoh dapat diklik, diperbesar/diperkecil, dan dicari lewat IDDS Input Search berlabel, dan koordinat GPS terisi otomatis. Tab diakhiri tombol Batal dan "Simpan Data Kantor". Tabel kontak memakai kolom No., Akun / Nomor, Jenis Kontak, Status, dan Aksi.',
+    lama:'Remah berbunyi "Home › Customer › Edit Customer", dan tab berlabel "Password". Blok "Data Remarks" memuat sakelar "Active". Tabel kontak memakai kolom "Contact Account / Code", "Contact Type", "Active", dan "Action" dengan jenis "Email"/"Phone". Di tab Kantor PPAT, lencana "Nonaktif" tidak dijelaskan, ID PPAT / Kode Kantor dan URL Web tampil abu-abu tanpa keterangan, dan Bank berisi "-- Pilih Bank --". Tabel Info Kontak kosong bertuliskan "No contacts yet.". Peta Leaflet memiliki tombol "+"/"−" tanpa label, kotak cari "Cari lokasi (cth: Monas, Jakarta)..." tanpa label, dan keterangan "Geser pin pada peta untuk mengisi koordinat GPS secara otomatis."', ke:'pengguna-edit', sorot:'#tabEdit' },
+  { kode:'IDDS-OB-40', judul:'Edit Pengguna: tab Kata Sandi untuk admin, pesan galat di bawah isian, dan penjaga perubahan',
+    isi:'Tab Kata Sandi hanya berisi Kata Sandi Baru dan Konfirmasi Kata Sandi. Isian "Kata Sandi Saat Ini" dihapus karena admin mengubah kata sandi pengguna lain dan tidak mengetahui kata sandinya. Syarat kata sandi tampil sebagai daftar centang seperti layar Registrasi (minimal 12 karakter, huruf besar, huruf kecil, angka, dan simbol) dan tercentang saat mengetik. Tombol "Perbarui" menjadi "Simpan Kata Sandi" agar seragam dengan "Simpan PPAT" dan "Simpan Data Kantor". Setiap tab menampilkan status "Belum disimpan" di samping tombol simpan dan titik penanda pada tab yang berubah. Pesan galat tampil di bawah isian, misalnya "Nama Depan wajib diisi.", "Nomor Rekening hanya boleh berisi angka.", "GPS Lat berupa angka antara -90 dan 90.", atau "Konfirmasi kata sandi tidak sama.". Bila halaman ditinggalkan sebelum disimpan, muncul "Tinggalkan halaman ini?" dengan pilihan Tetap di Sini atau Tinggalkan. Reset MFA meminta konfirmasi bertombol merah.',
+    lama:'Tab "Password" berisi isian "Kata Sandi Saat Ini", "Kata Sandi Baru", dan "Konfirmasi Kata Sandi", padahal admin mengubah kata sandi pengguna lain. Di bawahnya hanya tertulis "Min. 12 karakter · Huruf besar, kecil, angka & simbol" dengan bilah kekuatan, dan tombol simpan berlabel "Perbarui". Tidak ada tanda perubahan yang belum disimpan, dan perubahan hilang tanpa peringatan saat pengguna pindah menu.', ke:'pengguna-edit', sorot:'#kaki-ppat' },
+  { kode:'IDDS-OB-41', judul:'Peran Pengguna: sakelar berlabel, konfirmasi cabut akses, dan status tersimpan',
+    isi:'Setiap sakelar memakai IDDS Toggle dengan label yang menyebut menu dan pengguna, misalnya "Akses menu Harga Produk untuk Operator Contoh Dua". Mematikan sakelar membuka konfirmasi "Cabut akses Harga Produk?" dengan tombol "Cabut Akses" berwarna merah. Menyalakan sakelar langsung memberi akses. Status penyimpanan selalu terlihat di atas tabel ("Tersimpan pukul 19.06: …") dan diumumkan (aria-live).',
+    lama:'Mematikan sakelar langsung mencabut akses tanpa konfirmasi, dan tidak ada tanda tersimpan. Sakelar tidak berlabel. Saat gagal, muncul pesan "Gagal · Tidak dapat terhubung ke server." dengan tombol OK.', ke:'peran-operator', sorot:'#statusPeran' },
+  { kode:'IDDS-OB-42', judul:'Peran Pengguna: tabel akses yang mudah dibaca',
+    isi:'Halaman berjudul "Peran Pengguna Operator" dengan subjudul "Atur menu yang dapat dibuka setiap pengguna operator." Kolom pertama "Pengguna" tetap terlihat saat tabel digulir ke samping. Grup kolom memakai nama Indonesia ("Utama", "Pengaturan"). Pencarian "Cari pengguna" dan IDDS Pagination 10 baris per halaman memudahkan pembacaan daftar customer yang panjang. Ringkasan "8 pengguna · 13 menu" tetap ada.',
+    lama:'Judul berbunyi "Operator" dengan subjudul "Kelola akses menu per role". Kolom pengguna berjudul "List User", dan grup kolom berbunyi "Navigation". Semua pengguna (760 customer) dimuat dalam satu tabel tanpa pencarian.', ke:'peran-customer', sorot:'#tabelPeran' },
+  { kode:'IDDS-OB-43', judul:'Harga Produk: daftar, Tambah/Edit Produk, dan riwayat harga',
+    isi:'Subjudul sesuai isi: "Atur produk, durasi, dan harga paket E-PPAT." Kolom "Created/Modified" menjadi "Dibuat/Diubah", nominal ditulis "Rp3.500.000", dan produk tanpa harga ditulis "Belum ada harga". Tambah dan Edit Produk memakai IDDS Text Field dengan pesan galat di bawah isian dan penjaga perubahan. Aturannya: kode wajib, unik, dan berhuruf kapital; durasi minimal 1 hari. Tab "Main Info" menjadi "Info Utama". Di tab Harga, nominal diketik dengan pemisah ribuan. Mengganti atau menonaktifkan harga aktif dan menghapus harga meminta konfirmasi bertombol merah. Harga aktif tidak dapat dihapus, dan alasannya tertulis.',
+    lama:'Subjudul berbunyi "Kelola data master produk dan daftar amount paket untuk sistem E-PPAT.". Kolom berbunyi "Created" dan "Modified", dan nominal tertulis "Rp 1", "Rp 9.999", atau "-". Tab berlabel "Main Info". Kolom harga berbunyi "Tanggal/jam", "Create/Modif", dan "Action". Sakelar dan tombol hapus harga bekerja tanpa konfirmasi.', ke:'harga', sorot:'#tabelHarga' },
+  { kode:'IDDS-OB-44', judul:'Paket Langganan: paket sistem, dialog berlabel, dan pesan galat di bawah isian',
+    isi:'Subjudul berbunyi "Atur paket langganan yang dapat dipilih calon PPAT." Kolom "Max Order/Max User" menjadi "Maks. Order/Maks. Pengguna". Paket sistem (Gratis, Enterprise) bertanda "Paket sistem". Tombol Hapus paket sistem nonaktif, dan alasannya tertulis di baris ("Paket sistem tidak dapat dihapus."), bukan hanya di tooltip. Dialog Tambah/Edit Paket memakai IDDS Checkbox "Tanpa batas" yang mengosongkan dan mengunci isian angkanya, serta menampilkan pesan galat di bawah isian. Menghapus paket lain meminta konfirmasi bertombol merah.',
+    lama:'Subjudul berbunyi "Katalog paket langganan e-PPAT (sumber data langsung dari platform).", dan kolom berbunyi "Max Order" dan "Max User". Ikon hapus paket sistem hanya tampak pudar tanpa alasan. Nama paket tertulis "SATU BULAN".', ke:'paket', sorot:'#tabelPaket' },
+  { kode:'IDDS-OB-45', judul:'Pengaturan: Bantuan di setiap halaman',
+    isi:'Menu, Daftar Pengguna, Edit Pengguna, Peran Pengguna, Harga Produk (termasuk Tambah/Edit Produk), dan Paket Langganan memiliki tombol Bantuan di kanan judul. Tombol ini membuka IDDS Drawer berisi penjelasan halaman, langkah, istilah, pertanyaan umum (IDDS Accordion), serta kontak dukungan.',
+    lama:'Menu Pengaturan tidak memiliki panduan atau kontak dukungan.', ke:'bantuan', sorot:null }
+];
+
+/* ---------------- data contoh (netral) ---------------- */
+const SEKARANG = new Date('2026-10-26T19:06');
+const BLN = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+const jam = d => `${String(d.getHours()).padStart(2, '0')}.${String(d.getMinutes()).padStart(2, '0')}`;
+const tglPendek = w => { const d = new Date(w); return `${d.getDate()} ${BLN[d.getMonth()]} ${d.getFullYear()}`; };
+const tglJam = w => { const d = new Date(w); return `${tglPendek(w)}, ${jam(d)}`; };
+const rupiah = n => 'Rp' + n.toLocaleString('id-ID');
+const ANGKA = ['Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh'];
+const SLUG = ['satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh'];
+const JENIS = { admin:{ t:'Admin', kode:'01' }, operator:{ t:'Operator', kode:'02' }, customer:{ t:'Customer', kode:'04' } };
+const SAYA = 'Admin Contoh';
+
+/* Menu: kode 8 digit = jenis(2) · grup(2) · menu(2) · sub-menu(2); urutan & URL sesuai live */
+const M = (kode, nama, url, ikon) => ({ kode, nama, url, desk:'', aktif:true, ikon });
+function contohMenu() {
+  return {
+    admin:[M('01000000', 'Utama', '', 'kisi'), M('01000100', 'Dasbor', '/dashboard', 'dasbor'), M('01000200', 'Manajemen Onboarding', '/manajemen-onboarding', 'grup'), M('01000300', 'Verifikasi', '', 'dokumen'),
+      M('01000301', 'Verifikasi Anggota', '/verifikasi/anggota', 'dokumen'), M('01000302', 'Verifikasi Produk', '/verifikasi/produk', 'dokumen'), M('01000303', 'Verifikasi Pembayaran', '/verifikasi/pembayaran', 'dokumen'),
+      M('01010000', 'Pengaturan', '', 'pengaturan'), M('01010100', 'Menu', '', 'menu'), M('01010101', 'Menu Admin', '/pengaturan/menu-admin', 'menu'), M('01010102', 'Menu Operator', '/pengaturan/menu-operator', 'menu'), M('01010103', 'Menu Customer', '/pengaturan/menu-customer', 'menu'),
+      M('01010200', 'Daftar Pengguna', '', 'grup'), M('01010201', 'Admin', '/pengaturan/daftar-pengguna-admin', 'pengguna'), M('01010202', 'Operator', '/pengaturan/daftar-pengguna-operator', 'pengguna'), M('01010203', 'Customer', '/pengaturan/daftar-pengguna-customer', 'pengguna'),
+      M('01010300', 'Peran Pengguna', '', 'perisai'), M('01010301', 'Admin', '/pengaturan/peran-pengguna/admin', 'pengguna'), M('01010302', 'Operator', '/pengaturan/peran-pengguna/operator', 'pengguna'), M('01010303', 'Customer', '/pengaturan/peran-pengguna/customer', 'pengguna'),
+      M('01010400', 'Harga Produk', '/pengaturan/harga-produk', 'paket'), M('01010500', 'Paket Langganan', '/pengaturan/paket-langganan', '')],
+    operator:[M('02000000', 'Utama', '', 'kisi'), M('02000100', 'Dasbor', '/dashboard', 'dasbor'), M('02000200', 'Manajemen Onboarding', '/manajemen-onboarding', 'grup'), M('02000300', 'Verifikasi', '', 'dokumen'),
+      M('02000301', 'Verifikasi Anggota', '/verifikasi/anggota', 'dokumen'), M('02000302', 'Verifikasi Produk', '/verifikasi/produk', 'dokumen'), M('02000303', 'Verifikasi Pembayaran', '/verifikasi/pembayaran', 'dokumen'),
+      M('02010000', 'Pengaturan', '', 'pengaturan'), M('02010100', 'Daftar Pengguna', '', 'grup'), M('02010101', 'Operator', '/pengaturan/daftar-pengguna-operator', 'pengguna'), M('02010102', 'Customer', '/pengaturan/daftar-pengguna-customer', 'pengguna'),
+      M('02010200', 'Peran Pengguna', '', 'perisai'), M('02010201', 'Operator', '/pengaturan/peran-pengguna/operator', 'pengguna'), M('02010202', 'Customer', '/pengaturan/peran-pengguna/customer', 'pengguna'),
+      M('02010300', 'Harga Produk', '/pengaturan/harga-produk', 'paket')],
+    customer:[M('04000000', 'Utama', '', 'kisi'), M('04000100', 'Dasbor', '/dashboard', 'dasbor'), M('04000200', 'Riwayat Transaksi', '/riwayat-transaksi', 'kuitansi')]
+  };
+}
+/* 15 pilihan ikon = 15 ikon live (None, LayoutDashboard, LayoutGrid, Settings, Settings2, Users, UserRound, UserCog, Menu, ListTree, Home, FileText, ShieldCheck, Receipt, Package) */
+const IKON_MENU = [['', 'Tanpa Ikon', 'lingkar'], ['dasbor', 'Dasbor', 'grid'], ['kisi', 'Kisi', 'kisi'], ['pengaturan', 'Pengaturan', 'gerigi'], ['setel', 'Penyetel', 'setel'], ['grup', 'Grup Pengguna', 'users'], ['pengguna', 'Pengguna', 'user'], ['aturUser', 'Atur Pengguna', 'aturUser'],
+  ['menu', 'Menu', 'garis'], ['pohon', 'Daftar Bertingkat', 'pohon'], ['beranda', 'Beranda', 'rumah'], ['dokumen', 'Dokumen', 'berkas'], ['perisai', 'Perisai', 'tameng'], ['kuitansi', 'Kuitansi', 'kuitansi'], ['paket', 'Paket', 'kotak']];
+const ikonMenu = (k, s = 16) => ik((IKON_MENU.find(x => x[0] === k) || IKON_MENU[0])[2], s);
+const indukDari = k => k.slice(6) !== '00' ? k.slice(0, 6) + '00' : k.slice(4, 6) !== '00' ? k.slice(0, 4) + '0000' : null;
+const tingkat = k => k.slice(6) !== '00' ? 2 : k.slice(4, 6) !== '00' ? 1 : 0;
+const anakDari = (L, k) => L.filter(m => indukDari(m.kode) === k);
+const turunanDari = (L, k) => L.filter(m => m.kode !== k && (indukDari(m.kode) === k || indukDari(indukDari(m.kode) || '00000000') === k));
+function kodeBerikut(L, jenis, induk) {
+  const d2 = n => String(n).padStart(2, '0');
+  if (!induk) return JENIS[jenis].kode + d2(Math.max(-1, ...L.filter(m => tingkat(m.kode) === 0).map(m => +m.kode.slice(2, 4))) + 1) + '0000';
+  const sib = anakDari(L, induk);
+  if (tingkat(induk) === 0) return induk.slice(0, 4) + d2(Math.max(0, ...sib.map(m => +m.kode.slice(4, 6))) + 1) + '00';
+  return induk.slice(0, 6) + d2(Math.max(0, ...sib.map(m => +m.kode.slice(6))) + 1);
+}
+
+/* Pengguna */
+const kodeHex = i => ((Math.imul(i + 11, 2654435761) >>> 0).toString(16) + '00000000').slice(0, 8);
+const kodeUsr = i => { const A = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'; let x = Math.imul(i + 5, 2246822519) >>> 0, s = ''; for (let k = 0; k < 8; k++) { s += A[x % A.length]; x = (Math.floor(x / A.length) + Math.imul(k + 3, 40503) + i) >>> 0; } return 'USR-' + s; };
+const namaLengkap = p => [p.depan, p.tengah, p.belakang].filter(Boolean).join(' ');
+const inisial = p => { const a = namaLengkap(p).split(' ').filter(Boolean); return (a[0][0] + (a.length > 1 ? a[a.length - 1][0] : '')).toUpperCase(); };
+function contohPengguna() {
+  const P = { admin:[], operator:[], customer:[] }; let n = 0;
+  const buat = (jenis, depan, tengah, belakang, email, aktif, mfa, telp, kantor) => {
+    const i = n++, u = { kode:jenis === 'customer' ? kodeUsr(i) : kodeHex(i), depan, tengah, belakang, email, jk:i % 4 === 1 ? 'Perempuan' : 'Laki-laki', tipe:jenis, aktif, mfa, desk:'',
+      dibuat:SEKARANG.getTime() - (142 + i * 197) * 6e4, kantor:kantorKosong(kantor),
+      kontak:[{ id:1, jenis:'email', nilai:email, aktif:true }].concat(telp ? [{ id:2, jenis:'telepon', nilai:telp, aktif:true }] : []), kontakKantor:[] };
+    P[jenis].push(u);
+  };
+  for (let i = 0; i < 6; i++) buat('admin', 'Admin', 'Contoh', i ? ANGKA[i] : '', i ? `admin.${SLUG[i]}@contoh.id` : 'admin@contoh.id', true, i % 2 ? null : 'Email OTP', null);
+  for (let i = 0; i < 8; i++) buat('operator', 'Operator', 'Contoh', i ? ANGKA[i] : '', i ? `operator.${SLUG[i]}@contoh.id` : 'operator@contoh.id', i !== 4, i === 4 ? null : 'Email OTP', null);
+  const polaAktif = [false, false, true, true, true, false, true, true];
+  for (let i = 0; i < 24; i++) {
+    const aktif = polaAktif[i % 8], mfa = aktif && i % 3 !== 1 ? 'Email OTP' : null;
+    if (i < 16) {
+      const a = i < 10 ? ANGKA[i] : String(i + 1), s = i < 10 ? SLUG[i] : String(i + 1).padStart(2, '0'), t = `0812000000${String(i + 1).padStart(2, '0')}`;
+      buat('customer', 'Calon PPAT', 'Contoh', a, `calon.${s}@contoh.id`, aktif, mfa, t.replace(/^0/, '62'),
+        { nama:`Kantor PPAT Contoh ${a}`, id:`PPAT${100001 + i}`, url:`https://dev-app.eppat.id/t/ppat-contoh-${s}`, bank:'Bank Contoh Satu', rek:`13000123456${String(i).padStart(2, '0')}`, aktif:i % 4 === 3 });
+    } else buat('customer', 'Customer', 'Contoh', ANGKA[i - 16], `customer.${SLUG[i - 16]}@contoh.id`, aktif, mfa, null);
+  }
+  return P;
+}
+/* data kantor: isian sama dengan tab Kantor PPAT live (Detail Registrasi + Lokasi Kantor) */
+function kantorKosong(k) { return { nama:'', id:'', url:'', bank:'', rek:'', alamat:'', kel:'', kec:'', kota:'', lat:'-6.2088', lng:'106.8456', aktif:false, ...(k || {}) }; }
+const BANK = [['', 'Pilih Bank'], ['Bank Contoh Satu', 'Bank Contoh Satu'], ['Bank Contoh Dua', 'Bank Contoh Dua'], ['Bank Contoh Tiga', 'Bank Contoh Tiga']];
+
+/* Harga Produk */
+function contohProduk() {
+  return [
+    { kode:'ENTERPRISE', nama:'Enterprise', singkat:'1 PPAT, 1 Admin, dan hingga 4 Asisten', lengkap:'1 PPAT, 1 Admin, dan hingga 4 Asisten\nTanda tangan elektronik (maks. 6 orang) dan e-Meterai\nPekerjaan tanpa batas\nDasbor analitik lengkap\nBantuan teknis mendalam', durasi:365, aktif:true, foto:'', dibuat:'2026-07-08T12:44', diubah:null,
+      harga:[{ id:1, w:'2026-07-08T12:44', n:3500000, oleh:'Admin Contoh', aktif:true }, { id:2, w:'2026-07-08T12:44', n:1000000, oleh:'Admin Contoh', aktif:false }] },
+    { kode:'TRIAL', nama:'Trial', singkat:'10 transaksi', lengkap:'10 transaksi\nSemua menu dapat diakses\nMaksimal 5 pengguna\nGratis 30 hari', durasi:30, aktif:true, foto:'', dibuat:'2026-07-08T12:44', diubah:'2026-08-18T15:32',
+      harga:[{ id:1, w:'2026-07-08T12:44', n:0, oleh:'Admin Contoh', aktif:true }] },
+    { kode:'ENTERPRISE01', nama:'Enterprise Contoh', singkat:'Produk contoh untuk uji paket Enterprise', lengkap:'', durasi:365, aktif:true, foto:'', dibuat:'2026-08-05T14:29', diubah:'2026-08-05T14:32', harga:[] },
+    { kode:'PERSONAL', nama:'Personal Contoh', singkat:'Produk contoh untuk paket perorangan', lengkap:'', durasi:365, aktif:true, foto:'', dibuat:'2026-08-31T22:27', diubah:null, harga:[] }
+  ];
+}
+/* Paket Langganan (null = tanpa batas) */
+function contohPaket() {
+  return [
+    { kode:'FREE', nama:'Gratis', order:1, user:5, masa:30, ca:false, aktif:true, urut:1, sistem:true },
+    { kode:'SATU_BULAN', nama:'Satu Bulan', order:5, user:5, masa:30, ca:true, aktif:true, urut:2, sistem:false },
+    { kode:'ENTERPRISE', nama:'Enterprise', order:null, user:null, masa:null, ca:true, aktif:true, urut:3, sistem:true },
+    { kode:'PAKET_CONTOH', nama:'Paket Contoh', order:null, user:2, masa:null, ca:true, aktif:true, urut:4, sistem:false }
+  ];
+}
+let MENU = contohMenu(), PENGGUNA = contohPengguna(), PRODUK = contohProduk(), PAKET = contohPaket();
+/* akses yang DICABUT ("kodePengguna:kodeMenu"); menu baru otomatis dapat dibuka */
+const cabutAwal = () => ({ admin:new Set(), operator:new Set([PENGGUNA.operator[4].kode + ':02010300', PENGGUNA.operator[3].kode + ':02010200', PENGGUNA.operator[3].kode + ':02010201', PENGGUNA.operator[3].kode + ':02010202']),
+  customer:new Set(PENGGUNA.customer.filter(u => !u.aktif).map(u => u.kode + ':04000200')) });
+let CABUT = cabutAwal();
+
+/* ---------------- keadaan ---------------- */
+const LAYAR = [['menu-admin', 'Menu Admin'], ['menu-operator', 'Menu Operator'], ['menu-customer', 'Menu Customer'], ['pengguna-admin', 'Pengguna Admin'], ['pengguna-operator', 'Pengguna Operator'], ['pengguna-customer', 'Pengguna Customer'], ['pengguna-edit', 'Edit Pengguna'],
+  ['peran-admin', 'Peran Admin'], ['peran-operator', 'Peran Operator'], ['peran-customer', 'Peran Customer'], ['harga', 'Harga Produk'], ['harga-tambah', 'Tambah Produk'], ['harga-edit', 'Edit Produk'], ['paket', 'Paket Langganan']];
+const PER_HAL = 10;
+const S0 = () => ({ layar:'menu-admin', menu:false, kotor:false, cari:{}, chip:{}, hal:{}, tutup:{ admin:new Set(), operator:new Set(), customer:new Set() },
+  edit:{ jenis:'customer', kode:PENGGUNA.customer[0].kode }, tab:'ppat', produk:'ENTERPRISE', tabProduk:'info', statusPeran:{}, memuat:'' });
+let S = S0();
+let F = null, SNAP = null, FP = null, SNAPP = null; /* isian Edit Pengguna & Produk beserta salinan tersimpannya */
+
+/* ===================================================================================================
+   KERANGKA STAF ONBOARDING · JS — salin UTUH ke OB-VERIF & OB-PENGATURAN.
+   Yang diganti per berkas: BERKAS, TANDA_GRUP (kosongkan '' di OB-VERIF & OB-PENGATURAN), dan NAV_TURUNAN.
+   Butuh dari berkas: I/ik, $, usulan, S.layar, S.menu, S.kotor, pindah(), keLuar(), dialog().
+   =================================================================================================== */
+const BERKAS = 'Backlog-IDDS-OB-PENGATURAN-Prototype.html';
+const TANDA_GRUP = '';
+const NAV_TURUNAN = { get 'pengguna-edit'() { return 'pengguna-' + S.edit.jenis; }, 'harga-tambah':'harga', 'harga-edit':'harga' }; /* layar turunan → hash menu induknya (untuk sorotan menu aktif) */
+Object.assign(I, {
+  berkas:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>',
+  garis:'<path d="M4 6h16M4 12h16M4 18h16"/>',
+  tameng:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  kotak:'<path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.7z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/>',
+  kartu:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>'
+});
+const OB_MON = 'Backlog-IDDS-OB-MONITOR-Prototype.html', OB_VER = 'Backlog-IDDS-OB-VERIF-Prototype.html', OB_PGT = 'Backlog-IDDS-OB-PENGATURAN-Prototype.html';
+/* [label, ikon, tautan] atau [label, ikon, null, [anak…]] — urutan menu live (akun Admin) */
+const NAV = [
+  { g:'Utama', m:[
+    ['Dasbor', 'grid', OB_MON + '#dasbor'],
+    ['Manajemen Onboarding', 'users', OB_MON + '#onboarding'],
+    ['Verifikasi', 'berkas', null, [['Verifikasi Anggota', 'berkas', OB_VER + '#anggota'], ['Verifikasi Produk', 'berkas', OB_VER + '#produk'], ['Verifikasi Pembayaran', 'berkas', OB_VER + '#pembayaran']]]] },
+  { g:'Pengaturan', m:[
+    ['Menu', 'garis', null, [['Menu Admin', 'garis', OB_PGT + '#menu-admin'], ['Menu Operator', 'garis', OB_PGT + '#menu-operator'], ['Menu Customer', 'garis', OB_PGT + '#menu-customer']]],
+    ['Daftar Pengguna', 'users', null, [['Admin', 'user', OB_PGT + '#pengguna-admin'], ['Operator', 'user', OB_PGT + '#pengguna-operator'], ['Customer', 'user', OB_PGT + '#pengguna-customer']]],
+    ['Peran Pengguna', 'tameng', null, [['Admin', 'user', OB_PGT + '#peran-admin'], ['Operator', 'user', OB_PGT + '#peran-operator'], ['Customer', 'user', OB_PGT + '#peran-customer']]],
+    ['Harga Produk', 'kotak', OB_PGT + '#harga'],
+    ['Paket Langganan', 'kartu', OB_PGT + '#paket']] }
+];
+const grupTutup = new Set(), indukTutup = new Set(); /* semua grup & menu induk terbuka saat awal */
+const navAktif = url => { const [f, h] = url.split('#'); return f === BERKAS && h === (NAV_TURUNAN[S.layar] || S.layar); };
+function navTautan([t, k, url], anak, induk) {
+  const [f, h] = url.split('#'), sendiri = f === BERKAS, on = navAktif(url);
+  return `<a href="${sendiri ? '#' + h : url}" class="ina-button ina-button--link ina-button--md nav-item${anak ? ' nav-anak' : ''}${on ? ' on' : ''}" ${sendiri ? `data-ke="${h}"` : ''} ${on ? 'aria-current="page"' : ''} ${anak ? `aria-label="${induk} ${t}"` : ''}>${ik(k)}<span>${t}</span></a>`;
+}
+/* maks 2 level (pola Sidebar IDDS): menu induk bertingkat live (Verifikasi, Menu, Daftar Pengguna, Peran Pengguna) tampil sebagai grup tersendiri */
+const NAV_DATAR = NAV.flatMap(g => [...(g.m.some(m => !m[3]) ? [{ g:g.g, m:g.m.filter(m => !m[3]) }] : []), ...g.m.filter(m => m[3]).map(m => ({ g:m[0], induk:m[0], m:m[3] }))]);
+function gambarNav() {
+  $('#nav').innerHTML = NAV_DATAR.map((g, i) => `
+    <button type="button" class="grp" data-grp="${i}" aria-expanded="${!grupTutup.has(i)}"><span>${g.g}</span>${i === 0 ? TANDA_GRUP : ''}<span class="chev">${ik('chev', 12)}</span></button>
+    <div class="items" ${grupTutup.has(i) ? 'hidden' : ''}>${g.m.map(m => g.induk ? navTautan(m, true, g.induk) : navTautan(m)).join('')}</div>`).join('');
+}
+$('#nav').addEventListener('click', e => {
+  const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupTutup.has(i) ? grupTutup.delete(i) : grupTutup.add(i); gambarNav(); $(`#nav [data-grp="${i}"]`).focus(); return; }
+  const n = e.target.closest('.nav-induk'); if (n) { const id = n.dataset.induk; indukTutup.has(id) ? indukTutup.delete(id) : indukTutup.add(id); gambarNav(); $(`#nav [data-induk="${id}"]`).focus(); return; }
+  const a = e.target.closest('a'); if (!a) return; e.preventDefault();
+  $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on');
+  if (!a.dataset.ke) { keLuar(a.getAttribute('href')); return; }
+  pindah(a.dataset.ke);
+});
+/* menu akun (IDDS Action Dropdown) — live hanya berisi Keluar; tanpa lonceng */
+function gambarMenu() {
+  $('#menuProfil').innerHTML = S.menu ? `<div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible"><div class="menu-kepala"><b>Admin Contoh</b><span>Admin</span></div>
+    <div class="ina-action-dropdown__divider" role="separator"></div><div role="menu" aria-label="Menu akun">
+    <a class="ina-action-dropdown__item" role="menuitem" href="Backlog-HE-ONBOARDING-Prototype.html#masuk" data-keluar><span class="ina-action-dropdown__item-icon">${ik('keluar')}</span><span class="ina-action-dropdown__item-content">Keluar</span></a></div></div>` : '';
+  $('#userTombol').setAttribute('aria-expanded', String(S.menu));
+}
+$('#userTombol').addEventListener('click', () => { S.menu = !S.menu; gambarMenu(); if (S.menu) $('#menuProfil [role=menuitem]').focus(); });
+$('#user').addEventListener('click', e => { const a = e.target.closest('[data-keluar]'); if (a) { e.preventDefault(); S.menu = false; gambarMenu(); keLuar(a.getAttribute('href')); } });
+$('#user').addEventListener('keydown', e => {
+  if (e.key === 'Escape' && S.menu) { e.stopPropagation(); S.menu = false; gambarMenu(); $('#userTombol').focus(); return; }
+  if (!S.menu || (e.key !== 'ArrowDown' && e.key !== 'ArrowUp')) return;
+  e.preventDefault(); const it = [...document.querySelectorAll('#menuProfil [role=menuitem]')], i = it.indexOf(document.activeElement);
+  it[(i + (e.key === 'ArrowDown' ? 1 : it.length - 1)) % it.length].focus();
+});
+document.addEventListener('click', e => { if (S.menu && !e.target.closest('#user')) { S.menu = false; gambarMenu(); } });
+$('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
+$('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+/* penjaga perubahan belum disimpan: dipakai pindah() & keLuar() bila S.kotor */
+function jaga(lanjut) {
+  if (!S.kotor) { lanjut(); return; }
+  dialog({ judul:'Tinggalkan halaman ini?', konfirmasi:true, bahaya:true, isi:'<p>Perubahan yang belum disimpan akan hilang.</p>',
+    tombol:[['Tetap di Sini', 'secondary', null], ['Tinggalkan', 'primary', () => { S.kotor = false; lanjut(); }]] });
+}
+function keLuar(url) { jaga(() => { location.href = url; }); }
+/* ===================== akhir KERANGKA STAF ONBOARDING · JS ===================== */
+
+/* pindah layar dengan penjaga perubahan belum disimpan */
+function pindah(ke, lanjut) {
+  jaga(() => { S.layar = ke; S.menu = false; S.kotor = false; siapkan(ke); history.replaceState(null, '', '#' + ke); gambar(); gambarMenu(); window.scrollTo({ top:0 }); lanjut && lanjut(); });
+}
+function siapkan(ke) {
+  if (ke === 'pengguna-edit') { if (!penggunaEdit()) S.edit = { jenis:'customer', kode:PENGGUNA.customer[0].kode }; isiFormPengguna(); }
+  if (ke === 'harga-tambah') isiFormProduk(null);
+  if (ke === 'harga-edit') { if (!PRODUK.find(p => p.kode === S.produk)) S.produk = PRODUK[0] ? PRODUK[0].kode : ''; isiFormProduk(PRODUK.find(p => p.kode === S.produk)); }
+}
+
+/* ---------------- komponen bersama halaman ---------------- */
+function paginasi(jenis, hal, n) {
+  const jh = Math.max(1, Math.ceil(n / PER_HAL)), a = n ? (hal - 1) * PER_HAL + 1 : 0, b = Math.min(n, hal * PER_HAL);
+  let hs = []; for (let i = 1; i <= jh; i++) if (i === 1 || i === jh || Math.abs(i - hal) <= 1) hs.push(i); else if (hs[hs.length - 1] !== '…') hs.push('…');
+  return `<div class="halaman"><span>Menampilkan ${a}–${b} dari ${n}</span><nav class="ina-pagination" aria-label="Navigasi halaman"><div class="ina-pagination__nav-container"><div class="ina-pagination__page-info">Halaman ${hal} dari ${jh}</div><div class="ina-pagination__nav-buttons">
+    <button type="button" class="ina-pagination__nav-button ${hal > 1 ? '' : 'ina-pagination__nav-button--disabled'}" ${hal > 1 ? `data-hal="${jenis}:${hal - 1}"` : 'disabled'} aria-label="Halaman sebelumnya">${ik('kiri', 16)}</button>
+    ${hs.map(i => i === '…' ? '<span class="ina-pagination__page-info" aria-hidden="true">…</span>' : `<button type="button" class="ina-pagination__page-button ${i === hal ? 'ina-pagination__page-button--active' : ''}" data-hal="${jenis}:${i}" ${i === hal ? 'aria-current="page"' : ''} aria-label="Halaman ${i}">${i}</button>`).join('')}
+    <button type="button" class="ina-pagination__nav-button ${hal < jh ? '' : 'ina-pagination__nav-button--disabled'}" ${hal < jh ? `data-hal="${jenis}:${hal + 1}"` : 'disabled'} aria-label="Halaman berikutnya">${ik('chev', 16)}</button></div></div></nav></div>`;
+}
+const th = t => `<th class="ina-table__header-cell" scope="col">${t}</th>`;
+const jenisDari = l => (l.match(/(admin|operator|customer)$/) || [])[1];
+const nilaiCari = () => S.cari[S.layar] || '';
+const halKini = () => S.hal[S.layar] || 1;
+const potongHal = rows => { const n = rows.length, hal = Math.min(halKini(), Math.max(1, Math.ceil(n / PER_HAL))); S.hal[S.layar] = hal; const awal = (hal - 1) * PER_HAL; return { n, hal, awal, isi:rows.slice(awal, awal + PER_HAL) }; };
+const chip = (k, t, n, aktif) => `<button type="button" class="ina-chip__item ina-chip__item--size-small ina-chip__item--variant-outline ${aktif ? 'ina-chip__item--selected' : ''}" data-chip="${k}" aria-pressed="${aktif}">${t}<span class="jml">${n}</span></button>`;
+const lencanaStatus = on => on ? badge('Aktif', 'success', 'sm') : badge('Nonaktif', 'neutral', 'sm');
+const kosongTeks = t => `<span class="kc">${t}</span>`;
+
+/* ---------------- layar: Menu Admin / Operator / Customer ---------------- */
+function layarMenu(jenis) {
+  const L = MENU[jenis], t = JENIS[jenis].t, q = nilaiCari().trim().toLowerCase(), tutup = S.tutup[jenis];
+  let tampil;
+  if (q) { const cocok = L.filter(m => `${m.nama} ${m.kode}`.toLowerCase().includes(q)); const set = new Set(); cocok.forEach(m => { set.add(m.kode); let p = indukDari(m.kode); while (p) { set.add(p); p = indukDari(p); } }); tampil = L.filter(m => set.has(m.kode)); }
+  else tampil = L.filter(m => { let p = indukDari(m.kode); while (p) { if (tutup.has(p)) return false; p = indukDari(p); } return true; });
+  const nCocok = q ? L.filter(m => `${m.nama} ${m.kode}`.toLowerCase().includes(q)).length : L.length;
+  const baris = tampil.map(m => {
+    const tk = tingkat(m.kode), anak = anakDari(L, m.kode).length, buka = q || !tutup.has(m.kode);
+    return `<tr class="ina-table__row" data-baris-menu="${m.kode}">
+      <td class="ina-table__cell"><span class="mono">${m.kode}</span></td>
+      <td class="ina-table__cell"><div class="pohon-nama"><span class="jarak" style="width:${tk * 24}px" aria-hidden="true"></span>${anak ? `<button type="button" class="btn-buka" data-buka-menu="${m.kode}" aria-expanded="${!!buka}" aria-label="${buka ? 'Tutup' : 'Buka'} sub-menu ${esc(m.nama)}" ${q ? 'disabled' : ''}>${ik('chev', 14)}</button>` : '<span class="btn-buka-ganti" aria-hidden="true"></span>'}${ikonMenu(m.ikon)}<span class="${anak ? 'nm-induk' : ''}">${esc(m.nama)}</span></div></td>
+      <td class="ina-table__cell">${m.url ? esc(m.url) : kosongTeks(anak ? 'Tidak ada (menu induk)' : 'Belum ada')}</td>
+      <td class="ina-table__cell">${m.desk ? esc(m.desk) : kosongTeks('Belum ada')}</td>
+      <td class="ina-table__cell">${lencanaStatus(m.aktif)}</td>
+      <td class="ina-table__cell"><div class="aksi-baris">${tk < 2 ? ikonTombol('tambah', `Tambah sub-menu di bawah ${m.nama}`, `data-sub-menu="${m.kode}"`) : ''}${ikonTombol('pena', `Edit menu ${m.nama}`, `data-edit-menu="${m.kode}"`)}${ikonTombol('sampah', `Hapus menu ${m.nama}`, `data-hapus-menu="${m.kode}"`)}</div></td></tr>`;
+  }).join('');
+  return `${remah([`Menu ${t}`])}<h1>Menu ${t}</h1><p class="sub">Atur susunan menu samping aplikasi ${t.toLowerCase()}.</p>
+    <div class="saring-ob ditandai" id="saringMenu" role="search"><div class="baris"><div><label class="lbl" for="cariMenu">Cari menu</label>${cariIsian('cariMenu', 'Cari nama atau kode menu…', nilaiCari(), 'Cari menu menurut nama atau kode')}</div>
+      <span class="jumlah" aria-live="polite">${q ? `${nCocok} menu cocok` : `${L.length} menu`}</span>${usulan('IDDS-OB-32')}
+      <span class="kanan">${tombol('Tambah Menu Utama', 'primary', 'md', 'id="tambahMenuUtama"', ik('tambah', 16))}</span></div></div>
+    <div class="tabel-wadah ditandai" id="pohonMenu"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Susunan menu ${t.toLowerCase()}">
+      <thead class="ina-table__header"><tr>${['Kode', 'Nama Menu', 'URL', 'Deskripsi', 'Status', '<span style="display:block;text-align:right">Aksi</span>'].map(th).join('')}</tr></thead>
+      <tbody class="ina-table__body">${baris || `<tr><td colspan="6" class="ina-table__empty-cell kosong">${q ? `Tidak ada menu yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : 'Belum ada menu. Tambahkan lewat Tambah Menu Utama.'}</td></tr>`}</tbody></table></div></div></div>
+    ${usulan('IDDS-OB-31')}${usulan('IDDS-OB-33')}${usulan('IDDS-OB-35')}`;
+}
+function dialogMenu(mode, kodeAcuan) {
+  const jenis = jenisDari(S.layar), L = MENU[jenis], m = mode === 'edit' ? L.find(x => x.kode === kodeAcuan) : null;
+  const induk = mode === 'sub' ? L.find(x => x.kode === kodeAcuan) : null;
+  const v = m ? { ...m } : { kode:kodeBerikut(L, jenis, induk ? induk.kode : null), nama:'', url:'', desk:'', aktif:true, ikon:'' };
+  const judul = mode === 'edit' ? `Edit Menu ${esc(m.nama)}` : mode === 'sub' ? `Tambah Sub-menu di ${esc(induk.nama)}` : 'Tambah Menu Utama';
+  dialog({ judul, lebar:true,
+    isi:`<div class="form-d">
+      ${induk ? `<div class="lebar">${tf('mInduk', 'Kode Menu Induk', induk.kode, '', false, `Sub-menu ditambahkan di bawah ${esc(induk.nama)}.`, 'disabled')}</div>` : ''}
+      ${tf('mKode', 'Kode Menu', v.kode, 'Contoh: 01020000', true, mode === 'edit' ? 'Kode tidak dapat diubah karena menjadi dasar kode sub-menu.' : 'Terisi otomatis. Ubah bila perlu; 8 digit angka.', mode === 'edit' ? 'disabled' : 'inputmode="numeric" maxlength="8"')}
+      ${pilihan('mStatus', 'Status', [['1', 'Aktif'], ['0', 'Nonaktif']], v.aktif ? '1' : '0', 'Menu nonaktif tidak tampil di menu samping.')}
+      <div class="lebar">${tf('mNama', 'Nama Menu', v.nama, 'Contoh: Dasbor', true)}</div>
+      <div class="lebar">${tf('mUrl', 'URL / Path', v.url, 'Contoh: /dashboard', false, 'Kosongkan bila menu ini menjadi induk sub-menu.')}</div>
+      <div class="lebar">${tf('mDesk', 'Deskripsi Menu', v.desk, 'Tulis ringkasan fungsi menu…')}</div>
+      <div class="lebar"><fieldset class="ikon-grup"><legend>Ikon Navigasi</legend><div class="ikon-pilih">${IKON_MENU.map(([k, t2, i]) => `<label>${ik(i, 18)}<input type="radio" name="mIkon" value="${k}" ${k === v.ikon ? 'checked' : ''}><span>${t2}</span></label>`).join('')}</div></fieldset></div>
+    </div>${usulan('IDDS-OB-34')}`,
+    tombol:[['Batal', 'secondary', null], ['Simpan', 'primary', () => simpanMenu(mode, m, induk), true, '', ik('simpan', 16)]] });
+  pasangBersih('#lapisan');
+}
+function simpanMenu(mode, m, induk) {
+  const jenis = jenisDari(S.layar), L = MENU[jenis];
+  const kode = $('#mKode').value.trim(), nama = $('#mNama').value.trim(), url = $('#mUrl').value.trim(), salah = [];
+  if (mode !== 'edit') {
+    if (!kode) salah.push(['mKode', 'Kode Menu wajib diisi.']);
+    else if (!/^\d{8}$/.test(kode)) salah.push(['mKode', 'Kode Menu harus 8 digit angka.']);
+    else if (L.some(x => x.kode === kode)) salah.push(['mKode', `Kode Menu sudah dipakai menu ${L.find(x => x.kode === kode).nama}.`]);
+    else if (!kode.startsWith(JENIS[jenis].kode)) salah.push(['mKode', `Kode menu ${JENIS[jenis].t.toLowerCase()} diawali ${JENIS[jenis].kode}.`]);
+    else if (induk ? indukDari(kode) !== induk.kode : tingkat(kode) !== 0) salah.push(['mKode', induk ? `Kode sub-menu harus berada di bawah ${induk.kode}, misalnya ${kodeBerikut(L, jenis, induk.kode)}.` : `Kode menu utama berakhiran 0000, misalnya ${kodeBerikut(L, jenis, null)}.`]);
+  }
+  if (!nama) salah.push(['mNama', 'Nama Menu wajib diisi.']);
+  if (url && !url.startsWith('/')) salah.push(['mUrl', 'URL harus diawali garis miring (/), misalnya /dashboard.']);
+  ['mKode', 'mNama', 'mUrl'].forEach(bersih);
+  if (salah.length) { salah.forEach(([i, p]) => galat(i, p)); $('#' + salah[0][0]).focus(); return; }
+  const data = { nama, url, desk:$('#mDesk').value.trim(), aktif:$('#mStatus').value === '1', ikon:($('#lapisan input[name="mIkon"]:checked') || {}).value || '' };
+  let target;
+  if (mode === 'edit') { Object.assign(m, data); target = m.kode; }
+  else { L.push({ kode, ...data }); L.sort((a, b) => a.kode.localeCompare(b.kode)); target = kode; if (induk) S.tutup[jenis].delete(induk.kode); }
+  tutupDialog(); gambar();
+  ($(`[data-edit-menu="${target}"]`) || $('#tambahMenuUtama')).focus();
+  toast(mode === 'edit' ? `Menu ${nama} disimpan.` : `Menu ${nama} ditambahkan.`, 'positive', 3500, `Kode ${target}. Menu samping berubah saat pengguna memuat ulang halaman.`);
+}
+function hapusMenu(kode) {
+  const jenis = jenisDari(S.layar), L = MENU[jenis], m = L.find(x => x.kode === kode), tur = turunanDari(L, kode);
+  dialog({ judul:`Hapus menu ${esc(m.nama)}?`, konfirmasi:true, bahaya:true,
+    isi:`<div class="modal-gap"><p>Menu <b>${esc(m.nama)}</b> (kode ${m.kode}) dihapus dari menu samping ${JENIS[jenis].t.toLowerCase()} dan dari Peran Pengguna.</p>${tur.length ? `<p><b>${tur.length} sub-menu ikut terhapus:</b> ${tur.map(x => esc(x.nama)).join(', ')}.</p>` : ''}<p>Tindakan ini tidak dapat dibatalkan.</p></div>`,
+    tombol:[['Batal', 'secondary', null], ['Hapus Menu', 'primary', () => {
+      const buang = new Set([kode, ...tur.map(x => x.kode)]); MENU[jenis] = L.filter(x => !buang.has(x.kode));
+      gambar(); $('#tambahMenuUtama').focus(); toast(`Menu ${m.nama} dihapus.`, 'positive', 3500, tur.length ? `${tur.length} sub-menu ikut terhapus.` : '');
+    }]] });
+}
+
+/* ---------------- layar: Daftar Pengguna ---------------- */
+function layarPengguna(jenis) {
+  const t = JENIS[jenis].t, L = PENGGUNA[jenis], q = nilaiCari().trim().toLowerCase(), c = S.chip[S.layar] || 'semua';
+  const nA = L.filter(u => u.aktif).length;
+  const rows = L.filter(u => (c === 'semua' || (c === 'aktif') === u.aktif) && (!q || `${namaLengkap(u)} ${u.kode} ${u.email}`.toLowerCase().includes(q)));
+  const { n, hal, awal, isi } = potongHal(rows);
+  const nmC = { semua:'', aktif:'aktif', nonaktif:'nonaktif' }[c];
+  const kosong = q ? `Tidak ada pengguna${nmC ? ' ' + nmC : ''} yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : c !== 'semua' ? `Belum ada pengguna ${nmC}.<div style="margin-top:10px">${tombol('Tampilkan Semua', 'secondary', 'sm', 'id="tampilSemua"')}</div>` : 'Belum ada pengguna.';
+  return `${remah([`Daftar Pengguna ${t}`])}<h1>Daftar Pengguna ${t}</h1><p class="sub">Tambah, ubah, atau hapus akun pengguna ${t.toLowerCase()}.</p>
+    <div class="saring-ob ditandai" id="saringPengguna" role="search">
+      <div class="baris"><div><label class="lbl" for="cariPengguna">Cari pengguna</label>${cariIsian('cariPengguna', 'Cari nama, kode, atau email…', nilaiCari(), 'Cari pengguna menurut nama, kode, atau email')}</div>
+        <span class="jumlah" aria-live="polite">${n} pengguna</span><span class="kanan">${tombol('Tambah Pengguna', 'primary', 'md', 'id="tambahPengguna"', ik('tambah', 16))}</span></div>
+      <div class="ina-chip"><div class="ina-chip__list" role="group" aria-label="Saring menurut status">${chip('semua', 'Semua', L.length, c === 'semua')}${chip('aktif', 'Aktif', nA, c === 'aktif')}${chip('nonaktif', 'Nonaktif', L.length - nA, c === 'nonaktif')}</div></div>${usulan('IDDS-OB-36')}
+    </div>
+    <div class="tabel-wadah ditandai" id="tabelPengguna"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Daftar pengguna ${t.toLowerCase()}">
+      <thead class="ina-table__header"><tr>${['Kode', 'Avatar', 'Nama', 'Email', 'Dibuat', 'Tipe', 'Status', 'MFA', '<span style="display:block;text-align:right">Aksi</span>'].map(th).join('')}</tr></thead>
+      <tbody class="ina-table__body">${isi.length ? isi.map(u => { const nm = namaLengkap(u), saya = nm === SAYA; return `<tr class="ina-table__row">
+        <td class="ina-table__cell"><span class="mono">${u.kode}</span></td>
+        <td class="ina-table__cell"><span class="ava-kecil" aria-hidden="true">${inisial(u)}</span></td>
+        <td class="ina-table__cell">${esc(nm)}${saya ? '<div class="kc">Akun Anda</div>' : ''}</td>
+        <td class="ina-table__cell"><span class="email">${esc(u.email).replace('@', '<wbr>@')}</span></td>
+        <td class="ina-table__cell">${tglJam(u.dibuat)}</td>
+        <td class="ina-table__cell">${badge(JENIS[u.tipe].t, 'neutral', 'sm')}</td>
+        <td class="ina-table__cell">${lencanaStatus(u.aktif)}</td>
+        <td class="ina-table__cell">${u.mfa ? badge('Aktif', 'success', 'sm') : kosongTeks('Belum diatur')}</td>
+        <td class="ina-table__cell"><div class="aksi-baris">${ikonTombol('pena', `Edit ${nm}`, `data-edit-pengguna="${u.kode}"`)}${saya ? tombol(ik('sampah', 16), 'tertiary', 'sm', `class="ikon-saja" disabled aria-label="Hapus ${esc(nm)} tidak tersedia" aria-describedby="alasan-${u.kode}"`) : ikonTombol('sampah', `Hapus ${nm}`, `data-hapus-pengguna="${u.kode}"`)}</div>${saya ? `<div class="alasan" id="alasan-${u.kode}">Akun yang sedang dipakai tidak dapat dihapus.</div>` : ''}</td></tr>`; }).join('')
+        : `<tr><td colspan="9" class="ina-table__empty-cell kosong">${kosong}</td></tr>`}</tbody></table></div></div>
+      ${paginasi('pg', hal, n)}</div>${usulan('IDDS-OB-38')}`;
+}
+const cariUser = kode => { for (const j of Object.keys(PENGGUNA)) { const u = PENGGUNA[j].find(x => x.kode === kode); if (u) return u; } return null; };
+const SYARAT_PW = 'Minimal 12 karakter, dengan huruf besar, huruf kecil, angka, dan simbol.';
+const pwKuat = s => s.length >= 12 && /[A-Z]/.test(s) && /[a-z]/.test(s) && /\d/.test(s) && /[^A-Za-z0-9]/.test(s);
+const emailSah = s => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
+function dialogTambahPengguna() {
+  const jenis = jenisDari(S.layar);
+  dialog({ judul:'Tambah Pengguna', lebar:true,
+    isi:`<div class="form-d tiga">
+      ${tf('uDepan', 'Nama Depan', '', 'Nama depan', true, '', 'autocomplete="off"')}${tf('uTengah', 'Nama Tengah', '', 'Nama tengah')}${tf('uBelakang', 'Nama Belakang', '', 'Nama belakang')}
+      <div class="lebar"><span class="lbl-isian" id="lblAvatar">Avatar</span><div class="pilih-berkas">${tombol('Pilih File Gambar', 'secondary', 'sm', 'id="pilihAvatar" aria-describedby="lblAvatar namaAvatar"', ik('gambar', 16))}<span class="nama-berkas" id="namaAvatar">Belum ada gambar dipilih. JPG atau PNG, maksimal ${est('2 MB')}.</span></div></div>
+      <div class="lebar">${tf('uEmail', 'Email', '', 'nama@contoh.id', true, '', 'autocomplete="off" inputmode="email"', 'email')}</div>
+      <div class="lebar">${pwIsian('uSandi', 'Kata Sandi', 'Minimal 12 karakter', SYARAT_PW)}</div>
+    </div><div class="form-d">
+      ${pilihan('uTipe', 'Tipe', Object.entries(JENIS).map(([k, v]) => [k, v.t]), jenis, '', '', true)}${pilihan('uJk', 'Jenis Kelamin', [['Laki-laki', 'Laki-laki'], ['Perempuan', 'Perempuan']], 'Laki-laki', '', '', true)}
+      <div class="lebar">${ta('uDesk', 'Deskripsi', '', 'Deskripsi (opsional)', '', '', 2)}</div>
+    </div>${usulan('IDDS-OB-37')}`,
+    tombol:[['Batal', 'secondary', null], ['Tambah Pengguna', 'primary', simpanPenggunaBaru, true, '', ik('tambah', 16)]] });
+  pasangBersih('#lapisan');
+  $('#pilihAvatar').addEventListener('click', () => { $('#namaAvatar').textContent = 'avatar-contoh.png dipilih.'; });
+}
+function simpanPenggunaBaru() {
+  const depan = $('#uDepan').value.trim(), email = $('#uEmail').value.trim().toLowerCase(), pw = $('#uSandi').value, salah = [];
+  if (!depan) salah.push(['uDepan', 'Nama Depan wajib diisi.']);
+  if (!email) salah.push(['uEmail', 'Email wajib diisi.']);
+  else if (!emailSah(email)) salah.push(['uEmail', 'Format email belum benar. Contoh: nama@contoh.id.']);
+  else if (Object.values(PENGGUNA).flat().some(u => u.email === email)) salah.push(['uEmail', 'Email ini sudah terdaftar. Gunakan email lain.']);
+  if (!pw) salah.push(['uSandi', 'Kata Sandi wajib diisi.']); else if (!pwKuat(pw)) salah.push(['uSandi', `Kata sandi belum memenuhi syarat. ${SYARAT_PW}`]);
+  ['uDepan', 'uEmail', 'uSandi'].forEach(bersih);
+  if (salah.length) { salah.forEach(([i, p]) => galat(i, p)); $('#' + salah[0][0]).focus(); return; }
+  const tipe = $('#uTipe').value, n = Object.values(PENGGUNA).flat().length + 40;
+  const u = { kode:tipe === 'customer' ? kodeUsr(n) : kodeHex(n), depan, tengah:$('#uTengah').value.trim(), belakang:$('#uBelakang').value.trim(), email, jk:$('#uJk').value, tipe, aktif:true, mfa:null, desk:$('#uDesk').value.trim(),
+    dibuat:SEKARANG.getTime(), kantor:kantorKosong(), kontak:[{ id:1, jenis:'email', nilai:email, aktif:true }], kontakKantor:[] };
+  PENGGUNA[tipe].unshift(u); S.cari[S.layar] = ''; S.chip[S.layar] = 'semua'; S.hal[S.layar] = 1;
+  tutupDialog(); gambar(); ($(`[data-edit-pengguna="${u.kode}"]`) || $('#tambahPengguna')).focus();
+  toast(`${namaLengkap(u)} ditambahkan.`, 'positive', 4000, tipe === jenisDari(S.layar) ? 'Pengguna baru tampil di baris teratas.' : `Pengguna masuk ke Daftar Pengguna ${JENIS[tipe].t}.`);
+}
+function hapusPengguna(kode) {
+  const jenis = jenisDari(S.layar), u = PENGGUNA[jenis].find(x => x.kode === kode), nm = namaLengkap(u);
+  dialog({ judul:`Hapus pengguna ${esc(nm)}?`, konfirmasi:true, bahaya:true,
+    isi:`<div class="modal-gap"><p>Akun <b>${esc(nm)}</b> (${esc(u.email)}) dihapus permanen dan tidak dapat dipulihkan. Pengguna tidak dapat masuk lagi.</p><p>Bila hanya ingin menghentikan akses sementara, nonaktifkan akun di halaman Edit.</p></div>`,
+    tombol:[['Batal', 'secondary', null], ['Hapus Pengguna', 'primary', () => {
+      PENGGUNA[jenis] = PENGGUNA[jenis].filter(x => x.kode !== kode); gambar(); $('#cariPengguna').focus(); toast(`${nm} dihapus.`, 'positive');
+    }]] });
+}
+
+/* ---------------- layar: Edit Pengguna ---------------- */
+const NAMA_TAB = { ppat:'PPAT', kantor:'Kantor PPAT', sandi:'Kata Sandi' };
+const TABS = [['ppat', 'PPAT', 'user'], ['kantor', 'Kantor PPAT', 'gedung'], ['sandi', 'Kata Sandi', 'kunci']];
+const penggunaEdit = () => cariUser(S.edit.kode);
+function isiFormPengguna() {
+  const u = penggunaEdit();
+  SNAP = { ppat:{ tipe:u.tipe, jk:u.jk, depan:u.depan, tengah:u.tengah, belakang:u.belakang, aktif:u.aktif }, kantor:{ nama:u.kantor.nama, bank:u.kantor.bank, rek:u.kantor.rek, alamat:u.kantor.alamat, kel:u.kantor.kel, kec:u.kantor.kec, kota:u.kantor.kota, lat:u.kantor.lat, lng:u.kantor.lng }, sandi:{ baru:'', ulang:'' } };
+  F = JSON.parse(JSON.stringify(SNAP)); S.tab = 'ppat';
+}
+const kotorTab = t => !!F && !!SNAP && JSON.stringify(F[t]) !== JSON.stringify(SNAP[t]);
+const kakiTab = (t, tombolSimpan) => `<div class="kartu-kaki" id="kaki-${t}"><span class="kaki-st ${kotorTab(t) ? 'ada' : ''}" data-st="${t}" aria-live="polite">${kotorTab(t) ? `${ik('info', 14)} Belum disimpan` : `${ik('centang', 14)} Belum ada perubahan`}</span>${tombol('Batal', 'secondary', 'md', `data-batal="${t}"`, ik('x', 16))}${tombolSimpan}</div>${usulan('IDDS-OB-40')}`;
+function layarEdit() {
+  const u = penggunaEdit(), t = JENIS[S.edit.jenis].t, nm = namaLengkap(u);
+  const tabs = `<div class="tab-wadah ditandai" id="tabEdit"><div class="ina-tab-horizontal ina-tab-horizontal--use-brand-color"><div class="ina-tab-horizontal__container" role="tablist" aria-label="Bagian data pengguna">${TABS.map(([k, tt, i]) => `<button type="button" role="tab" id="tab-${k}" aria-controls="panel-${k}" aria-selected="${S.tab === k}" tabindex="${S.tab === k ? 0 : -1}" data-tab="${k}" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline ${S.tab === k ? 'ina-tab-horizontal__tab--selected' : ''}">${ik(i, 15)}${tt}<span class="titik-ubah" data-titik="${k}" role="img" aria-label="ada perubahan belum disimpan" ${kotorTab(k) ? '' : 'hidden'}></span></button>`).join('')}</div></div></div>${usulan('IDDS-OB-39')}`;
+  const panel = { ppat:panelPpat, kantor:panelKantor, sandi:panelSandi }[S.tab](u);
+  return `${remah([`Daftar Pengguna ${t}`, '#pengguna-' + S.edit.jenis], ['Edit Pengguna'])}<h1>Edit Pengguna</h1><p class="sub">Ubah data, kontak, dan kata sandi ${esc(nm)}.</p>
+    <div class="kembali">${tombol(`Kembali ke Daftar Pengguna ${t}`, 'tertiary', 'sm', 'id="kembaliPengguna"', ik('kiri', 14))}</div>
+    <div class="profil-grid">${kartuFoto(u, nm)}
+    <section class="kartu-p kartu-tab">${tabs}<div role="tabpanel" id="panel-${S.tab}" aria-labelledby="tab-${S.tab}">${panel}</div></section></div>`;
+}
+/* kartu kiri: Foto Profil, berganti Logo Kantor di tab Kantor PPAT (sama dengan live dan Profil Saya) */
+function kartuFoto(u, nm) {
+  const kantor = S.tab === 'kantor', nk = F.kantor.nama || u.kantor.nama;
+  return `<section class="kartu-p foto" aria-labelledby="jdFoto"><h2 class="kepala-hijau" id="jdFoto">${ik('kamera', 16)} ${kantor ? 'Logo Kantor' : 'Foto Profil'}</h2>
+      <div class="foto-isi"><button type="button" class="foto-area" id="gantiFoto" aria-label="${kantor ? `Ubah logo kantor ${esc(nk || nm)}` : `Ubah foto profil ${esc(nm)}`}" aria-describedby="h-foto">${kantor ? `<span>${ik('gedung', 56)}<span class="nama-kantor">${esc(nk || 'Nama kantor belum diisi')}</span><span class="kode-kantor">${esc(u.kantor.id || 'Belum ada ID PPAT')}</span></span>` : ik('user', 64)}</button>
+      <p class="foto-ket" id="h-foto">Klik gambar untuk mengubah ${kantor ? 'logo' : 'foto'}. JPG atau PNG, maksimal ${est('2 MB')}.</p></div></section>`;
+}
+function panelPpat(u) {
+  const p = F.ppat;
+  return `<div class="sub-blok"><h3 class="sub-kepala">${ik('user', 18)} PPAT <span class="kanan">${lencanaStatus(u.aktif)}</span></h3>
+    <div class="form-d tiga">
+      ${tf('pKode', 'Kode', u.kode, '', true, 'Dibuat otomatis oleh sistem dan tidak dapat diubah.', 'disabled')}
+      ${pilihan('pTipe', 'Tipe', Object.entries(JENIS).map(([k, v]) => [k, v.t]), p.tipe, 'Mengubah tipe memindahkan pengguna ke daftar tipe itu.', 'data-f="ppat.tipe"')}
+      ${pilihan('pJk', 'Jenis Kelamin', [['Laki-laki', 'Laki-laki'], ['Perempuan', 'Perempuan']], p.jk, '', 'data-f="ppat.jk"')}
+      ${tf('pDepan', 'Nama Depan', p.depan, 'Masukkan nama depan', true, '', 'data-f="ppat.depan"')}
+      ${tf('pTengah', 'Nama Tengah', p.tengah, 'Masukkan nama tengah', false, '', 'data-f="ppat.tengah"')}
+      ${tf('pBelakang', 'Nama Belakang', p.belakang, 'Masukkan nama belakang', false, '', 'data-f="ppat.belakang"')}
+    </div>
+    <p class="sub-judul">Status Akun</p>
+    <div style="margin-top:10px"><span class="ket-toggle">${sakelar('id="togAktif" data-tog-aktif', 'Akun aktif', p.aktif)}<span id="ketAktif">${p.aktif ? 'Aktif — pengguna dapat masuk.' : 'Nonaktif — pengguna tidak dapat masuk.'}</span></span></div>
+    ${kakiTab('ppat', tombol('Simpan PPAT', 'primary', 'md', `id="simpanPpat" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'ppat' ? spinner : ik('simpan', 16)))}</div>
+    ${blokKontak(u, 'kontak')}`;
+}
+function blokKontak(u, kunci) {
+  const L = u[kunci], kantor = kunci === 'kontakKantor';
+  return `<div class="sub-blok" id="${kantor ? 'blokKontakKantor' : 'blokKontak'}"><h3 class="sub-kepala">${ik('telepon', 18)} Info Kontak${kantor ? ' Kantor' : ''} <span class="kanan">${tombol('Tambah Kontak', 'primary', 'sm', `data-tambah-kontak="${kunci}"`, ik('tambah', 16))}</span></h3>
+    <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Info kontak${kantor ? ' kantor' : ''} ${esc(namaLengkap(u))}">
+      <thead class="ina-table__header"><tr>${['No.', 'Akun / Nomor', 'Jenis Kontak', 'Status', 'Aksi'].map(th).join('')}</tr></thead>
+      <tbody class="ina-table__body">${L.length ? L.map((k, i) => `<tr class="ina-table__row"><td class="ina-table__cell">${i + 1}.</td>
+        <td class="ina-table__cell"><span class="email">${esc(k.nilai)}</span></td>
+        <td class="ina-table__cell">${badge(`${ik(k.jenis === 'email' ? 'surat' : 'telepon', 12)} ${k.jenis === 'email' ? 'Email' : 'Telepon'}`, 'neutral', 'sm')}</td>
+        <td class="ina-table__cell"><span class="ket-toggle">${sakelar(`data-tog-kontak="${kunci}:${k.id}"`, `Status aktif kontak ${k.nilai}`, k.aktif)}<span>${k.aktif ? 'Aktif' : 'Nonaktif'}</span></span></td>
+        <td class="ina-table__cell">${ikonTombol('pena', `Ubah kontak ${k.nilai}`, `data-ubah-kontak="${kunci}:${k.id}"`)}</td></tr>`).join('')
+        : `<tr><td colspan="5" class="ina-table__empty-cell kosong">Belum ada kontak. Tambahkan email atau nomor telepon lewat Tambah Kontak.</td></tr>`}</tbody></table></div></div></div></div>`;
+}
+function panelKantor(u) {
+  const k = F.kantor;
+  const tipSt = u.kantor.aktif ? 'Kantor aktif: pembayaran sudah lunas dan proses administrasi selesai.' : 'Kantor aktif setelah pembayaran lunas dan proses administrasi selesai. Pantau tahapnya di Manajemen Onboarding.';
+  return `<div class="sub-blok"><h3 class="sub-kepala">${ik('gedung', 18)} Kantor PPAT <span class="kanan" id="stKantor">${denganTip(`<span tabindex="0" aria-label="Status kantor: ${u.kantor.aktif ? 'Aktif' : 'Nonaktif'}">${lencanaStatus(u.kantor.aktif)}</span>`, tipSt, 'left')}</span></h3>
+    <div class="form-d"><div class="lebar">${tf('kNama', 'Nama Kantor', k.nama, 'Masukkan nama kantor', false, '', 'data-f="kantor.nama"')}</div></div>
+    <p class="sub-judul">Detail Registrasi</p>
+    <div class="form-d">
+      ${tf('kId', 'ID PPAT / Kode Kantor', u.kantor.id, 'Belum ada', false, 'Terkunci sejak pendaftaran.', 'disabled')}
+      ${tf('kUrl', 'URL Web', u.kantor.url, 'Belum ada', false, 'Alamat aplikasi kantor; tidak dapat diubah.', 'disabled')}
+      ${pilihan('kBank', 'Bank', BANK, k.bank, '', 'data-f="kantor.bank"')}
+      ${tf('kRek', 'Nomor Rekening', k.rek, 'Masukkan nomor rekening', false, 'Hanya angka.', 'data-f="kantor.rek" inputmode="numeric"')}
+    </div></div>
+    ${blokKontak(u, 'kontakKantor')}
+    <div class="sub-blok" id="blokLokasi"><h3 class="sub-kepala">${ik('pin', 18)} Lokasi Kantor</h3>
+      <div class="lokasi"><div class="form-d">
+        <div class="lebar">${ta('kAlamat', 'Alamat Lengkap', k.alamat, 'Masukkan alamat lengkap kantor', '', 'data-f="kantor.alamat"')}</div>
+        ${tf('kKel', 'Kelurahan', k.kel, 'Masukkan kelurahan', false, '', 'data-f="kantor.kel"')}${tf('kKec', 'Kecamatan', k.kec, 'Masukkan kecamatan', false, '', 'data-f="kantor.kec"')}
+        <div class="lebar">${tf('kKota', 'Kota/Kabupaten', k.kota, 'Masukkan kota atau kabupaten', false, '', 'data-f="kantor.kota"')}</div>
+        ${tf('kLat', 'GPS Lat', k.lat, '-6.2088', false, '', 'data-f="kantor.lat" inputmode="decimal"')}${tf('kLng', 'GPS Long', k.lng, '106.8456', false, '', 'data-f="kantor.lng" inputmode="decimal"')}
+      </div>
+      <div>${petaKantor(k)}</div></div>
+      ${kakiTab('kantor', tombol('Simpan Data Kantor', 'primary', 'md', `id="simpanKantor" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'kantor' ? spinner : ik('simpan', 16)))}</div>`;
+}
+/* peta contoh Lokasi Kantor: salinan Profil Saya (OB-MASUK) */
+const petaKantor = k => `<div class="peta"><svg class="dasar" id="petaDasar" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Peta lokasi kantor (contoh). Klik peta untuk memindahkan pin."><rect width="400" height="300" fill="#eef1ec"/><g stroke="#d9c79a" stroke-width="7" fill="none"><path d="M0 210 L400 120"/><path d="M120 0 L210 300"/></g><g stroke="#fff" stroke-width="4" fill="none"><path d="M0 80 L400 60"/><path d="M0 260 L400 230"/><path d="M300 0 L330 300"/><path d="M40 0 L80 300"/></g><g fill="#cfe3d4"><rect x="230" y="150" width="50" height="40" rx="6"/><rect x="140" y="30" width="60" height="30" rx="6"/></g><g transform="translate(${posPin(k)})" color="#c0392b"><path d="M0 -26c-8 0-14 6-14 14 0 10 14 24 14 24s14-14 14-24c0-8-6-14-14-14z" fill="currentColor"/><circle cx="0" cy="-12" r="5" fill="#fff"/></g></svg>
+        <div class="zoom">${tombol(ik('plus', 16), 'secondary', 'sm', 'class="ikon-saja" data-zoom="1" aria-label="Perbesar peta"')}${tombol(ik('minus', 16), 'secondary', 'sm', 'class="ikon-saja" data-zoom="-1" aria-label="Perkecil peta"')}</div>
+        <div class="cari-peta"><div class="ina-input-search"><div class="ina-input-search__wrapper"><span class="ina-input-search__search-icon">${ik('cari', 18)}</span><input id="cariLokasi" class="ina-input-search__input" type="search" placeholder="Cari lokasi (mis. Monas, Jakarta)…" aria-label="Cari lokasi di peta" autocomplete="off"></div></div></div></div>
+        <p class="peta-ket">Klik peta atau cari lokasi untuk mengisi koordinat GPS secara otomatis.</p>`;
+const posPin = k => { const lat = parseFloat(k.lat), lng = parseFloat(k.lng); if (isNaN(lat) || isNaN(lng)) return '200 150'; return `${Math.max(20, Math.min(380, 200 + (lng - 106.8456) * 4000))} ${Math.max(30, Math.min(290, 150 - (lat + 6.2088) * 4000))}`; };
+function aturKoordinat(lat, lng) { F.kantor.lat = lat; F.kantor.lng = lng; $('#kLat').value = lat; $('#kLng').value = lng; bersih('kLat'); bersih('kLng'); $('#petaDasar g[transform]').setAttribute('transform', `translate(${posPin(F.kantor)})`); segarKotor(); }
+function panelSandi(u) {
+  return `<div class="sub-blok"><h3 class="sub-kepala">${ik('kunci', 18)} Kata Sandi</h3>
+    <div class="form-d">${pwIsian('sBaru', 'Kata Sandi Baru', 'Minimal 12 karakter', '', `data-f="sandi.baru" value="${esc(F.sandi.baru)}"`)}${pwIsian('sUlang', 'Konfirmasi Kata Sandi', 'Ketik ulang kata sandi baru', '', `data-f="sandi.ulang" value="${esc(F.sandi.ulang)}"`)}
+      <div class="lebar ditandai" id="blokSyarat">${syaratPw('syaratEdit', F.sandi.baru)}${usulan('IDDS-OB-40')}</div></div>
+    ${kakiTab('sandi', tombol('Simpan Kata Sandi', 'primary', 'md', `id="perbaruiSandi" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'sandi' ? spinner : ik('simpan', 16)))}</div>
+    <div class="sub-blok" id="blokMfa"><h3 class="sub-kepala">${ik('tameng', 18)} Verifikasi Dua Langkah (MFA)</h3>
+      <div class="mfa-baris"><div><p>Status: ${u.mfa ? badge(`Aktif · ${u.mfa}`, 'success', 'sm') : badge('Belum diatur', 'neutral', 'sm')}</p>
+        <p class="ket">${u.mfa ? 'Reset MFA menghapus verifikasi dua langkah pengguna ini. Saat masuk berikutnya, pengguna wajib memilih metode lagi.' : 'Pengguna akan diminta mengatur verifikasi dua langkah saat masuk berikutnya.'}</p></div>
+        ${u.mfa ? tombol('Reset MFA', 'secondary', 'md', `id="resetMfa" aria-label="Reset MFA ${esc(namaLengkap(u))}"`, ik('ulang', 16)) : ''}</div></div>`;
+}
+function segarKotor() {
+  Object.keys(NAMA_TAB).forEach(t => {
+    const d = $(`[data-titik="${t}"]`); if (d) d.hidden = !kotorTab(t);
+    const st = $(`[data-st="${t}"]`); if (st) { st.classList.toggle('ada', kotorTab(t)); st.innerHTML = kotorTab(t) ? `${ik('info', 14)} Belum disimpan` : `${ik('centang', 14)} Belum ada perubahan`; }
+  });
+  hitungKotor();
+}
+function hitungKotor() {
+  if (S.layar === 'pengguna-edit') S.kotor = Object.keys(NAMA_TAB).some(kotorTab);
+  else if (S.layar === 'harga-tambah' || S.layar === 'harga-edit') S.kotor = kotorProduk();
+  else S.kotor = false;
+}
+function simpanTab(t) {
+  const u = penggunaEdit(), salah = [];
+  if (t === 'ppat') { if (!F.ppat.depan.trim()) salah.push(['pDepan', 'Nama Depan wajib diisi.']); bersih('pDepan'); }
+  if (t === 'kantor') {
+    const k = F.kantor; ['kRek', 'kLat', 'kLng'].forEach(bersih);
+    if (k.rek && !/^\d+$/.test(k.rek)) salah.push(['kRek', 'Nomor Rekening hanya boleh berisi angka.']);
+    if (k.lat && (isNaN(+k.lat) || +k.lat < -90 || +k.lat > 90)) salah.push(['kLat', 'GPS Lat berupa angka antara -90 dan 90.']);
+    if (k.lng && (isNaN(+k.lng) || +k.lng < -180 || +k.lng > 180)) salah.push(['kLng', 'GPS Long berupa angka antara -180 dan 180.']);
+  }
+  if (t === 'sandi') {
+    ['sBaru', 'sUlang'].forEach(bersih);
+    if (!F.sandi.baru) salah.push(['sBaru', 'Kata Sandi Baru wajib diisi.']); else if (!pwKuat(F.sandi.baru)) salah.push(['sBaru', `Kata sandi belum memenuhi syarat. ${SYARAT_PW}`]);
+    if (!F.sandi.ulang) salah.push(['sUlang', 'Ketik ulang kata sandi baru.']); else if (F.sandi.ulang !== F.sandi.baru) salah.push(['sUlang', 'Konfirmasi kata sandi tidak sama.']);
+  }
+  if (salah.length) { salah.forEach(([i, p]) => galat(i, p)); $('#' + salah[0][0]).focus(); return; }
+  const idTombol = { ppat:'simpanPpat', kantor:'simpanKantor', sandi:'perbaruiSandi' }[t];
+  S.memuat = t; gambar();
+  setTimeout(() => {
+    S.memuat = '';
+    if (t === 'ppat') {
+      const p = F.ppat, pindahTipe = p.tipe !== u.tipe;
+      Object.assign(u, { jk:p.jk, depan:p.depan.trim(), tengah:p.tengah.trim(), belakang:p.belakang.trim(), aktif:p.aktif });
+      if (pindahTipe) { PENGGUNA[u.tipe] = PENGGUNA[u.tipe].filter(x => x !== u); u.tipe = p.tipe; PENGGUNA[u.tipe].unshift(u); S.edit.jenis = u.tipe; }
+      SNAP.ppat = JSON.parse(JSON.stringify(F.ppat));
+      toast(`Data PPAT ${namaLengkap(u)} disimpan.`, 'positive', 3500, pindahTipe ? `Pengguna kini ada di Daftar Pengguna ${JENIS[u.tipe].t}.` : '');
+    } else if (t === 'kantor') { Object.assign(u.kantor, F.kantor); SNAP.kantor = JSON.parse(JSON.stringify(F.kantor)); toast('Data kantor disimpan.', 'positive'); }
+    else { F.sandi = { baru:'', ulang:'' }; toast(`Kata sandi ${namaLengkap(u)} diperbarui.`, 'positive', 3500, 'Pengguna memakai kata sandi baru saat masuk berikutnya.'); }
+    hitungKotor(); if (S.layar === 'pengguna-edit') { gambar(); $('#' + idTombol)?.focus(); }
+  }, 500);
+}
+function batalTab(t) {
+  dialog({ judul:'Batalkan perubahan?', konfirmasi:true, bahaya:true, isi:`<p>Isian di tab ${NAMA_TAB[t]} dikembalikan ke data yang tersimpan.</p>`,
+    tombol:[['Tetap Ubah', 'secondary', null], ['Batalkan Perubahan', 'primary', () => { F[t] = JSON.parse(JSON.stringify(SNAP[t])); hitungKotor(); gambar(); $(`#tab-${t}`).focus(); }]] });
+}
+function gantiTab(t) { if (t === S.tab) return; S.tab = t; gambar(); $(`#tab-${t}`).focus(); }
+function dialogKontak(kunci, id) {
+  const u = penggunaEdit(), k = id ? u[kunci].find(x => x.id === id) : { jenis:'email', nilai:'', aktif:true };
+  dialog({ judul:id ? 'Ubah Kontak' : 'Tambah Kontak',
+    isi:`<div class="form-d">${pilihan('kJenis', 'Jenis Kontak', [['email', 'Email'], ['telepon', 'Telepon']], k.jenis)}<div></div>
+      <div class="lebar">${tf('kNilai', 'Akun / Nomor', k.nilai, 'nama@contoh.id atau 62812…', true)}</div>
+      <div class="lebar" style="margin-top:12px">${cekBox('kAktif', k.aktif, 'Kontak aktif (dapat dipakai untuk menghubungi pengguna)')}</div></div>`,
+    tombol:[['Batal', 'secondary', null], [id ? 'Simpan Kontak' : 'Tambah Kontak', 'primary', () => {
+      const j = $('#kJenis').value, v = $('#kNilai').value.trim(); bersih('kNilai');
+      const p = !v ? 'Akun / Nomor wajib diisi.' : j === 'email' && !emailSah(v) ? 'Format email belum benar. Contoh: nama@contoh.id.' : j === 'telepon' && !/^\+?\d{9,15}$/.test(v) ? 'Nomor telepon berisi 9–15 angka, misalnya 6281234567890.' : '';
+      if (p) { galat('kNilai', p); $('#kNilai').focus(); return; }
+      if (id) Object.assign(k, { jenis:j, nilai:v, aktif:$('#kAktif').checked }); else u[kunci].push({ id:Math.max(0, ...u[kunci].map(x => x.id)) + 1, jenis:j, nilai:v, aktif:$('#kAktif').checked });
+      tutupDialog(); gambar(); $(`[data-tambah-kontak="${kunci}"]`).focus(); toast(id ? 'Kontak disimpan.' : 'Kontak ditambahkan.', 'positive');
+    }, true]] });
+  pasangBersih('#lapisan');
+}
+
+/* ---------------- layar: Peran Pengguna ---------------- */
+const punyaAkses = (jenis, uk, mk) => !CABUT[jenis].has(uk + ':' + mk);
+function layarPeran(jenis) {
+  const t = JENIS[jenis].t, L = MENU[jenis], q = nilaiCari().trim().toLowerCase();
+  const grup = L.filter(m => tingkat(m.kode) === 0).map(r => ({ r, kol:L.filter(m => tingkat(m.kode) > 0 && m.kode.slice(0, 4) === r.kode.slice(0, 4)) })).filter(g => g.kol.length);
+  const kol = grup.flatMap(g => g.kol);
+  const rows = PENGGUNA[jenis].filter(u => !q || `${namaLengkap(u)} ${u.email}`.toLowerCase().includes(q));
+  const { n, hal, isi } = potongHal(rows);
+  const st = S.statusPeran[jenis];
+  return `${remah([`Peran Pengguna ${t}`])}<h1>Peran Pengguna ${t}</h1><p class="sub">Atur menu yang dapat dibuka setiap pengguna ${t.toLowerCase()}.</p>
+    <div class="saring-ob ditandai" id="saringPeran" role="search"><div class="baris"><div><label class="lbl" for="cariPeran">Cari pengguna</label>${cariIsian('cariPeran', 'Cari nama atau email…', nilaiCari(), 'Cari pengguna menurut nama atau email')}</div><span class="jumlah" aria-live="polite">${n} pengguna</span></div></div>
+    <p class="status-simpan ditandai ${st ? 'ok' : ''}" id="statusPeran" role="status" aria-live="polite">${st ? `${ik('centang', 16)}<span>${st}</span>` : `${ik('info', 16)}<span>Perubahan akses tersimpan otomatis setiap kali sakelar diubah. Mencabut akses meminta konfirmasi.</span>`}</p>${usulan('IDDS-OB-41')}
+    <div class="tabel-wadah ditandai" id="tabelPeran"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Akses menu pengguna ${t.toLowerCase()}">
+      <thead class="ina-table__header"><tr><th class="ina-table__header-cell kol-user" scope="col" rowspan="2">Pengguna</th>${grup.map(g => `<th class="ina-table__header-cell grup" scope="colgroup" colspan="${g.kol.length}">${esc(g.r.nama)}</th>`).join('')}</tr>
+        <tr>${kol.map(m => { const ind = tingkat(m.kode) === 2 ? L.find(x => x.kode === indukDari(m.kode)) : null; return `<th class="ina-table__header-cell" scope="col">${ind ? `<small>${esc(ind.nama)}</small>` : ''}${esc(m.nama)}</th>`; }).join('')}</tr></thead>
+      <tbody class="ina-table__body">${isi.length ? isi.map(u => { const nm = namaLengkap(u); return `<tr class="ina-table__row"><th class="ina-table__cell kol-user" scope="row"><b>${esc(nm)}</b><span class="kc">${JENIS[u.tipe].t}${u.aktif ? '' : ' · Nonaktif'}</span></th>
+        ${kol.map(m => { const ind = tingkat(m.kode) === 2 ? L.find(x => x.kode === indukDari(m.kode)) : null; return `<td class="ina-table__cell">${sakelar(`data-akses="${u.kode}:${m.kode}"`, `Akses menu ${ind ? ind.nama + ' › ' : ''}${m.nama} untuk ${nm}`, punyaAkses(jenis, u.kode, m.kode))}</td>`; }).join('')}</tr>`; }).join('')
+        : `<tr><td colspan="${kol.length + 1}" class="ina-table__empty-cell kosong">${q ? `Tidak ada pengguna yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : 'Belum ada pengguna.'}</td></tr>`}</tbody></table></div></div>
+      <div class="ringkas-peran">${PENGGUNA[jenis].length} pengguna · ${kol.length} menu</div>
+      ${paginasi('pr', hal, n)}</div>${usulan('IDDS-OB-42')}`;
+}
+function ubahAkses(el) {
+  const jenis = jenisDari(S.layar), [uk, mk] = el.dataset.akses.split(':'), u = PENGGUNA[jenis].find(x => x.kode === uk), m = MENU[jenis].find(x => x.kode === mk), nm = namaLengkap(u);
+  const on = !punyaAkses(jenis, uk, mk);
+  const terapkan = () => {
+    on ? CABUT[jenis].delete(uk + ':' + mk) : CABUT[jenis].add(uk + ':' + mk);
+    S.statusPeran[jenis] = `Tersimpan pukul ${jam(SEKARANG)}: akses ${m.nama} untuk ${nm} ${on ? 'diberikan' : 'dicabut'}.`;
+    gambar(); $(`[data-akses="${uk}:${mk}"]`)?.focus();
+    toast(`Akses ${m.nama} untuk ${nm} ${on ? 'diberikan' : 'dicabut'}.`, 'positive');
+  };
+  if (on) { terapkan(); return; }
+  dialog({ judul:`Cabut akses ${esc(m.nama)}?`, konfirmasi:true, bahaya:true,
+    isi:`<div class="modal-gap"><p><b>${esc(nm)}</b> tidak dapat lagi membuka menu <b>${esc(m.nama)}</b>. Menu itu hilang dari menu samping pengguna saat ia memuat ulang halaman.</p><p>Akses dapat diberikan lagi kapan saja dengan menyalakan sakelar.</p></div>`,
+    tombol:[['Batal', 'secondary', null], ['Cabut Akses', 'primary', terapkan]] });
+}
+
+/* ---------------- layar: Harga Produk ---------------- */
+const hargaAktif = p => p.harga.find(h => h.aktif);
+function layarHarga() {
+  const q = nilaiCari().trim().toLowerCase(), rows = PRODUK.filter(p => !q || `${p.kode} ${p.nama}`.toLowerCase().includes(q));
+  return `${remah(['Harga Produk'])}<h1>Harga Produk</h1><p class="sub">Atur produk, durasi, dan harga paket E-PPAT.</p>
+    <div class="saring-ob" id="saringHarga" role="search"><div class="baris"><div><label class="lbl" for="cariHarga">Cari produk</label>${cariIsian('cariHarga', 'Cari kode atau nama produk…', nilaiCari(), 'Cari produk menurut kode atau nama')}</div>
+      <span class="jumlah" aria-live="polite">${rows.length} produk</span><span class="kanan">${tombol('Tambah Produk', 'primary', 'md', 'id="tambahProduk"', ik('tambah', 16))}</span></div></div>
+    <div class="tabel-wadah ditandai" id="tabelHarga"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Daftar produk">
+      <thead class="ina-table__header"><tr>${['Kode', 'Foto', 'Nama Produk', 'Durasi', 'Harga', 'Status', 'Dibuat', 'Diubah', '<span style="display:block;text-align:right">Aksi</span>'].map(th).join('')}</tr></thead>
+      <tbody class="ina-table__body">${rows.length ? rows.map(p => { const h = hargaAktif(p); return `<tr class="ina-table__row">
+        <td class="ina-table__cell"><span class="kd" style="cursor:auto">${esc(p.kode)}</span></td>
+        <td class="ina-table__cell"><span class="foto-produk" aria-hidden="true">${ik(p.foto ? 'gambar' : 'kotak', 18)}</span></td>
+        <td class="ina-table__cell">${esc(p.nama)}${p.singkat ? `<div class="kc">${esc(p.singkat)}</div>` : ''}</td>
+        <td class="ina-table__cell">${p.durasi} hari</td>
+        <td class="ina-table__cell">${h ? `<b>${rupiah(h.n)}</b>` : kosongTeks('Belum ada harga')}</td>
+        <td class="ina-table__cell">${lencanaStatus(p.aktif)}</td>
+        <td class="ina-table__cell">${tglJam(p.dibuat)}</td>
+        <td class="ina-table__cell">${p.diubah ? tglJam(p.diubah) : kosongTeks('Belum pernah')}</td>
+        <td class="ina-table__cell"><div class="aksi-baris">${ikonTombol('pena', `Edit produk ${p.nama}`, `data-edit-produk="${p.kode}"`)}${ikonTombol('sampah', `Hapus produk ${p.nama}`, `data-hapus-produk="${p.kode}"`)}</div></td></tr>`; }).join('')
+        : `<tr><td colspan="9" class="ina-table__empty-cell kosong">${q ? `Tidak ada produk yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : 'Belum ada produk.'}</td></tr>`}</tbody></table></div></div></div>${usulan('IDDS-OB-43')}`;
+}
+function isiFormProduk(p) {
+  SNAPP = p ? { kode:p.kode, nama:p.nama, singkat:p.singkat, lengkap:p.lengkap, durasi:String(p.durasi), aktif:p.aktif, foto:p.foto, hargaBaru:'' } : { kode:'', nama:'', singkat:'', lengkap:'', durasi:'0', aktif:true, foto:'', hargaBaru:'' };
+  FP = { ...SNAPP }; S.tabProduk = 'info';
+}
+const kotorProduk = () => !!FP && !!SNAPP && JSON.stringify(FP) !== JSON.stringify(SNAPP);
+function formProduk(edit) {
+  return `<div class="form-d">
+      ${tf('prKode', 'Kode Produk', FP.kode, 'Contoh: ENTERPRISE', true, 'Huruf kapital, angka, atau garis bawah.', edit ? 'disabled' : 'data-fp="kode" autocomplete="off"')}
+      ${tf('prNama', 'Nama Produk', FP.nama, 'Contoh: Enterprise', true, '', 'data-fp="nama"')}
+      <div class="lebar">${tf('prSingkat', 'Deskripsi Singkat', FP.singkat, 'Contoh: Akses penuh / Akses terbatas', false, '', 'data-fp="singkat"')}</div>
+      <div class="lebar">${ta('prLengkap', 'Deskripsi Lengkap (Opsional)', FP.lengkap, 'Satu fitur per baris', 'Satu fitur per baris; tampil sebagai daftar di kartu paket.', 'data-fp="lengkap"', 5)}</div>
+      ${tf('prDurasi', 'Durasi (Hari)', FP.durasi, '0', true, 'Masa berlaku produk setelah dibayar.', 'data-fp="durasi" inputmode="numeric"')}
+      <div><span class="lbl-isian">Status</span><div style="margin-top:10px"><span class="ket-toggle">${sakelar('id="togProduk" data-tog-produk', 'Produk aktif', FP.aktif)}<span id="ketProduk">${FP.aktif ? 'Aktif' : 'Nonaktif'}</span></span></div></div>
+      <div class="lebar"><span class="lbl-isian" id="lblFoto">Foto/Gambar Produk (Opsional)</span><div class="pilih-berkas">${tombol('Pilih Foto', 'secondary', 'sm', 'id="pilihFotoProduk" aria-describedby="lblFoto"', ik('gambar', 16))}<span class="nama-berkas">${FP.foto ? esc(FP.foto) : 'Belum ada foto.'}</span></div>
+        ${tf('prFoto', '', FP.foto, 'Atau tulis path/URL gambar', false, '', 'data-fp="foto" aria-label="Path atau URL foto produk"')}</div>
+    </div>
+    <div class="kartu-kaki"><span class="kaki-st ${kotorProduk() ? 'ada' : ''}" id="stProduk" aria-live="polite">${kotorProduk() ? `${ik('info', 14)} Belum disimpan` : `${ik('centang', 14)} Belum ada perubahan`}</span>${tombol('Batal', 'secondary', 'md', 'id="batalProduk"')}${tombol('Simpan Produk', 'primary', 'md', `id="simpanProduk" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'produk' ? spinner : ik('centang', 16))}</div>`;
+}
+function layarTambahProduk() {
+  return `${remah(['Harga Produk', '#harga'], ['Tambah Produk'])}<h1>Tambah Produk</h1><p class="sub">Isi data produk baru, lalu tambahkan harganya lewat Edit Produk.</p>
+    <section class="kartu-form ditandai" aria-labelledby="jdFormProduk"><h2 class="kepala-form" id="jdFormProduk">${tombol(ik('kiri', 18), 'tertiary', 'sm', 'class="ikon-saja" id="kembaliHarga" aria-label="Kembali ke Harga Produk"')}Tambah Produk Baru</h2>${formProduk(false)}</section>${usulan('IDDS-OB-43')}`;
+}
+function layarEditProduk() {
+  const p = PRODUK.find(x => x.kode === S.produk);
+  if (!p) return `${remah(['Harga Produk', '#harga'], ['Edit Produk'])}<h1>Edit Produk</h1><p class="sub">Produk tidak ditemukan.</p>`;
+  const tb = [['info', 'Info Utama'], ['harga', 'Harga']];
+  const tabs = `<div class="tab-wadah ditandai" id="tabProduk"><div class="ina-tab-horizontal ina-tab-horizontal--use-brand-color"><div class="ina-tab-horizontal__container" role="tablist" aria-label="Bagian produk">${tb.map(([k, t]) => `<button type="button" role="tab" id="tabp-${k}" aria-controls="panelp-${k}" aria-selected="${S.tabProduk === k}" tabindex="${S.tabProduk === k ? 0 : -1}" data-tab-produk="${k}" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline ${S.tabProduk === k ? 'ina-tab-horizontal__tab--selected' : ''}">${t}</button>`).join('')}</div></div></div>`;
+  return `${remah(['Harga Produk', '#harga'], ['Edit Produk'])}<h1>Edit Produk</h1><p class="sub">Ubah data dan harga produk ${esc(p.nama)} (${esc(p.kode)}).</p>
+    <section class="kartu-form" aria-labelledby="jdFormProduk"><h2 class="kepala-form" id="jdFormProduk">${tombol(ik('kiri', 18), 'tertiary', 'sm', 'class="ikon-saja" id="kembaliHarga" aria-label="Kembali ke Harga Produk"')}Edit Produk ${esc(p.nama)}</h2>
+      ${tabs}<div role="tabpanel" id="panelp-${S.tabProduk}" aria-labelledby="tabp-${S.tabProduk}">${S.tabProduk === 'info' ? formProduk(true) : panelHarga(p)}</div></section>${usulan('IDDS-OB-43')}`;
+}
+const angkaRp = s => s.replace(/\D/g, '');
+const formatRibuan = s => { const d = angkaRp(s).replace(/^0+(?=\d)/, ''); return d ? (+d).toLocaleString('id-ID') : ''; };
+function panelHarga(p) {
+  return `<div class="tambah-harga">${tfRp('hargaBaru', 'Tambah Harga Baru (Rupiah)', FP.hargaBaru, 'Harga pertama otomatis menjadi harga aktif.', 'data-fp="hargaBaru"')}${tombol('Tambah', 'primary', 'md', `id="tambahHarga" ${FP.hargaBaru ? '' : 'disabled aria-describedby="h-hargaBaru"'}`, ik('tambah', 16))}</div>
+    <div class="tabel-wadah" id="tabelRiwayatHarga"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Riwayat harga ${esc(p.nama)}">
+      <thead class="ina-table__header"><tr>${['No', 'Tanggal/Jam', 'Harga (Rupiah)', 'Dibuat Oleh', 'Status', '<span style="display:block;text-align:right">Aksi</span>'].map(th).join('')}</tr></thead>
+      <tbody class="ina-table__body">${p.harga.length ? p.harga.map((h, i) => `<tr class="ina-table__row"><td class="ina-table__cell">${i + 1}</td><td class="ina-table__cell">${tglJam(h.w)}</td><td class="ina-table__cell"><b>${rupiah(h.n)}</b></td><td class="ina-table__cell">${esc(h.oleh)}</td>
+        <td class="ina-table__cell"><span class="ket-toggle">${sakelar(`data-tog-harga="${h.id}"`, `Jadikan ${rupiah(h.n)} harga aktif`, h.aktif)}<span>${h.aktif ? 'Aktif' : 'Tidak aktif'}</span></span></td>
+        <td class="ina-table__cell"><div class="aksi-baris">${h.aktif ? tombol(ik('sampah', 16), 'tertiary', 'sm', `class="ikon-saja" disabled aria-label="Hapus harga ${rupiah(h.n)} tidak tersedia" aria-describedby="alasan-h${h.id}"`) : ikonTombol('sampah', `Hapus harga ${rupiah(h.n)}`, `data-hapus-harga="${h.id}"`)}</div>${h.aktif ? `<div class="alasan" id="alasan-h${h.id}">Harga aktif tidak dapat dihapus.</div>` : ''}</td></tr>`).join('')
+        : '<tr><td colspan="6" class="ina-table__empty-cell kosong">Belum ada harga. Ketik nominal di atas, lalu klik Tambah.</td></tr>'}</tbody></table></div></div></div>`;
+}
+function simpanProduk() {
+  const edit = S.layar === 'harga-edit', salah = [], kode = FP.kode.trim();
+  ['prKode', 'prNama', 'prDurasi'].forEach(bersih);
+  if (!edit) { if (!kode) salah.push(['prKode', 'Kode Produk wajib diisi.']); else if (!/^[A-Z0-9_]+$/.test(kode)) salah.push(['prKode', 'Kode hanya boleh berisi huruf kapital, angka, atau garis bawah, misalnya ENTERPRISE.']); else if (PRODUK.some(p => p.kode === kode)) salah.push(['prKode', 'Kode Produk sudah dipakai. Gunakan kode lain.']); }
+  if (!FP.nama.trim()) salah.push(['prNama', 'Nama Produk wajib diisi.']);
+  if (!/^\d+$/.test(FP.durasi.trim()) || +FP.durasi < 1) salah.push(['prDurasi', 'Durasi minimal 1 hari dan berupa angka.']);
+  if (salah.length) { salah.forEach(([i, p]) => galat(i, p)); $('#' + salah[0][0]).focus(); return; }
+  S.memuat = 'produk'; gambar();
+  setTimeout(() => {
+    S.memuat = '';
+    const data = { nama:FP.nama.trim(), singkat:FP.singkat.trim(), lengkap:FP.lengkap.trim(), durasi:+FP.durasi, aktif:FP.aktif, foto:FP.foto.trim() };
+    if (edit) { const p = PRODUK.find(x => x.kode === S.produk); Object.assign(p, data, { diubah:'2026-10-26T19:06' }); SNAPP = { ...FP, hargaBaru:'' }; hitungKotor(); gambar(); $('#simpanProduk')?.focus(); toast(`Produk ${p.nama} disimpan.`, 'positive'); }
+    else { PRODUK.push({ kode, ...data, dibuat:'2026-10-26T19:06', diubah:null, harga:[] }); S.kotor = false; FP = SNAPP = null; pindah('harga', () => $(`[data-edit-produk="${kode}"]`)?.focus()); toast(`Produk ${data.nama} ditambahkan.`, 'positive', 4000, 'Klik Edit pada baris produk untuk menambahkan harga.'); }
+  }, 500);
+}
+function hapusProduk(kode) {
+  const p = PRODUK.find(x => x.kode === kode);
+  dialog({ judul:`Hapus produk ${esc(p.nama)}?`, konfirmasi:true, bahaya:true,
+    isi:`<div class="modal-gap"><p>Produk <b>${esc(p.nama)}</b> (${esc(p.kode)}) beserta ${p.harga.length} riwayat harganya dihapus permanen.</p><p>Calon PPAT tidak dapat memilih produk ini lagi. Bila hanya ingin menyembunyikannya sementara, nonaktifkan produk di halaman Edit.</p></div>`,
+    tombol:[['Batal', 'secondary', null], ['Hapus Produk', 'primary', () => { PRODUK = PRODUK.filter(x => x !== p); gambar(); $('#tambahProduk').focus(); toast(`Produk ${p.nama} dihapus.`, 'positive'); }]] });
+}
+function ubahHargaAktif(id) {
+  const p = PRODUK.find(x => x.kode === S.produk), h = p.harga.find(x => x.id === id), lama = hargaAktif(p);
+  const fokus = () => $(`[data-tog-harga="${id}"]`)?.focus();
+  if (h.aktif) {
+    dialog({ judul:`Nonaktifkan harga ${rupiah(h.n)}?`, konfirmasi:true, bahaya:true, isi:`<p>Produk <b>${esc(p.nama)}</b> tidak punya harga aktif sehingga tidak dapat dibeli sampai ada harga yang diaktifkan.</p>`,
+      tombol:[['Batal', 'secondary', null], ['Nonaktifkan Harga', 'primary', () => { h.aktif = false; p.diubah = '2026-10-26T19:06'; gambar(); fokus(); toast(`Harga ${rupiah(h.n)} dinonaktifkan.`, 'positive'); }]] });
+    return;
+  }
+  dialog({ judul:`Jadikan ${rupiah(h.n)} harga aktif?`, konfirmasi:true, bahaya:true,
+    isi:`<p>Pendaftar baru membayar <b>${rupiah(h.n)}</b> untuk ${esc(p.nama)}.${lama ? ` Harga ${rupiah(lama.n)} menjadi tidak aktif.` : ''} Tagihan yang sudah dibuat tidak berubah.</p>`,
+    tombol:[['Batal', 'secondary', null], ['Jadikan Harga Aktif', 'primary', () => { p.harga.forEach(x => { x.aktif = x === h; }); p.diubah = '2026-10-26T19:06'; gambar(); fokus(); toast(`${rupiah(h.n)} kini menjadi harga aktif ${p.nama}.`, 'positive'); }]] });
+}
+function tambahHarga() {
+  const p = PRODUK.find(x => x.kode === S.produk), n = +angkaRp(FP.hargaBaru);
+  if (!FP.hargaBaru) { galat('hargaBaru', 'Ketik nominal harga.'); $('#hargaBaru').focus(); return; }
+  const pertama = !p.harga.some(h => h.aktif);
+  p.harga.push({ id:Math.max(0, ...p.harga.map(h => h.id)) + 1, w:'2026-10-26T19:06', n, oleh:SAYA, aktif:pertama }); p.diubah = '2026-10-26T19:06';
+  FP.hargaBaru = ''; hitungKotor(); gambar(); $('#hargaBaru').focus();
+  toast(`Harga ${rupiah(n)} ditambahkan.`, 'positive', 3500, pertama ? 'Harga ini langsung menjadi harga aktif.' : 'Nyalakan sakelar Status untuk menjadikannya harga aktif.');
+}
+function hapusHarga(id) {
+  const p = PRODUK.find(x => x.kode === S.produk), h = p.harga.find(x => x.id === id);
+  dialog({ judul:`Hapus harga ${rupiah(h.n)}?`, konfirmasi:true, bahaya:true, isi:`<p>Harga <b>${rupiah(h.n)}</b> (${tglJam(h.w)}) dihapus dari riwayat harga ${esc(p.nama)}.</p>`,
+    tombol:[['Batal', 'secondary', null], ['Hapus Harga', 'primary', () => { p.harga = p.harga.filter(x => x !== h); gambar(); $('#hargaBaru').focus(); toast(`Harga ${rupiah(h.n)} dihapus.`, 'positive'); }]] });
+}
+
+/* ---------------- layar: Paket Langganan ---------------- */
+const batas = v => v == null ? 'Tanpa batas' : String(v);
+function layarPaket() {
+  const q = nilaiCari().trim().toLowerCase(), c = S.chip.paket || 'semua', nA = PAKET.filter(p => p.aktif).length;
+  const rows = PAKET.filter(p => (c === 'semua' || (c === 'aktif') === p.aktif) && (!q || `${p.kode} ${p.nama}`.toLowerCase().includes(q))).sort((a, b) => a.urut - b.urut);
+  return `${remah(['Paket Langganan'])}<h1>Paket Langganan</h1><p class="sub">Atur paket langganan yang dapat dipilih calon PPAT.</p>
+    <div class="saring-ob" id="saringPaket" role="search">
+      <div class="baris"><div><label class="lbl" for="cariPaket">Cari paket</label>${cariIsian('cariPaket', 'Cari kode atau nama paket…', nilaiCari(), 'Cari paket menurut kode atau nama')}</div><span class="jumlah" aria-live="polite">${rows.length} paket</span>
+        <span class="kanan">${tombol('Tambah Paket', 'primary', 'md', 'id="tambahPaket"', ik('tambah', 16))}</span></div>
+      <div class="ina-chip"><div class="ina-chip__list" role="group" aria-label="Saring menurut status">${chip('semua', 'Semua', PAKET.length, c === 'semua')}${chip('aktif', 'Aktif', nA, c === 'aktif')}${chip('nonaktif', 'Nonaktif', PAKET.length - nA, c === 'nonaktif')}</div></div></div>
+    <div class="tabel-wadah ditandai" id="tabelPaket"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Daftar paket langganan">
+      <thead class="ina-table__header"><tr>${['Kode', 'Nama', 'Maks. Order', 'Maks. Pengguna', 'Masa (Hari)', 'CA', 'Status', '<span style="display:block;text-align:right">Aksi</span>'].map(th).join('')}</tr></thead>
+      <tbody class="ina-table__body">${rows.length ? rows.map(p => `<tr class="ina-table__row">
+        <td class="ina-table__cell"><span class="kd" style="cursor:auto">${esc(p.kode)}</span></td>
+        <td class="ina-table__cell">${esc(p.nama)}${p.sistem ? `<div style="margin-top:4px">${badge('Paket sistem', 'neutral', 'sm')}</div>` : ''}</td>
+        <td class="ina-table__cell">${batas(p.order)}</td><td class="ina-table__cell">${batas(p.user)}</td><td class="ina-table__cell">${batas(p.masa)}</td>
+        <td class="ina-table__cell">${p.ca ? 'Ya' : 'Tidak'}</td><td class="ina-table__cell">${lencanaStatus(p.aktif)}</td>
+        <td class="ina-table__cell"><div class="aksi-baris">${ikonTombol('pena', `Edit paket ${p.nama}`, `data-edit-paket="${p.kode}"`)}${p.sistem ? tombol(ik('sampah', 16), 'tertiary', 'sm', `class="ikon-saja" disabled aria-label="Hapus paket ${esc(p.nama)} tidak tersedia" aria-describedby="alasan-p${p.kode}"`) : ikonTombol('sampah', `Hapus paket ${p.nama}`, `data-hapus-paket="${p.kode}"`)}</div>${p.sistem ? `<div class="alasan" id="alasan-p${p.kode}">Paket sistem tidak dapat dihapus.</div>` : ''}</td></tr>`).join('')
+        : `<tr><td colspan="8" class="ina-table__empty-cell kosong">${q ? `Tidak ada paket yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : `Belum ada paket ${c === 'aktif' ? 'aktif' : 'nonaktif'}.<div style="margin-top:10px">${tombol('Tampilkan Semua', 'secondary', 'sm', 'id="tampilSemua"')}</div>`}</td></tr>`}</tbody></table></div></div></div>${usulan('IDDS-OB-44')}`;
+}
+const isianBatas = (id, l, v) => `<div class="lebar"><div class="batas-baris">${tf(id, l, v == null ? '' : String(v), v == null ? 'Tanpa batas' : 'Contoh: 5', false, '', `inputmode="numeric" ${v == null ? 'disabled' : ''}`)}${cekBox(id + 'Tb', v == null, 'Tanpa batas', `data-tanpa-batas="${id}"`)}</div></div>`;
+function dialogPaket(kode) {
+  const p = kode ? PAKET.find(x => x.kode === kode) : { kode:'', nama:'', order:null, user:null, masa:null, ca:false, aktif:true, urut:PAKET.length + 1, sistem:false };
+  dialog({ judul:kode ? `Edit Paket ${esc(p.nama)}` : 'Tambah Paket',
+    isi:`<div class="form-d">
+      ${tf('pkKode', 'Kode', p.kode, 'Contoh: TRIAL', true, p.sistem ? 'Kode paket sistem tidak dapat diubah.' : 'Huruf kapital, angka, atau garis bawah.', p.sistem ? 'disabled' : 'autocomplete="off"')}
+      ${tf('pkNama', 'Nama', p.nama, 'Contoh: Trial 30 Hari', true)}
+      ${isianBatas('pkOrder', 'Maks. Order', p.order)}${isianBatas('pkUser', 'Maks. Pengguna', p.user)}${isianBatas('pkMasa', 'Masa Berlaku (Hari)', p.masa)}
+      <div class="lebar cek-baris">${cekBox('pkCa', p.ca, 'Fitur CA aktif')}${cekBox('pkAktif', p.aktif, 'Paket aktif')}</div>
+      ${tf('pkUrut', 'Urutan Tampil', String(p.urut), '1', false, 'Angka kecil tampil lebih dulu.', 'inputmode="numeric"')}
+    </div>${usulan('IDDS-OB-44')}`,
+    tombol:[['Batal', 'secondary', null], ['Simpan', 'primary', () => simpanPaket(kode ? p : null), true, '', ik('simpan', 16)]] });
+  pasangBersih('#lapisan');
+}
+function simpanPaket(p) {
+  const kode = $('#pkKode').value.trim(), nama = $('#pkNama').value.trim(), salah = [], hasil = {};
+  ['pkKode', 'pkNama', 'pkOrder', 'pkUser', 'pkMasa', 'pkUrut'].forEach(bersih);
+  if (!p || !p.sistem) { if (!kode) salah.push(['pkKode', 'Kode wajib diisi.']); else if (!/^[A-Z0-9_]+$/.test(kode)) salah.push(['pkKode', 'Kode hanya boleh berisi huruf kapital, angka, atau garis bawah, misalnya SATU_BULAN.']); else if (PAKET.some(x => x.kode === kode && x !== p)) salah.push(['pkKode', 'Kode sudah dipakai paket lain.']); }
+  if (!nama) salah.push(['pkNama', 'Nama wajib diisi.']);
+  for (const [id, k] of [['pkOrder', 'order'], ['pkUser', 'user'], ['pkMasa', 'masa']]) {
+    if ($('#' + id + 'Tb').checked) { hasil[k] = null; continue; }
+    const v = $('#' + id).value.trim(); if (!/^\d+$/.test(v) || +v < 1) salah.push([id, 'Isi angka 1 atau lebih, atau centang Tanpa batas.']); else hasil[k] = +v;
+  }
+  const urut = $('#pkUrut').value.trim(); if (!/^\d+$/.test(urut) || +urut < 1) salah.push(['pkUrut', 'Urutan Tampil berupa angka 1 atau lebih.']);
+  if (salah.length) { salah.forEach(([i, m]) => galat(i, m)); $('#' + salah[0][0]).focus(); return; }
+  const data = { nama, ...hasil, ca:$('#pkCa').checked, aktif:$('#pkAktif').checked, urut:+urut };
+  let k2;
+  if (p) { Object.assign(p, data, p.sistem ? {} : { kode }); k2 = p.kode; } else { PAKET.push({ kode, ...data, sistem:false }); k2 = kode; }
+  tutupDialog(); gambar(); ($(`[data-edit-paket="${k2}"]`) || $('#tambahPaket')).focus(); toast(p ? `Paket ${nama} disimpan.` : `Paket ${nama} ditambahkan.`, 'positive');
+}
+function hapusPaket(kode) {
+  const p = PAKET.find(x => x.kode === kode);
+  dialog({ judul:`Hapus paket ${esc(p.nama)}?`, konfirmasi:true, bahaya:true,
+    isi:`<div class="modal-gap"><p>Paket <b>${esc(p.nama)}</b> (${esc(p.kode)}) dihapus dari katalog dan tidak dapat dipilih lagi oleh calon PPAT.</p><p>Bila hanya ingin menyembunyikannya sementara, hapus centang "Paket aktif" lewat Edit.</p></div>`,
+    tombol:[['Batal', 'secondary', null], ['Hapus Paket', 'primary', () => { PAKET = PAKET.filter(x => x !== p); gambar(); $('#tambahPaket').focus(); toast(`Paket ${p.nama} dihapus.`, 'positive'); }]] });
+}
+
+/* ---------------- galat di bawah isian ---------------- */
+function galat(id, pesan) {
+  const f = $('#f-' + id); if (!f) return; const h = $('#h-' + id), i = document.getElementById(id);
+  const pw = f.querySelector('.ina-password-input__wrapper'), tw = f.querySelector('.ina-text-area__wrapper'), w = f.querySelector('.ina-text-field__wrapper');
+  if (pw) { pw.classList.replace('ina-password-input__wrapper--neutral', 'ina-password-input__wrapper--error'); if (h) h.className = 'ina-password-input__status-message ina-password-input__status-message--error'; }
+  else if (tw) { tw.classList.replace('ina-text-area__wrapper--status-neutral', 'ina-text-area__wrapper--status-error'); h?.classList.add('ina-text-area__helper-text--error'); }
+  else { w?.classList.add('ina-text-field__wrapper--status-error'); h?.classList.add('ina-text-field__helper-text--error'); }
+  if (h) h.textContent = pesan; i?.setAttribute('aria-invalid', 'true');
+}
+function bersih(id) {
+  const f = $('#f-' + id); if (!f) return; const h = $('#h-' + id), i = document.getElementById(id);
+  const pw = f.querySelector('.ina-password-input__wrapper'), tw = f.querySelector('.ina-text-area__wrapper'), w = f.querySelector('.ina-text-field__wrapper');
+  if (pw) { pw.classList.replace('ina-password-input__wrapper--error', 'ina-password-input__wrapper--neutral'); if (h) h.className = 'ina-password-input__status-message'; }
+  else if (tw) { tw.classList.replace('ina-text-area__wrapper--status-error', 'ina-text-area__wrapper--status-neutral'); h?.classList.remove('ina-text-area__helper-text--error'); }
+  else { w?.classList.remove('ina-text-field__wrapper--status-error'); h?.classList.remove('ina-text-field__helper-text--error'); }
+  if (h && i?.getAttribute('aria-invalid')) h.textContent = h.dataset.bantu || '';
+  i?.removeAttribute('aria-invalid');
+}
+function pasangBersih(sel) { $(sel).addEventListener('input', e => { if (e.target.id && e.target.getAttribute('aria-invalid')) bersih(e.target.id); }); }
+
+/* ---------------- gambar ---------------- */
+const RENDER = { 'menu-admin':() => layarMenu('admin'), 'menu-operator':() => layarMenu('operator'), 'menu-customer':() => layarMenu('customer'),
+  'pengguna-admin':() => layarPengguna('admin'), 'pengguna-operator':() => layarPengguna('operator'), 'pengguna-customer':() => layarPengguna('customer'), 'pengguna-edit':layarEdit,
+  'peran-admin':() => layarPeran('admin'), 'peran-operator':() => layarPeran('operator'), 'peran-customer':() => layarPeran('customer'),
+  harga:layarHarga, 'harga-tambah':layarTambahProduk, 'harga-edit':layarEditProduk, paket:layarPaket };
+function gambar() {
+  gambarNav();
+  $('#pilLayar').innerHTML = LAYAR.map(([k, t]) => `<button class="pil" data-pil="${k}" aria-pressed="${S.layar === k}">${t}</button>`).join(' ');
+  $('#halaman').innerHTML = RENDER[S.layar]();
+  pasangPanduan();
+}
+function setSakelar(el, on) {
+  el.setAttribute('aria-checked', on); el.classList.toggle('ina-toggle--checked', on); el.querySelector('input').checked = on;
+  el.querySelector('.ina-toggle__track').classList.toggle('ina-toggle__track--checked', on); el.querySelector('.ina-toggle__thumb').classList.toggle('ina-toggle__thumb--checked', on);
+}
+
+/* ---------------- interaksi ---------------- */
+const H = $('#halaman');
+const CARI = ['cariMenu', 'cariPengguna', 'cariPeran', 'cariHarga', 'cariPaket'];
+H.addEventListener('click', e => {
+  const t = e.target;
+  const rm = t.closest('[data-remah]'); if (rm) { e.preventDefault(); const h = rm.dataset.remah; RENDER[h] ? pindah(h) : keLuar(OB_MON + '#' + h); return; }
+  const fokusCari = () => { const c = CARI.map(i => document.getElementById(i)).find(Boolean); c && c.focus(); };
+  if (t.closest('#hapusCari')) { S.cari[S.layar] = ''; S.hal[S.layar] = 1; gambar(); fokusCari(); return; }
+  if (t.closest('#tampilSemua')) { S.chip[S.layar] = 'semua'; S.hal[S.layar] = 1; gambar(); $('[data-chip="semua"]').focus(); return; }
+  const ch = t.closest('[data-chip]'); if (ch) { S.chip[S.layar] = ch.dataset.chip; S.hal[S.layar] = 1; gambar(); $(`[data-chip="${ch.dataset.chip}"]`).focus(); return; }
+  const hl = t.closest('[data-hal]'); if (hl) { S.hal[S.layar] = +hl.dataset.hal.split(':')[1]; gambar(); (document.querySelector(`[data-hal="${hl.dataset.hal}"]`) || $('.halaman'))?.focus?.(); return; }
+  /* Menu */
+  const bk = t.closest('[data-buka-menu]'); if (bk) { const j = jenisDari(S.layar), k = bk.dataset.bukaMenu; S.tutup[j].has(k) ? S.tutup[j].delete(k) : S.tutup[j].add(k); gambar(); $(`[data-buka-menu="${k}"]`).focus(); return; }
+  if (t.closest('#tambahMenuUtama')) { dialogMenu('utama'); return; }
+  const sm = t.closest('[data-sub-menu]'); if (sm) { dialogMenu('sub', sm.dataset.subMenu); return; }
+  const em = t.closest('[data-edit-menu]'); if (em) { dialogMenu('edit', em.dataset.editMenu); return; }
+  const hm = t.closest('[data-hapus-menu]'); if (hm) { hapusMenu(hm.dataset.hapusMenu); return; }
+  /* Daftar Pengguna */
+  if (t.closest('#tambahPengguna')) { dialogTambahPengguna(); return; }
+  const ep = t.closest('[data-edit-pengguna]'); if (ep) { S.edit = { jenis:jenisDari(S.layar), kode:ep.dataset.editPengguna }; pindah('pengguna-edit', () => $('#halaman h1').focus()); return; }
+  const hp = t.closest('[data-hapus-pengguna]'); if (hp) { hapusPengguna(hp.dataset.hapusPengguna); return; }
+  /* Edit Pengguna */
+  if (t.closest('#kembaliPengguna')) { const asal = S.edit.kode; pindah('pengguna-' + S.edit.jenis, () => ($(`[data-edit-pengguna="${asal}"]`) || $('#cariPengguna')).focus()); return; }
+  const tb = t.closest('[data-tab]'); if (tb) { gantiTab(tb.dataset.tab); return; }
+  if (t.closest('#simpanPpat')) { simpanTab('ppat'); return; }
+  if (t.closest('#simpanKantor')) { simpanTab('kantor'); return; }
+  if (t.closest('#perbaruiSandi')) { simpanTab('sandi'); return; }
+  const bt = t.closest('[data-batal]'); if (bt) { if (kotorTab(bt.dataset.batal)) batalTab(bt.dataset.batal); else toast('Belum ada perubahan di tab ini.'); return; }
+  const ta2 = t.closest('[data-tog-aktif]'); if (ta2) { F.ppat.aktif = !F.ppat.aktif; setSakelar(ta2, F.ppat.aktif); $('#ketAktif').textContent = F.ppat.aktif ? 'Aktif — pengguna dapat masuk.' : 'Nonaktif — pengguna tidak dapat masuk.'; segarKotor(); return; }
+  const zm = t.closest('[data-zoom]'); if (zm) { const s = $('#petaDasar'); const z = Math.max(1, Math.min(2, (+s.dataset.z || 1) + (+zm.dataset.zoom) * .25)); s.dataset.z = z; s.style.transform = `scale(${z})`; return; }
+  const pt = t.closest('#petaDasar'); if (pt) { const r = pt.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 400, y = (e.clientY - r.top) / r.height * 300; aturKoordinat((-6.2088 - (y - 150) / 4000).toFixed(4), (106.8456 + (x - 200) / 4000).toFixed(4)); return; }
+  if (t.closest('#gantiFoto')) { toast('Pemilih berkas tidak dibuka di prototipe.', 'default', 3500, 'Di aplikasi asli, klik gambar membuka pemilih berkas JPG atau PNG.'); return; }
+  if (t.closest('#resetMfa')) {
+    const u = penggunaEdit();
+    dialog({ judul:`Reset MFA ${esc(namaLengkap(u))}?`, konfirmasi:true, bahaya:true, isi:`<p>Verifikasi dua langkah dan kode cadangan pengguna ini dihapus. Saat masuk berikutnya, pengguna wajib memilih metode verifikasi lagi.</p>`,
+      tombol:[['Batal', 'secondary', null], ['Reset MFA', 'primary', () => { u.mfa = null; gambar(); $('#tab-sandi').focus(); toast(`MFA ${namaLengkap(u)} direset.`, 'positive'); }]] });
+    return;
+  }
+  const tk = t.closest('[data-tambah-kontak]'); if (tk) { dialogKontak(tk.dataset.tambahKontak); return; }
+  const uk = t.closest('[data-ubah-kontak]'); if (uk) { const [k, id] = uk.dataset.ubahKontak.split(':'); dialogKontak(k, +id); return; }
+  const tgk = t.closest('[data-tog-kontak]'); if (tgk) {
+    const [kunci, id] = tgk.dataset.togKontak.split(':'), k = penggunaEdit()[kunci].find(x => String(x.id) === id);
+    const terapkan = on => { k.aktif = on; gambar(); $(`[data-tog-kontak="${kunci}:${id}"]`)?.focus(); toast(on ? `${k.nilai} diaktifkan.` : `${k.nilai} dinonaktifkan.`, 'positive'); };
+    if (!k.aktif) { terapkan(true); return; }
+    dialog({ judul:'Nonaktifkan kontak?', konfirmasi:true, bahaya:true, isi:`<p><b>${esc(k.nilai)}</b> tidak lagi dipakai untuk menghubungi pengguna sampai diaktifkan kembali.</p>`,
+      tombol:[['Batal', 'secondary', null], ['Nonaktifkan', 'primary', () => terapkan(false)]] });
+    return;
+  }
+  /* Peran */
+  const ak = t.closest('[data-akses]'); if (ak) { ubahAkses(ak); return; }
+  /* Harga Produk */
+  if (t.closest('#tambahProduk')) { pindah('harga-tambah', () => $('#prKode').focus()); return; }
+  const epr = t.closest('[data-edit-produk]'); if (epr) { S.produk = epr.dataset.editProduk; pindah('harga-edit', () => $('#halaman h1').focus()); return; }
+  const hpr = t.closest('[data-hapus-produk]'); if (hpr) { hapusProduk(hpr.dataset.hapusProduk); return; }
+  if (t.closest('#kembaliHarga') || t.closest('#batalProduk')) { const asal = S.produk; pindah('harga', () => ($(`[data-edit-produk="${asal}"]`) || $('#tambahProduk')).focus()); return; }
+  if (t.closest('#simpanProduk')) { simpanProduk(); return; }
+  const tp = t.closest('[data-tab-produk]'); if (tp) { S.tabProduk = tp.dataset.tabProduk; gambar(); $(`#tabp-${S.tabProduk}`).focus(); return; }
+  const tgp = t.closest('[data-tog-produk]'); if (tgp) { FP.aktif = !FP.aktif; setSakelar(tgp, FP.aktif); $('#ketProduk').textContent = FP.aktif ? 'Aktif' : 'Nonaktif'; segarProduk(); return; }
+  if (t.closest('#pilihFotoProduk')) { FP.foto = 'foto-produk-contoh.png'; gambar(); $('#pilihFotoProduk').focus(); segarProduk(); toast('Foto contoh dipilih.', 'default', 3000, 'Di aplikasi asli, tombol ini membuka pemilih berkas.'); return; }
+  if (t.closest('#tambahHarga')) { tambahHarga(); return; }
+  const tgh = t.closest('[data-tog-harga]'); if (tgh) { ubahHargaAktif(+tgh.dataset.togHarga); return; }
+  const hh = t.closest('[data-hapus-harga]'); if (hh) { hapusHarga(+hh.dataset.hapusHarga); return; }
+  /* Paket */
+  if (t.closest('#tambahPaket')) { dialogPaket(); return; }
+  const epk = t.closest('[data-edit-paket]'); if (epk) { dialogPaket(epk.dataset.editPaket); return; }
+  const hpk = t.closest('[data-hapus-paket]'); if (hpk) { hapusPaket(hpk.dataset.hapusPaket); return; }
+});
+function segarProduk() {
+  hitungKotor(); const st = $('#stProduk');
+  if (st) { st.classList.toggle('ada', kotorProduk()); st.innerHTML = kotorProduk() ? `${ik('info', 14)} Belum disimpan` : `${ik('centang', 14)} Belum ada perubahan`; }
+}
+H.addEventListener('input', e => {
+  const i = e.target;
+  if (CARI.includes(i.id)) { S.cari[S.layar] = i.value; S.hal[S.layar] = 1; const pos = i.selectionStart, id = i.id; gambar(); const n = $('#' + id); n.focus(); n.setSelectionRange(pos, pos); return; }
+  if (i.dataset.f) { const [t, k] = i.dataset.f.split('.'); F[t][k] = i.value; if (i.getAttribute('aria-invalid')) bersih(i.id); if (i.id === 'sBaru') cekSyarat('syaratEdit', i.value); segarKotor(); return; }
+  if (i.dataset.fp) {
+    if (i.id === 'hargaBaru') { const pos = i.value.length - i.selectionStart; i.value = formatRibuan(i.value); const p2 = Math.max(0, i.value.length - pos); i.setSelectionRange(p2, p2); const b = $('#tambahHarga'); b.disabled = !i.value; if (i.value) b.removeAttribute('aria-describedby'); else b.setAttribute('aria-describedby', 'h-hargaBaru'); }
+    FP[i.dataset.fp] = i.value; if (i.getAttribute('aria-invalid')) bersih(i.id); segarProduk();
+  }
+});
+H.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.target.id === 'hargaBaru') { e.preventDefault(); if (e.target.value) tambahHarga(); return; }
+  if (e.key === 'Enter' && e.target.id === 'cariLokasi') { e.preventDefault(); const q = e.target.value.trim(); if (!q) { toast('Ketik nama tempat untuk mencari lokasi.'); return; } aturKoordinat('-6.1754', '106.8272'); toast(`Lokasi ditemukan: ${q}`, 'positive', 3000, 'Koordinat GPS diisi dari hasil pencarian (contoh).'); return; }
+  const tab = e.target.closest('[role=tab]'); if (tab && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
+    const semua = [...tab.parentElement.querySelectorAll('[role=tab]')], i = semua.indexOf(tab), b = semua[(i + (e.key === 'ArrowRight' ? 1 : semua.length - 1)) % semua.length];
+    e.preventDefault(); b.click();
+  }
+});
+/* sakelar (role=switch) & kotak centang: papan ketik dan tampilan */
+document.addEventListener('keydown', e => { const s = e.target.closest && e.target.closest('[role=switch]'); if (s && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); s.click(); } });
+document.addEventListener('change', e => {
+  const c = e.target; if (!c.classList || !c.classList.contains('ina-checkbox__input')) return;
+  const box = c.nextElementSibling; box.className = `ina-checkbox__box ina-checkbox__box--${c.checked ? 'checked' : 'unchecked'}`; box.innerHTML = c.checked ? ik('centang', 12) : '';
+  const tb = c.dataset.tanpaBatas; if (tb) { const inp = $('#' + tb), w = inp.closest('.ina-text-field__wrapper'); inp.disabled = c.checked; w.classList.toggle('ina-text-field__wrapper--disabled', c.checked); if (c.checked) { inp.value = ''; inp.placeholder = 'Tanpa batas'; bersih(tb); } else { inp.placeholder = 'Contoh: 5'; inp.focus(); } }
+});
+document.addEventListener('click', e => {
+  const lp = e.target.closest('[data-lihat-pw]'); if (!lp) return;
+  const i = $('#' + lp.dataset.lihatPw), lihat = i.type === 'password', nm = lp.getAttribute('aria-label').replace(/^(Tampilkan|Sembunyikan) /, '');
+  i.type = lihat ? 'text' : 'password'; lp.setAttribute('aria-pressed', lihat); lp.setAttribute('aria-label', `${lihat ? 'Sembunyikan' : 'Tampilkan'} ${nm}`);
+});
+$('#pilLayar').addEventListener('click', e => { const b = e.target.closest('[data-pil]'); if (b) pindah(b.dataset.pil); });
+
+/* ---------------- tombol Bantuan di judul halaman ---------------- */
+function pasangPanduan() {
+  const h = document.querySelector('#halaman h1'); if (!h || h.parentElement.classList.contains('judul-kiri')) return;
+  h.tabIndex = -1;
+  const w = document.createElement('div'); w.className = 'judul-halaman';
+  const kiri = document.createElement('div'); kiri.className = 'judul-kiri';
+  const sub = h.nextElementSibling && h.nextElementSibling.classList.contains('sub') ? h.nextElementSibling : null;
+  h.before(w); w.append(kiri); kiri.append(h); if (sub) kiri.append(sub);
+  w.insertAdjacentHTML('beforeend', `<button type="button" class="ina-button ina-button--secondary ina-button--md ditandai" id="bukaBantuan" aria-label="Bantuan untuk halaman ini"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg><span>Bantuan</span></button>`);
+}
+document.addEventListener('click', e => { if (e.target.closest('#bukaBantuan')) bukaBantuan(); });
+
+/* ---------------- IDDS Drawer ---------------- */
+function drawer({ judul, isi }) {
+  const D = $('#lapisanDrawer'), hp = window.matchMedia('(max-width:760px)').matches;
+  D.innerHTML = `<div class="ina-drawer ina-drawer--position-${hp ? 'bottom' : 'right'}" role="dialog" aria-modal="true" aria-labelledby="drwJudul">
+    <div class="ina-drawer__backdrop" data-tutup-drawer></div>
+    <div class="ina-drawer__panel ina-drawer__panel--width-md">
+      <div class="ina-drawer__header"><h2 class="ina-drawer__title" id="drwJudul">${judul}</h2>
+        <button type="button" class="ina-drawer__close-button" aria-label="Tutup bantuan" data-tutup-drawer><svg class="ina-drawer__close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      <div class="ina-drawer__content">${isi}</div>
+    </div></div>`;
+  D.querySelector('.ina-drawer__close-button').focus();
+}
+function tutupDrawer() { $('#lapisanDrawer').innerHTML = ''; $('#bukaBantuan')?.focus(); }
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-tutup-drawer]')) { tutupDrawer(); return; }
+  const tg = e.target.closest('#lapisanDrawer .ina-accordion__toggle'); if (!tg) return;
+  const b = tg.getAttribute('aria-expanded') !== 'true';
+  tg.setAttribute('aria-expanded', b);
+  tg.querySelector('.ina-accordion__icon').classList.toggle('ina-accordion__icon--open', b);
+  tg.nextElementSibling.classList.toggle('ina-accordion__content--open', b);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisanDrawer').innerHTML) tutupDrawer(); });
+
+/* ---------------- IDDS Modal & Toast ---------------- */
+let asalDialog = null;
+function tutupDialog() { $('#lapisan').innerHTML = ''; const a = asalDialog; asalDialog = null; if (a && a.isConnected) a.focus(); }
+function dialog({ judul, isi, tombol: tb, lebar, konfirmasi, bahaya }) {
+  const Lp = $('#lapisan'); asalDialog = document.activeElement;
+  Lp.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-i="-1"></div><div class="ina-modal__container">
+    <div class="ina-modal__dialog ina-modal__dialog--size-${lebar ? 'lg' : 'md'} ${konfirmasi ? 'ina-modal-confirmation' : ''}" role="${konfirmasi ? 'alertdialog' : 'dialog'}" aria-modal="true" aria-labelledby="dlgJudul">
+      <div class="ina-modal__header"><h2 class="ina-modal__title" id="dlgJudul">${judul}</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-i="-1">${ik('x', 22)}</button></div>
+      <div class="ina-modal__body">${isi}</div>
+      <div class="ina-modal__footer">${tb.map(([t, h, , , kls, ikon], i) => `<button type="button" class="ina-button ina-button--${h} ina-button--md ${kls || ''}" data-i="${i}" ${bahaya && i === tb.length - 1 ? 'style="background:var(--ina-negative-600);border-color:var(--ina-negative-600)"' : ''}>${ikon || ''}${t}</button>`).join('')}</div></div></div></div>`;
+  Lp.onclick = e => {
+    const b = e.target.closest('[data-i]'); if (!b || b.disabled) return;
+    const i = +b.dataset.i; if (i < 0) { tutupDialog(); return; }
+    const [, , fn, tahan] = tb[i]; if (tahan) { fn && fn(); return; }
+    tutupDialog(); fn && fn();
+  };
+  Lp.querySelector('.ina-modal__close-button').focus();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisan').innerHTML) tutupDialog(); });
+let tt;
+function toast(teks, state = 'default', ms = 3000, ket = '') {
+  $('#toastWadah').innerHTML = `<div class="ina-toast ina-toast--state-${state} ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${ik(state === 'positive' ? 'centang' : 'info', 20)}</div>
+    <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p>${ket ? `<p class="ina-toast__description">${ket}</p>` : ''}</div></div><button class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast>${ik('x', 16)}</button></div>`;
+  clearTimeout(tt); tt = setTimeout(() => $('#toastWadah').innerHTML = '', ms);
+}
+$('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tutup-toast]')) $('#toastWadah').innerHTML = ''; });
+
+/* ---------------- Bantuan per halaman (IDDS-OB-45) ---------------- */
+const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
+const kontak = () => `<h4 class="bantu-sub">Kontak dukungan ${usulan('IDDS-OB-45')}</h4>
+  <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>`;
+const lgkh = a => `<ol class="bantu-langkah">${a.map(x => `<li>${x}</li>`).join('')}</ol>`;
+const istilah = a => `<dl class="bantu-istilah">${a.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
+const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
+const BANTUAN = {
+  menu:t => ({ judul:`Bantuan Menu ${t}`, isi:`<p>Halaman ini mengatur susunan menu samping aplikasi ${t.toLowerCase()}: nama, alamat halaman, ikon, urutan, dan status setiap menu.</p>
+    <h4 class="bantu-sub">Langkah menambah menu</h4>
+    ${lgkh(['Klik <b>Tambah Menu Utama</b> untuk grup baru, atau ikon <b>+</b> di baris menu untuk sub-menu.', 'Periksa <b>Kode Menu</b> yang terisi otomatis.', 'Isi <b>Nama Menu</b> dan <b>URL / Path</b> (kosongkan bila menu menjadi induk).', 'Pilih <b>Ikon Navigasi</b>, lalu klik <b>Simpan</b>.'])}
+    <h4 class="bantu-sub">Arti kode menu</h4>
+    ${istilah([['01…', 'Dua digit pertama: aplikasi (01 Admin, 02 Operator, 04 Customer).'], ['…01 0000', 'Menu utama (grup), misalnya Pengaturan.'], ['…0100', 'Menu tingkat pertama di bawah grup.'], ['…0101', 'Sub-menu tingkat kedua.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('m', [
+      ['Mengapa menu baru belum muncul di menu samping?', 'Menu samping dimuat saat halaman dibuka. Minta pengguna memuat ulang halaman. Pastikan juga statusnya Aktif dan aksesnya menyala di Peran Pengguna.'],
+      ['Apa yang terjadi bila menu induk dihapus?', 'Semua sub-menunya ikut terhapus. Jumlah sub-menu disebut di jendela konfirmasi sebelum Anda menghapus.'],
+      ['Bagaimana menyembunyikan menu tanpa menghapusnya?', 'Klik Edit Menu, ubah Status menjadi Nonaktif, lalu Simpan.'],
+      ['Mengapa kode menu tidak dapat diubah saat Edit?', 'Kode menjadi dasar kode sub-menu dan pengaturan akses. Bila perlu kode lain, buat menu baru lalu hapus yang lama.'],
+      ['Mengapa ikon + tidak ada di sebagian baris?', 'Menu hanya dapat bertingkat dua di bawah grup. Sub-menu tingkat kedua tidak dapat memiliki sub-menu lagi.'],
+      ['Kapan URL dikosongkan?', 'Bila menu hanya menjadi induk yang membuka daftar sub-menu, seperti Verifikasi.']])}
+    ${kontak()}` }),
+  pengguna:t => ({ judul:`Bantuan Daftar Pengguna ${t}`, isi:`<p>Halaman ini berisi semua akun pengguna ${t.toLowerCase()}. Anda dapat menambah, mengubah, atau menghapus akun.</p>
+    <h4 class="bantu-sub">Langkah menambah pengguna</h4>
+    ${lgkh(['Klik <b>Tambah Pengguna</b>.', 'Isi nama depan, email, dan kata sandi awal (minimal 12 karakter).', 'Pilih <b>Tipe</b> dan <b>Jenis Kelamin</b>.', 'Klik <b>Tambah Pengguna</b>. Pengguna baru tampil di baris teratas.'])}
+    <h4 class="bantu-sub">Arti kolom</h4>
+    ${istilah([['Status', 'Aktif: dapat masuk. Nonaktif: tidak dapat masuk.'], ['MFA', 'Aktif: verifikasi dua langkah sudah diatur. Belum diatur: pengguna akan diminta mengaturnya saat masuk.'], ['Tipe', 'Admin, Operator, atau Customer. Tipe menentukan menu yang tersedia.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('p', [
+      ['Apa beda menonaktifkan dan menghapus pengguna?', 'Nonaktif menghentikan akses sementara dan data tetap tersimpan. Hapus menghilangkan akun secara permanen.'],
+      ['Bagaimana menonaktifkan pengguna?', 'Klik ikon Edit, matikan sakelar Akun aktif di tab PPAT, lalu klik Simpan PPAT.'],
+      ['Mengapa saya tidak dapat menghapus akun saya sendiri?', 'Akun yang sedang dipakai tidak dapat dihapus agar Anda tidak terkunci dari portal.'],
+      ['Pengguna lupa kata sandi. Apa yang harus dilakukan?', 'Minta pengguna memakai Lupa kata sandi di halaman masuk, atau buka Edit › Kata Sandi untuk membuat kata sandi baru.'],
+      ['Mengapa email ditolak saat menambah pengguna?', 'Email sudah dipakai akun lain atau formatnya salah. Satu email hanya untuk satu akun.'],
+      ['Bagaimana mencari pengguna nonaktif?', 'Pilih chip Nonaktif, lalu ketik nama atau email di kotak Cari pengguna.']])}
+    ${kontak()}` }),
+  'pengguna-edit':() => ({ judul:'Bantuan Edit Pengguna', isi:`<p>Edit Pengguna berisi data PPAT, data kantor, kontak, kata sandi, dan verifikasi dua langkah satu pengguna.</p>
+    <h4 class="bantu-sub">Langkah mengubah data</h4>
+    ${lgkh(['Pilih tab <b>PPAT</b>, <b>Kantor PPAT</b>, atau <b>Kata Sandi</b>.', 'Ubah isian. Status di samping tombol simpan berubah menjadi <b>Belum disimpan</b>.', 'Klik <b>Simpan PPAT</b>, <b>Simpan Data Kantor</b>, atau <b>Simpan Kata Sandi</b>. Setiap tab disimpan sendiri-sendiri.'])}
+    <h4 class="bantu-sub">Istilah</h4>
+    ${istilah([['Status Akun', 'Sakelar Akun aktif menentukan apakah pengguna dapat masuk.'], ['Info Kontak', 'Email dan telepon pengguna. Kontak nonaktif tidak dipakai untuk menghubungi pengguna.'], ['Reset MFA', 'Menghapus verifikasi dua langkah sehingga pengguna mengaturnya lagi saat masuk.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('e', [
+      ['Apakah perubahan di satu tab ikut tersimpan saat menyimpan tab lain?', 'Tidak. Simpan setiap tab dengan tombolnya sendiri. Titik kuning di tab menandai perubahan yang belum disimpan.'],
+      ['Apa yang terjadi bila saya pindah halaman sebelum menyimpan?', 'Muncul pertanyaan "Tinggalkan halaman ini?". Pilih Tetap di Sini untuk menyimpan dulu.'],
+      ['Mengapa Kode, ID PPAT, dan URL Web tidak dapat diubah?', 'Ketiganya dibuat sistem saat pendaftaran dan dipakai di aplikasi kantor.'],
+      ['Kapan Reset MFA dipakai?', 'Bila pengguna kehilangan akses email atau aplikasi autentikator dan kode cadangannya habis.'],
+      ['Apa akibat mengubah Tipe?', 'Pengguna pindah ke daftar tipe baru dan menunya mengikuti tipe itu.'],
+      ['Apakah pengguna diberi tahu saat kata sandinya diganti?', 'Sampaikan kata sandi baru kepada pengguna lewat jalur yang aman. Pengguna memakainya saat masuk berikutnya.'],
+      ['Mengapa tidak ada isian Kata Sandi Saat Ini?', 'Anda mengubah kata sandi pengguna lain dan tidak mengetahui kata sandinya. Cukup isi Kata Sandi Baru dan Konfirmasi Kata Sandi.'],
+      ['Bagaimana mengisi koordinat GPS kantor?', 'Di tab Kantor PPAT, klik titik kantor pada peta atau ketik nama tempat di kotak Cari lokasi, lalu tekan Enter. GPS Lat dan GPS Long terisi otomatis.']])}
+    ${kontak()}` }),
+  peran:t => ({ judul:`Bantuan Peran Pengguna ${t}`, isi:`<p>Halaman ini mengatur menu yang dapat dibuka setiap pengguna ${t.toLowerCase()}. Satu baris untuk satu pengguna, satu kolom untuk satu menu.</p>
+    <h4 class="bantu-sub">Langkah mengatur akses</h4>
+    ${lgkh(['Cari pengguna di kotak <b>Cari pengguna</b>.', 'Nyalakan sakelar untuk memberi akses ke menu itu.', 'Matikan sakelar, lalu klik <b>Cabut Akses</b> di jendela konfirmasi untuk mencabut akses.', 'Lihat status di atas tabel untuk memastikan perubahan tersimpan.'])}
+    <h4 class="bantu-sub">Istilah</h4>
+    ${istilah([['Sakelar menyala', 'Pengguna dapat membuka menu itu.'], ['Sakelar mati', 'Menu tidak tampil di menu samping pengguna.'], ['Utama / Pengaturan', 'Grup menu, sama seperti di menu samping.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('r', [
+      ['Apakah perubahan langsung tersimpan?', 'Ya. Setiap sakelar tersimpan saat diubah. Waktu penyimpanan terakhir tertulis di atas tabel.'],
+      ['Mengapa mencabut akses meminta konfirmasi?', 'Agar akses tidak tercabut karena salah klik. Memberi akses tidak meminta konfirmasi.'],
+      ['Kapan perubahan terlihat oleh pengguna?', 'Saat pengguna memuat ulang halaman atau masuk lagi.'],
+      ['Bila menu induk dimatikan, apakah sub-menunya ikut tertutup?', 'Pengguna tidak dapat membuka grup itu dari menu samping. Matikan juga sub-menunya agar aksesnya benar-benar tertutup.'],
+      ['Bagaimana bila muncul pesan gagal menyimpan?', 'Periksa koneksi internet, lalu ubah sakelar sekali lagi. Bila tetap gagal, hubungi dukungan.'],
+      ['Dari mana daftar kolom menu berasal?', 'Dari halaman Menu. Menu baru otomatis muncul sebagai kolom dan dapat dibuka semua pengguna.']])}
+    ${kontak()}` }),
+  harga:() => ({ judul:'Bantuan Harga Produk', isi:`<p>Harga Produk berisi produk yang dapat dipilih calon PPAT, misalnya Enterprise dan Trial, beserta durasi dan harga aktifnya.</p>
+    <h4 class="bantu-sub">Langkah menambah produk</h4>
+    ${lgkh(['Klik <b>Tambah Produk</b>.', 'Isi kode, nama, deskripsi, dan durasi, lalu klik <b>Simpan Produk</b>.', 'Klik ikon <b>Edit</b> pada produk itu, buka tab <b>Harga</b>, lalu tambahkan harga.'])}
+    <h4 class="bantu-sub">Istilah</h4>
+    ${istilah([['Harga aktif', 'Harga yang dibayar pendaftar baru. Hanya satu harga aktif per produk.'], ['Belum ada harga', 'Produk belum dapat dibeli karena belum punya harga aktif.'], ['Durasi', 'Masa berlaku produk setelah dibayar, dalam hari.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('h', [
+      ['Bagaimana mengganti harga produk?', 'Buka Edit › Harga, tambahkan harga baru, lalu nyalakan sakelarnya dan konfirmasi. Harga lama tetap tersimpan di riwayat.'],
+      ['Apakah tagihan yang sudah dibuat ikut berubah?', 'Tidak. Harga baru hanya berlaku untuk tagihan berikutnya.'],
+      ['Mengapa harga aktif tidak dapat dihapus?', 'Produk harus punya harga aktif agar dapat dibeli. Aktifkan harga lain dulu, lalu hapus harga lama.'],
+      ['Apa beda menghapus dan menonaktifkan produk?', 'Nonaktif menyembunyikan produk sementara. Hapus menghilangkan produk dan riwayat harganya secara permanen.'],
+      ['Mengapa kode produk ditolak?', 'Kode wajib unik dan hanya berisi huruf kapital, angka, atau garis bawah.'],
+      ['Apakah Rp0 boleh dipakai?', 'Boleh, misalnya untuk produk Trial yang gratis.']])}
+    ${kontak()}` }),
+  produk:() => ({ judul:S.layar === 'harga-tambah' ? 'Bantuan Tambah Produk' : 'Bantuan Edit Produk', isi:`<p>Formulir ini berisi data produk: kode, nama, deskripsi, durasi, status, dan foto. Pada Edit Produk, tab Harga berisi riwayat harga.</p>
+    <h4 class="bantu-sub">Langkah</h4>
+    ${lgkh(['Isi isian bertanda bintang: <b>Kode Produk</b>, <b>Nama Produk</b>, dan <b>Durasi (Hari)</b>.', 'Tulis satu fitur per baris di <b>Deskripsi Lengkap</b>.', 'Klik <b>Simpan Produk</b>. Pesan galat tampil di bawah isian yang perlu diperbaiki.', 'Di tab <b>Harga</b>, ketik nominal lalu klik <b>Tambah</b>.'])}
+    <h4 class="bantu-sub">Istilah</h4>
+    ${istilah([['Info Utama', 'Data produk yang tampil di kartu paket.'], ['Harga', 'Riwayat harga; satu harga aktif dipakai untuk tagihan baru.'], ['Belum disimpan', 'Ada perubahan yang belum disimpan di formulir ini.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('f', [
+      ['Mengapa kode produk tidak dapat diubah saat Edit?', 'Kode dipakai di order dan tagihan yang sudah ada.'],
+      ['Apa yang terjadi bila saya keluar sebelum menyimpan?', 'Muncul pertanyaan "Tinggalkan halaman ini?". Pilih Tetap di Sini untuk menyimpan dulu.'],
+      ['Mengapa tombol Tambah harga belum aktif?', 'Tombol aktif setelah nominal diketik.'],
+      ['Bagaimana menulis nominal?', 'Ketik angka saja. Pemisah ribuan ditambahkan otomatis, misalnya 3.500.000.'],
+      ['Berapa ukuran foto produk?', 'Gunakan JPG atau PNG persegi. Foto tampil kecil di daftar produk.'],
+      ['Apakah durasi boleh 0?', 'Tidak. Durasi minimal 1 hari.']])}
+    ${kontak()}` }),
+  paket:() => ({ judul:'Bantuan Paket Langganan', isi:`<p>Paket Langganan berisi paket yang dapat dipilih calon PPAT beserta batas order, pengguna, masa berlaku, dan fitur CA.</p>
+    <h4 class="bantu-sub">Langkah menambah paket</h4>
+    ${lgkh(['Klik <b>Tambah Paket</b>.', 'Isi kode dan nama paket.', 'Isi batas angka, atau centang <b>Tanpa batas</b>.', 'Centang <b>Fitur CA aktif</b> dan <b>Paket aktif</b> bila perlu, lalu klik <b>Simpan</b>.'])}
+    <h4 class="bantu-sub">Istilah</h4>
+    ${istilah([['Paket sistem', 'Paket bawaan (Gratis dan Enterprise) yang dipakai alur pendaftaran; tidak dapat dihapus.'], ['CA', 'Fitur sertifikat elektronik untuk tanda tangan digital.'], ['Urutan Tampil', 'Urutan paket di daftar; angka kecil tampil lebih dulu.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('k', [
+      ['Mengapa paket sistem tidak dapat dihapus?', 'Paket sistem dipakai alur pendaftaran dan kantor yang sudah berlangganan. Anda tetap dapat mengubah isinya lewat Edit.'],
+      ['Apa arti Tanpa batas?', 'Tidak ada batas jumlah order, pengguna, atau masa berlaku untuk paket itu.'],
+      ['Bagaimana menyembunyikan paket tanpa menghapusnya?', 'Klik Edit, hapus centang Paket aktif, lalu Simpan.'],
+      ['Apakah perubahan paket memengaruhi kantor yang sudah berlangganan?', 'Batas baru berlaku sesuai aturan platform. Tanyakan ke dukungan sebelum mengubah paket yang sedang dipakai.'],
+      ['Di mana harga paket diatur?', 'Di menu Pengaturan › Harga Produk.'],
+      ['Mengapa kode paket ditolak?', 'Kode wajib unik dan hanya berisi huruf kapital, angka, atau garis bawah.']])}
+    ${kontak()}` })
+};
+function bukaBantuan() {
+  const l = S.layar, j = jenisDari(l);
+  const b = l.startsWith('menu-') ? BANTUAN.menu(JENIS[j].t) : l === 'pengguna-edit' ? BANTUAN['pengguna-edit']() : l.startsWith('pengguna-') ? BANTUAN.pengguna(JENIS[j].t)
+    : l.startsWith('peran-') ? BANTUAN.peran(JENIS[j].t) : l === 'harga' ? BANTUAN.harga() : l.startsWith('harga-') ? BANTUAN.produk() : BANTUAN.paket();
+  drawer(b);
+}
+
+/* ---------------- protobar & daftar penyesuaian ---------------- */
+$('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
+$('#bukaUbah').addEventListener('click', () => {
+  dialog({ judul:'Daftar penyesuaian Pengaturan Onboarding', lebar:true,
+    isi:`<p>Isi, kolom, isian, tab, dan alur mengikuti live dev.eppat.id (akun Admin). Yang disesuaikan adalah komponen IDDS dengan brand E-PPAT, bahasa, galat di bawah isian, konfirmasi aksi berdampak, penjaga perubahan, status sistem, dan Bantuan per halaman. Data di prototipe ini adalah data contoh.</p>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+        <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
+    tombol:[['Tutup', 'secondary', null]] });
+  $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });
+});
+function lihat(u) {
+  const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
+  if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke === S.layar) { sorot(); return; }
+  pindah(u.ke, sorot);
+}
+$('#aturUlang').addEventListener('click', () => {
+  jaga(() => { MENU = contohMenu(); PENGGUNA = contohPengguna(); PRODUK = contohProduk(); PAKET = contohPaket(); CABUT = cabutAwal(); const l = S.layar; S = S0(); S.layar = l; siapkan(l); gambar(); gambarMenu(); toast('Data contoh dikembalikan ke awal.'); });
+});
+$('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
+const awal = (location.hash || '').slice(1); if (RENDER[awal]) S.layar = awal;
+siapkan(S.layar);
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (RENDER[h] && h !== S.layar) pindah(h); });
+gambar();
+})();
+</script>
+</body>
+</html>

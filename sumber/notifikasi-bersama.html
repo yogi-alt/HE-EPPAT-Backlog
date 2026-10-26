@@ -1,0 +1,331 @@
+<!-- ===== Notifikasi bersama (lonceng di header) — IDDS-TN-39
+     Disisipkan otomatis oleh rakit-idds.js di akhir body pada prototipe yang punya tombol
+     lonceng Notifikasi di header.top. Mandiri: CSS sendiri (awalan .notif-) dan skrip IIFE sendiri.
+     Live (dev-app.eppat.id): GET /me/notifications?limit=20 {items, unread}, tandai dibaca, tandai semua dibaca,
+     polling 60 dtk, badge "9+". Penyesuaian: ikon & label jenis, filter, loading/error/kosong, Esc & fokus,
+     aria-expanded/aria-haspopup, jumlah belum dibaca terbaca pembaca layar, item tanpa tautan tidak tampak bisa diklik.
+     Status dibaca disimpan di localStorage 'eppat-notif-dibaca' (dipakai bersama semua prototipe). ===== -->
+<style id="notif-bersama-css">
+.notif-jangkar{position:relative;display:inline-flex;align-items:center}
+.notif-lencana{position:absolute;top:2px;right:2px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--ina-negative-600,#d50b0b);color:#fff;font:700 10px/18px Inter,system-ui,sans-serif;text-align:center;box-shadow:0 0 0 2px var(--ina-background-primary,#fff);pointer-events:none}
+.notif-lencana[hidden]{display:none!important}
+.notif-panel{position:absolute;top:calc(100% + 8px);right:0;z-index:45;width:360px;max-width:calc(100vw - 16px);display:flex;flex-direction:column;max-height:min(560px,calc(100vh - 96px));background:var(--ina-background-primary,#fff);color:var(--ina-content-primary,#1f1f1f);border:1px solid var(--ina-stroke-primary,#e3e7e6);border-radius:12px;box-shadow:0 12px 32px rgba(15,26,23,.16),0 2px 6px rgba(15,26,23,.08);text-align:left;font-family:Inter,system-ui,sans-serif}
+.notif-panel[hidden]{display:none!important}
+.notif-kepala{flex:none;padding:14px 16px 10px;border-bottom:1px solid var(--ina-stroke-primary,#e3e7e6)}
+.notif-baris{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.notif-judul{margin:0;font:600 16px/24px Inter,system-ui,sans-serif;color:var(--ina-primary-primary,#1f4d40);outline:0}
+.notif-judul:focus-visible{outline:2px solid var(--ina-primary-500,#3D6B5E);outline-offset:2px;border-radius:4px}
+.notif-jumlah{margin:0;font-size:12.5px;line-height:18px;color:var(--ina-content-secondary,#5c6663)}
+.notif-saring{margin-top:10px}
+.notif-saring .ina-button-group{width:100%}
+.notif-saring .ina-button-group__button{flex:1}
+.notif-isi{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain}
+.notif-daftar{list-style:none;margin:0;padding:0}
+.notif-daftar>li+li{border-top:1px solid var(--ina-stroke-primary,#e3e7e6)}
+.notif-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;color:inherit;text-decoration:none;position:relative}
+a.notif-item{cursor:pointer}
+a.notif-item:hover{background:var(--ina-background-secondary,#f5f7f6)}
+a.notif-item:focus-visible{outline:2px solid var(--ina-primary-500,#3D6B5E);outline-offset:-2px}
+.notif-item.belum{background:var(--ina-primary-25,#f5f8f7)}
+a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
+.notif-ikon{flex:none;width:36px;height:36px;border-radius:999px;display:grid;place-items:center;background:var(--ina-primary-50,#eaf1ef);color:var(--ina-primary-primary,#1f4d40)}
+.notif-ikon svg{width:16px;height:16px}
+.notif-teks{flex:1;min-width:0}
+.notif-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.notif-waktu{font-size:12px;line-height:16px;color:var(--ina-content-secondary,#5c6663)}
+.notif-t{display:block;margin-top:4px;font:600 13.5px/19px Inter,system-ui,sans-serif;color:var(--ina-content-primary,#1f1f1f)}
+.notif-b{display:block;margin-top:2px;font-size:12.5px;line-height:18px;color:var(--ina-content-secondary,#5c6663)}
+.notif-tandai{margin-top:8px}
+.notif-kanan{flex:none;display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:4px;color:var(--ina-content-tertiary,#8a9390)}
+.notif-titik{width:8px;height:8px;border-radius:999px;background:var(--ina-primary-primary,#1f4d40)}
+.notif-vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.notif-status{padding:28px 16px;text-align:center;font-size:13.5px;line-height:20px;color:var(--ina-content-secondary,#5c6663)}
+.notif-status svg{display:block;margin:0 auto 8px;color:var(--ina-content-tertiary,#8a9390)}
+.notif-rangka{list-style:none;margin:0;padding:4px 0}
+.notif-rangka li{display:flex;gap:12px;padding:12px 16px}
+.notif-rangka i{display:block;border-radius:8px;background:var(--ina-background-secondary,#eef1f0);animation:notif-denyut 1.2s ease-in-out infinite}
+.notif-rangka .b1{width:36px;height:36px;border-radius:999px;flex:none}
+.notif-rangka .b2{height:10px;margin-top:6px}
+@keyframes notif-denyut{50%{opacity:.5}}
+@media (prefers-reduced-motion:reduce){.notif-rangka i{animation:none}}
+.notif-galat{padding:16px}
+.notif-galat .ina-alert__content{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.notif-kaki{flex:none;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--ina-stroke-primary,#e3e7e6);font-size:12px;line-height:16px;color:var(--ina-content-secondary,#5c6663)}
+.notif-kaki .tag-usulan{margin-left:0}
+@media (max-width:760px){
+  .notif-panel{position:fixed;left:0;right:0;width:auto;max-width:none;border-radius:0 0 16px 16px;border-left:0;border-right:0;max-height:calc(100vh - var(--notif-atas,72px) - 8px)}
+}
+</style>
+<script id="notif-bersama">
+(() => {
+  if (window.__notifBersama) return;
+  window.__notifBersama = true;
+
+  const KUNCI = 'eppat-notif-dibaca';
+  const MENIT = 60000, JAM = 60 * MENIT;
+  const sekarang = Date.now();
+
+  /* ikon garis 24×24 (currentColor) */
+  const IK = {
+    order: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15h6"/>',
+    verif: '<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
+    ttd: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+    akta: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/>',
+    salinan: '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>',
+    sistem: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+    lonceng: '<path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>',
+    chevron: '<path d="M9 18l6-6-6-6"/>',
+    cek: '<path d="M20 6L9 17l-5-5"/>'
+  };
+  const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${IK[n]}</svg>`;
+
+  /* jenis notifikasi: label singkat, ikon, varian badge IDDS */
+  const JENIS = {
+    order: ['Permohonan baru', 'order', 'brand'],
+    verifikasi: ['Verifikasi', 'verif', 'warning'],
+    giliran: ['Giliran tanda tangan', 'ttd', 'info'],
+    ttd_selesai: ['Tanda tangan selesai', 'ttd', 'success'],
+    akta: ['Akta selesai', 'akta', 'success'],
+    salinan: ['Salinan dibuka', 'salinan', 'neutral'],
+    sistem: ['Sistem', 'sistem', 'neutral'],
+    kantor: ['PPAT baru', 'order', 'brand'],
+    keamanan: ['Keamanan', 'sistem', 'warning'],
+    paket: ['Paket', 'sistem', 'info'],
+    template: ['Template akta', 'akta', 'success']
+  };
+
+  /* contoh data: Klien (para pihak) hanya menerima notifikasi tentang akta dan akunnya sendiri */
+  const KLIEN = /Peran:\s*Klien/.test((document.querySelector('.protobar') || {}).textContent || '');
+  const DATA_KLIEN = [
+    { id: 'k4', jenis: 'giliran', judul: 'Giliran Anda menandatangani akta', isi: 'Akta Jual Beli ORD-CONTOH-007 menunggu tanda tangan elektronik Anda.', lalu: 3 * MENIT, baca: false, ke: 'Backlog-HE-EAWK-Prototype.html' },
+    { id: 'k3', jenis: 'sistem', judul: 'Lengkapi registrasi sertifikat elektronik', isi: 'Selesaikan eKYC di portal Peruri agar Anda dapat menandatangani akta.', lalu: 2 * JAM, baca: false, ke: 'Backlog-HE-CA-Prototype.html' },
+    { id: 'k2', jenis: 'ttd_selesai', judul: 'Semua pihak sudah menandatangani', isi: 'Akta Jual Beli ORD-CONTOH-005 sudah ditandatangani semua pihak dan sedang difinalisasi kantor PPAT.', lalu: 30 * JAM, baca: true, ke: 'Backlog-HE-EAWK-Prototype.html' },
+    { id: 'k1', jenis: 'akta', judul: 'Salinan akta dikirim ke email Anda', isi: 'Buka tautan di email untuk mengunduh salinan akta ORD-CONTOH-005. Tautan berlaku 7 hari.', lalu: 50 * JAM, baca: true, ke: '' }
+  ].map(d => Object.assign({}, d, { waktu: sekarang - d.lalu }));
+
+  /* contoh data bersama staf kantor (netral; sama untuk semua prototipe staf) */
+  const DATA_STAF = [
+    { id: 'n8', jenis: 'giliran', judul: 'Giliran Anda menandatangani akta', isi: 'Akta Jual Beli ORD-CONTOH-009 menunggu tanda tangan elektronik Anda.', lalu: 20 * 1000, baca: false, ke: 'Backlog-HE-EAW-Prototype.html' },
+    { id: 'n7', jenis: 'order', judul: 'Permohonan baru ORD-CONTOH-014', isi: 'Asisten Contoh membuat permohonan Akta Jual Beli untuk Contoh Penjual Satu.', lalu: 5 * MENIT, baca: false, ke: 'Backlog-HE-ORDER-Prototype.html' },
+    { id: 'n6', jenis: 'verifikasi', judul: 'Berkas ORD-CONTOH-012 perlu diverifikasi', isi: 'Contoh Penjual Satu mengunggah KTP dan sertipikat. Periksa berkas sebelum akta disusun.', lalu: 42 * MENIT, baca: false, ke: 'Backlog-HE-VERIF-Prototype.html' },
+    { id: 'n5', jenis: 'sistem', judul: 'Pemeliharaan sistem terjadwal', isi: 'E-PPAT tidak dapat diakses pada Sabtu, 31 Oktober 2026, pukul 22.00–23.00 WIB.', lalu: 2 * JAM, baca: false, ke: '' },
+    { id: 'n4', jenis: 'sistem', judul: 'Pendaftaran TERA kantor diproses Peruri', isi: 'Peruri sedang memeriksa data TERA kantor Anda. Hasilnya akan dikirim lewat notifikasi dan email.', lalu: 3 * JAM, baca: true, ke: 'Backlog-HE-TERA-Prototype.html' },
+    { id: 'n3', jenis: 'akta', judul: 'Akta ORD-CONTOH-005 selesai', isi: 'Akta sudah difinalisasi. Unggah scan akta, lalu kirim salinannya di menu Salinan Akta.', lalu: 7 * JAM, baca: true, ke: 'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan' },
+    { id: 'n2', jenis: 'salinan', judul: 'Salinan akta ORD-CONTOH-005 dibuka', isi: 'Contoh Penjual Satu membuka tautan salinan akta.', lalu: 26 * JAM, baca: true, ke: 'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan' },
+    { id: 'n1', jenis: 'sistem', judul: 'Layanan e-Meterai belum aktif', isi: 'Aktifkan e-Meterai agar akta dapat dibubuhi meterai elektronik.', lalu: 50 * JAM, baca: true, ke: 'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai' }
+  ].map(d => Object.assign({}, d, { waktu: sekarang - d.lalu }));
+  /* Admin Platform: notifikasi tingkat platform (bukan notifikasi kantor) */
+  const PLATFORM = /Peran:\s*Admin Platform/.test((document.querySelector('.protobar') || {}).textContent || '');
+  const DATA_PLATFORM = [
+    { id: 'p4', jenis: 'kantor', judul: 'Kantor PPAT baru terdaftar', isi: 'Kantor PPAT Contoh Dua selesai onboarding dengan paket Enterprise.', lalu: 15 * MENIT, baca: false, ke: 'Backlog-IDDS-PL-MONITORING-Prototype.html#ppat' },
+    { id: 'p3', jenis: 'keamanan', judul: 'Gagal masuk berulang', isi: 'Ada 5 percobaan masuk gagal dari akun yang sama di Kantor PPAT Contoh Tiga dalam 10 menit.', lalu: 1 * JAM, baca: false, ke: 'Backlog-IDDS-PL-MONITORING-Prototype.html#log' },
+    { id: 'p2', jenis: 'paket', judul: 'Masa berlaku paket segera habis', isi: '12 kantor PPAT berpaket Gratis akan habis masa berlakunya dalam 7 hari.', lalu: 5 * JAM, baca: true, ke: 'Backlog-IDDS-PL-MONITORING-Prototype.html#ppat' },
+    { id: 'p1', jenis: 'template', judul: 'Template akta diperbarui', isi: 'Template Akta Jual Beli versi terbaru sudah dipakai semua kantor PPAT.', lalu: 30 * JAM, baca: true, ke: 'Backlog-IDDS-PL-AKTA-Prototype.html#jenis' }
+  ].map(d => Object.assign({}, d, { waktu: sekarang - d.lalu }));
+  const DATA = PLATFORM ? DATA_PLATFORM : KLIEN ? DATA_KLIEN : DATA_STAF;
+
+  /* penyimpanan status dibaca (aman bila localStorage tidak tersedia) */
+  let simpanan = {};
+  try { simpanan = JSON.parse(localStorage.getItem(KUNCI) || '{}') || {}; } catch (e) { simpanan = {}; }
+  const simpan = () => { try { localStorage.setItem(KUNCI, JSON.stringify(simpanan)); } catch (e) { /* tanpa storage tetap jalan */ } };
+  const dibaca = d => d.baca || simpanan[d.id] === 1;
+  const tandai = id => { simpanan[id] = 1; simpan(); };
+  const jumlahBelum = () => DATA.filter(d => !dibaca(d)).length;
+
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const waktuRelatif = t => {
+    const s = Date.now() - t;
+    if (s < MENIT) return 'Baru saja';
+    if (s < JAM) return Math.floor(s / MENIT) + ' menit lalu';
+    if (s < 24 * JAM) return Math.floor(s / JAM) + ' jam lalu';
+    try { return new Date(t).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }).replace(/\./g, ''); }
+    catch (e) { return new Date(t).toDateString(); }
+  };
+
+  let gagalSimulasi = false;
+  try { gagalSimulasi = new URLSearchParams(location.search).get('notifgagal') === '1'; } catch (e) { /* abaikan */ }
+
+  const mulai = () => {
+    const bel = document.querySelector('header.top button[aria-label="Notifikasi"]');
+    if (!bel || bel.hasAttribute('data-notif')) return;
+    bel.setAttribute('data-notif', '1');
+
+    /* jangkar: bungkus tombol lonceng agar panel tepat di bawahnya dan urutan Tab alami */
+    const jangkar = document.createElement('span');
+    jangkar.className = 'notif-jangkar';
+    bel.parentNode.insertBefore(jangkar, bel);
+    jangkar.appendChild(bel);
+
+    const lencana = document.createElement('span');
+    lencana.className = 'notif-lencana';
+    lencana.setAttribute('aria-hidden', 'true');
+    jangkar.appendChild(lencana);
+
+    const panel = document.createElement('div');
+    panel.className = 'notif-panel';
+    panel.id = 'notifPanel';
+    panel.hidden = true;
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-modal', 'false');
+    panel.setAttribute('aria-labelledby', 'notifJudul');
+    panel.innerHTML = `
+      <div class="notif-kepala">
+        <div class="notif-baris">
+          <div>
+            <h2 class="notif-judul" id="notifJudul" tabindex="-1">Notifikasi</h2>
+            <p class="notif-jumlah" id="notifJumlah" aria-live="polite"></p>
+          </div>
+          <button type="button" class="ina-button ina-button--tertiary ina-button--sm" id="notifSemua" hidden><span>Tandai Semua Dibaca</span></button>
+        </div>
+        <div class="notif-saring">
+          <div class="ina-button-group" role="group" aria-label="Saring notifikasi">
+            <button type="button" class="ina-button-group__button" data-saring="semua"><span class="ina-button-group__button-content">Semua</span></button>
+            <button type="button" class="ina-button-group__button" data-saring="belum"><span class="ina-button-group__button-content">Belum dibaca</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="notif-isi" id="notifIsi"></div>
+      <div class="notif-kaki"><span>Notifikasi diperbarui otomatis setiap menit.</span><span class="tag-usulan">penyesuaian · IDDS-TN-39</span></div>`;
+    jangkar.appendChild(panel);
+
+    bel.setAttribute('aria-haspopup', 'dialog');
+    bel.setAttribute('aria-expanded', 'false');
+    bel.setAttribute('aria-controls', panel.id);
+    bel.setAttribute('title', 'Notifikasi');
+
+    const isi = panel.querySelector('#notifIsi');
+    const elJumlah = panel.querySelector('#notifJumlah');
+    const tSemua = panel.querySelector('#notifSemua');
+    const judul = panel.querySelector('#notifJudul');
+
+    let saring = 'semua';
+    let kondisi = 'baru'; // baru | muat | galat | siap
+
+    const perbaruiBel = () => {
+      const n = jumlahBelum();
+      lencana.textContent = n > 9 ? '9+' : String(n);
+      lencana.hidden = n === 0;
+      bel.setAttribute('aria-label', n ? `Notifikasi, ${n} belum dibaca` : 'Notifikasi, tidak ada yang belum dibaca');
+      elJumlah.textContent = n ? `${n} belum dibaca` : 'Semua sudah dibaca';
+      tSemua.hidden = n === 0 || kondisi !== 'siap';
+    };
+
+    const itemHtml = d => {
+      const [label, ikon, varian] = JENIS[d.jenis] || JENIS.sistem;
+      const belum = !dibaca(d);
+      const meta = `<span class="notif-meta"><span class="ina-badge ina-badge--soft ina-badge--${varian} ina-badge--sm ina-badge--rounded-full">${esc(label)}</span><span class="notif-waktu">${esc(waktuRelatif(d.waktu))}</span></span>`;
+      const teks = `<span class="notif-teks">${meta}<span class="notif-t">${esc(d.judul)}</span><span class="notif-b">${esc(d.isi)}</span>${belum ? '<span class="notif-vh">Belum dibaca.</span>' : ''}`;
+      const titik = belum ? '<span class="notif-titik" aria-hidden="true"></span>' : '';
+      if (d.ke) {
+        return `<li><a class="notif-item${belum ? ' belum' : ''}" href="${esc(d.ke)}" data-notif-id="${esc(d.id)}"><span class="notif-ikon" aria-hidden="true">${ik(ikon)}</span>${teks}</span><span class="notif-kanan">${titik}${ik('chevron', 16)}</span></a></li>`;
+      }
+      const tombol = belum ? `<button type="button" class="ina-button ina-button--secondary ina-button--sm notif-tandai" data-tandai="${esc(d.id)}"><span>Tandai dibaca</span></button>` : '';
+      return `<li><div class="notif-item${belum ? ' belum' : ''}"><span class="notif-ikon" aria-hidden="true">${ik(ikon)}</span>${teks}${tombol}</span><span class="notif-kanan">${titik}</span></div></li>`;
+    };
+
+    const render = () => {
+      perbaruiBel();
+      panel.querySelectorAll('[data-saring]').forEach(b => {
+        const on = b.dataset.saring === saring;
+        b.classList.toggle('ina-button-group__button--selected', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+      if (kondisi === 'muat') {
+        isi.innerHTML = `<p class="notif-vh" role="status">Memuat notifikasi…</p><ul class="notif-rangka" aria-hidden="true">${'<li><i class="b1"></i><span style="flex:1"><i class="b2" style="width:40%"></i><i class="b2" style="width:85%"></i><i class="b2" style="width:65%"></i></span></li>'.repeat(3)}</ul><p class="notif-status" style="padding-top:4px" aria-hidden="true">Memuat notifikasi…</p>`;
+        return;
+      }
+      if (kondisi === 'galat') {
+        isi.innerHTML = `<div class="notif-galat"><div class="ina-alert ina-alert--critical" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Notifikasi gagal dimuat.</div><div class="ina-alert__description">Periksa koneksi Anda, lalu coba lagi.</div></div><button type="button" class="ina-button ina-button--secondary ina-button--sm" id="notifUlang"><span>Coba Lagi</span></button></div></div></div>`;
+        return;
+      }
+      const daftar = DATA.filter(d => saring === 'semua' || !dibaca(d));
+      if (!daftar.length) {
+        isi.innerHTML = `<div class="notif-status">${ik('lonceng', 24)}${saring === 'belum' ? 'Tidak ada notifikasi yang belum dibaca.' : 'Belum ada notifikasi.'}</div>`;
+        return;
+      }
+      isi.innerHTML = `<ul class="notif-daftar">${daftar.map(itemHtml).join('')}</ul>`;
+    };
+
+    const muat = () => {
+      kondisi = 'muat';
+      render();
+      setTimeout(() => {
+        if (gagalSimulasi) { gagalSimulasi = false; kondisi = 'galat'; } // gagal sekali, "Coba Lagi" berhasil
+        else kondisi = 'siap';
+        render();
+      }, 300);
+    };
+
+    const atur = () => {
+      if (panel.hidden) return;
+      if (window.matchMedia && window.matchMedia('(max-width:760px)').matches) {
+        const r = bel.getBoundingClientRect();
+        const atas = Math.max(0, Math.round(r.bottom + 8));
+        panel.style.top = atas + 'px';
+        panel.style.setProperty('--notif-atas', atas + 'px');
+      } else {
+        panel.style.top = '';
+        panel.style.removeProperty('--notif-atas');
+      }
+    };
+
+    const buka = () => {
+      panel.hidden = false;
+      bel.setAttribute('aria-expanded', 'true');
+      atur();
+      if (kondisi === 'baru') muat(); else render();
+      judul.focus();
+    };
+    const tutup = (kembali) => {
+      if (panel.hidden) return;
+      panel.hidden = true;
+      bel.setAttribute('aria-expanded', 'false');
+      if (kembali) bel.focus();
+    };
+
+    bel.addEventListener('click', e => { e.preventDefault(); panel.hidden ? buka() : tutup(false); });
+
+    panel.addEventListener('click', e => {
+      const sar = e.target.closest('[data-saring]');
+      if (sar) { saring = sar.dataset.saring; render(); return; }
+      if (e.target.closest('#notifSemua')) {
+        DATA.forEach(d => { simpanan[d.id] = 1; });
+        simpan(); render(); judul.focus(); return;
+      }
+      if (e.target.closest('#notifUlang')) { muat(); judul.focus(); return; }
+      const tnd = e.target.closest('[data-tandai]');
+      if (tnd) { tandai(tnd.dataset.tandai); render(); judul.focus(); return; }
+      const a = e.target.closest('a[data-notif-id]');
+      if (a) { tandai(a.dataset.notifId); perbaruiBel(); tutup(false); /* lanjut navigasi bawaan tautan */ }
+    });
+
+    document.addEventListener('keydown', e => {
+      if ((e.key === 'Escape' || e.key === 'Esc') && !panel.hidden) { e.stopPropagation(); tutup(true); }
+    }, true);
+    document.addEventListener('click', e => {
+      if (!panel.hidden && !jangkar.contains(e.target)) tutup(false);
+    }, true);
+    jangkar.addEventListener('focusout', e => {
+      if (!panel.hidden && e.relatedTarget && !jangkar.contains(e.relatedTarget)) tutup(false);
+    });
+    window.addEventListener('resize', atur);
+    window.addEventListener('scroll', atur, { passive: true });
+
+    /* live: polling 60 dtk — di prototipe hanya memperbarui waktu relatif & jumlah */
+    setInterval(() => { if (kondisi === 'siap' && !panel.hidden) render(); else perbaruiBel(); }, 60000);
+    /* status dibaca dari tab/prototipe lain */
+    window.addEventListener('storage', e => {
+      if (e.key !== KUNCI) return;
+      try { simpanan = JSON.parse(e.newValue || '{}') || {}; } catch (er) { simpanan = {}; }
+      if (!panel.hidden && kondisi === 'siap') render(); else perbaruiBel();
+    });
+
+    perbaruiBel();
+  };
+
+  try {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mulai);
+    else mulai();
+  } catch (e) { /* jangan pernah memecah halaman */ }
+})();
+</script>

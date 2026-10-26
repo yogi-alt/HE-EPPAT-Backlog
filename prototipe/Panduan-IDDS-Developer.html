@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panduan IDDS Developer</title>
+<meta name="description" content="Panduan Penerapan IDDS untuk Developer E-PPAT — versi 1.0 · 26 Okt 2026">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#3d6b5e;--primary-hover:#345d52;--primary-700:#2a4b42;--primary-25:#f5f8f7;--primary-50:#eef3f1;--primary-100:#dde5e2;
+  --gold:#dac999;--gold-50:#f8f4e7;--gold-700:#6a5733;--sidebar:#2c3c42;--stroke:#d2ddd9;--stroke-n:#e5e5e5;
+  --teks:#1f1f1f;--teks-2:#525252;--latar:#f5f8f7;--kartu:#ffffff;--kode-bg:#1d2a2e;--kode-teks:#e6edea;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.6;color:var(--teks);background:var(--latar);-webkit-font-smoothing:antialiased}
+a{color:var(--primary)}
+a:hover{color:var(--primary-hover)}
+:focus-visible{outline:3px solid var(--primary);outline-offset:2px;border-radius:4px}
+code{font:500 .86em ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--primary-50);color:var(--primary-700);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+.atas{background:var(--sidebar);color:#fff;padding:12px 24px}
+.atas a{color:#fff;text-decoration:none;font-size:13px;font-weight:500;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:4px 12px;display:inline-block}
+.atas a:hover{background:rgba(255,255,255,.1)}
+.hero{background:var(--kartu);border-bottom:1px solid var(--stroke)}
+.hero-isi{max-width:1200px;margin:0 auto;padding:28px 24px 24px}
+.eyebrow{font:600 11px/1.4 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-700)}
+h1{margin:6px 0 4px;font:600 30px/1.25 Inter,sans-serif;letter-spacing:-.3px;color:var(--primary)}
+.versi{display:inline-block;margin-top:4px;font-size:13px;font-weight:500;background:var(--gold);color:#1f1f1f;border-radius:999px;padding:2px 10px}
+.ringkas{max-width:800px;margin:12px 0 0;color:var(--teks-2)}
+.tata{max-width:1200px;margin:0 auto;padding:24px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:32px;align-items:start}
+nav.daftar-isi{position:sticky;top:16px;background:var(--kartu);border:1px solid var(--stroke);border-radius:14px;padding:14px}
+nav.daftar-isi h2{margin:0 0 8px;padding:0 8px;font:600 12px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--teks-2)}
+nav.daftar-isi ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+nav.daftar-isi a{display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;text-decoration:none;color:var(--teks);font-size:14px;font-weight:500;line-height:1.35}
+nav.daftar-isi a:hover{background:var(--primary-50);color:var(--primary-700)}
+nav.daftar-isi .no{flex:none;width:24px;height:24px;border-radius:999px;display:grid;place-items:center;background:var(--primary);color:#fff;font-size:12px;font-weight:600}
+nav.daftar-isi .jml{margin-left:auto;font-size:12px;color:var(--teks-2);font-weight:500}
+nav.daftar-isi .total{margin:10px 8px 0;padding-top:10px;border-top:1px solid var(--stroke-n);font-size:12px;color:var(--teks-2)}
+main{min-width:0}
+.bagian{margin-bottom:40px}
+.bagian h2{display:flex;align-items:center;gap:12px;margin:0 0 16px;font:600 22px/1.3 Inter,sans-serif;color:var(--primary-700)}
+.bagian h2 .no{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--primary);color:#fff;font-size:16px}
+.item{background:var(--kartu);border:1px solid var(--stroke);border-radius:14px;padding:18px 20px;margin-bottom:14px;min-width:0}
+.item-kepala{display:flex;align-items:flex-start;justify-content:space-between;gap:8px 12px;flex-wrap:wrap}
+.item h3{margin:0;font:600 16px/1.4 Inter,sans-serif;color:var(--teks)}
+.item h3 .no{color:var(--primary);font-weight:600;margin-right:4px}
+.kodehe{display:flex;flex-wrap:wrap;gap:6px}
+.kodehe span{font:600 11px/1.6 ui-monospace,Menlo,Consolas,monospace;background:var(--gold-50);color:var(--gold-700);border:1px solid var(--gold);border-radius:999px;padding:0 8px;white-space:nowrap}
+.aturan{margin:8px 0 0}
+.lbl{display:block;font:600 11px Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--teks-2);margin-bottom:4px}
+pre.kode{margin:12px 0 0;background:var(--kode-bg);color:var(--kode-teks);border-radius:10px;padding:14px 16px;overflow-x:auto;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;tab-size:2;max-width:100%}
+pre.kode code{background:none;color:inherit;padding:0;font:inherit;overflow-wrap:normal;white-space:pre}
+pre.cek{background:var(--primary-25);color:var(--teks);border:1px dashed var(--primary)}
+.contoh{margin-top:12px;background:var(--primary-25);border-left:3px solid var(--primary);border-radius:0 10px 10px 0;padding:10px 14px}
+.contoh p{margin:0 0 4px;overflow-wrap:anywhere}
+.contoh p:last-child{margin-bottom:0}
+.tabel{margin-top:12px;border:1px solid var(--stroke);border-radius:10px;overflow:hidden}
+.tabel table{width:100%;border-collapse:collapse;font-size:13.5px}
+.tabel th{text-align:left;background:var(--primary-50);color:var(--primary-700);font-weight:600;padding:8px 12px}
+.tabel td{padding:8px 12px;border-top:1px solid var(--stroke-n);vertical-align:top;overflow-wrap:anywhere}
+.tabel tr:nth-child(even) td{background:#fbfcfc}
+.acuan{margin-top:12px;padding-top:10px;border-top:1px solid var(--stroke-n);font-size:13.5px}
+.acuan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.acuan a{font-weight:500;overflow-wrap:anywhere}
+.acuan .ket{color:var(--teks-2)}
+footer{max-width:1200px;margin:0 auto;padding:8px 24px 40px;font-size:13px;color:var(--teks-2)}
+@media (max-width:900px){
+  .tata{grid-template-columns:minmax(0,1fr);gap:20px;padding:16px}
+  nav.daftar-isi{position:static}
+  .hero-isi{padding:22px 16px 18px}
+  .atas{padding:10px 16px}
+  footer{padding:8px 16px 32px}
+}
+@media (max-width:480px){
+  h1{font-size:24px}
+  .item{padding:14px}
+  .bagian h2{font-size:19px}
+  .tabel table{font-size:12.5px}
+  .tabel th,.tabel td{padding:6px 8px}
+}
+@media print{.atas,nav.daftar-isi{display:none}.tata{display:block}.item{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="atas"><a href="index.html">‹ Daftar prototipe</a></div>
+<header class="hero"><div class="hero-isi">
+  <div class="eyebrow">E-PPAT Peruri · INA Digital Design System</div>
+  <h1>Panduan Penerapan IDDS untuk Developer E-PPAT</h1>
+  <span class="versi">Versi 1.0 · 26 Okt 2026</span>
+  <p class="ringkas">Panduan ini menjelaskan cara memasang INA Digital Design System (IDDS) dengan brand E-PPAT di aplikasi React E-PPAT. Setiap aturan diambil dari prototipe backlog Peruri dan saran Heuristic Evaluation (HE). Salin pola dari prototipe acuan, lalu periksa hasilnya dengan daftar periksa sebelum rilis. Dokumentasi resmi komponen ada di <a href="https://design.inadigital.go.id" rel="noopener">design.inadigital.go.id</a>.</p>
+</div></header>
+<div class="tata">
+  <nav class="daftar-isi" aria-label="Daftar isi">
+    <h2>Daftar isi</h2>
+    <ol><li><a href="#b1"><span class="no">1</span><span>Pemasangan dan token warna</span><span class="jml">10</span></a></li><li><a href="#b2"><span class="no">2</span><span>Kerangka halaman</span><span class="jml">12</span></a></li><li><a href="#b3"><span class="no">3</span><span>Komponen IDDS dan kapan dipakai</span><span class="jml">23</span></a></li><li><a href="#b4"><span class="no">4</span><span>Pola interaksi dari saran HE</span><span class="jml">12</span></a></li><li><a href="#b5"><span class="no">5</span><span>Aksesibilitas</span><span class="jml">8</span></a></li><li><a href="#b6"><span class="no">6</span><span>Bahasa dan pedoman penulisan</span><span class="jml">10</span></a></li><li><a href="#b7"><span class="no">7</span><span>Daftar periksa sebelum rilis</span><span class="jml">6</span></a></li><li><a href="#b8"><span class="no">8</span><span>Peta acuan prototipe</span><span class="jml">22</span></a></li></ol>
+    <p class="total">8 bagian · 103 aturan</p>
+  </nav>
+  <main>
+<section class="bagian" id="b1" aria-labelledby="h-b1">
+    <h2 id="h-b1"><span class="no">1</span>Pemasangan dan token warna</h2>
+    <article class="item" id="b1-1">
+      <div class="item-kepala"><h3><span class="no">1.1</span> Urutan pemasangan CSS</h3><div class="kodehe"><span>HE-UMUM-01</span><span>IDDS-TN-01</span></div></div>
+      <p class="aturan">Muat CSS IDDS lebih dulu, lalu <code>eppat.css</code>. Pasang atribut <code>data-brand=&quot;eppat&quot;</code> pada elemen <code>&lt;html&gt;</code>. Komponen IDDS yang sudah dipakai live (<code>ina-button</code>, <code>ina-text-field</code>) langsung berwarna hijau E-PPAT.</p>
+      <pre class="kode"><code>import '@idds/react/index.css';          // atau @idds/styles/dist/index.css
+import './brand-eppat-idds/eppat.css';   // SETELAH CSS IDDS
+
+document.documentElement.setAttribute('data-brand', 'eppat');
+
+&lt;!-- atau langsung di index.html --&gt;
+&lt;html lang=&quot;id&quot; data-brand=&quot;eppat&quot; data-theme=&quot;light&quot;&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="../brand-eppat-idds/README.md">brand-eppat-idds/README.md</a></li><li><a href="Brand-Mode-EPPAT-IDDS.html">Brand-Mode-EPPAT-IDDS</a></li></ul></div>
+    </article>
+    <article class="item" id="b1-2">
+      <div class="item-kepala"><h3><span class="no">1.2</span> Jangan memakai setBrandTheme untuk E-PPAT</h3><div class="kodehe"><span>HE-UMUM-01</span></div></div>
+      <p class="aturan"><code>setBrandTheme()</code> hanya menerima brand bawaan IDDS (inagov, inaku, bgn, bkn, lan, panrb, default). Jangan memanggilnya setelah <code>data-brand</code> terpasang karena fungsi itu menimpa atribut tersebut. Bila tidak dapat memuat berkas CSS tambahan, pakai <code>setCustomTheme(eppatTheme)</code>; cara ini tidak membawa penyesuaian mode gelap dan kontras.</p>
+      <pre class="kode"><code>import { setCustomTheme } from '@idds/react';
+import { eppatTheme } from './brand-eppat-idds/eppat-theme';
+setCustomTheme(eppatTheme);</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="../brand-eppat-idds/README.md">brand-eppat-idds/README.md</a></li></ul></div>
+    </article>
+    <article class="item" id="b1-3">
+      <div class="item-kepala"><h3><span class="no">1.3</span> Tailwind</h3></div>
+      <p class="aturan">Aplikasi live memakai Tailwind. Impor token E-PPAT agar kelas utilitas memakai warna yang sama dengan komponen IDDS. Jangan menulis kode warna heksadesimal langsung di kelas Tailwind; pakai token.</p>
+      <pre class="kode"><code>@import 'tailwindcss';
+@import '@idds/styles/tailwind/css/idds.css';
+@import './brand-eppat-idds/tailwind/eppat.css';   /* Tailwind v4 */
+
+/* Tailwind v3: brand-eppat-idds/tailwind/eppat.js */</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="../brand-eppat-idds/README.md">brand-eppat-idds/README.md</a></li></ul></div>
+    </article>
+    <article class="item" id="b1-4">
+      <div class="item-kepala"><h3><span class="no">1.4</span> Huruf</h3></div>
+      <p class="aturan">Pakai Inter dengan ketebalan 400, 500, 600, dan 700. Ukuran dan tinggi baris mengikuti tipografi IDDS. Judul halaman (H1) di prototipe: Inter 500, 28/36 px, warna <code>--ina-primary-primary</code>.</p>
+      <pre class="kode"><code>&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› judul halaman</span></li></ul></div>
+    </article>
+    <article class="item" id="b1-5">
+      <div class="item-kepala"><h3><span class="no">1.5</span> Mode gelap</h3></div>
+      <p class="aturan">Mode gelap aktif dengan <code>data-theme=&quot;dark&quot;</code> bersama <code>data-brand=&quot;eppat&quot;</code>. Di mode gelap warna utama berganti ke <code>--ina-primary-400</code> (#4E7C6F) dan sidebar ke #141C1F. Prototipe backlog hanya memakai mode terang. Deskripsi Alert IDDS 1.6.38 tampak pudar di mode gelap; ini perilaku CSS IDDS, bukan tema E-PPAT.</p>
+      <pre class="kode"><code>&lt;html lang=&quot;id&quot; data-brand=&quot;eppat&quot; data-theme=&quot;dark&quot;&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Brand-Mode-EPPAT-IDDS.html">Brand-Mode-EPPAT-IDDS</a> <span class="ket">› sakelar Terang / Gelap</span></li></ul></div>
+    </article>
+    <article class="item" id="b1-6">
+      <div class="item-kepala"><h3><span class="no">1.6</span> Batasi !important dan penimpaan gaya</h3><div class="kodehe"><span>HE-UMUM-01</span></div></div>
+      <p class="aturan">Jangan menimpa gaya IDDS dengan <code>!important</code> secara luas. Tulis penyesuaian dengan cakupan <code>[data-brand='eppat'] .ina-…</code> dan pakai token <code>var(--ina-…)</code>. <code>eppat.css</code> hanya memakai <code>!important</code> di tempat IDDS juga memakainya (misalnya teks placeholder Select).</p>
+      <pre class="kode"><code>/* Benar */
+[data-brand='eppat'] .ina-breadcrumb__link--active { color: var(--ina-primary-600); }
+
+/* Salah */
+.text-gray-400 { color: #999 !important; }</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="../brand-eppat-idds/eppat.css">brand-eppat-idds/eppat.css</a></li></ul></div>
+    </article>
+    <article class="item" id="b1-7">
+      <div class="item-kepala"><h3><span class="no">1.7</span> Token warna brand</h3><div class="kodehe"><span>HE-UMUM-01</span></div></div>
+      <p class="aturan">Hanya token brand yang diganti. Warna netral, tipografi, jarak, dan komponen tetap milik IDDS. Pakai nama token, bukan nilai heksadesimal.</p>
+      <div class="tabel"><table><thead><tr><th scope="col">Token</th><th scope="col">Nilai</th><th scope="col">Kegunaan</th></tr></thead><tbody><tr><td>--ina-primary-primary / -500</td><td>#3D6B5E</td><td>Tombol utama, tab aktif, fokus. Teks putih 6,06:1</td></tr><tr><td>--ina-primary-600 / --ina-brand-hover</td><td>#345D52</td><td>Hover, breadcrumb aktif. Teks putih 7,41:1</td></tr><tr><td>--ina-primary-400</td><td>#4E7C6F</td><td>Warna utama mode gelap. Teks putih 4,73:1</td></tr><tr><td>--ina-primary-25 / -50 / -100</td><td>#F5F8F7 / #EEF3F1 / #DDE5E2</td><td>Latar lembut, hover baris tabel</td></tr><tr><td>--ina-secondary-300 (--ina-eppat-office-card)</td><td>#DAC999</td><td>Kartu kantor emas di sidebar</td></tr><tr><td>--ina-eppat-sidebar-bg / -hover</td><td>#2C3C42 / #3A4D54</td><td>Latar sidebar. Teks putih 11,46:1</td></tr><tr><td>--ina-eppat-sidebar-active</td><td>var(--ina-primary-500)</td><td>Menu sidebar aktif</td></tr><tr><td>--ina-eppat-sidebar-content</td><td>rgba(255,255,255,.8)</td><td>Teks menu sidebar</td></tr><tr><td>--ina-eppat-stroke-brand</td><td>#D2DDD9</td><td>Garis bernuansa brand</td></tr></tbody></table></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="../brand-eppat-idds/README.md">brand-eppat-idds/README.md</a></li><li><a href="Brand-Mode-EPPAT-IDDS.html">Brand-Mode-EPPAT-IDDS</a></li></ul></div>
+    </article>
+    <article class="item" id="b1-8">
+      <div class="item-kepala"><h3><span class="no">1.8</span> Warna status tetap milik IDDS</h3><div class="kodehe"><span>HE-UMUM-01</span></div></div>
+      <p class="aturan">Warna sentimen tidak diubah oleh brand E-PPAT. Alert, Badge, dan Toast memakai warna ini. Elemen penunjuk (Button link, Stepper aktif/selesai, Checkbox tercentang, Pagination aktif, Breadcrumb aktif) memakai hijau brand.</p>
+      <div class="tabel"><table><thead><tr><th scope="col">Sentimen</th><th scope="col">Nilai dasar IDDS</th><th scope="col">Dipakai untuk</th></tr></thead><tbody><tr><td>info / guide</td><td>#0968F6</td><td>Informasi, proses berjalan</td></tr><tr><td>positive</td><td>#288034</td><td>Berhasil, selesai, aktif</td></tr><tr><td>warning</td><td>#EEBB04 (teks memakai warning-600)</td><td>Perlu perhatian, kurang data</td></tr><tr><td>negative</td><td>#F02D2D (teks memakai negative-600 #D50B0B)</td><td>Galat, gagal, aksi berbahaya</td></tr></tbody></table></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="../brand-eppat-idds/README.md">brand-eppat-idds/README.md</a></li></ul></div>
+    </article>
+    <article class="item" id="b1-9">
+      <div class="item-kepala"><h3><span class="no">1.9</span> Kontras minimal WCAG 2.2 AA</h3><div class="kodehe"><span>IDDS-TN-20</span></div></div>
+      <p class="aturan">Teks biasa wajib berkontras minimal 4,5:1 terhadap latarnya. Teks besar (≥ 24 px, atau ≥ 18,66 px tebal) dan batas komponen minimal 3:1. <code>eppat.css</code> sudah menggelapkan warna bawaan IDDS yang di bawah standar dengan corak dari keluarga warna yang sama, sehingga arti warna tidak berubah.</p>
+      <div class="tabel"><table><thead><tr><th scope="col">Elemen</th><th scope="col">Bawaan IDDS</th><th scope="col">Setelah eppat.css</th></tr></thead><tbody><tr><td>Label langkah Stepper yang belum aktif</td><td>#A3A3A3 (2,5:1)</td><td>--ina-content-secondary #525252 (7,8:1)</td></tr><tr><td>Tanda wajib (*) Text Field, Text Area, Select, Password, Input Search</td><td>#F02D2D (4,1:1)</td><td>--ina-negative-600 #D50B0B</td></tr><tr><td>Placeholder Select Dropdown dan Date Picker</td><td>abu-abu muda</td><td>--ina-content-secondary</td></tr><tr><td>Judul Alert caution</td><td>#EEBB04 (1,7:1)</td><td>--ina-warning-600 #855F00</td></tr><tr><td>Judul Alert critical</td><td>#F02D2D (3,6:1)</td><td>--ina-negative-600</td></tr><tr><td>Judul Alert info</td><td>biru guide</td><td>--ina-guide-600</td></tr><tr><td>Teks galat Text Field, Text Area, OTP, Phone, Password, File Upload</td><td>#F02D2D (4,1:1)</td><td>--ina-negative-600</td></tr><tr><td>Teks peringatan Text Field, Text Area, Password</td><td>#EEBB04 (1,8:1)</td><td>--ina-warning-600</td></tr></tbody></table></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="../brand-eppat-idds/eppat.css">brand-eppat-idds/eppat.css</a></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html#tema">Backlog-IDDS-TN-CMS-Prototype#tema</a> <span class="ket">› Cek kontras</span></li></ul></div>
+    </article>
+    <article class="item" id="b1-10">
+      <div class="item-kepala"><h3><span class="no">1.10</span> Keputusan terbuka: warna lencana status</h3><div class="kodehe"><span>HE-UMUM-01</span></div></div>
+      <p class="aturan">Di live, warna lencana status diatur lewat CMS › Tema Tampilan (warna status). Prototipe IDDS memakai varian sentimen IDDS. Tim perlu memutuskan sumber warna mana yang dipakai sebelum lencana diganti.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Keputusan tim: CMS › Tema Tampilan atau token sentimen IDDS.</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-CMS-Prototype.html#tema">Backlog-IDDS-TN-CMS-Prototype#tema</a></li><li><a href="Brand-Mode-EPPAT-IDDS.html">Brand-Mode-EPPAT-IDDS</a></li></ul></div>
+    </article>
+  </section>
+<section class="bagian" id="b2" aria-labelledby="h-b2">
+    <h2 id="h-b2"><span class="no">2</span>Kerangka halaman</h2>
+    <article class="item" id="b2-1">
+      <div class="item-kepala"><h3><span class="no">2.1</span> Sidebar</h3><div class="kodehe"><span>HE-UMUM-01</span></div></div>
+      <p class="aturan">Sidebar selebar 240 px dan tetap terlihat saat halaman digulir. Latarnya <code>--ina-eppat-sidebar-bg</code>. Menu dibagi menjadi grup System, CMS, Akta, dan Layanan AJB. Judul grup adalah tombol dengan <code>aria-expanded</code>. Menu memakai ikon garis 16 px dengan <code>currentColor</code>. Menu aktif berlatar <code>--ina-eppat-sidebar-active</code> dan berteks putih tebal. Nama menu sidebar jangan diubah tanpa keputusan tim.</p>
+      <pre class="kode"><code>&lt;aside class=&quot;sidebar&quot;&gt;
+  &lt;div class=&quot;brand&quot;&gt;&lt;img src=&quot;logo.png&quot; alt=&quot;E-PPAT&quot;&gt;&lt;/div&gt;
+  &lt;!-- kartu kantor, lihat topik berikutnya --&gt;
+  &lt;nav&gt;
+    &lt;button class=&quot;grp&quot; aria-expanded=&quot;true&quot;&gt;System&lt;/button&gt;
+    &lt;div class=&quot;items&quot;&gt;
+      &lt;a href=&quot;/dasbor&quot; class=&quot;ina-button ina-button--link ina-button--md nav-item on&quot; aria-current=&quot;page&quot;&gt;
+        &lt;svg aria-hidden=&quot;true&quot;&gt;…&lt;/svg&gt;&lt;span&gt;Dasbor&lt;/span&gt;&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
+&lt;/aside&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› sidebar</span></li><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor">Backlog-IDDS-TN-SYSTEM-Prototype#dasbor</a></li></ul></div>
+    </article>
+    <article class="item" id="b2-2">
+      <div class="item-kepala"><h3><span class="no">2.2</span> Kartu kantor</h3><div class="kodehe"><span>IDDS-TN-30</span></div></div>
+      <p class="aturan">Identitas kantor di sidebar memakai IDDS Card berlatar emas <code>--ina-eppat-office-card</code>. Isinya: label kecil &quot;Kantor Notaris &amp; PPAT&quot;, nama PPAT, lalu SK, wilayah, telepon, dan alamat dengan ikon kecil. Teks gelap #1F1F1F di atas latar emas.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-card ina-card--variant-basic kantor&quot;&gt;
+  &lt;div class=&quot;ina-card__content&quot;&gt;&lt;div&gt;
+    &lt;div class=&quot;eyebrow&quot;&gt;Kantor Notaris &amp;amp; PPAT&lt;/div&gt;
+    &lt;h3 class=&quot;ina-card__title&quot;&gt;PPAT Contoh Satu, S.H.&lt;/h3&gt;
+    &lt;div class=&quot;ina-card__description kantor-info&quot;&gt;
+      &lt;div class=&quot;baris-kantor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot;&gt;…&lt;/svg&gt;&lt;span&gt;SK · 1/KEP-CONTOH/2020&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› sidebar</span></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#profil">Backlog-IDDS-TN-EPPAT-Prototype#profil</a></li></ul></div>
+    </article>
+    <article class="item" id="b2-3">
+      <div class="item-kepala"><h3><span class="no">2.3</span> Header</h3></div>
+      <p class="aturan">Header setinggi 64 px, berlatar <code>--ina-background-primary</code>, dan tetap di atas saat halaman digulir. Urutan dari kiri: tombol menu (hanya untuk ponsel), ruang kosong, tombol &quot;Lihat Landing&quot; (secondary), tombol Notifikasi (tertiary, ikon saja dengan <code>aria-label</code>), lalu avatar dengan nama dan peran. Prototipe tidak membuat menu avatar; ikuti perilaku menu avatar di live.</p>
+      <pre class="kode"><code>&lt;header class=&quot;top&quot;&gt;
+  &lt;button class=&quot;ina-button ina-button--tertiary ina-button--md&quot; aria-label=&quot;Menu&quot;&gt;…&lt;/button&gt;
+  &lt;div class=&quot;spacer&quot;&gt;&lt;/div&gt;
+  &lt;button class=&quot;ina-button ina-button--secondary ina-button--md&quot;&gt;&lt;svg aria-hidden=&quot;true&quot;&gt;…&lt;/svg&gt;&lt;span&gt;Lihat Landing&lt;/span&gt;&lt;/button&gt;
+  &lt;button class=&quot;ina-button ina-button--tertiary ina-button--md&quot; aria-label=&quot;Notifikasi&quot;&gt;…&lt;/button&gt;
+  &lt;div class=&quot;user&quot;&gt;&lt;span class=&quot;ina-avatar ina-avatar--circle ava&quot;&gt;A&lt;/span&gt;
+    &lt;span class=&quot;uname&quot;&gt;Asisten Contoh&lt;/span&gt;&lt;span class=&quot;urole&quot;&gt;Asisten&lt;/span&gt;&lt;/div&gt;
+&lt;/header&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› header</span></li></ul></div>
+    </article>
+    <article class="item" id="b2-4">
+      <div class="item-kepala"><h3><span class="no">2.4</span> Breadcrumb</h3></div>
+      <p class="aturan">Setiap halaman di dalam aplikasi memakai IDDS Breadcrumb di atas judul. Isinya nama grup menu lalu nama halaman. Halaman aktif ditulis sebagai <code>&lt;span&gt;</code>, bukan tautan, dan berwarna <code>--ina-primary-600</code>. Pemisah diberi <code>aria-hidden=&quot;true&quot;</code>.</p>
+      <pre class="kode"><code>&lt;nav class=&quot;ina-breadcrumb&quot; aria-label=&quot;Breadcrumb&quot;&gt;&lt;ol class=&quot;ina-breadcrumb__list&quot;&gt;
+  &lt;li class=&quot;ina-breadcrumb__item&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;ina-breadcrumb__link&quot;&gt;&lt;span class=&quot;ina-breadcrumb__text&quot;&gt;Layanan AJB&lt;/span&gt;&lt;/a&gt;
+    &lt;span class=&quot;ina-breadcrumb__separator&quot; aria-hidden=&quot;true&quot;&gt;›&lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;ina-breadcrumb__item&quot;&gt;&lt;span class=&quot;ina-breadcrumb__link ina-breadcrumb__link--active&quot;&gt;&lt;span class=&quot;ina-breadcrumb__text&quot;&gt;Permohonan AJB&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/nav&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› daftar order</span></li></ul></div>
+    </article>
+    <article class="item" id="b2-5">
+      <div class="item-kepala"><h3><span class="no">2.5</span> Judul halaman dan subjudul</h3><div class="kodehe"><span>IDDS-TN-16</span></div></div>
+      <p class="aturan">Satu halaman hanya punya satu H1. Di bawahnya ada subjudul berupa satu kalimat SPOK yang menyebut hal yang dapat dilakukan pengguna di halaman itu, dan diakhiri titik. Jangan menulis subjudul berupa daftar kata atau penjelasan teknis.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Benar: Kelola permintaan Akta Jual Beli, mulai dari pengajuan klien sampai akta selesai.</p><p>Benar: Pantau jumlah user, aktivitas terbaru, dan pengingat penting kantor Anda.</p><p>Salah: Manajemen order AJB (CRUD)</p><p>Salah: RBAC per modul</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› judul halaman</span></li><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor">Backlog-IDDS-TN-SYSTEM-Prototype#dasbor</a></li></ul></div>
+    </article>
+    <article class="item" id="b2-6">
+      <div class="item-kepala"><h3><span class="no">2.6</span> Tombol Bantuan di kanan judul</h3><div class="kodehe"><span>HE-UMUM-02</span><span>IDDS-TN-15</span><span>IDDS-TN-25</span><span>IDDS-TN-36</span></div></div>
+      <p class="aturan">Setiap halaman punya tombol Bantuan (Button secondary md) di kanan judul, bukan di header global. Tombol membuka IDDS Drawer dari kanan; di layar ≤ 760 px Drawer muncul dari bawah. Isi Drawer khusus untuk halaman itu: langkah singkat, pertanyaan umum dalam IDDS Accordion, dan kontak dukungan. Fokus pindah ke tombol Tutup saat Drawer terbuka; Esc menutup Drawer.</p>
+      <pre class="kode"><code>&lt;div class=&quot;judul-halaman&quot;&gt;
+  &lt;div class=&quot;judul-kiri&quot;&gt;&lt;h1&gt;Permohonan AJB&lt;/h1&gt;&lt;p class=&quot;sub&quot;&gt;Kelola permintaan Akta Jual Beli, …&lt;/p&gt;&lt;/div&gt;
+  &lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--secondary ina-button--md&quot; aria-haspopup=&quot;dialog&quot; aria-label=&quot;Bantuan untuk halaman ini&quot;&gt;
+    &lt;svg aria-hidden=&quot;true&quot;&gt;…&lt;/svg&gt;&lt;span&gt;Bantuan&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;ina-drawer ina-drawer--position-right&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;drwJudul&quot;&gt;
+  &lt;div class=&quot;ina-drawer__backdrop&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;ina-drawer__panel ina-drawer__panel--width-md&quot;&gt;
+    &lt;div class=&quot;ina-drawer__header&quot;&gt;&lt;h2 class=&quot;ina-drawer__title&quot; id=&quot;drwJudul&quot;&gt;Bantuan Permohonan AJB&lt;/h2&gt;
+      &lt;button type=&quot;button&quot; class=&quot;ina-drawer__close-button&quot; aria-label=&quot;Tutup bantuan&quot;&gt;…&lt;/button&gt;&lt;/div&gt;
+    &lt;div class=&quot;ina-drawer__content&quot;&gt;…&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› tombol Bantuan</span></li><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html">Backlog-IDDS-TN-SYSTEM-Prototype</a></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html">Backlog-IDDS-TN-CMS-Prototype</a></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html">Backlog-IDDS-TN-EPPAT-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b2-7">
+      <div class="item-kepala"><h3><span class="no">2.7</span> Kontak dukungan di Bantuan</h3><div class="kodehe"><span>HE-UMUM-02</span></div></div>
+      <p class="aturan">Bagian akhir Drawer berisi email, telepon/WhatsApp, dan jam layanan. Nilai di prototipe adalah data contoh (bantuan@contoh.id, 0800-0000-0000). Isi dengan kontak resmi tim E-PPAT sebelum rilis.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Jam layanan: Senin–Jumat, 08.00–17.00 WIB</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› Bantuan › Kontak dukungan</span></li></ul></div>
+    </article>
+    <article class="item" id="b2-8">
+      <div class="item-kepala"><h3><span class="no">2.8</span> Layar daftar lebih dulu, detail lewat baris</h3><div class="kodehe"><span>HE-VERIF-05</span></div></div>
+      <p class="aturan">Setiap menu dibuka di layar daftar. Detail dibuka dengan mengeklik baris (<code>ina-table__row--clickable</code>) atau tombol Edit. Layar detail punya tombol &quot;Kembali&quot; (secondary sm) di atas kode atau nama item.</p>
+      <pre class="kode"><code>&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--secondary ina-button--sm&quot;&gt;&lt;svg aria-hidden=&quot;true&quot;&gt;…&lt;/svg&gt;Kembali&lt;/button&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› daftar dan detail order</span></li><li><a href="Backlog-HE-VERIF-Prototype.html">Backlog-HE-VERIF-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b2-9">
+      <div class="item-kepala"><h3><span class="no">2.9</span> Keadaan kosong</h3><div class="kodehe"><span>HE-EAW-07</span></div></div>
+      <p class="aturan">Tabel kosong tetap menampilkan tajuk kolom dan satu baris <code>ina-table__empty-cell</code> berisi kalimat singkat. Bedakan &quot;belum ada data&quot; dan &quot;hasil pencarian tidak cocok&quot;. Untuk hasil pencarian kosong, sediakan tombol untuk menghapus pencarian dan saringan.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Belum ada para pihak.</p><p>Tidak ada order yang cocok.</p><p>Tombol: Hapus Pencarian dan Saringan</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› tab Para Pihak</span></li><li><a href="Backlog-HE-EAW-Prototype.html">Backlog-HE-EAW-Prototype</a> <span class="ket">› daftar akta</span></li></ul></div>
+    </article>
+    <article class="item" id="b2-10">
+      <div class="item-kepala"><h3><span class="no">2.10</span> Keadaan memuat</h3></div>
+      <p class="aturan">Saat proses berjalan, tombol pemicu dinonaktifkan, labelnya berganti menjadi kata kerja berakhiran elipsis, dan IDDS Spinner kecil tampil di dalam tombol. Spinner diberi <code>aria-hidden=&quot;true&quot;</code> karena labelnya sudah menjelaskan proses.</p>
+      <pre class="kode"><code>&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--primary ina-button--lg&quot; disabled&gt;
+  &lt;span class=&quot;ina-spinner ina-spinner--spinner-only&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;ina-spinner__element ina-spinner__element--size-xs ina-spinner__element--color-primary&quot;&gt;&lt;/span&gt;&lt;/span&gt;
+  Memverifikasi…
+&lt;/button&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a> <span class="ket">› Masuk</span></li><li><a href="Backlog-HE-EAW-Prototype.html">Backlog-HE-EAW-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b2-11">
+      <div class="item-kepala"><h3><span class="no">2.11</span> Keadaan gagal dan data terbaru</h3><div class="kodehe"><span>IDDS-TN-28</span></div></div>
+      <p class="aturan">Bila data gagal dimuat, tampilkan IDDS Alert critical berisi penyebab dan tombol &quot;Coba Lagi&quot;. Halaman ringkasan menampilkan waktu pembaruan dan tombol &quot;Muat Ulang&quot;.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-alert ina-alert--critical&quot; role=&quot;status&quot;&gt;&lt;div class=&quot;ina-alert__content&quot;&gt;&lt;div class=&quot;ina-alert__text-section&quot;&gt;
+  &lt;div class=&quot;ina-alert__title&quot;&gt;Dashboard gagal dimuat&lt;/div&gt;
+  &lt;div class=&quot;ina-alert__description&quot;&gt;Periksa koneksi internet Anda, lalu coba lagi.&lt;/div&gt;&lt;/div&gt;
+  &lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--secondary ina-button--sm&quot;&gt;Coba Lagi&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;span class=&quot;diperbarui&quot;&gt;Diperbarui pukul 09.25 WIB&lt;/span&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard">Backlog-IDDS-TN-EPPAT-Prototype#dashboard</a></li></ul></div>
+    </article>
+    <article class="item" id="b2-12">
+      <div class="item-kepala"><h3><span class="no">2.12</span> Tampilan ponsel</h3></div>
+      <p class="aturan">Di layar sempit sidebar disembunyikan dan dibuka lewat tombol menu dengan latar gelap (scrim). Tabel lebar dibungkus elemen ber-<code>overflow-x:auto</code> agar halaman tidak bergeser ke samping. Stepper horizontal berganti menjadi vertikal. Drawer Bantuan muncul dari bawah.</p>
+      <pre class="kode"><code>&lt;div class=&quot;tabel-wadah&quot;&gt;&lt;div class=&quot;tabel-gulir&quot; style=&quot;overflow-x:auto&quot;&gt;
+  &lt;div class=&quot;ina-table&quot;&gt;&lt;table class=&quot;ina-table__container&quot;&gt;…&lt;/table&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› daftar order</span></li></ul></div>
+    </article>
+  </section>
+<section class="bagian" id="b3" aria-labelledby="h-b3">
+    <h2 id="h-b3"><span class="no">3</span>Komponen IDDS dan kapan dipakai</h2>
+    <article class="item" id="b3-1">
+      <div class="item-kepala"><h3><span class="no">3.1</span> Button: hierarki</h3><div class="kodehe"><span>HE-ORDER-05</span></div></div>
+      <p class="aturan">Satu area hanya punya satu tombol primary untuk aksi utama. Aksi pendamping memakai secondary. Aksi ringan atau berisiko rendah (Batal di daftar, Kirim Ulang, Muat Ulang) memakai tertiary. Tautan di dalam teks memakai varian link. Ukuran: sm di tabel, md di formulir dan dialog, lg di kartu Masuk.</p>
+      <pre class="kode"><code>&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--primary ina-button--md&quot;&gt;Buat Permohonan&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--secondary ina-button--md&quot;&gt;Muat Ulang&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--tertiary ina-button--sm&quot;&gt;Batalkan Pilihan&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--link ina-button--sm&quot;&gt;Lengkapi&lt;/button&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› daftar order</span></li></ul></div>
+    </article>
+    <article class="item" id="b3-2">
+      <div class="item-kepala"><h3><span class="no">3.2</span> Button: aksi yang menghapus atau membatalkan</h3><div class="kodehe"><span>HE-ORDER-05</span></div></div>
+      <p class="aturan">Di tabel, tombol Hapus dibuat tidak dominan: tertiary dengan teks merah <code>--ina-negative-600</code>. Hapus selalu meminta konfirmasi. Di dialog konfirmasi, tombol aksi berbahaya adalah tombol terakhir dengan latar dan garis <code>--ina-negative-600</code>.</p>
+      <pre class="kode"><code>&lt;!-- di tabel --&gt;
+&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--tertiary ina-button--sm&quot; style=&quot;color:var(--ina-negative-600)&quot;&gt;Hapus&lt;/button&gt;
+
+&lt;!-- di dialog konfirmasi --&gt;
+&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--primary ina-button--md&quot; style=&quot;background:var(--ina-negative-600);border-color:var(--ina-negative-600)&quot;&gt;Hapus&lt;/button&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› Hapus order</span></li></ul></div>
+    </article>
+    <article class="item" id="b3-3">
+      <div class="item-kepala"><h3><span class="no">3.3</span> Text Field</h3><div class="kodehe"><span>IDDS-TN-02</span></div></div>
+      <p class="aturan">Label selalu terlihat dan terhubung ke isian (<code>for</code>/<code>id</code>). Tanda wajib memakai <code>ina-text-field__required</code>. Teks bantuan dan galat berada di <code>ina-text-field__bottom-area</code> dan dihubungkan dengan <code>aria-describedby</code>. Placeholder hanya contoh isian, bukan pengganti label.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-text-field&quot; id=&quot;f-dEmail&quot;&gt;
+  &lt;label class=&quot;ina-text-field__label&quot; for=&quot;dEmail&quot;&gt;Email&lt;span class=&quot;ina-text-field__required&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
+  &lt;div class=&quot;ina-text-field__wrapper ina-text-field__wrapper--size-md&quot;&gt;
+    &lt;input id=&quot;dEmail&quot; type=&quot;email&quot; class=&quot;ina-text-field__input&quot; placeholder=&quot;nama@contoh.id&quot; autocomplete=&quot;email&quot; aria-describedby=&quot;h-dEmail&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;ina-text-field__bottom-area&quot;&gt;&lt;div class=&quot;ina-text-field__helper-text&quot; id=&quot;h-dEmail&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a> <span class="ket">› Daftar</span></li></ul></div>
+    </article>
+    <article class="item" id="b3-4">
+      <div class="item-kepala"><h3><span class="no">3.4</span> Text Field berawalan dan isian angka</h3><div class="kodehe"><span>HE-ORDER-07</span></div></div>
+      <p class="aturan">Isian uang memakai awalan &quot;Rp&quot; di dalam isian, <code>inputmode=&quot;numeric&quot;</code>, pemisah ribuan otomatis, dan terbilang di teks bantuan. Isian angka lain (luas, NIK) juga memakai <code>inputmode=&quot;numeric&quot;</code>.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-text-field__wrapper ina-text-field__wrapper--size-md&quot;&gt;
+  &lt;span class=&quot;ina-text-field__prefix-icon&quot;&gt;Rp&lt;/span&gt;
+  &lt;input id=&quot;oHarga&quot; class=&quot;ina-text-field__input&quot; placeholder=&quot;Contoh: 750.000.000&quot; inputmode=&quot;numeric&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;ina-text-field__helper-text&quot; id=&quot;h-oHarga&quot;&gt;tujuh ratus lima puluh juta rupiah&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› Tambah Objek</span></li></ul></div>
+    </article>
+    <article class="item" id="b3-5">
+      <div class="item-kepala"><h3><span class="no">3.5</span> Text Area</h3></div>
+      <p class="aturan">Pakai Text Area untuk isian lebih dari satu baris, misalnya catatan atau alamat panjang. Tulis &quot;(opsional)&quot; di placeholder atau label bila tidak wajib.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-text-area&quot;&gt;
+  &lt;label class=&quot;ina-text-area__label&quot; for=&quot;kCat&quot;&gt;Catatan&lt;/label&gt;
+  &lt;div class=&quot;ina-text-area__wrapper ina-text-area__wrapper--status-neutral&quot;&gt;
+    &lt;textarea id=&quot;kCat&quot; class=&quot;ina-text-area__input&quot; rows=&quot;3&quot; placeholder=&quot;Catatan tambahan (opsional)&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› tab Narahubung</span></li></ul></div>
+    </article>
+    <article class="item" id="b3-6">
+      <div class="item-kepala"><h3><span class="no">3.6</span> Password Input</h3><div class="kodehe"><span>HE-USER-03</span><span>HE-REG-04</span><span>IDDS-TN-05</span></div></div>
+      <p class="aturan">Semua isian kata sandi memakai IDDS Password Input dengan tombol tampilkan/sembunyikan (<code>aria-pressed</code> dan <code>aria-label</code> yang berganti). Syarat kata sandi tampil sebagai daftar centang yang sama di semua layar: minimal 12 karakter, huruf besar, huruf kecil, angka, dan simbol. Pesan status memakai <code>aria-live=&quot;polite&quot;</code>.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-password-input&quot; id=&quot;f-dPw&quot;&gt;
+  &lt;label class=&quot;ina-password-input__label&quot; for=&quot;dPw&quot;&gt;Kata Sandi&lt;span class=&quot;ina-password-input__required&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
+  &lt;div class=&quot;ina-password-input__wrapper ina-password-input__wrapper--size-md ina-password-input__wrapper--neutral&quot;&gt;
+    &lt;input id=&quot;dPw&quot; type=&quot;password&quot; class=&quot;ina-password-input__input&quot; autocomplete=&quot;new-password&quot; aria-describedby=&quot;h-dPw&quot;&gt;
+    &lt;div class=&quot;ina-password-input__actions&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;ina-password-input__toggle-button&quot; aria-label=&quot;Tampilkan kata sandi&quot; aria-pressed=&quot;false&quot;&gt;…&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;ina-password-input__status-area&quot;&gt;&lt;span class=&quot;ina-password-input__status-message&quot; id=&quot;h-dPw&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a> <span class="ket">› Daftar</span></li><li><a href="Backlog-HE-USER-Prototype.html">Backlog-HE-USER-Prototype</a> <span class="ket">› Tambah User</span></li><li><a href="Backlog-HE-CA-Prototype.html">Backlog-HE-CA-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b3-7">
+      <div class="item-kepala"><h3><span class="no">3.7</span> Select Dropdown</h3><div class="kodehe"><span>IDDS-TN-13</span><span>IDDS-TN-14</span></div></div>
+      <p class="aturan">Pakai Select Dropdown untuk memilih satu nilai dari daftar tetap (status, tipe pihak, jenis aktivitas). Label tetap terlihat di atas pemicu. Panel tertutup saat pengguna mengeklik di luar atau menekan Esc. Pilihan yang dipilih memakai <code>ina-select-dropdown__option--selected-single</code>. Jangan meminta pengguna mengetik nilai baku seperti zona waktu.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-select-dropdown&quot;&gt;
+  &lt;label class=&quot;ina-text-field__label&quot;&gt;Status&lt;/label&gt;
+  &lt;button type=&quot;button&quot; class=&quot;ina-select-dropdown__trigger ina-select-dropdown__trigger--size-md&quot; aria-haspopup=&quot;listbox&quot; aria-expanded=&quot;true&quot;&gt;
+    &lt;span class=&quot;ina-select-dropdown__trigger-text ina-select-dropdown__trigger-text--selected&quot;&gt;Semua status&lt;/span&gt;…&lt;/button&gt;
+  &lt;div class=&quot;ina-select-dropdown__panel&quot;&gt;&lt;div class=&quot;ina-select-dropdown__options&quot; role=&quot;listbox&quot;&gt;
+    &lt;button type=&quot;button&quot; role=&quot;option&quot; aria-selected=&quot;true&quot; class=&quot;ina-select-dropdown__option ina-select-dropdown__option--selected-single&quot;&gt;Semua status&lt;/button&gt;
+  &lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› saringan Status</span></li><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#logs">Backlog-IDDS-TN-SYSTEM-Prototype#logs</a> <span class="ket">› Jenis aktivitas</span></li></ul></div>
+    </article>
+    <article class="item" id="b3-8">
+      <div class="item-kepala"><h3><span class="no">3.8</span> Checkbox, Radio, dan Button Group</h3><div class="kodehe"><span>HE-ORDER-02</span><span>IDDS-TN-34</span></div></div>
+      <p class="aturan">Checkbox untuk pilihan ya/tidak atau banyak pilihan, misalnya pernyataan persetujuan dan memilih penerima. Radio untuk satu pilihan dari beberapa opsi yang perlu dibaca berdampingan. Button Group untuk saringan atau opsi singkat yang saling meniadakan; tiap tombol memakai <code>aria-pressed</code>.</p>
+      <pre class="kode"><code>&lt;label class=&quot;ina-checkbox&quot; for=&quot;setuju&quot;&gt;
+  &lt;input type=&quot;checkbox&quot; id=&quot;setuju&quot; class=&quot;ina-checkbox__input peer&quot;&gt;
+  &lt;div class=&quot;ina-checkbox__box ina-checkbox__box--unchecked&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;ina-checkbox__content&quot;&gt;&lt;span class=&quot;ina-checkbox__label&quot;&gt;Saya sudah memastikan minuta akta final dan data order benar.&lt;/span&gt;&lt;/div&gt;
+&lt;/label&gt;
+
+&lt;div class=&quot;ina-button-group&quot; role=&quot;group&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;ina-button-group__button ina-button-group__button--selected&quot; aria-pressed=&quot;true&quot;&gt;&lt;span class=&quot;ina-button-group__button-content&quot;&gt;Harta Sendiri&lt;/span&gt;&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;ina-button-group__button&quot; aria-pressed=&quot;false&quot;&gt;&lt;span class=&quot;ina-button-group__button-content&quot;&gt;Harta Bersama&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› Tambah Para Pihak</span></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#salinan">Backlog-IDDS-TN-EPPAT-Prototype#salinan</a> <span class="ket">› Kirim Salinan</span></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html#tema">Backlog-IDDS-TN-CMS-Prototype#tema</a></li></ul></div>
+    </article>
+    <article class="item" id="b3-9">
+      <div class="item-kepala"><h3><span class="no">3.9</span> Toggle</h3><div class="kodehe"><span>IDDS-TN-13</span><span>IDDS-TN-31</span></div></div>
+      <p class="aturan">Pakai Toggle untuk menyalakan atau mematikan fitur, bukan kotak centang. Toggle memakai <code>role=&quot;switch&quot;</code>, <code>aria-checked</code>, dan dapat dioperasikan dengan Spasi atau Enter. Bila mematikan fitur berdampak bagi user lain (misalnya menonaktifkan layanan akta atau mode pemeliharaan), minta konfirmasi lebih dulu.</p>
+      <pre class="kode"><code>&lt;span class=&quot;ina-toggle ina-toggle--size-sm ina-toggle--checked&quot; role=&quot;switch&quot; aria-checked=&quot;true&quot; tabindex=&quot;0&quot; id=&quot;aDaftar&quot; aria-label=&quot;Registrasi mandiri&quot;&gt;
+  &lt;span class=&quot;ina-toggle__track ina-toggle__track--checked&quot;&gt;&lt;span class=&quot;ina-toggle__thumb ina-toggle__thumb--checked&quot;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan">Backlog-IDDS-TN-SYSTEM-Prototype#pengaturan</a></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#profil">Backlog-IDDS-TN-EPPAT-Prototype#profil</a> <span class="ket">› Layanan Akta</span></li></ul></div>
+    </article>
+    <article class="item" id="b3-10">
+      <div class="item-kepala"><h3><span class="no">3.10</span> Input Search</h3><div class="kodehe"><span>HE-VERIF-04</span><span>IDDS-TN-32</span></div></div>
+      <p class="aturan">Pencarian daftar memakai IDDS Input Search dengan label &quot;Cari&quot; dan placeholder yang menyebut kolom yang dicari. Beri jeda (debounce) agar server tidak dipanggil pada setiap ketikan. Tampilkan jumlah hasil, misalnya &quot;Menampilkan 4 dari 12 order.&quot;</p>
+      <pre class="kode"><code>&lt;label class=&quot;ina-text-field__label&quot; for=&quot;cariOrder&quot;&gt;Cari&lt;/label&gt;
+&lt;div class=&quot;ina-input-search&quot;&gt;&lt;div class=&quot;ina-input-search__wrapper&quot;&gt;
+  &lt;span class=&quot;ina-input-search__search-icon&quot; aria-hidden=&quot;true&quot;&gt;…&lt;/span&gt;
+  &lt;input id=&quot;cariOrder&quot; class=&quot;ina-input-search__input&quot; type=&quot;search&quot; placeholder=&quot;Cari kode atau narahubung…&quot; autocomplete=&quot;off&quot;&gt;
+&lt;/div&gt;&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› daftar order</span></li><li><a href="Backlog-HE-VERIF-Prototype.html">Backlog-HE-VERIF-Prototype</a></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#salinan">Backlog-IDDS-TN-EPPAT-Prototype#salinan</a></li></ul></div>
+    </article>
+    <article class="item" id="b3-11">
+      <div class="item-kepala"><h3><span class="no">3.11</span> File Upload</h3><div class="kodehe"><span>IDDS-TN-23</span><span>IDDS-TN-33</span><span>HE-UMUM-03</span></div></div>
+      <p class="aturan">Unggahan memakai IDDS File Upload dengan seret-lepas. Zona unggah dapat difokus (<code>role=&quot;button&quot;</code>, <code>tabindex=&quot;0&quot;</code>) dan berlabel. Deskripsi menyebut format dan ukuran maksimal. Pesan galat tampil di bawah kotak (<code>ina-file-upload__error-message</code>) dan dihubungkan dengan <code>aria-describedby</code>.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-file-upload&quot;&gt;
+  &lt;div class=&quot;ina-file-upload__dropzone&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Unggah scan akta (PDF)&quot; aria-describedby=&quot;galatScan&quot;&gt;
+    &lt;div class=&quot;ina-file-upload__content&quot;&gt;&lt;div class=&quot;ina-file-upload__icon&quot;&gt;…&lt;/div&gt;
+      &lt;div class=&quot;ina-file-upload__text&quot;&gt;&lt;div class=&quot;ina-file-upload__title&quot;&gt;Seret berkas ke sini atau klik untuk memilih&lt;/div&gt;
+        &lt;div class=&quot;ina-file-upload__description&quot;&gt;PDF. Ukuran maksimal 20 MB.&lt;/div&gt;&lt;/div&gt;
+      &lt;span class=&quot;ina-file-upload__button&quot;&gt;Pilih Berkas&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;ina-file-upload__error-message&quot; id=&quot;galatScan&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#salinan">Backlog-IDDS-TN-EPPAT-Prototype#salinan</a> <span class="ket">› Detail</span></li><li><a href="Backlog-HE-USER-Prototype.html">Backlog-HE-USER-Prototype</a> <span class="ket">› Impor User</span></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html#media">Backlog-IDDS-TN-CMS-Prototype#media</a></li></ul></div>
+    </article>
+    <article class="item" id="b3-12">
+      <div class="item-kepala"><h3><span class="no">3.12</span> One-Time Password (OTP)</h3><div class="kodehe"><span>IDDS-TN-07</span><span>HE-EAW-04</span><span>HE-EAWK-05</span><span>HE-LOGIN-01</span></div></div>
+      <p class="aturan">Kode OTP memakai IDDS One-Time Password: enam kotak dengan <code>inputmode=&quot;numeric&quot;</code>, <code>maxlength=&quot;1&quot;</code>, dan label per kotak (&quot;Digit 1&quot;). Kelompok kotak berlabel dan dihubungkan ke teks bantuan ber-<code>aria-live</code>. Masa berlaku tampil sebagai Badge &quot;Kode berlaku m:ss&quot;.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-one-time-password&quot;&gt;
+  &lt;span class=&quot;ina-text-field__label&quot; id=&quot;lbl2fa&quot;&gt;Kode 6 digit&lt;span class=&quot;ina-text-field__required&quot;&gt;*&lt;/span&gt;&lt;/span&gt;
+  &lt;div class=&quot;ina-one-time-password__container&quot; role=&quot;group&quot; aria-labelledby=&quot;lbl2fa&quot; aria-describedby=&quot;otpPesan&quot;&gt;
+    &lt;input class=&quot;ina-one-time-password__input&quot; inputmode=&quot;numeric&quot; maxlength=&quot;1&quot; aria-label=&quot;Digit 1&quot; autocomplete=&quot;one-time-code&quot;&gt;
+    &lt;!-- … Digit 2 sampai 6 … --&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;ina-one-time-password__helper-text&quot; id=&quot;otpPesan&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a> <span class="ket">› Daftar · OTP</span></li><li><a href="Backlog-HE-EAW-Prototype.html">Backlog-HE-EAW-Prototype</a></li><li><a href="Backlog-HE-EAWK-Prototype.html">Backlog-HE-EAWK-Prototype</a></li><li><a href="Backlog-HE-ONBOARDING-Prototype.html">Backlog-HE-ONBOARDING-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b3-13">
+      <div class="item-kepala"><h3><span class="no">3.13</span> Badge: pemetaan status</h3><div class="kodehe"><span>HE-USER-01</span><span>HE-ORDER-04</span><span>IDDS-TN-27</span><span>IDDS-TN-32</span></div></div>
+      <p class="aturan">Status ditampilkan dengan IDDS Badge <code>ina-badge--soft ina-badge--md ina-badge--rounded-full</code> (sm di dalam tab atau sel padat). Status yang sama memakai varian yang sama di semua halaman, termasuk warna grafik Dashboard. Badge selalu berisi teks, bukan warna saja.</p>
+      <div class="tabel"><table><thead><tr><th scope="col">Status</th><th scope="col">Teks lencana</th><th scope="col">Varian Badge</th></tr></thead><tbody><tr><td>Order: BARU</td><td>Baru</td><td>neutral</td></tr><tr><td>Order: PENGUMPULAN</td><td>Pengumpulan</td><td>info</td></tr><tr><td>Order: SIAP</td><td>Siap</td><td>warning</td></tr><tr><td>Order: DRAFTING</td><td>Penyusunan</td><td>info (keputusan terbuka)</td></tr><tr><td>Order: SELESAI</td><td>Selesai</td><td>success</td></tr><tr><td>Akun: ACTIVE</td><td>Aktif</td><td>success</td></tr><tr><td>Akun: SUSPENDED</td><td>Ditangguhkan</td><td>warning</td></tr><tr><td>Akun: INACTIVE</td><td>Nonaktif</td><td>neutral</td></tr><tr><td>CA: active</td><td>CA aktif</td><td>success</td></tr><tr><td>CA: ekyc</td><td>Proses eKYC</td><td>info</td></tr><tr><td>CA: review</td><td>Menunggu verifikasi</td><td>info</td></tr><tr><td>CA: expired</td><td>Kedaluwarsa</td><td>warning</td></tr><tr><td>CA: revoked</td><td>Dicabut</td><td>error</td></tr><tr><td>CA: none</td><td>Belum registrasi</td><td>neutral</td></tr><tr><td>Salinan: terkirim</td><td>Terkirim</td><td>info</td></tr><tr><td>Salinan: dibuka</td><td>Dibuka</td><td>success</td></tr><tr><td>Salinan: gagal</td><td>Gagal</td><td>error</td></tr><tr><td>Salinan: revoked</td><td>Dicabut</td><td>neutral</td></tr><tr><td>Kolom Salinan</td><td>Belum ada scan / Siap dikirim / Terkirim ke N pihak</td><td>warning / info / info</td></tr><tr><td>Kelengkapan tab</td><td>Lengkap / Kurang N / Belum ada</td><td>success / warning / warning</td></tr></tbody></table></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› kolom Status</span></li><li><a href="Backlog-HE-USER-Prototype.html">Backlog-HE-USER-Prototype</a> <span class="ket">› kolom Status dan Status CA</span></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#salinan">Backlog-IDDS-TN-EPPAT-Prototype#salinan</a> <span class="ket">› Riwayat</span></li></ul></div>
+    </article>
+    <article class="item" id="b3-14">
+      <div class="item-kepala"><h3><span class="no">3.14</span> Badge: keputusan terbuka warna Penyusunan</h3><div class="kodehe"><span>IDDS-TN-27</span></div></div>
+      <p class="aturan">Di Permohonan AJB, Penyusunan dan Pengumpulan sama-sama memakai varian info, seperti di live. Grafik Dashboard Akta memakai warna brand untuk Penyusunan agar berbeda dari Pengumpulan. Tim perlu memilih satu aturan lalu menerapkannya di lencana dan grafik.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pilihan: Penyusunan = info (sama dengan live) atau Penyusunan = brand (beda dari Pengumpulan).</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› kolom Status</span></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard">Backlog-IDDS-TN-EPPAT-Prototype#dashboard</a></li></ul></div>
+    </article>
+    <article class="item" id="b3-15">
+      <div class="item-kepala"><h3><span class="no">3.15</span> Alert</h3><div class="kodehe"><span>HE-ORDER-01</span><span>HE-TERA-02</span><span>IDDS-TN-02</span></div></div>
+      <p class="aturan">Alert menyampaikan keadaan halaman atau bagian, bukan hasil sebuah klik. Pakai info untuk penjelasan atau langkah berikutnya, caution untuk syarat yang belum terpenuhi atau pengingat, critical untuk galat yang menghalangi (gagal masuk, gagal memuat), dan success untuk tahap yang sudah selesai. Alert boleh berisi tombol aksi. Pengingat yang dapat ditutup memakai <code>ina-alert__close-button</code> berlabel.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-alert ina-alert--caution&quot; role=&quot;status&quot;&gt;&lt;div class=&quot;ina-alert__content&quot;&gt;
+  &lt;div class=&quot;ina-alert__text-section&quot;&gt;
+    &lt;div class=&quot;ina-alert__title&quot;&gt;Syarat pindah ke Siap · 3 dari 5 terpenuhi&lt;/div&gt;
+    &lt;div class=&quot;ina-alert__description&quot;&gt;&lt;b&gt;Langkah berikutnya:&lt;/b&gt; Tambahkan pembeli di tab Para Pihak.&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› kartu status</span></li><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor">Backlog-IDDS-TN-SYSTEM-Prototype#dasbor</a> <span class="ket">› pengingat TERA</span></li><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a> <span class="ket">› Masuk · galat</span></li></ul></div>
+    </article>
+    <article class="item" id="b3-16">
+      <div class="item-kepala"><h3><span class="no">3.16</span> Modal, Modal Confirmation, atau Drawer</h3><div class="kodehe"><span>HE-ORDER-02</span><span>IDDS-TN-11</span><span>IDDS-TN-31</span></div></div>
+      <p class="aturan">Pakai Modal (<code>role=&quot;dialog&quot;</code>) untuk formulir singkat yang menjadi bagian alur, misalnya Tambah Objek. Pakai Modal Confirmation (<code>role=&quot;alertdialog&quot;</code>, kelas <code>ina-modal-confirmation</code>) untuk meminta persetujuan sebelum aksi berdampak. Pakai Drawer untuk konten pendamping yang tidak menghentikan pekerjaan, misalnya Bantuan. Jangan menumpuk lebih dari dua lapis dialog.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-modal&quot;&gt;&lt;div class=&quot;ina-modal__backdrop&quot;&gt;&lt;/div&gt;&lt;div class=&quot;ina-modal__container&quot;&gt;
+  &lt;div class=&quot;ina-modal__dialog ina-modal__dialog--size-md ina-modal-confirmation&quot; role=&quot;alertdialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;dlgJudul&quot;&gt;
+    &lt;div class=&quot;ina-modal__header&quot;&gt;&lt;h2 class=&quot;ina-modal__title&quot; id=&quot;dlgJudul&quot;&gt;Pindah ke Siap?&lt;/h2&gt;
+      &lt;button type=&quot;button&quot; class=&quot;ina-modal__close-button&quot; aria-label=&quot;Tutup dialog&quot;&gt;…&lt;/button&gt;&lt;/div&gt;
+    &lt;div class=&quot;ina-modal__body&quot;&gt;&lt;p&gt;Status order ORD-CONTOH-002 akan berubah dari Pengumpulan ke Siap.&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;ina-modal__footer&quot;&gt;
+      &lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--secondary ina-button--md&quot;&gt;Batal&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--primary ina-button--md&quot;&gt;Pindah ke Siap&lt;/button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› Pindah ke …</span></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html">Backlog-IDDS-TN-EPPAT-Prototype</a></li><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a> <span class="ket">› Kosongkan Formulir</span></li></ul></div>
+    </article>
+    <article class="item" id="b3-17">
+      <div class="item-kepala"><h3><span class="no">3.17</span> Toast</h3><div class="kodehe"><span>HE-USER-04</span><span>IDDS-TN-31</span></div></div>
+      <p class="aturan">Toast memberi umpan balik setelah aksi berhasil, misalnya &quot;Narahubung tersimpan.&quot; atau &quot;Akta Jual Beli diaktifkan.&quot;. Sebut nama item, bukan kode. Toast memakai <code>role=&quot;status&quot;</code>, hilang sendiri setelah sekitar 3 detik, dan punya tombol tutup berlabel. Jangan memakai Toast untuk galat isian; pesan galat isian tampil di bawah isian.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-toast ina-toast--state-positive ina-toast--style-solid ina-toast--visible&quot; role=&quot;status&quot;&gt;
+  &lt;div class=&quot;ina-toast__icon&quot;&gt;…&lt;/div&gt;
+  &lt;div class=&quot;ina-toast__content&quot;&gt;&lt;div class=&quot;ina-toast__text-area&quot;&gt;&lt;p class=&quot;ina-toast__title&quot;&gt;Objek ditambahkan.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;button class=&quot;ina-toast__close-button&quot; aria-label=&quot;Tutup notifikasi&quot;&gt;…&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#profil">Backlog-IDDS-TN-EPPAT-Prototype#profil</a> <span class="ket">› Layanan Akta</span></li></ul></div>
+    </article>
+    <article class="item" id="b3-18">
+      <div class="item-kepala"><h3><span class="no">3.18</span> Table dan Pagination</h3><div class="kodehe"><span>IDDS-TN-14</span><span>IDDS-TN-32</span></div></div>
+      <p class="aturan">Daftar memakai IDDS Table di dalam wadah berbingkai. Kolom aksi berada paling kanan. Di bawah tabel tampil &quot;Menampilkan 1–10 dari N&quot; dan IDDS Pagination. Tombol navigasi Pagination memakai <code>aria-label</code> &quot;Sebelumnya&quot; dan &quot;Berikutnya&quot;; tombol yang tidak dapat dipakai diberi <code>disabled</code>. Tajuk kolom ditulis lengkap, misalnya &quot;Tanggal Akta&quot;.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-table&quot;&gt;&lt;table class=&quot;ina-table__container&quot;&gt;
+  &lt;thead class=&quot;ina-table__header&quot;&gt;&lt;tr&gt;&lt;th class=&quot;ina-table__header-cell&quot;&gt;Kode&lt;/th&gt;…&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody class=&quot;ina-table__body&quot;&gt;&lt;tr class=&quot;ina-table__row ina-table__row--clickable&quot;&gt;…&lt;/tr&gt;&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+&lt;div class=&quot;ina-pagination&quot;&gt;&lt;div class=&quot;ina-pagination__nav-container&quot;&gt;
+  &lt;div class=&quot;ina-pagination__page-info&quot;&gt;Halaman 1 dari 1&lt;/div&gt;
+  &lt;div class=&quot;ina-pagination__nav-buttons&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;ina-pagination__nav-button ina-pagination__nav-button--disabled&quot; disabled aria-label=&quot;Sebelumnya&quot;&gt;…&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;ina-pagination__page-button ina-pagination__page-button--active&quot; aria-current=&quot;page&quot;&gt;1&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;ina-pagination__nav-button ina-pagination__nav-button--disabled&quot; disabled aria-label=&quot;Berikutnya&quot;&gt;…&lt;/button&gt;
+  &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› daftar order</span></li><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#logs">Backlog-IDDS-TN-SYSTEM-Prototype#logs</a></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#salinan">Backlog-IDDS-TN-EPPAT-Prototype#salinan</a></li></ul></div>
+    </article>
+    <article class="item" id="b3-19">
+      <div class="item-kepala"><h3><span class="no">3.19</span> Tab Horizontal</h3><div class="kodehe"><span>HE-ORDER-04</span><span>HE-TERA-03</span><span>IDDS-TN-19</span></div></div>
+      <p class="aturan">Tab memakai IDDS Tab Horizontal dengan warna brand (<code>ina-tab-horizontal--use-brand-color</code>). Wadah ber-<code>role=&quot;tablist&quot;</code>, tiap tab ber-<code>role=&quot;tab&quot;</code> dan <code>aria-selected</code>. Tab boleh memuat Badge kecil yang menunjukkan kelengkapan. Pindah tab tidak boleh membuang isian; simpan isian atau minta konfirmasi.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-tab-horizontal ina-tab-horizontal--use-brand-color&quot;&gt;
+  &lt;div class=&quot;ina-tab-horizontal__container&quot; role=&quot;tablist&quot;&gt;
+    &lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;true&quot; class=&quot;ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline ina-tab-horizontal__tab--selected&quot;&gt;
+      Para Pihak &lt;span class=&quot;ina-badge ina-badge--soft ina-badge--warning ina-badge--sm ina-badge--rounded-full&quot;&gt;Kurang 2&lt;/span&gt;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› tab detail order</span></li><li><a href="Backlog-HE-TERA-Prototype.html">Backlog-HE-TERA-Prototype</a></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html#tema">Backlog-IDDS-TN-CMS-Prototype#tema</a></li></ul></div>
+    </article>
+    <article class="item" id="b3-20">
+      <div class="item-kepala"><h3><span class="no">3.20</span> Stepper</h3><div class="kodehe"><span>HE-EAW-01</span><span>HE-TERA-07</span><span>HE-OB-05</span></div></div>
+      <p class="aturan">Proses bertahap memakai IDDS Stepper bernomor. Tiap langkah punya label dan keterangan singkat. Langkah selesai bertanda centang, langkah aktif diberi <code>aria-current=&quot;step&quot;</code>. Di layar sempit pakai versi vertikal. Bila tahap membutuhkan waktu, sebutkan perkiraan waktunya.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-stepper ina-stepper--horizontal&quot; role=&quot;list&quot; aria-label=&quot;Langkah pendaftaran&quot;&gt;
+  &lt;div class=&quot;ina-stepper__item ina-stepper__item--completed&quot; role=&quot;listitem&quot;&gt;…&lt;div class=&quot;ina-stepper__label&quot;&gt;Isi data&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;ina-stepper__separator ina-stepper__separator--completed&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;ina-stepper__item ina-stepper__item--active&quot; role=&quot;listitem&quot; aria-current=&quot;step&quot;&gt;
+    &lt;div class=&quot;ina-stepper__icon-wrapper&quot;&gt;&lt;span class=&quot;ina-stepper__step-number&quot;&gt;2&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;ina-stepper__label&quot;&gt;Verifikasi OTP&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› kartu status</span></li><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a> <span class="ket">› Daftar</span></li><li><a href="Backlog-HE-EAW-Prototype.html">Backlog-HE-EAW-Prototype</a></li><li><a href="Backlog-HE-TERA-Prototype.html">Backlog-HE-TERA-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b3-21">
+      <div class="item-kepala"><h3><span class="no">3.21</span> Tooltip</h3><div class="kodehe"><span>HE-MINUTA-01</span><span>HE-CA-03</span><span>IDDS-TN-31</span></div></div>
+      <p class="aturan">Tooltip hanya menambah penjelasan singkat untuk istilah. Pemicunya tombol kecil yang dapat difokus dan berlabel isi tooltip. Tooltip tampil saat hover dan saat fokus keyboard. Informasi penting seperti syarat, alasan tombol nonaktif, atau keterangan &quot;Segera hadir&quot; wajib tertulis di layar, bukan hanya di tooltip atau atribut <code>title</code>.</p>
+      <pre class="kode"><code>&lt;span class=&quot;ina-tooltip ina-tooltip--placement-top&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;tip&quot; aria-label=&quot;Saksi dibutuhkan 2 orang.&quot;&gt;?&lt;/button&gt;
+  &lt;span class=&quot;ina-tooltip__content&quot;&gt;&lt;span class=&quot;ina-tooltip__bubble&quot;&gt;Saksi dibutuhkan 2 orang.&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› Tambah Para Pihak</span></li><li><a href="Backlog-HE-MINUTA-Prototype.html">Backlog-HE-MINUTA-Prototype</a></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#profil">Backlog-IDDS-TN-EPPAT-Prototype#profil</a></li></ul></div>
+    </article>
+    <article class="item" id="b3-22">
+      <div class="item-kepala"><h3><span class="no">3.22</span> Action Dropdown</h3><div class="kodehe"><span>HE-USER-04</span></div></div>
+      <p class="aturan">Aksi tambahan per baris dikumpulkan dalam IDDS Action Dropdown. Pemicunya berlabel nama item, misalnya &quot;Aksi untuk Contoh Klien Dua&quot;, dengan <code>aria-haspopup=&quot;menu&quot;</code> dan <code>aria-expanded</code>. Panel memakai <code>role=&quot;menu&quot;</code> dan tiap item <code>role=&quot;menuitem&quot;</code> dengan ikon serta label kata kerja.</p>
+      <pre class="kode"><code>&lt;span class=&quot;ina-action-dropdown&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--secondary ina-button--sm&quot; aria-haspopup=&quot;menu&quot; aria-expanded=&quot;true&quot; aria-label=&quot;Aksi untuk Contoh Klien Dua&quot;&gt;…&lt;/button&gt;
+  &lt;div class=&quot;ina-action-dropdown__menu ina-action-dropdown__menu--visible&quot; role=&quot;menu&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;ina-action-dropdown__item&quot; role=&quot;menuitem&quot;&gt;&lt;span class=&quot;ina-action-dropdown__item-icon&quot;&gt;…&lt;/span&gt;&lt;span class=&quot;ina-action-dropdown__item-content&quot;&gt;Ubah Data&lt;/span&gt;&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;ina-action-dropdown__item&quot; role=&quot;menuitem&quot;&gt;&lt;span class=&quot;ina-action-dropdown__item-icon&quot;&gt;…&lt;/span&gt;&lt;span class=&quot;ina-action-dropdown__item-content&quot;&gt;Tangguhkan&lt;/span&gt;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/span&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-USER-Prototype.html">Backlog-HE-USER-Prototype</a> <span class="ket">› kolom Aksi</span></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html#posts">Backlog-IDDS-TN-CMS-Prototype#posts</a></li></ul></div>
+    </article>
+    <article class="item" id="b3-23">
+      <div class="item-kepala"><h3><span class="no">3.23</span> Accordion</h3><div class="kodehe"><span>HE-UMUM-02</span></div></div>
+      <p class="aturan">Pakai Accordion untuk pertanyaan umum dan isi panjang yang dapat dilipat. Tombol pembuka memakai <code>aria-expanded</code> dan <code>aria-controls</code>. Judul ditulis sebagai pertanyaan yang biasa diajukan pengguna.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-accordion&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;ina-accordion__toggle&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;faq-1&quot;&gt;
+    &lt;div class=&quot;ina-accordion__title&quot;&gt;Mengapa tombol &quot;Pindah ke …&quot; tidak bisa ditekan?&lt;/div&gt;
+    &lt;div class=&quot;ina-accordion__toggler&quot;&gt;&lt;svg class=&quot;ina-accordion__icon&quot; aria-hidden=&quot;true&quot;&gt;…&lt;/svg&gt;&lt;/div&gt;&lt;/button&gt;
+  &lt;div id=&quot;faq-1&quot; class=&quot;ina-accordion__content&quot;&gt;&lt;div class=&quot;ina-accordion__body&quot;&gt;&lt;p&gt;Masih ada syarat yang belum terpenuhi. …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› Bantuan › Pertanyaan umum</span></li></ul></div>
+    </article>
+  </section>
+<section class="bagian" id="b4" aria-labelledby="h-b4">
+    <h2 id="h-b4"><span class="no">4</span>Pola interaksi dari saran HE</h2>
+    <article class="item" id="b4-1">
+      <div class="item-kepala"><h3><span class="no">4.1</span> Pesan galat di bawah isian</h3><div class="kodehe"><span>IDDS-TN-02</span><span>HE-CA-06</span><span>HE-ORDER-07</span></div></div>
+      <p class="aturan">Pesan galat isian tampil di bawah isian yang bermasalah, bukan di Toast atau kotak terpisah. Saat pesan galat muncul, beri kelas status galat pada wrapper, pasang <code>aria-invalid=&quot;true&quot;</code>, dan isi teks galat di elemen yang dirujuk <code>aria-describedby</code>. Saat isian diperbaiki, pesan galat hilang dan teks bantuan semula kembali.</p>
+      <pre class="kode"><code>function galat(id, pesan) {
+  document.querySelector('#f-' + id + ' .ina-text-field__wrapper').classList.add('ina-text-field__wrapper--status-error');
+  document.getElementById(id).setAttribute('aria-invalid', 'true');
+  const h = document.getElementById('h-' + id);
+  h.textContent = pesan; h.classList.add('ina-text-field__helper-text--error');
+}
+// saat input: hapus kelas galat, removeAttribute('aria-invalid'), kembalikan teks bantuan</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a> <span class="ket">› Daftar</span></li><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› Tambah Objek</span></li><li><a href="Backlog-HE-CA-Prototype.html">Backlog-HE-CA-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b4-2">
+      <div class="item-kepala"><h3><span class="no">4.2</span> Waktu validasi</h3><div class="kodehe"><span>HE-TERA-05</span><span>IDDS-TN-29</span></div></div>
+      <p class="aturan">Periksa format isian saat pengguna meninggalkan isian (focusout), misalnya email dan nomor WhatsApp. Saat Simpan, periksa semua isian sekaligus, tampilkan semua pesan galat, lalu pindahkan fokus ke isian pertama yang salah. Jangan memvalidasi setiap ketikan sebelum pengguna selesai mengisi.</p>
+      <pre class="kode"><code>form.addEventListener('focusout', e =&gt; { if (e.target.matches('input[type=email]')) cekEmail(e.target); });
+
+// saat Simpan
+if (adaGalat) { document.querySelector('[aria-invalid=&quot;true&quot;]').focus(); return; }</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#profil">Backlog-IDDS-TN-EPPAT-Prototype#profil</a></li><li><a href="Backlog-HE-TERA-Prototype.html">Backlog-HE-TERA-Prototype</a></li><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a> <span class="ket">› Daftar</span></li></ul></div>
+    </article>
+    <article class="item" id="b4-3">
+      <div class="item-kepala"><h3><span class="no">4.3</span> Pesan galat sistem di dalam kartu</h3><div class="kodehe"><span>IDDS-TN-02</span><span>HE-LOGIN-02</span></div></div>
+      <p class="aturan">Pesan galat dari server yang tidak terkait dengan satu isian (misalnya email atau kata sandi salah) tampil sebagai Alert critical di dalam kartu, di atas isian. Pesan menyebut penyebab dan cara memperbaiki.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Gagal masuk — Email atau kata sandi salah. Periksa kembali, lalu coba lagi.</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a> <span class="ket">› Masuk · galat</span></li><li><a href="Backlog-HE-ONBOARDING-Prototype.html">Backlog-HE-ONBOARDING-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b4-4">
+      <div class="item-kepala"><h3><span class="no">4.4</span> Konfirmasi aksi berdampak</h3><div class="kodehe"><span>HE-ORDER-02</span><span>HE-EAW-03</span><span>HE-EAWK-04</span><span>HE-VERIF-03</span><span>IDDS-TN-34</span></div></div>
+      <p class="aturan">Aksi yang mengubah status, menghapus, mengirim, atau tidak dapat dibatalkan memakai Modal Confirmation. Judul berupa pertanyaan (&quot;Hapus pihak?&quot;). Isi menyebut nama item, dampaknya, dan kalimat &quot;Tindakan ini tidak dapat dibatalkan.&quot; bila berlaku. Label tombol aksi sama dengan kata kerja di judul. Untuk aksi yang mengunci data atau tidak dapat dikembalikan, tombol aksi baru aktif setelah pengguna mencentang pernyataan.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Judul: Tandai order Selesai?</p><p>Isi: Setelah ditandai Selesai, data order dikunci dan status tidak dapat dikembalikan.</p><p>Centang: Saya sudah memastikan minuta akta final dan data order benar.</p><p>Tombol: Batal · Tandai Selesai</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› Pindah ke Selesai</span></li><li><a href="Backlog-HE-EAW-Prototype.html">Backlog-HE-EAW-Prototype</a> <span class="ket">› Bubuhkan</span></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#salinan">Backlog-IDDS-TN-EPPAT-Prototype#salinan</a> <span class="ket">› Cabut Tautan</span></li></ul></div>
+    </article>
+    <article class="item" id="b4-5">
+      <div class="item-kepala"><h3><span class="no">4.5</span> Penjaga perubahan belum disimpan</h3><div class="kodehe"><span>IDDS-TN-13</span><span>IDDS-TN-19</span><span>IDDS-TN-22</span><span>IDDS-TN-29</span><span>HE-TERA-03</span></div></div>
+      <p class="aturan">Formulir panjang menampilkan status simpan di dekat tombol Simpan dengan <code>aria-live=&quot;polite&quot;</code> (&quot;2 perubahan belum disimpan&quot; / &quot;Semua perubahan sudah disimpan&quot;). Bila pengguna pindah menu dengan perubahan yang belum disimpan, tampilkan dialog &quot;Tinggalkan halaman ini?&quot; dengan tombol &quot;Tetap di Sini&quot; dan &quot;Tinggalkan&quot;. Pasang juga <code>beforeunload</code>. Menutup formulir di dalam Modal yang sudah diisi meminta konfirmasi &quot;Buang perubahan?&quot;.</p>
+      <pre class="kode"><code>window.addEventListener('beforeunload', e =&gt; { if (adaPerubahan()) { e.preventDefault(); e.returnValue = ''; } });
+
+Judul: Tinggalkan halaman ini?
+Isi: Ada 2 perubahan pengaturan yang belum disimpan. Perubahan itu akan hilang jika Anda meninggalkan halaman ini.
+Tombol: Tetap di Sini · Tinggalkan</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan">Backlog-IDDS-TN-SYSTEM-Prototype#pengaturan</a></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html#tema">Backlog-IDDS-TN-CMS-Prototype#tema</a></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#profil">Backlog-IDDS-TN-EPPAT-Prototype#profil</a></li><li><a href="Backlog-HE-TERA-Prototype.html">Backlog-HE-TERA-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b4-6">
+      <div class="item-kepala"><h3><span class="no">4.6</span> Aksi selalu terlihat</h3><div class="kodehe"><span>IDDS-TN-18</span><span>IDDS-TN-23</span></div></div>
+      <p class="aturan">Tombol aksi pada baris, kartu, atau blok selalu tampil, bukan hanya saat kursor berada di atasnya. Pengguna layar sentuh dan keyboard tidak dapat memakai aksi yang hanya muncul saat hover.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Blok Halaman Depan: tombol Naik, Turun, Duplikat, dan Hapus tampil tetap di kepala blok.</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-CMS-Prototype.html#landing">Backlog-IDDS-TN-CMS-Prototype#landing</a> <span class="ket">› Penyusun tata letak</span></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html#media">Backlog-IDDS-TN-CMS-Prototype#media</a></li></ul></div>
+    </article>
+    <article class="item" id="b4-7">
+      <div class="item-kepala"><h3><span class="no">4.7</span> Tombol ikon menyebut nama item</h3><div class="kodehe"><span>IDDS-TN-18</span><span>IDDS-TN-33</span></div></div>
+      <p class="aturan">Tombol yang hanya berisi ikon wajib memakai <code>aria-label</code> yang menyebut aksi dan nama itemnya. Label yang sama boleh dipasang di <code>title</code> sebagai tooltip bawaan.</p>
+      <pre class="kode"><code>&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--tertiary ina-button--sm&quot; aria-label=&quot;Hapus akta-ttd-contoh.pdf&quot; title=&quot;Hapus akta-ttd-contoh.pdf&quot;&gt;…&lt;/button&gt;
+&lt;button … aria-label=&quot;Ubah Beranda&quot;&gt;…&lt;/button&gt;
+&lt;button … aria-label=&quot;Cabut tautan untuk Contoh Pembeli Satu&quot;&gt;Cabut Tautan&lt;/button&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#salinan">Backlog-IDDS-TN-EPPAT-Prototype#salinan</a> <span class="ket">› Detail</span></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html#posts">Backlog-IDDS-TN-CMS-Prototype#posts</a></li></ul></div>
+    </article>
+    <article class="item" id="b4-8">
+      <div class="item-kepala"><h3><span class="no">4.8</span> Status sistem terlihat</h3><div class="kodehe"><span>IDDS-TN-07</span><span>HE-EAW-04</span><span>IDDS-TN-35</span><span>HE-TERA-07</span><span>HE-CA-01</span></div></div>
+      <p class="aturan">Tampilkan keadaan yang sedang berlangsung di layar. Untuk OTP, Badge &quot;Kode berlaku m:ss&quot; (brand) berubah kuning saat sisa waktu kurang dari 1 menit, lalu merah &quot;Waktu habis&quot;. Saat kode kedaluwarsa, kolom kode dan tombol Verifikasi dinonaktifkan, dan &quot;Kirim ulang dalam 0:59&quot; tampil sejak kode dikirim. Untuk e-Meterai, kartu status menampilkan Badge &quot;Belum diaktifkan&quot; atau &quot;Aktif&quot; beserta email tersimpan. Untuk TERA dan registrasi CA, tampilkan tahapan beserta perkiraan waktunya. Durasi OTP di prototipe adalah angka contoh; ambil nilainya dari server.</p>
+      <pre class="kode"><code>&lt;span class=&quot;ina-badge ina-badge--soft ina-badge--brand ina-badge--md ina-badge--rounded-full&quot;&gt;Kode berlaku 4:59&lt;/span&gt;
+&lt;span class=&quot;ina-badge ina-badge--soft ina-badge--warning …&quot;&gt;Kode berlaku 0:45&lt;/span&gt;
+&lt;span class=&quot;ina-badge ina-badge--soft ina-badge--error …&quot;&gt;Waktu habis&lt;/span&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a> <span class="ket">› Daftar · OTP</span></li><li><a href="Backlog-HE-EAW-Prototype.html">Backlog-HE-EAW-Prototype</a></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai">Backlog-IDDS-TN-EPPAT-Prototype#emeterai</a></li><li><a href="Backlog-HE-TERA-Prototype.html">Backlog-HE-TERA-Prototype</a></li><li><a href="Backlog-HE-CA-Prototype.html">Backlog-HE-CA-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b4-9">
+      <div class="item-kepala"><h3><span class="no">4.9</span> Cegah kesalahan dan jelaskan tombol nonaktif</h3><div class="kodehe"><span>IDDS-TN-33</span><span>HE-ORDER-01</span></div></div>
+      <p class="aturan">Nonaktifkan tombol bila syaratnya belum terpenuhi, lalu tulis alasannya sebagai teks di dekat tombol. Hubungkan teks itu dengan <code>aria-describedby</code>. Jangan menaruh alasan di atribut <code>title</code> saja.</p>
+      <pre class="kode"><code>&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--secondary ina-button--md&quot; disabled aria-describedby=&quot;alasanKirim&quot;&gt;Kirim Salinan&lt;/button&gt;
+&lt;p id=&quot;alasanKirim&quot;&gt;Unggah scan akta yang sudah ditandatangani untuk mengaktifkan Kirim Salinan.&lt;/p&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#salinan">Backlog-IDDS-TN-EPPAT-Prototype#salinan</a> <span class="ket">› Detail</span></li><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› kartu status</span></li></ul></div>
+    </article>
+    <article class="item" id="b4-10">
+      <div class="item-kepala"><h3><span class="no">4.10</span> Syarat dan langkah berikutnya terlihat</h3><div class="kodehe"><span>HE-ORDER-01</span><span>HE-ORDER-05</span><span>HE-ORDER-08</span><span>HE-EAWK-03</span></div></div>
+      <p class="aturan">Sebelum pengguna menekan tombol pindah tahap, tampilkan daftar syarat dengan tanda terpenuhi atau belum, tautan &quot;Lengkapi&quot; untuk syarat yang kurang, dan satu kalimat &quot;Langkah berikutnya&quot;.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Syarat pindah ke Siap · 4 dari 5 terpenuhi — Objek tanah (Lengkapi). Langkah berikutnya: Tambahkan objek tanah di tab Objek.</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› kartu status</span></li><li><a href="Backlog-HE-EAWK-Prototype.html">Backlog-HE-EAWK-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b4-11">
+      <div class="item-kepala"><h3><span class="no">4.11</span> Kurangi langkah berulang</h3><div class="kodehe"><span>HE-ORDER-03</span><span>HE-USER-02</span><span>HE-UMUM-03</span></div></div>
+      <p class="aturan">Sediakan jalan pintas untuk pekerjaan berulang. Contoh: &quot;Simpan &amp; Tambah Lagi&quot; di dialog Tambah Para Pihak, aksi massal Aktifkan/Tangguhkan untuk user terpilih, dan impor user dari berkas.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Tombol dialog: Batal · Simpan &amp; Tambah Lagi · Simpan</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› Tambah Para Pihak</span></li><li><a href="Backlog-HE-USER-Prototype.html">Backlog-HE-USER-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b4-12">
+      <div class="item-kepala"><h3><span class="no">4.12</span> Bantuan di setiap halaman</h3><div class="kodehe"><span>HE-UMUM-02</span><span>HE-USER-01</span><span>HE-VERIF-01</span><span>HE-CA-03</span></div></div>
+      <p class="aturan">Setiap halaman punya tombol Bantuan (lihat bagian 2). Istilah teknis di formulir (CA, eKYC, TERA, NJOP, renvoi) dijelaskan dengan teks bantuan atau Tooltip di dekat istilahnya.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Status CA — Status sertifikat elektronik (CA) dari Peruri. CA aktif diperlukan agar user dapat menandatangani akta secara elektronik.</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-USER-Prototype.html">Backlog-HE-USER-Prototype</a> <span class="ket">› kolom Status CA</span></li><li><a href="Backlog-HE-CA-Prototype.html">Backlog-HE-CA-Prototype</a></li><li><a href="Backlog-HE-VERIF-Prototype.html">Backlog-HE-VERIF-Prototype</a></li></ul></div>
+    </article>
+  </section>
+<section class="bagian" id="b5" aria-labelledby="h-b5">
+    <h2 id="h-b5"><span class="no">5</span>Aksesibilitas</h2>
+    <article class="item" id="b5-1">
+      <div class="item-kepala"><h3><span class="no">5.1</span> Label dan isian terhubung</h3><div class="kodehe"><span>IDDS-TN-29</span></div></div>
+      <p class="aturan">Setiap isian punya <code>&lt;label for&gt;</code> yang cocok dengan <code>id</code> isian. Kelompok isian tanpa label tunggal (OTP, Button Group) memakai <code>role=&quot;group&quot;</code> dengan <code>aria-labelledby</code> atau <code>aria-label</code>. Atur <code>autocomplete</code> yang tepat (username, current-password, new-password, email, tel, one-time-code).</p>
+      <pre class="kode"><code>&lt;label class=&quot;ina-text-field__label&quot; for=&quot;mEmail&quot;&gt;Email&lt;/label&gt; … &lt;input id=&quot;mEmail&quot; autocomplete=&quot;username&quot;&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a> <span class="ket">› Masuk</span></li></ul></div>
+    </article>
+    <article class="item" id="b5-2">
+      <div class="item-kepala"><h3><span class="no">5.2</span> Peran ARIA untuk tab, menu, dan dialog</h3></div>
+      <p class="aturan">Tab: <code>role=&quot;tablist&quot;</code>, <code>role=&quot;tab&quot;</code>, <code>aria-selected</code>. Menu aksi: <code>role=&quot;menu&quot;</code> dan <code>role=&quot;menuitem&quot;</code>. Dialog: <code>role=&quot;dialog&quot;</code> atau <code>role=&quot;alertdialog&quot;</code> dengan <code>aria-modal=&quot;true&quot;</code> dan <code>aria-labelledby</code> ke judulnya. Toggle: <code>role=&quot;switch&quot;</code> dengan <code>aria-checked</code>. Halaman aktif di sidebar dan Pagination: <code>aria-current=&quot;page&quot;</code>.</p>
+      <pre class="kode"><code>&lt;div class=&quot;ina-modal__dialog&quot; role=&quot;alertdialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;dlgJudul&quot;&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a></li><li><a href="Backlog-HE-USER-Prototype.html">Backlog-HE-USER-Prototype</a></li><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan">Backlog-IDDS-TN-SYSTEM-Prototype#pengaturan</a></li></ul></div>
+    </article>
+    <article class="item" id="b5-3">
+      <div class="item-kepala"><h3><span class="no">5.3</span> Keyboard</h3><div class="kodehe"><span>IDDS-TN-13</span><span>IDDS-TN-14</span></div></div>
+      <p class="aturan">Semua aksi dapat dijalankan dengan keyboard. Enter dan Spasi menjalankan tombol, Toggle, dan zona unggah. Esc menutup dropdown, dialog, dan Drawer (dialog paling atas lebih dulu). Pada Select Dropdown, panah atas dan bawah berpindah pilihan, lalu Enter atau Spasi memilih. Pada tab, perpindahan dengan tombol panah disarankan sesuai pola WAI-ARIA; sebagian prototipe saat ini hanya mendukung klik dan Enter.</p>
+      <pre class="kode"><code>if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); opsi[ke].focus(); }
+if (e.key === 'Escape') { tutupPanel(); pemicu.focus(); }</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#logs">Backlog-IDDS-TN-SYSTEM-Prototype#logs</a> <span class="ket">› Jenis aktivitas</span></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html">Backlog-IDDS-TN-CMS-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b5-4">
+      <div class="item-kepala"><h3><span class="no">5.4</span> Fokus terlihat</h3></div>
+      <p class="aturan">Jangan menghapus garis fokus (<code>outline: none</code>) tanpa pengganti. Pakai cincin fokus bawaan IDDS yang memakai warna brand. Elemen klik buatan (baris tabel, zona unggah) wajib dapat difokus.</p>
+      <pre class="kode"><code>/* Salah */ button:focus { outline: none; }</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Brand-Mode-EPPAT-IDDS.html">Brand-Mode-EPPAT-IDDS</a></li></ul></div>
+    </article>
+    <article class="item" id="b5-5">
+      <div class="item-kepala"><h3><span class="no">5.5</span> Arah fokus saat dialog dibuka dan ditutup</h3></div>
+      <p class="aturan">Saat dialog dibuka, fokus pindah ke isian pertama atau tombol Tutup. Saat galat, fokus pindah ke isian pertama yang salah. Saat dropdown, dialog, atau Drawer ditutup, kembalikan fokus ke tombol pemicunya agar pengguna keyboard tidak kehilangan posisi.</p>
+      <pre class="kode"><code>const pemicu = document.activeElement;
+bukaDialog();
+// saat ditutup
+pemicu.focus();</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#logs">Backlog-IDDS-TN-SYSTEM-Prototype#logs</a></li><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› Bantuan</span></li></ul></div>
+    </article>
+    <article class="item" id="b5-6">
+      <div class="item-kepala"><h3><span class="no">5.6</span> Pesan asinkron dibacakan</h3></div>
+      <p class="aturan">Pesan yang muncul tanpa pindah halaman memakai wilayah langsung: <code>role=&quot;status&quot;</code> atau <code>aria-live=&quot;polite&quot;</code> untuk Toast, jumlah hasil pencarian, status simpan, dan teks bantuan OTP; <code>role=&quot;alert&quot;</code> untuk pesan galat yang perlu segera diketahui. Hitung mundur OTP memakai <code>aria-live=&quot;off&quot;</code> agar tidak dibacakan setiap detik.</p>
+      <pre class="kode"><code>&lt;p class=&quot;ringkas-saring&quot; aria-live=&quot;polite&quot;&gt;Menampilkan 4 dari 12 order.&lt;/p&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-VERIF-Prototype.html">Backlog-HE-VERIF-Prototype</a></li><li><a href="Backlog-HE-EAW-Prototype.html">Backlog-HE-EAW-Prototype</a> <span class="ket">› dialog OTP</span></li><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan">Backlog-IDDS-TN-SYSTEM-Prototype#pengaturan</a></li></ul></div>
+    </article>
+    <article class="item" id="b5-7">
+      <div class="item-kepala"><h3><span class="no">5.7</span> Warna bukan satu-satunya tanda</h3><div class="kodehe"><span>HE-ORDER-04</span></div></div>
+      <p class="aturan">Status, galat, dan kelengkapan selalu disertai teks atau ikon, tidak hanya warna. Contoh: lencana berisi kata, syarat memakai ikon centang atau seru, galat berisi kalimat.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Badge &quot;Kurang 2&quot; (warning) + ikon seru; teks galat &quot;Email wajib diisi.&quot;</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› kolom Kelengkapan</span></li></ul></div>
+    </article>
+    <article class="item" id="b5-8">
+      <div class="item-kepala"><h3><span class="no">5.8</span> Bahasa dokumen dan gambar</h3></div>
+      <p class="aturan">Pasang <code>lang=&quot;id&quot;</code> pada <code>&lt;html&gt;</code>. Logo dan gambar bermakna punya <code>alt</code>; ikon hiasan diberi <code>aria-hidden=&quot;true&quot;</code>.</p>
+      <pre class="kode"><code>&lt;img src=&quot;logo.png&quot; alt=&quot;E-PPAT&quot;&gt;  &lt;svg aria-hidden=&quot;true&quot;&gt;…&lt;/svg&gt;</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a></li></ul></div>
+    </article>
+  </section>
+<section class="bagian" id="b6" aria-labelledby="h-b6">
+    <h2 id="h-b6"><span class="no">6</span>Bahasa dan pedoman penulisan</h2>
+    <article class="item" id="b6-1">
+      <div class="item-kepala"><h3><span class="no">6.1</span> Kata baku</h3><div class="kodehe"><span>IDDS-TN-06</span><span>IDDS-TN-16</span><span>IDDS-TN-26</span><span>IDDS-TN-37</span></div></div>
+      <p class="aturan">Pakai kata baku sesuai KBBI dan EYD V. Istilah teknis yang belum punya padanan umum (OTP, CA, eKYC, PDF) boleh dipakai dan dijelaskan di Bantuan.</p>
+      <div class="tabel"><table><thead><tr><th scope="col">Hindari</th><th scope="col">Pakai</th></tr></thead><tbody><tr><td>password</td><td>kata sandi</td></tr><tr><td>upload / download</td><td>unggah / unduh</td></tr><tr><td>Non-aktif / non aktif</td><td>nonaktif</td></tr><tr><td>kadaluarsa / kadaluwarsa</td><td>kedaluwarsa</td></tr><tr><td>e-Meterai / e-Meterai</td><td>e-Meterai</td></tr><tr><td>field wajib</td><td>isian wajib</td></tr><tr><td>Sukses</td><td>Berhasil</td></tr><tr><td>Login / Logout</td><td>Masuk / Keluar</td></tr><tr><td>Refresh sesi</td><td>Sesi diperpanjang</td></tr><tr><td>Buat role / Pilih Role</td><td>Tambah peran / Peran</td></tr><tr><td>Save Layout</td><td>Simpan Tata Letak</td></tr><tr><td>Code/Name, Excerpt, Tags, Density</td><td>Kode/Nama, Ringkasan, Tag, Kerapatan</td></tr><tr><td>Segera</td><td>Segera hadir</td></tr></tbody></table></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html">Backlog-IDDS-TN-SYSTEM-Prototype</a></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html">Backlog-IDDS-TN-CMS-Prototype</a></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html">Backlog-IDDS-TN-EPPAT-Prototype</a></li><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b6-2">
+      <div class="item-kepala"><h3><span class="no">6.2</span> Catatan sisa istilah lama di prototipe</h3><div class="kodehe"><span>HE-USER-03</span><span>IDDS-TN-26</span></div></div>
+      <p class="aturan">Beberapa label prototipe masih mengikuti live dan perlu diseragamkan saat implementasi: Daftar Pengguna masih menulis &quot;Password Awal&quot;, &quot;Reset Password&quot;, dan &quot;Non-aktif&quot;; layar Masuk dan Akun Saya sudah memakai &quot;Kata Sandi&quot;. Pakai bentuk baku di kode baru.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Password Awal → Kata Sandi Awal; Reset Password → Atur Ulang Kata Sandi; Non-aktif → Nonaktif</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-USER-Prototype.html">Backlog-HE-USER-Prototype</a> <span class="ket">› Tambah User</span></li><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b6-3">
+      <div class="item-kepala"><h3><span class="no">6.3</span> User dan calon pengguna</h3><div class="kodehe"><span>IDDS-TN-16</span></div></div>
+      <p class="aturan">Pakai &quot;user&quot; untuk akun yang sudah terdaftar di aplikasi, sesuai nama menu Daftar Pengguna. Pakai &quot;calon pengguna&quot; untuk orang yang belum punya akun, misalnya pada pendaftaran mandiri. Pakai &quot;pengguna&quot; dalam kalimat umum tentang orang yang memakai layar.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Peran ini dapat diberikan kepada user.</p><p>Saat aktif, calon pengguna dapat mendaftar sendiri ke kantor PPAT ini melalui halaman registrasi.</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#peran">Backlog-IDDS-TN-SYSTEM-Prototype#peran</a></li><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan">Backlog-IDDS-TN-SYSTEM-Prototype#pengaturan</a></li></ul></div>
+    </article>
+    <article class="item" id="b6-4">
+      <div class="item-kepala"><h3><span class="no">6.4</span> Huruf kapital</h3><div class="kodehe"><span>IDDS-TN-06</span></div></div>
+      <p class="aturan">Label tombol memakai Huruf Kapital di Setiap Kata, kecuali kata tugas (dan, ke, di, untuk). Judul halaman dan judul kartu mengikuti nama menu. Judul dialog, pesan, teks bantuan, dan isi Toast memakai huruf kapital hanya di awal kalimat dan nama diri.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Tombol: Buat Permohonan · Simpan &amp; Tambah Lagi · Kembali ke Halaman Masuk · Muat Ulang · Coba Lagi</p><p>Dialog: Hapus pihak?</p><p>Toast: Narahubung tersimpan.</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a></li><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b6-5">
+      <div class="item-kepala"><h3><span class="no">6.5</span> Pola pesan galat</h3><div class="kodehe"><span>IDDS-TN-02</span><span>HE-CA-06</span><span>HE-LOGIN-02</span></div></div>
+      <p class="aturan">Pesan galat singkat, menyebut nama isian, dan menunjukkan cara memperbaiki. Pakai pola baku berikut dan akhiri dengan titik.</p>
+      <pre class="kode"><code>Isian kosong: &lt;Nama isian&gt; wajib diisi.   → Email wajib diisi.
+Pilihan kosong: &lt;Nama isian&gt; wajib dipilih.   → Peran wajib dipilih.
+Format salah: Format &lt;nama isian&gt; tidak valid. Contoh: &lt;contoh&gt;.   → Format email tidak valid. Contoh: nama@contoh.id.
+Aturan khusus: Nomor WhatsApp harus diawali 62 dan terdiri atas 10–14 digit. Contoh: 6281200000000.
+Persetujuan: Centang persetujuan ketentuan layanan untuk melanjutkan.</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a> <span class="ket">› Daftar</span></li><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› Tambah Objek</span></li></ul></div>
+    </article>
+    <article class="item" id="b6-6">
+      <div class="item-kepala"><h3><span class="no">6.6</span> Kalimat SPOK yang manusiawi</h3><div class="kodehe"><span>IDDS-TN-26</span><span>IDDS-TN-37</span></div></div>
+      <p class="aturan">Tulis kalimat pendek dengan subjek dan predikat yang jelas. Sapa pengguna dengan &quot;Anda&quot;. Hindari kalimat pasif bertumpuk dan istilah developer (DOMPurify, sanitize, WYSIWYG, RBAC, siblings, di-assign). Catatan untuk tim tidak ditampilkan di layar aplikasi.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Benar: Unggah scan akta yang sudah ditandatangani untuk mengaktifkan Kirim Salinan.</p><p>Salah: Fitur kirim di-disable karena file scan belum ter-upload.</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#salinan">Backlog-IDDS-TN-EPPAT-Prototype#salinan</a></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html">Backlog-IDDS-TN-CMS-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b6-7">
+      <div class="item-kepala"><h3><span class="no">6.7</span> Tanda baca</h3></div>
+      <p class="aturan">Kalimat pesan, subjudul, dan teks bantuan diakhiri titik. Label isian, label tombol, judul kolom, dan teks lencana tidak diakhiri titik. Judul konfirmasi diakhiri tanda tanya. Pakai elipsis &quot;…&quot; untuk placeholder pencarian dan label proses (&quot;Memverifikasi…&quot;). Pakai tanda pisah pendek &quot;–&quot; untuk rentang (Senin–Jumat, 1–10). Pakai &quot;·&quot; sebagai pemisah ringkas dalam satu baris.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Placeholder: Cari kode atau narahubung…</p><p>Rentang: Menampilkan 1–10 dari 24</p><p>Pemisah: SK · 1/KEP-CONTOH/2020</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b6-8">
+      <div class="item-kepala"><h3><span class="no">6.8</span> Tanggal, waktu, dan uang</h3><div class="kodehe"><span>IDDS-TN-13</span></div></div>
+      <p class="aturan">Di tabel dan lencana pakai tanggal singkat &quot;26 Okt 2026&quot;. Di kalimat pakai tanggal lengkap &quot;26 Oktober 2026&quot;. Waktu memakai titik dan zona waktu: &quot;09.25 WIB&quot; (WITA/WIT sesuai Pengaturan kantor). Uang memakai &quot;Rp&quot; tanpa spasi dan titik pemisah ribuan sesuai EYD V: &quot;Rp10.000&quot;; di React pakai <code>toLocaleString('id-ID')</code>.</p>
+      <pre class="kode"><code>const rp = n =&gt; 'Rp' + Number(n).toLocaleString('id-ID');   // Rp750.000.000
+Diperbarui pukul 09.25 WIB
+Dibuat 26 Okt 2026</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-VERIF-Prototype.html">Backlog-HE-VERIF-Prototype</a></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard">Backlog-IDDS-TN-EPPAT-Prototype#dashboard</a></li><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan">Backlog-IDDS-TN-SYSTEM-Prototype#pengaturan</a></li></ul></div>
+    </article>
+    <article class="item" id="b6-9">
+      <div class="item-kepala"><h3><span class="no">6.9</span> Keputusan terbuka: scan atau pindaian</h3><div class="kodehe"><span>IDDS-TN-32</span><span>IDDS-TN-33</span></div></div>
+      <p class="aturan">Prototipe Salinan Akta memakai &quot;scan&quot; pada label (&quot;Belum ada scan&quot;, &quot;Unggah scan akta&quot;) dan &quot;hasil pindai&quot; pada deskripsi. KBBI memadankan scan dengan &quot;pindai&quot;. Tim perlu memutuskan satu istilah, lalu menerapkannya di label, lencana, pesan, dan Bantuan.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pilihan: Belum ada scan · atau · Belum ada pindaian</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#salinan">Backlog-IDDS-TN-EPPAT-Prototype#salinan</a></li></ul></div>
+    </article>
+    <article class="item" id="b6-10">
+      <div class="item-kepala"><h3><span class="no">6.10</span> Keputusan terbuka: ejaan menu e-Meterai</h3><div class="kodehe"><span>IDDS-TN-37</span><span>HE-EAW-02</span></div></div>
+      <p class="aturan">Di teks dan pesan pakai &quot;e-Meterai&quot; (KBBI: meterai; penulisan Peruri). Nama menu sidebar &quot;Aktivasi e-Meterai&quot; belum diubah karena dipakai di semua menu; usulan &quot;Aktivasi e-Meterai&quot; menunggu keputusan tim. Prototipe Penandatanganan Akta masih menulis &quot;E-Meterai&quot; di awal label; seragamkan setelah keputusan.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Usulan menu: Aktivasi e-Meterai</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai">Backlog-IDDS-TN-EPPAT-Prototype#emeterai</a></li><li><a href="Backlog-HE-EAW-Prototype.html">Backlog-HE-EAW-Prototype</a></li></ul></div>
+    </article>
+  </section>
+<section class="bagian" id="b7" aria-labelledby="h-b7">
+    <h2 id="h-b7"><span class="no">7</span>Daftar periksa sebelum rilis</h2>
+    <article class="item" id="b7-1">
+      <div class="item-kepala"><h3><span class="no">7.1</span> Tema dan warna</h3><div class="kodehe"><span>HE-UMUM-01</span></div></div>
+      <p class="aturan">Salin daftar ini ke deskripsi PR.</p>
+      <pre class="kode cek" aria-label="Daftar periksa, dapat disalin ke deskripsi PR"><code>- [ ] CSS IDDS dimuat sebelum eppat.css dan &lt;html&gt; ber-data-brand=&quot;eppat&quot;
+- [ ] Warna memakai token var(--ina-…), tanpa heksadesimal baru dan tanpa !important luas
+- [ ] Teks lolos kontras 4,5:1 (teks besar dan batas komponen 3:1)
+- [ ] Lencana status memakai varian dari tabel pemetaan</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="../brand-eppat-idds/eppat.css">brand-eppat-idds/eppat.css</a></li></ul></div>
+    </article>
+    <article class="item" id="b7-2">
+      <div class="item-kepala"><h3><span class="no">7.2</span> Kerangka halaman</h3><div class="kodehe"><span>HE-UMUM-02</span></div></div>
+      <p class="aturan">Periksa setiap halaman baru atau yang diubah.</p>
+      <pre class="kode cek" aria-label="Daftar periksa, dapat disalin ke deskripsi PR"><code>- [ ] Breadcrumb, satu H1, dan subjudul satu kalimat SPOK bertitik
+- [ ] Tombol Bantuan di kanan judul membuka Drawer khusus halaman
+- [ ] Ada keadaan kosong, memuat, dan gagal (dengan Coba Lagi)
+- [ ] Halaman tidak bergeser ke samping di lebar 360 px; tabel lebar digulir di dalam wadahnya</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b7-3">
+      <div class="item-kepala"><h3><span class="no">7.3</span> Formulir</h3><div class="kodehe"><span>IDDS-TN-02</span><span>IDDS-TN-29</span></div></div>
+      <p class="aturan">Periksa setiap formulir.</p>
+      <pre class="kode cek" aria-label="Daftar periksa, dapat disalin ke deskripsi PR"><code>- [ ] Setiap isian punya label for/id dan tanda * untuk isian wajib
+- [ ] Pesan galat tampil di bawah isian dengan aria-invalid dan aria-describedby
+- [ ] Validasi format saat focusout; Simpan memeriksa semua isian dan memfokuskan galat pertama
+- [ ] Pesan galat mengikuti pola &quot;… wajib diisi.&quot; / &quot;Format … tidak valid. Contoh: …&quot;
+- [ ] Perubahan belum disimpan dijaga (status simpan, dialog Tinggalkan, beforeunload)</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#profil">Backlog-IDDS-TN-EPPAT-Prototype#profil</a></li></ul></div>
+    </article>
+    <article class="item" id="b7-4">
+      <div class="item-kepala"><h3><span class="no">7.4</span> Aksi dan umpan balik</h3><div class="kodehe"><span>HE-ORDER-02</span><span>IDDS-TN-33</span></div></div>
+      <p class="aturan">Periksa setiap tombol dan aksi.</p>
+      <pre class="kode cek" aria-label="Daftar periksa, dapat disalin ke deskripsi PR"><code>- [ ] Satu tombol primary per area; Hapus di tabel tidak dominan
+- [ ] Aksi berdampak meminta Modal Confirmation yang menyebut nama item dan dampaknya
+- [ ] Toast setelah aksi berhasil menyebut nama item
+- [ ] Tombol nonaktif disertai alasan tertulis (bukan title)
+- [ ] Aksi baris selalu terlihat; tombol ikon ber-aria-label dengan nama item</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a></li><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#salinan">Backlog-IDDS-TN-EPPAT-Prototype#salinan</a></li></ul></div>
+    </article>
+    <article class="item" id="b7-5">
+      <div class="item-kepala"><h3><span class="no">7.5</span> Aksesibilitas</h3></div>
+      <p class="aturan">Uji dengan keyboard saja.</p>
+      <pre class="kode cek" aria-label="Daftar periksa, dapat disalin ke deskripsi PR"><code>- [ ] Semua aksi dapat dijalankan dengan Tab, Enter, Spasi, dan Esc
+- [ ] Fokus terlihat dan kembali ke pemicu setelah dialog, dropdown, atau Drawer ditutup
+- [ ] Toast, hasil pencarian, dan status simpan memakai role=&quot;status&quot; atau aria-live
+- [ ] Status tidak hanya dibedakan dengan warna</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html#logs">Backlog-IDDS-TN-SYSTEM-Prototype#logs</a></li></ul></div>
+    </article>
+    <article class="item" id="b7-6">
+      <div class="item-kepala"><h3><span class="no">7.6</span> Bahasa</h3><div class="kodehe"><span>IDDS-TN-37</span></div></div>
+      <p class="aturan">Baca ulang semua teks yang tampil.</p>
+      <pre class="kode cek" aria-label="Daftar periksa, dapat disalin ke deskripsi PR"><code>- [ ] Kata baku: kata sandi, unggah, unduh, nonaktif, kedaluwarsa, e-Meterai
+- [ ] Tombol Huruf Kapital di Setiap Kata; pesan berhuruf kapital di awal kalimat
+- [ ] Tanggal 26 Okt 2026 / 26 Oktober 2026, waktu 09.25 WIB, uang Rp10.000
+- [ ] Tanpa istilah developer dan tanpa catatan tim di layar</code></pre>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html">Backlog-IDDS-TN-EPPAT-Prototype</a></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html">Backlog-IDDS-TN-CMS-Prototype</a></li></ul></div>
+    </article>
+  </section>
+<section class="bagian" id="b8" aria-labelledby="h-b8">
+    <h2 id="h-b8"><span class="no">8</span>Peta acuan prototipe</h2>
+    <article class="item" id="b8-1">
+      <div class="item-kepala"><h3><span class="no">8.1</span> Brand Mode E-PPAT IDDS</h3><div class="kodehe"><span>HE-UMUM-01</span></div></div>
+      <p class="aturan">Halaman ini menampilkan pratinjau token brand dan komponen IDDS dengan sakelar E-PPAT, Default IDDS, INAgov, serta Terang dan Gelap. Salin cara pemasangannya dan periksa warna komponen.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: token brand, mode gelap, aksen komponen</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Brand-Mode-EPPAT-IDDS.html">Brand-Mode-EPPAT-IDDS</a></li><li><a href="../brand-eppat-idds/README.md">brand-eppat-idds/README.md</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-2">
+      <div class="item-kepala"><h3><span class="no">8.2</span> Permohonan AJB</h3><div class="kodehe"><span>HE-ORDER-01 s.d. 08</span><span>HE-UMUM-02</span></div></div>
+      <p class="aturan">Prototipe ini menjadi acuan utama kerangka halaman (sidebar, header, breadcrumb, judul dan Bantuan). Salin Table + Pagination, Tab dengan lencana kelengkapan, Stepper status, Alert syarat dan langkah berikutnya, Modal Confirmation pindah status, dialog Tambah Para Pihak dan Tambah Objek, Drawer Bantuan, serta Toast.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: kerangka, daftar → detail, syarat, konfirmasi, isian Rp + terbilang</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-3">
+      <div class="item-kepala"><h3><span class="no">8.3</span> Daftar Pengguna</h3><div class="kodehe"><span>HE-USER-01 s.d. 04</span><span>HE-UMUM-03</span></div></div>
+      <p class="aturan">Salin Action Dropdown per baris, pilih banyak dan aksi massal, Badge status akun dan status CA dengan penjelasan, Password Input dengan daftar syarat, dan File Upload untuk impor user.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: aksi massal, menu aksi, impor berkas</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-USER-Prototype.html">Backlog-HE-USER-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-4">
+      <div class="item-kepala"><h3><span class="no">8.4</span> Verifikasi</h3><div class="kodehe"><span>HE-VERIF-01 s.d. 05</span></div></div>
+      <p class="aturan">Salin saringan dan jumlah hasil ber-aria-live, lama menunggu dan dampaknya, konfirmasi sebelum verifikasi disimpan, serta navigasi detail yang konsisten.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: cari-saring-urut, konfirmasi simpan</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-VERIF-Prototype.html">Backlog-HE-VERIF-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-5">
+      <div class="item-kepala"><h3><span class="no">8.5</span> Penandatanganan Akta</h3><div class="kodehe"><span>HE-EAW-01 s.d. 07</span></div></div>
+      <p class="aturan">Salin Stepper bernomor dengan status langkah, konfirmasi sebelum stempel, tanda tangan, dan e-Meterai, dialog OTP dengan masa berlaku, serta cari dan saring daftar akta.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: wizard, OTP, konfirmasi bercentang</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-EAW-Prototype.html">Backlog-HE-EAW-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-6">
+      <div class="item-kepala"><h3><span class="no">8.6</span> Penandatanganan Akta Klien</h3><div class="kodehe"><span>HE-EAWK-01 s.d. 07</span></div></div>
+      <p class="aturan">Salin langkah berikutnya yang menonjol, konfirmasi tanda tangan, OTP, kontak kantor, dan panduan pengguna baru.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: alur klien, OTP</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-EAWK-Prototype.html">Backlog-HE-EAWK-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-7">
+      <div class="item-kepala"><h3><span class="no">8.7</span> Registrasi TERA</h3><div class="kodehe"><span>HE-TERA-01 s.d. 07</span></div></div>
+      <p class="aturan">Salin Tab tanpa kehilangan isian, validasi saat focusout, konfirmasi sebelum simpan, tahapan dengan perkiraan waktu, dan dialog &quot;Tinggalkan halaman ini?&quot;.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: formulir bertab, penjaga perubahan</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-TERA-Prototype.html">Backlog-HE-TERA-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-8">
+      <div class="item-kepala"><h3><span class="no">8.8</span> Registrasi CA / Akun Saya</h3><div class="kodehe"><span>HE-CA-01 s.d. 08</span></div></div>
+      <p class="aturan">Salin tahapan registrasi, Data Diri berkelompok, pesan galat di dekat isian, istilah CA/eKYC/swafoto yang dijelaskan, dan tab Akun dan Keamanan.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: formulir panjang berkelompok</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-CA-Prototype.html">Backlog-HE-CA-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-9">
+      <div class="item-kepala"><h3><span class="no">8.9</span> Minuta</h3><div class="kodehe"><span>HE-MINUTA-01 s.d. 06</span></div></div>
+      <p class="aturan">Salin Tooltip istilah dan tombol, bilah alat editor, umpan balik setelah hapus, dan pesan ketika fitur belum dapat dipakai.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: editor, tooltip</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-MINUTA-Prototype.html">Backlog-HE-MINUTA-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-10">
+      <div class="item-kepala"><h3><span class="no">8.10</span> Onboarding, Daftar, dan Masuk platform</h3><div class="kodehe"><span>HE-REG-01 s.d. 04</span><span>HE-LOGIN-01 s.d. 04</span><span>HE-OB-01 s.d. 05</span></div></div>
+      <p class="aturan">Salin Stepper pendaftaran, syarat kata sandi berbentuk daftar centang, masa berlaku kode verifikasi, pesan galat masuk, dan hasil cek status.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: registrasi kantor, 2FA</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ONBOARDING-Prototype.html">Backlog-HE-ONBOARDING-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-11">
+      <div class="item-kepala"><h3><span class="no">8.11</span> Tenant · Masuk &amp; Daftar</h3><div class="kodehe"><span>IDDS-TN-01 s.d. 07</span></div></div>
+      <p class="aturan">Salin kartu Masuk dengan Alert pesan galat di dalam kartu, fungsi galat()/bersih() dengan aria-invalid, Password Input, OTP per kanal dengan hitung mundur, dan konfirmasi Kosongkan Formulir.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: galat isian, OTP, memuat</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-12">
+      <div class="item-kepala"><h3><span class="no">8.12</span> Tenant · System</h3><div class="kodehe"><span>IDDS-TN-08 s.d. 16</span></div></div>
+      <p class="aturan">Salin Card dan aksi cepat Dasbor, matriks izin dengan Table dan Badge, Toggle ber-role switch, penjaga perubahan Pengaturan, dan Select Dropdown Log Aktivitas dengan keyboard lengkap.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: Toggle, dropdown keyboard, beforeunload</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-SYSTEM-Prototype.html">Backlog-IDDS-TN-SYSTEM-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-13">
+      <div class="item-kepala"><h3><span class="no">8.13</span> Tenant · CMS</h3><div class="kodehe"><span>IDDS-TN-17 s.d. 26</span></div></div>
+      <p class="aturan">Salin aksi blok yang selalu terlihat, Tab dan sub-tab tema, cek kontras, Badge &quot;Belum disimpan/Tersimpan&quot;, konfirmasi &quot;Buang perubahan?&quot;, File Upload seret-lepas, dan pemilih media.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: penyusun tata letak, tema, media</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-CMS-Prototype.html">Backlog-IDDS-TN-CMS-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-14">
+      <div class="item-kepala"><h3><span class="no">8.14</span> Tenant · Akta</h3><div class="kodehe"><span>IDDS-TN-27 s.d. 37</span></div></div>
+      <p class="aturan">Salin kartu dan grafik Dashboard dengan Muat Ulang dan Coba Lagi, validasi Profil Kantor, Toggle layanan berkonfirmasi, kolom Salinan, alasan tombol nonaktif, kirim dan cabut tautan, serta status e-Meterai.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: dasbor, unggah, status sistem</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html">Backlog-IDDS-TN-EPPAT-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-15">
+      <div class="item-kepala"><h3><span class="no">8.15</span> Platform · Masuk</h3><div class="kodehe"><span>IDDS-PL-01 s.d. 10</span></div></div>
+      <p class="aturan">Halaman masuk admin platform memakai kartu yang sama dengan Masuk tenant. Salin juga pesan galat di dalam kartu untuk akun yang bukan admin platform, serta layar pemeliharaan.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: galat isian, 2FA, pemeliharaan</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-PL-MASUK-Prototype.html">Backlog-IDDS-PL-MASUK-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-16">
+      <div class="item-kepala"><h3><span class="no">8.16</span> Platform · Monitoring</h3><div class="kodehe"><span>IDDS-PL-11 s.d. 20</span></div></div>
+      <p class="aturan">Salin kerangka platform (sidebar tanpa kartu kantor, header tanpa Lihat Landing), status sistem dengan waktu pemeriksaan, subjudul yang sesuai isi untuk halaman hanya baca, saringan log berlabel, dan label aktivitas berbahasa Indonesia.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: kerangka platform, tabel hanya baca</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-PL-MONITORING-Prototype.html">Backlog-IDDS-PL-MONITORING-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-17">
+      <div class="item-kepala"><h3><span class="no">8.17</span> Platform · Jenis Akta</h3><div class="kodehe"><span>IDDS-PL-21 s.d. 30</span></div></div>
+      <p class="aturan">Salin Toggle status berkonfirmasi dampak, dialog bertumpuk dengan &quot;Buang perubahan?&quot;, penulisan variabel {{kunci}}, pengecek isi berbentuk Alert, dan tombol urutan berlabel nama item.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: katalog + detail bertab, editor pasal</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-PL-AKTA-Prototype.html">Backlog-IDDS-PL-AKTA-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-18">
+      <div class="item-kepala"><h3><span class="no">8.18</span> Platform · Sistem</h3><div class="kodehe"><span>IDDS-PL-31 s.d. 40</span></div></div>
+      <p class="aturan">Salin Pengaturan Global bertab dengan simpan per tab, rahasia di Password Input, validasi URL/port/email di bawah isian, konfirmasi saat mematikan layanan, serta Akun Saya dengan 2FA terpandu.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: pengaturan bertab, rahasia, 2FA</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-PL-SISTEM-Prototype.html">Backlog-IDDS-PL-SISTEM-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-19">
+      <div class="item-kepala"><h3><span class="no">8.19</span> Onboarding · Beranda, Kata Sandi &amp; Profil</h3><div class="kodehe"><span>IDDS-OB-01 s.d. 10</span></div></div>
+      <p class="aturan">Salin Beranda publik dengan tombol Masuk dan Daftar, Lupa Kata Sandi dengan pesan terkirim dan kirim ulang berhitung mundur, Atur Ulang Kata Sandi dengan syarat sama seperti Registrasi, serta Profil Saya bertab dengan penjaga perubahan.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: halaman publik, atur ulang kata sandi, profil bertab</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-OB-MASUK-Prototype.html">Backlog-IDDS-OB-MASUK-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-20">
+      <div class="item-kepala"><h3><span class="no">8.20</span> Onboarding · Monitoring</h3><div class="kodehe"><span>IDDS-OB-11 s.d. 20</span></div></div>
+      <p class="aturan">Salin kerangka staf Onboarding (sidebar bertingkat, menu akun, remah Beranda), saringan tahap dengan Chip, lencana tahap berwarna, Detail Pendaftar dengan Stepper sembilan tahap, dan Provisi Manual berkonfirmasi.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: kerangka staf, daftar + detail, Stepper</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-OB-MONITOR-Prototype.html">Backlog-IDDS-OB-MONITOR-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-21">
+      <div class="item-kepala"><h3><span class="no">8.21</span> Onboarding · Verifikasi</h3><div class="kodehe"><span>IDDS-OB-21 s.d. 30</span></div></div>
+      <p class="aturan">Salin keputusan Setujui/Tolak dengan alasan wajib, detail sebagai halaman dengan tombol Kembali yang memulihkan saringan, serta label status pembayaran berbahasa Indonesia.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: verifikasi, alasan penolakan</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-OB-VERIF-Prototype.html">Backlog-IDDS-OB-VERIF-Prototype</a></li></ul></div>
+    </article>
+    <article class="item" id="b8-22">
+      <div class="item-kepala"><h3><span class="no">8.22</span> Onboarding · Pengaturan</h3><div class="kodehe"><span>IDDS-OB-31 s.d. 45</span></div></div>
+      <p class="aturan">Salin pohon menu dengan tombol buka/tutup berlabel, konfirmasi hapus yang menyebut dampaknya, sakelar akses berlabel dengan konfirmasi cabut, isian nominal berpemisah ribuan, dan tombol nonaktif yang alasannya terlihat.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Pola: pohon menu, matriks akses, katalog harga</p></div>
+      <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-OB-PENGATURAN-Prototype.html">Backlog-IDDS-OB-PENGATURAN-Prototype</a></li></ul></div>
+    </article>
+  </section>
+  </main>
+</div>
+<footer>Sumber: brand-eppat-idds, prototipe backlog Peruri, dan backlog-he.json. Isi yang sama tersedia di sumber/panduan-idds.json untuk lembar Excel.</footer>
+</body>
+</html>

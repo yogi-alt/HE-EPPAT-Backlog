@@ -1,0 +1,886 @@
+<style id="pl-akta-css">
+/* ===== Platform · Jenis Akta (Admin Platform) — penyesuaian IDDS (IDDS-PL-21…30)
+   Isi, kolom, dan alur mengikuti kode live dev-app.eppat.id/platform (Akta › Jenis Akta);
+   yang disesuaikan: komponen IDDS + brand E-PPAT, letak pesan, konfirmasi, penjaga perubahan, bahasa, Bantuan. ===== */
+.ina-tooltip:not(:hover):not(:focus-within) .ina-tooltip__content{display:none}
+.ina-modal-confirmation{max-width:560px}
+.modal-gap>*+*{margin-top:12px}
+.isi-tim{border-bottom:1px dashed currentColor;cursor:help}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* kepala: menu pengguna (IDDS Action Dropdown) — sama dengan prototipe Platform · Monitoring */
+.user-tombol{display:flex;align-items:center;gap:10px;padding:4px 8px;border:0;border-radius:8px;background:transparent;cursor:pointer;text-align:left;color:inherit}
+.user-tombol:hover{background:var(--ina-background-secondary)}
+.user-tombol:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px}
+.user-tombol .chev-u{color:var(--ina-content-secondary);display:grid}
+.user .ina-action-dropdown__menu{position:absolute;right:0;left:auto;top:calc(100% + 6px);min-width:220px;z-index:30;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.user a.ina-action-dropdown__item{text-decoration:none;color:inherit}
+.page .ina-breadcrumb__text{text-transform:none}
+.ina-breadcrumb__link{cursor:pointer}
+.ina-breadcrumb__plain{color:var(--ina-content-secondary)}
+.ina-modal__footer .kiri{margin-right:auto}
+.ina-button.bahaya{color:var(--ina-negative-600,#d50b0b);border-color:var(--ina-negative-600,#d50b0b)}
+.ina-modal__footer{flex-wrap:wrap}
+.f-baris{margin-top:16px}
+.f-tiga{display:grid;grid-template-columns:160px 140px minmax(0,1fr);gap:16px}
+.f-cek{display:flex;gap:16px 28px;flex-wrap:wrap;margin-top:16px}
+.ina-text-field select.ina-text-field__input{appearance:auto;background:transparent;border:0;width:100%;height:100%;font:inherit;font-size:14px;color:inherit;outline:0}
+.ina-text-field__input:disabled{color:var(--ina-content-secondary);cursor:not-allowed}
+.adorn{font:600 13px ui-monospace,Menlo,monospace;color:var(--ina-content-secondary);flex:none;padding:0 2px}
+.sakelar{padding:14px 16px;border:1px solid var(--ina-stroke-primary);border-radius:12px;background:var(--ina-background-secondary)}
+.sakelar .ket-toggle{display:inline-flex;align-items:center;gap:10px;font:600 14px Inter,sans-serif;color:var(--ina-content-primary);cursor:pointer}
+.sakelar p{margin:6px 0 0 50px!important;font-size:13px;line-height:19px;color:var(--ina-content-secondary)}
+.ina-checkbox{display:flex;align-items:flex-start;gap:10px;cursor:pointer}
+.ina-checkbox__description{display:block;font-size:12.5px;color:var(--ina-content-secondary)}
+.ina-checkbox__label .redup{font-weight:400;color:var(--ina-content-secondary)}
+/* kepala detail */
+.det-atas{display:flex;align-items:center;gap:10px;margin:4px 0 14px}
+.kode-atas{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.kode-atas code{font:600 13px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary)}
+.daftar-atas .ina-button{gap:6px}
+table.tb .kode{font:600 13px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary)}
+button.kd-btn{border:0;background:none;padding:0;cursor:pointer;font:600 13px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary);text-align:left}
+button.kd-btn:hover,button.kd-btn:focus-visible{text-decoration:underline}
+table.tb .mono-v{font:600 13px ui-monospace,Menlo,monospace;color:var(--ina-content-primary);white-space:nowrap}
+table.tb .nm-wrap{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+table.tb tr.baru td{background:var(--ina-positive-50,#f0fbf4)}
+.urut{display:inline-flex;gap:4px}
+.urut .ina-button{padding:0;width:32px;min-width:32px;justify-content:center}
+.tab-bar p code,.ina-modal__body code,.ina-text-field__helper-text code,.ina-drawer__content code{font:600 12.5px ui-monospace,Menlo,monospace;background:var(--ina-background-secondary);border:1px solid var(--ina-stroke-primary);border-radius:5px;padding:0 4px;color:var(--ina-content-primary)}
+/* editor isi bagian */
+.rte{margin-top:6px;border:1px solid var(--ina-stroke-secondary,#c9d1ce);border-radius:10px;background:var(--ina-background-primary)}
+.rte:focus-within{border-color:var(--ina-primary-500);box-shadow:0 0 0 3px var(--ina-primary-100)}
+.rte-alat{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:6px 8px;border-bottom:1px solid var(--ina-stroke-primary);background:var(--ina-background-secondary);border-radius:10px 10px 0 0}
+.rte-alat .alat{min-width:32px;height:32px;padding:0 8px;border:1px solid transparent;border-radius:6px;background:transparent;color:var(--ina-content-primary);cursor:pointer;font:600 14px Inter,sans-serif;display:inline-grid;place-items:center}
+.rte-alat .alat:hover,.rte-alat .alat:focus-visible{background:var(--ina-background-primary);border-color:var(--ina-stroke-primary)}
+.rte-alat .pisah{width:1px;height:20px;background:var(--ina-stroke-primary);margin:0 4px}
+.rte-alat .var-wadah{position:relative;margin-left:auto}
+.var-wadah .ina-action-dropdown__menu{position:absolute;right:0;left:auto;top:calc(100% + 4px);min-width:280px;max-height:300px;overflow:auto;z-index:30;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.var-grup{padding:8px 12px 4px;font:600 11px Inter,sans-serif;letter-spacing:.8px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.var-wadah .ina-action-dropdown__item-content{display:flex;justify-content:space-between;gap:12px;width:100%}
+.var-wadah .ina-action-dropdown__item-content code{font:12px ui-monospace,Menlo,monospace;color:var(--ina-content-secondary)}
+.rte-isi{min-height:220px;max-height:46vh;overflow:auto;padding:12px 16px;font-size:14px;line-height:22px;outline:0;color:var(--ina-content-primary)}
+.rte-isi:empty::before{content:attr(data-ph);color:var(--ina-content-tertiary,#6b7672)}
+.rte-isi p{margin:0 0 8px}
+.cek-isi{margin-top:12px}
+.cek-isi ul{margin:8px 0 0;padding-left:18px;font-size:13.5px;line-height:20px}
+.cek-isi li{margin-bottom:6px}
+.cek-isi .aksi{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.cek-isi code{background:var(--ina-background-primary)!important}
+.dampak{margin:6px 0 0;padding-left:20px;font-size:14px;line-height:21px;color:var(--ina-content-primary)}
+.dampak li{margin-bottom:4px}
+.bantu-istilah{display:grid;grid-template-columns:max-content 1fr;gap:6px 12px;margin:8px 0 4px;padding:12px 14px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);font-size:13.5px;line-height:20px}
+.bantu-istilah dt{font-weight:600}
+.bantu-istilah dd{margin:0;color:var(--ina-content-secondary)}
+ol.bantu-langkah{padding-left:22px}
+@media (max-width:760px){
+  .f-tiga{grid-template-columns:1fr}
+  .sakelar p{margin-left:0!important}
+  .bantu-istilah{grid-template-columns:1fr} .bantu-istilah dd{margin-bottom:6px}
+  .rte-alat .var-wadah{margin-left:0}
+  .var-wadah .ina-action-dropdown__menu{left:0;right:auto;min-width:240px;max-width:calc(100vw - 64px)}
+  .daftar-atas{justify-content:stretch}
+  .tab-bar .ina-button{width:100%;justify-content:center}
+  .user-tombol .chev-u{display:none}
+  .halaman > span{white-space:normal}
+}
+.halaman{flex-wrap:wrap}
+.user .menu-kepala{display:flex;flex-direction:column;gap:2px;padding:8px 12px}
+.user .menu-kepala b{font:600 14px Inter,sans-serif;color:var(--ina-primary-primary)}
+.user .menu-kepala span{font-size:12px;color:var(--ina-content-secondary)}
+</style>
+</head>
+<body>
+
+<div class="protobar">
+  <a href="index.html#platform">&#9776; Daftar prototipe</a>
+  <span class="sep">&bull;</span><b>Platform · Jenis Akta</b><span class="sep">&bull;</span><span>Peran: Admin Platform</span>
+  <span class="sep">&bull;</span><span>Layar:</span><span id="pilLayar"></span>
+  <span class="kanan">
+    <button class="pil" id="aturUlang">Atur ulang contoh</button>
+    <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai penyesuaian</button>
+    <button class="pil utama" id="bukaUbah">Daftar penyesuaian</button>
+  </span>
+</div>
+
+<div class="app">
+  <div class="scrim" id="scrim"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><img src="__LOGO__" alt="E-PPAT"></div>
+    <nav id="nav" aria-label="Menu platform"></nav>
+    <div class="sidefoot">E-PPAT</div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Tampilkan atau sembunyikan menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="spacer"></div>
+      <button class="ina-button ina-button--tertiary ina-button--md" aria-label="Notifikasi"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+      <div class="user ina-action-dropdown" id="user">
+        <button type="button" class="user-tombol" id="userTombol" aria-haspopup="menu" aria-expanded="false" aria-label="Menu akun Admin Contoh"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Admin Contoh</span><span class="urole">Platform Admin</span></span><span class="chev-u"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div id="menuProfil"></div>
+      </div>
+    </header>
+    <div class="content"><div class="page" id="halaman"></div></div>
+  </div>
+</div>
+
+<div id="lapisan"></div>
+<div id="lapisanDrawer"></div>
+<div class="toast-wadah" id="toastWadah"></div>
+<div class="sr-only" aria-live="polite" id="umumkan"></div>
+
+<script>
+(() => {
+/* ---------------- ikon & util (sama dengan prototipe System) ---------------- */
+const I = {
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  gedung:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01"/>',
+  bintang:'<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.7 1.8 1.8.7-1.8.7L19 20l-.7-1.8-1.8-.7 1.8-.7z"/>',
+  daftar:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+  stempel:'<path d="M9 3h6v4l-1 5h-4L9 7z"/><path d="M4 16a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H4z"/><path d="M4 21h16"/>',
+  palet:'<circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1 0 1.7-.8 1.7-1.7 0-1 .8-1.7 1.7-1.7H17a5 5 0 0 0 5-5C22 6 17.5 2 12 2z"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>',
+  dok:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>',
+  edit:'<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>', user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  keluar:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',
+  kiri:'<path d="M15 18l-6-6 6-6"/>', x:'<path d="M18 6L6 18M6 6l12 12"/>', info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+  centang:'<path d="M20 6L9 17l-5-5"/>', chev:'<path d="M9 18l6-6-6-6"/>', bawah:'<path d="M6 9l6 6 6-6"/>', atas:'<path d="M18 15l-6-6-6 6"/>',
+  sampah:'<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>', simpan:'<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/>',
+  bintangPenuh:'<path d="M12 2l3 6.5 7 .9-5.1 4.8 1.3 7L12 17.8 5.8 21.2l1.3-7L2 9.4l7-.9z"/>',
+  ul:'<path d="M9 6h12M9 12h12M9 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/>',
+  ol:'<path d="M10 6h11M10 12h11M10 18h11M4 4v4M3 18h3l-3 3h3M3 11h2v3"/>',
+  urung:'<path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/>', ulang:'<path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 15-6.7L21 13"/>',
+  hapusFormat:'<path d="M4 7V4h16v3M9 20h6M12 4l-3 16M3 21L21 3"/>', kurung:'<path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1"/>',
+  monitor:'<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>' /* ikon sidebar platform */
+};
+const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const usulan = kode => `<span class="tag-usulan">penyesuaian &middot; ${kode}</span>`;
+const badge = (t, j, uk = 'md', atr = '', kls = '') => `<span class="ina-badge ina-badge--soft ina-badge--${j} ina-badge--${uk} ina-badge--rounded-full ${kls}" ${atr}>${t}</span>`;
+const tombol = (t, h = 'primary', uk = 'md', atr = '', ikon = '') => { const m = /class="([^"]*)"/.exec(atr); return `<button type="button" class="ina-button ina-button--${h} ina-button--${uk}${m ? ' ' + m[1] : ''}" ${m ? atr.replace(m[0], '') : atr}>${ikon}${t}</button>`; };
+const alert = (j, judul, isi, ekstra = '') => `<div class="ina-alert ina-alert--${j}" role="status"><div class="ina-alert__content"><div class="ina-alert__text-section">${judul ? `<div class="ina-alert__title">${judul}</div>` : ''}<div class="ina-alert__description">${isi}</div></div>${ekstra}</div></div>`;
+const est = t => `<span class="isi-tim" title="Data contoh. Ganti dengan data resmi dari tim E-PPAT.">${t}</span>`;
+const cekBox = (id, cek, label, desk = '', atr = '') => `<label class="ina-checkbox" for="${id}"><input type="checkbox" id="${id}" class="ina-checkbox__input peer" ${cek ? 'checked' : ''} ${atr}><div class="ina-checkbox__box ina-checkbox__box--${cek ? 'checked' : 'unchecked'}">${cek ? ik('centang', 12) : ''}</div>${label ? `<div class="ina-checkbox__content"><span class="ina-checkbox__label">${label}</span>${desk ? `<span class="ina-checkbox__description">${desk}</span>` : ''}</div>` : ''}</label>`;
+const toggle = (id, label, on, atr = '') => `<span class="ket-toggle"><span class="ina-toggle ina-toggle--size-sm ${on ? 'ina-toggle--checked' : ''}" role="switch" aria-checked="${on}" tabindex="0" id="${id}" aria-label="${label}" data-tog ${atr}><input type="checkbox" class="ina-toggle__input" tabindex="-1" ${on ? 'checked' : ''}><span class="ina-toggle__track ${on ? 'ina-toggle__track--checked' : ''}" style="pointer-events:none"><span class="ina-toggle__thumb ${on ? 'ina-toggle__thumb--checked' : ''}"></span></span></span><span>${label}</span></span>`;
+const tf = (id, l, v = '', ph = '', wajib = false, bantu = '', atr = '', pre = '', suf = '') => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}${wajib ? '<span class="ina-text-field__required">*</span>' : ''}</label>
+  <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md">${pre ? `<span class="adorn" aria-hidden="true">${pre}</span>` : ''}<input id="${id}" type="text" class="ina-text-field__input" value="${esc(v)}" placeholder="${esc(ph)}" aria-describedby="h-${id}" ${wajib ? 'aria-required="true"' : ''} ${atr}>${suf ? `<span class="adorn" aria-hidden="true">${suf}</span>` : ''}</div>
+  <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div></div>`;
+const pilihan = (id, l, opsi, v, bantu = '') => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}</label>
+  <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><select id="${id}" class="ina-text-field__input" aria-describedby="h-${id}">${opsi.map(([ov, ot]) => `<option value="${esc(ov)}" ${ov === v ? 'selected' : ''}>${esc(ot)}</option>`).join('')}</select></div>
+  <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div></div>`;
+const vv = k => `<code>{{${k}}}</code>`; /* tulisan variabel: selalu kurung kurawal ganda (IDDS-PL-27) */
+const SEP = `<span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+/* remah: [teks, aksi] — aksi = data-atribut tautan; item terakhir aktif */
+const remah = (...it) => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list">${it.map(([t, a], i) => i === it.length - 1
+  ? `<li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active" aria-current="page"><span class="ina-breadcrumb__text">${esc(t)}</span></span></li>`
+  : `<li class="ina-breadcrumb__item">${a ? `<a href="#jenis" class="ina-breadcrumb__link" ${a}><span class="ina-breadcrumb__text">${esc(t)}</span></a>` : `<span class="ina-breadcrumb__plain"><span class="ina-breadcrumb__text">${esc(t)}</span></span>`}${SEP}</li>`).join('')}</ol></nav>`;
+/* ringkasan + IDDS Pagination (markup sama dengan prototipe Platform · Monitoring); semua baris tampil di satu halaman seperti live */
+const hal = n => `<div class="halaman"><span>Menampilkan ${n ? 1 : 0}–${n} dari ${n}</span><nav class="ina-pagination" aria-label="Navigasi halaman"><div class="ina-pagination__nav-container"><div class="ina-pagination__page-info">Halaman 1 dari 1</div><div class="ina-pagination__nav-buttons"><button type="button" class="ina-pagination__nav-button ina-pagination__nav-button--disabled" disabled aria-label="Halaman sebelumnya">${ik('kiri', 16)}</button><button type="button" class="ina-pagination__page-button ina-pagination__page-button--active" aria-current="page" aria-label="Halaman 1">1</button><button type="button" class="ina-pagination__nav-button ina-pagination__nav-button--disabled" disabled aria-label="Halaman berikutnya">${ik('chev', 16)}</button></div></div></nav></div>`;
+const umumkan = t => { const u = $('#umumkan'); u.textContent = ''; setTimeout(() => { u.textContent = t; }, 30); };
+
+/* ---------------- daftar penyesuaian ---------------- */
+const UBAH = [
+  { kode:'IDDS-PL-21', judul:'Daftar Jenis Akta: IDDS Table, aksi berlabel, dan subjudul yang jelas',
+    isi:'Daftar memakai IDDS Table di dalam kartu dengan IDDS Pagination ("Menampilkan 1–8 dari 8"). Kolom tetap: Kode, Nama Layanan (dengan deskripsi singkat), Urutan, dan Status (IDDS Badge Aktif/Nonaktif). Tombol "Ubah" memakai ikon pensil, bukan ikon pengaturan. Setiap tombol punya nama aksesibel yang menyebut itemnya, misalnya "Ubah Akta Jual Beli" dan "Template & Variabel Akta Jual Beli". Kode di setiap baris berupa tombol sehingga detail dapat dibuka dengan keyboard. Subjudul menjadi kalimat utuh: "Tambah jenis akta, atur statusnya, dan kelola template serta variabelnya." Jenis akta yang baru disimpan disorot sesaat.',
+    lama:'Subjudul berbunyi "Katalog layanan PPAT + template & variabel". Tombol Ubah berikon pengaturan. Baris hanya dapat diklik dengan tetikus, dan tombol tidak menyebut nama item.', ke:'jenis', sorot:'#tabelJenis' },
+  { kode:'IDDS-PL-22', judul:'Dialog Tambah/Ubah Jenis Akta: pesan galat di bawah isian dan istilah konsisten',
+    isi:'Dialog memakai IDDS Modal dan Text Field. Label terhubung ke isian, dan pesan galat tampil di bawah isian yang salah (aria-invalid + aria-describedby), bukan dalam satu kotak merah. Pesan dibakukan, misalnya "Kode diawali huruf besar, lalu huruf besar, angka, atau garis bawah. Misalnya AJB atau APHT.", "Kode AJB sudah dipakai. Gunakan kode lain.", dan "Urutan harus berupa angka, misalnya 1." Judul dialog menyebut item ("Ubah Jenis Akta — Akta Jual Beli"), dan teks atas judul "Platform · Jenis Akta" dihapus. Setiap simpan diakhiri IDDS Toast. Menutup dialog yang sudah diubah (Batal, ×, Esc, atau klik di luar) meminta konfirmasi "Buang perubahan?".',
+    lama:'Pesan galat tampil dalam satu kotak merah, dan tidak ada toast sukses. Dialog dapat tertutup tanpa peringatan. Kode duplikat baru ketahuan dari pesan server.', ke:'tambah', sorot:null },
+  { kode:'IDDS-PL-23', judul:'Jenis Akta: status memakai IDDS Toggle dan konfirmasi saat dinonaktifkan',
+    isi:'Kotak centang "Aktif (layanan bisa dipakai tenant)" diganti IDDS Toggle "Aktif" dengan keterangan "Layanan dapat dipilih kantor PPAT saat membuat order." Menonaktifkan jenis akta yang sedang aktif meminta konfirmasi lewat IDDS Modal Confirmation (tombol merah "Nonaktifkan"). Dialog menjelaskan dampaknya bagi kantor PPAT: layanan hilang dari pilihan order baru, order yang sudah ada tidak dihapus, serta template dan variabel tetap tersimpan. Dialog juga menyebut jumlah kantor dan order yang sedang memakainya.',
+    lama:'Status berubah langsung saat Simpan tanpa penjelasan dampak. Label memakai istilah "tenant".', ke:'nonaktif', sorot:null },
+  { kode:'IDDS-PL-24', judul:'Hapus Jenis Akta: konfirmasi merah dan alasan penolakan ditampilkan lebih dulu',
+    isi:'Hapus memakai IDDS Modal Confirmation dengan tombol merah "Hapus Jenis Akta" dan menyebut jumlah variabel yang ikut terhapus. Bila jenis akta masih dipakai order atau masih punya template, tombol hapus tidak ditawarkan. Dialog langsung menjelaskan alasannya lewat IDDS Alert dan menyarankan agar layanan dinonaktifkan.',
+    lama:'Penghapusan dicoba dulu ke server. Pesan galat "Gagal menghapus jenis akta." ditulis di formulir di balik dialog konfirmasi sehingga bisa tidak terlihat.', ke:'hapus', sorot:null },
+  { kode:'IDDS-PL-25', judul:'Detail Template & Variabel: navigasi jelas, IDDS Tab, dan konfirmasi template utama',
+    isi:'Breadcrumb menyebut posisi ("Akta › Jenis Akta › Akta Jual Beli") dan dapat diklik. Tombol "Kembali" memakai ikon yang sama di detail dan di Pasal & Catatan. Tab Template/Variabel memakai IDDS Tab yang menyebut jumlah item, dan tabelnya memakai IDDS Table dengan ringkasan jumlah. Kode di kepala detail disertai lencana status. Nama template disertai deskripsi dan jumlah bagiannya. Subjudul: "Atur template dan variabel yang dipakai saat menyusun draf akta ini." Istilah "Default" menjadi "Utama". "Jadikan Utama" meminta konfirmasi yang menyebut template utama saat ini, lalu IDDS Toast mengonfirmasi hasilnya.',
+    lama:'Breadcrumb tetap "Akta › Jenis Akta". Ikon Kembali berbeda di dua layar. "Jadikan Default" langsung berlaku tanpa konfirmasi dan tanpa umpan balik. Ada jargon "drafting".', ke:'detail', sorot:'#tabDetail' },
+  { kode:'IDDS-PL-26', judul:'Dialog Template: "Salin isi dari", IDDS Toggle Aktif, dan pesan galat di bawah isian',
+    isi:'Dialog Tambah/Ubah Template memakai IDDS Modal dan Text Field. Pilihan "Salin isi dari" otomatis memilih template utama dan punya opsi "— Mulai kosong —". Dialog juga memuat IDDS Toggle "Aktif" dan IDDS Checkbox "Jadikan template utama jenis akta ini". Pesan galat tampil di bawah isian dengan istilah yang benar ("Nama template minimal 2 karakter."). Toast setelah simpan menyebut jumlah bagian yang disalin. Hapus template memakai konfirmasi merah yang menyebut jumlah pasal dan catatan.',
+    lama:'Pesan galat "Nama akta minimal 2 karakter." muncul untuk isian Nama Template. Pesan galat tampil dalam kotak merah, tidak ada toast, dan dialog dapat tertutup tanpa peringatan.', ke:'template', sorot:null },
+  { kode:'IDDS-PL-27', judul:'Variabel: penulisan {{kunci}} konsisten di semua tempat',
+    isi:'Semua petunjuk, kolom Kunci, pilihan Tipe, keadaan kosong, dan konfirmasi hapus memakai kurung kurawal ganda. Penulisan ini sama dengan hasil tombol "Sisipkan Variabel" dan dengan yang diterima pengecek isi. Contoh petunjuk Kunci: "Ditulis sebagai {{kunci}} di isi pasal, misalnya {{penjual_nama}}." Contoh petunjuk Isi: "Sisipkan variabel lewat tombol Sisipkan Variabel atau tulis {{kunci}}." Di dialog, isian Kunci menampilkan pengapit {{ }}. Nilai Tipe mentah "single/list" menjadi "Tunggal/Daftar", dan isian "Nilai Default" menjadi "Nilai Awal". Contoh kunci mengikuti data live, misalnya {{penjual_nama}}.',
+    lama:'Petunjuk menulis {nama_penjual} dengan kurung tunggal, padahal pengecek isi menolak kurung tunggal dan tombol Variabel menyisipkan {{…}}. Pengguna yang mengikuti petunjuk langsung mendapat peringatan.', ke:'variabel', sorot:'#tabelVar' },
+  { kode:'IDDS-PL-28', judul:'Variabel: tombol urutan berlabel dan hapus menunjukkan pasal terdampak',
+    isi:'Tombol naik/turun punya nama aksesibel ("Naikkan Nama Lengkap Penjual", "Turunkan Nama Lengkap Penjual") dan nonaktif di ujung daftar. Perpindahan urutan diumumkan ke pembaca layar. Dialog variabel memakai IDDS Modal dengan pesan galat di bawah isian dan penjaga perubahan. Hapus variabel memakai konfirmasi merah yang mendaftar bagian template yang masih memakai variabel itu, sehingga admin tahu bagian yang perlu diubah.',
+    lama:'Tombol urutan hanya berupa ikon tanpa label. Konfirmasi hapus hanya menulis "Pasal yang memakainya tidak otomatis terupdate" tanpa menunjukkan pasalnya.', ke:'hapusVar', sorot:null },
+  { kode:'IDDS-PL-29', judul:'Pasal & Catatan: pengecek isi, penjaga perubahan, dan status bagian',
+    isi:'Subjudul menjadi "Susun pasal dan catatan template ini sesuai urutan di akta." Dialog bagian memakai IDDS Modal, Text Field, dan Checkbox, dan pesan galat Judul serta Nomor tampil di bawah isian. Tombol penyisip berlabel "Sisipkan Variabel" sesuai saran pengecek. Pengecek isi tampil sebagai IDDS Alert peringatan "Ada 1 hal yang perlu dicek sebelum disimpan". Alert memuat saran untuk setiap temuan serta tombol "Perbaiki Dulu" dan "Simpan Saja". Bagian yang masih punya temuan diberi lencana "Perlu dicek" di tabel. Menutup dialog yang sudah diubah meminta konfirmasi. Simpan, hapus (dengan konfirmasi merah), dan ubah urutan selalu diakhiri umpan balik.',
+    lama:'Saran pengecek merujuk "Sisip Variabel", padahal tombolnya berlabel "Variabel". Dialog dapat ditutup dengan Esc atau klik di luar tanpa peringatan. Tidak ada toast sukses. Subjudul berbunyi "Kelola pasal & catatan template akta ini."', ke:'bagian', sorot:null },
+  { kode:'IDDS-PL-30', judul:'Bantuan di setiap layar Jenis Akta',
+    isi:'Daftar Jenis Akta, Template & Variabel, dan Pasal & Catatan memiliki tombol Bantuan di kanan judul. Tombol ini membuka IDDS Drawer berisi penjelasan, langkah, istilah, pertanyaan umum (IDDS Accordion), dan kontak dukungan. Pertanyaan umum menjawab, antara lain, apa itu variabel, cara menyisipkannya, mengapa pengecek menolak kurung tunggal, fungsi urutan, dan dampak status Aktif/Nonaktif bagi kantor PPAT.',
+    lama:'Tidak ada panduan. Aturan penulisan variabel hanya diketahui dari peringatan pengecek.', ke:'bantuan', sorot:null }
+];
+
+/* ---------------- data contoh (kode & nama layanan sama dengan live; baris uji live tidak disertakan) ---------------- */
+const JA0 = () => [
+  { code:'AJB', name:'Akta Jual Beli', desc:'Peralihan hak atas tanah karena jual beli.', urut:1, aktif:true, kantor:3, order:12 },
+  { code:'APHB', name:'Akta Pembagian Hak Bersama', desc:'Pembagian hak bersama atas tanah di antara para pemegang hak.', urut:2, aktif:false, kantor:0, order:0 },
+  { code:'HIBAH', name:'Akta Hibah', desc:'Pemberian hak atas tanah tanpa imbalan.', urut:3, aktif:false, kantor:0, order:0 },
+  { code:'TUKAR_MENUKAR', name:'Akta Tukar Menukar', desc:'Pertukaran hak atas tanah antara para pihak.', urut:4, aktif:false, kantor:0, order:0 },
+  { code:'PEMASUKAN_KE_PERUSAHAAN', name:'Akta Pemasukan Ke Dalam Perusahaan (Inbreng)', desc:'Pemasukan hak atas tanah sebagai modal perusahaan.', urut:5, aktif:false, kantor:0, order:0 },
+  { code:'PEMBERIAN_HGB_HAK_MILIK', name:'Akta Pemberian Hak Guna Bangunan/Hak Pakai Atas Tanah Hak Milik', desc:'', urut:6, aktif:false, kantor:0, order:0 },
+  { code:'APHT', name:'Akta Pemberian Hak Tanggungan', desc:'Pembebanan hak tanggungan sebagai jaminan utang.', urut:7, aktif:false, kantor:0, order:0 },
+  { code:'SKMHT', name:'Surat Kuasa Membebankan Hak Tanggungan', desc:'', urut:8, aktif:false, kantor:0, order:0 }
+];
+const B = (type, nomor, title, content, wajib = true, tampil = true) => ({ type, nomor, title, content, wajib, tampil });
+/* AJB: template, pasal & catatan, dan 77 variabel sama dengan live (isi bagian ditulis ulang sebagai contoh).
+   Catatan 3 sengaja memuat {lokasi_tanah} berkurung tunggal untuk memperagakan pengecek isi.
+   APHB memuat dua template agar "Jadikan Utama" dapat diperagakan. */
+const TPL0 = () => [
+  { id:1, jenis:'AJB', code:'AJB', name:'AJB Standar', desc:'', aktif:true, def:true, bag:[
+    B('catatan', '1', 'PEMBUKAAN AKTA', '<p>Pada hari ini {{var_hari}}, tanggal {{var_tanggal}}, pukul {{var_pukul}}, hadir di hadapan saya, {{ppat_nama}}, Pejabat Pembuat Akta Tanah di {{ppat_wilayah}}, dengan Nomor Akta {{deed_number}}:</p>', true, false),
+    B('catatan', '2', 'Para Pihak', '<p>I. {{penjual_gelar}} {{penjual_nama}}, lahir di {{penjual_tempat_lahir}} pada {{penjual_tanggal_lahir}}, {{penjual_pekerjaan}}, NIK {{penjual_nik}}, selaku Penjual, selanjutnya disebut Pihak Pertama.</p><p>II. {{pembeli_gelar}} {{pembeli_nama}}, lahir di {{pembeli_tempat_lahir}} pada {{pembeli_tanggal_lahir}}, {{pembeli_pekerjaan}}, NIK {{pembeli_nik}}, selaku Pembeli, selanjutnya disebut Pihak Kedua.</p>', true, false),
+    B('catatan', '3', 'Objek Jual Beli', '<p>Pihak Pertama menjual kepada Pihak Kedua sebidang tanah {{jenis_hak}}, Surat Ukur Nomor {{surat_ukur_nomor}} tanggal {{surat_ukur_tanggal}}, seluas {{luas_tanah}} m², terletak di {lokasi_tanah}, {{desa_kelurahan}}, {{kecamatan}}, {{kabupaten_kota}}, {{provinsi}}.</p>', true, false),
+    B('pasal', '1', 'Pasal 1', '<p>Jual beli ini dilakukan dengan harga Rp{{harga_jual}}. Pihak Pertama mengaku telah menerima harga tersebut seluruhnya dari Pihak Kedua.</p>'),
+    B('pasal', '2', 'Pasal 2', '<p>Sejak akta ini ditandatangani, objek jual beli menjadi milik Pihak Kedua. Keuntungan dan kerugian atas objek tersebut menjadi tanggungan Pihak Kedua.</p>'),
+    B('pasal', '3', 'Pasal 3', '<p>Pihak Pertama menjamin bahwa objek jual beli tidak dalam sengketa, bebas dari sitaan, dan tidak dibebani hak tanggungan.</p>'),
+    B('pasal', '4', 'Pasal 4', '<p>Pihak Kedua menyatakan bahwa kepemilikan tanahnya tidak melebihi batas maksimum penguasaan tanah.</p>'),
+    B('pasal', '5', 'Pasal 5', '<p>Bila luas tanah berbeda dengan hasil pengukuran Badan Pertanahan Nasional, para pihak menerima hasil pengukuran tersebut.</p>'),
+    B('pasal', '6', 'Pasal 6', '<p>Pihak Pertama memberi kuasa kepada Pihak Kedua untuk menerima sertipikat dan mengurus pendaftaran peralihan haknya.</p>'),
+    B('pasal', '7', 'Pasal 7', '<p>Para pihak memilih domisili hukum di Kantor Panitera Pengadilan Negeri {{kabupaten_kota}}.</p>'),
+    B('pasal', '8', 'Pasal 8', '<p>Biaya pembuatan akta dan biaya peralihan hak ditanggung oleh Pihak Kedua.</p>'),
+    B('catatan', '10', 'Para Saksi', '<p>Akta ini dibuat di hadapan saksi-saksi: {{saksi1_gelar}} {{saksi1_nama}}, NIK {{saksi1_nik}}, dan {{saksi2_gelar}} {{saksi2_nama}}, NIK {{saksi2_nik}}.</p>', true, false),
+    B('catatan', '11', 'Penutup', '<p>Demikian akta ini dibuat. Setelah dibacakan dan dijelaskan, akta ini ditandatangani oleh para pihak, para saksi, dan saya, PPAT.</p>', true, false),
+    B('catatan', '12', 'TTD', '<p>Pihak Pertama, Pihak Kedua, para saksi, dan PPAT {{ppat_nama}}.</p>', true, false)] },
+  { id:2, jenis:'APHB', code:'APHB_WARIS', name:'APHB Waris', desc:'Pembagian hak bersama dari warisan', aktif:false, def:false, bag:[
+    B('pasal', '1', 'Objek Pembagian', '<p>Sebidang tanah Sertipikat Nomor {{nomor_sertipikat}} yang diperoleh para pihak karena pewarisan.</p>'),
+    B('pasal', '2', 'Pembagian', '<p>Para ahli waris sepakat membagi hak bersama kepada {{nama_pemegang_hak:list}}.</p>')] },
+  { id:3, jenis:'APHB', code:'APHB_STD', name:'APHB Standar', desc:'', aktif:true, def:true, bag:[
+    B('pasal', '1', 'Objek Pembagian', '<p>Sebidang tanah Sertipikat Nomor {{nomor_sertipikat}} milik bersama para pihak.</p>'),
+    B('pasal', '2', 'Pembagian', '<p>Para pihak sepakat membagi hak bersama kepada {{nama_pemegang_hak:list}}.</p>')] },
+  { id:4, jenis:'HIBAH', code:'HIBAH_STD', name:'Hibah Standar', desc:'', aktif:true, def:true, bag:[
+    B('pasal', '1', 'Objek Hibah', '<p>{{nama_pemberi_hibah}} menghibahkan tanah Sertipikat Nomor {{nomor_sertipikat}} kepada {{nama_penerima_hibah}}.</p>')] }
+];
+const V = (jenis, key, label, grup, tipe = 'single', def = '') => ({ jenis, key, label, grup, tipe, def });
+const PIHAK = [['gelar', 'Gelar/Status'], ['nama', 'Nama Lengkap'], ['tempat_lahir', 'Tempat Lahir'], ['tanggal_lahir', 'Tanggal Lahir'], ['pekerjaan', 'Pekerjaan'], ['jalan', 'Alamat Jalan'], ['rt', 'RT'], ['rw', 'RW'], ['kelurahan', 'Kelurahan'], ['kecamatan', 'Kecamatan'], ['kota', 'Kota/Kabupaten'], ['nik', 'NIK'], ['kewarganegaraan', 'Kewarganegaraan'], ['npwp', 'NPWP']];
+const SAKSI = [['gelar', 'Gelar'], ['nama', 'Nama'], ['tempat_lahir', 'Tempat Lahir'], ['tanggal_lahir', 'Tanggal Lahir'], ['pekerjaan', 'Pekerjaan'], ['jalan', 'Alamat Jalan'], ['rt', 'RT'], ['rw', 'RW'], ['kelurahan', 'Kelurahan'], ['kecamatan', 'Kecamatan'], ['kota', 'Kota'], ['provinsi', 'Provinsi'], ['nik', 'NIK'], ['domisili', 'Keterangan Domisili']];
+const VAR0 = () => [
+  ...PIHAK.map(([k, l]) => V('AJB', 'penjual_' + k, l + ' Penjual', 'Penjual')),
+  ...PIHAK.map(([k, l]) => V('AJB', 'pembeli_' + k, l + ' Pembeli', 'Pembeli')),
+  ...[['jenis_hak', 'Jenis Hak'], ['surat_ukur_nomor', 'Nomor Surat Ukur'], ['surat_ukur_tanggal', 'Tanggal Surat Ukur'], ['provinsi', 'Provinsi Objek'], ['kabupaten_kota', 'Kota/Kabupaten Objek'], ['kecamatan', 'Kecamatan Objek'], ['desa_kelurahan', 'Kelurahan Objek'], ['lokasi_tanah', 'Letak/Lokasi Tanah'], ['luas_tanah', 'Luas Tanah (m2)'], ['npp', 'NPP (%)'], ['harga_jual', 'Harga Jual Beli']].map(([k, l]) => V('AJB', k, l, 'Objek Tanah')),
+  ...SAKSI.map(([k, l]) => V('AJB', 'saksi1_' + k, l + ' Saksi I', 'Saksi I')),
+  ...SAKSI.map(([k, l]) => V('AJB', 'saksi2_' + k, l + ' Saksi II', 'Saksi II')),
+  ...[['ppat_nama', 'Nama PPAT'], ['ppat_sk', 'Nomor SK Pengangkatan'], ['ppat_wilayah', 'Wilayah Kerja'], ['ppat_alamat', 'Alamat Kantor'], ['ppat_telepon', 'Telepon'], ['ppat_email', 'Email']].map(([k, l]) => V('AJB', k, l, 'PPAT')),
+  ...[['deed_number', 'Nomor Akta'], ['var_hari', 'Hari'], ['var_tanggal', 'Tanggal Akta'], ['var_pukul', 'Pukul']].map(([k, l]) => V('AJB', k, l, 'Metadata Akta')),
+  V('APHB', 'nama_pemegang_hak', 'Nama Pemegang Hak', 'Para Pihak', 'list'), V('APHB', 'nomor_sertipikat', 'Nomor Sertipikat', 'Objek Tanah'),
+  V('HIBAH', 'nama_pemberi_hibah', 'Nama Pemberi Hibah', 'Pemberi Hibah'), V('HIBAH', 'nama_penerima_hibah', 'Nama Penerima Hibah', 'Penerima Hibah'), V('HIBAH', 'nomor_sertipikat', 'Nomor Sertipikat', 'Objek Tanah')
+];
+let nid = 100;
+const beriId = (tpl, vars) => { tpl.forEach(t => t.bag.forEach(b => { b.id = ++nid; })); vars.forEach(v => { v.id = ++nid; }); };
+let JA = JA0(), TPL = TPL0(), VAR = VAR0(); beriId(TPL, VAR);
+const TIPE = { single:'Tunggal', list:'Daftar' };
+const jenisDari = c => JA.find(j => j.code === c);
+const tplDari = c => TPL.filter(t => t.jenis === c);
+const varDari = c => VAR.filter(v => v.jenis === c);
+const namaBagian = b => { const k = `${b.type === 'pasal' ? 'Pasal' : 'Catatan'}${b.nomor ? ' ' + b.nomor : ''}`; return b.title === k ? k : `${k} · ${b.title}`; };
+
+/* pengecek isi (live: sat) — aturan sama, saran merujuk tombol "Sisipkan Variabel" (IDDS-PL-29) */
+function periksa(html, jenis) {
+  const d = document.createElement('div'); d.innerHTML = html; const t = d.textContent;
+  const kenal = new Set(varDari(jenis).map(v => v.key)), out = [];
+  for (const m of t.matchAll(/(^|[^{])\{([a-zA-Z0-9_:]+)\}(?!\})/g)) out.push({ jenis:'Kurung kurawal tunggal', teks:`{${m[2]}}`, saran:`tulis ${vv(m[2])} (kurung kurawal ganda) agar terisi otomatis.` });
+  for (const m of t.matchAll(/\{\{\s*([a-zA-Z0-9_:]+)\s*\}\}/g)) { const k = m[1].split(':')[0]; if (!kenal.has(k)) out.push({ jenis:'Variabel tidak dikenal', teks:`{{${m[1]}}}`, saran:`tidak ada di daftar variabel ${esc(jenisDari(jenis)?.name || jenis)}. Periksa ejaan atau pilih lewat tombol Sisipkan Variabel.` }); }
+  for (const m of t.matchAll(/XX\/XX\/XX\/XXXX|XXXX|1234567|\(Pekerjaan\)/g)) out.push({ jenis:'Teks contoh belum diganti', teks:m[0], saran:'teks contoh akan ikut tercetak di akta. Ganti dengan variabel yang sesuai.' });
+  return out;
+}
+const pemakai = (jenis, key) => { const re = new RegExp(`\\{\\{?\\s*${key}(:list)?\\s*\\}\\}?`); const out = []; tplDari(jenis).forEach(t => t.bag.forEach(b => { const d = document.createElement('div'); d.innerHTML = b.content; if (re.test(d.textContent)) out.push(`${t.name} · ${namaBagian(b)}`); })); return out; };
+
+/* ---------------- keadaan ---------------- */
+const LAYAR = [['jenis', 'Jenis Akta'], ['detail', 'Template & Variabel'], ['pasal', 'Pasal & Catatan']];
+const S0 = () => ({ detail:null, tab:'template', tpl:null, menu:false, baru:null });
+let S = S0();
+const tampilan = () => S.tpl ? 'pasal' : S.detail ? 'detail' : 'jenis';
+
+/* ---------------- sidebar platform (sama di ketiga prototipe platform) ---------------- */
+const NAV = [
+  { g:'Monitoring', ik:'monitor', m:[['Dasbor', 'grid'], ['Daftar PPAT', 'gedung'], ['Paket Langganan', 'bintang'], ['Log Aktivitas', 'daftar']] },
+  { g:'Akta', ik:'stempel', m:[['Jenis Akta', 'stempel', 'jenis']] },
+  { g:'Sistem', ik:'gear', m:[['Setting Theme', 'palet'], ['Pengaturan Global', 'gear']] }
+];
+const MON = 'Backlog-IDDS-PL-MONITORING-Prototype.html', SIS = 'Backlog-IDDS-PL-SISTEM-Prototype.html';
+const PROTO = { 'Dasbor':MON + '#dasbor', 'Daftar PPAT':MON + '#ppat', 'Paket Langganan':MON + '#paket', 'Log Aktivitas':MON + '#log', 'Setting Theme':SIS + '#tema', 'Pengaturan Global':SIS + '#pengaturan' };
+const grupBuka = new Set([0, 1, 2]);
+function gambarNav() {
+  $('#nav').innerHTML = NAV.map((g, i) => `
+    <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
+    <div class="items" ${grupBuka.has(i) ? '' : 'hidden'}>${g.m.map(([t, k, ke]) => `<a href="${ke ? '#' + ke : PROTO[t]}" class="ina-button ina-button--link ina-button--md nav-item ${ke ? 'on' : ''}" data-ke="${ke || ''}" ${ke ? 'aria-current="page"' : ''}>${ik(k)}<span>${t}</span></a>`).join('')}</div>`).join('');
+}
+$('#nav').addEventListener('click', e => {
+  const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
+  const a = e.target.closest('a'); if (!a) return; e.preventDefault();
+  if (!a.dataset.ke) { keLuar(PROTO[a.textContent.trim()]); return; }
+  pindah('jenis');
+  $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on');
+});
+
+/* menu akun (IDDS Action Dropdown) */
+function gambarMenu() {
+  $('#menuProfil').innerHTML = S.menu ? `<div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible"><div class="menu-kepala"><b>Admin Contoh</b><span>Platform Admin</span></div>
+    <div class="ina-action-dropdown__divider" role="separator"></div><div role="menu" aria-label="Menu akun">
+    <a class="ina-action-dropdown__item" role="menuitem" href="${SIS}#akun"><span class="ina-action-dropdown__item-icon">${ik('user')}</span><span class="ina-action-dropdown__item-content">Akun Saya</span></a>
+    <a class="ina-action-dropdown__item" role="menuitem" href="Backlog-IDDS-PL-MASUK-Prototype.html"><span class="ina-action-dropdown__item-icon">${ik('keluar')}</span><span class="ina-action-dropdown__item-content">Keluar</span></a></div></div>` : '';
+  $('#userTombol').setAttribute('aria-expanded', String(S.menu));
+}
+$('#userTombol').addEventListener('click', () => { S.menu = !S.menu; gambarMenu(); if (S.menu) $('#menuProfil [role=menuitem]').focus(); });
+$('#menuProfil').addEventListener('click', e => { const a = e.target.closest('a'); if (a) { e.preventDefault(); keLuar(a.getAttribute('href')); } });
+$('#user').addEventListener('keydown', e => {
+  if (e.key === 'Escape' && S.menu) { e.stopPropagation(); S.menu = false; gambarMenu(); $('#userTombol').focus(); return; }
+  if (!S.menu || (e.key !== 'ArrowDown' && e.key !== 'ArrowUp')) return;
+  e.preventDefault(); const it = [...document.querySelectorAll('#menuProfil [role=menuitem]')], i = it.indexOf(document.activeElement);
+  it[(i + (e.key === 'ArrowDown' ? 1 : it.length - 1)) % it.length].focus();
+});
+document.addEventListener('click', e => { if (S.menu && !e.target.closest('#user')) { S.menu = false; gambarMenu(); } });
+
+/* pindah tampilan; dialog yang sudah diubah dikonfirmasi dulu (IDDS-PL-29) */
+const adaKotor = () => LAPIS.some(o => o.kotor && o.kotor());
+function pindah(ke, opsi = {}, lanjut) {
+  const jalan = () => {
+    tutupSemua();
+    if (ke === 'jenis') { S.detail = null; S.tpl = null; }
+    else if (ke === 'detail') { S.detail = opsi.jenis || S.detail || 'AJB'; S.tpl = null; if (opsi.tab) S.tab = opsi.tab; }
+    else if (ke === 'pasal') { const t = TPL.find(x => x.id === (opsi.tpl || 1)) || TPL[0]; S.detail = t.jenis; S.tpl = t.id; }
+    history.replaceState(null, '', '#jenis'); gambar(); window.scrollTo({ top:0 });
+    const h = $('#halaman h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll:true }); }
+    lanjut && lanjut();
+  };
+  if (adaKotor()) { konfirmBuang(jalan); return; }
+  jalan();
+}
+function keLuar(url) { if (adaKotor()) { konfirmBuang(() => { tutupSemua(); location.href = url; }); return; } location.href = url; }
+
+/* ---------------- layar: Daftar Jenis Akta (live: Qst) ---------------- */
+function layarJenis() {
+  const rows = [...JA].sort((a, b) => a.urut - b.urut || a.code.localeCompare(b.code));
+  return `${remah(['Akta'], ['Jenis Akta'])}<h1>Jenis Akta</h1><p class="sub">Tambah jenis akta, atur statusnya, dan kelola template serta variabelnya.</p>
+    <div class="daftar-atas">${tombol('Tambah Jenis Akta', 'primary', 'md', 'id="tambahJenis"', ik('plus', 16))}</div>
+    <div class="tabel-wadah ditandai" id="tabelJenis"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Daftar jenis akta">
+      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Nama Layanan</th><th class="ina-table__header-cell">Urutan</th><th class="ina-table__header-cell">Status</th><th class="ina-table__header-cell"><span class="sr-only">Aksi</span></th></tr></thead>
+      <tbody class="ina-table__body">${rows.length ? rows.map(j => `<tr class="ina-table__row klik ${S.baru === j.code ? 'baru' : ''}" data-buka="${j.code}">
+        <td class="ina-table__cell"><button type="button" class="kd-btn" data-buka="${j.code}" aria-label="Buka template dan variabel ${esc(j.name)}">${j.code}</button></td>
+        <td class="ina-table__cell"><div class="nm">${esc(j.name)}</div>${j.desc ? `<div class="kc">${esc(j.desc)}</div>` : ''}</td>
+        <td class="ina-table__cell">${j.urut}</td>
+        <td class="ina-table__cell">${j.aktif ? badge('Aktif', 'success', 'sm') : badge('Nonaktif', 'neutral', 'sm')}</td>
+        <td class="ina-table__cell"><div class="aksi-baris">${tombol('Ubah', 'secondary', 'sm', `data-ubah-jenis="${j.code}" aria-label="Ubah ${esc(j.name)}"`, ik('edit', 14))}${tombol('Template &amp; Variabel', 'primary', 'sm', `data-buka="${j.code}" aria-label="Template &amp; Variabel ${esc(j.name)}"`, ik('dok', 14))}</div></td></tr>`).join('')
+        : `<tr><td colspan="5" class="ina-table__empty-cell kosong">Belum ada jenis akta. Klik Tambah Jenis Akta untuk membuat yang pertama.</td></tr>`}</tbody></table></div></div>
+      ${hal(rows.length)}</div>${usulan('IDDS-PL-21')}`;
+}
+
+/* ---------------- layar: Detail Template & Variabel (live: fat) ---------------- */
+function layarDetail() {
+  const j = jenisDari(S.detail), T = tplDari(j.code), Vs = varDari(j.code);
+  const tab = (k, t, n) => `<button type="button" role="tab" id="tab-${k}" aria-selected="${S.tab === k}" aria-controls="panel-${k}" tabindex="${S.tab === k ? 0 : -1}" data-tab="${k}" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline ${S.tab === k ? 'ina-tab-horizontal__tab--selected' : ''}">${t}<span class="tanda netral">${n}</span></button>`;
+  const isiT = `<div class="tab-bar"><p>Klik kode atau tombol Pasal &amp; Catatan untuk menyusun isi template.</p>${tombol('Tambah Template', 'primary', 'sm', 'id="tambahTpl"', ik('plus', 14))}</div>
+    <div class="tabel-wadah" style="margin-top:0"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Template ${esc(j.name)}">
+      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Nama Template</th><th class="ina-table__header-cell"><span class="sr-only">Aksi</span></th></tr></thead>
+      <tbody class="ina-table__body">${T.length ? T.map(t => `<tr class="ina-table__row klik ${S.baru === 't' + t.id ? 'baru' : ''}" data-pasal="${t.id}">
+        <td class="ina-table__cell"><button type="button" class="kd-btn" data-pasal="${t.id}" aria-label="Buka pasal dan catatan ${esc(t.name)}">${t.code}</button></td>
+        <td class="ina-table__cell"><div class="nm-wrap"><span class="nm">${esc(t.name)}</span>${t.def ? badge('Utama', 'info', 'sm') : ''}${t.aktif ? '' : badge('Nonaktif', 'neutral', 'sm')}</div>${t.desc ? `<div class="kc">${esc(t.desc)}</div>` : ''}<div class="kc">${t.bag.length} bagian</div></td>
+        <td class="ina-table__cell"><div class="aksi-baris">${t.def ? '' : tombol('Jadikan Utama', 'secondary', 'sm', `data-utama="${t.id}" aria-label="Jadikan ${esc(t.name)} template utama"`)}${tombol('Ubah', 'secondary', 'sm', `data-ubah-tpl="${t.id}" aria-label="Ubah template ${esc(t.name)}"`, ik('edit', 14))}${tombol('Pasal &amp; Catatan', 'primary', 'sm', `data-pasal="${t.id}" aria-label="Pasal &amp; Catatan ${esc(t.name)}"`, ik('dok', 14))}</div></td></tr>`).join('')
+        : `<tr><td colspan="3" class="ina-table__empty-cell kosong">Belum ada template untuk jenis akta ini.</td></tr>`}</tbody></table></div></div>${hal(T.length)}</div>`;
+  const isiV = `<div class="tab-bar"><p>Variabel ditulis ${vv('kunci')} di isi pasal dan terisi otomatis saat draf disusun.${usulan('IDDS-PL-27')}</p>${tombol('Tambah Variabel', 'primary', 'sm', 'id="tambahVar"', ik('plus', 14))}</div>
+    <div class="tabel-wadah ditandai" style="margin-top:0" id="tabelVar"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Variabel ${esc(j.name)}">
+      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Urutan</th><th class="ina-table__header-cell">Kunci</th><th class="ina-table__header-cell">Label</th><th class="ina-table__header-cell">Grup</th><th class="ina-table__header-cell">Tipe</th><th class="ina-table__header-cell"><span class="sr-only">Aksi</span></th></tr></thead>
+      <tbody class="ina-table__body">${Vs.length ? Vs.map((v, i) => `<tr class="ina-table__row ${S.baru === 'v' + v.id ? 'baru' : ''}">
+        <td class="ina-table__cell"><span class="urut">${tombol(ik('atas', 16), 'secondary', 'sm', `data-urut-var="${v.id}:-1" aria-label="Naikkan ${esc(v.label)}" title="Naikkan" ${i ? '' : 'disabled'}`)}${tombol(ik('bawah', 16), 'secondary', 'sm', `data-urut-var="${v.id}:1" aria-label="Turunkan ${esc(v.label)}" title="Turunkan" ${i < Vs.length - 1 ? '' : 'disabled'}`)}</span></td>
+        <td class="ina-table__cell"><span class="mono-v">{{${v.key}}}</span></td>
+        <td class="ina-table__cell">${esc(v.label)}</td>
+        <td class="ina-table__cell">${esc(v.grup)}</td>
+        <td class="ina-table__cell">${badge(TIPE[v.tipe], 'neutral', 'sm')}</td>
+        <td class="ina-table__cell"><div class="aksi-baris">${tombol('Ubah', 'secondary', 'sm', `data-ubah-var="${v.id}" aria-label="Ubah variabel ${esc(v.label)}"`, ik('edit', 14))}${tombol('Hapus', 'secondary', 'sm', `class="bahaya" data-hapus-var="${v.id}" aria-label="Hapus variabel ${esc(v.label)}"`, ik('sampah', 14))}</div></td></tr>`).join('')
+        : `<tr><td colspan="6" class="ina-table__empty-cell kosong">Belum ada variabel. Tambah variabel yang dipakai di pasal, misalnya ${vv('penjual_nama')}.</td></tr>`}</tbody></table></div></div>${hal(Vs.length)}</div>`;
+  return `${remah(['Akta'], ['Jenis Akta', 'data-ke-jenis'], [j.name])}
+    <div class="det-atas">${tombol('Kembali', 'secondary', 'sm', 'id="kembali" data-ke-jenis aria-label="Kembali ke daftar jenis akta"', ik('kiri', 14))}</div>
+    <div class="kode-atas"><code>${j.code}</code>${j.aktif ? badge('Aktif', 'success', 'sm') : badge('Nonaktif', 'neutral', 'sm')}</div>
+    <h1>${esc(j.name)}</h1><p class="sub">Atur template dan variabel yang dipakai saat menyusun draf akta ini.</p>
+    <div class="tab-kartu ditandai" id="tabDetail">${usulan('IDDS-PL-25')}
+      <div class="ina-tab-horizontal ina-tab-horizontal--use-brand-color"><div class="ina-tab-horizontal__container" role="tablist" aria-label="Isi jenis akta">${tab('template', 'Template', T.length)}${tab('variabel', 'Variabel', Vs.length)}</div></div>
+      <div class="tab-isi" role="tabpanel" id="panel-${S.tab}" aria-labelledby="tab-${S.tab}">${S.tab === 'template' ? isiT : isiV}</div></div>`;
+}
+
+/* ---------------- layar: Pasal & Catatan (live: uat) ---------------- */
+function layarPasal() {
+  const t = TPL.find(x => x.id === S.tpl), j = jenisDari(t.jenis), n = t.bag.length;
+  return `${remah(['Akta'], ['Jenis Akta', 'data-ke-jenis'], [j.name, 'data-ke-detail'], [t.name])}
+    <div class="det-atas">${tombol('Kembali', 'secondary', 'sm', 'id="kembali" data-ke-detail aria-label="Kembali ke template dan variabel ' + esc(j.name) + '"', ik('kiri', 14))}</div>
+    <div class="kode-atas"><code>${t.code}</code>${t.def ? badge('Utama', 'info', 'sm') : ''}${t.aktif ? '' : badge('Nonaktif', 'neutral', 'sm')}</div>
+    <h1>${esc(t.name)}</h1><p class="sub">Susun pasal dan catatan template ini sesuai urutan di akta.</p>
+    <div class="daftar-atas" style="gap:8px;flex-wrap:wrap">${tombol('Tambah Catatan', 'secondary', 'md', 'data-tambah-bag="catatan"', ik('plus', 16))}${tombol('Tambah Pasal', 'primary', 'md', 'data-tambah-bag="pasal"', ik('plus', 16))}</div>
+    <div class="tabel-wadah ditandai" id="tabelBag"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Pasal dan catatan ${esc(t.name)}">
+      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Urutan</th><th class="ina-table__header-cell">Tipe</th><th class="ina-table__header-cell">No.</th><th class="ina-table__header-cell">Judul</th><th class="ina-table__header-cell">Wajib</th><th class="ina-table__header-cell"><span class="sr-only">Aksi</span></th></tr></thead>
+      <tbody class="ina-table__body">${n ? t.bag.map((b, i) => { const m = periksa(b.content, t.jenis).length; const nm = esc(namaBagian(b)); return `<tr class="ina-table__row ${S.baru === 'b' + b.id ? 'baru' : ''}">
+        <td class="ina-table__cell"><span class="urut">${tombol(ik('atas', 16), 'secondary', 'sm', `data-urut-bag="${b.id}:-1" aria-label="Naikkan ${nm}" title="Naikkan" ${i ? '' : 'disabled'}`)}${tombol(ik('bawah', 16), 'secondary', 'sm', `data-urut-bag="${b.id}:1" aria-label="Turunkan ${nm}" title="Turunkan" ${i < n - 1 ? '' : 'disabled'}`)}</span></td>
+        <td class="ina-table__cell">${b.type === 'pasal' ? badge('Pasal', 'info', 'sm') : badge('Catatan', 'neutral', 'sm')}</td>
+        <td class="ina-table__cell">${b.nomor || '—'}</td>
+        <td class="ina-table__cell"><div class="nm-wrap"><span class="nm">${esc(b.title)}</span>${m ? badge(`Perlu dicek (${m})`, 'warning', 'sm', `title="${m} hal perlu dicek. Klik Ubah untuk melihatnya."`) : ''}</div>${b.tampil ? '' : '<div class="kc">(judul disembunyikan)</div>'}</td>
+        <td class="ina-table__cell">${b.wajib ? badge('Wajib', 'success', 'sm') : badge('Opsional', 'neutral', 'sm')}</td>
+        <td class="ina-table__cell"><div class="aksi-baris">${tombol('Ubah', 'secondary', 'sm', `data-ubah-bag="${b.id}" aria-label="Ubah ${nm}"`, ik('edit', 14))}${tombol('Hapus', 'secondary', 'sm', `class="bahaya" data-hapus-bag="${b.id}" aria-label="Hapus ${nm}"`, ik('sampah', 14))}</div></td></tr>`; }).join('')
+        : `<tr><td colspan="6" class="ina-table__empty-cell kosong">Belum ada pasal atau catatan. Tambah yang pertama.</td></tr>`}</tbody></table></div></div>${hal(n)}</div>${usulan('IDDS-PL-29')}`;
+}
+
+/* ---------------- gambar ---------------- */
+const RENDER = { jenis:layarJenis, detail:layarDetail, pasal:layarPasal };
+function gambar() {
+  gambarNav(); gambarMenu();
+  const v = tampilan();
+  $('#pilLayar').innerHTML = LAYAR.map(([k, t]) => `<button class="pil" data-pil="${k}" aria-pressed="${v === k}">${t}</button>`).join(' ');
+  $('#halaman').innerHTML = RENDER[v]();
+  pasangPanduan();
+  const sub = v === 'jenis' ? 'Jenis Akta' : v === 'detail' ? `${jenisDari(S.detail).name}` : TPL.find(x => x.id === S.tpl).name;
+  document.title = `Backlog E-PPAT Peruri — Platform · ${sub}`;
+}
+function sorotBaru(kunci) { S.baru = kunci; setTimeout(() => { if (S.baru === kunci) { S.baru = null; document.querySelectorAll('tr.baru').forEach(r => r.classList.remove('baru')); } }, 2400); }
+
+/* ---------------- interaksi halaman ---------------- */
+const H = $('#halaman');
+H.addEventListener('click', e => {
+  const t = e.target;
+  if (t.closest('[data-ke-jenis]')) { e.preventDefault(); pindah('jenis'); return; }
+  if (t.closest('[data-ke-detail]')) { e.preventDefault(); pindah('detail', { jenis:S.detail, tab:'template' }); return; }
+  if (t.closest('#tambahJenis')) { dialogJenis(null); return; }
+  const uj = t.closest('[data-ubah-jenis]'); if (uj) { dialogJenis(jenisDari(uj.dataset.ubahJenis)); return; }
+  /* detail */
+  const tb = t.closest('[data-tab]'); if (tb) { S.tab = tb.dataset.tab; gambar(); $(`#tab-${S.tab}`).focus(); return; }
+  if (t.closest('#tambahTpl')) { dialogTpl(null); return; }
+  const ut = t.closest('[data-ubah-tpl]'); if (ut) { dialogTpl(TPL.find(x => x.id === +ut.dataset.ubahTpl)); return; }
+  const um = t.closest('[data-utama]'); if (um) { konfirmUtama(TPL.find(x => x.id === +um.dataset.utama)); return; }
+  if (t.closest('#tambahVar')) { dialogVar(null); return; }
+  const uv = t.closest('[data-ubah-var]'); if (uv) { dialogVar(VAR.find(x => x.id === +uv.dataset.ubahVar)); return; }
+  const hv = t.closest('[data-hapus-var]'); if (hv) { konfirmHapusVar(VAR.find(x => x.id === +hv.dataset.hapusVar)); return; }
+  const rv = t.closest('[data-urut-var]'); if (rv) { urutVar(rv.dataset.urutVar); return; }
+  /* pasal */
+  const tbg = t.closest('[data-tambah-bag]'); if (tbg) { dialogBagian(null, tbg.dataset.tambahBag); return; }
+  const ub = t.closest('[data-ubah-bag]'); if (ub) { const tp = TPL.find(x => x.id === S.tpl); dialogBagian(tp.bag.find(b => b.id === +ub.dataset.ubahBag)); return; }
+  const hb = t.closest('[data-hapus-bag]'); if (hb) { const tp = TPL.find(x => x.id === S.tpl); konfirmHapusBag(tp, tp.bag.find(b => b.id === +hb.dataset.hapusBag)); return; }
+  const rb = t.closest('[data-urut-bag]'); if (rb) { urutBag(rb.dataset.urutBag); return; }
+  /* buka baris (terakhir, agar tombol aksi di baris tidak ikut) */
+  const pb = t.closest('button[data-pasal]'); if (pb) { pindah('pasal', { tpl:+pb.dataset.pasal }); return; }
+  const bb = t.closest('button[data-buka]'); if (bb) { pindah('detail', { jenis:bb.dataset.buka, tab:'template' }); return; }
+  if (t.closest('.aksi-baris')) return;
+  const pa = t.closest('[data-pasal]'); if (pa) { pindah('pasal', { tpl:+pa.dataset.pasal }); return; }
+  const bk = t.closest('[data-buka]'); if (bk) { pindah('detail', { jenis:bk.dataset.buka, tab:'template' }); return; }
+});
+H.addEventListener('keydown', e => {
+  const tb = e.target.closest('[data-tab]'); if (!tb || !['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+  e.preventDefault(); S.tab = S.tab === 'template' ? 'variabel' : 'template'; gambar(); $(`#tab-${S.tab}`).focus();
+});
+function urutVar(s) {
+  const [id, d] = s.split(':').map(Number), v = VAR.find(x => x.id === id), daftar = varDari(v.jenis), i = daftar.indexOf(v), lain = daftar[i + d]; if (!lain) return;
+  const a = VAR.indexOf(v), b = VAR.indexOf(lain); [VAR[a], VAR[b]] = [VAR[b], VAR[a]];
+  gambar(); umumkan(`${v.label} dipindah ke urutan ${i + d + 1} dari ${daftar.length}.`);
+  const btn = $(`[data-urut-var="${id}:${d}"]`); (btn && !btn.disabled ? btn : $(`[data-urut-var="${id}:${-d}"]`))?.focus();
+}
+function urutBag(s) {
+  const [id, d] = s.split(':').map(Number), t = TPL.find(x => x.id === S.tpl), i = t.bag.findIndex(b => b.id === id); if (!t.bag[i + d]) return;
+  [t.bag[i], t.bag[i + d]] = [t.bag[i + d], t.bag[i]];
+  gambar(); umumkan(`${namaBagian(t.bag[i + d])} dipindah ke urutan ${i + d + 1} dari ${t.bag.length}.`);
+  const btn = $(`[data-urut-bag="${id}:${d}"]`); (btn && !btn.disabled ? btn : $(`[data-urut-bag="${id}:${-d}"]`))?.focus();
+}
+
+/* ---------------- galat isian ---------------- */
+function galat(id, pesan) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); w?.classList.add('ina-text-field__wrapper--status-error'); $(`#${id}`)?.setAttribute('aria-invalid', 'true'); if (h) { h.innerHTML = pesan; h.classList.add('ina-text-field__helper-text--error'); } }
+function bersih(id) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); if (!w) return; w.classList.remove('ina-text-field__wrapper--status-error'); $(`#${id}`)?.removeAttribute('aria-invalid'); if (h) { h.classList.remove('ina-text-field__helper-text--error'); h.innerHTML = h.dataset.bantu || ''; } }
+const fokusGalat = el => el.querySelector('[aria-invalid="true"]')?.focus();
+const isTog = id => $('#' + id).getAttribute('aria-checked') === 'true';
+
+/* ---------------- dialog Tambah/Ubah Jenis Akta (IDDS-PL-22/23/24) ---------------- */
+function dialogJenis(j) {
+  const baru = !j;
+  const nilai = () => ({ code:$('#jKode').value.trim(), name:$('#jNama').value.trim(), desc:$('#jDesk').value.trim(), urut:$('#jUrut').value.trim(), aktif:isTog('jAktif') });
+  let awal;
+  const o = dialog({ judul: baru ? 'Tambah Jenis Akta' : `Ubah Jenis Akta — ${esc(j.name)}`,
+    isi:`${tf('jKode', 'Kode', baru ? '' : j.code, 'AJB', baru, baru ? 'Gunakan huruf besar, angka, atau garis bawah, misalnya AJB atau APHT.' : 'Kode tidak dapat diubah setelah dibuat.', baru ? 'autocomplete="off"' : 'disabled')}
+      <div class="f-baris">${tf('jNama', 'Nama Jenis Akta', baru ? '' : j.name, 'Akta Jual Beli', true)}</div>
+      <div class="f-baris">${tf('jDesk', 'Deskripsi', baru ? '' : j.desc, 'Penjelasan singkat', false, 'Opsional. Tampil di bawah nama pada daftar.')}</div>
+      <div class="f-baris">${tf('jUrut', 'Urutan', baru ? '0' : String(j.urut), '0', false, 'Angka kecil tampil lebih dulu di daftar.', 'inputmode="numeric"')}</div>
+      <div class="f-baris sakelar ditandai">${toggle('jAktif', 'Aktif', baru ? true : j.aktif)}<p>Layanan dapat dipilih kantor PPAT saat membuat order.</p></div>
+      ${usulan('IDDS-PL-22')}${usulan('IDDS-PL-23')}`,
+    kotor:() => JSON.stringify(nilai()) !== awal,
+    tombol:[...(baru ? [] : [['Hapus', 'secondary', () => konfirmHapusJenis(j), true, 'kiri bahaya', ik('sampah', 14)]]), ['Batal', 'secondary', null], [baru ? 'Buat' : 'Simpan', 'primary', () => simpan(), true, '', ik('simpan', 14)]] });
+  awal = JSON.stringify(nilai());
+  const kode = o.el.querySelector('#jKode');
+  kode.addEventListener('input', () => { const p = kode.selectionStart, s0 = kode.value; kode.value = s0.toUpperCase().replace(/\s/g, '_').replace(/[^A-Z0-9_]/g, ''); const q = Math.max(0, p - (s0.length - kode.value.length)); kode.setSelectionRange(q, q); });
+  function simpan() {
+    const v = nilai(); let ada = false;
+    if (baru) {
+      if (!v.code) { galat('jKode', 'Kode wajib diisi, misalnya AJB.'); ada = true; }
+      else if (!/^[A-Z][A-Z0-9_]*$/.test(v.code)) { galat('jKode', 'Kode diawali huruf besar, lalu huruf besar, angka, atau garis bawah. Misalnya AJB atau APHT.'); ada = true; }
+      else if (jenisDari(v.code)) { galat('jKode', `Kode ${esc(v.code)} sudah dipakai. Gunakan kode lain.`); ada = true; }
+    }
+    if (v.name.length < 2) { galat('jNama', 'Nama jenis akta minimal 2 karakter.'); ada = true; }
+    if (!/^\d+$/.test(v.urut)) { galat('jUrut', 'Urutan harus berupa angka, misalnya 1.'); ada = true; }
+    if (ada) { fokusGalat(o.el); return; }
+    const terap = () => {
+      if (baru) JA.push({ code:v.code, name:v.name, desc:v.desc, urut:+v.urut, aktif:v.aktif, kantor:0, order:0 });
+      else Object.assign(j, { name:v.name, desc:v.desc, urut:+v.urut, aktif:v.aktif });
+      tutup(o); sorotBaru(baru ? v.code : j.code); gambar();
+      toast(baru ? `Jenis akta ${v.name} ditambahkan.` : `Perubahan ${v.name} disimpan.`, 'positive', 4000,
+        baru ? 'Lanjutkan dengan menambah template dan variabelnya.' : (j.aktif !== undefined && !v.aktif && JSON.parse(awal).aktif ? 'Layanan ini tidak lagi tampil untuk order baru.' : ''));
+    };
+    if (!baru && j.aktif && !v.aktif) { konfirmNonaktif(j, terap); return; }
+    terap();
+  }
+}
+function konfirmNonaktif(j, fn) {
+  dialog({ judul:`Nonaktifkan ${esc(j.name)}?`, konfirmasi:true, bahaya:true,
+    isi:`<div class="modal-gap"><p>Setelah disimpan, kantor PPAT tidak dapat memilih layanan <b>${esc(j.name)}</b> untuk order baru.${usulan('IDDS-PL-23')}</p>
+      ${j.kantor ? alert('caution', 'Layanan ini sedang dipakai', `Dipakai ${est(j.kantor + ' kantor PPAT')} dengan ${est(j.order + ' order')} yang belum selesai.`) : ''}
+      <ul class="dampak"><li>Layanan hilang dari pilihan saat kantor PPAT membuat order baru.</li><li>Order yang sudah ada tidak dihapus.</li><li>Template dan variabel tetap tersimpan.</li><li>Anda dapat mengaktifkannya lagi kapan saja.</li></ul></div>`,
+    tombol:[['Batal', 'secondary', null], ['Nonaktifkan', 'primary', fn]] });
+}
+function konfirmHapusJenis(j) {
+  const nT = tplDari(j.code).length, nV = varDari(j.code).length;
+  if (j.order > 0 || nT > 0) {
+    dialog({ judul:`${esc(j.name)} tidak dapat dihapus`, konfirmasi:true,
+      isi:`<div class="modal-gap">${alert('critical', '', `<ul class="dampak" style="margin:0">${j.order ? `<li>Masih dipakai ${est(j.order + ' order')}.</li>` : ''}${nT ? `<li>Masih punya ${nT} template. Hapus templatenya dulu di Template &amp; Variabel.</li>` : ''}</ul>`)}
+        <p>Bila layanan ini tidak dipakai lagi, nonaktifkan saja. Layanan nonaktif tidak muncul untuk order baru.${usulan('IDDS-PL-24')}</p></div>`,
+      tombol:[['Tutup', 'secondary', null]] });
+    return;
+  }
+  dialog({ judul:`Hapus "${esc(j.name)}"?`, konfirmasi:true, bahaya:true,
+    isi:`<p>Jenis akta <b>${esc(j.name)}</b> (<code>${j.code}</code>)${nV ? ` beserta ${nV} variabelnya` : ''} akan dihapus permanen. Tindakan ini tidak dapat dibatalkan.${usulan('IDDS-PL-24')}</p>`,
+    tombol:[['Batal', 'secondary', null], ['Hapus Jenis Akta', 'primary', () => {
+      JA = JA.filter(x => x !== j); VAR = VAR.filter(v => v.jenis !== j.code); tutupSemua(); gambar(); toast(`Jenis akta ${j.name} dihapus.`, 'positive');
+    }]] });
+}
+
+/* ---------------- dialog Template (IDDS-PL-26) ---------------- */
+function dialogTpl(t) {
+  const baru = !t, j = jenisDari(S.detail), T = tplDari(j.code), sumber = T.find(x => x.def) || T[0];
+  const nilai = () => ({ code:$('#tKode').value.trim(), name:$('#tNama').value.trim(), desc:$('#tDesk').value.trim(), aktif:isTog('tAktif'), salin:baru ? $('#tSalin').value : '', utama:$('#tUtama').checked });
+  let awal;
+  const o = dialog({ judul: baru ? `Tambah Template — ${esc(j.name)}` : `Ubah Template — ${esc(t.name)}`,
+    isi:`${tf('tKode', 'Kode Template', baru ? '' : t.code, `${j.code}_STD`, baru, baru ? `Kode unik template, misalnya ${j.code}_STD atau ${j.code}_2025.` : 'Kode tidak dapat diubah setelah dibuat.', baru ? 'autocomplete="off"' : 'disabled')}
+      <div class="f-baris">${tf('tNama', 'Nama Template', baru ? '' : t.name, 'Misalnya: AJB Standar 2025', true)}</div>
+      <div class="f-baris">${tf('tDesk', 'Deskripsi', baru ? '' : t.desc, 'Varian standar untuk jual beli umum', false, 'Opsional. Penjelasan singkat.')}</div>
+      <div class="f-baris sakelar">${toggle('tAktif', 'Aktif', baru ? true : t.aktif)}<p>Template dapat dipilih saat menyusun draf.</p></div>
+      ${baru ? `<div class="f-baris ditandai">${pilihan('tSalin', 'Salin isi dari', [['', '— Mulai kosong —'], ...T.map(x => [String(x.id), `${x.code} · ${x.name}${x.def ? ' (utama)' : ''}`])], sumber ? String(sumber.id) : '', 'Semua pasal dan catatan template sumber disalin, lalu tinggal ubah yang berbeda. Pilih Mulai kosong hanya bila ingin menyusun dari awal.')}</div>` : ''}
+      <div class="f-baris">${cekBox('tUtama', !baru && t.def, `Jadikan template utama jenis akta ini${!baru && t.def ? ' <span class="redup">(sudah utama)</span>' : ''}`, 'Template utama dipilih otomatis saat draf baru disusun.', !baru && t.def ? 'disabled' : '')}</div>
+      ${usulan('IDDS-PL-26')}`,
+    kotor:() => JSON.stringify(nilai()) !== awal,
+    tombol:[...(baru ? [] : [['Hapus', 'secondary', () => konfirmHapusTpl(t), true, 'kiri bahaya', ik('sampah', 14)]]), ['Batal', 'secondary', null], [baru ? 'Buat Template' : 'Simpan', 'primary', () => simpan(), true, '', ik('simpan', 14)]] });
+  awal = JSON.stringify(nilai());
+  const kode = o.el.querySelector('#tKode');
+  kode.addEventListener('input', () => { const p = kode.selectionStart, s0 = kode.value; kode.value = s0.toUpperCase().replace(/\s/g, '_').replace(/[^A-Z0-9_]/g, ''); const q = Math.max(0, p - (s0.length - kode.value.length)); kode.setSelectionRange(q, q); });
+  function simpan() {
+    const v = nilai(); let ada = false;
+    if (baru) {
+      if (!/^[A-Z][A-Z0-9_]*$/.test(v.code)) { galat('tKode', v.code ? `Kode diawali huruf besar, lalu huruf besar, angka, atau garis bawah. Misalnya ${j.code}_STD.` : `Kode template wajib diisi, misalnya ${j.code}_STD.`); ada = true; }
+      else if (TPL.some(x => x.code === v.code)) { galat('tKode', `Kode ${esc(v.code)} sudah dipakai template lain. Gunakan kode lain.`); ada = true; }
+    }
+    if (v.name.length < 2) { galat('tNama', 'Nama template minimal 2 karakter.'); ada = true; }
+    if (ada) { fokusGalat(o.el); return; }
+    let tt = t, ket = '';
+    if (baru) {
+      const src = TPL.find(x => x.id === +v.salin);
+      tt = { id:++nid, jenis:j.code, code:v.code, name:v.name, desc:v.desc, aktif:v.aktif, def:!T.length, bag:src ? src.bag.map(b => ({ ...b, id:++nid })) : [] };
+      TPL.push(tt); ket = src ? `Berisi ${src.bag.length} bagian yang disalin dari ${src.code}. Ubah bagian yang berbeda.` : 'Template masih kosong. Tambah pasal lewat Pasal & Catatan.';
+    } else Object.assign(t, { name:v.name, desc:v.desc, aktif:v.aktif });
+    if (v.utama) { T.forEach(x => { x.def = false; }); tt.def = true; ket += (ket ? ' ' : '') + 'Template ini menjadi template utama.'; }
+    tutup(o); sorotBaru('t' + tt.id); gambar();
+    toast(baru ? `Template ${v.name} dibuat.` : `Perubahan template ${v.name} disimpan.`, 'positive', 4500, ket);
+  }
+}
+function konfirmHapusTpl(t) {
+  const lain = tplDari(t.jenis).filter(x => x !== t);
+  dialog({ judul:`Hapus "${esc(t.name)}"?`, konfirmasi:true, bahaya:true,
+    isi:`<div class="modal-gap"><p>Template <b>${esc(t.name)}</b> beserta ${t.bag.length} pasal dan catatannya akan dihapus permanen. Tindakan ini tidak dapat dibatalkan.${usulan('IDDS-PL-26')}</p>
+      ${t.def && lain.length ? alert('caution', '', 'Template ini adalah template utama. Setelah dihapus, pilih template utama yang baru dengan tombol Jadikan Utama.') : ''}</div>`,
+    tombol:[['Batal', 'secondary', null], ['Hapus Template', 'primary', () => { TPL = TPL.filter(x => x !== t); tutupSemua(); gambar(); toast(`Template ${t.name} dihapus.`, 'positive'); }]] });
+}
+function konfirmUtama(t) {
+  const j = jenisDari(t.jenis), kini = tplDari(t.jenis).find(x => x.def);
+  dialog({ judul:`Jadikan ${esc(t.name)} template utama?`, konfirmasi:true,
+    isi:`<div class="modal-gap"><p>Template utama dipilih otomatis saat draf ${esc(j.name)} baru disusun. Draf yang sudah ada tidak berubah.${usulan('IDDS-PL-25')}</p>
+      ${kini ? `<p>Template utama saat ini, <b>${esc(kini.name)}</b>, menjadi template biasa.</p>` : ''}${t.aktif ? '' : alert('caution', '', 'Template ini nonaktif. Aktifkan lewat Ubah agar dapat dipakai.')}</div>`,
+    tombol:[['Batal', 'secondary', null], ['Jadikan Utama', 'primary', () => { tplDari(t.jenis).forEach(x => { x.def = false; }); t.def = true; sorotBaru('t' + t.id); gambar(); toast(`${t.name} menjadi template utama ${j.name}.`, 'positive'); }]] });
+}
+
+/* ---------------- dialog Variabel (IDDS-PL-27/28) ---------------- */
+function dialogVar(v) {
+  const baru = !v, j = jenisDari(S.detail);
+  const nilai = () => ({ key:$('#vKunci').value.trim(), label:$('#vLabel').value.trim(), grup:$('#vGrup').value.trim(), tipe:$('#vTipe').value, def:$('#vDef').value });
+  let awal;
+  const o = dialog({ judul: baru ? `Tambah Variabel — ${esc(j.name)}` : `Ubah Variabel — ${esc(v.label)}`,
+    isi:`<div class="ditandai">${tf('vKunci', 'Kunci', baru ? '' : v.key, 'penjual_nama', baru, baru ? `Ditulis sebagai ${vv('kunci')} di isi pasal, misalnya ${vv('penjual_nama')}. Gunakan huruf kecil, angka, atau garis bawah.` : 'Kunci tidak dapat diubah setelah dibuat.', baru ? 'autocomplete="off" spellcheck="false"' : 'disabled', '{{', '}}')}</div>
+      <div class="f-baris">${tf('vLabel', 'Label', baru ? '' : v.label, 'Nama Lengkap Penjual', true, 'Nama yang tampil di editor saat menyusun draf.')}</div>
+      <div class="f-baris">${tf('vGrup', 'Grup', baru ? 'Umum' : v.grup, 'Umum', false, 'Pengelompokan di editor, misalnya Para Pihak atau Objek.')}</div>
+      <div class="f-baris">${pilihan('vTipe', 'Tipe', [['single', 'Tunggal — satu nilai, misalnya {{penjual_nama}}'], ['list', 'Daftar — nilai berulang, misalnya {{pihak:list}}']], baru ? 'single' : v.tipe)}</div>
+      <div class="f-baris">${tf('vDef', 'Nilai Awal', baru ? '' : v.def, '', false, 'Opsional. Dipakai saat draf dibuat.')}</div>
+      ${usulan('IDDS-PL-27')}${usulan('IDDS-PL-28')}`,
+    kotor:() => JSON.stringify(nilai()) !== awal,
+    tombol:[['Batal', 'secondary', null], [baru ? 'Tambah' : 'Simpan', 'primary', () => simpan(), true, '', ik('simpan', 14)]] });
+  awal = JSON.stringify(nilai());
+  const k = o.el.querySelector('#vKunci');
+  k.addEventListener('input', () => { const p = k.selectionStart, s0 = k.value; k.value = s0.toLowerCase().replace(/[{}\s]/g, m => /\s/.test(m) ? '_' : '').replace(/[^a-z0-9_]/g, ''); const q = Math.max(0, p - (s0.length - k.value.length)); k.setSelectionRange(q, q); });
+  function simpan() {
+    const n = nilai(); let ada = false;
+    if (baru) {
+      if (!/^[a-z][a-z0-9_]*$/.test(n.key)) { galat('vKunci', 'Kunci diawali huruf kecil, lalu huruf kecil, angka, atau garis bawah. Misalnya penjual_nama.'); ada = true; }
+      else if (varDari(j.code).some(x => x.key === n.key)) { galat('vKunci', `Kunci ${vv(n.key)} sudah ada di jenis akta ini.`); ada = true; }
+    }
+    if (!n.label) { galat('vLabel', 'Label wajib diisi.'); ada = true; }
+    if (ada) { fokusGalat(o.el); return; }
+    let vb = v;
+    if (baru) { vb = { id:++nid, jenis:j.code, key:n.key, label:n.label, grup:n.grup || 'Umum', tipe:n.tipe, def:n.def }; VAR.push(vb); }
+    else Object.assign(v, { label:n.label, grup:n.grup || 'Umum', tipe:n.tipe, def:n.def });
+    tutup(o); S.tab = 'variabel'; sorotBaru('v' + vb.id); gambar();
+    toast(baru ? `Variabel ${n.label} ditambahkan.` : `Variabel ${n.label} disimpan.`, 'positive', 4000, baru ? `Tulis {{${n.key}}} di isi pasal, atau pilih lewat Sisipkan Variabel.` : '');
+  }
+}
+function konfirmHapusVar(v) {
+  const pakai = pemakai(v.jenis, v.key);
+  dialog({ judul:`Hapus variabel ${esc(v.label)}?`, konfirmasi:true, bahaya:true,
+    isi:`<div class="modal-gap"><p>Variabel ${vv(v.key)} akan dihapus dari ${esc(jenisDari(v.jenis).name)}.${usulan('IDDS-PL-28')}</p>
+      ${pakai.length ? alert('caution', `Masih dipakai di ${pakai.length} bagian template`, `<ul class="dampak" style="margin:4px 0 6px">${pakai.map(x => `<li>${esc(x)}</li>`).join('')}</ul>Setelah dihapus, tulisan ${vv(v.key)} di bagian tersebut tidak terisi otomatis dan ditandai pengecek isi. Ubah bagian itu bila perlu.`) : '<p>Variabel ini tidak dipakai di template mana pun.</p>'}</div>`,
+    tombol:[['Batal', 'secondary', null], ['Hapus Variabel', 'primary', () => { VAR = VAR.filter(x => x !== v); gambar(); toast(`Variabel ${v.label} dihapus.`, 'positive', 4000, pakai.length ? `${pakai.length} bagian template perlu dicek.` : ''); }]] });
+}
+
+/* ---------------- dialog Bagian: pasal & catatan + pengecek isi (IDDS-PL-29) ---------------- */
+const ALAT = [['bold', '<b>B</b>', 'Tebal (Ctrl+B)'], ['italic', '<i>I</i>', 'Miring (Ctrl+I)'], ['underline', '<u>U</u>', 'Garis bawah (Ctrl+U)'], ['|'],
+  ['insertUnorderedList', ik('ul', 16), 'Daftar'], ['insertOrderedList', ik('ol', 16), 'Daftar bernomor'], ['removeFormat', ik('hapusFormat', 16), 'Hapus format'], ['|'],
+  ['undo', ik('urung', 16), 'Urungkan (Ctrl+Z)'], ['redo', ik('ulang', 16), 'Ulangi (Ctrl+Y)']];
+function dialogBagian(b, tipeBaru) {
+  const t = TPL.find(x => x.id === S.tpl), j = jenisDari(t.jenis), baru = !b, tipe = baru ? tipeBaru : b.type, Tn = tipe === 'pasal' ? 'Pasal' : 'Catatan';
+  const nilai = () => ({ type:$('#bTipe').value, nomor:$('#bNomor').value.trim(), title:$('#bJudul').value.trim(), wajib:$('#bWajib').checked, tampil:$('#bTampil').checked, content:$('#bIsi').innerHTML });
+  const grup = [...new Set(varDari(j.code).map(v => v.grup))];
+  let awal, range = null, menuVar = false;
+  const o = dialog({ lebar:true, judul: baru ? `Tambah ${Tn} — ${esc(t.name)}` : `Ubah ${Tn} — ${esc(b.title)}`,
+    isi:`<div class="f-tiga">${pilihan('bTipe', 'Tipe', [['pasal', 'Pasal'], ['catatan', 'Catatan']], tipe)}
+        ${tf('bNomor', 'Nomor', baru ? (tipe === 'pasal' ? String(t.bag.filter(x => x.type === 'pasal').length + 1) : '') : b.nomor, 'Misalnya 1', false, 'Opsional. Isi dengan angka.', 'inputmode="numeric"')}
+        ${tf('bJudul', 'Judul', baru ? '' : b.title, 'Objek Jual Beli', true)}</div>
+      <div class="f-cek">${cekBox('bWajib', baru ? true : b.wajib, 'Wajib', 'Bagian ini selalu ada di akta.')}${cekBox('bTampil', baru ? true : b.tampil, 'Tampilkan judul', 'Judul ikut tercetak di akta.')}</div>
+      <div class="f-baris"><span class="ina-text-field__label" id="lblIsi">Isi</span>
+        <div class="rte ditandai"><div class="rte-alat" role="toolbar" aria-label="Format isi">${ALAT.map(([c, g, l]) => c === '|' ? '<span class="pisah" aria-hidden="true"></span>' : `<button type="button" class="alat" data-cmd="${c}" aria-label="${l}" title="${l}">${g}</button>`).join('')}
+          <span class="var-wadah ina-action-dropdown"><button type="button" class="ina-button ina-button--secondary ina-button--sm" id="tombolVar" aria-haspopup="menu" aria-expanded="false" title="Sisipkan variabel ke isi">${ik('kurung', 14)}Sisipkan Variabel</button><div id="menuVar"></div></span></div>
+          <div class="rte-isi" id="bIsi" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="lblIsi" aria-describedby="h-bIsi" data-ph="Tulis isi pasal atau catatan di sini…">${baru ? '' : b.content}</div></div>
+        <div class="ina-text-field__helper-text" id="h-bIsi" style="margin-top:6px">Sisipkan variabel lewat tombol Sisipkan Variabel atau tulis ${vv('kunci')}, misalnya ${vv('penjual_nama')}.${usulan('IDDS-PL-27')}</div>
+        <div id="cekIsi" class="cek-isi" tabindex="-1"></div></div>${usulan('IDDS-PL-29')}`,
+    kotor:() => JSON.stringify(nilai()) !== awal,
+    tombol:[['Batal', 'secondary', null], ['Simpan', 'primary', () => simpan(false), true, '', ik('simpan', 14)]] });
+  awal = JSON.stringify(nilai());
+  const E = o.el.querySelector('#bIsi'), M = o.el.querySelector('#menuVar'), TV = o.el.querySelector('#tombolVar');
+  const catat = () => { const s = getSelection(); if (s.rangeCount && E.contains(s.anchorNode)) range = s.getRangeAt(0).cloneRange(); };
+  ['keyup', 'mouseup', 'input', 'blur'].forEach(ev => E.addEventListener(ev, catat));
+  E.addEventListener('input', () => { o.el.querySelector('#cekIsi').innerHTML = ''; });
+  o.el.querySelector('.rte-alat').addEventListener('mousedown', e => { if (e.target.closest('.alat')) e.preventDefault(); });
+  o.el.querySelector('.rte-alat').addEventListener('click', e => {
+    const a = e.target.closest('.alat'); if (a) { E.focus(); if (range) { const s = getSelection(); s.removeAllRanges(); s.addRange(range); } document.execCommand(a.dataset.cmd, false, null); catat(); return; }
+    if (e.target.closest('#tombolVar')) { aturMenu(!menuVar); if (menuVar) M.querySelector('[role=menuitem]')?.focus(); return; }
+    const it = e.target.closest('[data-var]'); if (it) sisip(it.dataset.var);
+  });
+  function aturMenu(buka) {
+    menuVar = buka; TV.setAttribute('aria-expanded', String(buka));
+    M.innerHTML = buka ? `<div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible" role="menu" aria-label="Variabel ${esc(j.name)}">${grup.length ? grup.map(g => `<div class="var-grup" role="presentation">${esc(g)}</div>${varDari(j.code).filter(v => v.grup === g).map(v => `<button type="button" class="ina-action-dropdown__item" role="menuitem" data-var="${v.key}${v.tipe === 'list' ? ':list' : ''}"><span class="ina-action-dropdown__item-content"><span>${esc(v.label)}</span><code>{{${v.key}${v.tipe === 'list' ? ':list' : ''}}}</code></span></button>`).join('')}`).join('') : '<div class="var-grup">Belum ada variabel</div>'}</div>` : '';
+  }
+  function sisip(k) {
+    aturMenu(false); E.focus(); const s = getSelection(); s.removeAllRanges();
+    if (range) s.addRange(range); else { const r = document.createRange(); r.selectNodeContents(E); r.collapse(false); s.addRange(r); }
+    document.execCommand('insertText', false, `{{${k}}}`); catat(); o.el.querySelector('#cekIsi').innerHTML = '';
+  }
+  M.addEventListener('keydown', e => {
+    const it = [...M.querySelectorAll('[role=menuitem]')], i = it.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); it[(i + (e.key === 'ArrowDown' ? 1 : -1) + it.length) % it.length]?.focus(); }
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); aturMenu(false); TV.focus(); }
+  });
+  o.el.addEventListener('click', e => { if (menuVar && !e.target.closest('.var-wadah')) aturMenu(false); });
+  o.el.querySelector('#bNomor').addEventListener('input', e => { const x = e.target; x.value = x.value.replace(/\D/g, ''); });
+  o.el.addEventListener('click', e => {
+    if (e.target.closest('#perbaikiDulu')) { o.el.querySelector('#cekIsi').innerHTML = ''; E.focus(); }
+    if (e.target.closest('#simpanSaja')) simpan(true);
+  });
+  function simpan(lewati) {
+    const v = nilai(); let ada = false;
+    if (!v.title) { galat('bJudul', 'Judul wajib diisi.'); ada = true; }
+    if (v.nomor && !/^\d+$/.test(v.nomor)) { galat('bNomor', 'Nomor harus berupa angka, misalnya 1.'); ada = true; }
+    if (ada) { fokusGalat(o.el); return; }
+    const m = periksa(v.content, j.code), P = o.el.querySelector('#cekIsi');
+    if (m.length && !lewati) {
+      P.innerHTML = alert('warning', `Ada ${m.length} hal yang perlu dicek sebelum disimpan`, `<ul>${m.map(x => `<li><b>${x.jenis}:</b> <code>${esc(x.teks)}</code> — ${x.saran}</li>`).join('')}</ul>
+        <div class="aksi">${tombol('Perbaiki Dulu', 'primary', 'sm', 'id="perbaikiDulu"')}${tombol('Simpan Saja', 'secondary', 'sm', 'id="simpanSaja"')}</div>`);
+      P.scrollIntoView({ block:'nearest' }); P.focus(); return;
+    }
+    let bb = b;
+    if (baru) { bb = { id:++nid, ...v }; t.bag.push(bb); } else Object.assign(b, v);
+    tutup(o); sorotBaru('b' + bb.id); gambar();
+    toast(`${namaBagian(bb)} disimpan.`, 'positive', 4000, m.length ? `Disimpan dengan ${m.length} hal yang belum diperbaiki.` : '');
+  }
+}
+function konfirmHapusBag(t, b) {
+  dialog({ judul:`Hapus "${esc(b.title)}"?`, konfirmasi:true, bahaya:true,
+    isi:`<p>Bagian <b>${esc(namaBagian(b))}</b> akan dihapus permanen dari template ${esc(t.name)}. Tindakan ini tidak dapat dibatalkan.${usulan('IDDS-PL-29')}</p>`,
+    tombol:[['Batal', 'secondary', null], ['Hapus Bagian', 'primary', () => { t.bag = t.bag.filter(x => x !== b); gambar(); toast(`${namaBagian(b)} dihapus.`, 'positive'); }]] });
+}
+
+/* ---------------- IDDS Modal bertumpuk + penjaga perubahan ---------------- */
+const LAPIS = [];
+function dialog({ judul, isi, tombol: tb, lebar, konfirmasi, bahaya, kotor }) {
+  const el = document.createElement('div'); el.className = 'lapis-dlg';
+  const o = { el, kotor, asal:document.activeElement };
+  el.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-i="-1"></div><div class="ina-modal__container">
+    <div class="ina-modal__dialog ina-modal__dialog--size-${lebar ? 'lg' : 'md'} ${konfirmasi ? 'ina-modal-confirmation' : ''}" role="${konfirmasi ? 'alertdialog' : 'dialog'}" aria-modal="true" aria-labelledby="dlgJudul${LAPIS.length}">
+      <div class="ina-modal__header"><h2 class="ina-modal__title" id="dlgJudul${LAPIS.length}">${judul}</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-i="-1">${ik('x', 22)}</button></div>
+      <div class="ina-modal__body">${isi}</div>
+      <div class="ina-modal__footer">${tb.map(([t, h, , , kls, ikon], i) => `<button type="button" class="ina-button ina-button--${h} ina-button--md ${kls || ''}" data-i="${i}" ${bahaya && i === tb.length - 1 ? 'style="background:var(--ina-negative-600);border-color:var(--ina-negative-600)"' : ''}>${ikon || ''}${t}</button>`).join('')}</div></div></div></div>`;
+  $('#lapisan').appendChild(el); LAPIS.push(o);
+  el.addEventListener('click', e => {
+    const b = e.target.closest('[data-i]'); if (!b || b.disabled || b.closest('.lapis-dlg') !== el) return;
+    const i = +b.dataset.i; if (i < 0) { cobaTutup(o); return; }
+    const [, , fn, tahan] = tb[i]; if (!fn) { cobaTutup(o); return; }
+    if (tahan) { fn(); return; }
+    tutup(o); fn();
+  });
+  el.addEventListener('input', e => { const f = e.target.closest('.ina-text-field'); if (f && f.id) bersih(f.id.slice(2)); });
+  (el.querySelector('.ina-modal__body input:not([disabled]), .ina-modal__body [contenteditable]') || el.querySelector(konfirmasi ? '.ina-modal__footer .ina-button' : '.ina-modal__close-button')).focus();
+  return o;
+}
+function tutup(o) { const i = LAPIS.indexOf(o); if (i < 0) return; LAPIS.splice(i, 1); o.el.remove(); if (o.asal && document.contains(o.asal)) o.asal.focus(); }
+function cobaTutup(o) { if (o.kotor && o.kotor()) { konfirmBuang(() => tutup(o)); return; } tutup(o); }
+function tutupSemua() { while (LAPIS.length) { const o = LAPIS.pop(); o.el.remove(); } }
+function konfirmBuang(fn) {
+  dialog({ judul:'Buang perubahan?', konfirmasi:true, bahaya:true,
+    isi:`<p>Perubahan yang belum disimpan akan hilang.${usulan('IDDS-PL-29')}</p>`,
+    tombol:[['Kembali ke Formulir', 'secondary', null], ['Buang Perubahan', 'primary', fn]] });
+}
+/* checkbox & toggle di dialog */
+document.addEventListener('change', e => { const c = e.target.closest('.ina-checkbox__input'); if (!c) return; const bx = c.nextElementSibling; bx.className = `ina-checkbox__box ina-checkbox__box--${c.checked ? 'checked' : 'unchecked'}`; bx.innerHTML = c.checked ? ik('centang', 12) : ''; });
+const balik = sk => { const on = sk.getAttribute('aria-checked') !== 'true'; sk.setAttribute('aria-checked', on); sk.classList.toggle('ina-toggle--checked', on); sk.querySelector('input').checked = on; sk.querySelector('.ina-toggle__track').classList.toggle('ina-toggle__track--checked', on); sk.querySelector('.ina-toggle__thumb').classList.toggle('ina-toggle__thumb--checked', on); };
+document.addEventListener('click', e => { const k = e.target.closest('.ket-toggle'); if (!k) return; balik(k.querySelector('[data-tog]')); });
+document.addEventListener('keydown', e => { const sk = e.target.closest && e.target.closest('[data-tog]'); if (sk && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); balik(sk); } });
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if ($('#lapisanDrawer').innerHTML) { tutupDrawer(); return; }
+  if (LAPIS.length) { e.preventDefault(); cobaTutup(LAPIS[LAPIS.length - 1]); }
+});
+window.addEventListener('beforeunload', e => { if (adaKotor()) { e.preventDefault(); e.returnValue = ''; } });
+let tt;
+function toast(teks, state = 'default', ms = 3000, ket = '') {
+  $('#toastWadah').innerHTML = `<div class="ina-toast ina-toast--state-${state} ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${ik(state === 'positive' ? 'centang' : 'info', 20)}</div>
+    <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${esc(teks)}</p>${ket ? `<p class="ina-toast__description">${esc(ket)}</p>` : ''}</div></div><button class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast>${ik('x', 16)}</button></div>`;
+  clearTimeout(tt); tt = setTimeout(() => $('#toastWadah').innerHTML = '', ms);
+}
+$('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tutup-toast]')) $('#toastWadah').innerHTML = ''; });
+
+/* ---------------- tombol Bantuan di judul halaman + IDDS Drawer ---------------- */
+function pasangPanduan() {
+  const h = document.querySelector('#halaman h1'); if (!h || h.parentElement.classList.contains('judul-kiri')) return;
+  const w = document.createElement('div'); w.className = 'judul-halaman';
+  const kiri = document.createElement('div'); kiri.className = 'judul-kiri';
+  const sub = h.nextElementSibling && h.nextElementSibling.classList.contains('sub') ? h.nextElementSibling : null;
+  h.before(w); w.append(kiri); kiri.append(h); if (sub) kiri.append(sub);
+  w.insertAdjacentHTML('beforeend', `<button type="button" class="ina-button ina-button--secondary ina-button--md ditandai" id="bukaBantuan" aria-label="Bantuan untuk halaman ini"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg><span>Bantuan</span></button>`);
+}
+document.addEventListener('click', e => { if (e.target.closest('#bukaBantuan')) bukaBantuan(); });
+function drawer({ judul, isi }) {
+  const D = $('#lapisanDrawer'), hp = window.matchMedia('(max-width:760px)').matches;
+  D.innerHTML = `<div class="ina-drawer ina-drawer--position-${hp ? 'bottom' : 'right'}" role="dialog" aria-modal="true" aria-labelledby="drwJudul">
+    <div class="ina-drawer__backdrop" data-tutup-drawer></div>
+    <div class="ina-drawer__panel ina-drawer__panel--width-md">
+      <div class="ina-drawer__header"><h2 class="ina-drawer__title" id="drwJudul">${judul}</h2>
+        <button type="button" class="ina-drawer__close-button" aria-label="Tutup bantuan" data-tutup-drawer><svg class="ina-drawer__close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      <div class="ina-drawer__content">${isi}</div>
+    </div></div>`;
+  D.querySelector('.ina-drawer__close-button').focus();
+}
+function tutupDrawer() { $('#lapisanDrawer').innerHTML = ''; $('#bukaBantuan')?.focus(); }
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-tutup-drawer]')) { tutupDrawer(); return; }
+  const tg = e.target.closest('#lapisanDrawer .ina-accordion__toggle'); if (!tg) return;
+  const b = tg.getAttribute('aria-expanded') !== 'true';
+  tg.setAttribute('aria-expanded', b);
+  tg.querySelector('.ina-accordion__icon').classList.toggle('ina-accordion__icon--open', b);
+  tg.nextElementSibling.classList.toggle('ina-accordion__content--open', b);
+});
+
+/* ---------------- Bantuan per layar (IDDS-PL-30) ---------------- */
+const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
+const kontak = () => `<h4 class="bantu-sub">Kontak dukungan ${usulan('IDDS-PL-30')}</h4>
+  <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>`;
+const lgkh = a => `<ol class="bantu-langkah">${a.map(x => `<li>${x}</li>`).join('')}</ol>`;
+const istilah = a => `<dl class="bantu-istilah">${a.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
+const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
+const FAQ_VAR = [
+  ['Apa itu variabel?', `Variabel adalah isian yang berbeda di setiap akta, misalnya nama penjual atau nomor sertipikat. Di isi pasal, variabel ditulis ${vv('penjual_nama')}. Saat draf disusun, tulisan itu diganti dengan data order secara otomatis.`],
+  ['Bagaimana cara menyisipkan variabel ke pasal?', `Buka Pasal &amp; Catatan, klik Ubah pada bagian yang dituju, letakkan kursor di isi, lalu klik <b>Sisipkan Variabel</b> dan pilih variabelnya. Anda juga dapat mengetik ${vv('kunci')} langsung.`],
+  ['Mengapa pengecek isi menolak {penjual_nama}?', `Variabel harus ditulis dengan kurung kurawal ganda, ${vv('penjual_nama')}. Tulisan dengan kurung tunggal tidak dikenali dan akan tercetak apa adanya di akta.`],
+  ['Apa arti "Variabel tidak dikenal"?', `Kunci di dalam ${vv('…')} tidak ada di daftar variabel jenis akta ini. Periksa ejaannya, atau tambahkan variabelnya di tab Variabel.`]
+];
+const BANTUAN = {
+  jenis:() => ({ judul:'Bantuan Jenis Akta', isi:`<p>Halaman ini berisi semua layanan akta yang tersedia untuk kantor PPAT. Setiap jenis akta punya template dan variabel sendiri.</p>
+    <h4 class="bantu-sub">Langkah menambah jenis akta</h4>
+    ${lgkh(['Klik <b>Tambah Jenis Akta</b>, isi Kode, Nama Jenis Akta, dan Urutan.', 'Biarkan <b>Aktif</b> menyala bila layanan sudah siap dipakai kantor PPAT.', 'Klik <b>Template &amp; Variabel</b> untuk menambah variabel dan menyusun template aktanya.'])}
+    <h4 class="bantu-sub">Istilah</h4>
+    ${istilah([['Kode', 'Pengenal tetap jenis akta, misalnya AJB. Tidak dapat diubah.'], ['Urutan', 'Posisi layanan di daftar. Angka kecil tampil lebih dulu.'], ['Aktif', 'Layanan dapat dipilih kantor PPAT saat membuat order.'], ['Nonaktif', 'Layanan disembunyikan dari order baru, tetapi datanya tetap tersimpan.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('j', [
+      ['Apa dampak menonaktifkan jenis akta bagi kantor PPAT?', 'Kantor PPAT tidak dapat memilih layanan itu untuk order baru. Order yang sudah ada tidak dihapus, dan template serta variabelnya tetap tersimpan. Aplikasi menampilkan jumlah kantor dan order yang sedang memakainya sebelum Anda menyimpan.'],
+      ['Mengapa jenis akta baru belum terlihat di kantor PPAT?', 'Pastikan statusnya Aktif dan sudah ada template utama yang aktif. Kantor PPAT juga perlu menyalakan layanannya di Profil Kantor › Layanan Akta.'],
+      ['Untuk apa kolom Urutan?', 'Menentukan urutan layanan di daftar ini dan di pilihan layanan kantor PPAT. Beri angka 1 untuk layanan yang paling sering dipakai.'],
+      ['Mengapa jenis akta tidak bisa dihapus?', 'Jenis akta yang masih dipakai order atau masih punya template tidak dapat dihapus. Nonaktifkan saja bila layanan tidak dipakai lagi.'],
+      ['Bisakah kode diganti?', 'Tidak. Kode dipakai sistem sebagai pengenal. Ganti Nama Jenis Akta bila perlu.'],
+      ['Apa beda menonaktifkan dan menghapus?', 'Jenis akta nonaktif tetap tersimpan dan dapat diaktifkan lagi. Jenis akta yang dihapus hilang permanen beserta variabelnya.']])}
+    ${kontak()}` }),
+  detail:() => { const j = jenisDari(S.detail); return { judul:`Bantuan Template & Variabel`, isi:`<p>Atur template dan variabel ${esc(j.name)}. Template berisi susunan pasal akta; variabel adalah isian yang terisi otomatis dari data order.</p>
+    <h4 class="bantu-sub">Langkah menyiapkan template</h4>
+    ${lgkh(['Di tab <b>Variabel</b>, tambah variabel yang dibutuhkan, misalnya ' + vv('penjual_nama') + '.', 'Di tab <b>Template</b>, klik <b>Tambah Template</b>. Pilih template sumber di <b>Salin isi dari</b> agar tidak mulai dari nol.', 'Klik <b>Pasal &amp; Catatan</b> untuk menyusun isinya.', 'Klik <b>Jadikan Utama</b> pada template yang dipakai otomatis.'])}
+    <h4 class="bantu-sub">Istilah</h4>
+    ${istilah([['Template utama', 'Template yang dipilih otomatis saat draf baru disusun. Satu jenis akta punya satu template utama.'], ['Kunci', `Nama variabel di isi pasal, ditulis ${vv('kunci')}.`], ['Tunggal', 'Variabel berisi satu nilai, misalnya nama penjual.'], ['Daftar', `Variabel berisi beberapa nilai berulang, misalnya daftar saksi, ditulis ${vv('saksi:list')}.`], ['Grup', 'Pengelompokan variabel di editor, misalnya Para Pihak atau Objek.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('d', [...FAQ_VAR,
+      ['Untuk apa urutan variabel?', 'Urutan menentukan posisi variabel di editor saat menyusun draf. Taruh variabel yang paling sering diisi di atas dengan tombol naik dan turun.'],
+      ['Apa yang terjadi bila variabel dihapus?', 'Tulisan variabel itu di pasal tidak lagi terisi otomatis dan ditandai pengecek isi. Dialog hapus menampilkan bagian template yang masih memakainya.'],
+      ['Apa akibat template dinonaktifkan?', 'Template tidak dapat dipilih saat menyusun draf baru. Draf yang sudah ada tidak berubah.']])}
+    ${kontak()}` }; },
+  pasal:() => ({ judul:'Bantuan Pasal & Catatan', isi:`<p>Susun isi template per bagian. <b>Pasal</b> bernomor dan berjudul; <b>Catatan</b> dipakai untuk bagian seperti komparisi atau penutup.</p>
+    <h4 class="bantu-sub">Langkah menulis pasal</h4>
+    ${lgkh(['Klik <b>Tambah Pasal</b> atau <b>Tambah Catatan</b>.', 'Isi Judul, lalu tulis isinya. Klik <b>Sisipkan Variabel</b> untuk menyisipkan isian otomatis.', 'Klik <b>Simpan</b>. Bila pengecek menemukan masalah, pilih <b>Perbaiki Dulu</b>.', 'Atur urutan dengan tombol naik dan turun. Urutan tabel sama dengan urutan di akta.'])}
+    <h4 class="bantu-sub">Istilah</h4>
+    ${istilah([['Wajib', 'Bagian selalu ada di akta. Bagian opsional dapat dilewati saat menyusun draf.'], ['Tampilkan judul', 'Judul bagian ikut tercetak di akta.'], ['Perlu dicek', 'Bagian berisi tulisan yang ditandai pengecek isi.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('p', [...FAQ_VAR,
+      ['Apa itu "Teks contoh belum diganti"?', 'Pengecek menemukan teks contoh seperti XXXX atau 1234567. Teks ini akan ikut tercetak di akta. Ganti dengan variabel yang sesuai.'],
+      ['Kapan memakai Simpan Saja?', 'Bila tulisan yang ditandai memang disengaja. Bagian tetap disimpan dan diberi lencana Perlu dicek di tabel.'],
+      ['Bagaimana jika saya menutup dialog sebelum menyimpan?', 'Aplikasi meminta konfirmasi. Bila Anda memilih Buang Perubahan, isi yang belum disimpan hilang.'],
+      ['Apakah urutan bagian memengaruhi akta?', 'Ya. Bagian dicetak sesuai urutan di tabel. Nomor pasal tidak berubah otomatis, jadi periksa nomornya setelah memindahkan pasal.']])}
+    ${kontak()}` })
+};
+function bukaBantuan() { drawer(BANTUAN[tampilan()]()); }
+
+/* ---------------- protobar & daftar penyesuaian ---------------- */
+$('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
+$('#bukaUbah').addEventListener('click', () => {
+  const o = dialog({ judul:'Daftar penyesuaian IDDS · Jenis Akta', lebar:true,
+    isi:`<p>Isi, kolom, dan alur mengikuti kode live dev-app.eppat.id/platform (Akta › Jenis Akta). Yang disesuaikan adalah komponen IDDS dengan brand E-PPAT, letak pesan, konfirmasi, penjaga perubahan, bahasa, dan Bantuan per layar. Daftar yang sama dicatat di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${esc(u.isi)}</p><div class="lama"><b>Saat ini:</b> ${esc(u.lama)}</div>
+        <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
+    tombol:[['Tutup', 'secondary', null]] });
+  o.el.querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); tutup(o); lihat(UBAH[+b.dataset.lihat]); });
+});
+function lihat(u) {
+  const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
+  const ajb = () => jenisDari('AJB');
+  ({ jenis:() => pindah('jenis', {}, sorot),
+     tambah:() => pindah('jenis', {}, () => dialogJenis(null)),
+     nonaktif:() => pindah('jenis', {}, () => { dialogJenis(ajb()); const t = $('#jAktif'); if (t.getAttribute('aria-checked') === 'true') balik(t); LAPIS[LAPIS.length - 1].el.querySelector('.ina-modal__footer .ina-button:last-child').click(); }),
+     hapus:() => pindah('jenis', {}, () => { dialogJenis(ajb()); LAPIS[0].el.querySelector('.kiri').click(); }),
+     detail:() => pindah('detail', { jenis:'AJB', tab:'template' }, sorot),
+     template:() => pindah('detail', { jenis:'AJB', tab:'template' }, () => dialogTpl(null)),
+     variabel:() => pindah('detail', { jenis:'AJB', tab:'variabel' }, sorot),
+     hapusVar:() => pindah('detail', { jenis:'AJB', tab:'variabel' }, () => konfirmHapusVar(VAR.find(v => v.jenis === 'AJB' && v.key === 'lokasi_tanah') || varDari('AJB')[0])),
+     bagian:() => pindah('pasal', { tpl:1 }, () => { const t = TPL.find(x => x.id === 1); const b = t?.bag.find(x => periksa(x.content, 'AJB').length) || t?.bag[0]; if (b) { dialogBagian(b); LAPIS[LAPIS.length - 1].el.querySelector('.ina-modal__footer .ina-button:last-child').click(); } }),
+     bantuan:() => bukaBantuan() })[u.ke]();
+}
+$('#pilLayar').addEventListener('click', e => { const b = e.target.closest('[data-pil]'); if (!b) return; const k = b.dataset.pil; pindah(k, k === 'detail' ? { jenis:S.detail || 'AJB' } : k === 'pasal' ? { tpl:S.tpl || (tplDari(S.detail || 'AJB')[0] || TPL[0]).id } : {}); });
+$('#aturUlang').addEventListener('click', () => { tutupSemua(); JA = JA0(); TPL = TPL0(); VAR = VAR0(); beriId(TPL, VAR); S = S0(); gambar(); toast('Data contoh dikembalikan ke awal.'); });
+$('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
+$('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
+$('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+window.addEventListener('hashchange', () => { if (location.hash === '#jenis' && tampilan() !== 'jenis') pindah('jenis'); });
+if (location.hash !== '#jenis') history.replaceState(null, '', '#jenis');
+gambar();
+})();
+</script>
+</body>
+</html>

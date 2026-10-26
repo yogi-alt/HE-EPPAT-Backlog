@@ -1,0 +1,660 @@
+<style id="pl-monitoring-css">
+/* ===== Platform · Monitoring (Admin Platform): Dasbor, Daftar PPAT, Paket Langganan, Log Aktivitas — penyesuaian IDDS (IDDS-PL-11…20)
+   Menu ini tidak dinilai HE. Isi, kolom, dan perilaku mengikuti kode live dev-app.eppat.id/platform;
+   yang disesuaikan hanya komponen (IDDS + brand E-PPAT), kejujuran label, bahasa, status sistem, dan Bantuan per halaman. ===== */
+.ina-tooltip:not(:hover):not(:focus-within) .ina-tooltip__content{display:none}
+.ina-tooltip__bubble{display:block;width:max-content;max-width:min(260px,80vw);white-space:normal;text-align:left;line-height:1.45;font-weight:400;text-transform:none;letter-spacing:0}
+.ina-modal-confirmation{max-width:560px}
+.modal-gap>*+*{margin-top:12px}
+.eb{font:600 11px Inter,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.blok{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px}
+.blok h2{margin:6px 0 4px;font:500 20px/28px Inter,sans-serif;color:var(--ina-primary-primary)}
+.blok .ket{margin:0;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+.blok-atas{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* kepala: menu pengguna (IDDS Action Dropdown) */
+.user-tombol{display:flex;align-items:center;gap:10px;padding:4px 8px;border:0;border-radius:8px;background:transparent;cursor:pointer;text-align:left;color:inherit}
+.user-tombol:hover{background:var(--ina-background-secondary)}
+.user-tombol:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px}
+.user-tombol .chev-u{color:var(--ina-content-secondary);display:grid}
+.user .ina-action-dropdown__menu{position:absolute;right:0;left:auto;top:calc(100% + 6px);min-width:220px;z-index:30;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.user a.ina-action-dropdown__item{text-decoration:none;color:inherit}
+.user .menu-kepala{display:flex;flex-direction:column;gap:2px;padding:8px 12px}
+.user .menu-kepala b{font:600 14px Inter,sans-serif;color:var(--ina-primary-primary)}
+.user .menu-kepala span{font-size:12px;color:var(--ina-content-secondary)}
+
+/* Dasbor */
+.kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:24px}
+.kpi > div{position:relative;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:20px}
+.kpi small{display:block;max-width:72%;font:600 11px/16px Inter,sans-serif;letter-spacing:1.4px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.kpi i{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:999px;background:var(--ina-primary-50);display:grid;place-items:center;color:var(--ina-primary-primary)}
+.kpi i svg{width:15px;height:15px}
+.kpi b{display:block;margin-top:18px;font:400 30px Inter,sans-serif;color:var(--ina-primary-primary)}
+.kpi span{font-size:12.5px;color:var(--ina-content-secondary)}
+.dua-kartu{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.kartu-st{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:18px 20px}
+.kartu-st .bulat{width:46px;height:46px;border-radius:999px;display:grid;place-items:center;flex:none;background:var(--ina-primary-50);color:var(--ina-primary-primary)}
+.kartu-st .bulat.sehat{background:var(--ina-positive-100,#dcf5e5);color:var(--ina-content-positive)}
+.kartu-st .bulat.periksa{background:var(--ina-neutral-100,#eee);color:var(--ina-content-secondary)}
+.kartu-st .isi{flex:1;min-width:160px}
+.kartu-st .nilai{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px;font:600 16px Inter,sans-serif;color:var(--ina-primary-primary)}
+.kartu-st .nilai.besar{font:600 24px Inter,sans-serif}
+.kartu-st .kt{display:block;margin-top:2px;font-size:12.5px;color:var(--ina-content-secondary)}
+.dasbor-dua{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:24px;margin-top:24px}
+.dasbor-dua .blok{margin:0}
+.akt{list-style:none;margin:12px 0 0;padding:0;font-size:14px}
+.akt li{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--ina-stroke-primary)}
+.akt li:first-child{border-top:0}
+.akt .titik{width:8px;height:8px;border-radius:999px;background:var(--ina-primary-primary);margin-top:7px;flex:none}
+.akt .titik.gagal{background:var(--ina-negative-600,#d50b0b)}
+.akt .baris1{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.akt b{font-weight:600;color:var(--ina-primary-primary)}
+.akt .baris2{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px}
+.akt .wkt{font-size:12px;color:var(--ina-content-secondary)}
+.teramai{list-style:none;margin:12px 0 0;padding:0}
+.teramai li + li{margin-top:4px}
+.teramai a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 8px;border-radius:10px;text-decoration:none;color:inherit}
+.teramai a:hover{background:var(--ina-primary-25,#f5f8f7)}
+.teramai a:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:1px}
+.teramai .nm{display:block;font:600 14px Inter,sans-serif;color:var(--ina-primary-primary)}
+.teramai .sl{display:block;font:12px ui-monospace,Menlo,monospace;color:var(--ina-content-secondary)}
+.teramai .ina-badge{flex:none}
+.lihat-semua{margin-top:12px}
+
+/* tabel & saringan */
+.mono{font:12px ui-monospace,Menlo,monospace;color:var(--ina-content-secondary)}
+.info-pl{margin-top:20px}
+.info-pl .ina-alert__content{display:flex;flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap;width:100%}
+.info-pl .ina-alert__text-section{flex:1;min-width:240px}
+.info-pl .aksi-info{display:flex;gap:8px;flex-wrap:wrap}
+.saring-pl{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-top:16px;padding:12px 16px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px}
+.saring-pl .lbl{display:block;margin-bottom:6px;font-size:13px;font-weight:500;color:var(--ina-content-primary)}
+.saring-pl .ina-input-search{width:320px}
+.saring-pl .jumlah{margin-left:auto;align-self:center;font-size:13px;color:var(--ina-content-secondary)}
+.pilih-wadah{position:relative}
+.pilih-wadah .ina-select-dropdown__trigger{min-width:250px}
+.pilih-wadah .ina-select-dropdown__panel{top:calc(100% + 4px);left:0;right:auto;min-width:260px;max-height:300px;overflow:auto;z-index:20}
+.kosong{text-align:center;padding:28px 12px;color:var(--ina-content-secondary)}
+.halaman{flex-wrap:wrap}
+.tb th .tip-kol{display:inline-flex;align-items:center;gap:4px}
+.nilai-batas{display:inline-flex;align-items:center;gap:4px}
+
+@media (max-width:1200px){ .kpi{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:1024px){ .dasbor-dua{grid-template-columns:1fr} }
+@media (max-width:760px){
+  .kpi,.dua-kartu{grid-template-columns:1fr}
+  .saring-pl > div,.saring-pl .ina-input-search,.pilih-wadah,.pilih-wadah .ina-select-dropdown__trigger{width:100%;min-width:0}
+  .pilih-wadah .ina-select-dropdown__panel{min-width:0;right:0}
+  .saring-pl .jumlah{margin-left:0}
+  .user-tombol .chev-u{display:none}
+  .halaman > span{white-space:normal}
+}
+.bantu-istilah{display:grid;grid-template-columns:max-content 1fr;gap:6px 12px;margin:8px 0 4px;padding:12px 14px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);font-size:13.5px;line-height:20px}
+.bantu-istilah dt{font-weight:600}
+.bantu-istilah dd{margin:0;color:var(--ina-content-secondary)}
+ol.bantu-langkah{padding-left:22px}
+@media (max-width:760px){ .bantu-istilah{grid-template-columns:1fr} .bantu-istilah dd{margin-bottom:6px} }
+</style>
+</head>
+<body>
+
+<div class="protobar">
+  <a href="index.html#platform">&#9776; Daftar prototipe</a>
+  <span class="sep">&bull;</span><b>Platform · Monitoring</b><span class="sep">&bull;</span><span>Peran: Admin Platform</span>
+  <span class="sep">&bull;</span><span>Layar:</span><span id="pilLayar"></span>
+  <span class="kanan">
+    <button class="pil" id="aturUlang">Atur ulang contoh</button>
+    <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai penyesuaian</button>
+    <button class="pil utama" id="bukaUbah">Daftar penyesuaian</button>
+  </span>
+</div>
+
+<div class="app">
+  <div class="scrim" id="scrim"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><img src="__LOGO__" alt="E-PPAT"></div>
+    <nav id="nav" aria-label="Menu platform"></nav>
+    <div class="sidefoot">E-PPAT</div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Tampilkan atau sembunyikan menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="spacer"></div>
+      <button class="ina-button ina-button--tertiary ina-button--md" aria-label="Notifikasi"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+      <div class="user ina-action-dropdown" id="user">
+        <button type="button" class="user-tombol" id="userTombol" aria-haspopup="menu" aria-expanded="false" aria-label="Menu akun Admin Contoh"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Admin Contoh</span><span class="urole">Platform Admin</span></span><span class="chev-u"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div id="menuProfil"></div>
+      </div>
+    </header>
+    <div class="content"><div class="page" id="halaman"></div></div>
+  </div>
+</div>
+
+<div id="lapisan"></div>
+<div id="lapisanDrawer"></div>
+<div class="toast-wadah" id="toastWadah"></div>
+
+<script>
+(() => {
+/* ---------------- ikon & util (sama dengan prototipe Tenant · System) ---------------- */
+const I = {
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+  user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>',
+  log:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>',
+  palet:'<circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1 0 1.7-.8 1.7-1.7 0-1 .8-1.7 1.7-1.7H17a5 5 0 0 0 5-5C22 6 17.5 2 12 2z"/>',
+  daftar:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+  gedung:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01"/>',
+  bintang:'<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.7 1.8 1.8.7-1.8.7L19 20l-.7-1.8-1.8-.7 1.8-.7z"/>',
+  stempel:'<path d="M9 3h6v4l-1 5h-4L9 7z"/><path d="M4 16a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H4z"/><path d="M4 21h16"/>',
+  monitor:'<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
+  tameng:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  peringatan:'<path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>',
+  keluar:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/>',
+  luar:'<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14L21 3"/>',
+  ulang:'<path d="M23 4v6h-6"/><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/>',
+  panah:'<path d="M5 12h14M13 6l6 6-6 6"/>', kiri:'<path d="M15 18l-6-6 6-6"/>', x:'<path d="M18 6L6 18M6 6l12 12"/>', info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+  centang:'<path d="M20 6L9 17l-5-5"/>', chev:'<path d="M9 18l6-6-6-6"/>', bawah:'<path d="M6 9l6 6 6-6"/>',
+  cari:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>', jam:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>', naik:'<path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/>'
+};
+const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const usulan = kode => `<span class="tag-usulan">penyesuaian &middot; ${kode}</span>`;
+const badge = (t, j, uk = 'md', atr = '', kls = '') => `<span class="ina-badge ina-badge--soft ina-badge--${j} ina-badge--${uk} ina-badge--rounded-full ${kls}" ${atr}>${t}</span>`;
+const tombol = (t, h = 'primary', uk = 'md', atr = '', ikon = '') => { let k = ''; atr = atr.replace(/class="([^"]*)"/, (m, c) => { k = ' ' + c; return ''; }); return `<button type="button" class="ina-button ina-button--${h} ina-button--${uk}${k}" ${atr}>${ikon}${t}</button>`; };
+const alert = (j, judul, isi, ekstra = '') => `<div class="ina-alert ina-alert--${j}" role="status"><div class="ina-alert__content"><div class="ina-alert__text-section">${judul ? `<div class="ina-alert__title">${judul}</div>` : ''}<div class="ina-alert__description">${isi}</div></div>${ekstra}</div></div>`;
+const est = t => `<span class="isi-tim" title="Data contoh. Ganti dengan data resmi dari tim E-PPAT.">${t}</span>`;
+const denganTip = (isi, t, letak = 'top') => `<span class="ina-tooltip ina-tooltip--placement-${letak}">${isi}<span class="ina-tooltip__content"><span class="ina-tooltip__bubble">${t}</span></span></span>`;
+const cariIsian = (id, ph, v, label) => `<div class="ina-input-search"><div class="ina-input-search__wrapper"><span class="ina-input-search__search-icon">${ik('cari', 20)}</span><input id="${id}" class="ina-input-search__input" type="search" placeholder="${ph}" aria-label="${label}" value="${esc(v)}" autocomplete="off"></div></div>`;
+const remah = t => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#dasbor" class="ina-breadcrumb__link"><span class="ina-breadcrumb__text">Monitoring</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active" aria-current="page"><span class="ina-breadcrumb__text">${t}</span></span></li></ol></nav>`;
+
+/* ---------------- daftar penyesuaian ---------------- */
+const UBAH = [
+  { kode:'IDDS-PL-11', judul:'Dasbor: kartu ringkasan memakai IDDS Card',
+    isi:'Empat kartu ringkasan (Total PPAT, PPAT Aktif, PPAT Ditangguhkan, Total Pengguna) memakai IDDS Card dengan ikon garis. Keterangan kartu memakai bahasa biasa: "Kantor PPAT terdaftar", "Berstatus aktif", "Berstatus ditangguhkan", dan "Di semua kantor PPAT". Kartu PPAT Baru (30 hari) menyebut periode hitungnya.',
+    lama:'Keterangan kartu memakai kode dan istilah teknis: "Tenant terdaftar", "Status ACTIVE", "Status SUSPENDED".', ke:'dasbor', sorot:'#kpi' },
+  { kode:'IDDS-PL-12', judul:'Dasbor: status sistem dengan waktu pemeriksaan',
+    isi:'Kartu Status Sistem menampilkan hasil dengan ikon dan teks ("Sehat" atau "Terganggu"), komponen yang diperiksa ("Basis data & Redis"), dan waktu pemeriksaan terakhir. Tombol "Periksa Ulang" menjalankan pemeriksaan lagi dan menampilkan "Memeriksa…" selama berjalan. Perubahan status diumumkan ke pembaca layar (aria-live).',
+    lama:'Status hanya diperiksa sekali saat halaman dibuka, tanpa waktu pemeriksaan dan tanpa cara memeriksa ulang. Status buruk berlabel "Degraded".', ke:'dasbor', sorot:'#kartuStatus' },
+  { kode:'IDDS-PL-13', judul:'Dasbor: aktivitas dan PPAT teramai dapat ditindaklanjuti',
+    isi:'Aktivitas lintas-PPAT memakai nama aktivitas yang sama dengan Log Aktivitas (misalnya "Masuk", "Unduh dokumen akta"). Aktivitas gagal diberi IDDS Badge "Gagal", bukan hanya titik merah. Kantor PPAT ditampilkan dengan IDDS Badge berisi alamatnya. Tombol "Lihat Semua" membuka Log Aktivitas. Setiap kantor di "PPAT teramai" dapat diklik untuk membuka Daftar PPAT dengan pencarian kantor tersebut.',
+    lama:'Aktivitas tampil sebagai kode sistem (LOGIN, DRAFT_DOWNLOAD, TOKEN_REFRESH). Aktivitas gagal dan berhasil hanya dibedakan dengan warna titik. Daftar "Top by user" tidak dapat diklik.', ke:'dasbor', sorot:'#aktLintas' },
+  { kode:'IDDS-PL-14', judul:'Daftar PPAT: subjudul yang tepat dan rujukan ke aplikasi Onboarding',
+    isi:'Subjudul menyebut apa yang benar-benar dapat dilakukan: "Lihat dan cari kantor PPAT yang terdaftar di E-PPAT." Judul ganda dihapus. IDDS Alert menjelaskan bahwa kantor PPAT baru, perubahan paket, dan admin kantor diatur di aplikasi Onboarding (konsol operator). Alert itu memuat tombol "Buka Onboarding" dan tautan ke Pengaturan Global, tempat alamat Onboarding diatur.',
+    lama:'Subjudul berbunyi "Kelola kantor PPAT (tenant)", padahal halaman hanya dapat dibaca. Paragraf di bawahnya merujuk "server onboarding" tanpa tautan.', ke:'ppat', sorot:'#infoPpat' },
+  { kode:'IDDS-PL-15', judul:'Daftar PPAT: tabel, lencana, pencarian, dan halaman IDDS',
+    isi:'Tabel memakai IDDS Table. Nama kantor ditulis tebal dengan alamat /t/… di bawahnya. Lencana dibuat konsisten: Paket memakai nama paket ("Enterprise", "Gratis"), Status memakai "Aktif" (hijau) dan "Ditangguhkan" (kuning), dan Registrasi memakai "Dibuka" (hijau) dan "Ditutup" (abu-abu). Masa berlaku yang lewat diberi lencana "Kedaluwarsa". Pencarian memakai IDDS Input Search berlabel "Cari PPAT", dan jumlah kantor yang tampil ada di kanannya. Hasil kosong menawarkan "Hapus Pencarian". Navigasi memakai IDDS Pagination (20 per halaman). Saringan status dan paket tidak ditambahkan karena API live belum menyediakannya.',
+    lama:'Paket tampil sebagai kode mentah ("ENTERPRISE", "FREE"). Ejaan "Kadaluarsa" tidak baku. Navigasi "‹ Sebelumnya · Hal 1/51 · Berikutnya ›" berupa tombol polos.', ke:'ppat', sorot:'#tabelPpat' },
+  { kode:'IDDS-PL-16', judul:'Paket Langganan: katalog hanya baca dengan lencana yang jelas',
+    isi:'Subjudul menggambarkan isi halaman dengan tepat: "Lihat batas order, pengguna, masa berlaku, dan registrasi CA setiap paket." Judul kolom memakai singkatan baku "Maks. Order" dan "Maks. Pengguna". Keterangan "dikelola di Onboarding" memakai IDDS Alert dengan tombol "Buka Onboarding". Tabel memakai IDDS Table dengan jumlah paket di bawahnya. Kolom Registrasi CA memakai lencana "Aktif"/"Nonaktif" sehingga sepadan dengan kolom Status. Judul kolom Registrasi CA dan nilai "Tanpa batas" diberi tooltip penjelasan.',
+    lama:'Subjudul berbunyi "Kelola batas fitur per paket", padahal paket tidak dapat diubah. Registrasi CA berlabel "Mati", sedangkan status paket berlabel "Nonaktif". Singkatan CA tidak dijelaskan.', ke:'paket', sorot:'#tabelPaket' },
+  { kode:'IDDS-PL-17', judul:'Log Aktivitas: saringan berlabel memakai IDDS Select Dropdown',
+    isi:'Dua saringan memakai IDDS Select Dropdown dengan label dan nilai awal yang terlihat: PPAT ("Semua PPAT") dan Jenis aktivitas ("Semua aktivitas"). Opsi jenis aktivitas memakai label yang sama dengan kolom Aksi. Jumlah hasil tampil di kanan, dan tombol "Hapus Saringan" muncul bila saringan aktif. Panel dapat dipakai dengan keyboard (panah, Enter, Esc).',
+    lama:'Dua kotak pilihan tidak punya teks awal (kosong). Opsinya berbahasa Inggris ("Login", "Logout", "Refresh token") dan tidak sama dengan isi kolom Aksi.', ke:'log', sorot:'#saringLog' },
+  { kode:'IDDS-PL-18', judul:'Log Aktivitas: tabel dan halaman mudah dibaca',
+    isi:'Tabel memakai IDDS Table. Waktu ditulis lengkap dengan tahun ("26 Okt 2026, 19.06"). Kolom PPAT menampilkan nama kantor dan alamat /t/… (aktivitas admin platform berlabel "Platform"), sehingga sama dengan saringan. Aksi memakai label bahasa Indonesia; status memakai IDDS Badge "Berhasil"/"Gagal". Navigasi memakai IDDS Pagination 20 per halaman.',
+    lama:'Waktu ditulis tanpa tahun. Kolom PPAT berisi slug, sedangkan saringan memakai nama. Aksi berupa kode sistem, status berbunyi "Sukses", dan navigasi berupa tombol polos.', ke:'log', sorot:'#tabelLog' },
+  { kode:'IDDS-PL-19', judul:'Menu Monitoring: istilah dibakukan',
+    isi:'Istilah teknis dan bahasa Inggris diganti. Kata "tenant" menjadi "kantor PPAT", "Degraded" menjadi "Terganggu", "Top by user" menjadi "Pengguna terbanyak", "Database" menjadi "Basis data", "Kadaluarsa" menjadi "Kedaluwarsa", "Mati" menjadi "Nonaktif", dan "Sukses" menjadi "Berhasil". Kata "user" menjadi "pengguna" di kartu Total Pengguna, lencana "N pengguna", kolom Maks. Pengguna, label aktivitas Tambah/Ubah/Hapus pengguna, dan Bantuan. Kode aksi LOGIN, LOGOUT, LOGIN_FAILED, TOKEN_REFRESH, PASSWORD_CHANGE, DRAFT_PREVIEW, dan DRAFT_DOWNLOAD menjadi Masuk, Keluar, Gagal masuk, Sesi diperpanjang, Ganti kata sandi, Pratinjau draf, dan Unduh dokumen akta. Subjudul setiap halaman berupa satu kalimat yang menyebut apa yang dapat dilakukan.',
+    lama:'Istilah bercampur bahasa Inggris, misalnya "Ringkasan & monitoring seluruh PPAT", "Audit aktivitas lintas-PPAT", "Status ACTIVE", "Top by user", dan "Refresh token".', ke:'log', sorot:null },
+  { kode:'IDDS-PL-20', judul:'Bantuan di setiap halaman Monitoring',
+    isi:'Setiap halaman (Dasbor, Daftar PPAT, Paket Langganan, Log Aktivitas) memiliki tombol Bantuan di kanan judul. Tombol ini membuka IDDS Drawer berisi penjelasan isi halaman, langkah, daftar istilah, pertanyaan umum (IDDS Accordion), dan kontak dukungan.',
+    lama:'Tidak ada panduan atau kontak dukungan di area platform.', ke:'bantuan', sorot:null },
+  { kode:'IDDS-PL-41', judul:'Kerangka: menu samping pola Sidebar IDDS',
+    isi:'Kerangka menu samping mengikuti pola Sidebar IDDS dengan warna brand E-PPAT tetap: label grup kecil berhuruf biasa dengan chevron buka/tutup, menu berupa ikon dan label dengan tanda arahkan dan tanda menu aktif, paling banyak dua tingkat (grup lalu menu), dan kartu profil pengguna (inisial, nama, peran) di bagian bawah dengan versi aplikasi di bawahnya. Tombol di samping logo menciutkan menu menjadi ikon saja; nama menu tampil sebagai tooltip dan tetap dibacakan pembaca layar. Pilihan ciut diingat peramban. Di layar sempit menu tetap berupa laci. Kartu profil membuka menu akun yang sama dengan kepala halaman. Berlaku di Monitoring, Jenis Akta, dan Sistem.',
+    lama:'Menu samping gelap ala live dengan label grup berhuruf kapital, tanpa kartu profil pengguna, dan tanpa mode ciut.', ke:'dasbor', sorot:'#sidebar' }
+];
+
+/* ---------------- data contoh (netral) ---------------- */
+const SEKARANG = new Date('2026-10-26T19:06');
+const BLN = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+const jam = d => `${String(d.getHours()).padStart(2, '0')}.${String(d.getMinutes()).padStart(2, '0')}`;
+const tglPendek = w => { const d = new Date(w); return `${d.getDate()} ${BLN[d.getMonth()]} ${d.getFullYear()}`; };
+const tglJam = w => { const d = new Date(w); return `${tglPendek(w)}, ${jam(d)}`; };
+const lalu = w => { const m = Math.floor((SEKARANG - new Date(w)) / 6e4); if (m < 1) return 'Baru saja'; if (m < 60) return `${m} menit lalu`; const j = Math.floor(m / 60); return j < 24 ? `${j} jam lalu` : `${Math.floor(j / 24)} hari lalu`; };
+const hariLalu = n => { const d = new Date(SEKARANG); d.setDate(d.getDate() - n); return d.toISOString().slice(0, 10); };
+const hariLagi = n => hariLalu(-n);
+
+/* Paket Langganan (live: kode, nama, max_orders, max_users, max_days, ca_enabled, is_active; −1 = tanpa batas) */
+const PAKET = [
+  { kode:'FREE', nama:'Gratis', order:1, user:5, hari:30, ca:false, aktif:true },
+  { kode:'SATU_BULAN', nama:'Satu Bulan', order:5, user:5, hari:30, ca:true, aktif:true },
+  { kode:'ENTERPRISE', nama:'Enterprise', order:-1, user:-1, hari:-1, ca:true, aktif:true },
+  { kode:'PAKET_LAMA', nama:'Paket Lama 2025', order:10, user:10, hari:365, ca:false, aktif:false }
+];
+const NM_PAKET = Object.fromEntries(PAKET.map(p => [p.kode, p.nama]));
+
+/* Daftar PPAT (live: name, slug, plan_code, plan_expires_at, status, allow_register, created_at, user_count) */
+function contohPpat() {
+  const T = (nama, slug, paket, exp, status, reg, dibuat, user) => ({ nama, slug, paket, exp, status, reg, dibuat, user });
+  const a = [
+    T('Kantor PPAT Contoh Satu', 'ppat-contoh-satu', 'ENTERPRISE', null, 'ACTIVE', true, hariLalu(210), 186),
+    T('Kantor PPAT Contoh Dua', 'ppat-contoh-dua', 'ENTERPRISE', null, 'ACTIVE', false, hariLalu(180), 48),
+    T('Kantor PPAT Contoh Tiga', 'ppat-contoh-tiga', 'SATU_BULAN', hariLagi(12), 'ACTIVE', true, hariLalu(18), 21),
+    T('Kantor PPAT Contoh Empat', 'ppat-contoh-empat', 'FREE', hariLalu(6), 'SUSPENDED', false, hariLalu(36), 4),
+    T('Kantor PPAT Contoh Lima', 'ppat-contoh-lima', 'ENTERPRISE', null, 'ACTIVE', false, hariLalu(120), 17),
+    T('Kantor PPAT Contoh Enam', 'ppat-contoh-enam', 'FREE', hariLagi(25), 'ACTIVE', true, hariLalu(5), 3),
+    T('Kantor PPAT Contoh Tujuh', 'ppat-contoh-tujuh', 'FREE', hariLalu(2), 'SUSPENDED', false, hariLalu(32), 2),
+    T('Kantor PPAT Contoh Delapan', 'ppat-contoh-delapan', 'ENTERPRISE', null, 'ACTIVE', false, hariLalu(95), 12)
+  ];
+  for (let i = 9; i <= 46; i++) {
+    const free = i % 3 !== 0, susp = i % 13 === 0, umur = 46 - i;
+    a.push(T(`Kantor PPAT Contoh ${i}`, `ppat-contoh-${String(i).padStart(2, '0')}`, free ? 'FREE' : 'ENTERPRISE', free ? (susp ? hariLalu(3) : hariLagi(Math.max(4, 30 - umur))) : null, susp ? 'SUSPENDED' : 'ACTIVE', false, hariLalu(umur), 1 + (i * 7) % 9));
+  }
+  return a.sort((x, y) => y.dibuat.localeCompare(x.dibuat));
+}
+let PPAT = contohPpat();
+const NM_PPAT = slug => (PPAT.find(t => t.slug === slug) || {}).nama || slug;
+
+/* Log aktivitas: kode live → label (peta AKT sama dengan Tenant · System) */
+const AKT = { LOGIN:'Masuk', LOGOUT:'Keluar', LOGIN_FAILED:'Gagal masuk', TOKEN_REFRESH:'Sesi diperpanjang', PASSWORD_CHANGE:'Ganti kata sandi', '2FA_ENABLED':'Aktifkan verifikasi 2 faktor', '2FA_DISABLED':'Nonaktifkan verifikasi 2 faktor', NIK_VIEW:'Buka NIK lengkap', DRAFT_EDIT:'Ubah pasal draf', DRAFT_PREVIEW:'Pratinjau draf', DRAFT_DOWNLOAD:'Unduh dokumen akta', ORDER_FINALIZE:'Finalisasi akta', USER_CREATE:'Tambah pengguna', USER_UPDATE:'Ubah pengguna', USER_DELETE:'Hapus pengguna', USER_RESET_PW:'Atur ulang kata sandi pengguna', ROLE_CREATE:'Tambah peran', ROLE_UPDATE:'Ubah peran', ROLE_DELETE:'Hapus peran', PERMISSION_UPDATE:'Ubah izin peran' };
+/* opsi saringan live: hanya 5 aksi autentikasi */
+const OPSI_AKT = [['', 'Semua aktivitas'], ['LOGIN', AKT.LOGIN], ['LOGOUT', AKT.LOGOUT], ['LOGIN_FAILED', AKT.LOGIN_FAILED], ['TOKEN_REFRESH', AKT.TOKEN_REFRESH], ['PASSWORD_CHANGE', AKT.PASSWORD_CHANGE]];
+function contohLog() {
+  const pola = [
+    ['-', 'Admin Contoh', 'LOGIN', true, '10.0.0.5'], ['-', 'Admin Contoh', 'LOGIN_FAILED', false, '10.0.0.5'],
+    ['ppat-contoh-satu', 'PPAT Contoh Satu', 'DRAFT_DOWNLOAD', true, ''], ['ppat-contoh-satu', 'PPAT Contoh Satu', 'DRAFT_PREVIEW', true, ''],
+    ['ppat-contoh-satu', 'PPAT Contoh Satu', 'TOKEN_REFRESH', true, '10.0.0.20'], ['ppat-contoh-dua', 'Asisten Contoh', 'LOGIN', true, '10.0.0.31'],
+    ['ppat-contoh-dua', 'Asisten Contoh', 'LOGIN_FAILED', false, '10.0.0.31'], ['ppat-contoh-satu', 'Admin Kantor Contoh', 'PASSWORD_CHANGE', true, '10.0.0.12'],
+    ['ppat-contoh-tiga', 'PPAT Contoh Tiga', 'LOGIN', true, '10.0.0.44'], ['ppat-contoh-tiga', 'PPAT Contoh Tiga', 'LOGOUT', true, '10.0.0.44'],
+    ['ppat-contoh-satu', 'Admin Kantor Contoh', 'TOKEN_REFRESH', true, '10.0.0.12'], ['ppat-contoh-empat', 'PPAT Contoh Empat', 'LOGIN_FAILED', false, '10.0.0.77']
+  ];
+  const menit = [0, 0, 2, 3, 3, 17, 18, 19, 41, 52, 64, 70];
+  const out = [];
+  for (let i = 0; i < 46; i++) {
+    const [t, aktor, kode, ok, ip] = pola[i % pola.length], d = new Date(SEKARANG);
+    d.setMinutes(d.getMinutes() - (menit[i % menit.length] + Math.floor(i / pola.length) * 95));
+    out.push({ w:d.getTime(), tenant:t, aktor, kode, ok, ip });
+  }
+  return out;
+}
+let LOG = contohLog();
+
+/* ---------------- keadaan ---------------- */
+const LAYAR = [['dasbor', 'Dasbor'], ['ppat', 'Daftar PPAT'], ['paket', 'Paket Langganan'], ['log', 'Log Aktivitas']];
+const PER_HAL = 20;
+const S0 = () => ({ layar:'dasbor', cari:'', halPpat:1, fPpat:'', fAkt:'', halLog:1, buka:null, menu:false, cekStatus:'sehat', waktuCek:new Date(SEKARANG) });
+let S = S0();
+
+/* ---------------- sidebar (menu live Admin Platform) ---------------- */
+const BERKAS = 'Backlog-IDDS-PL-MONITORING-Prototype.html';
+const NAV = [
+  { g:'Monitoring', ik:'monitor', m:[['Dasbor', 'grid', 'dasbor'], ['Daftar PPAT', 'gedung', 'ppat'], ['Paket Langganan', 'bintang', 'paket'], ['Log Aktivitas', 'daftar', 'log']] },
+  { g:'Akta', ik:'stempel', m:[['Jenis Akta', 'stempel']] },
+  { g:'Sistem', ik:'gear', m:[['Setting Theme', 'palet'], ['Pengaturan Global', 'gear']] }
+];
+const PROTO = { 'Jenis Akta':'Backlog-IDDS-PL-AKTA-Prototype.html#jenis', 'Setting Theme':'Backlog-IDDS-PL-SISTEM-Prototype.html#tema', 'Pengaturan Global':'Backlog-IDDS-PL-SISTEM-Prototype.html#pengaturan' };
+const grupBuka = new Set([0, 1, 2]);
+function gambarNav() {
+  $('#nav').innerHTML = NAV.map((g, i) => `
+    <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
+    <div class="items" ${grupBuka.has(i) ? '' : 'hidden'}>${g.m.map(([t, k, ke]) => `<a href="${ke ? '#' + ke : PROTO[t]}" class="ina-button ina-button--link ina-button--md nav-item ${ke && ke === S.layar ? 'on' : ''}" data-ke="${ke || ''}" ${ke === S.layar ? 'aria-current="page"' : ''}>${ik(k)}<span>${t}</span></a>`).join('')}</div>`).join('');
+}
+$('#nav').addEventListener('click', e => {
+  const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
+  const a = e.target.closest('a'); if (!a) return; e.preventDefault();
+  if (!a.dataset.ke) { keLuar(a.getAttribute('href')); return; }
+  pindah(a.dataset.ke);
+  $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on');
+});
+
+/* pindah layar (menu Monitoring hanya baca: tidak ada perubahan yang perlu dijaga) */
+function pindah(ke, lanjut) {
+  S.layar = ke; S.buka = null; history.replaceState(null, '', '#' + ke); gambar(); window.scrollTo({ top:0 }); lanjut && lanjut();
+}
+function keLuar(url) { location.href = url; }
+
+/* ---------------- menu akun (IDDS Action Dropdown) ---------------- */
+function gambarMenu() {
+  $('#menuProfil').innerHTML = S.menu ? `<div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible"><div class="menu-kepala"><b>Admin Contoh</b><span>Platform Admin</span></div>
+    <div class="ina-action-dropdown__divider" role="separator"></div><div role="menu" aria-label="Menu akun">
+    <a class="ina-action-dropdown__item" role="menuitem" href="Backlog-IDDS-PL-SISTEM-Prototype.html#akun"><span class="ina-action-dropdown__item-icon">${ik('user')}</span><span class="ina-action-dropdown__item-content">Akun Saya</span></a>
+    <a class="ina-action-dropdown__item" role="menuitem" href="Backlog-IDDS-PL-MASUK-Prototype.html"><span class="ina-action-dropdown__item-icon">${ik('keluar')}</span><span class="ina-action-dropdown__item-content">Keluar</span></a></div></div>` : '';
+  $('#userTombol').setAttribute('aria-expanded', String(S.menu));
+}
+$('#userTombol').addEventListener('click', () => { S.menu = !S.menu; gambarMenu(); if (S.menu) $('#menuProfil [role=menuitem]').focus(); });
+$('#user').addEventListener('keydown', e => {
+  if (e.key === 'Escape' && S.menu) { e.stopPropagation(); S.menu = false; gambarMenu(); $('#userTombol').focus(); return; }
+  if (!S.menu || (e.key !== 'ArrowDown' && e.key !== 'ArrowUp')) return;
+  e.preventDefault(); const it = [...document.querySelectorAll('#menuProfil [role=menuitem]')], i = it.indexOf(document.activeElement);
+  it[(i + (e.key === 'ArrowDown' ? 1 : it.length - 1)) % it.length].focus();
+});
+document.addEventListener('click', e => { if (S.menu && !e.target.closest('#user')) { S.menu = false; gambarMenu(); } });
+
+/* ---------------- komponen bersama halaman ---------------- */
+function paginasi(jenis, hal, n) {
+  const jh = Math.max(1, Math.ceil(n / PER_HAL)), a = n ? (hal - 1) * PER_HAL + 1 : 0, b = Math.min(n, hal * PER_HAL);
+  let hs = []; for (let i = 1; i <= jh; i++) if (i === 1 || i === jh || Math.abs(i - hal) <= 1) hs.push(i); else if (hs[hs.length - 1] !== '…') hs.push('…');
+  return `<div class="halaman"><span>Menampilkan ${a}–${b} dari ${n}</span><nav class="ina-pagination" aria-label="Navigasi halaman"><div class="ina-pagination__nav-container"><div class="ina-pagination__page-info">Halaman ${hal} dari ${jh}</div><div class="ina-pagination__nav-buttons">
+    <button type="button" class="ina-pagination__nav-button ${hal > 1 ? '' : 'ina-pagination__nav-button--disabled'}" ${hal > 1 ? `data-hal="${jenis}:${hal - 1}"` : 'disabled'} aria-label="Halaman sebelumnya">${ik('kiri', 16)}</button>
+    ${hs.map(i => i === '…' ? '<span class="ina-pagination__page-info" aria-hidden="true">…</span>' : `<button type="button" class="ina-pagination__page-button ${i === hal ? 'ina-pagination__page-button--active' : ''}" data-hal="${jenis}:${i}" ${i === hal ? 'aria-current="page"' : ''} aria-label="Halaman ${i}">${i}</button>`).join('')}
+    <button type="button" class="ina-pagination__nav-button ${hal < jh ? '' : 'ina-pagination__nav-button--disabled'}" ${hal < jh ? `data-hal="${jenis}:${hal + 1}"` : 'disabled'} aria-label="Halaman berikutnya">${ik('chev', 16)}</button></div></div></nav></div>`;
+}
+const th = t => `<th class="ina-table__header-cell" scope="col">${t}</th>`;
+const lencanaStatus = s => s === 'ACTIVE' ? badge('Aktif', 'success', 'sm') : badge('Ditangguhkan', 'warning', 'sm');
+const lencanaPaket = k => badge(NM_PAKET[k] || k || 'Gratis', k === 'ENTERPRISE' ? 'info' : 'neutral', 'sm');
+const batas = (v, sat = '') => v < 0 ? denganTip(`<span class="nilai-batas" tabindex="0">Tanpa batas</span>`, 'Tidak ada batas untuk paket ini.') : `${v}${sat}`;
+
+/* ---------------- layar: Dasbor Platform ---------------- */
+function layarDasbor() {
+  const total = PPAT.length, aktif = PPAT.filter(t => t.status === 'ACTIVE').length, tangguh = total - aktif;
+  const user = PPAT.reduce((a, t) => a + t.user, 0), baru = PPAT.filter(t => t.dibuat >= hariLalu(30)).length;
+  const akt = LOG.slice(0, 8), top = [...PPAT].sort((a, b) => b.user - a.user).slice(0, 5);
+  const st = S.cekStatus, stTeks = { periksa:'Memeriksa…', sehat:'Sehat', ganggu:'Terganggu' }[st];
+  return `${remah('Dasbor')}<h1>Dasbor Platform</h1><p class="sub">Pantau jumlah kantor PPAT, pengguna, kesehatan sistem, dan aktivitas terbaru di seluruh E-PPAT.</p>
+    <div class="kpi ditandai" id="kpi">${[['Total PPAT', total, 'Kantor PPAT terdaftar', 'gedung'], ['PPAT Aktif', aktif, 'Berstatus aktif', 'centang'], ['PPAT Ditangguhkan', tangguh, 'Berstatus ditangguhkan', 'peringatan'], ['Total Pengguna', user, 'Di semua kantor PPAT', 'users']]
+      .map(([t, n, s, i]) => `<div class="ina-card ina-card--variant-basic"><small>${t}</small><i>${ik(i)}</i><b>${n.toLocaleString('id-ID')}</b><span>${s}</span></div>`).join('')}</div>
+    ${usulan('IDDS-PL-11')}
+    <div class="dua-kartu">
+      <section class="kartu-st ditandai" id="kartuStatus" aria-labelledby="jdStatus">
+        <span class="bulat ${st === 'sehat' ? 'sehat' : st === 'periksa' ? 'periksa' : ''}" ${st === 'ganggu' ? 'style="background:var(--ina-negative-100,#fde3e3);color:var(--ina-negative-600)"' : ''}>${ik(st === 'sehat' ? 'centang' : st === 'periksa' ? 'jam' : 'peringatan', 20)}</span>
+        <div class="isi"><div class="eb" id="jdStatus">Status sistem</div>
+          <div class="nilai" aria-live="polite">${stTeks}</div>
+          <span class="kt">Basis data &amp; Redis · ${st === 'periksa' ? 'sedang diperiksa' : `diperiksa pukul ${jam(S.waktuCek)}`}</span></div>
+        ${tombol(st === 'periksa' ? 'Memeriksa…' : 'Periksa Ulang', 'secondary', 'sm', `id="periksaUlang" ${st === 'periksa' ? 'disabled' : ''}`, ik('ulang', 14))}${usulan('IDDS-PL-12')}
+      </section>
+      <section class="kartu-st" aria-labelledby="jdBaru">
+        <span class="bulat">${ik('naik', 20)}</span>
+        <div class="isi"><div class="eb" id="jdBaru">PPAT baru (30 hari)</div><div class="nilai besar">${baru}</div><span class="kt">Kantor PPAT yang mendaftar sejak ${tglPendek(hariLalu(30))}</span></div>
+      </section>
+    </div>
+    <div class="dasbor-dua">
+      <section class="blok ditandai" id="aktLintas" aria-labelledby="jdAkt">
+        <div class="blok-atas"><div><div class="eb">Aktivitas lintas-PPAT</div><h2 id="jdAkt">Pantau penggunaan</h2></div>
+          ${tombol('Lihat Semua', 'secondary', 'sm', 'data-ke-layar="log" aria-label="Lihat semua aktivitas di Log Aktivitas"', ik('panah', 14))}</div>${usulan('IDDS-PL-13')}
+        <ul class="akt">${akt.length ? akt.map(a => `<li><span class="titik ${a.ok ? '' : 'gagal'}" aria-hidden="true"></span><div>
+          <div class="baris1"><b>${esc(a.aktor)}</b><span>· ${AKT[a.kode] || a.kode}</span>${a.ok ? '' : badge('Gagal', 'error', 'sm')}</div>
+          <div class="baris2">${badge(a.tenant === '-' ? 'Platform' : '/t/' + a.tenant, 'neutral', 'sm')}<span class="wkt">${lalu(a.w)}</span></div></div></li>`).join('') : '<li class="wkt">Belum ada aktivitas.</li>'}</ul>
+      </section>
+      <section class="blok" aria-labelledby="jdTop"><div class="eb">PPAT teramai</div><h2 id="jdTop">Pengguna terbanyak</h2>
+        <ul class="teramai">${top.length ? top.map(t => `<li><a href="#ppat" data-cari-ppat="${t.slug}" aria-label="${esc(t.nama)}, ${t.user} pengguna. Buka di Daftar PPAT"><span><span class="nm">${esc(t.nama)}</span><span class="sl">/t/${t.slug}</span></span>${badge(`${t.user} pengguna`, 'brand', 'sm')}</a></li>`).join('') : '<li class="wkt">Belum ada PPAT.</li>'}</ul>
+      </section>
+    </div>`;
+}
+
+/* ---------------- layar: Daftar PPAT (hanya baca) ---------------- */
+const tampilPpat = () => { const q = S.cari.trim().toLowerCase(); return PPAT.filter(t => !q || `${t.nama} ${t.slug}`.toLowerCase().includes(q)); };
+function layarPpat() {
+  const rows = tampilPpat(), n = rows.length, hal = Math.min(S.halPpat, Math.max(1, Math.ceil(n / PER_HAL))), isi = rows.slice((hal - 1) * PER_HAL, hal * PER_HAL);
+  S.halPpat = hal;
+  return `${remah('Daftar PPAT')}<h1>Daftar PPAT</h1><p class="sub">Lihat dan cari kantor PPAT yang terdaftar di E-PPAT.</p>
+    <div class="info-pl ditandai" id="infoPpat">${alert('info', 'Halaman ini hanya untuk melihat data', 'Kantor PPAT baru, perubahan paket, dan admin kantor diatur di aplikasi Onboarding (konsol operator). Alamat aplikasi Onboarding diatur di <a href="Backlog-IDDS-PL-SISTEM-Prototype.html#pengaturan">Pengaturan Global</a>.' + usulan('IDDS-PL-14'),
+      `<div class="aksi-info">${tombol('Buka Onboarding', 'secondary', 'sm', 'id="bukaOnboarding"', ik('luar', 14))}</div>`)}</div>
+    <div class="saring-pl" role="search">
+      <div><label class="lbl" for="cariPpat">Cari PPAT</label>${cariIsian('cariPpat', 'Cari nama atau alamat kantor PPAT…', S.cari, 'Cari nama atau alamat kantor PPAT')}</div>
+      <span class="jumlah">${n} kantor PPAT</span>
+    </div>
+    <div class="tabel-wadah ditandai" id="tabelPpat"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Daftar kantor PPAT">
+      <thead class="ina-table__header"><tr>${['Nama PPAT', 'Paket', 'Masa Berlaku', 'Status', 'Registrasi', 'Dibuat'].map(th).join('')}</tr></thead>
+      <tbody class="ina-table__body">${isi.length ? isi.map(t => `<tr class="ina-table__row">
+        <td class="ina-table__cell"><span class="kd" style="cursor:auto">${esc(t.nama)}</span><div class="kc mono">/t/${t.slug}</div></td>
+        <td class="ina-table__cell">${lencanaPaket(t.paket)}</td>
+        <td class="ina-table__cell" style="white-space:nowrap">${t.exp ? `${tglPendek(t.exp)}${t.exp < SEKARANG.toISOString().slice(0, 10) ? `<div style="margin-top:4px">${badge('Kedaluwarsa', 'warning', 'sm')}</div>` : ''}` : 'Tanpa batas'}</td>
+        <td class="ina-table__cell">${lencanaStatus(t.status)}</td>
+        <td class="ina-table__cell">${t.reg ? badge('Dibuka', 'success', 'sm') : badge('Ditutup', 'neutral', 'sm')}</td>
+        <td class="ina-table__cell" style="white-space:nowrap">${tglPendek(t.dibuat)}</td></tr>`).join('')
+        : `<tr><td colspan="6" class="ina-table__empty-cell kosong">${S.cari ? `Tidak ada kantor PPAT yang cocok dengan "${esc(S.cari)}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : 'Belum ada kantor PPAT terdaftar.'}</td></tr>`}</tbody></table></div></div>
+      ${paginasi('ppat', hal, n)}</div>${usulan('IDDS-PL-15')}`;
+}
+
+/* ---------------- layar: Paket Langganan (hanya baca) ---------------- */
+function layarPaket() {
+  return `${remah('Paket Langganan')}<h1>Paket Langganan</h1><p class="sub">Lihat batas order, pengguna, masa berlaku, dan registrasi CA setiap paket.</p>
+    <div class="info-pl">${alert('info', 'Katalog hanya untuk dilihat', 'Paket dibuat dan diubah di aplikasi Onboarding (konsol operator). Halaman ini menampilkan paket yang berlaku saat ini.', `<div class="aksi-info">${tombol('Buka Onboarding', 'secondary', 'sm', 'id="bukaOnboarding"', ik('luar', 14))}</div>`)}</div>
+    <div class="tabel-wadah ditandai" id="tabelPaket"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Katalog paket langganan">
+      <thead class="ina-table__header"><tr>${th('Kode')}${th('Nama Paket')}${th('Maks. Order')}${th('Maks. Pengguna')}${th('Masa Berlaku')}${th(denganTip(`<span class="tip-kol" tabindex="0">Registrasi CA ${ik('info', 13)}</span>`, 'Registrasi CA: kantor dengan paket ini dapat mendaftarkan sertifikat elektronik (CA) Peruri untuk tanda tangan elektronik.', 'bottom'))}${th('Status')}</tr></thead>
+      <tbody class="ina-table__body">${PAKET.length ? PAKET.map(p => `<tr class="ina-table__row">
+        <td class="ina-table__cell"><span class="kd mono" style="cursor:auto;color:var(--ina-primary-primary);font-weight:600">${p.kode}</span></td>
+        <td class="ina-table__cell">${esc(p.nama)}</td>
+        <td class="ina-table__cell">${batas(p.order)}</td>
+        <td class="ina-table__cell">${batas(p.user)}</td>
+        <td class="ina-table__cell" style="white-space:nowrap">${batas(p.hari, ' hari')}</td>
+        <td class="ina-table__cell">${p.ca ? badge('Aktif', 'success', 'sm') : badge('Nonaktif', 'neutral', 'sm')}</td>
+        <td class="ina-table__cell">${p.aktif ? badge('Aktif', 'success', 'sm') : badge('Nonaktif', 'neutral', 'sm')}</td></tr>`).join('')
+        : `<tr><td colspan="7" class="ina-table__empty-cell kosong">Belum ada paket.</td></tr>`}</tbody></table></div></div>
+      <div class="halaman"><span>${PAKET.length} paket</span></div></div>${usulan('IDDS-PL-16')}`;
+}
+
+/* ---------------- layar: Log Aktivitas ---------------- */
+const OPSI_PPAT = () => [['', 'Semua PPAT'], ...PPAT.map(t => [t.slug, `${t.nama} (/t/${t.slug})`])];
+const tampilLog = () => LOG.filter(a => (!S.fPpat || a.tenant === S.fPpat) && (!S.fAkt || a.kode === S.fAkt));
+function pilihDropdown(nama, label, opsi, nilai) {
+  const buka = S.buka === nama, teks = (opsi.find(o => o[0] === nilai) || opsi[0])[1];
+  return `<div><span class="lbl" id="lbl-${nama}">${label}</span><div class="ina-select-dropdown pilih-wadah" data-dd="${nama}"><button type="button" class="ina-select-dropdown__trigger ina-select-dropdown__trigger--size-md" id="dd-${nama}" aria-haspopup="listbox" aria-expanded="${buka}" aria-labelledby="lbl-${nama} dd-${nama}"><span class="ina-select-dropdown__trigger-text ina-select-dropdown__trigger-text--selected">${esc(teks)}</span>${ik('bawah')}</button>
+    ${buka ? `<div class="ina-select-dropdown__panel"><div class="ina-select-dropdown__options" role="listbox" aria-labelledby="lbl-${nama}">${opsi.map(([v, t]) => `<button type="button" role="option" aria-selected="${v === nilai}" class="ina-select-dropdown__option ${v === nilai ? 'ina-select-dropdown__option--selected-single' : ''}" data-opsi="${nama}" data-v="${v}">${esc(t)}</button>`).join('')}</div></div>` : ''}</div></div>`;
+}
+function layarLog() {
+  const rows = tampilLog(), n = rows.length, hal = Math.min(S.halLog, Math.max(1, Math.ceil(n / PER_HAL))), isi = rows.slice((hal - 1) * PER_HAL, hal * PER_HAL), disaring = S.fPpat || S.fAkt;
+  S.halLog = hal;
+  return `${remah('Log Aktivitas')}<h1>Log Aktivitas</h1><p class="sub">Telusuri aktivitas masuk dan penggunaan di semua kantor PPAT.</p>
+    <div class="saring-pl ditandai" id="saringLog" role="search">
+      ${pilihDropdown('ppat', 'PPAT', OPSI_PPAT(), S.fPpat)}
+      ${pilihDropdown('akt', 'Jenis aktivitas', OPSI_AKT, S.fAkt)}
+      ${disaring ? tombol('Hapus Saringan', 'tertiary', 'md', 'id="hapusSaring"', ik('x', 14)) : ''}
+      ${usulan('IDDS-PL-17')}
+      <span class="jumlah" aria-live="polite">${n} aktivitas</span>
+    </div>
+    <div class="tabel-wadah ditandai" id="tabelLog"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Log aktivitas lintas kantor PPAT">
+      <thead class="ina-table__header"><tr>${['Waktu', 'PPAT', 'Aktor', 'Aksi', 'Status', 'IP'].map(th).join('')}</tr></thead>
+      <tbody class="ina-table__body">${isi.length ? isi.map(a => `<tr class="ina-table__row">
+        <td class="ina-table__cell" style="white-space:nowrap">${tglJam(a.w)}</td>
+        <td class="ina-table__cell">${a.tenant === '-' ? `<div>Platform</div><div class="kc">Admin platform</div>` : `<div>${esc(NM_PPAT(a.tenant))}</div><div class="kc mono">/t/${a.tenant}</div>`}</td>
+        <td class="ina-table__cell">${esc(a.aktor)}</td>
+        <td class="ina-table__cell">${AKT[a.kode] || a.kode}</td>
+        <td class="ina-table__cell">${a.ok ? badge('Berhasil', 'success', 'sm') : badge('Gagal', 'error', 'sm')}</td>
+        <td class="ina-table__cell mono">${a.ip || '—'}</td></tr>`).join('')
+        : `<tr><td colspan="6" class="ina-table__empty-cell kosong">${disaring ? `Tidak ada aktivitas yang cocok dengan saringan.<div style="margin-top:10px">${tombol('Hapus Saringan', 'secondary', 'sm', 'data-hapus-saring')}</div>` : 'Belum ada aktivitas.'}</td></tr>`}</tbody></table></div></div>
+      ${paginasi('log', hal, n)}</div>${usulan('IDDS-PL-18')}`;
+}
+
+/* ---------------- gambar ---------------- */
+const RENDER = { dasbor:layarDasbor, ppat:layarPpat, paket:layarPaket, log:layarLog };
+function gambar() {
+  gambarNav();
+  $('#pilLayar').innerHTML = LAYAR.map(([k, t]) => `<button class="pil" data-pil="${k}" aria-pressed="${S.layar === k}">${t}</button>`).join(' ');
+  $('#halaman').innerHTML = RENDER[S.layar]();
+  pasangPanduan();
+}
+
+/* ---------------- interaksi ---------------- */
+const H = $('#halaman');
+function bukaDd(nama) { S.buka = nama; gambar(); ($(`[data-dd="${nama}"] [role=option][aria-selected="true"]`) || $(`[data-dd="${nama}"] [role=option]`))?.focus(); }
+function pilihOpsi(nama, v) { if (nama === 'ppat') S.fPpat = v; else S.fAkt = v; S.halLog = 1; S.buka = null; gambar(); $(`#dd-${nama}`).focus(); }
+H.addEventListener('click', e => {
+  const t = e.target;
+  const kl = t.closest('[data-ke-layar]'); if (kl) { e.preventDefault(); pindah(kl.dataset.keLayar); return; }
+  if (t.closest('.ina-breadcrumb__link[href="#dasbor"]')) { e.preventDefault(); pindah('dasbor'); return; }
+  /* Dasbor */
+  const cp = t.closest('[data-cari-ppat]'); if (cp) { e.preventDefault(); S.cari = cp.dataset.cariPpat; S.halPpat = 1; pindah('ppat', () => $('#cariPpat').focus()); return; }
+  if (t.closest('#periksaUlang')) {
+    S.cekStatus = 'periksa'; gambar();
+    setTimeout(() => { S.cekStatus = 'sehat'; S.waktuCek = new Date(S.waktuCek.getTime() + 60000); if (S.layar === 'dasbor') { gambar(); $('#periksaUlang')?.focus(); } toast('Status sistem diperiksa: Sehat.', 'positive', 3000, 'Basis data dan Redis berjalan normal.'); }, 900);
+    return;
+  }
+  /* Daftar PPAT & Paket */
+  if (t.closest('#bukaOnboarding')) { toast('Aplikasi Onboarding tidak termasuk prototipe ini.', 'default', 4000, 'Di aplikasi asli, tombol ini membuka konsol operator Onboarding di tab baru.'); return; }
+  if (t.closest('#hapusCari')) { S.cari = ''; S.halPpat = 1; gambar(); $('#cariPpat').focus(); return; }
+  const hl = t.closest('[data-hal]'); if (hl) { const [j, n] = hl.dataset.hal.split(':'); if (j === 'ppat') S.halPpat = +n; else S.halLog = +n; gambar(); (document.querySelector(`[data-hal="${j}:${n}"]`) || $('.halaman'))?.focus?.(); return; }
+  /* Log */
+  const dd = t.closest('.ina-select-dropdown__trigger'); if (dd) { const nm = dd.closest('[data-dd]').dataset.dd; if (S.buka === nm) { S.buka = null; gambar(); $(`#dd-${nm}`).focus(); } else bukaDd(nm); return; }
+  const op = t.closest('[data-opsi]'); if (op) { pilihOpsi(op.dataset.opsi, op.dataset.v); return; }
+  if (t.closest('#hapusSaring') || t.closest('[data-hapus-saring]')) { S.fPpat = ''; S.fAkt = ''; S.halLog = 1; gambar(); $('#dd-ppat').focus(); return; }
+});
+/* Select Dropdown: panah atas/bawah, Enter/Spasi, Esc */
+H.addEventListener('keydown', e => {
+  const w = e.target.closest('[data-dd]'); if (!w) return;
+  const nm = w.dataset.dd, opsi = [...w.querySelectorAll('[role=option]')];
+  if (e.key === 'Escape' && S.buka) { e.preventDefault(); e.stopPropagation(); S.buka = null; gambar(); $(`#dd-${nm}`).focus(); return; }
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (S.buka !== nm) { bukaDd(nm); return; }
+    const i = opsi.indexOf(document.activeElement), n = opsi.length;
+    opsi[i < 0 ? 0 : (e.key === 'ArrowDown' ? Math.min(n - 1, i + 1) : Math.max(0, i - 1))]?.focus(); return;
+  }
+  const op = e.target.closest('[role=option]');
+  if (op && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); pilihOpsi(nm, op.dataset.v); }
+});
+H.addEventListener('input', e => {
+  if (e.target.id === 'cariPpat') { S.cari = e.target.value; S.halPpat = 1; const pos = e.target.selectionStart; gambar(); const i = $('#cariPpat'); i.focus(); i.setSelectionRange(pos, pos); }
+});
+document.addEventListener('click', e => { if (S.buka && !e.target.closest('.pilih-wadah')) { S.buka = null; gambar(); } });
+$('#pilLayar').addEventListener('click', e => { const b = e.target.closest('[data-pil]'); if (b) pindah(b.dataset.pil); });
+
+/* ---------------- tombol Bantuan di judul halaman ---------------- */
+function pasangPanduan() {
+  const h = document.querySelector('#halaman h1'); if (!h || h.parentElement.classList.contains('judul-kiri')) return;
+  const w = document.createElement('div'); w.className = 'judul-halaman';
+  const kiri = document.createElement('div'); kiri.className = 'judul-kiri';
+  const sub = h.nextElementSibling && h.nextElementSibling.classList.contains('sub') ? h.nextElementSibling : null;
+  h.before(w); w.append(kiri); kiri.append(h); if (sub) kiri.append(sub);
+  w.insertAdjacentHTML('beforeend', `<button type="button" class="ina-button ina-button--secondary ina-button--md ditandai" id="bukaBantuan" aria-label="Bantuan untuk halaman ini"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg><span>Bantuan</span></button>`);
+}
+document.addEventListener('click', e => { if (e.target.closest('#bukaBantuan')) bukaBantuan(); });
+
+/* ---------------- IDDS Drawer ---------------- */
+function drawer({ judul, isi }) {
+  const D = $('#lapisanDrawer'), hp = window.matchMedia('(max-width:760px)').matches;
+  D.innerHTML = `<div class="ina-drawer ina-drawer--position-${hp ? 'bottom' : 'right'}" role="dialog" aria-modal="true" aria-labelledby="drwJudul">
+    <div class="ina-drawer__backdrop" data-tutup-drawer></div>
+    <div class="ina-drawer__panel ina-drawer__panel--width-md">
+      <div class="ina-drawer__header"><h2 class="ina-drawer__title" id="drwJudul">${judul}</h2>
+        <button type="button" class="ina-drawer__close-button" aria-label="Tutup bantuan" data-tutup-drawer><svg class="ina-drawer__close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      <div class="ina-drawer__content">${isi}</div>
+    </div></div>`;
+  D.querySelector('.ina-drawer__close-button').focus();
+}
+function tutupDrawer() { $('#lapisanDrawer').innerHTML = ''; $('#bukaBantuan')?.focus(); }
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-tutup-drawer]')) { tutupDrawer(); return; }
+  const tg = e.target.closest('#lapisanDrawer .ina-accordion__toggle'); if (!tg) return;
+  const b = tg.getAttribute('aria-expanded') !== 'true';
+  tg.setAttribute('aria-expanded', b);
+  tg.querySelector('.ina-accordion__icon').classList.toggle('ina-accordion__icon--open', b);
+  tg.nextElementSibling.classList.toggle('ina-accordion__content--open', b);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisanDrawer').innerHTML) tutupDrawer(); });
+
+/* ---------------- IDDS Modal & Toast ---------------- */
+let asalDialog = null;
+function tutupDialog() { $('#lapisan').innerHTML = ''; const a = asalDialog; asalDialog = null; if (a && a.isConnected) a.focus(); }
+function dialog({ judul, isi, tombol: tb, lebar, konfirmasi, bahaya }) {
+  const Lp = $('#lapisan'); asalDialog = document.activeElement;
+  Lp.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-i="-1"></div><div class="ina-modal__container">
+    <div class="ina-modal__dialog ina-modal__dialog--size-${lebar ? 'lg' : 'md'} ${konfirmasi ? 'ina-modal-confirmation' : ''}" role="${konfirmasi ? 'alertdialog' : 'dialog'}" aria-modal="true" aria-labelledby="dlgJudul">
+      <div class="ina-modal__header"><h2 class="ina-modal__title" id="dlgJudul">${judul}</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-i="-1">${ik('x', 22)}</button></div>
+      <div class="ina-modal__body">${isi}</div>
+      <div class="ina-modal__footer">${tb.map(([t, h, , , kls, ikon], i) => `<button type="button" class="ina-button ina-button--${h} ina-button--md ${kls || ''}" data-i="${i}" ${bahaya && i === tb.length - 1 ? 'style="background:var(--ina-negative-600);border-color:var(--ina-negative-600)"' : ''}>${ikon || ''}${t}</button>`).join('')}</div></div></div></div>`;
+  Lp.onclick = e => {
+    const b = e.target.closest('[data-i]'); if (!b || b.disabled) return;
+    const i = +b.dataset.i; if (i < 0) { tutupDialog(); return; }
+    const [, , fn, tahan] = tb[i]; if (tahan) { fn && fn(); return; }
+    tutupDialog(); fn && fn();
+  };
+  Lp.querySelector('.ina-modal__close-button').focus();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisan').innerHTML) tutupDialog(); });
+let tt;
+function toast(teks, state = 'default', ms = 3000, ket = '') {
+  $('#toastWadah').innerHTML = `<div class="ina-toast ina-toast--state-${state} ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${ik(state === 'positive' ? 'centang' : 'info', 20)}</div>
+    <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p>${ket ? `<p class="ina-toast__description">${ket}</p>` : ''}</div></div><button class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast>${ik('x', 16)}</button></div>`;
+  clearTimeout(tt); tt = setTimeout(() => $('#toastWadah').innerHTML = '', ms);
+}
+$('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tutup-toast]')) $('#toastWadah').innerHTML = ''; });
+
+/* ---------------- Bantuan per halaman (IDDS-PL-20) ---------------- */
+const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
+const kontak = () => `<h4 class="bantu-sub">Kontak dukungan ${usulan('IDDS-PL-20')}</h4>
+  <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>`;
+const lgkh = a => `<ol class="bantu-langkah">${a.map(x => `<li>${x}</li>`).join('')}</ol>`;
+const istilah = a => `<dl class="bantu-istilah">${a.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
+const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
+const BANTUAN = {
+  dasbor:() => ({ judul:'Bantuan Dasbor Platform', isi:`<p>Dasbor merangkum keadaan seluruh E-PPAT: jumlah kantor PPAT dan pengguna, kesehatan sistem, serta aktivitas terbaru di semua kantor.</p>
+    <h4 class="bantu-sub">Isi halaman</h4>
+    <ul class="bantu-langkah"><li><b>Total PPAT</b>: semua kantor PPAT yang terdaftar, aktif maupun ditangguhkan.</li><li><b>PPAT Aktif</b> dan <b>PPAT Ditangguhkan</b>: jumlah kantor menurut statusnya.</li><li><b>Total Pengguna</b>: jumlah akun di semua kantor PPAT.</li><li><b>Status Sistem</b>: hasil pemeriksaan basis data dan Redis, beserta waktu pemeriksaannya.</li><li><b>PPAT baru (30 hari)</b>: kantor yang mendaftar dalam 30 hari terakhir.</li><li><b>Pantau penggunaan</b>: delapan aktivitas terbaru dari semua kantor.</li><li><b>Pengguna terbanyak</b>: lima kantor PPAT dengan pengguna terbanyak.</li></ul>
+    <h4 class="bantu-sub">Istilah</h4>
+    ${istilah([['Platform', 'Aktivitas admin platform, bukan aktivitas kantor PPAT.'], ['/t/…', 'Alamat kantor PPAT di E-PPAT, misalnya /t/ppat-contoh-satu.'], ['Redis', 'Layanan penyimpanan sementara yang dipakai aplikasi, misalnya untuk sesi masuk.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('d', [
+      ['Apa arti status sistem Terganggu?', 'Basis data atau Redis tidak menjawab saat diperiksa. Pengguna bisa gagal masuk atau menyimpan data. Klik "Periksa Ulang" setelah beberapa saat; bila tetap terganggu, hubungi tim teknis.'],
+      ['Kapan status sistem diperiksa?', 'Saat dasbor dibuka dan setiap kali Anda mengklik "Periksa Ulang". Waktu pemeriksaan terakhir tertulis di kartu.'],
+      ['Mengapa ada kantor PPAT yang ditangguhkan?', 'Biasanya karena masa berlaku paket sudah lewat atau kantor dinonaktifkan oleh operator. Lihat kolom Masa Berlaku di Daftar PPAT.'],
+      ['Bagaimana menangguhkan atau mengaktifkan kantor PPAT?', 'Tidak dari sini. Status kantor diatur di aplikasi Onboarding (konsol operator).'],
+      ['Apa arti aktivitas bertanda Gagal?', 'Aktivitas tidak berhasil, misalnya kata sandi salah saat masuk. Beberapa kegagalan berturut-turut dari akun yang sama perlu diperiksa di Log Aktivitas.'],
+      ['Bagaimana melihat semua aktivitas?', 'Klik "Lihat Semua" untuk membuka Log Aktivitas. Di sana Anda dapat menyaring per kantor PPAT dan jenis aktivitas.'],
+      ['Bisakah saya membuka data kantor dari daftar Pengguna terbanyak?', 'Ya. Klik nama kantor untuk membuka Daftar PPAT yang langsung mencari kantor tersebut.'],
+      ['Mengapa angka belum berubah?', 'Angka dimuat saat halaman dibuka. Muat ulang halaman untuk melihat data terbaru.']])}
+    ${kontak()}` }),
+  ppat:() => ({ judul:'Bantuan Daftar PPAT', isi:`<p>Daftar PPAT menampilkan semua kantor PPAT yang terdaftar di E-PPAT beserta paket, masa berlaku, dan statusnya. Halaman ini hanya untuk melihat data.</p>
+    <h4 class="bantu-sub">Langkah mencari kantor</h4>
+    ${lgkh(['Ketik nama kantor atau alamatnya (mis. <b>ppat-contoh-satu</b>) di kotak <b>Cari PPAT</b>.', 'Hasil langsung tersaring. Pindah halaman di bawah tabel bila hasilnya lebih dari 20.', 'Klik <b>Hapus Pencarian</b> bila tidak ada hasil.'])}
+    <h4 class="bantu-sub">Arti kolom</h4>
+    ${istilah([['Paket', 'Paket langganan kantor. Rincian batasnya ada di Paket Langganan.'], ['Masa Berlaku', 'Tanggal paket berakhir. "Tanpa batas" berarti tidak ada tanggal akhir. Lencana Kedaluwarsa berarti tanggalnya sudah lewat.'], ['Status', 'Aktif: kantor dapat dipakai. Ditangguhkan: pengguna kantor tidak dapat masuk.'], ['Registrasi', 'Dibuka: calon pengguna dapat mendaftar sendiri ke kantor itu. Ditutup: akun hanya dibuat admin kantor.'], ['Dibuat', 'Tanggal kantor didaftarkan.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('p', [
+      ['Bagaimana menambah kantor PPAT baru?', 'Kantor PPAT baru dibuat lewat aplikasi Onboarding (konsol operator), bukan dari halaman ini. Klik "Buka Onboarding".'],
+      ['Bagaimana mengganti paket atau memperpanjang masa berlaku?', 'Lewat aplikasi Onboarding. Setelah diubah di sana, data di halaman ini ikut berubah.'],
+      ['Di mana alamat aplikasi Onboarding diatur?', 'Di Sistem › Pengaturan Global, tab Umum, isian URL aplikasi Onboarding.'],
+      ['Apa yang terjadi bila masa berlaku sudah lewat?', 'Kantor diberi lencana Kedaluwarsa dan dapat ditangguhkan sampai paketnya diperpanjang di Onboarding.'],
+      ['Bisakah menyaring berdasarkan status atau paket?', 'Belum. Saat ini hanya tersedia pencarian nama dan alamat kantor.'],
+      ['Bagaimana membuka aplikasi kantor tertentu?', 'Tambahkan alamat yang tertulis di bawah nama kantor, misalnya /t/ppat-contoh-satu, di belakang alamat E-PPAT. Anda perlu akun di kantor itu untuk masuk.'],
+      ['Mengapa kantor yang saya cari tidak muncul?', 'Periksa ejaan nama atau alamatnya. Pencarian tidak membedakan huruf besar dan kecil.']])}
+    ${kontak()}` }),
+  paket:() => ({ judul:'Bantuan Paket Langganan', isi:`<p>Paket Langganan menampilkan katalog paket beserta batas pemakaiannya. Katalog ini hanya untuk dilihat; paket dibuat dan diubah di aplikasi Onboarding.</p>
+    <h4 class="bantu-sub">Arti kolom</h4>
+    ${istilah([['Kode', 'Kode paket yang dipakai sistem, mis. FREE atau ENTERPRISE.'], ['Maks. Order', 'Jumlah order akta paling banyak untuk satu kantor.'], ['Maks. Pengguna', 'Jumlah akun paling banyak di satu kantor.'], ['Masa Berlaku', 'Lama paket berlaku sejak diaktifkan.'], ['Registrasi CA', 'Aktif: kantor dapat mendaftarkan sertifikat elektronik (CA) Peruri untuk tanda tangan elektronik.'], ['Status', 'Aktif: paket dapat dipilih kantor. Nonaktif: paket tidak ditawarkan lagi.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('k', [
+      ['Apa arti "Tanpa batas"?', 'Paket tidak membatasi jumlah atau waktu untuk kolom tersebut.'],
+      ['Bagaimana mengubah batas sebuah paket?', 'Lewat aplikasi Onboarding (konsol operator). Klik "Buka Onboarding".'],
+      ['Apa beda kolom Registrasi CA dan Status?', 'Registrasi CA menunjukkan fitur sertifikat elektronik di paket itu. Status menunjukkan apakah paket itu masih ditawarkan.'],
+      ['Apa yang terjadi pada kantor yang memakai paket Nonaktif?', 'Kantor tetap memakai paketnya sampai masa berlaku habis. Paket nonaktif hanya tidak dapat dipilih kantor baru.'],
+      ['Apa itu CA?', 'CA (Certificate Authority) adalah sertifikat elektronik dari Peruri. Sertifikat ini diperlukan untuk menandatangani akta secara elektronik.'],
+      ['Di mana melihat paket yang dipakai sebuah kantor?', 'Di Daftar PPAT, kolom Paket.']])}
+    ${kontak()}` }),
+  log:() => ({ judul:'Bantuan Log Aktivitas', isi:`<p>Log Aktivitas mencatat aktivitas di semua kantor PPAT dan aktivitas admin platform, misalnya masuk, keluar, dan unduh dokumen akta.</p>
+    <h4 class="bantu-sub">Langkah mencari</h4>
+    ${lgkh(['Pilih kantor di saringan <b>PPAT</b>, atau biarkan <b>Semua PPAT</b>.', 'Pilih <b>Jenis aktivitas</b>, misalnya Gagal masuk.', 'Pindah halaman di bawah tabel untuk aktivitas yang lebih lama.', 'Klik <b>Hapus Saringan</b> untuk kembali ke semua aktivitas.'])}
+    <h4 class="bantu-sub">Arti aktivitas</h4>
+    ${istilah([['Masuk / Keluar', 'Pengguna masuk atau keluar dari aplikasi.'], ['Gagal masuk', 'Percobaan masuk ditolak, mis. kata sandi salah.'], ['Sesi diperpanjang', 'Sistem memperpanjang sesi masuk pengguna secara otomatis.'], ['Ganti kata sandi', 'Pengguna mengganti kata sandinya.'], ['Pratinjau draf', 'Pengguna membuka pratinjau draf akta.'], ['Unduh dokumen akta', 'Pengguna mengunduh dokumen akta.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('l', [
+      ['Apa arti PPAT "Platform"?', 'Aktivitas dilakukan oleh admin platform, bukan oleh pengguna kantor PPAT.'],
+      ['Mengapa kolom IP kosong (—)?', 'Beberapa aktivitas, misalnya pratinjau dan unduh draf, tidak mencatat alamat IP.'],
+      ['Apa itu kolom IP?', 'Alamat jaringan perangkat yang dipakai saat aktivitas terjadi. Gunakan untuk menelusuri akses yang mencurigakan.'],
+      ['Mengapa jenis aktivitas di saringan hanya lima?', 'Saringan saat ini mencakup aktivitas masuk dan keamanan akun. Aktivitas lain tetap tampil di tabel bila saringan jenis aktivitas tidak dipilih.'],
+      ['Bagaimana menelusuri banyak Gagal masuk?', 'Pilih Jenis aktivitas "Gagal masuk", lalu lihat Aktor dan IP. Bila percobaan berulang dari IP yang sama, hubungi admin kantor terkait.'],
+      ['Bisakah log diubah, dihapus, atau diunduh?', 'Tidak. Log hanya dapat dibaca agar riwayat tetap utuh. Bila butuh salinan log, hubungi dukungan.']])}
+    ${kontak()}` })
+};
+function bukaBantuan() { drawer(BANTUAN[S.layar]()); }
+
+/* ---------------- protobar & daftar penyesuaian ---------------- */
+$('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
+$('#bukaUbah').addEventListener('click', () => {
+  dialog({ judul:'Daftar penyesuaian menu Monitoring', lebar:true,
+    isi:`<p>Menu Monitoring di area platform tidak dinilai dalam laporan Heuristic Evaluation. Isi, kolom, dan perilaku mengikuti kode live dev-app.eppat.id/platform; yang disesuaikan adalah komponen IDDS dengan brand E-PPAT, kejujuran label, bahasa, status sistem, dan Bantuan per halaman. Data di prototipe ini adalah data contoh.</p>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+        <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
+    tombol:[['Tutup', 'secondary', null]] });
+  $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });
+});
+function lihat(u) {
+  const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
+  if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  pindah(u.ke, sorot);
+}
+$('#aturUlang').addEventListener('click', () => { PPAT = contohPpat(); LOG = contohLog(); const l = S.layar; S = S0(); S.layar = l; gambar(); gambarMenu(); toast('Data contoh dikembalikan ke awal.'); });
+$('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
+$('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
+$('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+const awal = (location.hash || '').slice(1); if (RENDER[awal]) S.layar = awal;
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (RENDER[h] && h !== S.layar) pindah(h); });
+gambar();
+})();
+</script>
+</body>
+</html>

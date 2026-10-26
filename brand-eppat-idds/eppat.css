@@ -1,0 +1,143 @@
+/**
+ * E-PPAT Brand Theme untuk INA Digital Design System (IDDS)
+ * --------------------------------------------------------------------------
+ * Format mengikuti brand bawaan IDDS (@idds/styles: [data-brand='inagov'], 'panrb', dll.).
+ * Hanya token brand (primary, secondary, hover) yang diganti; warna netral, sentimen
+ * (positive/negative/warning/guide), tipografi, spacing, dan komponen tetap milik IDDS.
+ *
+ * Pemakaian:
+ *   1. import '@idds/react/index.css'            (atau @idds/styles/dist/index.css)
+ *   2. import './eppat.css'                       (berkas ini, SETELAH CSS IDDS)
+ *   3. document.documentElement.setAttribute('data-brand', 'eppat')
+ *      — atau setCustomTheme(eppatTheme) dari eppat-theme.ts (tanpa dukungan mode gelap)
+ *
+ * Sumber warna: tema aktif E-PPAT (CMS › Setting Theme) di dev-app.eppat.id, dibaca 23 Okt 2026:
+ *   --eppat-brand-rgb 61 107 94 (#3D6B5E), --eppat-brand-hover-rgb 52 93 82 (#345D52),
+ *   --eppat-sidebar-bg #2C3C42, --eppat-sidebar-hover #3A4D54, --eppat-line-sand-rgb 210 221 217,
+ *   --eppat-paper-cream-rgb 238 243 241, --eppat-paper-vanilla-rgb 245 248 247, kartu kantor #DAC999.
+ * Kontras (WCAG 2.2): teks putih di atas primary-500 #3D6B5E = 6,06:1 (AA); hover #345D52 = 7,41:1;
+ *   primary-400 #4E7C6F = 4,73:1 (dipakai sebagai warna utama mode gelap).
+ */
+
+/* E-PPAT Theme - Pejabat Pembuat Akta Tanah */
+[data-brand='eppat'] {
+  /* Primary Colors - Hijau E-PPAT */
+  --ina-primary-25: #f5f8f7;
+  --ina-primary-50: #eef3f1;
+  --ina-primary-100: #dde5e2;
+  --ina-primary-200: #c2d3cc;
+  --ina-primary-300: #9db8ae;
+  --ina-primary-400: #4e7c6f;
+  --ina-primary-500: #3d6b5e;
+  --ina-primary-600: #345d52;
+  --ina-primary-700: #2a4b42;
+  --ina-primary-800: #1d3530;
+  --ina-primary-900: #0f1c19;
+  --ina-primary-primary: #3d6b5e;
+
+  /* Secondary Colors - Emas kartu kantor E-PPAT */
+  --ina-secondary-25: #fcfbf6;
+  --ina-secondary-50: #f8f4e7;
+  --ina-secondary-100: #f0e8cc;
+  --ina-secondary-200: #e6dab2;
+  --ina-secondary-300: #dac999;
+  --ina-secondary-400: #c7b077;
+  --ina-secondary-500: #ae9358;
+  --ina-secondary-600: #8c7444;
+  --ina-secondary-700: #6a5733;
+  --ina-secondary-800: #483b23;
+  --ina-secondary-900: #272013;
+
+  /* Accent Colors (legacy IDDS, disamakan dengan secondary) */
+  --ina-accent-100: #fcfbf6 !important;
+  --ina-accent-200: #f8f4e7 !important;
+  --ina-accent-300: #f0e8cc !important;
+  --ina-accent-400: #e6dab2 !important;
+  --ina-accent-500: #dac999 !important;
+  --ina-accent-600: #ae9358 !important;
+  --ina-accent-700: #6a5733 !important;
+
+  /* Interactive Colors */
+  --ina-brand-primary: #3d6b5e;
+  --ina-brand-hover: #345d52 !important;
+  --ina-neutral-hover: var(--ina-neutral-100) !important;
+
+  /* Brand-specific colors (seperti --ina-bgn-brand-primary pada brand BGN) */
+  --ina-eppat-sidebar-bg: #2c3c42;
+  --ina-eppat-sidebar-hover: #3a4d54;
+  --ina-eppat-sidebar-active: var(--ina-primary-500);
+  --ina-eppat-sidebar-content: rgba(255, 255, 255, 0.8);
+  --ina-eppat-office-card: var(--ina-secondary-300);
+  --ina-eppat-stroke-brand: #d2ddd9;
+  --ina-eppat-surface-cream: var(--ina-primary-50);
+}
+
+/* Aksen komponen mengikuti brand E-PPAT.
+   IDDS memakai biru "guide" atau hitam untuk elemen penunjuk berikut; di E-PPAT diganti hijau brand.
+   Warna status (positive/negative/warning/info pada Alert, Badge, Toast) TIDAK diubah. */
+[data-brand='eppat'] .ina-button.ina-button--link { color: var(--ina-primary-500) !important; }
+[data-brand='eppat'] .ina-button--link:hover:not(:disabled),
+[data-brand='eppat'] .ina-button--link:focus:not(:disabled) { color: var(--ina-primary-600); }
+[data-brand='eppat'] .ina-stepper__item--active .ina-stepper__icon-wrapper {
+  border-color: var(--ina-primary-500); color: var(--ina-primary-500); background-color: var(--ina-primary-50);
+}
+[data-brand='eppat'] .ina-stepper__item--active .ina-stepper__label { color: var(--ina-primary-500); }
+[data-brand='eppat'] .ina-stepper__item--completed .ina-stepper__icon-wrapper {
+  border-color: var(--ina-primary-500); color: #fff; background-color: var(--ina-primary-500);
+}
+[data-brand='eppat'] .ina-stepper__item--completed .ina-stepper__label { color: var(--ina-primary-600); }
+[data-brand='eppat'] .ina-stepper__separator--completed { background-color: var(--ina-primary-500); }
+[data-brand='eppat'] .ina-checkbox__box--checked {
+  background-color: var(--ina-primary-500); border-color: var(--ina-primary-500);
+  box-shadow: inset 0 0 0 1px #fff, inset 0 0 0 2px var(--ina-primary-500);
+}
+[data-brand='eppat'] .ina-pagination__page-button--active { border-color: var(--ina-primary-500); color: var(--ina-primary-600); }
+[data-brand='eppat'] .ina-breadcrumb__link--active { color: var(--ina-primary-600); }
+
+/* Penyesuaian kontras (WCAG 2.2 AA, minimal 4,5:1 untuk teks biasa).
+   Warna bawaan IDDS berikut di bawah standar pada latar terang; diganti dengan corak lebih gelap
+   dari keluarga warna yang SAMA sehingga arti warna tidak berubah. */
+[data-brand='eppat'] .ina-stepper__item:not(.ina-stepper__item--active):not(.ina-stepper__item--completed):not(.ina-stepper__item--error) .ina-stepper__label,
+[data-brand='eppat'] .ina-stepper__item:not(.ina-stepper__item--active):not(.ina-stepper__item--completed):not(.ina-stepper__item--error) .ina-stepper__icon-wrapper {
+  color: var(--ina-content-secondary);                  /* #a3a3a3 2,5:1 → #525252 7,8:1 */
+}
+[data-brand='eppat'] .ina-text-field__required,
+[data-brand='eppat'] .ina-text-area__required,
+[data-brand='eppat'] .ina-select-dropdown__required,
+[data-brand='eppat'] .ina-password-input__required,
+[data-brand='eppat'] .ina-input-search__asterisk { color: var(--ina-negative-600); }      /* #f02d2d 4,1:1 → #d50b0b */
+[data-brand='eppat'] .ina-select-dropdown__trigger-text--placeholder,
+[data-brand='eppat'] .ina-date-picker__trigger-text--placeholder { color: var(--ina-content-secondary) !important; } /* IDDS memakai !important */
+[data-brand='eppat'] .ina-alert--caution .ina-alert__title { color: var(--ina-warning-600); } /* #eebb04 1,7:1 → #855f00 */
+[data-brand='eppat'] .ina-alert--info .ina-alert__title { color: var(--ina-guide-600); }
+[data-brand='eppat'] .ina-alert--critical .ina-alert__title { color: var(--ina-negative-600); } /* #f02d2d 3,6:1 di atas latar alert → #d50b0b */
+/* teks galat isian (#f02d2d 4,1:1 → negative-600 #d50b0b) */
+[data-brand='eppat'] .ina-one-time-password__helper-text--error,
+[data-brand='eppat'] .ina-text-area__helper-text--error,
+[data-brand='eppat'] .ina-phone-input__helper-text--error,
+[data-brand='eppat'] .ina-text-field .ina-text-field__helper-text.ina-text-field__helper-text--error,
+[data-brand='eppat'] .ina-file-upload__file-error,
+[data-brand='eppat'] .ina-file-upload__file--error .ina-file-upload__file-name,
+[data-brand='eppat'] .ina-file-upload__error-message { color: var(--ina-negative-600); }
+[data-brand='eppat'] .ina-file-upload__error-message:empty { display: none; }
+[data-brand='eppat'] .ina-password-input__status-message--error,
+[data-brand='eppat'] .ina-password-input .ina-password-input__status-area .ina-password-input__status-message.ina-password-input__status-message--error,
+[data-brand='eppat'] .ina-password-input__character-count--error { color: var(--ina-negative-600); }
+/* teks peringatan isian (#eebb04 1,8:1 → warning-600) */
+[data-brand='eppat'] .ina-text-field .ina-text-field__helper-text.ina-text-field__helper-text--warning,
+[data-brand='eppat'] .ina-text-area__helper-text--warning,
+[data-brand='eppat'] .ina-password-input__status-message--warning,
+[data-brand='eppat'] .ina-password-input__character-count--warning { color: var(--ina-warning-600); }
+[data-brand='eppat'] .ina-password-input__status-message--success { color: var(--ina-content-positive); }
+
+/* E-PPAT Dark Mode Overrides */
+[data-theme='dark'][data-brand='eppat'] {
+  --ina-primary-primary: var(--ina-primary-400);
+  --ina-brand-hover: var(--ina-primary-500) !important;
+  --ina-neutral-hover: var(--ina-neutral-800) !important;
+  --ina-eppat-sidebar-bg: #141c1f;
+  --ina-eppat-sidebar-hover: #22302d;
+  --ina-eppat-sidebar-active: var(--ina-primary-400);
+  --ina-eppat-stroke-brand: #2a3a36;
+  --ina-eppat-surface-cream: #18211f;
+}

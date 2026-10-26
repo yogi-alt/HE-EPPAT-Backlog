@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="id" data-brand="eppat" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Backlog E-PPAT Peruri — Daftar Pengguna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- CSS resmi IDDS (design.inadigital.go.id/getting-started/code/js), versi dikunci -->
+<link href="https://unpkg.com/@idds/styles@1.6.38/dist/index.min.css" rel="stylesheet">
+<!-- Brand mode E-PPAT (brand-eppat-idds/eppat.css) -->
+<style id="brand-eppat">
+__EPPAT_CSS__
+
+/* Bantuan dalam IDDS Drawer + Accordion */
+.ina-drawer__content .bantu-langkah{margin:4px 0 4px;padding-left:20px;font-size:14px;line-height:21px}
+.ina-drawer__content .bantu-langkah li{margin-bottom:8px}
+.ina-drawer__content > p{margin:0 0 8px;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+.ina-drawer__content .bantu-sub{margin:20px 0 8px}
+.ina-drawer__content .bantu-kontak{grid-template-columns:1fr}
+.ina-drawer__content .ina-accordion{border-bottom:1px solid var(--ina-stroke-primary)}
+.ina-drawer__content .ina-accordion__body p{margin:0;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+
+.judul-halaman{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.judul-halaman .judul-kiri{min-width:0}
+</style>
+<style id="kerangka-css">
+/* ===== Order AJB — komponen IDDS + brand E-PPAT (HE-UMUM-01)
+   + usulan dari laporan Heuristic Evaluation INA Digital hal. 23–24 (HE-ORDER-01…05)
+   Kerangka & teks mengikuti layar live Peruri (dilihat 23 Okt 2026, akun Asisten). ===== */
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+button,input,select,textarea{font-family:inherit}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ina-content-primary);background:var(--ina-background-secondary);-webkit-font-smoothing:antialiased}
+
+/* protobar (khusus prototipe) */
+.protobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 16px;background:#0f1a17;color:#E6EDEA;font-size:12px;position:relative;z-index:60}
+.protobar a{color:#E6EDEA;text-decoration:none;border:1px dashed rgba(255,255,255,.3);border-radius:999px;padding:4px 10px;font:500 11px Inter,sans-serif}
+.protobar b{color:#fff}
+.protobar .sep{opacity:.35}
+.protobar button.pil{border:1px solid rgba(255,255,255,.25);background:transparent;color:#E6EDEA;font:500 11px Inter,sans-serif;padding:4px 10px;border-radius:999px;cursor:pointer}
+.protobar button.pil[aria-pressed="true"]{background:#3D6B5E;border-color:#3D6B5E;color:#fff}
+.protobar .kanan{margin-left:auto;display:inline-flex;gap:8px;flex-wrap:wrap}
+.protobar .utama{background:#3D6B5E!important;border-color:#3D6B5E!important;color:#fff!important;font-weight:600!important}
+.tag-usulan{display:none!important;align-items:center;font:600 10px Inter,sans-serif;letter-spacing:.6px;text-transform:uppercase;color:#2563EB;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:999px;padding:1px 7px;margin-left:6px;vertical-align:middle;white-space:nowrap}
+body.penanda .tag-usulan{display:inline-flex!important}
+body.penanda .ditandai{outline:2px dashed rgba(37,99,235,.45);outline-offset:4px;border-radius:10px}
+.sorot{outline:3px solid #2563EB!important;outline-offset:4px;border-radius:12px}
+
+/* kerangka aplikasi — struktur pola Sidebar & Header IDDS, warna dari brand E-PPAT (--ina-eppat-*, --ina-primary-*) */
+.app{display:flex;min-height:100vh}
+.sidebar{width:240px;flex:none;background:var(--ina-eppat-sidebar-bg);border-right:0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow:auto;padding:0 16px}
+.brand{display:flex;align-items:center;height:76px;flex:none;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:16px}
+.brand img{width:150px;display:block}
+.kantor.ina-card{flex:none;background:var(--ina-eppat-office-card);border:0;border-radius:12px;padding:12px 16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.kantor .ina-card__content{padding:0;gap:0}
+.kantor .eyebrow{font:600 10px/15px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#1f1f1f;opacity:.7}
+.kantor .ina-card__title{margin:4px 0 0;font:600 10px/1.375 Inter,sans-serif;color:#1f1f1f}
+.kantor .ina-card__description{-webkit-line-clamp:unset;line-clamp:unset;display:block;overflow:visible;margin:0;font-size:12px;line-height:18px;color:#1f1f1f}
+.kantor .kantor-info{display:flex;flex-direction:column;gap:4px;margin-top:8px;font-size:9px;line-height:13px;opacity:.8}
+.kantor .baris-kantor{display:flex;align-items:flex-start;gap:6px;font-size:9px;line-height:13px;font-weight:500;color:#1f1f1f}
+.kantor .baris-kantor svg{flex:none;width:10px;height:10px;margin-top:1px}
+#nav{flex:1;display:flex;flex-direction:column;gap:2px;padding-bottom:12px}
+.grp{display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:0;cursor:pointer;padding:16px 8px 6px;color:rgba(255,255,255,.72);font:500 12px/16px Inter,sans-serif;letter-spacing:0;text-transform:none} /* label grup sentence case (pola Sidebar IDDS) */
+.grp svg{flex:none;color:var(--eppat-sidebar-icon)}
+.grp > span:not(.chev){flex:1;min-width:0;text-align:left;line-height:16px} /* label grup rata kiri, sejajar ikon */
+/* ikon sidebar satu warna (pola backlog Perdana Niaga) — nanti dari Konten Situs › Tema Tampilan */
+:root{--eppat-sidebar-icon:#C2BB4B;--eppat-sidebar-active-icon:#FFFFFF}
+.grp .chev{margin-left:auto;transition:.15s;display:grid}
+.grp[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.items{display:flex;flex-direction:column;gap:2px}
+.sidebar .items a.nav-item{display:flex;justify-content:flex-start;gap:8px;width:100%;padding:8px;max-height:none;border-radius:8px;text-decoration:none;font-weight:500;color:var(--ina-eppat-sidebar-content)!important;background:transparent}
+.sidebar .items a.nav-item svg{width:16px;height:16px;flex:none;color:var(--eppat-sidebar-icon)}
+.sidebar .items a.nav-item:hover{background:var(--ina-eppat-sidebar-hover);color:#fff!important}
+.sidebar .items a.nav-item.on{background:var(--ina-eppat-sidebar-active);color:#fff!important;font-weight:600}
+.sidebar .items a.nav-item.on svg{color:var(--eppat-sidebar-active-icon)}
+.sidefoot{flex:none;padding:12px 8px;border-top:1px solid rgba(255,255,255,.1);font-size:11px;color:rgba(255,255,255,.75)}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+header.top{height:64px;flex:none;display:flex;align-items:center;gap:12px;padding:0 24px;background:var(--ina-background-primary);border-bottom:1px solid var(--ina-stroke-primary);position:sticky;top:0;z-index:20}
+.spacer{margin-left:auto}
+.user{position:relative;display:flex;align-items:center;gap:10px;padding:4px 8px;border-radius:8px}
+.ava{width:32px;height:32px;font:600 12px Inter,sans-serif;background:var(--ina-primary-primary)!important;color:#fff!important;border-color:var(--ina-primary-primary)!important}
+.uname{display:block;font:600 12px/14px Inter,sans-serif;color:var(--ina-primary-primary)}
+.urole{font:400 10px Inter,sans-serif;color:var(--ina-content-secondary);letter-spacing:1.4px;text-transform:uppercase}
+.content{flex:1;background-color:var(--ina-background-secondary);__BG__}
+.page{padding:24px 32px 56px}
+.page .ina-breadcrumb{margin-bottom:8px;display:flex;justify-content:flex-start}
+.page .ina-breadcrumb__list{justify-content:flex-start;margin:0;padding:0}
+h1{margin:0;font:500 28px/36px Inter,sans-serif;letter-spacing:-.3px;color:var(--ina-primary-primary)}
+.sub{margin:2px 0 0;font-size:14px;color:var(--ina-content-secondary)}
+.kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px}
+
+/* daftar order */
+.daftar-atas{display:flex;justify-content:flex-end;margin-top:20px}
+.saring{display:grid;grid-template-columns:minmax(0,1fr) 220px auto;gap:12px;align-items:end;margin-top:16px}
+.saring .ina-text-field__label{display:block}
+.saring .cari-wadah .ina-input-search{width:100%;margin-top:6px} /* IDDS Input Search, sama dengan Minuta & Verifikasi */
+.tabel-wadah{margin-top:16px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;overflow:hidden}
+.tabel-gulir{overflow-x:auto}
+table.tb{width:100%;border-collapse:collapse;font-size:14px}
+.tabel-wadah .ina-table{border:0;border-radius:0}
+table.tb td{vertical-align:middle}
+table.tb td .kd{font-weight:600;color:var(--ina-primary-primary);cursor:pointer}
+table.tb td .kc{font-size:12px;color:var(--ina-content-secondary)}
+table.tb tr.klik{cursor:pointer}
+table.tb tr.klik:hover td{background:var(--ina-primary-25)}
+.aksi-baris{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.kosong{padding:28px;text-align:center;color:var(--ina-content-secondary)}
+.halaman{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--ina-stroke-primary);font-size:13px;color:var(--ina-content-secondary)}
+.halaman > span{white-space:nowrap}
+[data-merah]{color:var(--ina-negative-600)!important}
+.tb .ina-table__cell,.tb .ina-table__header-cell{padding:12px 16px}
+.tb .ina-table__cell{white-space:normal}
+.lengkap{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.lengkap.ok{color:var(--ina-content-positive)}
+.lengkap.kurang{color:var(--ina-content-secondary)}
+.lengkap svg{flex:none}
+
+/* detail order */
+.det-kepala{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px}
+.det-kepala .kode{font:600 14px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary);margin-top:12px}
+.det-kepala h2{margin:2px 0 0;font:600 20px/28px Inter,sans-serif}
+.status-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px 28px}
+.status-kartu .ina-stepper{align-items:flex-start;min-height:92px;padding:4px 64px 0}
+.status-kartu .ina-stepper__separator{align-self:flex-start;margin-top:11px}
+.status-kartu .ina-stepper__label small{display:block;margin-top:3px;font-size:12px;line-height:16px;font-weight:400;color:var(--ina-content-secondary)}
+.status-kaki{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ina-stroke-primary);margin-top:8px;padding-top:16px}
+.status-kaki p{margin:0;font-size:14px;color:var(--ina-content-secondary)}
+.status-kaki p b{color:var(--ina-content-primary)}
+.status-kaki .kanan{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.status-kaki .alasan{font-size:12.5px;color:var(--ina-content-secondary)}
+.syarat{margin-top:16px;padding:14px 16px;border:1px solid var(--ina-stroke-primary);border-radius:12px;background:var(--ina-background-secondary)}
+.syarat h4{margin:0 0 10px;font:600 13px Inter,sans-serif;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.syarat h4 .hit{font-weight:500;color:var(--ina-content-secondary)}
+.syarat ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 16px}
+.syarat li{display:flex;align-items:center;gap:8px;font-size:13.5px;min-width:0}
+.syarat li .ik{width:20px;height:20px;border-radius:999px;display:grid;place-items:center;flex:none}
+.syarat li.ok .ik{background:var(--ina-positive-100);color:var(--ina-content-positive)}
+.syarat li.kurang .ik{background:var(--ina-warning-100);color:var(--ina-warning-600)}
+.syarat li.ok span.t{color:var(--ina-content-secondary)}
+.syarat li .ina-button{padding:0;height:auto;min-height:0}
+.syarat-alert{margin-top:16px}
+.syarat-alert .ina-alert__description{display:flex;flex-direction:column;gap:10px}
+.syarat-daftar{display:flex;flex-wrap:wrap;gap:8px 16px}
+.syarat-item{display:inline-flex;align-items:center;gap:4px}
+.syarat-item .ina-badge{display:inline-flex;align-items:center;gap:4px}
+.syarat-item .ina-button{padding:0 4px}
+.langkah-berikut{color:var(--ina-content-primary)}
+.info-baris{margin-top:16px}
+.info-baris .ina-alert__content{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;width:100%}
+.info-baris .ina-alert__text-section{flex:1;min-width:220px}
+
+.tab-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;overflow:hidden}
+.tab-kartu > .ina-tab-horizontal{padding:0 12px;border-bottom:1px solid var(--ina-stroke-primary)}
+.tab-kartu .ina-tab-horizontal__tab{gap:8px;display:inline-flex;align-items:center}
+.tab-kartu .tanda{font:600 11px Inter,sans-serif;border-radius:999px;padding:1px 7px}
+.tab-kartu .tanda.ok{background:var(--ina-positive-100);color:var(--ina-content-positive)}
+.tab-kartu .tanda.kurang{background:var(--ina-warning-100);color:var(--ina-warning-700)}
+.tab-kartu .tanda.netral{background:var(--ina-neutral-100);color:var(--ina-content-secondary)}
+.tab-isi{padding:20px}
+.tab-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.tab-bar p{margin:0;font-size:13px;color:var(--ina-content-secondary)}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f-grid .lebar{grid-column:1/-1}
+.ina-text-field textarea.ina-text-field__input{min-height:80px;resize:vertical;padding:0}
+.f-kaki{display:flex;justify-content:flex-end;margin-top:16px}
+.tb .nm{font-weight:500}
+.tb .sub2{font-size:12px;color:var(--ina-content-secondary)}
+.kunci{margin-bottom:16px}
+
+/* dialog */
+.ina-modal__body p{margin:0 0 8px;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+.seg{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary)}
+.seg button{border:0;border-radius:7px;background:transparent;padding:7px 14px;font:500 14px Inter,sans-serif;color:var(--ina-content-secondary);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ina-primary-primary);color:#fff}
+.fld{margin-bottom:16px}
+.fld > .ina-text-field__label{display:flex;align-items:center;gap:6px}
+.select-wadah{position:relative;display:block;width:100%}
+.select-wadah .ina-select-dropdown__panel{top:calc(100% + 4px);left:0;right:0;max-height:240px}
+.cari-panel{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:5;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:8px;box-shadow:0 10px 24px rgba(0,0,0,.1);padding:4px;max-height:220px;overflow:auto}
+.cari-panel button{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;border:0;background:transparent;text-align:left;padding:8px 10px;border-radius:6px;cursor:pointer;font-size:14px}
+.cari-panel button:hover{background:var(--ina-background-tertiary)}
+.cari-panel small{display:block;font-size:12px;color:var(--ina-content-secondary)}
+.kartu-pihak{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:12px 14px;background:var(--ina-background-secondary);font-size:13.5px}
+.kartu-pihak b{display:block;font-size:14px;margin-bottom:6px}
+.kartu-pihak dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;margin:0}
+.kartu-pihak dt{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.kartu-pihak dd{margin:0}
+.belum-ada{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 14px;padding:10px 12px;border-radius:10px;background:var(--ina-primary-25);border:1px solid var(--ina-primary-100);font-size:13px}
+.ringkas-kv{display:grid;grid-template-columns:140px 1fr;gap:8px 12px;margin:12px 0 14px;padding:12px 14px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);font-size:14px}
+.ringkas-kv dt{color:var(--ina-content-secondary)}
+.ringkas-kv dd{margin:0;font-weight:500}
+.cek-setuju{display:flex;gap:10px;align-items:flex-start;margin-top:10px;font-size:14px;cursor:pointer}
+
+.daftar-ubah{display:flex;flex-direction:column;gap:10px}
+.daftar-ubah .it{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:12px 14px}
+.daftar-ubah .it .a{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.daftar-ubah .it code{font:600 11.5px ui-monospace,Menlo,monospace;color:#2563EB}
+.daftar-ubah .it b{font-size:14px}
+.daftar-ubah .it p{margin:6px 0 4px;font-size:13px;line-height:19px;color:var(--ina-content-primary)}
+.daftar-ubah .it .lama{font-size:12.5px;line-height:18px;color:var(--ina-content-secondary)}
+.bantu-langkah{margin:8px 0 4px;padding-left:20px;font-size:14px;line-height:21px}
+.bantu-langkah li{margin-bottom:6px}
+.bantu-sub{margin:18px 0 8px;font:600 14px Inter,sans-serif;display:flex;align-items:center}
+.bantu-faq{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:14px}
+.bantu-faq summary{cursor:pointer;font-weight:500}
+.bantu-faq p{margin:8px 0 0!important}
+.bantu-kontak{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.bantu-kontak div{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:10px 12px;background:var(--ina-background-secondary)}
+.bantu-kontak b{display:block;font-size:12px;font-weight:500;color:var(--ina-content-secondary)}
+.bantu-kontak span{font-size:14px}
+.isi-tim{border-bottom:1px dashed currentColor;cursor:help}
+.toast-wadah{position:fixed;bottom:24px;right:24px;z-index:100;max-width:calc(100vw - 32px)}
+.tip{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:999px;border:1px solid var(--ina-stroke-secondary);color:var(--ina-content-secondary);font:600 10px Inter,sans-serif;cursor:help;background:transparent;padding:0}
+.ina-tooltip__bubble{max-width:260px;white-space:normal}
+
+@media (max-width:1024px){
+  .sidebar{position:fixed;z-index:40;left:0;top:0;transform:translateX(-100%);transition:.22s}
+  .sidebar.open{transform:none}
+  .scrim{position:fixed;inset:0;background:rgba(15,26,23,.45);z-index:35;opacity:0;pointer-events:none;transition:.22s}
+  .scrim.on{opacity:1;pointer-events:auto}
+  .syarat ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  header.top{padding:0 16px}
+  .user .txt,#bukaBantuan span{display:none}
+  .page{padding:20px 16px 40px}
+  h1{font-size:23px;line-height:32px}
+  .saring{grid-template-columns:1fr}
+  .f-grid,.syarat ul,.kartu-pihak dl,.bantu-kontak{grid-template-columns:1fr}
+  .status-kartu{padding:18px 16px}
+  .status-kartu .stepper-h{display:none}
+  .status-kartu .stepper-v{display:flex!important;padding:4px 0}
+  .ringkas-kv{grid-template-columns:1fr;gap:2px}
+  .protobar .kanan{margin-left:0}
+  table.tb thead{display:none}
+  table.tb tr{display:block;border-top:1px solid var(--ina-stroke-primary);padding:8px 0}
+  table.tb td{display:block;border:0;padding:4px 16px}
+  .aksi-baris{justify-content:flex-start}
+}
+.status-kartu .stepper-v{display:none}
+.status-kartu .stepper-v .ina-stepper__label small{display:inline;margin:0 0 0 8px}
+.status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
+</style>
+<style id="user-css">
+/* ===== Daftar User (Super Admin) — komponen IDDS + brand E-PPAT (HE-UMUM-01)
+   + usulan dari laporan Heuristic Evaluation INA Digital (skor 79,5; rincian di UX Metric Lab, Highlight #9) (HE-USER-01…04, HE-UMUM-03)
+   Kerangka, kolom, menu aksi, dialog, dan teks mengikuti kode live Peruri. Data contoh sama dengan prototipe Order AJB, Verifikasi, dan E-Akta Wizard. ===== */
+.ina-tooltip:not(:hover):not(:focus-within) .ina-tooltip__content{display:none}
+.ina-tooltip__bubble{display:block;width:max-content;max-width:min(260px,80vw);white-space:normal;text-align:left;line-height:1.45;font-weight:400;text-transform:none;letter-spacing:0}
+.istilah{border-bottom:1px dashed currentColor;cursor:help}
+.ina-modal-confirmation{max-width:560px}
+.ingat{margin-top:20px}
+.ingat .ina-alert__content{display:flex;flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap;width:100%}
+.ingat .ina-alert__text-section{flex:1;min-width:240px}
+
+/* alat daftar (live: status, peran, jumlah, cari, Tambah User) */
+.alat{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:16px;padding:12px 16px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px}
+.alat .kiri,.alat .kanan{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.alat .jumlah{font-size:13px;color:var(--ina-content-secondary)}
+.alat .ina-input-search{width:240px}
+.pilih-wadah{position:relative}
+.pilih-wadah .ina-select-dropdown__trigger{min-width:160px}
+.pilih-wadah .ina-select-dropdown__panel{top:calc(100% + 4px);left:0;right:auto;min-width:180px;z-index:20}
+/* aksi massal (HE-USER-02) */
+.massal{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding:10px 16px;border-radius:12px;background:var(--ina-primary-50,#eaf2ef);border:1px solid var(--ina-primary-200,#cfe3dc);font-size:14px}
+.massal b{margin-right:auto}
+td.cek-sel,th.cek-sel{width:44px}
+.ina-checkbox.sel{display:inline-flex;cursor:pointer}
+.nm-user{font-weight:600;color:var(--ina-primary-primary)}
+.kd-user{font:11px ui-monospace,Menlo,monospace;color:var(--ina-content-secondary)}
+.sel-email{font-size:13px;color:var(--ina-content-secondary)}
+.aksi-wadah{position:relative;display:inline-block}
+.aksi-wadah .ina-action-dropdown__menu{position:absolute;right:0;left:auto;top:calc(100% + 4px);min-width:190px;z-index:30;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.aksi-wadah .ikon-aksi{width:32px;height:32px;padding:0;justify-content:center}
+tr.dipilih td{background:var(--ina-primary-25,#f4faf7)}
+.kosong{text-align:center;padding:28px 12px;color:var(--ina-content-secondary)}
+
+/* formulir */
+.f-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.f-baris{margin-top:16px}
+.ina-text-field select.ina-text-field__input{appearance:auto;background:transparent;border:0;width:100%;height:100%;font:inherit;font-size:14px;color:inherit;outline:0}
+.terkunci-isi{padding:10px 12px;border:1px solid var(--ina-stroke-primary);border-radius:8px;background:var(--ina-background-secondary);font-size:14px;color:var(--ina-content-secondary)}
+.syarat-pw{list-style:none;margin:8px 0 0;padding:12px 14px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px 16px}
+.syarat-pw li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ina-content-secondary)}
+.syarat-pw .tanda{width:16px;height:16px;border-radius:999px;border:1.5px solid var(--ina-stroke-secondary);display:grid;place-items:center;flex:none}
+.syarat-pw li.ok{color:var(--ina-content-positive)}
+.syarat-pw li.ok .tanda{border-color:var(--ina-content-positive);background:var(--ina-positive-100)}
+.pw-atas{display:flex;justify-content:flex-end;margin-top:6px}
+.ringkas{display:grid;grid-template-columns:150px 1fr;gap:8px 12px;margin:12px 0;padding:12px 14px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);font-size:14px}
+.ringkas dt{color:var(--ina-content-secondary)}
+.ringkas dd{margin:0;font-weight:500}
+.pw-sementara{display:flex;align-items:center;gap:10px;margin-top:8px}
+.pw-sementara code{flex:1;padding:10px 12px;border:1px solid var(--ina-stroke-primary);border-radius:8px;background:#fff;font:600 15px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary);word-break:break-all}
+.daftar-nama{margin:8px 0 0;padding:10px 14px 10px 32px;border-radius:10px;background:var(--ina-background-secondary);font-size:14px;line-height:24px}
+.daftar-nama small{color:var(--ina-content-secondary)}
+.modal-gap>*+*{margin-top:12px}
+/* impor (HE-UMUM-03) */
+.langkah-impor{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.pratinjau{max-height:260px;overflow:auto;border:1px solid var(--ina-stroke-primary);border-radius:10px;margin-top:12px}
+.pratinjau table{width:100%;border-collapse:collapse;font-size:13px}
+.pratinjau th,.pratinjau td{padding:8px 10px;border-bottom:1px solid var(--ina-stroke-primary);text-align:left;vertical-align:top}
+.pratinjau th{background:var(--ina-background-secondary);font-weight:600}
+.pratinjau tr.galat td{background:var(--ina-negative-50,#fff1f1)}
+.pratinjau td small{display:block;color:var(--ina-negative-600,#c81e1e)}
+
+@media (max-width:760px){
+  .alat .ina-input-search{width:100%}
+  .alat .kanan,.alat .kiri{width:100%}
+  .f-grid3,.f-grid2{grid-template-columns:1fr}
+  .ringkas{grid-template-columns:1fr;gap:2px}
+  .ringkas dd{margin-bottom:6px}
+  .ina-button-group{overflow-x:auto;max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="protobar">
+  <a href="index.html">&#9776; Daftar prototipe</a>
+  <span class="sep">&bull;</span><b>Daftar Pengguna</b><span class="sep">&bull;</span><span>Peran: Super Admin</span>
+  <span class="kanan">
+    <button class="pil" id="aturUlang">Atur ulang contoh</button>
+    <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai usulan</button>
+    <button class="pil utama" id="bukaUbah">Daftar perubahan (7)</button>
+  </span>
+</div>
+
+<div class="app">
+  <div class="scrim" id="scrim"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><img src="__LOGO__" alt="E-PPAT"></div>
+    <div class="ina-card ina-card--variant-basic kantor"><div class="ina-card__content"><div>
+      <div class="eyebrow">Kantor Notaris &amp; PPAT</div>
+      <h3 class="ina-card__title">PPAT Contoh Satu, S.H.</h3>
+      <div class="ina-card__description kantor-info">
+        <div class="baris-kantor"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg><span>SK · 1/KEP-CONTOH/2020</span></div>
+        <div class="baris-kantor"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M14 10h4M14 14h4"/></svg><span>Wilayah · Kota Contoh</span></div>
+        <div class="baris-kantor"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span>0210000000</span></div>
+        <div class="baris-kantor"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></svg><span>Jalan Contoh No. 10, Kota Contoh</span></div></div></div></div></div>
+    <nav id="nav"></nav>
+    <div class="sidefoot">E-PPAT</div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="spacer"></div>
+      <button class="ina-button ina-button--secondary ina-button--md"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg><span>Lihat Landing</span></button>
+      <button class="ina-button ina-button--tertiary ina-button--md" aria-label="Notifikasi"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+      <div class="user"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Admin Contoh</span><span class="urole">Super Admin</span></span></div>
+    </header>
+    <div class="content"><div class="page" id="halaman"></div></div>
+  </div>
+</div>
+
+<div id="lapisan"></div>
+<div id="lapisanDrawer"></div>
+<div class="toast-wadah" id="toastWadah"></div>
+
+<script>
+(() => {
+/* ---------------- ikon & util (sama dengan prototipe TERA) ---------------- */
+const I = {
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+  user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  kunci:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>',
+  log:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>',
+  palet:'<circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1 0 1.7-.8 1.7-1.7 0-1 .8-1.7 1.7-1.7H17a5 5 0 0 0 5-5C22 6 17.5 2 12 2z"/>',
+  daftar:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+  dok:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>',
+  gambar:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>',
+  gedung:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01"/>',
+  tamengcek:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>',
+  pena:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>', langkah:'<circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><path d="M7 12h10"/>',
+  salin:'<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+  meterai:'<rect x="3" y="3" width="18" height="18" rx="2"/><rect x="7" y="7" width="10" height="10" rx="1"/>',
+  order:'<path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/>',
+  edit:'<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/>',
+  panah:'<path d="M5 12h14M13 6l6 6-6 6"/>', kiri:'<path d="M15 18l-6-6 6-6"/>', x:'<path d="M18 6L6 18M6 6l12 12"/>', info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+  seru:'<circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/>', centang:'<path d="M20 6L9 17l-5-5"/>', chev:'<path d="M9 18l6-6-6-6"/>', bawah:'<path d="M6 9l6 6 6-6"/>',
+  cari:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>', unggah:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v12"/>',
+  unduh:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/>', kunciKey:'<circle cx="7.5" cy="15.5" r="5.5"/><path d="M11.4 11.6L21 2M18 5l3 3M15 8l3 3"/>',
+  menu:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>', mata:'<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>',
+  mataTutup:'<path d="M17.9 17.9A10 10 0 0 1 12 19c-7 0-11-7-11-7a18 18 0 0 1 5.1-5.9M9.9 4.2A9 9 0 0 1 12 4c7 0 11 7 11 7a18 18 0 0 1-2.2 3.2M1 1l22 22"/>',
+  stempel:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/>', acak:'<path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>',
+  tb_stack_2:'<path d="M12 4l-8 4l8 4l8 -4l-8 -4" /> <path d="M4 12l8 4l8 -4" /> <path d="M4 16l8 4l8 -4" />', tb_feather:'<path d="M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4" /> <path d="M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4" />', tb_layout_dashboard:'<path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" /> <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />', tb_circle_check:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" />', tb_file_pencil:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M10 18l5 -5a1.414 1.414 0 0 0 -2 -2l-5 5v2h2z" />', tb_signature:'<path d="M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2" />', tb_files:'<path d="M15 3v4a1 1 0 0 0 1 1h4" /> <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z" /> <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />', tb_adjustments_horizontal:'<path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 6l8 0" /> <path d="M16 6l4 0" /> <path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 12l2 0" /> <path d="M10 12l10 0" /> <path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 18l11 0" /> <path d="M19 18l1 0" />', tb_building:'<path d="M3 21l18 0" /> <path d="M9 8l1 0" /> <path d="M9 12l1 0" /> <path d="M9 16l1 0" /> <path d="M14 8l1 0" /> <path d="M14 12l1 0" /> <path d="M14 16l1 0" /> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />', tb_users:'<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /> <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /> <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />', tb_shield_lock:'<path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /> <path d="M12 11m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12 12l0 2.5" />', tb_history:'<path d="M12 8l0 4l2 2" /> <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />', tb_rubber_stamp:'<path d="M21 17.85h-18c0 -4.05 1.421 -4.05 3.79 -4.05c5.21 0 1.21 -4.59 1.21 -6.8a4 4 0 1 1 8 0c0 2.21 -4 6.8 1.21 6.8c2.369 0 3.79 0 3.79 4.05z" /> <path d="M5 21h14" />', tb_settings:'<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />', tb_layout_cards:'<path d="M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /> <path d="M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />', tb_home:'<path d="M5 12l-2 0l9 -9l9 9l-2 0" /> <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /> <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />', tb_palette:'<path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" /> <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />', tb_database:'<path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /> <path d="M4 6v6a8 3 0 0 0 16 0v-6" /> <path d="M4 12v6a8 3 0 0 0 16 0v-6" />', tb_article:'<path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /> <path d="M7 8h10" /> <path d="M7 12h10" /> <path d="M7 16h10" />', tb_photo:'<path d="M15 8h.01" /> <path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z" /> <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5" /> <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3" />', tb_file_text:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 9l1 0" /> <path d="M9 13l6 0" /> <path d="M9 17l6 0" />', tb_gauge:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M13.41 10.59l2.59 -2.59" /> <path d="M7 12a5 5 0 0 1 5 -5" />' /* ikon Tabler sidebar */
+};
+const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const usulan = kode => `<span class="tag-usulan">usulan &middot; ${kode}</span>`;
+const badge = (t, j, uk = 'md', atr = '') => `<span class="ina-badge ina-badge--soft ina-badge--${j} ina-badge--${uk} ina-badge--rounded-full" ${atr}>${t}</span>`;
+const tombol = (t, h = 'primary', uk = 'md', atr = '', ikon = '') => `<button type="button" class="ina-button ina-button--${h} ina-button--${uk}" ${atr}>${ikon}${t}</button>`;
+const alert = (j, judul, isi, ekstra = '') => `<div class="ina-alert ina-alert--${j}" role="status"><div class="ina-alert__content"><div class="ina-alert__text-section">${judul ? `<div class="ina-alert__title">${judul}</div>` : ''}<div class="ina-alert__description">${isi}</div></div>${ekstra}</div></div>`;
+const est = t => `<span class="isi-tim" title="Data contoh. Ganti dengan data resmi dari tim E-PPAT.">${t}</span>`;
+const denganTip = (isi, t, letak = 'top') => `<span class="ina-tooltip ina-tooltip--placement-${letak}">${isi}<span class="ina-tooltip__content"><span class="ina-tooltip__bubble">${t}</span></span></span>`;
+const cekBox = (id, cek, label, atr = '') => `<label class="ina-checkbox sel" for="${id}"><input type="checkbox" id="${id}" class="ina-checkbox__input peer" ${cek ? 'checked' : ''} ${atr}><div class="ina-checkbox__box ina-checkbox__box--${cek ? 'checked' : 'unchecked'}">${cek ? ik('centang', 12) : ''}</div>${label ? `<div class="ina-checkbox__content"><span class="ina-checkbox__label">${label}</span></div>` : ''}</label>`;
+
+/* ---------------- daftar perubahan ---------------- */
+const UBAH = [
+  { kode:'HE-USER-01', judul:'Kolom Status CA: arti setiap status dijelaskan',
+    isi:'Judul kolom "Status CA" diberi tooltip yang menjelaskan sertifikat elektronik dari Peruri dan bahwa CA aktif diperlukan untuk menandatangani akta. Setiap lencana status juga memiliki tooltip yang menjelaskan artinya dan langkah berikutnya, misalnya "Proses eKYC: pengguna sedang memverifikasi identitas di portal Peruri."',
+    lama:'Kolom "Status CA" dan lencananya (Belum registrasi, Proses eKYC, Menunggu verifikasi, CA aktif, Kedaluwarsa, Dicabut) tidak dijelaskan.', ke:'daftar', sorot:'#kolomCa' },
+  { kode:'HE-USER-02', judul:'Daftar Pengguna: ubah status beberapa pengguna sekaligus',
+    isi:'Setiap baris memiliki IDDS Checkbox dan judul tabel memiliki "pilih semua". Setelah ada yang dipilih, bilah aksi menampilkan jumlah pengguna terpilih dengan tombol Aktifkan, Tangguhkan, dan Batalkan pilihan. IDDS Modal Confirmation menyebut nama-nama yang akan diubah dan pengguna yang dilewati karena statusnya sudah sesuai.',
+    lama:'Status pengguna hanya dapat diubah satu per satu melalui menu aksi di setiap baris.', ke:'massal', sorot:'#bilahMassal' },
+  { kode:'HE-USER-03', judul:'Tambah Pengguna: syarat kata sandi awal sama dengan aturan kata sandi lain',
+    isi:'Isian "Password Awal" memakai IDDS Password Input dengan tombol tampilkan/sembunyikan dan daftar centang yang sama dengan Akun Saya dan layar ganti kata sandi sementara: minimal 12 karakter, huruf besar, huruf kecil, angka, simbol. Tombol "Buat Password Acak" mengisi kata sandi yang memenuhi semua syarat.',
+    lama:'Isian "Password Awal" cukup "Minimal 8 karakter", padahal Reset Password membuat kata sandi acak 12 karakter dan layar ganti kata sandi sementara meminta 12 karakter + 4 jenis karakter.', ke:'tambah', sorot:'#f-uPw' },
+  { kode:'HE-USER-04', judul:'Daftar Pengguna: menu aksi dan pesan hasil yang jelas',
+    isi:'Tombol aksi di setiap baris memakai IDDS Action Dropdown dengan label "Aksi untuk [nama]" untuk pembaca layar dan tooltip. Pesan hasil (pengguna dibuat, diperbarui, ditangguhkan) memakai IDDS Toast yang dapat ditutup, dan baris yang berubah disorot sesaat.',
+    lama:'Tombol aksi hanya ikon daftar tanpa label. Pesan "User berhasil dibuat." muncul sebagai kotak di atas tabel yang hilang sendiri setelah 3 detik.', ke:'aksi', sorot:null },
+  { kode:'HE-UMUM-03', judul:'Daftar Pengguna: impor pengguna klien dari berkas',
+    isi:'Tombol "Impor dari Berkas" membuka dialog tiga langkah: unduh templat CSV, unggah berkas (IDDS File Upload), lalu pratinjau. Baris yang bermasalah ditandai beserta alasannya (email tidak valid, email sudah terdaftar, nama kosong) dan tidak ikut disimpan. Setelah impor, pengguna baru berperan Klien dan menerima kata sandi sementara melalui email. Klien hasil impor langsung dapat dipilih sebagai pihak di Permohonan AJB.',
+    lama:'Pengguna klien hanya dapat ditambahkan satu per satu.', ke:'impor', sorot:null },
+  { kode:'HE-UMUM-02', judul:'Bantuan untuk Daftar Pengguna',
+    isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi penjelasan peran, status akun, Status CA, syarat kata sandi, impor berkas, dan kontak dukungan.',
+    lama:'Tidak ada panduan atau kontak dukungan di halaman ini.', ke:'bantuan', sorot:null },
+  { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
+    isi:'Tabel, Checkbox, Button Group, Select Dropdown, Input Search, Action Dropdown, Text Field, Password Input, File Upload, alert, lencana, tooltip, Modal Confirmation, toast, dan drawer memakai komponen INA Digital Design System dengan brand E-PPAT.',
+    lama:'Saringan status, pilihan peran, menu aksi, dan dialog dibuat sendiri.', ke:'daftar', sorot:null }
+];
+
+/* ---------------- data contoh (nama sama dengan prototipe lain) ---------------- */
+const PERAN = { ROLE_PPAT:'PPAT', ROLE_ASISTEN:'Asisten', ROLE_KLIEN:'Klien' };
+const U = (id, nama, email, peran, ca, status, login) => ({ id, nama, email, peran, ca, status, login, kode:'USR_CONTOH' + String(id).padStart(2, '0') });
+function contoh() {
+  return [
+    U(1, 'PPAT Contoh Satu', 'ppat1@contoh.id', 'ROLE_PPAT', 'active', 'ACTIVE', '26 Okt 2026'),
+    U(2, 'Asisten Contoh', 'asisten1@contoh.id', 'ROLE_ASISTEN', 'ekyc', 'ACTIVE', '26 Okt 2026'),
+    U(3, 'Contoh Penjual Satu', 'penjual1@contoh.id', 'ROLE_KLIEN', 'active', 'ACTIVE', '24 Okt 2026'),
+    U(4, 'Contoh Penjual Dua', 'penjual2@contoh.id', 'ROLE_KLIEN', 'active', 'ACTIVE', '23 Okt 2026'),
+    U(5, 'Contoh Pembeli Satu', 'pembeli1@contoh.id', 'ROLE_KLIEN', 'active', 'ACTIVE', '25 Okt 2026'),
+    U(6, 'Contoh Pembeli Dua', 'pembeli2@contoh.id', 'ROLE_KLIEN', 'active', 'ACTIVE', '22 Okt 2026'),
+    U(7, 'Contoh Pembeli Tiga', 'pembeli3@contoh.id', 'ROLE_KLIEN', 'ekyc', 'ACTIVE', '25 Okt 2026'),
+    U(8, 'Contoh Saksi Satu', 'saksi1@contoh.id', 'ROLE_KLIEN', 'active', 'ACTIVE', '21 Okt 2026'),
+    U(9, 'Contoh Saksi Dua', 'saksi2@contoh.id', 'ROLE_KLIEN', 'active', 'ACTIVE', '21 Okt 2026'),
+    U(10, 'Contoh Klien Satu', 'klien1@contoh.id', 'ROLE_KLIEN', 'none', 'ACTIVE', '26 Okt 2026'),
+    U(11, 'Contoh Klien Dua', 'klien2@contoh.id', 'ROLE_KLIEN', 'review', 'SUSPENDED', '12 Okt 2026'),
+    U(12, 'Contoh Klien Tiga', 'klien3@contoh.id', 'ROLE_KLIEN', 'expired', 'INACTIVE', '')
+  ];
+}
+let USER = contoh();
+/* status CA live + penjelasan (HE-USER-01) */
+const CA = {
+  active:{ l:'CA aktif', b:'success', t:'Sertifikat elektronik aktif. Pengguna dapat menandatangani akta secara elektronik.' },
+  ekyc:{ l:'Proses eKYC', b:'info', t:'Pengguna sedang memverifikasi identitas (eKYC) di portal Peruri. Belum dapat menandatangani.' },
+  review:{ l:'Menunggu verifikasi', b:'info', t:'eKYC selesai; Peruri sedang memeriksa data pengguna. Biasanya selesai dalam 1 hari kerja.' },
+  expired:{ l:'Kedaluwarsa', b:'warning', t:'Masa berlaku sertifikat habis. Pengguna perlu registrasi CA ulang melalui Akun Saya.' },
+  revoked:{ l:'Dicabut', b:'error', t:'Sertifikat dicabut Peruri. Pengguna perlu registrasi CA baru.' },
+  none:{ l:'Belum registrasi', b:'neutral', t:'Pengguna belum mendaftarkan sertifikat elektronik. Registrasi dilakukan pengguna sendiri melalui Akun Saya.' }
+};
+const KET_CA = 'Status sertifikat elektronik (CA) dari Peruri. CA aktif diperlukan agar pengguna dapat menandatangani akta secara elektronik.';
+const STATUS = { ACTIVE:['Aktif', 'success'], SUSPENDED:['Ditangguhkan', 'warning'], INACTIVE:['Non-aktif', 'neutral'] };
+const SYARAT_PW = [['Minimal 12 karakter', s => s.length >= 12], ['Mengandung huruf besar', s => /[A-Z]/.test(s)], ['Mengandung huruf kecil', s => /[a-z]/.test(s)], ['Mengandung angka', s => /[0-9]/.test(s)], ['Mengandung simbol', s => /[^A-Za-z0-9]/.test(s)]];
+
+/* ---------------- keadaan ---------------- */
+const S = { status:'all', peran:'all', cari:'', pilih:new Set(), menu:null, peranBuka:false, tera:true, sorot:null };
+
+/* ---------------- sidebar (menu live Super Admin, sama dengan prototipe TERA) ---------------- */
+const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
+  { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text']] },
+  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Verifikasi Berkas','tb_circle_check'],['Penyusunan Akta','tb_file_pencil'],['Penandatanganan Akta','tb_signature'],['Salinan Akta','tb_files']] },
+  { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building'],['Daftar Pengguna','tb_users','user'],['Peran & Izin','tb_shield_lock'],['Log Aktivitas','tb_history'],['Aktivasi e-Meterai','tb_rubber_stamp']] },
+  { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge'],['Pengaturan','tb_settings']] },
+  { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home'],['Tema Tampilan','tb_palette'],['Master Konten','tb_database'],['Artikel & Halaman','tb_article'],['Pustaka Media','tb_photo']] }
+];
+const grupBuka = new Set([0, 1, 2, 3, 4]);
+function gambarNav() {
+  $('#nav').innerHTML = NAV.map((g, i) => `
+    <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
+    <div class="items" ${grupBuka.has(i) ? '' : 'hidden'}>${g.m.map(([t, k, ke]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item ${ke ? 'on' : ''}" data-ke="${ke || ''}">${ik(k)}<span>${t}</span></a>`).join('')}</div>`).join('');
+}
+const SYS = 'Backlog-IDDS-TN-SYSTEM-Prototype.html';
+const CMS = 'Backlog-IDDS-TN-CMS-Prototype.html';
+const PROTO = { 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Verifikasi Berkas':'Backlog-HE-VERIF-Prototype.html', 'Penyusunan Akta':'Backlog-HE-MINUTA-Prototype.html', 'Penandatanganan Akta':'Backlog-HE-EAW-Prototype.html', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
+$('#nav').addEventListener('click', e => {
+  const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
+  const a = e.target.closest('a'); if (!a) return; e.preventDefault();
+  if (!a.dataset.ke) { const nm = a.textContent.trim(); if (PROTO[nm]) { location.href = PROTO[nm]; return; } toast(`Menu ${nm} belum memiliki prototipe.`); return; }
+  gambar(); window.scrollTo({ top:0 });
+});
+
+/* ---------------- layar Daftar User (seperti live) ---------------- */
+const remah = () => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link"><span class="ina-breadcrumb__text">Pengaturan Aplikasi</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">Daftar Pengguna</span></span></li></ol></nav>`;
+const cari = (id, ph, v, label) => `<div class="ina-input-search"><div class="ina-input-search__wrapper"><span class="ina-input-search__search-icon">${ik('cari', 20)}</span><input id="${id}" class="ina-input-search__input" type="search" placeholder="${ph}" aria-label="${label}" value="${esc(v)}" autocomplete="off"></div></div>`;
+const ST_SARING = [['all', 'Semua'], ['ACTIVE', 'Aktif'], ['SUSPENDED', 'Ditangguhkan'], ['INACTIVE', 'Non-aktif']];
+const PERAN_SARING = [['all', 'Semua peran'], ['ROLE_ASISTEN', 'Asisten'], ['ROLE_PPAT', 'PPAT'], ['ROLE_KLIEN', 'Klien']];
+const tampil = () => { const q = S.cari.trim().toLowerCase(); return USER.filter(u => (S.status === 'all' || u.status === S.status) && (S.peran === 'all' || u.peran === S.peran) && (!q || `${u.nama} ${u.email}`.toLowerCase().includes(q))); };
+function layar() {
+  const rows = tampil(), semua = rows.length && rows.every(u => S.pilih.has(u.id));
+  const ingat = S.tera ? `<div class="ingat">${alert('caution', '', 'Stempel Elektronik (TERA) kantor Anda belum didaftarkan. Lengkapi data pendaftaran TERA agar akta bisa distempel elektronik.', `<div style="display:flex;gap:8px;align-items:center">${tombol('Daftar TERA', 'primary', 'sm', 'data-ke-tera', ik('panah', 14))}<button type="button" class="ina-alert__close-button" data-tutup-tera aria-label="Tutup pengingat">${ik('x', 16)}</button></div>`)}</div>` : '';
+  const dipilih = USER.filter(u => S.pilih.has(u.id));
+  return `${remah()}<h1>Daftar Pengguna</h1><p class="sub">Kelola akun pegawai kantor dan klien: tambah pengguna, ubah peran, dan atur status akun.</p>
+    ${ingat}
+    <div class="alat">
+      <div class="kiri">
+        <div class="ina-button-group" role="group" aria-label="Saring status akun">${ST_SARING.map(([v, t]) => `<button type="button" class="ina-button-group__button ${v === S.status ? 'ina-button-group__button--selected' : ''}" aria-pressed="${v === S.status}" data-status="${v}"><span class="ina-button-group__button-content">${t}</span></button>`).join('')}</div>
+        <div class="ina-select-dropdown pilih-wadah"><button type="button" class="ina-select-dropdown__trigger ina-select-dropdown__trigger--size-md" id="peranTombol" aria-haspopup="listbox" aria-expanded="${S.peranBuka}" aria-label="Saring peran"><span class="ina-select-dropdown__trigger-text ina-select-dropdown__trigger-text--selected">${PERAN_SARING.find(p => p[0] === S.peran)[1]}</span>${ik('bawah')}</button>
+          ${S.peranBuka ? `<div class="ina-select-dropdown__panel"><div class="ina-select-dropdown__options" role="listbox">${PERAN_SARING.map(([v, t]) => `<button type="button" role="option" aria-selected="${v === S.peran}" class="ina-select-dropdown__option ${v === S.peran ? 'ina-select-dropdown__option--selected-single' : ''}" data-peran="${v}">${t}</button>`).join('')}</div></div>` : ''}</div>
+        <span class="jumlah">${rows.length} pengguna</span>
+      </div>
+      <div class="kanan">
+        ${cari('cariUser', 'Cari nama / email…', S.cari, 'Cari user')}
+        ${tombol('Impor dari Berkas', 'secondary', 'sm', 'id="impor"', ik('unggah', 14))}${usulan('HE-UMUM-03')}
+        ${tombol('Tambah Pengguna', 'primary', 'sm', 'id="tambah"', ik('user', 14))}
+      </div>
+    </div>
+    ${dipilih.length ? `<div class="massal ditandai" id="bilahMassal" role="region" aria-label="Aksi untuk pengguna terpilih"><b>${dipilih.length} pengguna dipilih</b>
+      ${tombol('Aktifkan', 'secondary', 'sm', 'data-massal="ACTIVE"', ik('centang', 14))}${tombol('Tangguhkan', 'secondary', 'sm', 'data-massal="SUSPENDED"', ik('kunci', 14))}${tombol('Batalkan pilihan', 'tertiary', 'sm', 'id="batalPilih"')}${usulan('HE-USER-02')}</div>` : ''}
+    <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb">
+      <thead class="ina-table__header"><tr>
+        <th class="ina-table__header-cell cek-sel">${cekBox('pilihSemua', semua, '', 'aria-label="Pilih semua pengguna yang tampil" data-pilih-semua')}</th>
+        <th class="ina-table__header-cell">Nama</th><th class="ina-table__header-cell">Email</th><th class="ina-table__header-cell">Peran</th><th class="ina-table__header-cell">Login terakhir</th>
+        <th class="ina-table__header-cell ditandai" id="kolomCa">${denganTip(`<span class="istilah" tabindex="0">Status CA</span>`, KET_CA, 'bottom')}${usulan('HE-USER-01')}</th>
+        <th class="ina-table__header-cell">Status</th><th class="ina-table__header-cell"></th></tr></thead>
+      <tbody class="ina-table__body">${rows.length ? rows.map(u => { const c = CA[u.ca], [sl, sb] = STATUS[u.status], p = S.pilih.has(u.id);
+        return `<tr class="ina-table__row ${p ? 'dipilih' : ''} ${S.sorot === u.id ? 'sorot' : ''}" data-id="${u.id}">
+          <td class="ina-table__cell cek-sel">${cekBox('pilih' + u.id, p, '', `aria-label="Pilih ${esc(u.nama)}" data-pilih="${u.id}"`)}</td>
+          <td class="ina-table__cell"><div class="nm-user">${esc(u.nama)}</div><div class="kd-user">${u.kode}</div></td>
+          <td class="ina-table__cell"><span class="sel-email">${esc(u.email)}</span></td>
+          <td class="ina-table__cell">${badge(PERAN[u.peran], 'info', 'sm')}</td>
+          <td class="ina-table__cell"><span class="sel-email">${u.login || '—'}</span></td>
+          <td class="ina-table__cell">${denganTip(badge(c.l, c.b, 'sm', 'tabindex="0"'), c.t)}</td>
+          <td class="ina-table__cell">${badge(sl, sb, 'sm')}</td>
+          <td class="ina-table__cell" style="text-align:right">${menuAksi(u)}</td></tr>`; }).join('')
+        : `<tr><td colspan="8" class="ina-table__empty-cell kosong">${S.cari ? `Tidak ada pengguna cocok dengan "${esc(S.cari)}".` : 'Belum ada pengguna.'}</td></tr>`}</tbody></table></div></div></div>`;
+}
+/* menu aksi per baris: IDDS Action Dropdown (HE-USER-04) */
+function menuAksi(u) {
+  const buka = S.menu === u.id;
+  return `<span class="aksi-wadah ina-action-dropdown">${denganTip(`<button type="button" class="ina-button ina-button--secondary ina-button--sm ikon-aksi" data-menu="${u.id}" aria-haspopup="menu" aria-expanded="${buka}" aria-label="Aksi untuk ${esc(u.nama)}">${ik('menu', 16)}</button>`, 'Aksi', 'left')}
+    ${buka ? `<div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible" role="menu">
+      <button type="button" class="ina-action-dropdown__item" role="menuitem" data-ubah="${u.id}"><span class="ina-action-dropdown__item-icon">${ik('edit')}</span><span class="ina-action-dropdown__item-content">Ubah Data</span></button>
+      <button type="button" class="ina-action-dropdown__item" role="menuitem" data-reset="${u.id}"><span class="ina-action-dropdown__item-icon">${ik('kunciKey')}</span><span class="ina-action-dropdown__item-content">Reset Password</span></button>
+      ${u.status === 'ACTIVE' ? `<button type="button" class="ina-action-dropdown__item" role="menuitem" data-ubah-status="${u.id}" data-ke-status="SUSPENDED"><span class="ina-action-dropdown__item-icon">${ik('kunci')}</span><span class="ina-action-dropdown__item-content">Tangguhkan</span></button>`
+        : `<button type="button" class="ina-action-dropdown__item" role="menuitem" data-ubah-status="${u.id}" data-ke-status="ACTIVE"><span class="ina-action-dropdown__item-icon">${ik('centang')}</span><span class="ina-action-dropdown__item-content">Aktifkan</span></button>`}</div>` : ''}</span>`;
+}
+function gambar() { gambarNav(); $('#halaman').innerHTML = layar(); pasangPanduan(); }
+function sorotBaris(id) { S.sorot = id; gambar(); setTimeout(() => { S.sorot = null; document.querySelector(`tr[data-id="${id}"]`)?.classList.remove('sorot'); }, 2400); }
+
+/* ---------------- interaksi ---------------- */
+const H = $('#halaman');
+H.addEventListener('input', e => { if (e.target.id !== 'cariUser') return; S.cari = e.target.value; const pos = e.target.selectionStart; gambar(); const i = $('#cariUser'); i.focus(); i.setSelectionRange(pos, pos); });
+H.addEventListener('change', e => {
+  const p = e.target.closest('[data-pilih]'); if (p) { const id = +p.dataset.pilih; p.checked ? S.pilih.add(id) : S.pilih.delete(id); gambar(); return; }
+  if (e.target.closest('[data-pilih-semua]')) { const rows = tampil(); e.target.checked ? rows.forEach(u => S.pilih.add(u.id)) : rows.forEach(u => S.pilih.delete(u.id)); gambar(); }
+});
+H.addEventListener('click', e => {
+  const t = e.target;
+  if (t.closest('[data-ke-tera]')) { location.href = 'Backlog-HE-TERA-Prototype.html'; return; }
+  if (t.closest('[data-tutup-tera]')) { S.tera = false; gambar(); return; }
+  const st = t.closest('[data-status]'); if (st) { S.status = st.dataset.status; gambar(); return; }
+  if (t.closest('#peranTombol')) { S.peranBuka = !S.peranBuka; gambar(); return; }
+  const pr = t.closest('[data-peran]'); if (pr) { S.peran = pr.dataset.peran; S.peranBuka = false; gambar(); return; }
+  if (t.closest('#tambah')) { dialogUser('create'); return; }
+  if (t.closest('#impor')) { dialogImpor(); return; }
+  if (t.closest('#batalPilih')) { S.pilih.clear(); gambar(); return; }
+  const ms = t.closest('[data-massal]'); if (ms) { konfirmMassal(ms.dataset.massal); return; }
+  const mn = t.closest('[data-menu]'); if (mn) { const id = +mn.dataset.menu; S.menu = S.menu === id ? null : id; gambar(); return; }
+  const ub = t.closest('[data-ubah]'); if (ub) { S.menu = null; gambar(); dialogUser('edit', USER.find(u => u.id === +ub.dataset.ubah)); return; }
+  const rs = t.closest('[data-reset]'); if (rs) { S.menu = null; gambar(); dialogReset(USER.find(u => u.id === +rs.dataset.reset)); return; }
+  const us = t.closest('[data-ubah-status]'); if (us) { S.menu = null; gambar(); konfirmStatus(USER.find(u => u.id === +us.dataset.ubahStatus), us.dataset.keStatus); return; }
+});
+document.addEventListener('click', e => {
+  if (S.menu && !e.target.closest('.aksi-wadah')) { S.menu = null; gambar(); }
+  if (S.peranBuka && !e.target.closest('.pilih-wadah')) { S.peranBuka = false; gambar(); }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && S.menu) { S.menu = null; gambar(); } });
+
+/* ---------------- Tambah / Ubah User (live) + syarat password seragam (HE-USER-03) ---------------- */
+const tf = (id, l, v = '', ph = '', wajib = false, bantu = '', tipe = 'text') => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}${wajib ? '<span class="ina-text-field__required">*</span>' : ''}</label>
+  <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><input id="${id}" type="${tipe}" class="ina-text-field__input" value="${esc(v)}" placeholder="${ph}"></div>
+  <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div></div>`;
+const pilihan = (id, l, opsi, v, wajib, bantu = '') => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}${wajib ? '<span class="ina-text-field__required">*</span>' : ''}</label>
+  <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><select id="${id}" class="ina-text-field__input">${opsi.map(([ov, ot]) => `<option value="${ov}" ${ov === v ? 'selected' : ''}>${ot}</option>`).join('')}</select></div>
+  <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div></div>`;
+const pwIsian = (id, l, ph, bantu) => `<div class="ina-password-input ditandai" id="f-${id}"><label class="ina-password-input__label" for="${id}">${l}<span class="ina-password-input__required">*</span></label>
+  <div class="ina-password-input__wrapper ina-password-input__wrapper--size-md ina-password-input__wrapper--neutral"><input id="${id}" type="password" class="ina-password-input__input" placeholder="${ph}" autocomplete="new-password">
+  <div class="ina-password-input__actions"><button type="button" class="ina-password-input__toggle-button" data-lihat-pw="${id}" aria-label="Tampilkan password" aria-pressed="false">${ik('mata', 18)}</button></div></div>
+  <div class="ina-password-input__status-area"><span class="ina-password-input__status-message" id="h-${id}" aria-live="polite">${bantu}</span></div></div>`;
+function dialogUser(mode, u) {
+  const baru = mode === 'create';
+  dialog({ judul: baru ? 'Tambah Pengguna Baru' : `Ubah Pengguna — ${esc(u.nama)}`, lebar:true,
+    isi:`<div class="f-grid3">${tf('uDepan', 'Nama Depan', baru ? '' : u.nama.split(' ')[0], '', true)}${tf('uTengah', 'Nama Tengah', '')}${tf('uBelakang', 'Nama Belakang', baru ? '' : u.nama.split(' ').slice(1).join(' '))}</div>
+      ${baru ? `<div class="f-baris">${tf('uEmail', 'Email', '', 'nama@contoh.id', true, '', 'email')}</div>
+        <div class="f-baris">${pwIsian('uPw', 'Password Awal', 'Buat password awal', 'Sampaikan password ini ke pengguna. Pengguna dapat menggantinya sendiri di menu Akun Saya.')}
+          <ul class="syarat-pw" id="syaratPw" aria-live="polite">${SYARAT_PW.map(([l], i) => `<li data-syarat="${i}"><span class="tanda" aria-hidden="true"></span>${l}</li>`).join('')}</ul>
+          <div class="pw-atas">${tombol('Buat Password Acak', 'tertiary', 'sm', 'id="pwAcak"', ik('acak', 14))}${usulan('HE-USER-03')}</div></div>`
+        : `<div class="f-baris"><label class="ina-text-field__label">Email</label><div class="terkunci-isi">${esc(u.email)} <small>(tidak dapat diubah dari sini)</small></div></div>`}
+      <div class="f-grid2">${pilihan('uPeran', 'Peran', [...(baru ? [['', 'Pilih peran']] : [['', '(tidak berubah)']]), ['ROLE_ASISTEN', 'Asisten'], ['ROLE_PPAT', 'PPAT'], ['ROLE_KLIEN', 'Klien']], '', baru, baru ? '' : 'Kosongkan untuk membiarkan peran tetap.')}
+        ${baru ? '' : pilihan('uStatus', 'Status', [['ACTIVE', 'Aktif'], ['SUSPENDED', 'Ditangguhkan'], ['INACTIVE', 'Non-aktif']], u.status, true)}</div>`,
+    tombol:[['Batal', 'secondary', null], [baru ? 'Buat Pengguna' : 'Simpan Perubahan', 'primary', () => simpanUser(mode, u), true]] });
+  const L = $('#lapisan');
+  if (baru) {
+    L.querySelector('#uPw').addEventListener('input', cekPw);
+    L.querySelector('#pwAcak').addEventListener('click', () => { $('#uPw').value = acakPw(); $('#uPw').type = 'text'; cekPw(); });
+  }
+  L.addEventListener('click', e => { const lp = e.target.closest('[data-lihat-pw]'); if (!lp) return; const i = $('#' + lp.dataset.lihatPw), lihat = i.type === 'password'; i.type = lihat ? 'text' : 'password'; lp.setAttribute('aria-pressed', lihat); lp.setAttribute('aria-label', lihat ? 'Sembunyikan password' : 'Tampilkan password'); lp.innerHTML = ik(lihat ? 'mataTutup' : 'mata', 18); });
+  L.addEventListener('input', e => { const f = e.target.closest('.ina-text-field'); if (f) bersih(f.id.slice(2)); });
+  $('#uDepan').focus();
+}
+function acakPw() {
+  const set = ['ABCDEFGHJKLMNPQRSTUVWXYZ', 'abcdefghijkmnpqrstuvwxyz', '23456789', '!@#$%&*?'], semua = set.join('');
+  const r = s => s[Math.floor(Math.random() * s.length)];
+  const a = set.map(r); while (a.length < 14) a.push(r(semua));
+  return a.sort(() => Math.random() - .5).join('');
+}
+function setPw(pesan, jenis) {
+  const w = $('#f-uPw .ina-password-input__wrapper'), h = $('#h-uPw');
+  w.className = `ina-password-input__wrapper ina-password-input__wrapper--size-md ina-password-input__wrapper--${jenis || 'neutral'}`;
+  h.textContent = pesan; h.className = `ina-password-input__status-message ${jenis ? 'ina-password-input__status-message--' + jenis : ''}`;
+}
+function cekPw() {
+  const v = $('#uPw').value, ok = SYARAT_PW.map(([, uji]) => uji(v));
+  document.querySelectorAll('#syaratPw li').forEach((li, i) => { li.classList.toggle('ok', ok[i]); li.querySelector('.tanda').innerHTML = ok[i] ? ik('centang', 12) : ''; });
+  setPw(v && ok.every(Boolean) ? 'Password sudah memenuhi semua syarat.' : 'Sampaikan password ini ke pengguna. Pengguna dapat menggantinya sendiri di menu Akun Saya.', v && ok.every(Boolean) ? 'success' : '');
+}
+function galat(id, pesan) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); w?.classList.add('ina-text-field__wrapper--status-error'); if (h) { h.textContent = pesan; h.classList.add('ina-text-field__helper-text--error'); } }
+function bersih(id) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); w?.classList.remove('ina-text-field__wrapper--status-error'); if (h) { h.classList.remove('ina-text-field__helper-text--error'); h.textContent = h.dataset.bantu || ''; } }
+function simpanUser(mode, u) {
+  const v = id => ($('#' + id)?.value ?? '').trim(); let ada = false;
+  if (v('uDepan').length < 2) { galat('uDepan', 'Nama depan minimal 2 karakter.'); ada = true; }
+  if (mode === 'create') {
+    if (!/^\S+@\S+\.\S+$/.test(v('uEmail'))) { galat('uEmail', 'Format email tidak valid. Contoh: nama@contoh.id'); ada = true; }
+    else if (USER.some(x => x.email === v('uEmail').toLowerCase())) { galat('uEmail', 'Email ini sudah terdaftar. Gunakan email lain.'); ada = true; }
+    if (!SYARAT_PW.every(([, uji]) => uji($('#uPw').value))) { setPw('Password belum memenuhi semua syarat di bawah.', 'error'); ada = true; }
+    if (!v('uPeran')) { galat('uPeran', 'Pilih peran pengguna.'); ada = true; }
+  }
+  if (ada) { $('#lapisan .ina-text-field__wrapper--status-error input, #lapisan .ina-text-field__wrapper--status-error select, #lapisan .ina-password-input__wrapper--error input')?.focus(); return; }
+  const nama = [v('uDepan'), v('uTengah'), v('uBelakang')].filter(Boolean).join(' ');
+  $('#lapisan').innerHTML = '';
+  if (mode === 'create') { const id = Math.max(...USER.map(x => x.id)) + 1; USER.unshift({ id, nama, email:v('uEmail').toLowerCase(), peran:v('uPeran'), ca:'none', status:'ACTIVE', login:'', kode:'USR_CONTOH' + id }); sorotBaris(id); toast('Pengguna berhasil dibuat.', 'positive', 4000, `${nama} dapat masuk dengan email dan password awal.`); }
+  else { Object.assign(u, { nama, peran:v('uPeran') || u.peran, status:v('uStatus') }); sorotBaris(u.id); toast('Pengguna berhasil diperbarui.', 'positive'); }
+}
+
+/* ---------------- Reset Password (live, 2 tahap) ---------------- */
+function dialogReset(u) {
+  dialog({ judul:`Reset password — ${esc(u.nama)}`, konfirmasi:true,
+    isi:`<div class="modal-gap"><p>Sistem akan membuat password acak 12 karakter untuk pengguna ini. Password lama dinonaktifkan dan <b>pengguna otomatis keluar dari semua perangkat</b>.</p>
+      ${alert('info', '', `Password sementara akan <b>dikirim otomatis ke email pengguna</b> (${esc(u.email)}). Password juga ditampilkan sekali di sini sebagai cadangan bila email gagal terkirim.`)}</div>`,
+    tombol:[['Batal', 'secondary', null], ['Reset Password', 'primary', () => {
+      const pw = acakPw().slice(0, 12);
+      dialog({ judul:`Password sementara — ${esc(u.nama)}`,
+        isi:`<div class="modal-gap">${alert('success', 'Password terkirim ke email user', `Password sementara sudah dikirim ke ${esc(u.email)}. Password di bawah dapat dipakai sebagai cadangan bila pengguna tidak menerima email.`)}
+          <p>Password ini <b>tidak akan ditampilkan lagi</b> setelah dialog ditutup.</p>
+          <div><span class="ina-text-field__label">Password sementara</span><div class="pw-sementara"><code id="pwSementara">${pw}</code>${tombol('Salin', 'secondary', 'sm', 'id="salinPw"', ik('salin', 14))}</div></div>
+          ${alert('info', '', 'Pengguna harus masuk ulang dengan password ini. Semua sesi aktifnya sudah diakhiri.')}</div>`,
+        tombol:[['Selesai', 'primary', null]] });
+      $('#salinPw').addEventListener('click', e => { e.stopPropagation(); navigator.clipboard?.writeText(pw).catch(() => {}); toast('Password disalin.', 'positive'); });
+    }]] });
+}
+
+/* ---------------- Tangguhkan / Aktifkan (live) + massal (HE-USER-02) ---------------- */
+function konfirmStatus(u, ke) {
+  const tangguh = ke === 'SUSPENDED';
+  dialog({ judul: tangguh ? `Tangguhkan "${esc(u.nama)}"?` : `Aktifkan "${esc(u.nama)}"?`, konfirmasi:true,
+    isi: tangguh ? `<p>Akun <b>${esc(u.nama)}</b> akan ditangguhkan dan <b>tidak bisa masuk</b> sampai diaktifkan kembali. Sesi aktif yang ada tidak langsung diputus.</p>`
+      : `<p>Akun <b>${esc(u.nama)}</b> akan diaktifkan kembali dan <b>bisa masuk</b> seperti biasa.</p>`,
+    tombol:[['Batal', 'secondary', null], [tangguh ? 'Tangguhkan' : 'Aktifkan', 'primary', () => { u.status = ke; sorotBaris(u.id); toast(`${u.nama} ${tangguh ? 'ditangguhkan' : 'diaktifkan'}.`, 'positive'); }]] });
+}
+function konfirmMassal(ke) {
+  const tangguh = ke === 'SUSPENDED', dipilih = USER.filter(u => S.pilih.has(u.id));
+  const ubah = dipilih.filter(u => u.status !== ke), lewat = dipilih.filter(u => u.status === ke);
+  if (!ubah.length) { toast(`Semua pengguna terpilih sudah berstatus ${STATUS[ke][0]}.`); return; }
+  dialog({ judul: `${tangguh ? 'Tangguhkan' : 'Aktifkan'} ${ubah.length} pengguna?`, konfirmasi:true,
+    isi:`<p>${tangguh ? 'Pengguna berikut akan ditangguhkan dan <b>tidak bisa masuk</b> sampai diaktifkan kembali:' : 'Pengguna berikut akan diaktifkan kembali dan <b>bisa masuk</b> seperti biasa:'}${usulan('HE-USER-02')}</p>
+      <ol class="daftar-nama">${ubah.map(u => `<li>${esc(u.nama)} <small>· ${esc(u.email)}</small></li>`).join('')}</ol>
+      ${lewat.length ? `<p class="sel-email" style="margin-top:10px">${lewat.length} pengguna dilewati karena statusnya sudah ${STATUS[ke][0]}: ${lewat.map(u => esc(u.nama)).join(', ')}.</p>` : ''}`,
+    tombol:[['Batal', 'secondary', null], [`${tangguh ? 'Tangguhkan' : 'Aktifkan'} ${ubah.length} Pengguna`, 'primary', () => { ubah.forEach(u => { u.status = ke; }); S.pilih.clear(); gambar(); toast(`${ubah.length} pengguna ${tangguh ? 'ditangguhkan' : 'diaktifkan'}.`, 'positive', 4000, lewat.length ? `${lewat.length} pengguna dilewati karena statusnya sudah sesuai.` : ''); }]] });
+}
+
+/* ---------------- Impor dari berkas (HE-UMUM-03) ---------------- */
+const CONTOH_IMPOR = [
+  { nama:'Contoh Klien Empat', email:'klien4@contoh.id', hp:'081200000104' },
+  { nama:'Contoh Klien Lima', email:'klien5@contoh.id', hp:'081200000105' },
+  { nama:'Contoh Klien Enam', email:'klien6contoh.id', hp:'081200000106' },
+  { nama:'Contoh Penjual Satu', email:'penjual1@contoh.id', hp:'081200000011' },
+  { nama:'', email:'klien7@contoh.id', hp:'' }
+];
+function cekBaris(r) { if (!r.nama.trim()) return 'Nama kosong.'; if (!/^\S+@\S+\.\S+$/.test(r.email)) return 'Format email tidak valid.'; if (USER.some(u => u.email === r.email)) return 'Email sudah terdaftar.'; return ''; }
+function dialogImpor() {
+  dialog({ judul:'Impor pengguna klien dari berkas', lebar:true,
+    isi:`<div class="modal-gap"><p>Tambahkan banyak klien sekaligus. Pengguna hasil impor berperan <b>Klien</b> dan menerima password sementara melalui email.${usulan('HE-UMUM-03')}</p>
+      <div class="langkah-impor">${badge('1. Unduh templat', 'brand', 'sm')}${badge('2. Unggah berkas', 'neutral', 'sm')}${badge('3. Periksa dan simpan', 'neutral', 'sm')}</div>
+      <div>${tombol('Unduh Templat CSV', 'secondary', 'sm', 'id="unduhTemplat"', ik('unduh', 14))} <span class="sel-email">Kolom: nama, email, nomor HP (opsional).</span></div>
+      <div class="ina-file-upload" id="f-impor"><div class="ina-file-upload__label">Berkas pengguna<span class="ina-text-field__required">*</span></div>
+        <div class="ina-file-upload__dropzone" role="button" tabindex="0" id="pilihBerkas" aria-label="Pilih berkas CSV atau Excel"><div class="ina-file-upload__content"><div class="ina-file-upload__icon">${ik('unggah', 24)}</div>
+          <div class="ina-file-upload__text"><div class="ina-file-upload__title">Seret berkas ke sini atau klik untuk memilih</div><div class="ina-file-upload__description">CSV atau Excel (.xlsx), maks. 500 baris. Gunakan templat agar kolomnya sesuai.</div></div>
+          <span class="ina-file-upload__button">Pilih File</span></div></div>
+        <div class="ina-file-upload__files" id="berkasImpor"></div></div>
+      <div id="pratinjau"></div></div>`,
+    tombol:[['Batal', 'secondary', null], ['Simpan Pengguna Valid', 'primary', () => simpanImpor(), true]] });
+  const L = $('#lapisan'), simpan = L.querySelector('.ina-modal__footer .ina-button:last-child'); simpan.disabled = true;
+  L.querySelector('#unduhTemplat').addEventListener('click', e => { e.stopPropagation(); toast('Templat CSV diunduh (simulasi).'); });
+  const pilih = e => { e.stopPropagation();
+    $('#berkasImpor').innerHTML = `<div class="ina-file-upload__file ina-file-upload__file--success"><div class="ina-file-upload__file-icon-wrapper ina-file-upload__file-icon-wrapper--success">${ik('centang', 16)}</div><div class="ina-file-upload__file-info"><div class="ina-file-upload__file-name">daftar-klien-contoh.csv</div><div class="ina-file-upload__file-size">2 KB · ${CONTOH_IMPOR.length} baris</div></div></div>`;
+    const hasil = CONTOH_IMPOR.map(r => ({ ...r, galat:cekBaris(r) })), valid = hasil.filter(r => !r.galat).length;
+    $('#pratinjau').innerHTML = `${alert(valid === hasil.length ? 'success' : 'caution', `${valid} dari ${hasil.length} baris siap disimpan`, valid === hasil.length ? 'Semua baris valid.' : `${hasil.length - valid} baris bermasalah tidak ikut disimpan. Perbaiki di berkas, lalu impor ulang baris tersebut.`)}
+      <div class="pratinjau"><table><thead><tr><th>Baris</th><th>Nama</th><th>Email</th><th>Nomor HP</th><th>Hasil</th></tr></thead><tbody>${hasil.map((r, i) => `<tr class="${r.galat ? 'galat' : ''}"><td>${i + 2}</td><td>${esc(r.nama) || '—'}</td><td>${esc(r.email)}</td><td>${r.hp || '—'}</td><td>${r.galat ? badge('Tidak disimpan', 'error', 'sm') + `<small>${r.galat}</small>` : badge('Siap', 'success', 'sm')}</td></tr>`).join('')}</tbody></table></div>`;
+    simpan.disabled = !valid; simpan.textContent = `Simpan ${valid} Pengguna`; L._hasil = hasil;
+    document.querySelectorAll('.langkah-impor .ina-badge').forEach((b, i) => b.className = `ina-badge ina-badge--soft ina-badge--${i === 2 ? 'brand' : 'success'} ina-badge--sm ina-badge--rounded-full`);
+  };
+  L.querySelector('#pilihBerkas').addEventListener('click', pilih);
+  L.querySelector('#pilihBerkas').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pilih(e); } });
+}
+function simpanImpor() {
+  const hasil = $('#lapisan')._hasil || [], valid = hasil.filter(r => !r.galat);
+  let id = Math.max(...USER.map(x => x.id));
+  valid.forEach(r => { id++; USER.unshift({ id, nama:r.nama, email:r.email, peran:'ROLE_KLIEN', ca:'none', status:'ACTIVE', login:'', kode:'USR_CONTOH' + id }); });
+  $('#lapisan').innerHTML = ''; S.peran = 'ROLE_KLIEN'; gambar();
+  toast(`${valid.length} klien berhasil diimpor.`, 'positive', 4500, `Password sementara dikirim ke email masing-masing. ${hasil.length - valid.length} baris tidak disimpan.`);
+}
+
+/* ---------------- tombol Bantuan di judul halaman (HE-UMUM-02) ---------------- */
+function pasangPanduan() {
+  const h = document.querySelector('#halaman h1'); if (!h || h.parentElement.classList.contains('judul-kiri')) return;
+  const w = document.createElement('div'); w.className = 'judul-halaman';
+  const kiri = document.createElement('div'); kiri.className = 'judul-kiri';
+  const sub = h.nextElementSibling && h.nextElementSibling.classList.contains('sub') ? h.nextElementSibling : null;
+  h.before(w); w.append(kiri); kiri.append(h); if (sub) kiri.append(sub);
+  w.insertAdjacentHTML('beforeend', `<button type="button" class="ina-button ina-button--secondary ina-button--md ditandai" id="bukaBantuan" aria-label="Bantuan untuk halaman ini"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg><span>Bantuan</span></button>`);
+}
+document.addEventListener('click', e => { if (e.target.closest('#bukaBantuan')) bukaBantuan(); });
+
+/* ---------------- IDDS Drawer ---------------- */
+function drawer({ judul, isi }) {
+  const D = $('#lapisanDrawer'), hp = window.matchMedia('(max-width:760px)').matches;
+  D.innerHTML = `<div class="ina-drawer ina-drawer--position-${hp ? 'bottom' : 'right'}" role="dialog" aria-modal="true" aria-labelledby="drwJudul">
+    <div class="ina-drawer__backdrop" data-tutup-drawer></div>
+    <div class="ina-drawer__panel ina-drawer__panel--width-md">
+      <div class="ina-drawer__header"><h2 class="ina-drawer__title" id="drwJudul">${judul}</h2>
+        <button type="button" class="ina-drawer__close-button" aria-label="Tutup bantuan" data-tutup-drawer><svg class="ina-drawer__close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      <div class="ina-drawer__content">${isi}</div>
+    </div></div>`;
+  D.querySelector('.ina-drawer__close-button').focus();
+}
+function tutupDrawer() { $('#lapisanDrawer').innerHTML = ''; }
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-tutup-drawer]')) { tutupDrawer(); return; }
+  const tg = e.target.closest('#lapisanDrawer .ina-accordion__toggle'); if (!tg) return;
+  const b = tg.getAttribute('aria-expanded') !== 'true';
+  tg.setAttribute('aria-expanded', b);
+  tg.querySelector('.ina-accordion__icon').classList.toggle('ina-accordion__icon--open', b);
+  tg.nextElementSibling.classList.toggle('ina-accordion__content--open', b);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisanDrawer').innerHTML) tutupDrawer(); });
+
+/* ---------------- IDDS Modal & Toast ---------------- */
+function dialog({ judul, isi, tombol: tb, lebar, konfirmasi }) {
+  const L = $('#lapisan');
+  L.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-i="-1"></div><div class="ina-modal__container">
+    <div class="ina-modal__dialog ina-modal__dialog--size-${lebar ? 'lg' : 'md'} ${konfirmasi ? 'ina-modal-confirmation' : ''}" role="${konfirmasi ? 'alertdialog' : 'dialog'}" aria-modal="true" aria-labelledby="dlgJudul">
+      <div class="ina-modal__header"><h2 class="ina-modal__title" id="dlgJudul">${judul}</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-i="-1">${ik('x', 22)}</button></div>
+      <div class="ina-modal__body">${isi}</div>
+      <div class="ina-modal__footer">${tb.map(([t, h], i) => `<button type="button" class="ina-button ina-button--${h} ina-button--md" data-i="${i}">${t}</button>`).join('')}</div></div></div></div>`;
+  L.onclick = e => {
+    const b = e.target.closest('[data-i]'); if (!b || b.disabled) return;
+    const i = +b.dataset.i; if (i < 0) { L.innerHTML = ''; return; }
+    const [, , fn, tahan] = tb[i]; if (tahan) { fn && fn(); return; }
+    L.innerHTML = ''; fn && fn();
+  };
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisan').innerHTML) $('#lapisan').innerHTML = ''; });
+let tt;
+function toast(teks, state = 'default', ms = 3000, ket = '') {
+  $('#toastWadah').innerHTML = `<div class="ina-toast ina-toast--state-${state} ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${ik(state === 'positive' ? 'centang' : 'info', 20)}</div>
+    <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p>${ket ? `<p class="ina-toast__description">${ket}</p>` : ''}</div></div><button class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast>${ik('x', 16)}</button></div>`;
+  clearTimeout(tt); tt = setTimeout(() => $('#toastWadah').innerHTML = '', ms);
+}
+$('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tutup-toast]')) $('#toastWadah').innerHTML = ''; });
+
+/* ---------------- Bantuan (HE-UMUM-02) ---------------- */
+const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
+function bukaBantuan() {
+  drawer({ judul:'Bantuan Daftar Pengguna', isi:`
+    <p>Halaman ini untuk mengelola akun pegawai kantor (PPAT, Asisten) dan klien (penjual, pembeli, saksi).</p>
+    <h4 class="bantu-sub">Peran</h4>
+    <ul class="bantu-langkah"><li><b>PPAT:</b> memfinalisasi minuta dan menandatangani akta.</li><li><b>Asisten:</b> membuat permohonan, verifikasi, dan menyusun minuta.</li><li><b>Klien:</b> pihak dalam akta yang menandatangani secara elektronik.</li></ul>
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${faq(1, 'Apa arti Status CA?', KET_CA + ' Registrasi CA dilakukan pengguna sendiri melalui Akun Saya.')}
+    ${faq(2, 'Apa beda Ditangguhkan dan Non-aktif?', 'Ditangguhkan: pengguna tidak bisa masuk sementara, misalnya selama pemeriksaan. Non-aktif: akun tidak dipakai lagi. Keduanya dapat diaktifkan kembali.')}
+    ${faq(3, 'Syarat password awal', 'Minimal 12 karakter dan mengandung huruf besar, huruf kecil, angka, serta simbol. Gunakan "Buat Password Acak" agar syarat terpenuhi, lalu sampaikan ke pengguna.')}
+    ${faq(4, 'Bagaimana mengimpor banyak klien?', 'Klik "Impor dari Berkas", unduh templat CSV, isi nama dan email, lalu unggah. Baris yang bermasalah ditampilkan beserta alasannya dan tidak ikut disimpan.')}
+    ${faq(5, 'Pengguna tidak menerima email password', 'Gunakan Reset Password. Password sementara juga ditampilkan sekali di dialog sehingga dapat disampaikan langsung ke pengguna.')}
+    <h4 class="bantu-sub">Kontak dukungan ${usulan('HE-UMUM-02')}</h4>
+    <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>` });
+}
+
+/* ---------------- protobar & daftar perubahan ---------------- */
+$('#bukaUbah').addEventListener('click', () => {
+  dialog({ judul:'Daftar perubahan Daftar Pengguna', lebar:true,
+    isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital (skor halaman 79,5; rincian dan gambar bukti di laporan lengkap UX Metric Lab) serta kode live. Kolom, saringan, menu aksi, Reset Password, dan Tangguhkan/Aktifkan tetap seperti live; yang diubah adalah penjelasan Status CA, aksi massal, syarat password, kejelasan aksi, impor berkas, dan bantuan. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+        <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
+    tombol:[['Tutup', 'secondary', null]] });
+  $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });
+});
+function lihat(u) {
+  if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke === 'tambah') { dialogUser('create'); $('#f-uPw')?.scrollIntoView({ block:'center' }); return; }
+  if (u.ke === 'impor') { dialogImpor(); return; }
+  if (u.ke === 'massal') { S.pilih = new Set([10, 11]); gambar(); }
+  if (u.ke === 'aksi') { S.menu = 3; gambar(); return; }
+  const el = u.sorot && $(u.sorot);
+  if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); }
+}
+$('#aturUlang').addEventListener('click', () => { USER = contoh(); Object.assign(S, { status:'all', peran:'all', cari:'', pilih:new Set(), menu:null, tera:true }); gambar(); toast('Data contoh dikembalikan ke awal.'); });
+$('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
+$('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
+$('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+gambar();
+})();
+</script>
+</body>
+</html>

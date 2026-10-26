@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="id" data-brand="eppat" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brand Mode E-PPAT — IDDS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- CSS resmi IDDS (dokumentasi: design.inadigital.go.id/getting-started/code/js), versi dikunci -->
+<link href="https://unpkg.com/@idds/styles@1.6.38/dist/index.min.css" rel="stylesheet">
+<!-- Brand mode E-PPAT (brand-eppat-idds/eppat.css), disisipkan saat dirakit -->
+<style id="brand-eppat">
+/**
+ * E-PPAT Brand Theme untuk INA Digital Design System (IDDS)
+ * --------------------------------------------------------------------------
+ * Format mengikuti brand bawaan IDDS (@idds/styles: [data-brand='inagov'], 'panrb', dll.).
+ * Hanya token brand (primary, secondary, hover) yang diganti; warna netral, sentimen
+ * (positive/negative/warning/guide), tipografi, spacing, dan komponen tetap milik IDDS.
+ *
+ * Pemakaian:
+ *   1. import '@idds/react/index.css'            (atau @idds/styles/dist/index.css)
+ *   2. import './eppat.css'                       (berkas ini, SETELAH CSS IDDS)
+ *   3. document.documentElement.setAttribute('data-brand', 'eppat')
+ *      — atau setCustomTheme(eppatTheme) dari eppat-theme.ts (tanpa dukungan mode gelap)
+ *
+ * Sumber warna: tema aktif E-PPAT (CMS › Setting Theme) di dev-app.eppat.id, dibaca 23 Okt 2026:
+ *   --eppat-brand-rgb 61 107 94 (#3D6B5E), --eppat-brand-hover-rgb 52 93 82 (#345D52),
+ *   --eppat-sidebar-bg #2C3C42, --eppat-sidebar-hover #3A4D54, --eppat-line-sand-rgb 210 221 217,
+ *   --eppat-paper-cream-rgb 238 243 241, --eppat-paper-vanilla-rgb 245 248 247, kartu kantor #DAC999.
+ * Kontras (WCAG 2.2): teks putih di atas primary-500 #3D6B5E = 6,06:1 (AA); hover #345D52 = 7,41:1;
+ *   primary-400 #4E7C6F = 4,73:1 (dipakai sebagai warna utama mode gelap).
+ */
+
+/* E-PPAT Theme - Pejabat Pembuat Akta Tanah */
+[data-brand='eppat'] {
+  /* Primary Colors - Hijau E-PPAT */
+  --ina-primary-25: #f5f8f7;
+  --ina-primary-50: #eef3f1;
+  --ina-primary-100: #dde5e2;
+  --ina-primary-200: #c2d3cc;
+  --ina-primary-300: #9db8ae;
+  --ina-primary-400: #4e7c6f;
+  --ina-primary-500: #3d6b5e;
+  --ina-primary-600: #345d52;
+  --ina-primary-700: #2a4b42;
+  --ina-primary-800: #1d3530;
+  --ina-primary-900: #0f1c19;
+  --ina-primary-primary: #3d6b5e;
+
+  /* Secondary Colors - Emas kartu kantor E-PPAT */
+  --ina-secondary-25: #fcfbf6;
+  --ina-secondary-50: #f8f4e7;
+  --ina-secondary-100: #f0e8cc;
+  --ina-secondary-200: #e6dab2;
+  --ina-secondary-300: #dac999;
+  --ina-secondary-400: #c7b077;
+  --ina-secondary-500: #ae9358;
+  --ina-secondary-600: #8c7444;
+  --ina-secondary-700: #6a5733;
+  --ina-secondary-800: #483b23;
+  --ina-secondary-900: #272013;
+
+  /* Accent Colors (legacy IDDS, disamakan dengan secondary) */
+  --ina-accent-100: #fcfbf6 !important;
+  --ina-accent-200: #f8f4e7 !important;
+  --ina-accent-300: #f0e8cc !important;
+  --ina-accent-400: #e6dab2 !important;
+  --ina-accent-500: #dac999 !important;
+  --ina-accent-600: #ae9358 !important;
+  --ina-accent-700: #6a5733 !important;
+
+  /* Interactive Colors */
+  --ina-brand-primary: #3d6b5e;
+  --ina-brand-hover: #345d52 !important;
+  --ina-neutral-hover: var(--ina-neutral-100) !important;
+
+  /* Brand-specific colors (seperti --ina-bgn-brand-primary pada brand BGN) */
+  --ina-eppat-sidebar-bg: #2c3c42;
+  --ina-eppat-sidebar-hover: #3a4d54;
+  --ina-eppat-sidebar-active: var(--ina-primary-500);
+  --ina-eppat-sidebar-content: rgba(255, 255, 255, 0.8);
+  --ina-eppat-office-card: var(--ina-secondary-300);
+  --ina-eppat-stroke-brand: #d2ddd9;
+  --ina-eppat-surface-cream: var(--ina-primary-50);
+}
+
+/* Aksen komponen mengikuti brand E-PPAT.
+   IDDS memakai biru "guide" atau hitam untuk elemen penunjuk berikut; di E-PPAT diganti hijau brand.
+   Warna status (positive/negative/warning/info pada Alert, Badge, Toast) TIDAK diubah. */
+[data-brand='eppat'] .ina-button.ina-button--link { color: var(--ina-primary-500) !important; }
+[data-brand='eppat'] .ina-button--link:hover:not(:disabled),
+[data-brand='eppat'] .ina-button--link:focus:not(:disabled) { color: var(--ina-primary-600); }
+[data-brand='eppat'] .ina-stepper__item--active .ina-stepper__icon-wrapper {
+  border-color: var(--ina-primary-500); color: var(--ina-primary-500); background-color: var(--ina-primary-50);
+}
+[data-brand='eppat'] .ina-stepper__item--active .ina-stepper__label { color: var(--ina-primary-500); }
+[data-brand='eppat'] .ina-stepper__item--completed .ina-stepper__icon-wrapper {
+  border-color: var(--ina-primary-500); color: #fff; background-color: var(--ina-primary-500);
+}
+[data-brand='eppat'] .ina-stepper__item--completed .ina-stepper__label { color: var(--ina-primary-600); }
+[data-brand='eppat'] .ina-stepper__separator--completed { background-color: var(--ina-primary-500); }
+[data-brand='eppat'] .ina-checkbox__box--checked {
+  background-color: var(--ina-primary-500); border-color: var(--ina-primary-500);
+  box-shadow: inset 0 0 0 1px #fff, inset 0 0 0 2px var(--ina-primary-500);
+}
+[data-brand='eppat'] .ina-pagination__page-button--active { border-color: var(--ina-primary-500); color: var(--ina-primary-600); }
+[data-brand='eppat'] .ina-breadcrumb__link--active { color: var(--ina-primary-600); }
+
+/* Penyesuaian kontras (WCAG 2.2 AA, minimal 4,5:1 untuk teks biasa).
+   Warna bawaan IDDS berikut di bawah standar pada latar terang; diganti dengan corak lebih gelap
+   dari keluarga warna yang SAMA sehingga arti warna tidak berubah. */
+[data-brand='eppat'] .ina-stepper__item:not(.ina-stepper__item--active):not(.ina-stepper__item--completed):not(.ina-stepper__item--error) .ina-stepper__label,
+[data-brand='eppat'] .ina-stepper__item:not(.ina-stepper__item--active):not(.ina-stepper__item--completed):not(.ina-stepper__item--error) .ina-stepper__icon-wrapper {
+  color: var(--ina-content-secondary);                  /* #a3a3a3 2,5:1 → #525252 7,8:1 */
+}
+[data-brand='eppat'] .ina-text-field__required,
+[data-brand='eppat'] .ina-text-area__required,
+[data-brand='eppat'] .ina-select-dropdown__required,
+[data-brand='eppat'] .ina-password-input__required,
+[data-brand='eppat'] .ina-input-search__asterisk { color: var(--ina-negative-600); }      /* #f02d2d 4,1:1 → #d50b0b */
+[data-brand='eppat'] .ina-select-dropdown__trigger-text--placeholder,
+[data-brand='eppat'] .ina-date-picker__trigger-text--placeholder { color: var(--ina-content-secondary) !important; } /* IDDS memakai !important */
+[data-brand='eppat'] .ina-alert--caution .ina-alert__title { color: var(--ina-warning-600); } /* #eebb04 1,7:1 → #855f00 */
+[data-brand='eppat'] .ina-alert--info .ina-alert__title { color: var(--ina-guide-600); }
+/* teks galat isian (#f02d2d 4,1:1 → negative-600 #d50b0b) */
+[data-brand='eppat'] .ina-one-time-password__helper-text--error,
+[data-brand='eppat'] .ina-text-area__helper-text--error,
+[data-brand='eppat'] .ina-phone-input__helper-text--error,
+[data-brand='eppat'] .ina-text-field .ina-text-field__helper-text.ina-text-field__helper-text--error,
+[data-brand='eppat'] .ina-file-upload__file-error,
+[data-brand='eppat'] .ina-file-upload__file--error .ina-file-upload__file-name,
+[data-brand='eppat'] .ina-file-upload__error-message { color: var(--ina-negative-600); }
+[data-brand='eppat'] .ina-file-upload__error-message:empty { display: none; }
+[data-brand='eppat'] .ina-password-input__status-message--error,
+[data-brand='eppat'] .ina-password-input__character-count--error { color: var(--ina-negative-600); }
+/* teks peringatan isian (#eebb04 1,8:1 → warning-600) */
+[data-brand='eppat'] .ina-text-field .ina-text-field__helper-text.ina-text-field__helper-text--warning,
+[data-brand='eppat'] .ina-text-area__helper-text--warning,
+[data-brand='eppat'] .ina-password-input__status-message--warning,
+[data-brand='eppat'] .ina-password-input__character-count--warning { color: var(--ina-warning-600); }
+[data-brand='eppat'] .ina-password-input__status-message--success { color: var(--ina-content-positive); }
+
+/* E-PPAT Dark Mode Overrides */
+[data-theme='dark'][data-brand='eppat'] {
+  --ina-primary-primary: var(--ina-primary-400);
+  --ina-brand-hover: var(--ina-primary-500) !important;
+  --ina-neutral-hover: var(--ina-neutral-800) !important;
+  --ina-eppat-sidebar-bg: #141c1f;
+  --ina-eppat-sidebar-hover: #22302d;
+  --ina-eppat-sidebar-active: var(--ina-primary-400);
+  --ina-eppat-stroke-brand: #2a3a36;
+  --ina-eppat-surface-cream: #18211f;
+}
+
+</style>
+<style>
+  /* Tata letak halaman pratinjau — semua warna memakai token IDDS agar ikut brand & mode gelap */
+  *{box-sizing:border-box}
+  button,input,select,textarea{font-family:inherit}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--ina-background-secondary);color:var(--ina-content-primary);-webkit-font-smoothing:antialiased}
+  .protobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 16px;background:#0f1a17;color:#E6EDEA;font-size:12px;position:sticky;top:0;z-index:50}
+  .protobar a{color:#E6EDEA;text-decoration:none;border:1px dashed rgba(255,255,255,.3);border-radius:999px;padding:4px 10px;font:500 11px Inter,sans-serif}
+  .protobar b{color:#fff}
+  .protobar .sep{opacity:.35}
+  .protobar .grup{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .protobar .grup span{opacity:.7}
+  .protobar button{border:1px solid rgba(255,255,255,.25);background:transparent;color:#E6EDEA;font:500 11px Inter,sans-serif;padding:4px 10px;border-radius:999px;cursor:pointer}
+  .protobar button[aria-pressed="true"]{background:#3D6B5E;border-color:#3D6B5E;color:#fff}
+  .protobar .kanan{margin-left:auto;display:inline-flex;gap:14px;flex-wrap:wrap}
+
+  .wadah{max-width:1120px;margin:0 auto;padding:40px 24px 80px}
+  .kepala{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .eyebrow{font:600 12px Inter,sans-serif;letter-spacing:1.6px;text-transform:uppercase;color:var(--ina-primary-primary)}
+  h1{margin:6px 0 8px;font:600 32px/40px Inter,sans-serif;color:var(--ina-content-primary)}
+  .lead{margin:0;max-width:720px;font-size:16px;line-height:24px;color:var(--ina-content-secondary)}
+  .logo{height:44px;padding:10px 14px;border-radius:12px;background:var(--ina-eppat-sidebar-bg,#2c3c42)}
+  .logo img{height:24px;display:block}
+
+  .bagian{margin-top:40px}
+  .bagian > h2{margin:0 0 4px;font:600 22px/30px Inter,sans-serif}
+  .bagian > p{margin:0 0 16px;font-size:14px;line-height:20px;color:var(--ina-content-secondary)}
+  .kartu{background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px}
+  .kartu + .kartu{margin-top:16px}
+  .kartu h3{margin:0 0 4px;font:600 16px/24px Inter,sans-serif}
+  .kartu .ket{margin:0 0 16px;font-size:13px;line-height:19px;color:var(--ina-content-secondary)}
+  .baris{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .dua{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+  /* palet */
+  .palet{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px}
+  .sw{border-radius:10px;overflow:hidden;border:1px solid var(--ina-stroke-primary);background:var(--ina-background-primary)}
+  .sw i{display:block;height:56px}
+  .sw div{padding:6px 8px;font-size:11px;line-height:15px}
+  .sw b{display:block;font-weight:600}
+  .sw span{color:var(--ina-content-secondary);font-family:ui-monospace,Menlo,monospace}
+  .sw.utama{outline:2px solid var(--ina-primary-primary);outline-offset:2px}
+  .palet.kecil{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .catatan{display:flex;gap:10px;align-items:flex-start;margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--ina-background-secondary);font-size:13px;line-height:19px;color:var(--ina-content-secondary)}
+  .catatan b{color:var(--ina-content-primary)}
+
+  /* cuplikan layar E-PPAT memakai token brand */
+  .mini{display:grid;grid-template-columns:200px 1fr;border:1px solid var(--ina-stroke-primary);border-radius:14px;overflow:hidden;min-height:300px;background:var(--ina-background-secondary)}
+  .mini-side{background:var(--ina-eppat-sidebar-bg,#2c3c42);padding:14px 10px;display:flex;flex-direction:column;gap:4px}
+  .mini-side img{height:20px;margin:2px 6px 12px;align-self:flex-start}
+  .mini-kantor{background:var(--ina-eppat-office-card,#dac999);color:#1f1f1f;border-radius:10px;padding:8px 10px;margin-bottom:10px;font-size:10px;line-height:14px}
+  .mini-kantor b{display:block;font-size:12px}
+  .mini-side a{display:flex;align-items:center;gap:8px;height:34px;padding:0 10px;border-radius:8px;color:var(--ina-eppat-sidebar-content,rgba(255,255,255,.8));font-size:12.5px;text-decoration:none}
+  .mini-side a:hover{background:var(--ina-eppat-sidebar-hover,#3a4d54)}
+  .mini-side a.on{background:var(--ina-eppat-sidebar-active,#3d6b5e);color:#fff}
+  .mini-isi{padding:18px 20px}
+  .mini-isi .crumb{font:500 11px Inter,sans-serif;letter-spacing:1.1px;text-transform:uppercase;color:var(--ina-primary-primary)}
+  .mini-isi h4{margin:4px 0 2px;font:500 22px Inter,sans-serif;color:var(--ina-primary-primary)}
+  .mini-isi .sub{margin:0 0 14px;font-size:13px;color:var(--ina-content-secondary)}
+
+  /* kode */
+  pre{margin:0;padding:14px 16px;border-radius:10px;background:#0f1a17;color:#E6EDEA;font:12.5px/1.6 ui-monospace,Menlo,monospace;overflow:auto}
+  .kode-tab{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+
+  @media (max-width:900px){ .palet{grid-template-columns:repeat(6,minmax(0,1fr))} .dua{grid-template-columns:1fr} .mini{grid-template-columns:1fr} .mini-side{flex-direction:row;flex-wrap:wrap} .mini-kantor{display:none} }
+  @media (max-width:560px){ .wadah{padding:24px 16px 60px} h1{font-size:26px;line-height:34px} .palet{grid-template-columns:repeat(3,minmax(0,1fr))} .palet.kecil{grid-template-columns:repeat(2,minmax(0,1fr))} .protobar .kanan{margin-left:0} }
+</style>
+</head>
+<body>
+
+<div class="protobar">
+  <a href="index.html">&#9776; Daftar prototipe</a>
+  <span class="sep">&bull;</span><b>Brand Mode E-PPAT</b><span class="sep">&bull;</span><span>INA Digital Design System</span>
+  <span class="kanan">
+    <span class="grup" id="pilihBrand"><span>Brand:</span>
+      <button data-brand="eppat" aria-pressed="true">E-PPAT</button>
+      <button data-brand="default" aria-pressed="false">Default IDDS</button>
+      <button data-brand="inagov" aria-pressed="false">INAgov</button>
+    </span>
+    <span class="grup" id="pilihMode"><span>Mode:</span>
+      <button data-mode="light" aria-pressed="true">Terang</button>
+      <button data-mode="dark" aria-pressed="false">Gelap</button>
+    </span>
+  </span>
+</div>
+
+<main class="wadah">
+  <div class="kepala">
+    <div>
+      <div class="eyebrow">Brand mode untuk IDDS</div>
+      <h1>E-PPAT</h1>
+      <p class="lead">E-PPAT memakai komponen, tipografi, spasi, dan warna status dari INA Digital Design System. Yang diganti hanya warna brand: hijau E-PPAT sebagai warna utama dan emas kartu kantor sebagai warna pendamping.</p>
+    </div>
+    <div class="logo"><img src="data:image/png;base64,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" alt="E-PPAT"></div>
+  </div>
+
+  <!-- ===================== PALET ===================== -->
+  <section class="bagian">
+    <h2>Palet warna</h2>
+    <p>Warna diambil dari tema yang aktif di aplikasi E-PPAT, lalu disusun menjadi skala 25–900 seperti brand IDDS lainnya.</p>
+    <div class="kartu">
+      <h3 id="judulPrimary">Primary — hijau E-PPAT</h3>
+      <p class="ket" id="ketPrimary">Dipakai untuk tombol utama, tab aktif, tautan, dan fokus. Teks putih di atas warna utama memiliki kontras 6,06:1 (lolos WCAG AA).</p>
+      <div class="palet" id="palPrimary"></div>
+    </div>
+    <div class="kartu">
+      <h3 id="judulSecondary">Secondary — emas kartu kantor</h3>
+      <p class="ket">Dipakai untuk aksen pendukung, misalnya kartu identitas kantor di sidebar.</p>
+      <div class="palet" id="palSecondary"></div>
+    </div>
+    <div class="kartu" id="kartuKhusus">
+      <h3>Warna khusus E-PPAT</h3>
+      <p class="ket">Token tambahan untuk bagian yang hanya ada di E-PPAT, seperti sidebar dan kartu kantor.</p>
+      <div class="palet kecil" id="palKhusus"></div>
+    </div>
+    <div class="kartu">
+      <h3>Warna status — tetap milik IDDS</h3>
+      <p class="ket">Warna status tidak diubah agar arti hijau, merah, kuning, dan biru sama di seluruh layanan pemerintah.</p>
+      <div class="palet kecil" id="palStatus"></div>
+    </div>
+  </section>
+
+  <!-- ===================== CUPLIKAN ===================== -->
+  <section class="bagian">
+    <h2>Cuplikan di layar E-PPAT</h2>
+    <p>Kerangka layar E-PPAT dengan komponen IDDS dan warna brand E-PPAT.</p>
+    <div class="mini">
+      <div class="mini-side">
+        <img src="data:image/png;base64,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" alt="E-PPAT">
+        <div class="mini-kantor"><span>KANTOR NOTARIS &amp; PPAT</span><b>PPAT Contoh Satu, S.H.</b>SK &middot; 1/KEP-CONTOH/2020</div>
+        <a href="#" class="on">Dashboard</a><a href="#">Verifikasi</a><a href="#">Minuta</a><a href="#">E-Akta Wizard</a><a href="#">Order AJB</a>
+      </div>
+      <div class="mini-isi">
+        <div class="crumb">Akun Saya</div>
+        <h4>Pendaftaran Stempel Elektronik (TERA)</h4>
+        <p class="sub">Lengkapi data di bawah ini, lalu admin E-PPAT akan mengajukannya ke Peruri untuk Anda.</p>
+        <div class="ina-tab-horizontal ina-tab-horizontal--use-brand-color" style="margin-bottom:16px">
+          <div class="ina-tab-horizontal__container" role="tablist">
+            <button type="button" role="tab" aria-selected="false" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline">Akun</button>
+            <button type="button" role="tab" aria-selected="false" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline">Keamanan</button>
+            <button type="button" role="tab" aria-selected="true" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline ina-tab-horizontal__tab--selected">Registrasi TERA</button>
+          </div>
+        </div>
+        <div class="baris" style="justify-content:flex-end">
+          <button class="ina-button ina-button--secondary ina-button--md">Periksa Lagi</button>
+          <button class="ina-button ina-button--primary ina-button--md">Simpan Pendaftaran</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== KOMPONEN ===================== -->
+  <section class="bagian">
+    <h2>Komponen IDDS dengan brand E-PPAT</h2>
+    <p>Markup sama persis dengan contoh resmi IDDS versi JS + CSS. Coba ganti brand di bar atas untuk membandingkan.</p>
+
+    <div class="kartu">
+      <h3>Button</h3>
+      <p class="ket">Gunakan satu tombol utama untuk tindakan terpenting di setiap layar.</p>
+      <div class="baris">
+        <button class="ina-button ina-button--primary ina-button--md">Simpan Pendaftaran</button>
+        <button class="ina-button ina-button--secondary ina-button--md">Periksa Lagi</button>
+        <button class="ina-button ina-button--tertiary ina-button--md">Batal</button>
+        <button class="ina-button ina-button--link ina-button--md">Lihat panduan</button>
+      </div>
+      <div class="baris" style="margin-top:12px">
+        <button class="ina-button ina-button--primary ina-button--sm">Kecil</button>
+        <button class="ina-button ina-button--primary ina-button--md">Sedang</button>
+        <button class="ina-button ina-button--primary ina-button--lg">Besar</button>
+        <button class="ina-button ina-button--primary ina-button--md" disabled>Nonaktif</button>
+      </div>
+    </div>
+
+    <div class="kartu">
+      <h3>Text Field</h3>
+      <p class="ket">Isian dengan petunjuk singkat, keadaan salah, dan keadaan benar.</p>
+      <div class="dua">
+        <div class="ina-text-field">
+          <label class="ina-text-field__label" for="tf1">Nama Lengkap</label>
+          <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md">
+            <input type="text" id="tf1" class="ina-text-field__input" placeholder="Sesuai KTP, tanpa gelar">
+          </div>
+          <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text">Tulis nama persis seperti di KTP.</div></div>
+        </div>
+        <div class="ina-text-field">
+          <label class="ina-text-field__label" for="tf2">NIK</label>
+          <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ina-text-field__wrapper--status-error">
+            <input type="text" id="tf2" class="ina-text-field__input" value="320000000001" aria-invalid="true">
+          </div>
+          <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text ina-text-field__helper-text--error">NIK harus 16 angka.</div></div>
+        </div>
+        <div class="ina-text-field">
+          <label class="ina-text-field__label" for="tf3">Email</label>
+          <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ina-text-field__wrapper--status-success">
+            <input type="email" id="tf3" class="ina-text-field__input" value="ppat@contoh.id">
+          </div>
+          <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text ina-text-field__helper-text--success">Format email sudah benar.</div></div>
+        </div>
+        <div class="ina-text-field">
+          <label class="ina-text-field__label" for="tf4">Nama Organisasi</label>
+          <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ina-text-field__wrapper--disabled">
+            <input type="text" id="tf4" class="ina-text-field__input" value="Kantor PPAT Contoh Satu" disabled>
+          </div>
+          <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text">Terisi dari Profil Kantor.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kartu">
+      <h3>Badge</h3>
+      <p class="ket">Status singkat, 1–2 kata.</p>
+      <div class="baris">
+        <span class="ina-badge ina-badge--soft ina-badge--brand ina-badge--md ina-badge--rounded-full">Aktif</span>
+        <span class="ina-badge ina-badge--soft ina-badge--info ina-badge--md ina-badge--rounded-full">Menunggu Diproses</span>
+        <span class="ina-badge ina-badge--soft ina-badge--warning ina-badge--md ina-badge--rounded-full">Belum terdaftar</span>
+        <span class="ina-badge ina-badge--soft ina-badge--success ina-badge--md ina-badge--rounded-full">Selesai</span>
+        <span class="ina-badge ina-badge--soft ina-badge--error ina-badge--md ina-badge--rounded-full">Ditolak</span>
+        <span class="ina-badge ina-badge--soft ina-badge--neutral ina-badge--md ina-badge--rounded-full">Baru</span>
+      </div>
+      <div class="baris" style="margin-top:12px">
+        <span class="ina-badge ina-badge--fill ina-badge--brand ina-badge--md ina-badge--rounded-full">Aktif</span>
+        <span class="ina-badge ina-badge--fill ina-badge--info ina-badge--md ina-badge--rounded-full">Menunggu Diproses</span>
+        <span class="ina-badge ina-badge--fill ina-badge--warning ina-badge--md ina-badge--rounded-full">Belum terdaftar</span>
+        <span class="ina-badge ina-badge--fill ina-badge--success ina-badge--md ina-badge--rounded-full">Selesai</span>
+        <span class="ina-badge ina-badge--fill ina-badge--error ina-badge--md ina-badge--rounded-full">Ditolak</span>
+      </div>
+    </div>
+
+    <div class="kartu">
+      <h3>Alert</h3>
+      <p class="ket">Pesan penting di bagian atas konten, maksimal tiga baris.</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="ina-alert ina-alert--info" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Data sedang diperiksa</div><div class="ina-alert__description">Admin E-PPAT sedang memeriksa data Anda. Anda masih bisa mengubah data selama tahap ini.</div></div></div></div>
+        <div class="ina-alert ina-alert--caution" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Stempel elektronik belum didaftarkan</div><div class="ina-alert__description">Lengkapi data pendaftaran TERA agar akta bisa distempel elektronik.</div></div></div></div>
+        <div class="ina-alert ina-alert--success" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Stempel aktif</div><div class="ina-alert__description">Stempel elektronik kantor Anda siap dibubuhkan pada akta.</div></div></div></div>
+        <div class="ina-alert ina-alert--critical" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Pendaftaran ditolak</div><div class="ina-alert__description">Nama pada KTP berbeda dengan nama pada SK. Perbaiki data, lalu ajukan ulang.</div></div></div></div>
+      </div>
+    </div>
+
+    <div class="kartu">
+      <h3>Stepper</h3>
+      <p class="ket">Tahapan pendaftaran TERA dengan label singkat.</p>
+      <div class="ina-stepper ina-stepper--horizontal ina-stepper--horizontal-responsive">
+        <div class="ina-stepper__item ina-stepper__item--completed">
+          <div class="ina-stepper__icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" class="ina-stepper__check-icon" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10"/></svg></div>
+          <div class="ina-stepper__label">Isi data</div>
+        </div>
+        <div class="ina-stepper__separator ina-stepper__separator--completed"></div>
+        <div class="ina-stepper__item ina-stepper__item--active">
+          <div class="ina-stepper__icon-wrapper"><span class="ina-stepper__step-number">2</span></div>
+          <div class="ina-stepper__label">Pemeriksaan admin</div>
+        </div>
+        <div class="ina-stepper__separator"></div>
+        <div class="ina-stepper__item">
+          <div class="ina-stepper__icon-wrapper"><span class="ina-stepper__step-number">3</span></div>
+          <div class="ina-stepper__label">Proses Peruri</div>
+        </div>
+        <div class="ina-stepper__separator"></div>
+        <div class="ina-stepper__item">
+          <div class="ina-stepper__icon-wrapper"><span class="ina-stepper__step-number">4</span></div>
+          <div class="ina-stepper__label">Stempel aktif</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dua" style="margin-top:16px">
+      <div class="kartu" style="margin:0">
+        <h3>Tooltip</h3>
+        <p class="ket">Penjelasan singkat untuk istilah yang belum umum.</p>
+        <div class="baris">
+          <span>ID PPAT / Nomor SK</span>
+          <div class="ina-tooltip ina-tooltip--placement-top">
+            <button type="button" class="ina-button ina-button--tertiary ina-button--sm" aria-label="Penjelasan Nomor SK">?</button>
+            <div class="ina-tooltip__content"><div class="ina-tooltip__bubble">Nomor Surat Keputusan (SK) pengangkatan Anda sebagai PPAT.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="kartu" style="margin:0">
+        <h3>Modal dan Toast</h3>
+        <p class="ket">Konfirmasi sebelum menyimpan, lalu pesan singkat setelah berhasil.</p>
+        <div class="baris">
+          <button type="button" class="ina-button ina-button--primary ina-button--md" id="bukaModal">Simpan Pendaftaran</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="kartu" style="margin-top:16px">
+      <h3>File Upload</h3>
+      <p class="ket">Unggah dokumen pendukung di dalam formulir.</p>
+      <div class="ina-file-upload">
+        <div class="ina-file-upload__label">Scan KTP (PDF/gambar)</div>
+        <div class="ina-file-upload__dropzone" role="button" tabindex="0">
+          <input type="file" class="ina-file-upload__input" aria-label="Unggah scan KTP">
+          <div class="ina-file-upload__content">
+            <div class="ina-file-upload__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg></div>
+            <div class="ina-file-upload__text"><div class="ina-file-upload__title">Unggah File</div><div class="ina-file-upload__description">Unggah atau seret dan lepas ke dalam kotak ini. PDF, JPG, atau PNG.</div></div>
+            <button type="button" class="ina-file-upload__button">Pilih File</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CARA PAKAI ===================== -->
+  <section class="bagian">
+    <h2>Cara memakai</h2>
+    <p>Pilih sesuai teknologi aplikasi. Ketiganya memakai jalur resmi IDDS tanpa mengubah library.</p>
+    <div class="kartu">
+      <div class="kode-tab" id="kodeTab">
+        <button class="ina-button ina-button--primary ina-button--sm" data-k="css">CSS (disarankan)</button>
+        <button class="ina-button ina-button--secondary ina-button--sm" data-k="react">React</button>
+        <button class="ina-button ina-button--secondary ina-button--sm" data-k="tw">Tailwind</button>
+      </div>
+<pre id="k-css">/* 1. CSS IDDS lebih dulu, lalu brand E-PPAT */
+import '@idds/react/index.css';          // atau &lt;link href="…/@idds/styles/dist/index.min.css"&gt;
+import './brand-eppat-idds/eppat.css';
+
+/* 2. Aktifkan brand (mendukung mode terang &amp; gelap) */
+document.documentElement.setAttribute('data-brand', 'eppat');</pre>
+<pre id="k-react" hidden>import { setCustomTheme, setThemeMode } from '@idds/react';
+import { eppatTheme } from './brand-eppat-idds/eppat-theme';
+
+setCustomTheme(eppatTheme);   // API resmi IDDS untuk brand di luar daftar bawaan
+setThemeMode('light');</pre>
+<pre id="k-tw" hidden>/* Tailwind v4 */
+@import 'tailwindcss';
+@import '@idds/styles/tailwind/css/idds.css';
+@import './brand-eppat-idds/tailwind/eppat.css';
+
+/* Kelas yang tersedia: bg-primary-500, text-primary-primary,
+   bg-eppat-sidebar-bg, bg-eppat-office-card, dll. */</pre>
+    </div>
+  </section>
+</main>
+
+<!-- modal & toast (markup resmi IDDS) -->
+<div class="ina-modal" id="modal" style="display:none">
+  <div class="ina-modal__backdrop" data-tutup></div>
+  <div class="ina-modal__container">
+    <div class="ina-modal__dialog ina-modal__dialog--size-md" role="dialog" aria-modal="true" aria-labelledby="modal-judul">
+      <div class="ina-modal__header">
+        <h2 class="ina-modal__title" id="modal-judul">Simpan pendaftaran TERA?</h2>
+        <button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-tutup><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ina-modal__close-icon"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+      </div>
+      <div class="ina-modal__body"><p>Pastikan data sudah sesuai dengan KTP dan SK pengangkatan Anda. Setelah disimpan, admin E-PPAT akan memeriksa data Anda.</p></div>
+      <div class="ina-modal__footer">
+        <button type="button" class="ina-button ina-button--secondary ina-button--md" data-tutup>Periksa Lagi</button>
+        <button type="button" class="ina-button ina-button--primary ina-button--md" id="simpanModal">Simpan</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ina-toast-container ina-toast-container--top-right" id="toast" style="display:none">
+  <div class="ina-toast-item">
+    <div class="ina-toast ina-toast--state-positive ina-toast--style-solid ina-toast--visible">
+      <div class="ina-toast__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"></circle><path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">Pendaftaran TERA berhasil disimpan.</p></div></div>
+      <button class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ina-toast__close-icon"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s), html = document.documentElement;
+  /* palet dibaca langsung dari token CSS aktif, jadi selalu sama dengan brand yang dipilih */
+  const L = h => { const c = [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255).map(v => v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4); return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]; };
+  const kontras = (a, b) => { const [x, y] = [L(a), L(b)].sort((p, q) => q - p); return ((x + .05) / (y + .05)).toFixed(2).replace('.', ','); };
+  const hex = v => { v = v.trim(); if (/^#[0-9a-f]{3}$/i.test(v)) v = '#' + [...v.slice(1)].map(c => c + c).join(''); return /^#[0-9a-f]{6}$/i.test(v) ? v.toUpperCase() : v; };
+  const baca = (n) => { const d = document.createElement('i'); d.style.color = `var(${n})`; document.body.appendChild(d); const c = getComputedStyle(d).color; d.remove();
+    const m = c.match(/\d+(\.\d+)?/g); return m ? '#' + m.slice(0, 3).map(x => (+x).toString(16).padStart(2, '0')).join('').toUpperCase() : hex(getComputedStyle(html).getPropertyValue(n)); };
+  const SKALA = ['25','50','100','200','300','400','500','600','700','800','900'];
+  const NAMA = { eppat:['hijau E-PPAT','emas kartu kantor'], inagov:['biru INAgov','oranye INAgov'], default:['netral (bawaan IDDS)','biru (bawaan IDDS)'] };
+  function gambarPalet() {
+    const br = html.getAttribute('data-brand') || 'default', nm = NAMA[br] || NAMA.default;
+    $('#judulPrimary').textContent = 'Primary — ' + nm[0];
+    $('#judulSecondary').textContent = 'Secondary — ' + nm[1];
+    $('#kartuKhusus').hidden = br !== 'eppat';
+    const utama = baca('--ina-primary-primary');
+    $('#ketPrimary').textContent = 'Dipakai untuk tombol utama, tab aktif, tautan, dan fokus. Teks putih di atas warna utama memiliki kontras ' + kontras(utama, '#FFFFFF') + ':1.';
+    const sw = (n, lbl) => { const v = baca(n); return `<div class="sw ${n === '--ina-primary-' + lbl && v === utama ? 'utama' : ''}"><i style="background:${v}"></i><div><b>${lbl}</b><span>${v}</span></div></div>`; };
+    $('#palPrimary').innerHTML = SKALA.map(s => sw('--ina-primary-' + s, s)).join('') +
+      `<div class="sw utama"><i style="background:${utama}"></i><div><b>utama</b><span>${utama}</span></div></div>`;
+    $('#palSecondary').innerHTML = SKALA.map(s => sw('--ina-secondary-' + s, s)).join('');
+    const khusus = [['--ina-eppat-sidebar-bg','Sidebar'],['--ina-eppat-sidebar-hover','Sidebar hover'],['--ina-eppat-sidebar-active','Sidebar aktif'],['--ina-eppat-office-card','Kartu kantor'],['--ina-eppat-stroke-brand','Garis brand'],['--ina-eppat-surface-cream','Latar krem']];
+    $('#palKhusus').innerHTML = khusus.map(([n, l]) => { const v = baca(n); return `<div class="sw"><i style="background:${v}"></i><div><b>${l}</b><span>${v}</span></div></div>`; }).join('');
+    const status = [['--ina-content-guide','Info (guide)'],['--ina-content-positive','Positif'],['--ina-warning-500','Peringatan'],['--ina-content-negative','Negatif'],['--ina-content-primary','Teks utama'],['--ina-stroke-primary','Garis']];
+    $('#palStatus').innerHTML = status.map(([n, l]) => { const v = baca(n); return `<div class="sw"><i style="background:${v}"></i><div><b>${l}</b><span>${v}</span></div></div>`; }).join('');
+  }
+  /* sakelar brand & mode — sama dengan cara resmi IDDS (atribut data-brand / data-theme di <html>) */
+  $('#pilihBrand').addEventListener('click', e => {
+    const b = e.target.closest('[data-brand]'); if (!b) return;
+    b.dataset.brand === 'default' ? html.removeAttribute('data-brand') : html.setAttribute('data-brand', b.dataset.brand);
+    document.querySelectorAll('#pilihBrand [data-brand]').forEach(x => x.setAttribute('aria-pressed', x === b));
+    gambarPalet();
+  });
+  $('#pilihMode').addEventListener('click', e => {
+    const b = e.target.closest('[data-mode]'); if (!b) return;
+    html.setAttribute('data-theme', b.dataset.mode);
+    document.querySelectorAll('#pilihMode [data-mode]').forEach(x => x.setAttribute('aria-pressed', x === b));
+    gambarPalet();
+  });
+  /* modal & toast */
+  const modal = $('#modal'), toast = $('#toast'); let tt;
+  $('#bukaModal').addEventListener('click', () => { modal.style.display = ''; $('#simpanModal').focus(); });
+  modal.addEventListener('click', e => { if (e.target.closest('[data-tutup]')) modal.style.display = 'none'; });
+  $('#simpanModal').addEventListener('click', () => { modal.style.display = 'none'; toast.style.display = ''; clearTimeout(tt); tt = setTimeout(() => toast.style.display = 'none', 3000); });
+  toast.addEventListener('click', e => { if (e.target.closest('[data-tutup-toast]')) toast.style.display = 'none'; });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') modal.style.display = 'none'; });
+  /* tab contoh di cuplikan */
+  document.querySelectorAll('.mini .ina-tab-horizontal__tab').forEach(t => t.addEventListener('click', () => {
+    t.parentElement.querySelectorAll('.ina-tab-horizontal__tab').forEach(x => { x.classList.toggle('ina-tab-horizontal__tab--selected', x === t); x.setAttribute('aria-selected', x === t); });
+  }));
+  /* tab kode */
+  $('#kodeTab').addEventListener('click', e => {
+    const b = e.target.closest('[data-k]'); if (!b) return;
+    document.querySelectorAll('#kodeTab [data-k]').forEach(x => { const on = x === b; x.classList.toggle('ina-button--primary', on); x.classList.toggle('ina-button--secondary', !on); });
+    ['css', 'react', 'tw'].forEach(k => $('#k-' + k).hidden = k !== b.dataset.k);
+  });
+  document.fonts && document.fonts.ready.then(gambarPalet); gambarPalet();
+})();
+</script>
+</body>
+</html>

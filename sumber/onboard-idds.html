@@ -1,0 +1,1064 @@
+<!doctype html>
+<html lang="id" data-brand="eppat" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Backlog E-PPAT Peruri — Platform Onboarding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- CSS resmi IDDS (design.inadigital.go.id/getting-started/code/js), versi dikunci -->
+<link href="https://unpkg.com/@idds/styles@1.6.38/dist/index.min.css" rel="stylesheet">
+<!-- Brand mode E-PPAT (brand-eppat-idds/eppat.css) -->
+<style id="brand-eppat">
+__EPPAT_CSS__
+
+/* Bantuan dalam IDDS Drawer + Accordion */
+.ina-drawer__content .bantu-langkah{margin:4px 0 4px;padding-left:20px;font-size:14px;line-height:21px}
+.ina-drawer__content .bantu-langkah li{margin-bottom:8px}
+.ina-drawer__content > p{margin:0 0 8px;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+.ina-drawer__content .bantu-sub{margin:20px 0 8px}
+.ina-drawer__content .bantu-kontak{grid-template-columns:1fr}
+.ina-drawer__content .ina-accordion{border-bottom:1px solid var(--ina-stroke-primary)}
+.ina-drawer__content .ina-accordion__body p{margin:0;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+
+.judul-halaman{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.judul-halaman .judul-kiri{min-width:0}
+</style>
+<style id="kerangka-css">
+/* ===== Order AJB — komponen IDDS + brand E-PPAT (HE-UMUM-01)
+   + usulan dari laporan Heuristic Evaluation INA Digital hal. 23–24 (HE-ORDER-01…05)
+   Kerangka & teks mengikuti layar live Peruri (dilihat 23 Okt 2026, akun Asisten). ===== */
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+button,input,select,textarea{font-family:inherit}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ina-content-primary);background:var(--ina-background-secondary);-webkit-font-smoothing:antialiased}
+
+/* protobar (khusus prototipe) */
+.protobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 16px;background:#0f1a17;color:#E6EDEA;font-size:12px;position:relative;z-index:60}
+.protobar a{color:#E6EDEA;text-decoration:none;border:1px dashed rgba(255,255,255,.3);border-radius:999px;padding:4px 10px;font:500 11px Inter,sans-serif}
+.protobar b{color:#fff}
+.protobar .sep{opacity:.35}
+.protobar button.pil{border:1px solid rgba(255,255,255,.25);background:transparent;color:#E6EDEA;font:500 11px Inter,sans-serif;padding:4px 10px;border-radius:999px;cursor:pointer}
+.protobar button.pil[aria-pressed="true"]{background:#3D6B5E;border-color:#3D6B5E;color:#fff}
+.protobar .kanan{margin-left:auto;display:inline-flex;gap:8px;flex-wrap:wrap}
+.protobar .utama{background:#3D6B5E!important;border-color:#3D6B5E!important;color:#fff!important;font-weight:600!important}
+.tag-usulan{display:none!important;align-items:center;font:600 10px Inter,sans-serif;letter-spacing:.6px;text-transform:uppercase;color:#2563EB;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:999px;padding:1px 7px;margin-left:6px;vertical-align:middle;white-space:nowrap}
+body.penanda .tag-usulan{display:inline-flex!important}
+body.penanda .ditandai{outline:2px dashed rgba(37,99,235,.45);outline-offset:4px;border-radius:10px}
+.sorot{outline:3px solid #2563EB!important;outline-offset:4px;border-radius:12px}
+
+/* kerangka aplikasi — struktur pola Sidebar & Header IDDS, warna dari brand E-PPAT (--ina-eppat-*, --ina-primary-*) */
+.app{display:flex;min-height:100vh}
+.sidebar{width:240px;flex:none;background:var(--ina-eppat-sidebar-bg);border-right:0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow:auto;padding:0 16px}
+.brand{display:flex;align-items:center;height:76px;flex:none;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:16px}
+.brand img{width:150px;display:block}
+.kantor.ina-card{flex:none;background:var(--ina-eppat-office-card);border:0;border-radius:12px;padding:12px 16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.kantor .ina-card__content{padding:0;gap:0}
+.kantor .eyebrow{font:600 10px/15px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#1f1f1f;opacity:.7}
+.kantor .ina-card__title{margin:4px 0 0;font:600 10px/1.375 Inter,sans-serif;color:#1f1f1f}
+.kantor .ina-card__description{-webkit-line-clamp:unset;line-clamp:unset;display:block;overflow:visible;margin:0;font-size:12px;line-height:18px;color:#1f1f1f}
+.kantor .kantor-info{display:flex;flex-direction:column;gap:4px;margin-top:8px;font-size:9px;line-height:13px;opacity:.8}
+.kantor .baris-kantor{display:flex;align-items:flex-start;gap:6px;font-size:9px;line-height:13px;font-weight:500;color:#1f1f1f}
+.kantor .baris-kantor svg{flex:none;width:10px;height:10px;margin-top:1px}
+#nav{flex:1;display:flex;flex-direction:column;gap:2px;padding-bottom:12px}
+.grp{display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:0;cursor:pointer;padding:16px 8px 6px;color:rgba(255,255,255,.72);font:500 12px/16px Inter,sans-serif;letter-spacing:0;text-transform:none} /* label grup sentence case (pola Sidebar IDDS) */
+.grp svg{flex:none;color:var(--eppat-sidebar-icon)}
+.grp > span:not(.chev){flex:1;min-width:0;text-align:left;line-height:16px} /* label grup rata kiri, sejajar ikon */
+/* ikon sidebar satu warna (pola backlog Perdana Niaga) — nanti dari Konten Situs › Tema Tampilan */
+:root{--eppat-sidebar-icon:#C2BB4B;--eppat-sidebar-active-icon:#FFFFFF}
+.grp .chev{margin-left:auto;transition:.15s;display:grid}
+.grp[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.items{display:flex;flex-direction:column;gap:2px}
+.sidebar .items a.nav-item{display:flex;justify-content:flex-start;gap:8px;width:100%;padding:8px;max-height:none;border-radius:8px;text-decoration:none;font-weight:500;color:var(--ina-eppat-sidebar-content)!important;background:transparent}
+.sidebar .items a.nav-item svg{width:16px;height:16px;flex:none;color:var(--eppat-sidebar-icon)}
+.sidebar .items a.nav-item:hover{background:var(--ina-eppat-sidebar-hover);color:#fff!important}
+.sidebar .items a.nav-item.on{background:var(--ina-eppat-sidebar-active);color:#fff!important;font-weight:600}
+.sidebar .items a.nav-item.on svg{color:var(--eppat-sidebar-active-icon)}
+.sidefoot{flex:none;padding:12px 8px;border-top:1px solid rgba(255,255,255,.1);font-size:11px;color:rgba(255,255,255,.75)}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+header.top{height:64px;flex:none;display:flex;align-items:center;gap:12px;padding:0 24px;background:var(--ina-background-primary);border-bottom:1px solid var(--ina-stroke-primary);position:sticky;top:0;z-index:20}
+.spacer{margin-left:auto}
+.user{position:relative;display:flex;align-items:center;gap:10px;padding:4px 8px;border-radius:8px}
+.ava{width:32px;height:32px;font:600 12px Inter,sans-serif;background:var(--ina-primary-primary)!important;color:#fff!important;border-color:var(--ina-primary-primary)!important}
+.uname{display:block;font:600 12px/14px Inter,sans-serif;color:var(--ina-primary-primary)}
+.urole{font:400 10px Inter,sans-serif;color:var(--ina-content-secondary);letter-spacing:1.4px;text-transform:uppercase}
+.content{flex:1;background-color:var(--ina-background-secondary);__BG__}
+.page{padding:24px 32px 56px}
+.page .ina-breadcrumb{margin-bottom:8px;display:flex;justify-content:flex-start}
+.page .ina-breadcrumb__list{justify-content:flex-start;margin:0;padding:0}
+h1{margin:0;font:500 28px/36px Inter,sans-serif;letter-spacing:-.3px;color:var(--ina-primary-primary)}
+.sub{margin:2px 0 0;font-size:14px;color:var(--ina-content-secondary)}
+.kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px}
+
+/* daftar order */
+.daftar-atas{display:flex;justify-content:flex-end;margin-top:20px}
+.saring{display:grid;grid-template-columns:minmax(0,1fr) 220px auto;gap:12px;align-items:end;margin-top:16px}
+.saring .ina-text-field__label{display:block}
+.saring .cari-wadah .ina-input-search{width:100%;margin-top:6px} /* IDDS Input Search, sama dengan Minuta & Verifikasi */
+.tabel-wadah{margin-top:16px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;overflow:hidden}
+.tabel-gulir{overflow-x:auto}
+table.tb{width:100%;border-collapse:collapse;font-size:14px}
+.tabel-wadah .ina-table{border:0;border-radius:0}
+table.tb td{vertical-align:middle}
+table.tb td .kd{font-weight:600;color:var(--ina-primary-primary);cursor:pointer}
+table.tb td .kc{font-size:12px;color:var(--ina-content-secondary)}
+table.tb tr.klik{cursor:pointer}
+table.tb tr.klik:hover td{background:var(--ina-primary-25)}
+.aksi-baris{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.kosong{padding:28px;text-align:center;color:var(--ina-content-secondary)}
+.halaman{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--ina-stroke-primary);font-size:13px;color:var(--ina-content-secondary)}
+.halaman > span{white-space:nowrap}
+[data-merah]{color:var(--ina-negative-600)!important}
+.tb .ina-table__cell,.tb .ina-table__header-cell{padding:12px 16px}
+.tb .ina-table__cell{white-space:normal}
+.lengkap{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.lengkap.ok{color:var(--ina-content-positive)}
+.lengkap.kurang{color:var(--ina-content-secondary)}
+.lengkap svg{flex:none}
+
+/* detail order */
+.det-kepala{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px}
+.det-kepala .kode{font:600 14px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary);margin-top:12px}
+.det-kepala h2{margin:2px 0 0;font:600 20px/28px Inter,sans-serif}
+.status-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px 28px}
+.status-kartu .ina-stepper{align-items:flex-start;min-height:92px;padding:4px 64px 0}
+.status-kartu .ina-stepper__separator{align-self:flex-start;margin-top:11px}
+.status-kartu .ina-stepper__label small{display:block;margin-top:3px;font-size:12px;line-height:16px;font-weight:400;color:var(--ina-content-secondary)}
+.status-kaki{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ina-stroke-primary);margin-top:8px;padding-top:16px}
+.status-kaki p{margin:0;font-size:14px;color:var(--ina-content-secondary)}
+.status-kaki p b{color:var(--ina-content-primary)}
+.status-kaki .kanan{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.status-kaki .alasan{font-size:12.5px;color:var(--ina-content-secondary)}
+.syarat{margin-top:16px;padding:14px 16px;border:1px solid var(--ina-stroke-primary);border-radius:12px;background:var(--ina-background-secondary)}
+.syarat h4{margin:0 0 10px;font:600 13px Inter,sans-serif;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.syarat h4 .hit{font-weight:500;color:var(--ina-content-secondary)}
+.syarat ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 16px}
+.syarat li{display:flex;align-items:center;gap:8px;font-size:13.5px;min-width:0}
+.syarat li .ik{width:20px;height:20px;border-radius:999px;display:grid;place-items:center;flex:none}
+.syarat li.ok .ik{background:var(--ina-positive-100);color:var(--ina-content-positive)}
+.syarat li.kurang .ik{background:var(--ina-warning-100);color:var(--ina-warning-600)}
+.syarat li.ok span.t{color:var(--ina-content-secondary)}
+.syarat li .ina-button{padding:0;height:auto;min-height:0}
+.syarat-alert{margin-top:16px}
+.syarat-alert .ina-alert__description{display:flex;flex-direction:column;gap:10px}
+.syarat-daftar{display:flex;flex-wrap:wrap;gap:8px 16px}
+.syarat-item{display:inline-flex;align-items:center;gap:4px}
+.syarat-item .ina-badge{display:inline-flex;align-items:center;gap:4px}
+.syarat-item .ina-button{padding:0 4px}
+.langkah-berikut{color:var(--ina-content-primary)}
+.info-baris{margin-top:16px}
+.info-baris .ina-alert__content{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;width:100%}
+.info-baris .ina-alert__text-section{flex:1;min-width:220px}
+
+.tab-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;overflow:hidden}
+.tab-kartu > .ina-tab-horizontal{padding:0 12px;border-bottom:1px solid var(--ina-stroke-primary)}
+.tab-kartu .ina-tab-horizontal__tab{gap:8px;display:inline-flex;align-items:center}
+.tab-kartu .tanda{font:600 11px Inter,sans-serif;border-radius:999px;padding:1px 7px}
+.tab-kartu .tanda.ok{background:var(--ina-positive-100);color:var(--ina-content-positive)}
+.tab-kartu .tanda.kurang{background:var(--ina-warning-100);color:var(--ina-warning-700)}
+.tab-kartu .tanda.netral{background:var(--ina-neutral-100);color:var(--ina-content-secondary)}
+.tab-isi{padding:20px}
+.tab-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.tab-bar p{margin:0;font-size:13px;color:var(--ina-content-secondary)}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f-grid .lebar{grid-column:1/-1}
+.ina-text-field textarea.ina-text-field__input{min-height:80px;resize:vertical;padding:0}
+.f-kaki{display:flex;justify-content:flex-end;margin-top:16px}
+.tb .nm{font-weight:500}
+.tb .sub2{font-size:12px;color:var(--ina-content-secondary)}
+.kunci{margin-bottom:16px}
+
+/* dialog */
+.ina-modal__body p{margin:0 0 8px;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+.seg{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary)}
+.seg button{border:0;border-radius:7px;background:transparent;padding:7px 14px;font:500 14px Inter,sans-serif;color:var(--ina-content-secondary);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ina-primary-primary);color:#fff}
+.fld{margin-bottom:16px}
+.fld > .ina-text-field__label{display:flex;align-items:center;gap:6px}
+.select-wadah{position:relative;display:block;width:100%}
+.select-wadah .ina-select-dropdown__panel{top:calc(100% + 4px);left:0;right:0;max-height:240px}
+.cari-panel{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:5;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:8px;box-shadow:0 10px 24px rgba(0,0,0,.1);padding:4px;max-height:220px;overflow:auto}
+.cari-panel button{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;border:0;background:transparent;text-align:left;padding:8px 10px;border-radius:6px;cursor:pointer;font-size:14px}
+.cari-panel button:hover{background:var(--ina-background-tertiary)}
+.cari-panel small{display:block;font-size:12px;color:var(--ina-content-secondary)}
+.kartu-pihak{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:12px 14px;background:var(--ina-background-secondary);font-size:13.5px}
+.kartu-pihak b{display:block;font-size:14px;margin-bottom:6px}
+.kartu-pihak dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;margin:0}
+.kartu-pihak dt{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.kartu-pihak dd{margin:0}
+.belum-ada{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 14px;padding:10px 12px;border-radius:10px;background:var(--ina-primary-25);border:1px solid var(--ina-primary-100);font-size:13px}
+.ringkas-kv{display:grid;grid-template-columns:140px 1fr;gap:8px 12px;margin:12px 0 14px;padding:12px 14px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);font-size:14px}
+.ringkas-kv dt{color:var(--ina-content-secondary)}
+.ringkas-kv dd{margin:0;font-weight:500}
+.cek-setuju{display:flex;gap:10px;align-items:flex-start;margin-top:10px;font-size:14px;cursor:pointer}
+
+.daftar-ubah{display:flex;flex-direction:column;gap:10px}
+.daftar-ubah .it{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:12px 14px}
+.daftar-ubah .it .a{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.daftar-ubah .it code{font:600 11.5px ui-monospace,Menlo,monospace;color:#2563EB}
+.daftar-ubah .it b{font-size:14px}
+.daftar-ubah .it p{margin:6px 0 4px;font-size:13px;line-height:19px;color:var(--ina-content-primary)}
+.daftar-ubah .it .lama{font-size:12.5px;line-height:18px;color:var(--ina-content-secondary)}
+.bantu-langkah{margin:8px 0 4px;padding-left:20px;font-size:14px;line-height:21px}
+.bantu-langkah li{margin-bottom:6px}
+.bantu-sub{margin:18px 0 8px;font:600 14px Inter,sans-serif;display:flex;align-items:center}
+.bantu-faq{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:14px}
+.bantu-faq summary{cursor:pointer;font-weight:500}
+.bantu-faq p{margin:8px 0 0!important}
+.bantu-kontak{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.bantu-kontak div{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:10px 12px;background:var(--ina-background-secondary)}
+.bantu-kontak b{display:block;font-size:12px;font-weight:500;color:var(--ina-content-secondary)}
+.bantu-kontak span{font-size:14px}
+.isi-tim{border-bottom:1px dashed currentColor;cursor:help}
+.toast-wadah{position:fixed;bottom:24px;right:24px;z-index:100;max-width:calc(100vw - 32px)}
+.tip{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:999px;border:1px solid var(--ina-stroke-secondary);color:var(--ina-content-secondary);font:600 10px Inter,sans-serif;cursor:help;background:transparent;padding:0}
+.ina-tooltip__bubble{max-width:260px;white-space:normal}
+
+@media (max-width:1024px){
+  .sidebar{position:fixed;z-index:40;left:0;top:0;transform:translateX(-100%);transition:.22s}
+  .sidebar.open{transform:none}
+  .scrim{position:fixed;inset:0;background:rgba(15,26,23,.45);z-index:35;opacity:0;pointer-events:none;transition:.22s}
+  .scrim.on{opacity:1;pointer-events:auto}
+  .syarat ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  header.top{padding:0 16px}
+  .user .txt,#bukaBantuan span{display:none}
+  .page{padding:20px 16px 40px}
+  h1{font-size:23px;line-height:32px}
+  .saring{grid-template-columns:1fr}
+  .f-grid,.syarat ul,.kartu-pihak dl,.bantu-kontak{grid-template-columns:1fr}
+  .status-kartu{padding:18px 16px}
+  .status-kartu .stepper-h{display:none}
+  .status-kartu .stepper-v{display:flex!important;padding:4px 0}
+  .ringkas-kv{grid-template-columns:1fr;gap:2px}
+  .protobar .kanan{margin-left:0}
+  table.tb thead{display:none}
+  table.tb tr{display:block;border-top:1px solid var(--ina-stroke-primary);padding:8px 0}
+  table.tb td{display:block;border:0;padding:4px 16px}
+  .aksi-baris{justify-content:flex-start}
+}
+.status-kartu .stepper-v{display:none}
+.status-kartu .stepper-v .ina-stepper__label small{display:inline;margin:0 0 0 8px}
+.status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
+</style>
+<style id="onboard-css">
+/* ===== Platform Onboarding (dev.eppat.id): Registrasi & Login — komponen IDDS + brand E-PPAT (HE-UMUM-01)
+   + usulan dari laporan Heuristic Evaluation INA Digital (rincian di UX Metric Lab: Highlight #11 Registrasi 91,7; #7 Login 68,6)
+   Tata letak, isian, dan teks mengikuti layar live dev.eppat.id (dilihat 26 Okt 2026) dan gambar bukti HE. ===== */
+.ina-tooltip:not(:hover):not(:focus-within) .ina-tooltip__content{display:none}
+.ina-tooltip__bubble{display:block;width:max-content;max-width:min(280px,80vw);white-space:normal;text-align:left;line-height:1.45;font-weight:400}
+.istilah{border-bottom:1px dashed currentColor;cursor:help}
+.ina-modal-confirmation{max-width:520px}
+body{background:#1f2c33}
+.ob{min-height:100vh;display:flex;flex-direction:column;font-family:Inter,sans-serif}
+/* navbar (live) */
+.ob-nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:24px;padding:14px max(16px,calc((100% - 1200px)/2));background:#2c3c44;border-bottom:1px solid rgba(255,255,255,.08)}
+.ob-nav img{height:30px}
+.ob-nav .menu{display:flex;gap:4px;margin:0 auto}
+.ob-nav .menu a{padding:8px 14px;border-radius:8px;color:rgba(255,255,255,.82);font:600 14px Inter,sans-serif;text-decoration:none}
+.ob-nav .menu a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.ob-nav .ina-button{border-radius:12px}
+/* hero (live: latar peta gelap) */
+.ob-hero{flex:1;position:relative;padding:56px 16px 64px;background:#1f2c33 url("__OB_HERO__") center/cover no-repeat}
+.ob-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 50% at 50% 48%,rgba(0,0,0,0) 30%,rgba(10,20,26,.35) 100%);pointer-events:none}
+.ob-hero > *{position:relative}
+.ob-judul{text-align:center;color:#fff;margin:0 0 28px}
+.ob-judul h1{margin:0;font:700 30px/38px Inter,sans-serif;color:#fff}
+.ob-judul p{margin:8px 0 0;font-size:15px;color:rgba(255,255,255,.85)}
+.ob-kartu{margin:0 auto;background:#fff;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.35);padding:40px 44px}
+.ob-kartu.kecil{max-width:420px;padding:32px}
+.ob-kartu.sedang{max-width:520px;padding:32px}
+.ob-kartu.besar{max-width:800px}
+.ob-kartu .logo{display:block;height:44px;margin:0 auto 8px}
+.ob-kartu h2{margin:0 0 4px;text-align:center;font:600 21px/30px Inter,sans-serif;color:var(--ina-content-primary)}
+.ob-kartu .sub{margin:0 0 20px;text-align:center;font-size:14px;color:var(--ina-content-secondary)}
+.ob-kartu .ina-text-field,.ob-kartu .ina-password-input{margin-top:16px}
+.ob-kartu .ina-button.lebar{width:100%;justify-content:center;margin-top:20px}
+.lupa{display:flex;justify-content:flex-end;margin-top:6px}
+.garis{border:0;border-top:1px solid var(--ina-stroke-primary);margin:22px 0 16px}
+.ob-kartu .tengah{text-align:center;font-size:14px;color:var(--ina-content-secondary);margin:0}
+.ob-kartu .tengah a{color:var(--ina-primary-primary);font-weight:600;text-decoration:none}
+.bantu-link{display:flex;justify-content:center;margin-top:12px}
+.form-ob{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
+.form-ob .lebar{grid-column:1/-1}
+.form-ob .tiga{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:0 16px}
+.ina-text-field select.ina-text-field__input{appearance:auto;background:transparent;border:0;width:100%;height:100%;font:inherit;font-size:14px;color:inherit;outline:0}
+.ina-text-field__prefix-text{font-size:14px;color:var(--ina-content-secondary);padding-right:8px;margin-right:8px;border-right:1px solid var(--ina-stroke-primary);white-space:nowrap}
+.syarat-pw{list-style:none;margin:8px 0 0;padding:10px 12px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:4px 12px}
+.syarat-pw li{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ina-content-secondary)}
+.syarat-pw .tanda{width:15px;height:15px;border-radius:999px;border:1.5px solid var(--ina-stroke-secondary);display:grid;place-items:center;flex:none}
+.syarat-pw li.ok{color:var(--ina-content-positive)}
+.syarat-pw li.ok .tanda{border-color:var(--ina-content-positive);background:var(--ina-positive-100)}
+.setuju{display:flex;gap:10px;align-items:flex-start;margin-top:22px;font-size:14px;cursor:pointer}
+.setuju a{color:var(--ina-primary-primary);font-weight:600}
+.aksi-form{display:flex;gap:12px;margin-top:20px}
+.aksi-form .ina-button{flex:1;justify-content:center;height:52px}
+.aksi-form .ina-button.batal{flex:0 0 140px}
+.alur{display:flex;align-items:flex-start;gap:0;margin:0 0 24px;padding:14px 16px;border-radius:14px;background:var(--ina-primary-25,#f4faf7);border:1px solid var(--ina-primary-100,#dcebe5);list-style:none}
+.alur li{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font-size:12px;line-height:16px;color:var(--ina-content-secondary);position:relative}
+.alur li .no{width:26px;height:26px;border-radius:999px;display:grid;place-items:center;background:#fff;border:1.5px solid var(--ina-primary-400,#7aa595);color:var(--ina-primary-primary);font:600 12px Inter,sans-serif;z-index:1}
+.alur li.kini .no{background:var(--ina-primary-600);border-color:var(--ina-primary-600);color:#fff}
+.alur li.kini{color:var(--ina-content-primary);font-weight:600}
+.alur li:not(:last-child)::after{content:"";position:absolute;top:13px;left:calc(50% + 15px);right:calc(-50% + 15px);height:1.5px;background:var(--ina-primary-200,#cfe3dc)}
+.alur-judul{margin:0 0 10px;font:600 13px Inter,sans-serif;color:var(--ina-content-primary)}
+/* MFA */
+.kembali-link{display:inline-flex;align-items:center;gap:4px;margin:0 0 12px;padding:0;border:0;background:none;color:var(--ina-primary-primary);font:600 13px Inter,sans-serif;cursor:pointer}
+.mfa-kepala{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.mfa-kepala h2{text-align:left}
+.mfa-kepala svg{color:var(--ina-primary-600)}
+.pilih-metode{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.pilih-metode button{display:flex;align-items:flex-start;gap:12px;width:100%;padding:14px 16px;border:1.5px solid var(--ina-stroke-primary);border-radius:14px;background:#fff;text-align:left;cursor:pointer;font:inherit}
+.pilih-metode button:hover,.pilih-metode button:focus-visible{border-color:var(--ina-primary-500);outline:0;background:var(--ina-primary-25)}
+.pilih-metode .ik{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:var(--ina-primary-50);color:var(--ina-primary-600);flex:none}
+.pilih-metode b{display:block;font-size:15px;color:var(--ina-content-primary)}
+.pilih-metode small{display:block;font-size:13px;color:var(--ina-content-secondary);margin-top:2px}
+.otp-isi{text-align:center}
+.otp-isi .surel{margin:0 0 4px;font-size:14px;color:var(--ina-content-secondary)}
+.otp-isi .ina-one-time-password{align-items:center;padding:4px 0}
+.otp-isi .ina-one-time-password__container{justify-content:center;margin:12px 0 8px}
+.otp-waktu.ina-badge{display:inline-flex;align-items:center;gap:6px;margin:4px 0 6px;font-weight:600}
+.otp-ulang{margin-top:8px;font-size:13.5px;color:var(--ina-content-secondary)}
+.kode-cadangan{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;margin:14px 0;padding:14px 18px;border:1px solid var(--ina-stroke-primary);border-radius:12px;background:var(--ina-background-secondary);font:600 14px ui-monospace,Menlo,monospace;color:var(--ina-content-primary)}
+.baris-tombol{display:flex;gap:8px;flex-wrap:wrap}
+.cek{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:14px;cursor:pointer}
+.status-kartu{text-align:center}
+.status-kartu .ikon-besar{width:72px;height:72px;border-radius:999px;display:grid;place-items:center;margin:4px auto 14px;background:var(--ina-positive-100);color:var(--ina-content-positive)}
+.status-kartu p{margin:0 0 6px;font-size:14px;color:var(--ina-content-secondary);line-height:22px}
+.ina-alert{margin-top:16px}
+/* footer (live) */
+.ob-foot{background:#2c3c44;color:rgba(255,255,255,.85);padding:40px max(16px,calc((100% - 1180px)/2)) 24px;font-size:13.5px}
+.ob-foot .kolom{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.ob-foot img{height:34px;margin-bottom:16px}
+.ob-foot dl{margin:0}
+.ob-foot dt{font-weight:600;color:#fff;margin-top:12px}
+.ob-foot dd{margin:4px 0 0;line-height:20px}
+.ob-foot .bawah{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:28px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);font-size:12.5px;color:rgba(255,255,255,.7)}
+
+/* IDDS Stepper horizontal: label multi-baris di bawah nomor (IDDS bawaan membatasi tinggi item) */
+.alur-kotak{margin:0 0 24px;padding:14px 16px;border-radius:14px;background:var(--ina-primary-25,#f4faf7);border:1px solid var(--ina-primary-100,#dcebe5)}
+.stepper-ob.ina-stepper{display:flex;align-items:flex-start;width:100%;margin-top:14px;padding:0}
+.stepper-ob .ina-stepper__item{flex-direction:column;align-items:center;gap:6px;height:auto;max-height:none;flex:0 0 auto;width:92px;padding:0}
+.stepper-ob .ina-stepper__label{position:static;transform:none;white-space:normal;text-align:center;font-size:12px;line-height:16px;max-width:92px;margin:0}
+.stepper-ob .ina-stepper__item--active .ina-stepper__label > span,.stepper-ob .ina-stepper__item--completed .ina-stepper__label > span{font-weight:600;color:var(--ina-content-primary)}
+.stepper-ob .ina-stepper__label small{display:block;margin-top:2px;font-size:11px;font-weight:400;color:var(--ina-content-secondary)}
+.stepper-ob .ina-stepper__separator{align-self:flex-start;flex:1 1 auto;min-width:6px;margin:11px -34px 0;width:auto}
+.stepper-ob .ina-stepper__icon-wrapper{position:relative;z-index:1}
+/* IDDS Radio Button dalam kartu pilihan (paket, bank) */
+.radio-kartu .ina-radio-input__group{display:grid;gap:12px}
+.radio-kartu.dua .ina-radio-input__group{grid-template-columns:1fr 1fr;gap:16px}
+.radio-kartu .ina-radio-input__main-label{grid-column:1/-1;margin:0}
+.radio-kartu .ina-radio-input__option{align-items:flex-start;gap:12px;padding:16px 18px;border:1.5px solid var(--ina-stroke-primary);border-radius:16px;margin:0}
+.radio-kartu .ina-radio-input__option:has(.ina-radio-input__field:checked){border-color:var(--ina-primary-600);box-shadow:0 0 0 1px var(--ina-primary-600);background:var(--ina-primary-25)}
+.radio-kartu .ina-radio-input__option--disabled{background:var(--ina-background-secondary)}
+.radio-kartu .ina-radio-input__option-label{display:block;flex:1;cursor:pointer}
+.radio-kartu .ina-radio-input__option-label .atas{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pilih-paket h4{margin:0;font:600 20px Inter,sans-serif}
+.pilih-paket .harga{margin:10px 0 8px;font:700 26px Inter,sans-serif;color:var(--ina-content-primary)}
+.pilih-paket ul{margin:0;padding-left:18px;font-size:14px;line-height:24px;color:var(--ina-content-secondary)}
+.radio-kartu .ina-radio-input__option-label small{display:block;font-size:13px;color:var(--ina-content-secondary)}
+.kartu-aksi.ina-card{display:flex;flex-direction:row;align-items:center;gap:12px;width:100%;max-width:none;padding:14px 16px;text-align:left;font:inherit;cursor:pointer;border-radius:14px}
+.kartu-aksi.ina-card:hover,.kartu-aksi.ina-card:focus-visible{border-color:var(--ina-primary-500);outline:0;background:var(--ina-primary-25)}
+.kartu-aksi.ina-card:disabled{cursor:not-allowed;background:var(--ina-background-secondary)}
+/* ===== Dashboard (Onboarding) — kerangka aplikasi live: sidebar gelap + header ===== */
+#rootApp{display:none}
+body.mode-app #rootApp{display:flex}
+body.mode-app .ob{display:none}
+.side-ob .grp-lbl{margin:18px 4px 6px;font:600 11px Inter,sans-serif;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.side-ob .versi{margin-top:auto;padding:14px 4px;border-top:1px solid rgba(255,255,255,.1);font:11px ui-monospace,Menlo,monospace;color:rgba(255,255,255,.6)}
+.hero-db{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:24px;border-radius:18px;background:#2c3c44;color:#fff}
+.hero-db h2{margin:10px 0 4px;font:700 22px/30px Inter,sans-serif;color:#fff}
+.hero-db p{margin:0;font-size:14px;color:rgba(255,255,255,.85)}
+.hero-db .ina-button{background:rgba(255,255,255,.12)!important;border-color:rgba(255,255,255,.25)!important;color:#fff!important}
+.kartu-db.ina-card{display:block;width:100%;max-width:none;margin-top:16px;padding:22px 24px;border-radius:18px}
+.kartu-db .ina-card__content{padding:0;display:block}
+.kartu-db h3{margin:0;font:600 17px/26px Inter,sans-serif;color:var(--ina-content-primary)}
+.kartu-db .ket{margin:2px 0 0;font-size:14px;color:var(--ina-content-secondary)}
+.tahap{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:4px}
+.tahap li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;font-size:12px;line-height:16px;color:var(--ina-content-secondary)}
+.tahap li .no{width:28px;height:28px;border-radius:999px;display:grid;place-items:center;border:1.5px solid var(--ina-stroke-secondary);background:#fff;font:600 12px Inter,sans-serif;color:var(--ina-content-secondary);z-index:1}
+.tahap li.ok .no{background:var(--ina-primary-600);border-color:var(--ina-primary-600);color:#fff}
+.tahap li.kini .no{border:2px solid var(--ina-primary-600);color:var(--ina-primary-primary)}
+.tahap li.ok,.tahap li.kini{color:var(--ina-content-primary)}
+.tahap li b{font-weight:600}
+.tahap li small{font-size:11px;color:var(--ina-content-secondary)}
+.tahap li:not(:last-child)::after{content:"";position:absolute;top:14px;left:calc(50% + 16px);right:calc(-50% + 16px);height:2px;background:var(--ina-stroke-primary)}
+.tahap li.ok:not(:last-child)::after{background:var(--ina-primary-500)}
+.berikut-db{margin-top:16px}
+.berikut-db .ina-alert__content{display:flex;flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap;width:100%}
+.berikut-db .ina-alert__text-section{flex:1;min-width:240px}
+.paket{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.paket label{display:block;padding:20px 22px;border:1.5px solid var(--ina-stroke-primary);border-radius:16px;cursor:pointer}
+.paket label.dipilih{border-color:var(--ina-primary-600);box-shadow:0 0 0 1px var(--ina-primary-600);background:var(--ina-primary-25)}
+.paket input{position:absolute;opacity:0}
+.paket .atas{display:flex;align-items:center;gap:10px}
+.paket .rad{width:20px;height:20px;border-radius:999px;border:2px solid var(--ina-stroke-secondary);display:grid;place-items:center;flex:none}
+.paket label.dipilih .rad{border-color:var(--ina-primary-600)}
+.paket label.dipilih .rad::after{content:"";width:10px;height:10px;border-radius:999px;background:var(--ina-primary-600)}
+.paket h4{margin:0;font:600 20px Inter,sans-serif}
+.paket .harga{margin:10px 0 8px;font:700 26px Inter,sans-serif;color:var(--ina-content-primary)}
+.paket ul{margin:0;padding-left:18px;font-size:14px;line-height:24px;color:var(--ina-content-secondary)}
+.kaki-db{display:flex;justify-content:flex-end;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px;padding-top:16px;border-top:1px solid var(--ina-stroke-primary)}
+.kaki-db .ket{margin-right:auto}
+.dua-kol{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.metode{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.metode button{display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;border:1.5px solid var(--ina-stroke-primary);border-radius:14px;background:#fff;text-align:left;font:inherit;cursor:pointer}
+.metode button:disabled{cursor:not-allowed;background:var(--ina-background-secondary);color:var(--ina-content-secondary)}
+.metode button.dipilih{border-color:var(--ina-primary-600);box-shadow:0 0 0 1px var(--ina-primary-600)}
+.metode b{display:block;font-size:15px}
+.metode small{display:block;font-size:13px;color:var(--ina-content-secondary)}
+.metode .ina-badge{margin-left:auto}
+.tagihan{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.tagihan .jml{text-align:right;font-size:12px;color:var(--ina-content-secondary);letter-spacing:1px}
+.tagihan .jml b{display:block;font-size:18px;color:var(--ina-content-primary);letter-spacing:0}
+.no-va{display:flex;align-items:center;gap:12px;margin-top:14px;padding:16px;border:1px solid var(--ina-stroke-primary);border-radius:14px;background:var(--ina-background-secondary)}
+.no-va span{display:block;font-size:12px;letter-spacing:1px;color:var(--ina-content-secondary)}
+.no-va b{display:block;font:700 22px ui-monospace,Menlo,monospace;letter-spacing:2px;color:var(--ina-content-primary);margin-top:4px}
+.no-va .ina-button{margin-left:auto}
+.kv-va{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.kv-va div{padding:10px 14px;border:1px solid var(--ina-stroke-primary);border-radius:12px;font-size:13px;color:var(--ina-content-secondary)}
+.kv-va div b{display:block;margin-top:2px;font-size:14px;color:var(--ina-content-primary);word-break:break-all}
+.kv-va .lebar{grid-column:1/-1}
+.panduan-va{margin:12px 0 0;padding:12px 16px 12px 34px;border:1px solid var(--ina-stroke-primary);border-radius:12px;font-size:14px;line-height:24px}
+.tombol-blok{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.tombol-blok .ina-button{justify-content:center}
+.email-pratinjau{margin-top:12px;border:1px solid var(--ina-stroke-primary);border-radius:14px;overflow:hidden;font-size:14px}
+.email-pratinjau .kep{padding:10px 14px;background:var(--ina-background-secondary);font-size:12.5px;color:var(--ina-content-secondary)}
+.email-pratinjau .isi{padding:16px 18px;line-height:22px}
+.email-pratinjau .kotak{margin:12px 0;padding:12px 14px;border-radius:10px;background:var(--ina-background-secondary)}
+.email-pratinjau .kotak small{display:block;font-size:11px;letter-spacing:1px;color:var(--ina-content-secondary)}
+.bantuan-db{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bantuan-db .isi{flex:1;min-width:220px}
+.rw-status{white-space:nowrap}
+
+@media (max-width:760px){
+  .ob-nav .menu{display:none}
+  .tahap{grid-template-columns:repeat(3,1fr);row-gap:16px}
+  .tahap li::after{display:none}
+  .paket,.dua-kol,.kv-va{grid-template-columns:1fr}
+  .ob-nav{justify-content:space-between}
+  .ob-kartu,.ob-kartu.kecil,.ob-kartu.sedang{padding:24px 18px;border-radius:18px}
+  .form-ob{grid-template-columns:1fr}
+  .form-ob .tiga{grid-template-columns:1fr}
+  .alur{overflow-x:auto}
+  .alur li{min-width:72px}
+  .aksi-form{flex-direction:column-reverse}
+  .aksi-form .ina-button.batal{flex:1}
+  .ob-foot .kolom{grid-template-columns:1fr}
+  .ob-judul h1{font-size:24px;line-height:32px}
+}
+</style>
+</head>
+<body>
+
+<div class="protobar">
+  <a href="index.html">&#9776; Daftar prototipe</a>
+  <span class="sep">&bull;</span><b>Platform Onboarding</b><span class="sep">&bull;</span><span>Layar:</span>
+  <span id="pilLayar"></span>
+  <span class="kanan">
+    <span>Contoh: sandi <b>salah123</b> = login gagal · kode <b>000000</b> = salah</span>
+    <button class="pil" id="simKedaluwarsa" title="Saat kode OTP email ditampilkan">Simulasi kode kedaluwarsa</button>
+    <button class="pil" id="aturUlang">Atur ulang contoh</button>
+    <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai usulan</button>
+    <button class="pil utama" id="bukaUbah">Daftar perubahan</button>
+  </span>
+</div>
+
+<div class="ob">
+  <nav class="ob-nav" aria-label="Navigasi utama">
+    <img src="__OB_LOGO_LIGHT__" alt="E-PPAT">
+    <div class="menu"><a href="#" data-luar="Beranda">Beranda</a><a href="#" data-luar="Tentang e-PPAT">Tentang e-PPAT</a><a href="#" data-luar="Fitur">Fitur</a><a href="#" data-luar="Cara Kerja">Cara Kerja</a><a href="#" data-luar="Berita">Berita</a></div>
+    <span id="navAksi"></span>
+  </nav>
+  <main class="ob-hero" id="halaman"></main>
+  <footer class="ob-foot">
+    <div class="kolom">
+      <div><img src="__OB_PERURI__" alt="Peruri"><dl><dt>Head Office</dt><dd>Jl. Palatehan No.4 Blok K-V, Kebayoran Baru, Jakarta 12160</dd><dt>Phone Number</dt><dd>021-7395000</dd><dt>Hotline Digital Product</dt><dd>1500159</dd><dt>Asisten Virtual PERURI (TAMARA)</dt><dd>+62-811-1067-5555</dd><dt>Email Umum</dt><dd>contact@peruri.co.id</dd><dt>Email Product</dt><dd>marketing@peruri.co.id</dd></dl></div>
+      <div><img src="__OB_ATR__" alt="Kementerian ATR/BPN"><dl><dt>Stakeholder</dt><dd>Jl. Sisingamangaraja No.2, Selong, Kec. Kby. Baru, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12110</dd><dt>Whatsapp</dt><dd>0811-1068-0000 (Chat Only)</dd><dt>Email</dt><dd>surat@atrbpn.go.id</dd></dl></div>
+      <div><img src="__OB_IPPAT__" alt="Pengurus Pusat IPPAT"><dl><dt>Stakeholder</dt><dd>Ruko Mediterania Gajah Mada Residences, Blok TUC: 02 Jl. Gajah Mada No. 174 Kota Jakarta Barat, 11130</dd><dt>Whatsapp</dt><dd>(021) 22066368</dd><dt>Email</dt><dd>ippat.pengurus@yahoo.com</dd></dl></div>
+    </div>
+    <div class="bawah"><span>Copyright © 2026 E-PPAT | Powered by Peruri Env Dev</span><span>terms · condition</span></div>
+  </footer>
+</div>
+
+<!-- Dashboard (Onboarding): kerangka aplikasi live (sidebar gelap + header), kelas kerangka sama dengan prototipe lain -->
+<div class="app" id="rootApp">
+  <div class="scrim" id="scrim"></div>
+  <aside class="sidebar side-ob" id="sidebar">
+    <div class="brand"><img src="__LOGO__" alt="E-PPAT"></div>
+    <div class="grp-lbl">Navigasi</div>
+    <nav id="nav"></nav>
+    <div class="versi">e-PPAT v1.0.1</div>
+  </aside>
+  <div class="main">
+    <header class="top">
+      <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="spacer"></div>
+      <div class="user"><span class="ina-avatar ina-avatar--circle ava">CP</span><span class="txt"><span class="uname">Contoh PPAT Baru</span><span class="urole">Pelanggan</span></span></div>
+    </header>
+    <div class="content"><div class="page" id="halamanApp"></div></div>
+  </div>
+</div>
+
+<div id="lapisan"></div>
+<div id="lapisanDrawer"></div>
+<div class="toast-wadah" id="toastWadah"></div>
+
+<script>
+(() => {
+/* ---------------- ikon & util ---------------- */
+const I = {
+  panah:'<path d="M5 12h14M13 6l6 6-6 6"/>', kiri:'<path d="M15 18l-6-6 6-6"/>', x:'<path d="M18 6L6 18M6 6l12 12"/>', info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+  centang:'<path d="M20 6L9 17l-5-5"/>', seru:'<circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/>', mata:'<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>',
+  mataTutup:'<path d="M17.9 17.9A10 10 0 0 1 12 19c-7 0-11-7-11-7a18 18 0 0 1 5.1-5.9M9.9 4.2A9 9 0 0 1 12 4c7 0 11 7 11 7a18 18 0 0 1-2.2 3.2M1 1l22 22"/>',
+  tameng:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>', surat:'<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/>', ponsel:'<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',
+  jam:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>', salin:'<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+  unduh:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/>', bantu:'<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/>', masuk:'<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>'
+};
+const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const usulan = kode => `<span class="tag-usulan">usulan &middot; ${kode}</span>`;
+const badge = (t, j, uk = 'md', atr = '') => `<span class="ina-badge ina-badge--soft ina-badge--${j} ina-badge--${uk} ina-badge--rounded-full" ${atr}>${t}</span>`;
+/* kelas tambahan di atr (class="…") digabung ke kelas IDDS agar tidak ada atribut class ganda */
+const tombol = (t, h = 'primary', uk = 'md', atr = '', ikon = '') => { let k = ''; atr = atr.replace(/class="([^"]*)"/, (m, c) => { k = ' ' + c; return ''; }); return `<button type="button" class="ina-button ina-button--${h} ina-button--${uk}${k}" ${atr}>${ikon}${t}</button>`; };
+const alert = (j, judul, isi) => `<div class="ina-alert ina-alert--${j}" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section">${judul ? `<div class="ina-alert__title">${judul}</div>` : ''}<div class="ina-alert__description">${isi}</div></div></div></div>`;
+const est = t => `<span class="isi-tim" title="Data contoh. Ganti dengan data resmi dari tim E-PPAT.">${t}</span>`;
+const denganTip = (isi, t, letak = 'top') => `<span class="ina-tooltip ina-tooltip--placement-${letak}">${isi}<span class="ina-tooltip__content"><span class="ina-tooltip__bubble">${t}</span></span></span>`;
+const spinner = `<span class="ina-spinner ina-spinner--spinner-only" aria-hidden="true"><span class="ina-spinner__element ina-spinner__element--size-xs ina-spinner__element--color-primary"></span></span>`;
+const samar = e => e.replace(/^(.{2})[^@]*/, '$1***');
+const SYARAT_PW = [['Minimal 12 karakter', s => s.length >= 12], ['Mengandung huruf besar', s => /[A-Z]/.test(s)], ['Mengandung huruf kecil', s => /[a-z]/.test(s)], ['Mengandung angka', s => /[0-9]/.test(s)], ['Mengandung simbol', s => /[^A-Za-z0-9]/.test(s)]];
+
+/* ---------------- daftar perubahan ---------------- */
+const UBAH = [
+  { kode:'HE-REG-01', judul:'Formulir Registrasi: tombol Batal dan konfirmasi sebelum keluar',
+    isi:'Formulir pendaftaran memiliki tombol "Batal" di samping "Daftar Sekarang". Bila formulir sudah terisi lalu pengguna menekan Batal, Masuk, atau menu navigasi, muncul IDDS Modal Confirmation "Tinggalkan pendaftaran?" yang menjelaskan bahwa data yang sudah diisi akan hilang.',
+    lama:'Tidak ada tombol batal atau kembali selama pendaftaran; pengguna hanya dapat memakai tombol kembali di peramban dan data yang sudah diisi hilang tanpa peringatan.', ke:'reg-batal', sorot:'#aksiForm' },
+  { kode:'HE-REG-02', judul:'Formulir Registrasi: penjelasan isian ID PPAT dan URL Tenant',
+    isi:'Label "ID PPAT" dan "URL Tenant" diberi IDDS Tooltip dan teks bantuan di bawah isian. URL Tenant menampilkan pratinjau alamat lengkap aplikasi kantor (mis. dev-app.eppat.id/t/kantor-contoh), aturan penulisan (huruf kecil, angka, tanda hubung), dan hasil cek ketersediaan.',
+    lama:'Isian ID PPAT dan URL Tenant tidak dijelaskan; pengguna baru tidak tahu nilai apa yang harus diisi.', ke:'reg', sorot:'#f-rTenant' },
+  { kode:'HE-REG-03', judul:'Halaman Registrasi: gambaran alur pendaftaran sampai aplikasi aktif',
+    isi:'Di atas formulir ada ringkasan lima tahap: Isi data, Verifikasi email, Masuk dan amankan akun, Pilih paket dan bayar, Aplikasi kantor aktif. Tahap yang sedang dikerjakan ditandai.',
+    lama:'Tidak ada panduan atau onboarding untuk pengguna yang baru pertama kali mendaftar; tahapan baru terlihat di Dashboard setelah pengguna masuk.', ke:'reg', sorot:'#alurDaftar' },
+  { kode:'HE-REG-04', judul:'Formulir Registrasi: syarat kata sandi tampil sebagai daftar centang',
+    isi:'Syarat kata sandi ditampilkan sebagai daftar centang yang terisi saat mengetik, sama dengan Akun Saya dan Tambah User: minimal 12 karakter, huruf besar, huruf kecil, angka, simbol. Ulangi Kata Sandi langsung memberi tahu apakah sudah sama.',
+    lama:'Syarat kata sandi ditulis dalam satu baris kecil "Min. 12 karakter · Huruf besar, kecil, angka & simbol" dengan bilah kekuatan tanpa penjelasan syarat mana yang belum terpenuhi.', ke:'reg', sorot:'#syaratPw' },
+  { kode:'HE-LOGIN-01', judul:'Verifikasi dua langkah: masa berlaku kode terlihat di layar',
+    isi:'Halaman kode Email OTP memakai IDDS One-Time Password (6 kotak), menampilkan email tujuan yang disamarkan, hitung mundur "Kode berlaku 4:59", dan tombol "Kirim ulang kode" yang aktif setelah 60 detik.',
+    lama:'Batas waktu kode (5 menit) hanya disebut di email "Kode OTP Login e-PPAT"; layar hanya berisi satu kolom kode.', ke:'otp', sorot:'#otpWaktu' },
+  { kode:'HE-LOGIN-02', judul:'Halaman masuk: pesan galat menjelaskan penyebab dan cara memperbaikinya',
+    isi:'Kegagalan masuk ditampilkan sebagai IDDS Alert di dalam kartu (bukan dialog yang menutupi formulir), dengan isian yang tetap terisi dan tautan "Lupa kata sandi?". Kode OTP yang salah atau kedaluwarsa dijelaskan di bawah kotak kode beserta sisa percobaan dan cara mendapatkan kode baru.',
+    lama:'Kegagalan masuk memunculkan dialog besar "Login Gagal — Username/email atau kata sandi salah" yang harus ditutup dengan OK. Kode OTP yang salah hanya memunculkan "Invalid input" berbahasa Inggris tanpa solusi.', ke:'gagal', sorot:'#galatLogin' },
+  { kode:'HE-LOGIN-03', judul:'Verifikasi dua langkah: navigasi tetap tersedia',
+    isi:'Bilah navigasi atas tetap tampil di semua tahap verifikasi dua langkah. Setiap tahap memiliki tautan kembali ("Ganti metode", "Kembali ke halaman masuk") dan tombol Bantuan.',
+    lama:'Menu navigasi menghilang saat pengguna berada di tahap verifikasi dua langkah, sehingga pengguna yang tidak menerima kode tidak memiliki jalan keluar selain menutup halaman.', ke:'mfa', sorot:'#kembaliMasuk' },
+  { kode:'HE-LOGIN-04', judul:'Verifikasi dua langkah: penjelasan metode dan kode cadangan',
+    isi:'Halaman pilih metode menjelaskan dalam satu kalimat apa itu verifikasi dua langkah dan kapan memilih aplikasi authenticator atau email. Halaman kode cadangan menjelaskan kegunaannya; tombol "Lanjut ke Dasbor" baru aktif setelah pengguna mencentang "Saya sudah menyimpan kode cadangan".',
+    lama:'Tidak ada penjelasan tentang verifikasi dua langkah bagi pengguna baru. Tombol "Saya sudah simpan, ke Dashboard" dapat ditekan tanpa benar-benar menyimpan kode.', ke:'mfa', sorot:'#penjelasanMfa' },
+  { kode:'HE-OB-01', judul:'Dashboard Onboarding: hasil cek status jelas dan dapat ditutup',
+    isi:'"Check Status Terbaru" dibakukan menjadi "Cek Status Terbaru". Hasilnya ditampilkan sebagai IDDS Toast yang dapat ditutup, berisi jam pengecekan dan tahap saat ini (mis. "Belum ada perubahan · Tahap: Proses Pembayaran"). Bila ada perubahan, tahap yang berubah disorot di stepper.',
+    lama:'Setiap kali status dicek, muncul dialog besar "Status Diperbarui — Status registrasi terbaru sudah dimuat." tanpa tombol tutup, walaupun tidak ada perubahan apa pun (skor User Control Dashboard: 20).', ke:'db-cek', sorot:null },
+  { kode:'HE-OB-02', judul:'Ringkasan Pesanan: paket dapat diganti sebelum pembayaran',
+    isi:'Ringkasan Pesanan memiliki tombol "Ganti Paket" selama pembayaran belum diterima. Bila Virtual Account sudah dibuat, IDDS Modal Confirmation menjelaskan bahwa tagihan lama dibatalkan dan tagihan baru dibuat untuk paket yang dipilih.',
+    lama:'Setelah "Lanjut Pembayaran", paket terkunci; tidak ada cara mengganti paket selain menghubungi admin atau memulai ulang.', ke:'db-bayar', sorot:'#gantiPaket' },
+  { kode:'HE-OB-03', judul:'Dashboard Onboarding: langkah berikutnya, perkiraan waktu, dan bantuan',
+    isi:'Di bawah stepper ada IDDS Alert "Langkah berikutnya" yang menyebut apa yang perlu dilakukan dan perkiraan waktunya (mis. Proses Administrasi ± 1 hari kerja). Kartu "Butuh bantuan?" menampilkan kontak dukungan dan membuka drawer Bantuan berisi pertanyaan umum pembayaran dan aktivasi.',
+    lama:'Tidak ada panduan, tooltip, atau kontak dukungan di Dashboard maupun halaman pembayaran (skor Help & Documentation: 0).', ke:'db', sorot:'#langkahDb' },
+  { kode:'HE-OB-04', judul:'Email aktivasi instansi: tanpa kata sandi dalam teks biasa',
+    isi:'Email "Instansi e-PPAT siap digunakan" berisi alamat aplikasi kantor dan tombol "Buat Kata Sandi" (tautan sekali pakai dengan masa berlaku), bukan kata sandi. Pengguna membuat kata sandi sendiri sesuai syarat 12 karakter + 4 jenis karakter.',
+    lama:'Email aktivasi menampilkan "EMAIL LOGIN", "PASSWORD" dalam teks biasa, dan "LINK LOGIN" (skor Privacy Dashboard: 0).', ke:'db-lunas', sorot:'#emailAktivasi' },
+  { kode:'HE-OB-05', judul:'Stepper Dashboard Onboarding: nomor urut dan istilah konsisten',
+    isi:'Kesembilan tahap ditampilkan berurutan 1–9 (termasuk Verifikasi Anggota), masing-masing dengan tanggal selesai atau keterangan status. Label teknis dibakukan: metode "VIRTUAL_ACCOUNT" di Riwayat Transaksi menjadi "Virtual Account BRI", status "BELUM DIBAYAR" menjadi lencana "Belum dibayar".',
+    lama:'Penomoran stepper melompat dari 3 ke 5 karena satu tahap tidak ditampilkan. Riwayat Transaksi menampilkan nilai teknis "VIRTUAL_ACCOUNT" dan teks kapital "BELUM DIBAYAR".', ke:'db-riwayat', sorot:'#tabelRiwayat' },
+  { kode:'HE-UMUM-02', judul:'Bantuan untuk pendaftaran dan masuk',
+    isi:'Tautan "Butuh bantuan?" di setiap kartu membuka IDDS Drawer berisi pertanyaan umum (email verifikasi tidak masuk, lupa kata sandi, kode tidak masuk, kehilangan akses authenticator, isian ID PPAT dan URL Tenant) dan kontak dukungan.',
+    lama:'Tidak ada panduan atau kontak dukungan di halaman pendaftaran dan masuk (skor Help & Documentation Login: 25).', ke:'bantuan', sorot:null },
+  { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
+    isi:'Text Field, Password Input, Checkbox, Radio Button, Stepper, Card, Button, Alert, One-Time Password, Modal Confirmation, Tooltip, Toast, Drawer, dan Table memakai komponen INA Digital Design System dengan brand E-PPAT. Label berbahasa Inggris dibakukan: Login → Masuk, Register → Daftar, Username → Nama Pengguna, Login Pertama → Masuk Pertama, Customer → Pelanggan, Dashboard → Dasbor (menu samping aplikasi); kata ganti "anda" ditulis "Anda".',
+    lama:'Isian, stepper, pilihan paket, dialog, dan kotak pesan dibuat sendiri. Label bercampur bahasa Inggris (Login, Register, Username, Customer) dan placeholder memakai "anda" huruf kecil.', ke:'reg', sorot:null }
+];
+
+/* ---------------- keadaan ---------------- */
+const LAYAR = [['daftar', 'Registrasi'], ['verif', 'Cek email'], ['verifOk', 'Verifikasi berhasil'], ['masuk', 'Login'], ['metode', 'Verifikasi dua langkah'], ['cadangan', 'Kode cadangan'], ['dasbor', 'Dasbor'], ['bayar', 'Pembayaran VA'], ['lunas', 'Setelah lunas'], ['riwayat', 'Riwayat Transaksi']];
+const APP = ['dasbor', 'bayar', 'lunas', 'riwayat'];
+const S = { layar:'daftar', ubah:false, setuju:false, gagal:false, email:'', metode:'email', memuat:'', cekTenant:'' };
+/* status Dashboard (Onboarding) */
+const DB0 = () => ({ paket:'', dipesan:'', metodeBayar:'', bank:'', va:null, lunas:false, cek:'', hasilCek:'' });
+let DB = DB0();
+const AKUN = { email:'ppat.baru@contoh.id' };
+
+/* ---------------- navbar ---------------- */
+function gambarNav() {
+  $('#navAksi').innerHTML = S.layar === 'daftar' ? tombol('Masuk', 'primary', 'md', 'data-ke="masuk"') : S.layar === 'masuk' ? tombol('Daftar', 'primary', 'md', 'data-ke="daftar"') : tombol('Keluar', 'secondary', 'md', 'data-ke="masuk" id="navKeluar"', ik('masuk', 14));
+  $('#pilLayar').innerHTML = LAYAR.map(([k, t]) => `<button class="pil" data-layar="${k}" aria-pressed="${S.layar === k}">${t}</button>`).join(' ');
+}
+const bantuanLink = () => `<div class="bantu-link">${tombol('Butuh bantuan?', 'link', 'sm', 'data-bantuan', ik('bantu', 14))}${usulan('HE-UMUM-02')}</div>`;
+
+/* ---------------- Registrasi (live: Daftar E-PPAT Sekarang) ---------------- */
+const tf = (id, l, ph = '', wajib = false, bantu = '', ekstra = '', prefix = '', tipe = 'text') => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}${wajib ? '<span class="ina-text-field__required">*</span>' : ''}</label>
+  <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md">${prefix ? `<span class="ina-text-field__prefix-text">${prefix}</span>` : ''}<input id="${id}" type="${tipe}" class="ina-text-field__input" placeholder="${ph}" ${ekstra}></div>
+  <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div></div>`;
+const pilihan = (id, l, opsi, wajib = false) => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}${wajib ? '<span class="ina-text-field__required">*</span>' : ''}</label>
+  <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><select id="${id}" class="ina-text-field__input">${opsi.map(o => `<option value="${o === opsi[0] ? '' : o}">${o}</option>`).join('')}</select></div>
+  <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu=""></div></div></div>`;
+const pwIsian = (id, l, ph, bantu = '', ac = 'new-password') => `<div class="ina-password-input" id="f-${id}"><label class="ina-password-input__label" for="${id}">${l}<span class="ina-password-input__required">*</span></label>
+  <div class="ina-password-input__wrapper ina-password-input__wrapper--size-md ina-password-input__wrapper--neutral"><input id="${id}" type="password" class="ina-password-input__input" placeholder="${ph}" autocomplete="${ac}">
+  <div class="ina-password-input__actions"><button type="button" class="ina-password-input__toggle-button" data-lihat-pw="${id}" aria-label="Tampilkan password" aria-pressed="false">${ik('mata', 18)}</button></div></div>
+  <div class="ina-password-input__status-area"><span class="ina-password-input__status-message" id="h-${id}" aria-live="polite">${bantu}</span></div></div>`;
+/* IDDS Stepper horizontal (dipakai alur pendaftaran dan 9 tahap Dashboard) */
+const CEK_STEP = '<svg class="ina-stepper__check-icon" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none"><path d="M5 12l5 5l10 -10"/></svg>';
+const stepperH = (L, kini, sub = () => '', label = 'Tahapan') => `<div class="ina-stepper ina-stepper--horizontal stepper-ob" role="list" aria-label="${label}">${L.map((t, i) => { const kls = i < kini ? 'completed' : i === kini ? 'active' : '';
+  return `${i ? `<div class="ina-stepper__separator ${i <= kini ? 'ina-stepper__separator--completed' : ''}" aria-hidden="true"></div>` : ''}<div class="ina-stepper__item ${kls ? 'ina-stepper__item--' + kls : ''}" role="listitem" aria-current="${i === kini ? 'step' : 'false'}"><div class="ina-stepper__icon-wrapper">${i < kini ? CEK_STEP : `<span class="ina-stepper__step-number">${i + 1}</span>`}</div><div class="ina-stepper__label"><span>${t}</span>${sub(i)}</div></div>`; }).join('')}</div>`;
+const ALUR = ['Isi data pendaftaran', 'Verifikasi email', 'Masuk dan amankan akun', 'Pilih paket dan bayar', 'Aplikasi kantor aktif'];
+const alur = kini => `<div class="ditandai alur-kotak" id="alurDaftar"><p class="alur-judul">Langkah sampai aplikasi kantor Anda aktif${usulan('HE-REG-03')}</p>${stepperH(ALUR, kini, () => '', 'Langkah pendaftaran')}</div>`;
+const TIP_ID = 'Nomor identitas PPAT Anda. Dipakai asosiasi PPAT untuk memverifikasi bahwa pendaftar adalah PPAT yang sah.';
+const TIP_URL = 'Alamat aplikasi kantor Anda. Pegawai dan klien kantor masuk melalui alamat ini, jadi pilih nama yang mudah dikenali, misalnya nama kantor.';
+function layarDaftar() {
+  return `<div class="ob-judul"><h1>Daftar E-PPAT Sekarang</h1><p>Pastikan data yang Anda masukkan sesuai.</p></div>
+    <section class="ob-kartu besar" aria-label="Formulir pendaftaran">
+      ${alur(0)}
+      <div class="form-ob">
+        ${tf('rNama', 'Nama Lengkap', 'Masukkan nama lengkap Anda', true)}
+        ${tf('rNik', 'NIK', 'Masukkan 16 digit NIK', true, '16 digit sesuai KTP elektronik', 'inputmode="numeric" maxlength="16"')}
+        ${tf('rEmail', 'Email', 'Masukkan email Anda', true, 'Link verifikasi dikirim ke email ini.', '', '', 'email')}
+        ${tf('rHp', 'Nomor Telepon', '81234567890', true, '', 'inputmode="numeric"', '+62')}
+        <div>${pwIsian('rPw', 'Kata Sandi', 'Minimal 12 karakter')}</div>
+        <div>${pwIsian('rPw2', 'Ulangi Kata Sandi', 'Minimal 12 karakter')}</div>
+        <div class="lebar ditandai"><ul class="syarat-pw" id="syaratPw" aria-live="polite">${SYARAT_PW.map(([l], i) => `<li data-syarat="${i}"><span class="tanda" aria-hidden="true"></span>${l}</li>`).join('')}</ul>${usulan('HE-REG-04')}</div>
+        <div class="tiga">${pilihan('rWarga', 'Kewarganegaraan', ['Pilih', 'WNI', 'WNA'])}${tf('rTempat', 'Tempat Lahir', 'Masukkan tempat lahir')}${tf('rTgl', 'Tanggal Lahir', 'Pilih tanggal', false, '', '', '', 'date')}</div>
+        <div class="lebar ditandai">${tf('rIdPpat', `${denganTip('<span class="istilah" tabindex="0">ID PPAT</span>', TIP_ID)}`, 'Masukkan ID PPAT Anda', true, 'Sesuai data keanggotaan PPAT Anda.')}${usulan('HE-REG-02')}</div>
+        ${pilihan('rBank', 'Bank', ['Pilih Bank', 'Bank Contoh Satu', 'Bank Contoh Dua', 'Bank Contoh Tiga'])}
+        ${tf('rRek', 'Nomor Rekening', 'Masukkan nomor rekening Anda', false, '', 'inputmode="numeric"')}
+        <div class="lebar">${tf('rTenant', `${denganTip('<span class="istilah" tabindex="0">URL Tenant</span>', TIP_URL)}`, 'username-tenant', true, 'Huruf kecil, angka, dan tanda hubung. Contoh: kantor-contoh', '', 'dev-app.eppat.id/t/')}</div>
+      </div>
+      <label class="setuju" for="rSetuju"><span class="ina-checkbox"><input type="checkbox" id="rSetuju" class="ina-checkbox__input peer" ${S.setuju ? 'checked' : ''}><span class="ina-checkbox__box ina-checkbox__box--${S.setuju ? 'checked' : 'unchecked'}">${S.setuju ? ik('centang', 12) : ''}</span></span><span>Dengan klik tombol daftar, saya telah membaca dan menyetujui serta tunduk kepada <a href="#" data-luar="Ketentuan Layanan e-PPAT">Ketentuan Layanan e-PPAT</a></span></label>
+      <div class="aksi-form ditandai" id="aksiForm">${tombol('Batal', 'secondary', 'lg', 'id="batalDaftar" class="batal"')}${tombol('Daftar Sekarang', 'primary', 'lg', `id="kirimDaftar" ${S.setuju && !S.memuat ? '' : 'disabled'}`, S.memuat === 'daftar' ? spinner : '')}${usulan('HE-REG-01')}</div>
+      ${bantuanLink()}
+    </section>`;
+}
+/* halaman live "Cek Email Anda" (setelah daftar) dan "Verifikasi Berhasil!" (setelah klik tautan email) */
+function layarVerifEmail() {
+  return `<section class="ob-kartu sedang status-kartu" aria-label="Cek email">
+    <span class="ikon-besar">${ik('surat', 34)}</span><h2>Cek Email Anda</h2>
+    <p>Pendaftaran berhasil! Kami telah mengirimkan tautan verifikasi ke email Anda.</p>
+    <p>Harap periksa kotak masuk (atau folder spam) Anda dan klik tautan tersebut untuk mengaktifkan akun Anda sebelum masuk.</p>
+    <div class="kotak-surel" style="margin:14px 0;padding:12px;border-radius:12px;background:var(--ina-background-secondary)"><small style="display:block;font-size:12px;color:var(--ina-content-secondary)">Email Pendaftaran Anda</small><b>${esc(samar(S.email || AKUN.email))}</b></div>
+    ${alur(1)}
+    <div class="tombol-blok">${tombol('Kirim Ulang Email', 'secondary', 'lg', 'data-luar-ok="Email verifikasi dikirim ulang."')}${tombol('Lanjut ke Halaman Masuk', 'primary', 'lg', 'data-ke="masuk"', ik('panah', 16))}</div>
+    ${bantuanLink()}</section>`;
+}
+function layarVerifOk() {
+  return `<section class="ob-kartu sedang status-kartu" aria-label="Verifikasi berhasil">
+    <span class="ikon-besar">${ik('centang', 34)}</span><h2>Verifikasi Berhasil!</h2><p>Email Anda berhasil diverifikasi! Langkah berikutnya: masuk dan amankan akun dengan verifikasi dua langkah.</p>
+    ${tombol('Masuk Sekarang', 'primary', 'lg', 'data-ke="masuk" class="lebar"', ik('panah', 16))}
+    ${bantuanLink()}</section>`;
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-luar-ok]'); if (b) toast(b.dataset.luarOk, 'positive'); });
+
+/* ---------------- Login (live: Masuk ke e-PPAT) ---------------- */
+function layarMasuk() {
+  return `<section class="ob-kartu kecil" aria-label="Masuk">
+    <img class="logo" src="__OB_LOGO__" alt="E-PPAT"><h2>Masuk ke e-PPAT</h2>
+    ${S.gagal ? `<div class="ditandai" id="galatLogin">${alert('critical', 'Email atau kata sandi salah', 'Periksa kembali email dan kata sandi Anda. Bila lupa kata sandi, pilih "Lupa kata sandi?" di bawah.')}${usulan('HE-LOGIN-02')}</div>` : ''}
+    ${tf('mEmail', 'Email atau Nama Pengguna', 'Masukkan email atau nama pengguna Anda', true, '', `value="${esc(S.email)}" autocomplete="username"`)}
+    ${pwIsian('mPw', 'Kata Sandi', 'Masukkan kata sandi', '', 'current-password')}
+    <div class="lupa">${tombol('Lupa kata sandi?', 'link', 'sm', 'data-luar="Lupa kata sandi"')}</div>
+    ${tombol('Masuk', 'primary', 'lg', `id="kirimMasuk" class="lebar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'masuk' ? spinner : '')}
+    <hr class="garis"><p class="tengah">Belum punya akun? <a href="#" data-ke="daftar">Daftar sekarang</a></p>
+    ${bantuanLink()}</section>`;
+}
+/* verifikasi dua langkah (live: Verifikasi Dua Langkah (MFA)) */
+function layarMetode() {
+  return `<section class="ob-kartu sedang" aria-label="Verifikasi dua langkah">
+    <button type="button" class="kembali-link ditandai" id="kembaliMasuk" data-ke="masuk">${ik('kiri', 14)} Kembali ke halaman masuk</button>${usulan('HE-LOGIN-03')}
+    <div class="mfa-kepala">${ik('tameng', 22)}<h2>Verifikasi Dua Langkah (MFA)</h2></div>
+    <p class="ditandai" id="penjelasanMfa" style="margin:0;font-size:14px;line-height:22px;color:var(--ina-content-secondary)">Selain kata sandi, setiap kali masuk Anda diminta kode 6 digit. Akun tetap aman walaupun kata sandi diketahui orang lain. Pilih cara menerima kode:${usulan('HE-LOGIN-04')}</p>
+    <div class="pilih-metode">
+      <button type="button" class="ina-card ina-card--variant-basic kartu-aksi" data-metode="app"><span class="ik">${ik('ponsel', 20)}</span><span><b>Aplikasi Authenticator</b><small>Google Authenticator, Authy, dll (TOTP). Disarankan bila Anda sering masuk; kode tersedia walau tanpa sinyal.</small></span></button>
+      <button type="button" class="ina-card ina-card--variant-basic kartu-aksi" data-metode="email"><span class="ik">${ik('surat', 20)}</span><span><b>Email OTP</b><small>Kode dikirim ke email Anda setiap kali masuk. Kode berlaku 5 menit.</small></span></button>
+    </div>
+    ${bantuanLink()}</section>`;
+}
+function layarOtp() {
+  const email = S.metode === 'email';
+  return `<section class="ob-kartu sedang" aria-label="Masukkan kode">
+    <button type="button" class="kembali-link" data-ke="metode">${ik('kiri', 14)} Ganti metode</button>
+    <div class="mfa-kepala">${ik('tameng', 22)}<h2>Verifikasi Dua Langkah (MFA)</h2></div>
+    <div class="otp-isi">
+      <p class="surel">${email ? `Kami mengirim kode OTP 6 digit ke <b>${esc(samar(S.email || AKUN.email))}</b>. Masukkan di bawah.` : 'Buka aplikasi authenticator Anda, lalu masukkan kode 6 digit untuk akun e-PPAT.'}</p>
+      <div class="ina-one-time-password"><div class="ina-one-time-password__container" role="group" aria-label="Kode 6 digit">${Array.from({ length:6 }, (_, i) => `<input class="ina-one-time-password__input" inputmode="numeric" maxlength="1" aria-label="Digit ${i + 1}" data-otp="${i}" autocomplete="one-time-code">`).join('')}</div>
+        <div class="ina-one-time-password__helper-text" id="otpPesan" aria-live="polite"></div></div>
+      ${email ? `<div class="ditandai" style="display:inline-block"><div class="ina-badge ina-badge--soft ina-badge--brand ina-badge--md ina-badge--rounded-full otp-waktu" id="otpWaktu">${ik('jam', 14)} <span>Kode berlaku 5:00</span></div>${usulan('HE-LOGIN-01')}</div><div class="otp-ulang" id="otpUlang"></div>` : '<p class="otp-ulang">Kode di aplikasi berganti setiap 30 detik. Masukkan kode yang sedang tampil.</p>'}
+    </div>
+    ${tombol('Aktifkan &amp; Masuk', 'primary', 'lg', `id="kirimOtp" class="lebar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'otp' ? spinner : ik('panah', 16))}
+    ${bantuanLink()}</section>`;
+}
+function layarCadangan() {
+  return `<section class="ob-kartu sedang" aria-label="Kode cadangan">
+    <div class="mfa-kepala">${ik('tameng', 22)}<h2>Kode Cadangan MFA</h2></div>
+    <p style="margin:0;font-size:14px;line-height:22px;color:var(--ina-content-secondary)">Gunakan salah satu kode ini untuk masuk bila Anda kehilangan akses ke aplikasi authenticator atau email. Setiap kode hanya bisa dipakai sekali dan tidak akan ditampilkan lagi.</p>
+    ${alert('caution', '', 'Simpan kode di tempat aman, misalnya pengelola kata sandi atau kertas yang disimpan di lemari terkunci.')}
+    <div class="kode-cadangan" aria-label="Daftar kode cadangan">${['A1B2C-D3E4F', 'G5H6J-K7L8M', 'N9P1Q-R2S3T', 'U4V5W-X6Y7Z', 'B8C9D-F1G2H', 'J3K4L-M5N6P', 'Q7R8S-T9U1V', 'W2X3Y-Z4A5B'].map(k => `<span>${k}</span>`).join('')}</div>
+    <div class="baris-tombol">${tombol('Salin', 'secondary', 'sm', 'data-luar="Salin kode"', ik('salin', 14))}${tombol('Unduh (.txt)', 'secondary', 'sm', 'data-luar="Unduh kode"', ik('unduh', 14))}</div>
+    <label class="cek ditandai" for="sudahSimpan"><span class="ina-checkbox"><input type="checkbox" id="sudahSimpan" class="ina-checkbox__input peer"><span class="ina-checkbox__box ina-checkbox__box--unchecked"></span></span><span>Saya sudah menyimpan kode cadangan di tempat aman.${usulan('HE-LOGIN-04')}</span></label>
+    ${tombol('Lanjut ke Dasbor', 'primary', 'lg', 'id="keDasbor" class="lebar" disabled', ik('panah', 16))}
+    ${bantuanLink()}</section>`;
+}
+
+/* ---------------- gambar ---------------- */
+function gambar() {
+  gambarNav();
+  const app = APP.includes(S.layar);
+  document.body.classList.toggle('mode-app', app);
+  if (app) { gambarNavApp(); $('#halamanApp').innerHTML = { dasbor:layarDasbor, bayar:layarBayar, lunas:layarLunas, riwayat:layarRiwayat }[S.layar](); return; }
+  $('#halaman').innerHTML = { daftar:layarDaftar, verif:layarVerifEmail, verifOk:layarVerifOk, masuk:layarMasuk, metode:layarMetode, otp:layarOtp, cadangan:layarCadangan }[S.layar]();
+  if (S.layar === 'otp') pasangOtp();
+}
+
+/* ================= Dashboard (Onboarding) ================= */
+const PAKET = {
+  trial:{ n:'Trial', lencana:['Akses terbatas', 'info'], harga:'Gratis', fitur:['10 Transaksi', 'Semua Menu Akses', 'Pengguna Maksimal 5', '30 Hari Free Trial'] },
+  enterprise:{ n:'Enterprise', lencana:['Akses penuh', 'success'], harga:'Rp3.500.000', fitur:['1 PPAT, 1 Admin, & hingga 4 Asisten', 'E-Sign (Maks. 6 Orang) & E-Seal/Stamp', 'Pekerjaan Tanpa Batas', 'Dasbor Analitik Komprehensif', 'Bantuan Teknis Mendalam'] }
+};
+const TAHAP = ['Pendaftaran', 'Verifikasi Email', 'Masuk Pertama', 'Verifikasi Anggota', 'Pilih Produk', 'Proses Pembayaran', 'Lunas', 'Proses Administrasi', 'Selesai'];
+function posisiTahap() { if (DB.lunas) return 7; if (DB.dipesan) return 5; return 4; }
+function gambarNavApp() {
+  $('#nav').innerHTML = '<div class="items">' + [['dasbor', 'Dasbor', 'grid'], ['riwayat', 'Riwayat Transaksi', 'dok']].map(([k, t, i]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item ${S.layar === k || (k === 'dasbor' && S.layar !== 'riwayat') ? 'on' : ''}" data-ke="${k === 'dasbor' ? (DB.lunas ? 'lunas' : DB.dipesan ? 'bayar' : 'dasbor') : k}">${ik(i)}<span>${t}</span></a>`).join('') + '</div>';
+}
+I.grid = '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>';
+I.dok = '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>';
+I.ulang = '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>';
+I.telepon = '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>';
+const remahApp = t => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link" data-ke="dasbor"><span class="ina-breadcrumb__text">Beranda</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">${t}</span></span></li></ol></nav>`;
+const TGL = ['26 Okt, 09.10', '26 Okt, 09.12', '26 Okt, 09.15', '26 Okt, 09.15'];
+function heroDb() {
+  return `<section class="hero-db"><div>${badge(DB.lunas ? 'Status akun: Diproses' : 'Status akun: Onboarding', DB.lunas ? 'info' : 'success', 'sm')}<h2>Selamat Datang di Portal e-PPAT</h2><p>Selesaikan langkah-langkah di bawah ini untuk mengaktifkan akun PPAT ${PAKET[DB.dipesan || 'enterprise'].n} Anda.</p></div>
+    <span>${tombol('Cek Status Terbaru', 'secondary', 'md', `id="cekStatus" ${S.memuat === 'cek' ? 'disabled' : ''}`, S.memuat === 'cek' ? spinner : ik('ulang', 16))}${usulan('HE-OB-01')}</span></section>`;
+}
+/* stepper 9 tahap bernomor urut (HE-OB-05) + langkah berikutnya (HE-OB-03) */
+function kartuTahap() {
+  const p = posisiTahap(), waktu = i => i < 4 ? TGL[i] : i === 4 && DB.dipesan ? '26 Okt, 09.20' : i === 5 && DB.lunas ? '26 Okt, 09.31' : i === 6 && DB.lunas ? '26 Okt, 09.31' : '';
+  const BERIKUT = {
+    4:['Pilih paket layanan', 'Pilih Trial atau Enterprise di bawah, lalu tekan Lanjut Pembayaran. Paket masih dapat diganti sebelum pembayaran diterima.'],
+    5:['Selesaikan pembayaran', `Bayar tagihan melalui Virtual Account sebelum batas waktu. Pembayaran terverifikasi otomatis dalam beberapa menit setelah transfer.`],
+    7:['Tunggu proses administrasi', `Tim Peruri menyiapkan aplikasi kantor Anda (perkiraan ${est('± 1 hari kerja')}). Anda akan menerima email berisi alamat aplikasi dan tautan untuk membuat kata sandi.`]
+  }[p];
+  return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuTahap"><div class="ina-card__content"><h3>Progress Registrasi Anda${usulan('HE-OB-05')}</h3>
+    ${stepperH(TAHAP, p, i => `<small>${i < p ? (waktu(i) || 'Selesai') : i === p ? 'Sedang berjalan' : '—'}</small>`, 'Progres registrasi')}
+    <div class="berikut-db ditandai" id="langkahDb">${alert('info', `Langkah berikutnya: ${BERIKUT[0]}`, `${BERIKUT[1]}${usulan('HE-OB-03')}`)}</div></div></section>`;
+}
+function kartuBantuan() {
+  return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="bantuanDb"><div class="ina-card__content bantuan-db">
+    <span class="isi"><h3>Butuh bantuan?</h3><p class="ket">Hubungi Hotline Digital Product Peruri di 1500159 atau Asisten Virtual TAMARA +62-811-1067-5555.</p></span>
+    ${tombol('Lihat Bantuan', 'secondary', 'md', 'data-bantuan', ik('bantu', 16))}${usulan('HE-OB-03')}</div></section>`;
+}
+function layarDasbor() {
+  if (DB.dipesan) { S.layar = DB.lunas ? 'lunas' : 'bayar'; return S.layar === 'lunas' ? layarLunas() : layarBayar(); }
+  return `${heroDb()}${kartuTahap()}
+    <section class="ina-card ina-card--variant-basic kartu-db"><div class="ina-card__content"><h3>Pilih Paket Layanan Anda</h3><p class="ket">Mulai konfigurasi instansi e-PPAT Anda dengan memilih paket yang sesuai.</p>
+      <fieldset class="ina-radio-input ina-radio-input--size-md radio-kartu dua pilih-paket" style="border:0;padding:0;margin:16px 0 0"><div class="ina-radio-input__group"><p class="ina-radio-input__main-label sr-only" style="position:absolute;left:-9999px">Paket layanan</p>${Object.entries(PAKET).map(([k, p]) => `<div class="ina-radio-input__option"><input type="radio" id="paket-${k}" name="paket" value="${k}" class="ina-radio-input__field" ${DB.paket === k ? 'checked' : ''}>
+        <label for="paket-${k}" class="ina-radio-input__option-label"><span class="atas"><h4>${p.n}</h4>${badge(...p.lencana, 'sm')}</span><div class="harga">${p.harga}</div><ul>${p.fitur.map(f => `<li>${f}</li>`).join('')}</ul></label></div>`).join('')}</div></fieldset>
+      <div class="kaki-db"><span class="ket">${DB.paket ? `Paket dipilih: <b>${PAKET[DB.paket].n}</b>` : 'Pilih salah satu paket untuk melanjutkan.'}</span>${tombol('Lanjut Pembayaran', 'primary', 'md', `id="lanjutBayar" ${DB.paket ? '' : 'disabled'}`, ik('panah', 16))}</div></div></section>
+    ${kartuBantuan()}`;
+}
+function kartuRingkasan() {
+  const p = PAKET[DB.dipesan];
+  return `<section class="ina-card ina-card--variant-basic kartu-db" style="margin-top:0"><div class="ina-card__content"><h3>Ringkasan Pesanan</h3><p class="ket">Detail paket berlangganan yang Anda pilih.</p>
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--ina-stroke-primary)"><div class="paket" style="grid-template-columns:1fr;margin-top:0"><label class="dipilih" style="cursor:default"><span class="atas"><h4>${p.n}</h4>${badge(...p.lencana, 'sm')}</span><div class="harga">${p.harga}</div><ul>${p.fitur.map(f => `<li>${f}</li>`).join('')}</ul></label></div></div>
+    ${DB.lunas ? '' : `<div class="kaki-db ditandai" id="gantiPaket"><span class="ket">Paket dapat diganti selama pembayaran belum diterima.</span>${tombol('Ganti Paket', 'secondary', 'sm', 'id="tombolGanti"', ik('ulang', 14))}${usulan('HE-OB-02')}</div>`}</div></section>`;
+}
+function kartuMetode() {
+  if (DB.va) return kartuVa();
+  const tag = `<div class="tagihan"><span><h3>Pilih Metode Pembayaran</h3><p class="ket">${DB.metodeBayar ? 'QRIS atau Virtual Account sesuai pilihan.' : 'Pilih metode untuk membayar tagihan Anda.'}</p></span><span class="jml">TAGIHAN<b>${PAKET[DB.dipesan].harga}</b></span></div>`;
+  if (!DB.metodeBayar) return `<section class="ina-card ina-card--variant-basic kartu-db" style="margin-top:0"><div class="ina-card__content">${tag}
+    <div class="metode"><button type="button" class="ina-card ina-card--variant-basic kartu-aksi" data-metode-bayar="va"><span><b>Virtual Account</b><small>Pembayaran melalui Virtual Account</small></span>${ik('chev', 16)}</button>
+      <button type="button" class="ina-card ina-card--variant-basic kartu-aksi" disabled><span><b>QRIS</b><small>Pembayaran menggunakan QRIS</small></span>${badge('Segera hadir', 'neutral', 'sm')}</button>
+      <button type="button" class="ina-card ina-card--variant-basic kartu-aksi" disabled><span><b>Transfer Bank</b><small>Pembayaran melalui Transfer Bank</small></span>${badge('Segera hadir', 'neutral', 'sm')}</button></div></div></section>`;
+  const BANK = [['BRI', 'Pembayaran otomatis terverifikasi', true], ['BCA', '', false], ['BNI', '', false], ['Mandiri', '', false]];
+  return `<section class="ina-card ina-card--variant-basic kartu-db" style="margin-top:0"><div class="ina-card__content">${tag}
+    <fieldset class="ina-radio-input ina-radio-input--size-md radio-kartu" style="border:0;padding:0;margin:14px 0 0"><div class="ina-radio-input__group"><p class="ina-radio-input__main-label">Bank Virtual Account</p>${BANK.map(([b, k, aktif]) => `<div class="ina-radio-input__option ${aktif ? '' : 'ina-radio-input__option--disabled'}"><input type="radio" id="bank-${b}" name="bank" value="${b}" class="ina-radio-input__field" ${aktif ? '' : 'disabled'} ${DB.bank === b ? 'checked' : ''}>
+      <label for="bank-${b}" class="ina-radio-input__option-label ${aktif ? '' : 'ina-radio-input__option-label--disabled'}"><span class="atas"><b>${b} Virtual Account</b>${aktif ? '' : badge('Segera hadir', 'neutral', 'sm')}</span><small>${aktif ? k : 'Belum tersedia'}</small></label></div>`).join('')}</div></fieldset>
+    <div class="tombol-blok">${tombol('Buat Virtual Account', 'primary', 'md', `id="buatVa" ${DB.bank && !S.memuat ? '' : 'disabled'}`, S.memuat === 'va' ? spinner : '')}${tombol('Kembali', 'tertiary', 'md', 'id="kembaliMetode"')}</div></div></section>`;
+}
+I.chev = '<path d="M9 18l6-6-6-6"/>';
+function sisaVa() { const s = Math.max(0, Math.round((DB.va.habis - Date.now()) / 1000)); return `${String(Math.floor(s / 3600)).padStart(2, '0')}:${String(Math.floor(s % 3600 / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; }
+function kartuVa() {
+  return `<section class="ina-card ina-card--variant-basic kartu-db" style="margin-top:0"><div class="ina-card__content">
+    <div class="tagihan"><span><h3>${DB.bank} Virtual Account</h3><p class="ket">Pembayaran terverifikasi otomatis</p></span><span class="jml">TAGIHAN<b>${PAKET[DB.dipesan].harga}</b></span></div>
+    ${alert('caution', 'Selesaikan pembayaran dalam <span id="sisaVa">' + sisaVa() + '</span>', `Lakukan transfer sebelum ${DB.va.sampai}. Setelah batas waktu, buat Virtual Account baru.`)}
+    <div class="no-va"><span>NOMOR VIRTUAL ACCOUNT<b>${DB.va.no}</b></span>${tombol('Salin', 'secondary', 'sm', 'id="salinVa"', ik('salin', 14))}</div>
+    <div class="kv-va"><div>Nama VA<b>Pembayaran e-PPAT</b></div><div>Berlaku sampai<b>${DB.va.sampai}</b></div><div class="lebar">Referensi<b>${DB.va.ref}</b></div></div>
+    <ol class="panduan-va"><li>Lakukan transfer sesuai nominal di atas melalui kanal bank yang Anda pilih.</li><li>Pastikan nomor Virtual Account yang dimasukkan benar.</li><li>Pembayaran akan diverifikasi secara otomatis oleh sistem.</li></ol>
+    ${DB.hasilCek ? `<div id="hasilCekBayar">${alert('caution', 'Pembayaran belum terdeteksi', `Dicek pukul ${DB.hasilCek}. Bila Anda baru saja mentransfer, tunggu beberapa menit lalu cek lagi.`)}</div>` : ''}
+    <div class="tombol-blok">${tombol('Cek Status Pembayaran', 'primary', 'md', `id="cekBayar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'bayar' ? spinner : ik('ulang', 16))}${tombol('Ganti bank pembayaran', 'tertiary', 'md', 'id="gantiBank"')}</div></div></section>`;
+}
+function layarBayar() {
+  if (!DB.dipesan) { S.layar = 'dasbor'; return layarDasbor(); }
+  if (DB.lunas) { S.layar = 'lunas'; return layarLunas(); }
+  return `${heroDb()}${kartuTahap()}<div class="dua-kol" style="margin-top:16px">${kartuRingkasan()}${kartuMetode()}</div>${kartuBantuan()}`;
+}
+function layarLunas() {
+  if (!DB.lunas) { DB.dipesan = DB.dipesan || 'enterprise'; DB.lunas = true; }
+  return `${heroDb()}${kartuTahap()}
+    <div class="dua-kol" style="margin-top:16px">${kartuRingkasan()}
+      <section class="ina-card ina-card--variant-basic kartu-db" style="margin-top:0"><div class="ina-card__content"><h3>Pembayaran diterima</h3><p class="ket">Terima kasih. Tagihan ${PAKET[DB.dipesan].harga} sudah lunas pada 26 Okt 2026, 09.31.</p>
+        <div class="ditandai" id="emailAktivasi" style="margin-top:14px"><b style="font-size:14px">Setelah aplikasi siap, Anda menerima email seperti ini:${usulan('HE-OB-04')}</b>
+          <div class="email-pratinjau"><div class="kep">Dari: e-PPAT &lt;noreply@eppat.id&gt; · Subjek: Instansi e-PPAT Anda siap digunakan</div>
+            <div class="isi">Yth. Bapak/Ibu Contoh PPAT Baru,<br>Instansi e-PPAT untuk kantor Anda telah berhasil dibuat dan siap digunakan.
+              <div class="kotak"><small>ALAMAT APLIKASI</small>dev-app.eppat.id/t/kantor-contoh<small style="margin-top:8px">EMAIL LOGIN</small>${esc(S.email || 'ppat.baru@contoh.id')}</div>
+              ${tombol('Buat Kata Sandi', 'primary', 'sm', 'data-luar="Buat Kata Sandi"')}<p style="margin:10px 0 0;font-size:12.5px;color:var(--ina-content-secondary)">Tautan berlaku ${est('24 jam')} dan hanya dapat dipakai sekali. Demi keamanan, kami tidak pernah mengirim kata sandi melalui email.</p></div></div></div></div></section></div>
+    ${kartuBantuan()}`;
+}
+function layarRiwayat() {
+  const ada = !!DB.va;
+  return `${remahApp('Riwayat Transaksi')}<h1>Riwayat Transaksi</h1><p class="sub">Daftar seluruh transaksi pembayaran layanan e-PPAT Anda.</p>
+    <div style="display:flex;justify-content:flex-end;margin-top:12px">${tombol('Perpanjang Langganan', 'secondary', 'md', 'data-luar="Perpanjang Langganan"')}</div>
+    <div class="tabel-wadah ditandai" id="tabelRiwayat"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb">
+      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Detail Transaksi</th><th class="ina-table__header-cell">Metode${usulan('HE-OB-05')}</th><th class="ina-table__header-cell">Jumlah</th><th class="ina-table__header-cell">Jatuh Tempo</th><th class="ina-table__header-cell">Status</th><th class="ina-table__header-cell"></th></tr></thead>
+      <tbody class="ina-table__body">${ada ? `<tr class="ina-table__row"><td class="ina-table__cell"><span class="kd">ORD-ENTERPRISE-CONTOH</span><div class="kc">Ref. ${DB.va.ref}</div></td><td class="ina-table__cell">Virtual Account ${DB.bank}<div class="kc">${DB.va.no}</div></td><td class="ina-table__cell">${PAKET[DB.dipesan].harga}</td><td class="ina-table__cell">${DB.va.sampai}</td>
+        <td class="ina-table__cell rw-status">${DB.lunas ? badge('Lunas', 'success', 'sm') : badge('Belum dibayar', 'warning', 'sm')}</td><td class="ina-table__cell" style="text-align:right">${DB.lunas ? '' : tombol('Bayar Sekarang', 'link', 'sm', 'data-ke="bayar"', '')}</td></tr>`
+        : `<tr><td colspan="6" class="ina-table__empty-cell" style="text-align:center;padding:28px;color:var(--ina-content-secondary)">Belum ada transaksi. Transaksi muncul setelah Anda membuat tagihan pembayaran.</td></tr>`}</tbody></table></div></div></div>
+    ${bantuanLink()}`;
+}
+let jamVa;
+function jalankanJamVa() { clearInterval(jamVa); jamVa = setInterval(() => { const e = $('#sisaVa'); if (!e) { clearInterval(jamVa); return; } e.textContent = sisaVa(); }, 1000); }
+document.addEventListener('change', e => {
+  const r = e.target.closest('input[name="paket"]'); if (r) { DB.paket = r.value; gambar(); $(`#paket-${DB.paket}`)?.focus(); return; }
+  const bk = e.target.closest('input[name="bank"]'); if (bk) { DB.bank = bk.value; gambar(); $(`#bank-${DB.bank}`)?.focus(); }
+});
+document.addEventListener('click', e => {
+  const t = e.target;
+  if (t.closest('#lanjutBayar')) { DB.dipesan = DB.paket; S.layar = 'bayar'; gambar(); toast(`Paket ${PAKET[DB.dipesan].n} dipilih. Lanjutkan ke pembayaran.`, 'positive'); return; }
+  const mb = t.closest('[data-metode-bayar]'); if (mb) { DB.metodeBayar = 'va'; gambar(); return; }
+  if (t.closest('#kembaliMetode')) { DB.metodeBayar = ''; DB.bank = ''; gambar(); return; }
+  if (t.closest('#buatVa')) { S.memuat = 'va'; gambar(); setTimeout(() => { S.memuat = ''; const habis = Date.now() + 86400000; DB.va = { no:'1462900000000001', ref:'REF-CONTOH-0001', habis, sampai:'27 Okt 2026, 09.21' }; gambar(); jalankanJamVa(); toast('Virtual Account dibuat. Selesaikan pembayaran sebelum batas waktu.', 'positive'); }, 700); return; }
+  if (t.closest('#salinVa')) { navigator.clipboard?.writeText(DB.va.no).catch(() => {}); toast('Nomor Virtual Account disalin.', 'positive'); return; }
+  if (t.closest('#gantiBank')) { DB.va = null; DB.hasilCek = ''; gambar(); toast('Pilih bank pembayaran lain.'); return; }
+  if (t.closest('#cekBayar')) { S.memuat = 'bayar'; gambar(); setTimeout(() => { S.memuat = ''; DB.hasilCek = new Date().toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' }).replace(':', '.'); gambar(); jalankanJamVa(); }, 700); return; }
+  if (t.closest('#tombolGanti')) {
+    const lanjut = () => { DB.dipesan = ''; DB.metodeBayar = ''; DB.bank = ''; DB.va = null; DB.hasilCek = ''; S.layar = 'dasbor'; gambar(); toast('Silakan pilih paket lain.'); };
+    if (!DB.va) { lanjut(); return; }
+    dialog({ judul:'Ganti paket?', konfirmasi:true, isi:`<p>Tagihan Virtual Account <b>${DB.va.no}</b> untuk paket ${PAKET[DB.dipesan].n} akan dibatalkan. Tagihan baru dibuat setelah Anda memilih paket lain.${usulan('HE-OB-02')}</p>${alert('caution', '', 'Jangan mentransfer ke nomor Virtual Account lama setelah dibatalkan.')}`,
+      tombol:[['Batal', 'secondary', null], ['Ganti Paket', 'primary', lanjut]] });
+    return;
+  }
+  if (t.closest('#cekStatus')) {
+    S.memuat = 'cek'; gambar();
+    setTimeout(() => { S.memuat = ''; gambar(); if (S.layar === 'bayar') jalankanJamVa(); const jam = new Date().toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' }).replace(':', '.');
+      toast(`Belum ada perubahan · dicek ${jam}`, 'default', 4500); $('#toastWadah .ina-toast__title').insertAdjacentHTML('afterend', `<p class="ina-toast__description">Tahap saat ini: ${TAHAP[posisiTahap()]}.</p>`); }, 700);
+    return;
+  }
+  if (t.closest('#burger')) { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); return; }
+  if (t.closest('#scrim')) { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); }
+});
+function ke(layar) { S.layar = layar; S.memuat = ''; gambar(); window.scrollTo({ top:0 }); const f = $('#halaman input:not([type=checkbox])'); if (f) f.focus({ preventScroll:true }); }
+/* jaga perubahan formulir pendaftaran (HE-REG-01) */
+function jaga(lanjut) {
+  if (S.layar !== 'daftar' || !S.ubah) { lanjut(); return; }
+  dialog({ judul:'Tinggalkan pendaftaran?', konfirmasi:true, isi:`<p>Data yang sudah Anda isi di formulir pendaftaran akan hilang. Anda perlu mengisinya lagi bila ingin mendaftar.${usulan('HE-REG-01')}</p>`,
+    tombol:[['Lanjutkan Mengisi', 'secondary', null], ['Tinggalkan', 'primary', () => { S.ubah = false; S.setuju = false; lanjut(); }]] });
+}
+
+/* ---------------- interaksi ---------------- */
+document.addEventListener('click', e => {
+  const t = e.target;
+  const lu = t.closest('[data-luar]'); if (lu) { e.preventDefault(); const nm = lu.dataset.luar; jaga(() => toast(`${nm} tidak disimulasikan di prototipe.`)); return; }
+  const k = t.closest('[data-ke]'); if (k) { e.preventDefault(); const tujuan = k.dataset.ke; jaga(() => ke(tujuan)); return; }
+  const pl = t.closest('[data-layar]'); if (pl) { const tujuan = pl.dataset.layar; S.gagal = false; jaga(() => ke(tujuan)); return; }
+  if (t.closest('[data-bantuan]')) { bukaBantuan(); return; }
+  const lp = t.closest('[data-lihat-pw]'); if (lp) { const i = $('#' + lp.dataset.lihatPw), lihat = i.type === 'password'; i.type = lihat ? 'text' : 'password'; lp.setAttribute('aria-pressed', lihat); lp.setAttribute('aria-label', lihat ? 'Sembunyikan password' : 'Tampilkan password'); lp.innerHTML = ik(lihat ? 'mataTutup' : 'mata', 18); return; }
+  if (t.closest('#batalDaftar')) { if (S.ubah) jaga(() => ke('masuk')); else ke('masuk'); return; }
+  if (t.closest('#kirimDaftar')) { kirimDaftar(); return; }
+  if (t.closest('#kirimMasuk')) { kirimMasuk(); return; }
+  const m = t.closest('[data-metode]'); if (m) { S.metode = m.dataset.metode; ke('otp'); if (S.metode === 'email') toast('Kode OTP sudah dikirim ke email Anda.', 'positive'); return; }
+  if (t.closest('#kirimOtp')) { kirimOtp(); return; }
+  if (t.closest('#keDasbor')) { ke('dasbor'); toast('Verifikasi dua langkah aktif. Selamat datang di Portal e-PPAT.', 'positive', 4000); return; }
+});
+document.addEventListener('input', e => {
+  if (S.layar === 'daftar' && e.target.closest('.ob-kartu') && e.target.type !== 'checkbox') S.ubah = true;
+  const f = e.target.closest('.ina-text-field'); if (f) bersih(f.id.slice(2));
+  if (e.target.id === 'rPw' || e.target.id === 'rPw2') cekPwDaftar();
+  if (e.target.id === 'rTenant') cekTenant(e.target);
+  if (e.target.id === 'rNik' || e.target.id === 'rHp' || e.target.id === 'rRek') e.target.value = e.target.value.replace(/\D/g, '');
+  /* live: NIK 16 digit langsung menampilkan jenis kelamin dan tanggal lahir */
+  if (e.target.id === 'rNik') { const n = e.target.value, h = $('#h-rNik'); if (n.length === 16) { let d = +n.slice(6, 8); const pr = d > 40; if (pr) d -= 40; const m = +n.slice(8, 10), y = +n.slice(10, 12), th = y > 30 ? 1900 + y : 2000 + y;
+    h.innerHTML = d && m && m <= 12 && d <= 31 ? `${ik('centang', 12)} ${pr ? 'Perempuan' : 'Laki-laki'}, ${th}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}` : 'Tanggal lahir di NIK tidak valid. Periksa kembali.'; } else h.textContent = h.dataset.bantu; }
+});
+document.addEventListener('change', e => {
+  if (e.target.id === 'rSetuju') { S.setuju = e.target.checked; const bx = e.target.nextElementSibling; bx.className = `ina-checkbox__box ina-checkbox__box--${S.setuju ? 'checked' : 'unchecked'}`; bx.innerHTML = S.setuju ? ik('centang', 12) : ''; $('#kirimDaftar').disabled = !S.setuju; }
+  if (e.target.id === 'sudahSimpan') { const bx = e.target.nextElementSibling; bx.className = `ina-checkbox__box ina-checkbox__box--${e.target.checked ? 'checked' : 'unchecked'}`; bx.innerHTML = e.target.checked ? ik('centang', 12) : ''; $('#keDasbor').disabled = !e.target.checked; }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && S.layar === 'masuk' && e.target.closest('.ob-kartu input')) kirimMasuk(); });
+
+function galat(id, pesan) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); w?.classList.add('ina-text-field__wrapper--status-error'); if (h) { h.textContent = pesan; h.classList.add('ina-text-field__helper-text--error'); } }
+function bersih(id) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); if (!w) return; w.classList.remove('ina-text-field__wrapper--status-error'); if (h && id !== 'rTenant') { h.classList.remove('ina-text-field__helper-text--error'); h.textContent = h.dataset.bantu || ''; } }
+function setPw(id, pesan, jenis) { const w = $(`#f-${id} .ina-password-input__wrapper`), h = $(`#h-${id}`); if (!w) return; w.className = `ina-password-input__wrapper ina-password-input__wrapper--size-md ina-password-input__wrapper--${jenis || 'neutral'}`; h.textContent = pesan; h.className = `ina-password-input__status-message ${jenis ? 'ina-password-input__status-message--' + jenis : ''}`; }
+function cekPwDaftar() {
+  const a = $('#rPw').value, b = $('#rPw2').value, ok = SYARAT_PW.map(([, uji]) => uji(a));
+  document.querySelectorAll('#syaratPw li').forEach((li, i) => { li.classList.toggle('ok', ok[i]); li.querySelector('.tanda').innerHTML = ok[i] ? ik('centang', 11) : ''; });
+  setPw('rPw', a && ok.every(Boolean) ? 'Kata sandi sudah memenuhi semua syarat.' : '', a && ok.every(Boolean) ? 'success' : '');
+  setPw('rPw2', !b ? '' : b === a ? 'Kata sandi sama.' : 'Kata sandi belum sama.', !b ? '' : b === a ? 'success' : 'error');
+}
+let jt;
+function cekTenant(i) {
+  const v = i.value = i.value.toLowerCase().replace(/[^a-z0-9-]/g, ''), h = $('#h-rTenant');
+  clearTimeout(jt); h.classList.remove('ina-text-field__helper-text--error');
+  if (!v) { h.textContent = h.dataset.bantu; return; }
+  h.textContent = 'Memeriksa ketersediaan…';
+  jt = setTimeout(() => { const pakai = ['default', 'kantor-contoh'].includes(v) || v.length < 3;
+    h.innerHTML = pakai ? (v.length < 3 ? 'URL Tenant minimal 3 karakter.' : `dev-app.eppat.id/t/${v} sudah dipakai. Coba nama lain.`) : `${ik('centang', 12)} dev-app.eppat.id/t/<b>${v}</b> tersedia.`;
+    h.classList.toggle('ina-text-field__helper-text--error', pakai); S.cekTenant = pakai ? '' : v; }, 500);
+}
+function kirimDaftar() {
+  const v = id => ($('#' + id)?.value ?? '').trim(); let ada = false;
+  if (!v('rNama')) { galat('rNama', 'Nama lengkap wajib diisi.'); ada = true; }
+  if (!/^\d{16}$/.test(v('rNik'))) { galat('rNik', 'NIK harus 16 digit angka sesuai KTP elektronik.'); ada = true; }
+  if (!/^\S+@\S+\.\S+$/.test(v('rEmail'))) { galat('rEmail', 'Format email tidak valid. Contoh: nama@contoh.id'); ada = true; }
+  if (!/^8\d{8,11}$/.test(v('rHp'))) { galat('rHp', 'Nomor telepon diawali 8, 9–12 digit tanpa 0 di depan.'); ada = true; }
+  if (!SYARAT_PW.every(([, uji]) => uji($('#rPw').value))) { setPw('rPw', 'Kata sandi belum memenuhi semua syarat di bawah.', 'error'); ada = true; }
+  if (!$('#rPw2').value || $('#rPw2').value !== $('#rPw').value) { setPw('rPw2', 'Kata sandi belum sama.', 'error'); ada = true; }
+  if (!v('rIdPpat')) { galat('rIdPpat', 'ID PPAT wajib diisi.'); ada = true; }
+  if (!S.cekTenant || S.cekTenant !== v('rTenant')) { const h = $('#h-rTenant'); $('#f-rTenant .ina-text-field__wrapper').classList.add('ina-text-field__wrapper--status-error'); h.textContent = v('rTenant') ? (h.textContent.includes('dipakai') ? h.textContent : 'Tunggu hasil cek ketersediaan URL Tenant.') : 'URL Tenant wajib diisi.'; h.classList.add('ina-text-field__helper-text--error'); ada = true; }
+  if (ada) { const g = $('.ina-text-field__wrapper--status-error input, .ina-password-input__wrapper--error input'); g?.scrollIntoView({ block:'center' }); g?.focus({ preventScroll:true }); toast('Periksa kembali isian yang ditandai merah.'); return; }
+  S.email = v('rEmail'); S.memuat = 'daftar'; gambar();
+  setTimeout(() => { S.ubah = false; S.setuju = false; S.memuat = ''; dialog({ judul:'Pendaftaran Berhasil!', isi:`<div class="status-kartu"><span class="ikon-besar">${ik('centang', 34)}</span><p>Link verifikasi telah dikirim ke email Anda. Harap verifikasi email Anda sebelum login.</p></div>`, tombol:[['Lihat Petunjuk Verifikasi', 'primary', () => ke('verif')]] }); }, 700);
+}
+function kirimMasuk() {
+  const em = $('#mEmail').value.trim(), pw = $('#mPw').value; let ada = false;
+  if (!em) { galat('mEmail', 'Email atau nama pengguna wajib diisi.'); ada = true; }
+  if (!pw) { setPw('mPw', 'Kata sandi wajib diisi.', 'error'); ada = true; }
+  if (ada) return;
+  S.email = em; S.memuat = 'masuk'; S.gagal = false; gambar(); $('#mEmail').value = em;
+  setTimeout(() => { S.memuat = ''; if (pw === 'salah123') { S.gagal = true; gambar(); $('#mPw').focus(); return; } ke('metode'); }, 700);
+}
+
+/* ---------------- OTP dengan masa berlaku (HE-LOGIN-01, -02) ---------------- */
+let OTP = null;
+function pasangOtp() {
+  OTP = { sisa:300, ulang:60, coba:3, galat:'' };
+  const kotak = [...document.querySelectorAll('[data-otp]')];
+  kotak[0].focus();
+  kotak.forEach((k, i) => {
+    k.addEventListener('input', () => { k.value = k.value.replace(/\D/g, '').slice(-1); if (k.value && kotak[i + 1]) kotak[i + 1].focus(); OTP.galat = ''; segarOtp(); });
+    k.addEventListener('keydown', e => { if (e.key === 'Backspace' && !k.value && kotak[i - 1]) kotak[i - 1].focus(); if (e.key === 'Enter') kirimOtp(); });
+    k.addEventListener('paste', e => { const d = (e.clipboardData.getData('text') || '').replace(/\D/g, '').slice(0, 6); if (!d) return; e.preventDefault(); d.split('').forEach((c, j) => { if (kotak[j]) kotak[j].value = c; }); kotak[Math.min(d.length, 5)].focus(); segarOtp(); });
+  });
+  segarOtp();
+  clearInterval(pasangOtp.t); pasangOtp.t = setInterval(() => { if (!$('[data-otp]')) { clearInterval(pasangOtp.t); return; } OTP.sisa = Math.max(0, OTP.sisa - 1); OTP.ulang = Math.max(0, OTP.ulang - 1); segarOtp(); }, 1000);
+}
+function segarOtp() {
+  if (!OTP || !$('#otpPesan')) return;
+  const email = S.metode === 'email', habis = email && OTP.sisa <= 0;
+  if (email) {
+    const m = Math.floor(OTP.sisa / 60), d = String(OTP.sisa % 60).padStart(2, '0'), w = $('#otpWaktu');
+    w.className = `ina-badge ina-badge--soft ina-badge--${habis ? 'error' : OTP.sisa < 60 ? 'warning' : 'brand'} ina-badge--md ina-badge--rounded-full otp-waktu`;
+    w.querySelector('span').textContent = habis ? 'Waktu habis' : `Kode berlaku ${m}:${d}`;
+    const bisa = OTP.ulang <= 0 || habis || OTP.coba <= 0;
+    $('#otpUlang').innerHTML = `Tidak menerima kode? ${bisa ? tombol('Kirim ulang kode', 'link', 'sm', 'id="kirimUlang"') : `<span>Kirim ulang dalam ${Math.floor(OTP.ulang / 60)}:${String(OTP.ulang % 60).padStart(2, '0')}</span>`}`;
+  }
+  const g = habis ? 'Kode sudah kedaluwarsa. Klik "Kirim ulang kode" untuk mendapatkan kode baru.' : OTP.galat, ps = $('#otpPesan');
+  ps.textContent = g || (email ? 'Masukkan 6 digit kode dari email. Kode berlaku 5 menit.' : 'Masukkan 6 digit kode dari aplikasi authenticator.');
+  ps.classList.toggle('ina-one-time-password__helper-text--error', !!g);
+  document.querySelectorAll('[data-otp]').forEach(k => { k.classList.toggle('ina-one-time-password__input--error', !!g); k.disabled = habis || OTP.coba <= 0; });
+  const b = $('#kirimOtp'); if (b) b.disabled = habis || OTP.coba <= 0 || !!S.memuat;
+}
+document.addEventListener('click', e => { if (!e.target.closest('#kirimUlang') || !OTP) return; OTP.sisa = 300; OTP.ulang = 60; OTP.coba = 3; OTP.galat = ''; document.querySelectorAll('[data-otp]').forEach(k => k.value = ''); toast('Kode OTP baru sudah dikirim ke email Anda.', 'positive'); segarOtp(); $('[data-otp]').focus(); });
+function kirimOtp() {
+  if (!OTP) return; const kotak = [...document.querySelectorAll('[data-otp]')], c = kotak.map(k => k.value).join('');
+  if (S.metode === 'email' && OTP.sisa <= 0) return;
+  if (c.length < 6) { OTP.galat = 'Masukkan 6 digit kode.'; segarOtp(); return; }
+  if (c === '000000') { OTP.coba--; OTP.galat = OTP.coba > 0 ? `Kode salah. ${S.metode === 'email' ? 'Pastikan Anda memakai kode dari email terbaru.' : 'Pastikan jam di ponsel Anda sudah tepat.'} Sisa percobaan: ${OTP.coba}.` : `Kode salah 3 kali. ${S.metode === 'email' ? 'Kirim ulang kode untuk mencoba lagi.' : 'Kembali ke halaman masuk dan coba lagi.'}`; kotak.forEach(k => k.value = ''); kotak[0].focus(); segarOtp(); return; }
+  clearInterval(pasangOtp.t); S.memuat = 'otp'; segarOtp(); $('#kirimOtp').innerHTML = spinner + 'Aktifkan &amp; Masuk';
+  setTimeout(() => { OTP = null; ke('cadangan'); }, 700);
+}
+$('#simKedaluwarsa').addEventListener('click', () => { if (!OTP || S.metode !== 'email' || !$('#otpWaktu')) { toast('Buka halaman kode Email OTP terlebih dahulu (Login → Email OTP).'); return; } OTP.sisa = 0; segarOtp(); });
+
+/* ---------------- IDDS Drawer, Modal, Toast ---------------- */
+function drawer({ judul, isi }) {
+  const D = $('#lapisanDrawer'), hp = window.matchMedia('(max-width:760px)').matches;
+  D.innerHTML = `<div class="ina-drawer ina-drawer--position-${hp ? 'bottom' : 'right'}" role="dialog" aria-modal="true" aria-labelledby="drwJudul">
+    <div class="ina-drawer__backdrop" data-tutup-drawer></div>
+    <div class="ina-drawer__panel ina-drawer__panel--width-md">
+      <div class="ina-drawer__header"><h2 class="ina-drawer__title" id="drwJudul">${judul}</h2>
+        <button type="button" class="ina-drawer__close-button" aria-label="Tutup bantuan" data-tutup-drawer><svg class="ina-drawer__close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      <div class="ina-drawer__content">${isi}</div>
+    </div></div>`;
+  D.querySelector('.ina-drawer__close-button').focus();
+}
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-tutup-drawer]')) { $('#lapisanDrawer').innerHTML = ''; return; }
+  const tg = e.target.closest('#lapisanDrawer .ina-accordion__toggle'); if (!tg) return;
+  const b = tg.getAttribute('aria-expanded') !== 'true';
+  tg.setAttribute('aria-expanded', b); tg.querySelector('.ina-accordion__icon').classList.toggle('ina-accordion__icon--open', b); tg.nextElementSibling.classList.toggle('ina-accordion__content--open', b);
+});
+function dialog({ judul, isi, tombol: tb, lebar, konfirmasi }) {
+  const L = $('#lapisan');
+  L.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-i="-1"></div><div class="ina-modal__container">
+    <div class="ina-modal__dialog ina-modal__dialog--size-${lebar ? 'lg' : 'md'} ${konfirmasi ? 'ina-modal-confirmation' : ''}" role="${konfirmasi ? 'alertdialog' : 'dialog'}" aria-modal="true" aria-labelledby="dlgJudul">
+      <div class="ina-modal__header"><h2 class="ina-modal__title" id="dlgJudul">${judul}</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-i="-1">${ik('x', 22)}</button></div>
+      <div class="ina-modal__body">${isi}</div>
+      <div class="ina-modal__footer">${tb.map(([t, h], i) => `<button type="button" class="ina-button ina-button--${h} ina-button--md" data-i="${i}">${t}</button>`).join('')}</div></div></div></div>`;
+  L.querySelector('.ina-modal__footer .ina-button:last-child').focus();
+  L.onclick = e => { const b = e.target.closest('[data-i]'); if (!b) return; e.stopPropagation(); const i = +b.dataset.i; L.innerHTML = ''; if (i >= 0 && tb[i][2]) tb[i][2](); };
+}
+document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if ($('#lapisan').innerHTML) $('#lapisan').innerHTML = ''; else if ($('#lapisanDrawer').innerHTML) $('#lapisanDrawer').innerHTML = ''; });
+let tt;
+function toast(teks, state = 'default', ms = 3000) {
+  $('#toastWadah').innerHTML = `<div class="ina-toast ina-toast--state-${state} ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${ik(state === 'positive' ? 'centang' : 'info', 20)}</div>
+    <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p></div></div><button class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast>${ik('x', 16)}</button></div>`;
+  clearTimeout(tt); tt = setTimeout(() => $('#toastWadah').innerHTML = '', ms);
+}
+$('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tutup-toast]')) $('#toastWadah').innerHTML = ''; });
+
+/* ---------------- Bantuan (HE-UMUM-02) ---------------- */
+const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
+function bukaBantuan() {
+  drawer({ judul:'Bantuan pendaftaran dan login', isi:`
+    <p>Pendaftaran e-PPAT untuk kantor PPAT terdiri dari lima langkah:</p>
+    <ol class="bantu-langkah">${ALUR.map(t => `<li>${t}</li>`).join('')}</ol>
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${faq(1, 'Email verifikasi tidak masuk', 'Periksa folder spam atau promosi. Pastikan alamat email yang Anda daftarkan sudah benar.')}
+    ${faq(2, 'Apa yang diisi pada ID PPAT dan URL Tenant?', `${TIP_ID} ${TIP_URL}`)}
+    ${faq(3, 'Saya lupa kata sandi', 'Pilih "Lupa kata sandi?" di halaman masuk, lalu ikuti petunjuk yang dikirim ke email Anda.')}
+    ${faq(4, 'Kode verifikasi dua langkah tidak masuk', 'Kode Email OTP berlaku 5 menit. Periksa folder spam, lalu gunakan "Kirim ulang kode" bila sudah lewat 60 detik.')}
+    ${faq(5, 'Saya kehilangan akses ke aplikasi authenticator', 'Masuk dengan salah satu kode cadangan yang Anda simpan saat pertama kali mengaktifkan verifikasi dua langkah.')}
+    <h4 class="bantu-sub">Kontak dukungan</h4>
+    <div class="bantu-kontak"><div><b>Hotline Digital Product</b><span>1500159</span></div><div><b>Asisten Virtual PERURI (TAMARA)</b><span>+62-811-1067-5555</span></div><div><b>Email</b><span>contact@peruri.co.id</span></div></div>` });
+}
+
+/* ---------------- protobar & daftar perubahan ---------------- */
+$('#bukaUbah').addEventListener('click', () => {
+  dialog({ judul:'Daftar perubahan Platform Onboarding', lebar:true,
+    isi:`<p>Usulan disusun dari laporan lengkap Heuristic Evaluation di UX Metric Lab (Registrasi 91,7; Login 68,6) beserta gambar buktinya, dan layar live dev.eppat.id. Isian, aturan password, dan alur verifikasi dua langkah tetap seperti live; yang diubah adalah jalan keluar, penjelasan, pesan galat, dan informasi masa berlaku kode. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+        <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
+    tombol:[['Tutup', 'secondary', null]] });
+  $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });
+});
+$('#bukaUbah').textContent = `Daftar perubahan (${UBAH.length})`;
+function lihat(u) {
+  S.ubah = false;
+  if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke === 'reg' || u.ke === 'reg-batal') ke('daftar');
+  if (u.ke === 'reg-batal') { $('#rNama').value = 'Contoh PPAT Baru'; S.ubah = true; $('#batalDaftar').click(); return; }
+  if (u.ke === 'gagal') { S.gagal = true; S.email = 'ppat.baru@contoh.id'; ke('masuk'); }
+  if (u.ke === 'mfa') ke('metode');
+  if (u.ke === 'otp') { S.metode = 'email'; ke('otp'); }
+  if (u.ke === 'db') ke('dasbor');
+  if (u.ke === 'db-cek') { ke('dasbor'); $('#cekStatus').click(); return; }
+  if (u.ke === 'db-bayar') { DB = { ...DB0(), paket:'enterprise', dipesan:'enterprise', metodeBayar:'va', bank:'BRI', va:{ no:'1462900000000001', ref:'REF-CONTOH-0001', habis:Date.now() + 86400000, sampai:'27 Okt 2026, 09.21' } }; ke('bayar'); jalankanJamVa(); }
+  if (u.ke === 'db-lunas') { DB = { ...DB0(), paket:'enterprise', dipesan:'enterprise', bank:'BRI', va:{ no:'1462900000000001', ref:'REF-CONTOH-0001', habis:Date.now() + 86400000, sampai:'27 Okt 2026, 09.21' }, lunas:true }; ke('lunas'); }
+  if (u.ke === 'db-riwayat') { if (!DB.va) DB = { ...DB0(), paket:'enterprise', dipesan:'enterprise', bank:'BRI', va:{ no:'1462900000000001', ref:'REF-CONTOH-0001', habis:Date.now() + 86400000, sampai:'27 Okt 2026, 09.21' } }; ke('riwayat'); }
+  const el = u.sorot && $(u.sorot);
+  if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); }
+}
+$('#aturUlang').addEventListener('click', () => { Object.assign(S, { ubah:false, setuju:false, gagal:false, email:'', metode:'email', memuat:'', cekTenant:'' }); DB = DB0(); ke('daftar'); toast('Data contoh dikembalikan ke awal.'); });
+$('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
+{ const h = location.hash.slice(1); if (LAYAR.some(([k]) => k === h)) S.layar = h; }
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (h !== S.layar && LAYAR.some(([k]) => k === h)) ke(h); });
+gambar();
+})();
+</script>
+</body>
+</html>

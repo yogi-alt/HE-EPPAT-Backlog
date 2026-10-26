@@ -1,0 +1,629 @@
+<style id="ob-monitor-css">
+/* ===== Onboarding · Monitoring (Admin Onboarding, dev.eppat.id): Dasbor, Manajemen Onboarding, Detail Pendaftar — penyesuaian IDDS (IDDS-OB-11…20)
+   Isi, kolom, tahap, dan alur mengikuti live dev.eppat.id; yang disesuaikan hanya komponen (IDDS + brand E-PPAT), kejujuran label,
+   bahasa, status sistem, konfirmasi aksi berdampak, dan Bantuan per halaman.
+   Berkas ini juga RUJUKAN KERANGKA STAF ONBOARDING (CSS bagian "kerangka staf", HTML protobar/sidebar/header, dan blok JS
+   "KERANGKA STAF ONBOARDING") yang disalin persis oleh OB-VERIF dan OB-PENGATURAN. ===== */
+.ina-tooltip:not(:hover):not(:focus-within) .ina-tooltip__content{display:none}
+.ina-tooltip__bubble{display:block;width:max-content;max-width:min(260px,80vw);white-space:normal;text-align:left;line-height:1.45;font-weight:400;text-transform:none;letter-spacing:0}
+.ina-modal-confirmation{max-width:560px}
+.modal-gap>*+*{margin-top:12px}
+.eb{font:600 11px Inter,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.blok{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px}
+.blok h2{margin:0;font:600 18px/26px Inter,sans-serif;color:var(--ina-primary-primary)}
+.blok-atas{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* ---------- kerangka staf Onboarding (salin persis) ---------- */
+/* sidebar: grup + menu induk bertingkat (Verifikasi, Menu, Daftar Pengguna, Peran Pengguna) */
+.sidebar .items[hidden],.sidebar .anak[hidden]{display:none}
+.sidebar .items button.nav-induk{display:flex;align-items:center;gap:8px;width:100%;padding:8px;border:0;border-radius:8px;background:transparent;cursor:pointer;text-align:left;font:500 14px Inter,sans-serif;color:var(--ina-eppat-sidebar-content)}
+.sidebar .items button.nav-induk svg{width:16px;height:16px;flex:none;color:currentColor}
+.sidebar .items button.nav-induk:hover{background:var(--ina-eppat-sidebar-hover);color:#fff}
+.sidebar .items button.nav-induk:focus-visible,.sidebar .grp:focus-visible{outline:2px solid #fff;outline-offset:1px}
+.sidebar .items button.nav-induk.berisi-aktif{color:#fff;font-weight:600}
+.sidebar .nav-induk .chev{margin-left:auto;display:grid;transition:.15s}
+.sidebar .nav-induk .chev svg{width:12px;height:12px}
+.sidebar .nav-induk[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.sidebar .anak{display:flex;flex-direction:column;gap:2px}
+.sidebar .items a.nav-item.nav-anak{padding-left:28px}
+.sidebar .items a.nav-item.nav-anak svg{width:15px;height:15px}
+.sidebar .grp .tag-usulan{margin-left:0}
+/* kepala: menu akun (IDDS Action Dropdown) */
+.user-tombol{display:flex;align-items:center;gap:10px;padding:4px 8px;border:0;border-radius:8px;background:transparent;cursor:pointer;text-align:left;color:inherit}
+.user-tombol:hover{background:var(--ina-background-secondary)}
+.user-tombol:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px}
+.user-tombol .chev-u{color:var(--ina-content-secondary);display:grid}
+.user .ina-action-dropdown__menu{position:absolute;right:0;left:auto;top:calc(100% + 6px);min-width:220px;z-index:30;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.user a.ina-action-dropdown__item{text-decoration:none;color:inherit}
+.user .menu-kepala{display:flex;flex-direction:column;gap:2px;padding:8px 12px}
+.user .menu-kepala b{font:600 14px Inter,sans-serif;color:var(--ina-primary-primary)}
+.user .menu-kepala span{font-size:12px;color:var(--ina-content-secondary)}
+/* ---------- akhir kerangka staf ---------- */
+
+/* Dasbor */
+.kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:24px}
+.kpi > div{position:relative;display:flex;flex-direction:column;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:20px}
+.kpi small{display:block;max-width:72%;font:600 11px/16px Inter,sans-serif;letter-spacing:1.4px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.kpi i{position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:12px;background:var(--ina-primary-50);display:grid;place-items:center;color:var(--ina-primary-primary)}
+.kpi i svg{width:18px;height:18px}
+.kpi b{display:block;margin-top:14px;font:500 30px Inter,sans-serif;color:var(--ina-primary-primary)}
+.kpi .kaki{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:12px}
+.kpi .kaki > span{font-size:12.5px;color:var(--ina-content-secondary)}
+.kpi .kaki a{display:inline-flex;align-items:center;gap:4px;font:600 13px Inter,sans-serif;color:var(--ina-primary-primary);text-decoration:none;white-space:nowrap}
+.kpi .kaki a:hover{text-decoration:underline}
+.kpi .kaki a:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px;border-radius:4px}
+.tiga-daftar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+.tiga-daftar .blok{margin:0;padding:20px}
+.tiga-daftar .blok h2{display:flex;align-items:center;gap:8px;font-size:16px}
+.terbaru{list-style:none;margin:12px 0 0;padding:0}
+.terbaru li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid var(--ina-stroke-primary)}
+.terbaru li:first-child{border-top:0}
+.terbaru .nm{display:block;font:600 14px Inter,sans-serif;color:var(--ina-content-primary)}
+.terbaru .sl{display:block;margin-top:2px;font:12px ui-monospace,Menlo,monospace;color:var(--ina-content-secondary);word-break:break-all}
+.terbaru .lencana{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;flex:none}
+.terbaru .kosong-li{color:var(--ina-content-secondary);font-size:14px}
+
+/* Manajemen Onboarding */
+.mono{font:12px ui-monospace,Menlo,monospace;color:var(--ina-content-secondary)}
+.saring-ob{display:flex;flex-direction:column;gap:14px;margin-top:20px;padding:14px 16px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px}
+.saring-ob .baris{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.saring-ob .lbl{display:block;margin-bottom:6px;font-size:13px;font-weight:500;color:var(--ina-content-primary)}
+.saring-ob .ina-input-search{width:340px}
+.saring-ob .jumlah{margin-left:auto;align-self:center;font-size:13px;color:var(--ina-content-secondary)}
+.saring-ob .ina-chip__list{display:flex;flex-wrap:wrap;gap:8px}
+.saring-ob .ina-chip__item{cursor:pointer}
+.saring-ob .ina-chip__item:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px}
+.tb a.url-kantor{color:var(--ina-primary-primary);text-decoration:underline;word-break:break-all;font-size:13.5px}
+.tb .kontak-email{overflow-wrap:anywhere}
+.kosong{text-align:center;padding:28px 12px;color:var(--ina-content-secondary)}
+.halaman{flex-wrap:wrap}
+.aksi-baris{display:flex;justify-content:flex-end}
+#tabelOb table.tb{min-width:0}
+#tabelOb .ina-table__cell{white-space:normal;vertical-align:middle;min-width:0}
+#tabelOb a.url-kantor{display:inline-block;max-width:230px;word-break:normal;overflow-wrap:anywhere}
+#tabelOb .aksi-baris .ina-button{white-space:nowrap}
+.stepper-ob .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Detail pendaftar */
+.kembali{margin-top:4px}
+.ringkas-ob{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 24px;margin-top:16px}
+.ringkas-ob dt{font-size:12.5px;color:var(--ina-content-secondary)}
+.ringkas-ob dd{margin:4px 0 0;font-size:14px;color:var(--ina-content-primary);word-break:break-word}
+.provisi-baris{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.provisi-baris .ket-provisi{font-size:13px;color:var(--ina-content-secondary)}
+.timeline-judul{display:flex;align-items:center;gap:8px}
+.gulir-step{overflow-x:auto;padding-bottom:4px}
+.stepper-ob.ina-stepper{display:flex;align-items:flex-start;width:100%;min-width:820px;margin-top:20px;padding:0}
+.stepper-ob .ina-stepper__item{flex-direction:column;align-items:center;gap:6px;height:auto;max-height:none;flex:0 0 auto;width:92px;padding:0}
+.stepper-ob .ina-stepper__label{position:static;transform:none;white-space:normal;text-align:center;font-size:12.5px;line-height:17px;max-width:92px;margin:0}
+.stepper-ob .ina-stepper__item--active .ina-stepper__label > span,.stepper-ob .ina-stepper__item--completed .ina-stepper__label > span{font-weight:600;color:var(--ina-content-primary)}
+.stepper-ob .ina-stepper__label small{display:block;margin-top:2px;font-size:11.5px;font-weight:400;color:var(--ina-content-secondary)}
+.stepper-ob .ina-stepper__separator{align-self:flex-start;flex:1 1 auto;min-width:6px;margin:11px -34px 0;width:auto}
+.stepper-ob .ina-stepper__icon-wrapper{position:relative;z-index:1}
+.stepper-vt{display:none;margin-top:16px}
+.stepper-vt .ina-stepper__label small{display:block;margin-top:2px;font-size:12px;font-weight:400;color:var(--ina-content-secondary)}
+.stepper-vt .ina-stepper__item--active .ina-stepper__label > span,.stepper-vt .ina-stepper__item--completed .ina-stepper__label > span{font-weight:600;color:var(--ina-content-primary)}
+.stepper-vt .ina-stepper__separator{min-height:22px;height:22px}
+.stepper-vt .ina-stepper__item{height:auto;max-height:none;align-items:flex-start}
+.stepper-vt .ina-stepper__label{white-space:normal}
+
+@media (max-width:1200px){ .kpi{grid-template-columns:repeat(2,minmax(0,1fr))} .tiga-daftar{grid-template-columns:1fr} .ringkas-ob{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:1100px){ .gulir-step{display:none} .stepper-vt{display:flex} }
+@media (max-width:760px){
+  .kpi,.ringkas-ob{grid-template-columns:1fr}
+  .saring-ob .baris > div,.saring-ob .ina-input-search{width:100%;min-width:0}
+  .saring-ob .jumlah{margin-left:0}
+  .user-tombol .chev-u{display:none}
+  .halaman > span{white-space:normal}
+  .aksi-baris{justify-content:flex-start}
+}
+.bantu-istilah{display:grid;grid-template-columns:max-content 1fr;gap:6px 12px;margin:8px 0 4px;padding:12px 14px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);font-size:13.5px;line-height:20px}
+.bantu-istilah dt{font-weight:600}
+.bantu-istilah dd{margin:0;color:var(--ina-content-secondary)}
+ol.bantu-langkah{padding-left:22px}
+@media (max-width:760px){ .bantu-istilah{grid-template-columns:1fr} .bantu-istilah dd{margin-bottom:6px} }
+</style>
+</head>
+<body>
+
+<!-- ===== KERANGKA STAF ONBOARDING · HTML (salin persis; ganti judul berkas di protobar) ===== -->
+<div class="protobar">
+  <a href="index.html#onboarding">&#9776; Daftar prototipe</a>
+  <span class="sep">&bull;</span><b>Onboarding · Monitoring</b><span class="sep">&bull;</span><span>Peran: Admin Onboarding</span>
+  <span class="sep">&bull;</span><span>Layar:</span><span id="pilLayar"></span>
+  <span class="kanan">
+    <button class="pil" id="aturUlang">Atur ulang contoh</button>
+    <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai penyesuaian</button>
+    <button class="pil utama" id="bukaUbah">Daftar penyesuaian</button>
+  </span>
+</div>
+
+<div class="app">
+  <div class="scrim" id="scrim"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><img src="__LOGO__" alt="E-PPAT"></div>
+    <nav id="nav" aria-label="Menu Onboarding"></nav>
+    <div class="sidefoot">e-PPAT v1.0.1</div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Tampilkan atau sembunyikan menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="spacer"></div>
+      <div class="user ina-action-dropdown" id="user">
+        <button type="button" class="user-tombol" id="userTombol" aria-haspopup="menu" aria-expanded="false" aria-label="Menu akun Admin Contoh"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Admin Contoh</span><span class="urole">Admin</span></span><span class="chev-u"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div id="menuProfil"></div>
+      </div>
+    </header>
+    <div class="content"><div class="page" id="halaman"></div></div>
+  </div>
+</div>
+
+<div id="lapisan"></div>
+<div id="lapisanDrawer"></div>
+<div class="toast-wadah" id="toastWadah"></div>
+<!-- ===== akhir kerangka HTML ===== -->
+
+<script>
+(() => {
+/* ---------------- ikon & util (sama dengan Platform · Monitoring) ---------------- */
+const I = {
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+  user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  keluar:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/>',
+  luar:'<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14L21 3"/>',
+  ulang:'<path d="M23 4v6h-6"/><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/>',
+  panah:'<path d="M5 12h14M13 6l6 6-6 6"/>', kiri:'<path d="M15 18l-6-6 6-6"/>', x:'<path d="M18 6L6 18M6 6l12 12"/>', info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+  centang:'<path d="M20 6L9 17l-5-5"/>', chev:'<path d="M9 18l6-6-6-6"/>', bawah:'<path d="M6 9l6 6 6-6"/>', mata:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>',
+  cari:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>', jam:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>'
+};
+const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const usulan = kode => `<span class="tag-usulan">penyesuaian &middot; ${kode}</span>`;
+const badge = (t, j, uk = 'md', atr = '', kls = '') => `<span class="ina-badge ina-badge--soft ina-badge--${j} ina-badge--${uk} ina-badge--rounded-full ${kls}" ${atr}>${t}</span>`;
+const tombol = (t, h = 'primary', uk = 'md', atr = '', ikon = '') => { let k = ''; atr = atr.replace(/class="([^"]*)"/, (m, c) => { k = ' ' + c; return ''; }); return `<button type="button" class="ina-button ina-button--${h} ina-button--${uk}${k}" ${atr}>${ikon}${t}</button>`; };
+const alert = (j, judul, isi, ekstra = '') => `<div class="ina-alert ina-alert--${j}" role="status"><div class="ina-alert__content"><div class="ina-alert__text-section">${judul ? `<div class="ina-alert__title">${judul}</div>` : ''}<div class="ina-alert__description">${isi}</div></div>${ekstra}</div></div>`;
+const est = t => `<span class="isi-tim" title="Data contoh. Ganti dengan data resmi dari tim E-PPAT.">${t}</span>`;
+const cariIsian = (id, ph, v, label) => `<div class="ina-input-search"><div class="ina-input-search__wrapper"><span class="ina-input-search__search-icon">${ik('cari', 20)}</span><input id="${id}" class="ina-input-search__input" type="search" placeholder="${ph}" aria-label="${label}" value="${esc(v)}" autocomplete="off"></div></div>`;
+const PEMISAH_REMAH = `<span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+/* remah: [['Manajemen Onboarding', '#onboarding'], ['Detail Pendaftar']] → Beranda › … (item terakhir = halaman aktif) */
+const remah = (...jejak) => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#dasbor" class="ina-breadcrumb__link" data-remah="dasbor"><span class="ina-breadcrumb__text">Beranda</span></a>${PEMISAH_REMAH}</li>${jejak.map(([t, h], i) => i < jejak.length - 1
+  ? `<li class="ina-breadcrumb__item"><a href="${h}" class="ina-breadcrumb__link" data-remah="${h.slice(1)}"><span class="ina-breadcrumb__text">${t}</span></a>${PEMISAH_REMAH}</li>`
+  : `<li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active" aria-current="page"><span class="ina-breadcrumb__text">${t}</span></span></li>`).join('')}</ol></nav>`;
+
+/* ---------------- daftar penyesuaian ---------------- */
+const UBAH = [
+  { kode:'IDDS-OB-11', judul:'Kerangka staf: menu samping pola Sidebar IDDS, remah, dan menu akun berbahasa Indonesia',
+    isi:'Grup menu "NAVIGATION" menjadi "Utama", menu "Dashboard" menjadi "Dasbor", dan remah "Home" menjadi "Beranda" (IDDS Breadcrumb). Urutan menu tetap seperti live. Menu bertingkat live (Verifikasi, Menu, Daftar Pengguna, Peran Pengguna) tampil sebagai grup tersendiri agar menu cukup dua tingkat; tombol grup memakai aria-expanded. Ikon menu berupa ikon garis satu warna. Kerangka menu samping mengikuti pola Sidebar IDDS dengan warna brand E-PPAT tetap: label grup kecil berhuruf biasa dengan chevron buka/tutup, menu berupa ikon dan label dengan tanda arahkan dan tanda menu aktif, paling banyak dua tingkat (grup lalu menu), dan kartu profil pengguna (inisial, nama, peran) di bagian bawah dengan versi aplikasi di bawahnya. Tombol di samping logo menciutkan menu menjadi ikon saja; nama menu tampil sebagai tooltip dan tetap dibacakan pembaca layar. Pilihan ciut diingat peramban. Di layar sempit menu tetap berupa laci. Berlaku juga di aplikasi pelanggan (Dasbor, Riwayat Transaksi). Menu akun memakai IDDS Action Dropdown dengan kepala nama dan peran ("Admin Contoh · Admin") serta pilihan "Keluar". Menu akun dapat dipakai dengan papan ketik (panah dan Esc).',
+    lama:'Menu samping gelap ala live dengan label grup berhuruf kapital, tanpa kartu profil pengguna, dan tanpa mode ciut. Menu bertingkat tiga (grup, menu induk, submenu). Menu samping memakai grup "NAVIGATION" dan "PENGATURAN" serta menu "Dashboard". Remah berbunyi "Home › Dashboard", dan avatar menampilkan "SYSADMIN · Admin".', ke:'dasbor', sorot:'#sidebar' },
+  { kode:'IDDS-OB-12', judul:'Dasbor: judul, subjudul sesuai isi, dan kartu ringkasan IDDS Card',
+    isi:'Halaman berjudul "Dasbor Admin" dengan subjudul satu kalimat yang sesuai isi: "Pantau ringkasan pendaftaran, verifikasi, dan pembayaran calon PPAT." Empat kartu ringkasan memakai IDDS Card dengan ikon garis. Tautan "Lihat Detail" di setiap kartu membuka menu terkait. Untuk pembaca layar, tautan itu menyebut tujuannya, misalnya "Lihat detail Perlu Verifikasi Anggota di Verifikasi Anggota". Keterangan kartu memakai bahasa sehari-hari: "Menunggu verifikasi anggota" dan "Semua tagihan pembayaran".',
+    lama:'Judul berbunyi "Dashboard Admin" dengan subjudul "Selamat datang kembali, SYSADMIN. Berikut ringkasan aktivitas sistem hari ini.", padahal angka kartu adalah jumlah keseluruhan, bukan hari ini. Tautan "Detail" tidak menyebut tujuan. Keterangan kartu berbunyi "Status pending verifikasi" dan "Total invoice pembayaran".', ke:'dasbor', sorot:'#kpi' },
+  { kode:'IDDS-OB-13', judul:'Dasbor: tiga daftar terbaru dengan lencana berbahasa Indonesia',
+    isi:'Daftar Pendaftaran Terbaru, Transaksi Terbaru, dan Pemilihan Produk Terbaru memakai IDDS Badge berlabel Indonesia. Lencananya adalah "Menunggu" (kuning), "Lunas" dan "Disetujui" (hijau), "Belum Dibayar" (kuning), serta paket "Trial" dan "Enterprise". Nominal ditulis "Rp3.500.000" tanpa spasi. Tombol "Lihat Semua" menyebut daftar tujuannya untuk pembaca layar. Tombol itu membuka Manajemen Onboarding, Verifikasi Pembayaran, atau Verifikasi Produk.',
+    lama:'Lencana berisi kode mentah "Pending", "PAID", "UNPAID", "APPROVED", "TRIAL", dan "ENTERPRISE". Nominal ditulis dengan spasi ("Rp 1").', ke:'dasbor', sorot:'#terbaru' },
+  { kode:'IDDS-OB-14', judul:'Manajemen Onboarding: subjudul sesuai isi dan pencarian berlabel',
+    isi:'Subjudul menyebut tindakan yang benar-benar dapat dilakukan di halaman ini: "Pantau tahap pendaftaran setiap calon PPAT, dari pendaftaran sampai selesai." Pencarian memakai IDDS Input Search dengan label "Cari pendaftar" yang terlihat. Hasil tersaring langsung, dan jumlah pendaftar yang tampil diumumkan di kanan (aria-live).',
+    lama:'Subjudul berbunyi "Kelola pendaftaran user baru, verifikasi pembayaran, dan monitor registrasi.", padahal verifikasi pembayaran ada di menu lain. Kotak cari hanya berisi teks contoh "Cari nama, email, ID PPAT..." tanpa label.', ke:'onboarding', sorot:'#saringOb' },
+  { kode:'IDDS-OB-15', judul:'Manajemen Onboarding: saringan tahap memakai IDDS Chip',
+    isi:'Sepuluh saringan tahap (Semua, Pendaftaran … Selesai) memakai IDDS Chip dalam grup berlabel "Saring menurut tahap". Chip terpilih ditandai aria-pressed sehingga dibacakan "ditekan". Chip dapat dipilih dengan Tab lalu Enter atau Spasi, dan dapat digabung dengan pencarian. Bila tidak ada pendaftar di suatu tahap, tabel menampilkan "Belum ada pendaftar di tahap …" dengan tombol "Tampilkan Semua".',
+    lama:'Saringan tahap berupa pil bergaya khusus tanpa jumlah hasil. Tahap tanpa pendaftar hanya menampilkan tabel kosong.', ke:'onboarding', sorot:'#chipTahap' },
+  { kode:'IDDS-OB-16', judul:'Manajemen Onboarding: tabel, lencana tahap, dan aksi yang jelas',
+    isi:'Tabel memakai IDDS Table dengan kolom tetap: No, ID PPAT, Nama Pengguna, URL, Kontak, Status, dan Aksi. Warna lencana tahap konsisten: "Pendaftaran" kuning, tahap proses biru, "Lunas" dan "Selesai" hijau, serta "Belum ada status" abu-abu. Nilai kosong ditulis "Belum ada", bukan "-". Tombol aksi "Lihat Detail" menyebut nama pendaftar (aria-label). Navigasi memakai IDDS Pagination 10 baris per halaman dengan teks "Menampilkan 1–10 dari 46". Pencarian tanpa hasil menawarkan tombol "Hapus Pencarian".',
+    lama:'Lencana "Belum ada status" berwarna kuning, sama dengan "Pendaftaran". Nilai kosong ditulis "-". Tombol "Detail" tidak menyebut nama pendaftar, dan teks paginasi berbunyi "Menampilkan 1–10 dari total 760".', ke:'onboarding', sorot:'#tabelOb' },
+  { kode:'IDDS-OB-17', judul:'Detail Pendaftar: halaman detail dengan IDDS Stepper sembilan tahap',
+    isi:'Detail dibuka sebagai halaman (Beranda › Manajemen Onboarding › Detail Pendaftar) dengan tombol "Kembali ke Manajemen Onboarding". Tombol ini mengembalikan saringan dan halaman tabel sebelumnya. Ringkasan memuat data yang sama dengan baris tabel (ID PPAT, URL, kontak, status). Riwayat tahap memakai IDDS Stepper. Tahap selesai bercentang dengan tanggal lengkap ("26 Okt 2026, 16.44"), tahap berikutnya bertanda "Sedang berjalan", dan tahap lain bertanda "Belum dimulai". Di layar sempit, stepper berubah menjadi vertikal.',
+    lama:'Detail tampil di modal "Detail Riwayat" berisi "Timeline Status". Semua tahap yang belum selesai berlabel "Menunggu...", sehingga tahap yang sedang berjalan tidak terlihat. Tanggal tidak memuat tahun ("26 Okt, 16.44").', ke:'onboarding-detail', sorot:'#riwayatTahap' },
+  { kode:'IDDS-OB-18', judul:'Detail Pendaftar: Provisi Manual dengan konfirmasi dan status proses',
+    isi:'Tombol "Provision Manual" menjadi "Provisi Manual" dengan keterangan kapan tombol itu dipakai. Tombol hanya tampil setelah pembayaran lunas. Sebelum provisi berjalan, IDDS Modal konfirmasi menjelaskan dampaknya, dan tombol konfirmasinya berwarna merah. Selama berjalan, tombol berlabel "Memproses…" dan nonaktif. Setelah selesai, waktu dan pelaku provisi terakhir tampil di halaman, dan IDDS Toast mengumumkan hasilnya.',
+    lama:'Tombol "Provision Manual" berbahasa Inggris di kepala modal tanpa penjelasan kapan dipakai dan apa dampaknya.', ke:'onboarding-detail', sorot:'#blokProvisi' },
+  { kode:'IDDS-OB-19', judul:'Monitoring Onboarding: bahasa dan istilah baku',
+    isi:'Kode dan istilah Inggris diganti: "Pending" menjadi "Menunggu", "PAID" menjadi "Lunas", "UNPAID" menjadi "Belum Dibayar", "APPROVED" menjadi "Disetujui", dan "TRIAL/ENTERPRISE" menjadi "Trial/Enterprise". "Timeline Status" menjadi "Riwayat Tahap", "Detail Riwayat" menjadi "Detail Pendaftar", "Menunggu..." menjadi "Belum dimulai", dan "Home" menjadi "Beranda". "User" menjadi "Pengguna" (kolom Nama Pengguna), dan "Provision Manual" menjadi "Provisi Manual". Tahap "Login Pertama" menjadi "Masuk Pertama", dan "Verifikasi Asosiasi" menjadi "Verifikasi Anggota". Nama tahap ini sama dengan nama menu dan progres pelanggan di chip, lencana, stepper, dan Bantuan. Nominal ditulis tanpa spasi ("Rp3.500.000"), dan tanggal memuat tahun.',
+    lama:'Istilah campuran masih dipakai, misalnya "Dashboard Admin", "Home", "Pending", "PAID", "APPROVED", "Timeline Status", "Provision Manual", dan "Rp 1".', ke:'dasbor', sorot:null },
+  { kode:'IDDS-OB-20', judul:'Monitoring Onboarding: Bantuan di setiap halaman',
+    isi:'Dasbor, Manajemen Onboarding, dan Detail Pendaftar memiliki tombol Bantuan di kanan judul. Tombol ini membuka IDDS Drawer berisi penjelasan halaman, langkah, arti tahap dan istilah, pertanyaan umum (IDDS Accordion), serta kontak dukungan.',
+    lama:'Area staf Onboarding tidak memiliki panduan atau kontak dukungan.', ke:'bantuan', sorot:null }
+];
+
+/* ---------------- data contoh (netral) ---------------- */
+const SEKARANG = new Date('2026-10-26T19:06');
+const BLN = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+const jam = d => `${String(d.getHours()).padStart(2, '0')}.${String(d.getMinutes()).padStart(2, '0')}`;
+const tglPendek = w => { const d = new Date(w); return `${d.getDate()} ${BLN[d.getMonth()]} ${d.getFullYear()}`; };
+const tglJam = w => { const d = new Date(w); return `${tglPendek(w)}, ${jam(d)}`; };
+const rupiah = n => 'Rp' + n.toLocaleString('id-ID');
+
+/* Sembilan tahap progres (urutan live); indeks = tahap terakhir yang selesai, −1 = belum ada status */
+const TAHAP = ['Pendaftaran', 'Verifikasi Email', 'Masuk Pertama', 'Verifikasi Anggota', 'Pilih Produk', 'Proses Pembayaran', 'Lunas', 'Proses Administrasi', 'Selesai'];
+const I_LUNAS = 6;
+const lencanaTahap = (st, uk = 'sm') => st < 0 ? badge('Belum ada status', 'neutral', uk) : st === 0 ? badge('Pendaftaran', 'warning', uk) : st === I_LUNAS || st === 8 ? badge(TAHAP[st], 'success', uk) : badge(TAHAP[st], 'info', uk);
+const ANGKA = ['Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh'];
+const SLUG = ['satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh'];
+function contohPendaftar() {
+  const pola = [0, 0, 0, 0, 0, 0, 6, 8, 8, -1, 1, 2, 3, 3, 4, 5, 7, 8, 8, 2];
+  const out = []; let nCalon = 0, nCust = 0;
+  for (let i = 0; i < 46; i++) {
+    const st = pola[i % pola.length], daftar = new Date(SEKARANG.getTime() - (22 + i * 410) * 6e4);
+    const waktu = []; for (let k = 0; k <= st; k++) waktu.push(daftar.getTime() + k * (k < 5 ? 6 : 9) * 6e4);
+    if (st < 0) { nCust++; out.push({ id:null, nama:`Customer Contoh ${ANGKA[nCust - 1] || nCust}`, slug:null, email:`customer.${SLUG[nCust - 1] || nCust}@contoh.id`, telp:null, st, waktu, provisi:null }); continue; }
+    nCalon++; const a = nCalon <= 10 ? ANGKA[nCalon - 1] : String(nCalon), s = nCalon <= 10 ? SLUG[nCalon - 1] : String(nCalon).padStart(2, '0');
+    out.push({ id:`PPAT${100000 + nCalon}`, nama:`Calon PPAT Contoh ${a}`, slug:`ppat-contoh-${s}`, email:`calon.${s}@contoh.id`, telp:`0812000000${String(nCalon).padStart(2, '0')}`, st, waktu, provisi:null });
+  }
+  return out;
+}
+let DATA = contohPendaftar();
+/* Transaksi & Pemilihan Produk terbaru (data contoh; daftar lengkapnya di Verifikasi Pembayaran & Verifikasi Produk) */
+const TRANSAKSI = [
+  { nama:'Calon PPAT Contoh Tujuh', nominal:3500000, lunas:true }, { nama:'Calon PPAT Contoh Delapan', nominal:3500000, lunas:true },
+  { nama:'Calon PPAT Contoh Sembilan', nominal:3500000, lunas:false }, { nama:'Calon PPAT Contoh 15', nominal:3500000, lunas:true }, { nama:'Calon PPAT Contoh 16', nominal:3500000, lunas:true }];
+const PRODUK = [
+  { nama:'Calon PPAT Contoh Tujuh', order:'ORD-RENEW-2610260007', paket:'ENTERPRISE' }, { nama:'Calon PPAT Contoh Tujuh', order:'ORD-TRIAL-2610250007', paket:'TRIAL' },
+  { nama:'Calon PPAT Contoh Delapan', order:'ORD-ENTERPRISE-2610250008', paket:'ENTERPRISE' }, { nama:'Calon PPAT Contoh 14', order:'ORD-TRIAL-2610240014', paket:'TRIAL' }, { nama:'Calon PPAT Contoh 15', order:'ORD-TRIAL-2610230015', paket:'TRIAL' }];
+const JUMLAH_TRANSAKSI = 31, JUMLAH_ORDER = 38;
+const NM_PAKET = { TRIAL:'Trial', ENTERPRISE:'Enterprise' };
+
+/* ---------------- keadaan ---------------- */
+const LAYAR = [['dasbor', 'Dasbor'], ['onboarding', 'Manajemen Onboarding'], ['onboarding-detail', 'Detail Pendaftar']];
+const PER_HAL = 10;
+const pilihAwal = () => DATA.findIndex(p => p.st === I_LUNAS);
+const S0 = () => ({ layar:'dasbor', cari:'', tahap:'semua', hal:1, pilih:pilihAwal(), menu:false, provisi:false, kotor:false });
+let S = S0();
+
+/* ===================================================================================================
+   KERANGKA STAF ONBOARDING · JS — salin UTUH ke OB-VERIF & OB-PENGATURAN.
+   Yang diganti per berkas: BERKAS, TANDA_GRUP (kosongkan '' di OB-VERIF & OB-PENGATURAN), dan NAV_TURUNAN.
+   Butuh dari berkas: I/ik, $, usulan, S.layar, S.menu, S.kotor, pindah(), keLuar(), dialog().
+   =================================================================================================== */
+const BERKAS = 'Backlog-IDDS-OB-MONITOR-Prototype.html';
+const TANDA_GRUP = usulan('IDDS-OB-11');
+const NAV_TURUNAN = { 'onboarding-detail':'onboarding' }; /* layar turunan → hash menu induknya (untuk sorotan menu aktif) */
+Object.assign(I, {
+  berkas:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>',
+  garis:'<path d="M4 6h16M4 12h16M4 18h16"/>',
+  tameng:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  kotak:'<path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.7z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/>',
+  kartu:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>'
+});
+const OB_MON = 'Backlog-IDDS-OB-MONITOR-Prototype.html', OB_VER = 'Backlog-IDDS-OB-VERIF-Prototype.html', OB_PGT = 'Backlog-IDDS-OB-PENGATURAN-Prototype.html';
+/* [label, ikon, tautan] atau [label, ikon, null, [anak…]] — urutan menu live (akun Admin) */
+const NAV = [
+  { g:'Utama', m:[
+    ['Dasbor', 'grid', OB_MON + '#dasbor'],
+    ['Manajemen Onboarding', 'users', OB_MON + '#onboarding'],
+    ['Verifikasi', 'berkas', null, [['Verifikasi Anggota', 'berkas', OB_VER + '#anggota'], ['Verifikasi Produk', 'berkas', OB_VER + '#produk'], ['Verifikasi Pembayaran', 'berkas', OB_VER + '#pembayaran']]]] },
+  { g:'Pengaturan', m:[
+    ['Menu', 'garis', null, [['Menu Admin', 'garis', OB_PGT + '#menu-admin'], ['Menu Operator', 'garis', OB_PGT + '#menu-operator'], ['Menu Customer', 'garis', OB_PGT + '#menu-customer']]],
+    ['Daftar Pengguna', 'users', null, [['Admin', 'user', OB_PGT + '#pengguna-admin'], ['Operator', 'user', OB_PGT + '#pengguna-operator'], ['Customer', 'user', OB_PGT + '#pengguna-customer']]],
+    ['Peran Pengguna', 'tameng', null, [['Admin', 'user', OB_PGT + '#peran-admin'], ['Operator', 'user', OB_PGT + '#peran-operator'], ['Customer', 'user', OB_PGT + '#peran-customer']]],
+    ['Harga Produk', 'kotak', OB_PGT + '#harga'],
+    ['Paket Langganan', 'kartu', OB_PGT + '#paket']] }
+];
+const grupTutup = new Set(), indukTutup = new Set(); /* semua grup & menu induk terbuka saat awal */
+const navAktif = url => { const [f, h] = url.split('#'); return f === BERKAS && h === (NAV_TURUNAN[S.layar] || S.layar); };
+function navTautan([t, k, url], anak, induk) {
+  const [f, h] = url.split('#'), sendiri = f === BERKAS, on = navAktif(url);
+  return `<a href="${sendiri ? '#' + h : url}" class="ina-button ina-button--link ina-button--md nav-item${anak ? ' nav-anak' : ''}${on ? ' on' : ''}" ${sendiri ? `data-ke="${h}"` : ''} ${on ? 'aria-current="page"' : ''} ${anak ? `aria-label="${induk} ${t}"` : ''}>${ik(k)}<span>${t}</span></a>`;
+}
+/* maks 2 level (pola Sidebar IDDS): menu induk bertingkat live (Verifikasi, Menu, Daftar Pengguna, Peran Pengguna) tampil sebagai grup tersendiri */
+const NAV_DATAR = NAV.flatMap(g => [...(g.m.some(m => !m[3]) ? [{ g:g.g, m:g.m.filter(m => !m[3]) }] : []), ...g.m.filter(m => m[3]).map(m => ({ g:m[0], induk:m[0], m:m[3] }))]);
+function gambarNav() {
+  $('#nav').innerHTML = NAV_DATAR.map((g, i) => `
+    <button type="button" class="grp" data-grp="${i}" aria-expanded="${!grupTutup.has(i)}"><span>${g.g}</span>${i === 0 ? TANDA_GRUP : ''}<span class="chev">${ik('chev', 12)}</span></button>
+    <div class="items" ${grupTutup.has(i) ? 'hidden' : ''}>${g.m.map(m => g.induk ? navTautan(m, true, g.induk) : navTautan(m)).join('')}</div>`).join('');
+}
+$('#nav').addEventListener('click', e => {
+  const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupTutup.has(i) ? grupTutup.delete(i) : grupTutup.add(i); gambarNav(); $(`#nav [data-grp="${i}"]`).focus(); return; }
+  const n = e.target.closest('.nav-induk'); if (n) { const id = n.dataset.induk; indukTutup.has(id) ? indukTutup.delete(id) : indukTutup.add(id); gambarNav(); $(`#nav [data-induk="${id}"]`).focus(); return; }
+  const a = e.target.closest('a'); if (!a) return; e.preventDefault();
+  $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on');
+  if (!a.dataset.ke) { keLuar(a.getAttribute('href')); return; }
+  pindah(a.dataset.ke);
+});
+/* menu akun (IDDS Action Dropdown) — live hanya berisi Keluar; tanpa lonceng */
+function gambarMenu() {
+  $('#menuProfil').innerHTML = S.menu ? `<div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible"><div class="menu-kepala"><b>Admin Contoh</b><span>Admin</span></div>
+    <div class="ina-action-dropdown__divider" role="separator"></div><div role="menu" aria-label="Menu akun">
+    <a class="ina-action-dropdown__item" role="menuitem" href="Backlog-HE-ONBOARDING-Prototype.html#masuk" data-keluar><span class="ina-action-dropdown__item-icon">${ik('keluar')}</span><span class="ina-action-dropdown__item-content">Keluar</span></a></div></div>` : '';
+  $('#userTombol').setAttribute('aria-expanded', String(S.menu));
+}
+$('#userTombol').addEventListener('click', () => { S.menu = !S.menu; gambarMenu(); if (S.menu) $('#menuProfil [role=menuitem]').focus(); });
+$('#user').addEventListener('click', e => { const a = e.target.closest('[data-keluar]'); if (a) { e.preventDefault(); S.menu = false; gambarMenu(); keLuar(a.getAttribute('href')); } });
+$('#user').addEventListener('keydown', e => {
+  if (e.key === 'Escape' && S.menu) { e.stopPropagation(); S.menu = false; gambarMenu(); $('#userTombol').focus(); return; }
+  if (!S.menu || (e.key !== 'ArrowDown' && e.key !== 'ArrowUp')) return;
+  e.preventDefault(); const it = [...document.querySelectorAll('#menuProfil [role=menuitem]')], i = it.indexOf(document.activeElement);
+  it[(i + (e.key === 'ArrowDown' ? 1 : it.length - 1)) % it.length].focus();
+});
+document.addEventListener('click', e => { if (S.menu && !e.target.closest('#user')) { S.menu = false; gambarMenu(); } });
+$('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
+$('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+/* penjaga perubahan belum disimpan: dipakai pindah() & keLuar() bila S.kotor */
+function jaga(lanjut) {
+  if (!S.kotor) { lanjut(); return; }
+  dialog({ judul:'Tinggalkan halaman ini?', konfirmasi:true, bahaya:true, isi:'<p>Perubahan yang belum disimpan akan hilang.</p>',
+    tombol:[['Tetap di Sini', 'secondary', null], ['Tinggalkan', 'primary', () => { S.kotor = false; lanjut(); }]] });
+}
+function keLuar(url) { jaga(() => { location.href = url; }); }
+/* ===================== akhir KERANGKA STAF ONBOARDING · JS ===================== */
+
+/* pindah layar dengan penjaga (layar Monitoring tidak punya isian, jadi S.kotor tetap false) */
+function pindah(ke, lanjut) {
+  jaga(() => { S.layar = ke; S.menu = false; history.replaceState(null, '', '#' + ke); gambar(); gambarMenu(); window.scrollTo({ top:0 }); lanjut && lanjut(); });
+}
+
+/* ---------------- komponen bersama halaman ---------------- */
+function paginasi(jenis, hal, n) {
+  const jh = Math.max(1, Math.ceil(n / PER_HAL)), a = n ? (hal - 1) * PER_HAL + 1 : 0, b = Math.min(n, hal * PER_HAL);
+  let hs = []; for (let i = 1; i <= jh; i++) if (i === 1 || i === jh || Math.abs(i - hal) <= 1) hs.push(i); else if (hs[hs.length - 1] !== '…') hs.push('…');
+  return `<div class="halaman"><span>Menampilkan ${a}–${b} dari ${n}</span><nav class="ina-pagination" aria-label="Navigasi halaman"><div class="ina-pagination__nav-container"><div class="ina-pagination__page-info">Halaman ${hal} dari ${jh}</div><div class="ina-pagination__nav-buttons">
+    <button type="button" class="ina-pagination__nav-button ${hal > 1 ? '' : 'ina-pagination__nav-button--disabled'}" ${hal > 1 ? `data-hal="${jenis}:${hal - 1}"` : 'disabled'} aria-label="Halaman sebelumnya">${ik('kiri', 16)}</button>
+    ${hs.map(i => i === '…' ? '<span class="ina-pagination__page-info" aria-hidden="true">…</span>' : `<button type="button" class="ina-pagination__page-button ${i === hal ? 'ina-pagination__page-button--active' : ''}" data-hal="${jenis}:${i}" ${i === hal ? 'aria-current="page"' : ''} aria-label="Halaman ${i}">${i}</button>`).join('')}
+    <button type="button" class="ina-pagination__nav-button ${hal < jh ? '' : 'ina-pagination__nav-button--disabled'}" ${hal < jh ? `data-hal="${jenis}:${hal + 1}"` : 'disabled'} aria-label="Halaman berikutnya">${ik('chev', 16)}</button></div></div></nav></div>`;
+}
+const th = t => `<th class="ina-table__header-cell" scope="col">${t}</th>`;
+const urlKantor = p => p.slug ? `<a class="url-kantor" href="https://dev-app.eppat.id/t/${p.slug}" target="_blank" rel="noopener" data-url-kantor aria-label="Buka aplikasi kantor ${esc(p.nama)} di tab baru">dev-app.eppat.id/t/<wbr>${p.slug}</a>` : '<span class="kc">Belum ada</span>';
+
+/* ---------------- layar: Dasbor Admin ---------------- */
+function layarDasbor() {
+  const perluVerif = DATA.filter(p => p.st === 2).length;
+  const kartu = [
+    ['Total Pendaftaran', DATA.length, 'Seluruh anggota pendaftar', 'users', '#onboarding', 'Manajemen Onboarding'],
+    ['Perlu Verifikasi Anggota', perluVerif, 'Menunggu verifikasi anggota', 'jam', OB_VER + '#anggota', 'Verifikasi Anggota'],
+    ['Transaksi Virtual Account', JUMLAH_TRANSAKSI, 'Semua tagihan pembayaran', 'kartu', OB_VER + '#pembayaran', 'Verifikasi Pembayaran'],
+    ['Order Trial / Enterprise', JUMLAH_ORDER, 'Anggota memilih paket produk', 'kotak', OB_VER + '#produk', 'Verifikasi Produk']];
+  const baru = DATA.filter(p => p.st === 0).slice(0, 5);
+  const daftar = (id, judul, ikon, isi, ke, tujuan, sendiri) => `<section class="blok" aria-labelledby="${id}"><div class="blok-atas"><h2 id="${id}">${ik(ikon, 18)}${judul}</h2>
+      <a href="${ke}" class="ina-button ina-button--tertiary ina-button--sm" ${sendiri ? `data-ke-layar="${ke.slice(1)}"` : ''} aria-label="Lihat semua ${judul.toLowerCase()} di ${tujuan}">Lihat Semua</a></div>
+      <ul class="terbaru">${isi || '<li class="kosong-li">Belum ada data.</li>'}</ul></section>`;
+  return `${remah(['Dasbor'])}<h1>Dasbor Admin</h1><p class="sub">Pantau ringkasan pendaftaran, verifikasi, dan pembayaran calon PPAT.</p>
+    <div class="kpi ditandai" id="kpi">${kartu.map(([t, n, s, i, ke, tujuan]) => `<div class="ina-card ina-card--variant-basic"><small>${t}</small><i>${ik(i)}</i><b>${n.toLocaleString('id-ID')}</b>
+      <div class="kaki"><span>${s}</span><a href="${ke}" ${ke.startsWith('#') ? `data-ke-layar="${ke.slice(1)}"` : ''} aria-label="Lihat detail ${t} di ${tujuan}">Lihat Detail ${ik('panah', 14)}</a></div></div>`).join('')}</div>
+    ${usulan('IDDS-OB-12')}
+    <div class="tiga-daftar ditandai" id="terbaru">
+      ${daftar('jdDaftar', 'Pendaftaran Terbaru', 'users', baru.map(p => `<li><span><span class="nm">${esc(p.nama)}</span><span class="sl">${p.id}</span></span><span class="lencana">${badge('Menunggu', 'warning', 'sm')}</span></li>`).join(''), '#onboarding', 'Manajemen Onboarding', true)}
+      ${daftar('jdTrans', 'Transaksi Terbaru', 'kartu', TRANSAKSI.map(t => `<li><span><span class="nm">${esc(t.nama)}</span><span class="sl">${rupiah(t.nominal)}</span></span><span class="lencana">${t.lunas ? badge('Lunas', 'success', 'sm') : badge('Belum Dibayar', 'warning', 'sm')}</span></li>`).join(''), OB_VER + '#pembayaran', 'Verifikasi Pembayaran')}
+      ${daftar('jdProduk', 'Pemilihan Produk Terbaru', 'kotak', PRODUK.map(o => `<li><span><span class="nm">${esc(o.nama)}</span><span class="sl">${o.order}</span></span><span class="lencana">${badge(NM_PAKET[o.paket], o.paket === 'ENTERPRISE' ? 'info' : 'neutral', 'sm')}${badge('Disetujui', 'success', 'sm')}</span></li>`).join(''), OB_VER + '#produk', 'Verifikasi Produk')}
+    </div>${usulan('IDDS-OB-13')}`;
+}
+
+/* ---------------- layar: Manajemen Onboarding ---------------- */
+const SARING = [['semua', 'Semua'], ...TAHAP.map((t, i) => [String(i), t])];
+const tampilData = () => { const q = S.cari.trim().toLowerCase(); return DATA.filter(p => (S.tahap === 'semua' || String(p.st) === S.tahap) && (!q || `${p.nama} ${p.email} ${p.id || ''}`.toLowerCase().includes(q))); };
+function layarOnboarding() {
+  const rows = tampilData(), n = rows.length, hal = Math.min(S.hal, Math.max(1, Math.ceil(n / PER_HAL))), awal = (hal - 1) * PER_HAL, isi = rows.slice(awal, awal + PER_HAL);
+  S.hal = hal;
+  const nmTahap = S.tahap === 'semua' ? '' : TAHAP[+S.tahap];
+  const kosong = S.cari ? `Tidak ada pendaftar yang cocok dengan "${esc(S.cari)}"${nmTahap ? ` di tahap ${nmTahap}` : ''}.<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>`
+    : nmTahap ? `Belum ada pendaftar di tahap ${nmTahap}.<div style="margin-top:10px">${tombol('Tampilkan Semua', 'secondary', 'sm', 'id="tampilSemua"')}</div>` : 'Belum ada pendaftar.';
+  return `${remah(['Manajemen Onboarding'])}<h1>Manajemen Onboarding</h1><p class="sub">Pantau tahap pendaftaran setiap calon PPAT, dari pendaftaran sampai selesai.</p>
+    <div class="saring-ob ditandai" id="saringOb" role="search">
+      <div class="baris"><div><label class="lbl" for="cariOb">Cari pendaftar</label>${cariIsian('cariOb', 'Cari nama, email, atau ID PPAT…', S.cari, 'Cari pendaftar menurut nama, email, atau ID PPAT')}</div>
+        ${usulan('IDDS-OB-14')}<span class="jumlah" aria-live="polite">${n} pendaftar</span></div>
+      <div class="ina-chip ditandai" id="chipTahap"><div class="ina-chip__list" role="group" aria-label="Saring menurut tahap">${SARING.map(([k, t]) => `<button type="button" class="ina-chip__item ina-chip__item--size-small ina-chip__item--variant-outline ${S.tahap === k ? 'ina-chip__item--selected' : ''}" data-tahap="${k}" aria-pressed="${S.tahap === k}">${t}</button>`).join('')}</div>${usulan('IDDS-OB-15')}</div>
+    </div>
+    <div class="tabel-wadah ditandai" id="tabelOb"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Daftar pendaftar Onboarding">
+      <thead class="ina-table__header"><tr>${['No', 'ID PPAT', 'Nama Pengguna', 'URL', 'Kontak', 'Status', '<span style="display:block;text-align:right">Aksi</span>'].map(th).join('')}</tr></thead>
+      <tbody class="ina-table__body">${isi.length ? isi.map((p, i) => `<tr class="ina-table__row">
+        <td class="ina-table__cell">${awal + i + 1}</td>
+        <td class="ina-table__cell">${p.id ? `<span class="kd" style="cursor:auto">${p.id}</span>` : '<span class="kc">Belum ada</span>'}</td>
+        <td class="ina-table__cell">${esc(p.nama)}</td>
+        <td class="ina-table__cell">${urlKantor(p)}</td>
+        <td class="ina-table__cell"><div class="kontak-email">${esc(p.email).replace('@', '<wbr>@')}</div><div class="kc">${p.telp || 'Belum ada nomor telepon'}</div></td>
+        <td class="ina-table__cell">${lencanaTahap(p.st)}</td>
+        <td class="ina-table__cell"><div class="aksi-baris">${tombol('Lihat Detail', 'secondary', 'sm', `data-detail="${DATA.indexOf(p)}" aria-label="Lihat detail ${esc(p.nama)}"`, ik('mata', 14))}</div></td></tr>`).join('')
+        : `<tr><td colspan="7" class="ina-table__empty-cell kosong">${kosong}</td></tr>`}</tbody></table></div></div>
+      ${paginasi('ob', hal, n)}</div>${usulan('IDDS-OB-16')}`;
+}
+
+/* ---------------- layar: Detail Pendaftar ---------------- */
+const CEK_STEP = '<svg class="ina-stepper__check-icon" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" aria-hidden="true"><path d="M5 12l5 5l10 -10"/></svg>';
+function stepper(p, vertikal) {
+  const selesai = p.st, kini = selesai + 1; /* tahap berikutnya = sedang berjalan */
+  const ket = i => i <= selesai ? tglJam(p.waktu[i]) : i === kini ? 'Sedang berjalan' : 'Belum dimulai';
+  return `<div class="ina-stepper ${vertikal ? 'ina-stepper--vertical stepper-vt' : 'ina-stepper--horizontal stepper-ob'}" role="list" aria-label="Riwayat tahap ${esc(p.nama)}">${TAHAP.map((t, i) => {
+    const kls = i <= selesai ? 'completed' : i === kini ? 'active' : '';
+    return `${i ? `<div class="ina-stepper__separator ${i <= selesai ? 'ina-stepper__separator--completed' : ''}" aria-hidden="true"></div>` : ''}<div class="ina-stepper__item ${kls ? 'ina-stepper__item--' + kls : ''}" role="listitem" ${i === kini ? 'aria-current="step"' : ''}><div class="ina-stepper__icon-wrapper">${i <= selesai ? CEK_STEP : `<span class="ina-stepper__step-number">${i + 1}</span>`}</div><div class="ina-stepper__label"><span>${t}</span><small>${i <= selesai ? (vertikal ? 'Selesai · ' : '<span class="sr">Selesai, </span>') : ''}${ket(i)}</small></div></div>`;
+  }).join('')}</div>`;
+}
+function layarDetail() {
+  const p = DATA[S.pilih] || DATA[0];
+  const bisaProvisi = p.st >= I_LUNAS;
+  return `${remah(['Manajemen Onboarding', '#onboarding'], ['Detail Pendaftar'])}<h1>Detail Pendaftar</h1><p class="sub">Lihat data dan riwayat tahap pendaftaran ${esc(p.nama)}${p.id ? ` (${p.id})` : ''}.</p>
+    <div class="kembali">${tombol('Kembali ke Manajemen Onboarding', 'tertiary', 'sm', 'id="kembaliOb"', ik('kiri', 14))}</div>
+    <section class="blok" aria-labelledby="jdRingkas"><div class="blok-atas"><div><div class="eb">Pendaftar</div><h2 id="jdRingkas">${esc(p.nama)}</h2></div>${lencanaTahap(p.st, 'md')}</div>
+      <dl class="ringkas-ob"><div><dt>ID PPAT</dt><dd>${p.id || 'Belum ada'}</dd></div><div><dt>URL</dt><dd>${urlKantor(p)}</dd></div>
+        <div><dt>Email</dt><dd>${esc(p.email)}</dd></div><div><dt>Telepon</dt><dd>${p.telp || 'Belum ada'}</dd></div></dl>
+    </section>
+    ${bisaProvisi ? `<section class="blok ditandai" id="blokProvisi" aria-labelledby="jdProvisi"><div class="eb">Aplikasi kantor</div><h2 id="jdProvisi">Provisi Manual</h2>
+      <p class="sub" style="margin:4px 0 12px">Jalankan provisi bila aplikasi kantor belum aktif setelah pembayaran lunas.</p>
+      <div class="provisi-baris">${tombol(S.provisi ? 'Memproses…' : 'Provisi Manual', 'primary', 'md', `id="provisiManual" ${S.provisi ? 'disabled' : ''} aria-label="${S.provisi ? 'Memproses provisi' : 'Provisi manual untuk ' + esc(p.nama)}"`, ik('ulang', 16))}
+        <span class="ket-provisi" aria-live="polite">${S.provisi ? 'Provisi sedang berjalan…' : p.provisi ? `Provisi terakhir: ${tglJam(p.provisi)} oleh Admin Contoh.` : 'Provisi manual belum pernah dijalankan.'}</span></div>${usulan('IDDS-OB-18')}</section>` : ''}
+    <section class="blok ditandai" id="riwayatTahap" aria-labelledby="jdTahap"><h2 class="timeline-judul" id="jdTahap">${ik('jam', 18)}Riwayat Tahap</h2>
+      ${p.st < 0 ? `<div style="margin-top:12px">${alert('info', 'Belum ada status', 'Pengguna ini belum memulai pendaftaran PPAT, jadi belum ada tahap yang selesai.')}</div>` : ''}
+      <div class="gulir-step">${stepper(p, false)}</div>${stepper(p, true)}${usulan('IDDS-OB-17')}
+    </section>`;
+}
+
+/* ---------------- gambar ---------------- */
+const RENDER = { dasbor:layarDasbor, onboarding:layarOnboarding, 'onboarding-detail':layarDetail };
+function gambar() {
+  gambarNav();
+  $('#pilLayar').innerHTML = LAYAR.map(([k, t]) => `<button class="pil" data-pil="${k}" aria-pressed="${S.layar === k}">${t}</button>`).join(' ');
+  $('#halaman').innerHTML = RENDER[S.layar]();
+  pasangPanduan();
+}
+
+/* ---------------- interaksi ---------------- */
+const H = $('#halaman');
+H.addEventListener('click', e => {
+  const t = e.target;
+  const rm = t.closest('[data-remah]'); if (rm) { e.preventDefault(); pindah(rm.dataset.remah); return; }
+  const kl = t.closest('[data-ke-layar]'); if (kl) { e.preventDefault(); pindah(kl.dataset.keLayar); return; }
+  const lu = t.closest('a[href^="Backlog-"]'); if (lu) { e.preventDefault(); keLuar(lu.getAttribute('href')); return; }
+  if (t.closest('[data-url-kantor]')) { e.preventDefault(); toast('Aplikasi kantor tidak dibuka di prototipe.', 'default', 4000, 'Di aplikasi asli, tautan ini membuka aplikasi E-PPAT kantor tersebut di tab baru.'); return; }
+  /* Manajemen Onboarding */
+  const ch = t.closest('[data-tahap]'); if (ch) { S.tahap = ch.dataset.tahap; S.hal = 1; gambar(); $(`[data-tahap="${S.tahap}"]`).focus(); return; }
+  if (t.closest('#hapusCari')) { S.cari = ''; S.hal = 1; gambar(); $('#cariOb').focus(); return; }
+  if (t.closest('#tampilSemua')) { S.tahap = 'semua'; S.hal = 1; gambar(); $('[data-tahap="semua"]').focus(); return; }
+  const hl = t.closest('[data-hal]'); if (hl) { S.hal = +hl.dataset.hal.split(':')[1]; gambar(); (document.querySelector(`[data-hal="${hl.dataset.hal}"]`) || $('.halaman'))?.focus?.(); return; }
+  const dt = t.closest('[data-detail]'); if (dt) { S.pilih = +dt.dataset.detail; S.provisi = false; pindah('onboarding-detail', () => $('#halaman h1').focus()); return; }
+  /* Detail */
+  if (t.closest('#kembaliOb')) { const asal = S.pilih; pindah('onboarding', () => ($(`[data-detail="${asal}"]`) || $('#cariOb')).focus()); return; }
+  if (t.closest('#provisiManual')) {
+    const p = DATA[S.pilih];
+    dialog({ judul:'Jalankan provisi manual?', konfirmasi:true, bahaya:true,
+      isi:`<div class="modal-gap"><p>Sistem akan menyiapkan ulang aplikasi kantor <b>${esc(p.nama)}</b> di <b>dev-app.eppat.id/t/${p.slug}</b>.</p><p>Gunakan hanya bila aplikasi kantor belum aktif setelah pembayaran lunas. Proses ini tidak dapat dibatalkan setelah berjalan.</p></div>`,
+      tombol:[['Batal', 'secondary', null], ['Jalankan Provisi', 'primary', () => {
+        S.provisi = true; gambar(); $('#provisiManual').focus();
+        setTimeout(() => { S.provisi = false; p.provisi = SEKARANG.getTime(); if (S.layar === 'onboarding-detail') { gambar(); $('#provisiManual')?.focus(); } toast('Provisi manual berhasil dijalankan.', 'positive', 3500, `Aplikasi kantor ${p.nama} sedang disiapkan.`); }, 900);
+      }]] });
+    return;
+  }
+});
+H.addEventListener('input', e => {
+  if (e.target.id === 'cariOb') { S.cari = e.target.value; S.hal = 1; const pos = e.target.selectionStart; gambar(); const i = $('#cariOb'); i.focus(); i.setSelectionRange(pos, pos); }
+});
+$('#pilLayar').addEventListener('click', e => { const b = e.target.closest('[data-pil]'); if (b) pindah(b.dataset.pil); });
+
+/* ---------------- tombol Bantuan di judul halaman ---------------- */
+function pasangPanduan() {
+  const h = document.querySelector('#halaman h1'); if (!h || h.parentElement.classList.contains('judul-kiri')) return;
+  h.tabIndex = -1;
+  const w = document.createElement('div'); w.className = 'judul-halaman';
+  const kiri = document.createElement('div'); kiri.className = 'judul-kiri';
+  const sub = h.nextElementSibling && h.nextElementSibling.classList.contains('sub') ? h.nextElementSibling : null;
+  h.before(w); w.append(kiri); kiri.append(h); if (sub) kiri.append(sub);
+  w.insertAdjacentHTML('beforeend', `<button type="button" class="ina-button ina-button--secondary ina-button--md ditandai" id="bukaBantuan" aria-label="Bantuan untuk halaman ini"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg><span>Bantuan</span></button>`);
+}
+document.addEventListener('click', e => { if (e.target.closest('#bukaBantuan')) bukaBantuan(); });
+
+/* ---------------- IDDS Drawer ---------------- */
+function drawer({ judul, isi }) {
+  const D = $('#lapisanDrawer'), hp = window.matchMedia('(max-width:760px)').matches;
+  D.innerHTML = `<div class="ina-drawer ina-drawer--position-${hp ? 'bottom' : 'right'}" role="dialog" aria-modal="true" aria-labelledby="drwJudul">
+    <div class="ina-drawer__backdrop" data-tutup-drawer></div>
+    <div class="ina-drawer__panel ina-drawer__panel--width-md">
+      <div class="ina-drawer__header"><h2 class="ina-drawer__title" id="drwJudul">${judul}</h2>
+        <button type="button" class="ina-drawer__close-button" aria-label="Tutup bantuan" data-tutup-drawer><svg class="ina-drawer__close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      <div class="ina-drawer__content">${isi}</div>
+    </div></div>`;
+  D.querySelector('.ina-drawer__close-button').focus();
+}
+function tutupDrawer() { $('#lapisanDrawer').innerHTML = ''; $('#bukaBantuan')?.focus(); }
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-tutup-drawer]')) { tutupDrawer(); return; }
+  const tg = e.target.closest('#lapisanDrawer .ina-accordion__toggle'); if (!tg) return;
+  const b = tg.getAttribute('aria-expanded') !== 'true';
+  tg.setAttribute('aria-expanded', b);
+  tg.querySelector('.ina-accordion__icon').classList.toggle('ina-accordion__icon--open', b);
+  tg.nextElementSibling.classList.toggle('ina-accordion__content--open', b);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisanDrawer').innerHTML) tutupDrawer(); });
+
+/* ---------------- IDDS Modal & Toast ---------------- */
+let asalDialog = null;
+function tutupDialog() { $('#lapisan').innerHTML = ''; const a = asalDialog; asalDialog = null; if (a && a.isConnected) a.focus(); }
+function dialog({ judul, isi, tombol: tb, lebar, konfirmasi, bahaya }) {
+  const Lp = $('#lapisan'); asalDialog = document.activeElement;
+  Lp.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-i="-1"></div><div class="ina-modal__container">
+    <div class="ina-modal__dialog ina-modal__dialog--size-${lebar ? 'lg' : 'md'} ${konfirmasi ? 'ina-modal-confirmation' : ''}" role="${konfirmasi ? 'alertdialog' : 'dialog'}" aria-modal="true" aria-labelledby="dlgJudul">
+      <div class="ina-modal__header"><h2 class="ina-modal__title" id="dlgJudul">${judul}</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-i="-1">${ik('x', 22)}</button></div>
+      <div class="ina-modal__body">${isi}</div>
+      <div class="ina-modal__footer">${tb.map(([t, h, , , kls, ikon], i) => `<button type="button" class="ina-button ina-button--${h} ina-button--md ${kls || ''}" data-i="${i}" ${bahaya && i === tb.length - 1 ? 'style="background:var(--ina-negative-600);border-color:var(--ina-negative-600)"' : ''}>${ikon || ''}${t}</button>`).join('')}</div></div></div></div>`;
+  Lp.onclick = e => {
+    const b = e.target.closest('[data-i]'); if (!b || b.disabled) return;
+    const i = +b.dataset.i; if (i < 0) { tutupDialog(); return; }
+    const [, , fn, tahan] = tb[i]; if (tahan) { fn && fn(); return; }
+    tutupDialog(); fn && fn();
+  };
+  Lp.querySelector('.ina-modal__close-button').focus();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisan').innerHTML) tutupDialog(); });
+let tt;
+function toast(teks, state = 'default', ms = 3000, ket = '') {
+  $('#toastWadah').innerHTML = `<div class="ina-toast ina-toast--state-${state} ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${ik(state === 'positive' ? 'centang' : 'info', 20)}</div>
+    <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p>${ket ? `<p class="ina-toast__description">${ket}</p>` : ''}</div></div><button class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast>${ik('x', 16)}</button></div>`;
+  clearTimeout(tt); tt = setTimeout(() => $('#toastWadah').innerHTML = '', ms);
+}
+$('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tutup-toast]')) $('#toastWadah').innerHTML = ''; });
+
+/* ---------------- Bantuan per halaman (IDDS-OB-20) ---------------- */
+const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
+const kontak = () => `<h4 class="bantu-sub">Kontak dukungan ${usulan('IDDS-OB-20')}</h4>
+  <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>`;
+const lgkh = a => `<ol class="bantu-langkah">${a.map(x => `<li>${x}</li>`).join('')}</ol>`;
+const istilah = a => `<dl class="bantu-istilah">${a.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
+const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
+const ARTI_TAHAP = [['Pendaftaran', 'Calon PPAT sudah mengisi formulir pendaftaran.'], ['Verifikasi Email', 'Calon PPAT sudah mengklik tautan di email verifikasi.'], ['Masuk Pertama', 'Calon PPAT sudah masuk pertama kali dan mengaktifkan verifikasi dua langkah.'], ['Verifikasi Anggota', 'Data keanggotaan sudah diperiksa operator di Verifikasi Anggota.'], ['Pilih Produk', 'Calon PPAT sudah memilih paket, misalnya Trial atau Enterprise.'], ['Proses Pembayaran', 'Tagihan Virtual Account sudah dibuat dan menunggu dibayar.'], ['Lunas', 'Pembayaran sudah diterima.'], ['Proses Administrasi', 'Aplikasi kantor sedang disiapkan.'], ['Selesai', 'Aplikasi kantor aktif dan email akun sudah dikirim.']];
+const BANTUAN = {
+  dasbor:() => ({ judul:'Bantuan Dasbor Admin', isi:`<p>Dasbor merangkum pendaftaran calon PPAT, anggota yang perlu diverifikasi, transaksi pembayaran, dan pemilihan paket di portal Onboarding.</p>
+    <h4 class="bantu-sub">Isi halaman</h4>
+    <ul class="bantu-langkah"><li><b>Total Pendaftaran</b>: semua akun yang pernah mendaftar.</li><li><b>Perlu Verifikasi Anggota</b>: pendaftar yang menunggu pemeriksaan data keanggotaan.</li><li><b>Transaksi Virtual Account</b>: semua tagihan pembayaran yang pernah dibuat.</li><li><b>Order Trial / Enterprise</b>: jumlah pemilihan paket.</li><li><b>Tiga daftar terbaru</b>: lima pendaftaran, transaksi, dan pemilihan produk terakhir.</li></ul>
+    <h4 class="bantu-sub">Arti lencana</h4>
+    ${istilah([['Menunggu', 'Pendaftar baru mengisi formulir dan belum menyelesaikan tahap berikutnya.'], ['Lunas', 'Tagihan sudah dibayar.'], ['Belum Dibayar', 'Tagihan sudah dibuat, tetapi belum dibayar.'], ['Disetujui', 'Pemilihan paket sudah disetujui.'], ['Trial / Enterprise', 'Paket yang dipilih pendaftar.']])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('d', [
+      ['Apakah angka di kartu hanya untuk hari ini?', 'Tidak. Angka di kartu adalah jumlah keseluruhan sejak portal dipakai.'],
+      ['Bagaimana melihat pendaftar yang perlu diverifikasi?', 'Klik "Lihat Detail" di kartu Perlu Verifikasi Anggota. Halaman Verifikasi Anggota akan terbuka.'],
+      ['Mengapa tagihan berstatus Belum Dibayar?', 'Pendaftar belum mentransfer ke nomor Virtual Account. Tagihan dapat kedaluwarsa bila tidak dibayar sampai batas waktunya. Periksa di Verifikasi Pembayaran.'],
+      ['Apa beda Trial dan Enterprise?', 'Trial adalah paket coba gratis dengan batas waktu dan transaksi. Enterprise adalah paket berbayar. Rinciannya ada di Pengaturan › Harga Produk.'],
+      ['Bagaimana melihat daftar lengkap?', 'Klik "Lihat Semua" di kanan atas setiap daftar.'],
+      ['Mengapa angka belum berubah?', 'Angka dimuat saat halaman dibuka. Muat ulang halaman untuk melihat data terbaru.']])}
+    ${kontak()}` }),
+  onboarding:() => ({ judul:'Bantuan Manajemen Onboarding', isi:`<p>Manajemen Onboarding menampilkan semua pendaftar dan tahap terakhir yang sudah mereka selesaikan, dari Pendaftaran sampai Selesai.</p>
+    <h4 class="bantu-sub">Langkah mencari pendaftar</h4>
+    ${lgkh(['Ketik nama, email, atau ID PPAT di kotak <b>Cari pendaftar</b>.', 'Pilih tahap di chip saringan, misalnya <b>Proses Pembayaran</b>, atau biarkan <b>Semua</b>.', 'Klik <b>Lihat Detail</b> untuk membuka riwayat tahap pendaftar.', 'Klik <b>Hapus Pencarian</b> atau <b>Tampilkan Semua</b> bila tidak ada hasil.'])}
+    <h4 class="bantu-sub">Arti tahap</h4>
+    ${istilah(ARTI_TAHAP.concat([['Belum ada status', 'Akun customer yang belum memulai pendaftaran PPAT.']]))}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('o', [
+      ['Apa arti status di tabel?', 'Status adalah tahap terakhir yang sudah diselesaikan pendaftar. Tahap berikutnya terlihat di Detail Pendaftar.'],
+      ['Mengapa ada pendaftar tanpa ID PPAT dan URL?', 'Akun itu terdaftar sebagai customer tetapi belum memulai pendaftaran PPAT, jadi statusnya "Belum ada status".'],
+      ['Bagaimana memverifikasi anggota atau pembayaran?', 'Tidak dari halaman ini. Gunakan menu Verifikasi › Verifikasi Anggota atau Verifikasi Pembayaran.'],
+      ['Pendaftar lama di tahap Verifikasi Email. Apa yang harus dilakukan?', 'Pendaftar belum mengklik tautan di email verifikasi. Minta pendaftar memeriksa folder spam atau mengirim ulang email verifikasi dari halaman masuk.'],
+      ['Apa yang dibuka tautan di kolom URL?', 'Aplikasi E-PPAT kantor pendaftar. Aplikasi baru dapat dipakai setelah tahap Selesai.'],
+      ['Mengapa pendaftar yang saya cari tidak muncul?', 'Periksa ejaan dan saringan tahap yang aktif. Pilih "Semua" agar pencarian mencakup semua tahap.']])}
+    ${kontak()}` }),
+  'onboarding-detail':() => ({ judul:'Bantuan Detail Pendaftar', isi:`<p>Detail Pendaftar menampilkan data pendaftar dan riwayat sembilan tahap pendaftarannya, lengkap dengan waktu setiap tahap selesai.</p>
+    <h4 class="bantu-sub">Cara membaca riwayat tahap</h4>
+    ${istilah([['Bercentang', 'Tahap sudah selesai. Tanggal dan jam selesai tertulis di bawahnya.'], ['Sedang berjalan', 'Tahap berikutnya yang sedang ditunggu, dari pendaftar atau dari operator.'], ['Belum dimulai', 'Tahap yang belum dapat dikerjakan.']])}
+    <h4 class="bantu-sub">Langkah provisi manual</h4>
+    ${lgkh(['Pastikan status pendaftar sudah <b>Lunas</b> atau sesudahnya.', 'Klik <b>Provisi Manual</b>, baca penjelasannya, lalu klik <b>Jalankan Provisi</b>.', 'Tunggu sampai tombol kembali aktif. Waktu provisi terakhir tertulis di samping tombol.'])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('r', [
+      ['Kapan provisi manual dipakai?', 'Bila pembayaran sudah lunas tetapi aplikasi kantor belum aktif, misalnya karena penyiapan otomatis gagal.'],
+      ['Mengapa tombol Provisi Manual tidak ada?', 'Tombol hanya tampil setelah pembayaran pendaftar lunas.'],
+      ['Apakah provisi manual mengubah data pendaftar?', 'Tidak. Provisi hanya menyiapkan aplikasi kantor di alamat URL pendaftar.'],
+      ['Tahap Verifikasi Anggota lama berjalan. Apa yang harus dilakukan?', 'Periksa pendaftar di Verifikasi › Verifikasi Anggota, lalu verifikasi data keanggotaannya.'],
+      ['Bisakah tahap diubah dari halaman ini?', 'Tidak. Tahap berubah sendiri saat pendaftar atau operator menyelesaikan langkahnya.'],
+      ['Bagaimana kembali ke daftar?', 'Klik "Kembali ke Manajemen Onboarding". Saringan dan halaman tabel tetap seperti sebelumnya.']])}
+    ${kontak()}` })
+};
+function bukaBantuan() { drawer(BANTUAN[S.layar]()); }
+
+/* ---------------- protobar & daftar penyesuaian ---------------- */
+$('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
+$('#bukaUbah').addEventListener('click', () => {
+  dialog({ judul:'Daftar penyesuaian Monitoring Onboarding', lebar:true,
+    isi:`<p>Isi, kolom, tahap, dan alur mengikuti live dev.eppat.id (akun Admin). Yang disesuaikan adalah komponen IDDS dengan brand E-PPAT, kejujuran label, bahasa, status sistem, konfirmasi aksi berdampak, dan Bantuan per halaman. Data di prototipe ini adalah data contoh.</p>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+        <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
+    tombol:[['Tutup', 'secondary', null]] });
+  $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });
+});
+function lihat(u) {
+  const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
+  if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  pindah(u.ke, sorot);
+}
+$('#aturUlang').addEventListener('click', () => { DATA = contohPendaftar(); const l = S.layar; S = S0(); S.layar = l; gambar(); gambarMenu(); toast('Data contoh dikembalikan ke awal.'); });
+$('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
+const awal = (location.hash || '').slice(1); if (RENDER[awal]) S.layar = awal;
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (RENDER[h] && h !== S.layar) pindah(h); });
+gambar();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!-- ===== Sidebar pola IDDS (sidebar-idds.html, disisipkan rakit-idds.js ke setiap prototipe bersidebar) =====
+     Struktur mengikuti pola Sidebar IDDS (design.inadigital.go.id/pattern/sidebar): label grup kecil sentence case + chevron,
+     item ikon + label (default/hover/terpilih), kartu profil pengguna di bawah, kategori Expand/Collapse, laci di layar sempit.
+     WARNA TETAP brand E-PPAT (--ina-eppat-sidebar-*, --eppat-sidebar-icon, --eppat-sidebar-active-icon). Kartu profil kantor tetap. -->
+<style id="sidebar-idds-css">
+/* label grup: kecil, sentence case, rata kiri, chevron tepat setelah label */
+.sidebar .grp{padding:16px 8px 6px;font:500 12px/16px Inter,sans-serif;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.72)}
+.sidebar .grp > svg{display:none}
+.sidebar .grp > span:not(.chev){flex:0 1 auto}
+.sidebar .grp .chev{margin-left:0;color:currentColor}
+.sidebar .grp .chev svg{color:currentColor;width:12px;height:12px}
+.sidebar .grp:hover{color:#fff}
+.sidebar .grp:focus-visible,.sidebar a.nav-item:focus-visible,.sidebar .nav-induk:focus-visible,.sb-ciut-btn:focus-visible,.sb-profil-btn:focus-visible{outline:2px solid #fff;outline-offset:-2px;border-radius:8px}
+.side-ob .grp-lbl{margin:16px 8px 6px;font:500 12px/16px Inter,sans-serif;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.72)}
+/* item menu: ikon + label */
+.sidebar .items a.nav-item{min-height:40px;align-items:center;padding:8px 10px}
+.sidebar .items a.nav-item.nav-anak{padding-left:10px}
+.sidebar .items a.nav-item.nav-anak svg{width:16px;height:16px}
+.sidebar .items a.nav-item > span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* kepala sidebar: logo + tombol ciut */
+.sidebar .brand{gap:8px}
+.sidebar .brand img{flex:none}
+.sb-ciut-btn{margin-left:auto;flex:none;display:grid;place-items:center;width:32px;height:32px;border:0;border-radius:8px;background:transparent;color:rgba(255,255,255,.8);cursor:pointer}
+.sb-ciut-btn:hover{background:var(--ina-eppat-sidebar-hover);color:#fff}
+.sb-ciut-btn svg{width:18px;height:18px}
+/* kartu profil pengguna (bawah) */
+.sb-profil{flex:none;margin-top:auto;position:sticky;bottom:0;z-index:1;margin-left:-16px;margin-right:-16px;padding:12px 16px 0;background:var(--ina-eppat-sidebar-bg);border-top:1px solid rgba(255,255,255,.1)}
+.sb-profil-btn{display:flex;align-items:center;gap:10px;width:100%;padding:8px;border:0;border-radius:8px;background:transparent;color:#fff;text-align:left;font:inherit}
+button.sb-profil-btn{cursor:pointer}
+button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
+.sb-ava{flex:none;width:32px;height:32px;border-radius:999px;display:grid;place-items:center;background:var(--ina-primary-500);color:#fff;font:600 12px Inter,sans-serif}
+.sb-teks{flex:1;min-width:0;display:flex;flex-direction:column}
+.sb-nama{font:600 13px/18px Inter,sans-serif;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-peran{font:400 12px/16px Inter,sans-serif;color:rgba(255,255,255,.75);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-profil-btn .sb-pilih{flex:none;display:grid;color:rgba(255,255,255,.75)}
+.sidebar .sidefoot,.side-ob .versi{margin-top:0;border-top:0;padding:4px 8px 12px;font-size:11px;color:rgba(255,255,255,.72)}
+/* tooltip mode Collapse */
+#sbTip{position:fixed;z-index:200;pointer-events:none;background:#1f2a2e;color:#fff;font:500 12px/16px Inter,sans-serif;padding:6px 10px;border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,.2);white-space:nowrap}
+#sbTip[hidden]{display:none}
+.sb-sr{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important}
+@media (max-width:1024px){ .sb-ciut-btn{display:none} }
+/* kategori Collapse (ikon saja) — hanya layar lebar; layar sempit tetap laci */
+@media (min-width:1025px){
+  .sidebar{transition:width .18s}
+  .sidebar.sb-ciut{width:72px;padding:0 12px;overflow-x:hidden}
+  .sidebar.sb-ciut .brand{flex-direction:column;justify-content:center;height:auto;padding:14px 0 10px;gap:8px}
+  .sidebar.sb-ciut .brand img{width:34px;height:44px;object-fit:cover;object-position:left center}
+  .sidebar.sb-ciut .sb-ciut-btn{margin:0}
+  .sidebar.sb-ciut .kantor,.sidebar.sb-ciut .grp,.sidebar.sb-ciut .grp-lbl,.sidebar.sb-ciut .sidefoot,.sidebar.sb-ciut .versi,.sidebar.sb-ciut .sb-teks,.sidebar.sb-ciut .sb-pilih,.sidebar.sb-ciut .tag-usulan{display:none!important}
+  .sidebar.sb-ciut .items,.sidebar.sb-ciut .items[hidden]{display:flex!important}
+  .sidebar.sb-ciut #nav > .items + .items,.sidebar.sb-ciut #nav > .grp + .items:not(:first-of-type),.sidebar.sb-ciut nav > .items ~ .items{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1)}
+  .sidebar.sb-ciut .items a.nav-item,.sidebar.sb-ciut .items button.nav-induk{justify-content:center;padding:10px 0;gap:0}
+  .sidebar.sb-ciut .items a.nav-item svg{width:18px;height:18px}
+  .sidebar.sb-ciut .sb-profil-btn{justify-content:center;padding:8px 0}
+  .sidebar.sb-ciut .sb-profil{margin-left:-12px;margin-right:-12px;padding:12px 12px 12px}
+}
+</style>
+<script id="sidebar-idds-js">
+(() => {
+  const KUNCI = 'eppat-sidebar-ciut';
+  const baca = () => { try { return localStorage.getItem(KUNCI) === '1'; } catch (e) { return false; } };
+  const tulis = v => { try { localStorage.setItem(KUNCI, v ? '1' : '0'); } catch (e) {} };
+  const SVG = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+  const IK_CIUT = '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16"/><path d="M15 10l-2 2 2 2"/>';
+  const IK_BENTANG = '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16"/><path d="M14 10l2 2-2 2"/>';
+  const IK_PILIH = '<path d="M8 9l4-4 4 4"/><path d="M16 15l-4 4-4-4"/>';
+  const daftar = [...document.querySelectorAll('aside.sidebar')];
+  if (!daftar.length) return;
+  let ciut = baca();
+  const tip = document.createElement('div'); tip.id = 'sbTip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true; document.body.appendChild(tip);
+
+  daftar.forEach((sb, n) => {
+    if (sb.dataset.sbIdds) return; sb.dataset.sbIdds = '1';
+    if (!sb.id) sb.id = 'sidebar-' + n;
+    /* tombol ciut di kepala sidebar */
+    const brand = sb.querySelector('.brand');
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'sb-ciut-btn'; btn.setAttribute('aria-controls', sb.id);
+    if (brand) brand.appendChild(btn); else sb.prepend(btn);
+    /* kartu profil pengguna: nama & peran dari kepala halaman (satu sumber) */
+    const app = sb.closest('.app') || document;
+    const kepala = app.querySelector('header .user');
+    if (kepala) {
+      const pemicu = kepala.querySelector('.user-tombol') || (kepala.matches('[aria-haspopup], [role="button"]') ? kepala : null);
+      const wadah = document.createElement('div'); wadah.className = 'sb-profil';
+      const el = document.createElement(pemicu ? 'button' : 'div');
+      el.className = 'sb-profil-btn';
+      if (pemicu) { el.type = 'button'; el.setAttribute('aria-haspopup', 'menu'); }
+      wadah.appendChild(el);
+      const kaki = sb.querySelector(':scope > .sidefoot, :scope > .versi');
+      sb.appendChild(wadah); if (kaki) wadah.appendChild(kaki); /* versi aplikasi tetap kecil di bawah kartu */
+      const isi = () => {
+        const nama = (kepala.querySelector('.uname') || {}).textContent || '', peran = (kepala.querySelector('.urole') || {}).textContent || '';
+        const ava = (kepala.querySelector('.ava') || {}).textContent || nama.trim().charAt(0);
+        el.innerHTML = `<span class="sb-ava" aria-hidden="true">${ava.trim()}</span><span class="sb-teks"><span class="sb-nama">${nama.trim()}</span><span class="sb-peran">${peran.trim()}</span></span>${pemicu ? `<span class="sb-pilih">${SVG(IK_PILIH).replace('<svg', '<svg width="16" height="16"')}</span>` : ''}`;
+        el.dataset.tip = nama.trim();
+        if (pemicu) el.setAttribute('aria-label', `Menu akun ${nama.trim()}, ${peran.trim()}`);
+      };
+      isi();
+      new MutationObserver(isi).observe(kepala.querySelector('.txt') || kepala, { subtree: true, characterData: true, childList: true });
+      if (pemicu) el.addEventListener('click', e => {
+        e.stopPropagation(); /* jangan ditutup oleh penangan "klik di luar menu" */
+        sb.classList.remove('open'); const scrim = app.querySelector('.scrim'); if (scrim) scrim.classList.remove('on');
+        pemicu.click(); if (pemicu === kepala) pemicu.focus();
+      });
+    }
+  });
+
+  const terap = () => {
+    daftar.forEach(sb => {
+      sb.classList.toggle('sb-ciut', ciut);
+      const b = sb.querySelector('.sb-ciut-btn');
+      b.setAttribute('aria-expanded', String(!ciut));
+      b.setAttribute('aria-label', ciut ? 'Bentangkan menu samping' : 'Ciutkan menu samping');
+      b.innerHTML = SVG(ciut ? IK_BENTANG : IK_CIUT);
+      b.dataset.tip = ciut ? 'Bentangkan menu' : 'Ciutkan menu';
+    });
+    labelSr();
+  };
+  /* mode ciut: label disembunyikan secara visual saja (tetap dibacakan pembaca layar) */
+  const labelSr = () => daftar.forEach(sb => sb.querySelectorAll('a.nav-item > span, .nav-induk > span:not(.chev)').forEach(s => s.classList.toggle('sb-sr', ciut && matchMedia('(min-width:1025px)').matches)));
+  daftar.forEach(sb => new MutationObserver(() => { if (ciut) labelSr(); }).observe(sb, { childList: true, subtree: true }));
+  matchMedia('(min-width:1025px)').addEventListener('change', labelSr);
+  document.addEventListener('click', e => {
+    const b = e.target.closest('.sb-ciut-btn'); if (!b) return;
+    ciut = !ciut; tulis(ciut); tip.hidden = true; terap(); b.focus();
+  });
+  /* tooltip: label menu saat ciut */
+  const tampil = el => {
+    const sb = el.closest('.sidebar'); if (!sb || !sb.classList.contains('sb-ciut') || !matchMedia('(min-width:1025px)').matches) return;
+    const teks = el.dataset.tip || el.getAttribute('aria-label') || (el.querySelector(':scope > span:not(.chev)') || el).textContent.trim(); if (!teks) return;
+    tip.textContent = teks; tip.hidden = false;
+    const r = el.getBoundingClientRect(); tip.style.left = (r.right + 8) + 'px'; tip.style.top = (r.top + r.height / 2 - tip.offsetHeight / 2) + 'px';
+  };
+  const SEL = '.sidebar a.nav-item, .sidebar .nav-induk, .sidebar .sb-profil-btn, .sidebar .sb-ciut-btn';
+  document.addEventListener('mouseover', e => { const el = e.target.closest(SEL); if (el) tampil(el); else tip.hidden = true; });
+  document.addEventListener('focusin', e => { const el = e.target.closest(SEL); if (el) tampil(el); else tip.hidden = true; });
+  document.addEventListener('focusout', () => { tip.hidden = true; });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') tip.hidden = true; });
+  document.addEventListener('scroll', () => { tip.hidden = true; }, true);
+  terap();
+})();
+</script>

@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prototipe Backlog Peruri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--green:#3D6B5E;--green-dark:#33594E;--line:#D2DDD9;--muted:#5A6B66;--field-bg:#FBFDFC;--usulan:#2563EB}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#0f172a;
+    background:linear-gradient(160deg,#E9EFEE 0%,#F4F7F6 45%,#EDF2F1 100%);min-height:100vh}
+  .wrap{max-width:1040px;margin:0 auto;padding:48px 16px 64px}
+  .eyebrow{font:600 11px Inter,sans-serif;letter-spacing:1.8px;text-transform:uppercase;color:var(--green)}
+  h1{margin:6px 0 0;font:400 32px/1.25 Inter,sans-serif;letter-spacing:-.6px;color:var(--green)}
+  .sub{margin:6px 0 0;font-size:14px;color:var(--muted)}
+  .sumber{margin-top:14px;padding:12px 16px;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:0 10px 10px 0;background:rgba(255,255,255,.7);font-size:13px;line-height:20px;color:#334155}
+  .cari{position:relative;display:block;margin-top:20px}
+  .cari svg{position:absolute;left:14px;top:50%;width:16px;height:16px;transform:translateY(-50%);color:var(--muted)}
+  .cari input{width:100%;height:44px;padding:0 14px 0 40px;border:1px solid var(--line);border-radius:10px;background:#fff;font:400 14px Inter,sans-serif;outline:none}
+  .cari input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(61,107,94,.16)}
+  .jml{margin:10px 2px 0;font-size:12px;color:var(--muted)}
+  .kotak{margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(15,30,61,.05)}
+  table{width:100%;border-collapse:collapse}
+  thead tr{background:#EEF3F1}
+  th{text-align:left;padding:12px 16px;font:600 11px Inter,sans-serif;letter-spacing:1.3px;text-transform:uppercase;color:#4C5D58}
+  td{padding:14px 16px;border-top:1px solid rgba(210,221,217,.6);font-size:14px;color:#4C5D58;vertical-align:top}
+  tr.baris{cursor:pointer} tr.baris:hover td{background:rgba(238,243,241,.6)}
+  td.kode{font:600 13px ui-monospace,Menlo,monospace;color:var(--green);white-space:nowrap}
+  .nm{font-weight:600;color:#111}
+  .isi{margin-top:4px;font-size:13px;line-height:19px;color:var(--muted)}
+  .lenc{display:inline-flex;margin-top:6px;border:1px solid #BFDBFE;background:#EFF6FF;color:var(--usulan);border-radius:999px;padding:1px 8px;font:600 10.5px Inter,sans-serif}
+  td.tgl{white-space:nowrap;font-size:13px}
+  td.tgl .jam{display:block;font-size:11px;color:var(--muted)}
+  td.chev{width:40px;color:var(--muted)}
+  .tab{display:flex;gap:4px;margin-top:20px;border-bottom:1px solid var(--line);overflow-x:auto}
+  .tab button{flex:none;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:0;border-bottom:2px solid transparent;background:none;font:600 14px Inter,sans-serif;color:var(--muted);cursor:pointer;white-space:nowrap}
+  .tab button[aria-selected="true"]{color:var(--green);border-bottom-color:var(--green)}
+  .tab button:focus-visible{outline:2px solid var(--green);outline-offset:-2px;border-radius:6px 6px 0 0}
+  .tab .n{min-width:20px;padding:0 6px;border-radius:999px;background:#EEF3F1;font-size:11px;color:#4C5D58}
+  .tab button[aria-selected="true"] .n{background:var(--green);color:#fff}
+  .panduan-dev{display:flex;flex-direction:column;gap:2px;margin-top:16px;padding:12px 16px;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;background:#fff;color:inherit;text-decoration:none}
+  .panduan-dev:hover,.panduan-dev:focus-visible{border-color:var(--green)}
+  .panduan-dev b{color:var(--green);font-size:15px}
+  .panduan-dev span{font-size:13px;line-height:19px;color:var(--muted)}
+  .ket-tab{margin:12px 0 0;font-size:13px;line-height:20px;color:var(--muted)}
+  tr.kosong td{padding:28px 16px;text-align:center;color:var(--muted);cursor:default}
+  @media (max-width:700px){
+    thead{display:none} tr.baris{display:block;padding:8px 0} td{display:block;border:0;padding:4px 16px} tr.baris{border-top:1px solid var(--line)}
+    td.chev{display:none}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="eyebrow">E-PPAT &middot; Peruri</div>
+    <h1>Prototipe Backlog</h1>
+    <p class="sub">Cari atau pilih backlog untuk membuka prototipe layarnya.</p>
+    <div class="sumber">Backlog ini disusun dari laporan <b>Heuristic Evaluation ePPAT</b> (Tim Riset INA Digital, Oktober 2026) dengan fokus pada UI dan UX. Setiap prototipe meniru layar live <i>dev-app.eppat.id</i>, lalu menandai perbaikannya dengan label <span class="lenc" style="margin:0">usulan &middot; kode</span>. Tab <b>Penyesuaian IDDS</b> berisi menu yang tidak dinilai HE: tampilan disesuaikan dengan INA Digital Design System dan bahasanya dibakukan, tanpa mengubah isi live.</div>
+
+    <a class="panduan-dev" href="Panduan-IDDS-Developer.html"><b>Panduan Penerapan IDDS untuk Developer</b><span>Aturan pemasangan, komponen, pola saran HE, aksesibilitas, dan bahasa beserta daftar periksa rilis. Panel notifikasi (IDDS-TN-39) tersedia di lonceng setiap prototipe kantor.</span></a>
+
+    <div class="tab" role="tablist" aria-label="Kelompok prototipe">
+      <button type="button" role="tab" id="tab-he" data-tab="he" aria-selected="true">Dari HE <span class="n"></span></button>
+      <button type="button" role="tab" id="tab-tenant" data-tab="tenant" aria-selected="false">Penyesuaian IDDS Tenant <span class="n"></span></button>
+      <button type="button" role="tab" id="tab-platform" data-tab="platform" aria-selected="false">Penyesuaian IDDS Platform <span class="n"></span></button>
+      <button type="button" role="tab" id="tab-onboarding" data-tab="onboarding" aria-selected="false">Penyesuaian IDDS Onboarding <span class="n"></span></button>
+    </div>
+    <p class="ket-tab" id="ketTab"></p>
+
+    <label class="cari">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.7" y2="16.7"/></svg>
+      <input type="text" id="cari" placeholder="Cari kode backlog, nama layar, atau isi prototipe" autocomplete="off">
+    </label>
+    <p class="jml" id="jml"></p>
+
+    <div class="kotak">
+      <table>
+        <thead><tr><th>Backlog</th><th>Prototipe</th><th>Diperbarui</th><th></th></tr></thead>
+        <tbody id="baris">
+      <tr class="baris" data-tab="he" data-href="Brand-Mode-EPPAT-IDDS.html">
+        <td class="kode">IDDS-EPPAT</td>
+        <td><div class="nm">Brand Mode E-PPAT (IDDS)</div><div class="isi">Tema brand E-PPAT untuk INA Digital Design System: palet hijau E-PPAT dan emas kartu kantor (skala 25–900), token sidebar, komponen IDDS resmi (Button, Text Field, Badge, Alert, Stepper, Tab, Tooltip, Modal, Toast, File Upload), mode terang dan gelap, serta cara memakai. Bisa dibandingkan dengan Default IDDS dan INAgov.</div><span class="lenc">berkas: brand-eppat-idds/</span></td>
+        <td class="tgl"><time datetime="2026-10-23">23 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="he" data-href="Backlog-HE-ONBOARDING-Prototype.html">
+        <td class="kode">HE-REG · HE-LOGIN · HE-OB</td>
+        <td><div class="nm">Platform Onboarding — Registrasi, Login &amp; Dashboard</div><div class="isi">Usulan laporan HE (Registrasi 91,7; Login 68,6; rincian di UX Metric Lab) + layar live dev.eppat.id: tombol Batal dengan konfirmasi, penjelasan ID PPAT dan URL Tenant, gambaran alur pendaftaran, syarat password berupa daftar centang, masa berlaku kode verifikasi di layar, pesan galat yang menjelaskan solusi, navigasi tetap ada saat verifikasi dua langkah, penjelasan MFA dan kode cadangan; Dashboard: hasil cek status yang dapat ditutup, paket dapat diganti sebelum bayar, langkah berikutnya dan bantuan, email aktivasi tanpa password, stepper bernomor urut.</div><span class="lenc">15 usulan · HE-REG-01–04, HE-LOGIN-01–04, HE-OB-01–05, HE-UMUM-01–02</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="he" data-href="Backlog-HE-USER-Prototype.html">
+        <td class="kode">HE-USER</td>
+        <td><div class="nm">Daftar Pengguna</div><div class="isi">Usulan laporan HE (skor 79,5; rincian di UX Metric Lab) + kode live akun Super Admin: Status CA dijelaskan, pilih beberapa user lalu aktifkan/tangguhkan sekaligus, syarat password awal sama dengan aturan password lain, menu aksi dan pesan hasil yang jelas, impor klien dari berkas (HE-UMUM-03), serta Bantuan halaman.</div><span class="lenc">7 usulan · HE-USER-01–04, HE-UMUM-01–03</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="he" data-href="Backlog-HE-VERIF-Prototype.html">
+        <td class="kode">HE-VERIF</td>
+        <td><div class="nm">Verifikasi Berkas</div><div class="isi">Usulan laporan HE (skor 54,5; rincian di UX Metric Lab) + kode dan layar live akun Asisten: istilah CA dijelaskan dan status berbahasa Indonesia, lama menunggu dan dampaknya terlihat, konfirmasi serta pemeriksaan isian sebelum verifikasi disimpan, cari/saring/urutkan daftar, navigasi detail yang konsisten, serta Bantuan halaman.</div><span class="lenc">7 usulan · HE-VERIF-01–05, HE-UMUM-01–02</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="he" data-href="Backlog-HE-EAWK-Prototype.html">
+        <td class="kode">HE-EAWK</td>
+        <td><div class="nm">Penandatanganan Akta (Klien)</div><div class="isi">Usulan laporan HE hal. 36–38 (skor 46,4) + kode dan layar live akun Klien: cari, saring, dan urutkan daftar akta; PDF langsung ke halaman tanda tangan; langkah berikutnya yang menonjol; konfirmasi sebelum tanda tangan; masa berlaku OTP di layar; kontak kantor PPAT yang bisa diklik; panduan pertama kali, serta Bantuan halaman.</div><span class="lenc">9 usulan · HE-EAWK-01–07, HE-UMUM-01–02</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="he" data-href="Backlog-HE-CA-Prototype.html">
+        <td class="kode">HE-CA</td>
+        <td><div class="nm">Registrasi CA (Klien)</div><div class="isi">Usulan laporan HE hal. 34–35 (skor 54,8) + penelusuran live tiga kondisi: tahapan registrasi dengan perkiraan waktu, data diri cukup diisi sekali lewat panel samping, istilah CA/eKYC/swafoto dijelaskan, banner langsung ke tab yang tepat, satu pesan per status dengan ejaan baku, pesan galat di dekat isian, serta Bantuan halaman. Simulasi enam kondisi di protobar.</div><span class="lenc">8 usulan · HE-CA-01–06, HE-UMUM-01–02</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="he" data-href="Backlog-HE-EAW-Prototype.html">
+        <td class="kode">HE-EAW</td>
+        <td><div class="nm">Penandatanganan Akta (PPAT)</div><div class="isi">Usulan laporan HE hal. 28–30 (skor 36,2, terendah) + penelusuran live: stepper bernomor dengan status, istilah dijelaskan dan satu aksi utama, konfirmasi sebelum stempel/tanda tangan/e-meterai, masa berlaku OTP di layar, navigasi otomatis ke halaman penanda, cek kesiapan CA sejak awal, cari dan saring daftar akta, penjelasan saat TERA kantor belum aktif, pemeriksaan aktivasi e-Meterai dengan konfirmasi pemakaian kuota, serta Bantuan halaman.</div><span class="lenc">11 usulan · HE-EAW-01–09, HE-UMUM-01–02</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="he" data-href="Backlog-HE-MINUTA-Prototype.html">
+        <td class="kode">HE-MINUTA</td>
+        <td><div class="nm">Penyusunan Akta</div><div class="isi">Usulan laporan HE hal. 25–27 (skor 47,1), peran Asisten: tooltip dan penjelasan istilah, bilah alat editor yang lebih lega, variabel tampil sebagai label dengan panel pencarian dan contoh nilai, umpan balik setelah hapus pasal, pesan jelas saat Cek Ejaan belum aktif, Pengaturan Dokumen mengikuti standar kantor, serta Bantuan halaman.</div><span class="lenc">8 usulan · HE-MINUTA-01–06, HE-UMUM-01–02</span></td>
+        <td class="tgl"><time datetime="2026-10-23">23 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="he" data-href="Backlog-HE-ORDER-Prototype.html">
+        <td class="kode">HE-ORDER</td>
+        <td><div class="nm">Permohonan AJB</div><div class="isi">Laporan HE hal. 23–24 (skor 48,6), peran Asisten. Daftar order dengan kolom Kelengkapan; syarat pindah status tampil di bawah stepper dan tombol baru aktif bila lengkap; konfirmasi setiap pindah status (Selesai wajib centang pernyataan); Tambah Pihak dengan "Simpan &amp; Tambah Lagi"; penanda kelengkapan di tab; langkah berikutnya; Bantuan Permohonan AJB. Komponen IDDS dengan brand E-PPAT.</div><span class="lenc">7 usulan &middot; HE-ORDER-01 s.d. 08 (06–08 dari penelusuran live), HE-UMUM-01–02</span></td>
+        <td class="tgl"><time datetime="2026-10-23">23 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="he" data-href="Backlog-HE-TERA-Prototype.html">
+        <td class="kode">HE-TERA</td>
+        <td><div class="nm">Registrasi TERA</div><div class="isi">Memakai komponen IDDS dengan brand E-PPAT (HE-UMUM-01) dan tombol Bantuan berisi panduan serta kontak dukungan (HE-UMUM-02). Laporan HE hal. 20–22 (skor 41,7). Pengingat "Daftar TERA" langsung membuka formulir; Registrasi TERA mudah ditemukan lewat menu profil; isian tidak hilang saat pindah tab; petunjuk singkat dan penjelasan istilah; isian yang salah ditandai merah; konfirmasi sebelum menyimpan; tahapan proses dan perkiraan waktu. Simulasi 5 status TERA.</div><span class="lenc">9 usulan &middot; HE-UMUM-01–02, HE-TERA-01 s.d. 07</span></td>
+        <td class="tgl"><time datetime="2026-10-23">23 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="tenant" data-href="Backlog-IDDS-TN-MASUK-Prototype.html">
+        <td class="kode">IDDS-TN-MASUK</td>
+        <td><div class="nm">Tenant · Masuk &amp; Daftar</div><div class="isi">Penyesuaian IDDS halaman masuk dan registrasi mandiri aplikasi kantor (dev-app.eppat.id/t/default): Masuk, Verifikasi 2 faktor, Ganti Kata Sandi sementara, Daftar, Verifikasi OTP email &amp; WhatsApp, Akun aktif. Galat di dalam kartu dan di bawah isian, logo terlihat, teks pengantar tidak bertentangan, syarat kata sandi seragam, bahasa dibakukan, masa berlaku OTP terlihat, serta Bantuan di setiap layar.</div><span class="lenc">8 penyesuaian · IDDS-TN-01–07, IDDS-TN-38</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="tenant" data-href="Backlog-IDDS-TN-SYSTEM-Prototype.html">
+        <td class="kode">IDDS-TN-SYSTEM</td>
+        <td><div class="nm">Tenant · Pengaturan Aplikasi &amp; Kantor</div><div class="isi">Penyesuaian IDDS menu System untuk Super Admin (dev-app.eppat.id/t/default): Dasbor, Peran &amp; Izin, Pengaturan, Log Aktivitas. Daftar Pengguna memakai prototipe HE. Setiap halaman punya Bantuan sesuai saran HE; masuk berhasil di prototipe Masuk langsung membuka Dasbor.</div><span class="lenc">9 penyesuaian · IDDS-TN-08–16</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="tenant" data-href="Backlog-IDDS-TN-CMS-Prototype.html">
+        <td class="kode">IDDS-TN-CMS</td>
+        <td><div class="nm">Tenant · Konten Situs</div><div class="isi">Penyesuaian IDDS menu CMS untuk Super Admin (dev-app.eppat.id/t/default): Halaman Depan dengan penyusun tata letak, Tema Tampilan, Master Konten, Artikel &amp; Halaman, Pustaka Media. Status halaman berkonfirmasi, aksi blok selalu terlihat, cek kontras warna, formulir tidak hilang tanpa peringatan, pemilih media seragam, Bantuan per halaman.</div><span class="lenc">10 penyesuaian · IDDS-TN-17–26</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="tenant" data-href="Backlog-IDDS-TN-EPPAT-Prototype.html">
+        <td class="kode">IDDS-TN-EPPAT</td>
+        <td><div class="nm">Tenant · Akta &amp; Pengaturan Kantor</div><div class="isi">Penyesuaian IDDS Dashboard Akta, Profil Kantor (termasuk Layanan Akta), Salinan Akta, dan Aktivasi e-Meterai untuk Super Admin (dev-app.eppat.id/t/default). Warna status seragam, izin ubah dihormati, konfirmasi untuk aksi berdampak, status salinan dan e-Meterai terlihat, Bantuan per halaman.</div><span class="lenc">11 penyesuaian · IDDS-TN-27–37</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="platform" data-href="Backlog-IDDS-PL-MASUK-Prototype.html">
+        <td class="kode">IDDS-PL-MASUK</td>
+        <td><div class="nm">Platform · Masuk</div><div class="isi">Penyesuaian IDDS halaman masuk admin platform (dev-app.eppat.id/platform): Masuk, galat di dalam kartu, verifikasi 2 faktor, ganti kata sandi, akun bukan admin platform, dan layar pemeliharaan, serta Bantuan per layar. Masuk berhasil membuka Dasbor Platform.</div><span class="lenc">10 penyesuaian · IDDS-PL-01–10</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="platform" data-href="Backlog-IDDS-PL-MONITORING-Prototype.html">
+        <td class="kode">IDDS-PL-MONITORING</td>
+        <td><div class="nm">Platform · Monitoring</div><div class="isi">Dasbor Platform, Daftar PPAT, Paket Langganan, dan Log Aktivitas: kode mentah diganti label Indonesia, subjudul jujur untuk halaman hanya baca beserta rujukan ke aplikasi Onboarding, status sistem dengan waktu pemeriksaan, saringan log berlabel, serta Bantuan per halaman.</div><span class="lenc">10 penyesuaian · IDDS-PL-11–20</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="platform" data-href="Backlog-IDDS-PL-AKTA-Prototype.html">
+        <td class="kode">IDDS-PL-AKTA</td>
+        <td><div class="nm">Platform · Jenis Akta</div><div class="isi">Katalog jenis akta beserta template, variabel, serta pasal dan catatan: aksi berlabel, konfirmasi saat menonaktifkan atau menghapus, penulisan variabel {{kunci}} yang konsisten, pengecek isi yang jelas, penjaga perubahan, serta Bantuan per layar.</div><span class="lenc">10 penyesuaian · IDDS-PL-21–30</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="platform" data-href="Backlog-IDDS-PL-SISTEM-Prototype.html">
+        <td class="kode">IDDS-PL-SISTEM</td>
+        <td><div class="nm">Platform · Sistem</div><div class="isi">Setting Theme area platform (pola sama dengan tenant), Pengaturan Global (Umum, Email SMTP, WhatsApp OCA, Peruri CA, Gemini AI) dengan validasi, rahasia tersamar, dan konfirmasi berdampak, serta Akun Saya dengan syarat kata sandi 12 karakter + 4 jenis dan 2FA terpandu.</div><span class="lenc">10 penyesuaian · IDDS-PL-31–40</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="onboarding" data-href="Backlog-IDDS-OB-MASUK-Prototype.html">
+        <td class="kode">IDDS-OB-MASUK</td>
+        <td><div class="nm">Onboarding · Beranda, Kata Sandi &amp; Profil</div><div class="isi">Beranda publik dengan tombol Masuk dan Daftar, Lupa dan Atur Ulang Kata Sandi dengan syarat yang sama seperti Registrasi, serta Profil Saya pelanggan (PPAT, Kantor PPAT, Kata Sandi &amp; MFA) dengan galat di bawah isian, penjaga perubahan, dan Bantuan.</div><span class="lenc">10 penyesuaian · IDDS-OB-01–10</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="onboarding" data-href="Backlog-IDDS-OB-MONITOR-Prototype.html">
+        <td class="kode">IDDS-OB-MONITOR</td>
+        <td><div class="nm">Onboarding · Monitoring</div><div class="isi">Dasbor Admin dan Manajemen Onboarding: menu berbahasa Indonesia, lencana status Indonesia, saringan tahap IDDS Chip, Detail Pendaftar dengan Stepper sembilan tahap, Provisi Manual berkonfirmasi, serta Bantuan per halaman.</div><span class="lenc">10 penyesuaian · IDDS-OB-11–20</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="onboarding" data-href="Backlog-IDDS-OB-VERIF-Prototype.html">
+        <td class="kode">IDDS-OB-VERIF</td>
+        <td><div class="nm">Onboarding · Verifikasi</div><div class="isi">Verifikasi Anggota (dengan keputusan Setujui/Tolak berkonfirmasi), Verifikasi Produk, dan Verifikasi Pembayaran beserta detail transaksi: label status Indonesia, saringan berlabel, detail sebagai halaman dengan tombol Kembali, serta Bantuan.</div><span class="lenc">10 penyesuaian · IDDS-OB-21–30</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="onboarding" data-href="Backlog-IDDS-OB-PENGATURAN-Prototype.html">
+        <td class="kode">IDDS-OB-PENGATURAN</td>
+        <td><div class="nm">Onboarding · Pengaturan</div><div class="isi">Menu, Daftar Pengguna dan Edit Pengguna, Peran Pengguna, Harga Produk, serta Paket Langganan: aksi berlabel nama item, konfirmasi merah saat menghapus atau mencabut akses, galat di bawah isian, penjaga perubahan, dan Bantuan.</div><span class="lenc">15 penyesuaian · IDDS-OB-31–45</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+      <tr class="baris" data-tab="onboarding" data-href="Backlog-IDDS-OB-BAYAR-Prototype.html">
+        <td class="kode">IDDS-OB-BAYAR</td>
+        <td><div class="nm">Onboarding · Simulasi Pembayaran</div><div class="isi">Simulasi pembayaran langkah demi langkah untuk dua jalur, Enterprise langsung serta Trial lalu Upgrade, dengan Rekam Jejak yang dapat diunduh: tahap pembayaran tercatat sejak VA dibuat, QRIS nonaktif dengan alasan, tagihan kedaluwarsa dan gagal ditangani, Riwayat mencatat Trial dan Upgrade dengan nama yang benar, serta email aktivasi tanpa kata sandi.</div><span class="lenc">15 penyesuaian · IDDS-OB-46–60</span></td>
+        <td class="tgl"><time datetime="2026-10-26">26 Okt 2026</time></td>
+        <td class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<script>
+  const B = [...document.querySelectorAll('tr.baris')];
+  const jml = document.getElementById('jml'), cari = document.getElementById('cari'), tbody = document.getElementById('baris');
+  const KET = {
+    he:'Prototipe dari temuan laporan Heuristic Evaluation, lengkap dengan usulan perbaikan berlabel kode HE.',
+    tenant:'Aplikasi kantor PPAT (dev-app.eppat.id/t/…): menu yang tidak dinilai HE, disesuaikan dengan IDDS.',
+    platform:'Platform operator Peruri (dev.eppat.id, akun operator): menu yang tidak dinilai HE, disesuaikan dengan IDDS.',
+    onboarding:'Platform Onboarding calon PPAT (dev.eppat.id): halaman yang tidak dinilai HE, disesuaikan dengan IDDS.'
+  };
+  const tabAwal = (location.hash || '').slice(1);
+  let tab = KET[tabAwal] ? tabAwal : 'he';
+  const kosong = document.createElement('tr'); kosong.className = 'kosong'; kosong.innerHTML = '<td colspan="4"></td>'; tbody.appendChild(kosong);
+  function saring() {
+    const q = cari.value.trim().toLowerCase(); let n = 0;
+    B.forEach(r => { const ok = r.dataset.tab === tab && (!q || r.innerText.toLowerCase().includes(q)); r.hidden = !ok; if (ok) n++; });
+    document.querySelectorAll('.tab button').forEach(b => { const on = b.dataset.tab === tab; b.setAttribute('aria-selected', on); b.querySelector('.n').textContent = B.filter(r => r.dataset.tab === b.dataset.tab).length; });
+    document.getElementById('ketTab').textContent = KET[tab];
+    const total = B.filter(r => r.dataset.tab === tab).length;
+    kosong.hidden = n > 0;
+    kosong.firstChild.textContent = total ? 'Tidak ada prototipe yang cocok dengan pencarian.' : 'Prototipe untuk kelompok ini sedang disiapkan.';
+    jml.textContent = `${n} prototipe`;
+  }
+  cari.addEventListener('input', saring);
+  document.querySelector('.tab').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (!b) return; tab = b.dataset.tab; history.replaceState(null, '', '#' + tab); saring(); });
+  document.querySelector('.tab').addEventListener('keydown', e => { if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return; const t = [...document.querySelectorAll('.tab button')], i = t.findIndex(b => b.dataset.tab === tab), j = (i + (e.key === 'ArrowRight' ? 1 : t.length - 1)) % t.length; t[j].focus(); t[j].click(); });
+  B.forEach(r => r.addEventListener('click', () => location.href = r.dataset.href));
+  saring();
+</script>
+</body>
+</html>

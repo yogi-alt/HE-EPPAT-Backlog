@@ -1,0 +1,371 @@
+<style id="pl-masuk-css">
+/* ===== Platform (dev-app.eppat.id/platform) — Masuk admin platform: penyesuaian IDDS + brand E-PPAT
+   Tidak dinilai HE. Disalin dari tn-masuk-badan.html (layar sama = markup/teks/ikon sama), lalu disesuaikan dengan login platform
+   (kode live dilihat 26 Okt 2026): tanpa Daftar/OTP, eyebrow "Portal Platform", galat bukan admin, layar pemeliharaan. ===== */
+.ina-tooltip:not(:hover):not(:focus-within) .ina-tooltip__content{display:none}
+.ina-modal-confirmation{max-width:520px}
+body{background:#1f2c33}
+.tn{min-height:calc(100vh - 44px);display:flex;align-items:center;justify-content:center;padding:40px 16px;position:relative;background:#1f2c33 url("__OB_HERO__") center/cover no-repeat}
+.tn::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(15,30,61,.25),rgba(15,30,61,.35));pointer-events:none}
+.tn > *{position:relative}
+.wadah{width:100%;max-width:420px}
+.atas-tn{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.atas-tn .kanan-tn{margin-left:auto}
+.isi-tim{border-bottom:1px dashed currentColor;cursor:help}
+.kartu-tn{background:var(--ina-background-primary);border-radius:24px;box-shadow:0 24px 60px rgba(0,0,0,.28);padding:32px}
+.kepala-tn{display:flex;align-items:center;gap:14px}
+.kepala-tn img{height:44px;width:auto}
+.kepala-tn .ikon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--ina-primary-600);color:var(--ina-base-white,var(--ina-neutral-25));flex:none}
+.kepala-tn .eb{font:700 10px Inter,sans-serif;letter-spacing:1.8px;text-transform:uppercase;color:var(--ina-primary-600)}
+.kepala-tn h1{margin:2px 0 0;font:600 22px/28px Inter,sans-serif;color:var(--ina-content-primary)}
+.pengantar{margin:14px 0 0;font-size:14px;line-height:22px;color:var(--ina-content-secondary)}
+.kartu-tn .ina-alert{margin-top:16px}
+.kartu-tn .ina-text-field,.kartu-tn .ina-password-input{margin-top:16px}
+.kartu-tn .ina-button.penuh{width:100%;justify-content:center;margin-top:20px}
+.kaki-tn{margin-top:22px;padding-top:16px;border-top:1px solid var(--ina-stroke-primary);text-align:center;font-size:13px;color:var(--ina-content-secondary)}
+.kaki-tn a{color:var(--ina-primary-primary);font-weight:600;text-decoration:none}
+.syarat-pw{list-style:none;margin:8px 0 0;padding:10px 12px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:4px 12px}
+.syarat-pw li{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ina-content-secondary)}
+.syarat-pw .tanda{width:15px;height:15px;border-radius:999px;border:1.5px solid var(--ina-stroke-secondary);display:grid;place-items:center;flex:none}
+.syarat-pw li.ok{color:var(--ina-content-positive)}
+.syarat-pw li.ok .tanda{border-color:var(--ina-content-positive);background:var(--ina-positive-100)}
+.status-tn{text-align:center}
+.status-tn .bulat{width:72px;height:72px;border-radius:999px;display:grid;place-items:center;margin:0 auto 14px;background:var(--ina-positive-100);color:var(--ina-content-positive)}
+.status-tn .bulat.pelihara{background:var(--ina-primary-600);color:var(--ina-base-white,var(--ina-neutral-25))}
+.status-tn .eb{font:700 10px Inter,sans-serif;letter-spacing:1.8px;text-transform:uppercase;color:var(--ina-primary-600);margin-bottom:4px}
+.status-tn h1{margin:0;font:600 22px/30px Inter,sans-serif}
+.status-tn p{margin:6px 0 0;font-size:14px;line-height:22px;color:var(--ina-content-secondary)}
+@media (max-width:760px){
+  .kartu-tn{padding:22px 18px;border-radius:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="protobar">
+  <a href="index.html#platform">&#9776; Daftar prototipe</a>
+  <span class="sep">&bull;</span><b>Platform · Masuk</b><span class="sep">&bull;</span><span>Layar:</span>
+  <span id="pilLayar"></span>
+  <span class="kanan">
+    <span>Contoh: sandi <b>salah123</b> = gagal · email berawalan <b>2fa</b> = verifikasi 2 faktor · <b>sementara</b> = ganti kata sandi · <b>bukanadmin</b> = bukan admin platform · kode <b>000000</b> = salah</span>
+    <button class="pil" id="aturUlang">Atur ulang contoh</button>
+    <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai penyesuaian</button>
+    <button class="pil utama" id="bukaUbah">Daftar penyesuaian</button>
+  </span>
+</div>
+
+<main class="tn" id="halaman"></main>
+<div id="lapisan"></div>
+<div id="lapisanDrawer"></div>
+<div class="toast-wadah" id="toastWadah"></div>
+
+<script>
+(() => {
+const I = {
+  kiri:'<path d="M15 18l-6-6 6-6"/>', panah:'<path d="M5 12h14M13 6l6 6-6 6"/>', x:'<path d="M18 6L6 18M6 6l12 12"/>', info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+  centang:'<path d="M20 6L9 17l-5-5"/>', mata:'<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>',
+  mataTutup:'<path d="M17.9 17.9A10 10 0 0 1 12 19c-7 0-11-7-11-7a18 18 0 0 1 5.1-5.9M9.9 4.2A9 9 0 0 1 12 4c7 0 11 7 11 7a18 18 0 0 1-2.2 3.2M1 1l22 22"/>',
+  tameng:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>', kunci:'<circle cx="7.5" cy="15.5" r="5.5"/><path d="M11.4 11.6L21 2M18 5l3 3M15 8l3 3"/>',
+  gembok:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>', perkakas:'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/>',
+  tanya:'<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/>'
+};
+const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* penanda penyesuaian IDDS (gaya sama dengan label usulan) */
+const usulan = kode => `<span class="tag-usulan">penyesuaian &middot; ${kode}</span>`;
+const est = t => `<span class="isi-tim" title="Data contoh. Ganti dengan data resmi dari tim E-PPAT.">${t}</span>`;
+const tombol = (t, h = 'primary', uk = 'md', atr = '', ikon = '') => { let k = ''; atr = atr.replace(/class="([^"]*)"/, (m, c) => { k = ' ' + c; return ''; }); return `<button type="button" class="ina-button ina-button--${h} ina-button--${uk}${k}" ${atr}>${ikon}${t}</button>`; };
+const alert = (j, judul, isi) => `<div class="ina-alert ina-alert--${j}" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section">${judul ? `<div class="ina-alert__title">${judul}</div>` : ''}<div class="ina-alert__description">${isi}</div></div></div></div>`;
+const spinner = `<span class="ina-spinner ina-spinner--spinner-only" aria-hidden="true"><span class="ina-spinner__element ina-spinner__element--size-xs ina-spinner__element--color-primary"></span></span>`;
+const SYARAT_PW = [['Minimal 12 karakter', s => s.length >= 12], ['Mengandung huruf besar', s => /[A-Z]/.test(s)], ['Mengandung huruf kecil', s => /[a-z]/.test(s)], ['Mengandung angka', s => /[0-9]/.test(s)], ['Mengandung simbol', s => /[^A-Za-z0-9]/.test(s)]];
+const syaratHtml = id => `<ul class="syarat-pw" id="${id}" aria-live="polite">${SYARAT_PW.map(([l], i) => `<li data-syarat="${i}"><span class="tanda" aria-hidden="true"></span>${l}</li>`).join('')}</ul>`;
+const PESAN = {
+  salah:'Email atau kata sandi salah. Periksa kembali, lalu coba lagi.',
+  bukan:'Akun ini bukan admin platform. Akun kantor PPAT masuk lewat alamat kantor masing-masing.'
+};
+
+/* ---------------- daftar penyesuaian ---------------- */
+const UBAH = [
+  { kode:'IDDS-PL-01', judul:'Halaman Masuk platform: komponen IDDS dengan brand E-PPAT',
+    isi:'Isian memakai IDDS Text Field dan Password Input dengan tombol tampilkan/sembunyikan. Kode 2 faktor memakai One-Time Password. Tombol, alert, drawer, dan dialog juga memakai komponen IDDS. Komponen dan teks sama dengan halaman Masuk tenant (IDDS-TN-01).',
+    lama:'Isian dibuat sendiri. Isian kata sandi di halaman Masuk tidak punya tombol tampilkan. Kode 2 faktor diketik di satu isian biasa.', ke:'masuk', sorot:'#f-mPw' },
+  { kode:'IDDS-PL-02', judul:'Halaman Masuk platform: pesan galat di dalam kartu dan di bawah isian',
+    isi:'Pesan galat masuk tampil sebagai IDDS Alert di dalam kartu. Isian kosong ditandai di bawah isiannya ("Email wajib diisi.", "Kata sandi wajib diisi."). Pesan galat kode 2 faktor tampil di bawah kolom kode. Pola sama dengan IDDS-TN-02.',
+    lama:'Semua pesan galat muncul sebagai dialog "Gagal masuk" atau "Verifikasi gagal" yang menutupi formulir dan harus ditutup dengan "Mengerti". Isian kosong hanya diberi satu pesan "Email dan kata sandi wajib diisi."', ke:'gagal', sorot:'#galatMasuk' },
+  { kode:'IDDS-PL-03', judul:'Halaman Masuk platform: logo terlihat di kartu',
+    isi:'Logo E-PPAT (atau logo dari Setting Theme platform) memakai versi berwarna sehingga terlihat di atas kartu putih. Pola sama dengan IDDS-TN-03.',
+    lama:'Ruang logo di kiri teks atas judul "PORTAL PLATFORM" tampak kosong karena logo berwarna terang berada di atas kartu putih.', ke:'masuk', sorot:'.kepala-tn' },
+  { kode:'IDDS-PL-04', judul:'Halaman Masuk platform: teks pengantar untuk admin platform',
+    isi:'Pengantar berbunyi "Masuk dengan akun admin platform. Hubungi tim E-PPAT bila belum punya akses." Pengguna langsung tahu halaman ini khusus admin platform dan kepada siapa harus bertanya.',
+    lama:'Pengantar berbunyi "Gunakan akun yang telah diaktivasi oleh administrator. Hubungi admin kalau belum punya akses." Kalimat ini sama dengan halaman Masuk tenant dan tidak menyebut admin yang dimaksud.', ke:'masuk', sorot:'#pengantarMasuk' },
+  { kode:'IDDS-PL-05', judul:'Halaman Masuk platform: tombol Kembali ke Beranda punya tujuan',
+    isi:'Tombol "Kembali ke Beranda" membuka beranda publik E-PPAT. Di prototipe ini, tombol menampilkan pemberitahuan karena beranda tidak termasuk prototipe. Tujuan pasti (beranda E-PPAT atau situs onboarding) perlu dikonfirmasi tim.',
+    lama:'Tombol "Kembali ke beranda" mengarah ke /platform, yaitu halaman yang sedang dibuka, sehingga tidak terjadi apa-apa saat dipilih.', ke:'masuk', sorot:'#kembaliBeranda' },
+  { kode:'IDDS-PL-06', judul:'Halaman Masuk platform: pesan galat akun bukan admin platform di dalam kartu',
+    isi:'Bila akun benar tetapi bukan admin platform, kartu menampilkan IDDS Alert "Akun ini bukan admin platform." Alert itu juga menjelaskan bahwa akun kantor PPAT masuk lewat alamat kantor masing-masing. Email tetap terisi agar mudah diperbaiki.',
+    lama:'Dialog "Gagal masuk" berisi "Akun ini bukan platform admin." (susunan kata mengikuti bahasa Inggris) tanpa arahan ke mana akun tersebut harus masuk.', ke:'bukan', sorot:'#galatMasuk' },
+  { kode:'IDDS-PL-07', judul:'Halaman Masuk platform: istilah dibakukan',
+    isi:'"Login untuk" menjadi "Masuk untuk", dan "authenticator" menjadi "autentikator". Frasa "me-reset 2FA" menjadi "mengatur ulang verifikasi 2 faktor", dan "Kembali ke login" menjadi "Kembali ke Halaman Masuk". "Ganti Password", "Password Sementara", dan "Ubah Password" menjadi "Ganti Kata Sandi", "Kata Sandi Sementara", dan "Ubah Kata Sandi". "Password Berhasil Diubah!" menjadi "Kata sandi berhasil diubah". Teks sama dengan halaman Masuk tenant.',
+    lama:'Istilah bercampur bahasa Inggris: "Login", "authenticator", "me-reset 2FA", dan "Password" di layar ganti kata sandi, sedangkan halaman Masuk memakai "Kata Sandi".', ke:'2fa', sorot:'#info2fa' },
+  { kode:'IDDS-PL-08', judul:'Syarat kata sandi sama di semua layar platform',
+    isi:'Layar Ganti Kata Sandi memakai daftar centang yang sama dengan tenant: minimal 12 karakter serta memuat huruf besar, huruf kecil, angka, dan simbol. Akun Saya > Keamanan di platform diusulkan memakai daftar centang yang sama (lihat HE-CA-08 dan HE-USER-03).',
+    lama:'Layar ganti kata sandi wajib meminta 12 karakter dan 4 jenis karakter, tetapi Akun Saya > Keamanan di platform cukup "Minimal 8 karakter". Akibatnya, admin platform dapat menurunkan kekuatan kata sandinya sendiri.', ke:'ganti', sorot:'#syaratGanti' },
+  { kode:'IDDS-PL-09', judul:'Layar pemeliharaan memakai komponen IDDS',
+    isi:'Layar pemeliharaan memakai kartu, ikon, dan tombol IDDS yang sama dengan halaman Masuk, dilengkapi tombol Bantuan. Label tombol menjadi "Masuk sebagai Admin Platform" agar jelas siapa yang tetap boleh masuk. Isi pesan tetap dari pengaturan pemeliharaan.',
+    lama:'Layar berisi nama aplikasi, judul "Sedang Dalam Pemeliharaan", pesan, dan tombol "Masuk sebagai admin". Tidak ada penjelasan admin yang dimaksud dan tidak ada bantuan.', ke:'pelihara', sorot:'#tombolPelihara' },
+  { kode:'IDDS-PL-10', judul:'Bantuan di halaman Masuk platform',
+    isi:'Tombol Bantuan di atas kartu Masuk, Verifikasi 2 Faktor, Ganti Kata Sandi, dan Pemeliharaan membuka IDDS Drawer. Isinya mengikuti layar yang dibuka: langkah singkat, pertanyaan umum, dan kontak dukungan tim E-PPAT. Pertanyaan umum mencakup lupa kata sandi, akun bukan admin platform, kehilangan aplikasi autentikator, syarat kata sandi, dan pemeliharaan. Pola sama dengan IDDS-TN-38. Kontak bergaris putus-putus adalah data contoh.',
+    lama:'Tidak ada panduan atau kontak dukungan di halaman Masuk platform, Verifikasi 2 Faktor, dan Pemeliharaan. Tidak ada tautan "Lupa kata sandi".', ke:'bantuan', sorot:null }
+];
+
+/* ---------------- keadaan ---------------- */
+const LAYAR = [['masuk', 'Masuk'], ['gagal', 'Masuk · galat'], ['2fa', 'Verifikasi 2 faktor'], ['ganti', 'Ganti kata sandi'], ['bukan', 'Bukan admin platform'], ['pelihara', 'Pemeliharaan']];
+const S0 = () => ({ layar:'masuk', email:'', galat:'', jenisGalat:'', memuat:'', berhasil:false });
+let S = S0();
+
+const tf = (id, l, v = '', ph = '', wajib = false, bantu = '', ekstra = '', tipe = 'text') => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}${wajib ? '<span class="ina-text-field__required">*</span>' : ''}</label>
+  <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><input id="${id}" type="${tipe}" class="ina-text-field__input" value="${esc(v)}" placeholder="${ph}" aria-describedby="h-${id}" ${ekstra}></div>
+  <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div></div>`;
+const pwIsian = (id, l, ph, ac = 'new-password', bantu = '') => `<div class="ina-password-input" id="f-${id}"><label class="ina-password-input__label" for="${id}">${l}<span class="ina-password-input__required">*</span></label>
+  <div class="ina-password-input__wrapper ina-password-input__wrapper--size-md ina-password-input__wrapper--neutral"><input id="${id}" type="password" class="ina-password-input__input" placeholder="${ph}" autocomplete="${ac}" aria-describedby="h-${id}">
+  <div class="ina-password-input__actions"><button type="button" class="ina-password-input__toggle-button" data-lihat-pw="${id}" aria-label="Tampilkan kata sandi" aria-pressed="false">${ik('mata', 18)}</button></div></div>
+  <div class="ina-password-input__status-area"><span class="ina-password-input__status-message" id="h-${id}" aria-live="polite">${bantu}</span></div></div>`;
+
+/* baris atas kartu: tombol kembali (IDDS secondary sm) + Bantuan (IDDS-PL-10) */
+const atasTn = (kembali = '') => `<div class="atas-tn">${kembali}<div class="kanan-tn ditandai">${tombol('Bantuan', 'secondary', 'sm', 'id="bukaBantuan" aria-haspopup="dialog" aria-label="Bantuan untuk halaman ini"', ik('tanya', 14))}${usulan('IDDS-PL-10')}</div></div>`;
+const kembaliMasuk = () => tombol('Kembali ke Halaman Masuk', 'secondary', 'sm', 'data-ke="masuk"', ik('kiri', 14));
+
+/* ---------------- Masuk ---------------- */
+function layarMasuk() {
+  return `<div class="wadah">${atasTn(`<span class="ditandai" id="kembaliBeranda">${tombol('Kembali ke Beranda', 'secondary', 'sm', 'data-luar="Beranda"', ik('kiri', 14))}${usulan('IDDS-PL-05')}</span>`)}
+    <section class="kartu-tn" aria-labelledby="judulMasuk">
+      <div class="kepala-tn ditandai"><img src="__OB_LOGO__" alt="E-PPAT"><div><div class="eb">Portal Platform</div><h1 id="judulMasuk">Masuk</h1></div>${usulan('IDDS-PL-03')}</div>
+      <p class="pengantar ditandai" id="pengantarMasuk">Masuk dengan akun admin platform. Hubungi tim E-PPAT bila belum punya akses.${usulan('IDDS-PL-04')}</p>
+      ${S.galat ? `<div class="ditandai" id="galatMasuk">${alert('critical', 'Gagal masuk', esc(S.galat))}${usulan(S.jenisGalat === 'bukan' ? 'IDDS-PL-06' : 'IDDS-PL-02')}</div>` : ''}
+      ${tf('mEmail', 'Email', S.email, 'nama@contoh.id', true, '', 'autocomplete="username"', 'email')}
+      <div class="ditandai">${pwIsian('mPw', 'Kata Sandi', 'Masukkan kata sandi', 'current-password')}${usulan('IDDS-PL-01')}</div>
+      ${tombol(S.memuat ? 'Memverifikasi…' : `Masuk${ik('panah', 16)}`, 'primary', 'lg', `id="kirimMasuk" class="penuh" ${S.memuat ? 'disabled' : ''}`, S.memuat ? spinner : '')}
+      <div class="kaki-tn">Dengan masuk, Anda menyetujui ketentuan penggunaan layanan ini.</div>
+    </section></div>`;
+}
+/* verifikasi 2 faktor (aplikasi autentikator) — teks sama dengan tenant */
+function layar2fa() {
+  return `<div class="wadah">${atasTn(kembaliMasuk())}
+    <section class="kartu-tn" aria-labelledby="judul2fa">
+      <div class="kepala-tn"><span class="ikon">${ik('tameng', 20)}</span><div><div class="eb">Verifikasi 2 faktor</div><h1 id="judul2fa">Masukkan kode</h1></div></div>
+      <p class="pengantar">Masuk untuk <b>${esc(S.email || '2fa@contoh.id')}</b> memerlukan verifikasi 2 faktor. Buka aplikasi autentikator Anda, misalnya Google Authenticator atau Authy, lalu masukkan kode 6 digit yang sedang aktif.</p>
+      <div class="ina-one-time-password" style="margin-top:16px"><span class="ina-text-field__label" id="lbl2fa">Kode 6 digit<span class="ina-text-field__required">*</span></span><div class="ina-one-time-password__container" role="group" aria-labelledby="lbl2fa" aria-describedby="otp2Pesan" style="margin-top:8px">${Array.from({ length:6 }, (_, i) => `<input class="ina-one-time-password__input" inputmode="numeric" maxlength="1" aria-label="Digit ${i + 1}" data-otp2="${i}" autocomplete="one-time-code">`).join('')}</div>
+        <div class="ina-one-time-password__helper-text" id="otp2Pesan" aria-live="polite"></div></div>
+      ${tombol(S.memuat ? 'Memverifikasi…' : `Verifikasi${ik('panah', 16)}`, 'primary', 'lg', `id="kirim2fa" class="penuh" ${S.memuat ? 'disabled' : ''}`, S.memuat ? spinner : '')}
+      <div class="ditandai" id="info2fa">${alert('info', '', 'Kehilangan akses ke aplikasi autentikator? Hubungi tim E-PPAT untuk mengatur ulang verifikasi 2 faktor akun Anda.')}${usulan('IDDS-PL-07')}</div>
+    </section></div>`;
+}
+/* ganti kata sandi sementara — teks & syarat sama dengan tenant */
+function layarGanti() {
+  if (S.berhasil) return `<div class="wadah">${atasTn()}<section class="kartu-tn status-tn"><span class="bulat">${ik('centang', 34)}</span><h1>Kata sandi berhasil diubah</h1><p>Gunakan kata sandi baru setiap kali Anda masuk.</p>${tombol('Lanjut ke Aplikasi', 'primary', 'lg', 'class="penuh" data-ke-app', ik('panah', 16))}</section></div>`;
+  return `<div class="wadah">${atasTn()}<section class="kartu-tn" aria-labelledby="judulGanti">
+      <div class="kepala-tn"><span class="ikon">${ik('kunci', 20)}</span><div><div class="eb">Keamanan akun</div><h1 id="judulGanti">Ganti Kata Sandi</h1></div></div>
+      <p class="pengantar">Akun <b>${esc(S.email || 'sementara@contoh.id')}</b> masih memakai kata sandi sementara. Demi keamanan, ganti kata sandi sebelum memakai aplikasi.</p>
+      ${S.galat ? alert('critical', '', esc(S.galat)) : ''}
+      ${pwIsian('gLama', 'Kata Sandi Sementara', 'Kata sandi sementara dari email atau admin', 'current-password')}
+      ${pwIsian('gBaru', 'Kata Sandi Baru', 'Buat kata sandi baru')}
+      <div class="ditandai">${syaratHtml('syaratGanti')}${usulan('IDDS-PL-08')}</div>
+      ${pwIsian('gUlang', 'Konfirmasi Kata Sandi Baru', 'Ulangi kata sandi baru')}
+      ${tombol('Ubah Kata Sandi', 'primary', 'lg', 'id="kirimGanti" class="penuh" disabled')}
+      <div class="kaki-tn" style="margin-top:14px;padding-top:12px">${tombol('Keluar', 'tertiary', 'sm', 'data-ke="masuk"')}</div>
+    </section></div>`;
+}
+/* pemeliharaan — isi live (eyebrow nama aplikasi, judul, pesan, tombol masuk admin) */
+function layarPelihara() {
+  return `<div class="wadah">${atasTn()}<section class="kartu-tn status-tn" aria-labelledby="judulPelihara">
+      <span class="bulat pelihara">${ik('perkakas', 32)}</span>
+      <div class="eb">E-PPAT</div><h1 id="judulPelihara">Sedang Dalam Pemeliharaan</h1>
+      <p>Sistem sedang dipelihara dan dapat dipakai kembali sesegera mungkin.</p>
+      <div class="ditandai" id="tombolPelihara">${tombol('Masuk sebagai Admin Platform', 'primary', 'lg', 'class="penuh" data-ke="masuk"', ik('gembok', 16))}${usulan('IDDS-PL-09')}</div>
+    </section></div>`;
+}
+
+/* ---------------- gambar & navigasi ---------------- */
+function gambar() {
+  const aktif = S.layar === 'masuk' && S.galat ? (S.jenisGalat === 'bukan' ? 'bukan' : 'gagal') : S.layar;
+  $('#pilLayar').innerHTML = LAYAR.map(([k, t]) => `<button class="pil" data-layar="${k}" aria-pressed="${aktif === k}">${t}</button>`).join(' ');
+  $('#halaman').innerHTML = { masuk:layarMasuk, '2fa':layar2fa, ganti:layarGanti, pelihara:layarPelihara }[S.layar]();
+  pasangOtp();
+}
+function ke(l) {
+  S.layar = l; S.galat = ''; S.jenisGalat = ''; S.memuat = '';
+  if (l === 'gagal') { S.layar = 'masuk'; S.email = 'admin@contoh.id'; S.galat = PESAN.salah; S.jenisGalat = 'salah'; }
+  if (l === 'bukan') { S.layar = 'masuk'; S.email = 'bukanadmin@contoh.id'; S.galat = PESAN.bukan; S.jenisGalat = 'bukan'; }
+  gambar(); const f = $('#halaman input:not([type=checkbox])'); if (f && !S.galat) f.focus({ preventScroll:true });
+}
+
+/* ---------------- interaksi ---------------- */
+function galat(id, pesan) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); w?.classList.add('ina-text-field__wrapper--status-error'); $('#' + id)?.setAttribute('aria-invalid', 'true'); if (h) { h.textContent = pesan; h.classList.add('ina-text-field__helper-text--error'); } }
+function bersih(id) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); if (!w) return; w.classList.remove('ina-text-field__wrapper--status-error'); $('#' + id)?.removeAttribute('aria-invalid'); if (h) { h.classList.remove('ina-text-field__helper-text--error'); h.textContent = h.dataset.bantu || ''; } }
+function setPw(id, pesan, jenis) { const w = $(`#f-${id} .ina-password-input__wrapper`), h = $(`#h-${id}`); if (!w) return; if (jenis === 'error') $('#' + id).setAttribute('aria-invalid', 'true'); else $('#' + id).removeAttribute('aria-invalid'); w.className = `ina-password-input__wrapper ina-password-input__wrapper--size-md ina-password-input__wrapper--${jenis || 'neutral'}`; h.textContent = pesan; h.className = `ina-password-input__status-message ${jenis ? 'ina-password-input__status-message--' + jenis : ''}`; }
+function cekSyarat(idPw, idList) { const v = $('#' + idPw).value, ok = SYARAT_PW.map(([, u]) => u(v)); document.querySelectorAll(`#${idList} li`).forEach((li, i) => { li.classList.toggle('ok', ok[i]); li.querySelector('.tanda').innerHTML = ok[i] ? ik('centang', 11) : ''; }); return ok.every(Boolean); }
+document.addEventListener('click', e => {
+  const t = e.target;
+  const pl = t.closest('[data-layar]'); if (pl) { S.berhasil = false; ke(pl.dataset.layar); return; }
+  const k = t.closest('[data-ke]'); if (k) { e.preventDefault(); ke(k.dataset.ke); return; }
+  if (t.closest('[data-ke-app]')) { keAplikasi(); return; }
+  const lu = t.closest('[data-luar]'); if (lu) { toast(`${lu.dataset.luar} tidak termasuk prototipe ini.`); return; }
+  const lp = t.closest('[data-lihat-pw]'); if (lp) { const i = $('#' + lp.dataset.lihatPw), lihat = i.type === 'password'; i.type = lihat ? 'text' : 'password'; lp.setAttribute('aria-pressed', lihat); lp.setAttribute('aria-label', lihat ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'); lp.innerHTML = ik(lihat ? 'mataTutup' : 'mata', 18); return; }
+  if (t.closest('#kirimMasuk')) { kirimMasuk(); return; }
+  if (t.closest('#kirim2fa')) { kirim2fa(); return; }
+  if (t.closest('#kirimGanti')) { S.berhasil = true; gambar(); return; }
+  if (t.closest('#bukaBantuan')) { bukaBantuan(); return; }
+});
+document.addEventListener('input', e => {
+  const f = e.target.closest('.ina-text-field'); if (f) bersih(f.id.slice(2));
+  if (e.target.id === 'mPw') setPw('mPw', '', '');
+  if (e.target.matches('[data-otp2]')) tandai2fa('');
+  if (['gLama', 'gBaru', 'gUlang'].includes(e.target.id)) { const ok = cekSyarat('gBaru', 'syaratGanti'), l = $('#gLama').value, a = $('#gBaru').value, b = $('#gUlang').value; setPw('gUlang', !b ? '' : a === b ? 'Kata sandi cocok.' : 'Konfirmasi kata sandi belum sama.', !b ? '' : a === b ? 'success' : 'error'); setPw('gBaru', a && a === l ? 'Kata sandi baru harus berbeda dari kata sandi sementara.' : '', a && a === l ? 'error' : ''); $('#kirimGanti').disabled = !(l && ok && a === b && a !== l); }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && S.layar === 'masuk' && e.target.closest('.kartu-tn input')) kirimMasuk(); });
+function kirimMasuk() {
+  const em = $('#mEmail').value.trim(), pw = $('#mPw').value; let ada = false; S.galat = ''; S.jenisGalat = '';
+  if (!em) { galat('mEmail', 'Email wajib diisi.'); ada = true; }
+  if (!pw) { setPw('mPw', 'Kata sandi wajib diisi.', 'error'); ada = true; }
+  if (ada) { $('#galatMasuk')?.remove(); $(!em ? '#mEmail' : '#mPw').focus(); return; }
+  S.email = em; S.memuat = 'masuk'; gambar();
+  setTimeout(() => { S.memuat = '';
+    if (pw === 'salah123') { S.galat = PESAN.salah; S.jenisGalat = 'salah'; gambar(); $('#mPw').focus(); return; }
+    if (/^bukanadmin/i.test(em)) { S.galat = PESAN.bukan; S.jenisGalat = 'bukan'; gambar(); $('#mEmail').focus(); return; }
+    if (/^2fa/i.test(em)) { S.layar = '2fa'; gambar(); return; }
+    if (/^sementara/i.test(em)) { S.layar = 'ganti'; gambar(); return; }
+    keAplikasi(); }, 700);
+}
+/* masuk berhasil → area platform (prototipe Platform System, layar Dasbor) */
+function keAplikasi() { location.href = 'Backlog-IDDS-PL-MONITORING-Prototype.html#dasbor'; }
+/* galat 2 faktor ditampilkan di bawah kolom kode; pesan kosong = bersihkan */
+function tandai2fa(m) {
+  const ps = $('#otp2Pesan'); if (!ps) return;
+  ps.textContent = m; ps.classList.toggle('ina-one-time-password__helper-text--error', !!m);
+  document.querySelectorAll('[data-otp2]').forEach(i => { i.classList.toggle('ina-one-time-password__input--error', !!m); if (m) i.setAttribute('aria-invalid', 'true'); else i.removeAttribute('aria-invalid'); });
+}
+function kirim2fa() {
+  const d = [...document.querySelectorAll('[data-otp2]')], c = d.map(i => i.value).join('');
+  if (c.length < 6) { tandai2fa('Masukkan 6 digit angka dari aplikasi autentikator.'); (d.find(i => !i.value) || d[0]).focus(); return; }
+  if (c === '000000') { tandai2fa('Kode tidak sesuai. Pakai kode yang sedang aktif di aplikasi autentikator.'); d[0].focus(); return; }
+  S.galat = ''; keAplikasi();
+}
+function pasangOtp(akar = document) {
+  akar.querySelectorAll('[data-otp2]').forEach((k, i, semua) => {
+    k.addEventListener('input', () => { k.value = k.value.replace(/\D/g, '').slice(-1); const n = semua[i + 1]; if (k.value && n) n.focus(); });
+    k.addEventListener('keydown', e => { const p = semua[i - 1]; if (e.key === 'Backspace' && !k.value && p) p.focus(); });
+  });
+}
+
+/* ---------------- IDDS Modal & Toast ---------------- */
+/* fokus kembali ke tombol pembuka setelah dialog ditutup (Esc, ×, atau tombol dialog) */
+let asalDialog = null;
+function tutupDialog() { $('#lapisan').innerHTML = ''; if (asalDialog && document.contains(asalDialog)) asalDialog.focus(); asalDialog = null; }
+function dialog({ judul, isi, tombol: tb, lebar, konfirmasi, bahaya }) {
+  const L = $('#lapisan'); asalDialog = document.activeElement;
+  L.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-i="-1"></div><div class="ina-modal__container">
+    <div class="ina-modal__dialog ina-modal__dialog--size-${lebar ? 'lg' : 'md'} ${konfirmasi ? 'ina-modal-confirmation' : ''}" role="${konfirmasi ? 'alertdialog' : 'dialog'}" aria-modal="true" aria-labelledby="dlgJudul">
+      <div class="ina-modal__header"><h2 class="ina-modal__title" id="dlgJudul">${judul}</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-i="-1">${ik('x', 22)}</button></div>
+      <div class="ina-modal__body">${isi}</div>
+      <div class="ina-modal__footer">${tb.map(([t, h], i) => `<button type="button" class="ina-button ina-button--${h} ina-button--md" data-i="${i}" ${bahaya && i === tb.length - 1 ? 'style="background:var(--ina-negative-600);border-color:var(--ina-negative-600)"' : ''}>${t}</button>`).join('')}</div></div></div></div>`;
+  L.querySelector('.ina-modal__footer .ina-button:last-child').focus();
+  L.onclick = e => { const b = e.target.closest('[data-i]'); if (!b) return; e.stopPropagation(); const i = +b.dataset.i; tutupDialog(); if (i >= 0 && tb[i][2]) tb[i][2](); };
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisan').innerHTML) tutupDialog(); });
+let tt;
+function toast(teks, state = 'default', ms = 3000) {
+  $('#toastWadah').innerHTML = `<div class="ina-toast ina-toast--state-${state} ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${ik(state === 'positive' ? 'centang' : 'info', 20)}</div>
+    <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p></div></div><button type="button" class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast>${ik('x', 16)}</button></div>`;
+  clearTimeout(tt); tt = setTimeout(() => $('#toastWadah').innerHTML = '', ms);
+}
+$('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tutup-toast]')) $('#toastWadah').innerHTML = ''; });
+
+/* ---------------- IDDS Drawer (pola sama dengan tn-masuk) ---------------- */
+function drawer({ judul, isi }) {
+  const D = $('#lapisanDrawer'), hp = window.matchMedia('(max-width:760px)').matches;
+  D.innerHTML = `<div class="ina-drawer ina-drawer--position-${hp ? 'bottom' : 'right'}" role="dialog" aria-modal="true" aria-labelledby="drwJudul">
+    <div class="ina-drawer__backdrop" data-tutup-drawer></div>
+    <div class="ina-drawer__panel ina-drawer__panel--width-md">
+      <div class="ina-drawer__header"><h2 class="ina-drawer__title" id="drwJudul">${judul}</h2>
+        <button type="button" class="ina-drawer__close-button" aria-label="Tutup bantuan" data-tutup-drawer><svg class="ina-drawer__close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      <div class="ina-drawer__content">${isi}</div>
+    </div></div>`;
+  D.querySelector('.ina-drawer__close-button').focus();
+}
+function tutupDrawer() { $('#lapisanDrawer').innerHTML = ''; $('#bukaBantuan')?.focus(); }
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-tutup-drawer]')) { tutupDrawer(); return; }
+  const tg = e.target.closest('#lapisanDrawer .ina-accordion__toggle'); if (!tg) return;
+  const b = tg.getAttribute('aria-expanded') !== 'true';
+  tg.setAttribute('aria-expanded', b);
+  tg.querySelector('.ina-accordion__icon').classList.toggle('ina-accordion__icon--open', b);
+  tg.nextElementSibling.classList.toggle('ina-accordion__content--open', b);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisanDrawer').innerHTML) tutupDrawer(); });
+
+/* ---------------- Bantuan per layar (IDDS-PL-10, pola IDDS-TN-38) ---------------- */
+const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
+const kontak = () => `<h4 class="bantu-sub">Kontak dukungan ${usulan('IDDS-PL-10')}</h4>
+  <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>`;
+const lgkh = a => `<ol class="bantu-langkah">${a.map(x => `<li>${x}</li>`).join('')}</ol>`;
+const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
+const Q_LUPA = ['Saya lupa kata sandi.', 'Hubungi tim E-PPAT atau admin platform lain. Mereka akan mengatur ulang kata sandi dan memberikan kata sandi sementara. Setelah masuk, Anda diminta menggantinya.'];
+const Q_BUKAN = ['Saya admin atau pegawai kantor PPAT.', 'Halaman ini khusus admin platform. Akun kantor PPAT masuk lewat alamat kantor masing-masing, misalnya /t/nama-kantor. Tanyakan alamat tersebut kepada admin kantor Anda.'];
+const Q_SYARAT = ['Apa syarat kata sandi?', 'Kata sandi minimal 12 karakter. Kata sandi juga harus memuat huruf besar, huruf kecil, angka, dan simbol.'];
+const BANTUAN = {
+  masuk:() => ({ judul:'Bantuan Masuk', isi:`<p>Halaman ini khusus admin platform E-PPAT. Masuk dengan email dan kata sandi akun admin platform Anda.</p>
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('m', [Q_LUPA, Q_BUKAN,
+      ['Saya belum punya akun admin platform.', 'Akun admin platform dibuat oleh tim E-PPAT. Hubungi tim E-PPAT untuk meminta akses.'],
+      ['Mengapa saya diminta kode verifikasi?', 'Akun Anda memakai verifikasi 2 faktor. Siapkan aplikasi autentikator di ponsel Anda sebelum masuk.']])}
+    ${kontak()}` }),
+  gagal:() => ({ judul:'Bantuan Masuk', isi:`<p>Email atau kata sandi yang Anda masukkan tidak cocok dengan akun mana pun.</p>
+    <h4 class="bantu-sub">Langkah memeriksa</h4>
+    ${lgkh(['Periksa ejaan email.', 'Pastikan Caps Lock tidak aktif.', 'Pilih ikon mata untuk melihat kata sandi yang Anda ketik.', 'Bila tetap gagal, hubungi tim E-PPAT untuk mengatur ulang kata sandi.'])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('g', [Q_LUPA, Q_BUKAN])}
+    ${kontak()}` }),
+  bukan:() => ({ judul:'Bantuan Masuk', isi:`<p>Email dan kata sandi Anda benar, tetapi akun ini tidak punya hak admin platform.</p>
+    <h4 class="bantu-sub">Langkah</h4>
+    ${lgkh(['Bila Anda pegawai atau admin kantor PPAT, buka alamat kantor Anda, misalnya /t/nama-kantor, lalu masuk di sana.', 'Bila Anda seharusnya admin platform, hubungi tim E-PPAT untuk memeriksa hak akses akun Anda.'])}
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('b', [['Apa bedanya admin platform dan admin kantor?', 'Admin platform mengelola seluruh E-PPAT, misalnya daftar kantor PPAT, paket langganan, dan pengaturan global. Admin kantor hanya mengelola satu kantor PPAT.'], Q_LUPA])}
+    ${kontak()}` }),
+  '2fa':() => ({ judul:'Bantuan Verifikasi 2 Faktor', isi:`<p>Kode verifikasi berasal dari aplikasi autentikator di ponsel Anda, bukan dari SMS atau email.</p>
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('f', [['Di mana saya menemukan kodenya?', 'Buka aplikasi autentikator, misalnya Google Authenticator atau Authy. Cari akun E-PPAT, lalu masukkan 6 digit yang tampil.'],
+      ['Mengapa kode saya ditolak?', 'Kode di aplikasi autentikator berganti secara berkala. Masukkan kode yang sedang tampil, dan pastikan jam ponsel Anda diatur otomatis.'],
+      ['Saya kehilangan ponsel atau aplikasi autentikator.', 'Hubungi tim E-PPAT. Tim akan memeriksa identitas Anda, lalu mengatur ulang verifikasi 2 faktor akun Anda.']])}
+    ${kontak()}` }),
+  ganti:() => ({ judul:'Bantuan Ganti Kata Sandi', isi:`<p>Akun Anda masih memakai kata sandi sementara dari tim E-PPAT.</p>
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('k', [['Mengapa saya harus mengganti kata sandi?', 'Kata sandi sementara dibuat oleh orang lain dan dapat diketahui orang lain. Kata sandi baru hanya diketahui oleh Anda.'],
+      [Q_SYARAT[0], `${Q_SYARAT[1]} Kata sandi baru harus berbeda dari kata sandi sementara.`],
+      ['Saya tidak tahu kata sandi sementara.', 'Periksa email dari tim E-PPAT. Bila tidak ada, hubungi tim E-PPAT untuk mengatur ulang kata sandi.']])}
+    ${kontak()}` }),
+  pelihara:() => ({ judul:'Bantuan Pemeliharaan', isi:`<p>E-PPAT sedang dalam pemeliharaan. Selama pemeliharaan, hanya admin platform yang dapat masuk.</p>
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${fq('p', [['Kapan E-PPAT dapat dipakai lagi?', 'E-PPAT dapat dipakai lagi setelah pemeliharaan selesai. Muat ulang halaman ini secara berkala.'],
+      ['Siapa yang dapat masuk selama pemeliharaan?', 'Hanya admin platform. Pilih Masuk sebagai Admin Platform, lalu masuk dengan akun admin platform Anda.'],
+      ['Ada pekerjaan mendesak.', 'Hubungi tim E-PPAT lewat kontak di bawah.']])}
+    ${kontak()}` })
+};
+function bukaBantuan() { drawer(BANTUAN[S.layar === 'masuk' && S.galat ? (S.jenisGalat === 'bukan' ? 'bukan' : 'gagal') : S.layar]()); }
+
+/* ---------------- daftar penyesuaian ---------------- */
+$('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
+$('#bukaUbah').addEventListener('click', () => {
+  dialog({ judul:'Daftar penyesuaian IDDS · Masuk Platform', lebar:true,
+    isi:`<p>Halaman ini tidak dinilai dalam laporan HE. Prototipe meniru layar dan kode live <i>dev-app.eppat.id/platform</i> (dilihat 26 Okt 2026): isi, alur, dan aturan tetap seperti live; yang disesuaikan adalah komponen IDDS, letak pesan galat, dan bahasa. Layar yang sama dengan halaman Masuk tenant memakai markup dan teks yang sama.</p>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div><div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
+    tombol:[['Tutup', 'secondary', null]] });
+  $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; asalDialog = null; const u = UBAH[+b.dataset.lihat]; if (u.ke === 'bantuan') { bukaBantuan(); return; } S.berhasil = false; ke(u.ke); const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } });
+});
+$('#aturUlang').addEventListener('click', () => { S = S0(); gambar(); toast('Data contoh dikembalikan ke awal.'); });
+$('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
+gambar();
+})();
+</script>
+</body>
+</html>
