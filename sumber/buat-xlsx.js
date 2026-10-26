@@ -35,7 +35,7 @@ function judulSheet(ws, judul, sub, lebarKolom) {
 /* ---------- kelompok backlog ---------- */
 const KOLOM_HE = [
   ['No', 5, 'no'], ['Kode', 13, 'kode'], ['Lingkungan', 13, 'env'], ['Fitur / Layar', 18, 'fitur'], ['Judul usulan', 30, 'judul'], ['Kondisi saat ini (live)', 45, 'saat_ini'], ['Usulan perubahan', 55, 'usulan'],
-  ['Prinsip HE', 26, 'prinsip'], ['Hal. laporan', 11, 'halaman'], ['Prioritas', 10, 'prioritas'], ['Layar terdampak', 24, 'layar'], ['Acuan prototipe', 34, 'acuan'], ['Tautan prototipe (Vercel)', 20, 'tautan'],
+  ['Prinsip HE', 26, 'prinsip'], ['Hal. laporan', 11, 'halaman'], ['Prioritas', 10, 'prioritas'], ['Layar terdampak', 24, 'layar'], ['Acuan prototipe', 40, 'acuan'],
   ['Selesai bila', 45, 'selesai_bila'], ['Status', 16, 'status'], ['Catatan', 32, 'catatan'], ['Diperbarui', 12, 'tanggal']
 ];
 /* Lingkungan aplikasi tiap usulan HE: Onboarding (dev.eppat.id), Tenant (dev-app.eppat.id/t/<kantor>), Platform (dev-app.eppat.id/platform), atau Semua */
@@ -43,20 +43,27 @@ const LINGKUNGAN = ['Onboarding', 'Tenant', 'Platform', 'Semua'];
 const envDari = kode => /^HE-(REG|LOGIN|OB)-/.test(kode) ? 'Onboarding' : /^HE-UMUM-/.test(kode) ? 'Semua' : /^HE-PL-/.test(kode) ? 'Platform' : 'Tenant';
 /* Tautan prototipe: rumus memakai URL dasar Vercel di sel URL_SEL (baris 3 sheet Usulan HE); kosong = "Segera tersedia" */
 const URL_SEL = '$E$3';
+const URL_VERCEL = 'https://he-eppat.vercel.app/'; /* situs prototipe (repo yogi-alt/HE-EPPAT-Backlog, root prototipe) */
 const berkasAcuan = a => ((String(a || '').match(/prototipe\/([^\s;›]+\.html)/) || [])[1]) || '';
+/* semua tautan tujuan dari teks acuan: prototipe → situs Vercel, berkas lain di repo → GitHub */
+const URL_REPO = 'https://github.com/yogi-alt/HE-EPPAT-Backlog/blob/main/';
+const tautanAcuan = a => [...new Set([...String(a || '').matchAll(/(prototipe\/[^\s;›]+\.html|brand-eppat-idds\/[^\s;›]+)/g)].map(m => m[1].startsWith('prototipe/') ? URL_VERCEL + m[1].slice(10) : URL_REPO + m[1]))];
+/* satu tautan per baris: prototipe utama yang dibahas backlog itu */
+const UTAMA = { 'HE-UMUM-01': 'Brand-Mode-EPPAT-IDDS.html' };
+const selTautan = (c, a, kode) => { const u = UTAMA[kode] ? [URL_VERCEL + UTAMA[kode]] : tautanAcuan(a).filter(x => x.startsWith(URL_VERCEL)); if (!u.length) return; c.value = { text: u[0], hyperlink: u[0] }; c.font = { name: FONT, size: 9, underline: true, color: { argb: 'FF0968F6' } }; };
 const KOLOM_IDDS = [
   ['No', 5, 'no'], ['Kode', 13, 'kode'], ['Menu / Layar', 24, 'fitur'], ['Judul penyesuaian', 30, 'judul'], ['Kondisi saat ini (live)', 45, 'saat_ini'], ['Penyesuaian', 55, 'usulan'],
-  ['Prioritas', 10, 'prioritas'], ['Layar terdampak', 28, 'layar'], ['Acuan prototipe', 34, 'acuan'],
+  ['Prioritas', 10, 'prioritas'], ['Layar terdampak', 28, 'layar'], ['Acuan prototipe', 40, 'acuan'],
   ['Selesai bila', 45, 'selesai_bila'], ['Status', 16, 'status'], ['Catatan', 32, 'catatan'], ['Diperbarui', 12, 'tanggal']
 ];
 const KELOMPOK = [
-  { sheet:'Usulan HE', label:'Usulan HE', awalan:'HE-', kolom:KOLOM_HE,
+  { sheet:'Usulan HE', tab:'he', label:'Usulan HE', awalan:'HE-', kolom:KOLOM_HE,
     judul:data.judul, sub:`Usulan dari laporan Heuristic Evaluation INA Digital. Sumber: ${data.sumber} · Layar live: ${data.live}`, kosong:'Belum ada usulan.' },
-  { sheet:'Penyesuaian IDDS Tenant', label:'IDDS Tenant', awalan:'IDDS-TN-', kolom:KOLOM_IDDS,
+  { sheet:'Penyesuaian IDDS Tenant', tab:'tenant', label:'IDDS Tenant', awalan:'IDDS-TN-', kolom:KOLOM_IDDS,
     judul:'Penyesuaian IDDS · Tenant (aplikasi kantor PPAT)', sub:'Menu dev-app.eppat.id/t/<kantor> yang tidak dinilai HE. Komponen disesuaikan dengan IDDS, letak pesan dan bahasa dibakukan, dan isi live tidak diubah.', kosong:'Belum ada penyesuaian.' },
-  { sheet:'Penyesuaian IDDS Platform', label:'IDDS Platform', awalan:'IDDS-PL-', kolom:KOLOM_IDDS,
+  { sheet:'Penyesuaian IDDS Platform', tab:'platform', label:'IDDS Platform', awalan:'IDDS-PL-', kolom:KOLOM_IDDS,
     judul:'Penyesuaian IDDS · Platform (admin platform)', sub:'Menu dev-app.eppat.id/platform yang tidak dinilai HE. Komponen disesuaikan dengan IDDS, letak pesan dan bahasa dibakukan, dan isi live tidak diubah.', kosong:'Belum ada penyesuaian.' },
-  { sheet:'Penyesuaian IDDS Onboarding', label:'IDDS Onboarding', awalan:'IDDS-OB-', kolom:KOLOM_IDDS,
+  { sheet:'Penyesuaian IDDS Onboarding', tab:'onboarding', label:'IDDS Onboarding', awalan:'IDDS-OB-', kolom:KOLOM_IDDS,
     judul:'Penyesuaian IDDS · Onboarding (calon PPAT dan staf Onboarding)', sub:'Halaman dev.eppat.id yang tidak dinilai HE (Beranda, kata sandi, profil, menu Admin/Operator, dan simulasi pembayaran). Komponen disesuaikan dengan IDDS, serta letak pesan dan bahasa dibakukan.', kosong:'Belum ada penyesuaian.' }
 ];
 const lain = data.item.filter(x => !KELOMPOK.some(k => x.kode.startsWith(k.awalan)));
@@ -76,8 +83,9 @@ for (const bg of PD.bagian) {
   const c = pd.getCell(`A${bp}`); c.value = `${bg.nomor}. ${bg.judul}`; c.font = { name: FONT, size: 11, bold: true, color: { argb: HIJAU } }; c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: KREM } };
   bp++;
   bg.isi.forEach((x, i) => {
-    const r = pd.getRow(bp++); r.values = [`${bg.nomor}.${i + 1}`, bg.judul, x.topik, x.aturan, x.contoh || '', x.acuan || '', x.kode || ''];
+    const r = pd.getRow(bp++); const ac = String(x.acuan || ''); r.values = [`${bg.nomor}.${i + 1}`, bg.judul, x.topik, x.aturan, x.contoh || '', x.acuan || '', x.kode || ''];
     r.eachCell({ includeEmpty: true }, (c, col) => { c.font = { name: col === 5 ? 'Consolas' : FONT, size: 9 }; c.alignment = { vertical: 'top', wrapText: true }; c.border = tepi; });
+    selTautan(r.getCell(6), ac);
   });
 }
 
@@ -94,9 +102,8 @@ for (const k of KELOMPOK) {
   kepalaTabel(ws, 4, k.kolom.map(c => c[0]));
   items.forEach((it, i) => {
     const r = ws.getRow(5 + i);
-    r.values = k.kolom.map(([, , key]) => key === 'no' ? i + 1 : key === 'tanggal' ? tgl(it.tanggal) : key === 'env' ? envDari(it.kode) : key === 'tautan' ? null : it[key]);
-    const cTa = idx('tautan'), bk = berkasAcuan(it.acuan);
-    if (cTa && bk) r.getCell(cTa).value = { formula: `IF(${URL_SEL}="","Segera tersedia",HYPERLINK(${URL_SEL}&"${bk}","Buka prototipe"))`, result: 'Segera tersedia' };
+    r.values = k.kolom.map(([, , key]) => key === 'no' ? i + 1 : key === 'tanggal' ? tgl(it.tanggal) : key === 'env' ? envDari(it.kode) : it[key]);
+    selTautan(r.getCell(idx('acuan')), it.acuan, it.kode);
     r.eachCell({ includeEmpty: true }, (c, col) => {
       c.font = { name: FONT, size: 9, bold: col === cKd, color: { argb: col === cKd ? HIJAU : 'FF1F1F1F' } };
       c.alignment = { vertical: 'top', wrapText: true }; c.border = tepi;
@@ -117,12 +124,11 @@ for (const k of KELOMPOK) {
     ws.getCell(`${huruf(cSt)}${r}`).dataValidation = { type: 'list', allowBlank: true, formulae: [`"${STATUS.join(',')}"`] };
   }
   if (idx('env')) for (let r = 5; r <= 4 + items.length; r++) ws.getCell(`${huruf(idx('env'))}${r}`).dataValidation = { type: 'list', allowBlank: false, formulae: [`"${LINGKUNGAN.join(',')}"`] };
-  if (idx('tautan')) {
-    // baris 3: URL dasar prototipe di Vercel (diisi tim; diakhiri "/")
-    ws.mergeCells('A3:D3'); ws.mergeCells('E3:H3');
-    const lb = ws.getCell('A3'); lb.value = 'URL dasar prototipe (Vercel), diakhiri "/":'; lb.font = { name: FONT, size: 9, bold: true }; lb.alignment = { vertical: 'middle', horizontal: 'right' };
-    const ur = ws.getCell('E3'); ur.value = null; ur.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFF8D5' } }; ur.border = tepi; ur.font = { name: FONT, size: 9 };
-    ur.note = 'Isi dengan alamat Vercel yang terhubung ke repo GitHub (misalnya https://nama-proyek.vercel.app/). Setelah sel ini diisi, kolom Tautan prototipe otomatis menampilkan tautan "Buka prototipe".';
+  {
+    // baris 3: situs prototipe dan tautan ke daftar prototipe kelompok ini
+    ws.mergeCells('A3:F3');
+    const st = ws.getCell('A3'); st.value = { text: `Situs prototipe: ${URL_VERCEL}  ·  Buka daftar prototipe kelompok ini`, hyperlink: `${URL_VERCEL}index.html#${k.tab}` };
+    st.font = { name: FONT, size: 9, underline: true, color: { argb: 'FF0968F6' } }; st.alignment = { vertical: 'middle' };
     ws.getRow(3).height = 18;
   }
   if (items.length) ws.autoFilter = { from: 'A4', to: `${huruf(k.kolom.length)}${4 + items.length}` };
@@ -194,7 +200,7 @@ const KET = [
   ['Cara memperbarui', ''],
   ['Kolom yang diisi tim', 'Tim mengisi kolom Status dan Catatan (berlatar kuning) di sheet Usulan HE dan Penyesuaian IDDS. Kolom lain mengikuti prototipe dan laporan HE.'],
   ['Lingkungan (sheet Usulan HE)', 'Aplikasi tempat usulan diterapkan: Onboarding (dev.eppat.id), Tenant (dev-app.eppat.id/t/<kantor>), Platform (dev-app.eppat.id/platform), atau Semua. Gunakan filter di kepala kolom untuk menampilkan satu lingkungan saja.'],
-  ['Tautan prototipe (sheet Usulan HE)', 'Tautan ke prototipe yang dipublikasikan di Vercel. Isi URL dasar Vercel satu kali di sel kuning baris 3 (diakhiri "/"). Setelah itu, setiap baris otomatis menampilkan "Buka prototipe". Selama sel itu kosong, kolom ini bertuliskan "Segera tersedia".'],
+  ['Acuan prototipe (tautan)', 'Kolom Acuan prototipe berisi alamat lengkap halaman tujuan di situs https://he-eppat.vercel.app/ dan dapat diklik. Setiap backlog berisi satu alamat, yaitu prototipe yang dibahas backlog tersebut. Di dalam prototipe, tombol Daftar perubahan atau Daftar penyesuaian lalu Lihat di layar menunjukkan bagian yang berubah. Baris 3 setiap sheet menautkan ke daftar prototipe kelompok tersebut.'],
   ['Kode', 'Kode HE-<FITUR>-NN dipakai untuk usulan HE per fitur, HE-UMUM-NN untuk usulan HE lintas layar, dan IDDS-TN/PL/OB-NN untuk penyesuaian IDDS. Nomor tidak pernah diurutkan ulang.'],
   ['Acuan prototipe', 'Buka berkas di folder prototipe/, tekan tombol "Daftar perubahan" atau "Daftar penyesuaian", lalu pilih "Lihat di layar" untuk melihat bagian yang berubah.'],
   ['', ''],
