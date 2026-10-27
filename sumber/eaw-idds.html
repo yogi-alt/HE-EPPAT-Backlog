@@ -367,6 +367,54 @@ body:has(#otpWaktu) .protobar{position:relative;z-index:3000} /* tombol simulasi
 .ringkas dd{margin:0;font-weight:500}
 .cek{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:14px;cursor:pointer}
 
+/* tab Salinan (HE-EAW-10, -11, -12) — markup langkah disalin dari tab Minuta */
+.sal-info{margin-top:16px}
+.sal-unggah{margin-top:16px}
+.sal-unggah .ina-card__content,.sal-item .ina-card__content{padding:0;display:block}
+.ina-card.sal-unggah,.ina-card.sal-item{display:block;width:100%;max-width:none;padding:16px 20px}
+.sal-unggah h3,.sal-kepala h3{margin:0 0 4px;font:600 16px Inter,sans-serif;color:var(--ina-content-primary)}
+.sal-unggah .baris-unggah{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-top:12px}
+.sal-unggah .baris-unggah .ina-text-field{flex:1;min-width:220px;max-width:420px}
+.sal-unggah .baris-unggah .ina-text-field__bottom-area{display:none}
+.sal-unggah .ina-button{height:40px}
+.sal-unggah p{margin:0;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+.galat-unggah{margin-top:8px}
+.galat-unggah:empty{display:none}
+.tanya-btn{display:inline-grid;place-items:center;width:20px;height:20px;padding:0;margin-left:4px;border:0;border-radius:50%;background:transparent;color:var(--ina-content-secondary);cursor:help;vertical-align:middle}.tanya-btn:hover,.tanya-btn:focus-visible{color:var(--ina-primary-500);outline:2px solid var(--ina-primary-500);outline-offset:1px}
+.tanya:focus-within .ina-tooltip__content{visibility:visible;opacity:1}
+.tanya .tanya-btn svg{color:inherit}
+.tanya .ina-tooltip__bubble{font-weight:400;font-size:12px;letter-spacing:normal;text-transform:none;color:var(--ina-white,#fff)}
+.tanya{font-weight:400;text-transform:none;letter-spacing:0}
+.tab-dok.ina-tab-horizontal{display:flex;flex-direction:row;align-items:flex-end;gap:4px}
+.tab-dok .tanya{align-self:center;flex:none}
+.tab-dok > .ina-tab-horizontal__container{width:auto;flex:0 1 auto;min-width:0}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.sal-kepala{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:20px 0 10px}
+.sal-kepala span{font-size:14px;color:var(--ina-content-secondary)}
+.sal-daftar{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.sal-item .atas{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sal-item .nm{font:600 15px Inter,sans-serif;margin-right:4px}
+.sal-item .lencana{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 8px}
+.sal-item .lencana .ina-badge{display:inline-flex;align-items:center;gap:4px}
+.sal-item .penanda-tt{font-size:13.5px;color:var(--ina-content-secondary)}
+.sal-item .penanda-tt b{color:var(--ina-content-primary);font-weight:500}
+.sal-item .baris-aksi{margin-top:12px}
+.sal-item .ina-alert{margin-top:4px}
+.ina-button--tertiary.tb-bahaya{color:var(--ina-negative-600)}
+.sal-kosong{display:flex;flex-direction:column;align-items:center;gap:8px;padding:32px 16px;border:1.5px dashed var(--ina-stroke-primary);border-radius:16px;background:var(--ina-background-primary);color:var(--ina-content-secondary);font-size:14px;text-align:center}
+.sal-memuat{display:flex;align-items:center;gap:8px;padding:24px 4px;font-size:14px;color:var(--ina-content-secondary)}
+.kelola-atas{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:16px}
+.kelola-atas .nama-sal{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:600 15px Inter,sans-serif}
+.kelola-atas .ket-aktif{font-weight:400;font-size:14px;color:var(--ina-content-secondary)}
+.penerima{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:10px;max-height:50vh;overflow:auto}
+.penerima li{border:1px solid var(--ina-stroke-primary);border-radius:12px;padding:10px 12px}
+.penerima .atas{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.penerima .atas .ina-checkbox{margin:0}
+.penerima .atas .nm{font-weight:600;font-size:14px}
+.penerima .atas .ina-button{margin-left:auto}
+.penerima .ina-text-field{margin-top:8px}
+.penerima .ina-text-field__bottom-area:empty{display:none}
+
 @media (max-width:1180px){ .ruang{grid-template-columns:1fr} .kanvas{max-height:none} }
 @media (max-width:760px){
   .kartu-langkah{padding:16px}
@@ -399,11 +447,15 @@ body:has(#otpWaktu) .protobar{position:relative;z-index:3000} /* tombol simulasi
   <button class="pil" data-sim-meterai="aktif" aria-pressed="true">Aktif</button>
   <button class="pil" data-sim-meterai="belum" aria-pressed="false">Belum diaktifkan</button>
   <button class="pil" data-sim-meterai="habis" aria-pressed="false">Kuota habis</button>
+  <span class="sep">&bull;</span><span>PPAT penanda tangan salinan:</span>
+  <button class="pil" data-sim-ppat="ada" aria-pressed="true">Ditetapkan</button>
+  <button class="pil" data-sim-ppat="belum" aria-pressed="false">Belum ditetapkan</button>
+  <span class="sep">&bull;</span><span>Layar:</span><span id="pilLayar"></span>
   <span class="kanan">
     <button class="pil" id="simKedaluwarsa" title="Saat dialog OTP terbuka">Simulasi OTP kedaluwarsa</button>
     <button class="pil" id="aturUlang">Atur ulang contoh</button>
     <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai usulan</button>
-    <button class="pil utama" id="bukaUbah">Daftar perubahan (11)</button>
+    <button class="pil utama" id="bukaUbah">Daftar perubahan (14)</button>
   </span>
 </div>
 
@@ -463,8 +515,14 @@ const I = {
   jam:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>', seru:'<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>',
   panah:'<path d="M5 12h14M13 6l6 6-6 6"/>', minus:'<path d="M5 12h14"/>', tambah:'<path d="M12 5v14M5 12h14"/>', target:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>',
   log:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>', edit:'<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/>', palet:'<circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1 0 1.7-.8 1.7-1.7 0-1 .8-1.7 1.7-1.7H17a5 5 0 0 0 5-5C22 6 17.5 2 12 2z"/>', daftar:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>', gambar:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>', gedung:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01"/>' /* ikon sidebar seragam */,
-  tb_stack_2:'<path d="M12 4l-8 4l8 4l8 -4l-8 -4" /> <path d="M4 12l8 4l8 -4" /> <path d="M4 16l8 4l8 -4" />', tb_feather:'<path d="M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4" /> <path d="M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4" />', tb_layout_dashboard:'<path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" /> <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />', tb_circle_check:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" />', tb_file_pencil:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M10 18l5 -5a1.414 1.414 0 0 0 -2 -2l-5 5v2h2z" />', tb_signature:'<path d="M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2" />', tb_files:'<path d="M15 3v4a1 1 0 0 0 1 1h4" /> <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z" /> <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />', tb_adjustments_horizontal:'<path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 6l8 0" /> <path d="M16 6l4 0" /> <path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 12l2 0" /> <path d="M10 12l10 0" /> <path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 18l11 0" /> <path d="M19 18l1 0" />', tb_building:'<path d="M3 21l18 0" /> <path d="M9 8l1 0" /> <path d="M9 12l1 0" /> <path d="M9 16l1 0" /> <path d="M14 8l1 0" /> <path d="M14 12l1 0" /> <path d="M14 16l1 0" /> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />', tb_users:'<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /> <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /> <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />', tb_shield_lock:'<path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /> <path d="M12 11m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12 12l0 2.5" />', tb_history:'<path d="M12 8l0 4l2 2" /> <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />', tb_rubber_stamp:'<path d="M21 17.85h-18c0 -4.05 1.421 -4.05 3.79 -4.05c5.21 0 1.21 -4.59 1.21 -6.8a4 4 0 1 1 8 0c0 2.21 -4 6.8 1.21 6.8c2.369 0 3.79 0 3.79 4.05z" /> <path d="M5 21h14" />', tb_settings:'<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />', tb_layout_cards:'<path d="M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /> <path d="M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />', tb_home:'<path d="M5 12l-2 0l9 -9l9 9l-2 0" /> <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /> <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />', tb_palette:'<path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" /> <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />', tb_database:'<path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /> <path d="M4 6v6a8 3 0 0 0 16 0v-6" /> <path d="M4 12v6a8 3 0 0 0 16 0v-6" />', tb_article:'<path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /> <path d="M7 8h10" /> <path d="M7 12h10" /> <path d="M7 16h10" />', tb_photo:'<path d="M15 8h.01" /> <path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z" /> <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5" /> <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3" />', tb_file_text:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 9l1 0" /> <path d="M9 13l6 0" /> <path d="M9 17l6 0" />', tb_gauge:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M13.41 10.59l2.59 -2.59" /> <path d="M7 12a5 5 0 0 1 5 -5" />' /* ikon Tabler sidebar */
+  tb_stack_2:'<path d="M12 4l-8 4l8 4l8 -4l-8 -4" /> <path d="M4 12l8 4l8 -4" /> <path d="M4 16l8 4l8 -4" />', tb_feather:'<path d="M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4" /> <path d="M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4" />', tb_layout_dashboard:'<path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" /> <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />', tb_circle_check:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" />', tb_file_pencil:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M10 18l5 -5a1.414 1.414 0 0 0 -2 -2l-5 5v2h2z" />', tb_signature:'<path d="M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2" />', tb_files:'<path d="M15 3v4a1 1 0 0 0 1 1h4" /> <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z" /> <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />', tb_adjustments_horizontal:'<path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 6l8 0" /> <path d="M16 6l4 0" /> <path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 12l2 0" /> <path d="M10 12l10 0" /> <path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 18l11 0" /> <path d="M19 18l1 0" />', tb_building:'<path d="M3 21l18 0" /> <path d="M9 8l1 0" /> <path d="M9 12l1 0" /> <path d="M9 16l1 0" /> <path d="M14 8l1 0" /> <path d="M14 12l1 0" /> <path d="M14 16l1 0" /> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />', tb_users:'<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /> <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /> <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />', tb_shield_lock:'<path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /> <path d="M12 11m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12 12l0 2.5" />', tb_history:'<path d="M12 8l0 4l2 2" /> <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />', tb_rubber_stamp:'<path d="M21 17.85h-18c0 -4.05 1.421 -4.05 3.79 -4.05c5.21 0 1.21 -4.59 1.21 -6.8a4 4 0 1 1 8 0c0 2.21 -4 6.8 1.21 6.8c2.369 0 3.79 0 3.79 4.05z" /> <path d="M5 21h14" />', tb_settings:'<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />', tb_layout_cards:'<path d="M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /> <path d="M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />', tb_home:'<path d="M5 12l-2 0l9 -9l9 9l-2 0" /> <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /> <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />', tb_palette:'<path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" /> <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />', tb_database:'<path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /> <path d="M4 6v6a8 3 0 0 0 16 0v-6" /> <path d="M4 12v6a8 3 0 0 0 16 0v-6" />', tb_article:'<path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /> <path d="M7 8h10" /> <path d="M7 12h10" /> <path d="M7 16h10" />', tb_photo:'<path d="M15 8h.01" /> <path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z" /> <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5" /> <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3" />', tb_file_text:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 9l1 0" /> <path d="M9 13l6 0" /> <path d="M9 17l6 0" />', tb_gauge:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M13.41 10.59l2.59 -2.59" /> <path d="M7 12a5 5 0 0 1 5 -5" />', tb_file_description:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 17h6" /> <path d="M9 13h6" />' /* ikon Tabler sidebar */
 };
+Object.assign(I, { /* tab Salinan */
+  unggah:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v12"/>',
+  mata:'<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>',
+  tong:'<path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>',
+  tb_help_circle:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 17l0 .01" /><path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />'
+});
 const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -484,6 +542,27 @@ const ISTILAH = {
   METERAI:'Meterai elektronik resmi senilai Rp10.000. Setiap pembubuhan memakai 1 kuota yang tidak dapat dikembalikan.'
 };
 const istilah = (t, k) => denganTip(`<span class="istilah" tabindex="0">${t}</span>`, ISTILAH[k]);
+/* ikon "?" bertooltip untuk istilah/label yang belum punya penjelasan (HE-EAW-02) */
+const tanya = (ist, penjelasan) => `<span class="ina-tooltip ina-tooltip--placement-top tanya"><button type="button" class="tanya-btn" aria-label="Penjelasan: ${ist}">${ik('tb_help_circle', 14)}</button><span class="ina-tooltip__content" role="tooltip"><span class="ina-tooltip__bubble">${penjelasan}</span></span></span>`;
+const TANYA = {
+  status:['Status Penandatanganan', 'Kolom ini menunjukkan kemajuan penandatanganan minuta, mulai dari belum mulai, menunggu stempel TERA, tanda tangan para pihak, menunggu e-Meterai, sampai selesai.'],
+  final:['Akta final', 'Akta final adalah akta yang sudah melewati finalisasi di Penyusunan Akta. Isi akta dikunci dan siap dibubuhi stempel, tanda tangan, dan meterai.'],
+  dok:['Minuta dan Salinan', 'Minuta adalah akta asli yang ditandatangani para pihak dan disimpan kantor PPAT. Salinan adalah turunan akta yang diberikan kepada para pihak.'],
+  langkah:['Status langkah', 'Selesai berarti langkah sudah dikerjakan. Sedang berjalan berarti langkah dapat dikerjakan sekarang. Terkunci berarti langkah menunggu langkah sebelumnya selesai.'],
+  tera:['Stempel TERA', 'Stempel TERA adalah stempel elektronik resmi kantor PPAT yang terdaftar di Peruri. Stempel dibubuhkan satu kali sebelum tanda tangan.'],
+  ttd:['Tanda Tangan Elektronik', 'Tanda tangan elektronik adalah tanda tangan tersertifikasi yang dibubuhkan dengan sertifikat elektronik (CA) setiap penanda tangan.'],
+  meterai:['e-Meterai', 'e-Meterai adalah meterai elektronik resmi dari Peruri. Setiap pembubuhan memakai 1 kuota dari akun e-Meterai kantor.'],
+  penanda:['Penanda tangan', 'Penanda tangan adalah pihak yang membubuhkan tanda tangan elektronik pada akta, yaitu penjual, pembeli, dan PPAT. Urutannya mengikuti daftar.'],
+  penandaSal:['Penanda tangan salinan', 'Salinan ditandatangani oleh PPAT yang ditetapkan di Profil Kantor. PPAT tersebut memerlukan sertifikat elektronik (CA) yang aktif.'],
+  sn:['Nomor seri e-Meterai', 'Nomor seri adalah kode unik dari Peruri untuk satu meterai elektronik. Pembuatan nomor seri memakai 1 kuota.'],
+  akun:['Akun e-Meterai', 'Akun e-Meterai adalah email akun Peruri milik kantor. Kuota e-Meterai dibeli di portal Peruri dan dipotong dari akun ini.'],
+  otp:['Kode OTP', 'OTP adalah kode sekali pakai yang dikirim ke email. Kode hanya berlaku untuk satu kali verifikasi.'],
+  statusSal:['Status salinan', 'Draf berarti belum ada langkah yang selesai. Diproses berarti sebagian langkah sudah selesai. Selesai berarti stempel TERA, tanda tangan, dan e-Meterai sudah lengkap.'],
+  menuSal:['Menu Salinan Akta', 'Menu Salinan Akta menyimpan pindaian salinan bertanda tangan basah beserta catatan renvoi, yaitu catatan perbaikan yang tercetak pada salinan. Salinan dari menu itu dikirim sebagai tautan.'],
+  lampiran:['Lampiran', 'Lampiran adalah berkas PDF salinan yang dikirim bersama email. Berkas memuat hasil langkah terakhir yang sudah selesai.']
+};
+const tq = k => tanya(...TANYA[k]);
+document.addEventListener('click', e => { if (e.target.closest('.tanya-btn')) e.preventDefault(); });
 const remah = () => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link" data-ke-daftar><span class="ina-breadcrumb__text">Akta</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">Penandatanganan Akta</span></span></li></ol></nav>`;
 
 /* ---------------- daftar perubahan ---------------- */
@@ -492,7 +571,7 @@ const UBAH = [
     isi:'Gunakan IDDS Stepper yang menampilkan nomor, nama langkah, dan status setiap langkah, misalnya "Selesai", "Giliran Pembeli · 1 dari 3 selesai", atau "Terkunci". Tandai langkah yang sedang dikerjakan sebagai aktif, dan buat setiap langkah dapat diklik untuk melihat detailnya. Pakai satu nama langkah secara konsisten di stepper, panel, dan pesan: Stempel TERA, Tanda Tangan Elektronik, dan e-Meterai. Ejaan "E-Materai" di live dibakukan menjadi "e-Meterai" (KBBI: meterai).',
     lama:'Stepper hanya berupa tiga ikon (Digital Stamp, E-Signature, E-Materai) tanpa nomor dan status, dan "E-Materai" salah eja. Panel memakai nama lain: "Step 1: Digital Stamp (TERA)" dan "Stempel TERA".', ke:'ttd', sorot:'#kartuLangkah' },
   { kode:'HE-EAW-02', judul:'Panel wizard: istilah dijelaskan dan satu aksi utama yang jelas',
-    isi:'Beri garis putus-putus dan tooltip penjelasan pada istilah TERA, tanda tangan elektronik, CA, OTP, dan e-Meterai. Awali panel kanan dengan kartu "Langkah berikutnya" berisi satu kalimat dan satu tombol utama, misalnya "Kirim OTP ke Contoh Pembeli Satu". Bila tombol belum dapat dipakai, tulis alasannya di bawah tombol. Pindahkan aksi lain (unduh, ingatkan, mulai ulang) ke menu "Lainnya".',
+    isi:'Beri garis putus-putus dan tooltip penjelasan pada istilah TERA, tanda tangan elektronik, CA, OTP, dan e-Meterai. Kolom "Status E-Akta" diganti menjadi "Status Penandatanganan" karena menu kini bernama Penandatanganan Akta. Istilah dan label lain yang belum dijelaskan (Status Penandatanganan, akta final, Minuta dan Salinan, status langkah, Stempel TERA, penanda tangan, nomor seri dan akun e-Meterai, kode OTP, status salinan, menu Salinan Akta, lampiran) diberi ikon "?" bertooltip; informasi penting seperti masa berlaku OTP dan syarat tetap tertulis di layar. Awali panel kanan dengan kartu "Langkah berikutnya" berisi satu kalimat dan satu tombol utama, misalnya "Kirim OTP ke Contoh Pembeli Satu". Bila tombol belum dapat dipakai, tulis alasannya di bawah tombol. Pindahkan aksi lain (unduh, ingatkan, mulai ulang) ke menu "Lainnya".',
     lama:'Istilah tidak dijelaskan. Panel berisi banyak tombol sejajar (Unduh PDF, Ingatkan, Mulai Ulang, Kirim OTP per pihak) tanpa penanda tindakan yang harus dilakukan sekarang.', ke:'ttd', sorot:'#kartuBerikut' },
   { kode:'HE-EAW-03', judul:'Aksi wizard: konfirmasi sebelum stempel, tanda tangan, dan e-Meterai',
     isi:'Tampilkan IDDS Modal Confirmation sebelum kode OTP TERA dikirim, sebelum OTP penanda tangan dikirim, dan sebelum e-Meterai dibubuhkan. Modal berisi ringkasan (akta, posisi/halaman, penanda tangan) dan penjelasan bahwa tindakan tidak dapat dibatalkan. Untuk stempel TERA dan e-Meterai, pengguna harus mencentang "Saya sudah memeriksa isi akta dan posisi …" sebelum melanjutkan.',
@@ -515,6 +594,15 @@ const UBAH = [
   { kode:'HE-EAW-09', judul:'Langkah e-Meterai: aktivasi diperiksa dan pemakaian kuota dikonfirmasi',
     isi:'Bila email akun e-Meterai kantor belum disimpan, nonaktifkan tombol Buat Nomor Seri dan tampilkan IDDS Alert yang mengarahkan ke menu Aktivasi e-Meterai. Bila sudah aktif, tampilkan akun e-Meterai yang dipakai di panel. Sebelum nomor seri dibuat atau dibuat ulang, tampilkan IDDS Modal Confirmation "Pakai 1 kuota e-Meterai?" yang menyebut biaya Rp10.000 dan akun Peruri yang dipakai. Bila kuota habis, tampilkan IDDS Alert critical yang menetap di bawah tombol dengan tautan pembelian kuota di e-Meterai.co.id. Gunakan label berbahasa Indonesia: "Buat Nomor Seri", "Bubuhkan e-Meterai", dan "Nomor seri e-Meterai". Perilaku ini dapat dicoba melalui simulasi "e-Meterai" di bilah atas.',
     lama:'Wizard tidak membaca email aktivasi e-Meterai dan tidak menampilkan sisa kuota. Tombol "1. Generate SN (kuota)" selalu aktif dan langsung memakai 1 kuota (Rp10.000) tanpa konfirmasi; tombol "Generate Ulang SN" juga tanpa konfirmasi. Email yang belum diisi atau kuota yang habis baru diketahui dari toast pesan server atau "Gagal generate SN meterai." yang hilang sendiri. Label memakai bahasa Inggris dan ejaan "E-Materai".', ke:'meterai', sorot:'#alertMeterai' },
+  { kode:'HE-EAW-10', judul:'Tab Salinan: daftar salinan elektronik dan bedanya dengan menu Salinan Akta',
+    isi:'Buat tab Salinan berfungsi di layar detail. Saat tab dibuka, layar langsung masuk ke langkah Stempel TERA (atau langkah yang sedang berjalan) pada salinan aktif, yaitu salinan pertama yang belum selesai. Daftar salinan dibuka lewat tombol "Daftar Salinan" untuk mengganti salinan atau mengunggah salinan lain. Bila order belum punya salinan, tab menampilkan daftar kosong beserta kartu unggah, dan setelah unggah berhasil layar langsung masuk ke langkah Stempel TERA. Di atas daftar, tampilkan IDDS Alert info yang menjelaskan bahwa tab ini untuk salinan elektronik yang dibubuhi stempel TERA, tanda tangan elektronik, dan e-Meterai, lalu dikirim sebagai lampiran PDF. Pindaian salinan bertanda tangan basah yang dikirim sebagai tautan dikelola di menu Salinan Akta (ada tautannya). Kartu unggah tetap berisi Label (opsional) dan tombol "Unggah Salinan (PDF)". Galat format dan ukuran tampil di bawah isian, bukan toast, dan unggahan menampilkan status memuat. Setiap salinan memakai lencana status berbahasa Indonesia (Selesai, Diproses, Draf) serta lencana langkah Stempel TERA, Tanda Tangan Elektronik, dan e-Meterai. Bila PPAT penanda tangan belum ditetapkan, tampilkan IDDS Alert caution dengan tautan ke Profil Kantor. Tombol Bantuan di tab ini membuka tanya jawab khusus salinan.',
+    lama:'Tab "Salinan" membuka daftar salinan terlebih dahulu; pengguna harus mengklik "Kelola" pada salah satu salinan untuk mulai membubuhkan stempel TERA. Tab ini berisi kartu unggah "Label (opsional)" dan tombol "Unggah Salinan (PDF)" dengan galat "File harus PDF." dan "Ukuran file ({x.x} MB) melebihi batas. Maksimal 20 MB." Kartu salinan memakai lencana "Selesai", "Proses", "Draft" dan "TERA ✓ / E-Sign / E-Materai". Pesan Order menyuruh membuka menu Akta Salinan, sedangkan Minuta menyebut "Akta masuk ke menu Salinan"; tidak ada penjelasan beda antara tab Salinan (lampiran) dan menu Akta Salinan (tautan 7 hari), padahal keduanya memakai istilah "Kirim Salinan".', ke:'salinan', sorot:'#infoSalinan' },
+  { kode:'HE-EAW-11', judul:'Kelola salinan: stepper bernomor, urutan wajib, dan konfirmasi kuota',
+    isi:'Tab Salinan langsung membuka layar Kelola pada langkah Stempel TERA salinan aktif. Kepala layar menyebut salinan yang sedang dikerjakan (mis. "Sedang dikerjakan (2 dari 2): Salinan Pembeli") beserta statusnya, dan tombol "Daftar Salinan" dipakai untuk mengganti salinan. Kelola salinan memakai IDDS Stepper, penampil PDF, kartu "Langkah berikutnya", dialog OTP dengan masa berlaku, dan alert TERA kantor atau e-Meterai yang sama dengan tab Minuta. Langkah 2 dan 3 tampil terkunci dengan alasan dan tombol ke langkah sebelumnya. Sebelum nomor seri dibuat, IDDS Modal Confirmation "Pakai 1 kuota e-Meterai?" menyebut biaya Rp10.000 dan akun Peruri. Label dibakukan: "Stempel TERA", "Tanda Tangan Elektronik", "e-Meterai", "Buat Nomor Seri (pakai 1 kuota)", serta tombol unduh "Unduh Salinan Berstempel", "Unduh Salinan Bertanda Tangan", dan "Unduh Salinan Bermeterai".',
+    lama:'Layar Kelola baru terbuka setelah pengguna mengklik "Kelola" di daftar salinan. Stepper berupa tiga lingkaran "Digital Stamp → E-Signature → E-Materai" tanpa nomor dan status. Tombol "1. Generate SN (kuota)" dan "Generate Ulang SN" langsung memakai kuota (Rp 10.000) tanpa konfirmasi, tanpa tampilan sisa kuota. Tombol unduh bercampur: "Unduh PDF Ber-stempel", "Unduh Salinan Tersign", "Unduh PDF Ber-meterai". Dialog OTP hanya satu kolom angka "000000" tanpa masa berlaku.', ke:'kelola', sorot:'#kartuLangkahSal' },
+  { kode:'HE-EAW-12', judul:'Salinan: hapus berkonfirmasi dan kirim lampiran berlabel jelas',
+    isi:'Hapus salinan memakai IDDS Modal Confirmation bertombol merah yang menyebut nama salinan dan dampaknya, lalu fokus kembali ke daftar. Dialog "Kirim Salinan via Email" menampilkan nama berkas lampiran dan tahap yang sudah selesai, memberi peringatan bila salinan belum lengkap, menampilkan peran penerima dalam bahasa Indonesia (bukan kode MANUAL), dan menampilkan galat email di bawah isian.',
+    lama:'Hapus memakai window.confirm bawaan browser: \'Hapus salinan "{label}"? File tanda tangan (bila ada) ikut terhapus.\' Dialog kirim hanya menyebut "Dokumen {label} yang telah ditandatangani akan dikirim sebagai lampiran PDF (bukan tautan)." tanpa nama berkas atau tahap yang sudah selesai. Peran penerima tampil sebagai kode mentah, dan galat "Pilih minimal 1 penerima dengan email valid." tampil sebagai toast.', ke:'kirim', sorot:null },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Penandatanganan Akta',
     isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi urutan tiga langkah, pertanyaan umum (beda TERA dan tanda tangan, OTP tidak masuk atau kedaluwarsa, CA belum aktif, salah posisi setelah dibubuhkan, kuota meterai), dan kontak dukungan.',
     lama:'Tidak ada panduan, tooltip, atau kontak dukungan di seluruh alur wizard (skor Help & Documentation: 0).', ke:'bantuan', sorot:null },
@@ -545,6 +633,21 @@ function contoh() {
   ].map(x => { if (x.kode === 'ORD-CONTOH-004') x.pihak[2].ca = false; return x; }); /* PPAT belum ber-CA (temuan live) */
 }
 let ORDER = contoh();
+/* salinan elektronik per order (tab Salinan, HE-EAW-10…12); bentuk data sama dengan order agar langkah Minuta dapat dipakai ulang */
+const salinanBaru = (kode, id, label, selesai = false) => ({ salinan:true, id, label, kode, mulai:true,
+  tera:{ status:selesai ? 'STAMPED' : 'BELUM', hal:selesai ? JHAL_S : null, x:14, y:74 },
+  pihak:[{ id:3, nama:'PPAT Contoh Satu', peran:'PPAT', email:'ppat1@contoh.id', ca:true, hal:selesai ? JHAL_S : null, x:40, y:78, status:selesai ? 'SIGNED' : 'MENUNGGU' }],
+  meterai:{ status:selesai ? 'STAMPED' : 'NONE', hal:selesai ? JHAL_S : null, x:72, y:80, sn:selesai ? 'SN-CONTOH-0101' : '' } });
+const JHAL_S = 8;
+const contohSalinan = () => ({ 'ORD-CONTOH-013':[salinanBaru('ORD-CONTOH-013', 1, 'Salinan Penjual', true), salinanBaru('ORD-CONTOH-013', 2, 'Salinan Pembeli')] });
+let SALINAN = contohSalinan(), idSal = 10;
+const daftarSal = kode => SALINAN[kode] || (SALINAN[kode] = []);
+const kunci = x => x.salinan ? `${x.kode}#${x.id}` : x.kode;
+function statusSal(s) { /* status keseluruhan salinan, label Indonesia */
+  if (s.tera.status === 'STAMPED' && s.pihak[0].status === 'SIGNED' && s.meterai.status === 'STAMPED') return ['Selesai', 'success'];
+  if (s.tera.status === 'STAMPED' || s.meterai.status !== 'NONE') return ['Diproses', 'info'];
+  return ['Draf', 'neutral'];
+}
 const JHAL = 8;
 const LANGKAH = [
   { k:'tera', l:'Stempel TERA', ik:'stempel' },
@@ -566,21 +669,25 @@ function statusLangkah(o, i) {
   if (i < p) return { kls:'completed', t:'Selesai' };
   if (i > p) return { kls:'', t:'Terkunci' };
   if (i === 0) return { kls:'active', t:S.tera !== 'aktif' ? 'Menunggu TERA kantor' : 'Sedang berjalan' };
+  if (i === 1 && o.salinan) return { kls:'active', t:'Menunggu tanda tangan PPAT' };
   if (i === 1) { const g = giliran(o); return { kls:'active', t:`Giliran ${PERAN[g.peran]} · ${ttdSelesai(o)} dari ${o.pihak.length} selesai` }; }
   return { kls:'active', t:'Sedang berjalan' };
 }
 
 /* ---------------- keadaan ---------------- */
 const S = { layar:'daftar', aktif:null, lihat:0, hal:1, zoom:100, memuat:'', lainBuka:false, cari:'', grup:'',
-  tera:'aktif', emeterai:'aktif', galatKuota:'' }; /* simulasi status TERA kantor (HE-EAW-08) dan e-Meterai (HE-EAW-09) */
-const o = () => ORDER.find(x => x.kode === S.aktif);
+  tera:'aktif', emeterai:'aktif', galatKuota:'', /* simulasi status TERA kantor (HE-EAW-08) dan e-Meterai (HE-EAW-09) */
+  tab:'minuta', sal:null, memuatSal:false, labelSal:'', galatUnggah:'', ppat:'ada' }; /* tab Salinan (HE-EAW-10…12) */
+const ord = () => ORDER.find(x => x.kode === S.aktif);
+/* saat mengelola salinan, objek aktif = salinan (bentuk datanya sama dengan order) */
+const o = () => { const x = ord(); return x && S.tab === 'salinan' && S.sal != null ? daftarSal(x.kode).find(s => s.id === S.sal) : x; };
 const EMAIL_METERAI = 'ppat1@contoh.id';
 const PROTO_TERA = 'Backlog-HE-TERA-Prototype.html';
 
 /* ---------------- sidebar (menu live PPAT Peruri) ---------------- */
 const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
   { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text']] },
-  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Verifikasi Berkas','tb_circle_check'],['Penyusunan Akta','tb_file_pencil'],['Penandatanganan Akta','tb_signature','eaw'],['Salinan Akta','tb_files']] },
+  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Verifikasi Berkas','tb_circle_check'],['Penyusunan Akta','tb_file_pencil'],['Penyusunan Akta v2','tb_file_description'],['Penandatanganan Akta','tb_signature','eaw'],['Salinan Akta','tb_files']] },
   { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building'],['Daftar Pengguna','tb_users'],['Peran & Izin','tb_shield_lock'],['Log Aktivitas','tb_history'],['Aktivasi e-Meterai','tb_rubber_stamp']] },
   { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge'],['Pengaturan','tb_settings']] },
   { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home'],['Tema Tampilan','tb_palette'],['Master Konten','tb_database'],['Artikel & Halaman','tb_article'],['Pustaka Media','tb_photo']] }
@@ -591,7 +698,7 @@ function gambarNav() {
     <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
     <div class="items" ${grupBuka.has(i) ? '' : 'hidden'}>${g.m.map(([t, ic, ke]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item ${ke ? 'on' : ''}" data-ke="${ke || ''}">${ik(ic)}<span>${t}</span></a>`).join('')}</div>`).join('');
 }
-const PROTO = { 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Verifikasi Berkas':'Backlog-HE-VERIF-Prototype.html', 'Penyusunan Akta':'Backlog-HE-MINUTA-Prototype.html', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
+const PROTO = { 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Verifikasi Berkas':'Backlog-HE-VERIF-Prototype.html', 'Penyusunan Akta':'Backlog-HE-MINUTA-Prototype.html', 'Penyusunan Akta v2':'Backlog-HE-MINUTA-V2-Prototype.html', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
 $('#nav').addEventListener('click', e => {
   const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
   const a = e.target.closest('a'); if (!a) return; e.preventDefault();
@@ -609,13 +716,13 @@ function layarDaftar() {
   const q = S.cari.trim().toLowerCase(), n = g => ORDER.filter(x => !g || grupDari(x) === g).length;
   const rows = ORDER.filter(x => (!S.grup || grupDari(x) === S.grup) && (!q || `${x.kode} ${x.nama} ${x.nomor}`.toLowerCase().includes(q)));
   return `${remah()}
-    <h1>Penandatanganan Akta</h1><p class="sub">Bubuhkan stempel TERA, tanda tangan elektronik, dan e-Meterai pada akta final.${usulan('HE-EAW-02')}</p>
+    <h1>Penandatanganan Akta</h1><p class="sub">Bubuhkan stempel TERA, tanda tangan elektronik, dan e-Meterai pada akta final.${tq('final')}${usulan('HE-EAW-02')}</p>
     <div class="saring-e ditandai" id="saringEaw">
       ${cari('cariEaw', 'Cari kode, narahubung, atau nomor akta…', S.cari, 'Cari akta')}
       <div class="ina-button-group" role="group" aria-label="Saring langkah">${GRUP.map(([v, t]) => `<button type="button" class="ina-button-group__button ${v === S.grup ? 'ina-button-group__button--selected' : ''}" aria-pressed="${v === S.grup}" data-grup="${v}"><span class="ina-button-group__button-content">${t} (${n(v)})</span></button>`).join('')}</div>${usulan('HE-EAW-07')}
     </div>
     <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb">
-      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">Nomor Akta</th><th class="ina-table__header-cell">Tanggal Akta</th><th class="ina-table__header-cell">Status E-Akta</th><th class="ina-table__header-cell"></th></tr></thead>
+      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">Nomor Akta</th><th class="ina-table__header-cell">Tanggal Akta</th><th class="ina-table__header-cell">Status Penandatanganan${tq('status')}</th><th class="ina-table__header-cell"></th></tr></thead>
       <tbody class="ina-table__body">${rows.length ? '' : `<tr><td colspan="6" class="ina-table__empty-cell" style="text-align:center;padding:28px;color:var(--ina-content-secondary)">Tidak ada akta yang cocok.<div style="margin-top:10px">${tombol('Hapus pencarian dan saringan', 'secondary', 'sm', 'data-reset-saring')}</div></td></tr>`}${rows.map(x => { const [t, j] = statusDaftar(x); return `<tr class="ina-table__row ina-table__row--clickable klik" data-buka="${x.kode}">
         <td class="ina-table__cell"><span class="kd">${x.kode}</span></td>
         <td class="ina-table__cell"><div>Akta Jual Beli</div><div class="kc">${esc(x.nama)}</div></td>
@@ -636,15 +743,19 @@ function stepper(x, vertikal) {
         <div class="ina-stepper__label"><span>${L.l}</span><small>${st.t}</small></div></div>`; }).join('')}</div>`;
 }
 function layarDetail() {
-  const x = o(), p = posisi(x);
+  const d = ord(), tab = (k, t, ikon) => `<button type="button" role="tab" id="tab-${k}" data-tab="${k}" aria-selected="${S.tab === k}" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline ${S.tab === k ? 'ina-tab-horizontal__tab--selected' : ''}">${ik(ikon, 15)}<span>${t}</span></button>`;
   return `${remah()}
-    <h1>Penandatanganan Akta</h1><p class="sub">Bubuhkan stempel TERA, tanda tangan elektronik, dan e-Meterai pada akta final.</p>
-    <div class="det-atas">${tombol('Kembali', 'secondary', 'sm', 'id="kembali"', ik('kiri', 14))}<span class="meta">${x.kode} · Akta Jual Beli · ${esc(x.nama)}</span></div>
-    <div class="ina-tab-horizontal ina-tab-horizontal--use-brand-color tab-dok"><div class="ina-tab-horizontal__container" role="tablist">
-      <button type="button" role="tab" aria-selected="true" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline ina-tab-horizontal__tab--selected">${ik('dok', 15)}<span>Minuta</span></button>
-      <button type="button" role="tab" aria-selected="false" data-luar="Tab Salinan" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline">${ik('salin', 15)}<span>Salinan</span></button></div></div>
+    <h1>Penandatanganan Akta</h1><p class="sub">Bubuhkan stempel TERA, tanda tangan elektronik, dan e-Meterai pada akta final.${tq('final')}</p>
+    <div class="det-atas">${tombol('Kembali', 'secondary', 'sm', 'id="kembali"', ik('kiri', 14))}<span class="meta">${d.kode} · Akta Jual Beli · ${esc(d.nama)}</span></div>
+    <div class="ina-tab-horizontal ina-tab-horizontal--use-brand-color tab-dok"><div class="ina-tab-horizontal__container" role="tablist" aria-label="Dokumen akta">
+      ${tab('minuta', 'Minuta', 'dok')}${tab('salinan', 'Salinan', 'salin')}</div>${tq('dok')}</div>
+    <div role="tabpanel" aria-labelledby="tab-${S.tab}">${S.tab === 'minuta' ? isiMinuta() : S.sal != null && o() ? layarKelola() : layarSalinan()}</div>`;
+}
+function isiMinuta() {
+  const x = o(), p = posisi(x);
+  return `
     <div class="kartu-langkah ditandai" id="kartuLangkah">${stepper(x, false)}${stepper(x, true)}
-      <p class="ket-langkah">${ik('info', 14)}<span>${p === 3 ? 'Semua langkah selesai. Akta final siap diunduh.' : `Langkah dikerjakan secara berurutan. Langkah berikutnya terbuka setelah langkah sebelumnya selesai.`}</span>${usulan('HE-EAW-01')}</p></div>
+      <p class="ket-langkah">${ik('info', 14)}<span>${p === 3 ? 'Semua langkah selesai. Akta final siap diunduh.' : `Langkah dikerjakan secara berurutan. Langkah berikutnya terbuka setelah langkah sebelumnya selesai.`}</span>${tq('langkah')}${usulan('HE-EAW-01')}</p></div>
     ${kesiapan(x)}
     <div class="ruang">${penampil(x)}<div class="panel">${panel(x)}</div></div>`;
 }
@@ -658,6 +769,130 @@ function kesiapan(x) {
      ${saya ? `<div style="margin-top:10px">${tombol('Registrasi CA Saya', 'secondary', 'sm', 'data-luar="Registrasi CA"', ik('tameng', 14))}</div>` : ''}`)}</div>`;
 }
 
+/* ---------------- tab Salinan (HE-EAW-10…12; isi & teks mengikuti live, langkah disalin dari tab Minuta) ---------------- */
+const PROTO_SALINAN = 'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', PROTO_PROFIL = 'Backlog-IDDS-TN-EPPAT-Prototype.html#profil';
+const TAHAP_SAL = [['tera', 'Stempel TERA'], ['ttd', 'Tanda Tangan Elektronik'], ['meterai', 'e-Meterai']];
+function stTahap(s, k) {
+  if (k === 'tera') return s.tera.status === 'STAMPED' ? 'selesai' : 'belum';
+  if (k === 'ttd') return s.pihak[0].status === 'SIGNED' ? 'selesai' : 'belum';
+  return s.meterai.status === 'STAMPED' ? 'selesai' : s.meterai.status === 'SN_READY' ? 'proses' : 'belum';
+}
+const lencanaTahap = (s, k, l) => { const st = stTahap(s, k);
+  return st === 'selesai' ? badge(`${ik('centang', 12)}<span>${l}</span><span class="sr-only">: selesai</span>`, 'success', 'sm')
+    : st === 'proses' ? badge(`${ik('jam', 12)}<span>${l}</span><span class="sr-only">: diproses</span>`, 'info', 'sm')
+    : badge(`<span>${l}</span><span class="sr-only">: belum</span>`, 'neutral', 'sm'); };
+function kartuSal(s) {
+  const [t, j] = statusSal(s), g = s.pihak[0];
+  return `<li class="ina-card ina-card--variant-basic sal-item" data-sal="${s.id}"><div class="ina-card__content">
+    <div class="atas"><span class="nm">${esc(s.label)}</span>${badge(t, j, 'sm')}${tq('statusSal')}</div>
+    <div class="lencana">${TAHAP_SAL.map(([k, l]) => lencanaTahap(s, k, l)).join('')}</div>
+    ${g.email ? `<div class="penanda-tt">Penanda tangan (PPAT)${tq('penandaSal')}: <b>${esc(g.email)}</b> · ${istilah('CA', 'CA')} ${g.ca ? 'aktif' : 'belum aktif'}</div>`
+      : alert('caution', '', `PPAT penanda tangan belum ditetapkan. Lengkapi di Profil Kantor.<div class="alert-aksi">${tautan('Buka Profil Kantor', 'link', PROTO_PROFIL)}</div>`)}
+    <div class="baris-aksi">${tombol('Pratinjau', 'tertiary', 'sm', `data-luar="Pratinjau salinan" aria-label="Pratinjau ${esc(s.label)}"`, ik('mata', 14))}${tombol('Kelola', 'secondary', 'sm', `data-kelola-sal="${s.id}" aria-label="Kelola ${esc(s.label)}"`, ik('edit', 14))}<button type="button" class="ina-button ina-button--tertiary ina-button--sm tb-bahaya" data-hapus-sal="${s.id}" aria-label="Hapus ${esc(s.label)}">${ik('tong', 14)}Hapus</button></div>
+  </div></li>`;
+}
+function layarSalinan() {
+  const d = ord(), daftar = daftarSal(d.kode), sibuk = S.memuat === 'unggah';
+  return `<div class="sal-info ditandai" id="infoSalinan">${alert('info', `Salinan elektronik${usulan('HE-EAW-10')}`, `Tab ini untuk salinan elektronik yang dibubuhi stempel TERA, tanda tangan elektronik, dan e-Meterai, lalu dikirim ke para pihak sebagai <b>lampiran PDF</b>. Pindaian salinan bertanda tangan basah yang dikirim sebagai <b>tautan</b> dikelola di menu Salinan Akta.${tq('menuSal')}<div class="alert-aksi">${tautan('Buka menu Salinan Akta', 'link', PROTO_SALINAN)}</div>`)}</div>
+    <div class="ina-card ina-card--variant-basic sal-unggah"><div class="ina-card__content">
+      <h3>Unggah salinan</h3>
+      <p>Unggah file PDF salinan akta yang akan ditandatangani PPAT. Bisa banyak file per order (penjual, pembeli, arsip). <b>Format PDF, maksimal 20 MB per file.</b></p>
+      <div class="baris-unggah">
+        <div class="ina-text-field"><label class="ina-text-field__label" for="labelSal">Label (opsional)</label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><input id="labelSal" class="ina-text-field__input" value="${esc(S.labelSal)}" placeholder="mis. Salinan Penjual" autocomplete="off"></div></div>
+        ${tombol(sibuk ? 'Mengunggah…' : 'Unggah Salinan (PDF)', 'primary', 'md', `id="unggahSal" aria-describedby="galatUnggah" ${sibuk ? 'disabled' : ''}`, sibuk ? spinner : ik('unggah', 16))}
+        <input type="file" id="berkasSal" accept="application/pdf,.pdf" hidden>
+      </div>
+      <div class="ina-text-field__helper-text ${S.galatUnggah ? 'ina-text-field__helper-text--error' : ''} galat-unggah" id="galatUnggah" ${S.galatUnggah ? 'role="alert"' : ''}>${S.galatUnggah}</div>
+    </div></div>
+    ${S.memuatSal ? `<div class="sal-memuat" role="status">${spinner}<span>Memuat…</span></div>` : `
+    <div class="sal-kepala"><h3>Daftar salinan</h3><span id="jumlahSal" tabindex="-1">${daftar.length} file salinan untuk order ini.</span></div>
+    ${daftar.length ? `<ul class="sal-daftar" id="daftarSalinan">${daftar.map(kartuSal).join('')}</ul>` : `<div class="sal-kosong" id="daftarSalinan">${ik('dok', 28)}<span>Belum ada file salinan. Unggah PDF di atas untuk mulai.</span></div>`}`}`;
+}
+function layarKelola() {
+  const x = o(), p = posisi(x), hasil = x.tera.status === 'STAMPED';
+  const L = daftarSal(x.kode);
+  return `<div class="kelola-atas">${tombol('Daftar Salinan', 'secondary', 'sm', 'id="keDaftarSal" aria-label="Daftar Salinan: ganti salinan atau unggah salinan lain"', ik('kiri', 14))}
+      <div class="nama-sal"><span class="ket-aktif">Sedang dikerjakan (${L.indexOf(x) + 1} dari ${L.length}):</span><span>${esc(x.label)}</span>${badge(...statusSal(x), 'sm')}${hasil ? tombol('Kirim via Email', 'primary', 'sm', 'id="kirimSal"', ik('surat', 14)) : ''}</div></div>
+    <div class="kartu-langkah ditandai" id="kartuLangkahSal">${stepper(x, false)}${stepper(x, true)}
+      <p class="ket-langkah">${ik('info', 14)}<span>${p === 3 ? 'Semua langkah selesai. Salinan siap dikirim.' : 'Urutan wajib: Stempel TERA → Tanda Tangan Elektronik → e-Meterai. Langkah berikutnya terbuka setelah langkah sebelumnya selesai.'}</span>${tq('langkah')}${usulan('HE-EAW-11')}</p></div>
+    <div class="ruang">${penampil(x)}<div class="panel">${panel(x)}</div></div>`;
+}
+/* salinan aktif: yang pertama belum Selesai; bila semua Selesai, yang terakhir */
+const salAktif = kode => { const L = daftarSal(kode); return L.find(s => statusSal(s)[0] !== 'Selesai') || L[L.length - 1]; };
+/* tab Salinan langsung masuk ke langkah yang sedang berjalan pada salinan aktif (mulai dari Stempel TERA); daftar lewat tombol "Daftar Salinan" */
+function bukaTab(k, langsung = true) {
+  Object.assign(S, { tab:k, sal:null, lainBuka:false, galatUnggah:'' });
+  if (k === 'salinan') { S.memuatSal = true; setTimeout(() => { S.memuatSal = false; if (S.tab !== 'salinan' || S.sal != null) return; const s = langsung && salAktif(ord().kode); if (s) { kelolaSal(s.id, false); $('#tab-salinan')?.focus(); } else gambar(); }, 400); }
+  else { const x = ord(); const p = Math.min(posisi(x), 2); S.lihat = p; S.hal = halTujuan(x, p); }
+  gambar(); $(`#tab-${k}`)?.focus();
+}
+function kelolaSal(id, fokus = true) {
+  S.tab = 'salinan'; S.sal = id; S.lainBuka = false; S.memuatSal = false; const x = o(); const p = Math.min(posisi(x), 2); S.lihat = p; S.hal = halTujuan(x, p); gambar(); if (fokus) { window.scrollTo({ top:0 }); $('#keDaftarSal')?.focus(); }
+}
+function keDaftarSal() { const id = S.sal; S.sal = null; S.galatUnggah = ''; gambar(); $(`[data-kelola-sal="${id}"]`)?.focus(); }
+function unggahSal(f) {
+  S.galatUnggah = '';
+  if (!/\.pdf$/i.test(f.name) && f.type !== 'application/pdf') { S.galatUnggah = 'File harus PDF.'; gambar(); $('#unggahSal')?.focus(); return; }
+  if (f.size > 20 * 1048576) { S.galatUnggah = `Ukuran file (${(f.size / 1048576).toFixed(1).replace('.', ',')} MB) melebihi batas. Maksimal 20 MB.`; gambar(); $('#unggahSal')?.focus(); return; }
+  const d = ord(), label = S.labelSal.trim() || f.name.replace(/\.pdf$/i, '');
+  tunggu('unggah', 800, () => {
+    const s = salinanBaru(d.kode, ++idSal, label); s.pihak[0].email = S.ppat === 'ada' ? 'ppat1@contoh.id' : '';
+    daftarSal(d.kode).push(s); S.labelSal = ''; kelolaSal(s.id); toast('Salinan diunggah.', 'positive', 3500, 'Langkah berikutnya: Stempel TERA.');
+  });
+}
+function hapusSal(id) {
+  const d = ord(), s = daftarSal(d.kode).find(y => y.id === id);
+  dialog({ judul:`Hapus salinan "${esc(s.label)}"?`, konfirmasi:true, bahaya:true, kembali:`[data-hapus-sal="${id}"]`,
+    isi:`<p>File salinan beserta stempel, tanda tangan, dan e-Meterai yang sudah dibubuhkan (bila ada) ikut terhapus. <b>Tindakan ini tidak dapat dibatalkan.</b>${usulan('HE-EAW-12')}</p>${s.meterai.status !== 'NONE' ? '<p>Kuota e-Meterai yang sudah terpakai untuk salinan ini tidak kembali.</p>' : ''}`,
+    tombol:[['Batal', 'secondary', null], ['Hapus Salinan', 'primary', () => {
+      const L = daftarSal(d.kode), i = L.indexOf(s); L.splice(i, 1); gambar(); toast('Salinan dihapus.', 'positive');
+      const n = L[Math.min(i, L.length - 1)]; (n ? $(`[data-hapus-sal="${n.id}"]`) : $('#labelSal'))?.focus();
+    }]] });
+}
+/* dialog Kirim Salinan via Email (HE-EAW-12): lampiran berlabel jelas, peran Indonesia, galat di bawah isian */
+const REG_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+let KIRIM = null;
+function namaLampiran(s) {
+  const t = s.meterai.status === 'STAMPED' ? ['bermeterai', 'stempel TERA, tanda tangan elektronik, dan e-Meterai'] : s.pihak[0].status === 'SIGNED' ? ['bertanda-tangan', 'stempel TERA dan tanda tangan elektronik'] : ['berstempel', 'stempel TERA'];
+  return [`${s.label.replace(/\s+/g, '-')}-${t[0]}.pdf`, t[1]];
+}
+function bukaKirim() {
+  const x = o(), d = ord();
+  KIRIM = { sal:x, baris:d.pihak.filter(p => p.peran !== 'PPAT').map(p => ({ nama:p.nama, peran:PERAN[p.peran], email:p.email, pilih:true, manual:false })), galat:'' };
+  dialog({ judul:'Kirim Salinan via Email', kembali:'#kirimSal', isi:'<div id="isiKirim"></div>',
+    tombol:[['Batal', 'secondary', null], ['Kirim Lampiran', 'primary', () => kirimLampiran(), true]] });
+  gambarKirim(); $('#lapisan [data-email-kirim="0"]')?.focus();
+}
+function gambarKirim() {
+  const K = KIRIM, s = K.sal, [berkas, tahap] = namaLampiran(s), lengkap = s.meterai.status === 'STAMPED';
+  $('#isiKirim').innerHTML = `<p>Dokumen <b>${esc(s.label)}</b> akan dikirim sebagai <b>lampiran PDF</b> (bukan tautan).${usulan('HE-EAW-12')}</p>
+    ${ringkas([[`Lampiran${tq('lampiran')}`, `<span style="word-break:break-all">${esc(berkas)}</span>`], ['Sudah dibubuhi', tahap]])}
+    ${lengkap ? '' : alert('caution', '', 'Salinan belum lengkap. Lampiran berisi hasil terakhir dan belum dibubuhi semua langkah.')}
+    <ul class="penerima" id="daftarPenerima">${K.baris.length ? K.baris.map((r, i) => `<li><div class="atas">
+        <label class="ina-checkbox" for="pilih-${i}"><input type="checkbox" id="pilih-${i}" class="ina-checkbox__input peer" data-pilih-kirim="${i}" ${r.pilih ? 'checked' : ''}><div class="ina-checkbox__box ina-checkbox__box--${r.pilih ? 'checked' : 'unchecked'}">${r.pilih ? ik('centang', 12) : ''}</div><div class="ina-checkbox__content"><span class="ina-checkbox__label nm">${esc(r.nama || '(tanpa nama)')}</span></div></label>
+        ${badge(r.peran, r.manual ? 'neutral' : 'info', 'sm')}${r.manual ? `<button type="button" class="ina-button ina-button--tertiary ina-button--sm tb-bahaya" data-hapus-penerima="${i}" aria-label="Hapus penerima ${i + 1}">${ik('tong', 14)}</button>` : ''}</div>
+        <div class="ina-text-field"><label class="ina-text-field__label" for="email-${i}">Email</label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ${r.galat ? 'ina-text-field__wrapper--status-error' : ''}"><input id="email-${i}" type="email" class="ina-text-field__input" data-email-kirim="${i}" value="${esc(r.email)}" placeholder="email@contoh.com" aria-describedby="ge-${i}" ${r.galat ? 'aria-invalid="true"' : ''}></div>
+        <div class="ina-text-field__bottom-area">${r.galat ? `<div class="ina-text-field__helper-text ina-text-field__helper-text--error" id="ge-${i}">${r.galat}</div>` : ''}</div></div></li>`).join('') : '<li>Belum ada calon penerima. Tambah manual di bawah.</li>'}</ul>
+    <div style="margin-top:10px">${tombol('Tambah penerima', 'tertiary', 'sm', 'id="tambahPenerima"', ik('tambah', 14))}</div>
+    ${K.galat ? `<div class="ina-text-field__helper-text ina-text-field__helper-text--error" role="alert" id="galatKirim" style="margin-top:8px">${K.galat}</div>` : ''}`;
+}
+function kirimLampiran() {
+  const K = KIRIM; let ada = 0;
+  K.baris.forEach(r => { r.email = r.email.trim(); r.galat = r.pilih && r.email && !REG_EMAIL.test(r.email) ? 'Format email tidak valid. Contoh: nama@contoh.id' : r.pilih && !r.email ? 'Isi email penerima.' : ''; if (r.pilih && REG_EMAIL.test(r.email)) ada++; });
+  const salah = K.baris.some(r => r.galat);
+  K.galat = !ada ? 'Pilih minimal 1 penerima dengan email valid.' : '';
+  if (!ada || salah) { gambarKirim(); const f = K.baris.findIndex(r => r.galat); ($(`#lapisan [data-email-kirim="${f}"]`) || $('#galatKirim'))?.focus(); return; }
+  const tb = $('#lapisan .ina-modal__footer .ina-button:last-child'); tb.disabled = true; tb.innerHTML = `${spinner} Mengirim…`;
+  setTimeout(() => { $('#lapisan').innerHTML = ''; KIRIM = null; toast(`Salinan terkirim ke ${ada} penerima.`, 'positive'); $('#kirimSal')?.focus(); }, 700);
+}
+document.addEventListener('input', e => { const t = e.target; if (!KIRIM) return;
+  if (t.dataset.emailKirim != null) { KIRIM.baris[+t.dataset.emailKirim].email = t.value; } });
+document.addEventListener('change', e => { const t = e.target; if (!KIRIM || t.dataset.pilihKirim == null) return;
+  KIRIM.baris[+t.dataset.pilihKirim].pilih = t.checked; gambarKirim(); $(`#pilih-${t.dataset.pilihKirim}`)?.focus(); });
+document.addEventListener('click', e => { if (!KIRIM) return;
+  if (e.target.closest('#tambahPenerima')) { KIRIM.baris.push({ nama:'', peran:'Ditambahkan manual', email:'', pilih:true, manual:true }); gambarKirim(); $(`#lapisan [data-email-kirim="${KIRIM.baris.length - 1}"]`)?.focus(); return; }
+  const h = e.target.closest('[data-hapus-penerima]'); if (h) { KIRIM.baris.splice(+h.dataset.hapusPenerima, 1); gambarKirim(); $('#tambahPenerima')?.focus(); } });
+
 /* penampil PDF + navigasi otomatis (HE-EAW-05) */
 function penandaDi(x) {
   const out = [];
@@ -667,7 +902,7 @@ function penandaDi(x) {
   return out;
 }
 function isiHalaman(h) {
-  if (h === 1) return '<h3>AKTA JUAL BELI</h3><p style="text-align:center">Nomor: ……/2026</p>';
+  if (h === 1) return `<h3>${o()?.salinan ? 'SALINAN<br>' : ''}AKTA JUAL BELI</h3><p style="text-align:center">Nomor: ……/2026</p>`;
   if (h === JHAL) return '<p>Demikian akta ini dibuat dan ditandatangani secara elektronik.</p><div class="ttd-blok"><div>PIHAK PERTAMA<br>(Penjual)</div><div>PIHAK KEDUA<br>(Pembeli)</div></div>';
   return Array.from({ length:11 }, (_, i) => `<p>${['Pasal ' + (h - 1) + '.', 'Para pihak dengan ini menerangkan', 'bahwa objek jual beli telah', 'diperiksa dan disetujui bersama,', 'serta tunduk pada ketentuan yang', 'berlaku sebagaimana diuraikan', 'dalam akta ini. ————————————', 'Segala biaya yang timbul menjadi', 'tanggungan sesuai kesepakatan', 'para pihak. ———————————————', '————————————————————————'][i]}</p>`).join('');
 }
@@ -701,18 +936,20 @@ function menuLain(x) {
       <button type="button" class="ina-action-dropdown__item ina-action-dropdown__item--danger" role="menuitem" data-mulai-ulang><span class="ina-action-dropdown__item-icon">${ik('ulang')}</span><span class="ina-action-dropdown__item-content">Mulai Ulang</span></button></div>` : ''}</span>`;
 }
 function kartuInfo(x, judulL) {
-  return `<div class="ina-card ina-card--variant-basic"><div class="ina-card__content"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><h4 style="margin:0">${ik(LANGKAH[S.lihat].ik, 16)} Langkah ${S.lihat + 1}: ${judulL}</h4>${menuLain(x)}</div>
-    <dl class="kv" style="margin-top:10px"><dt>Kode</dt><dd class="kode">${x.kode}</dd><dt>Tanggal akta</dt><dd>${x.tgl || '—'}</dd><dt>Status</dt><dd>${badge(...statusDaftar(x), 'sm')}</dd></dl></div></div>`;
+  const dl = x.salinan ? `<dt>Salinan</dt><dd>${esc(x.label)}</dd><dt>Kode</dt><dd class="kode">${x.kode}</dd><dt>Status${tq('statusSal')}</dt><dd>${badge(...statusSal(x), 'sm')}</dd>`
+    : `<dt>Kode</dt><dd class="kode">${x.kode}</dd><dt>Tanggal akta</dt><dd>${x.tgl || '—'}</dd><dt>Status${tq('status')}</dt><dd>${badge(...statusDaftar(x), 'sm')}</dd>`;
+  return `<div class="ina-card ina-card--variant-basic"><div class="ina-card__content"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><h4 style="margin:0">${ik(LANGKAH[S.lihat].ik, 16)} Langkah ${S.lihat + 1}: ${judulL}${tq(['tera', 'ttd', 'meterai'][S.lihat])}</h4>${x.salinan ? '' : menuLain(x)}</div>
+    <dl class="kv" style="margin-top:10px">${dl}</dl></div></div>`;
 }
 function panel(x) {
   const p = posisi(x), L = S.lihat;
   if (L > p) {
     const sebelum = LANGKAH[p] || LANGKAH[0];
     return `${kartuInfo(x, LANGKAH[L].l)}<div class="ina-card ina-card--variant-basic"><div class="ina-card__content terkunci">${ik('kunci', 26)}<h4>${LANGKAH[L].l} terkunci</h4>
-      <p>Selesaikan <b>${sebelum.l}</b> (langkah ${p + 1}) terlebih dahulu. ${L === 2 ? 'Meterai dibubuhkan pada dokumen yang sudah ditandatangani semua pihak.' : 'Stempel TERA wajib dibubuhkan sebelum para pihak menandatangani akta.'}${p === 0 && S.tera !== 'aktif' ? ' TERA kantor belum aktif. Langkah ini terbuka setelah TERA kantor aktif dan akta distempel.' : ''}</p>${tombol(`Ke langkah ${p + 1}: ${sebelum.l}`, 'secondary', 'sm', `data-langkah="${p}"`, ik('panah', 14))}</div></div>`;
+      <p>Selesaikan <b>${sebelum.l}</b> (langkah ${p + 1}) terlebih dahulu. ${x.salinan ? (L === 2 ? 'e-Meterai dibubuhkan pada salinan yang sudah ditandatangani PPAT.' : 'Peruri mensyaratkan stempel TERA sebelum tanda tangan.') : L === 2 ? 'Meterai dibubuhkan pada dokumen yang sudah ditandatangani semua pihak.' : 'Stempel TERA wajib dibubuhkan sebelum para pihak menandatangani akta.'}${p === 0 && S.tera !== 'aktif' ? ' TERA kantor belum aktif. Langkah ini terbuka setelah TERA kantor aktif dan akta distempel.' : ''}</p>${tombol(`Ke langkah ${p + 1}: ${sebelum.l}`, 'secondary', 'sm', `data-langkah="${p}"`, ik('panah', 14))}</div></div>`;
   }
   if (L === 0) return panelTera(x, p);
-  if (L === 1) return panelTtd(x, p);
+  if (L === 1) return x.salinan ? panelTtdSal(x, p) : panelTtd(x, p);
   return panelMeterai(x, p);
 }
 /* status TERA kantor di langkah 1 (HE-EAW-08) */
@@ -736,7 +973,7 @@ function panelTera(x, p) {
     '');
   return `${berikut}${kartuInfo(x, 'Stempel TERA')}
     <div class="ina-card ina-card--variant-basic"><div class="ina-card__content">
-      ${jadi ? `<div class="sukses">${alert('success', 'Stempel TERA sudah dibubuhkan', `Stempel dibubuhkan di halaman ${t.hal}.`)}</div>${tombol('Unduh PDF Berstempel', 'secondary', 'sm', 'data-luar="Unduh PDF"', ik('unduh', 14))}${p === 1 ? `<p class="ket-kecil">Lanjutkan ke langkah 2: Tanda Tangan Elektronik.</p>${tombol('Ke Tanda Tangan Elektronik', 'primary', 'sm', 'data-langkah="1"', ik('panah', 14))}` : ''}`
+      ${jadi ? `<div class="sukses">${alert('success', 'Stempel TERA sudah dibubuhkan', `Stempel dibubuhkan di halaman ${t.hal}.`)}</div>${tombol(x.salinan ? 'Unduh Salinan Berstempel' : 'Unduh PDF Berstempel', 'secondary', 'sm', 'data-luar="Unduh PDF"', ik('unduh', 14))}${p === 1 ? `<p class="ket-kecil">Lanjutkan ke langkah 2: Tanda Tangan Elektronik.</p>${tombol('Ke Tanda Tangan Elektronik', 'primary', 'sm', 'data-langkah="1"', ik('panah', 14))}` : ''}`
       : `<h4>${ik('target', 16)} Posisi stempel</h4>
         <button type="button" class="kartu-seret" draggable="true" data-seret="tera">${ik('seret', 16)}<span>Stempel TERA<small>Seret ke halaman PDF</small></span></button>
         <div class="baris-aksi">${tombol(`Tempatkan di halaman ini (Hal. ${S.hal})`, 'secondary', 'sm', 'data-tempat="tera"')}${t.hal ? badge(`Ditempatkan · Hal. ${t.hal}`, 'brand', 'sm', `data-lompat="${t.hal}" role="button" tabindex="0"`) + tombol('Hapus posisi', 'tertiary', 'sm', 'data-hapus-posisi="tera"') : ''}</div>
@@ -753,7 +990,7 @@ function panelTtd(x, p) {
       !g.ca ? `${esc(g.nama)} belum memiliki CA aktif. Tanda tangan dapat dilanjutkan setelah Registrasi CA selesai.` : !g.hal ? 'Tombol aktif setelah kotak tanda tangan ditempatkan di PDF.' : '');
   } else if (p === 2) berikut = kartuBerikut('Semua pihak sudah menandatangani', 'Lanjutkan ke langkah 3 untuk membubuhkan e-Meterai.', tombol('Ke e-Meterai', 'primary', 'md', 'data-langkah="2"', ik('panah', 16)));
   return `${berikut}${kartuInfo(x, 'Tanda Tangan Elektronik')}
-    <div class="ina-card ina-card--variant-basic"><div class="ina-card__content"><h4>${ik('users', 16)} Penanda tangan</h4>
+    <div class="ina-card ina-card--variant-basic"><div class="ina-card__content"><h4>${ik('users', 16)} Penanda tangan${tq('penanda')}</h4>
       <p class="ket-kecil" style="margin:0 0 10px">Tanda tangan dilakukan berurutan sesuai daftar. Setiap penanda tangan wajib memiliki posisi di PDF dan ${istilah('CA', 'CA')} aktif.</p>
       <ul class="pihak">${x.pihak.map((s, i) => { const gil = g && s.id === g.id;
         return `<li class="ina-card ina-card--variant-basic ${gil ? 'giliran' : ''}"><div class="ina-card__content"><div class="atas"><span class="no">${i + 1}</span><span class="nm">${esc(s.nama)}</span>${badge(PERAN[s.peran], 'neutral', 'sm')}${s.status === 'SIGNED' ? badge('Sudah menandatangani', 'success', 'sm') : gil ? badge('Giliran', 'brand', 'sm') : badge('Menunggu', 'neutral', 'sm')}</div>
@@ -762,10 +999,28 @@ function panelTtd(x, p) {
           ${s.status === 'SIGNED' ? `<div class="selesai">${ik('centang', 14)} Selesai</div>` : `<button type="button" class="kartu-seret ttd" draggable="true" data-seret="ttd:${s.id}">${ik('seret', 16)}<span>Kotak tanda tangan ${PERAN[s.peran]}<small>Seret ke halaman PDF</small></span></button>
             <div class="baris-aksi">${tombol(`Tempatkan di halaman ini (Hal. ${S.hal})`, 'secondary', 'sm', `data-tempat="ttd:${s.id}"`)}</div>`}</div></li>`; }).join('')}</ul></div></div>`;
 }
+/* langkah 2 salinan: satu penanda tangan (PPAT kantor), markup sama dengan tab Minuta (HE-EAW-11) */
+function panelTtdSal(x, p) {
+  const g = x.pihak[0], jadi = g.status === 'SIGNED', ada = !!g.email, siap = ada && g.ca;
+  const berikut = jadi ? (p === 2 ? kartuBerikut('Salinan sudah ditandatangani', 'Lanjutkan ke langkah 3 untuk membubuhkan e-Meterai.', tombol('Ke e-Meterai', 'primary', 'md', 'data-langkah="2"', ik('panah', 16))) : '')
+    : kartuBerikut('Tanda tangani salinan', `${g.hal ? `Kotak tanda tangan sudah ditempatkan di halaman ${g.hal}.` : 'Kotak tanda tangan ditempatkan otomatis di kanan bawah halaman terakhir bila tidak diseret.'} Kirim kode ${istilah('OTP', 'OTP')} ke email PPAT penanda tangan. Setelah kode dimasukkan, ${istilah('tanda tangan elektronik', 'TTE')} PPAT dibubuhkan pada salinan.`,
+      tombol('Kirim OTP & Tanda Tangani', 'primary', 'md', `id="aksiTtd" ${siap && S.memuat !== 'ttd' ? '' : 'disabled'}`, S.memuat === 'ttd' ? spinner : ik('surat', 16)),
+      !ada ? 'Tombol aktif setelah PPAT penanda tangan ditetapkan di Profil Kantor.' : !g.ca ? 'Tombol aktif setelah sertifikat elektronik (CA) PPAT aktif.' : '');
+  return `${berikut}${kartuInfo(x, 'Tanda Tangan Elektronik')}
+    <div class="ina-card ina-card--variant-basic"><div class="ina-card__content"><h4>${ik('users', 16)} Penanda tangan${tq('penandaSal')}</h4>
+      ${!ada ? alert('caution', '', `PPAT penanda tangan belum ditetapkan. Lengkapi di Profil Kantor terlebih dahulu.<div class="alert-aksi">${tautan('Buka Profil Kantor', 'link', PROTO_PROFIL)}</div>`)
+      : `<ul class="pihak"><li class="ina-card ina-card--variant-basic ${jadi ? '' : 'giliran'}"><div class="ina-card__content"><div class="atas"><span class="no">1</span><span class="nm">${esc(g.nama)}</span>${badge('PPAT', 'neutral', 'sm')}${jadi ? badge('Sudah menandatangani', 'success', 'sm') : badge('Giliran', 'brand', 'sm')}</div>
+          <div class="lencana">${denganTip(g.ca ? badge('CA aktif', 'success', 'sm') : badge('CA belum aktif', 'warning', 'sm'), ISTILAH.CA)}${g.hal ? badge(`Ditempatkan · Hal. ${g.hal} ›`, 'info', 'sm', `data-lompat="${g.hal}" role="button" tabindex="0" title="Lihat posisi di PDF"`) : badge('Posisi otomatis', 'neutral', 'sm')}</div>
+          <div class="email">${esc(g.email)}</div>
+          ${jadi ? `<div class="selesai">${ik('centang', 14)} Selesai</div><div class="baris-aksi" style="margin-top:10px">${tombol('Unduh Salinan Bertanda Tangan', 'secondary', 'sm', 'data-luar="Unduh PDF"', ik('unduh', 14))}</div>`
+          : `<button type="button" class="kartu-seret ttd" draggable="true" data-seret="ttd:${g.id}">${ik('seret', 16)}<span>Kotak tanda tangan PPAT<small>Seret ke halaman PDF</small></span></button>
+            <div class="baris-aksi">${tombol(`Tempatkan di halaman ini (Hal. ${S.hal})`, 'secondary', 'sm', `data-tempat="ttd:${g.id}"`)}${g.hal ? tombol('Hapus posisi', 'tertiary', 'sm', 'data-hapus-posisi="ttd"') : ''}</div>
+            <p class="ket-kecil">Posisi bersifat opsional. Bila tidak ditentukan, tanda tangan ditempatkan otomatis di kanan bawah halaman terakhir.</p>`}</div></li></ul>`}</div></div>`;
+}
 /* aktivasi & kuota e-Meterai di langkah 3 (HE-EAW-09) */
 function alertMeterai(x) {
   if (S.emeterai === 'belum') return `<div class="ditandai" id="alertMeterai" data-status-meterai="belum">${alert('caution', '', `e-Meterai kantor belum diaktifkan. Simpan email akun e-Meterai Peruri di menu Aktivasi e-Meterai.${usulan('HE-EAW-09')}<div class="alert-aksi">${tautan('Buka Aktivasi e-Meterai', 'primary', 'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai')}</div>`)}</div>`;
-  if (S.emeterai === 'habis' && S.galatKuota === x.kode) return `<div class="ditandai" id="alertMeterai" data-status-meterai="habis">${alert('critical', '', `Kuota e-Meterai habis. Beli kuota di e-Meterai.co.id, lalu coba lagi.${usulan('HE-EAW-09')}<div class="alert-aksi">${tautan('Beli kuota di e-Meterai.co.id (membuka tab baru)', 'link', 'https://e-meterai.co.id/', 'target="_blank" rel="noopener"')}</div>`)}</div>`;
+  if (S.emeterai === 'habis' && S.galatKuota === kunci(x)) return `<div class="ditandai" id="alertMeterai" data-status-meterai="habis">${alert('critical', '', `Kuota e-Meterai habis. Beli kuota di e-Meterai.co.id, lalu coba lagi.${usulan('HE-EAW-09')}<div class="alert-aksi">${tautan('Beli kuota di e-Meterai.co.id (membuka tab baru)', 'link', 'https://e-meterai.co.id/', 'target="_blank" rel="noopener"')}</div>`)}</div>`;
   return '';
 }
 function panelMeterai(x, p) {
@@ -775,12 +1030,12 @@ function panelMeterai(x, p) {
     ? kartuBerikut('Bubuhkan e-Meterai', `Nomor seri sudah dibuat. Periksa posisi meterai, lalu bubuhkan ${istilah('e-Meterai', 'METERAI')} pada akta.`,
       tombol('Bubuhkan e-Meterai', 'primary', 'md', `id="aksiMeterai" data-tahap-meterai="bubuhkan" ${sibuk ? 'disabled' : ''}`, S.memuat === 'meterai' ? spinner : ik('meterai', 16)) + alertMeterai(x), '')
     : kartuBerikut('Buat nomor seri e-Meterai', `Tentukan posisi meterai, lalu buat nomor seri ${istilah('e-Meterai', 'METERAI')}. Pembuatan nomor seri memakai 1 kuota (Rp10.000).`,
-      tombol('Buat Nomor Seri', 'primary', 'md', `id="aksiMeterai" data-tahap-meterai="buat-sn" ${sibuk || !aktif ? 'disabled' : ''}`, S.memuat === 'sn' ? spinner : ik('meterai', 16)) + (aktif ? '' : '<span class="alasan">Tombol aktif setelah e-Meterai kantor diaktifkan.</span>') + alertMeterai(x), '');
-  const akun = aktif ? `<dt>Akun e-Meterai</dt><dd>${EMAIL_METERAI}${usulan('HE-EAW-09')}</dd>` : '';
+      tombol(x.salinan ? 'Buat Nomor Seri (pakai 1 kuota)' : 'Buat Nomor Seri', 'primary', 'md', `id="aksiMeterai" data-tahap-meterai="buat-sn" ${sibuk || !aktif ? 'disabled' : ''}`, S.memuat === 'sn' ? spinner : ik('meterai', 16)) + (aktif ? '' : '<span class="alasan">Tombol aktif setelah e-Meterai kantor diaktifkan.</span>') + alertMeterai(x), '');
+  const akun = aktif ? `<dt>Akun e-Meterai${tq('akun')}</dt><dd>${EMAIL_METERAI}${usulan('HE-EAW-09')}</dd>` : '';
   return `${berikut}${kartuInfo(x, 'e-Meterai')}
     <div class="ina-card ina-card--variant-basic"><div class="ina-card__content">
-      ${jadi ? `<div class="sukses">${alert('success', 'Akta selesai', 'Stempel TERA, tanda tangan elektronik, dan e-Meterai sudah lengkap.')}</div><dl class="kv"><dt>Nomor seri e-Meterai</dt><dd class="kode">${m.sn}</dd>${akun}</dl><div class="baris-aksi" style="margin-top:12px">${tombol('Unduh PDF Final', 'primary', 'sm', 'data-luar="Unduh PDF"', ik('unduh', 14))}</div>`
-      : `${akun || snSiap ? `<dl class="kv" style="margin-bottom:12px" id="infoMeterai">${snSiap ? `<dt>Nomor seri e-Meterai</dt><dd class="kode">${m.sn}</dd>` : ''}${akun}</dl>` : ''}
+      ${jadi ? `<div class="sukses">${alert('success', x.salinan ? 'Salinan selesai' : 'Akta selesai', 'Stempel TERA, tanda tangan elektronik, dan e-Meterai sudah lengkap.')}</div><dl class="kv"><dt>Nomor seri e-Meterai${tq('sn')}</dt><dd class="kode">${m.sn}</dd>${akun}</dl><div class="baris-aksi" style="margin-top:12px">${tombol(x.salinan ? 'Unduh Salinan Bermeterai' : 'Unduh PDF Final', 'primary', 'sm', 'data-luar="Unduh PDF"', ik('unduh', 14))}</div>`
+      : `${akun || snSiap ? `<dl class="kv" style="margin-bottom:12px" id="infoMeterai">${snSiap ? `<dt>Nomor seri e-Meterai${tq('sn')}</dt><dd class="kode">${m.sn}</dd>` : ''}${akun}</dl>` : ''}
         ${snSiap ? `<div class="baris-aksi" style="margin:0 0 12px">${tombol('Buat Ulang Nomor Seri', 'secondary', 'sm', `id="aksiSnUlang" ${sibuk || !aktif ? 'disabled' : ''}`, ik('ulang', 14))}</div>` : ''}
         <h4>${ik('target', 16)} Posisi meterai</h4>
         <button type="button" class="kartu-seret meterai" draggable="true" data-seret="meterai">${ik('seret', 16)}<span>e-Meterai<small>Seret ke halaman PDF</small></span></button>
@@ -790,7 +1045,19 @@ function panelMeterai(x, p) {
 }
 
 /* ---------------- gambar & navigasi ---------------- */
-function gambar() { gambarNav(); $('#halaman').innerHTML = S.layar === 'daftar' ? layarDaftar() : layarDetail(); pasangPanduan(); S.kilau = null; }
+function gambar() { gambarNav(); $('#halaman').innerHTML = S.layar === 'daftar' ? layarDaftar() : layarDetail(); pasangPanduan(); S.kilau = null; gambarPil(); }
+/* pil layar di bilah atas agar setiap layar dapat dibuka langsung */
+const PIL = [['daftar', 'Daftar'], ['minuta', 'Minuta'], ['salinan', 'Salinan'], ['daftarsal', 'Daftar salinan']];
+const pilAktif = () => S.layar === 'daftar' ? 'daftar' : S.tab === 'minuta' ? 'minuta' : S.sal != null ? 'salinan' : 'daftarsal';
+function gambarPil() { const a = pilAktif(); $('#pilLayar').innerHTML = PIL.map(([k, t]) => `<button class="pil" data-pil="${k}" aria-pressed="${a === k}">${t}</button>`).join(' '); }
+function bukaPil(k) {
+  if (k === 'daftar') { keDaftar(); return; }
+  if (k === 'minuta') { buka('ORD-CONTOH-007'); return; }
+  buka('ORD-CONTOH-013');
+  if (k === 'daftarsal') { bukaTab('salinan', false); return; }
+  const L = daftarSal('ORD-CONTOH-013'); if (!L.length) L.push(salinanBaru('ORD-CONTOH-013', ++idSal, 'Salinan Pembeli'));
+  kelolaSal(salAktif('ORD-CONTOH-013').id); /* pil Salinan: langsung ke langkah salinan aktif */
+}
 function keDaftar() { Object.assign(S, { layar:'daftar', aktif:null, lainBuka:false }); gambar(); window.scrollTo({ top:0 }); }
 /* halaman tujuan otomatis untuk langkah yang dibuka (HE-EAW-05) */
 function halTujuan(x, L) {
@@ -801,7 +1068,7 @@ function halTujuan(x, L) {
 function bukaLangkah(L, otomatis = true) { const x = o(); S.lihat = L; S.lainBuka = false; if (otomatis) S.hal = halTujuan(x, Math.min(L, 2)); gambar(); }
 function buka(kode) {
   const x = ORDER.find(y => y.kode === kode);
-  Object.assign(S, { layar:'detail', aktif:kode, zoom:100, lainBuka:false });
+  Object.assign(S, { layar:'detail', aktif:kode, zoom:100, lainBuka:false, tab:'minuta', sal:null, galatUnggah:'' });
   if (!x.mulai) { x.mulai = true; setTimeout(() => toast('Sesi tanda tangan sudah disiapkan berdasarkan data para pihak.', 'positive'), 50); }
   const p = Math.min(posisi(x), 2); S.lihat = p; S.hal = halTujuan(x, p); gambar(); window.scrollTo({ top:0 });
 }
@@ -833,9 +1100,10 @@ const H = $('#halaman');
 H.addEventListener('keydown', e => {
   if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-langkah], [data-lompat]')) { e.preventDefault(); e.target.click(); }
   if (e.target.id === 'inHal' && e.key === 'Enter') keHal(+e.target.value || 1);
+  if (e.target.matches('[role="tab"][data-tab]') && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { e.preventDefault(); bukaTab(S.tab === 'minuta' ? 'salinan' : 'minuta'); }
 });
-H.addEventListener('change', e => { if (e.target.id === 'inHal') keHal(+e.target.value || 1); });
-H.addEventListener('input', e => { if (e.target.id !== 'cariEaw') return; S.cari = e.target.value; const p = e.target.selectionStart; gambar(); const n = $('#cariEaw'); n.focus(); n.setSelectionRange(p, p); });
+H.addEventListener('change', e => { if (e.target.id === 'inHal') keHal(+e.target.value || 1); if (e.target.id === 'berkasSal' && e.target.files[0]) unggahSal(e.target.files[0]); });
+H.addEventListener('input', e => { if (e.target.id === 'labelSal') { S.labelSal = e.target.value; return; } if (e.target.id !== 'cariEaw') return; S.cari = e.target.value; const p = e.target.selectionStart; gambar(); const n = $('#cariEaw'); n.focus(); n.setSelectionRange(p, p); });
 H.addEventListener('click', e => { const g = e.target.closest('[data-grup]'); if (g) { S.grup = g.dataset.grup; gambar(); return; } if (e.target.closest('[data-reset-saring]')) { S.cari = ''; S.grup = ''; gambar(); } });
 H.addEventListener('click', e => {
   const t = e.target;
@@ -847,7 +1115,7 @@ H.addEventListener('click', e => {
   const hl = t.closest('[data-hal]'); if (hl && !hl.disabled) { keHal(+hl.dataset.hal); return; }
   const zm = t.closest('[data-zoom]'); if (zm) { S.zoom = Math.max(60, Math.min(160, S.zoom + +zm.dataset.zoom)); gambar(); return; }
   const tp = t.closest('[data-tempat]'); if (tp) { tempatkan(tp.dataset.tempat, S.hal); return; }
-  const hp = t.closest('[data-hapus-posisi]'); if (hp) { const x = o(); x[hp.dataset.hapusPosisi].hal = null; gambar(); toast('Posisi dihapus. Sistem akan memakai posisi otomatis.'); return; }
+  const hp = t.closest('[data-hapus-posisi]'); if (hp) { const x = o(), k = hp.dataset.hapusPosisi; (k === 'ttd' ? x.pihak[0] : x[k]).hal = null; gambar(); toast('Posisi dihapus. Sistem akan memakai posisi otomatis.'); return; }
   if (t.closest('#tombolLain')) { S.lainBuka = !S.lainBuka; gambar(); return; }
   if (t.closest('[data-ingatkan]')) { S.lainBuka = false; gambar(); toast(`Pengingat dikirim ke ${giliran(o()).nama}.`, 'positive'); return; }
   if (t.closest('[data-mulai-ulang]')) { S.lainBuka = false; gambar(); konfirmMulaiUlang(); return; }
@@ -855,6 +1123,13 @@ H.addEventListener('click', e => {
   if (t.closest('#aksiTtd')) { konfirmTtd(); return; }
   if (t.closest('#aksiMeterai')) { o().meterai.status === 'SN_READY' ? konfirmMeterai() : konfirmSn(false); return; }
   if (t.closest('#aksiSnUlang')) { konfirmSn(true); return; }
+  /* tab Salinan (HE-EAW-10…12) */
+  const tb = t.closest('[data-tab]'); if (tb) { if (tb.dataset.tab !== S.tab || S.sal != null) bukaTab(tb.dataset.tab); return; }
+  if (t.closest('#unggahSal')) { $('#berkasSal').click(); return; }
+  const ks = t.closest('[data-kelola-sal]'); if (ks) { kelolaSal(+ks.dataset.kelolaSal); return; }
+  const hs = t.closest('[data-hapus-sal]'); if (hs) { hapusSal(+hs.dataset.hapusSal); return; }
+  if (t.closest('#keDaftarSal')) { keDaftarSal(); return; }
+  if (t.closest('#kirimSal')) { bukaKirim(); return; }
   const lu = t.closest('[data-luar]'); if (lu) { S.lainBuka = false; toast(`${lu.dataset.luar} tidak disimulasikan di prototipe.`); return; }
 });
 document.addEventListener('click', e => { if (S.lainBuka && !e.target.closest('.lain-wadah')) { S.lainBuka = false; gambar(); } });
@@ -866,8 +1141,8 @@ function konfirmTera() {
   const x = o(); if (S.tera !== 'aktif') return; /* HE-EAW-08 */
   dialog({ judul:'Bubuhkan stempel TERA?', konfirmasi:true, kunciUtama:'#setuju',
     isi:`<p>Stempel TERA akan dibubuhkan pada akta berikut. Setelah dibubuhkan, stempel <b>tidak dapat dihapus atau dipindahkan</b>. Bila ada kesalahan, proses harus diulang dari awal melalui tombol Mulai Ulang.${usulan('HE-EAW-03')}</p>
-      ${ringkas([['Akta', `${x.kode} · Akta Jual Beli`], ['Posisi', x.tera.hal ? `Halaman ${x.tera.hal}` : `Otomatis (halaman terakhir, Hal. ${JHAL})`], ['Kode OTP dikirim ke', 'Email TERA kantor (te***@contoh.id)']])}
-      ${pernyataan('Saya sudah memeriksa isi akta dan posisi stempel.')}`,
+      ${ringkas([x.salinan ? ['Salinan', `${esc(x.label)} · ${x.kode}`] : ['Akta', `${x.kode} · Akta Jual Beli`], ['Posisi', x.tera.hal ? `Halaman ${x.tera.hal}` : `Otomatis (halaman terakhir, Hal. ${JHAL})`], ['Kode OTP dikirim ke', 'Email TERA kantor (te***@contoh.id)']])}
+      ${pernyataan(x.salinan ? 'Saya sudah memeriksa isi salinan dan posisi stempel.' : 'Saya sudah memeriksa isi akta dan posisi stempel.')}`,
     tombol:[['Batal','secondary',null],['Kirim Kode OTP','primary',() => {
       if (!x.tera.hal) Object.assign(x.tera, { hal:JHAL, x:39, y:68 });
       tunggu('tera', 700, () => dialogOtp({ judul:'Verifikasi OTP TERA', email:'te***@contoh.id', ket:'email TERA kantor', tombolOk:'Verifikasi & Bubuhkan', selesai:() => {
@@ -879,9 +1154,11 @@ function konfirmTtd() {
   const x = o(), g = giliran(x);
   dialog({ judul:`Kirim OTP ke ${esc(g.nama)}?`, konfirmasi:true,
     isi:`<p>Kode OTP akan dikirim ke email penanda tangan. Setelah kode dimasukkan, tanda tangan elektronik langsung dibubuhkan dan <b>tidak dapat dibatalkan</b>.${usulan('HE-EAW-03')}</p>
-      ${ringkas([['Penanda tangan', `${esc(g.nama)} (${PERAN[g.peran]})`], ['Posisi', `Halaman ${g.hal}`], ['Email', esc(g.email)], ['Urutan', `${x.pihak.indexOf(g) + 1} dari ${x.pihak.length}`]])}`,
+      ${ringkas(x.salinan ? [['Salinan', `${esc(x.label)} · ${x.kode}`], ['Penanda tangan', `${esc(g.nama)} (PPAT)`], ['Posisi', g.hal ? `Halaman ${g.hal}` : `Otomatis (kanan bawah, Hal. ${JHAL})`], ['Email', esc(g.email)]]
+        : [['Penanda tangan', `${esc(g.nama)} (${PERAN[g.peran]})`], ['Posisi', `Halaman ${g.hal}`], ['Email', esc(g.email)], ['Urutan', `${x.pihak.indexOf(g) + 1} dari ${x.pihak.length}`]])}`,
     tombol:[['Batal','secondary',null],['Kirim OTP','primary',() => tunggu('ttd', 700, () => dialogOtp({ judul:'Verifikasi OTP Tanda Tangan', email:samar(g.email), ket:g.nama, tombolOk:'Verifikasi & Tanda Tangani', selesai:() => {
-      g.status = 'SIGNED'; const n = giliran(x);
+      g.status = 'SIGNED'; if (x.salinan) { if (!g.hal) Object.assign(g, { hal:JHAL, x:54, y:78 }); toast('Salinan berhasil ditandatangani.', 'positive', 3500, 'Langkah berikutnya: e-Meterai.'); bukaLangkah(2); return; }
+      const n = giliran(x);
       toast(`${g.nama} sudah menandatangani.`, 'positive', 3500, n ? `Giliran berikutnya: ${n.nama} (${PERAN[n.peran]}).` : 'Semua pihak sudah menandatangani. Langkah berikutnya: e-Meterai.');
       bukaLangkah(n ? 1 : 2); } }))]] });
 }
@@ -891,7 +1168,7 @@ function konfirmSn(ulang) {
   dialog({ judul:ulang ? 'Buat ulang nomor seri?' : 'Pakai 1 kuota e-Meterai?', konfirmasi:true,
     isi:`<p>${ulang ? 'Membuat ulang nomor seri memakai 1 kuota lagi' : 'Membuat nomor seri e-Meterai memakai 1 kuota'} (Rp10.000) dari akun Peruri <b>${EMAIL_METERAI}</b>. Kuota yang terpakai tidak dapat dikembalikan.${usulan('HE-EAW-09')}</p>${ulang ? `<p>Nomor seri lama (${esc(x.meterai.sn)}) tidak dipakai lagi.</p>` : ''}`,
     tombol:[['Batal','secondary',null],['Pakai 1 Kuota','primary',() => tunggu('sn', 900, () => {
-      if (S.emeterai === 'habis') { S.galatKuota = x.kode; gambar(); $('#alertMeterai')?.scrollIntoView({ block:'nearest', behavior:'smooth' }); return; }
+      if (S.emeterai === 'habis') { S.galatKuota = kunci(x); gambar(); $('#alertMeterai')?.scrollIntoView({ block:'nearest', behavior:'smooth' }); return; }
       S.galatKuota = '';
       Object.assign(x.meterai, { status:'SN_READY', sn:ulang ? 'SN-CONTOH-0003' : 'SN-CONTOH-0002' }); gambar();
       toast(ulang ? 'Nomor seri e-Meterai dibuat ulang.' : 'Nomor seri e-Meterai dibuat.', 'positive', 4000, '1 kuota terpakai. Langkah berikutnya: bubuhkan e-Meterai.');
@@ -901,11 +1178,11 @@ function konfirmMeterai() {
   const x = o();
   dialog({ judul:'Bubuhkan e-Meterai?', konfirmasi:true, kunciUtama:'#setuju',
     isi:`<p>e-Meterai akan dibubuhkan pada akta berikut. Setelah dibubuhkan, e-Meterai <b>tidak dapat dihapus atau dipindahkan</b>. Kuota sudah terpakai saat nomor seri dibuat dan tidak dapat dikembalikan, termasuk bila proses diulang.${usulan('HE-EAW-03')}</p>
-      ${ringkas([['Akta', `${x.kode} · Akta Jual Beli`], ['Nomor seri e-Meterai', esc(x.meterai.sn)], ['Posisi', x.meterai.hal ? `Halaman ${x.meterai.hal}` : `Otomatis (Hal. ${JHAL})`], ['Akun e-Meterai', EMAIL_METERAI]])}
+      ${ringkas([x.salinan ? ['Salinan', `${esc(x.label)} · ${x.kode}`] : ['Akta', `${x.kode} · Akta Jual Beli`], ['Nomor seri e-Meterai', esc(x.meterai.sn)], ['Posisi', x.meterai.hal ? `Halaman ${x.meterai.hal}` : `Otomatis (Hal. ${JHAL})`], ['Akun e-Meterai', EMAIL_METERAI]])}
       ${pernyataan('Saya sudah memeriksa dokumen final dan posisi meterai.')}`,
     tombol:[['Batal','secondary',null],['Bubuhkan e-Meterai','primary',() => {
       if (!x.meterai.hal) x.meterai.hal = JHAL;
-      tunggu('meterai', 1200, () => { Object.assign(x.meterai, { status:'STAMPED', sn:x.meterai.sn || 'SN-CONTOH-0002' }); S.hal = x.meterai.hal; gambar(); toast('e-Meterai berhasil dibubuhkan. Akta lengkap.', 'positive', 4000); });
+      tunggu('meterai', 1200, () => { Object.assign(x.meterai, { status:'STAMPED', sn:x.meterai.sn || 'SN-CONTOH-0002' }); S.hal = x.meterai.hal; gambar(); toast(x.salinan ? 'e-Meterai berhasil dibubuhkan. Salinan lengkap dan siap dikirim.' : 'e-Meterai berhasil dibubuhkan. Akta lengkap.', 'positive', 4000); });
     }]] });
 }
 function konfirmMulaiUlang() {
@@ -922,7 +1199,7 @@ let OTP = null;
 function dialogOtp({ judul, email, ket, tombolOk, selesai }) {
   OTP = { sisa:15 * 60, ulang:60, coba:3, galat:'', selesai };
   dialog({ judul, isi:`<div class="otp-isi">
-      <p class="surel">${ik('surat', 16)} Kode OTP dikirim ke <b>${esc(email)}</b>${ket ? ` (${esc(ket)})` : ''}.</p>
+      <p class="surel">${ik('surat', 16)} Kode OTP${tq('otp')} dikirim ke <b>${esc(email)}</b>${ket ? ` (${esc(ket)})` : ''}.</p>
       <div class="ina-one-time-password"><div class="ina-one-time-password__container" role="group" aria-label="Kode OTP 6 digit">${Array.from({ length:6 }, (_, i) => `<input class="ina-one-time-password__input" inputmode="numeric" maxlength="1" aria-label="Digit ${i + 1}" data-otp="${i}" autocomplete="one-time-code">`).join('')}</div>
         <div class="ina-one-time-password__helper-text" id="otpPesan" aria-live="polite"></div></div>
       <div class="ina-badge ina-badge--soft ina-badge--brand ina-badge--md ina-badge--rounded-full otp-waktu" id="otpWaktu" aria-live="off">${ik('jam', 14)} <span>Kode berlaku 15:00</span></div>
@@ -996,8 +1273,10 @@ document.addEventListener('click', e => {
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisanDrawer').innerHTML) tutupDrawer(); });
 
 /* ---------------- IDDS Modal & Toast ---------------- */
-function dialog({ judul, isi, tombol: tb, lebar, kunciUtama, bahaya, konfirmasi, tanpaFokusUtama }) {
-  const L = $('#lapisan');
+let fokusKembali = null; /* pemicu yang menerima fokus lagi setelah dialog ditutup */
+function kembalikanFokus() { const k = fokusKembali; fokusKembali = null; if (k) setTimeout(() => $(k)?.focus(), 0); }
+function dialog({ judul, isi, tombol: tb, lebar, kunciUtama, bahaya, konfirmasi, tanpaFokusUtama, kembali }) {
+  const L = $('#lapisan'); fokusKembali = kembali || null;
   L.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-i="-1"></div><div class="ina-modal__container">
     <div class="ina-modal__dialog ina-modal__dialog--size-${lebar ? 'lg' : 'md'} ${konfirmasi ? 'ina-modal-confirmation' : ''}" role="${konfirmasi ? 'alertdialog' : 'dialog'}" aria-modal="true" aria-labelledby="dlgJudul">
       <div class="ina-modal__header"><h2 class="ina-modal__title" id="dlgJudul">${judul}</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-i="-1">${ik('x', 22)}</button></div>
@@ -1009,13 +1288,13 @@ function dialog({ judul, isi, tombol: tb, lebar, kunciUtama, bahaya, konfirmasi,
   L.onclick = e => {
     const b = e.target.closest('[data-i]'); if (!b || b.disabled) return;
     const i = +b.dataset.i;
-    if (i < 0) { L.innerHTML = ''; return; }
+    if (i < 0) { L.innerHTML = ''; KIRIM = null; kembalikanFokus(); return; }
     const [, , fn, tahan] = tb[i];
     if (tahan) { fn && fn(); return; }
-    L.innerHTML = ''; fn && fn();
+    L.innerHTML = ''; KIRIM = null; if (fn) { fokusKembali = null; fn(); } else kembalikanFokus();
   };
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisan').innerHTML) $('#lapisan').innerHTML = ''; });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisan').innerHTML) { $('#lapisan').innerHTML = ''; KIRIM = null; kembalikanFokus(); } });
 let tt;
 function toast(teks, state = 'default', ms = 3000, ket = '') {
   $('#toastWadah').innerHTML = `<div class="ina-toast ina-toast--state-${state} ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${ik(state === 'positive' ? 'centang' : 'info', 20)}</div>
@@ -1026,7 +1305,27 @@ $('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tu
 
 /* ---------------- Bantuan (HE-UMUM-02) ---------------- */
 const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
+function bantuanSalinan() { /* bantuan khusus tab Salinan (HE-EAW-10) */
+  drawer({ judul:'Bantuan Tab Salinan', isi:`
+    <p>Tab Salinan dipakai untuk membuat salinan akta elektronik: unggah PDF salinan, bubuhkan tiga langkah berurutan, lalu kirim ke para pihak sebagai lampiran email. Saat tab dibuka, layar langsung menampilkan langkah yang sedang berjalan pada salinan pertama yang belum selesai. Klik "Daftar Salinan" untuk mengganti salinan atau mengunggah salinan lain.</p>
+    <ol class="bantu-langkah">
+      <li><b>Stempel TERA:</b> tentukan posisi stempel (opsional), lalu masukkan kode OTP dari email TERA kantor.</li>
+      <li><b>Tanda Tangan Elektronik:</b> PPAT penanda tangan kantor menandatangani salinan dengan kode OTP.</li>
+      <li><b>e-Meterai:</b> buat nomor seri (memakai 1 kuota), lalu bubuhkan e-Meterai.</li>
+    </ol>
+    <h4 class="bantu-sub">Pertanyaan umum ${usulan('HE-EAW-10')}</h4>
+    ${faq(21, 'Apa beda tab Salinan dengan menu Salinan Akta?', 'Tab Salinan menghasilkan salinan elektronik yang dibubuhi stempel TERA, tanda tangan elektronik, dan e-Meterai, lalu dikirim sebagai lampiran PDF. Menu Salinan Akta dipakai untuk pindaian salinan bertanda tangan basah dan catatan renvoi, lalu dikirim sebagai tautan yang berlaku 7 hari.')}
+    ${faq(22, 'Mengapa langkah 2 dan 3 terkunci?', 'Urutan langkah wajib: Stempel TERA, Tanda Tangan Elektronik, lalu e-Meterai. Peruri mensyaratkan stempel sebelum tanda tangan, dan e-Meterai dibubuhkan pada salinan yang sudah ditandatangani.')}
+    ${faq(23, 'Apakah setiap salinan memakai kuota e-Meterai?', 'Ya. Setiap pembuatan nomor seri, termasuk pembuatan ulang, memakai 1 kuota (Rp10.000) dari akun e-Meterai kantor. Kuota yang terpakai tidak dapat dikembalikan, termasuk bila salinan dihapus.')}
+    ${faq(24, 'Bagaimana menentukan posisi stempel dan tanda tangan?', 'Seret kartu penanda ke halaman PDF atau klik "Tempatkan di halaman ini". Posisi bersifat opsional. Bila tidak ditentukan, sistem memakai posisi otomatis di halaman terakhir.')}
+    ${faq(25, 'Bagaimana mengirim salinan ke para pihak?', 'Klik "Kirim via Email" di layar Kelola. Pilih penerima dari daftar para pihak atau tambah penerima manual, lalu klik "Kirim Lampiran". Nama berkas dan langkah yang sudah dibubuhkan tampil di dialog.')}
+    ${faq(26, 'Apa yang terjadi bila salinan dihapus?', 'File salinan beserta stempel, tanda tangan, dan e-Meterai yang sudah dibubuhkan ikut terhapus dan tidak dapat dipulihkan. Minuta dan salinan lain tidak terpengaruh.')}
+    ${faq(27, 'Mengapa muncul peringatan PPAT penanda tangan belum ditetapkan?', 'Salinan ditandatangani oleh PPAT yang ditetapkan di Profil Kantor. Lengkapi data PPAT penanda tangan di Profil Kantor, lalu kembali ke tab ini.')}
+    <h4 class="bantu-sub">Kontak dukungan</h4>
+    <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>` });
+}
 function bukaBantuan() {
+  if (S.layar === 'detail' && S.tab === 'salinan') { bantuanSalinan(); return; }
   drawer({ judul:'Bantuan Penandatanganan Akta', isi:`
     <p>Melalui Penandatanganan Akta, akta final dibubuhi stempel, tanda tangan, dan meterai elektronik dalam tiga langkah berurutan.</p>
     <ol class="bantu-langkah">
@@ -1075,6 +1374,9 @@ function lihat(u) {
   }
   if (u.ke === 'otp') { buka('ORD-CONTOH-007'); konfirmTtd(); return; }
   if (u.ke === 'kesiapan') buka('ORD-CONTOH-004');
+  if (u.ke === 'salinan') { bukaPil('daftarsal'); setTimeout(() => { const el = $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } }, 450); return; }
+  if (u.ke === 'kelola') bukaPil('salinan');
+  if (u.ke === 'kirim') { bukaPil('daftarsal'); setTimeout(() => { const s = daftarSal('ORD-CONTOH-013').find(y => y.tera.status === 'STAMPED'); if (s) { kelolaSal(s.id); bukaKirim(); } }, 450); return; }
   const el = u.sorot && $(u.sorot);
   if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); }
 }
@@ -1085,11 +1387,17 @@ function aturSim(tera, meterai) {
   document.querySelectorAll('[data-sim-tera]').forEach(b => b.setAttribute('aria-pressed', b.dataset.simTera === tera));
   document.querySelectorAll('[data-sim-meterai]').forEach(b => b.setAttribute('aria-pressed', b.dataset.simMeterai === meterai));
 }
+function aturPpat(v) {
+  S.ppat = v; document.querySelectorAll('[data-sim-ppat]').forEach(b => b.setAttribute('aria-pressed', b.dataset.simPpat === v));
+  Object.values(SALINAN).flat().forEach(s => { s.pihak[0].email = v === 'ada' ? 'ppat1@contoh.id' : ''; });
+}
 document.querySelector('.protobar').addEventListener('click', e => {
+  const pl = e.target.closest('[data-pil]'); if (pl) { const k = pl.dataset.pil; bukaPil(k); $(`#pilLayar [data-pil="${k}"]`)?.focus(); return; }
+  const pp = e.target.closest('[data-sim-ppat]'); if (pp) { aturPpat(pp.dataset.simPpat); gambar(); return; }
   const t = e.target.closest('[data-sim-tera]'), m = e.target.closest('[data-sim-meterai]'); if (!t && !m) return;
   aturSim(t ? t.dataset.simTera : S.tera, m ? m.dataset.simMeterai : S.emeterai); S.lainBuka = false; gambar();
 });
-$('#aturUlang').addEventListener('click', () => { ORDER = contoh(); S.cari = ''; S.grup = ''; aturSim('aktif', 'aktif'); keDaftar(); toast('Data contoh dikembalikan ke awal.'); });
+$('#aturUlang').addEventListener('click', () => { ORDER = contoh(); SALINAN = contohSalinan(); S.cari = ''; S.grup = ''; S.labelSal = ''; aturSim('aktif', 'aktif'); aturPpat('ada'); keDaftar(); toast('Data contoh dikembalikan ke awal.'); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });

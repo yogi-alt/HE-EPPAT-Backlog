@@ -372,6 +372,22 @@
       "tanggal": "2026-10-26"
     },
     {
+      "kode": "HE-MINUTA-07",
+      "fitur": "Penyusunan Akta",
+      "judul": "Penyusunan Akta: tata letak editor ala pengolah kata",
+      "saat_ini": "Laporan HE menilai tampilan editor terlalu padat dan sulit dipindai, serta kurva pembelajarannya tinggi. Di live, kepala halaman berisi empat tombol, daftar pasal berupa kartu bertumpuk di kiri, editor berada di dalam tab dengan bilah alat dua baris berisi lebih dari 30 ikon tanpa nama, dan naskah tampil di kotak sempit tanpa batas halaman sehingga tidak terlihat utuh seperti akta. Footer hanya muncul di PDF; live menulis \"Hanya muncul di PDF (minuta/salinan), bukan di preview\", sehingga footer tidak terlihat saat menyusun.",
+      "usulan": "Editor berada di dalam kerangka aplikasi seperti halaman lain, dengan menu samping, header, remah, dan judul halaman. Kepala naskah ringkas dalam satu baris: tombol kembali, ikon naskah, judul \"Naskah Akta · kode\", lencana jenis dan status, keterangan \"Tersimpan\" atau \"Belum disimpan\", serta penanda variabel yang belum terisi. Bilah menu (File, Edit, Tampilan, Sisipkan, Format, Alat, Bantuan) berada di bawah judul. Di kanan ada Pratinjau Akta dan satu tombol utama sesuai peran: Beritahu PPAT untuk Asisten dan Finalisasi Akta untuk PPAT; akta final hanya menampilkan Pratinjau Akta. Editor terdiri atas panel Navigasi di kiri, kertas di tengah, dan panel Bagian di kanan. Kedua panel dapat ditutup agar kertas lebih lega, dan area kerja mengisi tinggi layar di bawah kepala naskah. Panel Navigasi memakai ikon jenis bagian yang seragam (lingkaran bernomor untuk pasal, ¶ untuk catatan) dengan ikon ? yang menjelaskannya, dan bagian Lampiran dapat dilipat (tetap \"Segera hadir\"). Di margin kiri kertas, setiap bagian diberi lencana jenis dan nama bagian. Naskah dipecah per halaman sesuai ukuran kertas dan margin dari Pengaturan Dokumen. Bila footer diaktifkan, setiap halaman menampilkan footer dengan kode yang sudah diganti nilai contoh (nomor halaman, jumlah halaman, tanggal, nama PPAT, wilayah, nomor akta, jenis akta). Bila footer tidak aktif, penanda kecil \"Halaman X dari Y\" tampil di luar kertas dan tidak ikut tercetak. Perubahan Pengaturan Dokumen langsung memotong ulang halaman, dan klik kaki halaman membuka isian footer. Fitur tidak berubah dari live. Catatan untuk tim aplikasi: pemotongan halaman di prototipe hanya perkiraan dari tinggi blok; di aplikasi, pemotongan harus memakai aturan yang sama dengan pembuat PDF agar editor, pratinjau, dan PDF sama persis.",
+      "prinsip": "H8 Aesthetic and Minimalist Design; H6 Recognition Rather Than Recall; H4 Consistency and Standards",
+      "halaman": "UX Metric Lab, Highlight #4 (skor 47,1)",
+      "prioritas": "Sedang",
+      "layar": "Akta › Penyusunan Akta › editor naskah",
+      "acuan": "prototipe/Backlog-HE-MINUTA-V2-Prototype.html › Daftar perubahan › HE-MINUTA-07",
+      "selesai_bila": "Editor naskah tampil dalam tiga area (Navigasi, kertas seperti hasil cetak, panel Bagian) dengan satu bilah menu dan satu bilah alat. Kedua panel dapat ditutup, dan semua fitur tetap sama dengan live.",
+      "status": "Prototipe siap",
+      "catatan": "Usulan tampilan saja; fitur sama dengan live. Prototipe Penyusunan Akta lama tetap tersedia sebagai pembanding.",
+      "tanggal": "2026-10-27"
+    },
+    {
       "kode": "HE-EAW-01",
       "fitur": "Penandatanganan Akta (PPAT)",
       "judul": "Stepper wizard: bernomor dengan status setiap langkah",
@@ -392,7 +408,7 @@
       "fitur": "Penandatanganan Akta (PPAT)",
       "judul": "Panel wizard: istilah dijelaskan dan satu aksi utama yang jelas",
       "saat_ini": "Istilah tidak dijelaskan. Panel berisi banyak tombol sejajar (Unduh PDF, Ingatkan, Mulai Ulang, Kirim OTP per pihak) tanpa penanda tindakan yang harus dilakukan sekarang.",
-      "usulan": "Beri garis putus-putus dan tooltip penjelasan pada istilah TERA, tanda tangan elektronik, CA, OTP, dan e-Meterai. Awali panel kanan dengan kartu \"Langkah berikutnya\" berisi satu kalimat dan satu tombol utama, misalnya \"Kirim OTP ke Contoh Pembeli Satu\". Bila tombol belum dapat dipakai, tulis alasannya di bawah tombol. Pindahkan aksi lain (unduh, ingatkan, mulai ulang) ke menu \"Lainnya\".",
+      "usulan": "Beri garis putus-putus dan tooltip penjelasan pada istilah TERA, tanda tangan elektronik, CA, OTP, dan e-Meterai. Kolom \"Status E-Akta\" diganti menjadi \"Status Penandatanganan\" karena menu kini bernama Penandatanganan Akta. Istilah dan label lain yang belum dijelaskan (Status Penandatanganan, akta final, Minuta dan Salinan, status langkah, Stempel TERA, penanda tangan, nomor seri dan akun e-Meterai, kode OTP, status salinan, menu Salinan Akta, lampiran) diberi ikon \"?\" bertooltip; informasi penting seperti masa berlaku OTP dan syarat tetap tertulis di layar. Awali panel kanan dengan kartu \"Langkah berikutnya\" berisi satu kalimat dan satu tombol utama, misalnya \"Kirim OTP ke Contoh Pembeli Satu\". Bila tombol belum dapat dipakai, tulis alasannya di bawah tombol. Pindahkan aksi lain (unduh, ingatkan, mulai ulang) ke menu \"Lainnya\".",
       "prinsip": "H2 Match between System and the Real World; H8 Aesthetic and Minimalist Design; H10 Help and Documentation",
       "halaman": "28, 29",
       "prioritas": "Tinggi",
@@ -2446,7 +2462,7 @@
       "catatan": "",
       "judul": "Lupa Kata Sandi: pesan galat di bawah isian dan konfirmasi terkirim yang jelas",
       "saat_ini": "Kartu berisi isian Email dan tombol \"Kirim Tautan Reset\". Setelah tautan dikirim, muncul pesan \"Terkirim!\" yang meminta pengguna memeriksa kotak masuk email. Pesan itu tidak menyebut email tujuan, masa berlaku tautan, atau cara mengirim ulang.",
-      "usulan": "Email yang kosong atau salah format ditandai dengan pesan galat di bawah isian (\"Email wajib diisi.\", \"Format email tidak valid. Contoh: nama@contoh.id\") dan atribut aria-invalid. Tombol \"Kirim Tautan Reset\" menampilkan status memuat. Setelah tautan terkirim, kartu berganti menjadi \"Cek Email Anda\". Kartu ini memuat email tujuan yang disamarkan, masa berlaku tautan, dan saran memeriksa folder spam. Kartu juga memuat tombol \"Kirim Ulang Tautan\" yang aktif setelah hitung mundur 60 detik, \"Ganti Email\", dan \"Kembali ke Halaman Masuk\". Demi keamanan akun, pesan tidak menyebut apakah email terdaftar.",
+      "usulan": "Email yang kosong atau salah format ditandai dengan pesan galat di bawah isian (\"Email wajib diisi.\", \"Format email tidak valid. Contoh: nama@contoh.id\") dan atribut aria-invalid. Tombol \"Kirim Tautan Atur Ulang\" menampilkan status memuat. Setelah tautan terkirim, kartu berganti menjadi \"Cek Email Anda\". Kartu ini memuat email tujuan yang disamarkan, masa berlaku tautan, dan saran memeriksa folder spam. Kartu juga memuat tombol \"Kirim Ulang Tautan\" yang aktif setelah hitung mundur 60 detik, \"Ganti Email\", dan \"Kembali ke Halaman Masuk\". Demi keamanan akun, pesan tidak menyebut apakah email terdaftar.",
       "acuan": "prototipe/Backlog-IDDS-OB-MASUK-Prototype.html › Daftar penyesuaian › IDDS-OB-04",
       "status": "Prototipe siap",
       "tanggal": "2026-10-26"
@@ -2526,7 +2542,7 @@
       "catatan": "",
       "judul": "Profil Saya: tab Kata Sandi dan MFA dengan syarat seragam dan konfirmasi tindakan berdampak",
       "saat_ini": "Tab berlabel \"Password\". Di bawah isian Kata Sandi Baru hanya tertulis \"Min. 12 karakter · Huruf besar, kecil, angka & simbol\" dengan bilah kekuatan. Keterangan \"Reset akan menghapus MFA pengguna ini; ia wajib mendaftar ulang …\" ditulis untuk admin, bukan untuk pemilik akun.",
-      "usulan": "Tab Kata Sandi memakai IDDS Password Input dan daftar centang syarat yang sama dengan Registrasi dan Atur Ulang Kata Sandi. Kata sandi saat ini yang salah, kata sandi baru yang sama dengan yang lama, dan konfirmasi yang belum sama dijelaskan di bawah isian. Tombol \"Buat Ulang Kode Cadangan\" dan \"Reset MFA\" meminta konfirmasi lewat IDDS Modal Confirmation bertombol merah yang menyebut dampaknya. Kode cadangan baru ditampilkan sekali dengan tombol Salin dan Unduh. Status MFA memakai IDDS Badge, dan keterangan Reset MFA ditujukan kepada pemilik akun.",
+      "usulan": "Tab Kata Sandi memakai IDDS Password Input dan daftar centang syarat yang sama dengan Registrasi dan Atur Ulang Kata Sandi. Kata sandi saat ini yang salah, kata sandi baru yang sama dengan yang lama, dan konfirmasi yang belum sama dijelaskan di bawah isian. Tombol \"Buat Ulang Kode Cadangan\" dan \"Atur Ulang MFA\" meminta konfirmasi lewat IDDS Modal Confirmation bertombol merah yang menyebut dampaknya. Kode cadangan baru ditampilkan sekali dengan tombol Salin dan Unduh. Status MFA memakai IDDS Badge, dan keterangan Atur Ulang MFA ditujukan kepada pemilik akun.",
       "acuan": "prototipe/Backlog-IDDS-OB-MASUK-Prototype.html › Daftar penyesuaian › IDDS-OB-09",
       "status": "Prototipe siap",
       "tanggal": "2026-10-26"
@@ -3022,7 +3038,7 @@
       "catatan": "",
       "judul": "Edit Pengguna: tab Kata Sandi untuk admin, pesan galat di bawah isian, dan penjaga perubahan",
       "saat_ini": "Tab \"Password\" berisi isian \"Kata Sandi Saat Ini\", \"Kata Sandi Baru\", dan \"Konfirmasi Kata Sandi\", padahal admin mengubah kata sandi pengguna lain. Di bawahnya hanya tertulis \"Min. 12 karakter · Huruf besar, kecil, angka & simbol\" dengan bilah kekuatan, dan tombol simpan berlabel \"Perbarui\". Tidak ada tanda perubahan yang belum disimpan, dan perubahan hilang tanpa peringatan saat pengguna pindah menu.",
-      "usulan": "Tab Kata Sandi hanya berisi Kata Sandi Baru dan Konfirmasi Kata Sandi. Isian \"Kata Sandi Saat Ini\" dihapus karena admin mengubah kata sandi pengguna lain dan tidak mengetahui kata sandinya. Syarat kata sandi tampil sebagai daftar centang seperti layar Registrasi (minimal 12 karakter, huruf besar, huruf kecil, angka, dan simbol) dan tercentang saat mengetik. Tombol \"Perbarui\" menjadi \"Simpan Kata Sandi\" agar seragam dengan \"Simpan PPAT\" dan \"Simpan Data Kantor\". Setiap tab menampilkan status \"Belum disimpan\" di samping tombol simpan dan titik penanda pada tab yang berubah. Pesan galat tampil di bawah isian, misalnya \"Nama Depan wajib diisi.\", \"Nomor Rekening hanya boleh berisi angka.\", \"GPS Lat berupa angka antara -90 dan 90.\", atau \"Konfirmasi kata sandi tidak sama.\". Bila halaman ditinggalkan sebelum disimpan, muncul \"Tinggalkan halaman ini?\" dengan pilihan Tetap di Sini atau Tinggalkan. Reset MFA meminta konfirmasi bertombol merah.",
+      "usulan": "Tab Kata Sandi hanya berisi Kata Sandi Baru dan Konfirmasi Kata Sandi. Isian \"Kata Sandi Saat Ini\" dihapus karena admin mengubah kata sandi pengguna lain dan tidak mengetahui kata sandinya. Syarat kata sandi tampil sebagai daftar centang seperti layar Registrasi (minimal 12 karakter, huruf besar, huruf kecil, angka, dan simbol) dan tercentang saat mengetik. Tombol \"Perbarui\" menjadi \"Simpan Kata Sandi\" agar seragam dengan \"Simpan PPAT\" dan \"Simpan Data Kantor\". Setiap tab menampilkan status \"Belum disimpan\" di samping tombol simpan dan titik penanda pada tab yang berubah. Pesan galat tampil di bawah isian, misalnya \"Nama Depan wajib diisi.\", \"Nomor Rekening hanya boleh berisi angka.\", \"GPS Lat berupa angka antara -90 dan 90.\", atau \"Konfirmasi kata sandi tidak sama.\". Bila halaman ditinggalkan sebelum disimpan, muncul \"Tinggalkan halaman ini?\" dengan pilihan Tetap di Sini atau Tinggalkan. Atur Ulang MFA meminta konfirmasi bertombol merah.",
       "acuan": "prototipe/Backlog-IDDS-OB-PENGATURAN-Prototype.html › Daftar penyesuaian › IDDS-OB-40",
       "status": "Prototipe siap",
       "tanggal": "2026-10-26"
@@ -3376,6 +3392,54 @@
       "saat_ini": "Menu samping gelap ala live dengan label grup berhuruf kapital, tanpa kartu profil pengguna, dan tanpa mode ciut.",
       "usulan": "Kerangka menu samping mengikuti pola Sidebar IDDS dengan warna brand E-PPAT tetap: label grup kecil berhuruf biasa dengan chevron buka/tutup, menu berupa ikon dan label dengan tanda arahkan dan tanda menu aktif, paling banyak dua tingkat (grup lalu menu), dan kartu profil pengguna (inisial, nama, peran) di bagian bawah dengan versi aplikasi di bawahnya. Tombol di samping logo menciutkan menu menjadi ikon saja; nama menu tampil sebagai tooltip dan tetap dibacakan pembaca layar. Pilihan ciut diingat peramban. Di layar sempit menu tetap berupa laci. Kartu profil membuka menu akun yang sama dengan kepala halaman. Berlaku di Monitoring, Jenis Akta, dan Sistem.",
       "acuan": "prototipe/Backlog-IDDS-PL-MONITORING-Prototype.html › Daftar penyesuaian › IDDS-PL-41",
+      "status": "Prototipe siap",
+      "tanggal": "2026-10-26"
+    },
+    {
+      "kode": "HE-EAW-10",
+      "fitur": "Penandatanganan Akta (PPAT)",
+      "prinsip": "H2 Match Between System and the Real World; H10 Help and Documentation",
+      "halaman": "Temuan penelusuran kode live (prototipe HE)",
+      "prioritas": "Sedang",
+      "layar": "Akta › Penandatanganan Akta › detail › tab Salinan",
+      "selesai_bila": "Tab Salinan menjelaskan bedanya dengan menu Salinan Akta, menampilkan galat unggah di bawah isian, dan memakai lencana status berbahasa Indonesia.",
+      "catatan": "Fitur sama dengan live; hanya tampilan, bahasa, dan penjelasan yang disesuaikan.",
+      "judul": "Tab Salinan: daftar salinan elektronik dan bedanya dengan menu Salinan Akta",
+      "saat_ini": "Tab \"Salinan\" membuka daftar salinan terlebih dahulu; pengguna harus mengklik \"Kelola\" pada salah satu salinan untuk mulai membubuhkan stempel TERA. Tab ini berisi kartu unggah \"Label (opsional)\" dan tombol \"Unggah Salinan (PDF)\" dengan galat \"File harus PDF.\" dan \"Ukuran file ({x.x} MB) melebihi batas. Maksimal 20 MB.\" Kartu salinan memakai lencana \"Selesai\", \"Proses\", \"Draft\" dan \"TERA ✓ / E-Sign / E-Materai\". Pesan Order menyuruh membuka menu Akta Salinan, sedangkan Minuta menyebut \"Akta masuk ke menu Salinan\"; tidak ada penjelasan beda antara tab Salinan (lampiran) dan menu Akta Salinan (tautan 7 hari), padahal keduanya memakai istilah \"Kirim Salinan\".",
+      "usulan": "Buat tab Salinan berfungsi di layar detail. Saat tab dibuka, layar langsung masuk ke langkah Stempel TERA (atau langkah yang sedang berjalan) pada salinan aktif, yaitu salinan pertama yang belum selesai. Daftar salinan dibuka lewat tombol \"Daftar Salinan\" untuk mengganti salinan atau mengunggah salinan lain. Bila order belum punya salinan, tab menampilkan daftar kosong beserta kartu unggah, dan setelah unggah berhasil layar langsung masuk ke langkah Stempel TERA. Di atas daftar, tampilkan IDDS Alert info yang menjelaskan bahwa tab ini untuk salinan elektronik yang dibubuhi stempel TERA, tanda tangan elektronik, dan e-Meterai, lalu dikirim sebagai lampiran PDF. Pindaian salinan bertanda tangan basah yang dikirim sebagai tautan dikelola di menu Salinan Akta (ada tautannya). Kartu unggah tetap berisi Label (opsional) dan tombol \"Unggah Salinan (PDF)\". Galat format dan ukuran tampil di bawah isian, bukan toast, dan unggahan menampilkan status memuat. Setiap salinan memakai lencana status berbahasa Indonesia (Selesai, Diproses, Draf) serta lencana langkah Stempel TERA, Tanda Tangan Elektronik, dan e-Meterai. Bila PPAT penanda tangan belum ditetapkan, tampilkan IDDS Alert caution dengan tautan ke Profil Kantor. Tombol Bantuan di tab ini membuka tanya jawab khusus salinan.",
+      "acuan": "prototipe/Backlog-HE-EAW-Prototype.html › Daftar perubahan › HE-EAW-10",
+      "status": "Prototipe siap",
+      "tanggal": "2026-10-26"
+    },
+    {
+      "kode": "HE-EAW-11",
+      "fitur": "Penandatanganan Akta (PPAT)",
+      "prinsip": "H5 Error Prevention; H1 Visibility of System Status; H4 Consistency and Standards",
+      "halaman": "Temuan penelusuran kode live (prototipe HE)",
+      "prioritas": "Tinggi",
+      "layar": "Akta › Penandatanganan Akta › tab Salinan › Kelola",
+      "selesai_bila": "Kelola salinan memakai stepper bernomor yang sama dengan tab Minuta, mengunci langkah 2 dan 3 beserta alasannya, dan meminta konfirmasi sebelum memakai kuota e-Meterai.",
+      "catatan": "",
+      "judul": "Kelola salinan: stepper bernomor, urutan wajib, dan konfirmasi kuota",
+      "saat_ini": "Layar Kelola baru terbuka setelah pengguna mengklik \"Kelola\" di daftar salinan. Stepper berupa tiga lingkaran \"Digital Stamp → E-Signature → E-Materai\" tanpa nomor dan status. Tombol \"1. Generate SN (kuota)\" dan \"Generate Ulang SN\" langsung memakai kuota (Rp 10.000) tanpa konfirmasi, tanpa tampilan sisa kuota. Tombol unduh bercampur: \"Unduh PDF Ber-stempel\", \"Unduh Salinan Tersign\", \"Unduh PDF Ber-meterai\". Dialog OTP hanya satu kolom angka \"000000\" tanpa masa berlaku.",
+      "usulan": "Tab Salinan langsung membuka layar Kelola pada langkah Stempel TERA salinan aktif. Kepala layar menyebut salinan yang sedang dikerjakan (mis. \"Sedang dikerjakan (2 dari 2): Salinan Pembeli\") beserta statusnya, dan tombol \"Daftar Salinan\" dipakai untuk mengganti salinan. Kelola salinan memakai IDDS Stepper, penampil PDF, kartu \"Langkah berikutnya\", dialog OTP dengan masa berlaku, dan alert TERA kantor atau e-Meterai yang sama dengan tab Minuta. Langkah 2 dan 3 tampil terkunci dengan alasan dan tombol ke langkah sebelumnya. Sebelum nomor seri dibuat, IDDS Modal Confirmation \"Pakai 1 kuota e-Meterai?\" menyebut biaya Rp10.000 dan akun Peruri. Label dibakukan: \"Stempel TERA\", \"Tanda Tangan Elektronik\", \"e-Meterai\", \"Buat Nomor Seri (pakai 1 kuota)\", serta tombol unduh \"Unduh Salinan Berstempel\", \"Unduh Salinan Bertanda Tangan\", dan \"Unduh Salinan Bermeterai\".",
+      "acuan": "prototipe/Backlog-HE-EAW-Prototype.html › Daftar perubahan › HE-EAW-11",
+      "status": "Prototipe siap",
+      "tanggal": "2026-10-26"
+    },
+    {
+      "kode": "HE-EAW-12",
+      "fitur": "Penandatanganan Akta (PPAT)",
+      "prinsip": "H5 Error Prevention; H3 User Control and Freedom",
+      "halaman": "Temuan penelusuran kode live (prototipe HE)",
+      "prioritas": "Sedang",
+      "layar": "Akta › Penandatanganan Akta › tab Salinan › Hapus dan Kirim via Email",
+      "selesai_bila": "Menghapus salinan memakai dialog konfirmasi bertombol merah dengan fokus kembali, dan dialog Kirim via Email menampilkan nama berkas, langkah yang sudah dibubuhkan, serta pesan galat di bawah isian.",
+      "catatan": "",
+      "judul": "Salinan: hapus berkonfirmasi dan kirim lampiran berlabel jelas",
+      "saat_ini": "Hapus memakai window.confirm bawaan browser: 'Hapus salinan \"{label}\"? File tanda tangan (bila ada) ikut terhapus.' Dialog kirim hanya menyebut \"Dokumen {label} yang telah ditandatangani akan dikirim sebagai lampiran PDF (bukan tautan).\" tanpa nama berkas atau tahap yang sudah selesai. Peran penerima tampil sebagai kode mentah, dan galat \"Pilih minimal 1 penerima dengan email valid.\" tampil sebagai toast.",
+      "usulan": "Hapus salinan memakai IDDS Modal Confirmation bertombol merah yang menyebut nama salinan dan dampaknya, lalu fokus kembali ke daftar. Dialog \"Kirim Salinan via Email\" menampilkan nama berkas lampiran dan tahap yang sudah selesai, memberi peringatan bila salinan belum lengkap, menampilkan peran penerima dalam bahasa Indonesia (bukan kode MANUAL), dan menampilkan galat email di bawah isian.",
+      "acuan": "prototipe/Backlog-HE-EAW-Prototype.html › Daftar perubahan › HE-EAW-12",
       "status": "Prototipe siap",
       "tanggal": "2026-10-26"
     }
@@ -3764,6 +3828,24 @@
       "kode": "IDDS-TN-40",
       "perubahan": "Ikon menu samping memakai Tabler Icons (pustaka ikon IDDS) yang paling mirip dengan backlog Perdana Niaga, dengan warna ikon emas (#C2BB4B) dan putih saat menu aktif lewat token --eppat-sidebar-icon dan --eppat-sidebar-active-icon. Uji kontras lulus.",
       "berkas": "sumber/aset/tabler-sidebar.json; sumber/order-idds.html; sumber/tera-idds.html"
+    },
+    {
+      "tanggal": "2026-10-27",
+      "kode": "HE-EAW-10–12",
+      "perubahan": "Tab Salinan di Penandatanganan Akta dibuat sesuai fitur live: daftar salinan elektronik dengan unggah berlabel, kelola salinan (Stempel TERA, tanda tangan elektronik, e-Meterai) dengan pola langkah yang sama dengan tab Minuta, hapus berkonfirmasi, dan kirim lampiran via email. Ditambah penjelasan beda dengan menu Salinan Akta serta ikon ? bertooltip pada istilah di Penandatanganan Akta (PPAT dan Klien), Penyusunan Akta, dan Permohonan AJB. Semua tooltip dijaga agar tidak terpotong.",
+      "berkas": "prototipe/Backlog-HE-EAW-Prototype.html; Backlog-HE-EAWK-Prototype.html; Backlog-HE-MINUTA-Prototype.html; Backlog-HE-ORDER-Prototype.html"
+    },
+    {
+      "tanggal": "2026-10-27",
+      "kode": "HE-MINUTA-07",
+      "perubahan": "Prototipe baru Penyusunan Akta v2 (usulan tampilan): editor naskah ala pengolah kata dengan tiga area (Navigasi, kertas seperti hasil cetak, panel Bagian), bilah menu dan satu bilah alat, panel yang dapat ditutup, serta laci di ponsel. Fitur tetap sama dengan live, Bantuan memakai isi yang sama, dan prototipe Penyusunan Akta lama dipertahankan sebagai pembanding.",
+      "berkas": "prototipe/Backlog-HE-MINUTA-V2-Prototype.html"
+    },
+    {
+      "tanggal": "2026-10-27",
+      "kode": "HE-MINUTA-07",
+      "perubahan": "Menu Penyusunan Akta v2 ditambahkan ke menu samping semua prototipe tenant dan HE, tepat di bawah Penyusunan Akta, agar kedua versi dapat dibuka dan dibandingkan. Tampilan v2 disesuaikan dengan referensi: kepala naskah ringkas dengan tombol utama per peran, panel Navigasi dengan ikon jenis bagian, kertas per halaman dengan footer dan nomor halaman yang tampil saat menyusun dan di pratinjau. Editor tetap berada di dalam kerangka aplikasi (tanpa layar penuh).",
+      "berkas": "prototipe/Backlog-HE-MINUTA-V2-Prototype.html; sumber/sidebar-seragam.js; semua prototipe tenant dan HE"
     }
   ]
 }

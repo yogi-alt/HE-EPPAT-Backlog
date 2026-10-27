@@ -4,12 +4,12 @@
 const fs = require('fs');
 const F = {
   sys:'Backlog-IDDS-TN-SYSTEM-Prototype.html', cms:'Backlog-IDDS-TN-CMS-Prototype.html', ep:'Backlog-IDDS-TN-EPPAT-Prototype.html',
-  user:'Backlog-HE-USER-Prototype.html', verif:'Backlog-HE-VERIF-Prototype.html', minuta:'Backlog-HE-MINUTA-Prototype.html', eaw:'Backlog-HE-EAW-Prototype.html', order:'Backlog-HE-ORDER-Prototype.html'
+  user:'Backlog-HE-USER-Prototype.html', verif:'Backlog-HE-VERIF-Prototype.html', minuta:'Backlog-HE-MINUTA-Prototype.html', minuta2:'Backlog-HE-MINUTA-V2-Prototype.html', eaw:'Backlog-HE-EAW-Prototype.html', order:'Backlog-HE-ORDER-Prototype.html'
 };
 /* [label, ikon, tujuan] — tujuan dipakai bila menu bukan milik prototipe yang sedang dibuka */
 const MENU = [ /* nama & urutan menu baru (26 Okt 2026); hanya menu yang ada di live; ikon Tabler (aset/tabler-sidebar.json) */
   ['Layanan', 'tb_stack_2', [['Permohonan AJB', 'tb_file_text', F.order]]],
-  ['Akta', 'tb_feather', [['Dashboard Akta', 'tb_layout_dashboard', F.ep + '#dashboard'], ['Verifikasi Berkas', 'tb_circle_check', F.verif], ['Penyusunan Akta', 'tb_file_pencil', F.minuta], ['Penandatanganan Akta', 'tb_signature', F.eaw], ['Salinan Akta', 'tb_files', F.ep + '#salinan']]],
+  ['Akta', 'tb_feather', [['Dashboard Akta', 'tb_layout_dashboard', F.ep + '#dashboard'], ['Verifikasi Berkas', 'tb_circle_check', F.verif], ['Penyusunan Akta', 'tb_file_pencil', F.minuta], ['Penyusunan Akta v2', 'tb_file_description', F.minuta2], ['Penandatanganan Akta', 'tb_signature', F.eaw], ['Salinan Akta', 'tb_files', F.ep + '#salinan']]],
   ['Pengaturan Kantor', 'tb_adjustments_horizontal', [['Profil Kantor', 'tb_building', F.ep + '#profil'], ['Daftar Pengguna', 'tb_users', F.user], ['Peran & Izin', 'tb_shield_lock', F.sys + '#peran'], ['Log Aktivitas', 'tb_history', F.sys + '#logs'], ['Aktivasi e-Meterai', 'tb_rubber_stamp', F.ep + '#emeterai']]],
   ['Pengaturan Aplikasi', 'tb_settings', [['Dashboard Sistem', 'tb_gauge', F.sys + '#dasbor'], ['Pengaturan', 'tb_settings', F.sys + '#pengaturan']]],
   ['Konten Situs', 'tb_layout_cards', [['Halaman Depan', 'tb_home', F.cms + '#landing'], ['Tema Tampilan', 'tb_palette', F.cms + '#tema'], ['Master Konten', 'tb_database', F.cms + '#master'], ['Artikel & Halaman', 'tb_article', F.cms + '#posts'], ['Pustaka Media', 'tb_photo', F.cms + '#media']]]
@@ -20,6 +20,7 @@ const SENDIRI = {
   'order-idds.html':{ 'Permohonan AJB':'order' },
   'verif-badan.html':{ 'Verifikasi Berkas':'verif' },
   'minuta-badan.html':{ 'Penyusunan Akta':'minuta' },
+  'minuta2-badan.html':{ 'Penyusunan Akta v2':'minuta' },
   'eaw-badan.html':{ 'Penandatanganan Akta':'eaw' },
   'user-badan.html':{ 'Daftar Pengguna':'user' },
   'tn-system-badan.html':{ 'Dashboard Sistem':'dasbor', 'Peran & Izin':'peran', 'Pengaturan':'pengaturan', 'Log Aktivitas':'logs' },

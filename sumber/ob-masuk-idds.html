@@ -605,7 +605,7 @@ const UBAH = [
     isi:'Nama aplikasi ditulis seragam "e-PPAT", sama dengan judul "Masuk ke e-PPAT". Salah ketik diperbaiki menjadi elektronik, efisien, dukungan, Kementerian, fleksibel, familier, drafting, e-Meterai, SKMHT, dan Jakarta. Kalimat panjang dipecah. Label Inggris diganti: Login → Masuk, Register → Daftar, Reset Kata Sandi → Atur Ulang Kata Sandi, Home → Beranda, Dashboard → Dasbor (menu samping Profil Saya), Profile → Profil Saya, Password → Kata Sandi, Customer → Pelanggan, dan NAVIGATION → Navigasi. Kolom Contact Account / Code, Contact Type, Active, dan Action menjadi Akun / Nomor, Jenis Kontak, Status, dan Aksi. Phone menjadi Telepon, "No contacts yet." menjadi "Belum ada kontak.", dan "online" menjadi "daring".',
     lama:'Nama aplikasi ditulis berganti-ganti ("EPPAT", "ePPAT", "e-PPAT"). Ada salah ketik "elektonik", "efiesien", "dukuan", "kementrian", "fleksible", "elektornik", "dafting", "e-Materai", "SKHMT", dan "akarta". Label masih berbahasa Inggris: "Login", "Register", "Reset Kata Sandi", "Home", "Dashboard", "Profile", "Password", "Customer", "NAVIGATION", "Contact Account / Code", "Contact Type", "Active", "Action", "Phone", dan "No contacts yet.".', ke:'beranda', sorot:'#bagianFitur' },
   { kode:'IDDS-OB-04', judul:'Lupa Kata Sandi: pesan galat di bawah isian dan konfirmasi terkirim yang jelas',
-    isi:'Email yang kosong atau salah format ditandai dengan pesan galat di bawah isian ("Email wajib diisi.", "Format email tidak valid. Contoh: nama@contoh.id") dan atribut aria-invalid. Tombol "Kirim Tautan Reset" menampilkan status memuat. Setelah tautan terkirim, kartu berganti menjadi "Cek Email Anda". Kartu ini memuat email tujuan yang disamarkan, masa berlaku tautan, dan saran memeriksa folder spam. Kartu juga memuat tombol "Kirim Ulang Tautan" yang aktif setelah hitung mundur 60 detik, "Ganti Email", dan "Kembali ke Halaman Masuk". Demi keamanan akun, pesan tidak menyebut apakah email terdaftar.',
+    isi:'Email yang kosong atau salah format ditandai dengan pesan galat di bawah isian ("Email wajib diisi.", "Format email tidak valid. Contoh: nama@contoh.id") dan atribut aria-invalid. Tombol "Kirim Tautan Atur Ulang" menampilkan status memuat. Setelah tautan terkirim, kartu berganti menjadi "Cek Email Anda". Kartu ini memuat email tujuan yang disamarkan, masa berlaku tautan, dan saran memeriksa folder spam. Kartu juga memuat tombol "Kirim Ulang Tautan" yang aktif setelah hitung mundur 60 detik, "Ganti Email", dan "Kembali ke Halaman Masuk". Demi keamanan akun, pesan tidak menyebut apakah email terdaftar.',
     lama:'Kartu berisi isian Email dan tombol "Kirim Tautan Reset". Setelah tautan dikirim, muncul pesan "Terkirim!" yang meminta pengguna memeriksa kotak masuk email. Pesan itu tidak menyebut email tujuan, masa berlaku tautan, atau cara mengirim ulang.', ke:'lupa-kirim', sorot:'#kartuTerkirim' },
   { kode:'IDDS-OB-05', judul:'Atur Ulang Kata Sandi: daftar syarat kata sandi seperti Registrasi',
     isi:'Syarat kata sandi tampil sebagai daftar centang yang terisi saat pengguna mengetik, sama dengan layar Registrasi: minimal 12 karakter, huruf besar, huruf kecil, angka, dan simbol. Isian "Ulangi Kata Sandi Baru" langsung memberi tahu apakah isinya sudah sama. Pesan galat tampil di bawah isian (aria-invalid). Kartu menyebut akun yang kata sandinya diatur ulang dengan email yang disamarkan. Isian memakai IDDS Password Input dengan tombol tampilkan/sembunyikan berlabel.',
@@ -620,7 +620,7 @@ const UBAH = [
     isi:'Tabel Info Kontak memakai IDDS Table berlabel Indonesia. Kolom Status memakai IDDS Toggle bertulisan "Aktif"/"Nonaktif" dengan aria-label yang menyebut kontaknya. Menonaktifkan kontak meminta konfirmasi dengan tombol merah. Tombol ubah berupa ikon pensil berlabel "Ubah kontak …". Dialog Tambah Kontak Baru dan Ubah Kontak memakai IDDS Modal. Pilihan Jenis Kontak (Email/Telepon) mengubah contoh dan aturan isian Akun / Nomor. Format salah dan kontak ganda ditolak dengan pesan di bawah isian tanpa menutup dialog. Setelah dialog ditutup, fokus kembali ke tombol pemicunya.',
     lama:'Tabel memakai kolom "No.", "Contact Account / Code", "Contact Type", "Active", dan "Action", dengan jenis kontak "Email"/"Phone". Tabel kosong bertuliskan "No contacts yet.". Sakelar Active tidak menampilkan teks status, dan ikon pensil tidak berlabel.', ke:'kontak', tab:'ppat', sorot:'#blokKontak' },
   { kode:'IDDS-OB-09', judul:'Profil Saya: tab Kata Sandi dan MFA dengan syarat seragam dan konfirmasi tindakan berdampak',
-    isi:'Tab Kata Sandi memakai IDDS Password Input dan daftar centang syarat yang sama dengan Registrasi dan Atur Ulang Kata Sandi. Kata sandi saat ini yang salah, kata sandi baru yang sama dengan yang lama, dan konfirmasi yang belum sama dijelaskan di bawah isian. Tombol "Buat Ulang Kode Cadangan" dan "Reset MFA" meminta konfirmasi lewat IDDS Modal Confirmation bertombol merah yang menyebut dampaknya. Kode cadangan baru ditampilkan sekali dengan tombol Salin dan Unduh. Status MFA memakai IDDS Badge, dan keterangan Reset MFA ditujukan kepada pemilik akun.',
+    isi:'Tab Kata Sandi memakai IDDS Password Input dan daftar centang syarat yang sama dengan Registrasi dan Atur Ulang Kata Sandi. Kata sandi saat ini yang salah, kata sandi baru yang sama dengan yang lama, dan konfirmasi yang belum sama dijelaskan di bawah isian. Tombol "Buat Ulang Kode Cadangan" dan "Atur Ulang MFA" meminta konfirmasi lewat IDDS Modal Confirmation bertombol merah yang menyebut dampaknya. Kode cadangan baru ditampilkan sekali dengan tombol Salin dan Unduh. Status MFA memakai IDDS Badge, dan keterangan Atur Ulang MFA ditujukan kepada pemilik akun.',
     lama:'Tab berlabel "Password". Di bawah isian Kata Sandi Baru hanya tertulis "Min. 12 karakter · Huruf besar, kecil, angka & simbol" dengan bilah kekuatan. Keterangan "Reset akan menghapus MFA pengguna ini; ia wajib mendaftar ulang …" ditulis untuk admin, bukan untuk pemilik akun.', ke:'profil', tab:'sandi', sorot:'#blokMfa' },
   { kode:'IDDS-OB-10', judul:'Beranda, Lupa Kata Sandi, Atur Ulang, dan Profil Saya: Bantuan khusus layar',
     isi:'Beranda (di bawah tombol "Daftar Sekarang" dan "Masuk"), kartu Lupa Kata Sandi, Atur Ulang Kata Sandi, dan Kata Sandi Berhasil Diubah memiliki tautan "Butuh bantuan?". Tautan ini sama dengan layar Registrasi dan Masuk (HE-UMUM-02). Profil Saya memiliki tombol Bantuan di kanan judul. Semuanya membuka IDDS Drawer khusus layar berisi penjelasan, langkah, istilah, pertanyaan umum (IDDS Accordion), dan kontak dukungan (data contoh bergaris putus-putus). Bantuan Beranda menjelaskan apa itu e-PPAT, cara mendaftar, siapa yang dapat mendaftar, serta paket dan biaya. Bantuan Kata Sandi Berhasil Diubah menjelaskan langkah masuk dan tindakan bila pengguna lupa kata sandi lagi.',
@@ -752,7 +752,7 @@ function layarLupa() {
     <div class="ditandai" id="isianLupa"><div class="ina-text-field" id="f-lEmail"><label class="ina-text-field__label" for="lEmail">Email<span class="ina-text-field__required">*</span></label>
       <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><span class="ikon-isian">${ik('surat', 18)}</span><input id="lEmail" type="email" class="ina-text-field__input" placeholder="Masukkan email Anda" autocomplete="email" aria-required="true" aria-describedby="h-lEmail" value="${esc(L.email)}"></div>
       <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-lEmail" data-bantu="Gunakan email yang Anda daftarkan.">Gunakan email yang Anda daftarkan.</div></div></div>${usulan('IDDS-OB-04')}</div>
-    ${tombol('Kirim Tautan Reset', 'primary', 'lg', `id="kirimLupa" class="lebar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'lupa' ? spinner : '')}
+    ${tombol('Kirim Tautan Atur Ulang', 'primary', 'lg', `id="kirimLupa" class="lebar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'lupa' ? spinner : '')}
     ${bantuanLink()}</section></div>`;
 }
 const teksUlang = () => S.lupa.ulang > 0 ? `Tidak menerima email? Kirim ulang dalam ${Math.floor(S.lupa.ulang / 60)}:${String(S.lupa.ulang % 60).padStart(2, '0')}.` : 'Tidak menerima email? Anda dapat mengirim ulang tautan sekarang.';
@@ -906,8 +906,8 @@ function panelSandi() {
     <div class="sub-blok ditandai" id="blokMfa"><h3 class="sub-kepala">${ik('tameng', 18)} Verifikasi Dua Langkah (MFA)</h3>
       <div class="mfa-baris"><div><p>Status: ${m.aktif ? badge(`Aktif · ${m.metode}`, 'success', 'sm') : badge('Belum diatur', 'neutral', 'sm')}</p>
         <p class="ket">Kode cadangan tersisa: <b>${m.aktif ? m.sisa : '—'}</b></p>
-        <p class="ket">${m.aktif ? 'Reset MFA menghapus verifikasi dua langkah akun Anda. Saat masuk berikutnya, Anda diminta memilih metode lagi.' : 'Saat masuk berikutnya, Anda diminta memilih metode verifikasi dua langkah lagi.'}</p></div>
-        ${m.aktif ? `<div class="baris-tombol">${tombol('Buat Ulang Kode Cadangan', 'secondary', 'md', 'id="ulangKode"', ik('ulang', 16))}${tombol('Reset MFA', 'secondary', 'md', 'id="resetMfa"', ik('ulang', 16))}</div>` : ''}</div>${usulan('IDDS-OB-09')}
+        <p class="ket">${m.aktif ? 'Atur Ulang MFA menghapus verifikasi dua langkah akun Anda. Saat masuk berikutnya, Anda diminta memilih metode lagi.' : 'Saat masuk berikutnya, Anda diminta memilih metode verifikasi dua langkah lagi.'}</p></div>
+        ${m.aktif ? `<div class="baris-tombol">${tombol('Buat Ulang Kode Cadangan', 'secondary', 'md', 'id="ulangKode"', ik('ulang', 16))}${tombol('Atur Ulang MFA', 'secondary', 'md', 'id="resetMfa"', ik('ulang', 16))}</div>` : ''}</div>${usulan('IDDS-OB-09')}
       ${kakiTab('sandi', tombol('Perbarui', 'primary', 'md', `id="perbaruiSandi" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'sandi' ? spinner : ik('simpan', 16)))}</div>`;
 }
 function segarKotor() {
@@ -1024,9 +1024,9 @@ function ulangKode() {
     }]] });
 }
 function resetMfa() {
-  dialog({ judul:'Reset MFA?', konfirmasi:true, bahaya:true,
+  dialog({ judul:'Atur Ulang MFA?', konfirmasi:true, bahaya:true,
     isi:`<p>Verifikasi dua langkah (${P.mfa.metode}) dan semua kode cadangan akun Anda dihapus. Saat masuk berikutnya, Anda wajib memilih metode verifikasi dua langkah lagi.${usulan('IDDS-OB-09')}</p>`,
-    tombol:[['Batal', 'secondary', null], ['Reset MFA', 'primary', () => { P.mfa = { ...P.mfa, aktif:false, sisa:0 }; gambar(); $('#tab-sandi').focus(); toast('MFA direset.', 'positive', 4000, 'Pilih metode verifikasi dua langkah saat masuk berikutnya.'); }]] });
+    tombol:[['Batal', 'secondary', null], ['Atur Ulang MFA', 'primary', () => { P.mfa = { ...P.mfa, aktif:false, sisa:0 }; gambar(); $('#tab-sandi').focus(); toast('MFA direset.', 'positive', 4000, 'Pilih metode verifikasi dua langkah saat masuk berikutnya.'); }]] });
 }
 /* kontak: dialog Tambah/Ubah (IDDS Modal) */
 let DK = null;
@@ -1242,7 +1242,7 @@ const BANTUAN = {
     ${kontak()}` }),
   berhasil:() => ({ judul:'Bantuan setelah kata sandi diubah', isi:`<p>Kata sandi baru Anda sudah tersimpan. Kata sandi lama tidak berlaku lagi.</p>
     <h4 class="bantu-sub">Langkah masuk</h4>
-    ${lgkh(['Pilih <b>Masuk Sekarang</b>.', 'Ketik email dan kata sandi baru Anda, lalu pilih <b>Masuk</b>.', 'Masukkan kode verifikasi dua langkah dari aplikasi authenticator atau email Anda.'])}
+    ${lgkh(['Pilih <b>Masuk Sekarang</b>.', 'Ketik email dan kata sandi baru Anda, lalu pilih <b>Masuk</b>.', 'Masukkan kode verifikasi dua langkah dari aplikasi autentikator atau email Anda.'])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('h', [
       ['Saya lupa kata sandi lagi', 'Pilih <b>Lupa kata sandi?</b> di halaman Masuk, lalu minta tautan baru. Setiap tautan hanya dapat dipakai sekali.'],
@@ -1251,7 +1251,7 @@ const BANTUAN = {
     ${kontak()}` }),
   sandi:() => ({ judul:'Bantuan lupa kata sandi', isi:`<p>Bila lupa kata sandi, Anda dapat membuat kata sandi baru lewat tautan yang dikirim ke email akun Anda.</p>
     <h4 class="bantu-sub">Langkah</h4>
-    ${lgkh(['Di halaman Lupa Kata Sandi, ketik email yang Anda daftarkan, lalu pilih <b>Kirim Tautan Reset</b>.', 'Buka email <b>Reset Password E-PPAT</b>, lalu klik tombol <b>Reset Password</b>.', 'Buat kata sandi baru yang memenuhi semua syarat, ketik ulang, lalu pilih <b>Simpan Kata Sandi</b>.', 'Masuk dengan kata sandi baru.'])}
+    ${lgkh(['Di halaman Lupa Kata Sandi, ketik email yang Anda daftarkan, lalu pilih <b>Kirim Tautan Atur Ulang</b>.', 'Buka email <b>Reset Password E-PPAT</b>, lalu klik tombol <b>Reset Password</b>.', 'Buat kata sandi baru yang memenuhi semua syarat, ketik ulang, lalu pilih <b>Simpan Kata Sandi</b>.', 'Masuk dengan kata sandi baru.'])}
     <h4 class="bantu-sub">Syarat kata sandi</h4>
     ${istilah([['Panjang', 'Minimal 12 karakter.'], ['Jenis karakter', 'Huruf besar, huruf kecil, angka, dan simbol (mis. ! @ #).']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1276,7 +1276,7 @@ const BANTUAN = {
       ['Mengapa status Kantor PPAT Nonaktif?', 'Kantor aktif setelah pembayaran lunas dan proses administrasi selesai. Pantau tahapnya di Dasbor.'],
       ['Foto saya ditolak', `Gunakan gambar JPG atau PNG berukuran paling besar ${est('2 MB')}.`],
       ['Kapan saya perlu Buat Ulang Kode Cadangan?', 'Bila kode cadangan hampir habis atau mungkin diketahui orang lain. Kode lama langsung tidak berlaku.'],
-      ['Kapan saya perlu Reset MFA?', 'Bila Anda ganti ponsel atau ingin berganti metode, misalnya dari Email OTP ke aplikasi authenticator. Saat masuk berikutnya, Anda memilih metode lagi.'],
+      ['Kapan saya perlu Atur Ulang MFA?', 'Bila Anda ganti ponsel atau ingin berganti metode, misalnya dari Email OTP ke aplikasi autentikator. Saat masuk berikutnya, Anda memilih metode lagi.'],
       ['Isian saya hilang saat pindah tab', 'Sebelum pindah tab, sistem menanyakan apakah perubahan dibuang. Pilih Tetap di Sini, lalu simpan dulu.']])}
     ${kontak()}` })
 };

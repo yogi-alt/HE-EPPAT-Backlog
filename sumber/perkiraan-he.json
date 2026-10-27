@@ -1,0 +1,36 @@
+{
+  "sumber": "Laporan Heuristic Evaluation ePPAT (Tim Riset INA Digital, Oktober 2026) di UX Metric Lab; skor keseluruhan 58,3 = rata-rata skor 11 halaman.",
+  "asumsi": [
+    "Angka perkiraan adalah hitungan tim backlog, bukan penilaian evaluator. Nilai pasti hanya dapat diperoleh lewat evaluasi ulang oleh INA Digital dengan checklist yang sama.",
+    "Perkiraan dihitung dari jumlah butir gagal per prinsip di laporan HE dikalikan perkiraan porsi yang ditutup oleh usulan prototipe. Daftar butir checklist per halaman tidak tersedia.",
+    "Batas bawah mengasumsikan sekitar separuh usulan diterapkan persis seperti prototipe dan pekerjaan backend/pihak ketiga belum dikerjakan. Batas atas mengasumsikan semua usulan diterapkan utuh.",
+    "Penyusunan Akta (PPAT) v2 adalah alternatif tampilan untuk halaman Minuta Akta. Rata-rata keseluruhan dihitung dua kali: dengan prototipe Penyusunan Akta lama dan dengan v2."
+  ],
+  "halaman": [
+    { "halaman": "E-Akta Wizard (PPAT) → Penandatanganan Akta", "skor": 36.2, "bawah": 75, "atas": 85, "penahan": "Backend E-PPAT: pindah otomatis ke halaman dokumen tempat tanda tangan dibubuhkan.", "jenis": "Backend E-PPAT", "acuan": "Backlog-HE-EAW-Prototype.html" },
+    { "halaman": "Super Admin - Registrasi TERA", "skor": 41.7, "bawah": 78, "atas": 88, "penahan": "Peruri: proses TERA masih manual sehingga perkiraan waktu resmi belum tersedia.", "jenis": "Pihak ketiga (Peruri)", "acuan": "Backlog-HE-TERA-Prototype.html" },
+    { "halaman": "E-Akta Wizard (Non-PPAT) → Penandatanganan Akta (Klien)", "skor": 46.4, "bawah": 78, "atas": 88, "penahan": "Backend E-PPAT: pindah otomatis ke halaman tanda tangan dan tanda tangan beberapa dokumen sekaligus.", "jenis": "Backend E-PPAT", "acuan": "Backlog-HE-EAWK-Prototype.html" },
+    { "halaman": "Minuta Akta (PPAT & Asisten) → Penyusunan Akta", "skor": 47.1, "bawah": 75, "atas": 85, "penahan": "Backend E-PPAT: editor dinilai terlalu padat dan memiliki kurva belajar tinggi; fitur cek ejaan dan lampiran masih segera hadir.", "jenis": "Backend E-PPAT", "acuan": "Backlog-HE-MINUTA-Prototype.html", "kelompok": "lama" },
+    { "halaman": "Penyusunan Akta (PPAT) v2 — usulan tampilan", "skor": 47.1, "bawah": 85, "atas": 90, "penahan": "Tata letak editor ala pengolah kata menjawab temuan editor terlalu padat dan kurva belajar tinggi. Yang tersisa hanya fitur yang masih segera hadir (lampiran) dan pemotongan halaman yang harus sama dengan pembuat PDF.", "jenis": "Backend E-PPAT (kecil)", "acuan": "Backlog-HE-MINUTA-V2-Prototype.html", "kelompok": "v2" },
+    { "halaman": "Super Admin - Order AJB → Permohonan AJB", "skor": 48.6, "bawah": 78, "atas": 88, "penahan": "Backend E-PPAT: tambah pihak secara massal dan otomatisasi langkah manual.", "jenis": "Backend E-PPAT", "acuan": "Backlog-HE-ORDER-Prototype.html" },
+    { "halaman": "Super Admin - Verifikasi Akta → Verifikasi Berkas", "skor": 54.5, "bawah": 80, "atas": 90, "penahan": "Tidak ada penahan besar; bergantung pada penerapan utuh usulan tampilan.", "jenis": "Tampilan", "acuan": "Backlog-HE-VERIF-Prototype.html" },
+    { "halaman": "Registrasi CA", "skor": 54.8, "bawah": 78, "atas": 88, "penahan": "Peruri: perkiraan waktu proses CA/eKYC dan notifikasi CA aktif bergantung pada data Peruri.", "jenis": "Pihak ketiga (Peruri)", "acuan": "Backlog-HE-CA-Prototype.html" },
+    { "halaman": "Login (Onboarding)", "skor": 68.6, "bawah": 85, "atas": 92, "penahan": "Tidak ada penahan besar.", "jenis": "Tampilan", "acuan": "Backlog-HE-ONBOARDING-Prototype.html" },
+    { "halaman": "Dashboard (Onboarding)", "skor": 71.5, "bawah": 85, "atas": 92, "penahan": "Backend E-PPAT: urutan waktu tahap, lencana status akun, dan email aktivasi tanpa kata sandi.", "jenis": "Backend E-PPAT", "acuan": "Backlog-HE-ONBOARDING-Prototype.html" },
+    { "halaman": "Super Admin - Daftar User → Daftar Pengguna", "skor": 79.5, "bawah": 88, "atas": 95, "penahan": "Tidak ada penahan besar.", "jenis": "Tampilan", "acuan": "Backlog-HE-USER-Prototype.html" },
+    { "halaman": "Registrasi (Onboarding)", "skor": 91.7, "bawah": 93, "atas": 97, "penahan": "Tidak ada penahan besar.", "jenis": "Tampilan", "acuan": "Backlog-HE-ONBOARDING-Prototype.html" }
+  ],
+  "prinsip": [
+    { "prinsip": "Visibility of System Status", "skor": 85.9, "bawah": 90, "atas": 97, "penutup": "Status tersimpan, stepper bernomor, status sistem dengan waktu pemeriksaan." },
+    { "prinsip": "Match Between System and the Real World", "skor": 49.1, "bawah": 80, "atas": 94, "penutup": "Bahasa Indonesia baku; istilah CA, TERA, OTP, dan e-Meterai dijelaskan dengan ikon ?." },
+    { "prinsip": "User Control and Freedom", "skor": 65.9, "bawah": 82, "atas": 92, "penutup": "Tombol Batal dan Kembali, peringatan sebelum meninggalkan perubahan, urungkan." },
+    { "prinsip": "Consistency and Standards", "skor": 48.8, "bawah": 80, "atas": 92, "penutup": "Komponen IDDS seragam, sidebar dan header sama di semua halaman, label baku." },
+    { "prinsip": "Help Users Recognize, Diagnose, and Recover From Errors", "skor": 62.7, "bawah": 82, "atas": 91, "penutup": "Pesan galat di bawah isian dengan cara memperbaiki." },
+    { "prinsip": "Error Prevention", "skor": 40.9, "bawah": 75, "atas": 90, "penutup": "Konfirmasi aksi berdampak bertombol merah, validasi sebelum kirim, konfirmasi kuota." },
+    { "prinsip": "Recognition Rather Than Recall", "skor": 68.9, "bawah": 82, "atas": 93, "penutup": "Variabel disorot, kertas sesuai hasil cetak, penanda variabel belum terisi." },
+    { "prinsip": "Flexibility and Efficiency of Use", "skor": 56.4, "bawah": 70, "atas": 79, "penutup": "Cari, saring, dan urutkan; aksi massal dan otomatisasi bergantung pada backend." },
+    { "prinsip": "Aesthetic and Minimalist Design", "skor": 60.6, "bawah": 80, "atas": 92, "penutup": "Tata letak lebih lega, aksi utama ditonjolkan, editor ala pengolah kata." },
+    { "prinsip": "Help and Documentation", "skor": 10.6, "bawah": 70, "atas": 85, "penutup": "Bantuan, FAQ, kontak, dan ikon ? di setiap halaman." },
+    { "prinsip": "Privacy", "skor": 90.9, "bawah": 91, "atas": 95, "penutup": "Email aktivasi tanpa kata sandi dalam teks biasa." }
+  ]
+}

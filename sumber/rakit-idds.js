@@ -23,5 +23,11 @@ if (html.includes('<aside class="sidebar') && !html.includes('id="sidebar-idds-j
   const i = html.lastIndexOf('</body>');
   html = i < 0 ? html + sb : html.slice(0, i) + sb + '\n' + html.slice(i);
 }
+// Tooltip aman: kotak IDDS Tooltip selalu berada di dalam layar dan tidak terpotong wadah.
+if (html.includes('ina-tooltip') && !html.includes('id="tooltip-aman-js"')) {
+  const tt = fs.readFileSync(path.join(d, 'tooltip-aman.html'), 'utf8');
+  const i = html.lastIndexOf('</body>');
+  html = i < 0 ? html + tt : html.slice(0, i) + tt + '\n' + html.slice(i);
+}
 fs.writeFileSync(path.resolve(out), html);
 console.log('OK', out, html.length, 'byte');

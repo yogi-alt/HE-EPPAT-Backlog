@@ -4,6 +4,7 @@ const jalan = (...a) => execFileSync('node', a, { stdio:['ignore', 'pipe', 'inhe
 const G = [ // [badan, idds, judul tab, keluaran, rakit-onboarding?]
   ['verif-badan.html', 'verif-idds.html', 'Verifikasi Berkas', 'Backlog-HE-VERIF-Prototype.html'],
   ['minuta-badan.html', 'minuta-idds.html', 'Penyusunan Akta', 'Backlog-HE-MINUTA-Prototype.html'],
+  ['minuta2-badan.html', 'minuta2-idds.html', 'Penyusunan Akta v2', 'Backlog-HE-MINUTA-V2-Prototype.html'],
   ['eaw-badan.html', 'eaw-idds.html', 'Penandatanganan Akta', 'Backlog-HE-EAW-Prototype.html'],
   ['eawk-badan.html', 'eawk-idds.html', 'Penandatanganan Akta (Klien)', 'Backlog-HE-EAWK-Prototype.html'],
   ['ca-badan.html', 'ca-idds.html', 'Registrasi CA', 'Backlog-HE-CA-Prototype.html'],

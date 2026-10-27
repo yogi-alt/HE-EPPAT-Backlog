@@ -404,6 +404,11 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .det-aksi{display:flex;gap:8px;flex-wrap:wrap}
 .ina-tooltip:not(:hover):not(:focus-within) .ina-tooltip__content{display:none}
 .ina-tooltip__bubble{display:block;width:max-content;max-width:min(260px,80vw);white-space:normal;text-align:left;line-height:1.45}
+/* ikon ? bertooltip untuk istilah (pola bersama) */
+.tanya-btn{display:inline-grid;place-items:center;width:20px;height:20px;padding:0;margin-left:4px;border:0;border-radius:50%;background:transparent;color:var(--ina-content-secondary);cursor:help;vertical-align:middle}.tanya-btn:hover,.tanya-btn:focus-visible{color:var(--ina-primary-500);outline:2px solid var(--ina-primary-500);outline-offset:1px}
+.tanya:focus-within .ina-tooltip__content{visibility:visible;opacity:1}
+.tanya .tanya-btn svg{color:inherit}
+.tanya .ina-tooltip__bubble{font-weight:400;font-size:12px;letter-spacing:normal;text-transform:none;color:var(--ina-white,#fff)}
 .ikon-alert{display:grid;place-items:center;color:var(--ina-negative-600);margin-top:1px}
 .ina-alert--critical .ina-alert__title{color:var(--ina-negative-600)}
 .peran-info{margin-top:14px}
@@ -652,7 +657,8 @@ const I = {
   lain:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
   ulang:'<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>',
   log:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>', edit:'<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/>', palet:'<circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1 0 1.7-.8 1.7-1.7 0-1 .8-1.7 1.7-1.7H17a5 5 0 0 0 5-5C22 6 17.5 2 12 2z"/>', daftar:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>', gambar:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>', gedung:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01"/>', meterai:'<rect x="3" y="3" width="18" height="18" rx="2"/><rect x="7" y="7" width="10" height="10" rx="1"/>' /* ikon sidebar seragam */,
-  tb_stack_2:'<path d="M12 4l-8 4l8 4l8 -4l-8 -4" /> <path d="M4 12l8 4l8 -4" /> <path d="M4 16l8 4l8 -4" />', tb_feather:'<path d="M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4" /> <path d="M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4" />', tb_layout_dashboard:'<path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" /> <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />', tb_circle_check:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" />', tb_file_pencil:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M10 18l5 -5a1.414 1.414 0 0 0 -2 -2l-5 5v2h2z" />', tb_signature:'<path d="M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2" />', tb_files:'<path d="M15 3v4a1 1 0 0 0 1 1h4" /> <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z" /> <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />', tb_adjustments_horizontal:'<path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 6l8 0" /> <path d="M16 6l4 0" /> <path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 12l2 0" /> <path d="M10 12l10 0" /> <path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 18l11 0" /> <path d="M19 18l1 0" />', tb_building:'<path d="M3 21l18 0" /> <path d="M9 8l1 0" /> <path d="M9 12l1 0" /> <path d="M9 16l1 0" /> <path d="M14 8l1 0" /> <path d="M14 12l1 0" /> <path d="M14 16l1 0" /> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />', tb_users:'<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /> <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /> <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />', tb_shield_lock:'<path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /> <path d="M12 11m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12 12l0 2.5" />', tb_history:'<path d="M12 8l0 4l2 2" /> <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />', tb_rubber_stamp:'<path d="M21 17.85h-18c0 -4.05 1.421 -4.05 3.79 -4.05c5.21 0 1.21 -4.59 1.21 -6.8a4 4 0 1 1 8 0c0 2.21 -4 6.8 1.21 6.8c2.369 0 3.79 0 3.79 4.05z" /> <path d="M5 21h14" />', tb_settings:'<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />', tb_layout_cards:'<path d="M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /> <path d="M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />', tb_home:'<path d="M5 12l-2 0l9 -9l9 9l-2 0" /> <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /> <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />', tb_palette:'<path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" /> <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />', tb_database:'<path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /> <path d="M4 6v6a8 3 0 0 0 16 0v-6" /> <path d="M4 12v6a8 3 0 0 0 16 0v-6" />', tb_article:'<path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /> <path d="M7 8h10" /> <path d="M7 12h10" /> <path d="M7 16h10" />', tb_photo:'<path d="M15 8h.01" /> <path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z" /> <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5" /> <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3" />', tb_file_text:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 9l1 0" /> <path d="M9 13l6 0" /> <path d="M9 17l6 0" />', tb_gauge:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M13.41 10.59l2.59 -2.59" /> <path d="M7 12a5 5 0 0 1 5 -5" />' /* ikon Tabler sidebar */
+  tb_help_circle:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 17l0 .01" /><path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />',
+  tb_stack_2:'<path d="M12 4l-8 4l8 4l8 -4l-8 -4" /> <path d="M4 12l8 4l8 -4" /> <path d="M4 16l8 4l8 -4" />', tb_feather:'<path d="M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4" /> <path d="M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4" />', tb_layout_dashboard:'<path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" /> <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />', tb_circle_check:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" />', tb_file_pencil:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M10 18l5 -5a1.414 1.414 0 0 0 -2 -2l-5 5v2h2z" />', tb_signature:'<path d="M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2" />', tb_files:'<path d="M15 3v4a1 1 0 0 0 1 1h4" /> <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z" /> <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />', tb_adjustments_horizontal:'<path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 6l8 0" /> <path d="M16 6l4 0" /> <path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 12l2 0" /> <path d="M10 12l10 0" /> <path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 18l11 0" /> <path d="M19 18l1 0" />', tb_building:'<path d="M3 21l18 0" /> <path d="M9 8l1 0" /> <path d="M9 12l1 0" /> <path d="M9 16l1 0" /> <path d="M14 8l1 0" /> <path d="M14 12l1 0" /> <path d="M14 16l1 0" /> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />', tb_users:'<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /> <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /> <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />', tb_shield_lock:'<path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /> <path d="M12 11m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12 12l0 2.5" />', tb_history:'<path d="M12 8l0 4l2 2" /> <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />', tb_rubber_stamp:'<path d="M21 17.85h-18c0 -4.05 1.421 -4.05 3.79 -4.05c5.21 0 1.21 -4.59 1.21 -6.8a4 4 0 1 1 8 0c0 2.21 -4 6.8 1.21 6.8c2.369 0 3.79 0 3.79 4.05z" /> <path d="M5 21h14" />', tb_settings:'<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />', tb_layout_cards:'<path d="M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /> <path d="M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />', tb_home:'<path d="M5 12l-2 0l9 -9l9 9l-2 0" /> <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /> <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />', tb_palette:'<path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" /> <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />', tb_database:'<path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /> <path d="M4 6v6a8 3 0 0 0 16 0v-6" /> <path d="M4 12v6a8 3 0 0 0 16 0v-6" />', tb_article:'<path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /> <path d="M7 8h10" /> <path d="M7 12h10" /> <path d="M7 16h10" />', tb_photo:'<path d="M15 8h.01" /> <path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z" /> <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5" /> <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3" />', tb_file_text:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 9l1 0" /> <path d="M9 13l6 0" /> <path d="M9 17l6 0" />', tb_gauge:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M13.41 10.59l2.59 -2.59" /> <path d="M7 12a5 5 0 0 1 5 -5" />', tb_file_description:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 17h6" /> <path d="M9 13h6" />' /* ikon Tabler sidebar */
 };
 const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
 const $ = s => document.querySelector(s);
@@ -666,6 +672,11 @@ const est = t => `<span class="isi-tim" title="Data contoh. Ganti dengan data re
 const tip = t => `<span class="ina-tooltip ina-tooltip--placement-top"><button type="button" class="tip" aria-label="${esc(t)}">?</button><span class="ina-tooltip__content"><span class="ina-tooltip__bubble">${t}</span></span></span>`;
 /* tombol dengan IDDS Tooltip (HE-MINUTA-01) */
 const denganTip = (isi, t, letak = 'bottom') => `<span class="ina-tooltip ina-tooltip--placement-${letak}">${isi}<span class="ina-tooltip__content"><span class="ina-tooltip__bubble">${t}</span></span></span>`;
+/* ikon ? bertooltip untuk istilah yang belum punya penjelasan di layar */
+const tanya = (istilah, penjelasan) => `<span class="ina-tooltip ina-tooltip--placement-top tanya"><button type="button" class="tanya-btn" aria-label="Penjelasan: ${istilah}">${ik('tb_help_circle', 14)}</button><span class="ina-tooltip__content" role="tooltip"><span class="ina-tooltip__bubble">${penjelasan}</span></span></span>`;
+document.addEventListener('click', e => { if (e.target.closest('.tanya-btn')) e.preventDefault(); });
+const T_MINUTA = 'Minuta akta adalah naskah asli akta yang disimpan kantor PPAT. Salinan akta dibuat dari minuta ini.';
+const T_FINAL = 'Finalisasi adalah langkah akhir oleh PPAT: memberi nomor dan tanggal akta, lalu mengunci naskah agar tidak dapat diubah.';
 const cek = (id, label, nyala, ket = '') => `<label class="ina-checkbox cek" for="${id}"><input type="checkbox" id="${id}" class="ina-checkbox__input peer" ${nyala ? 'checked' : ''}><div class="ina-checkbox__box ina-checkbox__box--${nyala ? 'checked' : 'unchecked'}">${nyala ? ik('centang', 12) : ''}</div><div class="ina-checkbox__content"><span class="ina-checkbox__label">${label}${ket ? ` <small>${ket}</small>` : ''}</span></div></label>`;
 const setCek = (cb) => { const bx = cb.nextElementSibling; bx.classList.toggle('ina-checkbox__box--checked', cb.checked); bx.classList.toggle('ina-checkbox__box--unchecked', !cb.checked); bx.innerHTML = cb.checked ? ik('centang', 12) : ''; };
 const remah = akhir => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link" data-ke-daftar><span class="ina-breadcrumb__text">Akta</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">${akhir}</span></span></li></ol></nav>`;
@@ -673,7 +684,7 @@ const remah = akhir => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol 
 /* ---------------- daftar perubahan ---------------- */
 const UBAH = [
   { kode:'HE-MINUTA-01', judul:'Detail minuta: istilah dan tombol dijelaskan singkat',
-    isi:'Tombol Preview Akta, Cek Ejaan, dan Beritahu PPAT memiliki tooltip yang menjelaskan fungsinya. Panel kiri menjelaskan beda pasal dan catatan. Pesan peran Asisten menyebut langkah berikutnya. Label "Tampilkan judul di dokumen (Preview, PDF)" diganti menjadi "Tampilkan judul pasal di akta". Tab Lampiran diberi penanda "Segera".',
+    isi:'Tombol Pratinjau Akta, Cek Ejaan, dan Beritahu PPAT memiliki tooltip yang menjelaskan fungsinya. Panel kiri menjelaskan beda pasal dan catatan. Pesan peran Asisten menyebut langkah berikutnya. Label "Tampilkan judul di dokumen (Preview, PDF)" diganti menjadi "Tampilkan judul pasal di akta". Tab Lampiran diberi penanda "Segera". Ikon ? bertooltip menjelaskan istilah minuta akta, status minuta, finalisasi, kode variabel {{…}}, standar akta PPAT, margin, dan footer.',
     lama:'Tombol dan istilah tanpa penjelasan; pesan peran hanya berbunyi "Mode editor — Anda dapat mengubah konten pasal, tetapi tidak dapat memfinalisasi."; tab Lampiran nonaktif tanpa keterangan.', ke:'editor', sorot:'#aksiAtas' },
   { kode:'HE-MINUTA-02', judul:'Bilah alat editor minuta: lebih lega dan mudah dipindai',
     isi:'Bilah alat hanya menampilkan alat yang sering dipakai (tebal, miring, garis bawah, daftar, perataan, urungkan, ulangi) dalam satu baris berjarak lega. Alat lain (judul, coret, warna, ukuran huruf, spasi, tautan, gambar, tabel, kode HTML) dipindahkan ke menu "Lainnya". Setiap ikon memiliki tooltip berisi nama alat dan pintasan papan ketik.',
@@ -758,7 +769,7 @@ const ST = { DRAFTING:['Penyusunan','info'], SELESAI:['Selesai','success'] };
 /* ---------------- sidebar (menu live Asisten Peruri) ---------------- */
 const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
   { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text']] },
-  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Verifikasi Berkas','tb_circle_check'],['Penyusunan Akta','tb_file_pencil','minuta'],['Penandatanganan Akta','tb_signature'],['Salinan Akta','tb_files']] },
+  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Verifikasi Berkas','tb_circle_check'],['Penyusunan Akta','tb_file_pencil','minuta'],['Penyusunan Akta v2','tb_file_description'],['Penandatanganan Akta','tb_signature'],['Salinan Akta','tb_files']] },
   { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building'],['Daftar Pengguna','tb_users'],['Peran & Izin','tb_shield_lock'],['Log Aktivitas','tb_history'],['Aktivasi e-Meterai','tb_rubber_stamp']] },
   { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge'],['Pengaturan','tb_settings']] },
   { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home'],['Tema Tampilan','tb_palette'],['Master Konten','tb_database'],['Artikel & Halaman','tb_article'],['Pustaka Media','tb_photo']] }
@@ -769,7 +780,7 @@ function gambarNav() {
     <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
     <div class="items" ${grupBuka.has(i) ? '' : 'hidden'}>${g.m.map(([t, ic, ke]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item ${ke ? 'on' : ''}" data-ke="${ke || ''}">${ik(ic)}<span>${t}</span></a>`).join('')}</div>`).join('');
 }
-const PROTO = { 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Verifikasi Berkas':'Backlog-HE-VERIF-Prototype.html', 'Penandatanganan Akta':'Backlog-HE-EAW-Prototype.html', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
+const PROTO = { 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Verifikasi Berkas':'Backlog-HE-VERIF-Prototype.html', 'Penyusunan Akta v2':'Backlog-HE-MINUTA-V2-Prototype.html', 'Penandatanganan Akta':'Backlog-HE-EAW-Prototype.html', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
 $('#nav').addEventListener('click', e => {
   const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
   const a = e.target.closest('a'); if (!a) return; e.preventDefault();
@@ -783,13 +794,13 @@ function layarDaftar() {
   const rows = MINUTA.filter(x => (!S.filter || x.status === S.filter) && (!q || (x.kode + ' ' + x.narahubung).toLowerCase().includes(q)));
   const grp = [['', 'Semua'], ['DRAFTING', 'Penyusunan'], ['SELESAI', 'Selesai']];
   return `${remah('Penyusunan Akta')}
-    <h1>Penyusunan Akta</h1><p class="sub">Susun naskah minuta akta dari permohonan yang sudah diverifikasi.</p>
+    <h1>Penyusunan Akta</h1><p class="sub">Susun naskah minuta akta${tanya('Minuta akta', T_MINUTA)} dari permohonan yang sudah diverifikasi.</p>
     <div class="saring-m">
       ${cari('cariMinuta', 'Cari kode / klien…', S.cari, 'Cari minuta')}
       <div class="ina-button-group" role="group" aria-label="Saring status">${grp.map(([v, t]) => `<button type="button" class="ina-button-group__button ${v === S.filter ? 'ina-button-group__button--selected' : ''}" aria-pressed="${v === S.filter}" data-filter="${v}"><span class="ina-button-group__button-content">${t}</span></button>`).join('')}</div>
     </div>
     <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb">
-      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">No. Akta</th><th class="ina-table__header-cell">Tgl Akta</th><th class="ina-table__header-cell">Status</th><th class="ina-table__header-cell"></th></tr></thead>
+      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">No. Akta</th><th class="ina-table__header-cell">Tgl Akta</th><th class="ina-table__header-cell">Status${tanya('Status minuta', 'Penyusunan berarti naskah masih dapat diubah. Selesai berarti akta sudah difinalisasi PPAT dan tidak dapat diubah lagi.')}</th><th class="ina-table__header-cell"></th></tr></thead>
       <tbody class="ina-table__body">${rows.length ? rows.map(x => `<tr class="ina-table__row ina-table__row--clickable klik" data-buka="${x.kode}">
         <td class="ina-table__cell"><span class="kd">${x.kode}</span></td>
         <td class="ina-table__cell"><div>Akta Jual Beli</div><div class="kc">${esc(x.narahubung)}</div></td>
@@ -809,17 +820,17 @@ function layarDetail() {
     <h1>Penyusunan Akta</h1><p class="sub">Susun naskah minuta akta dari permohonan yang sudah diverifikasi.</p>
     <div class="det-kepala">
       <div class="det-kiri">${tombol('Kembali', 'secondary', 'sm', 'id="kembali"', ik('kiri', 14))}
-        <div><h2>Minuta Akta <span class="kode">${x.kode}</span></h2><div class="jenis">${kecil('AJB', 'info')}<span>Akta Jual Beli</span>${final ? kecil('Final', 'success') : ''}</div></div></div>
+        <div><h2>Minuta Akta <span class="kode">${x.kode}</span>${tanya('Minuta akta', T_MINUTA)}</h2><div class="jenis">${kecil('AJB', 'info')}<span>Akta Jual Beli</span>${final ? kecil('Final', 'success') : ''}</div></div></div>
       <div class="det-aksi ditandai" id="aksiAtas">
-        ${tbl('preview', 'Preview Akta', 'mata', 'Lihat akta dengan data para pihak, objek, dan saksi yang sudah terisi.')}
+        ${tbl('preview', 'Pratinjau Akta', 'mata', 'Lihat akta dengan data para pihak, objek, dan saksi yang sudah terisi.')}
         ${tbl('cekEjaan', 'Cek Ejaan', 'kilau', 'Periksa salah ketik di semua pasal. Hasilnya berupa saran; teks tidak diubah otomatis.')}
         ${final ? '' : tbl('beritahu', 'Beritahu PPAT', 'lonceng', 'Kirim notifikasi ke PPAT bahwa minuta siap diperiksa dan difinalisasi.', '', 'bottom-end')}
         ${usulan('HE-MINUTA-01')}
       </div>
     </div>
     <div class="peran-info">${final
-      ? alert('info', '', `${ik('kunci', 14)} Akta sudah difinalisasi dengan nomor <b>${x.nomor}</b>. Pasal hanya dapat dilihat.`)
-      : alert('info', '', `Anda dapat menyunting isi pasal. Setelah selesai, klik <b>Beritahu PPAT</b> agar PPAT memeriksa dan memfinalisasi akta.${usulan('HE-MINUTA-01')}`)}</div>
+      ? alert('info', '', `${ik('kunci', 14)} Akta sudah difinalisasi${tanya('Finalisasi', T_FINAL)} dengan nomor <b>${x.nomor}</b>. Pasal hanya dapat dilihat.`)
+      : alert('info', '', `Anda dapat menyunting isi pasal. Setelah selesai, klik <b>Beritahu PPAT</b> agar PPAT memeriksa dan memfinalisasi akta.${tanya('Finalisasi', T_FINAL)}${usulan('HE-MINUTA-01')}`)}</div>
     ${blokEjaan()}
     <div class="ruang">
       ${panelKiri(x, final)}
@@ -882,7 +893,7 @@ function panelEditor(x, final) {
     <div class="ina-text-field"><label class="ina-text-field__label" for="judulPasal">Judul<span class="ina-text-field__required">*</span></label>
       <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ${S.galatJudul ? 'ina-text-field__wrapper--status-error' : ''} ${final ? 'ina-text-field__wrapper--disabled' : ''}"><input id="judulPasal" class="ina-text-field__input" value="${esc(d.judul)}" ${final ? 'disabled' : ''}></div>
       ${S.galatJudul ? `<div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text ina-text-field__helper-text--error">${S.galatJudul}</div></div>` : ''}</div>
-    ${final ? '' : `${cek('tampilJudul', 'Tampilkan judul pasal di akta', d.tampil, '(berlaku untuk Preview dan PDF)')}${usulan('HE-MINUTA-01')}`}
+    ${final ? '' : `${cek('tampilJudul', 'Tampilkan judul pasal di akta', d.tampil, '(berlaku untuk pratinjau dan PDF)')}${usulan('HE-MINUTA-01')}`}
     <div class="label-isi"><span>Isi</span></div>
     ${final ? '' : `<div class="alat ditandai" id="bilahAlat" role="toolbar" aria-label="Format teks">
       ${ALAT.map(a => a === '|' ? '<span class="pisah" aria-hidden="true"></span>' : denganTip(`<button type="button" class="ina-button ina-button--tertiary ina-button--sm btn-alat ${a[3] || ''}" data-cmd="${a[0]}" aria-label="${a[2]}">${a[1]}</button>`, a[2], 'top')).join('')}
@@ -894,7 +905,7 @@ function panelEditor(x, final) {
       <div id="wadahPop"></div>
     </div>`}
     <div class="kertas-wadah" ${final ? 'style="border-radius:10px"' : ''}><div class="kertas ${S.kode ? 'mode-kode' : ''}" id="editor" ${final ? '' : 'contenteditable="true"'} role="textbox" aria-multiline="true" aria-label="Isi ${esc(d.judul)}">${keChip(d.isi)}</div></div>
-    <div class="ket-var">${toggle('tampilKode', 'Tampilkan kode variabel', S.kode)}<span>Label hijau akan terisi otomatis dari data permohonan saat Preview dan PDF.${usulan('HE-MINUTA-03')}</span></div>
+    <div class="ket-var"><span style="display:inline-flex;align-items:center">${toggle('tampilKode', 'Tampilkan kode variabel', S.kode)}${tanya('Kode variabel', 'Kode variabel ditulis di antara kurung kurawal ganda, misalnya &#123;&#123;penjual_nama&#125;&#125;. Sistem mengganti kode ini dengan data permohonan saat pratinjau dan PDF dibuat.')}</span><span>Label hijau akan terisi otomatis dari data permohonan saat pratinjau dan PDF dibuat.${usulan('HE-MINUTA-03')}</span></div>
     ${asing.length && !final ? `<div class="galat-var">${alert('caution', `${asing.length} variabel tidak dikenal`, `${asing.map(k => `<b>{{${esc(k)}}}</b>`).join(', ')} tidak ada di daftar variabel Akta Jual Beli, sehingga tidak akan terisi. Hapus label kuning tersebut, lalu sisipkan ulang lewat <b>Sisipkan Variabel</b>${asing.includes('penjual_alamatt') ? ' (mungkin maksudnya <b>Alamat Penjual</b>)' : ''}.${usulan('HE-MINUTA-03')}`)}</div>` : ''}
     ${final ? '' : `<div class="ed-kaki"><span class="status-simpan ${S.ubah ? 'belum' : ''}" id="statusSimpan">${S.ubah ? `${ik('seru', 14)} Belum disimpan` : `${ik('centang', 14)} Semua perubahan tersimpan`}</span>${usulan('HE-MINUTA-04')}
       ${tombol('Batal', 'secondary', 'md', `id="batalPasal" ${S.ubah ? '' : 'disabled'}`)}${tombol('Simpan', 'primary', 'md', `id="simpanPasal" ${S.ubah ? '' : 'disabled'}`, ik('simpan', 16))}</div>`}
@@ -914,12 +925,12 @@ function panelAtur(x, final) {
   return `<div class="atur">
     <div class="atur-ringkas ditandai" id="ringkasAtur">
       <div>
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">${std ? badge(`${ik('centang', 12)} Mengikuti standar akta PPAT`, 'success') : badge('Diubah khusus untuk akta ini', 'warning')}${usulan('HE-MINUTA-06')}</div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">${std ? badge(`${ik('centang', 12)} Mengikuti standar akta PPAT`, 'success') : badge('Diubah khusus untuk akta ini', 'warning')}${tanya('Standar akta PPAT', 'Standar akta adalah format kertas, margin, dan huruf yang ditetapkan kantor untuk semua akta. Format ini berlaku kecuali Anda mengubahnya khusus untuk akta ini.')}${usulan('HE-MINUTA-06')}</div>
         <p class="sub" style="margin-top:8px">Pengaturan ini dipakai untuk minuta dan salinan akta. ${std ? 'Anda tidak perlu mengubah apa pun kecuali akta ini memerlukan format khusus.' : 'Akta lain tetap memakai standar.'}</p>
         <dl><dt>Kertas</dt><dd>${a.kertas}, ${a.orientasi.toLowerCase()}</dd>
-          <dt>Margin</dt><dd>Kiri ${a.kiri} cm (untuk jilid/cap) · atas ${a.atas} · kanan ${a.kanan} · bawah ${a.bawah} cm</dd>
+          <dt>Margin${tanya('Margin', 'Margin adalah jarak antara tepi kertas dan area tulis. Margin kiri dibuat lebih lebar untuk jilid dan cap.')}</dt><dd>Kiri ${a.kiri} cm (untuk jilid/cap) · atas ${a.atas} · kanan ${a.kanan} · bawah ${a.bawah} cm</dd>
           <dt>Huruf</dt><dd>${a.huruf} ${a.ukuran} pt, spasi ${a.spasi === '2' ? 'ganda (2)' : a.spasi}</dd>
-          <dt>Footer</dt><dd>${a.footer ? 'Aktif — nomor halaman di bagian bawah PDF' : 'Tidak aktif'}</dd></dl>
+          <dt>Footer${tanya('Footer', 'Footer adalah teks kaki di bagian bawah setiap halaman PDF, misalnya nomor halaman atau nama PPAT.')}</dt><dd>${a.footer ? 'Aktif — nomor halaman di bagian bawah PDF' : 'Tidak aktif'}</dd></dl>
       </div>
       <div>${halamanMini(a)}</div>
     </div>
@@ -932,7 +943,7 @@ function panelAtur(x, final) {
       <div class="ina-text-field"><label class="ina-text-field__label">Jenis huruf</label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ina-text-field__wrapper--disabled"><input class="ina-text-field__input" value="${a.huruf} (khas akta)" disabled></div></div>
       ${fld('a-ukuran', 'Ukuran huruf', a.ukuran, 'pt')}${fld('a-spasi', 'Spasi baris', a.spasi, '×', '1 = tunggal, 2 = ganda')}</div></div>
     <div class="atur-grup"><h4>Footer</h4>
-      ${cek('aFooter', 'Tampilkan footer di bagian bawah halaman', a.footer, '(hanya di PDF, tidak di Preview)')}
+      ${cek('aFooter', 'Tampilkan footer di bagian bawah halaman', a.footer, '(hanya di PDF, tidak di pratinjau)')}
       <p class="sub" style="margin:10px 0 0">Kode yang dapat dipakai di footer. Arahkan kursor untuk melihat contoh.</p>
       <div class="var-footer">${FV.map(([k, l]) => denganTip(kecil(`${l} · <code>${esc(k)}</code>`, 'neutral'), `${esc(k)} akan diganti dengan ${l.toLowerCase()} saat PDF dibuat.`, 'top')).join('')}</div></div>
     <div class="atur-kaki"><span class="kiri">${tombol('Kembalikan ke standar', 'tertiary', 'md', 'id="aturStandar"', ik('ulang', 16))}</span>${tombol('Batal', 'secondary', 'md', 'id="aturBatal"')}${tombol('Simpan Pengaturan', 'primary', 'md', 'id="aturSimpan"', ik('simpan', 16))}</div>`}
@@ -1065,7 +1076,7 @@ function segarVar() {
   const w = $('#wadahPop'); if (!w) return;
   /* struktur IDDS Select Dropdown: __panel > __search > __options > __option */
   w.innerHTML = `<div class="ina-select-dropdown pop-wadah"><div class="ina-select-dropdown__panel panel-var" role="dialog" aria-label="Sisipkan variabel">
-    <div class="kepala-var"><b>Sisipkan variabel</b><p>Variabel adalah isian otomatis. Saat Preview dan PDF dibuat, variabel diganti dengan data dari permohonan ini, misalnya nama penjual.</p></div>
+    <div class="kepala-var"><b>Sisipkan variabel</b><p>Variabel adalah isian otomatis. Saat pratinjau dan PDF dibuat, variabel diganti dengan data dari permohonan ini, misalnya nama penjual.</p></div>
     <div class="ina-select-dropdown__search"><input id="cariVar" type="search" class="ina-select-dropdown__search-input" placeholder="Cari: nama, saksi, harga…" aria-label="Cari variabel" value="${esc(S.cariVar || '')}" autocomplete="off"></div>
     <div class="ina-select-dropdown__options" role="listbox">${isi.length ? isi.map(([g, a]) => `<div class="grup-var" role="presentation">${g}</div>${a.map(([k, l, c]) => `<button type="button" class="ina-select-dropdown__option opsi-var" role="option" data-sisip="${k}"><span class="ina-select-dropdown__option-content"><span class="ina-select-dropdown__option-label">${l}</span><span class="c">Contoh: ${esc(c)}</span></span><code>{{${k}}}</code></button>`).join('')}`).join('') : '<div class="ina-select-dropdown__empty">Variabel tidak ditemukan.</div>'}</div></div></div>`;
 }
@@ -1116,7 +1127,7 @@ function beritahu() { jagaPerubahan(() => tunggu('beritahu', 800, () => { gambar
 function pratinjau() {
   const n = m().naskah;
   const isi = n.map(it => `${it.tampil ? `<h5>${esc(it.tipe === 'PASAL' ? `Pasal ${nomorPasal(n, it)}` : it.judul)}</h5>` : ''}${it.isi.replace(RE_VAR, (x, k) => VMAP.has(k) ? `<span class="isi-var">${esc(VMAP.get(k).c)}</span>` : `<span class="isi-var galat" title="Variabel tidak dikenal">{{${esc(k)}}}</span>`)}`).join('');
-  dialog({ judul:`Preview Akta · ${m().kode}`, lebar:true, isi:`<p>Bagian berlatar hijau adalah data yang terisi otomatis dari permohonan. Bagian kuning adalah variabel yang tidak dikenal.</p><div class="pratinjau"><div class="kertas">${isi}</div></div>`, tombol:[['Tutup','secondary',null],['Unduh PDF','primary',() => toast('Unduh PDF tidak disimulasikan di prototipe.')]] });
+  dialog({ judul:`Pratinjau Akta · ${m().kode}`, lebar:true, isi:`<p>Bagian berlatar hijau adalah data yang terisi otomatis dari permohonan. Bagian kuning adalah variabel yang tidak dikenal.</p><div class="pratinjau"><div class="kertas">${isi}</div></div>`, tombol:[['Tutup','secondary',null],['Unduh PDF','primary',() => toast('Unduh PDF tidak disimulasikan di prototipe.')]] });
 }
 
 /* ---------------- tombol Bantuan di judul halaman (HE-UMUM-02) ---------------- */
@@ -1192,12 +1203,12 @@ function bukaBantuan() {
       <li><b>Pilih pasal atau catatan</b> di panel kiri, lalu sunting judul dan isinya.</li>
       <li><b>Sisipkan variabel</b> untuk data yang terisi otomatis, misalnya nama penjual atau harga.</li>
       <li><b>Simpan</b> setiap pasal yang diubah.</li>
-      <li><b>Cek Ejaan</b> dan <b>Preview Akta</b> untuk memeriksa hasil akhir.</li>
+      <li><b>Cek Ejaan</b> dan <b>Pratinjau Akta</b> untuk memeriksa hasil akhir.</li>
       <li><b>Beritahu PPAT</b> bahwa minuta siap difinalisasi.</li>
     </ol>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${faq(1, 'Apa beda pasal dan catatan?', 'Pasal diberi nomor otomatis sesuai urutannya. Catatan adalah bagian tanpa nomor, seperti pembukaan akta, para pihak, objek, para saksi, dan penutup.')}
-    ${faq(2, 'Apa itu variabel?', 'Variabel adalah isian otomatis, misalnya "Nama Lengkap Penjual". Di editor variabel tampil sebagai label hijau. Saat Preview dan PDF dibuat, label diganti dengan data dari permohonan. Label kuning berarti variabel tidak dikenal dan tidak akan terisi.')}
+    ${faq(2, 'Apa itu variabel?', 'Variabel adalah isian otomatis, misalnya "Nama Lengkap Penjual". Di editor variabel tampil sebagai label hijau. Saat pratinjau dan PDF dibuat, label diganti dengan data dari permohonan. Label kuning berarti variabel tidak dikenal dan tidak akan terisi.')}
     ${faq(3, 'Mengapa Cek Ejaan tidak dapat digunakan?', 'Fitur Cek Ejaan perlu diaktifkan oleh admin sistem. Selama belum aktif, Anda tetap dapat menyunting dan menyimpan pasal seperti biasa.')}
     ${faq(4, 'Apakah pasal yang terhapus bisa dikembalikan?', 'Tidak. Tambahkan kembali lewat tombol Tambah Pasal, lalu isi ulang judul dan isinya. Nomor pasal lain menyesuaikan secara otomatis.')}
     ${faq(5, 'Siapa yang memfinalisasi akta?', 'PPAT. Asisten menyusun naskah, lalu menekan Beritahu PPAT. PPAT memeriksa, mengisi nomor dan tanggal akta, kemudian memfinalisasi. Setelah final, pasal tidak dapat diubah.')}
@@ -1710,6 +1721,35 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
   document.addEventListener('keydown', e => { if (e.key === 'Escape') tip.hidden = true; });
   document.addEventListener('scroll', () => { tip.hidden = true; }, true);
   terap();
+})();
+</script>
+
+<!-- ===== Tooltip aman (tooltip-aman.html, disisipkan rakit-idds.js ke setiap prototipe yang memakai IDDS Tooltip) =====
+     Kotak tooltip tidak boleh terpotong tepi layar atau wadah ber-overflow: saat tampil, kotak ditempatkan fixed
+     di atas pemicu (atau di bawah bila ruang atas kurang) dan digeser agar tetap berada di dalam layar. -->
+<style id="tooltip-aman-css">
+.ina-tooltip__content.tt-aman{position:fixed!important;transform:none!important;margin:0!important;z-index:2000;width:max-content!important;max-width:calc(100vw - 16px)!important}
+.ina-tooltip__content.tt-aman .ina-tooltip__bubble::before,.ina-tooltip__content.tt-aman .ina-tooltip__bubble::after,.ina-tooltip__content.tt-aman::before,.ina-tooltip__content.tt-aman::after{display:none!important}
+</style>
+<script id="tooltip-aman-js">
+(() => {
+  const JARAK = 8, TEPI = 8;
+  const pos = (c, k, v) => c.style.setProperty(k, v, 'important');
+  const atur = tip => {
+    const c = tip.querySelector(':scope > .ina-tooltip__content'); if (!c) return;
+    requestAnimationFrame(() => {
+      if (getComputedStyle(c).display === 'none') return;
+      // lepas dari wadah dulu, ukur ukuran aslinya, lalu tempatkan di dalam layar
+      c.classList.add('tt-aman'); pos(c, 'left', '0px'); pos(c, 'top', '0px'); pos(c, 'right', 'auto'); pos(c, 'bottom', 'auto');
+      const r = c.getBoundingClientRect(); if (!r.width) return;
+      const t = tip.getBoundingClientRect(), W = document.documentElement.clientWidth, H = innerHeight;
+      let left = t.left + t.width / 2 - r.width / 2; left = Math.max(TEPI, Math.min(left, W - r.width - TEPI));
+      let top = t.top - r.height - JARAK; if (top < TEPI) top = Math.min(t.bottom + JARAK, H - r.height - TEPI);
+      pos(c, 'left', left + 'px'); pos(c, 'top', Math.max(TEPI, top) + 'px');
+    });
+  };  const pasang = e => { const tip = e.target.closest && e.target.closest('.ina-tooltip'); if (tip) atur(tip); };
+  document.addEventListener('mouseover', pasang); document.addEventListener('focusin', pasang);
+  window.addEventListener('scroll', () => document.querySelectorAll('.ina-tooltip__content.tt-aman').forEach(c => { const tip = c.closest('.ina-tooltip'); if (tip && (tip.matches(':hover') || tip.matches(':focus-within'))) atur(tip); }), true);
 })();
 </script>
 

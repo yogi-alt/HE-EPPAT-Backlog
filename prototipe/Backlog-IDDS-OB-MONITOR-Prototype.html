@@ -1157,5 +1157,34 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
 })();
 </script>
 
+<!-- ===== Tooltip aman (tooltip-aman.html, disisipkan rakit-idds.js ke setiap prototipe yang memakai IDDS Tooltip) =====
+     Kotak tooltip tidak boleh terpotong tepi layar atau wadah ber-overflow: saat tampil, kotak ditempatkan fixed
+     di atas pemicu (atau di bawah bila ruang atas kurang) dan digeser agar tetap berada di dalam layar. -->
+<style id="tooltip-aman-css">
+.ina-tooltip__content.tt-aman{position:fixed!important;transform:none!important;margin:0!important;z-index:2000;width:max-content!important;max-width:calc(100vw - 16px)!important}
+.ina-tooltip__content.tt-aman .ina-tooltip__bubble::before,.ina-tooltip__content.tt-aman .ina-tooltip__bubble::after,.ina-tooltip__content.tt-aman::before,.ina-tooltip__content.tt-aman::after{display:none!important}
+</style>
+<script id="tooltip-aman-js">
+(() => {
+  const JARAK = 8, TEPI = 8;
+  const pos = (c, k, v) => c.style.setProperty(k, v, 'important');
+  const atur = tip => {
+    const c = tip.querySelector(':scope > .ina-tooltip__content'); if (!c) return;
+    requestAnimationFrame(() => {
+      if (getComputedStyle(c).display === 'none') return;
+      // lepas dari wadah dulu, ukur ukuran aslinya, lalu tempatkan di dalam layar
+      c.classList.add('tt-aman'); pos(c, 'left', '0px'); pos(c, 'top', '0px'); pos(c, 'right', 'auto'); pos(c, 'bottom', 'auto');
+      const r = c.getBoundingClientRect(); if (!r.width) return;
+      const t = tip.getBoundingClientRect(), W = document.documentElement.clientWidth, H = innerHeight;
+      let left = t.left + t.width / 2 - r.width / 2; left = Math.max(TEPI, Math.min(left, W - r.width - TEPI));
+      let top = t.top - r.height - JARAK; if (top < TEPI) top = Math.min(t.bottom + JARAK, H - r.height - TEPI);
+      pos(c, 'left', left + 'px'); pos(c, 'top', Math.max(TEPI, top) + 'px');
+    });
+  };  const pasang = e => { const tip = e.target.closest && e.target.closest('.ina-tooltip'); if (tip) atur(tip); };
+  document.addEventListener('mouseover', pasang); document.addEventListener('focusin', pasang);
+  window.addEventListener('scroll', () => document.querySelectorAll('.ina-tooltip__content.tt-aman').forEach(c => { const tip = c.closest('.ina-tooltip'); if (tip && (tip.matches(':hover') || tip.matches(':focus-within'))) atur(tip); }), true);
+})();
+</script>
+
 </body>
 </html>
