@@ -51,7 +51,7 @@
 .legenda .n{margin-left:auto;font-weight:600}
 .legenda small{color:var(--ina-content-secondary);min-width:42px;text-align:right}
 .batang{margin-top:16px}
-.batang .br{display:grid;grid-template-columns:150px 1fr 56px;gap:10px;align-items:center;padding:8px 0;font-size:14px}
+.batang .br{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;font-size:14px}
 .batang .trek{height:20px;border-radius:0 6px 6px 0;background:var(--ina-background-secondary)}
 .batang .isi{height:100%;border-radius:0 6px 6px 0;background:var(--ina-primary-500)}
 .daftar-order{list-style:none;margin:12px 0 0;padding:0}
@@ -134,7 +134,7 @@ a.ina-button{text-decoration:none}
 @media (max-width:760px){
   .kpi{grid-template-columns:repeat(2,minmax(0,1fr))}
   .f-dua{grid-template-columns:1fr}
-  .batang .br{grid-template-columns:100px 1fr 44px}
+  .batang .br{grid-template-columns:96px minmax(0,1fr) auto}
   .kv{grid-template-columns:1fr}
   .alat .ina-input-search{width:100%}
 }

@@ -165,7 +165,7 @@ const UBAH = [
     isi:'Setiap baris memiliki IDDS Checkbox dan judul tabel memiliki "pilih semua". Setelah ada yang dipilih, bilah aksi menampilkan jumlah pengguna terpilih dengan tombol Aktifkan, Tangguhkan, dan Batalkan pilihan. IDDS Modal Confirmation menyebut nama-nama yang akan diubah dan pengguna yang dilewati karena statusnya sudah sesuai.',
     lama:'Status pengguna hanya dapat diubah satu per satu melalui menu aksi di setiap baris.', ke:'massal', sorot:'#bilahMassal' },
   { kode:'HE-USER-03', judul:'Tambah Pengguna: syarat kata sandi awal sama dengan aturan kata sandi lain',
-    isi:'Isian "Password Awal" memakai IDDS Password Input dengan tombol tampilkan/sembunyikan dan daftar centang yang sama dengan Akun Saya dan layar ganti kata sandi sementara: minimal 12 karakter, huruf besar, huruf kecil, angka, simbol. Tombol "Buat Password Acak" mengisi kata sandi yang memenuhi semua syarat.',
+    isi:'Isian "Kata Sandi Awal" memakai IDDS Password Input dengan tombol tampilkan/sembunyikan dan daftar centang yang sama dengan Akun Saya dan layar ganti kata sandi sementara: minimal 12 karakter, huruf besar, huruf kecil, angka, simbol. Tombol "Buat Kata Sandi Acak" mengisi kata sandi yang memenuhi semua syarat.',
     lama:'Isian "Password Awal" cukup "Minimal 8 karakter", padahal Reset Password membuat kata sandi acak 12 karakter dan layar ganti kata sandi sementara meminta 12 karakter + 4 jenis karakter.', ke:'tambah', sorot:'#f-uPw' },
   { kode:'HE-USER-04', judul:'Daftar Pengguna: menu aksi dan pesan hasil yang jelas',
     isi:'Tombol aksi di setiap baris memakai IDDS Action Dropdown dengan label "Aksi untuk [nama]" untuk pembaca layar dan tooltip. Pesan hasil (pengguna dibuat, diperbarui, ditangguhkan) memakai IDDS Toast yang dapat ditutup, dan baris yang berubah disorot sesaat.',
@@ -271,7 +271,7 @@ function layar() {
     <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb">
       <thead class="ina-table__header"><tr>
         <th class="ina-table__header-cell cek-sel">${cekBox('pilihSemua', semua, '', 'aria-label="Pilih semua pengguna yang tampil" data-pilih-semua')}</th>
-        <th class="ina-table__header-cell">Nama</th><th class="ina-table__header-cell">Email</th><th class="ina-table__header-cell">Peran</th><th class="ina-table__header-cell">Login terakhir</th>
+        <th class="ina-table__header-cell">Nama</th><th class="ina-table__header-cell">Email</th><th class="ina-table__header-cell">Peran</th><th class="ina-table__header-cell">Terakhir masuk</th>
         <th class="ina-table__header-cell ditandai" id="kolomCa">${denganTip(`<span class="istilah" tabindex="0">Status CA</span>`, KET_CA, 'bottom')}${usulan('HE-USER-01')}</th>
         <th class="ina-table__header-cell">Status</th><th class="ina-table__header-cell"></th></tr></thead>
       <tbody class="ina-table__body">${rows.length ? rows.map(u => { const c = CA[u.ca], [sl, sb] = STATUS[u.status], p = S.pilih.has(u.id);
@@ -292,7 +292,7 @@ function menuAksi(u) {
   return `<span class="aksi-wadah ina-action-dropdown">${denganTip(`<button type="button" class="ina-button ina-button--secondary ina-button--sm ikon-aksi" data-menu="${u.id}" aria-haspopup="menu" aria-expanded="${buka}" aria-label="Aksi untuk ${esc(u.nama)}">${ik('menu', 16)}</button>`, 'Aksi', 'left')}
     ${buka ? `<div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible" role="menu">
       <button type="button" class="ina-action-dropdown__item" role="menuitem" data-ubah="${u.id}"><span class="ina-action-dropdown__item-icon">${ik('edit')}</span><span class="ina-action-dropdown__item-content">Ubah Data</span></button>
-      <button type="button" class="ina-action-dropdown__item" role="menuitem" data-reset="${u.id}"><span class="ina-action-dropdown__item-icon">${ik('kunciKey')}</span><span class="ina-action-dropdown__item-content">Reset Password</span></button>
+      <button type="button" class="ina-action-dropdown__item" role="menuitem" data-reset="${u.id}"><span class="ina-action-dropdown__item-icon">${ik('kunciKey')}</span><span class="ina-action-dropdown__item-content">Atur Ulang Kata Sandi</span></button>
       ${u.status === 'ACTIVE' ? `<button type="button" class="ina-action-dropdown__item" role="menuitem" data-ubah-status="${u.id}" data-ke-status="SUSPENDED"><span class="ina-action-dropdown__item-icon">${ik('kunci')}</span><span class="ina-action-dropdown__item-content">Tangguhkan</span></button>`
         : `<button type="button" class="ina-action-dropdown__item" role="menuitem" data-ubah-status="${u.id}" data-ke-status="ACTIVE"><span class="ina-action-dropdown__item-icon">${ik('centang')}</span><span class="ina-action-dropdown__item-content">Aktifkan</span></button>`}</div>` : ''}</span>`;
 }
@@ -337,16 +337,16 @@ const pilihan = (id, l, opsi, v, wajib, bantu = '') => `<div class="ina-text-fie
   <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div></div>`;
 const pwIsian = (id, l, ph, bantu) => `<div class="ina-password-input ditandai" id="f-${id}"><label class="ina-password-input__label" for="${id}">${l}<span class="ina-password-input__required">*</span></label>
   <div class="ina-password-input__wrapper ina-password-input__wrapper--size-md ina-password-input__wrapper--neutral"><input id="${id}" type="password" class="ina-password-input__input" placeholder="${ph}" autocomplete="new-password">
-  <div class="ina-password-input__actions"><button type="button" class="ina-password-input__toggle-button" data-lihat-pw="${id}" aria-label="Tampilkan password" aria-pressed="false">${ik('mata', 18)}</button></div></div>
+  <div class="ina-password-input__actions"><button type="button" class="ina-password-input__toggle-button" data-lihat-pw="${id}" aria-label="Tampilkan kata sandi" aria-pressed="false">${ik('mata', 18)}</button></div></div>
   <div class="ina-password-input__status-area"><span class="ina-password-input__status-message" id="h-${id}" aria-live="polite">${bantu}</span></div></div>`;
 function dialogUser(mode, u) {
   const baru = mode === 'create';
   dialog({ judul: baru ? 'Tambah Pengguna Baru' : `Ubah Pengguna — ${esc(u.nama)}`, lebar:true,
     isi:`<div class="f-grid3">${tf('uDepan', 'Nama Depan', baru ? '' : u.nama.split(' ')[0], '', true)}${tf('uTengah', 'Nama Tengah', '')}${tf('uBelakang', 'Nama Belakang', baru ? '' : u.nama.split(' ').slice(1).join(' '))}</div>
       ${baru ? `<div class="f-baris">${tf('uEmail', 'Email', '', 'nama@contoh.id', true, '', 'email')}</div>
-        <div class="f-baris">${pwIsian('uPw', 'Password Awal', 'Buat password awal', 'Sampaikan password ini ke pengguna. Pengguna dapat menggantinya sendiri di menu Akun Saya.')}
+        <div class="f-baris">${pwIsian('uPw', 'Kata Sandi Awal', 'Buat kata sandi awal', 'Sampaikan kata sandi ini ke pengguna. Pengguna dapat menggantinya sendiri di menu Akun Saya.')}
           <ul class="syarat-pw" id="syaratPw" aria-live="polite">${SYARAT_PW.map(([l], i) => `<li data-syarat="${i}"><span class="tanda" aria-hidden="true"></span>${l}</li>`).join('')}</ul>
-          <div class="pw-atas">${tombol('Buat Password Acak', 'tertiary', 'sm', 'id="pwAcak"', ik('acak', 14))}${usulan('HE-USER-03')}</div></div>`
+          <div class="pw-atas">${tombol('Buat Kata Sandi Acak', 'tertiary', 'sm', 'id="pwAcak"', ik('acak', 14))}${usulan('HE-USER-03')}</div></div>`
         : `<div class="f-baris"><label class="ina-text-field__label">Email</label><div class="terkunci-isi">${esc(u.email)} <small>(tidak dapat diubah dari sini)</small></div></div>`}
       <div class="f-grid2">${pilihan('uPeran', 'Peran', [...(baru ? [['', 'Pilih peran']] : [['', '(tidak berubah)']]), ['ROLE_ASISTEN', 'Asisten'], ['ROLE_PPAT', 'PPAT'], ['ROLE_KLIEN', 'Klien']], '', baru, baru ? '' : 'Kosongkan untuk membiarkan peran tetap.')}
         ${baru ? '' : pilihan('uStatus', 'Status', [['ACTIVE', 'Aktif'], ['SUSPENDED', 'Ditangguhkan'], ['INACTIVE', 'Non-aktif']], u.status, true)}</div>`,
@@ -356,7 +356,7 @@ function dialogUser(mode, u) {
     L.querySelector('#uPw').addEventListener('input', cekPw);
     L.querySelector('#pwAcak').addEventListener('click', () => { $('#uPw').value = acakPw(); $('#uPw').type = 'text'; cekPw(); });
   }
-  L.addEventListener('click', e => { const lp = e.target.closest('[data-lihat-pw]'); if (!lp) return; const i = $('#' + lp.dataset.lihatPw), lihat = i.type === 'password'; i.type = lihat ? 'text' : 'password'; lp.setAttribute('aria-pressed', lihat); lp.setAttribute('aria-label', lihat ? 'Sembunyikan password' : 'Tampilkan password'); lp.innerHTML = ik(lihat ? 'mataTutup' : 'mata', 18); });
+  L.addEventListener('click', e => { const lp = e.target.closest('[data-lihat-pw]'); if (!lp) return; const i = $('#' + lp.dataset.lihatPw), lihat = i.type === 'password'; i.type = lihat ? 'text' : 'password'; lp.setAttribute('aria-pressed', lihat); lp.setAttribute('aria-label', lihat ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'); lp.innerHTML = ik(lihat ? 'mataTutup' : 'mata', 18); });
   L.addEventListener('input', e => { const f = e.target.closest('.ina-text-field'); if (f) bersih(f.id.slice(2)); });
   $('#uDepan').focus();
 }
@@ -374,7 +374,7 @@ function setPw(pesan, jenis) {
 function cekPw() {
   const v = $('#uPw').value, ok = SYARAT_PW.map(([, uji]) => uji(v));
   document.querySelectorAll('#syaratPw li').forEach((li, i) => { li.classList.toggle('ok', ok[i]); li.querySelector('.tanda').innerHTML = ok[i] ? ik('centang', 12) : ''; });
-  setPw(v && ok.every(Boolean) ? 'Password sudah memenuhi semua syarat.' : 'Sampaikan password ini ke pengguna. Pengguna dapat menggantinya sendiri di menu Akun Saya.', v && ok.every(Boolean) ? 'success' : '');
+  setPw(v && ok.every(Boolean) ? 'Kata sandi sudah memenuhi semua syarat.' : 'Sampaikan kata sandi ini ke pengguna. Pengguna dapat menggantinya sendiri di menu Akun Saya.', v && ok.every(Boolean) ? 'success' : '');
 }
 function galat(id, pesan) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); w?.classList.add('ina-text-field__wrapper--status-error'); if (h) { h.textContent = pesan; h.classList.add('ina-text-field__helper-text--error'); } }
 function bersih(id) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); w?.classList.remove('ina-text-field__wrapper--status-error'); if (h) { h.classList.remove('ina-text-field__helper-text--error'); h.textContent = h.dataset.bantu || ''; } }
@@ -384,30 +384,30 @@ function simpanUser(mode, u) {
   if (mode === 'create') {
     if (!/^\S+@\S+\.\S+$/.test(v('uEmail'))) { galat('uEmail', 'Format email tidak valid. Contoh: nama@contoh.id'); ada = true; }
     else if (USER.some(x => x.email === v('uEmail').toLowerCase())) { galat('uEmail', 'Email ini sudah terdaftar. Gunakan email lain.'); ada = true; }
-    if (!SYARAT_PW.every(([, uji]) => uji($('#uPw').value))) { setPw('Password belum memenuhi semua syarat di bawah.', 'error'); ada = true; }
+    if (!SYARAT_PW.every(([, uji]) => uji($('#uPw').value))) { setPw('Kata sandi belum memenuhi semua syarat di bawah.', 'error'); ada = true; }
     if (!v('uPeran')) { galat('uPeran', 'Pilih peran pengguna.'); ada = true; }
   }
   if (ada) { $('#lapisan .ina-text-field__wrapper--status-error input, #lapisan .ina-text-field__wrapper--status-error select, #lapisan .ina-password-input__wrapper--error input')?.focus(); return; }
   const nama = [v('uDepan'), v('uTengah'), v('uBelakang')].filter(Boolean).join(' ');
   $('#lapisan').innerHTML = '';
-  if (mode === 'create') { const id = Math.max(...USER.map(x => x.id)) + 1; USER.unshift({ id, nama, email:v('uEmail').toLowerCase(), peran:v('uPeran'), ca:'none', status:'ACTIVE', login:'', kode:'USR_CONTOH' + id }); sorotBaris(id); toast('Pengguna berhasil dibuat.', 'positive', 4000, `${nama} dapat masuk dengan email dan password awal.`); }
+  if (mode === 'create') { const id = Math.max(...USER.map(x => x.id)) + 1; USER.unshift({ id, nama, email:v('uEmail').toLowerCase(), peran:v('uPeran'), ca:'none', status:'ACTIVE', login:'', kode:'USR_CONTOH' + id }); sorotBaris(id); toast('Pengguna berhasil dibuat.', 'positive', 4000, `${nama} dapat masuk dengan email dan kata sandi awal.`); }
   else { Object.assign(u, { nama, peran:v('uPeran') || u.peran, status:v('uStatus') }); sorotBaris(u.id); toast('Pengguna berhasil diperbarui.', 'positive'); }
 }
 
 /* ---------------- Reset Password (live, 2 tahap) ---------------- */
 function dialogReset(u) {
-  dialog({ judul:`Reset password — ${esc(u.nama)}`, konfirmasi:true,
-    isi:`<div class="modal-gap"><p>Sistem akan membuat password acak 12 karakter untuk pengguna ini. Password lama dinonaktifkan dan <b>pengguna otomatis keluar dari semua perangkat</b>.</p>
-      ${alert('info', '', `Password sementara akan <b>dikirim otomatis ke email pengguna</b> (${esc(u.email)}). Password juga ditampilkan sekali di sini sebagai cadangan bila email gagal terkirim.`)}</div>`,
-    tombol:[['Batal', 'secondary', null], ['Reset Password', 'primary', () => {
+  dialog({ judul:`Atur ulang kata sandi — ${esc(u.nama)}`, konfirmasi:true,
+    isi:`<div class="modal-gap"><p>Sistem akan membuat kata sandi acak 12 karakter untuk pengguna ini. Kata sandi lama dinonaktifkan dan <b>pengguna otomatis keluar dari semua perangkat</b>.</p>
+      ${alert('info', '', `Kata sandi sementara akan <b>dikirim otomatis ke email pengguna</b> (${esc(u.email)}). Kata sandi juga ditampilkan sekali di sini sebagai cadangan bila email gagal terkirim.`)}</div>`,
+    tombol:[['Batal', 'secondary', null], ['Atur Ulang Kata Sandi', 'primary', () => {
       const pw = acakPw().slice(0, 12);
-      dialog({ judul:`Password sementara — ${esc(u.nama)}`,
-        isi:`<div class="modal-gap">${alert('success', 'Password terkirim ke email user', `Password sementara sudah dikirim ke ${esc(u.email)}. Password di bawah dapat dipakai sebagai cadangan bila pengguna tidak menerima email.`)}
-          <p>Password ini <b>tidak akan ditampilkan lagi</b> setelah dialog ditutup.</p>
-          <div><span class="ina-text-field__label">Password sementara</span><div class="pw-sementara"><code id="pwSementara">${pw}</code>${tombol('Salin', 'secondary', 'sm', 'id="salinPw"', ik('salin', 14))}</div></div>
-          ${alert('info', '', 'Pengguna harus masuk ulang dengan password ini. Semua sesi aktifnya sudah diakhiri.')}</div>`,
+      dialog({ judul:`Kata sandi sementara — ${esc(u.nama)}`,
+        isi:`<div class="modal-gap">${alert('success', 'Kata sandi terkirim ke email pengguna', `Kata sandi sementara sudah dikirim ke ${esc(u.email)}. Kata sandi di bawah dapat dipakai sebagai cadangan bila pengguna tidak menerima email.`)}
+          <p>Kata sandi ini <b>tidak akan ditampilkan lagi</b> setelah dialog ditutup.</p>
+          <div><span class="ina-text-field__label">Kata sandi sementara</span><div class="pw-sementara"><code id="pwSementara">${pw}</code>${tombol('Salin', 'secondary', 'sm', 'id="salinPw"', ik('salin', 14))}</div></div>
+          ${alert('info', '', 'Pengguna harus masuk ulang dengan kata sandi ini. Semua sesi aktifnya sudah diakhiri.')}</div>`,
         tombol:[['Selesai', 'primary', null]] });
-      $('#salinPw').addEventListener('click', e => { e.stopPropagation(); navigator.clipboard?.writeText(pw).catch(() => {}); toast('Password disalin.', 'positive'); });
+      $('#salinPw').addEventListener('click', e => { e.stopPropagation(); navigator.clipboard?.writeText(pw).catch(() => {}); toast('Kata sandi disalin.', 'positive'); });
     }]] });
 }
 
@@ -441,7 +441,7 @@ const CONTOH_IMPOR = [
 function cekBaris(r) { if (!r.nama.trim()) return 'Nama kosong.'; if (!/^\S+@\S+\.\S+$/.test(r.email)) return 'Format email tidak valid.'; if (USER.some(u => u.email === r.email)) return 'Email sudah terdaftar.'; return ''; }
 function dialogImpor() {
   dialog({ judul:'Impor pengguna klien dari berkas', lebar:true,
-    isi:`<div class="modal-gap"><p>Tambahkan banyak klien sekaligus. Pengguna hasil impor berperan <b>Klien</b> dan menerima password sementara melalui email.${usulan('HE-UMUM-03')}</p>
+    isi:`<div class="modal-gap"><p>Tambahkan banyak klien sekaligus. Pengguna hasil impor berperan <b>Klien</b> dan menerima kata sandi sementara melalui email.${usulan('HE-UMUM-03')}</p>
       <div class="langkah-impor">${badge('1. Unduh templat', 'brand', 'sm')}${badge('2. Unggah berkas', 'neutral', 'sm')}${badge('3. Periksa dan simpan', 'neutral', 'sm')}</div>
       <div>${tombol('Unduh Templat CSV', 'secondary', 'sm', 'id="unduhTemplat"', ik('unduh', 14))} <span class="sel-email">Kolom: nama, email, nomor HP (opsional).</span></div>
       <div class="ina-file-upload" id="f-impor"><div class="ina-file-upload__label">Berkas pengguna<span class="ina-text-field__required">*</span></div>
@@ -469,7 +469,7 @@ function simpanImpor() {
   let id = Math.max(...USER.map(x => x.id));
   valid.forEach(r => { id++; USER.unshift({ id, nama:r.nama, email:r.email, peran:'ROLE_KLIEN', ca:'none', status:'ACTIVE', login:'', kode:'USR_CONTOH' + id }); });
   $('#lapisan').innerHTML = ''; S.peran = 'ROLE_KLIEN'; gambar();
-  toast(`${valid.length} klien berhasil diimpor.`, 'positive', 4500, `Password sementara dikirim ke email masing-masing. ${hasil.length - valid.length} baris tidak disimpan.`);
+  toast(`${valid.length} klien berhasil diimpor.`, 'positive', 4500, `Kata sandi sementara dikirim ke email masing-masing. ${hasil.length - valid.length} baris tidak disimpan.`);
 }
 
 /* ---------------- tombol Bantuan di judul halaman (HE-UMUM-02) ---------------- */
@@ -540,9 +540,9 @@ function bukaBantuan() {
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${faq(1, 'Apa arti Status CA?', KET_CA + ' Registrasi CA dilakukan pengguna sendiri melalui Akun Saya.')}
     ${faq(2, 'Apa beda Ditangguhkan dan Non-aktif?', 'Ditangguhkan: pengguna tidak bisa masuk sementara, misalnya selama pemeriksaan. Non-aktif: akun tidak dipakai lagi. Keduanya dapat diaktifkan kembali.')}
-    ${faq(3, 'Syarat password awal', 'Minimal 12 karakter dan mengandung huruf besar, huruf kecil, angka, serta simbol. Gunakan "Buat Password Acak" agar syarat terpenuhi, lalu sampaikan ke pengguna.')}
+    ${faq(3, 'Syarat kata sandi awal', 'Minimal 12 karakter dan mengandung huruf besar, huruf kecil, angka, serta simbol. Gunakan "Buat Kata Sandi Acak" agar syarat terpenuhi, lalu sampaikan ke pengguna.')}
     ${faq(4, 'Bagaimana mengimpor banyak klien?', 'Klik "Impor dari Berkas", unduh templat CSV, isi nama dan email, lalu unggah. Baris yang bermasalah ditampilkan beserta alasannya dan tidak ikut disimpan.')}
-    ${faq(5, 'Pengguna tidak menerima email password', 'Gunakan Reset Password. Password sementara juga ditampilkan sekali di dialog sehingga dapat disampaikan langsung ke pengguna.')}
+    ${faq(5, 'Pengguna tidak menerima email kata sandi', 'Gunakan Atur Ulang Kata Sandi. Kata sandi sementara juga ditampilkan sekali di dialog sehingga dapat disampaikan langsung ke pengguna.')}
     <h4 class="bantu-sub">Kontak dukungan ${usulan('HE-UMUM-02')}</h4>
     <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>` });
 }
@@ -550,7 +550,7 @@ function bukaBantuan() {
 /* ---------------- protobar & daftar perubahan ---------------- */
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Daftar Pengguna', lebar:true,
-    isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital (skor halaman 79,5; rincian dan gambar bukti di laporan lengkap UX Metric Lab) serta kode live. Kolom, saringan, menu aksi, Reset Password, dan Tangguhkan/Aktifkan tetap seperti live; yang diubah adalah penjelasan Status CA, aksi massal, syarat password, kejelasan aksi, impor berkas, dan bantuan. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
+    isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital (skor halaman 79,5; rincian dan gambar bukti di laporan lengkap UX Metric Lab) serta kode live. Kolom, saringan, menu aksi, Atur Ulang Kata Sandi, dan Tangguhkan/Aktifkan tetap seperti live; yang diubah adalah penjelasan Status CA, aksi massal, syarat kata sandi, kejelasan aksi, impor berkas, dan bantuan. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
       <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });

@@ -181,7 +181,7 @@ body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ina-content-pri
 .protobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 16px;background:#0f1a17;color:#E6EDEA;font-size:12px;position:relative;z-index:60}
 .protobar a{color:#E6EDEA;text-decoration:none;border:1px dashed rgba(255,255,255,.3);border-radius:999px;padding:4px 10px;font:500 11px Inter,sans-serif}
 .protobar b{color:#fff}
-.protobar .sep{opacity:.35}
+.protobar .sep{opacity:.6}
 .protobar button.pil{border:1px solid rgba(255,255,255,.25);background:transparent;color:#E6EDEA;font:500 11px Inter,sans-serif;padding:4px 10px;border-radius:999px;cursor:pointer}
 .protobar button.pil[aria-pressed="true"]{background:#3D6B5E;border-color:#3D6B5E;color:#fff}
 .protobar .kanan{margin-left:auto;display:inline-flex;gap:8px;flex-wrap:wrap}
@@ -728,8 +728,8 @@ function tabObjek(o, kunci) {
 function tabDok(o, kunci) {
   return `<div class="tab-bar"><p>${kunci ? '' : 'Dokumen membantu pemeriksaan, tetapi tidak menjadi syarat pindah status.'}</p>${kunci ? '' : tombol('Tambah Dokumen', 'primary', 'md', 'id="tambahDok"', ik('tambah', 16))}</div>
     <div class="tabel-wadah" style="margin-top:0"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb"><thead class="ina-table__header"><tr><th class="ina-table__header-cell">Jenis</th><th class="ina-table__header-cell">Pemilik</th><th class="ina-table__header-cell">File</th><th class="ina-table__header-cell">Ukuran</th><th class="ina-table__header-cell"></th></tr></thead>
-    <tbody class="ina-table__body">${o.dok.length ? o.dok.map((d, i) => `<tr class="ina-table__row"><td class="ina-table__cell">${badge(d.jenis, d.file ? 'success' : 'neutral')}</td><td class="ina-table__cell">${d.pemilik}</td><td class="ina-table__cell">${d.file ? `<span style="color:var(--ina-primary-primary)">${d.file}</span>` : '<span class="sub2">Belum upload</span>'}</td><td class="ina-table__cell">${d.ukuran || '-'}</td>
-      <td class="ina-table__cell">${kunci ? '—' : `<div class="aksi-baris">${tombol('Upload', 'secondary', 'sm', `data-unggah="${i}"`, ik('unggah', 14))}${tombol('Hapus', 'tertiary', 'sm', `data-hapus-dok="${i}" data-merah`)}</div>`}</td></tr>`).join('')
+    <tbody class="ina-table__body">${o.dok.length ? o.dok.map((d, i) => `<tr class="ina-table__row"><td class="ina-table__cell">${badge(d.jenis, d.file ? 'success' : 'neutral')}</td><td class="ina-table__cell">${d.pemilik}</td><td class="ina-table__cell">${d.file ? `<span style="color:var(--ina-primary-primary)">${d.file}</span>` : '<span class="sub2">Belum diunggah</span>'}</td><td class="ina-table__cell">${d.ukuran || '-'}</td>
+      <td class="ina-table__cell">${kunci ? '—' : `<div class="aksi-baris">${tombol('Unggah', 'secondary', 'sm', `data-unggah="${i}"`, ik('unggah', 14))}${tombol('Hapus', 'tertiary', 'sm', `data-hapus-dok="${i}" data-merah`)}</div>`}</td></tr>`).join('')
       : `<tr><td colspan="5" class="ina-table__empty-cell kosong">Belum ada dokumen.</td></tr>`}</tbody></table></div></div></div>`;
 }
 
@@ -880,7 +880,7 @@ function dialogObjek() {
 }
 function dialogDok() {
   dialog({ judul:'Tambah Dokumen', isi:`<div class="f-grid">${tf('dJenis', 'Jenis Dokumen', 'KTP', 'KTP / KK / NPWP / SERTIFIKAT / PBB', true)}${tf('dPemilik', 'Pemilik', 'Penjual', 'Penjual / Pembeli')}</div>`,
-    tombol:[['Batal','secondary',null],['Simpan','primary',() => { ord().dok.push({ jenis:($('#dJenis').value || 'KTP').toUpperCase(), pemilik:$('#dPemilik').value || '-', file:'', ukuran:'' }); gambar(); toast('Dokumen ditambahkan. Klik Upload untuk mengunggah berkas.', 'positive'); }]] });
+    tombol:[['Batal','secondary',null],['Simpan','primary',() => { ord().dok.push({ jenis:($('#dJenis').value || 'KTP').toUpperCase(), pemilik:$('#dPemilik').value || '-', file:'', ukuran:'' }); gambar(); toast('Dokumen ditambahkan. Klik Unggah untuk mengunggah berkas.', 'positive'); }]] });
 }
 function dialogBuatOrder() {
   dialog({ judul:'Buat Permohonan', isi:`<div class="f-grid">${tf('bJenis', 'Jenis Akta', 'AJB - Akta Jual Beli', '', true, true)}${tf('bNama', 'Nama Narahubung', '', 'Nama narahubung', true)}${tf('bHp', 'No. HP', '', '08xxxx')}${tf('bEmail', 'Email', '', 'email@contoh.id', false, false, 'email')}</div>`,

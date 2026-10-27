@@ -38,7 +38,7 @@ body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ina-content-pri
 .protobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 16px;background:#0f1a17;color:#E6EDEA;font-size:12px;position:relative;z-index:60}
 .protobar a{color:#E6EDEA;text-decoration:none;border:1px dashed rgba(255,255,255,.3);border-radius:999px;padding:4px 10px;font:500 11px Inter,sans-serif}
 .protobar b{color:#fff}
-.protobar .sep{opacity:.35}
+.protobar .sep{opacity:.6}
 .protobar .sim{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
 .protobar .sim span{opacity:.7}
 .protobar button.pil{border:1px solid rgba(255,255,255,.25);background:transparent;color:#E6EDEA;font:500 11px Inter,sans-serif;padding:4px 10px;border-radius:999px;cursor:pointer}
@@ -505,7 +505,7 @@ function pindahLayar(ke, tab) {
 /* ---------------- layar System › Dasbor (bentuk = live; letak pengingat TERA sesuai bukti laporan HE) ---------------- */
 function layarDashboard() {
   const aksi = `<div style="display:flex;gap:8px;align-items:center">${tombol('Daftar TERA', 'primary', 'sm', 'id="daftarTera"', ik('panah', 14))}<button type="button" class="ina-alert__close-button" id="tutupIngat" aria-label="Tutup">${ik('x', 16)}</button></div>`;
-  const cepat = [['users','Kelola pengguna','Tambah, suspend, reset password'],['tameng','Atur peran & izin','RBAC matrix per modul'],['gear','Pengaturan sistem','Brand theme + preferensi global']];
+  const cepat = [['users','Kelola pengguna','Tambah pengguna, tangguhkan, atur ulang kata sandi'],['tameng','Atur peran & izin','RBAC matrix per modul'],['gear','Pengaturan sistem','Brand theme + preferensi global']];
   const log = [['LOGIN','Baru saja'],['LOGIN','34 menit lalu'],['TOKEN_REFRESH','39 menit lalu'],['TOKEN_REFRESH','54 menit lalu'],['TOKEN_REFRESH','1 jam lalu']];
   return `
     <nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link"><span class="ina-breadcrumb__text">Pengaturan Aplikasi</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">Dasbor</span></span></li></ol></nav>
@@ -545,8 +545,8 @@ function tabAkun() {
 }
 function tabKeamanan() {
   return `<div class="kartu"><div class="atas"><div><div class="eb">Keamanan Akun</div><h3>Verifikasi Dua Faktor (2FA) ${badge('Belum aktif', 'neutral')}</h3></div><div>${tombol('Aktifkan 2FA', 'primary', 'md', '', ik('tameng', 16))}</div></div>
-    <p class="ket">Tambahkan lapisan keamanan ekstra. Saat 2FA aktif, login akan meminta kode 6 digit dari aplikasi authenticator.</p></div>
-    <div class="kartu"><div class="eb">Keamanan Akun</div><h3>Ganti Password</h3><p class="ket">Setelah password diubah, semua sesi aktif di perangkat lain akan otomatis keluar.</p></div>`;
+    <p class="ket">Tambahkan lapisan keamanan ekstra. Saat 2FA aktif, proses masuk akan meminta kode 6 digit dari aplikasi authenticator.</p></div>
+    <div class="kartu"><div class="eb">Keamanan Akun</div><h3>Ganti Kata Sandi</h3><p class="ket">Setelah kata sandi diubah, semua sesi aktif di perangkat lain akan otomatis keluar.</p></div>`;
 }
 function tabTera() {
   const st = STATUS[S.status];
@@ -686,7 +686,7 @@ function bukaBantuan() {
     : `<p>Akun Saya berisi data akun dan pengaturan keamanan Anda.</p>
     <ol class="bantu-langkah">
       <li><b>Akun</b> — lihat dan ubah nama serta nomor telepon. Email hanya dapat diubah oleh admin.</li>
-      <li><b>Keamanan</b> — aktifkan verifikasi dua faktor (2FA) dan ganti password.</li>
+      <li><b>Keamanan</b> — aktifkan verifikasi dua faktor (2FA) dan ganti kata sandi.</li>
       <li><b>Registrasi TERA</b> — daftarkan stempel elektronik kantor. Buka tab ini lalu klik Bantuan untuk panduan lengkapnya.</li>
     </ol>`;
   drawer({ judul: diTera ? 'Bantuan Registrasi TERA' : S.layar === 'dashboard' ? 'Bantuan Dasbor' : 'Bantuan Akun Saya',

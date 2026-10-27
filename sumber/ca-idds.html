@@ -38,7 +38,7 @@ body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ina-content-pri
 .protobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 16px;background:#0f1a17;color:#E6EDEA;font-size:12px;position:relative;z-index:60}
 .protobar a{color:#E6EDEA;text-decoration:none;border:1px dashed rgba(255,255,255,.3);border-radius:999px;padding:4px 10px;font:500 11px Inter,sans-serif}
 .protobar b{color:#fff}
-.protobar .sep{opacity:.35}
+.protobar .sep{opacity:.6}
 .protobar button.pil{border:1px solid rgba(255,255,255,.25);background:transparent;color:#E6EDEA;font:500 11px Inter,sans-serif;padding:4px 10px;border-radius:999px;cursor:pointer}
 .protobar button.pil[aria-pressed="true"]{background:#3D6B5E;border-color:#3D6B5E;color:#fff}
 .protobar .kanan{margin-left:auto;display:inline-flex;gap:8px;flex-wrap:wrap}
@@ -464,7 +464,7 @@ const UBAH = [
     isi:'Semua data yang diperlukan untuk akta dan registrasi CA diisi di tab Data Diri (KTP), termasuk nomor HP (sebelumnya di tab Akun; kini tab Akun hanya menampilkannya). Isian dikelompokkan seperti urutan KTP: Identitas sesuai KTP, Alamat sesuai KTP, Kontak dan domisili, Foto KTP — tiap kelompok memiliki satu kalimat penjelasan. Isian wajib bertanda *, isian lain bertanda "(opsional)". Alert di atas menunjukkan "n dari 6 isian wajib terisi" dan tombol "Ke isian berikutnya". Kaki formulir menunjukkan "Belum disimpan" / "Semua perubahan tersimpan"; pindah tab dengan perubahan belum disimpan memunculkan konfirmasi. Format NIK, NPWP, nomor HP, dan RT/RW diperiksa sebelum disimpan.',
     lama:'Satu daftar panjang 17 isian tanpa pengelompokan; nomor HP di tab Akun sehingga data CA tersebar di dua tab; tidak ada penanda isian wajib; perubahan dapat hilang saat pindah tab tanpa peringatan; beda "Kota Domisili" dan "Domisili Sementara" tidak jelas.', ke:'datadiri', sorot:'#kartuDataDiri' },
   { kode:'HE-CA-08', judul:'Tab Akun dan Keamanan: seragam, berbahasa Indonesia, dan aman dipakai',
-    isi:'Keempat tab Akun Saya memakai pola kartu yang sama (ikon, judul, satu kalimat keterangan, tombol di kaki). Tab Akun: nama diubah lewat "Ubah Nama" dengan status "Belum disimpan" dan konfirmasi bila pindah tab sebelum disimpan; nomor HP ditautkan ke tab Data Diri; peran "Klien" dijelaskan dengan tooltip; ID akun diberi keterangan kegunaannya. Tab Keamanan: isian kata sandi memakai IDDS Password Input dengan tombol tampilkan/sembunyikan; syarat kata sandi diseragamkan dengan layar ganti kata sandi sementara (minimal 12 karakter, huruf besar, huruf kecil, angka, simbol) dan ditampilkan sebagai daftar centang yang terisi saat mengetik; kecocokan ulangan diperiksa; tombol "Ganti Password" baru aktif bila semua sesuai; pesan "password saat ini tidak sesuai" tampil di bawah isian. Bagian sesi menjadi "Perangkat yang sedang masuk" dengan jenis perangkat, label "Perangkat ini", dan konfirmasi sebelum mengeluarkan perangkat.',
+    isi:'Keempat tab Akun Saya memakai pola kartu yang sama (ikon, judul, satu kalimat keterangan, tombol di kaki). Tab Akun: nama diubah lewat "Ubah Nama" dengan status "Belum disimpan" dan konfirmasi bila pindah tab sebelum disimpan; nomor HP ditautkan ke tab Data Diri; peran "Klien" dijelaskan dengan tooltip; ID akun diberi keterangan kegunaannya. Tab Keamanan: isian kata sandi memakai IDDS Password Input dengan tombol tampilkan/sembunyikan; syarat kata sandi diseragamkan dengan layar ganti kata sandi sementara (minimal 12 karakter, huruf besar, huruf kecil, angka, simbol) dan ditampilkan sebagai daftar centang yang terisi saat mengetik; kecocokan ulangan diperiksa; tombol "Ganti Kata Sandi" baru aktif bila semua sesuai; pesan "kata sandi saat ini tidak sesuai" tampil di bawah isian. Bagian sesi menjadi "Perangkat yang sedang masuk" dengan jenis perangkat, label "Perangkat ini", dan konfirmasi sebelum mengeluarkan perangkat.',
     lama:'Bahasa bercampur Inggris: "device", "di-logout", "login", "Logout dari sini", "Logout Semua", "Sesi ini". Pola kartu tiap tab berbeda (judul huruf kapital kecil di atas, ikon hanya di sebagian kartu). ID akun teknis (USR_…) ditampilkan tanpa keterangan. Syarat kata sandi tidak seragam: layar ganti kata sandi sementara meminta 12 karakter + huruf besar, huruf kecil, angka, simbol, sedangkan tab Keamanan, Tambah User, dan Registrasi hanya meminta minimal 8 karakter.', ke:'keamanan', sorot:'#kartuPassword' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Registrasi CA',
     isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi urutan registrasi, pertanyaan umum (apa itu CA, apa yang dilakukan di portal Peruri, berapa lama, tautan kedaluwarsa, CA kedaluwarsa), dan kontak dukungan.',
@@ -580,18 +580,18 @@ const tfAkun = (id, l, v, ph, wajib, bantu = '') => `<div class="ina-text-field"
 /* IDDS Password Input dengan tombol tampilkan/sembunyikan dan pesan status */
 const pwIsian = (id, l, ph, bantu, ac) => `<div class="ina-password-input" id="f-${id}"><label class="ina-password-input__label" for="${id}">${l}<span class="ina-password-input__required">*</span></label>
   <div class="ina-password-input__wrapper ina-password-input__wrapper--size-md ina-password-input__wrapper--neutral"><input id="${id}" type="password" class="ina-password-input__input" placeholder="${ph}" autocomplete="${ac}">
-  <div class="ina-password-input__actions"><button type="button" class="ina-password-input__toggle-button" data-lihat-pw="${id}" aria-label="Tampilkan password" aria-pressed="false">${ik('mata', 18)}</button></div></div>
+  <div class="ina-password-input__actions"><button type="button" class="ina-password-input__toggle-button" data-lihat-pw="${id}" aria-label="Tampilkan kata sandi" aria-pressed="false">${ik('mata', 18)}</button></div></div>
   <div class="ina-password-input__status-area"><span class="ina-password-input__status-message" id="h-${id}" aria-live="polite">${bantu}</span></div></div>`;
 function tabAman() {
   const sesiLain = S.sesi.filter(s => !s.ini).length;
   return `<div class="ina-card ina-card--variant-basic kartu">
-    ${kepala('tameng', `<span>Verifikasi dua langkah (2FA)</span> ${badge('Belum aktif', 'neutral', 'sm')}`, 'Saat masuk, Anda diminta kode 6 digit dari aplikasi autentikator (mis. Google Authenticator atau Authy) selain password.', tombol('Aktifkan 2FA', 'primary', 'md', 'data-luar="Aktivasi 2FA"', ik('tameng', 16)))}</div>
+    ${kepala('tameng', `<span>Verifikasi dua langkah (2FA)</span> ${badge('Belum aktif', 'neutral', 'sm')}`, 'Saat masuk, Anda diminta kode 6 digit dari aplikasi autentikator (mis. Google Authenticator atau Authy) selain kata sandi.', tombol('Aktifkan 2FA', 'primary', 'md', 'data-luar="Aktivasi 2FA"', ik('tameng', 16)))}</div>
   <div class="ina-card ina-card--variant-basic kartu ditandai" id="kartuPassword">
-    ${kepala('kunci', 'Ganti password', 'Setelah password diganti, akun Anda otomatis keluar dari perangkat lain. Anda tetap masuk di perangkat ini.')}
-    <div class="form-dd"><div class="lebar">${pwIsian('pLama', 'Password saat ini', 'Masukkan password yang Anda pakai sekarang', '', 'current-password')}</div>
-      ${pwIsian('pBaru', 'Password baru', 'Buat password baru', '', 'new-password')}${pwIsian('pUlang', 'Ulangi password baru', 'Ketik ulang password baru', '', 'new-password')}
+    ${kepala('kunci', 'Ganti kata sandi', 'Setelah kata sandi diganti, akun Anda otomatis keluar dari perangkat lain. Anda tetap masuk di perangkat ini.')}
+    <div class="form-dd"><div class="lebar">${pwIsian('pLama', 'Kata sandi saat ini', 'Masukkan kata sandi yang Anda pakai sekarang', '', 'current-password')}</div>
+      ${pwIsian('pBaru', 'Kata sandi baru', 'Buat kata sandi baru', '', 'new-password')}${pwIsian('pUlang', 'Ulangi kata sandi baru', 'Ketik ulang kata sandi baru', '', 'new-password')}
       <div class="lebar"><ul class="syarat-pw" id="syaratPw" aria-live="polite">${SYARAT_PW.map(([l], i) => `<li data-syarat="${i}"><span class="tanda" aria-hidden="true"></span>${l}</li>`).join('')}</ul></div></div>
-    <div class="kartu-kaki">${tombol('Ganti Password', 'primary', 'md', 'id="gantiPw" disabled', ik('kunci', 16))}${usulan('HE-CA-08')}</div></div>
+    <div class="kartu-kaki">${tombol('Ganti Kata Sandi', 'primary', 'md', 'id="gantiPw" disabled', ik('kunci', 16))}${usulan('HE-CA-08')}</div></div>
   <div class="ina-card ina-card--variant-basic kartu ditandai" id="kartuSesi">
     ${kepala('laptop', 'Perangkat yang sedang masuk', 'Keluarkan perangkat yang tidak Anda kenali atau tidak dipakai lagi.', sesiLain ? tombol('Keluarkan Semua Perangkat Lain', 'secondary', 'sm', 'data-keluar-semua', ik('keluar', 14)) : '')}
     <ul class="daftar-sesi">${S.sesi.map(s => `<li><span class="ikon-bulat kecil">${ik(s.jenis === 'Ponsel' ? 'ponsel' : 'laptop', 18)}</span>
@@ -794,7 +794,7 @@ H.addEventListener('click', e => {
   if (t.closest('#ubahAkun')) { S.ubahAkun = true; gambar(); $('#aDepan')?.focus(); return; }
   if (t.closest('#simpanAkun')) { simpanAkun(); return; }
   if (t.closest('#batalAkun')) { S.ddUbah = false; S.ubahAkun = false; gambar(); return; }
-  const lp = t.closest('[data-lihat-pw]'); if (lp) { const i = $('#' + lp.dataset.lihatPw), lihat = i.type === 'password'; i.type = lihat ? 'text' : 'password'; lp.setAttribute('aria-pressed', lihat); lp.setAttribute('aria-label', lihat ? 'Sembunyikan password' : 'Tampilkan password'); lp.innerHTML = ik(lihat ? 'mataTutup' : 'mata', 18); return; }
+  const lp = t.closest('[data-lihat-pw]'); if (lp) { const i = $('#' + lp.dataset.lihatPw), lihat = i.type === 'password'; i.type = lihat ? 'text' : 'password'; lp.setAttribute('aria-pressed', lihat); lp.setAttribute('aria-label', lihat ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'); lp.innerHTML = ik(lihat ? 'mataTutup' : 'mata', 18); return; }
   if (t.closest('#gantiPw')) { gantiPassword(); return; }
   const ks = t.closest('[data-keluar-sesi]'); if (ks) { keluarSesi(+ks.dataset.keluarSesi); return; }
   if (t.closest('[data-keluar-semua]')) { keluarSemua(); return; }
@@ -859,18 +859,18 @@ function cekPassword() {
   const ok = SYARAT_PW.map(([, uji]) => uji(baru));
   document.querySelectorAll('#syaratPw li').forEach((li, i) => { li.classList.toggle('ok', ok[i]); li.querySelector('.tanda').innerHTML = ok[i] ? ik('centang', 12) : ''; });
   const semua = ok.every(Boolean);
-  if (baru && baru === lama) setPw('pBaru', 'Password baru harus berbeda dari password saat ini.', 'error');
-  else setPw('pBaru', baru && semua ? 'Password sudah memenuhi semua syarat.' : '', baru && semua ? 'success' : '');
+  if (baru && baru === lama) setPw('pBaru', 'Kata sandi baru harus berbeda dari kata sandi saat ini.', 'error');
+  else setPw('pBaru', baru && semua ? 'Kata sandi sudah memenuhi semua syarat.' : '', baru && semua ? 'success' : '');
   if (!ulang) setPw('pUlang', '', '');
-  else if (ulang !== baru) setPw('pUlang', 'Password belum sama dengan password baru.', 'error');
-  else setPw('pUlang', 'Password sama.', 'success');
+  else if (ulang !== baru) setPw('pUlang', 'Kata sandi belum sama dengan kata sandi baru.', 'error');
+  else setPw('pUlang', 'Kata sandi sama.', 'success');
   setPw('pLama', '', '');
   $('#gantiPw').disabled = !(lama && semua && baru !== lama && ulang === baru);
 }
 function gantiPassword() {
-  if ($('#pLama').value === 'salah123') { setPw('pLama', 'Password saat ini tidak sesuai. Periksa kembali, perhatikan huruf besar dan kecil.', 'error'); $('#pLama').focus(); return; }
+  if ($('#pLama').value === 'salah123') { setPw('pLama', 'Kata sandi saat ini tidak sesuai. Periksa kembali, perhatikan huruf besar dan kecil.', 'error'); $('#pLama').focus(); return; }
   const lain = S.sesi.filter(s => !s.ini).length; S.sesi = S.sesi.filter(s => s.ini); gambar();
-  toast('Password berhasil diganti.', 'positive', 4500, lain ? `${lain} perangkat lain sudah dikeluarkan.` : '');
+  toast('Kata sandi berhasil diganti.', 'positive', 4500, lain ? `${lain} perangkat lain sudah dikeluarkan.` : '');
 }
 function keluarSesi(id) {
   const s = S.sesi.find(x => x.id === id);

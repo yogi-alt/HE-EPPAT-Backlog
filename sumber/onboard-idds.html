@@ -38,7 +38,7 @@ body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ina-content-pri
 .protobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 16px;background:#0f1a17;color:#E6EDEA;font-size:12px;position:relative;z-index:60}
 .protobar a{color:#E6EDEA;text-decoration:none;border:1px dashed rgba(255,255,255,.3);border-radius:999px;padding:4px 10px;font:500 11px Inter,sans-serif}
 .protobar b{color:#fff}
-.protobar .sep{opacity:.35}
+.protobar .sep{opacity:.6}
 .protobar button.pil{border:1px solid rgba(255,255,255,.25);background:transparent;color:#E6EDEA;font:500 11px Inter,sans-serif;padding:4px 10px;border-radius:999px;cursor:pointer}
 .protobar button.pil[aria-pressed="true"]{background:#3D6B5E;border-color:#3D6B5E;color:#fff}
 .protobar .kanan{margin-left:auto;display:inline-flex;gap:8px;flex-wrap:wrap}
@@ -457,7 +457,7 @@ body.mode-app .ob{display:none}
   <span class="sep">&bull;</span><b>Platform Onboarding</b><span class="sep">&bull;</span><span>Layar:</span>
   <span id="pilLayar"></span>
   <span class="kanan">
-    <span>Contoh: sandi <b>salah123</b> = login gagal · kode <b>000000</b> = salah</span>
+    <span>Contoh: sandi <b>salah123</b> = gagal masuk · kode <b>000000</b> = salah</span>
     <button class="pil" id="simKedaluwarsa" title="Saat kode OTP email ditampilkan">Simulasi kode kedaluwarsa</button>
     <button class="pil" id="aturUlang">Atur ulang contoh</button>
     <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai usulan</button>
@@ -542,7 +542,7 @@ const UBAH = [
     isi:'Di atas formulir ada ringkasan lima tahap: Isi data, Verifikasi email, Masuk dan amankan akun, Pilih paket dan bayar, Aplikasi kantor aktif. Tahap yang sedang dikerjakan ditandai.',
     lama:'Tidak ada panduan atau onboarding untuk pengguna yang baru pertama kali mendaftar; tahapan baru terlihat di Dashboard setelah pengguna masuk.', ke:'reg', sorot:'#alurDaftar' },
   { kode:'HE-REG-04', judul:'Formulir Registrasi: syarat kata sandi tampil sebagai daftar centang',
-    isi:'Syarat kata sandi ditampilkan sebagai daftar centang yang terisi saat mengetik, sama dengan Akun Saya dan Tambah User: minimal 12 karakter, huruf besar, huruf kecil, angka, simbol. Ulangi Kata Sandi langsung memberi tahu apakah sudah sama.',
+    isi:'Syarat kata sandi ditampilkan sebagai daftar centang yang terisi saat mengetik, sama dengan Akun Saya dan Tambah Pengguna: minimal 12 karakter, huruf besar, huruf kecil, angka, simbol. Ulangi Kata Sandi langsung memberi tahu apakah sudah sama.',
     lama:'Syarat kata sandi ditulis dalam satu baris kecil "Min. 12 karakter · Huruf besar, kecil, angka & simbol" dengan bilah kekuatan tanpa penjelasan syarat mana yang belum terpenuhi.', ke:'reg', sorot:'#syaratPw' },
   { kode:'HE-LOGIN-01', judul:'Verifikasi dua langkah: masa berlaku kode terlihat di layar',
     isi:'Halaman kode Email OTP memakai IDDS One-Time Password (6 kotak), menampilkan email tujuan yang disamarkan, hitung mundur "Kode berlaku 4:59", dan tombol "Kirim ulang kode" yang aktif setelah 60 detik.',
@@ -580,7 +580,7 @@ const UBAH = [
 ];
 
 /* ---------------- keadaan ---------------- */
-const LAYAR = [['daftar', 'Registrasi'], ['verif', 'Cek email'], ['verifOk', 'Verifikasi berhasil'], ['masuk', 'Login'], ['metode', 'Verifikasi dua langkah'], ['cadangan', 'Kode cadangan'], ['dasbor', 'Dasbor'], ['bayar', 'Pembayaran VA'], ['lunas', 'Setelah lunas'], ['riwayat', 'Riwayat Transaksi']];
+const LAYAR = [['daftar', 'Registrasi'], ['verif', 'Cek email'], ['verifOk', 'Verifikasi berhasil'], ['masuk', 'Masuk'], ['metode', 'Verifikasi dua langkah'], ['cadangan', 'Kode cadangan'], ['dasbor', 'Dasbor'], ['bayar', 'Pembayaran VA'], ['lunas', 'Setelah lunas'], ['riwayat', 'Riwayat Transaksi']];
 const APP = ['dasbor', 'bayar', 'lunas', 'riwayat'];
 const S = { layar:'daftar', ubah:false, setuju:false, gagal:false, email:'', metode:'email', memuat:'', cekTenant:'' };
 /* status Dashboard (Onboarding) */
@@ -604,7 +604,7 @@ const pilihan = (id, l, opsi, wajib = false) => `<div class="ina-text-field" id=
   <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu=""></div></div></div>`;
 const pwIsian = (id, l, ph, bantu = '', ac = 'new-password') => `<div class="ina-password-input" id="f-${id}"><label class="ina-password-input__label" for="${id}">${l}<span class="ina-password-input__required">*</span></label>
   <div class="ina-password-input__wrapper ina-password-input__wrapper--size-md ina-password-input__wrapper--neutral"><input id="${id}" type="password" class="ina-password-input__input" placeholder="${ph}" autocomplete="${ac}">
-  <div class="ina-password-input__actions"><button type="button" class="ina-password-input__toggle-button" data-lihat-pw="${id}" aria-label="Tampilkan password" aria-pressed="false">${ik('mata', 18)}</button></div></div>
+  <div class="ina-password-input__actions"><button type="button" class="ina-password-input__toggle-button" data-lihat-pw="${id}" aria-label="Tampilkan kata sandi" aria-pressed="false">${ik('mata', 18)}</button></div></div>
   <div class="ina-password-input__status-area"><span class="ina-password-input__status-message" id="h-${id}" aria-live="polite">${bantu}</span></div></div>`;
 /* IDDS Stepper horizontal (dipakai alur pendaftaran dan 9 tahap Dashboard) */
 const CEK_STEP = '<svg class="ina-stepper__check-icon" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none"><path d="M5 12l5 5l10 -10"/></svg>';
@@ -806,7 +806,7 @@ function layarLunas() {
         <div class="ditandai" id="emailAktivasi" style="margin-top:14px"><b style="font-size:14px">Setelah aplikasi siap, Anda menerima email seperti ini:${usulan('HE-OB-04')}</b>
           <div class="email-pratinjau"><div class="kep">Dari: e-PPAT &lt;noreply@eppat.id&gt; · Subjek: Instansi e-PPAT Anda siap digunakan</div>
             <div class="isi">Yth. Bapak/Ibu Contoh PPAT Baru,<br>Instansi e-PPAT untuk kantor Anda telah berhasil dibuat dan siap digunakan.
-              <div class="kotak"><small>ALAMAT APLIKASI</small>dev-app.eppat.id/t/kantor-contoh<small style="margin-top:8px">EMAIL LOGIN</small>${esc(S.email || 'ppat.baru@contoh.id')}</div>
+              <div class="kotak"><small>ALAMAT APLIKASI</small>dev-app.eppat.id/t/kantor-contoh<small style="margin-top:8px">EMAIL UNTUK MASUK</small>${esc(S.email || 'ppat.baru@contoh.id')}</div>
               ${tombol('Buat Kata Sandi', 'primary', 'sm', 'data-luar="Buat Kata Sandi"')}<p style="margin:10px 0 0;font-size:12.5px;color:var(--ina-content-secondary)">Tautan berlaku ${est('24 jam')} dan hanya dapat dipakai sekali. Demi keamanan, kami tidak pernah mengirim kata sandi melalui email.</p></div></div></div></div></section></div>
     ${kartuBantuan()}`;
 }
@@ -867,7 +867,7 @@ document.addEventListener('click', e => {
   const k = t.closest('[data-ke]'); if (k) { e.preventDefault(); const tujuan = k.dataset.ke; jaga(() => ke(tujuan)); return; }
   const pl = t.closest('[data-layar]'); if (pl) { const tujuan = pl.dataset.layar; S.gagal = false; jaga(() => ke(tujuan)); return; }
   if (t.closest('[data-bantuan]')) { bukaBantuan(); return; }
-  const lp = t.closest('[data-lihat-pw]'); if (lp) { const i = $('#' + lp.dataset.lihatPw), lihat = i.type === 'password'; i.type = lihat ? 'text' : 'password'; lp.setAttribute('aria-pressed', lihat); lp.setAttribute('aria-label', lihat ? 'Sembunyikan password' : 'Tampilkan password'); lp.innerHTML = ik(lihat ? 'mataTutup' : 'mata', 18); return; }
+  const lp = t.closest('[data-lihat-pw]'); if (lp) { const i = $('#' + lp.dataset.lihatPw), lihat = i.type === 'password'; i.type = lihat ? 'text' : 'password'; lp.setAttribute('aria-pressed', lihat); lp.setAttribute('aria-label', lihat ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'); lp.innerHTML = ik(lihat ? 'mataTutup' : 'mata', 18); return; }
   if (t.closest('#batalDaftar')) { if (S.ubah) jaga(() => ke('masuk')); else ke('masuk'); return; }
   if (t.closest('#kirimDaftar')) { kirimDaftar(); return; }
   if (t.closest('#kirimMasuk')) { kirimMasuk(); return; }
@@ -922,7 +922,7 @@ function kirimDaftar() {
   if (!S.cekTenant || S.cekTenant !== v('rTenant')) { const h = $('#h-rTenant'); $('#f-rTenant .ina-text-field__wrapper').classList.add('ina-text-field__wrapper--status-error'); h.textContent = v('rTenant') ? (h.textContent.includes('dipakai') ? h.textContent : 'Tunggu hasil cek ketersediaan URL Tenant.') : 'URL Tenant wajib diisi.'; h.classList.add('ina-text-field__helper-text--error'); ada = true; }
   if (ada) { const g = $('.ina-text-field__wrapper--status-error input, .ina-password-input__wrapper--error input'); g?.scrollIntoView({ block:'center' }); g?.focus({ preventScroll:true }); toast('Periksa kembali isian yang ditandai merah.'); return; }
   S.email = v('rEmail'); S.memuat = 'daftar'; gambar();
-  setTimeout(() => { S.ubah = false; S.setuju = false; S.memuat = ''; dialog({ judul:'Pendaftaran Berhasil!', isi:`<div class="status-kartu"><span class="ikon-besar">${ik('centang', 34)}</span><p>Link verifikasi telah dikirim ke email Anda. Harap verifikasi email Anda sebelum login.</p></div>`, tombol:[['Lihat Petunjuk Verifikasi', 'primary', () => ke('verif')]] }); }, 700);
+  setTimeout(() => { S.ubah = false; S.setuju = false; S.memuat = ''; dialog({ judul:'Pendaftaran Berhasil!', isi:`<div class="status-kartu"><span class="ikon-besar">${ik('centang', 34)}</span><p>Link verifikasi telah dikirim ke email Anda. Harap verifikasi email Anda sebelum masuk.</p></div>`, tombol:[['Lihat Petunjuk Verifikasi', 'primary', () => ke('verif')]] }); }, 700);
 }
 function kirimMasuk() {
   const em = $('#mEmail').value.trim(), pw = $('#mPw').value; let ada = false;
@@ -972,7 +972,7 @@ function kirimOtp() {
   clearInterval(pasangOtp.t); S.memuat = 'otp'; segarOtp(); $('#kirimOtp').innerHTML = spinner + 'Aktifkan &amp; Masuk';
   setTimeout(() => { OTP = null; ke('cadangan'); }, 700);
 }
-$('#simKedaluwarsa').addEventListener('click', () => { if (!OTP || S.metode !== 'email' || !$('#otpWaktu')) { toast('Buka halaman kode Email OTP terlebih dahulu (Login → Email OTP).'); return; } OTP.sisa = 0; segarOtp(); });
+$('#simKedaluwarsa').addEventListener('click', () => { if (!OTP || S.metode !== 'email' || !$('#otpWaktu')) { toast('Buka halaman kode Email OTP terlebih dahulu (Masuk → Email OTP).'); return; } OTP.sisa = 0; segarOtp(); });
 
 /* ---------------- IDDS Drawer, Modal, Toast ---------------- */
 function drawer({ judul, isi }) {
@@ -1014,7 +1014,7 @@ $('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tu
 /* ---------------- Bantuan (HE-UMUM-02) ---------------- */
 const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
 function bukaBantuan() {
-  drawer({ judul:'Bantuan pendaftaran dan login', isi:`
+  drawer({ judul:'Bantuan pendaftaran dan masuk', isi:`
     <p>Pendaftaran e-PPAT untuk kantor PPAT terdiri dari lima langkah:</p>
     <ol class="bantu-langkah">${ALUR.map(t => `<li>${t}</li>`).join('')}</ol>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1030,7 +1030,7 @@ function bukaBantuan() {
 /* ---------------- protobar & daftar perubahan ---------------- */
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Platform Onboarding', lebar:true,
-    isi:`<p>Usulan disusun dari laporan lengkap Heuristic Evaluation di UX Metric Lab (Registrasi 91,7; Login 68,6) beserta gambar buktinya, dan layar live dev.eppat.id. Isian, aturan password, dan alur verifikasi dua langkah tetap seperti live; yang diubah adalah jalan keluar, penjelasan, pesan galat, dan informasi masa berlaku kode. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
+    isi:`<p>Usulan disusun dari laporan lengkap Heuristic Evaluation di UX Metric Lab (Registrasi 91,7; Login 68,6) beserta gambar buktinya, dan layar live dev.eppat.id. Isian, aturan kata sandi, dan alur verifikasi dua langkah tetap seperti live; yang diubah adalah jalan keluar, penjelasan, pesan galat, dan informasi masa berlaku kode. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
       <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
