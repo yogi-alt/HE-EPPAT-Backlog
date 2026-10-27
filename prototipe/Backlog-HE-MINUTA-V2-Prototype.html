@@ -1,6 +1,73 @@
 <!doctype html>
 <html lang="id" data-brand="eppat" data-theme="light">
 <head>
+<!-- ===== Pilihan tema prototipe (tema-proto.html, disisipkan rakit-idds.js ke setiap prototipe ber-IDDS) =====
+     Alat diskusi internal: membandingkan tiga tema yang dikonfirmasi Peruri (penyedia IDDS):
+       E-PPAT  → <html data-brand="eppat">  (brand kustom, brand-eppat-idds/eppat.css)
+       INAgov  → <html data-brand="inagov"> (brand bawaan IDDS @idds/styles)
+       Default → tanpa data-brand            (warna netral bawaan IDDS)
+     Pilihan disimpan di localStorage "eppat-tema-proto" sehingga ikut terbawa saat berpindah prototipe.
+     Bagian KEPALA (style + skrip awal) disisipkan tepat setelah <head> agar tema terpasang sebelum halaman tergambar;
+     bagian BADAN (skrip pil di protobar) disisipkan sebelum </body>. -->
+<style id="tema-proto-css">
+/* Token kustom E-PPAT (bukan token IDDS) untuk tema INAgov & Default: kerangka memakai warna netral IDDS,
+   menu aktif memakai warna utama brand aktif, kartu kantor memakai latar netral terang (bukan emas E-PPAT). */
+html:not([data-brand='eppat']){
+  --ina-eppat-sidebar-bg: var(--ina-neutral-900);
+  --ina-eppat-sidebar-hover: var(--ina-neutral-700);
+  --ina-eppat-sidebar-active: var(--ina-primary-500);
+  --ina-eppat-sidebar-content: rgba(255, 255, 255, 0.8);
+  --ina-eppat-office-card: var(--ina-neutral-50);
+  --ina-eppat-stroke-brand: var(--ina-stroke-primary);
+  --ina-eppat-surface-cream: var(--ina-primary-50);
+  --eppat-sidebar-icon: var(--ina-eppat-sidebar-content);
+  --eppat-sidebar-active-icon: #ffffff;
+}
+/* Penyesuaian kontras WCAG 2.2 AA yang sama dengan eppat.css (bukan warna brand) agar tetap berlaku di tema lain */
+html:not([data-brand='eppat']) .ina-stepper__item:not(.ina-stepper__item--active):not(.ina-stepper__item--completed):not(.ina-stepper__item--error) .ina-stepper__label,
+html:not([data-brand='eppat']) .ina-stepper__item:not(.ina-stepper__item--active):not(.ina-stepper__item--completed):not(.ina-stepper__item--error) .ina-stepper__icon-wrapper { color: var(--ina-content-secondary); }
+html:not([data-brand='eppat']) .ina-text-field__required,
+html:not([data-brand='eppat']) .ina-text-area__required,
+html:not([data-brand='eppat']) .ina-select-dropdown__required,
+html:not([data-brand='eppat']) .ina-password-input__required,
+html:not([data-brand='eppat']) .ina-input-search__asterisk { color: var(--ina-negative-600); }
+html:not([data-brand='eppat']) .ina-select-dropdown__trigger-text--placeholder,
+html:not([data-brand='eppat']) .ina-date-picker__trigger-text--placeholder { color: var(--ina-content-secondary) !important; }
+html:not([data-brand='eppat']) .ina-alert--caution .ina-alert__title { color: var(--ina-warning-600); }
+html:not([data-brand='eppat']) .ina-alert--info .ina-alert__title { color: var(--ina-guide-600); }
+html:not([data-brand='eppat']) .ina-alert--critical .ina-alert__title { color: var(--ina-negative-600); }
+html:not([data-brand='eppat']) .ina-one-time-password__helper-text--error,
+html:not([data-brand='eppat']) .ina-text-area__helper-text--error,
+html:not([data-brand='eppat']) .ina-phone-input__helper-text--error,
+html:not([data-brand='eppat']) .ina-text-field .ina-text-field__helper-text.ina-text-field__helper-text--error,
+html:not([data-brand='eppat']) .ina-file-upload__file-error,
+html:not([data-brand='eppat']) .ina-file-upload__file--error .ina-file-upload__file-name,
+html:not([data-brand='eppat']) .ina-file-upload__error-message,
+html:not([data-brand='eppat']) .ina-password-input__status-message--error,
+html:not([data-brand='eppat']) .ina-password-input .ina-password-input__status-area .ina-password-input__status-message.ina-password-input__status-message--error,
+html:not([data-brand='eppat']) .ina-password-input__character-count--error { color: var(--ina-negative-600); }
+html:not([data-brand='eppat']) .ina-file-upload__error-message:empty { display: none; }
+html:not([data-brand='eppat']) .ina-text-field .ina-text-field__helper-text.ina-text-field__helper-text--warning,
+html:not([data-brand='eppat']) .ina-text-area__helper-text--warning,
+html:not([data-brand='eppat']) .ina-password-input__status-message--warning,
+html:not([data-brand='eppat']) .ina-password-input__character-count--warning { color: var(--ina-warning-600); }
+html:not([data-brand='eppat']) .ina-password-input__status-message--success { color: var(--ina-content-positive); }
+/* INAgov: IDDS Badge soft "brand" memakai primary-primary #196BCD di atas primary-100 (3,6:1) → primary-600 #0A489F (keluarga warna sama) */
+[data-brand='inagov'] .ina-badge--soft.ina-badge--brand { color: var(--ina-primary-600); }
+/* pil tema di protobar */
+.protobar .tema-proto{display:inline-flex;gap:4px;flex-wrap:wrap}
+</style>
+<script id="tema-proto-awal">
+(() => {
+  let t = 'eppat';
+  try { t = localStorage.getItem('eppat-tema-proto') || 'eppat'; } catch (e) {}
+  const h = document.documentElement;
+  if (t === 'inagov') h.setAttribute('data-brand', 'inagov');
+  else if (t === 'default') h.removeAttribute('data-brand');
+  else h.setAttribute('data-brand', 'eppat');
+})();
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Backlog E-PPAT Peruri — Penyusunan Akta v2</title>
@@ -2216,5 +2283,33 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
 })();
 </script>
 
+<script id="tema-proto-js">
+(() => {
+  const KUNCI = 'eppat-tema-proto';
+  const TEMA = [['eppat', 'E-PPAT'], ['inagov', 'INAgov'], ['default', 'Default']];
+  const baca = () => { try { const v = localStorage.getItem(KUNCI); return TEMA.some(x => x[0] === v) ? v : 'eppat'; } catch (e) { return 'eppat'; } };
+  const tulis = v => { try { localStorage.setItem(KUNCI, v); } catch (e) {} };
+  const terap = v => {
+    const h = document.documentElement;
+    if (v === 'default') h.removeAttribute('data-brand'); else h.setAttribute('data-brand', v);
+    document.querySelectorAll('.tema-proto [data-tema-proto]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.temaProto === v)));
+  };
+  /* pil hanya di protobar utama (bukan bilah simulasi) */
+  const bar = document.querySelector('.protobar:not(.protobar-sim)');
+  if (bar && !bar.querySelector('.tema-proto')) {
+    const frag = document.createElement('span'); frag.style.display = 'contents';
+    frag.innerHTML = `<span class="sep">&bull;</span><span id="temaProtoLbl">Tema:</span><span class="tema-proto" role="group" aria-labelledby="temaProtoLbl">${TEMA.map(([k, l]) => `<button type="button" class="pil" data-tema-proto="${k}" aria-pressed="false">${l}</button>`).join('')}</span>`;
+    const kanan = bar.querySelector(':scope > .kanan');
+    if (kanan) bar.insertBefore(frag, kanan); else bar.appendChild(frag);
+    bar.addEventListener('click', e => {
+      const b = e.target.closest('[data-tema-proto]'); if (!b) return;
+      const v = b.dataset.temaProto; tulis(v); terap(v); b.focus();
+    });
+  }
+  terap(baca());
+  /* tema dipilih di tab lain → samakan */
+  window.addEventListener('storage', e => { if (e.key === KUNCI) terap(baca()); });
+})();
+</script>
 </body>
 </html>

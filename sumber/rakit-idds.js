@@ -29,5 +29,14 @@ if (html.includes('ina-tooltip') && !html.includes('id="tooltip-aman-js"')) {
   const i = html.lastIndexOf('</body>');
   html = i < 0 ? html + tt : html.slice(0, i) + tt + '\n' + html.slice(i);
 }
+// Pilihan tema prototipe (E-PPAT | INAgov | Default IDDS): bagian kepala tepat setelah <head> (tanpa kedip), pil protobar sebelum </body>.
+if (html.includes('@idds/styles') && !html.includes('id="tema-proto-js"')) {
+  const [kepala, badan] = fs.readFileSync(path.join(d, 'tema-proto.html'), 'utf8').split('<!-- ===== bagian badan ===== -->');
+  const h = html.indexOf('<head>');
+  if (h < 0 || !badan) { console.error('tema-proto: <head> atau penanda badan tidak ketemu'); process.exit(1); }
+  html = html.slice(0, h + 6) + '\n' + kepala.trim() + '\n' + html.slice(h + 6);
+  const i = html.lastIndexOf('</body>');
+  html = i < 0 ? html + badan : html.slice(0, i) + badan.trim() + '\n' + html.slice(i);
+}
 fs.writeFileSync(path.resolve(out), html);
 console.log('OK', out, html.length, 'byte');

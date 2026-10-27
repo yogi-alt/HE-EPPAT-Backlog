@@ -3442,6 +3442,38 @@
       "acuan": "prototipe/Backlog-HE-EAW-Prototype.html › Daftar perubahan › HE-EAW-12",
       "status": "Prototipe siap",
       "tanggal": "2026-10-26"
+    },
+    {
+      "kode": "IDDS-PL-42",
+      "fitur": "Platform · Setting Theme (penyesuaian IDDS)",
+      "prinsip": "Penyesuaian IDDS (Kesimpulan HE hal. 40 no. 1); H4 Consistency and Standards",
+      "halaman": "Tidak dinilai HE",
+      "prioritas": "Sedang",
+      "layar": "dev-app.eppat.id/platform › Setting Theme › Preset",
+      "selesai_bila": "Setting Theme platform menyediakan tiga preset tema IDDS yang sama dengan tenant (E-PPAT, INAgov, Default IDDS), dengan pratinjau langsung dan kontras yang lulus WCAG AA.",
+      "catatan": "Pola sama dengan IDDS-TN-41.",
+      "judul": "Setting Theme: tiga preset tema IDDS (E-PPAT, INAgov, Default)",
+      "saat_ini": "Sembilan preset warna bebas dalam satu daftar tanpa pembeda brand IDDS: Navy Dark, e-PPAT Teal (bawaan), Navy Blue (\"Biru dongker standar IDDS\"), Sky Blue, Deep Blue, Royal Blue, Crimson, Steel Blue, dan Burgundy. Label \"Navy Blue: standar IDDS\" tidak akurat karena standar IDDS adalah Default netral dan INAgov biru #0956C3. Merah (Crimson, Burgundy) dapat dipilih sebagai warna utama tanpa peringatan, padahal berisiko salah makna.",
+      "usulan": "Preset Brand dibagi dua kelompok IDDS Radio. Kelompok teratas \"Preset tema IDDS\" berlencana \"Sesuai IDDS\" dan direkomendasikan. Isinya \"E-PPAT (bawaan)\" (hijau #3D6B5E, menggantikan \"e-PPAT Teal\"), \"INAgov\" (biru #0956C3, brand bawaan IDDS), dan \"Default IDDS\" (abu-abu netral bawaan IDDS). Ketiganya dikonfirmasi Peruri sebagai penyedia IDDS. Setiap kartu punya contoh warna dan keterangan kapan dipakai. Memilih preset langsung mengubah Pratinjau Langsung: wadah pratinjau memakai data-brand yang sama dengan aplikasi (eppat, inagov, atau tanpa data-brand untuk Default). Preset live lainnya tetap ada di kelompok \"Warna lain (di luar brand IDDS)\" dengan keterangan \"Warna ini bukan brand resmi IDDS. Pastikan kontrasnya lulus sebelum dipakai.\" Crimson dan Burgundy diberi peringatan kecil karena IDDS memakai merah untuk galat dan aksi hapus. Label Navy Blue menjadi \"Biru dongker\". Mode Kustom, penanda belum disimpan, konfirmasi Batal, dan Toast simpan tetap. Pola sama persis dengan Tema Tampilan kantor (IDDS-TN-41).",
+      "acuan": "prototipe/Backlog-IDDS-PL-SISTEM-Prototype.html › Daftar penyesuaian › IDDS-PL-42",
+      "status": "Prototipe siap",
+      "tanggal": "2026-10-26"
+    },
+    {
+      "kode": "IDDS-TN-41",
+      "fitur": "Tenant · Konten Situs · Tema Tampilan (penyesuaian IDDS)",
+      "prinsip": "Penyesuaian IDDS (Kesimpulan HE hal. 40 no. 1); H4 Consistency and Standards",
+      "halaman": "Tidak dinilai HE",
+      "prioritas": "Sedang",
+      "layar": "dev-app.eppat.id/t/<kantor> › Konten Situs › Tema Tampilan › Preset",
+      "selesai_bila": "Tema Tampilan menyediakan tiga preset tema IDDS (E-PPAT, INAgov, Default IDDS). Memilih preset langsung mengubah pratinjau, dan semua teks pada ketiga tema lulus uji kontras WCAG AA.",
+      "catatan": "Ketiga pilihan tema dikonfirmasi Peruri sebagai penyedia IDDS (27 Okt 2026).",
+      "judul": "Tema Tampilan: tiga preset tema IDDS (E-PPAT, INAgov, Default)",
+      "saat_ini": "Sembilan preset warna bebas dalam satu daftar tanpa pembeda brand IDDS: Navy Dark, e-PPAT Teal (bawaan), Navy Blue (\"Biru dongker standar IDDS\"), Sky Blue, Deep Blue, Royal Blue, Crimson, Steel Blue, dan Burgundy. Label \"Navy Blue: standar IDDS\" tidak akurat karena standar IDDS adalah Default netral dan INAgov biru #0956C3. Merah (Crimson, Burgundy) dapat dipilih sebagai warna utama tanpa peringatan, padahal berisiko salah makna.",
+      "usulan": "Preset Brand dibagi dua kelompok IDDS Radio. Kelompok teratas \"Preset tema IDDS\" berlencana \"Sesuai IDDS\" dan direkomendasikan. Isinya \"E-PPAT (bawaan)\" (hijau #3D6B5E, menggantikan \"e-PPAT Teal\"), \"INAgov\" (biru #0956C3, brand bawaan IDDS), dan \"Default IDDS\" (abu-abu netral bawaan IDDS). Ketiganya dikonfirmasi Peruri sebagai penyedia IDDS. Setiap kartu punya contoh warna dan keterangan kapan dipakai. Memilih preset langsung mengubah Pratinjau Langsung: wadah pratinjau memakai data-brand yang sama dengan aplikasi (eppat, inagov, atau tanpa data-brand untuk Default). Preset live lainnya tetap ada di kelompok \"Warna lain (di luar brand IDDS)\" dengan keterangan \"Warna ini bukan brand resmi IDDS. Pastikan kontrasnya lulus sebelum dipakai.\" Crimson dan Burgundy diberi peringatan kecil karena IDDS memakai merah untuk galat dan aksi hapus. Label Navy Blue menjadi \"Biru dongker\". Mode Kustom, penanda belum disimpan, konfirmasi Batal, dan Toast simpan tetap.",
+      "acuan": "prototipe/Backlog-IDDS-TN-CMS-Prototype.html › Daftar penyesuaian › IDDS-TN-41",
+      "status": "Prototipe siap",
+      "tanggal": "2026-10-26"
     }
   ],
   "riwayat": [
@@ -3858,6 +3890,12 @@
       "kode": "HE-UMUM-01",
       "perubahan": "Semua ikon di luar menu samping (tombol, tabel, dialog, lencana, isian, kartu kantor, remah, dan index) diganti dengan Tabler Icons resmi versi 3.19.0, pustaka ikon IDDS. Sebanyak 112 jenis ikon dipetakan ke ikon Tabler yang paling dekat maknanya; audit isi SVG menunjukkan 0 ikon non-Tabler. Logo, ilustrasi, peta, kode QR, dan grafik tidak diubah.",
       "berkas": "sumber/aset/tabler-ui.json; sumber/ikon-tabler.js; semua prototipe"
+    },
+    {
+      "tanggal": "2026-10-27",
+      "kode": "IDDS-TN-41; IDDS-PL-42",
+      "perubahan": "Tiga pilihan tema yang dikonfirmasi Peruri sebagai penyedia IDDS (E-PPAT, INAgov, Default IDDS) disediakan di dua tempat: (1) pilihan Tema di bilah semua prototipe untuk diskusi internal, tersimpan dan terbawa antarprototipe; (2) preset di Tema Tampilan tenant dan Setting Theme Platform, dikelompokkan menjadi Preset tema IDDS (berlencana Sesuai IDDS) dan Warna lain di luar brand IDDS. Label Navy Blue standar IDDS dikoreksi, Crimson dan Burgundy diberi peringatan karena merah dipakai untuk galat. Uji kontras ketiga tema lulus.",
+      "berkas": "sumber/tema-proto.html; sumber/rakit-idds.js; prototipe/Backlog-IDDS-TN-CMS-Prototype.html; Backlog-IDDS-PL-SISTEM-Prototype.html; semua prototipe"
     }
   ]
 }

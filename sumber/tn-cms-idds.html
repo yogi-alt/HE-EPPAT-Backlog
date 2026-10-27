@@ -366,6 +366,16 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .preset .ina-radio-input__option.dipilih{border-color:var(--ina-primary-500);box-shadow:0 0 0 2px var(--ina-primary-200)}
 .preset .sw{width:24px;height:24px;border-radius:999px;flex:none;border:1px solid rgba(0,0,0,.1)}
 .preset small{display:block;font-size:12px;color:var(--ina-content-secondary)}
+/* preset tema dalam dua kelompok (IDDS-TN-41) */
+.preset-kel{border:0;padding:0;margin:0;min-width:0}
+.preset-kel + .preset-kel{margin-top:20px}
+.preset-kel > legend{display:flex;align-items:center;gap:8px;padding:0;margin:0 0 4px;font:600 14px/20px Inter,sans-serif;color:var(--ina-content-primary)}
+.preset-kel > p{margin:0 0 10px;font-size:12.5px;line-height:18px;color:var(--ina-content-secondary)}
+.preset .awas{display:flex;align-items:flex-start;gap:4px;margin-top:4px;font-size:11.5px;line-height:16px;color:var(--ina-warning-600)}
+.preset .awas svg{flex:none;margin-top:1px}
+/* pratinjau preset IDDS: wadah memakai data-brand yang sama dengan aplikasi; Default = token netral bawaan IDDS */
+.mock[data-brand='default']{--ina-primary-25:#ffffff;--ina-primary-50:#f8f8f7;--ina-primary-100:#f5f5f5;--ina-primary-200:#e5e5e5;--ina-primary-300:#d4d4d4;--ina-primary-400:#a3a3a3;--ina-primary-500:#737373;--ina-primary-600:#525252;--ina-primary-700:#404040;--ina-primary-800:#1f1f1f;--ina-primary-900:#141414;--ina-primary-primary:#141414}
+.mock:is([data-brand='inagov'],[data-brand='default']){--ina-eppat-sidebar-bg:var(--ina-neutral-900);--ina-eppat-sidebar-active:var(--ina-primary-500);--ina-eppat-sidebar-content:rgba(255,255,255,.8)}
 .kartu-warna{padding:12px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-primary)}
 .kartu-warna .lbl{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:13px;font-weight:500;margin-bottom:6px}
 .kontras{margin-top:6px}
@@ -596,7 +606,10 @@ const UBAH = [
     lama:'Tidak ada panduan atau kontak dukungan di halaman CMS.', ke:'bantuan', sorot:null },
   { kode:'IDDS-TN-26', judul:'Menu Konten Situs: istilah dan ejaan dibakukan',
     isi:'Istilah dan ejaan dibakukan: "Save Layout" menjadi "Simpan Tata Letak", "Import/Export" menjadi "Impor/Ekspor", "Upload" menjadi "Unggah", "Non-aktif" menjadi "Nonaktif", "di-undo" menjadi "dibatalkan", dan "konfigurasi-nya" menjadi "konfigurasinya". Label isian juga dibakukan: "Code/Name" menjadi "Kode/Nama", "Excerpt" menjadi "Ringkasan", "Tags" menjadi "Tag", "Density" menjadi "Kerapatan", "Primary" menjadi "Warna utama", dan "Tambah Post" menjadi "Tambah Artikel/Halaman". Istilah teknis yang bocor ke layar ("DOMPurify", "sanitize", "WYSIWYG", "broken", "siblings", "properties picker") diganti kalimat biasa. Nama menu di sidebar tidak diubah.',
-    lama:'Label dan pesan bercampur bahasa Inggris dan istilah developer, misalnya "Block di builder yang memakai ID master ini akan jadi broken" dan "Markup di-sanitize via DOMPurify".', ke:'posts', sorot:null }
+    lama:'Label dan pesan bercampur bahasa Inggris dan istilah developer, misalnya "Block di builder yang memakai ID master ini akan jadi broken" dan "Markup di-sanitize via DOMPurify".', ke:'posts', sorot:null },
+  { kode:'IDDS-TN-41', judul:'Tema Tampilan: tiga preset tema IDDS (E-PPAT, INAgov, Default)',
+    isi:'Preset Brand dibagi dua kelompok IDDS Radio. Kelompok teratas "Preset tema IDDS" berlencana "Sesuai IDDS" dan direkomendasikan. Isinya "E-PPAT (bawaan)" (hijau #3D6B5E, menggantikan "e-PPAT Teal"), "INAgov" (biru #0956C3, brand bawaan IDDS), dan "Default IDDS" (abu-abu netral bawaan IDDS). Ketiganya dikonfirmasi Peruri sebagai penyedia IDDS. Setiap kartu punya contoh warna dan keterangan kapan dipakai. Memilih preset langsung mengubah Pratinjau Langsung: wadah pratinjau memakai data-brand yang sama dengan aplikasi (eppat, inagov, atau tanpa data-brand untuk Default). Preset live lainnya tetap ada di kelompok "Warna lain (di luar brand IDDS)" dengan keterangan "Warna ini bukan brand resmi IDDS. Pastikan kontrasnya lulus sebelum dipakai." Crimson dan Burgundy diberi peringatan kecil karena IDDS memakai merah untuk galat dan aksi hapus. Label Navy Blue menjadi "Biru dongker". Mode Kustom, penanda belum disimpan, konfirmasi Batal, dan Toast simpan tetap.',
+    lama:'Sembilan preset warna bebas dalam satu daftar tanpa pembeda brand IDDS: Navy Dark, e-PPAT Teal (bawaan), Navy Blue ("Biru dongker standar IDDS"), Sky Blue, Deep Blue, Royal Blue, Crimson, Steel Blue, dan Burgundy. Label "Navy Blue: standar IDDS" tidak akurat karena standar IDDS adalah Default netral dan INAgov biru #0956C3. Merah (Crimson, Burgundy) dapat dipilih sebagai warna utama tanpa peringatan, padahal berisiko salah makna.', ke:'tema', sorot:'#presetTema' }
 ];
 
 /* ---------------- data contoh ---------------- */
@@ -724,9 +737,17 @@ const BLN = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt
 const tglId = s => { if (!s) return '—'; const [y, m, d] = s.split('-').map(Number); return `${d} ${BLN[m - 1]} ${y}`; };
 
 /* tema (model data live) */
-const PRESET = [['atrbpn', 'Navy Dark', '#0f1e3d', 'Biru dongker gelap'], ['eppat', 'e-PPAT Teal', '#2b3a3a', 'Hijau keabuan gelap dengan aksen hijau (sidebar E-PPAT)'], ['default', 'Navy Blue', '#06264d', 'Biru dongker standar IDDS'],
-  ['inagov', 'Sky Blue', '#629cef', 'Biru langit cerah'], ['inaku', 'Deep Blue', '#06264d', 'Biru dalam'], ['bgn', 'Royal Blue', '#0058ff', 'Biru terang pekat'], ['bkn', 'Crimson', '#de1d5e', 'Merah krimson'], ['lan', 'Steel Blue', '#2663a3', 'Biru baja'], ['panrb', 'Burgundy', '#b42b2d', 'Merah burgundi']];
-const WARNA_PRESET = { eppat:{ brand_primary:'#3d6b5e', brand_hover:'#345d52', content_primary:'#1f1f1f', content_secondary:'#525252', content_tertiary:'#737373', background_primary:'#ffffff', background_secondary:'#f5f8f7', background_tertiary:'#eef3f1', stroke_primary:'#d2ddd9', stroke_secondary:'#c2d3cc' } };
+/* preset tema (IDDS-TN-41): kelompok 1 = tiga tema yang dikonfirmasi Peruri sebagai penyedia IDDS; kelompok 2 = preset warna live lainnya (tetap ada) */
+const PRESET_IDDS = [['eppat', 'E-PPAT (bawaan)', '#3d6b5e', 'Hijau E-PPAT. Pakai untuk tampilan resmi E-PPAT.'],
+  ['inagov', 'INAgov', '#0956c3', 'Biru INAgov bawaan IDDS. Pakai bila kantor mengikuti tampilan layanan pemerintah.'],
+  ['default', 'Default IDDS', '#737373', 'Abu-abu netral bawaan IDDS. Pakai bila belum ada warna brand.']];
+const PRESET_LAIN = [['atrbpn', 'Navy Dark', '#0f1e3d', 'Biru dongker gelap'], ['navy', 'Navy Blue', '#06264d', 'Biru dongker'], ['sky', 'Sky Blue', '#629cef', 'Biru langit cerah'], ['inaku', 'Deep Blue', '#06264d', 'Biru dalam'], ['bgn', 'Royal Blue', '#0058ff', 'Biru terang pekat'],
+  ['bkn', 'Crimson', '#de1d5e', 'Merah krimson', 'merah'], ['lan', 'Steel Blue', '#2663a3', 'Biru baja'], ['panrb', 'Burgundy', '#b42b2d', 'Merah burgundi', 'merah']];
+const PRESET = [...PRESET_IDDS, ...PRESET_LAIN];
+const presetIdds = () => TEMA.mode === 'preset' && PRESET_IDDS.some(p => p[0] === TEMA.preset_brand);
+const WARNA_PRESET = { eppat:{ brand_primary:'#3d6b5e', brand_hover:'#345d52', content_primary:'#1f1f1f', content_secondary:'#525252', content_tertiary:'#737373', background_primary:'#ffffff', background_secondary:'#f5f8f7', background_tertiary:'#eef3f1', stroke_primary:'#d2ddd9', stroke_secondary:'#c2d3cc' },
+  inagov:{ brand_primary:'#0956c3', brand_hover:'#0a489f', content_primary:'#1f1f1f', content_secondary:'#525252', content_tertiary:'#a3a3a3', background_primary:'#ffffff', background_secondary:'#f8f8f7', background_tertiary:'#f2f2f2', stroke_primary:'#e5e5e5', stroke_secondary:'#a3a3a3' },
+  default:{ brand_primary:'#737373', brand_hover:'#525252', content_primary:'#1f1f1f', content_secondary:'#525252', content_tertiary:'#a3a3a3', background_primary:'#ffffff', background_secondary:'#f8f8f7', background_tertiary:'#f2f2f2', stroke_primary:'#e5e5e5', stroke_secondary:'#a3a3a3' } };
 const WARNA_KUSTOM = [['brand_primary', 'Warna utama'], ['brand_hover', 'Warna utama saat disorot'], ['content_primary', 'Teks utama'], ['content_secondary', 'Teks sekunder'], ['content_tertiary', 'Teks tersier'], ['background_primary', 'Latar'], ['background_secondary', 'Latar lembut'], ['background_tertiary', 'Latar panel'], ['stroke_primary', 'Garis tepi'], ['stroke_secondary', 'Garis tepi tegas']];
 const CHROME = {
   sidebar:[['sidebar_bg', 'Latar sidebar', '#2C3C42'], ['sidebar_text', 'Teks menu', '#C7D0CE'], ['sidebar_hover', 'Menu saat disorot', '#3A4D54'], ['sidebar_active_bg', 'Latar menu aktif', '#3D6B5E'], ['sidebar_active_text', 'Teks menu aktif', '#FFFFFF']],
@@ -1006,11 +1027,13 @@ function layarTema() {
     </div>${pratinjauTema()}</div>`;
 }
 const subJudul = (j, k) => `<h3>${j}</h3><p>${k}</p>`;
+const opsiPreset = ([v, n, sw, h, merah]) => `<label class="ina-radio-input__option ${TEMA.preset_brand === v ? 'dipilih' : ''}"><input type="radio" class="ina-radio-input__field" name="preset" value="${v}" ${TEMA.preset_brand === v ? 'checked' : ''} data-preset="${v}"><span class="sw" style="background:${sw}"></span><span><b style="font-size:13.5px">${n}</b><small>${h}</small>${merah ? `<span class="awas">${ik('info', 12)}Merah dipakai IDDS untuk galat dan aksi hapus. Hindari sebagai warna utama.</span>` : ''}</span></label>`;
+const grupPreset = (judul, ket, daftar, idds) => `<fieldset class="ina-radio-input preset-kel"><legend>${judul}${idds ? badge('Sesuai IDDS', 'success', 'sm') : ''}</legend><p>${ket}</p><div class="preset ina-radio-input__group">${daftar.map(opsiPreset).join('')}</div></fieldset>`;
 function temaBrand() {
   const w = warnaAktif();
   return `<div class="sub-bagian" style="margin-top:0">${subJudul('Sumber warna', 'Pakai preset bawaan sebagai titik awal, atau atur warna sendiri.')}${grupTombol([['preset', 'Preset bawaan'], ['custom', 'Kustom']], TEMA.mode, 'data-tema-mode', 'Sumber warna')}</div>
-    ${TEMA.mode === 'preset' ? `<div class="sub-bagian">${subJudul('Preset Brand', 'Pilih tema bawaan.')}
-      <fieldset class="ina-radio-input" style="border:0;padding:0;margin:0"><legend class="sr-only" style="position:absolute;left:-9999px">Preset brand</legend><div class="preset ina-radio-input__group">${PRESET.map(([v, n, sw, h]) => `<label class="ina-radio-input__option ${TEMA.preset_brand === v ? 'dipilih' : ''}"><input type="radio" class="ina-radio-input__field" name="preset" value="${v}" ${TEMA.preset_brand === v ? 'checked' : ''} data-preset="${v}"><span class="sw" style="background:${sw}"></span><span><b style="font-size:13.5px">${n}</b><small>${h}${v === 'eppat' ? ' · bawaan' : ''}</small></span></label>`).join('')}</div></fieldset></div>` : ''}
+    ${TEMA.mode === 'preset' ? `<div class="sub-bagian ditandai" id="presetTema">${subJudul('Preset Brand', 'Pilih tema. Pratinjau Langsung ikut berubah.')}
+      ${grupPreset('Preset tema IDDS', 'Direkomendasikan. Ketiga tema ini dikonfirmasi Peruri sebagai penyedia IDDS.', PRESET_IDDS, true)}${grupPreset('Warna lain (di luar brand IDDS)', 'Warna ini bukan brand resmi IDDS. Pastikan kontrasnya lulus sebelum dipakai.', PRESET_LAIN, false)}${usulan('IDDS-TN-41')}</div>` : ''}
     <div class="sub-bagian ditandai" id="warnaKustom">${subJudul('Warna Kustom', TEMA.mode === 'preset' ? 'Warna dari preset terpilih. Mengubah salah satu warna memindah sumber warna ke Kustom.' : 'Warna inti aplikasi: warna utama, teks, latar, dan garis tepi.')}
       <div class="grid-warna">${WARNA_KUSTOM.map(([k, l]) => `<div class="kartu-warna">${isianWarna('w-' + k, l, w[k], `data-warna-kustom="${k}"`)}
         ${k === 'brand_primary' ? lencanaKontras(w[k], '#ffffff', 'teks putih di atas warna utama') : k === 'content_primary' ? lencanaKontras(w[k], w.background_primary, 'Teks utama di atas Latar') : k === 'content_secondary' ? lencanaKontras(w[k], w.background_primary, 'Teks sekunder di atas Latar') : ''}</div>`).join('')}</div>${usulan('IDDS-TN-20')}</div>`;
@@ -1018,7 +1041,7 @@ function temaBrand() {
 const kartuWarnaKosong = (grp, [k, l, ph], ob = TEMA.chrome) => `<div class="kartu-warna"><div class="lbl">${l}${ob[k] ? tombol('Kosongkan', 'tertiary', 'sm', `data-kosongkan="${grp}:${k}" aria-label="Kosongkan ${esc(l)}"`) : ''}</div>
   <div class="warna-isian"><input type="color" value="${ob[k] || ph.toLowerCase()}" aria-label="Pilih ${esc(l)}" data-warna-chrome="${grp}:${k}" data-warna-pick><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><input type="text" class="ina-text-field__input mono" value="${esc(ob[k])}" placeholder="${ph} (bawaan)" aria-label="${esc(l)}" data-warna-chrome="${grp}:${k}"></div></div></div>`;
 function temaChrome() {
-  const c = TEMA.chrome, sbBg = c.sidebar_bg || '#2C3C42', sbTx = c.sidebar_text || '#C7D0CE';
+  const c = TEMA.chrome, sbBg = c.sidebar_bg || (presetIdds() && TEMA.preset_brand !== 'eppat' ? '#141414' : '#2C3C42'), sbTx = c.sidebar_text || (presetIdds() && TEMA.preset_brand !== 'eppat' ? '#D0D0D0' : '#C7D0CE');
   return `<div class="sub-bagian" style="margin-top:0">${subJudul('Warna Sidebar', 'Kosongkan untuk mengikuti preset.')}<div class="grid-warna">${CHROME.sidebar.map(f => kartuWarnaKosong('chrome', f)).join('')}</div>${lencanaKontras(sbTx.toLowerCase(), sbBg.toLowerCase(), 'teks menu di atas latar sidebar')}</div>
     <div class="sub-bagian">${subJudul('Warna Navbar', 'Warna bilah atas aplikasi. Kosongkan untuk mengikuti preset.')}<div class="grid-warna">${CHROME.navbar.map(f => kartuWarnaKosong('chrome', f)).join('')}</div></div>
     <div class="sub-bagian">${subJudul('Warna Status', 'Warna lencana, pesan, dan penanda status (berhasil, peringatan, bahaya, informasi, netral). Latar dan garis tepinya dibuat otomatis. Kosongkan untuk mengikuti bawaan.')}<div class="grid-warna">${CHROME.status.map(f => kartuWarnaKosong('status', f, TEMA.status)).join('')}</div></div>`;
@@ -1051,13 +1074,14 @@ function temaKomponen() {
 }
 function pratinjauTema() {
   const w = warnaAktif(), c = TEMA.chrome, st = TEMA.status, kotor = temaKotor();
-  const sb = c.sidebar_bg || '#2C3C42', sbt = c.sidebar_text || '#C7D0CE', sba = c.sidebar_active_bg || w.brand_primary, sbat = c.sidebar_active_text || '#fff';
+  const idds = presetIdds(); /* preset IDDS: pratinjau memakai data-brand yang sama dengan aplikasi (IDDS-TN-41) */
+  const sb = c.sidebar_bg || (idds ? 'var(--ina-eppat-sidebar-bg)' : '#2C3C42'), sbt = c.sidebar_text || (idds ? 'var(--ina-eppat-sidebar-content)' : '#C7D0CE'), sba = c.sidebar_active_bg || (idds ? 'var(--ina-eppat-sidebar-active)' : w.brand_primary), sbat = c.sidebar_active_text || '#fff';
   const rad = { none:0, sm:4, md:8, lg:12, pill:999 }[TEMA.radius];
   return `<aside class="pratinjau-tema ditandai" id="pratinjauTema" aria-label="Pratinjau tema"><h3>Pratinjau Langsung</h3><p class="ket" style="font-size:12.5px">Perubahan tampil di sini. Seluruh aplikasi berubah setelah Anda menyimpan.</p>
-    <div class="mock" aria-hidden="true"><div class="sb" style="background:${sb};color:${sbt}">${TEMA.assets.logo_mark_url ? `<img src="${TEMA.assets.logo_mark_url}" alt="" style="height:18px;object-fit:contain">` : '<span class="lg"></span>'}<span style="background:${sba};color:${sbat}">Menu</span><span>Menu</span><span>Menu</span></div>
+    <div class="mock" aria-hidden="true"${idds ? ` data-brand="${TEMA.preset_brand}"` : ''}><div class="sb" style="background:${sb};color:${sbt}">${TEMA.assets.logo_mark_url ? `<img src="${TEMA.assets.logo_mark_url}" alt="" style="height:18px;object-fit:contain">` : '<span class="lg"></span>'}<span style="background:${sba};color:${sbat}">Menu</span><span>Menu</span><span>Menu</span></div>
       <div class="kn" style="background:${c.content_bg || w.background_secondary}"><div class="nb" style="background:${c.navbar_bg || '#fff'};color:${c.navbar_text || w.content_primary};border-color:${c.navbar_border || w.stroke_primary}"><b>Judul Halaman</b><span style="width:14px;height:14px;border-radius:999px;background:${c.navbar_icon || w.content_secondary}"></span></div>
         <div class="bd" style="color:${w.content_primary}"><span class="bar" style="width:70%"></span><span class="bar" style="width:45%"></span>
-          <div class="tb"><span style="background:${w.brand_primary};color:#fff;border-radius:${TEMA.button.shape === 'pill' ? 999 : TEMA.button.shape === 'square' ? 0 : rad}px">Simpan</span><span style="border:1px solid ${w.stroke_secondary};border-radius:${TEMA.button.shape === 'pill' ? 999 : TEMA.button.shape === 'square' ? 0 : rad}px">Batal</span></div>
+          <div class="tb"><span style="background:${idds ? 'var(--ina-primary-500)' : w.brand_primary};color:#fff;border-radius:${TEMA.button.shape === 'pill' ? 999 : TEMA.button.shape === 'square' ? 0 : rad}px">Simpan</span><span style="border:1px solid ${w.stroke_secondary};border-radius:${TEMA.button.shape === 'pill' ? 999 : TEMA.button.shape === 'square' ? 0 : rad}px">Batal</span></div>
           <span style="padding:5px 8px;border:1px solid ${w.stroke_primary};border-radius:${rad}px;background:${w.background_primary};color:${w.content_secondary}">Contoh isian</span>
           <div class="st">${CHROME.status.map(([k, l, d]) => `<i style="color:${st[k] || d};background:${(st[k] || d)}1a">${l.split(' ')[0]}</i>`).join('')}</div></div></div></div>
     <div class="status-simpan ${kotor ? 'ada' : ''}" aria-live="polite">${kotor ? `${ik('info', 14)} Ada perubahan belum disimpan` : `${ik('centang', 14)} Tersimpan`}</div>
