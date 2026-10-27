@@ -56,6 +56,8 @@ html:not([data-brand='eppat']) .ina-password-input__status-message--success { co
 [data-brand='inagov'] .ina-badge--soft.ina-badge--brand { color: var(--ina-primary-600); }
 /* pil tema di protobar */
 .protobar .tema-proto{display:inline-flex;gap:4px;flex-wrap:wrap}
+/* INAgov & Default: tanpa latar bergambar khas E-PPAT (gradasi + watermark IPPAT); latar polos netral IDDS */
+html:not([data-brand='eppat']) .content,html:not([data-brand='eppat']) main.tn{background-image:none!important;background-color:var(--ina-background-secondary)!important}
 </style>
 <script id="tema-proto-awal">
 (() => {
