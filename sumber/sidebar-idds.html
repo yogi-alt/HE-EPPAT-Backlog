@@ -61,9 +61,9 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
   const baca = () => { try { return localStorage.getItem(KUNCI) === '1'; } catch (e) { return false; } };
   const tulis = v => { try { localStorage.setItem(KUNCI, v ? '1' : '0'); } catch (e) {} };
   const SVG = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
-  const IK_CIUT = '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16"/><path d="M15 10l-2 2 2 2"/>';
-  const IK_BENTANG = '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16"/><path d="M14 10l2 2-2 2"/>';
-  const IK_PILIH = '<path d="M8 9l4-4 4 4"/><path d="M16 15l-4 4-4-4"/>';
+  const IK_CIUT = '<path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M9 4v16" /><path d="M15 10l-2 2l2 2" />';
+  const IK_BENTANG = '<path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M9 4v16" /><path d="M14 10l2 2l-2 2" />';
+  const IK_PILIH = '<path d="M8 9l4 -4l4 4" /><path d="M16 15l-4 4l-4 -4" />';
   const daftar = [...document.querySelectorAll('aside.sidebar')];
   if (!daftar.length) return;
   let ciut = baca();

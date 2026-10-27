@@ -123,6 +123,7 @@
 [data-brand='eppat'] .ina-date-picker__trigger-text--placeholder { color: var(--ina-content-secondary) !important; } /* IDDS memakai !important */
 [data-brand='eppat'] .ina-alert--caution .ina-alert__title { color: var(--ina-warning-600); } /* #eebb04 1,7:1 → #855f00 */
 [data-brand='eppat'] .ina-alert--info .ina-alert__title { color: var(--ina-guide-600); }
+[data-brand='eppat'] .ina-alert--critical .ina-alert__title { color: var(--ina-negative-600); } /* #f02d2d 3,6:1 di atas latar alert → #d50b0b */
 /* teks galat isian (#f02d2d 4,1:1 → negative-600 #d50b0b) */
 [data-brand='eppat'] .ina-one-time-password__helper-text--error,
 [data-brand='eppat'] .ina-text-area__helper-text--error,
@@ -133,6 +134,7 @@
 [data-brand='eppat'] .ina-file-upload__error-message { color: var(--ina-negative-600); }
 [data-brand='eppat'] .ina-file-upload__error-message:empty { display: none; }
 [data-brand='eppat'] .ina-password-input__status-message--error,
+[data-brand='eppat'] .ina-password-input .ina-password-input__status-area .ina-password-input__status-message.ina-password-input__status-message--error,
 [data-brand='eppat'] .ina-password-input__character-count--error { color: var(--ina-negative-600); }
 /* teks peringatan isian (#eebb04 1,8:1 → warning-600) */
 [data-brand='eppat'] .ina-text-field .ina-text-field__helper-text.ina-text-field__helper-text--warning,
@@ -162,7 +164,7 @@
   .protobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 16px;background:#0f1a17;color:#E6EDEA;font-size:12px;position:sticky;top:0;z-index:50}
   .protobar a{color:#E6EDEA;text-decoration:none;border:1px dashed rgba(255,255,255,.3);border-radius:999px;padding:4px 10px;font:500 11px Inter,sans-serif}
   .protobar b{color:#fff}
-  .protobar .sep{opacity:.35}
+  .protobar .sep{opacity:.6}
   .protobar .grup{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
   .protobar .grup span{opacity:.7}
   .protobar button{border:1px solid rgba(255,255,255,.25);background:transparent;color:#E6EDEA;font:500 11px Inter,sans-serif;padding:4px 10px;border-radius:999px;cursor:pointer}
@@ -447,7 +449,7 @@
         <div class="ina-file-upload__dropzone" role="button" tabindex="0">
           <input type="file" class="ina-file-upload__input" aria-label="Unggah scan KTP">
           <div class="ina-file-upload__content">
-            <div class="ina-file-upload__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg></div>
+            <div class="ina-file-upload__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 9l5 -5l5 5" /><path d="M12 4l0 12" /></svg></div>
             <div class="ina-file-upload__text"><div class="ina-file-upload__title">Unggah File</div><div class="ina-file-upload__description">Unggah atau seret dan lepas ke dalam kotak ini. PDF, JPG, atau PNG.</div></div>
             <button type="button" class="ina-file-upload__button">Pilih File</button>
           </div>
@@ -495,7 +497,7 @@ setThemeMode('light');</pre>
     <div class="ina-modal__dialog ina-modal__dialog--size-md" role="dialog" aria-modal="true" aria-labelledby="modal-judul">
       <div class="ina-modal__header">
         <h2 class="ina-modal__title" id="modal-judul">Simpan pendaftaran TERA?</h2>
-        <button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-tutup><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ina-modal__close-icon"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-tutup><svg class="ina-modal__close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
       </div>
       <div class="ina-modal__body"><p>Pastikan data sudah sesuai dengan KTP dan SK pengangkatan Anda. Setelah disimpan, admin E-PPAT akan memeriksa data Anda.</p></div>
       <div class="ina-modal__footer">
@@ -508,9 +510,9 @@ setThemeMode('light');</pre>
 <div class="ina-toast-container ina-toast-container--top-right" id="toast" style="display:none">
   <div class="ina-toast-item">
     <div class="ina-toast ina-toast--state-positive ina-toast--style-solid ina-toast--visible">
-      <div class="ina-toast__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"></circle><path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      <div class="ina-toast__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M9 12l2 2l4 -4" /></svg></div>
       <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">Pendaftaran TERA berhasil disimpan.</p></div></div>
-      <button class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ina-toast__close-icon"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+      <button class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast><svg class="ina-toast__close-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
     </div>
   </div>
 </div>

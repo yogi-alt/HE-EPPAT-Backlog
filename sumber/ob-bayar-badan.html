@@ -271,10 +271,10 @@ ol.bantu-langkah{padding-left:22px}
   </aside>
   <div class="main">
     <header class="top">
-      <button class="ina-button ina-button--tertiary ina-button--md" id="burgerP" aria-label="Tampilkan atau sembunyikan menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <button class="ina-button ina-button--tertiary ina-button--md" id="burgerP" aria-label="Tampilkan atau sembunyikan menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg></button>
       <div class="spacer"></div>
       <div class="user ina-action-dropdown" id="userP">
-        <button type="button" class="user-tombol" id="userTombolP" aria-haspopup="menu" aria-expanded="false" aria-label="Menu akun Calon PPAT Contoh Satu"><span class="ina-avatar ina-avatar--circle ava">CS</span><span class="txt"><span class="uname">Calon PPAT Contoh Satu</span><span class="urole">Pelanggan</span></span><span class="chev-u"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <button type="button" class="user-tombol" id="userTombolP" aria-haspopup="menu" aria-expanded="false" aria-label="Menu akun Calon PPAT Contoh Satu"><span class="ina-avatar ina-avatar--circle ava">CS</span><span class="txt"><span class="uname">Calon PPAT Contoh Satu</span><span class="urole">Pelanggan</span></span><span class="chev-u"><svg width="14" height="14" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></span></button>
         <div id="menuProfilP"></div>
       </div>
     </header>
@@ -293,10 +293,10 @@ ol.bantu-langkah{padding-left:22px}
 
   <div class="main">
     <header class="top">
-      <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Tampilkan atau sembunyikan menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Tampilkan atau sembunyikan menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg></button>
       <div class="spacer"></div>
       <div class="user ina-action-dropdown" id="user">
-        <button type="button" class="user-tombol" id="userTombol" aria-haspopup="menu" aria-expanded="false" aria-label="Menu akun Admin Contoh"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Admin Contoh</span><span class="urole">Admin</span></span><span class="chev-u"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <button type="button" class="user-tombol" id="userTombol" aria-haspopup="menu" aria-expanded="false" aria-label="Menu akun Admin Contoh"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Admin Contoh</span><span class="urole">Admin</span></span><span class="chev-u"><svg width="14" height="14" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></span></button>
         <div id="menuProfil"></div>
       </div>
     </header>
@@ -313,21 +313,21 @@ ol.bantu-langkah{padding-left:22px}
 (() => {
 /* ---------------- ikon & util (sama dengan Monitoring & HE Onboarding) ---------------- */
 const I = {
-  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
-  users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
-  user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
-  keluar:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/>',
-  luar:'<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14L21 3"/>',
-  ulang:'<path d="M23 4v6h-6"/><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/>',
-  panah:'<path d="M5 12h14M13 6l6 6-6 6"/>', kiri:'<path d="M15 18l-6-6 6-6"/>', x:'<path d="M18 6L6 18M6 6l12 12"/>', info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
-  centang:'<path d="M20 6L9 17l-5-5"/>', chev:'<path d="M9 18l6-6-6-6"/>', bawah:'<path d="M6 9l6 6 6-6"/>', mata:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>',
-  cari:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>', jam:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
-  salin:'<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
-  unduh:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/>', bantu:'<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/>',
-  masuk:'<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>', dok:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>',
-  uang:'<path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>', kalender:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
-  centangL:'<circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/>', silang:'<circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/>',
-  uji:'<path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7 15h10"/>'
+  grid:'<path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />',
+  users:'<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />',
+  user:'<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />',
+  keluar:'<path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" />',
+  luar:'<path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /><path d="M11 13l9 -9" /><path d="M15 4h5v5" />',
+  ulang:'<path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />',
+  panah:'<path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />', kiri:'<path d="M15 6l-6 6l6 6" />', x:'<path d="M18 6l-12 12" /><path d="M6 6l12 12" />', info:'<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" />',
+  centang:'<path d="M5 12l5 5l10 -10" />', chev:'<path d="M9 6l6 6l-6 6" />', bawah:'<path d="M6 9l6 6l6 -6" />', mata:'<path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />',
+  cari:'<path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" />', jam:'<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 7v5l3 3" />',
+  salin:'<path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />',
+  unduh:'<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" />', bantu:'<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 16v.01" /><path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" />',
+  masuk:'<path d="M15 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M21 12h-13l3 -3" /><path d="M11 15l-3 -3" />', dok:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 9l1 0" /><path d="M9 13l6 0" /><path d="M9 17l6 0" />',
+  uang:'<path d="M7 9m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" /><path d="M14 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 9v-2a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v6a2 2 0 0 0 2 2h2" />', kalender:'<path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" />',
+  centangL:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M9 12l2 2l4 -4" />', silang:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 10l4 4m0 -4l-4 4" />',
+  uji:'<path d="M9 3l6 0" /><path d="M10 9l4 0" /><path d="M10 3v6l-4 11a.7 .7 0 0 0 .5 1h11a.7 .7 0 0 0 .5 -1l-4 -11v-6" />'
 };
 const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
 const $ = s => document.querySelector(s);
@@ -339,7 +339,7 @@ const alert = (j, judul, isi, ekstra = '') => `<div class="ina-alert ina-alert--
 const est = t => `<span class="isi-tim" title="Data contoh. Ganti dengan data resmi dari tim E-PPAT.">${t}</span>`;
 const spinner = `<span class="ina-spinner ina-spinner--spinner-only" aria-hidden="true"><span class="ina-spinner__element ina-spinner__element--size-xs ina-spinner__element--color-primary"></span></span>`;
 const cariIsian = (id, ph, v, label) => `<div class="ina-input-search"><div class="ina-input-search__wrapper"><span class="ina-input-search__search-icon">${ik('cari', 20)}</span><input id="${id}" class="ina-input-search__input" type="search" placeholder="${ph}" aria-label="${label}" value="${esc(v)}" autocomplete="off"></div></div>`;
-const PEMISAH_REMAH = `<span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+const PEMISAH_REMAH = `<span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6l-6 6" /></svg></span>`;
 const remah = (...jejak) => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="Backlog-IDDS-OB-MONITOR-Prototype.html#dasbor" class="ina-breadcrumb__link"><span class="ina-breadcrumb__text">Beranda</span></a>${PEMISAH_REMAH}</li>${jejak.map(([t, h], i) => i < jejak.length - 1
   ? `<li class="ina-breadcrumb__item"><a href="${h}" class="ina-breadcrumb__link" data-remah="${h.slice(1)}"><span class="ina-breadcrumb__text">${t}</span></a>${PEMISAH_REMAH}</li>`
   : `<li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active" aria-current="page"><span class="ina-breadcrumb__text">${t}</span></span></li>`).join('')}</ol></nav>`;
@@ -658,11 +658,11 @@ const BERKAS = 'Backlog-IDDS-OB-BAYAR-Prototype.html';
 const TANDA_GRUP = '';
 const NAV_TURUNAN = { 'onboarding-detail':'onboarding', 'pembayaran-detail':'pembayaran' };
 Object.assign(I, {
-  berkas:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>',
-  garis:'<path d="M4 6h16M4 12h16M4 18h16"/>',
-  tameng:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
-  kotak:'<path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.7z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/>',
-  kartu:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>'
+  berkas:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 9l1 0" /><path d="M9 13l6 0" /><path d="M9 17l6 0" />',
+  garis:'<path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" />',
+  tameng:'<path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />',
+  kotak:'<path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" /><path d="M12 12l8 -4.5" /><path d="M12 12l0 9" /><path d="M12 12l-8 -4.5" /><path d="M16 5.25l-8 4.5" />',
+  kartu:'<path d="M3 5m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" /><path d="M3 10l18 0" /><path d="M7 15l.01 0" /><path d="M11 15l2 0" />'
 });
 const OB_MON = 'Backlog-IDDS-OB-MONITOR-Prototype.html', OB_VER = 'Backlog-IDDS-OB-VERIF-Prototype.html', OB_PGT = 'Backlog-IDDS-OB-PENGATURAN-Prototype.html';
 const NAV = [
@@ -847,7 +847,7 @@ const CARA = [
   ['BRImo', ['Masuk ke BRImo, lalu pilih BRIVA.', 'Masukkan nomor Virtual Account.', 'Periksa nominal, lalu masukkan PIN.']],
   ['Internet Banking BRI', ['Pilih Pembayaran, lalu BRIVA.', 'Masukkan nomor Virtual Account.', 'Periksa nominal, lalu masukkan kode m-Token.']],
   ['Bank lain', ['Pilih transfer antarbank.', 'Pilih bank BRI (kode 002), lalu masukkan nomor Virtual Account sebagai nomor tujuan.', 'Masukkan nominal persis Rp3.500.000, lalu konfirmasi.']]];
-const faqHalaman = (id, q, isi) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="${id}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></button><div id="${id}" class="ina-accordion__content"><div class="ina-accordion__body">${isi}</div></div></div>`;
+const faqHalaman = (id, q, isi) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="${id}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></div></button><div id="${id}" class="ina-accordion__content"><div class="ina-accordion__body">${isi}</div></div></div>`;
 function kartuVa() {
   const t = tAktif(), st = t.status, L = fase() === 'tunggu' ? 5 : 4;
   const masalah = st === 'kedaluwarsa' ? alert('critical', 'Tagihan kedaluwarsa', `Batas waktu ${tglJam(t.batas)} sudah lewat. Jangan transfer ke nomor ini lagi. Buat tagihan baru untuk melanjutkan.`)
@@ -1247,7 +1247,7 @@ function pasangPanduan(wadah) {
   const kiri = document.createElement('div'); kiri.className = 'judul-kiri';
   const sub = h.nextElementSibling && h.nextElementSibling.classList.contains('sub') ? h.nextElementSibling : null;
   h.before(w); w.append(kiri); kiri.append(h); if (sub) kiri.append(sub);
-  w.insertAdjacentHTML('beforeend', `<button type="button" class="ina-button ina-button--secondary ina-button--md" id="bukaBantuan" data-bantuan aria-label="Bantuan untuk halaman ini"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg><span>Bantuan</span></button>`);
+  w.insertAdjacentHTML('beforeend', `<button type="button" class="ina-button ina-button--secondary ina-button--md" id="bukaBantuan" data-bantuan aria-label="Bantuan untuk halaman ini"><svg width="16" height="16" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 16v.01" /><path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /></svg><span>Bantuan</span></button>`);
 }
 
 /* ---------------- IDDS Drawer ---------------- */
@@ -1259,7 +1259,7 @@ function drawer({ judul, isi, lebar = 'md', label = 'Tutup bantuan' }) {
     <div class="ina-drawer__backdrop" data-tutup-drawer></div>
     <div class="ina-drawer__panel ina-drawer__panel--width-${lebar}">
       <div class="ina-drawer__header"><h2 class="ina-drawer__title" id="drwJudul">${judul}</h2>
-        <button type="button" class="ina-drawer__close-button" aria-label="${label}" data-tutup-drawer><svg class="ina-drawer__close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+        <button type="button" class="ina-drawer__close-button" aria-label="${label}" data-tutup-drawer><svg class="ina-drawer__close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button></div>
       <div class="ina-drawer__content">${isi}</div>
     </div></div>`;
   D.querySelector('.ina-drawer__close-button').focus();
@@ -1344,7 +1344,7 @@ function toast(teks, state = 'default', ms = 3000, ket = '') {
 $('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tutup-toast]')) $('#toastWadah').innerHTML = ''; });
 
 /* ---------------- Bantuan per tampilan (IDDS-OB-55) ---------------- */
-const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
+const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
 const kontak = () => `<h4 class="bantu-sub">Kontak dukungan ${usulan('IDDS-OB-55')}</h4>
   <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>`;
 const lgkh = a => `<ol class="bantu-langkah">${a.map(x => `<li>${x}</li>`).join('')}</ol>`;
