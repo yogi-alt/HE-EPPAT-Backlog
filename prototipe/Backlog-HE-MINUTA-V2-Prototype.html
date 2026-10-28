@@ -2162,6 +2162,8 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
 #sbTip[hidden]{display:none}
 .sb-sr{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important}
 @media (max-width:1024px){ .sb-ciut-btn{display:none} }
+/* satu kendali per ukuran layar: layar lebar = tombol ciut di kepala sidebar; layar sempit = tombol menu (burger) di header membuka laci */
+@media (min-width:1025px){ #burger,#burgerP{display:none!important} }
 /* kategori Collapse (ikon saja) — hanya layar lebar; layar sempit tetap laci */
 @media (min-width:1025px){
   .sidebar{transition:width .18s}
