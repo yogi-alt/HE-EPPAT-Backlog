@@ -2076,6 +2076,8 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
     const b = e.target.closest('.sb-ciut-btn'); if (!b) return;
     ciut = !ciut; tulis(ciut); tip.hidden = true; terap(); b.focus();
   });
+  /* ciut sementara dari halaman (mis. editor Penyusunan Akta v2): tidak menimpa pilihan tersimpan; null = kembali ke pilihan pengguna */
+  window.sidebarIdds = { ciutSementara: v => { ciut = v == null ? baca() : !!v; terap(); } };
   /* tooltip: label menu saat ciut */
   const tampil = el => {
     const sb = el.closest('.sidebar'); if (!sb || !sb.classList.contains('sb-ciut') || !matchMedia('(min-width:1025px)').matches) return;
