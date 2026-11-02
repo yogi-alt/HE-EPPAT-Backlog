@@ -308,8 +308,8 @@ H.addEventListener('change', e => {
 });
 H.addEventListener('click', e => {
   const t = e.target;
-  if (t.closest('[data-ke-tera]')) { location.href = 'Backlog-HE-TERA-Prototype.html'; return; }
-  if (t.closest('[data-tutup-tera]')) { S.tera = false; gambar(); return; }
+  if (t.closest('[data-ke-tera]')) { location.href = 'Backlog-HE-TERA-Prototype.html#registrasi'; return; }
+  if (t.closest('[data-tutup-tera]')) { dialog({ judul:'Tutup pengingat TERA?', konfirmasi:true, isi:'<p>Pengingat ini akan disembunyikan. Anda tetap dapat mendaftarkan TERA melalui menu profil › <b>Akun Saya</b> › tab <b>Registrasi TERA</b>. Pengingat muncul lagi pada kunjungan berikutnya selama TERA belum terdaftar.</p>', tombol:[['Batal','secondary',null],['OK','primary',() => { S.tera = false; gambar(); }]] }); return; }
   const st = t.closest('[data-status]'); if (st) { S.status = st.dataset.status; gambar(); return; }
   if (t.closest('#peranTombol')) { S.peranBuka = !S.peranBuka; gambar(); return; }
   const pr = t.closest('[data-peran]'); if (pr) { S.peran = pr.dataset.peran; S.peranBuka = false; gambar(); return; }

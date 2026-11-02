@@ -345,10 +345,10 @@ const UBAH = [
     isi:'Setiap halaman memiliki tombol Bantuan di kanan judul. Isinya khusus untuk halaman itu (langkah singkat, pertanyaan umum, kontak dukungan) dan tampil di panel samping (IDDS Drawer). Kartu Registrasi TERA juga memuat tautan "Lihat panduan pendaftaran".',
     lama:'Tidak ada menu bantuan, panduan penggunaan, atau kontak dukungan di seluruh platform (skor Help & Documentation 10,6; Registrasi TERA 0).', ke:'bantuan', sorot:null },
   { kode:'HE-TERA-01', judul:'Pengingat TERA: tombol "Daftar TERA" membuka formulir pendaftaran',
-    isi:'Klik "Daftar TERA" pada pengingat langsung membuka Akun Saya di tab Registrasi TERA.',
+    isi:'Klik "Daftar TERA" pada pengingat, di Penandatanganan Akta, atau di halaman lain langsung membuka Akun Saya di tab Registrasi TERA, bukan dasbor.',
     lama:'Tombol membuka Akun Saya di tab Akun. Pengguna harus mencari tab Registrasi TERA sendiri.', ke:'dashboard', sorot:'#teraIngat' },
-  { kode:'HE-TERA-02', judul:'Menu profil: Registrasi TERA tetap mudah ditemukan setelah pengingat ditutup',
-    isi:'Menu profil memuat "Registrasi TERA" beserta statusnya. Tab Registrasi TERA diberi titik penanda selama pendaftaran belum selesai. Saat pengingat ditutup, sistem memberi tahu letak menunya.',
+  { kode:'HE-TERA-02', judul:'Pengingat TERA: letak pendaftaran tetap diketahui setelah pengingat ditutup',
+    isi:'Saat pengingat ditutup, IDDS Modal memberi tahu letak pendaftaran (menu profil › Akun Saya › tab Registrasi TERA). Pengingat baru hilang setelah pengguna mengklik OK. Tab Registrasi TERA diberi titik penanda selama pendaftaran belum selesai. Menu profil hanya berisi Akun Saya dan Keluar.',
     lama:'Setelah pengingat ditutup, pendaftaran hanya dapat dibuka dari Akun Saya tanpa penanda apa pun.', ke:'profil', sorot:'#profilMenu' },
   { kode:'HE-TERA-03', judul:'Formulir TERA: isian tidak hilang saat berpindah tab',
     isi:'Isian tetap ada ketika pengguna membuka tab Akun atau Keamanan lalu kembali. Jika pengguna meninggalkan halaman Akun Saya sebelum menyimpan, sistem meminta konfirmasi.',
@@ -471,7 +471,6 @@ function gambarProfil() {
   $('#profilMenu').innerHTML = `<div class="ina-action-dropdown__list">
     <div class="ina-action-dropdown__group-header">Admin Contoh &middot; Super Admin</div>
     <button class="ina-action-dropdown__item" data-p="akun" role="menuitem"><span class="ina-action-dropdown__item-icon">${ik('user')}</span><span class="ina-action-dropdown__item-content">Akun Saya</span></button>
-    <button class="ina-action-dropdown__item ditandai" data-p="tera" role="menuitem"><span class="ina-action-dropdown__item-icon">${ik('stempel')}</span><span class="ina-action-dropdown__item-content">Registrasi TERA</span><span class="ket-st">${badge(st.label, st.jenis)}</span></button>
     <div class="ina-action-dropdown__divider"></div>
     <button class="ina-action-dropdown__item" data-p="keluar" role="menuitem"><span class="ina-action-dropdown__item-icon">${ik('keluar')}</span><span class="ina-action-dropdown__item-content">Keluar</span></button></div>`;
   $('#profilMenu').hidden = !S.menuProfil;
@@ -649,7 +648,7 @@ $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.c
 const H = $('#halaman');
 H.addEventListener('click', e => {
   if (e.target.closest('#daftarTera')) { pindahLayar('akun', 'tera'); return; }
-  if (e.target.closest('#tutupIngat')) { S.ingatTutup = true; gambar(); toast('Pengingat ditutup. Anda tetap dapat mendaftar melalui menu profil › Registrasi TERA.', 'default', 4000); return; }
+  if (e.target.closest('#tutupIngat')) { dialog({ judul:'Tutup pengingat TERA?', konfirmasi:true, isi:'<p>Pengingat ini akan disembunyikan. Anda tetap dapat mendaftarkan TERA melalui menu profil › <b>Akun Saya</b> › tab <b>Registrasi TERA</b>. Pengingat muncul lagi pada kunjungan berikutnya selama TERA belum terdaftar.</p>', tombol:[['Batal','secondary',null],['OK','primary',() => { S.ingatTutup = true; gambar(); }]] }); return; }
   const t = e.target.closest('[data-tab]'); if (t) { S.tab = t.dataset.tab; gambar(); return; }
   const lc = e.target.closest('[data-loncat]'); if (lc) { fokusIsian(lc.dataset.loncat); return; }
   const bk = e.target.closest('[data-berkas]'); if (bk) { S.form[bk.dataset.berkas] = 'berkas-contoh.pdf'; perbaruiIsian(SEMUA.find(f => f.k === bk.dataset.berkas), null); return; }
@@ -835,6 +834,7 @@ function lihat(u) {
 
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+if (location.hash === '#registrasi') { S.layar = 'akun'; S.tab = 'tera'; } /* tombol Daftar TERA dari prototipe lain */
 gambar();
 })();
 </script>

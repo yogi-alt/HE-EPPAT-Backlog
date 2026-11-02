@@ -504,6 +504,9 @@ body{background:#1f2c33}
 .syarat-pw .tanda{width:15px;height:15px;border-radius:999px;border:1.5px solid var(--ina-stroke-secondary);display:grid;place-items:center;flex:none}
 .syarat-pw li.ok{color:var(--ina-content-positive)}
 .syarat-pw li.ok .tanda{border-color:var(--ina-content-positive);background:var(--ina-positive-100)}
+.hindari-url{margin:8px 0 0;padding:10px 12px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);font-size:12.5px;line-height:18px;color:var(--ina-content-secondary)}
+.hindari-url p{margin:0 0 4px;font-weight:600;color:var(--ina-content-primary)}
+.hindari-url ul{margin:0;padding-left:18px;display:grid;gap:2px}
 .setuju{display:flex;gap:10px;align-items:flex-start;margin-top:22px;font-size:14px;cursor:pointer}
 .setuju a{color:var(--ina-primary-primary);font-weight:600}
 .aksi-form{display:flex;gap:12px;margin-top:20px}
@@ -636,6 +639,10 @@ body.mode-app .ob{display:none}
 .panduan-va{margin:12px 0 0;padding:12px 16px 12px 34px;border:1px solid var(--ina-stroke-primary);border-radius:12px;font-size:14px;line-height:24px}
 .tombol-blok{display:flex;flex-direction:column;gap:10px;margin-top:14px}
 .tombol-blok .ina-button{justify-content:center}
+.siap-ikon{width:56px;height:56px;border-radius:999px;display:grid;place-items:center;background:var(--ina-positive-100);color:var(--ina-content-positive);margin-bottom:10px}
+.akses{margin-top:14px;padding:14px 16px;border:1px solid var(--ina-stroke-primary);border-radius:14px}
+.akses small{display:block;font-size:12px;color:var(--ina-content-secondary)}
+.akses a.url-kantor{display:inline-block;margin-top:4px;font-weight:600;color:var(--ina-primary-primary);overflow-wrap:anywhere}
 .email-pratinjau{margin-top:12px;border:1px solid var(--ina-stroke-primary);border-radius:14px;overflow:hidden;font-size:14px}
 .email-pratinjau .kep{padding:10px 14px;background:var(--ina-background-secondary);font-size:12.5px;color:var(--ina-content-secondary)}
 .email-pratinjau .isi{padding:16px 18px;line-height:22px}
@@ -723,7 +730,7 @@ body.mode-app .ob{display:none}
 /* ---------------- ikon & util ---------------- */
 const I = {
   panah:'<path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />', kiri:'<path d="M15 6l-6 6l6 6" />', x:'<path d="M18 6l-12 12" /><path d="M6 6l12 12" />', info:'<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" />',
-  centang:'<path d="M5 12l5 5l10 -10" />', seru:'<path d="M12 9v4" /><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z" /><path d="M12 16h.01" />', mata:'<path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />',
+  centang:'<path d="M5 12l5 5l10 -10" />', centangL:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M9 12l2 2l4 -4" />', seru:'<path d="M12 9v4" /><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z" /><path d="M12 16h.01" />', mata:'<path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />',
   mataTutup:'<path d="M10.585 10.587a2 2 0 0 0 2.829 2.828" /><path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87" /><path d="M3 3l18 18" />',
   tameng:'<path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />', surat:'<path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" />', ponsel:'<path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14z" /><path d="M11 4h2" /><path d="M12 17v.01" />',
   jam:'<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 7v5l3 3" />', salin:'<path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />',
@@ -748,8 +755,8 @@ const UBAH = [
   { kode:'HE-REG-01', judul:'Formulir Registrasi: tombol Batal dan konfirmasi sebelum keluar',
     isi:'Formulir pendaftaran memiliki tombol "Batal" di samping "Daftar Sekarang". Bila formulir sudah terisi lalu pengguna menekan Batal, Masuk, atau menu navigasi, muncul IDDS Modal Confirmation "Tinggalkan pendaftaran?" yang menjelaskan bahwa data yang sudah diisi akan hilang.',
     lama:'Tidak ada tombol batal atau kembali selama pendaftaran; pengguna hanya dapat memakai tombol kembali di peramban dan data yang sudah diisi hilang tanpa peringatan.', ke:'reg-batal', sorot:'#aksiForm' },
-  { kode:'HE-REG-02', judul:'Formulir Registrasi: penjelasan isian ID PPAT dan URL Tenant',
-    isi:'Label "ID PPAT" dan "URL Tenant" diberi IDDS Tooltip dan teks bantuan di bawah isian. URL Tenant menampilkan pratinjau alamat lengkap aplikasi kantor (mis. dev-app.eppat.id/t/kantor-contoh), aturan penulisan (huruf kecil, angka, tanda hubung), dan hasil cek ketersediaan.',
+  { kode:'HE-REG-02', judul:'Formulir Registrasi: penjelasan isian ID PPAT / SK PPAT dan URL Tenant',
+    isi:'Label "ID PPAT / SK PPAT" dan "URL Tenant" diberi IDDS Tooltip dan teks bantuan di bawah isian. Isian ID PPAT / SK PPAT berketerangan "Sesuai nomor SK PPAT yang terdaftar di ATR/BPN.". URL Tenant menampilkan pratinjau alamat lengkap aplikasi kantor (mis. dev-app.eppat.id/t/kantor-contoh), aturan penulisan (huruf kecil, angka, tanda hubung), daftar hal yang dihindari (spasi, huruf kapital, simbol, tanda hubung di awal atau akhir, kurang dari 3 karakter, nama yang sudah dipakai, data pribadi), dan hasil cek ketersediaan.',
     lama:'Isian ID PPAT dan URL Tenant tidak dijelaskan; pengguna baru tidak tahu nilai apa yang harus diisi.', ke:'reg', sorot:'#f-rTenant' },
   { kode:'HE-REG-03', judul:'Halaman Registrasi: gambaran alur pendaftaran sampai aplikasi aktif',
     isi:'Di atas formulir ada ringkasan lima tahap: Isi data, Verifikasi email, Masuk dan amankan akun, Pilih paket dan bayar, Aplikasi kantor aktif. Tahap yang sedang dikerjakan ditandai.',
@@ -779,10 +786,10 @@ const UBAH = [
     isi:'Di bawah stepper ada IDDS Alert "Langkah berikutnya" yang menyebut apa yang perlu dilakukan dan perkiraan waktunya (mis. Proses Administrasi ± 1 hari kerja). Kartu "Butuh bantuan?" menampilkan kontak dukungan dan membuka drawer Bantuan berisi pertanyaan umum pembayaran dan aktivasi.',
     lama:'Tidak ada panduan, tooltip, atau kontak dukungan di Dashboard maupun halaman pembayaran (skor Help & Documentation: 0).', ke:'db', sorot:'#langkahDb' },
   { kode:'HE-OB-04', judul:'Email aktivasi instansi: tanpa kata sandi dalam teks biasa',
-    isi:'Email "Instansi e-PPAT siap digunakan" berisi alamat aplikasi kantor dan tombol "Buat Kata Sandi" (tautan sekali pakai dengan masa berlaku), bukan kata sandi. Pengguna membuat kata sandi sendiri sesuai syarat 12 karakter + 4 jenis karakter.',
+    isi:'Email aktivasi berisi alamat aplikasi kantor, email untuk masuk, dan tombol "Masuk ke Aplikasi e-PPAT", tanpa kata sandi. Email menjelaskan bahwa pengguna masuk dengan kata sandi yang dibuat saat pendaftaran, dan menunjukkan pilihan "Lupa kata sandi?" di halaman masuk. Layar Selesai menampilkan lencana "Status akun: Aktif", kartu "Aplikasi e-PPAT Anda Siap!" dengan tombol "Masuk ke Aplikasi e-PPAT" dan tautan "Lupa kata sandi?", serta pratinjau email ini.',
     lama:'Email aktivasi menampilkan "EMAIL LOGIN", "PASSWORD" dalam teks biasa, dan "LINK LOGIN" (skor Privacy Dashboard: 0).', ke:'db-lunas', sorot:'#emailAktivasi' },
   { kode:'HE-OB-05', judul:'Stepper Dashboard Onboarding: nomor urut dan istilah konsisten',
-    isi:'Kesembilan tahap ditampilkan berurutan 1–9 (termasuk Verifikasi Anggota), masing-masing dengan tanggal selesai atau keterangan status. Label teknis dibakukan: metode "VIRTUAL_ACCOUNT" di Riwayat Transaksi menjadi "Virtual Account BRI", status "BELUM DIBAYAR" menjadi lencana "Belum dibayar".',
+    isi:'Tahap ditampilkan bernomor urut 1–8 tanpa lompatan, masing-masing dengan tanggal selesai atau keterangan status. Tahap Verifikasi Anggota tidak ditampilkan karena sedang ditahan oleh E-PPAT. Label teknis dibakukan: metode "VIRTUAL_ACCOUNT" di Riwayat Transaksi menjadi "Virtual Account BRI", status "BELUM DIBAYAR" menjadi lencana "Belum dibayar".',
     lama:'Penomoran stepper melompat dari 3 ke 5 karena satu tahap tidak ditampilkan. Riwayat Transaksi menampilkan nilai teknis "VIRTUAL_ACCOUNT" dan teks kapital "BELUM DIBAYAR".', ke:'db-riwayat', sorot:'#tabelRiwayat' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk pendaftaran dan masuk',
     isi:'Tautan "Butuh bantuan?" di setiap kartu membuka IDDS Drawer berisi pertanyaan umum (email verifikasi tidak masuk, lupa kata sandi, kode tidak masuk, kehilangan akses aplikasi autentikator, isian ID PPAT dan URL Tenant) dan kontak dukungan.',
@@ -793,11 +800,11 @@ const UBAH = [
 ];
 
 /* ---------------- keadaan ---------------- */
-const LAYAR = [['daftar', 'Registrasi'], ['verif', 'Cek email'], ['verifOk', 'Verifikasi berhasil'], ['masuk', 'Masuk'], ['metode', 'Verifikasi dua langkah'], ['cadangan', 'Kode cadangan'], ['dasbor', 'Dasbor'], ['bayar', 'Pembayaran VA'], ['lunas', 'Setelah lunas'], ['riwayat', 'Riwayat Transaksi']];
-const APP = ['dasbor', 'bayar', 'lunas', 'riwayat'];
+const LAYAR = [['daftar', 'Registrasi'], ['verif', 'Cek email'], ['verifOk', 'Verifikasi berhasil'], ['masuk', 'Masuk'], ['metode', 'Verifikasi dua langkah'], ['cadangan', 'Kode cadangan'], ['dasbor', 'Dasbor'], ['bayar', 'Pembayaran VA'], ['lunas', 'Setelah lunas'], ['selesai', 'Selesai'], ['riwayat', 'Riwayat Transaksi']];
+const APP = ['dasbor', 'bayar', 'lunas', 'selesai', 'riwayat'];
 const S = { layar:'daftar', ubah:false, setuju:false, gagal:false, email:'', metode:'email', memuat:'', cekTenant:'' };
 /* status Dashboard (Onboarding) */
-const DB0 = () => ({ paket:'', dipesan:'', metodeBayar:'', bank:'', va:null, lunas:false, cek:'', hasilCek:'' });
+const DB0 = () => ({ paket:'', dipesan:'', metodeBayar:'', bank:'', va:null, lunas:false, aktif:false, cek:'', hasilCek:'' });
 let DB = DB0();
 const AKUN = { email:'ppat.baru@contoh.id' };
 
@@ -825,8 +832,9 @@ const stepperH = (L, kini, sub = () => '', label = 'Tahapan') => `<div class="in
   return `${i ? `<div class="ina-stepper__separator ${i <= kini ? 'ina-stepper__separator--completed' : ''}" aria-hidden="true"></div>` : ''}<div class="ina-stepper__item ${kls ? 'ina-stepper__item--' + kls : ''}" role="listitem" aria-current="${i === kini ? 'step' : 'false'}"><div class="ina-stepper__icon-wrapper">${i < kini ? CEK_STEP : `<span class="ina-stepper__step-number">${i + 1}</span>`}</div><div class="ina-stepper__label"><span>${t}</span>${sub(i)}</div></div>`; }).join('')}</div>`;
 const ALUR = ['Isi data pendaftaran', 'Verifikasi email', 'Masuk dan amankan akun', 'Pilih paket dan bayar', 'Aplikasi kantor aktif'];
 const alur = kini => `<div class="ditandai alur-kotak" id="alurDaftar"><p class="alur-judul">Langkah sampai aplikasi kantor Anda aktif${usulan('HE-REG-03')}</p>${stepperH(ALUR, kini, () => '', 'Langkah pendaftaran')}</div>`;
-const TIP_ID = 'Nomor identitas PPAT Anda. Dipakai asosiasi PPAT untuk memverifikasi bahwa pendaftar adalah PPAT yang sah.';
-const TIP_URL = 'Alamat aplikasi kantor Anda. Pegawai dan klien kantor masuk melalui alamat ini, jadi pilih nama yang mudah dikenali, misalnya nama kantor.';
+const TIP_ID = 'Isi ID PPAT atau nomor SK pengangkatan PPAT Anda. Nomor ini dipakai untuk memverifikasi bahwa pendaftar adalah PPAT yang sah.';
+const TIP_URL = 'Alamat aplikasi kantor Anda. Pegawai dan klien kantor masuk melalui alamat ini, sehingga pilih nama yang mudah dikenali, misalnya nama kantor.';
+const HINDARI_URL = ['Spasi, huruf kapital, dan simbol selain tanda hubung (-).', 'Tanda hubung di awal atau di akhir nama.', 'Nama yang kurang dari 3 karakter.', 'Nama yang sudah dipakai kantor lain.', 'Data pribadi, seperti NIK atau nomor telepon.'];
 function layarDaftar() {
   return `<div class="ob-judul"><h1>Daftar E-PPAT Sekarang</h1><p>Pastikan data yang Anda masukkan sesuai.</p></div>
     <section class="ob-kartu besar" aria-label="Formulir pendaftaran">
@@ -840,10 +848,10 @@ function layarDaftar() {
         <div>${pwIsian('rPw2', 'Ulangi Kata Sandi', 'Minimal 12 karakter')}</div>
         <div class="lebar ditandai"><ul class="syarat-pw" id="syaratPw" aria-live="polite">${SYARAT_PW.map(([l], i) => `<li data-syarat="${i}"><span class="tanda" aria-hidden="true"></span>${l}</li>`).join('')}</ul>${usulan('HE-REG-04')}</div>
         <div class="tiga">${pilihan('rWarga', 'Kewarganegaraan', ['Pilih', 'WNI', 'WNA'])}${tf('rTempat', 'Tempat Lahir', 'Masukkan tempat lahir')}${tf('rTgl', 'Tanggal Lahir', 'Pilih tanggal', false, '', '', '', 'date')}</div>
-        <div class="lebar ditandai">${tf('rIdPpat', `${denganTip('<span class="istilah" tabindex="0">ID PPAT</span>', TIP_ID)}`, 'Masukkan ID PPAT Anda', true, 'Sesuai data keanggotaan PPAT Anda.')}${usulan('HE-REG-02')}</div>
+        <div class="lebar ditandai">${tf('rIdPpat', `${denganTip('<span class="istilah" tabindex="0">ID PPAT / SK PPAT</span>', TIP_ID)}`, 'Masukkan ID PPAT atau nomor SK PPAT', true, 'Sesuai nomor SK PPAT yang terdaftar di ATR/BPN.')}${usulan('HE-REG-02')}</div>
         ${pilihan('rBank', 'Bank', ['Pilih Bank', 'Bank Contoh Satu', 'Bank Contoh Dua', 'Bank Contoh Tiga'])}
         ${tf('rRek', 'Nomor Rekening', 'Masukkan nomor rekening Anda', false, '', 'inputmode="numeric"')}
-        <div class="lebar">${tf('rTenant', `${denganTip('<span class="istilah" tabindex="0">URL Tenant</span>', TIP_URL)}`, 'username-tenant', true, 'Huruf kecil, angka, dan tanda hubung. Contoh: kantor-contoh', '', 'dev-app.eppat.id/t/')}</div>
+        <div class="lebar">${tf('rTenant', `${denganTip('<span class="istilah" tabindex="0">URL Tenant</span>', TIP_URL)}`, 'username-tenant', true, 'Huruf kecil, angka, dan tanda hubung. Contoh: kantor-contoh', 'aria-describedby="hindariUrl"', 'dev-app.eppat.id/t/')}<div class="hindari-url" id="hindariUrl"><p>Hindari hal berikut:</p><ul>${HINDARI_URL.map(t => `<li>${t}</li>`).join('')}</ul></div></div>
       </div>
       <label class="setuju" for="rSetuju"><span class="ina-checkbox"><input type="checkbox" id="rSetuju" class="ina-checkbox__input peer" ${S.setuju ? 'checked' : ''}><span class="ina-checkbox__box ina-checkbox__box--${S.setuju ? 'checked' : 'unchecked'}">${S.setuju ? ik('centang', 12) : ''}</span></span><span>Dengan klik tombol daftar, saya telah membaca dan menyetujui serta tunduk kepada <a href="#" data-luar="Ketentuan Layanan e-PPAT">Ketentuan Layanan e-PPAT</a></span></label>
       <div class="aksi-form ditandai" id="aksiForm">${tombol('Batal', 'secondary', 'lg', 'id="batalDaftar" class="batal"')}${tombol('Daftar Sekarang', 'primary', 'lg', `id="kirimDaftar" ${S.setuju && !S.memuat ? '' : 'disabled'}`, S.memuat === 'daftar' ? spinner : '')}${usulan('HE-REG-01')}</div>
@@ -924,7 +932,7 @@ function gambar() {
   gambarNav();
   const app = APP.includes(S.layar);
   document.body.classList.toggle('mode-app', app);
-  if (app) { gambarNavApp(); $('#halamanApp').innerHTML = { dasbor:layarDasbor, bayar:layarBayar, lunas:layarLunas, riwayat:layarRiwayat }[S.layar](); return; }
+  if (app) { gambarNavApp(); $('#halamanApp').innerHTML = { dasbor:layarDasbor, bayar:layarBayar, lunas:layarLunas, selesai:layarSelesai, riwayat:layarRiwayat }[S.layar](); return; }
   $('#halaman').innerHTML = { daftar:layarDaftar, verif:layarVerifEmail, verifOk:layarVerifOk, masuk:layarMasuk, metode:layarMetode, otp:layarOtp, cadangan:layarCadangan }[S.layar]();
   if (S.layar === 'otp') pasangOtp();
 }
@@ -935,9 +943,9 @@ const PAKET = {
   enterprise:{ n:'Enterprise', lencana:['Akses penuh', 'success'], harga:'Rp3.500.000', fitur:['1 PPAT, 1 Admin, & hingga 4 Asisten', 'E-Sign (Maks. 6 Orang) & E-Seal/Stamp', 'Pekerjaan Tanpa Batas', 'Dasbor Analitik Komprehensif', 'Bantuan Teknis Mendalam'] }
 };
 const TAHAP = ['Pendaftaran', 'Verifikasi Email', 'Masuk Pertama', 'Verifikasi Anggota', 'Pilih Produk', 'Proses Pembayaran', 'Lunas', 'Proses Administrasi', 'Selesai'];
-function posisiTahap() { if (DB.lunas) return 7; if (DB.dipesan) return 5; return 4; }
+function posisiTahap() { if (DB.aktif) return 9; if (DB.lunas) return 7; if (DB.dipesan) return 5; return 4; }
 function gambarNavApp() {
-  $('#nav').innerHTML = '<div class="items">' + [['dasbor', 'Dasbor', 'grid'], ['riwayat', 'Riwayat Transaksi', 'dok']].map(([k, t, i]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item ${S.layar === k || (k === 'dasbor' && S.layar !== 'riwayat') ? 'on' : ''}" data-ke="${k === 'dasbor' ? (DB.lunas ? 'lunas' : DB.dipesan ? 'bayar' : 'dasbor') : k}">${ik(i)}<span>${t}</span></a>`).join('') + '</div>';
+  $('#nav').innerHTML = '<div class="items">' + [['dasbor', 'Dasbor', 'grid'], ['riwayat', 'Riwayat Transaksi', 'dok']].map(([k, t, i]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item ${S.layar === k || (k === 'dasbor' && S.layar !== 'riwayat') ? 'on' : ''}" data-ke="${k === 'dasbor' ? (DB.aktif ? 'selesai' : DB.lunas ? 'lunas' : DB.dipesan ? 'bayar' : 'dasbor') : k}">${ik(i)}<span>${t}</span></a>`).join('') + '</div>';
 }
 I.grid = '<path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />';
 I.dok = '<path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 9l1 0" /><path d="M9 13l6 0" /><path d="M9 17l6 0" />';
@@ -946,20 +954,22 @@ I.telepon = '<path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0
 const remahApp = t => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link" data-ke="dasbor"><span class="ina-breadcrumb__text">Beranda</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6l-6 6" /></svg></span></li><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">${t}</span></span></li></ol></nav>`;
 const TGL = ['26 Okt, 09.10', '26 Okt, 09.12', '26 Okt, 09.15', '26 Okt, 09.15'];
 function heroDb() {
-  return `<section class="hero-db"><div>${badge(DB.lunas ? 'Status akun: Diproses' : 'Status akun: Onboarding', DB.lunas ? 'info' : 'success', 'sm')}<h2>Selamat Datang di Portal e-PPAT</h2><p>Selesaikan langkah-langkah di bawah ini untuk mengaktifkan akun PPAT ${PAKET[DB.dipesan || 'enterprise'].n} Anda.</p></div>
+  return `<section class="hero-db"><div>${badge(DB.aktif ? 'Status akun: Aktif' : DB.lunas ? 'Status akun: Diproses' : 'Status akun: Onboarding', DB.aktif ? 'success' : DB.lunas ? 'info' : 'success', 'sm')}<h2>Selamat Datang di Portal e-PPAT</h2><p>${DB.aktif ? `Aplikasi e-PPAT kantor Anda sudah aktif. Paket ${PAKET[DB.dipesan || 'enterprise'].n} berlaku.` : `Selesaikan langkah-langkah di bawah ini untuk mengaktifkan akun PPAT ${PAKET[DB.dipesan || 'enterprise'].n} Anda.`}</p></div>
     <span>${tombol('Cek Status Terbaru', 'secondary', 'md', `id="cekStatus" ${S.memuat === 'cek' ? 'disabled' : ''}`, S.memuat === 'cek' ? spinner : ik('ulang', 16))}${usulan('HE-OB-01')}</span></section>`;
 }
-/* stepper 9 tahap bernomor urut (HE-OB-05) + langkah berikutnya (HE-OB-03) */
+/* stepper bernomor urut 1–8 (HE-OB-05) + langkah berikutnya (HE-OB-03).
+   Tahap Verifikasi Anggota (indeks 3) sedang ditahan E-PPAT, jadi tidak ditampilkan ke pelanggan; nomor tetap urut. */
+const TAMPIL = [0, 1, 2, 4, 5, 6, 7, 8];
 function kartuTahap() {
-  const p = posisiTahap(), waktu = i => i < 4 ? TGL[i] : i === 4 && DB.dipesan ? '26 Okt, 09.20' : i === 5 && DB.lunas ? '26 Okt, 09.31' : i === 6 && DB.lunas ? '26 Okt, 09.31' : '';
+  const p = posisiTahap(), waktu = i => i < 4 ? TGL[i] : i === 4 && DB.dipesan ? '26 Okt, 09.20' : i === 5 && DB.lunas ? '26 Okt, 09.31' : i === 6 && DB.lunas ? '26 Okt, 09.31' : i >= 7 && DB.aktif ? '27 Okt, 10.05' : '';
   const BERIKUT = {
     4:['Pilih paket layanan', 'Pilih Trial atau Enterprise di bawah, lalu tekan Lanjut Pembayaran. Paket masih dapat diganti sebelum pembayaran diterima.'],
     5:['Selesaikan pembayaran', `Bayar tagihan melalui Virtual Account sebelum batas waktu. Pembayaran terverifikasi otomatis dalam beberapa menit setelah transfer.`],
-    7:['Tunggu proses administrasi', `Tim Peruri menyiapkan aplikasi kantor Anda (perkiraan ${est('± 1 hari kerja')}). Anda akan menerima email berisi alamat aplikasi dan tautan untuk membuat kata sandi.`]
+    7:['Tunggu proses administrasi', `Tim Peruri menyiapkan aplikasi kantor Anda (perkiraan ${est('± 1 hari kerja')}). Anda akan menerima email berisi alamat aplikasi. Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran.`]
   }[p];
   return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuTahap"><div class="ina-card__content"><h3>Progress Registrasi Anda${usulan('HE-OB-05')}</h3>
-    ${stepperH(TAHAP, p, i => `<small>${i < p ? (waktu(i) || 'Selesai') : i === p ? 'Sedang berjalan' : '—'}</small>`, 'Progres registrasi')}
-    <div class="berikut-db ditandai" id="langkahDb">${alert('info', `Langkah berikutnya: ${BERIKUT[0]}`, `${BERIKUT[1]}${usulan('HE-OB-03')}`)}</div></div></section>`;
+    ${stepperH(TAMPIL.map(i => TAHAP[i]), p > 8 ? TAMPIL.length : TAMPIL.indexOf(p), n => { const i = TAMPIL[n]; return `<small>${i < p ? (waktu(i) || 'Selesai') : i === p ? 'Sedang berjalan' : '—'}</small>`; }, 'Progres registrasi')}
+    ${BERIKUT ? `<div class="berikut-db ditandai" id="langkahDb">${alert('info', `Langkah berikutnya: ${BERIKUT[0]}`, `${BERIKUT[1]}${usulan('HE-OB-03')}`)}</div>` : ''}</div></section>`;
 }
 function kartuBantuan() {
   return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="bantuanDb"><div class="ina-card__content bantuan-db">
@@ -967,6 +977,7 @@ function kartuBantuan() {
     ${tombol('Lihat Bantuan', 'secondary', 'md', 'data-bantuan', ik('bantu', 16))}${usulan('HE-OB-03')}</div></section>`;
 }
 function layarDasbor() {
+  if (DB.aktif) { S.layar = 'selesai'; return layarSelesai(); }
   if (DB.dipesan) { S.layar = DB.lunas ? 'lunas' : 'bayar'; return S.layar === 'lunas' ? layarLunas() : layarBayar(); }
   return `${heroDb()}${kartuTahap()}
     <section class="ina-card ina-card--variant-basic kartu-db"><div class="ina-card__content"><h3>Pilih Paket Layanan Anda</h3><p class="ket">Mulai konfigurasi instansi e-PPAT Anda dengan memilih paket yang sesuai.</p>
@@ -1013,6 +1024,7 @@ function layarBayar() {
 }
 function layarLunas() {
   if (!DB.lunas) { DB.dipesan = DB.dipesan || 'enterprise'; DB.lunas = true; }
+  DB.aktif = false;
   return `${heroDb()}${kartuTahap()}
     <div class="dua-kol" style="margin-top:16px">${kartuRingkasan()}
       <section class="ina-card ina-card--variant-basic kartu-db" style="margin-top:0"><div class="ina-card__content"><h3>Pembayaran diterima</h3><p class="ket">Terima kasih. Tagihan ${PAKET[DB.dipesan].harga} sudah lunas pada 26 Okt 2026, 09.31.</p>
@@ -1020,7 +1032,24 @@ function layarLunas() {
           <div class="email-pratinjau"><div class="kep">Dari: e-PPAT &lt;noreply@eppat.id&gt; · Subjek: Instansi e-PPAT Anda siap digunakan</div>
             <div class="isi">Yth. Bapak/Ibu Contoh PPAT Baru,<br>Instansi e-PPAT untuk kantor Anda telah berhasil dibuat dan siap digunakan.
               <div class="kotak"><small>ALAMAT APLIKASI</small>dev-app.eppat.id/t/kantor-contoh<small style="margin-top:8px">EMAIL UNTUK MASUK</small>${esc(S.email || 'ppat.baru@contoh.id')}</div>
-              ${tombol('Buat Kata Sandi', 'primary', 'sm', 'data-luar="Buat Kata Sandi"')}<p style="margin:10px 0 0;font-size:12.5px;color:var(--ina-content-secondary)">Tautan berlaku ${est('24 jam')} dan hanya dapat dipakai sekali. Demi keamanan, kami tidak pernah mengirim kata sandi melalui email.</p></div></div></div></div></section></div>
+              ${tombol('Masuk ke Aplikasi e-PPAT', 'primary', 'sm', 'data-luar="Masuk ke Aplikasi e-PPAT"')}<p style="margin:10px 0 0;font-size:12.5px;color:var(--ina-content-secondary)">Masuk dengan email di atas dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kami tidak pernah mengirim kata sandi melalui email. Bila lupa, pilih <b>Lupa kata sandi?</b> di halaman masuk.</p></div></div></div></div></section></div>
+    ${kartuBantuan()}`;
+}
+/* tahap Selesai: aplikasi kantor aktif (sama dengan OB-BAYAR, IDDS-OB-54) */
+function layarSelesai() {
+  DB.dipesan = DB.dipesan || 'enterprise'; DB.lunas = true; DB.aktif = true;
+  const url = 'dev-app.eppat.id/t/kantor-contoh';
+  return `${heroDb()}${kartuTahap()}
+    <div class="dua-kol" style="margin-top:16px">
+      <section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuSiap" style="margin-top:0"><div class="ina-card__content"><span class="siap-ikon">${ik('centangL', 28)}</span><h3>Aplikasi e-PPAT Anda Siap!</h3><p class="ket">Akun aplikasi e-PPAT Anda telah berhasil dibuat dan siap digunakan.</p>
+        <div class="akses"><small>Alamat aplikasi e-PPAT Anda</small><a href="#" class="url-kantor" data-luar="Aplikasi kantor">https://${url}</a></div>
+        <div class="tombol-blok">${tombol('Masuk ke Aplikasi e-PPAT', 'primary', 'md', 'data-luar="Masuk ke Aplikasi e-PPAT"', ik('masuk', 16))}${tombol('Lupa kata sandi?', 'link', 'md', 'data-luar="Lupa kata sandi"')}</div>
+        <div style="margin-top:12px">${alert('info', '', 'Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kata sandi tidak pernah dikirim melalui email.')}</div>
+        <div class="ditandai" id="emailAktif" style="margin-top:14px"><div class="email-pratinjau"><div class="kep">Dari: e-PPAT &lt;noreply@eppat.id&gt; · Subjek: Akun e-PPAT Anda Sudah Aktif</div>
+          <div class="isi">Yth. Bapak/Ibu Contoh PPAT Baru,<br>Instansi e-PPAT untuk kantor Anda telah berhasil dibuat dan siap digunakan.
+            <div class="kotak"><small>ALAMAT APLIKASI</small>${url}<small style="margin-top:8px">EMAIL UNTUK MASUK</small>${esc(S.email || 'ppat.baru@contoh.id')}</div>
+            ${tombol('Masuk ke Aplikasi e-PPAT', 'primary', 'sm', 'data-luar="Masuk ke Aplikasi e-PPAT"')}<p style="margin:10px 0 0;font-size:12.5px;color:var(--ina-content-secondary)">Masuk dengan email di atas dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kami tidak pernah mengirim kata sandi melalui email. Bila lupa, pilih <b>Lupa kata sandi?</b> di halaman masuk.</p></div></div></div>${usulan('HE-OB-04')}</div></section>
+      ${kartuRingkasan()}</div>
     ${kartuBantuan()}`;
 }
 function layarRiwayat() {
@@ -1054,6 +1083,11 @@ document.addEventListener('click', e => {
     if (!DB.va) { lanjut(); return; }
     dialog({ judul:'Ganti paket?', konfirmasi:true, isi:`<p>Tagihan Virtual Account <b>${DB.va.no}</b> untuk paket ${PAKET[DB.dipesan].n} akan dibatalkan. Tagihan baru dibuat setelah Anda memilih paket lain.${usulan('HE-OB-02')}</p>${alert('caution', '', 'Jangan mentransfer ke nomor Virtual Account lama setelah dibatalkan.')}`,
       tombol:[['Batal', 'secondary', null], ['Ganti Paket', 'primary', lanjut]] });
+    return;
+  }
+  if (t.closest('#cekStatus') && S.layar === 'lunas') {
+    S.memuat = 'cek'; gambar();
+    setTimeout(() => { S.memuat = ''; ke('selesai'); toast('Status diperbarui: aplikasi kantor Anda sudah aktif.', 'positive', 4500); }, 700);
     return;
   }
   if (t.closest('#cekStatus')) {
@@ -1119,8 +1153,8 @@ function cekTenant(i) {
   clearTimeout(jt); h.classList.remove('ina-text-field__helper-text--error');
   if (!v) { h.textContent = h.dataset.bantu; return; }
   h.textContent = 'Memeriksa ketersediaan…';
-  jt = setTimeout(() => { const pakai = ['default', 'kantor-contoh'].includes(v) || v.length < 3;
-    h.innerHTML = pakai ? (v.length < 3 ? 'URL Tenant minimal 3 karakter.' : `dev-app.eppat.id/t/${v} sudah dipakai. Coba nama lain.`) : `${ik('centang', 12)} dev-app.eppat.id/t/<b>${v}</b> tersedia.`;
+  jt = setTimeout(() => { const ujung = /^-|-$/.test(v), pakai = ['default', 'kantor-contoh'].includes(v) || v.length < 3 || ujung;
+    h.innerHTML = pakai ? (v.length < 3 ? 'URL Tenant minimal 3 karakter.' : ujung ? 'URL Tenant tidak boleh diawali atau diakhiri tanda hubung.' : `dev-app.eppat.id/t/${v} sudah dipakai. Coba nama lain.`) : `${ik('centang', 12)} dev-app.eppat.id/t/<b>${v}</b> tersedia.`;
     h.classList.toggle('ina-text-field__helper-text--error', pakai); S.cekTenant = pakai ? '' : v; }, 500);
 }
 function kirimDaftar() {
@@ -1131,8 +1165,8 @@ function kirimDaftar() {
   if (!/^8\d{8,11}$/.test(v('rHp'))) { galat('rHp', 'Nomor telepon diawali 8, 9–12 digit tanpa 0 di depan.'); ada = true; }
   if (!SYARAT_PW.every(([, uji]) => uji($('#rPw').value))) { setPw('rPw', 'Kata sandi belum memenuhi semua syarat di bawah.', 'error'); ada = true; }
   if (!$('#rPw2').value || $('#rPw2').value !== $('#rPw').value) { setPw('rPw2', 'Kata sandi belum sama.', 'error'); ada = true; }
-  if (!v('rIdPpat')) { galat('rIdPpat', 'ID PPAT wajib diisi.'); ada = true; }
-  if (!S.cekTenant || S.cekTenant !== v('rTenant')) { const h = $('#h-rTenant'); $('#f-rTenant .ina-text-field__wrapper').classList.add('ina-text-field__wrapper--status-error'); h.textContent = v('rTenant') ? (h.textContent.includes('dipakai') ? h.textContent : 'Tunggu hasil cek ketersediaan URL Tenant.') : 'URL Tenant wajib diisi.'; h.classList.add('ina-text-field__helper-text--error'); ada = true; }
+  if (!v('rIdPpat')) { galat('rIdPpat', 'ID PPAT atau nomor SK PPAT wajib diisi.'); ada = true; }
+  if (!S.cekTenant || S.cekTenant !== v('rTenant')) { const h = $('#h-rTenant'); $('#f-rTenant .ina-text-field__wrapper').classList.add('ina-text-field__wrapper--status-error'); h.textContent = v('rTenant') ? (h.classList.contains('ina-text-field__helper-text--error') ? h.textContent : 'Tunggu hasil cek ketersediaan URL Tenant.') : 'URL Tenant wajib diisi.'; h.classList.add('ina-text-field__helper-text--error'); ada = true; }
   if (ada) { const g = $('.ina-text-field__wrapper--status-error input, .ina-password-input__wrapper--error input'); g?.scrollIntoView({ block:'center' }); g?.focus({ preventScroll:true }); toast('Periksa kembali isian yang ditandai merah.'); return; }
   S.email = v('rEmail'); S.memuat = 'daftar'; gambar();
   setTimeout(() => { S.ubah = false; S.setuju = false; S.memuat = ''; dialog({ judul:'Pendaftaran Berhasil!', isi:`<div class="status-kartu"><span class="ikon-besar">${ik('centang', 34)}</span><p>Tautan verifikasi telah dikirim ke email Anda. Harap verifikasi email Anda sebelum masuk.</p></div>`, tombol:[['Lihat Petunjuk Verifikasi', 'primary', () => ke('verif')]] }); }, 700);
@@ -1232,7 +1266,7 @@ function bukaBantuan() {
     <ol class="bantu-langkah">${ALUR.map(t => `<li>${t}</li>`).join('')}</ol>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${faq(1, 'Email verifikasi tidak masuk', 'Periksa folder spam atau promosi. Pastikan alamat email yang Anda daftarkan sudah benar.')}
-    ${faq(2, 'Apa yang diisi pada ID PPAT dan URL Tenant?', `${TIP_ID} ${TIP_URL}`)}
+    ${faq(2, 'Apa yang diisi pada ID PPAT / SK PPAT dan URL Tenant?', `${TIP_ID} ${TIP_URL} Hindari spasi, huruf kapital, simbol selain tanda hubung, tanda hubung di awal atau akhir, nama kurang dari 3 karakter, dan data pribadi.`)}
     ${faq(3, 'Saya lupa kata sandi', 'Pilih "Lupa kata sandi?" di halaman masuk, lalu ikuti petunjuk yang dikirim ke email Anda.')}
     ${faq(4, 'Kode verifikasi dua langkah tidak masuk', 'Kode Email OTP berlaku 5 menit. Periksa folder spam, lalu gunakan "Kirim ulang kode" bila sudah lewat 60 detik.')}
     ${faq(5, 'Saya kehilangan akses ke aplikasi autentikator', 'Masuk dengan salah satu kode cadangan yang Anda simpan saat pertama kali mengaktifkan verifikasi dua langkah.')}

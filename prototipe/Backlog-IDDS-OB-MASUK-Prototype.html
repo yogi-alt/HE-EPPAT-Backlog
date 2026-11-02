@@ -856,7 +856,7 @@ let P = P0();
 const F0 = () => ({ ppat:salinObj(P.ppat), kantor:salinObj(P.kantor), sandi:{ lama:'', baru:'', ulang:'' } });
 let F = F0();
 const BANK = [['', 'Pilih Bank'], ['Bank Contoh Satu', 'Bank Contoh Satu'], ['Bank Contoh Dua', 'Bank Contoh Dua'], ['Bank Contoh Tiga', 'Bank Contoh Tiga']];
-const ALUR = [['Isi data pendaftaran', 'Nama, NIK, email, ID PPAT, dan alamat aplikasi kantor.'], ['Verifikasi email', 'Klik tautan yang dikirim ke email Anda.'], ['Masuk dan amankan akun', 'Masuk, lalu aktifkan verifikasi dua langkah.'], ['Pilih paket dan bayar', 'Pilih Trial atau Enterprise, lalu bayar tagihannya.'], ['Aplikasi kantor aktif', 'Alamat aplikasi kantor dan tautan kata sandi dikirim lewat email.']];
+const ALUR = [['Isi data pendaftaran', 'Nama, NIK, email, ID PPAT / SK PPAT, dan alamat aplikasi kantor.'], ['Verifikasi email', 'Klik tautan yang dikirim ke email Anda.'], ['Masuk dan amankan akun', 'Masuk, lalu aktifkan verifikasi dua langkah.'], ['Pilih paket dan bayar', 'Pilih Trial atau Enterprise, lalu bayar tagihannya.'], ['Aplikasi kantor aktif', 'Alamat aplikasi kantor dikirim lewat email.']];
 
 /* ---------------- keadaan ---------------- */
 const LAYAR = [['beranda', 'Beranda'], ['lupa', 'Lupa Kata Sandi'], ['reset', 'Atur Ulang Kata Sandi'], ['reset-ok', 'Kata sandi berhasil diubah'], ['profil', 'Profil Saya']];
@@ -1449,9 +1449,9 @@ const BANTUAN = {
     ${istilah([['PPAT', 'Pejabat Pembuat Akta Tanah.'], ['ID PPAT', 'Nomor anggota PPAT yang dipakai untuk memverifikasi keanggotaan Anda.'], ['Aplikasi kantor', 'Aplikasi e-PPAT milik kantor Anda, dengan alamat sendiri, untuk membuat akta bersama staf.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('b', [
-      ['Siapa yang dapat mendaftar?', 'PPAT yang memiliki ID PPAT. Keanggotaan Anda diverifikasi sebelum Anda dapat memilih paket.'],
+      ['Siapa yang dapat mendaftar?', 'PPAT yang memiliki ID PPAT atau nomor SK PPAT.'],
       ['Berapa biayanya?', 'Ada dua paket: Trial (gratis, 30 hari) dan Enterprise (berbayar). Harga dan isi paket tampil setelah Anda masuk pertama kali. Pembayaran memakai Virtual Account.'],
-      ['Berapa lama sampai aplikasi kantor aktif?', `Setelah pembayaran lunas, tim menyiapkan aplikasi kantor Anda (perkiraan ${est('± 1 hari kerja')}). Alamat aplikasi dan tautan kata sandi dikirim lewat email.`],
+      ['Berapa lama sampai aplikasi kantor aktif?', `Setelah pembayaran lunas, tim menyiapkan aplikasi kantor Anda (perkiraan ${est('± 1 hari kerja')}). Alamat aplikasi dikirim lewat email. Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran.`],
       ['Saya sudah punya akun', 'Pilih <b>Masuk</b>, lalu masuk dengan email dan kata sandi Anda.'],
       ['Saya lupa kata sandi', 'Pilih <b>Masuk</b>, lalu <b>Lupa kata sandi?</b> untuk meminta tautan kata sandi baru.']])}
     ${kontak()}` }),

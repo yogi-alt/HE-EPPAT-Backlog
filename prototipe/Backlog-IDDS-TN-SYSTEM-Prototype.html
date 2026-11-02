@@ -1012,8 +1012,8 @@ H.addEventListener('click', e => {
   const kl = t.closest('[data-ke-layar]'); if (kl) { e.preventDefault(); pindah(kl.dataset.keLayar); return; }
   if (t.closest('[data-luar-proto]')) { e.preventDefault(); keLuar(t.closest('[data-luar-proto]').getAttribute('href')); return; }
   if (t.closest('.ina-breadcrumb__link[href="#dasbor"]')) { e.preventDefault(); pindah('dasbor'); return; }
-  if (t.closest('[data-ke-tera]')) { location.href = 'Backlog-HE-TERA-Prototype.html'; return; }
-  if (t.closest('[data-tutup-tera]')) { S.tera = false; gambar(); return; }
+  if (t.closest('[data-ke-tera]')) { location.href = 'Backlog-HE-TERA-Prototype.html#registrasi'; return; }
+  if (t.closest('[data-tutup-tera]')) { dialog({ judul:'Tutup pengingat TERA?', konfirmasi:true, isi:'<p>Pengingat ini akan disembunyikan. Anda tetap dapat mendaftarkan TERA melalui menu profil › <b>Akun Saya</b> › tab <b>Registrasi TERA</b>. Pengingat muncul lagi pada kunjungan berikutnya selama TERA belum terdaftar.</p>', tombol:[['Batal','secondary',null],['OK','primary',() => { S.tera = false; gambar(); }]] }); return; }
   /* Peran & Izin */
   if (t.closest('#tambahPeran')) { dialogPeran(null); return; }
   const up = t.closest('[data-ubah-peran]'); if (up) { dialogPeran(PERAN.find(r => r.id === +up.dataset.ubahPeran)); return; }
@@ -1314,7 +1314,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
     { id: 'n7', jenis: 'order', judul: 'Permohonan baru ORD-CONTOH-014', isi: 'Asisten Contoh membuat permohonan Akta Jual Beli untuk Contoh Penjual Satu.', lalu: 5 * MENIT, baca: false, ke: 'Backlog-HE-ORDER-Prototype.html' },
     { id: 'n6', jenis: 'verifikasi', judul: 'Berkas ORD-CONTOH-012 perlu diverifikasi', isi: 'Contoh Penjual Satu mengunggah KTP dan sertipikat. Periksa berkas sebelum akta disusun.', lalu: 42 * MENIT, baca: false, ke: 'Backlog-HE-VERIF-Prototype.html' },
     { id: 'n5', jenis: 'sistem', judul: 'Pemeliharaan sistem terjadwal', isi: 'E-PPAT tidak dapat diakses pada Sabtu, 31 Oktober 2026, pukul 22.00–23.00 WIB.', lalu: 2 * JAM, baca: false, ke: '' },
-    { id: 'n4', jenis: 'sistem', judul: 'Pendaftaran TERA kantor diproses Peruri', isi: 'Peruri sedang memeriksa data TERA kantor Anda. Hasilnya akan dikirim lewat notifikasi dan email.', lalu: 3 * JAM, baca: true, ke: 'Backlog-HE-TERA-Prototype.html' },
+    { id: 'n4', jenis: 'sistem', judul: 'Pendaftaran TERA kantor diproses Peruri', isi: 'Peruri sedang memeriksa data TERA kantor Anda. Hasilnya akan dikirim lewat notifikasi dan email.', lalu: 3 * JAM, baca: true, ke: 'Backlog-HE-TERA-Prototype.html#registrasi' },
     { id: 'n3', jenis: 'akta', judul: 'Akta ORD-CONTOH-005 selesai', isi: 'Akta sudah difinalisasi. Unggah scan akta, lalu kirim salinannya di menu Salinan Akta.', lalu: 7 * JAM, baca: true, ke: 'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan' },
     { id: 'n2', jenis: 'salinan', judul: 'Salinan akta ORD-CONTOH-005 dibuka', isi: 'Contoh Penjual Satu membuka tautan salinan akta.', lalu: 26 * JAM, baca: true, ke: 'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan' },
     { id: 'n1', jenis: 'sistem', judul: 'Layanan e-Meterai belum aktif', isi: 'Aktifkan e-Meterai agar akta dapat dibubuhi meterai elektronik.', lalu: 50 * JAM, baca: true, ke: 'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai' }

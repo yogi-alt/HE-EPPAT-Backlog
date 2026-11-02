@@ -554,8 +554,8 @@ H.addEventListener('click', e => {
   const kl = t.closest('[data-ke-layar]'); if (kl) { e.preventDefault(); pindah(kl.dataset.keLayar); return; }
   if (t.closest('[data-luar-proto]')) { e.preventDefault(); keLuar(t.closest('[data-luar-proto]').getAttribute('href')); return; }
   if (t.closest('.ina-breadcrumb__link[href="#dasbor"]')) { e.preventDefault(); pindah('dasbor'); return; }
-  if (t.closest('[data-ke-tera]')) { location.href = 'Backlog-HE-TERA-Prototype.html'; return; }
-  if (t.closest('[data-tutup-tera]')) { S.tera = false; gambar(); return; }
+  if (t.closest('[data-ke-tera]')) { location.href = 'Backlog-HE-TERA-Prototype.html#registrasi'; return; }
+  if (t.closest('[data-tutup-tera]')) { dialog({ judul:'Tutup pengingat TERA?', konfirmasi:true, isi:'<p>Pengingat ini akan disembunyikan. Anda tetap dapat mendaftarkan TERA melalui menu profil › <b>Akun Saya</b> › tab <b>Registrasi TERA</b>. Pengingat muncul lagi pada kunjungan berikutnya selama TERA belum terdaftar.</p>', tombol:[['Batal','secondary',null],['OK','primary',() => { S.tera = false; gambar(); }]] }); return; }
   /* Peran & Izin */
   if (t.closest('#tambahPeran')) { dialogPeran(null); return; }
   const up = t.closest('[data-ubah-peran]'); if (up) { dialogPeran(PERAN.find(r => r.id === +up.dataset.ubahPeran)); return; }

@@ -40,13 +40,13 @@
       "fitur": "Registrasi TERA",
       "judul": "Pengingat TERA: tombol \"Daftar TERA\" membuka formulir pendaftaran",
       "saat_ini": "Tombol \"Daftar TERA\" pada pengingat membuka Akun Saya di tab Akun (kode live: onRegister: () => j(\"account\")). Pengguna harus mencari tab Registrasi TERA sendiri.",
-      "usulan": "Tombol \"Daftar TERA\" langsung membuka Akun Saya di tab Registrasi TERA.",
+      "usulan": "Tombol \"Daftar TERA\" langsung membuka Akun Saya di tab Registrasi TERA, baik dari pengingat di dasbor dan halaman lain maupun dari Penandatanganan Akta.",
       "prinsip": "H7 Recognition rather than Recall; H4 Consistency and Standards",
       "halaman": "20, 22",
       "prioritas": "Tinggi",
       "layar": "Pengaturan Aplikasi › Dashboard Sistem (pengingat TERA) › Akun Saya",
       "acuan": "prototipe/Backlog-HE-TERA-Prototype.html › Daftar perubahan › HE-TERA-01",
-      "selesai_bila": "Klik tombol \"Daftar TERA\" membuka halaman Akun Saya dengan tab Registrasi TERA aktif.",
+      "selesai_bila": "Klik tombol \"Daftar TERA\" dari halaman mana pun membuka halaman Akun Saya dengan tab Registrasi TERA aktif, bukan dasbor.",
       "status": "Prototipe siap",
       "catatan": "",
       "tanggal": "2026-10-26"
@@ -54,15 +54,15 @@
     {
       "kode": "HE-TERA-02",
       "fitur": "Registrasi TERA",
-      "judul": "Menu profil: Registrasi TERA tetap mudah ditemukan setelah pengingat ditutup",
+      "judul": "Pengingat TERA: letak pendaftaran tetap diketahui setelah pengingat ditutup",
       "saat_ini": "Setelah pengingat ditutup, pendaftaran hanya dapat dibuka dari Akun Saya › tab Registrasi TERA tanpa penanda apa pun.",
-      "usulan": "Tambahkan item \"Registrasi TERA\" beserta lencana status di menu profil. Beri titik penanda pada tab Registrasi TERA selama pendaftaran belum selesai. Saat pengingat ditutup, tampilkan toast: \"Pengingat ditutup. Anda tetap dapat mendaftar melalui menu profil › Registrasi TERA.\"",
+      "usulan": "Saat pengguna menutup pengingat TERA, tampilkan IDDS Modal \"Tutup pengingat TERA?\" yang menyebut letak pendaftaran: menu profil › Akun Saya › tab Registrasi TERA. Pengingat baru disembunyikan setelah pengguna mengklik OK. Beri titik penanda pada tab Registrasi TERA selama pendaftaran belum selesai. Menu profil hanya berisi Akun Saya dan Keluar.",
       "prinsip": "H7 Recognition rather than Recall; H1 Visibility of System Status",
       "halaman": "22",
       "prioritas": "Sedang",
       "layar": "Header (menu profil), Akun Saya",
       "acuan": "prototipe/Backlog-HE-TERA-Prototype.html › Daftar perubahan › HE-TERA-02",
-      "selesai_bila": "Menu profil memuat item Registrasi TERA dengan lencana status. Tab Registrasi TERA menampilkan titik penanda saat status Belum terdaftar atau Ditolak, dan toast muncul saat pengingat ditutup.",
+      "selesai_bila": "Menutup pengingat memunculkan modal berisi letak pendaftaran TERA, dan pengingat tidak hilang sebelum pengguna mengklik OK. Tab Registrasi TERA menampilkan titik penanda saat status Belum terdaftar atau Ditolak.",
       "status": "Prototipe siap",
       "catatan": "",
       "tanggal": "2026-10-23"
@@ -376,7 +376,7 @@
       "fitur": "Penyusunan Akta",
       "judul": "Penyusunan Akta: tata letak editor ala pengolah kata",
       "saat_ini": "Laporan HE menilai tampilan editor terlalu padat dan sulit dipindai, serta kurva pembelajarannya tinggi. Di live, kepala halaman berisi empat tombol, daftar pasal berupa kartu bertumpuk di kiri, editor berada di dalam tab dengan bilah alat dua baris berisi lebih dari 30 ikon tanpa nama, dan naskah tampil di kotak sempit tanpa batas halaman sehingga tidak terlihat utuh seperti akta. Footer hanya muncul di PDF; live menulis \"Hanya muncul di PDF (minuta/salinan), bukan di preview\", sehingga footer tidak terlihat saat menyusun.",
-      "usulan": "Editor berada di dalam kerangka aplikasi seperti halaman lain, dengan menu samping, header, remah, dan judul halaman. Kepala naskah ringkas dalam satu baris: tombol kembali, ikon naskah, judul \"Naskah Akta · kode\", lencana jenis dan status, keterangan \"Tersimpan\" atau \"Belum disimpan\", serta penanda variabel yang belum terisi. Bilah menu (File, Edit, Tampilan, Sisipkan, Format, Alat, Bantuan) berada di bawah judul. Di kanan ada Pratinjau Akta dan satu tombol utama sesuai peran: Beritahu PPAT untuk Asisten dan Finalisasi Akta untuk PPAT; akta final hanya menampilkan Pratinjau Akta. Editor terdiri atas panel Navigasi di kiri, kertas di tengah, dan panel Bagian di kanan. Kedua panel dapat ditutup agar kertas lebih lega, dan area kerja mengisi tinggi layar di bawah kepala naskah. Panel Navigasi memakai ikon jenis bagian yang seragam (lingkaran bernomor untuk pasal, ¶ untuk catatan) dengan ikon ? yang menjelaskannya, dan bagian Lampiran dapat dilipat (tetap \"Segera hadir\"). Di margin kiri kertas, setiap bagian diberi lencana jenis dan nama bagian. Naskah dipecah per halaman sesuai ukuran kertas dan margin dari Pengaturan Dokumen. Bila footer diaktifkan, setiap halaman menampilkan footer dengan kode yang sudah diganti nilai contoh (nomor halaman, jumlah halaman, tanggal, nama PPAT, wilayah, nomor akta, jenis akta). Bila footer tidak aktif, penanda kecil \"Halaman X dari Y\" tampil di luar kertas dan tidak ikut tercetak. Perubahan Pengaturan Dokumen langsung memotong ulang halaman, dan klik kaki halaman membuka isian footer. Fitur tidak berubah dari live. Catatan untuk tim aplikasi: pemotongan halaman di prototipe hanya perkiraan dari tinggi blok; di aplikasi, pemotongan harus memakai aturan yang sama dengan pembuat PDF agar editor, pratinjau, dan PDF sama persis.",
+      "usulan": "Editor berada di dalam kerangka aplikasi seperti halaman lain, dengan menu samping, header, remah, dan judul halaman. Kepala naskah ringkas dalam satu baris: tombol kembali, ikon naskah, judul \"Naskah Akta · kode\", lencana jenis dan status, keterangan \"Tersimpan\" atau \"Belum disimpan\", serta penanda variabel yang belum terisi. Bilah menu (File, Edit, Tampilan, Sisipkan, Format, Alat, Bantuan) berada di bawah judul. Di kanan ada Pratinjau Akta dan satu tombol utama sesuai peran: Beritahu PPAT untuk Asisten dan Finalisasi Akta untuk PPAT; akta final hanya menampilkan Pratinjau Akta. Editor terdiri atas panel Navigasi di kiri, kertas di tengah, dan panel Bagian di kanan. Kedua panel dapat ditutup agar kertas lebih lega, dan area kerja mengisi tinggi layar di bawah kepala naskah. Panel Navigasi memakai ikon jenis bagian yang seragam (lingkaran bernomor untuk pasal, ¶ untuk catatan) dengan ikon ? yang menjelaskannya, dan bagian Lampiran dapat dilipat (tetap \"Segera hadir\"). Di margin kiri kertas, setiap bagian diberi lencana jenis dan nama bagian. Naskah dipecah per halaman sesuai ukuran kertas dan margin dari Pengaturan Dokumen. Bila footer diaktifkan, setiap halaman menampilkan footer dengan kode yang sudah diganti nilai contoh (nomor halaman, jumlah halaman, tanggal, nama PPAT, wilayah, nomor akta, jenis akta). Bila footer tidak aktif, penanda kecil \"Halaman X dari Y\" tampil di luar kertas dan tidak ikut tercetak. Perubahan Pengaturan Dokumen langsung memotong ulang halaman, dan klik kaki halaman membuka isian footer. Fitur tidak berubah dari live. Catatan untuk tim aplikasi: pemotongan halaman di prototipe hanya perkiraan dari tinggi blok; di aplikasi, pemotongan harus memakai aturan yang sama dengan pembuat PDF agar editor, pratinjau, dan PDF sama persis. Saat editor dibuka, menu samping aplikasi otomatis diciutkan menjadi ikon agar kertas lebih lega; saat kembali ke daftar, menu samping kembali seperti pilihan terakhir pengguna.",
       "prinsip": "H8 Aesthetic and Minimalist Design; H6 Recognition Rather Than Recall; H4 Consistency and Standards",
       "halaman": "UX Metric Lab, Highlight #4 (skor 47,1)",
       "prioritas": "Sedang",
@@ -760,7 +760,7 @@
       "fitur": "Verifikasi Berkas (Asisten/PPAT)",
       "judul": "Daftar dan detail verifikasi: lama menunggu dan dampaknya terlihat",
       "saat_ini": "Layar tidak menampilkan informasi urgensi atau tenggat. Daftar hanya menampilkan tanggal order dibuat, dan halaman detail tidak menjelaskan akibat bila verifikasi belum selesai.",
-      "usulan": "Tambahkan kolom \"Menunggu\" di daftar yang berisi lama waktu sejak order berstatus Siap beserta tanggalnya. Beri lencana kuning \"Lewat 3 hari\" pada order yang melewati batas, dan urutkan daftar secara bawaan dari yang paling lama menunggu. Tampilkan IDDS Alert di detail yang menyebut sejak kapan order menunggu dan bahwa drafting baru dapat dimulai setelah ketiga verifikasi selesai.",
+      "usulan": "Tambahkan kolom \"Menunggu\" di daftar yang berisi lama waktu sejak order berstatus Siap beserta tanggalnya. Beri lencana kuning \"Lewat 3 hari\" pada order yang melewati batas, dan urutkan daftar secara bawaan dari yang paling lama menunggu. Tampilkan IDDS Alert di detail yang menyebut sejak kapan order menunggu dan jumlah bagian yang belum diverifikasi (mis. \"1 bagian lagi belum diverifikasi\"), serta bahwa penyusunan minuta baru dapat dimulai setelah ketiga verifikasi selesai.",
       "prinsip": "H1 Visibility of System Status",
       "halaman": "UX Metric Lab, Highlight #5 (skor 54,5; PDF hal. 15)",
       "prioritas": "Sedang",
@@ -902,15 +902,15 @@
     {
       "kode": "HE-REG-02",
       "fitur": "Registrasi (Onboarding)",
-      "judul": "Formulir Registrasi: penjelasan isian ID PPAT dan URL Tenant",
+      "judul": "Formulir Registrasi: penjelasan isian ID PPAT / SK PPAT dan URL Tenant",
       "saat_ini": "Isian ID PPAT dan URL Tenant tidak dijelaskan sehingga pengguna baru tidak tahu nilai yang harus diisi.",
-      "usulan": "Pasang IDDS Tooltip dan teks bantuan pada ID PPAT dan URL Tenant. ID PPAT adalah nomor identitas PPAT yang dipakai asosiasi untuk verifikasi. URL Tenant adalah alamat aplikasi kantor yang hanya memuat huruf kecil, angka, dan tanda hubung. Isian URL Tenant menampilkan hasil cek ketersediaan beserta alamat lengkapnya.",
+      "usulan": "Pasang IDDS Tooltip dan teks bantuan pada ID PPAT / SK PPAT dan URL Tenant. Isian ID PPAT / SK PPAT berketerangan \"Sesuai nomor SK PPAT yang terdaftar di ATR/BPN.\". URL Tenant adalah alamat aplikasi kantor yang hanya memuat huruf kecil, angka, dan tanda hubung. Di bawah isian URL Tenant tampil daftar hal yang dihindari: spasi, huruf kapital, dan simbol selain tanda hubung; tanda hubung di awal atau akhir; nama kurang dari 3 karakter; nama yang sudah dipakai; dan data pribadi. Isian URL Tenant menampilkan hasil cek ketersediaan beserta alamat lengkapnya.",
       "prinsip": "H10 Help and Documentation; H2 Match between System and the Real World",
       "halaman": "UX Metric Lab, Highlight #11 (skor 91,7; PDF hal. 15)",
       "prioritas": "Rendah",
       "layar": "dev.eppat.id/register",
       "acuan": "prototipe/Backlog-HE-ONBOARDING-Prototype.html › Daftar perubahan › HE-REG-02",
-      "selesai_bila": "Isian ID PPAT dan URL Tenant menampilkan penjelasan tanpa pengguna meninggalkan formulir.",
+      "selesai_bila": "Isian ID PPAT / SK PPAT dan URL Tenant menampilkan penjelasan serta daftar hal yang dihindari tanpa pengguna meninggalkan formulir.",
       "status": "Prototipe siap",
       "catatan": "Sumber resmi nomor ID PPAT perlu dikonfirmasi tim agar teks bantuannya tepat.",
       "tanggal": "2026-10-26"
@@ -1064,15 +1064,15 @@
       "fitur": "Dashboard (Onboarding)",
       "judul": "Email aktivasi instansi: tanpa kata sandi dalam teks biasa",
       "saat_ini": "Email \"instansi e-PPAT telah berhasil dibuat\" menampilkan \"EMAIL LOGIN\", \"PASSWORD\" dalam teks biasa, dan \"LINK LOGIN\" (bukti HE; skor Privacy Dashboard: 0).",
-      "usulan": "Isi email dengan alamat aplikasi kantor, email masuk, dan tombol \"Buat Kata Sandi\" berupa tautan sekali pakai yang memiliki masa berlaku. Tambahkan kalimat bahwa E-PPAT tidak pernah mengirim kata sandi melalui email. Pengguna membuat kata sandi sendiri dengan syarat 12 karakter dan 4 jenis karakter.",
+      "usulan": "Isi email aktivasi dengan alamat aplikasi kantor, email untuk masuk, dan tombol \"Masuk ke Aplikasi e-PPAT\", tanpa kata sandi. Tulis bahwa pengguna masuk dengan kata sandi yang dibuat saat pendaftaran, bahwa E-PPAT tidak pernah mengirim kata sandi melalui email, dan bahwa pengguna yang lupa dapat memilih \"Lupa kata sandi?\" di halaman masuk. Layar Selesai menampilkan lencana \"Status akun: Aktif\", kartu \"Aplikasi e-PPAT Anda Siap!\" dengan tombol \"Masuk ke Aplikasi e-PPAT\" dan tautan \"Lupa kata sandi?\", serta pratinjau email ini.",
       "prinsip": "H11 Privacy; H5 Error Prevention",
       "halaman": "UX Metric Lab, Highlight #8 (skor 71,5; PDF hal. 15)",
       "prioritas": "Tinggi",
       "layar": "Email aktivasi instansi (setelah Proses Administrasi)",
       "acuan": "prototipe/Backlog-HE-ONBOARDING-Prototype.html › Daftar perubahan › HE-OB-04",
-      "selesai_bila": "Tidak ada email dari sistem yang memuat kata sandi.",
+      "selesai_bila": "Email aktivasi tidak memuat kata sandi, dan pengguna tahu harus masuk dengan kata sandi pendaftaran.",
       "status": "Prototipe siap",
-      "catatan": "",
+      "catatan": "Sumber: masalah dari temuan HE (kata sandi dikirim dalam teks biasa). Solusi usulan tim. Kata sandi aplikasi kantor sama dengan kata sandi saat pendaftaran onboarding (konfirmasi pengguna, 30 Okt 2026).",
       "tanggal": "2026-10-26"
     },
     {
@@ -1080,7 +1080,7 @@
       "fitur": "Dashboard (Onboarding)",
       "judul": "Stepper Dashboard Onboarding: nomor urut dan istilah konsisten",
       "saat_ini": "Penomoran stepper melompat dari 3 ke 5 karena satu tahap tidak ditampilkan (live 26 Okt 2026). Riwayat Transaksi menampilkan nilai teknis \"VIRTUAL_ACCOUNT\" dan teks kapital \"BELUM DIBAYAR\".",
-      "usulan": "Tampilkan kesembilan tahap secara berurutan dari 1 sampai 9, termasuk Verifikasi Anggota, beserta tanggal selesai atau keterangan \"Sedang berjalan\". Ubah metode di Riwayat Transaksi menjadi \"Virtual Account BRI\" dan tampilkan status dengan lencana \"Belum dibayar\" atau \"Lunas\".",
+      "usulan": "Tahap di stepper Dashboard ditampilkan bernomor urut 1–8 tanpa lompatan, dengan tanggal selesai atau keterangan \"Sedang berjalan\". Tahap Verifikasi Anggota tidak ditampilkan karena sedang ditahan oleh E-PPAT. Metode di Riwayat Transaksi menjadi \"Virtual Account BRI\" dan status memakai lencana \"Belum dibayar\"/\"Lunas\".",
       "prinsip": "H4 Consistency and Standards; H2 Match between System and the Real World",
       "halaman": "UX Metric Lab, Highlight #8 (skor 71,5; PDF hal. 15)",
       "prioritas": "Rendah",
@@ -1742,7 +1742,7 @@
       "catatan": "Status TERA dibaca dari GET /admin/eppat/tera-registration (null/pending/submitted/active/rejected).",
       "judul": "Langkah Stempel TERA: penjelasan bila TERA kantor belum aktif",
       "saat_ini": "Wizard tidak membaca status pendaftaran TERA kantor. Tombol \"Stempel TERA\" tetap aktif walaupun TERA belum didaftarkan, masih diproses, atau ditolak. Kegagalan baru terlihat setelah tombol diklik, berupa toast umum \"Gagal memulai stempel TERA.\" yang hilang sendiri. Peringatan TERA hanya berupa banner untuk admin kantor, sehingga PPAT dan Asisten yang bukan admin tidak melihatnya. Tombol \"Daftar TERA\" pada banner membuka tab Akun, bukan tab Registrasi TERA. Daftar wizard hanya menampilkan \"Menunggu TERA\".",
-      "usulan": "Periksa status pendaftaran TERA kantor di wizard. Bila TERA belum didaftarkan, masih diproses Peruri, atau ditolak, nonaktifkan tombol Bubuhkan Stempel TERA. Tampilkan IDDS Alert di bawah tombol yang menjelaskan penyebab dan langkah selanjutnya: \"Daftar TERA\", \"Lihat status pendaftaran\", atau \"Perbaiki Pendaftaran\" (membuka prototipe Registrasi TERA). Minta pengguna yang bukan admin menghubungi admin kantor. Langkah 2 dan 3 tetap terkunci dengan alasan yang menyebut TERA kantor, dan daftar akta menampilkan status \"Menunggu TERA kantor\". Bantuan memuat tanya jawab tentang TERA kantor. Perilaku ini dapat dicoba melalui simulasi \"TERA kantor\" di bilah atas.",
+      "usulan": "Periksa status pendaftaran TERA kantor di wizard. Bila TERA belum didaftarkan, masih diproses Peruri, atau ditolak, nonaktifkan tombol Bubuhkan Stempel TERA. Tampilkan IDDS Alert di bawah tombol yang menjelaskan penyebab dan langkah selanjutnya: \"Daftar TERA\", \"Lihat status pendaftaran\", atau \"Perbaiki Pendaftaran\" (langsung membuka Akun Saya › tab Registrasi TERA). Minta pengguna yang bukan admin menghubungi admin kantor. Langkah 2 dan 3 tetap terkunci dengan alasan yang menyebut TERA kantor, dan daftar akta menampilkan status \"Menunggu TERA kantor\". Bantuan memuat tanya jawab tentang TERA kantor. Perilaku ini dapat dicoba melalui simulasi \"TERA kantor\" di bilah atas.",
       "acuan": "prototipe/Backlog-HE-EAW-Prototype.html › Daftar perubahan › HE-EAW-08",
       "status": "Prototipe siap",
       "tanggal": "2026-10-26"
@@ -3258,11 +3258,11 @@
       "halaman": "Tidak dinilai HE",
       "prioritas": "Sedang",
       "layar": "dev.eppat.id › Dasbor pelanggan › Pembayaran VA; Verifikasi Pembayaran; Manajemen Onboarding",
-      "selesai_bila": "Setelah tahap Selesai, lencana menampilkan \"Status akun: Aktif\" dan kartu memuat tombol \"Masuk ke Aplikasi e-PPAT\". Email aktivasi tidak memuat kata sandi, tetapi memuat tautan sekali pakai \"Buat Kata Sandi\".",
-      "catatan": "",
+      "selesai_bila": "Setelah tahap Selesai, lencana menampilkan \"Status akun: Aktif\" dan kartu memuat tombol \"Masuk ke Aplikasi e-PPAT\". Email aktivasi tidak memuat kata sandi dan menyatakan bahwa pengguna masuk dengan kata sandi yang dibuat saat pendaftaran.",
+      "catatan": "Sumber: masalah dari temuan HE (kata sandi dikirim dalam teks biasa). Solusi usulan tim. Kata sandi aplikasi kantor sama dengan kata sandi saat pendaftaran onboarding (konfirmasi pengguna, 30 Okt 2026).",
       "judul": "Tahap Selesai: status akun Aktif, tautan masuk, dan email tanpa kata sandi",
       "saat_ini": "Setelah Selesai, lencana tetap \"STATUS AKUN: ONBOARDING\" dengan kalimat \"Selesaikan langkah-langkah…\" (temuan #3). Kartu \"Aplikasi e-PPAT Anda Siap!\" meminta \"Cek email Anda untuk mendapatkan password login\". Surel \"Akun e-PPAT Anda Sudah Aktif\" memuat PASSWORD dalam teks biasa (temuan #4), dan surel \"Pembayaran Berhasil Diterima\" menyapa dengan alamat email (temuan #10). Bukti 26 Okt 22.45: tahap Selesai berlabel \"AKTIF\", tetapi lencana tetap \"STATUS AKUN: ONBOARDING\". Kartu berbunyi \"Cek email Anda untuk mendapatkan password login dan instruksi lengkap cara menggunakan Aplikasi e-PPAT Anda.\". Fitur tertulis \"1 PPAT, 1 Admin, & up to 4 Asisten\" dan \"Dashboard Analitik Komprehensif\", dengan \"Berlaku hingga: 26 Oktober 2027\". Surel \"Pembayaran Berhasil Diterima\" dan \"Akun e-PPAT Anda Sudah Aktif\" terkirim pada menit yang sama (22.45).",
-      "usulan": "Setelah tahap Selesai, lencana berubah menjadi \"Status akun: Aktif\" (hijau), dan kalimat pembuka menyatakan aplikasi kantor sudah aktif. Kartu \"Aplikasi e-PPAT Anda Siap!\" memuat alamat aplikasi dan tombol \"Masuk ke Aplikasi e-PPAT\". Email aktivasi berisi alamat aplikasi, email untuk masuk, dan tombol \"Buat Kata Sandi\" (tautan sekali pakai), tanpa kata sandi. Email \"Pembayaran Berhasil Diterima\" menyapa pelanggan dengan namanya. Fitur paket ditulis baku, yaitu \"hingga 4 Asisten\" dan \"Dasbor Analitik Komprehensif\", dengan masa berlaku \"26 Okt 2027\".",
+      "usulan": "Setelah tahap Selesai, lencana berubah menjadi \"Status akun: Aktif\" (hijau), dan kalimat pembuka menyatakan aplikasi kantor sudah aktif. Kartu \"Aplikasi e-PPAT Anda Siap!\" memuat alamat aplikasi dan tombol \"Masuk ke Aplikasi e-PPAT\". Email aktivasi berisi alamat aplikasi, email untuk masuk, dan tombol \"Masuk ke Aplikasi e-PPAT\", tanpa kata sandi. Pengguna masuk dengan kata sandi yang dibuat saat pendaftaran. Email \"Pembayaran Berhasil Diterima\" menyapa pelanggan dengan namanya. Fitur paket ditulis baku, yaitu \"hingga 4 Asisten\" dan \"Dasbor Analitik Komprehensif\", dengan masa berlaku \"26 Okt 2027\".",
       "acuan": "prototipe/Backlog-IDDS-OB-BAYAR-Prototype.html › Daftar penyesuaian › IDDS-OB-54",
       "status": "Prototipe siap",
       "tanggal": "2026-10-26"
@@ -3358,7 +3358,7 @@
       "catatan": "",
       "judul": "Trial dan Upgrade: stepper urut waktu, lencana status akun, dan email aktivasi tidak ganda",
       "saat_ini": "Stepper awal melompat dari tahap 3 (Login Pertama) ke tahap 5 (Pilih Produk) karena Verifikasi Anggota tidak tampil. Saat Trial aktif, Pilih Produk, Proses Administrasi, dan Selesai semuanya bertanggal \"26 Okt, 23.03\", sedangkan Proses Pembayaran dan Lunas hilang dari stepper. Setelah upgrade, Proses Pembayaran dan Lunas \"26 Okt, 23.06\" tampil sebelum Proses Administrasi dan Selesai \"26 Okt, 23.03\", sehingga urutan waktu terbalik. Lencana tetap \"STATUS AKUN: ONBOARDING\" saat Trial maupun setelah Enterprise aktif. Email \"Akun e-PPAT Anda Sudah Aktif\" terkirim dua kali, yaitu pukul 23.03 (Trial) dan 23.06 (Enterprise), bersama \"Pembayaran Berhasil Diterima\" pukul 23.06. Kartu tetap bertuliskan \"Cek email Anda untuk mendapatkan password login\".",
-      "usulan": "Progres Registrasi tetap sembilan tahap, termasuk Verifikasi Anggota. Saat Trial, Proses Pembayaran dan Lunas bertanda \"Tidak perlu (Trial gratis)\", sedangkan Proses Administrasi dan Selesai tercatat pada waktu Trial aktif. Pembayaran upgrade dicatat di Progres Upgrade tersendiri (Upgrade dimulai, Proses Pembayaran, Lunas, Enterprise aktif), sehingga waktu di setiap stepper selalu urut. Lencana berubah sesuai keadaan: \"Status akun: Onboarding\", lalu \"Status akun: Trial aktif\", lalu \"Status akun: Aktif\". Email \"Akun e-PPAT Anda Sudah Aktif\" (tautan Buat Kata Sandi, tanpa kata sandi) hanya dikirim sekali saat Trial aktif. Saat upgrade, hanya email \"Pembayaran Berhasil Diterima\" yang dikirim. Email itu menyatakan paket Enterprise aktif serta alamat aplikasi dan kata sandi tidak berubah. Operator melihat Riwayat Tahap, Paket Langganan, dan Progres Upgrade yang sama di Detail Pendaftar.",
+      "usulan": "Progres Registrasi tetap sembilan tahap, termasuk Verifikasi Anggota. Saat Trial, Proses Pembayaran dan Lunas bertanda \"Tidak perlu (Trial gratis)\", sedangkan Proses Administrasi dan Selesai tercatat pada waktu Trial aktif. Pembayaran upgrade dicatat di Progres Upgrade tersendiri (Upgrade dimulai, Proses Pembayaran, Lunas, Enterprise aktif), sehingga waktu di setiap stepper selalu urut. Lencana berubah sesuai keadaan: \"Status akun: Onboarding\", lalu \"Status akun: Trial aktif\", lalu \"Status akun: Aktif\". Email \"Akun e-PPAT Anda Sudah Aktif\" (tanpa kata sandi; pengguna masuk dengan kata sandi pendaftaran) hanya dikirim sekali saat Trial aktif. Saat upgrade, hanya email \"Pembayaran Berhasil Diterima\" yang dikirim. Email itu menyatakan paket Enterprise aktif serta alamat aplikasi dan kata sandi tidak berubah. Operator melihat Riwayat Tahap, Paket Langganan, dan Progres Upgrade yang sama di Detail Pendaftar.",
       "acuan": "prototipe/Backlog-IDDS-OB-BAYAR-Prototype.html › Daftar penyesuaian › IDDS-OB-60",
       "status": "Prototipe siap",
       "tanggal": "2026-10-26"
@@ -3914,6 +3914,36 @@
       "kode": "IDDS-TN-40; IDDS-PL-41",
       "perubahan": "Tombol menu (ikon tiga garis) di header kini hanya tampil di layar sempit untuk membuka laci menu samping. Di layar lebar tombol itu disembunyikan karena tidak berfungsi; menu samping diciutkan atau dibentangkan dengan tombol di kepala menu samping. Dengan begitu, setiap ukuran layar hanya punya satu kendali menu samping.",
       "berkas": "sumber/sidebar-idds.html; semua prototipe bersidebar"
+    },
+    {
+      "tanggal": "2026-10-30",
+      "kode": "HE-REG-02",
+      "perubahan": "Penyesuaian dari masukan Peruri pada formulir registrasi PPAT: (1) isian ID PPAT menjadi ID PPAT / SK PPAT dengan keterangan Sesuai nomor SK PPAT yang terdaftar di ATR/BPN; (2) tooltip URL Tenant memakai kata sehingga; (3) URL Tenant diberi daftar hal yang dihindari: spasi, huruf kapital, dan simbol selain tanda hubung; tanda hubung di awal atau akhir; kurang dari 3 karakter; nama yang sudah dipakai; dan data pribadi. Tanda hubung di awal atau akhir kini ditolak dengan pesan galat.",
+      "berkas": "sumber/onboard-badan.html; sumber/ob-masuk-badan.html; prototipe/Backlog-HE-ONBOARDING-Prototype.html; prototipe/Backlog-IDDS-OB-MASUK-Prototype.html"
+    },
+    {
+      "tanggal": "2026-10-30",
+      "kode": "HE-VERIF-02; HE-TERA-01; HE-TERA-02",
+      "perubahan": "Masukan Peruri: (4) judul info tunggu Verifikasi Berkas menjadi \"1 bagian lagi belum diverifikasi\"; (5) tombol Daftar TERA di Penandatanganan Akta dan di pengingat halaman lain langsung membuka Akun Saya › tab Registrasi TERA, bukan dasbor; (6) menutup pengingat TERA memunculkan modal berisi letak pendaftaran TERA dengan tombol Batal dan OK, menggantikan toast yang langsung hilang; (7) item Registrasi TERA dihapus dari menu profil di header, sehingga menu profil berisi Akun Saya dan Keluar.",
+      "berkas": "sumber/verif-badan.html; sumber/eaw-badan.html; sumber/tera-idds.html; sumber/user-badan.html; sumber/tn-system-badan.html; sumber/tn-eppat-badan.html; prototipe terkait"
+    },
+    {
+      "tanggal": "2026-10-30",
+      "kode": "HE-OB-05",
+      "perubahan": "Arahan pengguna: tahap Verifikasi Anggota sedang ditahan oleh E-PPAT. Tahap ini dihapus dari stepper dasbor pelanggan, sehingga stepper menjadi 8 tahap bernomor urut (Pendaftaran, Verifikasi Email, Masuk Pertama, Pilih Produk, Proses Pembayaran, Lunas, Proses Administrasi, Selesai). Pertanyaan umum di Beranda tidak lagi menyebut verifikasi keanggotaan sebelum memilih paket. Layar admin (Monitoring, menu Verifikasi Anggota) tidak diubah.",
+      "berkas": "sumber/onboard-badan.html; sumber/ob-masuk-badan.html; prototipe/Backlog-HE-ONBOARDING-Prototype.html; prototipe/Backlog-IDDS-OB-MASUK-Prototype.html"
+    },
+    {
+      "tanggal": "2026-10-30",
+      "kode": "HE-OB-04; HE-OB-05",
+      "perubahan": "Prototipe Platform Onboarding diberi layar tahap Selesai yang sebelumnya belum ada. Tampilannya disamakan dengan OB-BAYAR (IDDS-OB-54): lencana \"Status akun: Aktif\", semua tahap stepper bercentang, kartu \"Aplikasi e-PPAT Anda Siap!\" berisi alamat aplikasi dan tombol \"Masuk ke Aplikasi e-PPAT\", serta email \"Akun e-PPAT Anda Sudah Aktif\" dengan tautan Buat Kata Sandi tanpa kata sandi. Layar dibuka lewat pil Selesai atau tombol Cek Status Terbaru di layar Setelah lunas.",
+      "berkas": "sumber/onboard-badan.html; prototipe/Backlog-HE-ONBOARDING-Prototype.html"
+    },
+    {
+      "tanggal": "2026-10-30",
+      "kode": "HE-OB-04; IDDS-OB-54; IDDS-OB-60",
+      "perubahan": "Koreksi: tombol dan tautan \"Buat Kata Sandi\" dihapus karena kata sandi aplikasi kantor sama dengan kata sandi saat pendaftaran onboarding. Email \"Akun e-PPAT Anda Sudah Aktif\" dan kartu \"Aplikasi e-PPAT Anda Siap!\" kini berisi tombol \"Masuk ke Aplikasi e-PPAT\" dan kalimat \"Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran.\", tanpa kata sandi. Kartu juga diberi tautan \"Lupa kata sandi?\". Keterangan masa berlaku tautan dan syarat 12 karakter yang sebelumnya dikarang dihapus. Usulan HE-OB-04 dan IDDS-OB-54 diberi catatan sumber: masalah dari HE, solusi dari tim.",
+      "berkas": "sumber/onboard-badan.html; sumber/ob-bayar-badan.html; sumber/ob-masuk-badan.html; prototipe/Backlog-HE-ONBOARDING-Prototype.html; prototipe/Backlog-IDDS-OB-BAYAR-Prototype.html; prototipe/Backlog-IDDS-OB-MASUK-Prototype.html"
     }
   ]
 }
