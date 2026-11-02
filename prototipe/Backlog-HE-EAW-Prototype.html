@@ -236,6 +236,7 @@ html:not([data-brand='eppat']) .content,html:not([data-brand='eppat']) main.tn{b
 
 .judul-halaman{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .judul-halaman .judul-kiri{min-width:0}
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 <style id="kerangka-css">
 /* ===== Order AJB — komponen IDDS + brand E-PPAT (HE-UMUM-01)
@@ -643,6 +644,7 @@ body:has(#otpWaktu) .protobar{position:relative;z-index:3000} /* tombol simulasi
   .otp-isi .ina-one-time-password__container{gap:6px;min-width:0}
   .penampil-bar b{width:100%}
 }
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 </head>
 <body>
@@ -782,46 +784,46 @@ const remah = () => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol cla
 const UBAH = [
   { kode:'HE-EAW-01', judul:'Stepper wizard: bernomor dengan status setiap langkah',
     isi:'Gunakan IDDS Stepper yang menampilkan nomor, nama langkah, dan status setiap langkah, misalnya "Selesai", "Giliran Pembeli · 1 dari 3 selesai", atau "Terkunci". Tandai langkah yang sedang dikerjakan sebagai aktif, dan buat setiap langkah dapat diklik untuk melihat detailnya. Pakai satu nama langkah secara konsisten di stepper, panel, dan pesan: Stempel TERA, Tanda Tangan Elektronik, dan e-Meterai. Ejaan "E-Materai" di live dibakukan menjadi "e-Meterai" (KBBI: meterai).',
-    lama:'Stepper hanya berupa tiga ikon (Digital Stamp, E-Signature, E-Materai) tanpa nomor dan status, dan "E-Materai" salah eja. Panel memakai nama lain: "Step 1: Digital Stamp (TERA)" dan "Stempel TERA".', ke:'ttd', sorot:'#kartuLangkah' },
+    lama:'Stepper hanya berupa tiga ikon (Digital Stamp, E-Signature, E-Materai) tanpa nomor dan status, dan "E-Materai" salah eja. Panel memakai nama lain: "Step 1: Digital Stamp (TERA)" dan "Stempel TERA".', ke:'ttd', sorot:'#kartuLangkah', sumber:'Laporan HE INA Digital hlm. 28, 29' },
   { kode:'HE-EAW-02', judul:'Panel wizard: istilah dijelaskan dan satu aksi utama yang jelas',
     isi:'Beri garis putus-putus dan tooltip penjelasan pada istilah TERA, tanda tangan elektronik, CA, OTP, dan e-Meterai. Kolom "Status E-Akta" diganti menjadi "Status Penandatanganan" karena menu kini bernama Penandatanganan Akta. Istilah dan label lain yang belum dijelaskan (Status Penandatanganan, akta final, Minuta dan Salinan, status langkah, Stempel TERA, penanda tangan, nomor seri dan akun e-Meterai, kode OTP, status salinan, menu Salinan Akta, lampiran) diberi ikon "?" bertooltip; informasi penting seperti masa berlaku OTP dan syarat tetap tertulis di layar. Awali panel kanan dengan kartu "Langkah berikutnya" berisi satu kalimat dan satu tombol utama, misalnya "Kirim OTP ke Contoh Pembeli Satu". Bila tombol belum dapat dipakai, tulis alasannya di bawah tombol. Pindahkan aksi lain (unduh, ingatkan, mulai ulang) ke menu "Lainnya".',
-    lama:'Istilah tidak dijelaskan. Panel berisi banyak tombol sejajar (Unduh PDF, Ingatkan, Mulai Ulang, Kirim OTP per pihak) tanpa penanda tindakan yang harus dilakukan sekarang.', ke:'ttd', sorot:'#kartuBerikut' },
+    lama:'Istilah tidak dijelaskan. Panel berisi banyak tombol sejajar (Unduh PDF, Ingatkan, Mulai Ulang, Kirim OTP per pihak) tanpa penanda tindakan yang harus dilakukan sekarang.', ke:'ttd', sorot:'#kartuBerikut', sumber:'Laporan HE INA Digital hlm. 28, 29' },
   { kode:'HE-EAW-03', judul:'Aksi wizard: konfirmasi sebelum stempel, tanda tangan, dan e-Meterai',
     isi:'Tampilkan IDDS Modal Confirmation sebelum kode OTP TERA dikirim, sebelum OTP penanda tangan dikirim, dan sebelum e-Meterai dibubuhkan. Modal berisi ringkasan (akta, posisi/halaman, penanda tangan) dan penjelasan bahwa tindakan tidak dapat dibatalkan. Untuk stempel TERA dan e-Meterai, pengguna harus mencentang "Saya sudah memeriksa isi akta dan posisi …" sebelum melanjutkan.',
-    lama:'Tombol "Stempel TERA" langsung membuat QR dan mengirim OTP, tombol "Kirim OTP" langsung mengirim kode, dan tombol "Generate SN (kuota)" langsung memakai 1 kuota meterai. Konfirmasi hanya ada untuk Mulai Ulang.', ke:'konfirm-tera', sorot:null },
+    lama:'Tombol "Stempel TERA" langsung membuat QR dan mengirim OTP, tombol "Kirim OTP" langsung mengirim kode, dan tombol "Generate SN (kuota)" langsung memakai 1 kuota meterai. Konfirmasi hanya ada untuk Mulai Ulang.', ke:'konfirm-tera', sorot:null, sumber:'Laporan HE INA Digital hlm. 28, 29' },
   { kode:'HE-EAW-04', judul:'Dialog OTP wizard: masa berlaku kode terlihat di layar',
     isi:'Gunakan komponen IDDS One-Time Password (6 kotak) pada dialog OTP. Tampilkan email tujuan yang disamarkan, hitung mundur "Kode berlaku 14:59", dan tombol "Kirim ulang kode" yang aktif setelah 60 detik. Tampilkan pesan galat yang spesifik: kode salah beserta sisa percobaan, atau kode kedaluwarsa beserta ajakan mengirim ulang.',
-    lama:'Dialog hanya berisi satu kolom angka dan teks "Kode OTP dikirim ke email …". Masa berlaku 15 menit hanya disebut di email, dan pesan galat berupa toast umum "OTP TERA salah / gagal."', ke:'otp', sorot:null },
+    lama:'Dialog hanya berisi satu kolom angka dan teks "Kode OTP dikirim ke email …". Masa berlaku 15 menit hanya disebut di email, dan pesan galat berupa toast umum "OTP TERA salah / gagal."', ke:'otp', sorot:null, sumber:'Laporan HE INA Digital hlm. 28, 30' },
   { kode:'HE-EAW-05', judul:'Penampil PDF wizard: langsung ke posisi stempel dan tanda tangan',
     isi:'Saat langkah dibuka atau giliran berganti, arahkan penampil PDF langsung ke halaman penanda terkait. Tambahkan baris "Lompat ke" di atas PDF berisi pintasan ke setiap penanda (Stempel · Hal. 8, Pembeli · Hal. 8, …). Lencana "Ditempatkan · Hal. 8" di kartu penanda tangan juga dapat diklik. Setelah stempel TERA berhasil, wizard otomatis pindah ke langkah Tanda Tangan Elektronik. Penanda dapat diseret ke halaman atau ditempatkan dengan tombol "Tempatkan di halaman ini", dan toast posisi hanya muncul sekali.',
-    lama:'Pengguna berpindah halaman satu per satu dengan tombol "Prev"/"Next" untuk mencari halaman tanda tangan. Toast "Posisi stempel TERA ditempatkan di halaman 7" dapat muncul dua kali.', ke:'ttd', sorot:'#barisLompat' },
+    lama:'Pengguna berpindah halaman satu per satu dengan tombol "Prev"/"Next" untuk mencari halaman tanda tangan. Toast "Posisi stempel TERA ditempatkan di halaman 7" dapat muncul dua kali.', ke:'ttd', sorot:'#barisLompat', sumber:'Laporan HE INA Digital hlm. 28, 30' },
   { kode:'HE-EAW-06', judul:'Wizard: kesiapan CA penanda tangan diperiksa sejak awal',
     isi:'Periksa CA semua penanda tangan, termasuk PPAT, saat wizard dibuka. Bila ada CA yang belum aktif, tampilkan IDDS Alert caution di bawah stepper yang menyebut nama dan peran penanda tangan serta dampaknya ("proses akan tertahan di langkah 2"). Alert memuat tautan Registrasi CA bila CA yang belum aktif adalah milik pengguna sendiri. Di daftar penanda tangan, lencana berubah menjadi "CA belum aktif" dan tombol Kirim OTP menjelaskan alasannya.',
-    lama:'Penelusuran live dengan order uji ORD-261023-001 menunjukkan akun PPAT belum memiliki CA, tetapi wizard tetap dimulai tanpa peringatan bahwa tanda tangan PPAT di langkah 2 akan tertahan. Banner CA di atas halaman bersifat umum dan tidak dikaitkan dengan akta yang sedang diproses.', ke:'kesiapan', sorot:'#kesiapan' },
+    lama:'Penelusuran live dengan order uji ORD-261023-001 menunjukkan akun PPAT belum memiliki CA, tetapi wizard tetap dimulai tanpa peringatan bahwa tanda tangan PPAT di langkah 2 akan tertahan. Banner CA di atas halaman bersifat umum dan tidak dikaitkan dengan akta yang sedang diproses.', ke:'kesiapan', sorot:'#kesiapan', sumber:'Laporan HE INA Digital hlm. 28 + penelusuran live' },
   { kode:'HE-EAW-07', judul:'Daftar Penandatanganan Akta: cari dan saring akta',
     isi:'Tambahkan IDDS Input Search (kode, narahubung, atau nomor akta) di atas daftar. Tambahkan saringan IDDS Button Group per langkah beserta jumlahnya: Semua, Belum mulai, Stempel TERA, Tanda tangan, e-Meterai, dan Selesai. Hasil kosong menampilkan tombol "Hapus pencarian dan saringan". Polanya sama dengan daftar Penyusunan Akta dan Verifikasi Berkas.',
-    lama:'Daftar E-Akta Wizard tidak memiliki pencarian atau saringan, sehingga pengguna harus menggulir untuk menemukan akta pada langkah tertentu. Laporan HE hal. 40 no. 5 merekomendasikan pencarian dan filter pada daftar transaksi dan akta.', ke:'daftar', sorot:'#saringEaw' },
-  { kode:'HE-EAW-08', judul:'Langkah Stempel TERA: penjelasan bila TERA kantor belum aktif',
-    isi:'Periksa status pendaftaran TERA kantor di wizard. Bila TERA belum didaftarkan, masih diproses Peruri, atau ditolak, nonaktifkan tombol Bubuhkan Stempel TERA. Tampilkan IDDS Alert di bawah tombol yang menjelaskan penyebab dan langkah selanjutnya: "Daftar TERA", "Lihat status pendaftaran", atau "Perbaiki Pendaftaran" (langsung membuka Akun Saya › tab Registrasi TERA). Minta pengguna yang bukan admin menghubungi admin kantor. Langkah 2 dan 3 tetap terkunci dengan alasan yang menyebut TERA kantor, dan daftar akta menampilkan status "Menunggu TERA kantor". Bantuan memuat tanya jawab tentang TERA kantor. Perilaku ini dapat dicoba melalui simulasi "TERA kantor" di bilah atas.',
-    lama:'Wizard tidak membaca status pendaftaran TERA kantor. Tombol "Stempel TERA" tetap aktif walaupun TERA belum didaftarkan, masih diproses, atau ditolak. Kegagalan baru terlihat setelah tombol diklik, berupa toast umum "Gagal memulai stempel TERA." yang hilang sendiri. Peringatan TERA hanya berupa banner untuk admin kantor, sehingga PPAT dan Asisten yang bukan admin tidak melihatnya. Tombol "Daftar TERA" pada banner membuka tab Akun, bukan tab Registrasi TERA. Daftar wizard hanya menampilkan "Menunggu TERA".', ke:'tera', sorot:'#alertTera' },
-  { kode:'HE-EAW-09', judul:'Langkah e-Meterai: aktivasi diperiksa dan pemakaian kuota dikonfirmasi',
-    isi:'Bila email akun e-Meterai kantor belum disimpan, nonaktifkan tombol Buat Nomor Seri dan tampilkan IDDS Alert yang mengarahkan ke menu Aktivasi e-Meterai. Bila sudah aktif, tampilkan akun e-Meterai yang dipakai di panel. Sebelum nomor seri dibuat atau dibuat ulang, tampilkan IDDS Modal Confirmation "Pakai 1 kuota e-Meterai?" yang menyebut biaya Rp10.000 dan akun Peruri yang dipakai. Bila kuota habis, tampilkan IDDS Alert critical yang menetap di bawah tombol dengan tautan pembelian kuota di e-Meterai.co.id. Gunakan label berbahasa Indonesia: "Buat Nomor Seri", "Bubuhkan e-Meterai", dan "Nomor seri e-Meterai". Perilaku ini dapat dicoba melalui simulasi "e-Meterai" di bilah atas.',
-    lama:'Wizard tidak membaca email aktivasi e-Meterai dan tidak menampilkan sisa kuota. Tombol "1. Generate SN (kuota)" selalu aktif dan langsung memakai 1 kuota (Rp10.000) tanpa konfirmasi; tombol "Generate Ulang SN" juga tanpa konfirmasi. Email yang belum diisi atau kuota yang habis baru diketahui dari toast pesan server atau "Gagal generate SN meterai." yang hilang sendiri. Label memakai bahasa Inggris dan ejaan "E-Materai".', ke:'meterai', sorot:'#alertMeterai' },
-  { kode:'HE-EAW-10', judul:'Tab Salinan: daftar salinan elektronik dan bedanya dengan menu Salinan Akta',
-    isi:'Buat tab Salinan berfungsi di layar detail. Saat tab dibuka, layar langsung masuk ke langkah Stempel TERA (atau langkah yang sedang berjalan) pada salinan aktif, yaitu salinan pertama yang belum selesai. Daftar salinan dibuka lewat tombol "Daftar Salinan" untuk mengganti salinan atau mengunggah salinan lain. Bila order belum punya salinan, tab menampilkan daftar kosong beserta kartu unggah, dan setelah unggah berhasil layar langsung masuk ke langkah Stempel TERA. Di atas daftar, tampilkan IDDS Alert info yang menjelaskan bahwa tab ini untuk salinan elektronik yang dibubuhi stempel TERA, tanda tangan elektronik, dan e-Meterai, lalu dikirim sebagai lampiran PDF. Pindaian salinan bertanda tangan basah yang dikirim sebagai tautan dikelola di menu Salinan Akta (ada tautannya). Kartu unggah tetap berisi Label (opsional) dan tombol "Unggah Salinan (PDF)". Galat format dan ukuran tampil di bawah isian, bukan toast, dan unggahan menampilkan status memuat. Setiap salinan memakai lencana status berbahasa Indonesia (Selesai, Diproses, Draf) serta lencana langkah Stempel TERA, Tanda Tangan Elektronik, dan e-Meterai. Bila PPAT penanda tangan belum ditetapkan, tampilkan IDDS Alert caution dengan tautan ke Profil Kantor. Tombol Bantuan di tab ini membuka tanya jawab khusus salinan.',
-    lama:'Tab "Salinan" membuka daftar salinan terlebih dahulu; pengguna harus mengklik "Kelola" pada salah satu salinan untuk mulai membubuhkan stempel TERA. Tab ini berisi kartu unggah "Label (opsional)" dan tombol "Unggah Salinan (PDF)" dengan galat "File harus PDF." dan "Ukuran file ({x.x} MB) melebihi batas. Maksimal 20 MB." Kartu salinan memakai lencana "Selesai", "Proses", "Draft" dan "TERA ✓ / E-Sign / E-Materai". Pesan Order menyuruh membuka menu Akta Salinan, sedangkan Minuta menyebut "Akta masuk ke menu Salinan"; tidak ada penjelasan beda antara tab Salinan (lampiran) dan menu Akta Salinan (tautan 7 hari), padahal keduanya memakai istilah "Kirim Salinan".', ke:'salinan', sorot:'#infoSalinan' },
-  { kode:'HE-EAW-11', judul:'Kelola salinan: stepper bernomor, urutan wajib, dan konfirmasi kuota',
-    isi:'Tab Salinan langsung membuka layar Kelola pada langkah Stempel TERA salinan aktif. Kepala layar menyebut salinan yang sedang dikerjakan (mis. "Sedang dikerjakan (2 dari 2): Salinan Pembeli") beserta statusnya, dan tombol "Daftar Salinan" dipakai untuk mengganti salinan. Kelola salinan memakai IDDS Stepper, penampil PDF, kartu "Langkah berikutnya", dialog OTP dengan masa berlaku, dan alert TERA kantor atau e-Meterai yang sama dengan tab Minuta. Langkah 2 dan 3 tampil terkunci dengan alasan dan tombol ke langkah sebelumnya. Sebelum nomor seri dibuat, IDDS Modal Confirmation "Pakai 1 kuota e-Meterai?" menyebut biaya Rp10.000 dan akun Peruri. Label dibakukan: "Stempel TERA", "Tanda Tangan Elektronik", "e-Meterai", "Buat Nomor Seri (pakai 1 kuota)", serta tombol unduh "Unduh Salinan Berstempel", "Unduh Salinan Bertanda Tangan", dan "Unduh Salinan Bermeterai".',
-    lama:'Layar Kelola baru terbuka setelah pengguna mengklik "Kelola" di daftar salinan. Stepper berupa tiga lingkaran "Digital Stamp → E-Signature → E-Materai" tanpa nomor dan status. Tombol "1. Generate SN (kuota)" dan "Generate Ulang SN" langsung memakai kuota (Rp 10.000) tanpa konfirmasi, tanpa tampilan sisa kuota. Tombol unduh bercampur: "Unduh PDF Ber-stempel", "Unduh Salinan Tersign", "Unduh PDF Ber-meterai". Dialog OTP hanya satu kolom angka "000000" tanpa masa berlaku.', ke:'kelola', sorot:'#kartuLangkahSal' },
-  { kode:'HE-EAW-12', judul:'Salinan: hapus berkonfirmasi dan kirim lampiran berlabel jelas',
-    isi:'Hapus salinan memakai IDDS Modal Confirmation bertombol merah yang menyebut nama salinan dan dampaknya, lalu fokus kembali ke daftar. Dialog "Kirim Salinan via Email" menampilkan nama berkas lampiran dan tahap yang sudah selesai, memberi peringatan bila salinan belum lengkap, menampilkan peran penerima dalam bahasa Indonesia (bukan kode MANUAL), dan menampilkan galat email di bawah isian.',
-    lama:'Hapus memakai window.confirm bawaan browser: \'Hapus salinan "{label}"? File tanda tangan (bila ada) ikut terhapus.\' Dialog kirim hanya menyebut "Dokumen {label} yang telah ditandatangani akan dikirim sebagai lampiran PDF (bukan tautan)." tanpa nama berkas atau tahap yang sudah selesai. Peran penerima tampil sebagai kode mentah, dan galat "Pilih minimal 1 penerima dengan email valid." tampil sebagai toast.', ke:'kirim', sorot:null },
+    lama:'Daftar E-Akta Wizard tidak memiliki pencarian atau saringan, sehingga pengguna harus menggulir untuk menemukan akta pada langkah tertentu. Laporan HE hal. 40 no. 5 merekomendasikan pencarian dan filter pada daftar transaksi dan akta.', ke:'daftar', sorot:'#saringEaw', sumber:'Laporan HE INA Digital hlm. 40 (Kesimpulan no. 5)' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Penandatanganan Akta',
     isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi urutan tiga langkah, pertanyaan umum (beda TERA dan tanda tangan, OTP tidak masuk atau kedaluwarsa, CA belum aktif, salah posisi setelah dibubuhkan, kuota meterai), dan kontak dukungan.',
-    lama:'Tidak ada panduan, tooltip, atau kontak dukungan di seluruh alur wizard (skor Help & Documentation: 0).', ke:'bantuan', sorot:null },
+    lama:'Tidak ada panduan, tooltip, atau kontak dukungan di seluruh alur wizard (skor Help & Documentation: 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
     isi:'Stepper, tab, tabel, lencana, kartu, tombol, tooltip, Action Dropdown, Modal Confirmation, One-Time Password, Spinner, toast, dan drawer memakai komponen INA Digital Design System dengan brand E-PPAT.',
-    lama:'Stepper, kartu, dialog OTP, dan lencana dibuat sendiri.', ke:'ttd', sorot:null }
+    lama:'Stepper, kartu, dialog OTP, dan lencana dibuat sendiri.', ke:'ttd', sorot:null, sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' },
+  { kode:'HE-EAW-08', judul:'Langkah Stempel TERA: penjelasan bila TERA kantor belum aktif',
+    isi:'Periksa status pendaftaran TERA kantor di wizard. Bila TERA belum didaftarkan, masih diproses Peruri, atau ditolak, nonaktifkan tombol Bubuhkan Stempel TERA. Tampilkan IDDS Alert di bawah tombol yang menjelaskan penyebab dan langkah selanjutnya: "Daftar TERA", "Lihat status pendaftaran", atau "Perbaiki Pendaftaran" (langsung membuka Akun Saya › tab Registrasi TERA). Minta pengguna yang bukan admin menghubungi admin kantor. Langkah 2 dan 3 tetap terkunci dengan alasan yang menyebut TERA kantor, dan daftar akta menampilkan status "Menunggu TERA kantor". Bantuan memuat tanya jawab tentang TERA kantor. Perilaku ini dapat dicoba melalui simulasi "TERA kantor" di bilah atas.',
+    lama:'Wizard tidak membaca status pendaftaran TERA kantor. Tombol "Stempel TERA" tetap aktif walaupun TERA belum didaftarkan, masih diproses, atau ditolak. Kegagalan baru terlihat setelah tombol diklik, berupa toast umum "Gagal memulai stempel TERA." yang hilang sendiri. Peringatan TERA hanya berupa banner untuk admin kantor, sehingga PPAT dan Asisten yang bukan admin tidak melihatnya. Tombol "Daftar TERA" pada banner membuka tab Akun, bukan tab Registrasi TERA. Daftar wizard hanya menampilkan "Menunggu TERA".', ke:'tera', sorot:'#alertTera', sumber:'Penelusuran live (bukan temuan HE)', bukanHE:true },
+  { kode:'HE-EAW-09', judul:'Langkah e-Meterai: aktivasi diperiksa dan pemakaian kuota dikonfirmasi',
+    isi:'Bila email akun e-Meterai kantor belum disimpan, nonaktifkan tombol Buat Nomor Seri dan tampilkan IDDS Alert yang mengarahkan ke menu Aktivasi e-Meterai. Bila sudah aktif, tampilkan akun e-Meterai yang dipakai di panel. Sebelum nomor seri dibuat atau dibuat ulang, tampilkan IDDS Modal Confirmation "Pakai 1 kuota e-Meterai?" yang menyebut biaya Rp10.000 dan akun Peruri yang dipakai. Bila kuota habis, tampilkan IDDS Alert critical yang menetap di bawah tombol dengan tautan pembelian kuota di e-Meterai.co.id. Gunakan label berbahasa Indonesia: "Buat Nomor Seri", "Bubuhkan e-Meterai", dan "Nomor seri e-Meterai". Perilaku ini dapat dicoba melalui simulasi "e-Meterai" di bilah atas.',
+    lama:'Wizard tidak membaca email aktivasi e-Meterai dan tidak menampilkan sisa kuota. Tombol "1. Generate SN (kuota)" selalu aktif dan langsung memakai 1 kuota (Rp10.000) tanpa konfirmasi; tombol "Generate Ulang SN" juga tanpa konfirmasi. Email yang belum diisi atau kuota yang habis baru diketahui dari toast pesan server atau "Gagal generate SN meterai." yang hilang sendiri. Label memakai bahasa Inggris dan ejaan "E-Materai".', ke:'meterai', sorot:'#alertMeterai', sumber:'Penelusuran live (bukan temuan HE)', bukanHE:true },
+  { kode:'HE-EAW-10', judul:'Tab Salinan: daftar salinan elektronik dan bedanya dengan menu Salinan Akta',
+    isi:'Buat tab Salinan berfungsi di layar detail. Saat tab dibuka, layar langsung masuk ke langkah Stempel TERA (atau langkah yang sedang berjalan) pada salinan aktif, yaitu salinan pertama yang belum selesai. Daftar salinan dibuka lewat tombol "Daftar Salinan" untuk mengganti salinan atau mengunggah salinan lain. Bila order belum punya salinan, tab menampilkan daftar kosong beserta kartu unggah, dan setelah unggah berhasil layar langsung masuk ke langkah Stempel TERA. Di atas daftar, tampilkan IDDS Alert info yang menjelaskan bahwa tab ini untuk salinan elektronik yang dibubuhi stempel TERA, tanda tangan elektronik, dan e-Meterai, lalu dikirim sebagai lampiran PDF. Pindaian salinan bertanda tangan basah yang dikirim sebagai tautan dikelola di menu Salinan Akta (ada tautannya). Kartu unggah tetap berisi Label (opsional) dan tombol "Unggah Salinan (PDF)". Galat format dan ukuran tampil di bawah isian, bukan toast, dan unggahan menampilkan status memuat. Setiap salinan memakai lencana status berbahasa Indonesia (Selesai, Diproses, Draf) serta lencana langkah Stempel TERA, Tanda Tangan Elektronik, dan e-Meterai. Bila PPAT penanda tangan belum ditetapkan, tampilkan IDDS Alert caution dengan tautan ke Profil Kantor. Tombol Bantuan di tab ini membuka tanya jawab khusus salinan.',
+    lama:'Tab "Salinan" membuka daftar salinan terlebih dahulu; pengguna harus mengklik "Kelola" pada salah satu salinan untuk mulai membubuhkan stempel TERA. Tab ini berisi kartu unggah "Label (opsional)" dan tombol "Unggah Salinan (PDF)" dengan galat "File harus PDF." dan "Ukuran file ({x.x} MB) melebihi batas. Maksimal 20 MB." Kartu salinan memakai lencana "Selesai", "Proses", "Draft" dan "TERA ✓ / E-Sign / E-Materai". Pesan Order menyuruh membuka menu Akta Salinan, sedangkan Minuta menyebut "Akta masuk ke menu Salinan"; tidak ada penjelasan beda antara tab Salinan (lampiran) dan menu Akta Salinan (tautan 7 hari), padahal keduanya memakai istilah "Kirim Salinan".', ke:'salinan', sorot:'#infoSalinan', sumber:'Penelusuran live (bukan temuan HE)', bukanHE:true },
+  { kode:'HE-EAW-11', judul:'Kelola salinan: stepper bernomor, urutan wajib, dan konfirmasi kuota',
+    isi:'Tab Salinan langsung membuka layar Kelola pada langkah Stempel TERA salinan aktif. Kepala layar menyebut salinan yang sedang dikerjakan (mis. "Sedang dikerjakan (2 dari 2): Salinan Pembeli") beserta statusnya, dan tombol "Daftar Salinan" dipakai untuk mengganti salinan. Kelola salinan memakai IDDS Stepper, penampil PDF, kartu "Langkah berikutnya", dialog OTP dengan masa berlaku, dan alert TERA kantor atau e-Meterai yang sama dengan tab Minuta. Langkah 2 dan 3 tampil terkunci dengan alasan dan tombol ke langkah sebelumnya. Sebelum nomor seri dibuat, IDDS Modal Confirmation "Pakai 1 kuota e-Meterai?" menyebut biaya Rp10.000 dan akun Peruri. Label dibakukan: "Stempel TERA", "Tanda Tangan Elektronik", "e-Meterai", "Buat Nomor Seri (pakai 1 kuota)", serta tombol unduh "Unduh Salinan Berstempel", "Unduh Salinan Bertanda Tangan", dan "Unduh Salinan Bermeterai".',
+    lama:'Layar Kelola baru terbuka setelah pengguna mengklik "Kelola" di daftar salinan. Stepper berupa tiga lingkaran "Digital Stamp → E-Signature → E-Materai" tanpa nomor dan status. Tombol "1. Generate SN (kuota)" dan "Generate Ulang SN" langsung memakai kuota (Rp 10.000) tanpa konfirmasi, tanpa tampilan sisa kuota. Tombol unduh bercampur: "Unduh PDF Ber-stempel", "Unduh Salinan Tersign", "Unduh PDF Ber-meterai". Dialog OTP hanya satu kolom angka "000000" tanpa masa berlaku.', ke:'kelola', sorot:'#kartuLangkahSal', sumber:'Penelusuran live (bukan temuan HE)', bukanHE:true },
+  { kode:'HE-EAW-12', judul:'Salinan: hapus berkonfirmasi dan kirim lampiran berlabel jelas',
+    isi:'Hapus salinan memakai IDDS Modal Confirmation bertombol merah yang menyebut nama salinan dan dampaknya, lalu fokus kembali ke daftar. Dialog "Kirim Salinan via Email" menampilkan nama berkas lampiran dan tahap yang sudah selesai, memberi peringatan bila salinan belum lengkap, menampilkan peran penerima dalam bahasa Indonesia (bukan kode MANUAL), dan menampilkan galat email di bawah isian.',
+    lama:'Hapus memakai window.confirm bawaan browser: \'Hapus salinan "{label}"? File tanda tangan (bila ada) ikut terhapus.\' Dialog kirim hanya menyebut "Dokumen {label} yang telah ditandatangani akan dikirim sebagai lampiran PDF (bukan tautan)." tanpa nama berkas atau tahap yang sudah selesai. Peran penerima tampil sebagai kode mentah, dan galat "Pilih minimal 1 penerima dengan email valid." tampil sebagai toast.', ke:'kirim', sorot:null, sumber:'Penelusuran live (bukan temuan HE)', bukanHE:true }
 ];
 
 /* ---------------- data contoh ---------------- */
@@ -1566,7 +1568,7 @@ function bukaBantuan() {
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Penandatanganan Akta', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital, halaman 28–30 (skor halaman 36,2, terendah), beserta gambar buktinya. Urutan langkah, aturan giliran, dan OTP tetap seperti live; yang diubah adalah kejelasan status dan istilah, pencegahan kesalahan, informasi OTP, dan navigasi dokumen. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {
@@ -2123,6 +2125,67 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
   };  const pasang = e => { const tip = e.target.closest && e.target.closest('.ina-tooltip'); if (tip) atur(tip); };
   document.addEventListener('mouseover', pasang); document.addEventListener('focusin', pasang);
   window.addEventListener('scroll', () => document.querySelectorAll('.ina-tooltip__content.tt-aman').forEach(c => { const tip = c.closest('.ina-tooltip'); if (tip && (tip.matches(':hover') || tip.matches(':focus-within'))) atur(tip); }), true);
+})();
+</script>
+
+<!-- ===== Sorot bersama (sorot-bersama.html, disisipkan rakit-idds.js ke prototipe yang punya "Lihat di layar") =====
+     Setiap klik "Lihat di layar" di Daftar perubahan/penyesuaian selalu memberi lingkaran biru yang berkedip beberapa detik
+     pada bagian yang dimaksud. Lingkaran berupa lapisan tersendiri (#sorotCincin) yang mengikuti posisi sasaran, jadi tidak
+     terpotong wadah, tidak bentrok dengan animasi komponen, dan tetap ada walau layar digambar ulang.
+     Urutan sasaran: dialog/laci yang terbuka (kecuali sasaran ada di dalamnya) → elemen sorot milik usulan →
+     elemen yang sudah disorot prototipe → isi halaman. -->
+<style id="sorot-bersama-css">
+@keyframes sorotKedip{0%,100%{border-color:#2563EB;box-shadow:0 0 0 6px rgba(37,99,235,.22)}50%{border-color:rgba(37,99,235,.15);box-shadow:0 0 0 0 rgba(37,99,235,0)}}
+#sorotCincin{position:fixed;z-index:2147483000;pointer-events:none;border:3px solid #2563EB;border-radius:14px;animation:sorotKedip .8s ease-in-out 5}
+@media (prefers-reduced-motion:reduce){#sorotCincin{animation:none}}
+</style>
+<script id="sorot-bersama-js">
+(() => {
+  const DURASI = 4000, JARAK = 6;
+  /* sasaran sorot per usulan, urut sama dengan tombol "Lihat di layar" (dibaca dari daftar usulan di halaman) */
+  const sumber = [...document.scripts].map(s => s.textContent).join('\n');
+  const SOROT = [...sumber.matchAll(/\{ kode:'[A-Z0-9-]+', judul:'[^']*'[\s\S]*?sorot:(null|'[^']*')/g)].map(m => m[1] === 'null' ? null : m[1].slice(1, -1));
+  const tampak = el => !!el && el.isConnected && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+  const cari = s => { try { return s ? document.querySelector(s) : null; } catch (x) { return null; } };
+  const lapisan = () => [...document.querySelectorAll('.ina-modal__dialog, .ina-drawer__panel')].filter(tampak).pop();
+  let cincin = null, sasaran = null, pemilih = null, selesai = 0, raf = 0, urut = 0;
+  const lepas = () => { cancelAnimationFrame(raf); if (cincin) cincin.remove(); if (sasaran) sasaran.classList.remove('sorot-kedip'); cincin = sasaran = pemilih = null; };
+  const ikuti = () => {
+    if (!cincin) return;
+    if (Date.now() > selesai) { lepas(); return; }
+    if (!tampak(sasaran) && pemilih) { const b = cari(pemilih); if (tampak(b)) { sasaran = b; b.classList.add('sorot-kedip'); } }
+    if (tampak(sasaran)) {
+      const r = sasaran.getBoundingClientRect();
+      const x1 = Math.max(3, r.left - JARAK), y1 = Math.max(3, r.top - JARAK), x2 = Math.min(innerWidth - 3, r.right + JARAK), y2 = Math.min(innerHeight - 3, r.bottom + JARAK); /* tetap di dalam layar */
+      Object.assign(cincin.style, { display:'block', left:x1 + 'px', top:y1 + 'px', width:Math.max(0, x2 - x1) + 'px', height:Math.max(0, y2 - y1) + 'px' });
+    } else cincin.style.display = 'none';
+    raf = requestAnimationFrame(ikuti);
+  };
+  const pasang = (el, sel) => {
+    lepas();
+    sasaran = el; pemilih = sel || null; selesai = Date.now() + DURASI;
+    el.scrollIntoView({ block:'center', behavior:'smooth' });
+    el.classList.add('sorot-kedip');
+    cincin = document.createElement('div'); cincin.id = 'sorotCincin'; cincin.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(cincin); ikuti();
+  };
+  document.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || b.textContent.trim() !== 'Lihat di layar') return;
+    const semua = [...document.querySelectorAll('button')].filter(x => x.textContent.trim() === 'Lihat di layar');
+    const sel = semua.length === SOROT.length ? SOROT[semua.indexOf(b)] : null, ke = ++urut, mulai = Date.now();
+    lepas();
+    const coba = () => {
+      if (ke !== urut) return;
+      const lap = lapisan(), t = cari(sel), habis = Date.now() - mulai > (sel ? 1600 : 900);
+      if (tampak(t) && !(lap && !lap.contains(t))) { pasang(t, sel); return; }
+      if (lap && (!t || !lap.contains(t) || habis)) { pasang(lap); return; }
+      if (!habis) { setTimeout(coba, 150); return; }
+      const lain = [...document.querySelectorAll('.sorot, .kedip')].find(tampak)
+        || ['#halamanApp', '#halaman', 'main .content', 'main', '.content'].map(cari).find(tampak);
+      if (lain) pasang(lain);
+    };
+    setTimeout(coba, 450);
+  }, true);
 })();
 </script>
 

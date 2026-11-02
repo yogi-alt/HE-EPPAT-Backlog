@@ -35,7 +35,7 @@ function judulSheet(ws, judul, sub, lebarKolom) {
 /* ---------- kelompok backlog ---------- */
 const KOLOM_HE = [
   ['No', 5, 'no'], ['Kode', 13, 'kode'], ['Lingkungan', 13, 'env'], ['Fitur / Layar', 18, 'fitur'], ['Judul usulan', 30, 'judul'], ['Kondisi saat ini (live)', 45, 'saat_ini'], ['Usulan perubahan', 55, 'usulan'],
-  ['Prinsip HE', 26, 'prinsip'], ['Hal. laporan', 11, 'halaman'], ['Prioritas', 10, 'prioritas'], ['Layar terdampak', 24, 'layar'], ['Acuan prototipe', 40, 'acuan'],
+  ['Prinsip HE', 26, 'prinsip'], ['Sumber', 34, 'sumber'], ['Prioritas', 10, 'prioritas'], ['Layar terdampak', 24, 'layar'], ['Acuan prototipe', 40, 'acuan'],
   ['Selesai bila', 45, 'selesai_bila'], ['Status', 16, 'status'], ['Catatan', 32, 'catatan'], ['Diperbarui', 12, 'tanggal']
 ];
 /* Lingkungan aplikasi tiap usulan HE: Onboarding (dev.eppat.id), Tenant (dev-app.eppat.id/t/<kantor>), Platform (dev-app.eppat.id/platform), atau Semua */

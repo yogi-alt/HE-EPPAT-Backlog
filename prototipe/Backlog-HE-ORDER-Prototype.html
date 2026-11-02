@@ -236,6 +236,7 @@ html:not([data-brand='eppat']) .content,html:not([data-brand='eppat']) main.tn{b
 
 .judul-halaman{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .judul-halaman .judul-kiri{min-width:0}
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 <style id="order-css">
 /* ===== Order AJB — komponen IDDS + brand E-PPAT (HE-UMUM-01)
@@ -567,34 +568,34 @@ const T_HARGA = 'Nilai transaksi yang disepakati penjual dan pembeli. Harga ini 
 const UBAH = [
   { kode:'HE-ORDER-01', judul:'Kartu status permohonan: syarat pindah status terlihat sebelum tombol ditekan',
     isi:'Di bawah stepper tampil daftar syarat tahap berikutnya (mis. untuk Siap: narahubung, penjual, pembeli, 2 saksi, objek), lengkap dengan tanda centang atau tautan "Lengkapi". Tombol "Pindah ke …" baru aktif setelah semua syarat terpenuhi.',
-    lama:'Tombol "Pindah ke Siap" selalu aktif. Kekurangan data baru diberitahukan melalui dialog "Data belum lengkap" setelah tombol ditekan; untuk tahap lain tidak ada pengecekan.', ke:'detail-002', sorot:'#syarat' },
+    lama:'Tombol "Pindah ke Siap" selalu aktif. Kekurangan data baru diberitahukan melalui dialog "Data belum lengkap" setelah tombol ditekan; untuk tahap lain tidak ada pengecekan.', ke:'detail-002', sorot:'#syarat', sumber:'Laporan HE INA Digital hlm. 23, 24' },
   { kode:'HE-ORDER-02', judul:'Detail order: konfirmasi sebelum pindah status',
     isi:'Setiap perpindahan status meminta konfirmasi berisi ringkasan dampaknya. Untuk Penyusunan → Selesai, pengguna harus mencentang pernyataan bahwa minuta sudah final, karena data permohonan akan dikunci dan status tidak dapat dikembalikan.',
-    lama:'Status langsung berpindah saat tombol ditekan, termasuk Drafting → Selesai yang mengunci data order.', ke:'konfirm-selesai', sorot:null },
+    lama:'Status langsung berpindah saat tombol ditekan, termasuk Drafting → Selesai yang mengunci data order.', ke:'konfirm-selesai', sorot:null, sumber:'Laporan HE INA Digital hlm. 24' },
   { kode:'HE-ORDER-03', judul:'Dialog Tambah Pihak: beberapa pihak ditambahkan tanpa membuka ulang dialog',
     isi:'Dialog Tambah Pihak memiliki tombol "Simpan & Tambah Lagi". Setelah menyimpan, formulir dikosongkan dan Tipe Pihak otomatis memilih pihak yang masih kurang (mis. setelah Penjual → Pembeli). Bagian atas dialog menampilkan pihak yang belum ada. Data diri tetap diambil dari klien terdaftar.',
-    lama:'Setiap pihak harus ditambahkan satu per satu: klik Tambah Pihak, isi, Simpan, dialog tertutup, lalu ulangi.', ke:'tambah-pihak', sorot:null },
+    lama:'Setiap pihak harus ditambahkan satu per satu: klik Tambah Pihak, isi, Simpan, dialog tertutup, lalu ulangi.', ke:'tambah-pihak', sorot:null, sumber:'Laporan HE INA Digital hlm. 23, 24' },
   { kode:'HE-ORDER-04', judul:'Tab detail dan daftar order: penanda kelengkapan data',
     isi:'Tab Para Pihak, Objek, dan Dokumen menampilkan penanda (mis. "Kurang 3", "Lengkap", jumlah dokumen). Daftar permohonan memiliki kolom Kelengkapan sehingga permohonan yang masih kurang data mudah dikenali.',
-    lama:'Tab hanya berisi nama. Daftar order hanya menampilkan status tanpa informasi kelengkapan.', ke:'daftar', sorot:'#kolLengkap' },
+    lama:'Tab hanya berisi nama. Daftar order hanya menampilkan status tanpa informasi kelengkapan.', ke:'daftar', sorot:'#kolLengkap', sumber:'Laporan HE INA Digital hlm. 24' },
   { kode:'HE-ORDER-05', judul:'Detail order: aksi utama lebih menonjol',
     isi:'Kartu status menampilkan "Langkah berikutnya" dalam satu kalimat. Tombol Hapus di tabel dibuat tidak dominan (tombol teks merah) sehingga tombol utama tetap menjadi fokus; konfirmasi hapus tetap ada.',
-    lama:'Tombol Hapus berwarna merah penuh di setiap baris tabel dan bersaing dengan tombol utama.', ke:'detail-002', sorot:'#langkahBerikut' },
+    lama:'Tombol Hapus berwarna merah penuh di setiap baris tabel dan bersaing dengan tombol utama.', ke:'detail-002', sorot:'#langkahBerikut', sumber:'Laporan HE INA Digital hlm. 23' },
   { kode:'HE-ORDER-06', judul:'Tabel Para Pihak: kontak konsisten dan data kosong ditandai',
     isi:'Kolom Kontak di tabel Para Pihak selalu berisi email dan No. HP (dua baris); bila salah satu kosong tertulis "No. HP belum diisi". NIK yang kosong ditandai lencana kuning "NIK belum diisi" sehingga data yang perlu dilengkapi sebelum akta terlihat sejak awal.',
-    lama:'Hasil penelusuran live (order uji ORD-261023-001): kolom Kontak berisi email untuk satu pihak dan nomor HP untuk pihak lain; NIK kosong hanya tampil "-".', ke:'pihak-003', sorot:'#kolKontak' },
+    lama:'Hasil penelusuran live (order uji ORD-261023-001): kolom Kontak berisi email untuk satu pihak dan nomor HP untuk pihak lain; NIK kosong hanya tampil "-".', ke:'pihak-003', sorot:'#kolKontak', sumber:'Laporan HE INA Digital hlm. 23–24 + penelusuran live' },
   { kode:'HE-ORDER-07', judul:'Dialog Tambah Objek: formulir satu tampilan dengan isian wajib',
     isi:'Dialog Tambah Objek menjadi satu formulir berkelompok (Data sertifikat, Lokasi, Harga, Data tambahan opsional). Isian wajib bertanda bintang; Harga jual beli memakai awalan Rp, pemisah ribuan otomatis, dan terbilang di bawahnya. Kesalahan ditampilkan di bawah isian yang bermasalah. Tabel objek menampilkan kolom Harga jual beli.',
-    lama:'Hasil penelusuran live: dialog memakai dua tab (Data Umum / Data Khusus AJB); Harga Jual Beli tersembunyi di tab kedua; tidak ada tanda isian wajib; harga tidak terlihat di tabel objek.', ke:'objek-dialog', sorot:null },
+    lama:'Hasil penelusuran live: dialog memakai dua tab (Data Umum / Data Khusus AJB); Harga Jual Beli tersembunyi di tab kedua; tidak ada tanda isian wajib; harga tidak terlihat di tabel objek.', ke:'objek-dialog', sorot:null, sumber:'Laporan HE INA Digital hlm. 23–24 + penelusuran live' },
   { kode:'HE-ORDER-08', judul:'Kartu status permohonan: syarat Penyusunan dan Selesai mengikuti verifikasi dan minuta',
     isi:'Syarat pindah ke Penyusunan dirinci menjadi tiga: verifikasi para pihak (CA), objek tanah, dan harga (NJOP), masing-masing dengan status dan tautan "Verifikasi Sekarang". Syarat pindah ke Selesai: minuta akta sudah difinalisasi PPAT, dengan tautan "Buka Minuta". Tombol pindah status baru aktif setelah syarat terpenuhi.',
-    lama:'Hasil penelusuran live: "Pindah ke Drafting" sudah aktif sebelum verifikasi dilakukan, dan "Pindah ke Selesai" langsung tersedia walaupun minuta belum difinalisasi.', ke:'syarat-003', sorot:'#syarat' },
+    lama:'Hasil penelusuran live: "Pindah ke Drafting" sudah aktif sebelum verifikasi dilakukan, dan "Pindah ke Selesai" langsung tersedia walaupun minuta belum difinalisasi.', ke:'syarat-003', sorot:'#syarat', sumber:'Laporan HE INA Digital hlm. 23–24 + penelusuran live' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Permohonan AJB',
     isi:'Tombol Bantuan di kanan judul halaman Permohonan AJB membuka panel samping (IDDS Drawer) berisi panduan langkah demi langkah, pertanyaan umum (mengapa tombol pindah status tidak aktif, harta bersama, status tidak dapat dikembalikan), dan kontak dukungan. Ikon ? bertooltip menjelaskan istilah status permohonan, kelengkapan, syarat pindah status, verifikasi CA, NJOP, tipe dan bentuk pihak, jenis hak, nomor sertifikat, NIB, luas, harga jual beli, NOP PBB, jenis dokumen, dan unggah dokumen.',
-    lama:'Tidak ada panduan, tooltip, atau kontak dukungan (skor Help & Documentation Order AJB: 0).', ke:'bantuan', sorot:null },
+    lama:'Tidak ada panduan, tooltip, atau kontak dukungan (skor Help & Documentation Order AJB: 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
     isi:'Stepper, tab, tabel, lencana, dialog, toast, alert, dan isian memakai komponen INA Digital Design System dengan brand E-PPAT.',
-    lama:'Stepper, tab, dialog, dan lencana dibuat sendiri.', ke:'detail-002', sorot:null }
+    lama:'Stepper, tab, dialog, dan lencana dibuat sendiri.', ke:'detail-002', sorot:null, sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' }
 ];
 
 /* ---------------- data contoh ---------------- */
@@ -1069,7 +1070,7 @@ function bukaBantuan() {
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Permohonan AJB', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital, halaman 23–24, dan keputusan tim: status tetap dipindah oleh pengguna (tidak otomatis), penambahan pihak dipercepat di dalam dialog, dan impor dari berkas ditempatkan di Daftar Pengguna. HE-ORDER-06 sampai 08 berasal dari penelusuran live dengan permohonan uji (23 Okt 2026). Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {
@@ -1601,6 +1602,67 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
   };  const pasang = e => { const tip = e.target.closest && e.target.closest('.ina-tooltip'); if (tip) atur(tip); };
   document.addEventListener('mouseover', pasang); document.addEventListener('focusin', pasang);
   window.addEventListener('scroll', () => document.querySelectorAll('.ina-tooltip__content.tt-aman').forEach(c => { const tip = c.closest('.ina-tooltip'); if (tip && (tip.matches(':hover') || tip.matches(':focus-within'))) atur(tip); }), true);
+})();
+</script>
+
+<!-- ===== Sorot bersama (sorot-bersama.html, disisipkan rakit-idds.js ke prototipe yang punya "Lihat di layar") =====
+     Setiap klik "Lihat di layar" di Daftar perubahan/penyesuaian selalu memberi lingkaran biru yang berkedip beberapa detik
+     pada bagian yang dimaksud. Lingkaran berupa lapisan tersendiri (#sorotCincin) yang mengikuti posisi sasaran, jadi tidak
+     terpotong wadah, tidak bentrok dengan animasi komponen, dan tetap ada walau layar digambar ulang.
+     Urutan sasaran: dialog/laci yang terbuka (kecuali sasaran ada di dalamnya) → elemen sorot milik usulan →
+     elemen yang sudah disorot prototipe → isi halaman. -->
+<style id="sorot-bersama-css">
+@keyframes sorotKedip{0%,100%{border-color:#2563EB;box-shadow:0 0 0 6px rgba(37,99,235,.22)}50%{border-color:rgba(37,99,235,.15);box-shadow:0 0 0 0 rgba(37,99,235,0)}}
+#sorotCincin{position:fixed;z-index:2147483000;pointer-events:none;border:3px solid #2563EB;border-radius:14px;animation:sorotKedip .8s ease-in-out 5}
+@media (prefers-reduced-motion:reduce){#sorotCincin{animation:none}}
+</style>
+<script id="sorot-bersama-js">
+(() => {
+  const DURASI = 4000, JARAK = 6;
+  /* sasaran sorot per usulan, urut sama dengan tombol "Lihat di layar" (dibaca dari daftar usulan di halaman) */
+  const sumber = [...document.scripts].map(s => s.textContent).join('\n');
+  const SOROT = [...sumber.matchAll(/\{ kode:'[A-Z0-9-]+', judul:'[^']*'[\s\S]*?sorot:(null|'[^']*')/g)].map(m => m[1] === 'null' ? null : m[1].slice(1, -1));
+  const tampak = el => !!el && el.isConnected && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+  const cari = s => { try { return s ? document.querySelector(s) : null; } catch (x) { return null; } };
+  const lapisan = () => [...document.querySelectorAll('.ina-modal__dialog, .ina-drawer__panel')].filter(tampak).pop();
+  let cincin = null, sasaran = null, pemilih = null, selesai = 0, raf = 0, urut = 0;
+  const lepas = () => { cancelAnimationFrame(raf); if (cincin) cincin.remove(); if (sasaran) sasaran.classList.remove('sorot-kedip'); cincin = sasaran = pemilih = null; };
+  const ikuti = () => {
+    if (!cincin) return;
+    if (Date.now() > selesai) { lepas(); return; }
+    if (!tampak(sasaran) && pemilih) { const b = cari(pemilih); if (tampak(b)) { sasaran = b; b.classList.add('sorot-kedip'); } }
+    if (tampak(sasaran)) {
+      const r = sasaran.getBoundingClientRect();
+      const x1 = Math.max(3, r.left - JARAK), y1 = Math.max(3, r.top - JARAK), x2 = Math.min(innerWidth - 3, r.right + JARAK), y2 = Math.min(innerHeight - 3, r.bottom + JARAK); /* tetap di dalam layar */
+      Object.assign(cincin.style, { display:'block', left:x1 + 'px', top:y1 + 'px', width:Math.max(0, x2 - x1) + 'px', height:Math.max(0, y2 - y1) + 'px' });
+    } else cincin.style.display = 'none';
+    raf = requestAnimationFrame(ikuti);
+  };
+  const pasang = (el, sel) => {
+    lepas();
+    sasaran = el; pemilih = sel || null; selesai = Date.now() + DURASI;
+    el.scrollIntoView({ block:'center', behavior:'smooth' });
+    el.classList.add('sorot-kedip');
+    cincin = document.createElement('div'); cincin.id = 'sorotCincin'; cincin.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(cincin); ikuti();
+  };
+  document.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || b.textContent.trim() !== 'Lihat di layar') return;
+    const semua = [...document.querySelectorAll('button')].filter(x => x.textContent.trim() === 'Lihat di layar');
+    const sel = semua.length === SOROT.length ? SOROT[semua.indexOf(b)] : null, ke = ++urut, mulai = Date.now();
+    lepas();
+    const coba = () => {
+      if (ke !== urut) return;
+      const lap = lapisan(), t = cari(sel), habis = Date.now() - mulai > (sel ? 1600 : 900);
+      if (tampak(t) && !(lap && !lap.contains(t))) { pasang(t, sel); return; }
+      if (lap && (!t || !lap.contains(t) || habis)) { pasang(lap); return; }
+      if (!habis) { setTimeout(coba, 150); return; }
+      const lain = [...document.querySelectorAll('.sorot, .kedip')].find(tampak)
+        || ['#halamanApp', '#halaman', 'main .content', 'main', '.content'].map(cari).find(tampak);
+      if (lain) pasang(lain);
+    };
+    setTimeout(coba, 450);
+  }, true);
 })();
 </script>
 

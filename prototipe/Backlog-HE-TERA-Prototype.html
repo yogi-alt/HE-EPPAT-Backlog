@@ -236,6 +236,7 @@ html:not([data-brand='eppat']) .content,html:not([data-brand='eppat']) main.tn{b
 
 .judul-halaman{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .judul-halaman .judul-kiri{min-width:0}
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 <style id="tera-css">
 /* ===== Registrasi TERA — komponen IDDS + brand E-PPAT (HE-UMUM-01)
@@ -552,31 +553,31 @@ const alert = (jenis, judul, isi, ekstra = '') => `<div class="ina-alert ina-ale
 const UBAH = [
   { kode:'HE-UMUM-01', judul:'Antarmuka memakai komponen IDDS dengan brand E-PPAT',
     isi:'Tombol, kolom isian, tab, stepper, alert, lencana, tooltip, dialog, toast, dan pilihan (select) memakai komponen INA Digital Design System. Warna brand mengikuti tema E-PPAT (data-brand="eppat"); warna status mengikuti IDDS.',
-    lama:'Aplikasi sudah memuat CSS IDDS, tetapi baru tombol dan kolom isian yang memakai komponen IDDS, tanpa brand (warna utama IDDS masih abu-abu bawaan). Tab, stepper, dialog, lencana, dan toast dibuat sendiri.', ke:'tera', sorot:'#teraKepala' },
+    lama:'Aplikasi sudah memuat CSS IDDS, tetapi baru tombol dan kolom isian yang memakai komponen IDDS, tanpa brand (warna utama IDDS masih abu-abu bawaan). Tab, stepper, dialog, lencana, dan toast dibuat sendiri.', ke:'tera', sorot:'#teraKepala', sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' },
   { kode:'HE-UMUM-02', judul:'Bantuan dan kontak dukungan mudah diakses',
     isi:'Setiap halaman memiliki tombol Bantuan di kanan judul. Isinya khusus untuk halaman itu (langkah singkat, pertanyaan umum, kontak dukungan) dan tampil di panel samping (IDDS Drawer). Kartu Registrasi TERA juga memuat tautan "Lihat panduan pendaftaran".',
-    lama:'Tidak ada menu bantuan, panduan penggunaan, atau kontak dukungan di seluruh platform (skor Help & Documentation 10,6; Registrasi TERA 0).', ke:'bantuan', sorot:null },
+    lama:'Tidak ada menu bantuan, panduan penggunaan, atau kontak dukungan di seluruh platform (skor Help & Documentation 10,6; Registrasi TERA 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-TERA-01', judul:'Pengingat TERA: tombol "Daftar TERA" membuka formulir pendaftaran',
     isi:'Klik "Daftar TERA" pada pengingat, di Penandatanganan Akta, atau di halaman lain langsung membuka Akun Saya di tab Registrasi TERA, bukan dasbor.',
-    lama:'Tombol membuka Akun Saya di tab Akun. Pengguna harus mencari tab Registrasi TERA sendiri.', ke:'dashboard', sorot:'#teraIngat' },
+    lama:'Tombol membuka Akun Saya di tab Akun. Pengguna harus mencari tab Registrasi TERA sendiri.', ke:'dashboard', sorot:'#teraIngat', sumber:'Laporan HE INA Digital hlm. 20, 22 + masukan Peruri 30 Okt 2026' },
   { kode:'HE-TERA-02', judul:'Pengingat TERA: letak pendaftaran tetap diketahui setelah pengingat ditutup',
     isi:'Saat pengingat ditutup, IDDS Modal memberi tahu letak pendaftaran (menu profil › Akun Saya › tab Registrasi TERA). Pengingat baru hilang setelah pengguna mengklik OK. Tab Registrasi TERA diberi titik penanda selama pendaftaran belum selesai. Menu profil hanya berisi Akun Saya dan Keluar.',
-    lama:'Setelah pengingat ditutup, pendaftaran hanya dapat dibuka dari Akun Saya tanpa penanda apa pun.', ke:'profil', sorot:'#profilMenu' },
+    lama:'Setelah pengingat ditutup, pendaftaran hanya dapat dibuka dari Akun Saya tanpa penanda apa pun.', ke:'tutup-ingat', sorot:null, sumber:'Laporan HE INA Digital hlm. 22 + masukan Peruri 30 Okt 2026' },
   { kode:'HE-TERA-03', judul:'Formulir TERA: isian tidak hilang saat berpindah tab',
     isi:'Isian tetap ada ketika pengguna membuka tab Akun atau Keamanan lalu kembali. Jika pengguna meninggalkan halaman Akun Saya sebelum menyimpan, sistem meminta konfirmasi.',
-    lama:'Isian terhapus setelah pengguna berpindah tab.', ke:'tera', sorot:'#akunTab' },
+    lama:'Isian terhapus setelah pengguna berpindah tab.', ke:'tera', sorot:'#akunTab', sumber:'Laporan HE INA Digital hlm. 21' },
   { kode:'HE-TERA-04', judul:'Formulir TERA: petunjuk pengisian singkat dan jelas',
     isi:'Keterangan atas memakai bahasa awam dan menyebut dokumen yang perlu disiapkan. Setiap bagian memiliki satu kalimat pengantar. Isian yang rawan salah diberi contoh format atau penjelasan istilah (?). Bagian stempel menampilkan pratinjau.',
-    lama:'Formulir hanya berisi label. Keterangan atas berbunyi: "Lengkapi data pendaftaran TERA Peruri. Catatan: API registrasi TERA Peruri belum tersedia — data ini dikumpulkan dan diajukan manual oleh admin platform. Anda tidak perlu kirim email sendiri."', ke:'tera', sorot:'#teraKepala' },
+    lama:'Formulir hanya berisi label. Keterangan atas berbunyi: "Lengkapi data pendaftaran TERA Peruri. Catatan: API registrasi TERA Peruri belum tersedia — data ini dikumpulkan dan diajukan manual oleh admin platform. Anda tidak perlu kirim email sendiri."', ke:'tera', sorot:'#teraKepala', sumber:'Laporan HE INA Digital hlm. 20, 22' },
   { kode:'HE-TERA-05', judul:'Formulir TERA: isian yang salah langsung terlihat',
     isi:'Sistem memeriksa isian wajib dan formatnya sebelum menyimpan. Isian yang salah diberi garis merah dan pesan singkat di bawahnya, lalu halaman bergulir ke isian pertama yang salah. Isian NIK, NPWP, telepon, dan rekening hanya menerima angka.',
-    lama:'Pesan dari server ("input tidak valid: …") muncul sebagai satu kotak di atas formulir tanpa penanda pada isiannya.', ke:'tera-galat', sorot:null },
+    lama:'Pesan dari server ("input tidak valid: …") muncul sebagai satu kotak di atas formulir tanpa penanda pada isiannya.', ke:'tera-galat', sorot:'.ina-text-field__wrapper--status-error', sumber:'Laporan HE INA Digital hlm. 20, 21' },
   { kode:'HE-TERA-06', judul:'Registrasi TERA: konfirmasi sebelum pendaftaran disimpan',
     isi:'Sebelum menyimpan, sistem menampilkan ringkasan data utama agar pengguna dapat memeriksanya sekali lagi.',
-    lama:'Tombol "Simpan Pendaftaran" langsung menyimpan tanpa konfirmasi.', ke:'tera-konfirm', sorot:null },
+    lama:'Tombol "Simpan Pendaftaran" langsung menyimpan tanpa konfirmasi.', ke:'tera-konfirm', sorot:null, sumber:'Laporan HE INA Digital hlm. 20' },
   { kode:'HE-TERA-07', judul:'Registrasi TERA: tahapan proses dan perkiraan waktu',
     isi:'Bagian atas menampilkan empat tahap beserta perkiraan waktunya, lalu satu kalimat tentang langkah berikutnya. Dialog konfirmasi juga menyebut perkiraan waktu sampai stempel aktif. Jika pendaftaran ditolak, alasannya ikut ditampilkan.',
-    lama:'Hanya lencana status dan kalimat "Data pendaftaran tersimpan. Pengajuan ke Peruri dilakukan manual oleh admin platform (API registrasi TERA belum tersedia)."', ke:'tera', sorot:'#tahap' }
+    lama:'Hanya lencana status dan kalimat "Data pendaftaran tersimpan. Pengajuan ke Peruri dilakukan manual oleh admin platform (API registrasi TERA belum tersedia)."', ke:'tera', sorot:'#tahap', sumber:'Laporan HE INA Digital hlm. 20' }
 ];
 
 /* ---------------- status TERA (label = live; jenis lencana = IDDS) ---------------- */
@@ -1022,7 +1023,7 @@ $('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tu
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Registrasi TERA', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital (halaman 20–22 dan rekomendasi IDDS). Daftar yang sama tersedia di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {
@@ -1033,7 +1034,7 @@ function lihat(u) {
   S.menuProfil = false; S.galat = {};
   if (u.ke === 'bantuan') { S.layar = 'akun'; S.tab = 'tera'; gambar(); bukaBantuan(); return; }
   if (u.ke === 'dashboard') { S.status = 'belum'; S.ingatTutup = false; S.form = KOSONG(); S.simpanan = null; S.layar = 'akun'; pindahLayar('dashboard'); }
-  else if (u.ke === 'profil') { pindahLayar('dashboard'); S.menuProfil = true; gambarProfil(); }
+  else if (u.ke === 'tutup-ingat') { S.status = 'belum'; S.ingatTutup = false; S.form = KOSONG(); S.simpanan = null; S.layar = 'akun'; pindahLayar('dashboard'); $('#tutupIngat').click(); return; }
   else {
     if (u.ke === 'tera-galat') { S.status = 'belum'; S.form = { ...KOSONG(), nik:'320000000001', email:'ppat@contoh' }; S.simpanan = null; }
     if (u.ke === 'tera-konfirm') { S.status = 'belum'; S.form = TERISI(); S.simpanan = null; }
@@ -1556,6 +1557,67 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
   };  const pasang = e => { const tip = e.target.closest && e.target.closest('.ina-tooltip'); if (tip) atur(tip); };
   document.addEventListener('mouseover', pasang); document.addEventListener('focusin', pasang);
   window.addEventListener('scroll', () => document.querySelectorAll('.ina-tooltip__content.tt-aman').forEach(c => { const tip = c.closest('.ina-tooltip'); if (tip && (tip.matches(':hover') || tip.matches(':focus-within'))) atur(tip); }), true);
+})();
+</script>
+
+<!-- ===== Sorot bersama (sorot-bersama.html, disisipkan rakit-idds.js ke prototipe yang punya "Lihat di layar") =====
+     Setiap klik "Lihat di layar" di Daftar perubahan/penyesuaian selalu memberi lingkaran biru yang berkedip beberapa detik
+     pada bagian yang dimaksud. Lingkaran berupa lapisan tersendiri (#sorotCincin) yang mengikuti posisi sasaran, jadi tidak
+     terpotong wadah, tidak bentrok dengan animasi komponen, dan tetap ada walau layar digambar ulang.
+     Urutan sasaran: dialog/laci yang terbuka (kecuali sasaran ada di dalamnya) → elemen sorot milik usulan →
+     elemen yang sudah disorot prototipe → isi halaman. -->
+<style id="sorot-bersama-css">
+@keyframes sorotKedip{0%,100%{border-color:#2563EB;box-shadow:0 0 0 6px rgba(37,99,235,.22)}50%{border-color:rgba(37,99,235,.15);box-shadow:0 0 0 0 rgba(37,99,235,0)}}
+#sorotCincin{position:fixed;z-index:2147483000;pointer-events:none;border:3px solid #2563EB;border-radius:14px;animation:sorotKedip .8s ease-in-out 5}
+@media (prefers-reduced-motion:reduce){#sorotCincin{animation:none}}
+</style>
+<script id="sorot-bersama-js">
+(() => {
+  const DURASI = 4000, JARAK = 6;
+  /* sasaran sorot per usulan, urut sama dengan tombol "Lihat di layar" (dibaca dari daftar usulan di halaman) */
+  const sumber = [...document.scripts].map(s => s.textContent).join('\n');
+  const SOROT = [...sumber.matchAll(/\{ kode:'[A-Z0-9-]+', judul:'[^']*'[\s\S]*?sorot:(null|'[^']*')/g)].map(m => m[1] === 'null' ? null : m[1].slice(1, -1));
+  const tampak = el => !!el && el.isConnected && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+  const cari = s => { try { return s ? document.querySelector(s) : null; } catch (x) { return null; } };
+  const lapisan = () => [...document.querySelectorAll('.ina-modal__dialog, .ina-drawer__panel')].filter(tampak).pop();
+  let cincin = null, sasaran = null, pemilih = null, selesai = 0, raf = 0, urut = 0;
+  const lepas = () => { cancelAnimationFrame(raf); if (cincin) cincin.remove(); if (sasaran) sasaran.classList.remove('sorot-kedip'); cincin = sasaran = pemilih = null; };
+  const ikuti = () => {
+    if (!cincin) return;
+    if (Date.now() > selesai) { lepas(); return; }
+    if (!tampak(sasaran) && pemilih) { const b = cari(pemilih); if (tampak(b)) { sasaran = b; b.classList.add('sorot-kedip'); } }
+    if (tampak(sasaran)) {
+      const r = sasaran.getBoundingClientRect();
+      const x1 = Math.max(3, r.left - JARAK), y1 = Math.max(3, r.top - JARAK), x2 = Math.min(innerWidth - 3, r.right + JARAK), y2 = Math.min(innerHeight - 3, r.bottom + JARAK); /* tetap di dalam layar */
+      Object.assign(cincin.style, { display:'block', left:x1 + 'px', top:y1 + 'px', width:Math.max(0, x2 - x1) + 'px', height:Math.max(0, y2 - y1) + 'px' });
+    } else cincin.style.display = 'none';
+    raf = requestAnimationFrame(ikuti);
+  };
+  const pasang = (el, sel) => {
+    lepas();
+    sasaran = el; pemilih = sel || null; selesai = Date.now() + DURASI;
+    el.scrollIntoView({ block:'center', behavior:'smooth' });
+    el.classList.add('sorot-kedip');
+    cincin = document.createElement('div'); cincin.id = 'sorotCincin'; cincin.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(cincin); ikuti();
+  };
+  document.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || b.textContent.trim() !== 'Lihat di layar') return;
+    const semua = [...document.querySelectorAll('button')].filter(x => x.textContent.trim() === 'Lihat di layar');
+    const sel = semua.length === SOROT.length ? SOROT[semua.indexOf(b)] : null, ke = ++urut, mulai = Date.now();
+    lepas();
+    const coba = () => {
+      if (ke !== urut) return;
+      const lap = lapisan(), t = cari(sel), habis = Date.now() - mulai > (sel ? 1600 : 900);
+      if (tampak(t) && !(lap && !lap.contains(t))) { pasang(t, sel); return; }
+      if (lap && (!t || !lap.contains(t) || habis)) { pasang(lap); return; }
+      if (!habis) { setTimeout(coba, 150); return; }
+      const lain = [...document.querySelectorAll('.sorot, .kedip')].find(tampak)
+        || ['#halamanApp', '#halaman', 'main .content', 'main', '.content'].map(cari).find(tampak);
+      if (lain) pasang(lain);
+    };
+    setTimeout(coba, 450);
+  }, true);
 })();
 </script>
 

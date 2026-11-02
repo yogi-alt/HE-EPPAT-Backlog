@@ -24,6 +24,7 @@ __EPPAT_CSS__
 
 .judul-halaman{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .judul-halaman .judul-kiri{min-width:0}
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 <style id="tera-css">
 /* ===== Registrasi TERA — komponen IDDS + brand E-PPAT (HE-UMUM-01)
@@ -340,31 +341,31 @@ const alert = (jenis, judul, isi, ekstra = '') => `<div class="ina-alert ina-ale
 const UBAH = [
   { kode:'HE-UMUM-01', judul:'Antarmuka memakai komponen IDDS dengan brand E-PPAT',
     isi:'Tombol, kolom isian, tab, stepper, alert, lencana, tooltip, dialog, toast, dan pilihan (select) memakai komponen INA Digital Design System. Warna brand mengikuti tema E-PPAT (data-brand="eppat"); warna status mengikuti IDDS.',
-    lama:'Aplikasi sudah memuat CSS IDDS, tetapi baru tombol dan kolom isian yang memakai komponen IDDS, tanpa brand (warna utama IDDS masih abu-abu bawaan). Tab, stepper, dialog, lencana, dan toast dibuat sendiri.', ke:'tera', sorot:'#teraKepala' },
+    lama:'Aplikasi sudah memuat CSS IDDS, tetapi baru tombol dan kolom isian yang memakai komponen IDDS, tanpa brand (warna utama IDDS masih abu-abu bawaan). Tab, stepper, dialog, lencana, dan toast dibuat sendiri.', ke:'tera', sorot:'#teraKepala', sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' },
   { kode:'HE-UMUM-02', judul:'Bantuan dan kontak dukungan mudah diakses',
     isi:'Setiap halaman memiliki tombol Bantuan di kanan judul. Isinya khusus untuk halaman itu (langkah singkat, pertanyaan umum, kontak dukungan) dan tampil di panel samping (IDDS Drawer). Kartu Registrasi TERA juga memuat tautan "Lihat panduan pendaftaran".',
-    lama:'Tidak ada menu bantuan, panduan penggunaan, atau kontak dukungan di seluruh platform (skor Help & Documentation 10,6; Registrasi TERA 0).', ke:'bantuan', sorot:null },
+    lama:'Tidak ada menu bantuan, panduan penggunaan, atau kontak dukungan di seluruh platform (skor Help & Documentation 10,6; Registrasi TERA 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-TERA-01', judul:'Pengingat TERA: tombol "Daftar TERA" membuka formulir pendaftaran',
     isi:'Klik "Daftar TERA" pada pengingat, di Penandatanganan Akta, atau di halaman lain langsung membuka Akun Saya di tab Registrasi TERA, bukan dasbor.',
-    lama:'Tombol membuka Akun Saya di tab Akun. Pengguna harus mencari tab Registrasi TERA sendiri.', ke:'dashboard', sorot:'#teraIngat' },
+    lama:'Tombol membuka Akun Saya di tab Akun. Pengguna harus mencari tab Registrasi TERA sendiri.', ke:'dashboard', sorot:'#teraIngat', sumber:'Laporan HE INA Digital hlm. 20, 22 + masukan Peruri 30 Okt 2026' },
   { kode:'HE-TERA-02', judul:'Pengingat TERA: letak pendaftaran tetap diketahui setelah pengingat ditutup',
     isi:'Saat pengingat ditutup, IDDS Modal memberi tahu letak pendaftaran (menu profil › Akun Saya › tab Registrasi TERA). Pengingat baru hilang setelah pengguna mengklik OK. Tab Registrasi TERA diberi titik penanda selama pendaftaran belum selesai. Menu profil hanya berisi Akun Saya dan Keluar.',
-    lama:'Setelah pengingat ditutup, pendaftaran hanya dapat dibuka dari Akun Saya tanpa penanda apa pun.', ke:'profil', sorot:'#profilMenu' },
+    lama:'Setelah pengingat ditutup, pendaftaran hanya dapat dibuka dari Akun Saya tanpa penanda apa pun.', ke:'tutup-ingat', sorot:null, sumber:'Laporan HE INA Digital hlm. 22 + masukan Peruri 30 Okt 2026' },
   { kode:'HE-TERA-03', judul:'Formulir TERA: isian tidak hilang saat berpindah tab',
     isi:'Isian tetap ada ketika pengguna membuka tab Akun atau Keamanan lalu kembali. Jika pengguna meninggalkan halaman Akun Saya sebelum menyimpan, sistem meminta konfirmasi.',
-    lama:'Isian terhapus setelah pengguna berpindah tab.', ke:'tera', sorot:'#akunTab' },
+    lama:'Isian terhapus setelah pengguna berpindah tab.', ke:'tera', sorot:'#akunTab', sumber:'Laporan HE INA Digital hlm. 21' },
   { kode:'HE-TERA-04', judul:'Formulir TERA: petunjuk pengisian singkat dan jelas',
     isi:'Keterangan atas memakai bahasa awam dan menyebut dokumen yang perlu disiapkan. Setiap bagian memiliki satu kalimat pengantar. Isian yang rawan salah diberi contoh format atau penjelasan istilah (?). Bagian stempel menampilkan pratinjau.',
-    lama:'Formulir hanya berisi label. Keterangan atas berbunyi: "Lengkapi data pendaftaran TERA Peruri. Catatan: API registrasi TERA Peruri belum tersedia — data ini dikumpulkan dan diajukan manual oleh admin platform. Anda tidak perlu kirim email sendiri."', ke:'tera', sorot:'#teraKepala' },
+    lama:'Formulir hanya berisi label. Keterangan atas berbunyi: "Lengkapi data pendaftaran TERA Peruri. Catatan: API registrasi TERA Peruri belum tersedia — data ini dikumpulkan dan diajukan manual oleh admin platform. Anda tidak perlu kirim email sendiri."', ke:'tera', sorot:'#teraKepala', sumber:'Laporan HE INA Digital hlm. 20, 22' },
   { kode:'HE-TERA-05', judul:'Formulir TERA: isian yang salah langsung terlihat',
     isi:'Sistem memeriksa isian wajib dan formatnya sebelum menyimpan. Isian yang salah diberi garis merah dan pesan singkat di bawahnya, lalu halaman bergulir ke isian pertama yang salah. Isian NIK, NPWP, telepon, dan rekening hanya menerima angka.',
-    lama:'Pesan dari server ("input tidak valid: …") muncul sebagai satu kotak di atas formulir tanpa penanda pada isiannya.', ke:'tera-galat', sorot:null },
+    lama:'Pesan dari server ("input tidak valid: …") muncul sebagai satu kotak di atas formulir tanpa penanda pada isiannya.', ke:'tera-galat', sorot:'.ina-text-field__wrapper--status-error', sumber:'Laporan HE INA Digital hlm. 20, 21' },
   { kode:'HE-TERA-06', judul:'Registrasi TERA: konfirmasi sebelum pendaftaran disimpan',
     isi:'Sebelum menyimpan, sistem menampilkan ringkasan data utama agar pengguna dapat memeriksanya sekali lagi.',
-    lama:'Tombol "Simpan Pendaftaran" langsung menyimpan tanpa konfirmasi.', ke:'tera-konfirm', sorot:null },
+    lama:'Tombol "Simpan Pendaftaran" langsung menyimpan tanpa konfirmasi.', ke:'tera-konfirm', sorot:null, sumber:'Laporan HE INA Digital hlm. 20' },
   { kode:'HE-TERA-07', judul:'Registrasi TERA: tahapan proses dan perkiraan waktu',
     isi:'Bagian atas menampilkan empat tahap beserta perkiraan waktunya, lalu satu kalimat tentang langkah berikutnya. Dialog konfirmasi juga menyebut perkiraan waktu sampai stempel aktif. Jika pendaftaran ditolak, alasannya ikut ditampilkan.',
-    lama:'Hanya lencana status dan kalimat "Data pendaftaran tersimpan. Pengajuan ke Peruri dilakukan manual oleh admin platform (API registrasi TERA belum tersedia)."', ke:'tera', sorot:'#tahap' }
+    lama:'Hanya lencana status dan kalimat "Data pendaftaran tersimpan. Pengajuan ke Peruri dilakukan manual oleh admin platform (API registrasi TERA belum tersedia)."', ke:'tera', sorot:'#tahap', sumber:'Laporan HE INA Digital hlm. 20' }
 ];
 
 /* ---------------- status TERA (label = live; jenis lencana = IDDS) ---------------- */
@@ -810,7 +811,7 @@ $('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tu
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Registrasi TERA', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital (halaman 20–22 dan rekomendasi IDDS). Daftar yang sama tersedia di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {
@@ -821,7 +822,7 @@ function lihat(u) {
   S.menuProfil = false; S.galat = {};
   if (u.ke === 'bantuan') { S.layar = 'akun'; S.tab = 'tera'; gambar(); bukaBantuan(); return; }
   if (u.ke === 'dashboard') { S.status = 'belum'; S.ingatTutup = false; S.form = KOSONG(); S.simpanan = null; S.layar = 'akun'; pindahLayar('dashboard'); }
-  else if (u.ke === 'profil') { pindahLayar('dashboard'); S.menuProfil = true; gambarProfil(); }
+  else if (u.ke === 'tutup-ingat') { S.status = 'belum'; S.ingatTutup = false; S.form = KOSONG(); S.simpanan = null; S.layar = 'akun'; pindahLayar('dashboard'); $('#tutupIngat').click(); return; }
   else {
     if (u.ke === 'tera-galat') { S.status = 'belum'; S.form = { ...KOSONG(), nik:'320000000001', email:'ppat@contoh' }; S.simpanan = null; }
     if (u.ke === 'tera-konfirm') { S.status = 'belum'; S.form = TERISI(); S.simpanan = null; }

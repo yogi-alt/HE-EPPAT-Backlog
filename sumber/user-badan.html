@@ -69,6 +69,7 @@ tr.dipilih td{background:var(--ina-primary-25,#f4faf7)}
   .ringkas dd{margin-bottom:6px}
   .ina-button-group{overflow-x:auto;max-width:100%}
 }
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 </head>
 <body>
@@ -160,25 +161,25 @@ const cekBox = (id, cek, label, atr = '') => `<label class="ina-checkbox sel" fo
 const UBAH = [
   { kode:'HE-USER-01', judul:'Kolom Status CA: arti setiap status dijelaskan',
     isi:'Judul kolom "Status CA" diberi tooltip yang menjelaskan sertifikat elektronik dari Peruri dan bahwa CA aktif diperlukan untuk menandatangani akta. Setiap lencana status juga memiliki tooltip yang menjelaskan artinya dan langkah berikutnya, misalnya "Proses eKYC: pengguna sedang memverifikasi identitas di portal Peruri."',
-    lama:'Kolom "Status CA" dan lencananya (Belum registrasi, Proses eKYC, Menunggu verifikasi, CA aktif, Kedaluwarsa, Dicabut) tidak dijelaskan.', ke:'daftar', sorot:'#kolomCa' },
+    lama:'Kolom "Status CA" dan lencananya (Belum registrasi, Proses eKYC, Menunggu verifikasi, CA aktif, Kedaluwarsa, Dicabut) tidak dijelaskan.', ke:'daftar', sorot:'#kolomCa', sumber:'Laporan HE UX Metric Lab, Highlight #9 (skor 79,5; PDF hlm. 15)' },
   { kode:'HE-USER-02', judul:'Daftar Pengguna: ubah status beberapa pengguna sekaligus',
     isi:'Setiap baris memiliki IDDS Checkbox dan judul tabel memiliki "pilih semua". Setelah ada yang dipilih, bilah aksi menampilkan jumlah pengguna terpilih dengan tombol Aktifkan, Tangguhkan, dan Batalkan pilihan. IDDS Modal Confirmation menyebut nama-nama yang akan diubah dan pengguna yang dilewati karena statusnya sudah sesuai.',
-    lama:'Status pengguna hanya dapat diubah satu per satu melalui menu aksi di setiap baris.', ke:'massal', sorot:'#bilahMassal' },
+    lama:'Status pengguna hanya dapat diubah satu per satu melalui menu aksi di setiap baris.', ke:'massal', sorot:'#bilahMassal', sumber:'Laporan HE UX Metric Lab, Highlight #9 (skor 79,5; PDF hlm. 15)' },
   { kode:'HE-USER-03', judul:'Tambah Pengguna: syarat kata sandi awal sama dengan aturan kata sandi lain',
     isi:'Isian "Kata Sandi Awal" memakai IDDS Password Input dengan tombol tampilkan/sembunyikan dan daftar centang yang sama dengan Akun Saya dan layar ganti kata sandi sementara: minimal 12 karakter, huruf besar, huruf kecil, angka, simbol. Tombol "Buat Kata Sandi Acak" mengisi kata sandi yang memenuhi semua syarat.',
-    lama:'Isian "Password Awal" cukup "Minimal 8 karakter", padahal Reset Password membuat kata sandi acak 12 karakter dan layar ganti kata sandi sementara meminta 12 karakter + 4 jenis karakter.', ke:'tambah', sorot:'#f-uPw' },
+    lama:'Isian "Password Awal" cukup "Minimal 8 karakter", padahal Reset Password membuat kata sandi acak 12 karakter dan layar ganti kata sandi sementara meminta 12 karakter + 4 jenis karakter.', ke:'tambah', sorot:'#f-uPw', sumber:'Laporan HE UX Metric Lab, Highlight #9 (skor 79,5; PDF hlm. 15)' },
   { kode:'HE-USER-04', judul:'Daftar Pengguna: menu aksi dan pesan hasil yang jelas',
     isi:'Tombol aksi di setiap baris memakai IDDS Action Dropdown dengan label "Aksi untuk [nama]" untuk pembaca layar dan tooltip. Pesan hasil (pengguna dibuat, diperbarui, ditangguhkan) memakai IDDS Toast yang dapat ditutup, dan baris yang berubah disorot sesaat.',
-    lama:'Tombol aksi hanya ikon daftar tanpa label. Pesan "User berhasil dibuat." muncul sebagai kotak di atas tabel yang hilang sendiri setelah 3 detik.', ke:'aksi', sorot:null },
+    lama:'Tombol aksi hanya ikon daftar tanpa label. Pesan "User berhasil dibuat." muncul sebagai kotak di atas tabel yang hilang sendiri setelah 3 detik.', ke:'aksi', sorot:'.ina-action-dropdown__menu--visible', sumber:'Laporan HE UX Metric Lab, Highlight #9 (skor 79,5; PDF hlm. 15)' },
   { kode:'HE-UMUM-03', judul:'Daftar Pengguna: impor pengguna klien dari berkas',
     isi:'Tombol "Impor dari Berkas" membuka dialog tiga langkah: unduh templat CSV, unggah berkas (IDDS File Upload), lalu pratinjau. Baris yang bermasalah ditandai beserta alasannya (email tidak valid, email sudah terdaftar, nama kosong) dan tidak ikut disimpan. Setelah impor, pengguna baru berperan Klien dan menerima kata sandi sementara melalui email. Klien hasil impor langsung dapat dipilih sebagai pihak di Permohonan AJB.',
-    lama:'Pengguna klien hanya dapat ditambahkan satu per satu.', ke:'impor', sorot:null },
+    lama:'Pengguna klien hanya dapat ditambahkan satu per satu.', ke:'impor', sorot:null, sumber:'Laporan HE INA Digital hlm. 23, 40 (Kesimpulan no. 5) + keputusan tim 23 Okt 2026' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Daftar Pengguna',
     isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi penjelasan peran, status akun, Status CA, syarat kata sandi, impor berkas, dan kontak dukungan.',
-    lama:'Tidak ada panduan atau kontak dukungan di halaman ini.', ke:'bantuan', sorot:null },
+    lama:'Tidak ada panduan atau kontak dukungan di halaman ini.', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
     isi:'Tabel, Checkbox, Button Group, Select Dropdown, Input Search, Action Dropdown, Text Field, Password Input, File Upload, alert, lencana, tooltip, Modal Confirmation, toast, dan drawer memakai komponen INA Digital Design System dengan brand E-PPAT.',
-    lama:'Saringan status, pilihan peran, menu aksi, dan dialog dibuat sendiri.', ke:'daftar', sorot:null }
+    lama:'Saringan status, pilihan peran, menu aksi, dan dialog dibuat sendiri.', ke:'daftar', sorot:null, sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' }
 ];
 
 /* ---------------- data contoh (nama sama dengan prototipe lain) ---------------- */
@@ -551,7 +552,7 @@ function bukaBantuan() {
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Daftar Pengguna', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital (skor halaman 79,5; rincian dan gambar bukti di laporan lengkap UX Metric Lab) serta kode live. Kolom, saringan, menu aksi, Atur Ulang Kata Sandi, dan Tangguhkan/Aktifkan tetap seperti live; yang diubah adalah penjelasan Status CA, aksi massal, syarat kata sandi, kejelasan aksi, impor berkas, dan bantuan. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });

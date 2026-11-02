@@ -179,6 +179,7 @@
   .alat .kanan-alat{margin-left:0;width:100%;justify-content:space-between}
   .pop-wadah{right:auto;left:0}
 }
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 </head>
 <body>
@@ -297,28 +298,28 @@ const remah = akhir => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol 
 const UBAH = [
   { kode:'HE-MINUTA-01', judul:'Detail minuta: istilah dan tombol dijelaskan singkat',
     isi:'Tombol Pratinjau Akta, Cek Ejaan, dan Beritahu PPAT memiliki tooltip yang menjelaskan fungsinya. Panel kiri menjelaskan beda pasal dan catatan. Pesan peran Asisten menyebut langkah berikutnya. Label "Tampilkan judul di dokumen (Preview, PDF)" diganti menjadi "Tampilkan judul pasal di akta". Tab Lampiran diberi penanda "Segera". Ikon ? bertooltip menjelaskan istilah minuta akta, status minuta, finalisasi, kode variabel {{…}}, standar akta PPAT, margin, dan footer.',
-    lama:'Tombol dan istilah tanpa penjelasan; pesan peran hanya berbunyi "Mode editor — Anda dapat mengubah konten pasal, tetapi tidak dapat memfinalisasi."; tab Lampiran nonaktif tanpa keterangan.', ke:'editor', sorot:'#aksiAtas' },
+    lama:'Tombol dan istilah tanpa penjelasan; pesan peran hanya berbunyi "Mode editor — Anda dapat mengubah konten pasal, tetapi tidak dapat memfinalisasi."; tab Lampiran nonaktif tanpa keterangan.', ke:'editor', sorot:'#aksiAtas', sumber:'Laporan HE INA Digital hlm. 25, 26' },
   { kode:'HE-MINUTA-02', judul:'Bilah alat editor minuta: lebih lega dan mudah dipindai',
     isi:'Bilah alat hanya menampilkan alat yang sering dipakai (tebal, miring, garis bawah, daftar, perataan, urungkan, ulangi) dalam satu baris berjarak lega. Alat lain (judul, coret, warna, ukuran huruf, spasi, tautan, gambar, tabel, kode HTML) dipindahkan ke menu "Lainnya". Setiap ikon memiliki tooltip berisi nama alat dan pintasan papan ketik.',
-    lama:'Lebih dari 30 ikon kecil dalam dua baris tanpa nama, sehingga sulit dipindai.', ke:'editor', sorot:'#bilahAlat' },
+    lama:'Lebih dari 30 ikon kecil dalam dua baris tanpa nama, sehingga sulit dipindai.', ke:'editor', sorot:'#bilahAlat', sumber:'Laporan HE INA Digital hlm. 25, 26' },
   { kode:'HE-MINUTA-03', judul:'Editor pasal: variabel tampil sebagai label yang mudah dibaca',
     isi:'Variabel di naskah tampil sebagai label hijau (mis. "Nama Lengkap Penjual"), bukan kode {{penjual_nama}}. Kode tetap dapat dilihat melalui pilihan "Tampilkan kode variabel". Tombol "Sisipkan Variabel" membuka panel dengan pencarian, penjelasan singkat, dan contoh nilai dari permohonan ini. Variabel yang salah ketik ditandai kuning dengan petunjuk perbaikan sebelum disimpan.',
-    lama:'Naskah menampilkan kode mentah seperti {{saksi1_gelar}}{{saksi1_nama}}; daftar variabel tanpa pencarian, tanpa penjelasan, dan tanpa contoh nilai; salah ketik variabel tidak terdeteksi di editor minuta.', ke:'variabel', sorot:'#bilahAlat' },
+    lama:'Naskah menampilkan kode mentah seperti {{saksi1_gelar}}{{saksi1_nama}}; daftar variabel tanpa pencarian, tanpa penjelasan, dan tanpa contoh nilai; salah ketik variabel tidak terdeteksi di editor minuta.', ke:'variabel', sorot:'#bilahAlat', sumber:'Laporan HE INA Digital hlm. 25, 26' },
   { kode:'HE-MINUTA-04', judul:'Daftar pasal: umpan balik setelah hapus dan saat pindah pasal',
     isi:'Setelah pasal dihapus, muncul toast "Pasal 9 · Pasal Baru dihapus" beserta keterangan bahwa nomor pasal lain sudah disesuaikan. Jika ada perubahan yang belum disimpan saat pindah pasal atau kembali ke daftar, muncul dialog IDDS dengan pilihan Simpan & Lanjutkan, Buang Perubahan, atau Batal. Status "Belum disimpan" terlihat di kaki editor.',
-    lama:'Setelah konfirmasi hapus, pasal hilang tanpa pesan apa pun. Peringatan perubahan belum disimpan memakai kotak dialog bawaan peramban ("Pindah tanpa menyimpan?").', ke:'hapus', sorot:null },
+    lama:'Setelah konfirmasi hapus, pasal hilang tanpa pesan apa pun. Peringatan perubahan belum disimpan memakai kotak dialog bawaan peramban ("Pindah tanpa menyimpan?").', ke:'hapus', sorot:null, sumber:'Laporan HE INA Digital hlm. 25, 27' },
   { kode:'HE-MINUTA-05', judul:'Cek Ejaan: pesan jelas saat fitur belum dapat digunakan',
     isi:'Jika fitur belum diaktifkan, muncul IDDS Alert merah berjudul "Cek Ejaan belum dapat digunakan" dengan penjelasan dalam bahasa sehari-hari, keterangan bahwa pekerjaan tetap dapat disimpan, dan siapa yang dapat mengaktifkannya. Hasil cek ejaan tampil dalam kartu yang menunjukkan bagian akta, kata yang salah, dan sarannya, dengan tautan ke pasal terkait.',
-    lama:'Muncul teks abu-abu "input tidak valid: Gemini API Key belum diatur / fitur tidak aktif. Atur di Pengaturan Platform" tanpa warna peringatan, dengan istilah teknis.', ke:'ejaan-galat', sorot:'#hasilEjaan' },
+    lama:'Muncul teks abu-abu "input tidak valid: Gemini API Key belum diatur / fitur tidak aktif. Atur di Pengaturan Platform" tanpa warna peringatan, dengan istilah teknis.', ke:'ejaan-galat', sorot:'#hasilEjaan', sumber:'Laporan HE INA Digital hlm. 25, 27' },
   { kode:'HE-MINUTA-06', judul:'Tab Pengaturan Dokumen: otomatis mengikuti standar kantor',
     isi:'Tab Pengaturan Dokumen menampilkan ringkasan pengaturan yang sedang dipakai (standar akta PPAT/kantor) beserta gambar halaman. Pengguna tidak perlu mengisi apa pun; formulir baru terbuka bila memilih "Ubah untuk akta ini", dikelompokkan per bagian (Kertas, Margin, Huruf, Footer), dan dapat dikembalikan ke standar dengan satu klik. Variabel footer dijelaskan artinya.',
-    lama:'Semua isian kertas, margin, huruf, dan footer langsung ditampilkan dan harus diperiksa manual untuk setiap akta; variabel footer ditulis sebagai kode ({page}, {{ppat_nama}}, …) tanpa penjelasan.', ke:'pengaturan', sorot:'#ringkasAtur' },
+    lama:'Semua isian kertas, margin, huruf, dan footer langsung ditampilkan dan harus diperiksa manual untuk setiap akta; variabel footer ditulis sebagai kode ({page}, {{ppat_nama}}, …) tanpa penjelasan.', ke:'pengaturan', sorot:'#ringkasAtur', sumber:'Laporan HE INA Digital hlm. 26' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Penyusunan Akta',
     isi:'Tombol Bantuan di kanan judul halaman Penyusunan Akta membuka panel samping (IDDS Drawer) berisi langkah menyusun minuta, pertanyaan umum (beda pasal dan catatan, arti variabel, Cek Ejaan tidak dapat digunakan, pasal terhapus, siapa yang memfinalisasi), dan kontak dukungan.',
-    lama:'Tidak ada panduan maupun cara menghubungi dukungan dari halaman ini (skor Help & Documentation Minuta Akta: 0).', ke:'bantuan', sorot:null },
+    lama:'Tidak ada panduan maupun cara menghubungi dukungan dari halaman ini (skor Help & Documentation Minuta Akta: 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
     isi:'Tabel, tab, tombol, tooltip, alert, lencana, dialog, toast, dan isian memakai komponen INA Digital Design System dengan brand E-PPAT.',
-    lama:'Komponen dibuat sendiri.', ke:'editor', sorot:null }
+    lama:'Komponen dibuat sendiri.', ke:'editor', sorot:null, sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' }
 ];
 
 /* ---------------- variabel (kelompok mengikuti live; contoh nilai = data contoh) ---------------- */
@@ -832,7 +833,7 @@ function bukaBantuan() {
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Penyusunan Akta', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital, halaman 25–27 (skor halaman 47,1), beserta gambar buktinya. Fitur dan alur live tetap; yang diubah adalah kejelasan istilah, kepadatan editor, panduan, dan umpan balik. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {

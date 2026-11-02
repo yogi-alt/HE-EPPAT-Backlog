@@ -29,6 +29,12 @@ if (html.includes('ina-tooltip') && !html.includes('id="tooltip-aman-js"')) {
   const i = html.lastIndexOf('</body>');
   html = i < 0 ? html + tt : html.slice(0, i) + tt + '\n' + html.slice(i);
 }
+// Sorot bersama: lingkaran biru berkedip setiap klik "Lihat di layar".
+if (html.includes('Lihat di layar') && !html.includes('id="sorot-bersama-js"')) {
+  const so = fs.readFileSync(path.join(d, 'sorot-bersama.html'), 'utf8');
+  const i = html.lastIndexOf('</body>');
+  html = i < 0 ? html + so : html.slice(0, i) + so + '\n' + html.slice(i);
+}
 // Pilihan tema prototipe (E-PPAT | INAgov | Default IDDS): bagian kepala tepat setelah <head> (tanpa kedip), pil protobar sebelum </body>.
 if (html.includes('@idds/styles') && !html.includes('id="tema-proto-js"')) {
   const [kepala, badan] = fs.readFileSync(path.join(d, 'tema-proto.html'), 'utf8').split('<!-- ===== bagian badan ===== -->');

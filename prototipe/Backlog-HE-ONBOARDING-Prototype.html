@@ -236,6 +236,7 @@ html:not([data-brand='eppat']) .content,html:not([data-brand='eppat']) main.tn{b
 
 .judul-halaman{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .judul-halaman .judul-kiri{min-width:0}
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 <style id="kerangka-css">
 /* ===== Order AJB — komponen IDDS + brand E-PPAT (HE-UMUM-01)
@@ -668,6 +669,7 @@ body.mode-app .ob{display:none}
   .ob-foot .kolom{grid-template-columns:1fr}
   .ob-judul h1{font-size:24px;line-height:32px}
 }
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 </head>
 <body>
@@ -754,49 +756,49 @@ const SYARAT_PW = [['Minimal 12 karakter', s => s.length >= 12], ['Mengandung hu
 const UBAH = [
   { kode:'HE-REG-01', judul:'Formulir Registrasi: tombol Batal dan konfirmasi sebelum keluar',
     isi:'Formulir pendaftaran memiliki tombol "Batal" di samping "Daftar Sekarang". Bila formulir sudah terisi lalu pengguna menekan Batal, Masuk, atau menu navigasi, muncul IDDS Modal Confirmation "Tinggalkan pendaftaran?" yang menjelaskan bahwa data yang sudah diisi akan hilang.',
-    lama:'Tidak ada tombol batal atau kembali selama pendaftaran; pengguna hanya dapat memakai tombol kembali di peramban dan data yang sudah diisi hilang tanpa peringatan.', ke:'reg-batal', sorot:'#aksiForm' },
+    lama:'Tidak ada tombol batal atau kembali selama pendaftaran; pengguna hanya dapat memakai tombol kembali di peramban dan data yang sudah diisi hilang tanpa peringatan.', ke:'reg-batal', sorot:'#aksiForm', sumber:'Laporan HE UX Metric Lab, Highlight #11 (skor 91,7; PDF hlm. 15)' },
   { kode:'HE-REG-02', judul:'Formulir Registrasi: penjelasan isian ID PPAT / SK PPAT dan URL Tenant',
     isi:'Label "ID PPAT / SK PPAT" dan "URL Tenant" diberi IDDS Tooltip dan teks bantuan di bawah isian. Isian ID PPAT / SK PPAT berketerangan "Sesuai nomor SK PPAT yang terdaftar di ATR/BPN.". URL Tenant menampilkan pratinjau alamat lengkap aplikasi kantor (mis. dev-app.eppat.id/t/kantor-contoh), aturan penulisan (huruf kecil, angka, tanda hubung), daftar hal yang dihindari (spasi, huruf kapital, simbol, tanda hubung di awal atau akhir, kurang dari 3 karakter, nama yang sudah dipakai, data pribadi), dan hasil cek ketersediaan.',
-    lama:'Isian ID PPAT dan URL Tenant tidak dijelaskan; pengguna baru tidak tahu nilai apa yang harus diisi.', ke:'reg', sorot:'#f-rTenant' },
+    lama:'Isian ID PPAT dan URL Tenant tidak dijelaskan; pengguna baru tidak tahu nilai apa yang harus diisi.', ke:'reg', sorot:'#f-rTenant', sumber:'Laporan HE UX Metric Lab, Highlight #11 (skor 91,7; PDF hlm. 15) + masukan Peruri 30 Okt 2026' },
   { kode:'HE-REG-03', judul:'Halaman Registrasi: gambaran alur pendaftaran sampai aplikasi aktif',
     isi:'Di atas formulir ada ringkasan lima tahap: Isi data, Verifikasi email, Masuk dan amankan akun, Pilih paket dan bayar, Aplikasi kantor aktif. Tahap yang sedang dikerjakan ditandai.',
-    lama:'Tidak ada panduan atau onboarding untuk pengguna yang baru pertama kali mendaftar; tahapan baru terlihat di Dashboard setelah pengguna masuk.', ke:'reg', sorot:'#alurDaftar' },
+    lama:'Tidak ada panduan atau onboarding untuk pengguna yang baru pertama kali mendaftar; tahapan baru terlihat di Dashboard setelah pengguna masuk.', ke:'reg', sorot:'#alurDaftar', sumber:'Laporan HE UX Metric Lab, Highlight #11 (skor 91,7; PDF hlm. 15)' },
   { kode:'HE-REG-04', judul:'Formulir Registrasi: syarat kata sandi tampil sebagai daftar centang',
     isi:'Syarat kata sandi ditampilkan sebagai daftar centang yang terisi saat mengetik, sama dengan Akun Saya dan Tambah Pengguna: minimal 12 karakter, huruf besar, huruf kecil, angka, simbol. Ulangi Kata Sandi langsung memberi tahu apakah sudah sama.',
-    lama:'Syarat kata sandi ditulis dalam satu baris kecil "Min. 12 karakter · Huruf besar, kecil, angka & simbol" dengan bilah kekuatan tanpa penjelasan syarat mana yang belum terpenuhi.', ke:'reg', sorot:'#syaratPw' },
+    lama:'Syarat kata sandi ditulis dalam satu baris kecil "Min. 12 karakter · Huruf besar, kecil, angka & simbol" dengan bilah kekuatan tanpa penjelasan syarat mana yang belum terpenuhi.', ke:'reg', sorot:'#syaratPw', sumber:'Laporan HE UX Metric Lab, Highlight #11 (skor 91,7; PDF hlm. 15)' },
   { kode:'HE-LOGIN-01', judul:'Verifikasi dua langkah: masa berlaku kode terlihat di layar',
     isi:'Halaman kode Email OTP memakai IDDS One-Time Password (6 kotak), menampilkan email tujuan yang disamarkan, hitung mundur "Kode berlaku 4:59", dan tombol "Kirim ulang kode" yang aktif setelah 60 detik.',
-    lama:'Batas waktu kode (5 menit) hanya disebut di email "Kode OTP Login e-PPAT"; layar hanya berisi satu kolom kode.', ke:'otp', sorot:'#otpWaktu' },
+    lama:'Batas waktu kode (5 menit) hanya disebut di email "Kode OTP Login e-PPAT"; layar hanya berisi satu kolom kode.', ke:'otp', sorot:'#otpWaktu', sumber:'Laporan HE UX Metric Lab, Highlight #7 (skor 68,6; PDF hlm. 15)' },
   { kode:'HE-LOGIN-02', judul:'Halaman masuk: pesan galat menjelaskan penyebab dan cara memperbaikinya',
     isi:'Kegagalan masuk ditampilkan sebagai IDDS Alert di dalam kartu (bukan dialog yang menutupi formulir), dengan isian yang tetap terisi dan tautan "Lupa kata sandi?". Kode OTP yang salah atau kedaluwarsa dijelaskan di bawah kotak kode beserta sisa percobaan dan cara mendapatkan kode baru.',
-    lama:'Kegagalan masuk memunculkan dialog besar "Login Gagal — Username/email atau kata sandi salah" yang harus ditutup dengan OK. Kode OTP yang salah hanya memunculkan "Invalid input" berbahasa Inggris tanpa solusi.', ke:'gagal', sorot:'#galatLogin' },
+    lama:'Kegagalan masuk memunculkan dialog besar "Login Gagal — Username/email atau kata sandi salah" yang harus ditutup dengan OK. Kode OTP yang salah hanya memunculkan "Invalid input" berbahasa Inggris tanpa solusi.', ke:'gagal', sorot:'#galatLogin', sumber:'Laporan HE UX Metric Lab, Highlight #7 (skor 68,6; PDF hlm. 15)' },
   { kode:'HE-LOGIN-03', judul:'Verifikasi dua langkah: navigasi tetap tersedia',
     isi:'Bilah navigasi atas tetap tampil di semua tahap verifikasi dua langkah. Setiap tahap memiliki tautan kembali ("Ganti metode", "Kembali ke halaman masuk") dan tombol Bantuan.',
-    lama:'Menu navigasi menghilang saat pengguna berada di tahap verifikasi dua langkah, sehingga pengguna yang tidak menerima kode tidak memiliki jalan keluar selain menutup halaman.', ke:'mfa', sorot:'#kembaliMasuk' },
+    lama:'Menu navigasi menghilang saat pengguna berada di tahap verifikasi dua langkah, sehingga pengguna yang tidak menerima kode tidak memiliki jalan keluar selain menutup halaman.', ke:'mfa', sorot:'#kembaliMasuk', sumber:'Laporan HE UX Metric Lab, Highlight #7 (skor 68,6; PDF hlm. 15)' },
   { kode:'HE-LOGIN-04', judul:'Verifikasi dua langkah: penjelasan metode dan kode cadangan',
     isi:'Halaman pilih metode menjelaskan dalam satu kalimat apa itu verifikasi dua langkah dan kapan memilih aplikasi autentikator atau email. Halaman kode cadangan menjelaskan kegunaannya; tombol "Lanjut ke Dasbor" baru aktif setelah pengguna mencentang "Saya sudah menyimpan kode cadangan".',
-    lama:'Tidak ada penjelasan tentang verifikasi dua langkah bagi pengguna baru. Tombol "Saya sudah simpan, ke Dashboard" dapat ditekan tanpa benar-benar menyimpan kode.', ke:'mfa', sorot:'#penjelasanMfa' },
+    lama:'Tidak ada penjelasan tentang verifikasi dua langkah bagi pengguna baru. Tombol "Saya sudah simpan, ke Dashboard" dapat ditekan tanpa benar-benar menyimpan kode.', ke:'mfa', sorot:'#penjelasanMfa', sumber:'Laporan HE UX Metric Lab, Highlight #7 (skor 68,6; PDF hlm. 15)' },
   { kode:'HE-OB-01', judul:'Dashboard Onboarding: hasil cek status jelas dan dapat ditutup',
     isi:'"Check Status Terbaru" dibakukan menjadi "Cek Status Terbaru". Hasilnya ditampilkan sebagai IDDS Toast yang dapat ditutup, berisi jam pengecekan dan tahap saat ini (mis. "Belum ada perubahan · Tahap: Proses Pembayaran"). Bila ada perubahan, tahap yang berubah disorot di stepper.',
-    lama:'Setiap kali status dicek, muncul dialog besar "Status Diperbarui — Status registrasi terbaru sudah dimuat." tanpa tombol tutup, walaupun tidak ada perubahan apa pun (skor User Control Dashboard: 20).', ke:'db-cek', sorot:null },
+    lama:'Setiap kali status dicek, muncul dialog besar "Status Diperbarui — Status registrasi terbaru sudah dimuat." tanpa tombol tutup, walaupun tidak ada perubahan apa pun (skor User Control Dashboard: 20).', ke:'db-cek', sorot:'#cekStatus', sumber:'Laporan HE UX Metric Lab, Highlight #8 (skor 71,5; PDF hlm. 15)' },
   { kode:'HE-OB-02', judul:'Ringkasan Pesanan: paket dapat diganti sebelum pembayaran',
     isi:'Ringkasan Pesanan memiliki tombol "Ganti Paket" selama pembayaran belum diterima. Bila Virtual Account sudah dibuat, IDDS Modal Confirmation menjelaskan bahwa tagihan lama dibatalkan dan tagihan baru dibuat untuk paket yang dipilih.',
-    lama:'Setelah "Lanjut Pembayaran", paket terkunci; tidak ada cara mengganti paket selain menghubungi admin atau memulai ulang.', ke:'db-bayar', sorot:'#gantiPaket' },
+    lama:'Setelah "Lanjut Pembayaran", paket terkunci; tidak ada cara mengganti paket selain menghubungi admin atau memulai ulang.', ke:'db-bayar', sorot:'#gantiPaket', sumber:'Laporan HE UX Metric Lab, Highlight #8 (skor 71,5; PDF hlm. 15)' },
   { kode:'HE-OB-03', judul:'Dashboard Onboarding: langkah berikutnya, perkiraan waktu, dan bantuan',
     isi:'Di bawah stepper ada IDDS Alert "Langkah berikutnya" yang menyebut apa yang perlu dilakukan dan perkiraan waktunya (mis. Proses Administrasi ± 1 hari kerja). Kartu "Butuh bantuan?" menampilkan kontak dukungan dan membuka drawer Bantuan berisi pertanyaan umum pembayaran dan aktivasi.',
-    lama:'Tidak ada panduan, tooltip, atau kontak dukungan di Dashboard maupun halaman pembayaran (skor Help & Documentation: 0).', ke:'db', sorot:'#langkahDb' },
+    lama:'Tidak ada panduan, tooltip, atau kontak dukungan di Dashboard maupun halaman pembayaran (skor Help & Documentation: 0).', ke:'db', sorot:'#langkahDb', sumber:'Laporan HE UX Metric Lab, Highlight #8 (skor 71,5; PDF hlm. 15)' },
   { kode:'HE-OB-04', judul:'Email aktivasi instansi: tanpa kata sandi dalam teks biasa',
     isi:'Email aktivasi berisi alamat aplikasi kantor, email untuk masuk, dan tombol "Masuk ke Aplikasi e-PPAT", tanpa kata sandi. Email menjelaskan bahwa pengguna masuk dengan kata sandi yang dibuat saat pendaftaran, dan menunjukkan pilihan "Lupa kata sandi?" di halaman masuk. Layar Selesai menampilkan lencana "Status akun: Aktif", kartu "Aplikasi e-PPAT Anda Siap!" dengan tombol "Masuk ke Aplikasi e-PPAT" dan tautan "Lupa kata sandi?", serta pratinjau email ini.',
-    lama:'Email aktivasi menampilkan "EMAIL LOGIN", "PASSWORD" dalam teks biasa, dan "LINK LOGIN" (skor Privacy Dashboard: 0).', ke:'db-lunas', sorot:'#emailAktivasi' },
+    lama:'Email aktivasi menampilkan "EMAIL LOGIN", "PASSWORD" dalam teks biasa, dan "LINK LOGIN" (skor Privacy Dashboard: 0).', ke:'db-lunas', sorot:'#emailAktivasi', sumber:'Laporan HE UX Metric Lab, Highlight #8 (skor 71,5; PDF hlm. 15) · solusi usulan tim' },
   { kode:'HE-OB-05', judul:'Stepper Dashboard Onboarding: nomor urut dan istilah konsisten',
     isi:'Tahap ditampilkan bernomor urut 1–8 tanpa lompatan, masing-masing dengan tanggal selesai atau keterangan status. Tahap Verifikasi Anggota tidak ditampilkan karena sedang ditahan oleh E-PPAT. Label teknis dibakukan: metode "VIRTUAL_ACCOUNT" di Riwayat Transaksi menjadi "Virtual Account BRI", status "BELUM DIBAYAR" menjadi lencana "Belum dibayar".',
-    lama:'Penomoran stepper melompat dari 3 ke 5 karena satu tahap tidak ditampilkan. Riwayat Transaksi menampilkan nilai teknis "VIRTUAL_ACCOUNT" dan teks kapital "BELUM DIBAYAR".', ke:'db-riwayat', sorot:'#tabelRiwayat' },
+    lama:'Penomoran stepper melompat dari 3 ke 5 karena satu tahap tidak ditampilkan. Riwayat Transaksi menampilkan nilai teknis "VIRTUAL_ACCOUNT" dan teks kapital "BELUM DIBAYAR".', ke:'db', sorot:'#kartuTahap', sumber:'Laporan HE UX Metric Lab, Highlight #8 (skor 71,5; PDF hlm. 15) + arahan Peruri 30 Okt 2026 · solusi usulan tim' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk pendaftaran dan masuk',
     isi:'Tautan "Butuh bantuan?" di setiap kartu membuka IDDS Drawer berisi pertanyaan umum (email verifikasi tidak masuk, lupa kata sandi, kode tidak masuk, kehilangan akses aplikasi autentikator, isian ID PPAT dan URL Tenant) dan kontak dukungan.',
-    lama:'Tidak ada panduan atau kontak dukungan di halaman pendaftaran dan masuk (skor Help & Documentation Login: 25).', ke:'bantuan', sorot:null },
+    lama:'Tidak ada panduan atau kontak dukungan di halaman pendaftaran dan masuk (skor Help & Documentation Login: 25).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
     isi:'Text Field, Password Input, Checkbox, Radio Button, Stepper, Card, Button, Alert, One-Time Password, Modal Confirmation, Tooltip, Toast, Drawer, dan Table memakai komponen INA Digital Design System dengan brand E-PPAT. Label berbahasa Inggris dibakukan: Login → Masuk, Register → Daftar, Username → Nama Pengguna, Login Pertama → Masuk Pertama, Customer → Pelanggan, Dashboard → Dasbor (menu samping aplikasi); kata ganti "anda" ditulis "Anda".',
-    lama:'Isian, stepper, pilihan paket, dialog, dan kotak pesan dibuat sendiri. Label bercampur bahasa Inggris (Login, Register, Username, Customer) dan placeholder memakai "anda" huruf kecil.', ke:'reg', sorot:null }
+    lama:'Isian, stepper, pilihan paket, dialog, dan kotak pesan dibuat sendiri. Label bercampur bahasa Inggris (Login, Register, Username, Customer) dan placeholder memakai "anda" huruf kecil.', ke:'reg', sorot:null, sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' }
 ];
 
 /* ---------------- keadaan ---------------- */
@@ -1278,7 +1280,7 @@ function bukaBantuan() {
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Platform Onboarding', lebar:true,
     isi:`<p>Usulan disusun dari laporan lengkap Heuristic Evaluation di UX Metric Lab (Registrasi 91,7; Login 68,6) beserta gambar buktinya, dan layar live dev.eppat.id. Isian, aturan kata sandi, dan alur verifikasi dua langkah tetap seperti live; yang diubah adalah jalan keluar, penjelasan, pesan galat, dan informasi masa berlaku kode. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });
@@ -1481,6 +1483,67 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
   };  const pasang = e => { const tip = e.target.closest && e.target.closest('.ina-tooltip'); if (tip) atur(tip); };
   document.addEventListener('mouseover', pasang); document.addEventListener('focusin', pasang);
   window.addEventListener('scroll', () => document.querySelectorAll('.ina-tooltip__content.tt-aman').forEach(c => { const tip = c.closest('.ina-tooltip'); if (tip && (tip.matches(':hover') || tip.matches(':focus-within'))) atur(tip); }), true);
+})();
+</script>
+
+<!-- ===== Sorot bersama (sorot-bersama.html, disisipkan rakit-idds.js ke prototipe yang punya "Lihat di layar") =====
+     Setiap klik "Lihat di layar" di Daftar perubahan/penyesuaian selalu memberi lingkaran biru yang berkedip beberapa detik
+     pada bagian yang dimaksud. Lingkaran berupa lapisan tersendiri (#sorotCincin) yang mengikuti posisi sasaran, jadi tidak
+     terpotong wadah, tidak bentrok dengan animasi komponen, dan tetap ada walau layar digambar ulang.
+     Urutan sasaran: dialog/laci yang terbuka (kecuali sasaran ada di dalamnya) → elemen sorot milik usulan →
+     elemen yang sudah disorot prototipe → isi halaman. -->
+<style id="sorot-bersama-css">
+@keyframes sorotKedip{0%,100%{border-color:#2563EB;box-shadow:0 0 0 6px rgba(37,99,235,.22)}50%{border-color:rgba(37,99,235,.15);box-shadow:0 0 0 0 rgba(37,99,235,0)}}
+#sorotCincin{position:fixed;z-index:2147483000;pointer-events:none;border:3px solid #2563EB;border-radius:14px;animation:sorotKedip .8s ease-in-out 5}
+@media (prefers-reduced-motion:reduce){#sorotCincin{animation:none}}
+</style>
+<script id="sorot-bersama-js">
+(() => {
+  const DURASI = 4000, JARAK = 6;
+  /* sasaran sorot per usulan, urut sama dengan tombol "Lihat di layar" (dibaca dari daftar usulan di halaman) */
+  const sumber = [...document.scripts].map(s => s.textContent).join('\n');
+  const SOROT = [...sumber.matchAll(/\{ kode:'[A-Z0-9-]+', judul:'[^']*'[\s\S]*?sorot:(null|'[^']*')/g)].map(m => m[1] === 'null' ? null : m[1].slice(1, -1));
+  const tampak = el => !!el && el.isConnected && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+  const cari = s => { try { return s ? document.querySelector(s) : null; } catch (x) { return null; } };
+  const lapisan = () => [...document.querySelectorAll('.ina-modal__dialog, .ina-drawer__panel')].filter(tampak).pop();
+  let cincin = null, sasaran = null, pemilih = null, selesai = 0, raf = 0, urut = 0;
+  const lepas = () => { cancelAnimationFrame(raf); if (cincin) cincin.remove(); if (sasaran) sasaran.classList.remove('sorot-kedip'); cincin = sasaran = pemilih = null; };
+  const ikuti = () => {
+    if (!cincin) return;
+    if (Date.now() > selesai) { lepas(); return; }
+    if (!tampak(sasaran) && pemilih) { const b = cari(pemilih); if (tampak(b)) { sasaran = b; b.classList.add('sorot-kedip'); } }
+    if (tampak(sasaran)) {
+      const r = sasaran.getBoundingClientRect();
+      const x1 = Math.max(3, r.left - JARAK), y1 = Math.max(3, r.top - JARAK), x2 = Math.min(innerWidth - 3, r.right + JARAK), y2 = Math.min(innerHeight - 3, r.bottom + JARAK); /* tetap di dalam layar */
+      Object.assign(cincin.style, { display:'block', left:x1 + 'px', top:y1 + 'px', width:Math.max(0, x2 - x1) + 'px', height:Math.max(0, y2 - y1) + 'px' });
+    } else cincin.style.display = 'none';
+    raf = requestAnimationFrame(ikuti);
+  };
+  const pasang = (el, sel) => {
+    lepas();
+    sasaran = el; pemilih = sel || null; selesai = Date.now() + DURASI;
+    el.scrollIntoView({ block:'center', behavior:'smooth' });
+    el.classList.add('sorot-kedip');
+    cincin = document.createElement('div'); cincin.id = 'sorotCincin'; cincin.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(cincin); ikuti();
+  };
+  document.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || b.textContent.trim() !== 'Lihat di layar') return;
+    const semua = [...document.querySelectorAll('button')].filter(x => x.textContent.trim() === 'Lihat di layar');
+    const sel = semua.length === SOROT.length ? SOROT[semua.indexOf(b)] : null, ke = ++urut, mulai = Date.now();
+    lepas();
+    const coba = () => {
+      if (ke !== urut) return;
+      const lap = lapisan(), t = cari(sel), habis = Date.now() - mulai > (sel ? 1600 : 900);
+      if (tampak(t) && !(lap && !lap.contains(t))) { pasang(t, sel); return; }
+      if (lap && (!t || !lap.contains(t) || habis)) { pasang(lap); return; }
+      if (!habis) { setTimeout(coba, 150); return; }
+      const lain = [...document.querySelectorAll('.sorot, .kedip')].find(tampak)
+        || ['#halamanApp', '#halaman', 'main .content', 'main', '.content'].map(cari).find(tampak);
+      if (lain) pasang(lain);
+    };
+    setTimeout(coba, 450);
+  }, true);
 })();
 </script>
 

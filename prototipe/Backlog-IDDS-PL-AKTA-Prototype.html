@@ -236,6 +236,7 @@ html:not([data-brand='eppat']) .content,html:not([data-brand='eppat']) main.tn{b
 
 .judul-halaman{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .judul-halaman .judul-kiri{min-width:0}
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 <style id="kerangka-css">
 /* ===== Order AJB — komponen IDDS + brand E-PPAT (HE-UMUM-01)
@@ -1846,6 +1847,67 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
   };  const pasang = e => { const tip = e.target.closest && e.target.closest('.ina-tooltip'); if (tip) atur(tip); };
   document.addEventListener('mouseover', pasang); document.addEventListener('focusin', pasang);
   window.addEventListener('scroll', () => document.querySelectorAll('.ina-tooltip__content.tt-aman').forEach(c => { const tip = c.closest('.ina-tooltip'); if (tip && (tip.matches(':hover') || tip.matches(':focus-within'))) atur(tip); }), true);
+})();
+</script>
+
+<!-- ===== Sorot bersama (sorot-bersama.html, disisipkan rakit-idds.js ke prototipe yang punya "Lihat di layar") =====
+     Setiap klik "Lihat di layar" di Daftar perubahan/penyesuaian selalu memberi lingkaran biru yang berkedip beberapa detik
+     pada bagian yang dimaksud. Lingkaran berupa lapisan tersendiri (#sorotCincin) yang mengikuti posisi sasaran, jadi tidak
+     terpotong wadah, tidak bentrok dengan animasi komponen, dan tetap ada walau layar digambar ulang.
+     Urutan sasaran: dialog/laci yang terbuka (kecuali sasaran ada di dalamnya) → elemen sorot milik usulan →
+     elemen yang sudah disorot prototipe → isi halaman. -->
+<style id="sorot-bersama-css">
+@keyframes sorotKedip{0%,100%{border-color:#2563EB;box-shadow:0 0 0 6px rgba(37,99,235,.22)}50%{border-color:rgba(37,99,235,.15);box-shadow:0 0 0 0 rgba(37,99,235,0)}}
+#sorotCincin{position:fixed;z-index:2147483000;pointer-events:none;border:3px solid #2563EB;border-radius:14px;animation:sorotKedip .8s ease-in-out 5}
+@media (prefers-reduced-motion:reduce){#sorotCincin{animation:none}}
+</style>
+<script id="sorot-bersama-js">
+(() => {
+  const DURASI = 4000, JARAK = 6;
+  /* sasaran sorot per usulan, urut sama dengan tombol "Lihat di layar" (dibaca dari daftar usulan di halaman) */
+  const sumber = [...document.scripts].map(s => s.textContent).join('\n');
+  const SOROT = [...sumber.matchAll(/\{ kode:'[A-Z0-9-]+', judul:'[^']*'[\s\S]*?sorot:(null|'[^']*')/g)].map(m => m[1] === 'null' ? null : m[1].slice(1, -1));
+  const tampak = el => !!el && el.isConnected && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+  const cari = s => { try { return s ? document.querySelector(s) : null; } catch (x) { return null; } };
+  const lapisan = () => [...document.querySelectorAll('.ina-modal__dialog, .ina-drawer__panel')].filter(tampak).pop();
+  let cincin = null, sasaran = null, pemilih = null, selesai = 0, raf = 0, urut = 0;
+  const lepas = () => { cancelAnimationFrame(raf); if (cincin) cincin.remove(); if (sasaran) sasaran.classList.remove('sorot-kedip'); cincin = sasaran = pemilih = null; };
+  const ikuti = () => {
+    if (!cincin) return;
+    if (Date.now() > selesai) { lepas(); return; }
+    if (!tampak(sasaran) && pemilih) { const b = cari(pemilih); if (tampak(b)) { sasaran = b; b.classList.add('sorot-kedip'); } }
+    if (tampak(sasaran)) {
+      const r = sasaran.getBoundingClientRect();
+      const x1 = Math.max(3, r.left - JARAK), y1 = Math.max(3, r.top - JARAK), x2 = Math.min(innerWidth - 3, r.right + JARAK), y2 = Math.min(innerHeight - 3, r.bottom + JARAK); /* tetap di dalam layar */
+      Object.assign(cincin.style, { display:'block', left:x1 + 'px', top:y1 + 'px', width:Math.max(0, x2 - x1) + 'px', height:Math.max(0, y2 - y1) + 'px' });
+    } else cincin.style.display = 'none';
+    raf = requestAnimationFrame(ikuti);
+  };
+  const pasang = (el, sel) => {
+    lepas();
+    sasaran = el; pemilih = sel || null; selesai = Date.now() + DURASI;
+    el.scrollIntoView({ block:'center', behavior:'smooth' });
+    el.classList.add('sorot-kedip');
+    cincin = document.createElement('div'); cincin.id = 'sorotCincin'; cincin.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(cincin); ikuti();
+  };
+  document.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || b.textContent.trim() !== 'Lihat di layar') return;
+    const semua = [...document.querySelectorAll('button')].filter(x => x.textContent.trim() === 'Lihat di layar');
+    const sel = semua.length === SOROT.length ? SOROT[semua.indexOf(b)] : null, ke = ++urut, mulai = Date.now();
+    lepas();
+    const coba = () => {
+      if (ke !== urut) return;
+      const lap = lapisan(), t = cari(sel), habis = Date.now() - mulai > (sel ? 1600 : 900);
+      if (tampak(t) && !(lap && !lap.contains(t))) { pasang(t, sel); return; }
+      if (lap && (!t || !lap.contains(t) || habis)) { pasang(lap); return; }
+      if (!habis) { setTimeout(coba, 150); return; }
+      const lain = [...document.querySelectorAll('.sorot, .kedip')].find(tampak)
+        || ['#halamanApp', '#halaman', 'main .content', 'main', '.content'].map(cari).find(tampak);
+      if (lain) pasang(lain);
+    };
+    setTimeout(coba, 450);
+  }, true);
 })();
 </script>
 

@@ -236,6 +236,7 @@ html:not([data-brand='eppat']) .content,html:not([data-brand='eppat']) main.tn{b
 
 .judul-halaman{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .judul-halaman .judul-kiri{min-width:0}
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 <style id="kerangka-css">
 /* ===== Order AJB — komponen IDDS + brand E-PPAT (HE-UMUM-01)
@@ -616,6 +617,7 @@ body:has(#otpWaktu) .protobar{position:relative;z-index:3000}
   .otp-isi .ina-one-time-password__container{gap:6px;min-width:0}
   .penampil-bar b{width:100%}
 }
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 </head>
 <body>
@@ -708,31 +710,31 @@ const KANTOR = { nama:'PPAT Contoh Satu, S.H.', telp:'0210000000', email:'kantor
 const UBAH = [
   { kode:'HE-EAWK-01', judul:'Daftar akta Klien: cari, saring, dan urutkan',
     isi:'Di atas daftar ada IDDS Input Search (kode permohonan, jenis akta, atau peran), saringan status dengan jumlahnya (Semua, Perlu tindakan, Menunggu, Selesai), dan pilihan urutan (Perlu tindakan dulu, Terbaru, Terlama). Akta yang menunggu tindakan Anda diberi garis tepi kuning dan tampil paling atas. Setiap akta menampilkan tanggal pembaruan terakhir.',
-    lama:'Daftar akta hanya dapat digulir; tidak ada pencarian, saringan status, urutan, atau tanggal. Akta yang perlu ditandatangani bercampur dengan akta yang sudah selesai.', ke:'daftar', sorot:'#saringAkta' },
+    lama:'Daftar akta hanya dapat digulir; tidak ada pencarian, saringan status, urutan, atau tanggal. Akta yang perlu ditandatangani bercampur dengan akta yang sudah selesai.', ke:'daftar', sorot:'#saringAkta', sumber:'Laporan HE INA Digital hlm. 37 (Temuan 3)' },
   { kode:'HE-EAWK-02', judul:'Penampil PDF Klien: langsung ke halaman tanda tangan pengguna',
     isi:'Saat akta dibuka, penampil PDF langsung menuju halaman tempat tanda tangan Anda dan kotak tanda tangan berkedip dengan label "Tanda tangan Anda di sini". Baris "Lompat ke" di atas PDF berisi pintasan ke posisi tanda tangan Anda, halaman pertama, dan halaman terakhir.',
-    lama:'Panel kanan menyebut "Posisi tanda tangan sudah ditentukan Kantor PPAT (halaman 7)", tetapi PDF selalu terbuka di halaman 1. Pengguna harus mengingat nomor halaman lalu menekan "Next" berulang kali.', ke:'giliran', sorot:'#barisLompat' },
+    lama:'Panel kanan menyebut "Posisi tanda tangan sudah ditentukan Kantor PPAT (halaman 7)", tetapi PDF selalu terbuka di halaman 1. Pengguna harus mengingat nomor halaman lalu menekan "Next" berulang kali.', ke:'giliran', sorot:'#barisLompat', sumber:'Laporan HE INA Digital hlm. 36, 38' },
   { kode:'HE-EAWK-03', judul:'Panel kanan Klien: langkah berikutnya tampil paling atas dan menonjol',
     isi:'Panel kanan dibuka dengan kartu "Langkah berikutnya" bergaris tebal yang berisi tiga langkah bernomor (periksa akta, kirim OTP, masukkan kode) beserta statusnya dan satu tombol utama. Bila Anda belum dapat menandatangani, kartu ini menjelaskan alasannya dan apa yang terjadi berikutnya. Di layar sempit, panel ini tampil di atas PDF.',
-    lama:'Instruksi berupa teks kecil abu-abu di dalam kartu informasi, di bawah data peran dan email, sehingga mudah terlewat karena perhatian tertuju ke PDF di sebelah kiri.', ke:'giliran', sorot:'#kartuBerikut' },
+    lama:'Instruksi berupa teks kecil abu-abu di dalam kartu informasi, di bawah data peran dan email, sehingga mudah terlewat karena perhatian tertuju ke PDF di sebelah kiri.', ke:'giliran', sorot:'#kartuBerikut', sumber:'Laporan HE INA Digital hlm. 38' },
   { kode:'HE-EAWK-04', judul:'Kirim OTP Klien: konfirmasi sebelum tanda tangan dibubuhkan',
     isi:'Sebelum kode OTP dikirim, muncul IDDS Modal Confirmation berisi ringkasan (akta, peran, halaman tanda tangan, email OTP) dan penjelasan bahwa tanda tangan yang sudah dibubuhkan tidak dapat dibatalkan. Tombol "Kirim OTP" baru aktif setelah pengguna mencentang "Saya sudah membaca isi akta dan setuju menandatanganinya." Dialog OTP juga mengingatkan bahwa tanda tangan dibubuhkan saat tombol Tanda Tangani ditekan.',
-    lama:'Tombol "Kirim OTP" langsung mengirim kode, dan tombol "Tanda tangani" di dialog OTP langsung membubuhkan tanda tangan tanpa konfirmasi atau ringkasan.', ke:'konfirm', sorot:null },
+    lama:'Tombol "Kirim OTP" langsung mengirim kode, dan tombol "Tanda tangani" di dialog OTP langsung membubuhkan tanda tangan tanpa konfirmasi atau ringkasan.', ke:'konfirm', sorot:null, sumber:'Laporan HE INA Digital hlm. 36, 38' },
   { kode:'HE-EAWK-05', judul:'Dialog OTP Klien: masa berlaku kode dan pesan galat terlihat',
     isi:'Dialog OTP memakai IDDS One-Time Password (6 kotak), menampilkan email tujuan yang disamarkan, hitung mundur "Kode berlaku 14:59", dan tombol "Kirim ulang kode" yang aktif setelah 60 detik. Kode salah atau kedaluwarsa dijelaskan tepat di bawah kotak kode beserta sisa percobaan. Panel kanan menulis jam pengiriman dan batas berlakunya kode.',
-    lama:'Dialog berisi satu kolom angka; masa berlaku kode hanya disebut di email. Kode salah muncul sebagai toast teknis di pojok kanan atas: "input tidak valid: OTP salah, mohon coba lagi".', ke:'otp', sorot:null },
+    lama:'Dialog berisi satu kolom angka; masa berlaku kode hanya disebut di email. Kode salah muncul sebagai toast teknis di pojok kanan atas: "input tidak valid: OTP salah, mohon coba lagi".', ke:'otp', sorot:null, sumber:'Laporan HE INA Digital hlm. 36 (bukti UX Metric Lab)' },
   { kode:'HE-EAWK-06', judul:'Detail akta Klien: kontak kantor PPAT dapat langsung dihubungi',
     isi:'Setiap kali pengguna diminta menghubungi kantor PPAT, layar menampilkan nama kantor, nomor telepon (tautan tel:), dan email (tautan mailto:) yang dapat langsung diklik. Kartu "Ada pertanyaan tentang akta ini?" juga tersedia di panel kanan setiap akta.',
-    lama:'Pesan hanya berbunyi "Kantor PPAT belum menempatkan posisi tanda tangan Anda di dokumen. Hubungi Kantor PPAT." tanpa nomor telepon, email, atau tautan.', ke:'tanpa-posisi', sorot:'#kontakKantor' },
+    lama:'Pesan hanya berbunyi "Kantor PPAT belum menempatkan posisi tanda tangan Anda di dokumen. Hubungi Kantor PPAT." tanpa nomor telepon, email, atau tautan.', ke:'tanpa-posisi', sorot:'#kontakKantor', sumber:'Laporan HE INA Digital hlm. 37 (Temuan 1)' },
   { kode:'HE-EAWK-07', judul:'Daftar akta Klien: panduan singkat untuk pengguna baru',
     isi:'Di atas daftar akta ada kartu "Pertama kali menandatangani akta elektronik?" berisi tiga langkah singkat dan tombol "Lihat panduan lengkap". Kartu dapat ditutup dan panduan tetap dapat dibuka lagi melalui tombol Bantuan.',
-    lama:'Tidak ada tutorial atau panduan awal. Instruksi baru muncul setelah pengguna membuka akta tertentu, sehingga pengguna baru tidak mendapat gambaran menyeluruh.', ke:'panduan', sorot:'#panduanAwal' },
+    lama:'Tidak ada tutorial atau panduan awal. Instruksi baru muncul setelah pengguna membuka akta tertentu, sehingga pengguna baru tidak mendapat gambaran menyeluruh.', ke:'panduan', sorot:'#panduanAwal', sumber:'Laporan HE INA Digital hlm. 37 (Temuan 2)' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Penandatanganan Akta',
     isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi urutan tanda tangan, pertanyaan umum (apa itu tanda tangan elektronik, kapan giliran saya, OTP tidak masuk, salah tanda tangan, posisi belum ditentukan), kontak kantor PPAT, dan kontak dukungan E-PPAT. Ikon ? bertooltip menjelaskan istilah tanda tangan elektronik, sertifikat elektronik (CA), OTP, status akta, peran para pihak, urutan tanda tangan, dan posisi tanda tangan.',
-    lama:'Tidak ada menu bantuan, pertanyaan umum, atau penjelasan istilah selama proses tanda tangan (skor Help & Documentation: 0).', ke:'bantuan', sorot:null },
+    lama:'Tidak ada menu bantuan, pertanyaan umum, atau penjelasan istilah selama proses tanda tangan (skor Help & Documentation: 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
     isi:'Kartu, lencana, Input Search, Button Group, Select Dropdown, Stepper, alert, tombol, checkbox, tooltip, Modal Confirmation, One-Time Password, Spinner, toast, dan drawer memakai komponen INA Digital Design System dengan brand E-PPAT. Label status penanda tangan dibakukan menjadi "Sudah menandatangani" dan "Sedang menandatangani", sama dengan prototipe Penandatanganan Akta PPAT.',
-    lama:'Kartu, lencana, dialog OTP, dan kotak pesan dibuat sendiri. Label status memakai "Tertanda tangan" dan "Sedang tanda tangan".', ke:'daftar', sorot:null }
+    lama:'Kartu, lencana, dialog OTP, dan kotak pesan dibuat sendiri. Label status memakai "Tertanda tangan" dan "Sedang tanda tangan".', ke:'daftar', sorot:null, sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' }
 ];
 
 /* ---------------- data contoh (status live: MENUNGGU_TERA, MENUNGGU_GILIRAN, GILIRAN_ANDA, OTP_TERKIRIM, SUDAH_TTD, SELESAI) ---------------- */
@@ -1133,7 +1135,7 @@ function bukaBantuan() {
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Penandatanganan Akta (Klien)', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital, halaman 36–38 (skor halaman 46,4), gambar buktinya, dan kode serta layar live akun Klien. Urutan tanda tangan, status, dan OTP tetap seperti live; yang diubah adalah navigasi ke posisi tanda tangan, kejelasan instruksi, konfirmasi, informasi OTP, kontak kantor, pencarian daftar, dan panduan. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {
@@ -1664,6 +1666,67 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
   };  const pasang = e => { const tip = e.target.closest && e.target.closest('.ina-tooltip'); if (tip) atur(tip); };
   document.addEventListener('mouseover', pasang); document.addEventListener('focusin', pasang);
   window.addEventListener('scroll', () => document.querySelectorAll('.ina-tooltip__content.tt-aman').forEach(c => { const tip = c.closest('.ina-tooltip'); if (tip && (tip.matches(':hover') || tip.matches(':focus-within'))) atur(tip); }), true);
+})();
+</script>
+
+<!-- ===== Sorot bersama (sorot-bersama.html, disisipkan rakit-idds.js ke prototipe yang punya "Lihat di layar") =====
+     Setiap klik "Lihat di layar" di Daftar perubahan/penyesuaian selalu memberi lingkaran biru yang berkedip beberapa detik
+     pada bagian yang dimaksud. Lingkaran berupa lapisan tersendiri (#sorotCincin) yang mengikuti posisi sasaran, jadi tidak
+     terpotong wadah, tidak bentrok dengan animasi komponen, dan tetap ada walau layar digambar ulang.
+     Urutan sasaran: dialog/laci yang terbuka (kecuali sasaran ada di dalamnya) → elemen sorot milik usulan →
+     elemen yang sudah disorot prototipe → isi halaman. -->
+<style id="sorot-bersama-css">
+@keyframes sorotKedip{0%,100%{border-color:#2563EB;box-shadow:0 0 0 6px rgba(37,99,235,.22)}50%{border-color:rgba(37,99,235,.15);box-shadow:0 0 0 0 rgba(37,99,235,0)}}
+#sorotCincin{position:fixed;z-index:2147483000;pointer-events:none;border:3px solid #2563EB;border-radius:14px;animation:sorotKedip .8s ease-in-out 5}
+@media (prefers-reduced-motion:reduce){#sorotCincin{animation:none}}
+</style>
+<script id="sorot-bersama-js">
+(() => {
+  const DURASI = 4000, JARAK = 6;
+  /* sasaran sorot per usulan, urut sama dengan tombol "Lihat di layar" (dibaca dari daftar usulan di halaman) */
+  const sumber = [...document.scripts].map(s => s.textContent).join('\n');
+  const SOROT = [...sumber.matchAll(/\{ kode:'[A-Z0-9-]+', judul:'[^']*'[\s\S]*?sorot:(null|'[^']*')/g)].map(m => m[1] === 'null' ? null : m[1].slice(1, -1));
+  const tampak = el => !!el && el.isConnected && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+  const cari = s => { try { return s ? document.querySelector(s) : null; } catch (x) { return null; } };
+  const lapisan = () => [...document.querySelectorAll('.ina-modal__dialog, .ina-drawer__panel')].filter(tampak).pop();
+  let cincin = null, sasaran = null, pemilih = null, selesai = 0, raf = 0, urut = 0;
+  const lepas = () => { cancelAnimationFrame(raf); if (cincin) cincin.remove(); if (sasaran) sasaran.classList.remove('sorot-kedip'); cincin = sasaran = pemilih = null; };
+  const ikuti = () => {
+    if (!cincin) return;
+    if (Date.now() > selesai) { lepas(); return; }
+    if (!tampak(sasaran) && pemilih) { const b = cari(pemilih); if (tampak(b)) { sasaran = b; b.classList.add('sorot-kedip'); } }
+    if (tampak(sasaran)) {
+      const r = sasaran.getBoundingClientRect();
+      const x1 = Math.max(3, r.left - JARAK), y1 = Math.max(3, r.top - JARAK), x2 = Math.min(innerWidth - 3, r.right + JARAK), y2 = Math.min(innerHeight - 3, r.bottom + JARAK); /* tetap di dalam layar */
+      Object.assign(cincin.style, { display:'block', left:x1 + 'px', top:y1 + 'px', width:Math.max(0, x2 - x1) + 'px', height:Math.max(0, y2 - y1) + 'px' });
+    } else cincin.style.display = 'none';
+    raf = requestAnimationFrame(ikuti);
+  };
+  const pasang = (el, sel) => {
+    lepas();
+    sasaran = el; pemilih = sel || null; selesai = Date.now() + DURASI;
+    el.scrollIntoView({ block:'center', behavior:'smooth' });
+    el.classList.add('sorot-kedip');
+    cincin = document.createElement('div'); cincin.id = 'sorotCincin'; cincin.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(cincin); ikuti();
+  };
+  document.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || b.textContent.trim() !== 'Lihat di layar') return;
+    const semua = [...document.querySelectorAll('button')].filter(x => x.textContent.trim() === 'Lihat di layar');
+    const sel = semua.length === SOROT.length ? SOROT[semua.indexOf(b)] : null, ke = ++urut, mulai = Date.now();
+    lepas();
+    const coba = () => {
+      if (ke !== urut) return;
+      const lap = lapisan(), t = cari(sel), habis = Date.now() - mulai > (sel ? 1600 : 900);
+      if (tampak(t) && !(lap && !lap.contains(t))) { pasang(t, sel); return; }
+      if (lap && (!t || !lap.contains(t) || habis)) { pasang(lap); return; }
+      if (!habis) { setTimeout(coba, 150); return; }
+      const lain = [...document.querySelectorAll('.sorot, .kedip')].find(tampak)
+        || ['#halamanApp', '#halaman', 'main .content', 'main', '.content'].map(cari).find(tampak);
+      if (lain) pasang(lain);
+    };
+    setTimeout(coba, 450);
+  }, true);
 })();
 </script>
 

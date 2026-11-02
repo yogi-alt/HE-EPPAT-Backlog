@@ -236,6 +236,7 @@ html:not([data-brand='eppat']) .content,html:not([data-brand='eppat']) main.tn{b
 
 .judul-halaman{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .judul-halaman .judul-kiri{min-width:0}
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 <style id="kerangka-css">
 /* ===== Order AJB — komponen IDDS + brand E-PPAT (HE-UMUM-01)
@@ -536,6 +537,7 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
   .urut-wadah,.urut-wadah .ina-select-dropdown__trigger{width:100%}
   .kartu-kepala .kanan{margin-left:0;align-items:flex-start}
 }
+.daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
 </style>
 </head>
 <body>
@@ -640,25 +642,25 @@ const BATAS_HARI = 3; /* angka contoh: verifikasi dianggap terlambat bila lebih 
 const UBAH = [
   { kode:'HE-VERIF-01', judul:'Verifikasi Berkas: istilah CA dijelaskan dan status berbahasa Indonesia',
     isi:'Istilah CA, NJOP, NIB, dan verifikasi manual diberi garis putus-putus dengan IDDS Tooltip. Label campuran dibakukan: "Verified" menjadi "Terverifikasi", "CA Kadaluarsa" menjadi "CA Kedaluwarsa". Tanda ✓, !, dan • pada tab diganti lencana bertulisan (Terverifikasi, Perlu dicek, Belum diverifikasi). Pihak yang belum terverifikasi diberi garis kuning dan satu kalimat solusi, misalnya "Minta pihak menyelesaikan eKYC di portal Peruri, lalu tekan Cek CA Semua Pihak lagi."',
-    lama:'Istilah "CA" muncul berulang kali tanpa penjelasan (skor H2 halaman: 40). Lencana bercampur bahasa Inggris ("✓ Verified") dan salah eja ("CA Kadaluarsa"); status tab hanya berupa simbol ✓, !, •. Pihak yang belum terverifikasi hanya diberi keterangan "CA belum aktif" tanpa langkah perbaikan.', ke:'pihak-010', sorot:'#daftarPihak' },
+    lama:'Istilah "CA" muncul berulang kali tanpa penjelasan (skor H2 halaman: 40). Lencana bercampur bahasa Inggris ("✓ Verified") dan salah eja ("CA Kadaluarsa"); status tab hanya berupa simbol ✓, !, •. Pihak yang belum terverifikasi hanya diberi keterangan "CA belum aktif" tanpa langkah perbaikan.', ke:'pihak-010', sorot:'#daftarPihak', sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
   { kode:'HE-VERIF-02', judul:'Daftar dan detail verifikasi: lama menunggu dan dampaknya terlihat',
     isi:'Daftar memiliki kolom "Menunggu" (lama sejak permohonan berstatus Siap); permohonan yang menunggu lebih dari 3 hari diberi lencana kuning "Lewat 3 hari" dan tampil paling atas secara bawaan. Di halaman detail, IDDS Alert berjudul jumlah bagian yang belum diverifikasi (mis. "1 bagian lagi belum diverifikasi") serta menyebut sejak kapan permohonan menunggu dan dampaknya: penyusunan minuta baru dapat dimulai setelah ketiga verifikasi selesai.',
-    lama:'Tidak ada informasi urgensi atau tenggat. Daftar hanya menampilkan tanggal order dibuat, dan halaman detail tidak menjelaskan akibat bila verifikasi belum selesai.', ke:'tunggu', sorot:'#infoTunggu' },
+    lama:'Tidak ada informasi urgensi atau tenggat. Daftar hanya menampilkan tanggal order dibuat, dan halaman detail tidak menjelaskan akibat bila verifikasi belum selesai.', ke:'tunggu', sorot:'#infoTunggu', sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15) + masukan Peruri 30 Okt 2026' },
   { kode:'HE-VERIF-03', judul:'Simpan verifikasi: konfirmasi dan pemeriksaan isian',
     isi:'"Tandai Terverifikasi" (objek tanah) dan "Simpan & Verifikasi" (harga) membuka IDDS Modal Confirmation berisi ringkasan data yang diverifikasi. Untuk objek tanah, pengguna mencentang daftar periksa (sertifikat asli, tidak ada blokir/sengketa, data sesuai). Isian NJOP dan luas yang kosong ditandai di bawah isian, bukan melalui toast. Bila harga jual di bawah NJOP, catatan alasan wajib diisi sebelum verifikasi. Verifikasi manual pihak tanpa akun juga meminta konfirmasi.',
-    lama:'Tombol "Tandai Terverifikasi" dan "Simpan & Verifikasi" langsung mengubah status tanpa konfirmasi (skor H6 halaman: 0). NJOP kosong hanya memunculkan toast "Isi NJOP/m² dan luas tanah dulu."; harga jual di bawah NJOP hanya diberi teks kecil "⚠ … periksa" dan verifikasi tetap dapat disimpan tanpa catatan.', ke:'konfirm-objek', sorot:null },
+    lama:'Tombol "Tandai Terverifikasi" dan "Simpan & Verifikasi" langsung mengubah status tanpa konfirmasi (skor H6 halaman: 0). NJOP kosong hanya memunculkan toast "Isi NJOP/m² dan luas tanah dulu."; harga jual di bawah NJOP hanya diberi teks kecil "⚠ … periksa" dan verifikasi tetap dapat disimpan tanpa catatan.', ke:'konfirm-objek', sorot:null, sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
   { kode:'HE-VERIF-04', judul:'Daftar verifikasi: cari, saring, dan urutkan',
     isi:'Selain IDDS Input Search (kode atau klien), tersedia saringan IDDS Button Group dengan jumlahnya (Semua, Belum dimulai, Sebagian, Lengkap) dan pilihan urutan (Paling lama menunggu, Terbaru). Hasil kosong menampilkan tombol "Hapus pencarian dan saringan".',
-    lama:'Daftar hanya memiliki kolom pencarian kode/klien tanpa saringan status atau urutan, sehingga sulit mengelola banyak order.', ke:'daftar', sorot:'#saringVerif' },
+    lama:'Daftar hanya memiliki kolom pencarian kode/klien tanpa saringan status atau urutan, sehingga sulit mengelola banyak order.', ke:'daftar', sorot:'#saringVerif', sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
   { kode:'HE-VERIF-05', judul:'Detail verifikasi: navigasi konsisten dan langkah berikutnya jelas',
     isi:'Judul ganda "Verifikasi Berkas" di daftar dihapus. Tombol Kembali dan identitas permohonan memakai pola yang sama dengan prototipe Penandatanganan Akta. Tab memakai IDDS Tab Horizontal selebar halaman dengan lencana status. Setelah satu bagian terverifikasi, toast menunjukkan bagian berikutnya dan tab berpindah otomatis. Setelah ketiganya selesai, IDDS Alert menyatakan permohonan siap penyusunan dengan tombol "Buka Permohonan AJB".',
-    lama:'Judul "Verifikasi Akta" muncul dua kali di daftar. Letak tombol Kembali berbeda dengan halaman lain (bukti HE). Tab buatan sendiri dengan simbol; setelah verifikasi hanya muncul toast, tanpa arahan ke bagian berikutnya atau ke tahap drafting.', ke:'harga-011', sorot:'#tabVerif' },
+    lama:'Judul "Verifikasi Akta" muncul dua kali di daftar. Letak tombol Kembali berbeda dengan halaman lain (bukti HE). Tab buatan sendiri dengan simbol; setelah verifikasi hanya muncul toast, tanpa arahan ke bagian berikutnya atau ke tahap drafting.', ke:'harga-011', sorot:'#tabVerif', sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Verifikasi Berkas',
     isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi urutan tiga verifikasi, pertanyaan umum (CA belum aktif, pihak tanpa akun, sumber NJOP, harga di bawah NJOP, salah verifikasi), dan kontak dukungan.',
-    lama:'Tidak ada panduan atau bantuan di halaman ini (skor Help & Documentation halaman: 0).', ke:'bantuan', sorot:null },
+    lama:'Tidak ada panduan atau bantuan di halaman ini (skor Help & Documentation halaman: 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
     isi:'Tabel, Input Search, Button Group, Select Dropdown, Tab Horizontal, kartu, lencana, Text Field, Text Area, Checkbox, alert, tombol, tooltip, Modal Confirmation, Spinner, toast, dan drawer memakai komponen INA Digital Design System dengan brand E-PPAT.',
-    lama:'Tab, kartu, kotak centang, dan lencana dibuat sendiri.', ke:'daftar', sorot:null }
+    lama:'Tab, kartu, kotak centang, dan lencana dibuat sendiri.', ke:'daftar', sorot:null, sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' }
 ];
 
 /* ---------------- data contoh (sama dengan prototipe Order AJB) ---------------- */
@@ -1006,7 +1008,7 @@ function bukaBantuan() {
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Verifikasi Berkas', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital (skor halaman 54,5; rincian dan gambar bukti di laporan lengkap UX Metric Lab) serta kode dan layar live akun Asisten. Tiga bagian verifikasi, aturan CA otomatis, dan perhitungan NJOP tetap seperti live; yang diubah adalah penjelasan istilah, informasi lama menunggu, konfirmasi, pencarian, dan navigasi. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {
@@ -1536,6 +1538,67 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
   };  const pasang = e => { const tip = e.target.closest && e.target.closest('.ina-tooltip'); if (tip) atur(tip); };
   document.addEventListener('mouseover', pasang); document.addEventListener('focusin', pasang);
   window.addEventListener('scroll', () => document.querySelectorAll('.ina-tooltip__content.tt-aman').forEach(c => { const tip = c.closest('.ina-tooltip'); if (tip && (tip.matches(':hover') || tip.matches(':focus-within'))) atur(tip); }), true);
+})();
+</script>
+
+<!-- ===== Sorot bersama (sorot-bersama.html, disisipkan rakit-idds.js ke prototipe yang punya "Lihat di layar") =====
+     Setiap klik "Lihat di layar" di Daftar perubahan/penyesuaian selalu memberi lingkaran biru yang berkedip beberapa detik
+     pada bagian yang dimaksud. Lingkaran berupa lapisan tersendiri (#sorotCincin) yang mengikuti posisi sasaran, jadi tidak
+     terpotong wadah, tidak bentrok dengan animasi komponen, dan tetap ada walau layar digambar ulang.
+     Urutan sasaran: dialog/laci yang terbuka (kecuali sasaran ada di dalamnya) → elemen sorot milik usulan →
+     elemen yang sudah disorot prototipe → isi halaman. -->
+<style id="sorot-bersama-css">
+@keyframes sorotKedip{0%,100%{border-color:#2563EB;box-shadow:0 0 0 6px rgba(37,99,235,.22)}50%{border-color:rgba(37,99,235,.15);box-shadow:0 0 0 0 rgba(37,99,235,0)}}
+#sorotCincin{position:fixed;z-index:2147483000;pointer-events:none;border:3px solid #2563EB;border-radius:14px;animation:sorotKedip .8s ease-in-out 5}
+@media (prefers-reduced-motion:reduce){#sorotCincin{animation:none}}
+</style>
+<script id="sorot-bersama-js">
+(() => {
+  const DURASI = 4000, JARAK = 6;
+  /* sasaran sorot per usulan, urut sama dengan tombol "Lihat di layar" (dibaca dari daftar usulan di halaman) */
+  const sumber = [...document.scripts].map(s => s.textContent).join('\n');
+  const SOROT = [...sumber.matchAll(/\{ kode:'[A-Z0-9-]+', judul:'[^']*'[\s\S]*?sorot:(null|'[^']*')/g)].map(m => m[1] === 'null' ? null : m[1].slice(1, -1));
+  const tampak = el => !!el && el.isConnected && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+  const cari = s => { try { return s ? document.querySelector(s) : null; } catch (x) { return null; } };
+  const lapisan = () => [...document.querySelectorAll('.ina-modal__dialog, .ina-drawer__panel')].filter(tampak).pop();
+  let cincin = null, sasaran = null, pemilih = null, selesai = 0, raf = 0, urut = 0;
+  const lepas = () => { cancelAnimationFrame(raf); if (cincin) cincin.remove(); if (sasaran) sasaran.classList.remove('sorot-kedip'); cincin = sasaran = pemilih = null; };
+  const ikuti = () => {
+    if (!cincin) return;
+    if (Date.now() > selesai) { lepas(); return; }
+    if (!tampak(sasaran) && pemilih) { const b = cari(pemilih); if (tampak(b)) { sasaran = b; b.classList.add('sorot-kedip'); } }
+    if (tampak(sasaran)) {
+      const r = sasaran.getBoundingClientRect();
+      const x1 = Math.max(3, r.left - JARAK), y1 = Math.max(3, r.top - JARAK), x2 = Math.min(innerWidth - 3, r.right + JARAK), y2 = Math.min(innerHeight - 3, r.bottom + JARAK); /* tetap di dalam layar */
+      Object.assign(cincin.style, { display:'block', left:x1 + 'px', top:y1 + 'px', width:Math.max(0, x2 - x1) + 'px', height:Math.max(0, y2 - y1) + 'px' });
+    } else cincin.style.display = 'none';
+    raf = requestAnimationFrame(ikuti);
+  };
+  const pasang = (el, sel) => {
+    lepas();
+    sasaran = el; pemilih = sel || null; selesai = Date.now() + DURASI;
+    el.scrollIntoView({ block:'center', behavior:'smooth' });
+    el.classList.add('sorot-kedip');
+    cincin = document.createElement('div'); cincin.id = 'sorotCincin'; cincin.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(cincin); ikuti();
+  };
+  document.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || b.textContent.trim() !== 'Lihat di layar') return;
+    const semua = [...document.querySelectorAll('button')].filter(x => x.textContent.trim() === 'Lihat di layar');
+    const sel = semua.length === SOROT.length ? SOROT[semua.indexOf(b)] : null, ke = ++urut, mulai = Date.now();
+    lepas();
+    const coba = () => {
+      if (ke !== urut) return;
+      const lap = lapisan(), t = cari(sel), habis = Date.now() - mulai > (sel ? 1600 : 900);
+      if (tampak(t) && !(lap && !lap.contains(t))) { pasang(t, sel); return; }
+      if (lap && (!t || !lap.contains(t) || habis)) { pasang(lap); return; }
+      if (!habis) { setTimeout(coba, 150); return; }
+      const lain = [...document.querySelectorAll('.sorot, .kedip')].find(tampak)
+        || ['#halamanApp', '#halaman', 'main .content', 'main', '.content'].map(cari).find(tampak);
+      if (lain) pasang(lain);
+    };
+    setTimeout(coba, 450);
+  }, true);
 })();
 </script>
 
