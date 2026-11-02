@@ -975,19 +975,19 @@
     {
       "kode": "HE-REG-03",
       "fitur": "Registrasi (Onboarding)",
-      "judul": "Halaman Registrasi: gambaran alur pendaftaran sampai aplikasi aktif",
+      "judul": "Halaman Registrasi: langkah sebelum masuk",
       "saat_ini": "Tidak ada panduan atau onboarding untuk pengguna yang baru pertama kali mendaftar. Tahapan baru terlihat di Dashboard setelah pengguna masuk.",
-      "usulan": "Tampilkan ringkasan lima tahap di atas formulir: Isi data pendaftaran, Verifikasi email, Masuk dan amankan akun, Pilih paket dan bayar, serta Aplikasi kantor aktif. Tandai tahap yang sedang dikerjakan. Setelah pengguna mendaftar, halaman petunjuk verifikasi email menampilkan email tujuan yang disamarkan dan saran memeriksa folder spam.",
+      "usulan": "Tampilkan stepper tiga langkah sebelum masuk di atas formulir: Pendaftaran, Verifikasi Email, Masuk Pertama (istilah sama dengan tahap 1–3 di Progress Registrasi Dasbor). Tambahkan keterangan bahwa tahap berikutnya sampai aplikasi kantor aktif ditampilkan di Dasbor setelah masuk. Tandai langkah yang sedang dikerjakan. Halaman petunjuk verifikasi email menampilkan email tujuan yang disamarkan dan saran memeriksa folder spam.",
       "prinsip": "H10 Help and Documentation; H1 Visibility of System Status",
       "halaman": "UX Metric Lab, Highlight #11 (skor 91,7; PDF hal. 15)",
       "prioritas": "Rendah",
       "layar": "dev.eppat.id/register; /verify-email",
       "acuan": "prototipe/Backlog-HE-ONBOARDING-Prototype.html › Daftar perubahan › HE-REG-03",
-      "selesai_bila": "Halaman Registrasi menampilkan seluruh tahapan sebelum calon pengguna mengisi formulir.",
+      "selesai_bila": "Halaman Registrasi menampilkan langkah sebelum masuk dengan istilah yang sama seperti tahap 1–3 di Dasbor, dan menjelaskan bahwa tahap berikutnya ada di Dasbor.",
       "status": "Prototipe siap",
-      "catatan": "",
+      "catatan": "HE hanya mencatat tidak ada panduan untuk pendaftar baru dan merekomendasikan panduan singkat atau tooltip untuk ID PPAT dan URL Tenant. Bentuk stepper adalah usulan tim. Stepper dibatasi pada langkah sebelum masuk (keputusan 2 Nov 2026) agar tidak terkesan sebagai proses terpisah dari stepper 8 tahap di Dasbor.",
       "tanggal": "2026-10-26",
-      "sumber": "Laporan HE UX Metric Lab, Highlight #11 (skor 91,7; PDF hlm. 15)"
+      "sumber": "Laporan HE UX Metric Lab, Highlight #11 (skor 91,7; PDF hlm. 15) · bentuk stepper usulan tim"
     },
     {
       "kode": "HE-REG-04",
@@ -4024,6 +4024,12 @@
       "kode": "Semua usulan tab Dari HE",
       "perubahan": "Setiap usulan di Daftar perubahan dan spreadsheet diberi label sumber: halaman laporan HE INA Digital atau Highlight UX Metric Lab, ditambah keterangan bila ada rincian dari masukan Peruri, keputusan tim, atau solusi usulan tim. HE-EAW-08 sampai HE-EAW-12 ditandai \"Penelusuran live (bukan temuan HE)\" dan dipisah ke kelompok tersendiri di akhir Daftar perubahan Penandatanganan Akta. Catatan HE-OB-05 dan HE-REG-02 yang usang diperbarui. Kolom \"Hal. laporan\" di sheet Usulan HE menjadi \"Sumber\".",
       "berkas": "sumber/*-badan.html; sumber/order-idds.html; sumber/tera-idds.html; sumber/backlog-he.json; sumber/buat-xlsx.js; prototipe tab Dari HE"
+    },
+    {
+      "tanggal": "2026-11-02",
+      "kode": "HE-REG-03",
+      "perubahan": "Stepper di halaman Registrasi diubah dari lima langkah (mencampur langkah sebelum dan sesudah masuk) menjadi tiga langkah sebelum masuk: Pendaftaran, Verifikasi Email, Masuk Pertama, dengan istilah sama seperti Dasbor, ditambah keterangan bahwa tahap berikutnya ada di Dasbor. Daftar langkah di laci Bantuan ikut disesuaikan. Sumber ditandai \"bentuk stepper usulan tim\".",
+      "berkas": "sumber/onboard-badan.html; sumber/backlog-he.json"
     }
   ]
 }

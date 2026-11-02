@@ -95,6 +95,7 @@ body{background:#1f2c33}
 .ob-foot .bawah{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:28px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);font-size:12.5px;color:rgba(255,255,255,.7)}
 
 /* IDDS Stepper horizontal: label multi-baris di bawah nomor (IDDS bawaan membatasi tinggi item) */
+.alur-lanjut{margin:8px 0 0;font-size:12.5px;line-height:18px;color:var(--ina-content-secondary)}
 .alur-kotak{margin:0 0 24px;padding:14px 16px;border-radius:14px;background:var(--ina-primary-25,#f4faf7);border:1px solid var(--ina-primary-100,#dcebe5)}
 .stepper-ob.ina-stepper{display:flex;align-items:flex-start;width:100%;margin-top:14px;padding:0}
 .stepper-ob .ina-stepper__item{flex-direction:column;align-items:center;gap:6px;height:auto;max-height:none;flex:0 0 auto;width:92px;padding:0}
@@ -301,9 +302,9 @@ const UBAH = [
   { kode:'HE-REG-02', judul:'Formulir Registrasi: penjelasan isian ID PPAT / SK PPAT dan URL Tenant',
     isi:'Label "ID PPAT / SK PPAT" dan "URL Tenant" diberi IDDS Tooltip dan teks bantuan di bawah isian. Isian ID PPAT / SK PPAT berketerangan "Sesuai nomor SK PPAT yang terdaftar di ATR/BPN.". URL Tenant menampilkan pratinjau alamat lengkap aplikasi kantor (mis. dev-app.eppat.id/t/kantor-contoh), aturan penulisan (huruf kecil, angka, tanda hubung), daftar hal yang dihindari (spasi, huruf kapital, simbol, tanda hubung di awal atau akhir, kurang dari 3 karakter, nama yang sudah dipakai, data pribadi), dan hasil cek ketersediaan.',
     lama:'Isian ID PPAT dan URL Tenant tidak dijelaskan; pengguna baru tidak tahu nilai apa yang harus diisi.', ke:'reg', sorot:'#f-rTenant', sumber:'Laporan HE UX Metric Lab, Highlight #11 (skor 91,7; PDF hlm. 15) + masukan Peruri 30 Okt 2026' },
-  { kode:'HE-REG-03', judul:'Halaman Registrasi: gambaran alur pendaftaran sampai aplikasi aktif',
-    isi:'Di atas formulir ada ringkasan lima tahap: Isi data, Verifikasi email, Masuk dan amankan akun, Pilih paket dan bayar, Aplikasi kantor aktif. Tahap yang sedang dikerjakan ditandai.',
-    lama:'Tidak ada panduan atau onboarding untuk pengguna yang baru pertama kali mendaftar; tahapan baru terlihat di Dashboard setelah pengguna masuk.', ke:'reg', sorot:'#alurDaftar', sumber:'Laporan HE UX Metric Lab, Highlight #11 (skor 91,7; PDF hlm. 15)' },
+  { kode:'HE-REG-03', judul:'Halaman Registrasi: langkah sebelum masuk',
+    isi:'Di atas formulir ada stepper tiga langkah sebelum masuk: Pendaftaran, Verifikasi Email, Masuk Pertama. Istilahnya sama dengan tahap 1–3 di Progress Registrasi Dasbor. Di bawahnya ada keterangan bahwa tahap berikutnya ditampilkan di Dasbor setelah masuk. Langkah yang sedang dikerjakan ditandai.',
+    lama:'Tidak ada panduan atau onboarding untuk pengguna yang baru pertama kali mendaftar; tahapan baru terlihat di Dashboard setelah pengguna masuk.', ke:'reg', sorot:'#alurDaftar', sumber:'Laporan HE UX Metric Lab, Highlight #11 (skor 91,7; PDF hlm. 15) · bentuk stepper usulan tim' },
   { kode:'HE-REG-04', judul:'Formulir Registrasi: syarat kata sandi tampil sebagai daftar centang',
     isi:'Syarat kata sandi ditampilkan sebagai daftar centang yang terisi saat mengetik, sama dengan Akun Saya dan Tambah Pengguna: minimal 12 karakter, huruf besar, huruf kecil, angka, simbol. Ulangi Kata Sandi langsung memberi tahu apakah sudah sama.',
     lama:'Syarat kata sandi ditulis dalam satu baris kecil "Min. 12 karakter · Huruf besar, kecil, angka & simbol" dengan bilah kekuatan tanpa penjelasan syarat mana yang belum terpenuhi.', ke:'reg', sorot:'#syaratPw', sumber:'Laporan HE UX Metric Lab, Highlight #11 (skor 91,7; PDF hlm. 15)' },
@@ -373,8 +374,10 @@ const pwIsian = (id, l, ph, bantu = '', ac = 'new-password') => `<div class="ina
 const CEK_STEP = '<svg class="ina-stepper__check-icon" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none"><path d="M5 12l5 5l10 -10"/></svg>';
 const stepperH = (L, kini, sub = () => '', label = 'Tahapan') => `<div class="ina-stepper ina-stepper--horizontal stepper-ob" role="list" aria-label="${label}">${L.map((t, i) => { const kls = i < kini ? 'completed' : i === kini ? 'active' : '';
   return `${i ? `<div class="ina-stepper__separator ${i <= kini ? 'ina-stepper__separator--completed' : ''}" aria-hidden="true"></div>` : ''}<div class="ina-stepper__item ${kls ? 'ina-stepper__item--' + kls : ''}" role="listitem" aria-current="${i === kini ? 'step' : 'false'}"><div class="ina-stepper__icon-wrapper">${i < kini ? CEK_STEP : `<span class="ina-stepper__step-number">${i + 1}</span>`}</div><div class="ina-stepper__label"><span>${t}</span>${sub(i)}</div></div>`; }).join('')}</div>`;
-const ALUR = ['Isi data pendaftaran', 'Verifikasi email', 'Masuk dan amankan akun', 'Pilih paket dan bayar', 'Aplikasi kantor aktif'];
-const alur = kini => `<div class="ditandai alur-kotak" id="alurDaftar"><p class="alur-judul">Langkah sampai aplikasi kantor Anda aktif${usulan('HE-REG-03')}</p>${stepperH(ALUR, kini, () => '', 'Langkah pendaftaran')}</div>`;
+/* hanya langkah sebelum masuk; istilah sama dengan tahap 1–3 di Progress Registrasi Dasbor */
+const ALUR = ['Pendaftaran', 'Verifikasi Email', 'Masuk Pertama'];
+const ALUR_LANJUT = 'Setelah Anda masuk, tahap berikutnya sampai aplikasi kantor aktif ditampilkan di Dasbor.';
+const alur = kini => `<div class="ditandai alur-kotak" id="alurDaftar"><p class="alur-judul">Langkah sebelum masuk${usulan('HE-REG-03')}</p>${stepperH(ALUR, kini, () => '', 'Langkah sebelum masuk')}<p class="alur-lanjut">${ALUR_LANJUT}</p></div>`;
 const TIP_ID = 'Isi ID PPAT atau nomor SK pengangkatan PPAT Anda. Nomor ini dipakai untuk memverifikasi bahwa pendaftar adalah PPAT yang sah.';
 const TIP_URL = 'Alamat aplikasi kantor Anda. Pegawai dan klien kantor masuk melalui alamat ini, sehingga pilih nama yang mudah dikenali, misalnya nama kantor.';
 const HINDARI_URL = ['Spasi, huruf kapital, dan simbol selain tanda hubung (-).', 'Tanda hubung di awal atau di akhir nama.', 'Nama yang kurang dari 3 karakter.', 'Nama yang sudah dipakai kantor lain.', 'Data pribadi, seperti NIK atau nomor telepon.'];
@@ -805,8 +808,9 @@ $('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tu
 const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
 function bukaBantuan() {
   drawer({ judul:'Bantuan pendaftaran dan masuk', isi:`
-    <p>Pendaftaran e-PPAT untuk kantor PPAT terdiri dari lima langkah:</p>
+    <p>Sebelum masuk, ada tiga langkah:</p>
     <ol class="bantu-langkah">${ALUR.map(t => `<li>${t}</li>`).join('')}</ol>
+    <p>${ALUR_LANJUT}</p>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${faq(1, 'Email verifikasi tidak masuk', 'Periksa folder spam atau promosi. Pastikan alamat email yang Anda daftarkan sudah benar.')}
     ${faq(2, 'Apa yang diisi pada ID PPAT / SK PPAT dan URL Tenant?', `${TIP_ID} ${TIP_URL} Hindari spasi, huruf kapital, simbol selain tanda hubung, tanda hubung di awal atau akhir, nama kurang dari 3 karakter, dan data pribadi.`)}
