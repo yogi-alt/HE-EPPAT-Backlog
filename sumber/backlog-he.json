@@ -455,6 +455,24 @@
       "catatan": "Unggahan bersyarat tampil setelah isian pemicunya dipilih."
     },
     {
+      "kode": "HE-ORDER-18",
+      "fitur": "Permohonan AJB",
+      "status": "Prototipe siap",
+      "tanggal": "2026-11-06",
+      "sumber": "Masukan Peruri",
+      "versi": "v2",
+      "halaman": "Masukan 5 Nov 2026",
+      "judul": "Stepper AJB sampai akta selesai, dengan waktu dan tombol per tahap",
+      "saat_ini": "Stepper berhenti di Penyusunan Akta lalu Selesai. Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta adalah tiga menu terpisah, sehingga pengguna mencari order yang sama di setiap daftar.",
+      "usulan": "Stepper memuat enam tahap: Pengumpulan Berkas, Verifikasi Berkas, Penyusunan Akta (Pembuatan Akta Minuta & Salinan), Finalisasi Akta (Finalisasi Akta Minuta & Salinan), Penandatanganan Akta (Penandatanganan Akta Minuta & Salinan), dan Selesai (Akta Minuta & Salinan selesai). Setiap tahap menampilkan perkiraan waktu, status dari layar pengerjaannya, waktu seperti Dasbor Onboarding, dan tombol yang langsung membuka order tersebut. Tombol Kembali di layar tujuan kembali ke stepper order yang sama. Menu Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta dihapus dari sidebar staf; Penyusunan Akta memakai versi 2.",
+      "prinsip": "H6 Recognition Rather Than Recall",
+      "prioritas": "Sedang",
+      "layar": "Permohonan AJB › dialog Tambah Pihak dan Tambah Objek",
+      "acuan": "Prototipe ORDER",
+      "selesai_bila": "Pengguna dapat menyelesaikan satu permohonan dari Pengumpulan Berkas sampai Selesai hanya melalui stepper Permohonan AJB.",
+      "catatan": "Masukan Peruri 6 Nov 2026. Perkiraan waktu per tahap adalah data contoh."
+    },
+    {
       "kode": "HE-MINUTA-01",
       "fitur": "Penyusunan Akta",
       "judul": "Detail minuta: istilah dan tombol dijelaskan singkat",
@@ -812,6 +830,24 @@
       "sumber": "Laporan HE INA Digital hlm. 34–35"
     },
     {
+      "kode": "HE-CA-09",
+      "fitur": "Registrasi CA (Klien)",
+      "judul": "Masa berlaku sertifikat tampil dan registrasi selesai setelah spesimen",
+      "saat_ini": "Status hanya tertulis Aktif tanpa tanggal berakhir. eKYC dan Pemeriksaan Peruri adalah dua langkah terpisah, dan spesimen tidak menjadi bagian stepper.",
+      "usulan": "Status sertifikat menyebut tanggal berakhir (berlaku 1 tahun sejak aktif) di Registrasi CA, Permohonan AJB, Verifikasi Berkas, Penandatanganan Akta, Daftar Pengguna, dan Profil Kantor. Stepper menjadi empat langkah: Lengkapi data diri, Ajukan ke Peruri, Verifikasi & Pemeriksaan Peruri, dan Spesimen tanda tangan. Registrasi selesai setelah spesimen disimpan.",
+      "prinsip": "H1 Visibility of System Status; H8 Aesthetic and Minimalist Design",
+      "halaman": "34, 35",
+      "prioritas": "Tinggi",
+      "layar": "Akun Saya › tab Registrasi CA",
+      "acuan": "prototipe/Backlog-HE-CA-Prototype.html › Daftar perubahan › HE-CA-01",
+      "selesai_bila": "Pengguna melihat tanggal berakhir sertifikat dan registrasi berstatus selesai hanya setelah spesimen disimpan.",
+      "status": "Prototipe siap",
+      "catatan": "Masukan Peruri 6 Nov 2026. Tanggal berakhir di prototipe adalah data contoh.",
+      "tanggal": "2026-11-06",
+      "sumber": "Masukan Peruri",
+      "versi": "v2"
+    },
+    {
       "kode": "HE-UMUM-03",
       "fitur": "Daftar Pengguna",
       "judul": "Daftar Pengguna: impor pengguna klien dari berkas",
@@ -1056,6 +1092,24 @@
       "sumber": "Laporan HE INA Digital hlm. 37 (Temuan 2)"
     },
     {
+      "kode": "HE-EAWK-08",
+      "fitur": "Penandatanganan Akta (Klien)",
+      "judul": "Tanda tangan ditahan sampai spesimen dimasukkan",
+      "saat_ini": "Pengguna dengan sertifikat aktif dapat menandatangani tanpa spesimen.",
+      "usulan": "Saat giliran tanda tangan tiba dan spesimen belum ada, layar memberi tahu bahwa spesimen harus dimasukkan terlebih dahulu, lalu mengarahkan ke Registrasi CA dan kembali ke akta yang sama.",
+      "prinsip": "H10 Help and Documentation",
+      "halaman": "37 (Temuan 2)",
+      "prioritas": "Sedang",
+      "layar": "Penandatanganan Akta › daftar akta",
+      "acuan": "prototipe/Backlog-HE-EAWK-Prototype.html › Daftar perubahan › HE-EAWK-07",
+      "selesai_bila": "Klien tanpa spesimen tidak dapat mengirim OTP tanda tangan.",
+      "status": "Prototipe siap",
+      "catatan": "Masukan Peruri 6 Nov 2026.",
+      "tanggal": "2026-11-06",
+      "sumber": "Masukan Peruri",
+      "versi": "v2"
+    },
+    {
       "kode": "HE-VERIF-01",
       "fitur": "Verifikasi Berkas (Asisten/PPAT)",
       "judul": "Verifikasi Berkas: istilah CA dijelaskan dan status berbahasa Indonesia",
@@ -1119,7 +1173,7 @@
       "acuan": "prototipe/Backlog-HE-VERIF-Prototype.html › Daftar perubahan › HE-VERIF-04",
       "selesai_bila": "Daftar verifikasi dapat menampilkan hanya order yang belum dimulai atau yang sebagian, serta dapat diurutkan berdasarkan lama menunggu.",
       "status": "Prototipe siap",
-      "catatan": "",
+      "catatan": "Layar daftar Verifikasi Berkas dihapus (HE-ORDER-18); order dicari di daftar Permohonan AJB.",
       "tanggal": "2026-10-26",
       "sumber": "Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)"
     },
@@ -1767,7 +1821,7 @@
       "acuan": "prototipe/Backlog-HE-EAW-Prototype.html › Daftar perubahan › HE-EAW-07",
       "selesai_bila": "Daftar Penandatanganan Akta dapat dicari berdasarkan kode, narahubung, atau nomor akta dan dapat disaring per langkah tanpa menggulir.",
       "status": "Prototipe siap",
-      "catatan": "",
+      "catatan": "Layar daftar Penandatanganan Akta dihapus (HE-ORDER-18); order dicari di daftar Permohonan AJB.",
       "tanggal": "2026-10-26",
       "sumber": "Laporan HE INA Digital hlm. 40 (Kesimpulan no. 5)"
     },
@@ -4113,6 +4167,24 @@
       "sumber": "Penelusuran live (bukan temuan HE)"
     },
     {
+      "kode": "HE-EAW-13",
+      "fitur": "Penandatanganan Akta (PPAT)",
+      "prinsip": "H5 Error Prevention; H3 User Control and Freedom",
+      "halaman": "Temuan penelusuran kode live (prototipe HE)",
+      "prioritas": "Sedang",
+      "layar": "Akta › Penandatanganan Akta › tab Salinan › Hapus dan Kirim via Email",
+      "selesai_bila": "Semua peran staf dapat menempatkan kotak, dan tombol tanda tangan PPAT aktif hanya untuk akun berperan PPAT.",
+      "catatan": "Masukan Peruri 6 Nov 2026.",
+      "judul": "Tanda tangan mengikuti peran PPAT dan spesimen",
+      "saat_ini": "Semua peran yang membuka layar dapat menjalankan langkah tanda tangan, dan spesimen tidak diperiksa.",
+      "usulan": "Saksi ikut menandatangani (urutan Pihak Pertama, Pihak Kedua, dua Saksi, PPAT), dan Asisten dapat menjadi saksi. Asisten, PPAT, dan Super Admin dapat menentukan posisi kotak dan mengirim OTP ke para pihak. Tanda tangan PPAT hanya dapat dilakukan akun berperan PPAT. Super Admin tanpa peran PPAT juga tidak dapat membubuhkan stempel TERA dan e-Meterai. Setiap penanda tangan tanpa spesimen mendapat informasi untuk memasukkannya terlebih dahulu.",
+      "acuan": "prototipe/Backlog-HE-EAW-Prototype.html › Daftar perubahan › HE-EAW-12",
+      "status": "Prototipe siap",
+      "tanggal": "2026-11-06",
+      "sumber": "Masukan Peruri",
+      "versi": "v2"
+    },
+    {
       "kode": "IDDS-PL-42",
       "fitur": "Platform · Setting Theme (penyesuaian IDDS)",
       "prinsip": "Penyesuaian IDDS (Kesimpulan HE hal. 40 no. 1); H4 Consistency and Standards",
@@ -5243,6 +5315,42 @@
       "kode": "HE-REG-08; HE-TERA-06; HE-CA-02; HE-ORDER-09",
       "perubahan": "NIK tampil lengkap di konfirmasi sebelum pengiriman: Registrasi Onboarding dan Trial, TERA, Registrasi CA, serta Buat Akun & Undang, agar pengguna dapat memeriksa angkanya.",
       "berkas": "sumber/onboard-badan.html, sumber/tera-idds.html, sumber/ca-badan.html, sumber/order-idds.html"
+    },
+    {
+      "tanggal": "2026-11-06",
+      "kode": "HE-ORDER-18; HE-VERIF-04; HE-EAW-07",
+      "perubahan": "Stepper Permohonan AJB enam tahap dengan status, waktu, dan tombol per tahap. Menu Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta dihapus dari sidebar staf. Penyusunan Akta memakai versi 2; prototipe versi lama dihapus dan tetap tersimpan di arsip v1.",
+      "berkas": "sumber/order-idds.html, sumber/verif-badan.html, sumber/minuta2-badan.html, sumber/eaw-badan.html, sumber/ajb-bersama.html, sumber/sesi-bersama.html, sumber/sidebar-seragam.js"
+    },
+    {
+      "tanggal": "2026-11-06",
+      "kode": "HE-ORDER-18; HE-CA-09; HE-USER-13",
+      "perubahan": "Tahap Pengesahan Akta diganti Finalisasi Akta; perkiraan waktu tampil di setiap tahap. Masa berlaku CA tampil, stepper CA empat langkah dengan spesimen. Pendaftaran TERA, e-Meterai, dan CA tidak tampil untuk Super Admin, juga saat prototipe dibuka tanpa masuk simulasi; peran PPAT ditambahkan di Daftar Pengguna.",
+      "berkas": "sumber/order-idds.html, sumber/ca-badan.html, sumber/sesi-bersama.html, sumber/user-badan.html"
+    },
+    {
+      "tanggal": "2026-11-06",
+      "kode": "HE-EAWK-08; HE-EAW-13; HE-ORDER-18",
+      "perubahan": "Tanda tangan ditahan sampai spesimen ada. Super Admin tanpa PPAT hanya melihat Penandatanganan Akta. Dashboard Akta memakai enam tahap dan mengikuti status stepper; daftar Perlu tindakan memuat semua permohonan yang belum Selesai.",
+      "berkas": "sumber/eawk-badan.html, sumber/eaw-badan.html, sumber/ca-badan.html, sumber/tn-eppat-badan.html, sumber/ajb-bersama.html"
+    },
+    {
+      "tanggal": "2026-11-06",
+      "kode": "HE-EAW-13",
+      "perubahan": "Penempatan kotak dan OTP ke para pihak dibuka untuk semua peran staf; yang ditahan hanya tanda tangan PPAT, serta stempel TERA dan e-Meterai untuk Super Admin tanpa PPAT.",
+      "berkas": "sumber/eaw-badan.html"
+    },
+    {
+      "tanggal": "2026-11-06",
+      "kode": "HE-EAW-13; HE-EAWK-08",
+      "perubahan": "Pemeriksaan spesimen berlaku untuk setiap penanda tangan, dengan informasi berupa IDDS Alert sebelum OTP dikirim.",
+      "berkas": "sumber/eaw-badan.html"
+    },
+    {
+      "tanggal": "2026-11-06",
+      "kode": "HE-EAW-13",
+      "perubahan": "Dua saksi masuk daftar penanda tangan. Asisten dapat dipilih sebagai saksi dan diperiksa spesimennya sendiri. Stempel TERA dan e-Meterai dijalankan Asisten dan PPAT.",
+      "berkas": "sumber/eaw-badan.html, sumber/order-idds.html, sumber/ajb-bersama.html"
     }
   ]
 }

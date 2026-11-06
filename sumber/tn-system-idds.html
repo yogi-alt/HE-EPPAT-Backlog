@@ -133,8 +133,21 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .det-kepala .kode{font:600 14px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary);margin-top:12px}
 .det-kepala h2{margin:2px 0 0;font:600 20px/28px Inter,sans-serif}
 .status-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px 28px}
-.status-kartu .ina-stepper{align-items:flex-start;min-height:92px;padding:4px 64px 0}
-.status-kartu .ina-stepper__separator{align-self:flex-start;margin-top:11px}
+.gulir-tahap{overflow-x:auto;padding-bottom:4px}
+.status-kartu .stepper-h.ina-stepper{display:flex;align-items:flex-start;width:100%;min-width:1000px;min-height:0;padding:4px 0 12px}
+.stepper-h .ina-stepper__item{flex-direction:column;align-items:center;gap:6px;height:auto;max-height:none;flex:0 0 auto;width:160px;padding:0}
+.stepper-h .ina-stepper__label{position:static;transform:none;white-space:normal;text-align:center;max-width:160px;margin:0;font-size:13px;line-height:18px}
+.stepper-h .ina-stepper__icon-wrapper{position:relative;z-index:1}
+.status-kartu .stepper-h .ina-stepper__separator{align-self:flex-start;flex:1 1 auto;min-width:6px;margin:11px -68px 0;width:auto}
+.status-kartu .stepper-v.ina-stepper{height:auto;min-height:0}
+.status-kartu .stepper-v.ina-stepper .ina-stepper__item{height:auto;max-height:none;min-height:0;flex:none;align-items:flex-start}
+.status-kartu .stepper-v .ina-stepper__label{position:static;transform:none;white-space:normal;max-width:none}
+.status-kartu .ina-stepper__item--active .ina-stepper__label > span:first-child,.status-kartu .ina-stepper__item--completed .ina-stepper__label > span:first-child{font-weight:600;color:var(--ina-content-primary)}
+.tahap-status,.tahap-aksi,.tahap-perkiraan{display:block;margin-top:6px}
+.tahap-perkiraan .ina-badge{display:inline-flex;align-items:center;gap:6px}
+.status-kartu .ina-stepper__label small.tahap-waktu{margin-top:4px;font-size:11.5px}
+.waktu-baris{display:block;margin:2px 0 8px}
+.waktu-baris .ina-badge{display:inline-flex;align-items:center;gap:6px}
 .status-kartu .ina-stepper__label small{display:block;margin-top:3px;font-size:12px;line-height:16px;font-weight:400;color:var(--ina-content-secondary)}
 .status-kaki{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ina-stroke-primary);margin-top:8px;padding-top:16px}
 .status-kaki p{margin:0;font-size:14px;color:var(--ina-content-secondary)}
@@ -296,7 +309,7 @@ body .protobar{z-index:1001}
   .saring{grid-template-columns:1fr}
   .f-grid,.syarat ul,.kartu-pihak dl,.bantu-kontak{grid-template-columns:1fr}
   .status-kartu{padding:18px 16px}
-  .status-kartu .stepper-h{display:none}
+  .status-kartu .gulir-tahap{display:none}
   .status-kartu .stepper-v{display:flex!important;padding:4px 0}
   .ringkas-kv{grid-template-columns:1fr;gap:2px}
   .protobar .kanan{margin-left:0}
@@ -306,7 +319,6 @@ body .protobar{z-index:1001}
   .aksi-baris{justify-content:flex-start}
 }
 .status-kartu .stepper-v{display:none}
-.status-kartu .stepper-v .ina-stepper__label small{display:inline;margin:0 0 0 8px}
 .status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
 </style>
 <style id="system-css">
@@ -618,7 +630,7 @@ let S = S0();
 /* ---------------- sidebar (menu live Super Admin, sama dengan prototipe Daftar User) ---------------- */
 const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
   { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text']] },
-  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Verifikasi Berkas','tb_circle_check'],['Penyusunan Akta','tb_file_pencil'],['Penyusunan Akta v2','tb_file_description'],['Penandatanganan Akta','tb_signature'],['Salinan Akta','tb_files']] },
+  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Salinan Akta','tb_files']] },
   { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building'],['Daftar Pengguna','tb_users'],['Peran & Izin','tb_shield_lock','peran'],['Log Aktivitas','tb_history','logs'],['Aktivasi e-Meterai','tb_rubber_stamp']] },
   { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge','dasbor'],['Pengaturan','tb_settings','pengaturan']] },
   { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home'],['Tema Tampilan','tb_palette'],['Master Konten','tb_database'],['Artikel & Halaman','tb_article'],['Pustaka Media','tb_photo']] }
@@ -630,7 +642,7 @@ function gambarNav() {
     <div class="items" ${grupBuka.has(i) ? '' : 'hidden'}>${g.m.map(([t, k, ke]) => `<a href="${ke ? '#' + ke : '#'}" class="ina-button ina-button--link ina-button--md nav-item ${ke && ke === S.layar ? 'on' : ''}" data-ke="${ke || ''}" ${ke === S.layar ? 'aria-current="page"' : ''}>${ik(k)}<span>${t}</span></a>`).join('')}</div>`).join('');
 }
 const CMS = 'Backlog-IDDS-TN-CMS-Prototype.html';
-const PROTO = { 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Verifikasi Berkas':'Backlog-HE-VERIF-Prototype.html', 'Penyusunan Akta':'Backlog-HE-MINUTA-Prototype.html', 'Penyusunan Akta v2':'Backlog-HE-MINUTA-V2-Prototype.html', 'Penandatanganan Akta':'Backlog-HE-EAW-Prototype.html', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
+const PROTO = { 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
 $('#nav').addEventListener('click', e => {
   const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
   const a = e.target.closest('a'); if (!a) return; e.preventDefault();

@@ -168,10 +168,11 @@ body:has(#otpWaktu) .protobar{position:relative;z-index:3000}
   <span class="sep">&bull;</span><b>Penandatanganan Akta</b><span class="sep">&bull;</span><span>Peran: Klien</span>
   <span class="sep">&bull;</span><span>Kode OTP contoh: angka 6 digit apa saja (000000 = salah)</span>
   <span class="kanan">
+    <button class="pil" id="simSpesimen" title="Mensimulasikan spesimen tanda tangan Klien">Spesimen: belum ada</button>
     <button class="pil" id="simKedaluwarsa" title="Saat dialog OTP terbuka">Simulasi OTP kedaluwarsa</button>
     <button class="pil" id="aturUlang">Atur ulang contoh</button>
     <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai usulan</button>
-    <button class="pil utama" id="bukaUbah">Daftar perubahan (9)</button>
+    <button class="pil utama" id="bukaUbah">Daftar perubahan (10)</button>
   </span>
 </div>
 
@@ -270,6 +271,9 @@ const UBAH = [
   { kode:'HE-EAWK-07', judul:'Daftar akta Klien: panduan singkat untuk pengguna baru',
     isi:'Di atas daftar akta ada kartu "Pertama kali menandatangani akta elektronik?" berisi tiga langkah singkat dan tombol "Lihat panduan lengkap". Kartu dapat ditutup dan panduan tetap dapat dibuka lagi melalui tombol Bantuan.',
     lama:'Tidak ada tutorial atau panduan awal. Instruksi baru muncul setelah pengguna membuka akta tertentu, sehingga pengguna baru tidak mendapat gambaran menyeluruh.', ke:'panduan', sorot:'#panduanAwal', sumber:'Laporan HE INA Digital hlm. 37 (Temuan 2)' },
+  { kode:'HE-EAWK-08', versi:'v2', bukanHE:true, judul:'Tanda tangan ditahan sampai spesimen dimasukkan',
+    isi:'Saat giliran tanda tangan tiba dan spesimen belum ada, kartu Langkah berikutnya memberi tahu bahwa spesimen harus dimasukkan terlebih dahulu, walaupun sertifikat sudah aktif. Tombol Masukkan Spesimen membuka Registrasi CA, lalu pengguna kembali ke akta yang sama.',
+    lama:'Pengguna dengan sertifikat aktif dapat menandatangani tanpa spesimen.', ke:'spesimen', sorot:'#kartuBerikut', sumber:'Masukan Peruri, 6 Nov 2026' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Penandatanganan Akta',
     isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi urutan tanda tangan, pertanyaan umum (apa itu tanda tangan elektronik, kapan giliran saya, OTP tidak masuk, salah tanda tangan, posisi belum ditentukan), kontak kantor PPAT, dan kontak dukungan E-PPAT. Ikon ? bertooltip menjelaskan istilah tanda tangan elektronik, sertifikat elektronik (CA), OTP, status akta, peran para pihak, urutan tanda tangan, dan posisi tanda tangan.',
     lama:'Tidak ada menu bantuan, pertanyaan umum, atau penjelasan istilah selama proses tanda tangan (skor Help & Documentation: 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
@@ -313,6 +317,7 @@ function contoh() {
   ];
 }
 let AKTA = contoh();
+const spesimenAda = () => !!AJB.spesimen(EMAIL);
 const bisaTtd = x => (x.state === 'GILIRAN_ANDA' || x.state === 'OTP_TERKIRIM') && !!x.hal;
 const sayaDi = x => x.urutan.find(s => s.saya);
 
@@ -418,6 +423,7 @@ function kartuBerikut(x) {
   const st = ST[x.state], s = sayaDi(x), kepala = t => `<div class="eyebrow2">Langkah berikutnya${usulan('HE-EAWK-03')}</div><h4>${t}</h4>`;
   const bungkus = isi => `<div class="ina-card ina-card--variant-basic berikut ditandai" id="kartuBerikut"><div class="ina-card__content">${isi}</div></div>`;
   if (x.state === 'GILIRAN_ANDA' && !x.hal) return bungkus(`${kepala('Menunggu Kantor PPAT')}${alert('caution', 'Posisi tanda tangan belum ditentukan', `${esc(x.alasan)} Anda dapat menandatangani setelah kantor menempatkannya. Hubungi kantor melalui kontak di bawah.`)}`);
+  if (bisaTtd(x) && !spesimenAda()) return bungkus(`${kepala('Masukkan spesimen terlebih dahulu')}${alert('caution', 'Spesimen tanda tangan belum ada', `Sertifikat elektronik Anda sudah aktif, tetapi Anda perlu memasukkan ${istilah('spesimen', 'SPESIMEN')} tanda tangan sebelum menandatangani akta ini.${usulan('HE-EAWK-08')}`)}<a class="ina-button ina-button--primary ina-button--md" id="keSpesimen" style="margin-top:12px;text-decoration:none" href="Backlog-HE-CA-Prototype.html#spesimen=${x.kode}">${ik('pena', 16)}Masukkan Spesimen</a>`);
   if (bisaTtd(x)) {
     const otp = x.state === 'OTP_TERKIRIM', habis = otp && x.otpHabis <= Date.now();
     const L = [
@@ -449,7 +455,7 @@ function kartuInfo(x) {
   return `<div class="ina-card ina-card--variant-basic"><div class="ina-card__content">
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="kd-info">${x.kode}</span>${badge(st.l, st.b, 'sm')}${tanya('Status akta', 'Status menunjukkan tahap akta saat ini. "Giliran Anda" berarti akta menunggu tanda tangan Anda, "Menunggu giliran" berarti akta menunggu pihak lain, dan "Selesai" berarti semua pihak sudah menandatangani.')}</div>
     <div style="margin-top:4px;font-size:14px">Akta Jual Beli</div>
-    <dl class="kv"><dt>Peran Anda${tanya('Peran Anda', 'Peran menunjukkan kedudukan Anda dalam akta, misalnya Pihak Pertama sebagai penjual, Pihak Kedua sebagai pembeli, atau Saksi. Angka urutan menunjukkan giliran tanda tangan Anda.')}</dt><dd>${x.peran} · urutan ${s.seq + 1}</dd><dt>${istilah('Sertifikat (CA)', 'CA')}</dt><dd>${badge('Aktif', 'success', 'sm')}</dd><dt>Email OTP</dt><dd>${EMAIL}</dd>${x.state !== 'MENUNGGU_TERA' ? `<dt>Dokumen</dt><dd>${JHAL} halaman</dd>` : ''}</dl></div></div>`;
+    <dl class="kv"><dt>Peran Anda${tanya('Peran Anda', 'Peran menunjukkan kedudukan Anda dalam akta, misalnya Pihak Pertama sebagai penjual, Pihak Kedua sebagai pembeli, atau Saksi. Angka urutan menunjukkan giliran tanda tangan Anda.')}</dt><dd>${x.peran} · urutan ${s.seq + 1}</dd><dt>${istilah('Sertifikat (CA)', 'CA')}</dt><dd>${badge('Aktif sampai 26 Okt 2027', 'success', 'sm')}</dd><dt>Email OTP</dt><dd>${EMAIL}</dd>${x.state !== 'MENUNGGU_TERA' ? `<dt>Dokumen</dt><dd>${JHAL} halaman</dd>` : ''}</dl></div></div>`;
 }
 /* label live "Tertanda tangan" / "Sedang tanda tangan" dibakukan, sama dengan prototipe E-Akta Wizard PPAT */
 const STATUS_URUT = s => s.status === 'SIGNED' ? ['Sudah menandatangani', 'success'] : s.status === 'OTP_SENT' ? ['Sedang menandatangani', 'warning'] : ['Menunggu', 'neutral'];
@@ -688,6 +694,7 @@ function lihat(u) {
   if (u.ke === 'daftar') keDaftar();
   if (u.ke === 'panduan') { S.panduan = true; try { localStorage.removeItem('eawk-panduan-tutup'); } catch (e) {} keDaftar(); }
   if (u.ke === 'giliran') buka('ORD-CONTOH-021');
+  if (u.ke === 'spesimen') { AJB.simpanSpesimen(EMAIL, ''); gambarSpesimen(); buka('ORD-CONTOH-021'); }
   if (u.ke === 'konfirm') { buka('ORD-CONTOH-021'); konfirmTtd(); return; }
   if (u.ke === 'otp') { buka('ORD-CONTOH-022'); bukaOtp(); return; }
   if (u.ke === 'tanpa-posisi') buka('ORD-CONTOH-023');
@@ -695,10 +702,15 @@ function lihat(u) {
   if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); }
 }
 $('#aturUlang').addEventListener('click', () => { AKTA = contoh(); Object.assign(S, { cari:'', grup:'', urut:'perlu', panduan:true }); try { localStorage.removeItem('eawk-panduan-tutup'); } catch (e) {} keDaftar(); toast('Data contoh dikembalikan ke awal.'); });
+const gambarSpesimen = () => { const b = $('#simSpesimen'); b.textContent = `Spesimen: ${spesimenAda() ? 'sudah ada' : 'belum ada'}`; b.setAttribute('aria-pressed', spesimenAda()); };
+$('#simSpesimen').addEventListener('click', () => { AJB.simpanSpesimen(EMAIL, spesimenAda() ? '' : 'contoh'); gambarSpesimen(); gambar(); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+gambarSpesimen();
 gambar();
+const aktaAwal = (location.hash.match(/^#akta=(.+)$/) || [])[1];
+if (AKTA.some(x => x.kode === aktaAwal)) buka(aktaAwal);
 })();
 </script>
 </body>

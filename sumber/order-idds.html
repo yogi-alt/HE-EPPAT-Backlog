@@ -133,8 +133,21 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .det-kepala .kode{font:600 14px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary);margin-top:12px}
 .det-kepala h2{margin:2px 0 0;font:600 20px/28px Inter,sans-serif}
 .status-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px 28px}
-.status-kartu .ina-stepper{align-items:flex-start;min-height:92px;padding:4px 64px 0}
-.status-kartu .ina-stepper__separator{align-self:flex-start;margin-top:11px}
+.gulir-tahap{overflow-x:auto;padding-bottom:4px}
+.status-kartu .stepper-h.ina-stepper{display:flex;align-items:flex-start;width:100%;min-width:1000px;min-height:0;padding:4px 0 12px}
+.stepper-h .ina-stepper__item{flex-direction:column;align-items:center;gap:6px;height:auto;max-height:none;flex:0 0 auto;width:160px;padding:0}
+.stepper-h .ina-stepper__label{position:static;transform:none;white-space:normal;text-align:center;max-width:160px;margin:0;font-size:13px;line-height:18px}
+.stepper-h .ina-stepper__icon-wrapper{position:relative;z-index:1}
+.status-kartu .stepper-h .ina-stepper__separator{align-self:flex-start;flex:1 1 auto;min-width:6px;margin:11px -68px 0;width:auto}
+.status-kartu .stepper-v.ina-stepper{height:auto;min-height:0}
+.status-kartu .stepper-v.ina-stepper .ina-stepper__item{height:auto;max-height:none;min-height:0;flex:none;align-items:flex-start}
+.status-kartu .stepper-v .ina-stepper__label{position:static;transform:none;white-space:normal;max-width:none}
+.status-kartu .ina-stepper__item--active .ina-stepper__label > span:first-child,.status-kartu .ina-stepper__item--completed .ina-stepper__label > span:first-child{font-weight:600;color:var(--ina-content-primary)}
+.tahap-status,.tahap-aksi,.tahap-perkiraan{display:block;margin-top:6px}
+.tahap-perkiraan .ina-badge{display:inline-flex;align-items:center;gap:6px}
+.status-kartu .ina-stepper__label small.tahap-waktu{margin-top:4px;font-size:11.5px}
+.waktu-baris{display:block;margin:2px 0 8px}
+.waktu-baris .ina-badge{display:inline-flex;align-items:center;gap:6px}
 .status-kartu .ina-stepper__label small{display:block;margin-top:3px;font-size:12px;line-height:16px;font-weight:400;color:var(--ina-content-secondary)}
 .status-kaki{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ina-stroke-primary);margin-top:8px;padding-top:16px}
 .status-kaki p{margin:0;font-size:14px;color:var(--ina-content-secondary)}
@@ -296,7 +309,7 @@ body .protobar{z-index:1001}
   .saring{grid-template-columns:1fr}
   .f-grid,.syarat ul,.kartu-pihak dl,.bantu-kontak{grid-template-columns:1fr}
   .status-kartu{padding:18px 16px}
-  .status-kartu .stepper-h{display:none}
+  .status-kartu .gulir-tahap{display:none}
   .status-kartu .stepper-v{display:flex!important;padding:4px 0}
   .ringkas-kv{grid-template-columns:1fr;gap:2px}
   .protobar .kanan{margin-left:0}
@@ -306,7 +319,6 @@ body .protobar{z-index:1001}
   .aksi-baris{justify-content:flex-start}
 }
 .status-kartu .stepper-v{display:none}
-.status-kartu .stepper-v .ina-stepper__label small{display:inline;margin:0 0 0 8px}
 .status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
 </style>
 <style id="order-halaman-css">
@@ -369,6 +381,7 @@ body .protobar{z-index:1001}
 (() => {
 /* ---------------- ikon & util ---------------- */
 const I = {
+  jam:'<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 7v5l3 3" />',
   grid:'<path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />',
   users:'<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />',
   gear:'<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />',
@@ -474,8 +487,11 @@ const UBAH = [
     isi:'Dialog Tambah Objek menjadi satu formulir berkelompok (Data sertifikat, Lokasi, Harga, Data tambahan opsional). Isian wajib bertanda bintang; Harga jual beli memakai awalan Rp, pemisah ribuan otomatis, dan terbilang di bawahnya. Kesalahan ditampilkan di bawah isian yang bermasalah. Tabel objek menampilkan kolom Harga jual beli.',
     lama:'Hasil penelusuran live: dialog memakai dua tab (Data Umum / Data Khusus AJB); Harga Jual Beli tersembunyi di tab kedua; tidak ada tanda isian wajib; harga tidak terlihat di tabel objek.', ke:'objek-dialog', sorot:null, sumber:'Laporan HE INA Digital hlm. 23–24 + penelusuran live' },
   { kode:'HE-ORDER-08', judul:'Kartu status permohonan: syarat Penyusunan dan Selesai mengikuti verifikasi dan minuta',
-    isi:'Syarat pindah ke Penyusunan dirinci menjadi tiga: verifikasi para pihak (CA), objek tanah, dan harga (NJOP), masing-masing dengan status dan tautan "Verifikasi Sekarang". Syarat pindah ke Selesai: minuta akta sudah difinalisasi PPAT, dengan tautan "Buka Minuta". Tombol pindah status baru aktif setelah syarat terpenuhi.',
+    isi:'Syarat pindah ke Penyusunan dirinci menjadi tiga: verifikasi para pihak (CA), objek tanah, dan harga (NJOP), masing-masing dengan status dan tautan "Verifikasi Sekarang". Syarat pindah ke Penandatanganan: minuta akta sudah difinalisasi PPAT, dengan tautan "Buka Minuta". Tombol pindah status baru aktif setelah syarat terpenuhi.',
     lama:'Hasil penelusuran live: "Pindah ke Drafting" sudah aktif sebelum verifikasi dilakukan, dan "Pindah ke Selesai" langsung tersedia walaupun minuta belum difinalisasi.', ke:'syarat-003', sorot:'#syarat', sumber:'Laporan HE INA Digital hlm. 23–24 + penelusuran live' },
+  { kode:'HE-ORDER-18', versi:'v2', bukanHE:true, judul:'Stepper AJB sampai akta selesai, dengan waktu dan tombol per tahap',
+    isi:'Stepper memuat enam tahap: Pengumpulan Berkas, Verifikasi Berkas, Penyusunan Akta, Finalisasi Akta, Penandatanganan Akta, dan Selesai. Setiap tahap menampilkan perkiraan waktu, status dari layar pengerjaannya, waktu selesai atau waktu mulai, dan tombol yang langsung membuka order tersebut. Tombol Kembali di layar tujuan kembali ke stepper order yang sama. Menu Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta dihapus dari sidebar staf.',
+    lama:'Stepper berhenti di Penyusunan Akta lalu Selesai. Pengguna membuka tiga menu terpisah dan mencari order yang sama di setiap daftar.', ke:'stepper', sorot:'#stepperAjb', sumber:'Masukan Peruri, 6 Nov 2026' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Permohonan AJB',
     isi:'Tombol Bantuan di kanan judul halaman Permohonan AJB membuka panel samping (IDDS Drawer) berisi panduan langkah demi langkah, pertanyaan umum (mengapa tombol pindah status tidak aktif, harta bersama, status tidak dapat dikembalikan), dan kontak dukungan. Ikon ? bertooltip menjelaskan istilah status permohonan, kelengkapan, syarat pindah status, verifikasi CA, NJOP, tipe dan bentuk pihak, jenis hak, nomor sertifikat, NIB, luas, harga jual beli, NOP PBB, jenis dokumen, dan unggah dokumen.',
     lama:'Tidak ada panduan, tooltip, atau kontak dukungan (skor Help & Documentation Order AJB: 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
@@ -492,7 +508,8 @@ const KLIEN = [
   { id:4, nama:'Contoh Pembeli Dua', email:'pembeli2@contoh.id', nik:'', hp:'', kota:'', ca:'active' },
   { id:5, nama:'Contoh Saksi Satu', email:'saksi1@contoh.id', nik:'3200000000000031', hp:'081200000031', kota:'Kota Contoh', ca:'active' },
   { id:6, nama:'Contoh Saksi Dua', email:'saksi2@contoh.id', nik:'3200000000000032', hp:'081200000032', kota:'Kota Contoh', ca:'active' },
-  { id:7, nama:'Contoh Pasangan Satu', email:'pasangan1@contoh.id', nik:'3200000000000041', hp:'081200000041', kota:'Kota Contoh' }
+  { id:7, nama:'Contoh Pasangan Satu', email:'pasangan1@contoh.id', nik:'3200000000000041', hp:'081200000041', kota:'Kota Contoh' },
+  { id:8, nama:'Asisten Contoh', email:'asisten1@contoh.id', nik:'3200000000000051', hp:'081200000051', kota:'Kota Contoh', ca:'active', hanyaSaksi:true } /* Asisten kantor dapat menjadi saksi */
 ];
 const k = id => KLIEN.find(x => x.id === id);
 const P = (tipe, id, extra = {}) => ({ tipe, bentuk:'Perorangan', harta:'SENDIRI', ...k(id), ...extra });
@@ -501,20 +518,37 @@ const OBJ = { hak:'SHM', sertifikat:'00001', nib:'00000000001', luas:'120', loka
 const V = (p = false, o = false, h = false) => ({ pihak:p, objek:o, harga:h });
 const verifSelesai = o => o.verif.pihak && o.verif.objek && o.verif.harga;
 const DOKS = [{ jenis:'KTP', pemilik:'Pihak Pertama', file:'ktp-penjual-contoh.pdf', ukuran:'210 KB' },{ jenis:'KTP', pemilik:'Pihak Kedua', file:'ktp-pembeli-contoh.pdf', ukuran:'198 KB' },{ jenis:'Sertifikat', pemilik:'Pihak Pertama', file:'sertifikat-contoh.pdf', ukuran:'1,2 MB' },{ jenis:'PBB', pemilik:'Pihak Pertama', file:'', ukuran:'' }];
-const LENGKAP_PIHAK = () => [P('PENJUAL',1), P('PEMBELI',3), P('SAKSI',5), P('SAKSI',6)];
+const LENGKAP_PIHAK = () => [P('PENJUAL',1), P('PEMBELI',3), P('SAKSI',5), P('SAKSI',8)];
+const FINAL = (nomor, tgl) => ({ disusun:true, minuta:true, nomor, tgl });
+const TTD = (l, j, selesai = false) => ({ ttd:{ l, j, selesai }, salinan:{ selesai } });
 function contoh() {
   return [
-    { kode:'ORD-CONTOH-001', status:'PENGUMPULAN', tanggal:'22 Okt 2026', kontak:{ nama:'Contoh Narahubung Satu', hp:'', email:'', catatan:'' }, pihak:[], objek:[], dok:[], verif:V(), minuta:false },
-    { kode:'ORD-CONTOH-002', status:'PENGUMPULAN', tanggal:'21 Okt 2026', kontak:{ nama:'Contoh Narahubung Dua', hp:'081200000002', email:'narahubung2@contoh.id', catatan:'' }, pihak:[P('PENJUAL',1)], objek:[], dok:[{ ...DOKS[0] }], verif:V(), minuta:false },
-    { kode:'ORD-CONTOH-003', status:'SIAP', tanggal:'20 Okt 2026', kontak:{ nama:'Contoh Narahubung Tiga', hp:'081200000003', email:'', catatan:'' }, pihak:[P('PENJUAL',1), P('PEMBELI',4), P('SAKSI',5), P('SAKSI',6)], objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true), minuta:false },
-    { kode:'ORD-CONTOH-006', status:'DRAFTING', tanggal:'19 Okt 2026', kontak:{ nama:'Contoh Narahubung Enam', hp:'081200000006', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true, true), minuta:false },
-    { kode:'ORD-CONTOH-004', status:'DRAFTING', tanggal:'18 Okt 2026', kontak:{ nama:'Contoh Narahubung Empat', hp:'081200000004', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true, true), minuta:true },
-    { kode:'ORD-CONTOH-005', status:'SELESAI', tanggal:'15 Okt 2026', kontak:{ nama:'Contoh Narahubung Lima', hp:'081200000005', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true, true), minuta:true }
+    { kode:'ORD-CONTOH-011', status:'SIAP', tanggal:'23 Okt 2026', kontak:{ nama:'Contoh Narahubung Sebelas', hp:'081200000011', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true), waktu:['25 Okt 2026, 09.20'] },
+    { kode:'ORD-CONTOH-001', status:'PENGUMPULAN', tanggal:'22 Okt 2026', kontak:{ nama:'Contoh Narahubung Satu', hp:'', email:'', catatan:'' }, pihak:[], objek:[], dok:[], verif:V() },
+    { kode:'ORD-CONTOH-012', status:'SIAP', tanggal:'22 Okt 2026', kontak:{ nama:'Contoh Narahubung Dua Belas', hp:'081200000012', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true, true), waktu:['24 Okt 2026, 13.05'] },
+    { kode:'ORD-CONTOH-002', status:'PENGUMPULAN', tanggal:'21 Okt 2026', kontak:{ nama:'Contoh Narahubung Dua', hp:'081200000002', email:'narahubung2@contoh.id', catatan:'' }, pihak:[P('PENJUAL',1)], objek:[], dok:[{ ...DOKS[0] }], verif:V() },
+    { kode:'ORD-CONTOH-003', status:'SIAP', tanggal:'20 Okt 2026', kontak:{ nama:'Contoh Narahubung Tiga', hp:'081200000003', email:'', catatan:'' }, pihak:[P('PENJUAL',1), P('PEMBELI',4), P('SAKSI',5), P('SAKSI',6)], objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true), waktu:['22 Okt 2026, 10.15'] },
+    { kode:'ORD-CONTOH-006', status:'DRAFTING', tanggal:'19 Okt 2026', kontak:{ nama:'Contoh Narahubung Enam', hp:'081200000006', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true, true), waktu:['20 Okt 2026, 09.30', '22 Okt 2026, 14.40'] },
+    { kode:'ORD-CONTOH-004', status:'FINALISASI', tanggal:'18 Okt 2026', kontak:{ nama:'Contoh Narahubung Empat', hp:'081200000004', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true, true), disusun:true, waktu:['19 Okt 2026, 11.00', '20 Okt 2026, 15.25', '23 Okt 2026, 10.05'] },
+    { kode:'ORD-CONTOH-010', status:'SIAP', tanggal:'17 Okt 2026', kontak:{ nama:'Contoh Narahubung Sepuluh', hp:'081200000010', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(), waktu:['19 Okt 2026, 08.45'] },
+    { kode:'ORD-CONTOH-005', status:'SELESAI', tanggal:'8 Okt 2026', kontak:{ nama:'Contoh Narahubung Lima', hp:'081200000005', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true, true), ...FINAL('5/2026', '15 Okt 2026'), ...TTD('Selesai', 'success', true), waktu:['9 Okt 2026, 09.10', '10 Okt 2026, 11.30', '13 Okt 2026, 16.00', '15 Okt 2026, 10.20', '16 Okt 2026, 14.35'] },
+    { kode:'ORD-CONTOH-007', status:'PENANDATANGANAN', tanggal:'14 Okt 2026', kontak:{ nama:'Contoh Narahubung Tujuh', hp:'081200000007', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true, true), ...FINAL('7/2026', '21 Okt 2026'), ...TTD('Tanda tangan 1/5', 'info'), waktu:['15 Okt 2026, 09.40', '16 Okt 2026, 13.15', '20 Okt 2026, 11.50', '21 Okt 2026, 15.30'] },
+    { kode:'ORD-CONTOH-008', status:'PENANDATANGANAN', tanggal:'13 Okt 2026', kontak:{ nama:'Contoh Narahubung Delapan', hp:'081200000008', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true, true), ...FINAL('8/2026', '20 Okt 2026'), ...TTD('Menunggu e-Meterai', 'warning'), waktu:['14 Okt 2026, 10.05', '15 Okt 2026, 14.20', '19 Okt 2026, 09.55', '20 Okt 2026, 16.10'] },
+    { kode:'ORD-CONTOH-009', status:'PENANDATANGANAN', tanggal:'12 Okt 2026', kontak:{ nama:'Contoh Narahubung Sembilan', hp:'081200000009', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true, true), ...FINAL('9/2026', '22 Okt 2026'), ...TTD('Belum mulai', 'neutral'), waktu:['13 Okt 2026, 11.25', '14 Okt 2026, 15.45', '21 Okt 2026, 10.30', '22 Okt 2026, 14.15'] },
+    { kode:'ORD-CONTOH-013', status:'SELESAI', tanggal:'2 Okt 2026', kontak:{ nama:'Contoh Narahubung Tiga Belas', hp:'081200000013', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true, true), ...FINAL('13/2026', '10 Okt 2026'), ...TTD('Selesai', 'success', true), waktu:['3 Okt 2026, 09.30', '5 Okt 2026, 10.40', '8 Okt 2026, 13.20', '10 Okt 2026, 11.05', '12 Okt 2026, 15.50'] },
+    { kode:'ORD-CONTOH-014', status:'SELESAI', tanggal:'30 Sep 2026', kontak:{ nama:'Contoh Narahubung Empat Belas', hp:'081200000014', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true, true), ...FINAL('14/2026', '8 Okt 2026'), ...TTD('Selesai', 'success', true), waktu:['1 Okt 2026, 10.15', '2 Okt 2026, 14.05', '6 Okt 2026, 09.35', '8 Okt 2026, 13.45', '9 Okt 2026, 16.20'] }
   ];
 }
 let ORDER = contoh();
 /* paket Trial: satu contoh order; data tetap ada setelah upgrade (HE-TRIAL-04, -09) */
-if (window.SESI_PROTO && window.SESI_PROTO.paket === 'trial') ORDER = ORDER.slice(0, 1);
+if (window.SESI_PROTO && window.SESI_PROTO.paket === 'trial') ORDER = ORDER.filter(o => o.kode === 'ORD-CONTOH-001');
+/* status dari Verifikasi, Penyusunan, dan Penandatanganan kembali ke stepper; permohonan baru tetap ada setelah berpindah prototipe */
+function pulihkanAjb() {
+  const d = AJB.semua(), asal = contoh().map(o => o.kode);
+  ORDER = [...ORDER.map(o => (d[o.kode] || {}).order || o), ...Object.values(d).filter(x => x.order && !asal.includes(x.order.kode)).map(x => x.order)];
+  ORDER.forEach(o => { const x = d[o.kode] || {}; ['verif', 'disusun', 'minuta', 'nomor', 'tgl', 'ttd', 'salinan'].forEach(k => { if (x[k] !== undefined) o[k] = x[k]; }); });
+}
+pulihkanAjb();
 /* lapisan sendiri agar formulir Tambah Pihak yang sedang terbuka tidak hilang */
 function dialogBatas(judul, isi) {
   const w = document.createElement('div'); w.id = 'lapisanBatas';
@@ -530,8 +564,13 @@ const trialOrderPenuh = () => { const p = window.PAKET_TRIAL; return !!p && (p.b
 const trialKlienPenuh = () => { const p = window.PAKET_TRIAL; return !!p && (p.batas ? 5 : 3) + bacaKB().filter(r => r.status !== 'NONE').length >= p.pengguna && dialogBatas('Batas pengguna tercapai', `Paket Trial memuat paling banyak ${p.pengguna} pengguna, termasuk klien dan akun pemilik. Upgrade ke Enterprise untuk menambah klien.`); };
 
 /* ---------------- status & syarat (aturan live: Penjual, Pembeli, 2 Saksi, objek) ---------------- */
-const URUT = ['PENGUMPULAN','SIAP','DRAFTING','SELESAI'];
-const ST = { PENGUMPULAN:{ l:'Pengumpulan Berkas', s:'Dibuat oleh Asisten / PPAT', b:'info' }, SIAP:{ l:'Verifikasi Berkas', s:'Data lengkap, siap diperiksa', b:'warning' }, DRAFTING:{ l:'Penyusunan Akta', s:'Pembuatan akta', b:'info' }, SELESAI:{ l:'Selesai', s:'Akta selesai', b:'success' } };
+const URUT = ['PENGUMPULAN','SIAP','DRAFTING','FINALISASI','PENANDATANGANAN','SELESAI'];
+const ST = { PENGUMPULAN:{ l:'Pengumpulan Berkas', s:'Dibuat oleh Asisten / PPAT', b:'info' }, SIAP:{ l:'Verifikasi Berkas', s:'Data lengkap, siap diperiksa', b:'warning' }, DRAFTING:{ l:'Penyusunan Akta', s:'Pembuatan Akta Minuta & Salinan', b:'info' }, FINALISASI:{ l:'Finalisasi Akta', s:'Finalisasi Akta Minuta & Salinan', b:'warning' }, PENANDATANGANAN:{ l:'Penandatanganan Akta', s:'Penandatanganan Akta Minuta & Salinan', b:'info' }, SELESAI:{ l:'Selesai', s:'Akta Minuta & Salinan selesai', b:'success' } };
+/* tahap yang dikerjakan di layar lain: [label tombol, halaman tujuan] (HE-ORDER-18) */
+const TUJUAN = { SIAP:['Verifikasi Berkas', 'verif'], DRAFTING:['Penyusunan Akta', 'susun'], FINALISASI:['Finalisasi Akta', 'susun'], PENANDATANGANAN:['Penandatanganan Akta', 'ttd'] };
+const keTahap = (o, s) => { location.href = AJB.alamat(TUJUAN[s][1], o.kode, s === 'FINALISASI' ? 'ppat' : ''); };
+const PERKIRAAN = { SIAP:'± 1 hari kerja', DRAFTING:'± 2 hari kerja', FINALISASI:'± 1 hari kerja', PENANDATANGANAN:'± 2 hari kerja' };
+const waktuKini = () => { const d = new Date(), p = n => String(n).padStart(2, '0'); return `${d.getDate()} ${['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'][d.getMonth()]} ${d.getFullYear()}, ${p(d.getHours())}.${p(d.getMinutes())}`; };
 const TIPE = { PENJUAL:'Pihak Pertama', PEMBELI:'Pihak Kedua', PASANGAN:'Pasangan (harta bersama)', SAKSI:'Saksi', LAINNYA:'Lainnya' };
 const hitung = (o, t) => o.pihak.filter(p => p.tipe === t).length;
 const butuhPasangan = o => o.pihak.filter(p => (p.tipe === 'PENJUAL' || p.tipe === 'PEMBELI') && p.harta === 'BERSAMA').length;
@@ -542,7 +581,7 @@ const simpanKB = a => { try { localStorage.setItem(KUNCI_KB, JSON.stringify(a));
 const statusAkun = p => (p.baru ? (bacaKB().find(r => r.id === p.id) || {}).status || 'NONE' : 'ACTIVE');
 /* teks status sama dengan Daftar Pengguna (HE-ORDER-15) */
 const AKUN_PIHAK = { NONE:['Belum punya akun', 'neutral', 'Klien belum punya akun. Klik Buat Akun & Undang untuk mengirim undangan.'], INVITED:['Diundang', 'info', 'Undangan sudah dikirim ke email. Status berubah menjadi Aktif setelah pengguna membuat kata sandi.'], ACTIVE:['Aktif', 'success', 'Akun aktif. Pengguna dapat masuk dan memakai E-PPAT sesuai perannya.'] };
-const CA_PIHAK = { active:['Sertifikat Elektronik Aktif', 'success', 'Sertifikat elektronik aktif. Pengguna dapat menandatangani akta secara elektronik.'], none:['Belum registrasi', 'neutral', 'Pengguna belum mendaftarkan sertifikat elektronik. Registrasi dapat dimulai pengguna melalui Akun Saya, atau admin dari Ubah Pengguna.'] };
+const CA_PIHAK = { active:['Aktif sampai 26 Okt 2027', 'success', 'Sertifikat elektronik aktif. Pengguna dapat menandatangani akta secara elektronik. Sertifikat berlaku 1 tahun sejak aktif.'], none:['Belum registrasi', 'neutral', 'Pengguna belum mendaftarkan sertifikat elektronik. Registrasi dapat dimulai pengguna melalui Akun Saya, atau admin dari Ubah Pengguna.'] };
 const KET_AKUN = 'Status akun pengguna di E-PPAT. Status ini menentukan apakah pengguna dapat masuk.';
 const KET_CA = 'Status sertifikat elektronik (CA) dari Peruri. Sertifikat elektronik aktif diperlukan agar pengguna dapat menandatangani akta secara elektronik.';
 const lencanaTip = ([l, j, t]) => `<span class="ina-tooltip ina-tooltip--placement-top tanya">${kecil(l, j).replace('<span ', '<span tabindex="0" ')}<span class="ina-tooltip__content"><span class="ina-tooltip__bubble">${t}</span></span></span>`;
@@ -563,12 +602,14 @@ function syarat(o) {
   const ke = URUT[URUT.indexOf(o.status) + 1];
   if (!ke) return { ke:null, daftar:[] };
   if (o.status === 'PENGUMPULAN') return { ke, daftar:syaratData(o) };
-  /* HE-ORDER-08: syarat Drafting = tiga verifikasi; syarat Selesai = minuta difinalisasi PPAT */
+  /* HE-ORDER-08, HE-ORDER-18: setiap tahap memakai status dari layar pengerjaannya */
   if (o.status === 'SIAP') return { ke, daftar:[
-    { k:'v-pihak', l:'Verifikasi para pihak (CA)', ok:o.verif.pihak, verif:true },
-    { k:'v-objek', l:'Verifikasi objek tanah', ok:o.verif.objek, verif:true },
-    { k:'v-harga', l:'Verifikasi harga (NJOP)', ok:o.verif.harga, verif:true }] };
-  return { ke, daftar:[{ k:'minuta', l:'Minuta akta difinalisasi PPAT', ok:o.minuta, minuta:true }] };
+    { k:'v-pihak', l:'Verifikasi para pihak (CA)', ok:o.verif.pihak, verif:true, tahap:'SIAP' },
+    { k:'v-objek', l:'Verifikasi objek tanah', ok:o.verif.objek, verif:true, tahap:'SIAP' },
+    { k:'v-harga', l:'Verifikasi harga (NJOP)', ok:o.verif.harga, verif:true, tahap:'SIAP' }] };
+  if (o.status === 'DRAFTING') return { ke, daftar:[{ k:'susun', l:'Naskah minuta selesai disusun', ok:!!(o.disusun || o.minuta), tahap:'DRAFTING' }] };
+  if (o.status === 'FINALISASI') return { ke, daftar:[{ k:'minuta', l:'Minuta akta difinalisasi PPAT', ok:!!o.minuta, tahap:'FINALISASI' }] };
+  return { ke, daftar:[{ k:'ttd', l:'Minuta selesai ditandatangani', ok:!!(o.ttd && o.ttd.selesai), tahap:'PENANDATANGANAN' }, { k:'salinan', l:'Salinan selesai ditandatangani', ok:!!(o.salinan && o.salinan.selesai), tahap:'PENANDATANGANAN' }] };
 }
 const kurangData = o => syaratData(o).filter(x => !x.ok).length;
 
@@ -579,7 +620,7 @@ const ord = () => ORDER.find(o => o.kode === S.aktif);
 /* ---------------- sidebar (menu live Asisten Peruri) ---------------- */
 const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
   { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text','order']] },
-  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Verifikasi Berkas','tb_circle_check'],['Penyusunan Akta','tb_file_pencil'],['Penyusunan Akta v2','tb_file_description'],['Penandatanganan Akta','tb_signature'],['Salinan Akta','tb_files']] },
+  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Salinan Akta','tb_files']] },
   { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building'],['Daftar Pengguna','tb_users'],['Peran & Izin','tb_shield_lock'],['Log Aktivitas','tb_history'],['Aktivasi e-Meterai','tb_rubber_stamp']] },
   { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge'],['Pengaturan','tb_settings']] },
   { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home'],['Tema Tampilan','tb_palette'],['Master Konten','tb_database'],['Artikel & Halaman','tb_article'],['Pustaka Media','tb_photo']] }
@@ -590,7 +631,7 @@ function gambarNav() {
     <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
     <div class="items" ${grupBuka.has(i) ? '' : 'hidden'}>${g.m.map(([t, ic, ke]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item ${ke ? 'on' : ''}" data-ke="${ke || ''}">${ik(ic)}<span>${t}</span></a>`).join('')}</div>`).join('');
 }
-const PROTO = { 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Verifikasi Berkas':'Backlog-HE-VERIF-Prototype.html', 'Penyusunan Akta':'Backlog-HE-MINUTA-Prototype.html', 'Penyusunan Akta v2':'Backlog-HE-MINUTA-V2-Prototype.html', 'Penandatanganan Akta':'Backlog-HE-EAW-Prototype.html', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
+const PROTO = { 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
 $('#nav').addEventListener('click', e => {
   const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
   const a = e.target.closest('a'); if (!a) return; e.preventDefault();
@@ -622,7 +663,7 @@ function layarDaftar() {
       ${tombol('Muat Ulang', 'secondary', 'md', 'id="muatUlang"', ik('saring', 16))}
     </div>
     <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb">
-      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">Narahubung</th><th class="ina-table__header-cell">Status${tanya('Status permohonan', 'Status menunjukkan tahap permohonan saat ini. Permohonan berjalan berurutan dari Pengumpulan Berkas, Verifikasi Berkas, Penyusunan Akta, sampai Selesai.')}</th><th id="kolLengkap" class="ina-table__header-cell ditandai">Kelengkapan${tanya('Kelengkapan', 'Kolom ini menunjukkan kelengkapan data wajib, yaitu narahubung, penjual, pembeli, dua saksi, dan objek tanah.')} ${usulan('HE-ORDER-04')}</th><th class="ina-table__header-cell">Tanggal</th><th class="ina-table__header-cell"></th></tr></thead>
+      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">Narahubung</th><th class="ina-table__header-cell">Status${tanya('Status permohonan', 'Status menunjukkan tahap permohonan saat ini. Permohonan berjalan berurutan dari Pengumpulan Berkas, Verifikasi Berkas, Penyusunan Akta, Finalisasi Akta, Penandatanganan Akta, sampai Selesai.')}</th><th id="kolLengkap" class="ina-table__header-cell ditandai">Kelengkapan${tanya('Kelengkapan', 'Kolom ini menunjukkan kelengkapan data wajib, yaitu narahubung, penjual, pembeli, dua saksi, dan objek tanah.')} ${usulan('HE-ORDER-04')}</th><th class="ina-table__header-cell">Tanggal</th><th class="ina-table__header-cell"></th></tr></thead>
       <tbody class="ina-table__body">${rows.length ? rows.map(o => `<tr class="ina-table__row ina-table__row--clickable klik" data-buka="${o.kode}">
         <td class="ina-table__cell"><span class="kd">${o.kode}</span></td>
         <td class="ina-table__cell"><div>AJB</div><div class="kc">Akta Jual Beli</div></td>
@@ -637,20 +678,44 @@ function layarDaftar() {
 }
 
 /* ---------------- layar detail ---------------- */
+/* status yang sebelumnya dilihat di menu Verifikasi, Penyusunan, dan Penandatanganan (HE-ORDER-18) */
+function statusTahap(o, s) {
+  if (s === 'SIAP') { const n = Object.values(o.verif).filter(Boolean).length; return [`${n}/3 terverifikasi`, n >= 3 ? 'success' : n ? 'info' : 'neutral']; }
+  if (s === 'DRAFTING') return o.disusun || o.minuta ? ['Selesai disusun', 'success'] : ['Penyusunan', 'info'];
+  if (s === 'FINALISASI') return o.minuta ? [o.nomor ? `Final · No. ${esc(o.nomor)}` : 'Final', 'success'] : ['Menunggu finalisasi PPAT', 'warning'];
+  if (s === 'PENANDATANGANAN') return o.ttd ? [o.ttd.l, o.ttd.j] : ['Belum mulai', 'neutral'];
+  return null;
+}
+/* waktu per tahap seperti Dasbor Onboarding: o.waktu[i] = saat tahap i selesai */
+function ketWaktu(o, i, pos) {
+  const w = o.waktu || [];
+  if (i < pos || o.status === 'SELESAI') return w[Math.min(i, w.length - 1)] || '—';
+  if (i > pos) return 'Belum dimulai';
+  return `Sedang berjalan sejak ${pos ? w[pos - 1] || o.tanggal : o.tanggal}`;
+}
+function tombolTahap(o, s, kls) {
+  if (!TUJUAN[s]) return '';
+  return `<span class="tahap-aksi">${tombol(TUJUAN[s][0], kls === 'active' ? 'primary' : 'secondary', 'sm', kls ? `data-ke-tahap="${s}"` : 'disabled')}</span>`;
+}
 function stepper(o, vertikal) {
   const pos = URUT.indexOf(o.status);
-  return `<div class="ina-stepper ${vertikal ? 'ina-stepper--vertical stepper-v' : 'ina-stepper--horizontal ina-stepper--horizontal-responsive stepper-h'}">${URUT.map((s, i) => {
-    const kls = i < pos || o.status === 'SELESAI' ? 'completed' : i === pos ? 'active' : '';
-    return `${i ? `<div class="ina-stepper__separator ${i <= pos ? 'ina-stepper__separator--completed' : ''}"></div>` : ''}
-      <div class="ina-stepper__item ${kls ? 'ina-stepper__item--' + kls : ''}"><div class="ina-stepper__icon-wrapper">${kls === 'completed' ? `<svg class="ina-stepper__check-icon" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none"><path d="M5 12l5 5l10 -10"/></svg>` : `<span class="ina-stepper__step-number">${i + 1}</span>`}</div><div class="ina-stepper__label">${ST[s].l}<small>${ST[s].s}</small></div></div>`; }).join('')}</div>`;
+  const isi = `<div class="ina-stepper ${vertikal ? 'ina-stepper--vertical stepper-v' : 'ina-stepper--horizontal stepper-h'}" role="list" aria-label="Tahap permohonan">${URUT.map((s, i) => {
+    const kls = i < pos || o.status === 'SELESAI' ? 'completed' : i === pos ? 'active' : '', st = i <= pos ? statusTahap(o, s) : null;
+    return `${i ? `<div class="ina-stepper__separator ${i <= pos ? 'ina-stepper__separator--completed' : ''}" aria-hidden="true"></div>` : ''}
+      <div class="ina-stepper__item ${kls ? 'ina-stepper__item--' + kls : ''}" role="listitem" ${kls === 'active' ? 'aria-current="step"' : ''}><div class="ina-stepper__icon-wrapper">${kls === 'completed' ? `<svg class="ina-stepper__check-icon" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none"><path d="M5 12l5 5l10 -10"/></svg>` : `<span class="ina-stepper__step-number">${i + 1}</span>`}</div><div class="ina-stepper__label"><span>${ST[s].l}</span><small>${ST[s].s}</small>${kls !== 'completed' && PERKIRAAN[s] ? `<span class="tahap-perkiraan">${badge(`${ik('jam', 14)} <b>${est(PERKIRAAN[s])}</b>`, 'warning')}</span>` : ''}${st ? `<span class="tahap-status">${kecil(st[0], st[1])}</span>` : ''}<small class="tahap-waktu">${ketWaktu(o, i, pos)}</small>${tombolTahap(o, s, kls)}</div></div>`; }).join('')}</div>`;
+  return vertikal ? isi : `<div class="gulir-tahap" id="stepperAjb">${isi}</div>`;
 }
+const lencanaWaktu = o => PERKIRAAN[o.status] ? `<span class="waktu-baris">${badge(`${ik('jam', 14)} Perkiraan selesai: <b>${est(PERKIRAAN[o.status])}</b>`, 'warning')}</span>` : '';
 function langkahBerikut(o, sy) {
-  if (o.status === 'SELESAI') return 'Akta sudah selesai. Salinan akta tersedia di menu Salinan Akta.';
+  if (o.status === 'SELESAI') return 'Akta Minuta dan Salinan sudah selesai. Salinan akta tersedia di menu Salinan Akta.';
   const kurang = sy.daftar.filter(x => !x.ok);
   if (!kurang.length) return `Semua syarat terpenuhi. Klik <b>Pindah ke ${ST[sy.ke].l}</b> untuk melanjutkan.`;
   const x = kurang[0];
-  if (x.verif) return `Selesaikan ${kurang.map(y => y.l.replace('Verifikasi ', '')).join(', ')} di menu Verifikasi Berkas sebelum penyusunan.`;
-  if (x.minuta) return 'Minuta akta belum final. Minta PPAT memfinalisasi minuta di menu Penyusunan Akta sebelum permohonan ditandai Selesai.';
+  if (x.verif) return `Selesaikan ${kurang.map(y => y.l.replace('Verifikasi ', '')).join(', ')} melalui tombol Verifikasi Berkas pada stepper.`;
+  if (x.k === 'susun') return 'Susun naskah melalui tombol Penyusunan Akta pada stepper, lalu tekan Beritahu PPAT.';
+  if (x.k === 'minuta') return 'PPAT memberi nomor dan tanggal akta melalui tombol Finalisasi Akta pada stepper.';
+  if (x.k === 'ttd') return 'Selesaikan stempel TERA, tanda tangan elektronik, dan e-Meterai melalui tombol Penandatanganan Akta pada stepper.';
+  if (x.k === 'salinan') return 'Selesaikan salinan di tab Salinan pada Penandatanganan Akta.';
   if (x.k === 'kontak') return 'Lengkapi nama narahubung di tab Narahubung.';
   if (x.k === 'objek') return 'Tambahkan objek tanah di tab Objek.';
   if (x.k === 'akun') return 'Undang pihak baru di tab Para Pihak, lalu tunggu pihak membuat kata sandi.';
@@ -665,14 +730,14 @@ function kartuStatus(o) {
     ${stepper(o, false)}${stepper(o, true)}
     ${(() => {
       /* syarat & langkah berikutnya memakai IDDS Alert + Badge (HE-ORDER-01, HE-ORDER-05) */
-      const tampilSyarat = sy.ke && (sy.daftar.length > 1 || !siap || o.status === 'DRAFTING');
+      const tampilSyarat = sy.ke && (sy.daftar.length > 1 || !siap || o.status !== 'PENGUMPULAN');
       const jenis = o.status === 'SELESAI' ? 'info' : siap ? 'success' : 'caution';
       const judul = tampilSyarat ? `Syarat pindah ke ${ST[sy.ke].l} · ${sy.daftar.length - kurang} dari ${sy.daftar.length} terpenuhi${tanya('Syarat pindah status', 'Permohonan baru dapat dipindah ke tahap berikutnya setelah syarat ini terpenuhi. Tombol pindah aktif bila semua syarat sudah bertanda centang.')}${usulan('HE-ORDER-01')}` : '';
       const TSY = { 'v-pihak':tanya('Verifikasi para pihak (CA)', 'Verifikasi ini memastikan setiap pihak memiliki sertifikat elektronik (CA) aktif dari Peruri. Sertifikat itu diperlukan untuk menandatangani akta secara elektronik.'), 'v-harga':tanya('NJOP', T_NJOP) };
-      const daftar = tampilSyarat ? `<div class="syarat-daftar">${sy.daftar.map(x => `<span class="syarat-item">${badge(`${ik(x.ok ? 'centang' : 'seru', 12)} ${x.l}`, x.ok ? 'success' : 'warning')}${TSY[x.k] || ''}${x.ok ? '' : x.verif ? tombol('Verifikasi Sekarang', 'link', 'sm', 'data-verif') : x.minuta ? tombol('Buka Minuta', 'link', 'sm', 'data-minuta') : tombol('Lengkapi', 'link', 'sm', `data-lengkapi="${x.k}"`)}</span>`).join('')}</div>` : '';
-      return `<div class="syarat-alert ditandai" id="syarat">${alert(jenis, judul, `${daftar}<div class="langkah-berikut" id="langkahBerikut"><b>Langkah berikutnya:</b> ${langkahBerikut(o, sy)}${usulan('HE-ORDER-05')}${o.status === 'SIAP' || o.status === 'DRAFTING' ? usulan('HE-ORDER-08') : ''}</div>`)}</div>`;
+      const daftar = tampilSyarat ? `<div class="syarat-daftar">${sy.daftar.map(x => `<span class="syarat-item">${badge(`${ik(x.ok ? 'centang' : 'seru', 12)} ${x.l}`, x.ok ? 'success' : 'warning')}${TSY[x.k] || ''}${x.ok ? '' : x.verif ? tombol('Verifikasi Sekarang', 'link', 'sm', 'data-ke-tahap="SIAP"') : x.tahap ? tombol(`Buka ${TUJUAN[x.tahap][0]}`, 'link', 'sm', `data-ke-tahap="${x.tahap}"`) : tombol('Lengkapi', 'link', 'sm', `data-lengkapi="${x.k}"`)}</span>`).join('')}</div>` : '';
+      return `<div class="syarat-alert ditandai" id="syarat">${alert(jenis, judul, `${lencanaWaktu(o)}${daftar}<div class="langkah-berikut" id="langkahBerikut"><b>Langkah berikutnya:</b> ${langkahBerikut(o, sy)}${usulan('HE-ORDER-05')}${TUJUAN[o.status] ? usulan('HE-ORDER-08') : ''}</div>`)}</div>`;
     })()}
-    <div class="status-kaki"><p>Status saat ini: <b>${ST[o.status].l}</b>${tanya('Status permohonan', 'Status menunjukkan tahap permohonan saat ini. Permohonan berjalan berurutan dari Pengumpulan Berkas, Verifikasi Berkas, Penyusunan Akta, sampai Selesai, dan tidak dapat dikembalikan ke tahap sebelumnya.')}</p>
+    <div class="status-kaki"><p>Status saat ini: <b>${ST[o.status].l}</b>${tanya('Status permohonan', 'Status menunjukkan tahap permohonan saat ini. Permohonan berjalan berurutan dari Pengumpulan Berkas, Verifikasi Berkas, Penyusunan Akta, Finalisasi Akta, Penandatanganan Akta, sampai Selesai, dan tidak dapat dikembalikan ke tahap sebelumnya.')}</p>
       <div class="kanan">${sy.ke && !siap ? `<span class="alasan">Lengkapi ${kurang} syarat di atas untuk melanjutkan.</span>` : ''}${tombolPindah}</div></div>
   </div>`;
 }
@@ -693,9 +758,9 @@ function layarDetail() {
     <h1>Permohonan AJB</h1><p class="sub">Kelola permintaan Akta Jual Beli, mulai dari pengumpulan berkas sampai akta selesai.</p>
     <div class="det-kepala"><div>${tombol('Kembali', 'secondary', 'sm', 'id="kembali"', ik('kiri', 14))}
       <div class="kode">${o.kode}</div><h2>AJB - Akta Jual Beli</h2><p class="sub">Dibuat ${o.tanggal}</p></div>
-      ${o.status === 'DRAFTING' ? tombol('Buka Penyusunan Akta', 'primary', 'md', 'data-luar="Penyusunan Akta"', ik('edit', 16)) : ''}</div>
+      </div>
     ${kartuStatus(o)}
-    ${o.status === 'SIAP' && !verifSelesai(o) ? `<div class="info-baris">${alert('info', '', 'Permohonan masuk tahap <b>Verifikasi Berkas</b>. Periksa para pihak, objek tanah, dan harga sebelum penyusunan.', tombol('Verifikasi Sekarang', 'primary', 'sm', 'data-verif', ik('tameng', 14)))}</div>` : ''}
+    ${o.status === 'SIAP' && !verifSelesai(o) ? `<div class="info-baris">${alert('info', '', 'Permohonan masuk tahap <b>Verifikasi Berkas</b>. Periksa para pihak, objek tanah, dan harga sebelum penyusunan.', tombol('Verifikasi Sekarang', 'primary', 'sm', 'data-ke-tahap="SIAP"', ik('tameng', 14)))}</div>` : ''}
     <div class="tab-kartu ditandai">
       <div class="ina-tab-horizontal ina-tab-horizontal--use-brand-color"><div class="ina-tab-horizontal__container" role="tablist">${tabs.map(([kk, t]) =>
         `<button type="button" role="tab" data-tab="${kk}" aria-selected="${S.tab === kk}" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline ${S.tab === kk ? 'ina-tab-horizontal__tab--selected' : ''}"><span title="${TIPTAB[kk]}">${t}</span>${kunci ? '' : tandaTab(o, kk)}</button>`).join('')}${usulan('HE-ORDER-04')}</div></div>
@@ -742,14 +807,14 @@ function tabObjek(o, kunci) {
 }
 function tabDok(o, kunci) {
   return `<div class="tab-bar"><p>${kunci ? '' : 'Dokumen membantu pemeriksaan, tetapi tidak menjadi syarat pindah status.'}</p>${kunci ? '' : tombol('Tambah Dokumen', 'primary', 'md', 'id="tambahDok"', ik('tambah', 16))}</div>
-    <div class="tabel-wadah" style="margin-top:0"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb"><thead class="ina-table__header"><tr><th class="ina-table__header-cell">Jenis</th><th class="ina-table__header-cell">Pemilik</th><th class="ina-table__header-cell">File${tanya('Unggah dokumen', 'Klik Unggah pada baris dokumen untuk melampirkan berkasnya. Berkas itu membantu pemeriksaan di menu Verifikasi Berkas.')}</th><th class="ina-table__header-cell">Ukuran</th><th class="ina-table__header-cell"></th></tr></thead>
+    <div class="tabel-wadah" style="margin-top:0"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb"><thead class="ina-table__header"><tr><th class="ina-table__header-cell">Jenis</th><th class="ina-table__header-cell">Pemilik</th><th class="ina-table__header-cell">File${tanya('Unggah dokumen', 'Klik Unggah pada baris dokumen untuk melampirkan berkasnya. Berkas itu membantu pemeriksaan di tahap Verifikasi Berkas.')}</th><th class="ina-table__header-cell">Ukuran</th><th class="ina-table__header-cell"></th></tr></thead>
     <tbody class="ina-table__body">${o.dok.length ? o.dok.map((d, i) => `<tr class="ina-table__row"><td class="ina-table__cell">${badge(d.jenis, d.file ? 'success' : 'neutral')}</td><td class="ina-table__cell">${d.pemilik}</td><td class="ina-table__cell">${d.file ? `<span style="color:var(--ina-primary-primary)">${d.file}</span>` : '<span class="sub2">Belum diunggah</span>'}</td><td class="ina-table__cell">${d.ukuran || '-'}</td>
       <td class="ina-table__cell">${kunci ? '—' : `<div class="aksi-baris">${tombol('Unggah', 'secondary', 'sm', `data-unggah="${i}"`, ik('unggah', 14))}${tombol('Hapus', 'tertiary', 'sm', `data-hapus-dok="${i}" data-merah`)}</div>`}</td></tr>`).join('')
       : `<tr><td colspan="5" class="ina-table__empty-cell kosong">Belum ada dokumen.</td></tr>`}</tbody></table></div></div></div>`;
 }
 
 /* ---------------- gambar ---------------- */
-function gambar() { gambarNav(); $('#halaman').innerHTML = S.layar === 'daftar' ? layarDaftar() : layarDetail(); pasangPanduan(); }
+function gambar() { gambarNav(); $('#halaman').innerHTML = S.layar === 'daftar' ? layarDaftar() : layarDetail(); pasangPanduan(); ORDER.forEach(o => AJB.simpan(o.kode, { order:o })); }
 function buka(kode, tab = 'kontak') { S.layar = 'detail'; S.aktif = kode; S.tab = tab; gambar(); window.scrollTo({ top:0 }); }
 
 /* ---------------- interaksi ---------------- */
@@ -760,14 +825,13 @@ H.addEventListener('click', e => {
   if (t.closest('[data-pilih="filter"]')) { S.pilihBuka = S.pilihBuka === 'filter' ? null : 'filter'; gambar(); return; }
   const f = t.closest('[data-filter]'); if (f) { S.filter = f.dataset.filter; S.pilihBuka = null; gambar(); return; }
   if (t.closest('#muatUlang')) { toast('Daftar permohonan dimuat ulang.'); return; }
-  const ho = t.closest('[data-hapus-order]'); if (ho) { e.stopPropagation(); konfirmHapus(`Hapus permohonan ${ho.dataset.hapusOrder}?`, 'Permohonan dan seluruh datanya akan dihapus. Tindakan ini tidak dapat dibatalkan.', () => { ORDER = ORDER.filter(o => o.kode !== ho.dataset.hapusOrder); gambar(); toast('Permohonan dihapus.', 'positive'); }); return; }
+  const ho = t.closest('[data-hapus-order]'); if (ho) { e.stopPropagation(); konfirmHapus(`Hapus permohonan ${ho.dataset.hapusOrder}?`, 'Permohonan dan seluruh datanya akan dihapus. Tindakan ini tidak dapat dibatalkan.', () => { ORDER = ORDER.filter(o => o.kode !== ho.dataset.hapusOrder); AJB.buang(ho.dataset.hapusOrder); gambar(); toast('Permohonan dihapus.', 'positive'); }); return; }
   const b = t.closest('[data-buka]'); if (b) { buka(b.dataset.buka); return; }
   if (t.closest('#buatOrder')) { if (trialOrderPenuh()) return; dialogBuatOrder(); return; }
-  if (t.closest('#kembali')) { S.layar = 'daftar'; gambar(); return; }
+  if (t.closest('#kembali')) { S.layar = 'daftar'; history.replaceState(null, '', location.pathname); gambar(); return; }
   const tb = t.closest('[data-tab]'); if (tb) { S.tab = tb.dataset.tab; gambar(); return; }
   const lk = t.closest('[data-lengkapi]'); if (lk) { const x = syaratData(ord()).find(y => y.k === lk.dataset.lengkapi); S.tab = x.tab; gambar(); if (x.tipe) dialogPihak(x.tipe); else if (x.tab === 'objek') dialogObjek(); else document.getElementById('kNama')?.focus(); return; }
-  if (t.closest('[data-verif]')) { const v = ord().verif; dialog({ judul:'Verifikasi order', isi:`<p>Verifikasi dilakukan di menu <b>Verifikasi Berkas</b> dalam tiga bagian. Status saat ini:</p><dl class="ringkas-kv"><dt>Para pihak (CA)</dt><dd>${v.pihak ? 'Terverifikasi' : 'Belum'}</dd><dt>Objek tanah</dt><dd>${v.objek ? 'Terverifikasi' : 'Belum'}</dd><dt>Harga (NJOP)${tanya('NJOP', T_NJOP)}</dt><dd>${v.harga ? 'Terverifikasi' : 'Belum'}</dd></dl><p>Di prototipe ini, verifikasi dapat ditandai selesai untuk mensimulasikan alur.</p>`, tombol:[['Batal','tertiary',null],['Buka Prototipe Verifikasi','secondary',() => { location.href = 'Backlog-HE-VERIF-Prototype.html'; }],['Tandai semua terverifikasi','primary',() => { ord().verif = V(true, true, true); gambar(); toast('Verifikasi selesai (simulasi).', 'positive'); }]] }); return; }
-  if (t.closest('[data-minuta]')) { dialog({ judul:'Minuta akta belum final', isi:'<p>Minuta disusun Asisten di menu <b>Penyusunan Akta</b>, lalu PPAT memfinalisasinya dengan nomor dan tanggal akta. Setelah final, permohonan dapat ditandai Selesai.</p><p>Di prototipe ini, finalisasi dapat disimulasikan.</p>', tombol:[['Batal','tertiary',null],['Buka Prototipe Penyusunan Akta','secondary',() => { location.href = 'Backlog-HE-MINUTA-Prototype.html'; }],['Tandai minuta final (simulasi)','primary',() => { ord().minuta = true; gambar(); toast('Minuta ditandai final (simulasi).', 'positive'); }]] }); return; }
+  const kt = t.closest('[data-ke-tahap]'); if (kt) { keTahap(ord(), kt.dataset.keTahap); return; }
   if (t.closest('#pindah')) { konfirmPindah(); return; }
   if (t.closest('#simpanKontak')) { const o = ord(); const nm = $('#kNama').value.trim(); if (nm.length < 2) { toast('Nama narahubung minimal 2 karakter.', 'destructive'); return; } if ($('#kHp').value.replace(/\D/g, '').length > 15) { toast('No. HP maksimal 15 digit.', 'destructive'); return; } Object.assign(o.kontak, { nama:nm, hp:$('#kHp').value.trim(), email:$('#kEmail').value.trim(), catatan:$('#kCat').value }); gambar(); toast('Narahubung tersimpan.', 'positive'); return; }
   const tp = t.closest('[data-tambah-pihak]'); if (tp) { dialogPihak(); return; }
@@ -785,23 +849,25 @@ H.addEventListener('click', e => {
 document.addEventListener('click', e => { if (S.pilihBuka === 'filter' && !e.target.closest('#f-filter')) { S.pilihBuka = null; gambar(); } });
 
 /* ---------------- pindah status (HE-ORDER-01, HE-ORDER-02) ---------------- */
-function konfirmPindah() {
+function konfirmPindah(contohSaja = false) {
   const o = ord(), sy = syarat(o), ke = sy.ke;
-  if (!ke || !sy.daftar.every(x => x.ok)) return;
+  if (!ke || (!contohSaja && !sy.daftar.every(x => x.ok))) return;
   const DAMPAK = {
     SIAP:'Permohonan masuk antrean Verifikasi Berkas. Setelah ini, menambah, mengubah, atau menghapus pihak akan mengembalikan permohonan ke tahap Verifikasi.',
-    DRAFTING:'Pembuatan minuta akta dimulai di menu Penyusunan Akta.'
+    DRAFTING:'Pembuatan akta minuta dan salinan dimulai di tahap Penyusunan Akta.',
+    FINALISASI:'PPAT memeriksa naskah, lalu memfinalisasi akta dengan nomor dan tanggal akta.',
+    PENANDATANGANAN:'Akta final dibubuhi stempel TERA, tanda tangan elektronik, dan e-Meterai.'
   };
   if (ke === 'SELESAI') {
     dialog({ judul:'Tandai permohonan Selesai?', isi:`<p>Setelah ditandai Selesai, <b>data permohonan dikunci</b> dan status <b>tidak dapat dikembalikan</b>. Salinan akta dikelola di menu Salinan Akta.</p>
       <dl class="ringkas-kv"><dt>Kode permohonan</dt><dd>${o.kode}</dd><dt>Para pihak</dt><dd>${o.pihak.length} pihak</dd><dt>Objek</dt><dd>${o.objek.length} objek</dd></dl>
-      <label class="ina-checkbox cek-setuju" id="labelSetuju"><input type="checkbox" id="setujuSelesai" class="ina-checkbox__input peer"><div class="ina-checkbox__box ina-checkbox__box--unchecked"></div><div class="ina-checkbox__content"><span class="ina-checkbox__label">Saya sudah memastikan minuta akta final dan data permohonan benar.</span></div></label>${usulan('HE-ORDER-02')}`,
+      <label class="ina-checkbox cek-setuju" id="labelSetuju"><input type="checkbox" id="setujuSelesai" class="ina-checkbox__input peer"><div class="ina-checkbox__box ina-checkbox__box--unchecked"></div><div class="ina-checkbox__content"><span class="ina-checkbox__label">Saya sudah memastikan akta minuta dan salinan selesai, dan data permohonan benar.</span></div></label>${usulan('HE-ORDER-02')}`,
       tombol:[['Batal','secondary',null],['Tandai Selesai','primary',() => lanjut()]], kunciUtama:'#setujuSelesai' });
     return;
   }
   dialog({ judul:`Pindah ke ${ST[ke].l}?`, isi:`<p>Status permohonan <b>${o.kode}</b> akan berubah dari <b>${ST[o.status].l}</b> ke <b>${ST[ke].l}</b>.</p><p>${DAMPAK[ke]}</p><p>Status tidak dapat dikembalikan ke tahap sebelumnya.${usulan('HE-ORDER-02')}</p>`,
     tombol:[['Batal','secondary',null],[`Pindah ke ${ST[ke].l}`,'primary',() => lanjut()]] });
-  function lanjut() { o.status = ke; gambar(); toast(`Status permohonan berpindah ke ${ST[ke].l}.`, 'positive'); }
+  function lanjut() { (o.waktu = o.waktu || []).push(waktuKini()); o.status = ke; gambar(); toast(`Status permohonan berpindah ke ${ST[ke].l}.`, 'positive'); }
 }
 
 /* ---------------- mesin isian AJB (HE-ORDER-13, HE-ORDER-14) ---------------- */
@@ -869,7 +935,7 @@ function kartuUser(f, V, c) {
     return `<div class="kartu-pihak ditandai" id="kartu-${k}"><div style="display:flex;justify-content:space-between;gap:8px"><b>${judul}: ${esc(u.nama)}</b>${tombol('Ganti pengguna', 'link', 'sm', `data-ganti-user="${k}"`)}</div><dl><div><dt>NIK</dt><dd>${u.nik ? u.nik.slice(0, 4) + '********' + u.nik.slice(-4) : '—'}</dd></div><div><dt>Tempat lahir</dt><dd>${esc(u.tempat) || '—'}</dd></div><div><dt>Alamat</dt><dd>${esc(u.alamat) || '—'}</dd></div><div><dt>Pekerjaan</dt><dd>${esc(u.pekerjaan) || '—'}</dd></div></dl>
       ${u.baru ? `<div class="catatan-akun">${alert('info', '', 'Belum punya akun. Setelah disimpan, klik <b>Buat Akun &amp; Undang</b> di daftar para pihak.')}</div>` : `<p class="ket-f" style="margin-top:8px">Identitasnya dibaca dari data diri akun ini saat akta dirakit. Perbaikannya di menu Daftar Pengguna.</p>`}
       ${!u.nik ? `<div style="margin-top:10px">${alert('caution', '', 'Profil pengguna ini belum lengkap (NIK belum diisi). Anda tetap bisa menyimpan; lengkapi datanya nanti agar siap untuk akta.')}</div>` : ''}${usulan('HE-ORDER-14')}</div>`; }
-  const q = (c.cari[k] || '').toLowerCase(), sudah = c.sudah || new Set(), hasil = KLIEN.filter(x => !sudah.has(x.id) && (!q || (x.nama + x.email).toLowerCase().includes(q)));
+  const q = (c.cari[k] || '').toLowerCase(), sudah = c.sudah || new Set(), hasil = KLIEN.filter(x => !sudah.has(x.id) && (!x.hanyaSaksi || V.tipe_pihak === 'Saksi') && (!q || (x.nama + x.email).toLowerCase().includes(q)));
   return `<div class="ina-text-field" style="position:relative"><label class="ina-text-field__label" for="cari-${k}">${f.label}<span class="ina-text-field__required">*</span></label>
     <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ${err ? 'ina-text-field__wrapper--status-error' : ''}"><div class="ina-text-field__prefix-icon">${ik('cari')}</div><input id="cari-${k}" class="ina-text-field__input" data-cari-user="${k}" placeholder="Cari nama / email…" value="${esc(c.cari[k] || '')}" autocomplete="off"></div>
     ${c.buka === k ? `<div class="ina-select-dropdown__panel cari-panel"><div class="ina-select-dropdown__options">${hasil.length ? hasil.map(x => `<button type="button" class="ina-select-dropdown__option" data-pilih-user="${k}" data-uid="${x.id}"><span>${esc(x.nama)}<small>${esc(x.email)}</small></span>${x.nik ? '' : badge('NIK kosong', 'warning')}</button>`).join('') : '<div class="kosong" style="padding:10px">Tidak ada pengguna yang cocok.</div>'}</div></div>` : ''}
@@ -1217,7 +1283,7 @@ function dialogBuatOrder() {
   dialog({ judul:'Buat Permohonan', isi:`<div class="f-grid">${tf('bJenis', 'Jenis Akta', 'AJB - Akta Jual Beli', '', true, true)}${tf('bNama', 'Nama Narahubung', '', 'Nama narahubung', true)}${tf('bHp', 'No. HP', '', '08xxxx')}${tf('bEmail', 'Email', '', 'email@contoh.id', false, false, 'email')}</div>`,
     tombol:[['Batal','secondary',null],['Buat Permohonan','primary',() => {
       const nm = $('#bNama').value.trim(); if (nm.length < 2) { toast('Nama narahubung minimal 2 karakter.', 'destructive'); return false; } if ($('#bHp').value.replace(/\D/g, '').length > 15) { toast('No. HP maksimal 15 digit.', 'destructive'); return false; }
-      const kode = 'ORD-CONTOH-' + String(ORDER.length + 1).padStart(3, '0');
+      const kode = 'ORD-CONTOH-' + String(Math.max(...[...ORDER, ...contoh()].map(o => +o.kode.slice(-3))) + 1).padStart(3, '0');
       ORDER.unshift({ kode, status:'PENGUMPULAN', tanggal:'23 Okt 2026', kontak:{ nama:nm, hp:$('#bHp').value, email:$('#bEmail').value, catatan:'' }, pihak:[], objek:[], dok:[], verif:false });
       buka(kode); toast('Permohonan dibuat.', 'positive');
     }, true]] });
@@ -1297,7 +1363,7 @@ function bukaBantuan() {
       <li><b>Tambahkan para pihak:</b> Pihak Pertama, Pihak Kedua, dan 2 saksi. Jika salah satunya memilih harta bersama, tambahkan juga pasangannya. Gunakan <b>Simpan &amp; Tambah Lagi</b> agar tidak perlu membuka dialog berulang kali.</li>
       <li><b>Tambahkan objek tanah</b> dan unggah dokumen pendukung.</li>
       <li><b>Pindah ke Verifikasi Berkas</b> setelah semua syarat bercentang hijau, lalu lakukan verifikasi.</li>
-      <li><b>Pindah ke Penyusunan</b> untuk menyusun minuta, kemudian <b>Selesai</b> setelah minuta final.</li>
+      <li>Lanjutkan <b>Penyusunan Akta</b>, <b>Finalisasi Akta</b>, dan <b>Penandatanganan Akta</b> melalui tombol di setiap tahap stepper. Tombol Kembali di setiap layar membawa Anda ke stepper ini.</li>
     </ol>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     <div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-1"><div class="ina-accordion__title">Mengapa tombol "Pindah ke …" tidak bisa ditekan?</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></div></button><div id="faq-1" class="ina-accordion__content"><div class="ina-accordion__body"><p>Masih ada syarat yang belum terpenuhi. Lihat daftar syarat di bawah stepper dan klik "Lengkapi" pada syarat yang belum bercentang.</p></div></div></div>
@@ -1327,14 +1393,15 @@ function lihat(u) {
   if (u.ke === 'daftar') { S.layar = 'daftar'; gambar(); }
   if (u.ke === 'detail-002') buka('ORD-CONTOH-002');
   if (u.ke === 'tambah-pihak') { buka('ORD-CONTOH-002', 'pihak'); dialogPihak(); return; }
-  if (u.ke === 'konfirm-selesai') { buka('ORD-CONTOH-004'); konfirmPindah(); return; }
+  if (u.ke === 'konfirm-selesai') { buka('ORD-CONTOH-008'); konfirmPindah(true); return; }
+  if (u.ke === 'stepper') buka('ORD-CONTOH-006');
   if (u.ke === 'pihak-003') buka('ORD-CONTOH-003', 'pihak');
   if (u.ke === 'objek-dialog') { buka('ORD-CONTOH-003', 'objek'); dialogObjek(); return; }
   if (u.ke === 'syarat-003') buka('ORD-CONTOH-003');
   const el = u.sorot && $(u.sorot);
   if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); }
 }
-$('#aturUlang').addEventListener('click', () => { simpanKB([]); ORDER = contoh(); S.layar = 'daftar'; S.cari = ''; S.filter = ''; gambar(); toast('Data contoh dikembalikan ke awal.'); });
+$('#aturUlang').addEventListener('click', () => { simpanKB([]); AJB.hapus(); history.replaceState(null, '', location.pathname); ORDER = contoh(); S.layar = 'daftar'; S.cari = ''; S.filter = ''; gambar(); toast('Data contoh dikembalikan ke awal.'); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
@@ -1343,7 +1410,12 @@ const pulihkanKB = () => bacaKB().forEach(r => { const o = r.pihak && ORDER.find
 pulihkanKB();
 $('#simAktif').addEventListener('click', () => { const a = bacaKB(), n = a.filter(r => r.status === 'INVITED').length; if (!n) { toast('Belum ada pihak berstatus Diundang.'); return; } simpanKB(a.map(r => (r.status === 'INVITED' ? { ...r, status:'ACTIVE' } : r))); gambar(); toast(`${n} akun pihak kini aktif.`, 'positive'); });
 $('#bukaUbah').textContent = `Daftar perubahan (${UBAH.length})`;
+/* tautan dari layar lain dan notifikasi: #order=KODE membuka stepper order itu */
+const bukaHash = () => { const k = AJB.kode(); if (ORDER.some(o => o.kode === k)) buka(k); };
+addEventListener('hashchange', bukaHash);
+addEventListener('pageshow', e => { if (e.persisted) location.reload(); });
 gambar();
+bukaHash();
 })();
 </script>
 </body>

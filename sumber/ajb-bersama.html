@@ -1,0 +1,25 @@
+<script id="ajb-bersama-js">
+/* Satu perjalanan Permohonan AJB lintas prototipe: Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta dibuka dari stepper,
+   menyimpan statusnya di sini, lalu Kembali ke stepper order yang sama. Alamat tujuan: <berkas>#order=KODE[&peran=ppat]. */
+window.AJB = (() => {
+  const KUNCI_SPESIMEN = 'eppat-spesimen';
+  const bacaSpesimen = () => { try { return JSON.parse(localStorage.getItem(KUNCI_SPESIMEN)) || {}; } catch (e) { return {}; } };
+  const tulisSpesimen = d => { try { localStorage.setItem(KUNCI_SPESIMEN, JSON.stringify(d)); } catch (e) { /* lihat tulis() */ } };
+  const KUNCI = 'eppat-ajb-v3', ORDER = 'Backlog-HE-ORDER-Prototype.html';
+  const HAL = { verif:'Backlog-HE-VERIF-Prototype.html', susun:'Backlog-HE-MINUTA-V2-Prototype.html', ttd:'Backlog-HE-EAW-Prototype.html' };
+  const semua = () => { try { return JSON.parse(localStorage.getItem(KUNCI)) || {}; } catch (e) { return {}; } };
+  const tulis = d => { try { localStorage.setItem(KUNCI, JSON.stringify(d)); } catch (e) { /* peramban menolak penyimpanan: prototipe tetap berjalan */ } };
+  const param = k => (location.hash.match(new RegExp(`[#&]${k}=([^&]+)`)) || [])[1] || '';
+  return {
+    semua, kode:() => param('order'), peran:() => param('peran'),
+    ambil:k => semua()[k] || {},
+    simpan:(k, isi) => { const d = semua(); d[k] = { ...d[k], ...isi }; tulis(d); },
+    buang:k => { const d = semua(); delete d[k]; tulis(d); },
+    hapus:() => { try { localStorage.removeItem(KUNCI); } catch (e) { /* lihat tulis() */ } },
+    spesimen:email => bacaSpesimen()[email] || '',
+    simpanSpesimen:(email, gbr) => { const d = bacaSpesimen(); if (gbr) d[email] = gbr; else delete d[email]; tulisSpesimen(d); },
+    alamat:(hal, kode, peran) => `${HAL[hal]}#order=${kode}${peran ? '&peran=' + peran : ''}`,
+    keStepper:kode => { location.href = kode ? `${ORDER}#order=${kode}` : ORDER; }
+  };
+})();
+</script>

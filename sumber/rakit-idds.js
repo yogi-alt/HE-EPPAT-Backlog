@@ -17,8 +17,13 @@ if (html.includes('aria-label="Notifikasi"') && !html.includes('id="notif-bersam
   const i = html.lastIndexOf('</body>');
   html = i < 0 ? html + notif : html.slice(0, i) + notif + '\n' + html.slice(i);
 }
+// Perjalanan Permohonan AJB: stepper dan layar tahapnya berbagi status. Disisipkan di kepala agar tersedia untuk skrip halaman.
+if (/Backlog-(HE-(VERIF|MINUTA-V2|EAW|EAWK|CA|ORDER)|IDDS-TN-EPPAT)-Prototype\.html$/.test(out) && !html.includes('id="ajb-bersama-js"')) {
+  const ajb = fs.readFileSync(path.join(d, 'ajb-bersama.html'), 'utf8');
+  html = html.replace('<head>', () => '<head>\n' + ajb);
+}
 // Sesi bersama: prototipe tenant saling terhubung (masuk simulasi, menu profil, menu per peran). Disisipkan sebelum sidebar.
-if (/Backlog-(HE-(VERIF|MINUTA|MINUTA-V2|EAW|EAWK|CA|USER|TERA|ORDER)|IDDS-TN-[A-Z]+)-Prototype\.html$/.test(out) && !html.includes('id="sesi-bersama-js"')) {
+if (/Backlog-(HE-(VERIF|MINUTA-V2|EAW|EAWK|CA|USER|TERA|ORDER)|IDDS-TN-[A-Z]+)-Prototype\.html$/.test(out) && !html.includes('id="sesi-bersama-js"')) {
   const ikon = JSON.parse(fs.readFileSync(path.join(d, 'aset', 'tabler-sidebar.json'), 'utf8'));
   const se = fs.readFileSync(path.join(d, 'sesi-bersama.html'), 'utf8').replace('__TABLER__', () => JSON.stringify(ikon));
   html = html.replace('<head>', () => '<head>\n<script id="sesi-kepala-js">try { window.SESI_PROTO = JSON.parse(localStorage.getItem(\'eppat-sesi\')); var t = JSON.parse(localStorage.getItem(\'eppat-trial\')) || {}; if (window.SESI_PROTO && window.SESI_PROTO.paket === \'trial\') { if (t.nama) window.SESI_PROTO.nama = t.nama; if (t.email) window.SESI_PROTO.email = t.email; } window.PAKET_TRIAL = window.SESI_PROTO && window.SESI_PROTO.paket === \'trial\' && !(t.db && t.db.ent) ? { batas:!!t.batas, pengguna:5, transaksi:10, upgrade:\'Backlog-HE-TRIAL-Prototype.html#berlangganan\' } : null; } catch (e) { window.SESI_PROTO = null; window.PAKET_TRIAL = null; }</script>');

@@ -133,8 +133,21 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .det-kepala .kode{font:600 14px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary);margin-top:12px}
 .det-kepala h2{margin:2px 0 0;font:600 20px/28px Inter,sans-serif}
 .status-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px 28px}
-.status-kartu .ina-stepper{align-items:flex-start;min-height:92px;padding:4px 64px 0}
-.status-kartu .ina-stepper__separator{align-self:flex-start;margin-top:11px}
+.gulir-tahap{overflow-x:auto;padding-bottom:4px}
+.status-kartu .stepper-h.ina-stepper{display:flex;align-items:flex-start;width:100%;min-width:1000px;min-height:0;padding:4px 0 12px}
+.stepper-h .ina-stepper__item{flex-direction:column;align-items:center;gap:6px;height:auto;max-height:none;flex:0 0 auto;width:160px;padding:0}
+.stepper-h .ina-stepper__label{position:static;transform:none;white-space:normal;text-align:center;max-width:160px;margin:0;font-size:13px;line-height:18px}
+.stepper-h .ina-stepper__icon-wrapper{position:relative;z-index:1}
+.status-kartu .stepper-h .ina-stepper__separator{align-self:flex-start;flex:1 1 auto;min-width:6px;margin:11px -68px 0;width:auto}
+.status-kartu .stepper-v.ina-stepper{height:auto;min-height:0}
+.status-kartu .stepper-v.ina-stepper .ina-stepper__item{height:auto;max-height:none;min-height:0;flex:none;align-items:flex-start}
+.status-kartu .stepper-v .ina-stepper__label{position:static;transform:none;white-space:normal;max-width:none}
+.status-kartu .ina-stepper__item--active .ina-stepper__label > span:first-child,.status-kartu .ina-stepper__item--completed .ina-stepper__label > span:first-child{font-weight:600;color:var(--ina-content-primary)}
+.tahap-status,.tahap-aksi,.tahap-perkiraan{display:block;margin-top:6px}
+.tahap-perkiraan .ina-badge{display:inline-flex;align-items:center;gap:6px}
+.status-kartu .ina-stepper__label small.tahap-waktu{margin-top:4px;font-size:11.5px}
+.waktu-baris{display:block;margin:2px 0 8px}
+.waktu-baris .ina-badge{display:inline-flex;align-items:center;gap:6px}
 .status-kartu .ina-stepper__label small{display:block;margin-top:3px;font-size:12px;line-height:16px;font-weight:400;color:var(--ina-content-secondary)}
 .status-kaki{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ina-stroke-primary);margin-top:8px;padding-top:16px}
 .status-kaki p{margin:0;font-size:14px;color:var(--ina-content-secondary)}
@@ -296,7 +309,7 @@ body .protobar{z-index:1001}
   .saring{grid-template-columns:1fr}
   .f-grid,.syarat ul,.kartu-pihak dl,.bantu-kontak{grid-template-columns:1fr}
   .status-kartu{padding:18px 16px}
-  .status-kartu .stepper-h{display:none}
+  .status-kartu .gulir-tahap{display:none}
   .status-kartu .stepper-v{display:flex!important;padding:4px 0}
   .ringkas-kv{grid-template-columns:1fr;gap:2px}
   .protobar .kanan{margin-left:0}
@@ -306,7 +319,6 @@ body .protobar{z-index:1001}
   .aksi-baris{justify-content:flex-start}
 }
 .status-kartu .stepper-v{display:none}
-.status-kartu .stepper-v .ina-stepper__label small{display:inline;margin:0 0 0 8px}
 .status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
 </style>
 <style id="user-css">
@@ -605,7 +617,7 @@ function simpanKlienAjb() {
 }
 function contoh() {
   return klienAjb().concat([
-    { ...U(0, 'Admin Contoh', 'admin@contoh.id', window.SESI_PROTO && window.SESI_PROTO.peran.includes('ROLE_ADMIN') ? window.SESI_PROTO.peran : ['ROLE_ADMIN', 'ROLE_PPAT'], 'none', 'ACTIVE', '26 Okt 2026'), terkunci:true },
+    { ...U(0, 'Admin Contoh', 'admin@contoh.id', window.SESI_PROTO && window.SESI_PROTO.peran.includes('ROLE_ADMIN') ? window.SESI_PROTO.peran : ['ROLE_ADMIN'], 'none', 'ACTIVE', '26 Okt 2026'), terkunci:true },
     U(1, 'PPAT Contoh Satu', 'ppat1@contoh.id', 'ROLE_PPAT', 'active', 'ACTIVE', '26 Okt 2026'),
     U(2, 'Asisten Contoh', 'asisten1@contoh.id', ['ROLE_ASISTEN', 'ROLE_KLIEN'], 'ekyc', 'ACTIVE', '26 Okt 2026'),
     U(3, 'Contoh Penjual Satu', 'penjual1@contoh.id', 'ROLE_KLIEN', 'active', 'ACTIVE', '24 Okt 2026'),
@@ -632,7 +644,7 @@ function trialPenuh() {
 }
 /* status CA live + penjelasan (HE-USER-01) */
 const CA = {
-  active:{ l:'Sertifikat Elektronik Aktif', b:'success', t:'Sertifikat elektronik aktif. Pengguna dapat menandatangani akta secara elektronik.' },
+  active:{ l:'Aktif sampai 26 Okt 2027', b:'success', t:'Sertifikat elektronik aktif. Pengguna dapat menandatangani akta secara elektronik. Sertifikat berlaku 1 tahun sejak aktif.' },
   ekyc:{ l:'Proses eKYC', b:'info', t:'Pengguna sedang memverifikasi identitas (eKYC) di portal Peruri. Belum dapat menandatangani.' },
   review:{ l:'Menunggu verifikasi', b:'info', t:'eKYC selesai; Peruri sedang memeriksa data pengguna. Biasanya selesai dalam 1 hari kerja.' },
   expired:{ l:'Kedaluwarsa', b:'warning', t:'Masa berlaku sertifikat habis. Pengguna perlu registrasi CA ulang melalui Akun Saya, atau admin memulainya dari Ubah Pengguna.' },
@@ -656,7 +668,7 @@ const S = { status:'all', peran:'all', cari:'', pilih:new Set(), menu:null, pera
 /* ---------------- sidebar (menu live Super Admin, sama dengan prototipe TERA) ---------------- */
 const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
   { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text']] },
-  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Verifikasi Berkas','tb_circle_check'],['Penyusunan Akta','tb_file_pencil'],['Penyusunan Akta v2','tb_file_description'],['Penandatanganan Akta','tb_signature'],['Salinan Akta','tb_files']] },
+  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Salinan Akta','tb_files']] },
   { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building'],['Daftar Pengguna','tb_users','user'],['Peran & Izin','tb_shield_lock'],['Log Aktivitas','tb_history'],['Aktivasi e-Meterai','tb_rubber_stamp']] },
   { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge'],['Pengaturan','tb_settings']] },
   { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home'],['Tema Tampilan','tb_palette'],['Master Konten','tb_database'],['Artikel & Halaman','tb_article'],['Pustaka Media','tb_photo']] }
@@ -669,7 +681,7 @@ function gambarNav() {
 }
 const SYS = 'Backlog-IDDS-TN-SYSTEM-Prototype.html';
 const CMS = 'Backlog-IDDS-TN-CMS-Prototype.html';
-const PROTO = { 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Verifikasi Berkas':'Backlog-HE-VERIF-Prototype.html', 'Penyusunan Akta':'Backlog-HE-MINUTA-Prototype.html', 'Penyusunan Akta v2':'Backlog-HE-MINUTA-V2-Prototype.html', 'Penandatanganan Akta':'Backlog-HE-EAW-Prototype.html', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
+const PROTO = { 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
 $('#nav').addEventListener('click', e => {
   const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
   const a = e.target.closest('a'); if (!a) return; e.preventDefault();
@@ -720,7 +732,7 @@ function layar() {
           <td class="ina-table__cell"><span class="sel-email">${esc(u.email)}</span></td>
           <td class="ina-table__cell"><span class="peran-sel">${u.peran.map(p => p === 'ROLE_ADMIN' ? denganTip(badge(PERAN[p], 'brand', 'sm', 'tabindex="0"'), KET_ADMIN) : badge(PERAN[p], 'info', 'sm')).join('')}</span></td>
           <td class="ina-table__cell"><span class="sel-email">${u.login || '—'}</span></td>
-          <td class="ina-table__cell">${denganTip(badge(c.l, c.b, 'sm', 'tabindex="0"'), c.t)}</td>
+          <td class="ina-table__cell">${u.terkunci && !u.peran.includes('ROLE_PPAT') ? '—' : denganTip(badge(c.l, c.b, 'sm', 'tabindex="0"'), c.t)}</td>
           <td class="ina-table__cell">${denganTip(badge(sl, sb, 'sm', 'tabindex="0"'), st)}</td>
           <td class="ina-table__cell" style="text-align:right">${menuAksi(u)}</td></tr>`; }).join('')
         : `<tr><td colspan="8" class="ina-table__empty-cell kosong">${S.cari ? `Tidak ada pengguna cocok dengan "${esc(S.cari)}".` : 'Belum ada pengguna.'}</td></tr>`}</tbody></table></div></div></div>`;
@@ -999,7 +1011,12 @@ function simpanUser(mode, u) {
   const ktp = Object.fromEntries(ISIAN_KTP.map(id => [id, v(id)])), foto = S.ktp && ['ok', 'ragu', 'ada'].includes(S.ktp.status) ? S.ktp.nama : '';
   $('#lapisan').innerHTML = '';
   if (mode === 'create') { const id = Math.max(...USER.map(x => x.id)) + 1; USER.unshift({ id, nama, email, peran, ca:'none', status:'INVITED', login:'', kode:'USR_CONTOH' + id, hp, ktp, foto }); sorotBaris(id); toast('Pengguna berhasil dibuat.', 'positive', 4000, `Undangan dikirim ke ${esc(email)}. Status akun Diundang sampai pengguna membuat kata sandi.`); }
-  else { Object.assign(u, { nama, peran, status:status || u.status, hp, ktp, foto }); sorotBaris(u.id); toast('Pengguna berhasil diperbarui.', 'positive'); }
+  else {
+    const peranBerubah = u.terkunci && u.peran.join() !== peran.join();
+    Object.assign(u, { nama, peran, status:status || u.status, hp, ktp, foto }); sorotBaris(u.id);
+    if (peranBerubah) { const ppat = peran.includes('ROLE_PPAT'); window.sesiPeran(peran); toast('Peran Super Admin diperbarui.', 'positive', 3000, ppat ? 'Registrasi CA, Registrasi TERA, dan Aktivasi e-Meterai kini tersedia untuk akun ini.' : 'Registrasi CA, Registrasi TERA, dan Aktivasi e-Meterai tidak tersedia untuk akun ini.'); setTimeout(() => location.reload(), 2000); }
+    else toast('Pengguna berhasil diperbarui.', 'positive');
+  }
 }
 
 /* ---------------- Reset Password (live, 2 tahap) ---------------- */

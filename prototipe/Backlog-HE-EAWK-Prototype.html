@@ -71,6 +71,32 @@ html:not([data-brand='eppat']) .content,html:not([data-brand='eppat']) main.tn{b
 </script>
 
 <script id="sesi-kepala-js">try { window.SESI_PROTO = JSON.parse(localStorage.getItem('eppat-sesi')); var t = JSON.parse(localStorage.getItem('eppat-trial')) || {}; if (window.SESI_PROTO && window.SESI_PROTO.paket === 'trial') { if (t.nama) window.SESI_PROTO.nama = t.nama; if (t.email) window.SESI_PROTO.email = t.email; } window.PAKET_TRIAL = window.SESI_PROTO && window.SESI_PROTO.paket === 'trial' && !(t.db && t.db.ent) ? { batas:!!t.batas, pengguna:5, transaksi:10, upgrade:'Backlog-HE-TRIAL-Prototype.html#berlangganan' } : null; } catch (e) { window.SESI_PROTO = null; window.PAKET_TRIAL = null; }</script>
+<script id="ajb-bersama-js">
+/* Satu perjalanan Permohonan AJB lintas prototipe: Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta dibuka dari stepper,
+   menyimpan statusnya di sini, lalu Kembali ke stepper order yang sama. Alamat tujuan: <berkas>#order=KODE[&peran=ppat]. */
+window.AJB = (() => {
+  const KUNCI_SPESIMEN = 'eppat-spesimen';
+  const bacaSpesimen = () => { try { return JSON.parse(localStorage.getItem(KUNCI_SPESIMEN)) || {}; } catch (e) { return {}; } };
+  const tulisSpesimen = d => { try { localStorage.setItem(KUNCI_SPESIMEN, JSON.stringify(d)); } catch (e) { /* lihat tulis() */ } };
+  const KUNCI = 'eppat-ajb-v3', ORDER = 'Backlog-HE-ORDER-Prototype.html';
+  const HAL = { verif:'Backlog-HE-VERIF-Prototype.html', susun:'Backlog-HE-MINUTA-V2-Prototype.html', ttd:'Backlog-HE-EAW-Prototype.html' };
+  const semua = () => { try { return JSON.parse(localStorage.getItem(KUNCI)) || {}; } catch (e) { return {}; } };
+  const tulis = d => { try { localStorage.setItem(KUNCI, JSON.stringify(d)); } catch (e) { /* peramban menolak penyimpanan: prototipe tetap berjalan */ } };
+  const param = k => (location.hash.match(new RegExp(`[#&]${k}=([^&]+)`)) || [])[1] || '';
+  return {
+    semua, kode:() => param('order'), peran:() => param('peran'),
+    ambil:k => semua()[k] || {},
+    simpan:(k, isi) => { const d = semua(); d[k] = { ...d[k], ...isi }; tulis(d); },
+    buang:k => { const d = semua(); delete d[k]; tulis(d); },
+    hapus:() => { try { localStorage.removeItem(KUNCI); } catch (e) { /* lihat tulis() */ } },
+    spesimen:email => bacaSpesimen()[email] || '',
+    simpanSpesimen:(email, gbr) => { const d = bacaSpesimen(); if (gbr) d[email] = gbr; else delete d[email]; tulisSpesimen(d); },
+    alamat:(hal, kode, peran) => `${HAL[hal]}#order=${kode}${peran ? '&peran=' + peran : ''}`,
+    keStepper:kode => { location.href = kode ? `${ORDER}#order=${kode}` : ORDER; }
+  };
+})();
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Backlog E-PPAT Peruri — Penandatanganan Akta (Klien)</title>
@@ -346,8 +372,21 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .det-kepala .kode{font:600 14px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary);margin-top:12px}
 .det-kepala h2{margin:2px 0 0;font:600 20px/28px Inter,sans-serif}
 .status-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px 28px}
-.status-kartu .ina-stepper{align-items:flex-start;min-height:92px;padding:4px 64px 0}
-.status-kartu .ina-stepper__separator{align-self:flex-start;margin-top:11px}
+.gulir-tahap{overflow-x:auto;padding-bottom:4px}
+.status-kartu .stepper-h.ina-stepper{display:flex;align-items:flex-start;width:100%;min-width:1000px;min-height:0;padding:4px 0 12px}
+.stepper-h .ina-stepper__item{flex-direction:column;align-items:center;gap:6px;height:auto;max-height:none;flex:0 0 auto;width:160px;padding:0}
+.stepper-h .ina-stepper__label{position:static;transform:none;white-space:normal;text-align:center;max-width:160px;margin:0;font-size:13px;line-height:18px}
+.stepper-h .ina-stepper__icon-wrapper{position:relative;z-index:1}
+.status-kartu .stepper-h .ina-stepper__separator{align-self:flex-start;flex:1 1 auto;min-width:6px;margin:11px -68px 0;width:auto}
+.status-kartu .stepper-v.ina-stepper{height:auto;min-height:0}
+.status-kartu .stepper-v.ina-stepper .ina-stepper__item{height:auto;max-height:none;min-height:0;flex:none;align-items:flex-start}
+.status-kartu .stepper-v .ina-stepper__label{position:static;transform:none;white-space:normal;max-width:none}
+.status-kartu .ina-stepper__item--active .ina-stepper__label > span:first-child,.status-kartu .ina-stepper__item--completed .ina-stepper__label > span:first-child{font-weight:600;color:var(--ina-content-primary)}
+.tahap-status,.tahap-aksi,.tahap-perkiraan{display:block;margin-top:6px}
+.tahap-perkiraan .ina-badge{display:inline-flex;align-items:center;gap:6px}
+.status-kartu .ina-stepper__label small.tahap-waktu{margin-top:4px;font-size:11.5px}
+.waktu-baris{display:block;margin:2px 0 8px}
+.waktu-baris .ina-badge{display:inline-flex;align-items:center;gap:6px}
 .status-kartu .ina-stepper__label small{display:block;margin-top:3px;font-size:12px;line-height:16px;font-weight:400;color:var(--ina-content-secondary)}
 .status-kaki{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ina-stroke-primary);margin-top:8px;padding-top:16px}
 .status-kaki p{margin:0;font-size:14px;color:var(--ina-content-secondary)}
@@ -509,7 +548,7 @@ body .protobar{z-index:1001}
   .saring{grid-template-columns:1fr}
   .f-grid,.syarat ul,.kartu-pihak dl,.bantu-kontak{grid-template-columns:1fr}
   .status-kartu{padding:18px 16px}
-  .status-kartu .stepper-h{display:none}
+  .status-kartu .gulir-tahap{display:none}
   .status-kartu .stepper-v{display:flex!important;padding:4px 0}
   .ringkas-kv{grid-template-columns:1fr;gap:2px}
   .protobar .kanan{margin-left:0}
@@ -519,7 +558,6 @@ body .protobar{z-index:1001}
   .aksi-baris{justify-content:flex-start}
 }
 .status-kartu .stepper-v{display:none}
-.status-kartu .stepper-v .ina-stepper__label small{display:inline;margin:0 0 0 8px}
 .status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
 </style>
 <style id="eawk-css">
@@ -693,10 +731,11 @@ body:has(#otpWaktu) .protobar{position:relative;z-index:3000}
   <span class="sep">&bull;</span><b>Penandatanganan Akta</b><span class="sep">&bull;</span><span>Peran: Klien</span>
   <span class="sep">&bull;</span><span>Kode OTP contoh: angka 6 digit apa saja (000000 = salah)</span>
   <span class="kanan">
+    <button class="pil" id="simSpesimen" title="Mensimulasikan spesimen tanda tangan Klien">Spesimen: belum ada</button>
     <button class="pil" id="simKedaluwarsa" title="Saat dialog OTP terbuka">Simulasi OTP kedaluwarsa</button>
     <button class="pil" id="aturUlang">Atur ulang contoh</button>
     <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai usulan</button>
-    <button class="pil utama" id="bukaUbah">Daftar perubahan (9)</button>
+    <button class="pil utama" id="bukaUbah">Daftar perubahan (10)</button>
   </span>
 </div>
 
@@ -795,6 +834,9 @@ const UBAH = [
   { kode:'HE-EAWK-07', judul:'Daftar akta Klien: panduan singkat untuk pengguna baru',
     isi:'Di atas daftar akta ada kartu "Pertama kali menandatangani akta elektronik?" berisi tiga langkah singkat dan tombol "Lihat panduan lengkap". Kartu dapat ditutup dan panduan tetap dapat dibuka lagi melalui tombol Bantuan.',
     lama:'Tidak ada tutorial atau panduan awal. Instruksi baru muncul setelah pengguna membuka akta tertentu, sehingga pengguna baru tidak mendapat gambaran menyeluruh.', ke:'panduan', sorot:'#panduanAwal', sumber:'Laporan HE INA Digital hlm. 37 (Temuan 2)' },
+  { kode:'HE-EAWK-08', versi:'v2', bukanHE:true, judul:'Tanda tangan ditahan sampai spesimen dimasukkan',
+    isi:'Saat giliran tanda tangan tiba dan spesimen belum ada, kartu Langkah berikutnya memberi tahu bahwa spesimen harus dimasukkan terlebih dahulu, walaupun sertifikat sudah aktif. Tombol Masukkan Spesimen membuka Registrasi CA, lalu pengguna kembali ke akta yang sama.',
+    lama:'Pengguna dengan sertifikat aktif dapat menandatangani tanpa spesimen.', ke:'spesimen', sorot:'#kartuBerikut', sumber:'Masukan Peruri, 6 Nov 2026' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Penandatanganan Akta',
     isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi urutan tanda tangan, pertanyaan umum (apa itu tanda tangan elektronik, kapan giliran saya, OTP tidak masuk, salah tanda tangan, posisi belum ditentukan), kontak kantor PPAT, dan kontak dukungan E-PPAT. Ikon ? bertooltip menjelaskan istilah tanda tangan elektronik, sertifikat elektronik (CA), OTP, status akta, peran para pihak, urutan tanda tangan, dan posisi tanda tangan.',
     lama:'Tidak ada menu bantuan, pertanyaan umum, atau penjelasan istilah selama proses tanda tangan (skor Help & Documentation: 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
@@ -838,6 +880,7 @@ function contoh() {
   ];
 }
 let AKTA = contoh();
+const spesimenAda = () => !!AJB.spesimen(EMAIL);
 const bisaTtd = x => (x.state === 'GILIRAN_ANDA' || x.state === 'OTP_TERKIRIM') && !!x.hal;
 const sayaDi = x => x.urutan.find(s => s.saya);
 
@@ -943,6 +986,7 @@ function kartuBerikut(x) {
   const st = ST[x.state], s = sayaDi(x), kepala = t => `<div class="eyebrow2">Langkah berikutnya${usulan('HE-EAWK-03')}</div><h4>${t}</h4>`;
   const bungkus = isi => `<div class="ina-card ina-card--variant-basic berikut ditandai" id="kartuBerikut"><div class="ina-card__content">${isi}</div></div>`;
   if (x.state === 'GILIRAN_ANDA' && !x.hal) return bungkus(`${kepala('Menunggu Kantor PPAT')}${alert('caution', 'Posisi tanda tangan belum ditentukan', `${esc(x.alasan)} Anda dapat menandatangani setelah kantor menempatkannya. Hubungi kantor melalui kontak di bawah.`)}`);
+  if (bisaTtd(x) && !spesimenAda()) return bungkus(`${kepala('Masukkan spesimen terlebih dahulu')}${alert('caution', 'Spesimen tanda tangan belum ada', `Sertifikat elektronik Anda sudah aktif, tetapi Anda perlu memasukkan ${istilah('spesimen', 'SPESIMEN')} tanda tangan sebelum menandatangani akta ini.${usulan('HE-EAWK-08')}`)}<a class="ina-button ina-button--primary ina-button--md" id="keSpesimen" style="margin-top:12px;text-decoration:none" href="Backlog-HE-CA-Prototype.html#spesimen=${x.kode}">${ik('pena', 16)}Masukkan Spesimen</a>`);
   if (bisaTtd(x)) {
     const otp = x.state === 'OTP_TERKIRIM', habis = otp && x.otpHabis <= Date.now();
     const L = [
@@ -974,7 +1018,7 @@ function kartuInfo(x) {
   return `<div class="ina-card ina-card--variant-basic"><div class="ina-card__content">
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="kd-info">${x.kode}</span>${badge(st.l, st.b, 'sm')}${tanya('Status akta', 'Status menunjukkan tahap akta saat ini. "Giliran Anda" berarti akta menunggu tanda tangan Anda, "Menunggu giliran" berarti akta menunggu pihak lain, dan "Selesai" berarti semua pihak sudah menandatangani.')}</div>
     <div style="margin-top:4px;font-size:14px">Akta Jual Beli</div>
-    <dl class="kv"><dt>Peran Anda${tanya('Peran Anda', 'Peran menunjukkan kedudukan Anda dalam akta, misalnya Pihak Pertama sebagai penjual, Pihak Kedua sebagai pembeli, atau Saksi. Angka urutan menunjukkan giliran tanda tangan Anda.')}</dt><dd>${x.peran} · urutan ${s.seq + 1}</dd><dt>${istilah('Sertifikat (CA)', 'CA')}</dt><dd>${badge('Aktif', 'success', 'sm')}</dd><dt>Email OTP</dt><dd>${EMAIL}</dd>${x.state !== 'MENUNGGU_TERA' ? `<dt>Dokumen</dt><dd>${JHAL} halaman</dd>` : ''}</dl></div></div>`;
+    <dl class="kv"><dt>Peran Anda${tanya('Peran Anda', 'Peran menunjukkan kedudukan Anda dalam akta, misalnya Pihak Pertama sebagai penjual, Pihak Kedua sebagai pembeli, atau Saksi. Angka urutan menunjukkan giliran tanda tangan Anda.')}</dt><dd>${x.peran} · urutan ${s.seq + 1}</dd><dt>${istilah('Sertifikat (CA)', 'CA')}</dt><dd>${badge('Aktif sampai 26 Okt 2027', 'success', 'sm')}</dd><dt>Email OTP</dt><dd>${EMAIL}</dd>${x.state !== 'MENUNGGU_TERA' ? `<dt>Dokumen</dt><dd>${JHAL} halaman</dd>` : ''}</dl></div></div>`;
 }
 /* label live "Tertanda tangan" / "Sedang tanda tangan" dibakukan, sama dengan prototipe E-Akta Wizard PPAT */
 const STATUS_URUT = s => s.status === 'SIGNED' ? ['Sudah menandatangani', 'success'] : s.status === 'OTP_SENT' ? ['Sedang menandatangani', 'warning'] : ['Menunggu', 'neutral'];
@@ -1213,6 +1257,7 @@ function lihat(u) {
   if (u.ke === 'daftar') keDaftar();
   if (u.ke === 'panduan') { S.panduan = true; try { localStorage.removeItem('eawk-panduan-tutup'); } catch (e) {} keDaftar(); }
   if (u.ke === 'giliran') buka('ORD-CONTOH-021');
+  if (u.ke === 'spesimen') { AJB.simpanSpesimen(EMAIL, ''); gambarSpesimen(); buka('ORD-CONTOH-021'); }
   if (u.ke === 'konfirm') { buka('ORD-CONTOH-021'); konfirmTtd(); return; }
   if (u.ke === 'otp') { buka('ORD-CONTOH-022'); bukaOtp(); return; }
   if (u.ke === 'tanpa-posisi') buka('ORD-CONTOH-023');
@@ -1220,10 +1265,15 @@ function lihat(u) {
   if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); }
 }
 $('#aturUlang').addEventListener('click', () => { AKTA = contoh(); Object.assign(S, { cari:'', grup:'', urut:'perlu', panduan:true }); try { localStorage.removeItem('eawk-panduan-tutup'); } catch (e) {} keDaftar(); toast('Data contoh dikembalikan ke awal.'); });
+const gambarSpesimen = () => { const b = $('#simSpesimen'); b.textContent = `Spesimen: ${spesimenAda() ? 'sudah ada' : 'belum ada'}`; b.setAttribute('aria-pressed', spesimenAda()); };
+$('#simSpesimen').addEventListener('click', () => { AJB.simpanSpesimen(EMAIL, spesimenAda() ? '' : 'contoh'); gambarSpesimen(); gambar(); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+gambarSpesimen();
 gambar();
+const aktaAwal = (location.hash.match(/^#akta=(.+)$/) || [])[1];
+if (AKTA.some(x => x.kode === aktaAwal)) buka(aktaAwal);
 })();
 </script>
 <!-- ===== Notifikasi bersama (lonceng di header) — IDDS-TN-39
@@ -1333,9 +1383,9 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
 
   /* contoh data bersama staf kantor (netral; sama untuk semua prototipe staf) */
   const DATA_STAF = [
-    { id: 'n8', jenis: 'giliran', judul: 'Giliran Anda menandatangani akta', isi: 'Akta Jual Beli ORD-CONTOH-009 menunggu tanda tangan elektronik Anda.', lalu: 20 * 1000, baca: false, ke: 'Backlog-HE-EAW-Prototype.html' },
+    { id: 'n8', jenis: 'giliran', judul: 'Giliran Anda menandatangani akta', isi: 'Akta Jual Beli ORD-CONTOH-009 menunggu tanda tangan elektronik Anda.', lalu: 20 * 1000, baca: false, ke: 'Backlog-HE-ORDER-Prototype.html#order=ORD-CONTOH-009' },
     { id: 'n7', jenis: 'order', judul: 'Permohonan baru ORD-CONTOH-014', isi: 'Asisten Contoh membuat permohonan Akta Jual Beli untuk Contoh Penjual Satu.', lalu: 5 * MENIT, baca: false, ke: 'Backlog-HE-ORDER-Prototype.html' },
-    { id: 'n6', jenis: 'verifikasi', judul: 'Berkas ORD-CONTOH-012 perlu diverifikasi', isi: 'Contoh Penjual Satu mengunggah KTP dan sertipikat. Periksa berkas sebelum akta disusun.', lalu: 42 * MENIT, baca: false, ke: 'Backlog-HE-VERIF-Prototype.html' },
+    { id: 'n6', jenis: 'verifikasi', judul: 'Berkas ORD-CONTOH-012 perlu diverifikasi', isi: 'Contoh Penjual Satu mengunggah KTP dan sertipikat. Periksa berkas sebelum akta disusun.', lalu: 42 * MENIT, baca: false, ke: 'Backlog-HE-ORDER-Prototype.html#order=ORD-CONTOH-012' },
     { id: 'n5', jenis: 'sistem', judul: 'Pemeliharaan sistem terjadwal', isi: 'E-PPAT tidak dapat diakses pada Sabtu, 31 Oktober 2026, pukul 22.00–23.00 WIB.', lalu: 2 * JAM, baca: false, ke: '' },
     { id: 'n4', jenis: 'sistem', judul: 'Pendaftaran TERA kantor diproses Peruri', isi: 'Peruri sedang memeriksa data TERA kantor Anda. Hasilnya akan dikirim lewat notifikasi dan email.', lalu: 3 * JAM, baca: true, ke: 'Backlog-HE-TERA-Prototype.html#registrasi' },
     { id: 'n3', jenis: 'akta', judul: 'Akta ORD-CONTOH-005 selesai', isi: 'Akta sudah difinalisasi. Unggah scan akta, lalu kirim salinannya di menu Salinan Akta.', lalu: 7 * JAM, baca: true, ke: 'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan' },
@@ -1600,22 +1650,22 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
     { kunci:'admin', label:'Super Admin', nama:'Admin Contoh', email:'admin@contoh.id', peran:['ROLE_ADMIN'], ca:'kurang' },
     { kunci:'admin-ppat', label:'Super Admin + PPAT', nama:'Admin Contoh', email:'admin.ppat@contoh.id', peran:['ROLE_ADMIN', 'ROLE_PPAT'], ca:'kurang' },
     { kunci:'admin-trial', label:'Super Admin Trial', nama:'Contoh PPAT Baru', email:'ppat.baru@contoh.id', peran:['ROLE_ADMIN'], ca:'kurang', paket:'trial' },
-    { kunci:'ppat', label:'PPAT', nama:'PPAT Contoh Satu', email:'ppat1@contoh.id', peran:['ROLE_PPAT'], ca:'aktif' },
+    { kunci:'ppat', label:'PPAT', nama:'PPAT Contoh Satu', email:'ppat1@contoh.id', peran:['ROLE_PPAT'], ca:'selesai' },
     { kunci:'asisten', label:'Asisten', nama:'Asisten Contoh', email:'asisten1@contoh.id', peran:['ROLE_ASISTEN'], ca:'ekyc' },
     { kunci:'klien', label:'Klien', nama:'Contoh Klien Satu', email:'klien1@contoh.id', peran:['ROLE_KLIEN'], ca:'kurang' }
   ];
-  const STATUS_CA = { kurang:['Belum terdaftar', 'neutral'], ekyc:['Menunggu eKYC', 'info'], aktif:['Aktif', 'success'] };
-  const STAF = ['Permohonan AJB', 'Dashboard Akta', 'Verifikasi Berkas', 'Penyusunan Akta', 'Penyusunan Akta v2', 'Penandatanganan Akta', 'Salinan Akta', 'Profil Kantor'];
+  const STATUS_CA = { kurang:['Belum terdaftar', 'neutral'], ekyc:['Menunggu eKYC', 'info'], aktif:['Aktif sampai 26 Okt 2027', 'success'], selesai:['Aktif sampai 26 Okt 2027', 'success'] };
+  const STAF = ['Permohonan AJB', 'Dashboard Akta', 'Salinan Akta', 'Profil Kantor'];
   const MENU_PERAN = { ROLE_PPAT:[...STAF, 'Daftar Pengguna', 'Aktivasi e-Meterai'], /* Daftar Pengguna untuk kebutuhan prototipe; di live PPAT tidak memilikinya */ ROLE_ASISTEN:[...STAF, 'Daftar Pengguna', 'Dashboard Sistem'], ROLE_KLIEN:['Penandatanganan Akta'] };
   /* layar di dalam satu prototipe yang punya syarat menu sendiri */
   const LAYAR_MENU = { '#peran':'Peran & Izin', '#logs':'Log Aktivitas', '#pengaturan':'Pengaturan', '#emeterai':'Aktivasi e-Meterai' };
   const LANDAS = { ROLE_ADMIN:SYS + '#dasbor', ROLE_PPAT:EP + '#dashboard', ROLE_ASISTEN:EP + '#dashboard', ROLE_KLIEN:'Backlog-HE-EAWK-Prototype.html' };
   /* halaman → menu yang menjadi syarat akses */
-  const HALAMAN = { 'HE-USER':'Daftar Pengguna', 'HE-VERIF':'Verifikasi Berkas', 'HE-MINUTA':'Penyusunan Akta', 'HE-MINUTA-V2':'Penyusunan Akta v2', 'HE-EAW':'Penandatanganan Akta', 'HE-ORDER':'Permohonan AJB', 'HE-TERA':'Aktivasi e-Meterai', 'IDDS-TN-EPPAT':'Dashboard Akta', 'IDDS-TN-SYSTEM':'Dashboard Sistem', 'IDDS-TN-CMS':'Halaman Depan' };
+  const HALAMAN = { 'HE-USER':'Daftar Pengguna', 'HE-VERIF':'Permohonan AJB', 'HE-MINUTA-V2':'Permohonan AJB', 'HE-EAW':'Permohonan AJB', 'HE-ORDER':'Permohonan AJB', 'HE-TERA':'Aktivasi e-Meterai', 'IDDS-TN-EPPAT':'Dashboard Akta', 'IDDS-TN-SYSTEM':'Dashboard Sistem', 'IDDS-TN-CMS':'Halaman Depan' };
   /* menu lengkap untuk halaman yang sidebarnya khusus Klien, saat dibuka peran staf */
   const MENU = [
     ['Layanan', [['Permohonan AJB', 'file-text', 'Backlog-HE-ORDER-Prototype.html']]],
-    ['Akta', [['Dashboard Akta', 'layout-dashboard', EP + '#dashboard'], ['Verifikasi Berkas', 'circle-check', 'Backlog-HE-VERIF-Prototype.html'], ['Penyusunan Akta', 'file-pencil', 'Backlog-HE-MINUTA-Prototype.html'], ['Penyusunan Akta v2', 'file-description', 'Backlog-HE-MINUTA-V2-Prototype.html'], ['Penandatanganan Akta', 'signature', 'Backlog-HE-EAW-Prototype.html'], ['Salinan Akta', 'files', EP + '#salinan']]],
+    ['Akta', [['Dashboard Akta', 'layout-dashboard', EP + '#dashboard'], ['Salinan Akta', 'files', EP + '#salinan']]],
     ['Pengaturan Kantor', [['Profil Kantor', 'building', EP + '#profil'], ['Daftar Pengguna', 'users', 'Backlog-HE-USER-Prototype.html'], ['Peran & Izin', 'shield-lock', SYS + '#peran'], ['Log Aktivitas', 'history', SYS + '#logs'], ['Aktivasi e-Meterai', 'rubber-stamp', EP + '#emeterai']]],
     ['Pengaturan Aplikasi', [['Dashboard Sistem', 'gauge', SYS + '#dasbor'], ['Pengaturan', 'settings', SYS + '#pengaturan']]],
     ['Konten Situs', [['Halaman Depan', 'home', CMS + '#landing'], ['Tema Tampilan', 'palette', CMS + '#tema'], ['Master Konten', 'database', CMS + '#master'], ['Artikel & Halaman', 'article', CMS + '#posts'], ['Pustaka Media', 'photo', CMS + '#media']]]
@@ -1630,6 +1680,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
   const baca = () => { try { return JSON.parse(localStorage.getItem(KUNCI)); } catch (e) { return null; } };
   const simpan = s => { try { localStorage.setItem(KUNCI, JSON.stringify(s)); } catch (e) { /* peramban menolak penyimpanan: prototipe tetap berjalan */ } };
   const sesi = baca();
+  let sesiTampil = sesi; /* tanpa sesi tersimpan: peran yang tampil di kepala halaman */
   /* paket Trial: keadaan dibagi dengan Backlog-HE-TRIAL (kunci eppat-trial); setelah upgrade akun menjadi Super Admin biasa */
   const KUNCI_TRIAL = 'eppat-trial', HAL_UPGRADE = 'Backlog-HE-TRIAL-Prototype.html#berlangganan';
   const bacaTrial = () => { try { return JSON.parse(localStorage.getItem(KUNCI_TRIAL)) || {}; } catch (e) { return {}; } };
@@ -1648,6 +1699,8 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
     simpan(dataSesi(a));
     location.href = LANDAS[a.peran[0]];
   };
+  /* Daftar Pengguna: Super Admin menambah atau melepas peran pada akunnya sendiri */
+  window.sesiPeran = peran => { const a = sesi && sesi.paket ? AKUN.find(x => x.paket) : AKUN.find(x => x.kunci === (peran.includes('ROLE_PPAT') ? 'admin-ppat' : 'admin')); simpan(dataSesi({ ...a, nama:sesi && sesi.paket ? sesi.nama : a.nama, email:sesi && sesi.paket ? sesi.email : a.email, peran })); };
   const keluar = () => { try { localStorage.removeItem(KUNCI); } catch (e) { /* lihat simpan() */ } location.href = MASUK; };
 
   /* halaman Masuk: pilihan simulasi ada di bawah tombol Masuk */
@@ -1657,7 +1710,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
   }
 
   const itemCa = () => {
-    if (sesi && sesi.tanpaDaftar) return '';
+    if (sesiTampil && sesiTampil.tanpaDaftar) return '';
     const nama = (document.querySelector('header .user .uname') || {}).textContent;
     const [l, j] = sesi && sesi.caL ? sesi.caL : STATUS_CA[(AKUN.find(a => a.nama === nama) || AKUN[0]).ca];
     return `<button type="button" class="ina-action-dropdown__item" role="menuitem" data-sesi-href="${REG_CA}"><span class="ina-action-dropdown__item-icon">${svg(I_TAMENG)}</span><span class="ina-action-dropdown__item-content">Registrasi CA</span><span class="ina-badge ina-badge--soft ina-badge--${j} ina-badge--sm ina-badge--rounded-full">${l}</span></button>`;
@@ -1681,7 +1734,16 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
 
   /* pilihan peran di bilah prototipe: tetap di halaman ini bila perannya boleh membukanya */
   const labelPeran = [...document.querySelectorAll('.protobar span')].find(el => /^Peran:/.test(el.textContent));
-  const kini = sesi ? sesi.kunci : (AKUN.find(a => a.label === ((pemicu && pemicu.querySelector('.urole')) || {}).textContent) || AKUN[0]).kunci;
+  const halamanPpat = berkas === 'HE-TERA' || location.hash === '#emeterai'; /* pendaftaran hanya untuk PPAT */
+  const kini = sesi ? sesi.kunci : halamanPpat ? 'ppat' : (AKUN.find(a => a.label === ((pemicu && pemicu.querySelector('.urole')) || {}).textContent) || AKUN[0]).kunci;
+  if (!sesi && !['HE-CA', 'HE-EAWK'].includes(berkas)) {
+    const a = AKUN.find(x => x.kunci === kini); sesiTampil = dataSesi(a);
+    if (halamanPpat && pemicu) [['.uname', a.nama], ['.urole', a.label], ['.ava', a.nama.charAt(0)]].forEach(([s, t]) => { const el = pemicu.querySelector(s); if (el) el.textContent = t; });
+    document.body.classList.toggle('sesi-tanpa-daftar', !!sesiTampil.tanpaDaftar);
+    document.body.classList.toggle('sesi-tanpa-ingat', !izin(sesiTampil, 'Aktivasi e-Meterai'));
+    const n = $('#nav'), saringTampil = () => n.querySelectorAll('a.nav-item').forEach(x => x.classList.toggle('sesi-sembunyi', !izin(sesiTampil, x.textContent.trim())));
+    if (n) { saringTampil(); new MutationObserver(saringTampil).observe(n, { childList:true }); }
+  }
   const pilihPeran = `<span id="sesiPeran"><label for="sesiPilih">Peran:</label> <select id="sesiPilih" class="sesi-pilih">${AKUN.map(a => `<option value="${a.kunci}" ${a.kunci === kini ? 'selected' : ''}>${a.label}</option>`).join('')}</select></span>`;
   if (labelPeran) labelPeran.outerHTML = pilihPeran;
   else { const judul = $('.protobar b'); if (judul) judul.insertAdjacentHTML('afterend', `<span class="sep">&bull;</span>${pilihPeran}`); }

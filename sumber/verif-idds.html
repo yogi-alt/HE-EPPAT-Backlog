@@ -133,8 +133,21 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .det-kepala .kode{font:600 14px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary);margin-top:12px}
 .det-kepala h2{margin:2px 0 0;font:600 20px/28px Inter,sans-serif}
 .status-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px 28px}
-.status-kartu .ina-stepper{align-items:flex-start;min-height:92px;padding:4px 64px 0}
-.status-kartu .ina-stepper__separator{align-self:flex-start;margin-top:11px}
+.gulir-tahap{overflow-x:auto;padding-bottom:4px}
+.status-kartu .stepper-h.ina-stepper{display:flex;align-items:flex-start;width:100%;min-width:1000px;min-height:0;padding:4px 0 12px}
+.stepper-h .ina-stepper__item{flex-direction:column;align-items:center;gap:6px;height:auto;max-height:none;flex:0 0 auto;width:160px;padding:0}
+.stepper-h .ina-stepper__label{position:static;transform:none;white-space:normal;text-align:center;max-width:160px;margin:0;font-size:13px;line-height:18px}
+.stepper-h .ina-stepper__icon-wrapper{position:relative;z-index:1}
+.status-kartu .stepper-h .ina-stepper__separator{align-self:flex-start;flex:1 1 auto;min-width:6px;margin:11px -68px 0;width:auto}
+.status-kartu .stepper-v.ina-stepper{height:auto;min-height:0}
+.status-kartu .stepper-v.ina-stepper .ina-stepper__item{height:auto;max-height:none;min-height:0;flex:none;align-items:flex-start}
+.status-kartu .stepper-v .ina-stepper__label{position:static;transform:none;white-space:normal;max-width:none}
+.status-kartu .ina-stepper__item--active .ina-stepper__label > span:first-child,.status-kartu .ina-stepper__item--completed .ina-stepper__label > span:first-child{font-weight:600;color:var(--ina-content-primary)}
+.tahap-status,.tahap-aksi,.tahap-perkiraan{display:block;margin-top:6px}
+.tahap-perkiraan .ina-badge{display:inline-flex;align-items:center;gap:6px}
+.status-kartu .ina-stepper__label small.tahap-waktu{margin-top:4px;font-size:11.5px}
+.waktu-baris{display:block;margin:2px 0 8px}
+.waktu-baris .ina-badge{display:inline-flex;align-items:center;gap:6px}
 .status-kartu .ina-stepper__label small{display:block;margin-top:3px;font-size:12px;line-height:16px;font-weight:400;color:var(--ina-content-secondary)}
 .status-kaki{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ina-stroke-primary);margin-top:8px;padding-top:16px}
 .status-kaki p{margin:0;font-size:14px;color:var(--ina-content-secondary)}
@@ -296,7 +309,7 @@ body .protobar{z-index:1001}
   .saring{grid-template-columns:1fr}
   .f-grid,.syarat ul,.kartu-pihak dl,.bantu-kontak{grid-template-columns:1fr}
   .status-kartu{padding:18px 16px}
-  .status-kartu .stepper-h{display:none}
+  .status-kartu .gulir-tahap{display:none}
   .status-kartu .stepper-v{display:flex!important;padding:4px 0}
   .ringkas-kv{grid-template-columns:1fr;gap:2px}
   .protobar .kanan{margin-left:0}
@@ -306,7 +319,6 @@ body .protobar{z-index:1001}
   .aksi-baris{justify-content:flex-start}
 }
 .status-kartu .stepper-v{display:none}
-.status-kartu .stepper-v .ina-stepper__label small{display:inline;margin:0 0 0 8px}
 .status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
 </style>
 <style id="verif-css">
@@ -400,7 +412,7 @@ body .protobar{z-index:1001}
   <span class="kanan">
     <button class="pil" id="aturUlang">Atur ulang contoh</button>
     <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai usulan</button>
-    <button class="pil utama" id="bukaUbah">Daftar perubahan (7)</button>
+    <button class="pil utama" id="bukaUbah">Daftar perubahan (6)</button>
   </span>
 </div>
 
@@ -501,9 +513,6 @@ const UBAH = [
   { kode:'HE-VERIF-03', judul:'Simpan verifikasi: konfirmasi dan pemeriksaan isian',
     isi:'"Tandai Terverifikasi" (objek tanah) dan "Simpan & Verifikasi" (harga) membuka IDDS Modal Confirmation berisi ringkasan data yang diverifikasi. Untuk objek tanah, pengguna mencentang daftar periksa (sertifikat asli, tidak ada blokir/sengketa, data sesuai). Isian NJOP dan luas yang kosong ditandai di bawah isian, bukan melalui toast. Bila harga jual di bawah NJOP, catatan alasan wajib diisi sebelum verifikasi. Verifikasi manual pihak tanpa akun juga meminta konfirmasi.',
     lama:'Tombol "Tandai Terverifikasi" dan "Simpan & Verifikasi" langsung mengubah status tanpa konfirmasi (skor H6 halaman: 0). NJOP kosong hanya memunculkan toast "Isi NJOP/m² dan luas tanah dulu."; harga jual di bawah NJOP hanya diberi teks kecil "⚠ … periksa" dan verifikasi tetap dapat disimpan tanpa catatan.', ke:'konfirm-objek', sorot:null, sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
-  { kode:'HE-VERIF-04', judul:'Daftar verifikasi: cari, saring, dan urutkan',
-    isi:'Selain IDDS Input Search (kode atau klien), tersedia saringan IDDS Button Group dengan jumlahnya (Semua, Belum dimulai, Sebagian, Lengkap) dan pilihan urutan (Paling lama menunggu, Terbaru). Hasil kosong menampilkan tombol "Hapus pencarian dan saringan".',
-    lama:'Daftar hanya memiliki kolom pencarian kode/klien tanpa saringan status atau urutan, sehingga sulit mengelola banyak order.', ke:'daftar', sorot:'#saringVerif', sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
   { kode:'HE-VERIF-05', judul:'Detail verifikasi: navigasi konsisten dan langkah berikutnya jelas',
     isi:'Judul ganda "Verifikasi Berkas" di daftar dihapus. Tombol Kembali dan identitas permohonan memakai pola yang sama dengan prototipe Penandatanganan Akta. Tab memakai IDDS Tab Horizontal selebar halaman dengan lencana status. Setelah satu bagian terverifikasi, toast menunjukkan bagian berikutnya dan tab berpindah otomatis. Setelah ketiganya selesai, IDDS Alert menyatakan permohonan siap penyusunan dengan tombol "Buka Permohonan AJB".',
     lama:'Judul "Verifikasi Akta" muncul dua kali di daftar. Letak tombol Kembali berbeda dengan halaman lain (bukti HE). Tab buatan sendiri dengan simbol; setelah verifikasi hanya muncul toast, tanpa arahan ke bagian berikutnya atau ke tahap drafting.', ke:'harga-011', sorot:'#tabVerif', sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
@@ -512,12 +521,12 @@ const UBAH = [
     lama:'Tidak ada panduan atau bantuan di halaman ini (skor Help & Documentation halaman: 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
     isi:'Tabel, Input Search, Button Group, Select Dropdown, Tab Horizontal, kartu, lencana, Text Field, Text Area, Checkbox, alert, tombol, tooltip, Modal Confirmation, Spinner, toast, dan drawer memakai komponen INA Digital Design System dengan brand E-PPAT.',
-    lama:'Tab, kartu, kotak centang, dan lencana dibuat sendiri.', ke:'daftar', sorot:null, sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' }
+    lama:'Tab, kartu, kotak centang, dan lencana dibuat sendiri.', ke:'tunggu', sorot:null, sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' }
 ];
 
 /* ---------------- data contoh (sama dengan prototipe Order AJB) ---------------- */
 const LABEL_TIPE = { PENJUAL:'Pihak Pertama', PEMBELI:'Pihak Kedua', SAKSI:'Saksi', PASANGAN:'Pasangan', LAINNYA:'Lainnya' };
-const CA = { active:{ l:'Sertifikat Elektronik Aktif', b:'success' }, pending:{ l:'Sertifikat Elektronik Diproses', b:'info' }, expired:{ l:'Sertifikat Elektronik Kedaluwarsa', b:'warning' }, revoked:{ l:'Sertifikat Elektronik Dicabut', b:'error' }, none:{ l:'Belum Ada Sertifikat Elektronik', b:'neutral' } };
+const CA = { active:{ l:'Sertifikat Elektronik Aktif sampai 26 Okt 2027', b:'success' }, pending:{ l:'Sertifikat Elektronik Diproses', b:'info' }, expired:{ l:'Sertifikat Elektronik Kedaluwarsa', b:'warning' }, revoked:{ l:'Sertifikat Elektronik Dicabut', b:'error' }, none:{ l:'Belum Ada Sertifikat Elektronik', b:'neutral' } };
 const SOLUSI = { pending:'Minta pihak menyelesaikan eKYC di portal Peruri, lalu tekan Cek Sertifikat Semua Pihak lagi.', expired:'Minta pihak mengajukan registrasi CA ulang melalui Akun Saya.', revoked:'Sertifikat dicabut Peruri. Hubungi pihak untuk registrasi CA baru.', none:'Minta pihak melakukan registrasi CA melalui Akun Saya.' };
 const OBJ = { hak:'SHM', sertifikat:'00001', nib:'00000000001', luas:120, lokasi:'Kel. Contoh, Kec. Contoh' };
 const ph = (nama, tipe, ca, akun = true) => ({ nama, tipe, ca, akun, manual:false });
@@ -550,13 +559,13 @@ const LBL = { ok:['Terverifikasi', 'success'], gagal:['Perlu dicek', 'warning'],
 const statusBagian = (x, k) => k === 'pihak' ? statusPihak(x) : x.v[k] ? 'ok' : 'belum';
 
 /* ---------------- keadaan ---------------- */
-const S = { layar:'daftar', aktif:null, tab:'pihak', cari:'', grup:'', urut:'lama', urutBuka:false, memuat:'' };
+const S = { layar:'detail', aktif:null, tab:'pihak', cari:'', grup:'', urut:'lama', urutBuka:false, memuat:'' };
 const o = () => DATA.find(x => x.kode === S.aktif);
 
 /* ---------------- sidebar (menu live Asisten Peruri, sama dengan prototipe Order AJB) ---------------- */
 const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
-  { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text']] },
-  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Verifikasi Berkas','tb_circle_check','verif'],['Penyusunan Akta','tb_file_pencil'],['Penyusunan Akta v2','tb_file_description'],['Penandatanganan Akta','tb_signature'],['Salinan Akta','tb_files']] },
+  { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text','ajb']] },
+  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Salinan Akta','tb_files']] },
   { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building'],['Daftar Pengguna','tb_users'],['Peran & Izin','tb_shield_lock'],['Log Aktivitas','tb_history'],['Aktivasi e-Meterai','tb_rubber_stamp']] },
   { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge'],['Pengaturan','tb_settings']] },
   { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home'],['Tema Tampilan','tb_palette'],['Master Konten','tb_database'],['Artikel & Halaman','tb_article'],['Pustaka Media','tb_photo']] }
@@ -567,57 +576,27 @@ function gambarNav() {
     <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
     <div class="items" ${grupBuka.has(i) ? '' : 'hidden'}>${g.m.map(([t, ic, ke]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item ${ke ? 'on' : ''}" data-ke="${ke || ''}" data-nama="${t}">${ik(ic)}<span>${t}</span></a>`).join('')}</div>`).join('');
 }
-const PROTO = { 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Penyusunan Akta':'Backlog-HE-MINUTA-Prototype.html', 'Penyusunan Akta v2':'Backlog-HE-MINUTA-V2-Prototype.html', 'Penandatanganan Akta':'Backlog-HE-EAW-Prototype.html', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
+const PROTO = { 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
 $('#nav').addEventListener('click', e => {
   const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
   const a = e.target.closest('a'); if (!a) return; e.preventDefault();
   if (!a.dataset.ke) { const nm = a.textContent.trim(); if (PROTO[nm]) { location.href = PROTO[nm]; return; } toast(`Menu ${nm} belum memiliki prototipe.`); return; }
-  keDaftar();
+  AJB.keStepper();
 });
 
-/* ---------------- layar daftar (seperti live) ---------------- */
-const remah = () => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link" data-ke-daftar><span class="ina-breadcrumb__text">Akta</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6l-6 6" /></svg></span></li><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">Verifikasi</span></span></li></ol></nav>`;
+const remah = () => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link" data-ke-order-daftar><span class="ina-breadcrumb__text">Layanan</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6l-6 6" /></svg></span></li><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link" data-ke-daftar><span class="ina-breadcrumb__text">Permohonan AJB</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6l-6 6" /></svg></span></li><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">Verifikasi Berkas</span></span></li></ol></nav>`;
 const cari = (id, ph, v, label) => `<div class="ina-input-search"><div class="ina-input-search__wrapper"><span class="ina-input-search__search-icon">${ik('cari', 20)}</span><input id="${id}" class="ina-input-search__input" type="search" placeholder="${ph}" aria-label="${label}" value="${esc(v)}" autocomplete="off"></div></div>`;
 const URUT = [['lama', 'Paling lama menunggu'], ['baru', 'Terbaru masuk']];
 const grupDari = x => jml(x) === 0 ? 'belum' : jml(x) < 3 ? 'sebagian' : 'lengkap';
 function lencanaProgres(x) { const n = jml(x); return badge(`${n}/3 terverifikasi`, n >= 3 ? 'success' : n > 0 ? 'info' : 'neutral', 'sm'); }
-function layarDaftar() {
-  const q = S.cari.trim().toLowerCase();
-  const rows = DATA.filter(x => (!S.grup || grupDari(x) === S.grup) && (!q || `${x.kode} ${x.klien}`.toLowerCase().includes(q)))
-    .sort((a, b) => S.urut === 'baru' ? b.siap - a.siap : a.siap - b.siap);
-  const n = g => DATA.filter(x => !g || grupDari(x) === g).length;
-  const grp = [['', 'Semua'], ['belum', 'Belum dimulai'], ['sebagian', 'Sebagian'], ['lengkap', 'Lengkap']];
-  return `${remah()}<h1>Verifikasi Berkas</h1><p class="sub">Pilih permohonan untuk memeriksa data para pihak, objek tanah, dan harga sebelum minuta disusun.</p>
-    <div class="saring-v ditandai" id="saringVerif">
-      ${cari('cariVerif', 'Cari kode / klien…', S.cari, 'Cari order')}
-      <div class="ina-button-group" role="group" aria-label="Saring kemajuan verifikasi">${grp.map(([v, t]) => `<button type="button" class="ina-button-group__button ${v === S.grup ? 'ina-button-group__button--selected' : ''}" aria-pressed="${v === S.grup}" data-grup="${v}"><span class="ina-button-group__button-content">${t} (${n(v)})</span></button>`).join('')}</div>
-      <div class="ina-select-dropdown urut-wadah"><button type="button" class="ina-select-dropdown__trigger ina-select-dropdown__trigger--size-md" id="urutTombol" aria-haspopup="listbox" aria-expanded="${S.urutBuka}" aria-label="Urutkan daftar"><span class="ina-select-dropdown__trigger-text ina-select-dropdown__trigger-text--selected">Urutkan: ${URUT.find(u => u[0] === S.urut)[1]}</span>${ik('bawah')}</button>
-        ${S.urutBuka ? `<div class="ina-select-dropdown__panel"><div class="ina-select-dropdown__options" role="listbox">${URUT.map(([v, t]) => `<button type="button" role="option" aria-selected="${v === S.urut}" class="ina-select-dropdown__option ${v === S.urut ? 'ina-select-dropdown__option--selected-single' : ''}" data-urut="${v}">${t}</button>`).join('')}</div></div>` : ''}</div>
-      ${usulan('HE-VERIF-04')}
-    </div>
-    <p class="ringkas-saring" aria-live="polite">Menampilkan ${rows.length} dari ${DATA.length} order${S.grup || S.cari ? '' : ` · ${DATA.filter(x => jml(x) < 3 && lama(x) > BATAS_HARI).length} permohonan menunggu lebih dari ${BATAS_HARI} hari`}.</p>
-    <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb">
-      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">Klien</th><th class="ina-table__header-cell">Verifikasi</th><th class="ina-table__header-cell">Menunggu ${usulan('HE-VERIF-02')}</th><th class="ina-table__header-cell">Dibuat</th><th class="ina-table__header-cell"></th></tr></thead>
-      <tbody class="ina-table__body">${rows.length ? rows.map(x => { const t = lama(x), telat = jml(x) < 3 && t > BATAS_HARI;
-        return `<tr class="ina-table__row ina-table__row--clickable klik" data-buka="${x.kode}">
-        <td class="ina-table__cell"><span class="kd">${x.kode}</span></td><td class="ina-table__cell">Akta Jual Beli</td><td class="ina-table__cell">${esc(x.klien)}</td>
-        <td class="ina-table__cell">${lencanaProgres(x)}</td>
-        <td class="ina-table__cell"><div class="tunggu">${jml(x) >= 3 ? '<span>—</span><small>Selesai diverifikasi</small>' : `<span>${t} hari ${telat ? badge(`Lewat ${BATAS_HARI} hari`, 'warning', 'sm') : ''}</span><small>Masuk verifikasi ${tgl(x.siap)}</small>`}</div></td>
-        <td class="ina-table__cell">${tgl(x.dibuat)}</td>
-        <td class="ina-table__cell" style="text-align:right">${tombol(jml(x) >= 3 ? 'Lihat' : 'Verifikasi', jml(x) >= 3 ? 'secondary' : 'primary', 'sm', `data-buka="${x.kode}"`, ik('tameng', 14))}</td></tr>`; }).join('')
-        : `<tr><td colspan="7" class="ina-table__empty-cell kosong">Tidak ada permohonan yang cocok.<div style="margin-top:10px">${tombol('Hapus pencarian dan saringan', 'secondary', 'sm', 'data-reset-saring')}</div></td></tr>`}</tbody></table></div></div>
-      <div class="halaman"><span>Menampilkan 1–${rows.length} dari ${rows.length}</span><div class="ina-pagination"><div class="ina-pagination__nav-container"><div class="ina-pagination__page-info">Halaman 1 dari 1</div><div class="ina-pagination__nav-buttons"><button type="button" class="ina-pagination__nav-button ina-pagination__nav-button--disabled" disabled aria-label="Sebelumnya">${ik('kiri', 16)}</button><button type="button" class="ina-pagination__page-button ina-pagination__page-button--active">1</button><button type="button" class="ina-pagination__nav-button ina-pagination__nav-button--disabled" disabled aria-label="Berikutnya">${ik('chev', 16)}</button></div></div></div></div>
-    </div>`;
-}
-
 /* ---------------- layar detail ---------------- */
 const TAB = [['pihak', 'Para Pihak', 'users'], ['objek', 'Objek Tanah', 'tanah'], ['harga', 'Harga Tanah', 'uang']];
 function layarDetail() {
   const x = o(), n = jml(x), t = lama(x);
-  const info = n >= 3 ? `<div class="selesai-semua ditandai" id="selesaiSemua">${alert('success', 'Ketiga verifikasi selesai', `Permohonan ${x.kode} siap masuk tahap penyusunan minuta. Pindahkan status permohonan ke <b>Penyusunan</b> di menu Permohonan AJB.${usulan('HE-VERIF-05')}`, tombol('Buka Permohonan AJB', 'primary', 'sm', 'data-ke-order', ik('panah', 14)))}</div>`
+  const info = n >= 3 ? `<div class="selesai-semua ditandai" id="selesaiSemua">${alert('success', 'Ketiga verifikasi selesai', `Permohonan ${x.kode} siap masuk tahap penyusunan. Kembali ke stepper, lalu tekan <b>Pindah ke Penyusunan Akta</b>.${usulan('HE-VERIF-05')}`, tombol('Kembali ke Permohonan AJB', 'primary', 'sm', 'data-ke-daftar', ik('panah', 14)))}</div>`
     : `<div class="info-tunggu ditandai" id="infoTunggu">${alert(t > BATAS_HARI ? 'caution' : 'info', t > BATAS_HARI ? `Menunggu verifikasi ${t} hari` : `${3 - n} bagian lagi belum diverifikasi`, `Permohonan masuk tahap Verifikasi Berkas sejak ${tgl(x.siap)}${t > BATAS_HARI ? `, lebih dari batas ${est(BATAS_HARI + ' hari')}` : ''}. Penyusunan minuta baru dapat dimulai setelah para pihak, objek tanah, dan harga terverifikasi.${usulan('HE-VERIF-02')}`)}</div>`;
   return `${remah()}<h1>Verifikasi Berkas</h1><p class="sub">Periksa data para pihak, objek tanah, dan harga, lalu tandai setiap bagian yang sudah sesuai.</p>
-    <div class="det-atas">${tombol('Kembali', 'secondary', 'sm', 'id="kembali"', ik('kiri', 14))}<span class="meta">${x.kode} · Akta Jual Beli · ${esc(x.klien)}</span></div>
+    <div class="det-atas">${tombol('Kembali', 'secondary', 'sm', 'id="kembali" aria-label="Kembali ke stepper Permohonan AJB"', ik('kiri', 14))}<span class="meta">${x.kode} · Akta Jual Beli · ${esc(x.klien)}</span></div>
     ${info}
     <div class="tab-verif ina-tab-horizontal ina-tab-horizontal--full-width ina-tab-horizontal--use-brand-color ditandai" id="tabVerif"><div class="ina-tab-horizontal__container ina-tab-horizontal__container--full-width" role="tablist">${TAB.map(([k, l, ic]) => { const [bl, bj] = LBL[statusBagian(x, k)];
       return `<button type="button" role="tab" data-tab="${k}" aria-selected="${S.tab === k}" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline ina-tab-horizontal__tab--full-width ${S.tab === k ? 'ina-tab-horizontal__tab--selected' : ''}">${ik(ic, 16)}<span class="lbl">${l}</span>${badge(bl, bj, 'sm')}</button>`; }).join('')}</div></div>
@@ -641,7 +620,7 @@ function tabObjek(x) {
   const st = statusBagian(x, 'objek'), ob = x.objek;
   return `<section class="ina-card ina-card--variant-basic kartu"><div class="ina-card__content">
     ${kepala('tanah', 'Verifikasi Objek Tanah', st, 'Konfirmasi data objek secara manual (integrasi BPN menyusul).')}
-    ${ob.length ? ob.map(b => `<dl class="objek"><div><dt>Hak</dt><dd>${b.hak}</dd></div><div><dt>No. Sertifikat</dt><dd>${b.sertifikat}</dd></div><div><dt>${istilah('NIB', 'NIB')}</dt><dd>${b.nib}</dd></div><div><dt>Luas</dt><dd>${b.luas} m²</dd></div><div class="lebar"><dt>Lokasi</dt><dd>${esc(b.lokasi)}</dd></div></dl>`).join('') : alert('critical', '', 'Belum ada objek tanah di permohonan ini. Tambahkan objek di menu Permohonan AJB.')}
+    ${ob.length ? ob.map(b => `<dl class="objek"><div><dt>Hak</dt><dd>${b.hak}</dd></div><div><dt>No. Sertifikat</dt><dd>${b.sertifikat}</dd></div><div><dt>${istilah('NIB', 'NIB')}</dt><dd>${b.nib}</dd></div><div><dt>Luas</dt><dd>${b.luas} m²</dd></div><div class="lebar"><dt>Lokasi</dt><dd>${esc(b.lokasi)}</dd></div></dl>`).join('') : alert('critical', '', 'Belum ada objek tanah di permohonan ini. Tambahkan objek di Permohonan AJB.')}
     <div class="ina-text-area" id="f-catObjek"><label class="ina-text-area__label" for="catObjek">Catatan Verifikasi <span class="opsional" style="font-weight:400;color:var(--ina-content-secondary)">(opsional)</span></label><div class="ina-text-area__wrapper ina-text-area__wrapper--status-neutral"><textarea id="catObjek" class="ina-text-area__input" rows="3" placeholder="Mis. sertifikat asli dicek, tidak ada sengketa/blokir." ${st === 'ok' ? 'disabled' : ''}>${esc(x.catObjek)}</textarea></div></div>
     <div class="kartu-kaki">${st === 'ok' ? `<span class="ket">${ik('centang', 14)} Objek tanah sudah terverifikasi.</span>` : `<span class="ket">Anda akan diminta mengonfirmasi hasil pemeriksaan.</span>${tombol('Tandai Terverifikasi', 'primary', 'md', `id="verifObjek" ${ob.length && !S.memuat ? '' : 'disabled'}`, S.memuat === 'objek' ? spinner : ik('centang', 16))}`}</div>
   </div></section>`;
@@ -669,8 +648,15 @@ function tabHarga(x) {
 }
 
 /* ---------------- gambar & navigasi ---------------- */
-function gambar() { gambarNav(); $('#halaman').innerHTML = S.layar === 'daftar' ? layarDaftar() : layarDetail(); pasangPanduan(); }
-function keDaftar() { Object.assign(S, { layar:'daftar', aktif:null, urutBuka:false }); gambar(); window.scrollTo({ top:0 }); }
+function gambar() { gambarNav(); $('#halaman').innerHTML = layarDetail(); pasangPanduan(); const x = o(); if (x) { const { dicek, v, catObjek, catHarga, njop, luas, pihak } = x; AJB.simpan(x.kode, { verif:{ ...v }, verifData:{ dicek, v, catObjek, catHarga, njop, luas, pihak } }); } }
+function keDaftar() { AJB.keStepper(S.aktif); }
+/* data order dari Permohonan AJB: hasil verifikasi tersimpan, atau order baru yang belum ada di contoh */
+function pastikan(kode) {
+  const d = AJB.ambil(kode), y = d.order; let x = DATA.find(z => z.kode === kode);
+  if (!x && y) { const b = y.objek[0] || {}; x = { kode, klien:y.kontak.nama, dibuat:HARI_INI, siap:HARI_INI, harga:+b.harga || 0, objek:y.objek.map(z => ({ ...z, luas:+z.luas })), pihak:y.pihak.map(p => ph(p.nama, p.tipe, p.ca === 'active' ? 'active' : null, p.ca === 'active')), dicek:null, v:{ ...y.verif }, catObjek:'', catHarga:'', njop:null, luas:+b.luas || 0 }; DATA.push(x); }
+  if (x && d.verifData) Object.assign(x, d.verifData);
+  return x;
+}
 function buka(kode, tab) {
   const x = DATA.find(y => y.kode === kode);
   /* tab pertama yang belum selesai dibuka otomatis (HE-VERIF-05) */
@@ -730,7 +716,7 @@ H.addEventListener('change', e => {
 H.addEventListener('click', e => {
   const t = e.target;
   if (t.closest('[data-ke-daftar]')) { e.preventDefault(); keDaftar(); return; }
-  if (t.closest('[data-ke-order]')) { location.href = 'Backlog-HE-ORDER-Prototype.html'; return; }
+  if (t.closest('[data-ke-order-daftar]')) { e.preventDefault(); AJB.keStepper(); return; }
   const gr = t.closest('[data-grup]'); if (gr) { S.grup = gr.dataset.grup; gambar(); return; }
   if (t.closest('#urutTombol')) { S.urutBuka = !S.urutBuka; gambar(); return; }
   const ur = t.closest('[data-urut]'); if (ur) { S.urut = ur.dataset.urut; S.urutBuka = false; gambar(); return; }
@@ -870,7 +856,6 @@ $('#bukaUbah').addEventListener('click', () => {
 });
 function lihat(u) {
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
-  if (u.ke === 'daftar') keDaftar();
   if (u.ke === 'tunggu') buka('ORD-CONTOH-010');
   if (u.ke === 'pihak-010') { const x = DATA.find(y => y.kode === 'ORD-CONTOH-010'); if (!x.dicek) x.dicek = '26 Okt 2026, 08.30'; buka('ORD-CONTOH-010', 'pihak'); }
   if (u.ke === 'konfirm-objek') { buka('ORD-CONTOH-003', 'objek'); konfirmObjek(); return; }
@@ -878,11 +863,13 @@ function lihat(u) {
   const el = u.sorot && $(u.sorot);
   if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); }
 }
-$('#aturUlang').addEventListener('click', () => { DATA = contoh(); Object.assign(S, { cari:'', grup:'', urut:'lama' }); keDaftar(); toast('Data contoh dikembalikan ke awal.'); });
+$('#aturUlang').addEventListener('click', () => { AJB.hapus(); location.reload(); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
-gambar();
+const kodeAwal = AJB.kode();
+DATA.forEach(x => pastikan(x.kode));
+buka(pastikan(kodeAwal) ? kodeAwal : 'ORD-CONTOH-003');
 })();
 </script>
 </body>

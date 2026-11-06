@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Backlog E-PPAT Peruri — Penyusunan Akta v2</title>
+<title>Backlog E-PPAT Peruri — Penyusunan Akta</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -133,8 +133,21 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .det-kepala .kode{font:600 14px ui-monospace,Menlo,monospace;color:var(--ina-primary-primary);margin-top:12px}
 .det-kepala h2{margin:2px 0 0;font:600 20px/28px Inter,sans-serif}
 .status-kartu{margin-top:20px;background:var(--ina-background-primary);border:1px solid var(--ina-stroke-primary);border-radius:16px;padding:24px 28px}
-.status-kartu .ina-stepper{align-items:flex-start;min-height:92px;padding:4px 64px 0}
-.status-kartu .ina-stepper__separator{align-self:flex-start;margin-top:11px}
+.gulir-tahap{overflow-x:auto;padding-bottom:4px}
+.status-kartu .stepper-h.ina-stepper{display:flex;align-items:flex-start;width:100%;min-width:1000px;min-height:0;padding:4px 0 12px}
+.stepper-h .ina-stepper__item{flex-direction:column;align-items:center;gap:6px;height:auto;max-height:none;flex:0 0 auto;width:160px;padding:0}
+.stepper-h .ina-stepper__label{position:static;transform:none;white-space:normal;text-align:center;max-width:160px;margin:0;font-size:13px;line-height:18px}
+.stepper-h .ina-stepper__icon-wrapper{position:relative;z-index:1}
+.status-kartu .stepper-h .ina-stepper__separator{align-self:flex-start;flex:1 1 auto;min-width:6px;margin:11px -68px 0;width:auto}
+.status-kartu .stepper-v.ina-stepper{height:auto;min-height:0}
+.status-kartu .stepper-v.ina-stepper .ina-stepper__item{height:auto;max-height:none;min-height:0;flex:none;align-items:flex-start}
+.status-kartu .stepper-v .ina-stepper__label{position:static;transform:none;white-space:normal;max-width:none}
+.status-kartu .ina-stepper__item--active .ina-stepper__label > span:first-child,.status-kartu .ina-stepper__item--completed .ina-stepper__label > span:first-child{font-weight:600;color:var(--ina-content-primary)}
+.tahap-status,.tahap-aksi,.tahap-perkiraan{display:block;margin-top:6px}
+.tahap-perkiraan .ina-badge{display:inline-flex;align-items:center;gap:6px}
+.status-kartu .ina-stepper__label small.tahap-waktu{margin-top:4px;font-size:11.5px}
+.waktu-baris{display:block;margin:2px 0 8px}
+.waktu-baris .ina-badge{display:inline-flex;align-items:center;gap:6px}
 .status-kartu .ina-stepper__label small{display:block;margin-top:3px;font-size:12px;line-height:16px;font-weight:400;color:var(--ina-content-secondary)}
 .status-kaki{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ina-stroke-primary);margin-top:8px;padding-top:16px}
 .status-kaki p{margin:0;font-size:14px;color:var(--ina-content-secondary)}
@@ -296,7 +309,7 @@ body .protobar{z-index:1001}
   .saring{grid-template-columns:1fr}
   .f-grid,.syarat ul,.kartu-pihak dl,.bantu-kontak{grid-template-columns:1fr}
   .status-kartu{padding:18px 16px}
-  .status-kartu .stepper-h{display:none}
+  .status-kartu .gulir-tahap{display:none}
   .status-kartu .stepper-v{display:flex!important;padding:4px 0}
   .ringkas-kv{grid-template-columns:1fr;gap:2px}
   .protobar .kanan{margin-left:0}
@@ -306,7 +319,6 @@ body .protobar{z-index:1001}
   .aksi-baris{justify-content:flex-start}
 }
 .status-kartu .stepper-v{display:none}
-.status-kartu .stepper-v .ina-stepper__label small{display:inline;margin:0 0 0 8px}
 .status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
 </style>
 <style id="minuta2-css">
@@ -578,11 +590,10 @@ body .protobar{z-index:1001}
 
 <div class="protobar">
   <a href="index.html">&#9776; Daftar prototipe</a>
-  <span class="sep">&bull;</span><b>Penyusunan Akta v2</b><span class="sep">&bull;</span><span>usulan tampilan</span>
+  <span class="sep">&bull;</span><b>Penyusunan Akta</b>
   <span class="sep">&bull;</span><span>Layar:</span>
   <span id="pilLayar" style="display:inline-flex;gap:6px;flex-wrap:wrap">
-    <button class="pil" data-layar="daftar" aria-pressed="true">Daftar</button>
-    <button class="pil" data-layar="asisten" aria-pressed="false">Editor (Asisten)</button>
+    <button class="pil" data-layar="asisten" aria-pressed="true">Editor (Asisten)</button>
     <button class="pil" data-layar="ppat" aria-pressed="false">Editor (PPAT)</button>
     <button class="pil" data-layar="final" aria-pressed="false">Final (hanya baca)</button>
   </span>
@@ -700,7 +711,7 @@ const T_FINAL = 'Finalisasi adalah langkah akhir oleh PPAT: memberi nomor dan ta
 const cek = (id, label, nyala, ket = '', mati = false) => `<label class="ina-checkbox cek" for="${id}"><input type="checkbox" id="${id}" class="ina-checkbox__input peer" ${nyala ? 'checked' : ''} ${mati ? 'disabled' : ''}><div class="ina-checkbox__box ina-checkbox__box--${nyala ? 'checked' : 'unchecked'}">${nyala ? ik('centang', 12) : ''}</div><div class="ina-checkbox__content"><span class="ina-checkbox__label">${label}${ket ? ` <small>${ket}</small>` : ''}</span></div></label>`;
 const setCek = (cb) => { const bx = cb.nextElementSibling; bx.classList.toggle('ina-checkbox__box--checked', cb.checked); bx.classList.toggle('ina-checkbox__box--unchecked', !cb.checked); bx.innerHTML = cb.checked ? ik('centang', 12) : ''; };
 const pisahRemah = `<span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6l-6 6" /></svg></span>`;
-const remah = (akhir, tengah) => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link" data-ke-daftar><span class="ina-breadcrumb__text">Akta</span></a>${pisahRemah}</li>${tengah ? `<li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link" data-ke-daftar><span class="ina-breadcrumb__text">${tengah}</span></a>${pisahRemah}</li>` : ''}<li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">${akhir}</span></span></li></ol></nav>`;
+const remah = (akhir, tengah) => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link" data-ke-order-daftar><span class="ina-breadcrumb__text">Layanan</span></a>${pisahRemah}</li>${tengah ? `<li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link" data-ke-daftar><span class="ina-breadcrumb__text">${tengah}</span></a>${pisahRemah}</li>` : ''}<li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">${akhir}</span></span></li></ol></nav>`;
 
 /* ---------------- daftar perubahan ---------------- */
 const UBAH = [
@@ -778,15 +789,14 @@ function contoh() {
   return [
     { kode:'ORD-CONTOH-004', narahubung:'Contoh Narahubung Empat', status:'DRAFTING', nomor:'', tgl:'', naskah:NASKAH(), atur:{ ...STANDAR } },
     { kode:'ORD-CONTOH-006', narahubung:'Contoh Narahubung Enam', status:'DRAFTING', nomor:'', tgl:'', naskah:NASKAH(), atur:{ ...STANDAR } },
-    { kode:'ORD-CONTOH-005', narahubung:'Contoh Narahubung Lima', status:'SELESAI', nomor:'12/2026', tgl:'15 Okt 2026', naskah:NASKAH(), atur:{ ...STANDAR } },
-    { kode:'ORD-CONTOH-003', narahubung:'Contoh Narahubung Tiga', status:'SELESAI', nomor:'11/2026', tgl:'9 Okt 2026', naskah:NASKAH(), atur:{ ...STANDAR } }
+    { kode:'ORD-CONTOH-005', narahubung:'Contoh Narahubung Lima', status:'SELESAI', nomor:'5/2026', tgl:'15 Okt 2026', naskah:NASKAH(), atur:{ ...STANDAR } }
   ];
 }
 let MINUTA = contoh();
 let idBaru = 100;
 
 /* ---------------- keadaan ---------------- */
-const S = { layar:'daftar', aktif:null, filter:'', cari:'', pilih:null, tab:'pasal', draf:null, ubah:false, kode:false, ejaanAktif:true, hasil:null, galatEjaan:false, memuat:'', galatJudul:'', kilau:null, aturBuka:false, aturAsal:null, lampiran:false,
+const S = { layar:'detail', aktif:null, filter:'', cari:'', pilih:null, tab:'pasal', draf:null, ubah:false, kode:false, ejaanAktif:true, hasil:null, galatEjaan:false, memuat:'', galatJudul:'', kilau:null, aturBuka:false, aturAsal:null, lampiran:false,
   peran:'asisten', nav:true, panel:true };
 const PERAN = { asisten:{ nama:'Asisten Contoh', label:'Asisten', huruf:'A' }, ppat:{ nama:'PPAT Contoh Satu, S.H.', label:'PPAT', huruf:'P' } };
 const m = () => MINUTA.find(x => x.kode === S.aktif);
@@ -799,8 +809,8 @@ const sempit = () => window.matchMedia('(max-width:900px)').matches;
 
 /* ---------------- sidebar (menu live Peruri) ---------------- */
 const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
-  { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text']] },
-  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Verifikasi Berkas','tb_circle_check'],['Penyusunan Akta','tb_file_pencil'],['Penyusunan Akta v2','tb_file_description','minuta'],['Penandatanganan Akta','tb_signature'],['Salinan Akta','tb_files']] },
+  { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text','ajb']] },
+  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Salinan Akta','tb_files']] },
   { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building'],['Daftar Pengguna','tb_users'],['Peran & Izin','tb_shield_lock'],['Log Aktivitas','tb_history'],['Aktivasi e-Meterai','tb_rubber_stamp']] },
   { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge'],['Pengaturan','tb_settings']] },
   { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home'],['Tema Tampilan','tb_palette'],['Master Konten','tb_database'],['Artikel & Halaman','tb_article'],['Pustaka Media','tb_photo']] }
@@ -811,36 +821,13 @@ function gambarNav() {
     <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
     <div class="items" ${grupBuka.has(i) ? '' : 'hidden'}>${g.m.map(([t, ic, ke]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item ${ke ? 'on' : ''}" data-ke="${ke || ''}">${ik(ic)}<span>${t}</span></a>`).join('')}</div>`).join('');
 }
-const PROTO = { 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Verifikasi Berkas':'Backlog-HE-VERIF-Prototype.html', 'Penyusunan Akta':'Backlog-HE-MINUTA-Prototype.html', 'Penandatanganan Akta':'Backlog-HE-EAW-Prototype.html', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
+const PROTO = { 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
 $('#nav').addEventListener('click', e => {
   const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
   const a = e.target.closest('a'); if (!a) return; e.preventDefault();
   if (!a.dataset.ke) { const nm = a.textContent.trim(); if (PROTO[nm]) { location.href = PROTO[nm]; return; } toast(`Menu ${nm} belum memiliki prototipe.`); return; }
-  jagaPerubahan(() => keDaftar());
+  jagaPerubahan(() => AJB.keStepper());
 });
-
-/* ---------------- layar daftar (sama dengan prototipe Penyusunan Akta) ---------------- */
-function layarDaftar() {
-  const q = S.cari.trim().toLowerCase();
-  const rows = MINUTA.filter(x => (!S.filter || x.status === S.filter) && (!q || (x.kode + ' ' + x.narahubung).toLowerCase().includes(q)));
-  const grp = [['', 'Semua'], ['DRAFTING', 'Penyusunan'], ['SELESAI', 'Selesai']];
-  return `${remah('Penyusunan Akta')}
-    <h1>Penyusunan Akta</h1><p class="sub">Susun naskah minuta akta${tanya('Minuta akta', T_MINUTA)} dari permohonan yang sudah diverifikasi.</p>
-    <div class="saring-m">
-      ${cari('cariMinuta', 'Cari kode / klien…', S.cari, 'Cari minuta')}
-      <div class="ina-button-group" role="group" aria-label="Saring status">${grp.map(([v, t]) => `<button type="button" class="ina-button-group__button ${v === S.filter ? 'ina-button-group__button--selected' : ''}" aria-pressed="${v === S.filter}" data-filter="${v}"><span class="ina-button-group__button-content">${t}</span></button>`).join('')}</div>
-    </div>
-    <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb">
-      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">No. Akta</th><th class="ina-table__header-cell">Tgl Akta</th><th class="ina-table__header-cell">Status${tanya('Status minuta', 'Penyusunan berarti naskah masih dapat diubah. Selesai berarti akta sudah difinalisasi PPAT dan tidak dapat diubah lagi.')}</th><th class="ina-table__header-cell"></th></tr></thead>
-      <tbody class="ina-table__body">${rows.length ? rows.map(x => `<tr class="ina-table__row ina-table__row--clickable klik" data-buka="${x.kode}">
-        <td class="ina-table__cell"><span class="kd">${x.kode}</span></td>
-        <td class="ina-table__cell"><div>Akta Jual Beli</div><div class="kc">${esc(x.narahubung)}</div></td>
-        <td class="ina-table__cell">${x.nomor || '—'}</td><td class="ina-table__cell">${x.tgl || '—'}</td>
-        <td class="ina-table__cell">${badge(ST[x.status][0], ST[x.status][1])}</td>
-        <td class="ina-table__cell" style="text-align:right">${ik('chev')}</td></tr>`).join('') : `<tr><td colspan="6" class="ina-table__empty-cell kosong">Tidak ada minuta yang cocok.</td></tr>`}</tbody></table></div></div>
-      <div class="halaman"><span>Menampilkan 1–${rows.length} dari ${rows.length}</span><div class="ina-pagination"><div class="ina-pagination__nav-container"><div class="ina-pagination__page-info">Halaman 1 dari 1</div><div class="ina-pagination__nav-buttons"><button type="button" class="ina-pagination__nav-button ina-pagination__nav-button--disabled" disabled aria-label="Sebelumnya">${ik('kiri', 16)}</button><button type="button" class="ina-pagination__page-button ina-pagination__page-button--active">1</button><button type="button" class="ina-pagination__nav-button ina-pagination__nav-button--disabled" disabled aria-label="Berikutnya">${ik('chev', 16)}</button></div></div></div></div>
-    </div>`;
-}
 
 /* ---------------- variabel belum terisi (dihitung dari seluruh naskah) ---------------- */
 function belumTerisi() {
@@ -853,12 +840,12 @@ function layarDetail() {
   const x = m(), fin = final(), ppat = S.peran === 'ppat';
   const tbl = (id, label, ikon, t, hier = 'secondary', letak = 'bottom') => denganTip(tombol(label, hier, 'md', `id="${id}" aria-label="${label}. ${esc(t)}" ${S.memuat === id ? 'disabled aria-busy="true"' : ''}`, S.memuat === id ? spinner : ik(ikon, 16)), t, letak);
   const kurang = fin ? [] : belumTerisi();
-  return `${remah('Naskah Akta', 'Penyusunan Akta')}
+  return `${remah('Penyusunan Akta', 'Permohonan AJB')}
     <h1>Penyusunan Akta</h1><p class="sub">Susun naskah minuta akta dari permohonan yang sudah diverifikasi.</p>
     <section class="dok" aria-label="Naskah akta ${x.kode}">
       <div class="dok-kepala">
         <div class="dok-kiri">
-          ${denganTip(`<button type="button" class="ina-button ina-button--tertiary ina-button--sm" id="kembali" aria-label="Kembali ke daftar Penyusunan Akta">${ik('kiri', 18)}</button>`, 'Tombol ini membuka kembali daftar Penyusunan Akta.', 'bottom')}
+          ${denganTip(`<button type="button" class="ina-button ina-button--tertiary ina-button--sm" id="kembali" aria-label="Kembali ke stepper Permohonan AJB">${ik('kiri', 18)}</button>`, 'Tombol ini membuka kembali stepper Permohonan AJB.', 'bottom')}
           <span class="dok-ikon">${ik('naskah', 28)}</span>
           <div class="dok-id">
             <div class="dok-b1">
@@ -879,7 +866,7 @@ function layarDetail() {
       </div>
       ${bilahAlat()}
       <div class="pita">${fin
-        ? alert('info', '', `${ik('kunci', 14)} Akta sudah difinalisasi${tanya('Finalisasi', T_FINAL)} dengan nomor <b>${esc(x.nomor)}</b>. Naskah hanya dapat dibaca.`)
+        ? alert('info', '', `${ik('kunci', 14)} Akta sudah difinalisasi${tanya('Finalisasi', T_FINAL)} dengan nomor <b>${esc(x.nomor)}</b>. Naskah hanya dapat dibaca.`, tombol('Kembali ke Permohonan AJB', 'primary', 'sm', 'data-ke-daftar', ik('panah', 14)))
         : ppat ? alert('info', '', `Anda dapat menyunting pasal dan memfinalisasi akta. Periksa naskah, lalu klik <b>Finalisasi Akta</b>.${tanya('Finalisasi', T_FINAL)}${usulan('HE-MINUTA-01')}`)
         : alert('info', '', `Anda dapat menyunting isi pasal. Setelah selesai, klik <b>Beritahu PPAT</b> agar PPAT memeriksa dan memfinalisasi akta.${tanya('Finalisasi', T_FINAL)}${usulan('HE-MINUTA-01')}`)}</div>
       ${blokEjaan()}
@@ -1101,7 +1088,7 @@ function panelAtur(x, fin) {
 /* ---------------- bilah menu: setiap butir = fitur live ---------------- */
 /* [aksi, label, pintasan/keterangan, syarat aktif] ; '-' = pemisah ; aksi 'segera:…' = fitur live yang belum tersedia */
 const MENU = {
-  File:[['atur', 'Pengaturan dokumen…', 'Atur kertas, margin, huruf, dan footer.'], ['preview', 'Pratinjau akta', 'Lihat akta dengan data yang sudah terisi.'], '-', ['kembali', 'Tutup naskah', 'Kembali ke daftar minuta.']],
+  File:[['atur', 'Pengaturan dokumen…', 'Atur kertas, margin, huruf, dan footer.'], ['preview', 'Pratinjau akta', 'Lihat akta dengan data yang sudah terisi.'], '-', ['kembali', 'Tutup naskah', 'Kembali ke stepper Permohonan AJB.']],
   Edit:[['c:undo', 'Urungkan', 'Ctrl+Z', 'ed'], ['c:redo', 'Ulangi', 'Ctrl+Y', 'ed'], '-', ['simpan', 'Simpan bagian ini', '', 'ubah'], ['batal', 'Batalkan perubahan', '', 'ubah'], '-', ['c:x:html', 'Sunting kode HTML', '', 'ed']],
   Tampilan:[['nav', 'Panel Navigasi', '', 'cek:nav'], ['panel', 'Panel Bagian', '', 'cek:panel'], ['kode', 'Tampilkan kode variabel', '', 'cek:kode'], '-', ['c:x:penuh', 'Layar penuh', '', 'ed']],
   Sisipkan:[['tambah:PASAL', 'Pasal baru', 'Sistem menambahkannya di akhir daftar.', 'draf'], ['tambah:CATATAN', 'Catatan baru', 'Catatan adalah bagian tanpa nomor.', 'draf'], ['var', 'Variabel…', 'Variabel terisi otomatis dari permohonan.', 'ed'], '-', ['c:x:tautan', 'Tautan', '', 'ed'], ['c:x:gambar', 'Gambar', '', 'ed'], ['c:x:tabel', 'Tabel', '', 'ed'], '-', ['segera:lampiran', 'Lampiran', 'Lampiran akta akan tersedia pada pembaruan berikutnya.']],
@@ -1181,13 +1168,14 @@ function serialisasi(ed) {
 function gambar() {
   simpanDraf(); gambarNav(); tutupMenu();
   const gul = ['#kanvas', '#daftarPasal', '#panelIsi'].map(s => [s, $(s)?.scrollTop || 0]);
-  $('#halaman').innerHTML = S.layar === 'daftar' ? layarDaftar() : layarDetail();
-  if (S.layar !== 'daftar') paginasi($('#kertas'), m().atur, m(), true);
+  $('#halaman').innerHTML = layarDetail();
+  paginasi($('#kertas'), m().atur, m(), true);
+  const x = m(); AJB.simpan(x.kode, { minutaData:{ naskah:x.naskah, atur:x.atur }, minuta:x.status === 'SELESAI', nomor:x.nomor, tgl:x.tgl });
   gul.forEach(([s, v]) => { const el = $(s); if (el) el.scrollTop = v; });
   pasangPanduan(); S.kilau = null; perbaruiKepala();
   ciutSidebar();
 }
-/* editor penyusunan: menu samping otomatis diciutkan agar kertas lebih lega; kembali ke daftar = pilihan pengguna */
+/* editor penyusunan: menu samping otomatis diciutkan agar kertas lebih lega */
 let editorTerbuka = null;
 function ciutSidebar() {
   const ed = S.layar !== 'daftar'; if (!window.sidebarIdds || ed === editorTerbuka) return; editorTerbuka = ed;
@@ -1197,12 +1185,24 @@ addEventListener('load', ciutSidebar); /* skrip sidebar disisipkan setelah skrip
 function perbaruiKepala() {
   const p = PERAN[S.peran], u = document.querySelector('header .user');
   if (u) { const n = u.querySelector('.uname'), r = u.querySelector('.urole'), a = u.querySelector('.ava'); if (n) n.textContent = p.nama; if (r) r.textContent = p.label; if (a) a.textContent = p.huruf; }
-  const layar = S.layar === 'daftar' ? 'daftar' : final() ? 'final' : S.peran;
+  const layar = final() ? 'final' : S.peran;
   document.querySelectorAll('#pilLayar [data-layar]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.layar === layar)));
 }
 /* pengaturan dokumen yang belum disimpan dikembalikan saat formulir ditinggalkan */
 function batalAtur() { if (S.aturBuka && S.aturAsal && m()) m().atur = { ...S.aturAsal }; S.aturAsal = null; S.aturBuka = false; }
-function keDaftar() { batalAtur(); Object.assign(S, { layar:'daftar', aktif:null, pilih:null, draf:null, ubah:false, hasil:null, galatEjaan:false, galatJudul:'', aturBuka:false }); gambar(); window.scrollTo({ top:0 }); }
+function keDaftar() { batalAtur(); AJB.keStepper(S.aktif); }
+/* naskah per order: tersimpan di Permohonan AJB agar tetap ada setelah berpindah layar */
+function pastikan(kode) {
+  const d = AJB.ambil(kode), y = d.order; let x = MINUTA.find(z => z.kode === kode);
+  if (!x && !y) return null;
+  if (!x) { x = { kode, narahubung:y.kontak.nama, status:'DRAFTING', nomor:'', tgl:'', naskah:NASKAH(), atur:{ ...STANDAR } }; MINUTA.push(x); }
+  if (d.minutaData) { Object.assign(x, d.minutaData); idBaru = Math.max(idBaru, ...x.naskah.map(n => n.id + 1)); }
+  const asal = { ...y, ...d };
+  if (asal.minuta) Object.assign(x, { status:'SELESAI', nomor:asal.nomor || x.nomor, tgl:asal.tgl || x.tgl });
+  return x;
+}
+/* peran mengikuti sesi; tanpa sesi, tombol Finalisasi Akta di stepper membuka editor sebagai PPAT */
+function peranAwal() { const s = window.SESI_PROTO; return s && s.aktif === 'ROLE_ASISTEN' ? 'asisten' : (s && (s.peran || []).includes('ROLE_PPAT')) || AJB.peran() === 'ppat' ? 'ppat' : 'asisten'; }
 function buka(kode, pilih = null, tab = 'pasal') {
   batalAtur(); Object.assign(S, { layar:'detail', aktif:kode, pilih, tab, draf:null, ubah:false, hasil:null, galatEjaan:false, galatJudul:'', aturBuka:false, nav:!sempit(), panel:!sempit() });
   gambar(); window.scrollTo({ top:0 });
@@ -1299,6 +1299,7 @@ H.addEventListener('keydown', e => {
 H.addEventListener('click', e => {
   const t = e.target;
   if (t.closest('[data-ke-daftar]')) { e.preventDefault(); jagaPerubahan(keDaftar); return; }
+  if (t.closest('[data-ke-order-daftar]')) { e.preventDefault(); jagaPerubahan(() => AJB.keStepper()); return; }
   if (t.closest('#tampilKode, [data-toggle-label="tampilKode"]')) { aturKode(!S.kode); return; }
   if (t.closest('#kertas [data-kaki]')) { bukaFooter(); return; }
   const lp = t.closest('#lipatLampiran'); if (lp) { S.lampiran = !S.lampiran; lp.setAttribute('aria-expanded', S.lampiran); $('#isiLampiran').hidden = !S.lampiran; return; }
@@ -1463,7 +1464,7 @@ function cekEjaan() {
     S.galatEjaan = false; S.hasil = h; gambar(); toast(h.length ? `${h.length} temuan ejaan.` : 'Tidak ada salah ketik yang ditemukan.', 'positive');
   }));
 }
-function beritahu() { if (final() || S.peran !== 'asisten') return; jagaPerubahan(() => tunggu('beritahu', 800, () => { gambar(); toast('PPAT sudah diberitahu bahwa minuta siap difinalisasi.', 'positive'); })); }
+function beritahu() { if (final() || S.peran !== 'asisten') return; jagaPerubahan(() => tunggu('beritahu', 800, () => { AJB.simpan(S.aktif, { disusun:true }); gambar(); toast('PPAT sudah diberitahu bahwa minuta siap difinalisasi.', 'positive', 5000, 'Kembali ke Permohonan AJB untuk memindahkan tahap ke Finalisasi Akta.'); })); }
 /* Finalisasi (live: hanya PPAT; isian Nomor Akta & Tanggal Akta wajib) */
 const BLN = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
 function finalisasi() {
@@ -1480,7 +1481,7 @@ function finalisasi() {
         Object.assign(x, { status:'SELESAI', nomor:no, tgl:`${d} ${BLN[mo - 1]} ${y}` });
         Object.assign(S, { draf:null, ubah:false, aturBuka:false });
         gambar(); $('#preview')?.focus();
-        toast('Akta difinalisasi.', 'positive', 5000, 'Akta masuk ke menu Salinan Akta.');
+        toast('Akta difinalisasi.', 'positive', 5000, 'Kembali ke Permohonan AJB untuk melanjutkan ke Penandatanganan Akta.');
         return 'fokus-diatur';
       }, true]] });
   });
@@ -1623,14 +1624,13 @@ document.querySelectorAll('#pilLayar [data-layar]').forEach(b => b.addEventListe
   const k = b.dataset.layar;
   const jalan = () => {
     S.ubah = false; S.draf = null;
-    if (k === 'daftar') { keDaftar(); return; }
     if (k === 'final') { buka('ORD-CONTOH-005', 4); return; }
-    S.peran = k; const x = MINUTA.find(y => y.kode === 'ORD-CONTOH-004');
-    buka(x.status === 'SELESAI' ? (MINUTA.find(y => y.status === 'DRAFTING') || x).kode : x.kode, 4);
+    S.peran = k; const x = m() && !final() ? m() : MINUTA.find(y => y.status === 'DRAFTING') || MINUTA[0];
+    buka(x.kode, 4);
   };
   jagaPerubahan(jalan);
 }));
-$('#aturUlang').addEventListener('click', () => { MINUTA = contoh(); S.ubah = false; S.draf = null; S.cari = ''; S.filter = ''; keDaftar(); toast('Data contoh dikembalikan ke awal.'); });
+$('#aturUlang').addEventListener('click', () => { AJB.hapus(); location.reload(); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
@@ -1640,7 +1640,9 @@ let tunda;
 window.addEventListener('resize', () => { const s = sempit(); if (s !== lebarLalu && S.layar === 'detail') { lebarLalu = s; S.nav = !s; S.panel = !s; gambar(); } lebarLalu = s;
   /* lebar kertas berubah → potong ulang halaman */
   clearTimeout(tunda); tunda = setTimeout(() => { if (S.layar === 'detail' && !S.ubah && !document.activeElement?.closest('#panelDok')) gambar(); }, 250); });
-gambar();
+MINUTA.forEach(x => pastikan(x.kode));
+S.peran = peranAwal();
+buka(pastikan(AJB.kode()) ? AJB.kode() : 'ORD-CONTOH-004');
 })();
 </script>
 </body>
