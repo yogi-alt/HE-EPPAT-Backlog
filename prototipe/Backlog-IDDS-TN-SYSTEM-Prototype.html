@@ -71,6 +71,37 @@ html:not([data-brand='eppat']) .content,html:not([data-brand='eppat']) main.tn{b
 </script>
 
 <script id="sesi-kepala-js">try { window.SESI_PROTO = JSON.parse(localStorage.getItem('eppat-sesi')); var t = JSON.parse(localStorage.getItem('eppat-trial')) || {}; if (window.SESI_PROTO && window.SESI_PROTO.paket === 'trial') { if (t.nama) window.SESI_PROTO.nama = t.nama; if (t.email) window.SESI_PROTO.email = t.email; } window.PAKET_TRIAL = window.SESI_PROTO && window.SESI_PROTO.paket === 'trial' && !(t.db && t.db.ent) ? { batas:!!t.batas, pengguna:5, transaksi:10, upgrade:'Backlog-HE-TRIAL-Prototype.html#berlangganan' } : null; } catch (e) { window.SESI_PROTO = null; window.PAKET_TRIAL = null; }</script>
+<script id="ajb-bersama-js">
+/* Satu perjalanan Permohonan AJB lintas prototipe: Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta dibuka dari stepper,
+   menyimpan statusnya di sini, lalu Kembali ke stepper order yang sama. Alamat tujuan: <berkas>#order=KODE[&peran=ppat]. */
+window.AJB = (() => {
+  const KUNCI_SPESIMEN = 'eppat-spesimen', KUNCI_DAFTAR = 'eppat-daftar';
+  const bacaDaftar = () => { try { return JSON.parse(localStorage.getItem(KUNCI_DAFTAR)) || {}; } catch (e) { return {}; } };
+  const ubahDaftar = (k, v) => { const d = bacaDaftar(); d[k] = v; try { localStorage.setItem(KUNCI_DAFTAR, JSON.stringify(d)); } catch (e) { /* lihat tulis() */ } };
+  const bacaSpesimen = () => { try { return JSON.parse(localStorage.getItem(KUNCI_SPESIMEN)) || {}; } catch (e) { return {}; } };
+  const tulisSpesimen = d => { try { localStorage.setItem(KUNCI_SPESIMEN, JSON.stringify(d)); } catch (e) { /* lihat tulis() */ } };
+  const KUNCI = 'eppat-ajb-v3', ORDER = 'Backlog-HE-ORDER-Prototype.html';
+  const HAL = { verif:'Backlog-HE-VERIF-Prototype.html', susun:'Backlog-HE-MINUTA-V2-Prototype.html', ttd:'Backlog-HE-EAW-Prototype.html' };
+  const semua = () => { try { return JSON.parse(localStorage.getItem(KUNCI)) || {}; } catch (e) { return {}; } };
+  const tulis = d => { try { localStorage.setItem(KUNCI, JSON.stringify(d)); } catch (e) { /* peramban menolak penyimpanan: prototipe tetap berjalan */ } };
+  const param = k => (location.hash.match(new RegExp(`[#&]${k}=([^&]+)`)) || [])[1] || '';
+  return {
+    semua, kode:() => param('order'), peran:() => param('peran'),
+    ambil:k => semua()[k] || {},
+    simpan:(k, isi) => { const d = semua(); d[k] = { ...d[k], ...isi }; tulis(d); },
+    buang:k => { const d = semua(); delete d[k]; tulis(d); },
+    hapus:() => { try { localStorage.removeItem(KUNCI); } catch (e) { /* lihat tulis() */ } },
+    spesimen:email => bacaSpesimen()[email] || '',
+    simpanSpesimen:(email, gbr) => { const d = bacaSpesimen(); if (gbr) d[email] = gbr; else delete d[email]; tulisSpesimen(d); },
+    /* status pendaftaran: CA per pengguna, TERA per kantor; dipakai notifikasi di semua halaman */
+    caStatus:email => bacaDaftar()['ca:' + email] || '', simpanCa:(email, k) => ubahDaftar('ca:' + email, k),
+    teraStatus:() => bacaDaftar().tera || '', simpanTera:k => ubahDaftar('tera', k),
+    alamat:(hal, kode, peran) => `${HAL[hal]}#order=${kode}${peran ? '&peran=' + peran : ''}`,
+    keStepper:kode => { location.href = kode ? `${ORDER}#order=${kode}` : ORDER; }
+  };
+})();
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Backlog E-PPAT Peruri — Tenant · Pengaturan Aplikasi & Kantor</title>
@@ -356,7 +387,7 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .status-kartu .stepper-v.ina-stepper .ina-stepper__item{height:auto;max-height:none;min-height:0;flex:none;align-items:flex-start}
 .status-kartu .stepper-v .ina-stepper__label{position:static;transform:none;white-space:normal;max-width:none}
 .status-kartu .ina-stepper__item--active .ina-stepper__label > span:first-child,.status-kartu .ina-stepper__item--completed .ina-stepper__label > span:first-child{font-weight:600;color:var(--ina-content-primary)}
-.tahap-status,.tahap-aksi,.tahap-perkiraan{display:block;margin-top:6px}
+.tahap-status,.tahap-perkiraan{display:block;margin-top:6px}
 .tahap-perkiraan .ina-badge{display:inline-flex;align-items:center;gap:6px}
 .status-kartu .ina-stepper__label small.tahap-waktu{margin-top:4px;font-size:11.5px}
 .waktu-baris{display:block;margin:2px 0 8px}
@@ -1620,7 +1651,15 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
      Menu per peran mengikuti live (dilihat 20 Okt 2026 dengan akun tiap peran); aturan Super Admin dan Super Admin + PPAT mengikuti masukan Peruri. -->
 <style id="sesi-bersama-css">
 .sesi-sembunyi{display:none!important}
-.sesi-tanpa-ingat .ingat,.sesi-tanpa-daftar [data-akun="ca"],.sesi-tanpa-daftar [data-tab="ca"]{display:none!important}
+.ingat,#bannerCa,.sesi-tanpa-daftar [data-akun="ca"],.sesi-tanpa-daftar [data-tab="ca"]{display:none!important}
+#notifDaftar{display:grid;gap:8px;padding:24px 32px 0}
+#notifDaftar:empty{display:none}
+#notifDaftar:not(:empty) + .page{padding-top:16px}
+#notifDaftar .ina-alert__content{display:flex;flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap;width:100%}
+#notifDaftar .ina-alert__text-section{flex:1;min-width:240px}
+#notifDaftar .notif-aksi{display:flex;align-items:center;gap:8px}
+#notifDaftar .ina-button{text-decoration:none}
+@media (max-width:760px){ #notifDaftar{padding:16px 16px 0} }
 .protobar .sesi-pilih{border:1px solid rgba(255,255,255,.25);background:transparent;color:#E6EDEA;font:500 11px Inter,sans-serif;padding:4px 8px;border-radius:999px;cursor:pointer}
 .protobar .sesi-pilih option{color:#1f2a2e;background:#fff}
 #menuSesi .ina-action-dropdown__menu{position:absolute;top:calc(100% + 6px);right:0;left:auto;min-width:260px;z-index:60;visibility:visible;opacity:1;pointer-events:auto;transform:none}
@@ -1656,13 +1695,12 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
     { kunci:'admin', label:'Super Admin', nama:'Admin Contoh', email:'admin@contoh.id', peran:['ROLE_ADMIN'], ca:'kurang' },
     { kunci:'admin-ppat', label:'Super Admin + PPAT', nama:'Admin Contoh', email:'admin.ppat@contoh.id', peran:['ROLE_ADMIN', 'ROLE_PPAT'], ca:'kurang' },
     { kunci:'admin-trial', label:'Super Admin Trial', nama:'Contoh PPAT Baru', email:'ppat.baru@contoh.id', peran:['ROLE_ADMIN'], ca:'kurang', paket:'trial' },
-    { kunci:'ppat', label:'PPAT', nama:'PPAT Contoh Satu', email:'ppat1@contoh.id', peran:['ROLE_PPAT'], ca:'selesai' },
-    { kunci:'asisten', label:'Asisten', nama:'Asisten Contoh', email:'asisten1@contoh.id', peran:['ROLE_ASISTEN'], ca:'ekyc' },
+    { kunci:'ppat', label:'PPAT', nama:'PPAT Contoh Satu', email:'ppat1@contoh.id', peran:['ROLE_PPAT'], ca:'kurang' },
+    { kunci:'asisten', label:'Asisten', nama:'Asisten Contoh', email:'asisten1@contoh.id', peran:['ROLE_ASISTEN'], ca:'kurang' },
     { kunci:'klien', label:'Klien', nama:'Contoh Klien Satu', email:'klien1@contoh.id', peran:['ROLE_KLIEN'], ca:'kurang' }
   ];
-  const STATUS_CA = { kurang:['Belum terdaftar', 'neutral'], ekyc:['Menunggu eKYC', 'info'], aktif:['Aktif sampai 26 Okt 2027', 'success'], selesai:['Aktif sampai 26 Okt 2027', 'success'] };
   const STAF = ['Permohonan AJB', 'Dashboard Akta', 'Salinan Akta', 'Profil Kantor'];
-  const MENU_PERAN = { ROLE_PPAT:[...STAF, 'Daftar Pengguna', 'Aktivasi e-Meterai'], /* Daftar Pengguna untuk kebutuhan prototipe; di live PPAT tidak memilikinya */ ROLE_ASISTEN:[...STAF, 'Daftar Pengguna', 'Dashboard Sistem'], ROLE_KLIEN:['Penandatanganan Akta'] };
+  const MENU_PERAN = { ROLE_PPAT:[...STAF, 'Daftar Pengguna', 'Aktivasi e-Meterai'], /* Daftar Pengguna untuk kebutuhan prototipe; di live PPAT tidak memilikinya */ ROLE_ASISTEN:[...STAF, 'Daftar Pengguna', 'Dashboard Sistem'], ROLE_KLIEN:['Permohonan AJB', 'Penandatanganan Akta'] };
   /* layar di dalam satu prototipe yang punya syarat menu sendiri */
   const LAYAR_MENU = { '#peran':'Peran & Izin', '#logs':'Log Aktivitas', '#pengaturan':'Pengaturan', '#emeterai':'Aktivasi e-Meterai' };
   const LANDAS = { ROLE_ADMIN:SYS + '#dasbor', ROLE_PPAT:EP + '#dashboard', ROLE_ASISTEN:EP + '#dashboard', ROLE_KLIEN:'Backlog-HE-EAWK-Prototype.html' };
@@ -1696,9 +1734,9 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
   const berkas = (location.pathname.split('/').pop().match(/^Backlog-(.+)-Prototype\.html$/) || [])[1] || '';
 
   /* Super Admin saja tidak mendaftarkan TERA, e-Meterai, dan CA; bila merangkap PPAT, semuanya tersedia */
-  const dataSesi = a => ({ kunci:a.kunci, label:a.label, nama:a.nama, email:a.email, peran:a.peran, aktif:a.peran[0], ca:a.ca, caL:STATUS_CA[a.ca], paket:a.paket, tanpaDaftar:a.peran.includes('ROLE_ADMIN') && !a.peran.includes('ROLE_PPAT') });
+  const dataSesi = a => ({ kunci:a.kunci, label:a.label, nama:a.nama, email:a.email, peran:a.peran, aktif:a.peran[0], ca:a.ca, paket:a.paket, tanpaDaftar:a.peran.includes('ROLE_ADMIN') && !a.peran.includes('ROLE_PPAT') });
   const izin = (s, t) => (s.tanpaDaftar ? t !== 'Aktivasi e-Meterai' : !MENU_PERAN[s.aktif] || MENU_PERAN[s.aktif].includes(t));
-  const halamanBoleh = s => { const syarat = HALAMAN[berkas]; if (berkas === 'HE-EAWK') return s.aktif === 'ROLE_KLIEN'; if (berkas === 'HE-EAW' && s.aktif === 'ROLE_KLIEN') return false; if (LAYAR_MENU[location.hash] && !izin(s, LAYAR_MENU[location.hash])) return false; return !syarat || izin(s, syarat); };
+  const halamanBoleh = s => { const syarat = HALAMAN[berkas]; if (berkas === 'HE-EAWK') return s.aktif === 'ROLE_KLIEN'; if (['HE-EAW', 'HE-VERIF', 'HE-MINUTA-V2'].includes(berkas) && s.aktif === 'ROLE_KLIEN') return false; if (LAYAR_MENU[location.hash] && !izin(s, LAYAR_MENU[location.hash])) return false; return !syarat || izin(s, syarat); };
   window.sesiMasuk = kunci => {
     if (kunci === 'admin-trial-ulang') { try { localStorage.removeItem(KUNCI_TRIAL); } catch (e) { /* lihat simpan() */ } kunci = 'admin-trial'; }
     const a = AKUN.find(x => x.kunci === kunci || x.email === String(kunci).toLowerCase() || (x.paket && bacaTrial().email === kunci)) || AKUN[0];
@@ -1715,16 +1753,11 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
     return;
   }
 
-  const itemCa = () => {
-    if (sesiTampil && sesiTampil.tanpaDaftar) return '';
-    const nama = (document.querySelector('header .user .uname') || {}).textContent;
-    const [l, j] = sesi && sesi.caL ? sesi.caL : STATUS_CA[(AKUN.find(a => a.nama === nama) || AKUN[0]).ca];
-    return `<button type="button" class="ina-action-dropdown__item" role="menuitem" data-sesi-href="${REG_CA}"><span class="ina-action-dropdown__item-icon">${svg(I_TAMENG)}</span><span class="ina-action-dropdown__item-content">Registrasi CA</span><span class="ina-badge ina-badge--soft ina-badge--${j} ina-badge--sm ina-badge--rounded-full">${l}</span></button>`;
-  };
 
   /* Keluar berlaku di semua halaman, termasuk yang punya menu profil sendiri */
   document.addEventListener('click', e => {
     const a = e.target.closest('[data-sesi-href]');
+    if (!sesi && ['HE-TERA', 'HE-CA', 'HE-EAWK'].includes(berkas) && e.target.closest('[data-sesi-href], [data-tab], #notifDaftar a')) simpan(tampil); /* peran tetap sama di halaman Akun Saya berikutnya */
     if (a) { e.preventDefault(); e.stopPropagation(); location.href = a.dataset.sesiHref; return; }
     if (e.target.closest('[data-sesi-keluar], #user [data-luar="Keluar"], #user [data-p="keluar"]')) { e.stopPropagation(); keluar(); }
   }, true);
@@ -1766,7 +1799,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
     const atur = buka => {
       pemicu.setAttribute('aria-expanded', String(buka));
       wadah.innerHTML = buka ? `<div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible" role="menu">
-        <button type="button" class="ina-action-dropdown__item" role="menuitem" data-sesi-href="${AKUN_SAYA}"><span class="ina-action-dropdown__item-icon">${svg(I_AKUN)}</span><span class="ina-action-dropdown__item-content">Akun Saya</span></button>${itemCa()}
+        <button type="button" class="ina-action-dropdown__item" role="menuitem" data-sesi-href="${AKUN_SAYA}"><span class="ina-action-dropdown__item-icon">${svg(I_AKUN)}</span><span class="ina-action-dropdown__item-content">Akun Saya</span></button>
         <div class="ina-action-dropdown__divider" role="separator"></div>
         <button type="button" class="ina-action-dropdown__item" role="menuitem" data-sesi-keluar><span class="ina-action-dropdown__item-icon">${svg(I_KELUAR)}</span><span class="ina-action-dropdown__item-content">Keluar</span></button></div>` : '';
     };
@@ -1775,14 +1808,32 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
     document.addEventListener('click', () => { if (wadah.innerHTML) atur(false); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && wadah.innerHTML) atur(false); });
   }
-  /* halaman dengan menu profil sendiri: lengkapi agar susunannya sama */
-  if (milikSendiri) {
-    const pasang = () => {
-      const bagi = milikSendiri.querySelector('.ina-action-dropdown__divider'); if (!bagi) return;
-      if (!bagi.parentElement.textContent.includes('Registrasi CA') && itemCa()) bagi.insertAdjacentHTML('beforebegin', itemCa());
-    };
-    pasang(); new MutationObserver(pasang).observe(milikSendiri, { childList:true, subtree:true });
-  }
+
+  /* notifikasi pendaftaran: satu sumber untuk semua halaman dan peran; Super Admin tanpa PPAT tidak mendapatkannya */
+  const tampil = sesiTampil || dataSesi(AKUN.find(a => a.kunci === kini));
+  const TEKS_CA = { kurang:'Sertifikat elektronik (CA) Anda belum terdaftar. Daftarkan sekarang agar Anda dapat menandatangani akta secara elektronik.',
+    siap:'Sertifikat elektronik (CA) Anda belum terdaftar. Data Anda sudah lengkap dan siap diajukan ke Peruri.',
+    ekyc:'Registrasi CA Anda menunggu verifikasi identitas (eKYC) di portal Peruri.',
+    periksa:'Peruri sedang memeriksa registrasi CA Anda.',
+    kedaluwarsa:'Sertifikat elektronik (CA) Anda sudah kedaluwarsa. Ajukan registrasi ulang agar Anda dapat menandatangani akta.' };
+  const I_TUTUP = '<path d="M18 6l-12 12" /><path d="M6 6l12 12" />';
+  const ditutup = k => { try { return sessionStorage.getItem('eppat-notif-' + k) === '1'; } catch (e) { return false; } };
+  const konten = $('.content');
+  if (konten) konten.insertAdjacentHTML('afterbegin', '<div id="notifDaftar"></div>');
+  window.segarNotif = () => {
+    const w = $('#notifDaftar'); if (!w) return;
+    const ca = TEKS_CA[window.AJB.caStatus(tampil.email) || tampil.ca], teraBelum = ['', 'belum', 'rejected'].includes(window.AJB.teraStatus());
+    const isi = tampil.tanpaDaftar || tampil.aktif === 'ROLE_ADMIN' && !tampil.peran.includes('ROLE_PPAT') ? [] : [
+      ca && ['ca', ca, 'Buka Registrasi CA', REG_CA],
+      tampil.peran.includes('ROLE_PPAT') && teraBelum && ['tera', 'Stempel Elektronik (TERA) kantor Anda belum didaftarkan. Lengkapi data pendaftaran TERA agar akta bisa distempel elektronik.', 'Daftar TERA', 'Backlog-HE-TERA-Prototype.html#registrasi']
+    ].filter(x => x && !ditutup(x[0]));
+    w.innerHTML = isi.map(([k, teks, aksi, href]) => `<div class="ina-alert ina-alert--caution" role="status"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__description">${teks}</div></div><div class="notif-aksi"><a class="ina-button ina-button--primary ina-button--sm" href="${href}" data-notif-daftar="${k}">${aksi}</a><button type="button" class="ina-alert__close-button" aria-label="Tutup notifikasi" data-tutup-notif="${k}">${svg(I_TUTUP)}</button></div></div></div>`).join('');
+  };
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-tutup-notif]'); if (b) { try { sessionStorage.setItem('eppat-notif-' + b.dataset.tutupNotif, '1'); } catch (x) { /* peramban menolak penyimpanan */ } window.segarNotif(); return; }
+    const a = e.target.closest('[data-notif-daftar]'); if (a && window.bukaDaftar && window.bukaDaftar(a.dataset.notifDaftar)) e.preventDefault();
+  });
+  window.segarNotif();
 
   if (!sesi) return;
 
@@ -1793,6 +1844,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
   const saring = () => {
     if (!nav) return;
     if (['HE-CA', 'HE-EAWK'].includes(berkas) && sesi.aktif !== 'ROLE_KLIEN') { if (!nav.querySelector('[data-sesi-href]')) nav.innerHTML = lengkap(); return; }
+    if (berkas === 'HE-ORDER' && sesi.aktif === 'ROLE_KLIEN' && !nav.querySelector('[data-sesi-href]')) nav.querySelector('.items').insertAdjacentHTML('beforeend', `<a href="#" class="ina-button ina-button--link ina-button--md nav-item" data-sesi-href="Backlog-HE-EAWK-Prototype.html">${svg(IKON.signature || '')}<span>Penandatanganan Akta</span></a>`);
     nav.querySelectorAll('a.nav-item').forEach(a => a.classList.toggle('sesi-sembunyi', !boleh(a.textContent.trim())));
     nav.querySelectorAll('.items').forEach(w => {
       const kosong = !w.querySelector('a.nav-item:not(.sesi-sembunyi)'); w.classList.toggle('sesi-sembunyi', kosong);

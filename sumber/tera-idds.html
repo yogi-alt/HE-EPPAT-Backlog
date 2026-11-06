@@ -347,7 +347,7 @@ const UBAH = [
     lama:'Tidak ada menu bantuan, panduan penggunaan, atau kontak dukungan di seluruh platform (skor Help & Documentation 10,6; Registrasi TERA 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-TERA-01', judul:'Pengingat TERA: tombol "Daftar TERA" membuka formulir pendaftaran',
     isi:'Klik "Daftar TERA" pada pengingat, di Penandatanganan Akta, atau di halaman lain langsung membuka Akun Saya di tab Registrasi TERA, bukan dasbor.',
-    lama:'Tombol membuka Akun Saya di tab Akun. Pengguna harus mencari tab Registrasi TERA sendiri.', ke:'dashboard', sorot:'#teraIngat', sumber:'Laporan HE INA Digital hlm. 20, 22 + masukan Peruri 30 Okt 2026' },
+    lama:'Tombol membuka Akun Saya di tab Akun. Pengguna harus mencari tab Registrasi TERA sendiri.', ke:'dashboard', sorot:'#notifDaftar', sumber:'Laporan HE INA Digital hlm. 20, 22 + masukan Peruri 30 Okt 2026' },
   { kode:'HE-TERA-02', judul:'Pengingat TERA: letak pendaftaran tetap diketahui setelah pengingat ditutup',
     isi:'Saat pengingat ditutup, IDDS Modal memberi tahu letak pendaftaran (menu profil › Akun Saya › tab Registrasi TERA). Pengingat baru hilang setelah pengguna mengklik OK. Tab Registrasi TERA diberi titik penanda selama pendaftaran belum selesai. Menu profil hanya berisi Akun Saya dan Keluar.',
     lama:'Setelah pengingat ditutup, pendaftaran hanya dapat dibuka dari Akun Saya tanpa penanda apa pun.', ke:'tutup-ingat', sorot:null, sumber:'Laporan HE INA Digital hlm. 22 + masukan Peruri 30 Okt 2026' },
@@ -438,7 +438,7 @@ function periksa(f, v) {
 }
 
 /* ---------------- keadaan ---------------- */
-const S = { layar:'dashboard', tab:'profil', status:'belum', ingatTutup:false, form:KOSONG(), simpanan:null, galat:{}, menuProfil:false, selectBuka:null };
+const S = { layar:'dashboard', tab:'tera', status:'belum', ingatTutup:false, form:KOSONG(), simpanan:null, galat:{}, menuProfil:false, selectBuka:null };
 const kotor = () => JSON.stringify(S.form) !== JSON.stringify(S.simpanan || KOSONG());
 const perluTindakan = () => S.status === 'belum' || S.status === 'rejected';
 
@@ -470,7 +470,7 @@ $('#nav').addEventListener('click', e => {
 function gambarProfil() {
   const st = STATUS[S.status];
   $('#profilMenu').innerHTML = `<div class="ina-action-dropdown__list">
-    <button class="ina-action-dropdown__item" data-p="akun" role="menuitem"><span class="ina-action-dropdown__item-icon">${ik('user')}</span><span class="ina-action-dropdown__item-content">Akun Saya</span></button>
+    <button class="ina-action-dropdown__item" data-sesi-href="Backlog-HE-CA-Prototype.html#akun" role="menuitem"><span class="ina-action-dropdown__item-icon">${ik('user')}</span><span class="ina-action-dropdown__item-content">Akun Saya</span></button>
     <div class="ina-action-dropdown__divider"></div>
     <button class="ina-action-dropdown__item" data-p="keluar" role="menuitem"><span class="ina-action-dropdown__item-icon">${ik('keluar')}</span><span class="ina-action-dropdown__item-content">Keluar</span></button></div>`;
   $('#profilMenu').hidden = !S.menuProfil;
@@ -524,7 +524,7 @@ function layarDashboard() {
 
 /* ---------------- layar Akun Saya ---------------- */
 function layarAkun() {
-  const tabs = [['profil','Akun','user'],['keamanan','Keamanan','tameng'],['tera','Registrasi TERA','kartu']];
+  const tabs = [['profil','Akun','user'],['keamanan','Keamanan','tameng'],['data','Data Diri (KTP)','kartu'],['ca','Registrasi CA','kartu'],['tera','Registrasi TERA','kartu']];
   const belumSimpan = S.tab !== 'tera' && kotor(), titik = perluTindakan() || belumSimpan;
   return `
     <nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">Akun Saya</span></span></li></ol></nav>
@@ -636,7 +636,8 @@ function kaki() {
 }
 
 /* ---------------- gambar ulang ---------------- */
-function gambar() { gambarNav(); gambarProfil(); gambarSim(); $('#halaman').innerHTML = S.layar === 'dashboard' ? layarDashboard() : layarAkun(); pasangPanduan(); }
+function laporTera() { AJB.simpanTera(S.status); if (window.segarNotif) window.segarNotif(); }
+function gambar() { laporTera(); gambarNav(); gambarProfil(); gambarSim(); $('#halaman').innerHTML = S.layar === 'dashboard' ? layarDashboard() : layarAkun(); pasangPanduan(); }
 function gambarSim() { $('#simStatus').innerHTML = '<span>Status TERA:</span>' + SIM.map(([k, t]) => `<button class="pil" data-sim="${k}" aria-pressed="${S.status === k}">${t}</button>`).join(''); }
 $('#simStatus').addEventListener('click', e => {
   const b = e.target.closest('[data-sim]'); if (!b) return;
@@ -649,7 +650,7 @@ const H = $('#halaman');
 H.addEventListener('click', e => {
   if (e.target.closest('#daftarTera')) { pindahLayar('akun', 'tera'); return; }
   if (e.target.closest('#tutupIngat')) { dialog({ judul:'Tutup pengingat TERA?', konfirmasi:true, isi:'<p>Pengingat ini akan disembunyikan. Anda tetap dapat mendaftarkan TERA melalui menu profil › <b>Akun Saya</b> › tab <b>Registrasi TERA</b>. Pengingat muncul lagi pada kunjungan berikutnya selama TERA belum terdaftar.</p>', tombol:[['Batal','secondary',null],['OK','primary',() => { S.ingatTutup = true; gambar(); }]] }); return; }
-  const t = e.target.closest('[data-tab]'); if (t) { S.tab = t.dataset.tab; gambar(); return; }
+  const t = e.target.closest('[data-tab]'); if (t) { const luar = { profil:'akun', keamanan:'aman', data:'data', ca:'ca' }[t.dataset.tab]; if (luar) { location.href = 'Backlog-HE-CA-Prototype.html#' + luar; return; } S.tab = t.dataset.tab; gambar(); return; }
   const lc = e.target.closest('[data-loncat]'); if (lc) { fokusIsian(lc.dataset.loncat); return; }
   const bk = e.target.closest('[data-berkas]'); if (bk) { S.form[bk.dataset.berkas] = 'berkas-contoh.pdf'; perbaruiIsian(SEMUA.find(f => f.k === bk.dataset.berkas), null); return; }
   const pl = e.target.closest('[data-pilih]'); if (pl) { const k = pl.dataset.pilih, lama = S.selectBuka; S.selectBuka = lama === k ? null : k; if (lama && lama !== k) perbaruiIsian(SEMUA.find(f => f.k === lama), null); perbaruiIsian(SEMUA.find(f => f.k === k), null); return; }
@@ -834,6 +835,8 @@ function lihat(u) {
 
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+{ const st = AJB.teraStatus(); if (st && st !== 'belum') { S.status = st; S.form = TERISI(); S.simpanan = { ...S.form }; } } /* status kantor bersama */
+window.bukaDaftar = j => { if (j !== 'tera') return false; S.layar = 'akun'; S.tab = 'tera'; gambar(); return true; };
 if (location.hash === '#registrasi') { S.layar = 'akun'; S.tab = 'tera'; } /* tombol Daftar TERA dari prototipe lain */
 gambar();
 })();

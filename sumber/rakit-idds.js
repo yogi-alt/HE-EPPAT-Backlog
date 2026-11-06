@@ -18,7 +18,7 @@ if (html.includes('aria-label="Notifikasi"') && !html.includes('id="notif-bersam
   html = i < 0 ? html + notif : html.slice(0, i) + notif + '\n' + html.slice(i);
 }
 // Perjalanan Permohonan AJB: stepper dan layar tahapnya berbagi status. Disisipkan di kepala agar tersedia untuk skrip halaman.
-if (/Backlog-(HE-(VERIF|MINUTA-V2|EAW|EAWK|CA|ORDER)|IDDS-TN-EPPAT)-Prototype\.html$/.test(out) && !html.includes('id="ajb-bersama-js"')) {
+if (/Backlog-(HE-(VERIF|MINUTA-V2|EAW|EAWK|CA|USER|TERA|ORDER)|IDDS-TN-[A-Z]+)-Prototype\.html$/.test(out) && !html.includes('id="ajb-bersama-js"')) {
   const ajb = fs.readFileSync(path.join(d, 'ajb-bersama.html'), 'utf8');
   html = html.replace('<head>', () => '<head>\n' + ajb);
 }

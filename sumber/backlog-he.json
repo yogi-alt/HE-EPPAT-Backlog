@@ -462,15 +462,51 @@
       "sumber": "Masukan Peruri",
       "versi": "v2",
       "halaman": "Masukan 5 Nov 2026",
-      "judul": "Stepper AJB sampai akta selesai, dengan waktu dan tombol per tahap",
+      "judul": "Stepper AJB sampai akta selesai, dengan waktu per tahap dan satu tombol tahap",
       "saat_ini": "Stepper berhenti di Penyusunan Akta lalu Selesai. Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta adalah tiga menu terpisah, sehingga pengguna mencari order yang sama di setiap daftar.",
-      "usulan": "Stepper memuat enam tahap: Pengumpulan Berkas, Verifikasi Berkas, Penyusunan Akta (Pembuatan Akta Minuta & Salinan), Finalisasi Akta (Finalisasi Akta Minuta & Salinan), Penandatanganan Akta (Penandatanganan Akta Minuta & Salinan), dan Selesai (Akta Minuta & Salinan selesai). Setiap tahap menampilkan perkiraan waktu, status dari layar pengerjaannya, waktu seperti Dasbor Onboarding, dan tombol yang langsung membuka order tersebut. Tombol Kembali di layar tujuan kembali ke stepper order yang sama. Menu Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta dihapus dari sidebar staf; Penyusunan Akta memakai versi 2.",
+      "usulan": "Stepper memuat enam tahap: Pengumpulan Berkas, Verifikasi Berkas, Penyusunan Akta (Pembuatan Akta Minuta & Salinan), Finalisasi Akta (Finalisasi Akta Minuta & Salinan), Penandatanganan Akta (Penandatanganan Akta Minuta & Salinan), dan Selesai (Akta Minuta & Salinan selesai). Setiap tahap menampilkan perkiraan waktu, status dari layar pengerjaannya, waktu seperti Dasbor Onboarding, dan tombol tahap di samping tombol Pindah langsung membuka order tersebut. Tombol Kembali di layar tujuan kembali ke stepper order yang sama. Menu Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta dihapus dari sidebar staf; Penyusunan Akta memakai versi 2.",
       "prinsip": "H6 Recognition Rather Than Recall",
       "prioritas": "Sedang",
       "layar": "Permohonan AJB › dialog Tambah Pihak dan Tambah Objek",
       "acuan": "Prototipe ORDER",
       "selesai_bila": "Pengguna dapat menyelesaikan satu permohonan dari Pengumpulan Berkas sampai Selesai hanya melalui stepper Permohonan AJB.",
       "catatan": "Masukan Peruri 6 Nov 2026. Perkiraan waktu per tahap adalah data contoh."
+    },
+    {
+      "kode": "HE-ORDER-19",
+      "fitur": "Permohonan AJB",
+      "status": "Prototipe siap",
+      "tanggal": "2026-11-06",
+      "sumber": "Masukan Peruri",
+      "versi": "v2",
+      "halaman": "Masukan 5 Nov 2026",
+      "judul": "Klien memantau permohonan yang melibatkan dirinya",
+      "saat_ini": "Klien tidak dapat melihat kemajuan permohonan.",
+      "usulan": "Klien dan para pihak memiliki menu Permohonan AJB yang hanya memuat permohonan yang melibatkan mereka, tanpa membuat atau mengubah data. Perkiraan waktu per tahap hanya tampil untuk mereka, tidak untuk Super Admin, PPAT, dan Asisten.",
+      "prinsip": "H6 Recognition Rather Than Recall",
+      "prioritas": "Sedang",
+      "layar": "Permohonan AJB › dialog Tambah Pihak dan Tambah Objek",
+      "acuan": "Prototipe ORDER",
+      "selesai_bila": "Klien hanya melihat permohonannya dan perkiraan waktu; staf tidak melihat perkiraan waktu.",
+      "catatan": "Masukan Peruri 6 Nov 2026."
+    },
+    {
+      "kode": "HE-ORDER-20",
+      "fitur": "Permohonan AJB",
+      "status": "Prototipe siap",
+      "tanggal": "2026-11-06",
+      "sumber": "Masukan Peruri",
+      "versi": "v2",
+      "halaman": "Masukan 5 Nov 2026",
+      "judul": "Buat Permohonan tanpa modal",
+      "saat_ini": "Modal Buat Permohonan harus diisi lebih dulu.",
+      "usulan": "Tombol Buat Permohonan langsung membuka Pengumpulan Berkas. Permohonan tersimpan dan masuk daftar setelah staf menyimpan salah satu data.",
+      "prinsip": "H6 Recognition Rather Than Recall",
+      "prioritas": "Sedang",
+      "layar": "Permohonan AJB › dialog Tambah Pihak dan Tambah Objek",
+      "acuan": "Prototipe ORDER",
+      "selesai_bila": "Permohonan masuk daftar hanya setelah ada data yang disimpan.",
+      "catatan": "Masukan Peruri 6 Nov 2026."
     },
     {
       "kode": "HE-MINUTA-01",
@@ -698,7 +734,7 @@
       "fitur": "Registrasi CA (Klien)",
       "judul": "Tab Registrasi CA: tahapan dan perkiraan waktu terlihat",
       "saat_ini": "Layar hanya menampilkan lencana status (\"Belum Registrasi\", \"Sedang Diproses\") dan paragraf panjang tanpa perkiraan waktu. Tombol Lanjutkan eKYC, Buat Ulang Link, dan Cek Status CA tampil sejajar tanpa penanda aksi yang perlu dilakukan.",
-      "usulan": "Tampilkan IDDS Stepper 4 langkah berstatus di kartu Sertifikat Elektronik: (1) Lengkapi data diri, (2) Ajukan ke Peruri, (3) Verifikasi di portal Peruri (eKYC), dan (4) Pemeriksaan Peruri ± 1 hari kerja. Langkah 3 terdiri atas 5 tahap selama ± 6 menit: setujui syarat, OTP email dan SMS, periksa data pribadi, swafoto, dan kirim pengajuan. Di bawah stepper, tampilkan IDDS Alert \"Langkah berikutnya: …\" dengan satu tombol sesuai status: Lengkapi data, Ajukan Registrasi CA, Lanjutkan eKYC di Peruri, atau Registrasi Ulang. Saat pengajuan diperiksa Peruri, tampilkan perkiraan waktu dan pemberitahuan bahwa pengguna akan diberi tahu melalui notifikasi dan email.",
+      "usulan": "Tampilkan IDDS Stepper 4 langkah berstatus di kartu Sertifikat Elektronik: (1) Lengkapi data diri, (2) Ajukan ke Peruri, (3) Verifikasi di portal Peruri (eKYC), dan (4) Pemeriksaan Peruri ± 1 hari kerja. Langkah 3 terdiri atas 5 tahap: setujui syarat, OTP email dan SMS, periksa data pribadi, swafoto, dan kirim pengajuan. Di bawah stepper, tampilkan IDDS Alert \"Langkah berikutnya: …\" dengan satu tombol sesuai status: Lengkapi data, Ajukan Registrasi CA, Lanjutkan eKYC di Peruri, atau Registrasi Ulang. Saat pengajuan diperiksa Peruri, tampilkan perkiraan waktu dan pemberitahuan bahwa pengguna akan diberi tahu melalui notifikasi dan email.",
       "prinsip": "H1 Visibility of System Status; H8 Aesthetic and Minimalist Design",
       "halaman": "34, 35",
       "prioritas": "Tinggi",
@@ -843,6 +879,24 @@
       "selesai_bila": "Pengguna melihat tanggal berakhir sertifikat dan registrasi berstatus selesai hanya setelah spesimen disimpan.",
       "status": "Prototipe siap",
       "catatan": "Masukan Peruri 6 Nov 2026. Tanggal berakhir di prototipe adalah data contoh.",
+      "tanggal": "2026-11-06",
+      "sumber": "Masukan Peruri",
+      "versi": "v2"
+    },
+    {
+      "kode": "HE-CA-10",
+      "fitur": "Registrasi CA (Klien)",
+      "judul": "Akun Saya dan notifikasi pendaftaran konsisten di semua prototipe",
+      "saat_ini": "Tab Akun Saya berbeda antara halaman CA dan TERA, notifikasi hanya ada di sebagian halaman, dan menu akun memuat Registrasi CA.",
+      "usulan": "Akun Saya memakai susunan tab yang sama: Akun, Keamanan, Data Diri (KTP), Registrasi CA, dan Registrasi TERA khusus PPAT. Notifikasi kuning CA tampil untuk PPAT, Asisten, dan Klien, dan notifikasi TERA untuk PPAT, di semua prototipe tenant. Super Admin tanpa PPAT tidak mendapatkannya. Menu akun hanya berisi Akun Saya dan Keluar.",
+      "prinsip": "H1 Visibility of System Status; H8 Aesthetic and Minimalist Design",
+      "halaman": "34, 35",
+      "prioritas": "Tinggi",
+      "layar": "Akun Saya › tab Registrasi CA",
+      "acuan": "prototipe/Backlog-HE-CA-Prototype.html › Daftar perubahan › HE-CA-01",
+      "selesai_bila": "Setiap peran melihat tab dan notifikasi yang sama di semua halaman, dan notifikasi hilang setelah pendaftaran berjalan sampai aktif.",
+      "status": "Prototipe siap",
+      "catatan": "Masukan Peruri 6 Nov 2026.",
       "tanggal": "2026-11-06",
       "sumber": "Masukan Peruri",
       "versi": "v2"
@@ -5351,6 +5405,48 @@
       "kode": "HE-EAW-13",
       "perubahan": "Dua saksi masuk daftar penanda tangan. Asisten dapat dipilih sebagai saksi dan diperiksa spesimennya sendiri. Stempel TERA dan e-Meterai dijalankan Asisten dan PPAT.",
       "berkas": "sumber/eaw-badan.html, sumber/order-idds.html, sumber/ajb-bersama.html"
+    },
+    {
+      "tanggal": "2026-11-06",
+      "kode": "HE-CA-01",
+      "perubahan": "Estimasi waktu eKYC dihapus karena bergantung pada pengguna. Perkiraan hanya untuk proses Peruri, yaitu pemeriksaan ± 1 hari kerja.",
+      "berkas": "sumber/ca-badan.html"
+    },
+    {
+      "tanggal": "2026-11-06",
+      "kode": "HE-CA-01; HE-TERA-07",
+      "perubahan": "Perkiraan waktu proses di stepper CA dan TERA memakai lencana, dan kotak keterangan memakai format Perkiraan selesai seperti Dasbor Onboarding.",
+      "berkas": "sumber/ca-badan.html, sumber/tera-idds.html"
+    },
+    {
+      "tanggal": "2026-11-06",
+      "kode": "HE-CA-10",
+      "perubahan": "Tab Akun Saya, notifikasi pendaftaran CA dan TERA, serta menu akun disamakan di semua prototipe tenant melalui sesi bersama.",
+      "berkas": "sumber/sesi-bersama.html, sumber/ajb-bersama.html, sumber/ca-badan.html, sumber/tera-idds.html, sumber/eawk-badan.html"
+    },
+    {
+      "tanggal": "2026-11-06",
+      "kode": "HE-ORDER-18",
+      "perubahan": "Tombol tahap dipindah dari stepper ke satu kotak informasi di bawah stepper: Verifikasi Sekarang, Susun Sekarang, Finalisasi Sekarang, Tanda Tangani Sekarang.",
+      "berkas": "sumber/order-idds.html"
+    },
+    {
+      "tanggal": "2026-11-06",
+      "kode": "HE-ORDER-18",
+      "perubahan": "Tombol Verifikasi Berkas, Penyusunan Akta, Finalisasi Akta, dan Penandatanganan Akta berada di samping tombol Pindah.",
+      "berkas": "sumber/order-idds.html"
+    },
+    {
+      "tanggal": "2026-11-06",
+      "kode": "HE-ORDER-19; HE-ORDER-20",
+      "perubahan": "Menu Permohonan AJB untuk Klien sebagai pemantauan; perkiraan waktu hanya sisi Klien. Modal Buat Permohonan dihapus.",
+      "berkas": "sumber/order-idds.html, sumber/sesi-bersama.html, sumber/eawk-badan.html, sumber/ca-badan.html, sumber/eaw-badan.html"
+    },
+    {
+      "tanggal": "2026-11-06",
+      "kode": "HE-CA-01; HE-TERA-07",
+      "perubahan": "Lencana perkiraan waktu di stepper CA dan TERA dikembalikan ke teks semula. Penekanan perkiraan waktu hanya untuk Permohonan AJB sisi Klien. Penghapusan estimasi eKYC tetap berlaku.",
+      "berkas": "sumber/ca-badan.html, sumber/tera-idds.html"
     }
   ]
 }

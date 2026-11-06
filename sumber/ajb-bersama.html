@@ -2,7 +2,9 @@
 /* Satu perjalanan Permohonan AJB lintas prototipe: Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta dibuka dari stepper,
    menyimpan statusnya di sini, lalu Kembali ke stepper order yang sama. Alamat tujuan: <berkas>#order=KODE[&peran=ppat]. */
 window.AJB = (() => {
-  const KUNCI_SPESIMEN = 'eppat-spesimen';
+  const KUNCI_SPESIMEN = 'eppat-spesimen', KUNCI_DAFTAR = 'eppat-daftar';
+  const bacaDaftar = () => { try { return JSON.parse(localStorage.getItem(KUNCI_DAFTAR)) || {}; } catch (e) { return {}; } };
+  const ubahDaftar = (k, v) => { const d = bacaDaftar(); d[k] = v; try { localStorage.setItem(KUNCI_DAFTAR, JSON.stringify(d)); } catch (e) { /* lihat tulis() */ } };
   const bacaSpesimen = () => { try { return JSON.parse(localStorage.getItem(KUNCI_SPESIMEN)) || {}; } catch (e) { return {}; } };
   const tulisSpesimen = d => { try { localStorage.setItem(KUNCI_SPESIMEN, JSON.stringify(d)); } catch (e) { /* lihat tulis() */ } };
   const KUNCI = 'eppat-ajb-v3', ORDER = 'Backlog-HE-ORDER-Prototype.html';
@@ -18,6 +20,9 @@ window.AJB = (() => {
     hapus:() => { try { localStorage.removeItem(KUNCI); } catch (e) { /* lihat tulis() */ } },
     spesimen:email => bacaSpesimen()[email] || '',
     simpanSpesimen:(email, gbr) => { const d = bacaSpesimen(); if (gbr) d[email] = gbr; else delete d[email]; tulisSpesimen(d); },
+    /* status pendaftaran: CA per pengguna, TERA per kantor; dipakai notifikasi di semua halaman */
+    caStatus:email => bacaDaftar()['ca:' + email] || '', simpanCa:(email, k) => ubahDaftar('ca:' + email, k),
+    teraStatus:() => bacaDaftar().tera || '', simpanTera:k => ubahDaftar('tera', k),
     alamat:(hal, kode, peran) => `${HAL[hal]}#order=${kode}${peran ? '&peran=' + peran : ''}`,
     keStepper:kode => { location.href = kode ? `${ORDER}#order=${kode}` : ORDER; }
   };

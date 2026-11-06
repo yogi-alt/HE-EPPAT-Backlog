@@ -143,7 +143,7 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .status-kartu .stepper-v.ina-stepper .ina-stepper__item{height:auto;max-height:none;min-height:0;flex:none;align-items:flex-start}
 .status-kartu .stepper-v .ina-stepper__label{position:static;transform:none;white-space:normal;max-width:none}
 .status-kartu .ina-stepper__item--active .ina-stepper__label > span:first-child,.status-kartu .ina-stepper__item--completed .ina-stepper__label > span:first-child{font-weight:600;color:var(--ina-content-primary)}
-.tahap-status,.tahap-aksi,.tahap-perkiraan{display:block;margin-top:6px}
+.tahap-status,.tahap-perkiraan{display:block;margin-top:6px}
 .tahap-perkiraan .ina-badge{display:inline-flex;align-items:center;gap:6px}
 .status-kartu .ina-stepper__label small.tahap-waktu{margin-top:4px;font-size:11.5px}
 .waktu-baris{display:block;margin:2px 0 8px}
@@ -712,7 +712,7 @@ function contoh() {
     a('ORD-CONTOH-013', 'Contoh Narahubung Tiga Belas', true, 3, true, '13/2026', '10 Okt 2026'), /* akta selesai yang sama dengan Akta Salinan & Dashboard Akta */
     a('ORD-CONTOH-014', 'Contoh Narahubung Empat Belas', true, 3, true, '14/2026', '8 Okt 2026'),
     { ...a('ORD-CONTOH-009', 'Contoh Narahubung Sembilan', false, 0, false, '9/2026', '22 Okt 2026'), mulai:false }
-  ].map(x => { if (x.kode === 'ORD-CONTOH-004') x.pihak.find(s => s.peran === 'PPAT').ca = false; return x; }); /* PPAT belum ber-CA (temuan live) */
+  ].map(x => { if (x.kode === 'ORD-CONTOH-004') x.pihak.find(s => s.peran === 'PPAT').ca = false; if (['ORD-CONTOH-005', 'ORD-CONTOH-007'].includes(x.kode)) Object.assign(x.pihak[1], { nama:'Contoh Klien Satu', email:'klien1@contoh.id' }); return x; }); /* PPAT belum ber-CA (temuan live) */
 }
 let ORDER = contoh();
 /* salinan elektronik per order (tab Salinan, HE-EAW-10…12); bentuk data sama dengan order agar langkah Minuta dapat dipakai ulang */
@@ -989,7 +989,7 @@ function penampil(x) {
 const SESI_E = window.SESI_PROTO, HANYA_LIHAT = !!(SESI_E && SESI_E.tanpaDaftar);
 const bukanPpat = g => g.peran === 'PPAT' && !!SESI_E && !SESI_E.peran.includes('ROLE_PPAT');
 const ALASAN_PPAT = 'Tanda tangan PPAT hanya dapat dilakukan akun berperan PPAT.';
-const spesimenPpat = () => !SESI_E || SESI_E.ca === 'selesai' || !!AJB.spesimen(SESI_E.email);
+const spesimenPpat = () => !SESI_E || !!AJB.spesimen(SESI_E.email);
 /* berlaku untuk setiap penanda tangan; pil simulasi mengosongkan spesimen semua penanda tangan */
 const giliranSaya = g => !!SESI_E && g.email === SESI_E.email; /* mis. Asisten yang menjadi saksi */
 const kurangSpesimen = g => !bukanPpat(g) && (S.tanpaSpesimen || (g.peran === 'PPAT' && !spesimenPpat()) || (giliranSaya(g) && !spesimenPpat()));
@@ -1138,7 +1138,7 @@ function keDaftar() { AJB.keStepper(S.aktif); }
 function pastikan(kode) {
   const d = AJB.ambil(kode), y = { ...d.order, ...d }; let x = ORDER.find(z => z.kode === kode);
   if (!x && !d.order) return null;
-  if (!x) { x = a(kode, d.order.kontak.nama, false, 0, false); ORDER.push(x); }
+  if (!x) { x = a(kode, d.order.kontak.nama, false, 0, false); ORDER.push(x); ['PENJUAL', 'PEMBELI'].forEach(t => { const s = x.pihak.find(p => p.peran === t), u = d.order.pihak.find(p => p.tipe === t); if (u) Object.assign(s, { nama:u.nama, email:u.email }); }); }
   if (d.eawData) Object.assign(x, d.eawData);
   if (d.salinanData) { SALINAN[kode] = d.salinanData; idSal = Math.max(idSal, ...d.salinanData.map(s => s.id + 1)); }
   if (y.nomor) Object.assign(x, { nomor:y.nomor, tgl:y.tgl });
