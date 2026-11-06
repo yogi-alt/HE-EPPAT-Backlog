@@ -236,7 +236,7 @@ const tglJam = w => { const d = new Date(w); return `${tglPendek(w)}, ${jam(d)}`
 const rupiah = n => 'Rp' + n.toLocaleString('id-ID');
 
 /* Sembilan tahap progres (urutan live); indeks = tahap terakhir yang selesai, −1 = belum ada status */
-const TAHAP = ['Pendaftaran', 'Verifikasi Email', 'Masuk Pertama', 'Verifikasi Anggota', 'Pilih Produk', 'Proses Pembayaran', 'Lunas', 'Proses Administrasi', 'Selesai'];
+const TAHAP = ['Pendaftaran', 'Verifikasi Data', 'Masuk Pertama', 'Verifikasi Anggota', 'Pilih Produk', 'Proses Pembayaran', 'Lunas', 'Proses Aktivasi', 'Selesai'];
 const I_LUNAS = 6;
 const lencanaTahap = (st, uk = 'sm') => st < 0 ? badge('Belum ada status', 'neutral', uk) : st === 0 ? badge('Pendaftaran', 'warning', uk) : st === I_LUNAS || st === 8 ? badge(TAHAP[st], 'success', uk) : badge(TAHAP[st], 'info', uk);
 const ANGKA = ['Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh'];
@@ -556,7 +556,7 @@ const kontak = () => `<h4 class="bantu-sub">Kontak dukungan ${usulan('IDDS-OB-20
 const lgkh = a => `<ol class="bantu-langkah">${a.map(x => `<li>${x}</li>`).join('')}</ol>`;
 const istilah = a => `<dl class="bantu-istilah">${a.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
 const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
-const ARTI_TAHAP = [['Pendaftaran', 'Calon PPAT sudah mengisi formulir pendaftaran.'], ['Verifikasi Email', 'Calon PPAT sudah mengklik tautan di email verifikasi.'], ['Masuk Pertama', 'Calon PPAT sudah masuk pertama kali dan mengaktifkan verifikasi dua langkah.'], ['Verifikasi Anggota', 'Data keanggotaan sudah diperiksa operator di Verifikasi Anggota.'], ['Pilih Produk', 'Calon PPAT sudah memilih paket, misalnya Trial atau Enterprise.'], ['Proses Pembayaran', 'Tagihan Virtual Account sudah dibuat dan menunggu dibayar.'], ['Lunas', 'Pembayaran sudah diterima.'], ['Proses Administrasi', 'Aplikasi kantor sedang disiapkan.'], ['Selesai', 'Aplikasi kantor aktif dan email akun sudah dikirim.']];
+const ARTI_TAHAP = [['Pendaftaran', 'Calon PPAT sudah mengisi formulir pendaftaran.'], ['Verifikasi Data', 'Calon PPAT sudah mengklik tautan di email verifikasi.'], ['Masuk Pertama', 'Calon PPAT sudah masuk pertama kali dan mengaktifkan verifikasi dua langkah.'], ['Verifikasi Anggota', 'Data keanggotaan sudah diperiksa operator di Verifikasi Anggota.'], ['Pilih Produk', 'Calon PPAT sudah memilih paket, misalnya Trial atau Enterprise.'], ['Proses Pembayaran', 'Tagihan Virtual Account sudah dibuat dan menunggu dibayar.'], ['Lunas', 'Pembayaran sudah diterima.'], ['Proses Aktivasi', 'Aplikasi kantor sedang disiapkan.'], ['Selesai', 'Aplikasi kantor aktif dan email akun sudah dikirim.']];
 const BANTUAN = {
   dasbor:() => ({ judul:'Bantuan Dasbor Admin', isi:`<p>Dasbor merangkum pendaftaran calon PPAT, anggota yang perlu diverifikasi, transaksi pembayaran, dan pemilihan paket di portal Onboarding.</p>
     <h4 class="bantu-sub">Isi halaman</h4>
@@ -582,7 +582,7 @@ const BANTUAN = {
       ['Apa arti status di tabel?', 'Status adalah tahap terakhir yang sudah diselesaikan pendaftar. Tahap berikutnya terlihat di Detail Pendaftar.'],
       ['Mengapa ada pendaftar tanpa ID PPAT dan URL?', 'Akun itu terdaftar sebagai customer tetapi belum memulai pendaftaran PPAT, jadi statusnya "Belum ada status".'],
       ['Bagaimana memverifikasi anggota atau pembayaran?', 'Tidak dari halaman ini. Gunakan menu Verifikasi › Verifikasi Anggota atau Verifikasi Pembayaran.'],
-      ['Pendaftar lama di tahap Verifikasi Email. Apa yang harus dilakukan?', 'Pendaftar belum mengklik tautan di email verifikasi. Minta pendaftar memeriksa folder spam atau mengirim ulang email verifikasi dari halaman masuk.'],
+      ['Pendaftar lama di tahap Verifikasi Data. Apa yang harus dilakukan?', 'Pendaftar belum mengklik tautan di email verifikasi. Minta pendaftar memeriksa folder spam atau mengirim ulang email verifikasi dari halaman masuk.'],
       ['Apa yang dibuka tautan di kolom URL?', 'Aplikasi E-PPAT kantor pendaftar. Aplikasi baru dapat dipakai setelah tahap Selesai.'],
       ['Mengapa pendaftar yang saya cari tidak muncul?', 'Periksa ejaan dan saringan tahap yang aktif. Pilih "Semua" agar pencarian mencakup semua tahap.']])}
     ${kontak()}` }),
@@ -608,7 +608,7 @@ $('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar penyesuaian Monitoring Onboarding', lebar:true,
     isi:`<p>Isi, kolom, tahap, dan alur mengikuti live dev.eppat.id (akun Admin). Yang disesuaikan adalah komponen IDDS dengan brand E-PPAT, kejujuran label, bahasa, status sistem, konfirmasi aksi berdampak, dan Bantuan per halaman. Data di prototipe ini adalah data contoh.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });

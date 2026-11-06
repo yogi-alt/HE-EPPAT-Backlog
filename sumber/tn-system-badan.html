@@ -257,7 +257,7 @@ function contohPeran() {
   return [
     { id:1, code:'ROLE_ADMIN', name:'Super Admin', aktif:true, publik:false, fungsi:'NONE', user:1, izin:null },
     { id:2, code:'ROLE_PPAT', name:'PPAT', aktif:true, publik:false, fungsi:'NOTARIS', user:1, izin:izin({ PPAT_REVIEW:'vced', PIHAK_REVIEW:'v', USER_MGMT:'v', EPPAT_DASHBOARD:'v', EPPAT_VERIFIKASI:'vced', EPPAT_MINUTA:'vced', EPPAT_WIZARD:'vced', EPPAT_SALINAN:'vced', EPPAT_PERMINTAAN:'vced', EPPAT_PROFIL:'ve', EPPAT_EMATERAI:'vce' }) },
-    { id:3, code:'ROLE_ASISTEN', name:'Asisten', aktif:true, publik:true, fungsi:'ASISTEN', user:1, izin:izin({ PIHAK_REVIEW:'v', USER_MGMT:'v', EPPAT_DASHBOARD:'v', EPPAT_VERIFIKASI:'vce', EPPAT_MINUTA:'vce', EPPAT_WIZARD:'ve', EPPAT_SALINAN:'v', EPPAT_PERMINTAAN:'vce', EPPAT_PROFIL:'v' }) },
+    { id:3, code:'ROLE_ASISTEN', name:'Asisten', aktif:true, publik:false, fungsi:'ASISTEN', user:1, izin:izin({ PIHAK_REVIEW:'v', USER_MGMT:'v', EPPAT_DASHBOARD:'v', EPPAT_VERIFIKASI:'vce', EPPAT_MINUTA:'vce', EPPAT_WIZARD:'ve', EPPAT_SALINAN:'v', EPPAT_PERMINTAAN:'vce', EPPAT_PROFIL:'v' }) },
     { id:4, code:'ROLE_KLIEN', name:'Klien', aktif:true, publik:true, fungsi:'KLIEN', user:10, izin:izin({ PIHAK_REVIEW:'ve', EPPAT_WIZARD:'v', EPPAT_SALINAN:'v' }) }
   ];
 }
@@ -279,7 +279,7 @@ function contohLog() {
     L('2026-10-26T08:30', 'PPAT Contoh Satu', 'ppat1@contoh.id', 'NIK_VIEW', 'NIK Contoh Penjual Satu', true, '10.0.0.20'),
     L('2026-10-26T08:05', 'PPAT Contoh Satu', 'ppat1@contoh.id', 'LOGIN', '', true, '10.0.0.20'),
     L('2026-10-25T16:45', 'Admin Contoh', 'admin@contoh.id', 'USER_CREATE', 'Contoh Klien Tiga (Klien)', true, '10.0.0.12'),
-    L('2026-10-25T16:40', 'Admin Contoh', 'admin@contoh.id', 'ROLE_UPDATE', 'Asisten: peran publik diaktifkan', true, '10.0.0.12'),
+    L('2026-10-25T16:40', 'Admin Contoh', 'admin@contoh.id', 'ROLE_UPDATE', 'Asisten: peran publik dinonaktifkan', true, '10.0.0.12'),
     L('2026-10-25T15:02', 'Contoh Klien Dua', 'klien2@contoh.id', 'LOGIN_FAILED', 'Akun ditangguhkan', false, '10.0.0.77'),
     L('2026-10-25T14:20', 'Asisten Contoh', 'asisten1@contoh.id', 'DRAFT_PREVIEW', 'ORD-CONTOH-002', true, '10.0.0.31'),
     L('2026-10-25T13:10', 'Asisten Contoh', 'asisten1@contoh.id', 'LOGOUT', '', true, '10.0.0.31')
@@ -346,7 +346,7 @@ function konfirmTinggal(fn) {
 
 /* ---------------- layar: Dasbor (live: Ringkasan · Dasbor admin) ---------------- */
 function layarDasbor() {
-  const total = 12, aktif = 10, akt = LOG.slice(0, 6);
+  const trial = window.SESI_PROTO && window.SESI_PROTO.paket === 'trial', total = trial ? 3 : 12, aktif = trial ? 3 : 10, akt = LOG.slice(0, 6);
   const cepat = [['users', 'Kelola pengguna', 'Tambah pengguna, tangguhkan, atur ulang kata sandi', 'Backlog-HE-USER-Prototype.html', 'data-luar-proto'], ['tameng', 'Atur peran & izin', 'Hak akses setiap peran per modul', '#peran', 'data-ke-layar="peran"'], ['gear', 'Pengaturan sistem', 'Identitas aplikasi dan preferensi umum', '#pengaturan', 'data-ke-layar="pengaturan"']];
   const ingat = S.tera ? `<div class="ingat">${alert('caution', '', 'Stempel Elektronik (TERA) kantor Anda belum didaftarkan. Lengkapi data pendaftaran TERA agar akta dapat dibubuhi stempel elektronik.', `<div style="display:flex;gap:8px;align-items:center">${tombol('Daftar TERA', 'primary', 'sm', 'data-ke-tera', ik('panah', 14))}<button type="button" class="ina-alert__close-button" data-tutup-tera aria-label="Tutup pengingat">${ik('x', 16)}</button></div>`)}</div>` : '';
   return `${remah('Dasbor')}<h1>Ringkasan</h1><p class="sub">Pantau jumlah pengguna, aktivitas terbaru, dan pengingat penting kantor Anda.</p>
@@ -724,7 +724,7 @@ $('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar penyesuaian menu Pengaturan Aplikasi', lebar:true,
     isi:`<p>Menu Pengaturan Aplikasi tidak dinilai dalam laporan Heuristic Evaluation. Isi, kolom, dan perilaku mengikuti kode live dev-app.eppat.id/t/default; yang disesuaikan adalah komponen IDDS dengan brand E-PPAT, letak pesan, bahasa, dan Bantuan per halaman sesuai saran HE-UMUM-02. Daftar Pengguna memakai prototipe HE yang sudah ada. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });

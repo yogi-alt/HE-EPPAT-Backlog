@@ -1,0 +1,70 @@
+<!-- ===== Kabar bersama (kabar-bersama.html, disisipkan rakit-idds.js ke prototipe yang punya #toastWadah) =====
+     Pesan hasil tindakan pengguna ("Email verifikasi dikirim ulang.", "Perubahan disimpan.", …) tidak lagi muncul sebagai
+     toast di kanan bawah, tetapi sebagai IDDS Alert di bagian atas kartu tempat tombol diklik, agar tidak terlewat.
+     Urutan wadah: kartu/dialog/laci tempat tombol diklik → kartu yang sama setelah layar digambar ulang → dialog/laci
+     yang terbuka → kartu utama halaman → atas isi halaman.
+     Pesan milik kontrol prototipe (protobar, Daftar perubahan, "Lihat di layar", teks yang menyebut "prototipe") tetap toast. -->
+<style id="kabar-bersama-css">
+.kabar-sisip{text-align:left;flex:none;width:100%;grid-column:1/-1;box-sizing:border-box;margin:0 0 16px}
+.kabar-sisip .ina-alert__content{flex:1;min-width:0}
+.kabar-sisip .ina-alert__description{margin:2px 0 0}
+</style>
+<script id="kabar-bersama-js">
+(() => {
+  const wadah = document.getElementById('toastWadah');
+  if (!wadah) return;
+  const KARTU = '.ina-modal__body, .ina-drawer__content, .ina-card__content, .ob-kartu, .ina-card, section, .builder, .kartu, .panel';
+  const META = '.protobar, .daftar-ubah, [data-lihat], #notif-bersama';
+  const LUAR = '.sidebar, .topbar, .ob-nav, header, nav';
+  const IKON = {
+    success:'<path d="M5 12l5 5l10 -10" />',
+    info:'<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" />'
+  };
+  const svg = (p, s) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+  const tampak = el => !!el && el.isConnected && el.getClientRects().length > 0;
+  let asal = null, jejak = null;
+  /* catat tombol yang terakhir dipakai beserta kartunya, untuk menemukan kartu yang sama bila layar digambar ulang */
+  const catat = e => {
+    asal = e.target instanceof Element ? e.target : null;
+    const k = asal && !asal.closest(LUAR) ? asal.closest(KARTU) : null;
+    if (!k) { jejak = null; return; }
+    const pemilih = k.id ? '#' + CSS.escape(k.id) : k.tagName.toLowerCase() + (k.classList[0] ? '.' + CSS.escape(k.classList[0]) : '');
+    jejak = { pemilih, ke:[...document.querySelectorAll(pemilih)].indexOf(k) };
+  };
+  document.addEventListener('pointerdown', catat, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') catat(e); }, true);
+  const isiKartu = k => (k.classList.contains('ina-card') && k.querySelector(':scope > .ina-card__content')) || k;
+  function cariWadah() {
+    if (asal && asal.isConnected && !asal.closest(LUAR)) { const k = asal.closest(KARTU); if (tampak(k)) return isiKartu(k); }
+    if (jejak) { const k = document.querySelectorAll(jejak.pemilih)[jejak.ke]; if (tampak(k)) return isiKartu(k); }
+    const lap = [...document.querySelectorAll('.ina-modal__body, .ina-drawer__content')].filter(tampak).pop();
+    if (lap) return lap;
+    const utama = document.querySelector('#halaman .ob-kartu');
+    if (tampak(utama)) return utama;
+    return [document.getElementById('halamanApp'), document.getElementById('halaman'), document.querySelector('main')].find(tampak) || null;
+  }
+  function sisipkan() {
+    const t = wadah.querySelector('.ina-toast');
+    if (!t) return;
+    const judul = (t.querySelector('.ina-toast__title') || {}).textContent || '';
+    const desk = (t.querySelector('.ina-toast__description') || {}).textContent || '';
+    const meta = (asal && asal.isConnected && asal.closest(META)) || /prototipe/i.test(judul + ' ' + desk);
+    const tujuan = meta ? null : cariWadah();
+    if (!tujuan) return; /* tetap toast */
+    const jenis = t.className.includes('state-positive') ? 'success' : 'info';
+    document.querySelectorAll('.kabar-sisip').forEach(x => x.remove());
+    /* wadah grid atau flex sebaris: alert di atas kartu (bukan di dalam) agar tidak ikut meregang/terjepit */
+    const gaya = getComputedStyle(tujuan), luar = gaya.display.includes('grid') || (gaya.display.includes('flex') && !gaya.flexDirection.startsWith('column') && gaya.flexWrap === 'nowrap');
+    tujuan.insertAdjacentHTML(luar ? 'beforebegin' : 'afterbegin', `<div class="ina-alert ina-alert--${jenis} kabar-sisip" role="status"><span class="ina-alert__icon">${svg(IKON[jenis], 20)}</span>
+      <div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">${judul.replace(/</g, '&lt;')}</div>${desk ? `<div class="ina-alert__description">${desk.replace(/</g, '&lt;')}</div>` : ''}</div></div>
+      <button type="button" class="ina-alert__close-button" aria-label="Tutup pesan">${svg('<path d="M18 6l-12 12" /><path d="M6 6l12 12" />', 16)}</button></div>`);
+    wadah.innerHTML = '';
+    const a = document.querySelector('.kabar-sisip'), r = a.getBoundingClientRect();
+    if (r.top < 0 || r.bottom > innerHeight) a.scrollIntoView({ block:'nearest', behavior:'smooth' });
+  }
+  /* tunggu satu giliran: beberapa prototipe menambah keterangan ke toast sesudah toast dibuat */
+  let antre = 0;
+  new MutationObserver(() => { clearTimeout(antre); antre = setTimeout(sisipkan, 0); }).observe(wadah, { childList:true, subtree:true });
+  document.addEventListener('click', e => { const b = e.target.closest('.kabar-sisip .ina-alert__close-button'); if (b) b.closest('.kabar-sisip').remove(); });
+})();
+</script>

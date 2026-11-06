@@ -28,8 +28,15 @@ body{background:#1f2c33}
 .kaki-tn a{color:var(--ina-primary-primary);font-weight:600;text-decoration:none}
 .form-tn{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
 .form-tn .lebar{grid-column:1/-1}
+.simulasi-masuk{margin-top:16px}
+.simulasi-masuk p{margin:0 0 8px;text-align:center;font-size:13px;line-height:20px;color:var(--ina-content-secondary)}
+.simulasi-pilihan{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .ina-text-field select.ina-text-field__input{appearance:auto;background:transparent;border:0;width:100%;height:100%;font:inherit;font-size:14px;color:inherit;outline:0}
 .syarat-pw{list-style:none;margin:8px 0 0;padding:10px 12px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:4px 12px}
+/* dua kolom: kiri panjang + huruf besar + huruf kecil, kanan angka + simbol (daftar simbol boleh dua baris) */
+.syarat-pw{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,auto);grid-auto-flow:column}
+.syarat-pw li:last-child{grid-row:span 2;align-items:flex-start}
+@media (max-width:560px){.syarat-pw{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}.syarat-pw li:last-child{grid-row:auto}}
 .syarat-pw li{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ina-content-secondary)}
 .syarat-pw .tanda{width:15px;height:15px;border-radius:999px;border:1.5px solid var(--ina-stroke-secondary);display:grid;place-items:center;flex:none}
 .syarat-pw li.ok{color:var(--ina-content-positive)}
@@ -73,7 +80,7 @@ body{background:#1f2c33}
   <span class="sep">&bull;</span><b>Tenant · Masuk &amp; Daftar</b><span class="sep">&bull;</span><span>Layar:</span>
   <span id="pilLayar"></span>
   <span class="kanan">
-    <span>Contoh: sandi <b>salah123</b> = gagal · email berawalan <b>2fa</b> = verifikasi 2 faktor · <b>sementara</b> = ganti kata sandi · kode <b>000000</b> = salah</span>
+    <span>Contoh: sandi <b>salah123</b> = gagal · email berawalan <b>2fa</b> = verifikasi 2 faktor · kode <b>000000</b> = salah</span>
     <button class="pil" id="aturUlang">Atur ulang contoh</button>
     <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai penyesuaian</button>
     <button class="pil utama" id="bukaUbah">Daftar penyesuaian</button>
@@ -106,14 +113,14 @@ const badge = (t, j, uk = 'sm') => `<span class="ina-badge ina-badge--soft ina-b
 const tombol = (t, h = 'primary', uk = 'md', atr = '', ikon = '') => { let k = ''; atr = atr.replace(/class="([^"]*)"/, (m, c) => { k = ' ' + c; return ''; }); return `<button type="button" class="ina-button ina-button--${h} ina-button--${uk}${k}" ${atr}>${ikon}${t}</button>`; };
 const alert = (j, judul, isi) => `<div class="ina-alert ina-alert--${j}" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section">${judul ? `<div class="ina-alert__title">${judul}</div>` : ''}<div class="ina-alert__description">${isi}</div></div></div></div>`;
 const spinner = `<span class="ina-spinner ina-spinner--spinner-only" aria-hidden="true"><span class="ina-spinner__element ina-spinner__element--size-xs ina-spinner__element--color-primary"></span></span>`;
-const SYARAT_PW = [['Minimal 12 karakter', s => s.length >= 12], ['Mengandung huruf besar', s => /[A-Z]/.test(s)], ['Mengandung huruf kecil', s => /[a-z]/.test(s)], ['Mengandung angka', s => /[0-9]/.test(s)], ['Mengandung simbol', s => /[^A-Za-z0-9]/.test(s)]];
+const SYARAT_PW = [['Minimal 12 karakter', s => s.length >= 12], ['Mengandung huruf besar', s => /[A-Z]/.test(s)], ['Mengandung huruf kecil', s => /[a-z]/.test(s)], ['Mengandung angka', s => /[0-9]/.test(s)], ['Mengandung simbol (- _ ? ! & + % # @ * $ ^)', s => /[-_?!&+%#@*$^]/.test(s) && !/[^A-Za-z0-9_?!&+%#@*$^-]/.test(s)]];
 const syaratHtml = id => `<ul class="syarat-pw" id="${id}" aria-live="polite">${SYARAT_PW.map(([l], i) => `<li data-syarat="${i}"><span class="tanda" aria-hidden="true"></span>${l}</li>`).join('')}</ul>`;
 const ROLE = ['Klien', 'Asisten'];
 
 /* ---------------- daftar penyesuaian ---------------- */
 const UBAH = [
   { kode:'IDDS-TN-01', judul:'Halaman Masuk dan Daftar: komponen IDDS dengan brand E-PPAT',
-    isi:'Isian memakai IDDS Text Field dan Password Input dengan tombol tampilkan/sembunyikan. Pilihan peran memakai Select Dropdown, dan persetujuan memakai Checkbox. Langkah pendaftaran memakai Stepper (Isi data, Verifikasi OTP, Akun aktif), dan kolom kode memakai One-Time Password. Tombol, alert, dan dialog konfirmasi juga memakai komponen IDDS.',
+    isi:'Isian memakai IDDS Text Field dan Password Input dengan tombol tampilkan/sembunyikan. Persetujuan memakai Checkbox. Langkah pendaftaran memakai Stepper (Isi data, Verifikasi OTP, Akun aktif), dan kolom kode memakai One-Time Password. Tombol, alert, dan dialog konfirmasi juga memakai komponen IDDS.',
     lama:'Isian, kotak centang, penanda langkah "1/2 Form", dan kolom kode dibuat sendiri. Isian kata sandi di halaman Masuk tidak punya tombol tampilkan.', ke:'masuk', sorot:'#f-mPw' },
   { kode:'IDDS-TN-02', judul:'Halaman Masuk dan Daftar: pesan galat di dalam kartu dan di bawah isian',
     isi:'Pesan galat masuk tampil sebagai IDDS Alert di dalam kartu. Isian kosong ditandai di bawah isiannya ("Email wajib diisi."). Pesan galat formulir Daftar muncul sekaligus di bawah setiap isian yang salah, bukan satu per satu di atas formulir.',
@@ -125,22 +132,25 @@ const UBAH = [
     isi:'Bila pendaftaran mandiri dibuka, pengantar berbunyi "Masuk dengan akun yang dibuat admin kantor, atau daftar sendiri bila belum punya akun." Bila pendaftaran ditutup, pengantar meminta pengguna menghubungi admin kantor, dan tautan Daftar tidak ditampilkan.',
     lama:'Pengantar berbunyi "Gunakan akun yang telah diaktivasi oleh administrator. Hubungi admin kalau belum punya akses.", tetapi di bawahnya tetap ada tautan "Daftar untuk membuat akun baru."', ke:'masuk', sorot:'#pengantarMasuk' },
   { kode:'IDDS-TN-05', judul:'Daftar: syarat kata sandi sama dengan layar kata sandi lain',
-    isi:'Kata sandi pendaftaran memakai daftar centang yang sama dengan Ganti Kata Sandi, Akun Saya, dan Tambah Pengguna. Syaratnya minimal 12 karakter serta memuat huruf besar, huruf kecil, angka, dan simbol (lihat HE-CA-08 dan HE-USER-03).',
+    isi:'Kata sandi pendaftaran memakai daftar centang yang sama dengan Ganti Kata Sandi, Akun Saya, dan Tambah Pengguna. Syaratnya minimal 12 karakter serta memuat huruf besar, huruf kecil, angka, dan simbol (- _ ? ! & + % # @ * $ ^) (lihat HE-CA-08 dan HE-USER-03).',
     lama:'Kata sandi pendaftaran cukup "Minimal 8 karakter", sedangkan layar Ganti Kata Sandi pada proses masuk yang sama meminta 12 karakter dan 4 jenis karakter.', ke:'daftar', sorot:'#syaratDaftar' },
   { kode:'IDDS-TN-06', judul:'Halaman Masuk dan Daftar: istilah dibakukan',
-    isi:'"Pilih Role" menjadi "Peran", dan "PPAT belum dipilih" menjadi "Kantor PPAT belum dipilih". Kata "Login" pada tautan kembali menjadi "Masuk". Tombol "Hapus draft" menjadi "Kosongkan Formulir" dan meminta konfirmasi. Pesan "Kode OTP sudah dikirim ke email dan WhatsApp." tetap dipakai.',
-    lama:'Istilah bercampur bahasa Inggris, misalnya "Pilih Role", "Kembali ke login", dan "Hapus draft". Tombol "Hapus draft" langsung menghapus isian tanpa konfirmasi.', ke:'daftar', sorot:'#f-dRole' },
+    isi:'"PPAT belum dipilih" menjadi "Kantor PPAT belum dipilih". Kata "Login" pada tautan kembali menjadi "Masuk". Tombol "Hapus draft" menjadi "Kosongkan Formulir" dan meminta konfirmasi. Pesan "Kode OTP sudah dikirim ke email dan WhatsApp." tetap dipakai.',
+    lama:'Istilah bercampur bahasa Inggris, misalnya "Pilih Role", "Kembali ke login", dan "Hapus draft". Tombol "Hapus draft" langsung menghapus isian tanpa konfirmasi.', ke:'daftar', sorot:'#dNama' },
   { kode:'IDDS-TN-07', judul:'Verifikasi OTP: masa berlaku kode terlihat di layar',
     isi:'Setiap kanal (Email dan WhatsApp) menampilkan hitung mundur "Kode berlaku 4:59" yang berubah kuning saat sisa waktunya kurang dari 1 menit. Jeda "Kirim ulang dalam 0:59" tampil sejak kode dikirim. Saat waktu habis, kolom kode dan tombol Verifikasi nonaktif, lalu muncul pesan "Kode sudah kedaluwarsa". Tombol "Kirim Ulang" memulai hitungan baru. Pola sama dengan HE-LOGIN-01, HE-EAW-04, dan HE-EAWK-05. Durasi 5 menit adalah angka contoh; masa berlaku sebenarnya mengikuti server.',
     lama:'Hanya ada tombol "Kirim ulang" dengan jeda 60 detik. Masa berlaku kode tidak disebut di layar.', ke:'otp', sorot:'#waktu-email' },
+  { kode:'IDDS-TN-42', judul:'Pendaftaran mandiri hanya untuk Klien',
+    isi:'Isian Peran dihapus karena pendaftar mandiri selalu menjadi Klien. Judul menjadi "Buat Akun Klien". Akun PPAT dan Asisten dibuat Super Admin melalui Daftar Pengguna. Di Peran & Izin, hanya Klien yang berstatus peran publik.',
+    lama:'Pendaftar memilih peran Klien atau Asisten, dan judul berbunyi "Buat Akun PPAT".', ke:'daftar', sorot:'#dNama', sumber:'Masukan 5 Nov 2026 (bukan temuan HE)', versi:'v2' },
   { kode:'IDDS-TN-38', judul:'Halaman Masuk dan Daftar: Bantuan di setiap layar',
     isi:'Tombol Bantuan di atas kartu Masuk, Verifikasi 2 Faktor, Ganti Kata Sandi, Daftar, Verifikasi OTP, dan Akun Aktif membuka IDDS Drawer. Isinya mengikuti layar yang sedang dibuka: langkah singkat, pertanyaan umum, dan kontak dukungan. Pertanyaan umum mencakup lupa kata sandi, belum punya akun, kode OTP tidak masuk atau kedaluwarsa, kehilangan aplikasi autentikator, syarat kata sandi, pilihan peran, dan langkah setelah mendaftar. Pola sama dengan Bantuan di menu Pengaturan Aplikasi (IDDS-TN-15, HE-UMUM-02). Kontak bergaris putus-putus adalah data contoh.',
     lama:'Tidak ada panduan atau kontak dukungan di halaman Masuk, Daftar, dan verifikasi.', ke:'bantuan', sorot:null }
 ];
 
 /* ---------------- keadaan ---------------- */
-const LAYAR = [['masuk', 'Masuk'], ['gagal', 'Masuk · galat'], ['2fa', 'Verifikasi 2 faktor'], ['ganti', 'Ganti kata sandi'], ['daftar', 'Daftar'], ['otp', 'Daftar · OTP'], ['aktif', 'Akun aktif']];
-const S0 = () => ({ layar:'masuk', email:'', galat:'', memuat:'', d:{ nama:'', hp:'', email:'', role:'', setuju:false }, otp:null, berhasil:false });
+const LAYAR = [['masuk', 'Masuk'], ['gagal', 'Masuk · galat'], ['2fa', 'Verifikasi 2 faktor'], ['ganti', 'Buat kata sandi baru'], ['daftar', 'Daftar'], ['otp', 'Daftar · OTP'], ['aktif', 'Akun aktif']];
+const S0 = () => ({ layar:'masuk', email:'', galat:'', memuat:'', d:{ nama:'', hp:'', email:'', setuju:false }, otp:null, berhasil:false });
 const otpBaru = () => ({ email:false, wa:false, jeda:{ email:60, wa:60 }, sisa:{ email:MASA_OTP, wa:MASA_OTP } });
 let S = S0();
 
@@ -159,6 +169,8 @@ const atasTn = (kembali = '') => `<div class="atas-tn">${kembali}<div class="kan
 const kembaliMasuk = () => tombol('Kembali ke Halaman Masuk', 'secondary', 'sm', 'data-ke="masuk"', ik('kiri', 14));
 
 /* ---------------- Masuk ---------------- */
+/* perjalanan Trial (Backlog-HE-TRIAL): pilihan Trial ditonjolkan bila pengguna datang dari portal */
+const trialTn = () => { try { const d = (JSON.parse(localStorage.getItem('eppat-trial')) || {}).db; return d && d.ent ? 'ent' : d && d.trial ? 'trial' : ''; } catch (e) { return ''; } };
 function layarMasuk() {
   return `<div class="wadah">${atasTn(tombol('Kembali ke Beranda', 'secondary', 'sm', 'data-luar="Beranda"', ik('kiri', 14)))}
     <section class="kartu-tn" aria-labelledby="judulMasuk">
@@ -168,6 +180,7 @@ function layarMasuk() {
       ${tf('mEmail', 'Email', S.email, 'nama@contoh.id', true, '', 'autocomplete="username"', 'email')}
       <div class="ditandai">${pwIsian('mPw', 'Kata Sandi', 'Masukkan kata sandi', 'current-password')}${usulan('IDDS-TN-01')}</div>
       ${tombol(S.memuat ? 'Memverifikasi…' : `Masuk${ik('panah', 16)}`, 'primary', 'lg', `id="kirimMasuk" class="penuh" ${S.memuat ? 'disabled' : ''}`, S.memuat ? spinner : '')}
+      <div class="simulasi-masuk ditandai" id="simulasiMasuk"><p>Simulasi masuk sebagai</p><div class="simulasi-pilihan">${[['admin', 'Super Admin'], ['admin-ppat', 'Super Admin + PPAT'], ['admin-trial', trialTn() === 'ent' ? 'Super Admin (sudah Enterprise)' : 'Super Admin Trial'], ...(trialTn() === 'ent' ? [['admin-trial-ulang', 'Ulangi Trial']] : []), ['ppat', 'PPAT'], ['asisten', 'Asisten'], ['klien', 'Klien']].map(([k, l]) => tombol(l, k === 'admin-trial' && trialTn() ? 'primary' : 'secondary', 'sm', `data-sesi-masuk="${k}"`)).join('')}</div>${usulan('HE-UMUM-08')}</div>
       <div class="kaki-tn">Belum punya akun? <a href="#" data-ke="daftar">Daftar</a> untuk membuat akun baru.</div>
     </section></div>`;
 }
@@ -183,18 +196,17 @@ function layar2fa() {
       ${alert('info', '', 'Kehilangan akses ke aplikasi autentikator? Hubungi admin kantor untuk mengatur ulang verifikasi 2 faktor akun Anda.')}
     </section></div>`;
 }
-/* ganti kata sandi sementara — teks & syarat live */
+/* buat kata sandi baru dari tautan email (Atur Ulang Kata Sandi, HE-USER-14) */
 function layarGanti() {
-  if (S.berhasil) return `<div class="wadah">${atasTn()}<section class="kartu-tn status-tn"><span class="bulat">${ik('centang', 34)}</span><h1>Kata sandi berhasil diubah</h1><p>Gunakan kata sandi baru setiap kali Anda masuk.</p>${tombol('Lanjut ke Aplikasi', 'primary', 'lg', 'class="penuh" data-ke-app', ik('panah', 16))}</section></div>`;
+  if (S.berhasil) return `<div class="wadah">${atasTn()}<section class="kartu-tn status-tn"><span class="bulat">${ik('centang', 34)}</span><h1>Kata sandi berhasil disimpan</h1><p>Gunakan kata sandi baru setiap kali Anda masuk.</p>${tombol('Lanjut ke Aplikasi', 'primary', 'lg', 'class="penuh" data-ke-app', ik('panah', 16))}</section></div>`;
   return `<div class="wadah">${atasTn()}<section class="kartu-tn" aria-labelledby="judulGanti">
-      <div class="kepala-tn"><span class="ikon">${ik('kunci', 20)}</span><div><div class="eb">Keamanan akun</div><h1 id="judulGanti">Ganti Kata Sandi</h1></div></div>
-      <p class="pengantar">Akun <b>${esc(S.email || 'sementara@contoh.id')}</b> masih memakai kata sandi sementara. Demi keamanan, ganti kata sandi sebelum memakai aplikasi.</p>
+      <div class="kepala-tn"><span class="ikon">${ik('kunci', 20)}</span><div><div class="eb">Atur ulang kata sandi</div><h1 id="judulGanti">Buat Kata Sandi Baru</h1></div></div>
+      <p class="pengantar">Buat kata sandi baru untuk akun <b>${esc(S.email || 'nama@contoh.id')}</b>.</p>
       ${S.galat ? alert('critical', '', esc(S.galat)) : ''}
-      ${pwIsian('gLama', 'Kata Sandi Sementara', 'Kata sandi sementara dari email atau admin', 'current-password')}
       ${pwIsian('gBaru', 'Kata Sandi Baru', 'Buat kata sandi baru')}
       ${syaratHtml('syaratGanti')}
       ${pwIsian('gUlang', 'Konfirmasi Kata Sandi Baru', 'Ulangi kata sandi baru')}
-      ${tombol('Ubah Kata Sandi', 'primary', 'lg', 'id="kirimGanti" class="penuh" disabled')}
+      ${tombol('Simpan Kata Sandi', 'primary', 'lg', 'id="kirimGanti" class="penuh" disabled')}
       <div class="kaki-tn" style="margin-top:14px;padding-top:12px">${tombol('Keluar', 'tertiary', 'sm', 'data-ke="masuk"')}</div>
     </section></div>`;
 }
@@ -206,16 +218,13 @@ function layarDaftar() {
   const d = S.d;
   return `<div class="wadah lebar">${atasTn(kembaliMasuk())}
     <section class="kartu-tn" aria-label="Buat akun">
-      ${kepalaDaftar(0, 'Buat Akun PPAT')}
+      ${kepalaDaftar(0, 'Buat Akun Klien')}
       <p class="pengantar">Isi data Anda. Kode OTP akan dikirim ke email dan WhatsApp untuk memastikan keduanya aktif. Data yang sudah diisi tersimpan otomatis di perangkat ini sampai pendaftaran selesai.</p>
       ${S.galat ? alert('critical', '', esc(S.galat)) : ''}
       <div class="form-tn">
         ${tf('dNama', 'Nama Lengkap', d.nama, 'Nama sesuai identitas', true, '', 'autocomplete="name"')}
-        ${tf('dHp', 'Nomor WhatsApp', d.hp, '62812xxxx', true, 'Nomor WhatsApp aktif, diawali 62. Contoh: 6281200000000.', 'inputmode="tel" autocomplete="tel"')}
-        ${tf('dEmail', 'Email', d.email, 'nama@contoh.id', true, '', 'autocomplete="email"', 'email')}
-        <div class="ditandai"><div class="ina-text-field" id="f-dRole"><label class="ina-text-field__label" for="dRole">Peran<span class="ina-text-field__required">*</span></label>
-          <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><select id="dRole" class="ina-text-field__input" aria-describedby="h-dRole"><option value="">Pilih peran</option>${ROLE.map(r => `<option ${d.role === r ? 'selected' : ''}>${r}</option>`).join('')}</select></div>
-          <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-dRole" data-bantu="Klien: pihak dalam akta. Asisten: pegawai kantor PPAT.">Klien: pihak dalam akta. Asisten: pegawai kantor PPAT.</div></div></div>${usulan('IDDS-TN-06')}</div>
+        ${tf('dHp', 'Nomor WhatsApp', d.hp, '62812xxxx', true, 'Nomor WhatsApp aktif, diawali 62. Contoh: 6281200000000.', 'inputmode="tel" autocomplete="tel" maxlength="15"')}
+        <div class="lebar">${tf('dEmail', 'Email', d.email, 'nama@contoh.id', true, '', 'autocomplete="email"', 'email')}</div>
         <div>${pwIsian('dPw', 'Kata Sandi', 'Buat kata sandi')}</div>
         <div>${pwIsian('dPw2', 'Konfirmasi Kata Sandi', 'Ulangi kata sandi')}</div>
         <div class="lebar ditandai">${syaratHtml('syaratDaftar')}${usulan('IDDS-TN-05')}</div>
@@ -284,13 +293,12 @@ document.addEventListener('input', e => {
   const f = e.target.closest('.ina-text-field'); if (f) bersih(f.id.slice(2));
   if (e.target.id === 'mEmail' || e.target.id === 'mPw') { if (e.target.id === 'mPw') setPw('mPw', '', ''); }
   if (e.target.matches('[data-otp2]')) tandai2fa('');
-  if (S.layar === 'daftar') { const d = S.d; d.nama = $('#dNama').value; d.hp = $('#dHp').value = $('#dHp').value.replace(/\D/g, ''); d.email = $('#dEmail').value; d.role = $('#dRole').value; }
+  if (S.layar === 'daftar') { const d = S.d; d.nama = $('#dNama').value; d.hp = $('#dHp').value = $('#dHp').value.replace(/\D/g, ''); d.email = $('#dEmail').value; }
   if (e.target.id === 'dPw' || e.target.id === 'dPw2') { const ok = cekSyarat('dPw', 'syaratDaftar'), a = $('#dPw').value, b = $('#dPw2').value; setPw('dPw', a && ok ? 'Kata sandi sudah memenuhi semua syarat.' : '', a && ok ? 'success' : ''); setPw('dPw2', !b ? '' : a === b ? 'Kata sandi cocok.' : 'Konfirmasi kata sandi belum sama.', !b ? '' : a === b ? 'success' : 'error'); }
-  if (['gLama', 'gBaru', 'gUlang'].includes(e.target.id)) { const ok = cekSyarat('gBaru', 'syaratGanti'), l = $('#gLama').value, a = $('#gBaru').value, b = $('#gUlang').value; setPw('gUlang', !b ? '' : a === b ? 'Kata sandi cocok.' : 'Konfirmasi kata sandi belum sama.', !b ? '' : a === b ? 'success' : 'error'); setPw('gBaru', a && a === l ? 'Kata sandi baru harus berbeda dari kata sandi sementara.' : '', a && a === l ? 'error' : ''); $('#kirimGanti').disabled = !(l && ok && a === b && a !== l); }
+  if (['gBaru', 'gUlang'].includes(e.target.id)) { const ok = cekSyarat('gBaru', 'syaratGanti'), a = $('#gBaru').value, b = $('#gUlang').value; setPw('gUlang', !b ? '' : a === b ? 'Kata sandi cocok.' : 'Konfirmasi kata sandi belum sama.', !b ? '' : a === b ? 'success' : 'error'); $('#kirimGanti').disabled = !(ok && a === b); }
 });
 document.addEventListener('change', e => {
   if (e.target.id === 'dSetuju') { S.d.setuju = e.target.checked; const bx = e.target.nextElementSibling; bx.className = `ina-checkbox__box ina-checkbox__box--${S.d.setuju ? 'checked' : 'unchecked'}`; bx.innerHTML = S.d.setuju ? ik('centang', 12) : ''; if (S.d.setuju) { const h = $('#h-dSetuju'); h.textContent = ''; h.classList.remove('ina-text-field__helper-text--error'); e.target.removeAttribute('aria-invalid'); } }
-  if (e.target.id === 'dRole') { S.d.role = e.target.value; bersih('dRole'); }
 });
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && S.layar === 'masuk' && e.target.closest('.kartu-tn input')) kirimMasuk(); });
 function kirimMasuk() {
@@ -301,11 +309,10 @@ function kirimMasuk() {
   S.email = em; S.memuat = 'masuk'; gambar();
   setTimeout(() => { S.memuat = ''; if (pw === 'salah123') { S.galat = 'Email atau kata sandi salah. Periksa kembali, lalu coba lagi.'; gambar(); $('#mPw').focus(); return; }
     if (/^2fa/i.test(em)) { S.layar = '2fa'; gambar(); pasangOtp(); return; }
-    if (/^sementara/i.test(em)) { S.layar = 'ganti'; gambar(); return; }
     keAplikasi(); }, 700);
 }
 /* masuk berhasil → aplikasi kantor (prototipe System, layar Dasbor) */
-function keAplikasi() { location.href = 'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor'; }
+function keAplikasi() { window.sesiMasuk(S.email); }
 /* galat 2 faktor ditampilkan di bawah kolom kode (pola kanalOtp); pesan kosong = bersihkan */
 function tandai2fa(m) {
   const ps = $('#otp2Pesan'); if (!ps) return;
@@ -321,9 +328,8 @@ function kirim2fa() {
 function kirimDaftar() {
   const v = id => ($('#' + id)?.value ?? '').trim(); let ada = false; S.galat = '';
   if (!v('dNama')) { galat('dNama', 'Nama lengkap wajib diisi.'); ada = true; }
-  if (!/^62\d{8,12}$/.test(v('dHp'))) { galat('dHp', 'Nomor WhatsApp harus diawali 62 dan terdiri atas 10–14 digit. Contoh: 6281200000000.'); ada = true; }
+  if (!/^62\d{8,13}$/.test(v('dHp'))) { galat('dHp', 'Nomor WhatsApp harus diawali 62 dan terdiri atas 10–15 digit. Contoh: 6281200000000.'); ada = true; }
   if (!/^\S+@\S+\.\S+$/.test(v('dEmail'))) { galat('dEmail', 'Format email tidak valid. Contoh: nama@contoh.id.'); ada = true; }
-  if (!v('dRole')) { galat('dRole', 'Peran wajib dipilih.'); ada = true; }
   if (!SYARAT_PW.every(([, u]) => u($('#dPw').value))) { setPw('dPw', 'Kata sandi belum memenuhi semua syarat di bawah.', 'error'); ada = true; }
   if (!$('#dPw2').value || $('#dPw2').value !== $('#dPw').value) { setPw('dPw2', 'Konfirmasi kata sandi belum sama.', 'error'); ada = true; }
   if (!S.d.setuju) { const h = $('#h-dSetuju'); h.textContent = 'Centang persetujuan ketentuan layanan untuk melanjutkan.'; h.classList.add('ina-text-field__helper-text--error'); $('#dSetuju').setAttribute('aria-invalid', 'true'); ada = true; }
@@ -419,8 +425,8 @@ const kontak = () => `<h4 class="bantu-sub">Kontak dukungan ${usulan('IDDS-TN-38
   <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>`;
 const lgkh = a => `<ol class="bantu-langkah">${a.map(x => `<li>${x}</li>`).join('')}</ol>`;
 const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
-const Q_LUPA = ['Saya lupa kata sandi.', 'Hubungi admin kantor PPAT Anda. Admin akan mengatur ulang kata sandi dan memberikan kata sandi sementara. Setelah masuk, Anda diminta menggantinya.'];
-const Q_SYARAT = ['Apa syarat kata sandi?', 'Kata sandi minimal 12 karakter. Kata sandi juga harus memuat huruf besar, huruf kecil, angka, dan simbol.'];
+const Q_LUPA = ['Saya lupa kata sandi.', 'Hubungi admin kantor PPAT Anda. Admin akan mengirim tautan ke email Anda untuk membuat kata sandi baru.'];
+const Q_SYARAT = ['Apa syarat kata sandi?', 'Kata sandi minimal 12 karakter. Kata sandi juga harus memuat huruf besar, huruf kecil, angka, dan simbol. Simbol yang dapat dipakai: - _ ? ! & + % # @ * $ ^'];
 const BANTUAN = {
   masuk:() => ({ judul:'Bantuan Masuk', isi:`<p>Masuk dengan email dan kata sandi akun Anda di kantor PPAT ini.</p>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -442,17 +448,16 @@ const BANTUAN = {
       ['Mengapa kode saya ditolak?', 'Kode di aplikasi autentikator berganti secara berkala. Masukkan kode yang sedang tampil, dan pastikan jam ponsel Anda diatur otomatis.'],
       ['Saya kehilangan ponsel atau aplikasi autentikator.', 'Hubungi administrator kantor PPAT Anda. Administrator akan mengatur ulang verifikasi 2 faktor akun Anda.']])}
     ${kontak()}` }),
-  ganti:() => ({ judul:'Bantuan Ganti Kata Sandi', isi:`<p>Akun Anda masih memakai kata sandi sementara dari admin kantor.</p>
+  ganti:() => ({ judul:'Bantuan Kata Sandi Baru', isi:`<p>Anda membuka tautan dari email untuk membuat kata sandi baru.</p>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
-    ${fq('k', [['Mengapa saya harus mengganti kata sandi?', 'Kata sandi sementara dibuat oleh admin dan dapat diketahui orang lain. Kata sandi baru hanya diketahui oleh Anda.'],
-      [Q_SYARAT[0], `${Q_SYARAT[1]} Kata sandi baru harus berbeda dari kata sandi sementara.`],
-      ['Saya tidak tahu kata sandi sementara.', 'Periksa email dari admin kantor. Bila tidak ada, hubungi admin untuk mengatur ulang kata sandi.']])}
+    ${fq('k', [[Q_SYARAT[0], Q_SYARAT[1]],
+      ['Tautan saya sudah kedaluwarsa.', 'Tautan berlaku 72 jam dan hanya dapat dipakai sekali. Minta tautan baru kepada admin kantor PPAT Anda.']])}
     ${kontak()}` }),
   daftar:() => ({ judul:'Bantuan Daftar', isi:`<p>Pendaftaran mandiri membuat akun Anda di kantor PPAT ini.</p>
     <h4 class="bantu-sub">Langkah</h4>
     ${lgkh(['Isi data diri, pilih peran, dan buat kata sandi.', 'Masukkan kode OTP yang dikirim ke email dan WhatsApp.', 'Akun aktif dan dapat dipakai untuk masuk.'])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
-    ${fq('d', [['Peran apa yang harus saya pilih?', 'Pilih Klien bila Anda pihak dalam akta, misalnya penjual atau pembeli. Pilih Asisten bila Anda pegawai kantor PPAT.'],
+    ${fq('d', [['Siapa yang dapat mendaftar di sini?', 'Pendaftaran mandiri hanya untuk Klien, yaitu pihak dalam akta seperti penjual atau pembeli. Akun pegawai kantor dibuat oleh Super Admin.'],
       Q_SYARAT,
       ['Apa yang terjadi setelah saya mendaftar?', 'Kode OTP dikirim ke email dan WhatsApp Anda. Setelah kedua kode terverifikasi, akun Anda aktif dan dapat dipakai untuk masuk.'],
       ['Apakah isian saya hilang bila halaman ditutup?', 'Tidak. Isian tersimpan di perangkat ini sampai pendaftaran selesai. Pilih Kosongkan Formulir untuk menghapusnya.']])}
@@ -475,7 +480,7 @@ $('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar penyesuaian IDDS · Masuk & Daftar', lebar:true,
     isi:`<p>Halaman ini tidak dinilai dalam laporan HE. Prototipe meniru layar dan kode live <i>dev-app.eppat.id/t/default</i> (dilihat 26 Okt 2026): isi, alur, dan aturan tetap seperti live; yang disesuaikan adalah komponen IDDS, letak pesan galat, dan bahasa.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div><div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div><div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; const u = UBAH[+b.dataset.lihat]; if (u.ke === 'bantuan') { bukaBantuan(); return; } ke(u.ke); const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } });
 });

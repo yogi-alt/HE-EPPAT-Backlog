@@ -18,12 +18,15 @@ const G = [ // [badan, idds, judul tab, keluaran, rakit-onboarding?]
   ['pl-akta-badan.html', 'pl-akta-idds.html', 'Platform · Jenis Akta', 'Backlog-IDDS-PL-AKTA-Prototype.html'],
   ['pl-sistem-badan.html', 'pl-sistem-idds.html', 'Platform · Sistem', 'Backlog-IDDS-PL-SISTEM-Prototype.html'],
   ['onboard-badan.html', 'onboard-idds.html', 'Platform Onboarding', 'Backlog-HE-ONBOARDING-Prototype.html', true],
+  ['trial-badan.html', 'trial-idds.html', 'Trial ke Enterprise', 'Backlog-HE-TRIAL-Prototype.html', true],
   ['ob-masuk-badan.html', 'ob-masuk-idds.html', 'Onboarding · Beranda, Kata Sandi & Profil', 'Backlog-IDDS-OB-MASUK-Prototype.html', true],
   ['ob-monitor-badan.html', 'ob-monitor-idds.html', 'Onboarding · Monitoring', 'Backlog-IDDS-OB-MONITOR-Prototype.html'],
   ['ob-verif-badan.html', 'ob-verif-idds.html', 'Onboarding · Verifikasi', 'Backlog-IDDS-OB-VERIF-Prototype.html'],
   ['ob-pengaturan-badan.html', 'ob-pengaturan-idds.html', 'Onboarding · Pengaturan', 'Backlog-IDDS-OB-PENGATURAN-Prototype.html'],
   ['ob-bayar-badan.html', 'ob-bayar-idds.html', 'Onboarding · Simulasi Pembayaran', 'Backlog-IDDS-OB-BAYAR-Prototype.html']
 ];
+jalan('buat-trial.js');
 const LANGSUNG = [['tera-idds.html', 'Backlog-HE-TERA-Prototype.html'], ['order-idds.html', 'Backlog-HE-ORDER-Prototype.html']];
 for (const [s, k] of LANGSUNG) console.log(jalan('rakit-idds.js', s, '../prototipe/' + k));
 for (const [b, i, j, k, ob] of G) { jalan('gabung.js', b, i, j); console.log(jalan('rakit-idds.js', i, '../prototipe/' + k)); if (ob) jalan('rakit-onboarding.js', '../prototipe/' + k); }
+console.log(jalan('versi-pasang.js', 'index'));

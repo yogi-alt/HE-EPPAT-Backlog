@@ -85,6 +85,10 @@
 .kv-akun dd small{display:block;margin:2px 0 0}
 .mono{font-family:ui-monospace,Menlo,monospace}
 .syarat-pw{list-style:none;margin:0;padding:12px 14px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px 16px}
+/* dua kolom: kiri panjang + huruf besar + huruf kecil, kanan angka + simbol (daftar simbol boleh dua baris) */
+.syarat-pw{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,auto);grid-auto-flow:column}
+.syarat-pw li:last-child{grid-row:span 2;align-items:flex-start}
+@media (max-width:560px){.syarat-pw{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}.syarat-pw li:last-child{grid-row:auto}}
 .syarat-pw li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ina-content-secondary)}
 .syarat-pw .tanda{width:16px;height:16px;border-radius:999px;border:1.5px solid var(--ina-stroke-secondary);display:grid;place-items:center;flex:none}
 .syarat-pw li.ok{color:var(--ina-content-positive)}
@@ -199,7 +203,7 @@ const istilah = (t, k) => denganTip(`<span class="istilah" tabindex="0">${t}</sp
 /* ---------------- daftar perubahan ---------------- */
 const UBAH = [
   { kode:'HE-CA-01', judul:'Tab Registrasi CA: tahapan dan perkiraan waktu terlihat',
-    isi:'Kartu Sertifikat Elektronik menampilkan IDDS Stepper empat langkah: Lengkapi data diri, Ajukan ke Peruri, Verifikasi di portal Peruri (eKYC, 5 tahap ± 6 menit), dan Pemeriksaan Peruri ± 1 hari kerja. Setiap langkah menunjukkan statusnya. Di bawah stepper ada satu "Langkah berikutnya" dengan tombol yang sesuai. Saat diperiksa Peruri, tertulis perkiraan waktu dan bahwa pengguna akan diberi tahu ketika CA aktif.',
+    isi:'Kartu Sertifikat Elektronik menampilkan IDDS Stepper empat langkah: Lengkapi data diri, Ajukan ke Peruri, Verifikasi di portal Peruri (eKYC, 5 tahap ± 6 menit), dan Pemeriksaan Peruri ± 1 hari kerja. Setiap langkah menunjukkan statusnya. Di bawah stepper ada satu "Langkah berikutnya" dengan tombol yang sesuai. Saat diperiksa Peruri, tertulis perkiraan waktu dan bahwa pengguna akan diberi tahu ketika sertifikat elektronik aktif.',
     lama:'Hanya ada lencana status ("Belum Registrasi", "Sedang Diproses") dan paragraf panjang; tidak ada perkiraan waktu penyelesaian; tombol Lanjutkan eKYC, Buat Ulang Link, dan Cek Status CA tampil sejajar tanpa penanda mana yang perlu dilakukan.', ke:'ekyc', sorot:'#kartuCa', sumber:'Laporan HE INA Digital hlm. 34, 35' },
   { kode:'HE-CA-02', judul:'Tab Registrasi CA: data diri cukup diisi sekali',
     isi:'Kekurangan data tampil sebagai daftar kelengkapan (NIK, tempat lahir, tanggal lahir, foto KTP, nomor HP). Tombol "Lengkapi di tab Data Diri" membuka tab Data Diri (KTP) — satu-satunya formulir data diri, yang juga dipakai untuk profil pihak dalam akta — langsung ke isian pertama yang kosong; isian wajib yang kosong ditandai kuning (IDDS status warning). Setelah lengkap, alert di atas formulir menampilkan tombol "Kembali ke Registrasi CA". Sebelum diajukan, ditampilkan ringkasan data yang otomatis dikirim ke Peruri beserta penegasan bahwa data itu sudah terisi di portal Peruri sehingga pengguna cukup memeriksanya. Langkah eKYC menjelaskan lima tahap di portal Peruri dan bahwa tautan yang sama dikirim ke email. Dialog pengingat "Lengkapi Data Diri" saat masuk memakai daftar yang sama (termasuk foto KTP dan nomor HP) dan membawa pengguna ke tab Data Diri dengan cara yang sama. Tab Data Diri (KTP) tetap formulir lengkap seperti live; hanya ditambah tanda * pada isian yang diperlukan untuk akta dan registrasi CA.',
@@ -211,7 +215,7 @@ const UBAH = [
     isi:'Tombol pada banner ("Buka Registrasi CA") membuka Akun Saya langsung di tab Registrasi CA. Isi banner mengikuti status (belum terdaftar, menunggu eKYC, diperiksa Peruri, kedaluwarsa). Setelah banner ditutup, Registrasi CA tetap dapat dibuka dari menu profil yang menampilkan status CA.',
     lama:'Tombol "Registrasi CA" dan "Cek / Lanjutkan" pada banner membuka tab Akun, bukan tab Registrasi CA; tombol "Lengkapi Sekarang" pada dialog pengingat juga membuka tab Akun, bukan tab Data Diri (KTP) (terbukti di live 26 Okt 2026). Setelah banner ditutup, tidak ada jalan pintas yang terlihat.', ke:'banner', sorot:'#bannerCa', sumber:'Laporan HE INA Digital hlm. 34' },
   { kode:'HE-CA-05', judul:'Tab Registrasi CA: satu pesan per status, bahasa baku, dan hasil cek status terlihat',
-    isi:'Setiap status hanya menampilkan pesan yang relevan. Catatan Peruri diterjemahkan ("Waiting for Verification" → "Menunggu verifikasi Peruri"). Ejaan dibakukan: Kedaluwarsa, Spesimen, tautan. Hasil "Cek Status CA" ditampilkan beserta waktu pengecekan ("Status belum berubah · dicek 10.32"). Masa berlaku tautan eKYC tertulis jelas.',
+    isi:'Setiap status hanya menampilkan pesan yang relevan. Catatan Peruri diterjemahkan ("Waiting for Verification" → "Menunggu verifikasi Peruri"). Ejaan dibakukan: Kedaluwarsa, Spesimen, tautan. Hasil "Cek Status Sertifikat" ditampilkan beserta waktu pengecekan ("Status belum berubah · dicek 10.32"). Masa berlaku tautan eKYC tertulis jelas.',
     lama:'Hasil penelusuran live: akun berstatus "Sedang Diproses" masih menampilkan "Registrasi CA belum bisa dibuat — lengkapi Data Diri dulu … Masih kurang: Foto KTP, Nomor HP"; catatan Peruri berbahasa Inggris ("Catatan Peruri: Success", "Waiting for Verification"); label "Kadaluarsa" dan "Specimen" tidak baku; tombol "Buat Ulang Link".', ke:'periksa', sorot:'#kartuCa', sumber:'Laporan HE INA Digital hlm. 34, 35 + penelusuran live' },
   { kode:'HE-CA-06', judul:'Data diri: pesan galat jelas dan muncul di dekat isian',
     isi:'Kesalahan data diri (tab Data Diri dan tab Akun) ditampilkan tepat di bawah isian atau berkas yang bermasalah, dengan bahasa awam dan cara memperbaikinya. Foto KTP memakai IDDS File Upload; foto beresolusi rendah ditandai merah di daftar berkas beserta ukurannya. Nomor HP yang sudah dipakai akun lain dijelaskan tanpa awalan teknis.',
@@ -232,7 +236,8 @@ const UBAH = [
 
 /* ---------------- data contoh & kondisi ---------------- */
 const KONDISI = [['kurang','Data belum lengkap'],['siap','Siap diajukan'],['ekyc','Menunggu eKYC'],['periksa','Diperiksa Peruri'],['aktif','Aktif'],['kedaluwarsa','Kedaluwarsa']];
-const PROFIL_LENGKAP = () => ({ nama:'Contoh Klien Satu', depan:'Contoh', tengah:'', belakang:'Klien Satu', email:'klien1@contoh.id', hp:'081200000101', nik:'3200001501900101', tempat:'Kota Contoh', tgl:'1990-01-15', ktp:'ktp-contoh.jpg',
+const SESI_P = window.SESI_PROTO, NAMA_P = SESI_P ? SESI_P.nama : 'Contoh Klien Satu', [DEPAN_P, ...SISA_P] = NAMA_P.split(' ');
+const PROFIL_LENGKAP = () => ({ nama:NAMA_P, depan:DEPAN_P, tengah:'', belakang:SISA_P.join(' '), email:SESI_P ? SESI_P.email : 'klien1@contoh.id', hp:'081200000101', nik:'3200001501900101', tempat:'Kota Contoh', tgl:'1990-01-15', ktp:'ktp-contoh.jpg',
   npwp:'', jk:'L', gelar:'', pekerjaan:'Karyawan Swasta', kota:'Kota Contoh', warga:'Indonesia', alamat:'Jalan Contoh No. 1', rt:'001', rw:'002', kel:'Kelurahan Contoh', kec:'Kecamatan Contoh', prov:'Provinsi Contoh', domisili:'' });
 const SESI = () => [
   { id:1, jenis:'Laptop', ket:'Chrome · Windows', ip:'10.0.0.21', mulai:'26 Okt 2026, 09.15', habis:'2 Nov 2026, 09.15', ini:true },
@@ -283,7 +288,7 @@ function teksBanner() {
   return { kurang:'Sertifikat elektronik (CA) Anda belum terdaftar. Daftarkan sekarang agar Anda dapat menandatangani akta secara elektronik.',
     siap:'Sertifikat elektronik (CA) Anda belum terdaftar. Data Anda sudah lengkap dan siap diajukan ke Peruri.',
     ekyc:'Registrasi CA Anda menunggu verifikasi identitas (eKYC) di portal Peruri.',
-    periksa:'Identitas Anda sedang diperiksa Peruri. Anda akan diberi tahu setelah CA aktif.',
+    periksa:'Identitas Anda sedang diperiksa Peruri. Anda akan diberi tahu setelah sertifikat elektronik aktif.',
     kedaluwarsa:'Sertifikat elektronik (CA) Anda sudah kedaluwarsa. Ajukan registrasi ulang agar dapat menandatangani akta.' }[S.kondisi];
 }
 function banner() {
@@ -312,7 +317,7 @@ function layarAkun() {
 }
 /* kepala kartu seragam untuk semua tab Akun Saya (HE-CA-08) */
 const kepala = (ikon, judul, ket, kanan = '') => `<div class="kartu-kepala"><span class="ikon-bulat">${ik(ikon, 20)}</span><div style="flex:1;min-width:0"><h2>${judul}</h2><p>${ket}</p></div>${kanan}</div>`;
-const SYARAT_PW = [['Minimal 12 karakter', s => s.length >= 12], ['Mengandung huruf besar', s => /[A-Z]/.test(s)], ['Mengandung huruf kecil', s => /[a-z]/.test(s)], ['Mengandung angka', s => /[0-9]/.test(s)], ['Mengandung simbol', s => /[^A-Za-z0-9]/.test(s)]];
+const SYARAT_PW = [['Minimal 12 karakter', s => s.length >= 12], ['Mengandung huruf besar', s => /[A-Z]/.test(s)], ['Mengandung huruf kecil', s => /[a-z]/.test(s)], ['Mengandung angka', s => /[0-9]/.test(s)], ['Mengandung simbol (- _ ? ! & + % # @ * $ ^)', s => /[-_?!&+%#@*$^]/.test(s) && !/[^A-Za-z0-9_?!&+%#@*$^-]/.test(s)]];
 const PERAN_KET = 'Klien adalah pihak dalam akta, misalnya penjual, pembeli, atau saksi.';
 function tabAkunInfo() {
   const p = S.profil;
@@ -380,7 +385,7 @@ function tabData() {
       ${ws('dKel', 'Kelurahan/Desa', p.kel)}${ws('dKec', 'Kecamatan', p.kec)}
       ${ws('dProv', 'Provinsi', p.prov)}`)}
     ${grup('Kontak dan domisili', 'Nomor HP dipakai Peruri untuk mengirim kode OTP saat registrasi CA.',
-      `${ws('dHp', 'Nomor HP', p.hp, 'mis. 0812 3456 7890', true, 'Pastikan aktif dan dapat menerima SMS.', 'type="tel" inputmode="tel"')}
+      `${ws('dHp', 'Nomor HP', p.hp, '08xxxxxxxxxx', true, 'Pastikan aktif dan dapat menerima SMS.', 'type="tel" inputmode="numeric" maxlength="15"')}
       ${ws('dEmail', 'Email', p.email, '', false, 'Hubungi admin kantor untuk mengubah email.', 'disabled')}
       ${ws('dKota', 'Kota domisili', p.kota, 'mis. Kota Jakarta Selatan', false, 'Kota tempat Anda tinggal sekarang.')}
       ${ws('dDomisili', ops('Domisili sementara'), p.domisili, 'mis. Kota Jakarta Selatan', false, "Isi bila saat penandatanganan Anda berada di kota lain. Tercetak di akta: 'Untuk sementara berada di …'")}`)}
@@ -424,7 +429,7 @@ function langkahBerikut() {
     kurang:['caution', `Lengkapi ${n} data diri`, 'Data ini dikirim ke Peruri saat registrasi, sehingga Anda tidak perlu mengetik ulang di portal Peruri.', tombol('Lengkapi di tab Data Diri', 'primary', 'md', 'data-lengkapi', ik('panah', 16))],
     siap:['info', 'Ajukan registrasi CA', `Data diri Anda sudah lengkap. Setelah diajukan, portal Peruri terbuka di tab baru untuk ${istilah('eKYC', 'EKYC')}. Tautan yang sama juga dikirim ke email Anda.`, tombol('Ajukan Registrasi CA', 'primary', 'md', `id="ajukan" ${m === 'ajukan' ? 'disabled' : ''}`, m === 'ajukan' ? spinner : ik('tamengcek', 16))],
     ekyc:['info', 'Selesaikan eKYC di portal Peruri', `Di portal Peruri Anda akan (1) menyetujui syarat layanan, (2) memasukkan kode OTP dari email dan SMS, (3) memeriksa data pribadi yang sudah terisi, (4) mengambil ${istilah('swafoto', 'SWAFOTO')}, dan (5) mengirim pengajuan. Semuanya memakan waktu ${est('± 6 menit')}. Tautan yang sama ada di email dari no-reply-digital@peruri.co.id dan berlaku sampai ${est('27 Okt 2026, 09.15')}.`, tombol('Lanjutkan eKYC di Peruri', 'primary', 'md', 'id="lanjutEkyc"', ik('luar', 16))],
-    periksa:['info', 'Menunggu pemeriksaan Peruri', `eKYC Anda sudah selesai. Peruri sedang memeriksa identitas Anda, biasanya ${est('± 1 hari kerja')}. Anda akan menerima notifikasi dan email setelah CA aktif. Anda tidak perlu membuka tautan lagi.`, ''],
+    periksa:['info', 'Menunggu pemeriksaan Peruri', `eKYC Anda sudah selesai. Peruri sedang memeriksa identitas Anda, biasanya ${est('± 1 hari kerja')}. Anda akan menerima notifikasi dan email setelah sertifikat elektronik aktif. Anda tidak perlu membuka tautan lagi.`, ''],
     aktif:['success', 'Sertifikat elektronik aktif', 'Anda sudah dapat menandatangani akta secara elektronik. Lengkapi spesimen tanda tangan bila belum ada.', ''],
     kedaluwarsa:['caution', 'Ajukan registrasi ulang', 'Sertifikat elektronik Anda sudah kedaluwarsa. Data diri Anda masih tersimpan sehingga Anda cukup mengajukan ulang dan menyelesaikan eKYC kembali.', tombol('Registrasi Ulang', 'primary', 'md', `id="ajukan" ${m === 'ajukan' ? 'disabled' : ''}`, m === 'ajukan' ? spinner : ik('ulang', 16))]
   }[k];
@@ -443,7 +448,7 @@ function tabCa() {
       ${kd === 'siap' ? dataKirim() : ''}
       <div class="kaki-kartu">
         ${kd === 'ekyc' ? tombol('Buat tautan baru', 'secondary', 'sm', 'id="tautanBaru"', ik('ulang', 14)) : ''}
-        ${['ekyc', 'periksa', 'aktif'].includes(kd) ? tombol('Cek Status CA', 'secondary', 'sm', `id="cekStatus" ${S.memuat === 'cek' ? 'disabled' : ''}`, S.memuat === 'cek' ? spinner : ik('ulang', 14)) : ''}
+        ${['ekyc', 'periksa', 'aktif'].includes(kd) ? tombol('Cek Status Sertifikat', 'secondary', 'sm', `id="cekStatus" ${S.memuat === 'cek' ? 'disabled' : ''}`, S.memuat === 'cek' ? spinner : ik('ulang', 14)) : ''}
         <span class="waktu" id="hasilCek" aria-live="polite">${S.hasilCek || (['ekyc', 'periksa', 'aktif'].includes(kd) ? `Terakhir dicek ${S.dicek}` : '')}${usulan('HE-CA-05')}</span>
       </div>
     </div>
@@ -458,7 +463,7 @@ function kelengkapan() {
 function dataKirim() {
   const p = S.profil;
   return `<div class="kirim"><h3>${ik('panah', 16)} Data yang otomatis dikirim ke Peruri${usulan('HE-CA-02')}</h3>
-    <dl class="kv"><dt>Nama</dt><dd>${esc(p.nama)}</dd><dt>NIK</dt><dd>${samarNik(p.nik)}</dd><dt>Tempat, tanggal lahir</dt><dd>${esc(p.tempat)}, ${tglId(p.tgl)}</dd><dt>Nomor HP</dt><dd>${esc(p.hp)}</dd><dt>Email</dt><dd>${esc(p.email)}</dd><dt>Foto KTP</dt><dd>${esc(p.ktp)}</dd></dl>
+    <dl class="kv"><dt>Nama</dt><dd>${esc(p.nama)}</dd><dt>NIK</dt><dd>${esc(p.nik) || '—'}</dd><dt>Tempat, tanggal lahir</dt><dd>${esc(p.tempat)}, ${tglId(p.tgl)}</dd><dt>Nomor HP</dt><dd>${esc(p.hp)}</dd><dt>Email</dt><dd>${esc(p.email)}</dd><dt>Foto KTP</dt><dd>${esc(p.ktp)}</dd></dl>
     <p class="alasan">Data ini sudah terisi di portal Peruri, sehingga Anda cukup memeriksanya tanpa mengetik ulang.</p></div>`;
 }
 function kartuSpesimen() {
@@ -507,7 +512,7 @@ function konfirmAjukan() {
   const p = S.profil;
   dialog({ judul:S.kondisi === 'kedaluwarsa' ? 'Ajukan registrasi ulang?' : 'Ajukan registrasi CA?', konfirmasi:true, kunciUtama:'#setuju',
     isi:`<p>Data berikut akan dikirim ke Peruri. Setelah itu, portal Peruri akan terbuka di tab baru untuk verifikasi identitas (${est('± 6 menit')}). Tautan yang sama juga dikirim ke email Anda.</p>
-      ${ringkas([['Nama', esc(p.nama)], ['NIK', samarNik(p.nik)], ['Tempat, tanggal lahir', `${esc(p.tempat)}, ${tglId(p.tgl)}`], ['Nomor HP', esc(p.hp)], ['Foto KTP', esc(p.ktp)]])}
+      ${ringkas([['Nama', esc(p.nama)], ['NIK', esc(p.nik) || '—'], ['Tempat, tanggal lahir', `${esc(p.tempat)}, ${tglId(p.tgl)}`], ['Nomor HP', esc(p.hp)], ['Foto KTP', esc(p.ktp)]])}
       <label class="ina-checkbox cek" for="setuju"><input type="checkbox" id="setuju" class="ina-checkbox__input peer"><div class="ina-checkbox__box ina-checkbox__box--unchecked"></div><div class="ina-checkbox__content"><span class="ina-checkbox__label">Data di atas sesuai dengan KTP saya.</span></div></label>`,
     tombol:[['Ubah Data','secondary',() => { bukaDataDiri(); }],['Ajukan & Buka Portal Peruri','primary',() => {
       tunggu('ajukan', 900, () => { S.kondisi = 'ekyc'; setKondisi('ekyc'); S.dicek = 'baru saja'; gambar(); toast('Registrasi CA diajukan.', 'positive', 4500, 'Portal Peruri dibuka di tab baru (disimulasikan). Selesaikan eKYC di sana.'); });
@@ -517,7 +522,7 @@ function cekStatus() {
   tunggu('cek', 1100, () => {
     const jam = new Date().toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' }).replace(':', '.');
     S.dicek = `hari ini, ${jam}`;
-    S.hasilCek = { ekyc:`Status belum berubah: menunggu eKYC · dicek ${jam}`, periksa:`Status belum berubah: menunggu verifikasi Peruri · dicek ${jam}`, aktif:`CA aktif · dicek ${jam}` }[S.kondisi];
+    S.hasilCek = { ekyc:`Status belum berubah: menunggu eKYC · dicek ${jam}`, periksa:`Status belum berubah: menunggu verifikasi Peruri · dicek ${jam}`, aktif:`Sertifikat Elektronik Aktif · dicek ${jam}` }[S.kondisi];
     gambar(); toast(S.hasilCek.split(' · ')[0], S.kondisi === 'aktif' ? 'positive' : 'default');
   });
 }
@@ -580,7 +585,7 @@ function simpanDataDiri(lanjut) {
   if (v('dNik')) { if (!/^\d{16}$/.test(v('dNik'))) { galatH('dNik', 'NIK harus 16 digit angka.'); ada = true; } else baru.nik = v('dNik'); }
   if (v('dTgl')) { const u = (Date.now() - new Date(v('dTgl'))) / 31557600000; if (u < 17) { galatH('dTgl', 'Usia minimal 17 tahun.'); ada = true; } else baru.tgl = v('dTgl'); }
   const hp = v('dHp').replace(/\D/g, '');
-  if (hp && !/^08\d{8,11}$/.test(hp)) { galatH('dHp', 'Nomor HP diawali 08, 10–13 digit.'); ada = true; }
+  if (hp && !/^08\d{8,13}$/.test(hp)) { galatH('dHp', 'Nomor HP diawali 08, 10–15 digit.'); ada = true; }
   else if (hp === '081200000000') { galatH('dHp', 'Nomor HP ini sudah dipakai akun lain di kantor ini. Gunakan nomor lain atau hubungi kantor PPAT.'); ada = true; }
   ['dRt', 'dRw'].forEach(id => { if (v(id) && !/^\d{1,3}$/.test(v(id))) { galatH(id, 'Isi dengan angka, maks. 3 digit.'); ada = true; } });
   if (v('dNpwp') && !/^\d{15,16}$/.test(v('dNpwp').replace(/\D/g, ''))) { galatH('dNpwp', 'NPWP terdiri dari 15 atau 16 digit angka.'); ada = true; }
@@ -715,13 +720,13 @@ function bukaBantuan() {
       <li><b>Lengkapi data diri:</b> NIK, tempat dan tanggal lahir, nomor HP, serta foto KTP.</li>
       <li><b>Ajukan registrasi CA:</b> data Anda dikirim otomatis ke Peruri.</li>
       <li><b>Selesaikan eKYC di portal Peruri</b> (${est('± 6 menit')}): setujui syarat layanan, masukkan kode OTP dari email dan SMS, periksa data pribadi, ambil swafoto, lalu kirim pengajuan. Tautannya juga dikirim ke email Anda.</li>
-      <li><b>Tunggu pemeriksaan Peruri</b> (${est('± 1 hari kerja')}). Anda akan diberi tahu setelah CA aktif.</li>
+      <li><b>Tunggu pemeriksaan Peruri</b> (${est('± 1 hari kerja')}). Anda akan diberi tahu setelah sertifikat elektronik aktif.</li>
     </ol>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${faq(1, 'Apa itu sertifikat elektronik (CA)?', 'Sertifikat dari Peruri yang membuktikan bahwa tanda tangan elektronik pada akta benar-benar milik Anda.')}
     ${faq(2, 'Apa yang dilakukan di portal Peruri?', 'Anda menyetujui syarat layanan, memasukkan kode OTP dari email dan SMS, memeriksa data pribadi, mengambil swafoto, lalu mengirim pengajuan. Data diri Anda sudah terisi otomatis sehingga Anda tidak perlu mengetik ulang. Bila portal tampil dalam bahasa Inggris, pilih ID di kanan atas.')}
     ${faq(3, 'Tautan eKYC sudah kedaluwarsa', 'Klik "Buat tautan baru" di tab Registrasi CA, lalu klik "Lanjutkan eKYC di Peruri".')}
-    ${faq(4, 'Status tidak berubah setelah eKYC', 'Pemeriksaan Peruri biasanya selesai dalam satu hari kerja. Anda dapat menekan "Cek Status CA" untuk memperbarui status.')}
+    ${faq(4, 'Status tidak berubah setelah eKYC', 'Pemeriksaan Peruri biasanya selesai dalam satu hari kerja. Anda dapat menekan "Cek Status Sertifikat" untuk memperbarui status.')}
     ${faq(5, 'Sertifikat saya kedaluwarsa', 'Ajukan registrasi ulang. Data diri Anda masih tersimpan sehingga Anda cukup menyelesaikan eKYC kembali.')}
     <h4 class="bantu-sub">Kontak dukungan ${usulan('HE-UMUM-02')}</h4>
     <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>` });
@@ -733,7 +738,7 @@ $('#pilKondisi').addEventListener('click', e => { const b = e.target.closest('[d
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Registrasi CA', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital, halaman 34–35 (skor halaman 54,8), gambar buktinya, dan penelusuran live 26 Okt 2026 pada tiga kondisi (belum terdaftar, sedang diproses, aktif). Alur dan aturan live tetap; yang diubah adalah kejelasan tahapan, pengisian data, istilah, dan tautan. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });
@@ -752,6 +757,9 @@ $('#aturUlang').addEventListener('click', () => { setKondisi('kurang'); S.sesi =
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+if (SESI_P && SESI_P.ca) setKondisi(SESI_P.ca);
+const TANPA_CA = SESI_P && SESI_P.tanpaDaftar;
+if (TANPA_CA || /^#(akun|ca)$/.test(location.hash)) { S.layar = 'akun'; S.tab = !TANPA_CA && location.hash === '#ca' ? 'ca' : 'akun'; S.modalAwal = false; }
 gambar(); modalAwal(); /* modal "Lengkapi Data Diri" saat masuk, seperti live */
 })();
 </script>

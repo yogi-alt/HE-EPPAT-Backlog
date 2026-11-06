@@ -303,7 +303,7 @@ const UBAH = [
     isi:'Bilah alat hanya menampilkan alat yang sering dipakai (tebal, miring, garis bawah, daftar, perataan, urungkan, ulangi) dalam satu baris berjarak lega. Alat lain (judul, coret, warna, ukuran huruf, spasi, tautan, gambar, tabel, kode HTML) dipindahkan ke menu "Lainnya". Setiap ikon memiliki tooltip berisi nama alat dan pintasan papan ketik.',
     lama:'Lebih dari 30 ikon kecil dalam dua baris tanpa nama, sehingga sulit dipindai.', ke:'editor', sorot:'#bilahAlat', sumber:'Laporan HE INA Digital hlm. 25, 26' },
   { kode:'HE-MINUTA-03', judul:'Editor pasal: variabel tampil sebagai label yang mudah dibaca',
-    isi:'Variabel di naskah tampil sebagai label hijau (mis. "Nama Lengkap Penjual"), bukan kode {{penjual_nama}}. Kode tetap dapat dilihat melalui pilihan "Tampilkan kode variabel". Tombol "Sisipkan Variabel" membuka panel dengan pencarian, penjelasan singkat, dan contoh nilai dari permohonan ini. Variabel yang salah ketik ditandai kuning dengan petunjuk perbaikan sebelum disimpan.',
+    isi:'Variabel di naskah tampil sebagai label hijau (mis. "Nama Lengkap Pihak Pertama"), bukan kode {{penjual_nama}}. Kode tetap dapat dilihat melalui pilihan "Tampilkan kode variabel". Tombol "Sisipkan Variabel" membuka panel dengan pencarian, penjelasan singkat, dan contoh nilai dari permohonan ini. Variabel yang salah ketik ditandai kuning dengan petunjuk perbaikan sebelum disimpan.',
     lama:'Naskah menampilkan kode mentah seperti {{saksi1_gelar}}{{saksi1_nama}}; daftar variabel tanpa pencarian, tanpa penjelasan, dan tanpa contoh nilai; salah ketik variabel tidak terdeteksi di editor minuta.', ke:'variabel', sorot:'#bilahAlat', sumber:'Laporan HE INA Digital hlm. 25, 26' },
   { kode:'HE-MINUTA-04', judul:'Daftar pasal: umpan balik setelah hapus dan saat pindah pasal',
     isi:'Setelah pasal dihapus, muncul toast "Pasal 9 · Pasal Baru dihapus" beserta keterangan bahwa nomor pasal lain sudah disesuaikan. Jika ada perubahan yang belum disimpan saat pindah pasal atau kembali ke daftar, muncul dialog IDDS dengan pilihan Simpan & Lanjutkan, Buang Perubahan, atau Batal. Status "Belum disimpan" terlihat di kaki editor.',
@@ -326,8 +326,8 @@ const UBAH = [
 const VAR = [
   ['Akta', [['akta_nomor','Nomor Akta','Diisi PPAT saat finalisasi'],['akta_hari','Hari Akta','Kamis'],['akta_tanggal','Tanggal Akta','23 Oktober 2026']]],
   ['PPAT', [['ppat_nama','Nama PPAT','PPAT Contoh Satu, S.H.'],['ppat_wilayah','Wilayah Kerja PPAT','Kota Contoh']]],
-  ['Penjual', [['penjual_gelar','Gelar/Status Penjual','Tuan'],['penjual_nama','Nama Lengkap Penjual','Contoh Penjual Satu'],['penjual_tempat_lahir','Tempat Lahir Penjual','Kota Contoh'],['penjual_tanggal_lahir','Tanggal Lahir Penjual','1 Januari 1980'],['penjual_pekerjaan','Pekerjaan Penjual','Karyawan Swasta'],['penjual_alamat','Alamat Penjual','Jalan Contoh Nomor 1, Kota Contoh']]],
-  ['Pembeli', [['pembeli_gelar','Gelar/Status Pembeli','Nyonya'],['pembeli_nama','Nama Lengkap Pembeli','Contoh Pembeli Satu'],['pembeli_tempat_lahir','Tempat Lahir Pembeli','Kota Contoh'],['pembeli_tanggal_lahir','Tanggal Lahir Pembeli','2 Februari 1985'],['pembeli_pekerjaan','Pekerjaan Pembeli','Wiraswasta'],['pembeli_alamat','Alamat Pembeli','Jalan Contoh Nomor 2, Kota Contoh']]],
+  ['Pihak Pertama', [['penjual_gelar','Gelar/Status Pihak Pertama','Tuan'],['penjual_nama','Nama Lengkap Pihak Pertama','Contoh Penjual Satu'],['penjual_tempat_lahir','Tempat Lahir Pihak Pertama','Kota Contoh'],['penjual_tanggal_lahir','Tanggal Lahir Pihak Pertama','1 Januari 1980'],['penjual_pekerjaan','Pekerjaan Pihak Pertama','Karyawan Swasta'],['penjual_alamat','Alamat Pihak Pertama','Jalan Contoh Nomor 1, Kota Contoh']]],
+  ['Pihak Kedua', [['pembeli_gelar','Gelar/Status Pihak Kedua','Nyonya'],['pembeli_nama','Nama Lengkap Pihak Kedua','Contoh Pembeli Satu'],['pembeli_tempat_lahir','Tempat Lahir Pihak Kedua','Kota Contoh'],['pembeli_tanggal_lahir','Tanggal Lahir Pihak Kedua','2 Februari 1985'],['pembeli_pekerjaan','Pekerjaan Pihak Kedua','Wiraswasta'],['pembeli_alamat','Alamat Pihak Kedua','Jalan Contoh Nomor 2, Kota Contoh']]],
   ['Objek', [['objek_nomor_sertifikat','Nomor Sertifikat','00001'],['objek_nib','NIB','00000000001'],['objek_luas','Luas Tanah (m²)','120'],['objek_lokasi','Lokasi Objek','Kel. Contoh, Kec. Contoh'],['objek_harga','Harga Jual Beli','750.000.000'],['objek_harga:terbilang','Harga Jual Beli (terbilang)','tujuh ratus lima puluh juta']]],
   ['Saksi', [['saksi1_gelar','Gelar Saksi 1','Tuan'],['saksi1_nama','Nama Saksi 1','Contoh Saksi Satu'],['saksi1_pekerjaan','Pekerjaan Saksi 1','Pegawai Kantor PPAT'],['saksi2_gelar','Gelar Saksi 2','Nyonya'],['saksi2_nama','Nama Saksi 2','Contoh Saksi Dua'],['saksi2_pekerjaan','Pekerjaan Saksi 2','Pegawai Kantor PPAT']]]
 ];
@@ -519,7 +519,7 @@ function panelEditor(x, final) {
     </div>`}
     <div class="kertas-wadah" ${final ? 'style="border-radius:10px"' : ''}><div class="kertas ${S.kode ? 'mode-kode' : ''}" id="editor" ${final ? '' : 'contenteditable="true"'} role="textbox" aria-multiline="true" aria-label="Isi ${esc(d.judul)}">${keChip(d.isi)}</div></div>
     <div class="ket-var"><span style="display:inline-flex;align-items:center">${toggle('tampilKode', 'Tampilkan kode variabel', S.kode)}${tanya('Kode variabel', 'Kode variabel ditulis di antara kurung kurawal ganda, misalnya &#123;&#123;penjual_nama&#125;&#125;. Sistem mengganti kode ini dengan data permohonan saat pratinjau dan PDF dibuat.')}</span><span>Label hijau akan terisi otomatis dari data permohonan saat pratinjau dan PDF dibuat.${usulan('HE-MINUTA-03')}</span></div>
-    ${asing.length && !final ? `<div class="galat-var">${alert('caution', `${asing.length} variabel tidak dikenal`, `${asing.map(k => `<b>{{${esc(k)}}}</b>`).join(', ')} tidak ada di daftar variabel Akta Jual Beli, sehingga tidak akan terisi. Hapus label kuning tersebut, lalu sisipkan ulang lewat <b>Sisipkan Variabel</b>${asing.includes('penjual_alamatt') ? ' (mungkin maksudnya <b>Alamat Penjual</b>)' : ''}.${usulan('HE-MINUTA-03')}`)}</div>` : ''}
+    ${asing.length && !final ? `<div class="galat-var">${alert('caution', `${asing.length} variabel tidak dikenal`, `${asing.map(k => `<b>{{${esc(k)}}}</b>`).join(', ')} tidak ada di daftar variabel Akta Jual Beli, sehingga tidak akan terisi. Hapus label kuning tersebut, lalu sisipkan ulang lewat <b>Sisipkan Variabel</b>${asing.includes('penjual_alamatt') ? ' (mungkin maksudnya <b>Alamat Pihak Pertama</b>)' : ''}.${usulan('HE-MINUTA-03')}`)}</div>` : ''}
     ${final ? '' : `<div class="ed-kaki"><span class="status-simpan ${S.ubah ? 'belum' : ''}" id="statusSimpan">${S.ubah ? `${ik('seru', 14)} Belum disimpan` : `${ik('centang', 14)} Semua perubahan tersimpan`}</span>${usulan('HE-MINUTA-04')}
       ${tombol('Batal', 'secondary', 'md', `id="batalPasal" ${S.ubah ? '' : 'disabled'}`)}${tombol('Simpan', 'primary', 'md', `id="simpanPasal" ${S.ubah ? '' : 'disabled'}`, ik('simpan', 16))}</div>`}
   </div>`;
@@ -689,7 +689,7 @@ function segarVar() {
   const w = $('#wadahPop'); if (!w) return;
   /* struktur IDDS Select Dropdown: __panel > __search > __options > __option */
   w.innerHTML = `<div class="ina-select-dropdown pop-wadah"><div class="ina-select-dropdown__panel panel-var" role="dialog" aria-label="Sisipkan variabel">
-    <div class="kepala-var"><b>Sisipkan variabel</b><p>Variabel adalah isian otomatis. Saat pratinjau dan PDF dibuat, variabel diganti dengan data dari permohonan ini, misalnya nama penjual.</p></div>
+    <div class="kepala-var"><b>Sisipkan variabel</b><p>Variabel adalah isian otomatis. Saat pratinjau dan PDF dibuat, variabel diganti dengan data dari permohonan ini, misalnya nama Pihak Pertama.</p></div>
     <div class="ina-select-dropdown__search"><input id="cariVar" type="search" class="ina-select-dropdown__search-input" placeholder="Cari: nama, saksi, harga…" aria-label="Cari variabel" value="${esc(S.cariVar || '')}" autocomplete="off"></div>
     <div class="ina-select-dropdown__options" role="listbox">${isi.length ? isi.map(([g, a]) => `<div class="grup-var" role="presentation">${g}</div>${a.map(([k, l, c]) => `<button type="button" class="ina-select-dropdown__option opsi-var" role="option" data-sisip="${k}"><span class="ina-select-dropdown__option-content"><span class="ina-select-dropdown__option-label">${l}</span><span class="c">Contoh: ${esc(c)}</span></span><code>{{${k}}}</code></button>`).join('')}`).join('') : '<div class="ina-select-dropdown__empty">Variabel tidak ditemukan.</div>'}</div></div></div>`;
 }
@@ -814,14 +814,14 @@ function bukaBantuan() {
     <ol class="bantu-langkah">
       <li><b>Buka minuta</b> berstatus Penyusunan dari daftar.</li>
       <li><b>Pilih pasal atau catatan</b> di panel kiri, lalu sunting judul dan isinya.</li>
-      <li><b>Sisipkan variabel</b> untuk data yang terisi otomatis, misalnya nama penjual atau harga.</li>
+      <li><b>Sisipkan variabel</b> untuk data yang terisi otomatis, misalnya nama Pihak Pertama atau harga.</li>
       <li><b>Simpan</b> setiap pasal yang diubah.</li>
       <li><b>Cek Ejaan</b> dan <b>Pratinjau Akta</b> untuk memeriksa hasil akhir.</li>
       <li><b>Beritahu PPAT</b> bahwa minuta siap difinalisasi.</li>
     </ol>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${faq(1, 'Apa beda pasal dan catatan?', 'Pasal diberi nomor otomatis sesuai urutannya. Catatan adalah bagian tanpa nomor, seperti pembukaan akta, para pihak, objek, para saksi, dan penutup.')}
-    ${faq(2, 'Apa itu variabel?', 'Variabel adalah isian otomatis, misalnya "Nama Lengkap Penjual". Di editor variabel tampil sebagai label hijau. Saat pratinjau dan PDF dibuat, label diganti dengan data dari permohonan. Label kuning berarti variabel tidak dikenal dan tidak akan terisi.')}
+    ${faq(2, 'Apa itu variabel?', 'Variabel adalah isian otomatis, misalnya "Nama Lengkap Pihak Pertama". Di editor variabel tampil sebagai label hijau. Saat pratinjau dan PDF dibuat, label diganti dengan data dari permohonan. Label kuning berarti variabel tidak dikenal dan tidak akan terisi.')}
     ${faq(3, 'Mengapa Cek Ejaan tidak dapat digunakan?', 'Fitur Cek Ejaan perlu diaktifkan oleh admin sistem. Selama belum aktif, Anda tetap dapat menyunting dan menyimpan pasal seperti biasa.')}
     ${faq(4, 'Apakah pasal yang terhapus bisa dikembalikan?', 'Tidak. Tambahkan kembali lewat tombol Tambah Pasal, lalu isi ulang judul dan isinya. Nomor pasal lain menyesuaikan secara otomatis.')}
     ${faq(5, 'Siapa yang memfinalisasi akta?', 'PPAT. Asisten menyusun naskah, lalu menekan Beritahu PPAT. PPAT memeriksa, mengisi nomor dan tanggal akta, kemudian memfinalisasi. Setelah final, pasal tidak dapat diubah.')}
@@ -833,7 +833,7 @@ function bukaBantuan() {
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Penyusunan Akta', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital, halaman 25–27 (skor halaman 47,1), beserta gambar buktinya. Fitur dan alur live tetap; yang diubah adalah kejelasan istilah, kepadatan editor, panduan, dan umpan balik. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {

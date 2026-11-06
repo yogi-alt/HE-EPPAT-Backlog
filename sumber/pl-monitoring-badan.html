@@ -637,7 +637,7 @@ $('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar penyesuaian menu Monitoring', lebar:true,
     isi:`<p>Menu Monitoring di area platform tidak dinilai dalam laporan Heuristic Evaluation. Isi, kolom, dan perilaku mengikuti kode live dev-app.eppat.id/platform; yang disesuaikan adalah komponen IDDS dengan brand E-PPAT, kejujuran label, bahasa, status sistem, dan Bantuan per halaman. Data di prototipe ini adalah data contoh.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });

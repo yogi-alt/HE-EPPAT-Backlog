@@ -36,7 +36,7 @@ function judulSheet(ws, judul, sub, lebarKolom) {
 const KOLOM_HE = [
   ['No', 5, 'no'], ['Kode', 13, 'kode'], ['Lingkungan', 13, 'env'], ['Fitur / Layar', 18, 'fitur'], ['Judul usulan', 30, 'judul'], ['Kondisi saat ini (live)', 45, 'saat_ini'], ['Usulan perubahan', 55, 'usulan'],
   ['Prinsip HE', 26, 'prinsip'], ['Sumber', 34, 'sumber'], ['Prioritas', 10, 'prioritas'], ['Layar terdampak', 24, 'layar'], ['Acuan prototipe', 40, 'acuan'],
-  ['Selesai bila', 45, 'selesai_bila'], ['Status', 16, 'status'], ['Catatan', 32, 'catatan'], ['Diperbarui', 12, 'tanggal']
+  ['Selesai bila', 45, 'selesai_bila'], ['Status', 16, 'status'], ['Versi', 8, 'versi'], ['Catatan', 32, 'catatan'], ['Diperbarui', 12, 'tanggal']
 ];
 /* Lingkungan aplikasi tiap usulan HE: Onboarding (dev.eppat.id), Tenant (dev-app.eppat.id/t/<kantor>), Platform (dev-app.eppat.id/platform), atau Semua */
 const LINGKUNGAN = ['Onboarding', 'Tenant', 'Platform', 'Semua'];
@@ -54,7 +54,7 @@ const selTautan = (c, a, kode) => { const u = UTAMA[kode] ? [URL_VERCEL + UTAMA[
 const KOLOM_IDDS = [
   ['No', 5, 'no'], ['Kode', 13, 'kode'], ['Menu / Layar', 24, 'fitur'], ['Judul penyesuaian', 30, 'judul'], ['Kondisi saat ini (live)', 45, 'saat_ini'], ['Penyesuaian', 55, 'usulan'],
   ['Prioritas', 10, 'prioritas'], ['Layar terdampak', 28, 'layar'], ['Acuan prototipe', 40, 'acuan'],
-  ['Selesai bila', 45, 'selesai_bila'], ['Status', 16, 'status'], ['Catatan', 32, 'catatan'], ['Diperbarui', 12, 'tanggal']
+  ['Selesai bila', 45, 'selesai_bila'], ['Status', 16, 'status'], ['Versi', 8, 'versi'], ['Catatan', 32, 'catatan'], ['Diperbarui', 12, 'tanggal']
 ];
 const KELOMPOK = [
   { sheet:'Usulan HE', tab:'he', label:'Usulan HE', awalan:'HE-', kolom:KOLOM_HE,
@@ -102,7 +102,7 @@ for (const k of KELOMPOK) {
   kepalaTabel(ws, 4, k.kolom.map(c => c[0]));
   items.forEach((it, i) => {
     const r = ws.getRow(5 + i);
-    r.values = k.kolom.map(([, , key]) => key === 'no' ? i + 1 : key === 'tanggal' ? tgl(it.tanggal) : key === 'env' ? envDari(it.kode) : it[key]);
+    r.values = k.kolom.map(([, , key]) => key === 'no' ? i + 1 : key === 'tanggal' ? tgl(it.tanggal) : key === 'env' ? envDari(it.kode) : key === 'versi' ? (it.versi || 'v1') : it[key]);
     selTautan(r.getCell(idx('acuan')), it.acuan, it.kode);
     r.eachCell({ includeEmpty: true }, (c, col) => {
       c.font = { name: FONT, size: 9, bold: col === cKd, color: { argb: col === cKd ? HIJAU : 'FF1F1F1F' } };

@@ -385,7 +385,7 @@ const BAGIAN = [
     { k:'nama_lengkap', l:'Nama Lengkap', wajib:true, ph:'Sesuai KTP, tanpa gelar' },
     { k:'nik', l:'NIK', wajib:true, ph:'16 angka sesuai KTP', angka:16 },
     { k:'email', l:'Email', tipe:'email', ph:'nama@contoh.id' },
-    { k:'nomor_telepon', l:'Nomor Telepon', ph:'08xxxxxxxxxx', angka:13 },
+    { k:'nomor_telepon', l:'Nomor Telepon', ph:'08xxxxxxxxxx', angka:15 },
     { k:'kewarganegaraan', l:'Kewarganegaraan', pilih:[['WNI','WNI'],['WNA','WNA']] },
     { k:'tempat_lahir', l:'Tempat Lahir', ph:'Sesuai KTP' },
     { k:'tanggal_lahir', l:'Tanggal Lahir', tipe:'date' },
@@ -400,7 +400,7 @@ const BAGIAN = [
     { k:'alamat_organisasi', l:'Alamat Organisasi' },
     { k:'nomor_siup_kbli', l:'Nomor SIUP / KBLI', ph:'Isi salah satu', tip:'SIUP adalah Surat Izin Usaha Perdagangan. KBLI adalah kode bidang usaha 5 angka yang tercantum pada NIB.' },
     { k:'nomor_npwp', l:'Nomor NPWP', ph:'15 atau 16 angka', angka:16 },
-    { k:'telepon_organisasi', l:'Telepon Organisasi', ph:'021xxxxxxx', angka:13 },
+    { k:'telepon_organisasi', l:'Telepon Organisasi', ph:'021xxxxxxx', angka:15 },
     { k:'jenis_dokumen', l:'Jenis Dokumen', pilih:[['','Pilih jenis dokumen'],['SIUP','SIUP'],['NPWP','NPWP'],['AKTA PENDIRIAN','Akta Pendirian']], tip:'Pilih jenis dokumen yang Anda unggah pada isian Lampiran.' },
     { k:'email_admin_notaris', l:'Email Admin PPAT', tipe:'email', ph:'staf@contoh.id', tip:'Email staf kantor yang mengurus pendaftaran ini.' },
     { k:'lampiran', l:'Lampiran (PDF/gambar)', berkas:true }
@@ -429,8 +429,8 @@ function periksa(f, v) {
   if (!n) return '';
   if (f.k === 'nik' && n.length !== 16) return 'NIK harus 16 angka.';
   if (f.tipe === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(n)) return 'Format email belum benar, contoh: nama@contoh.id';
-  if (f.k === 'nomor_telepon' && !/^08\d{8,11}$/.test(n)) return 'Nomor ponsel diawali 08 dan berisi 10–13 angka.';
-  if (f.k === 'telepon_organisasi' && !/^0\d{8,12}$/.test(n)) return 'Nomor telepon diawali 0 dan berisi 9–13 angka.';
+  if (f.k === 'nomor_telepon' && !/^08\d{8,13}$/.test(n)) return 'Nomor ponsel diawali 08 dan berisi 10–15 angka.';
+  if (f.k === 'telepon_organisasi' && !/^0\d{8,14}$/.test(n)) return 'Nomor telepon diawali 0 dan berisi 9–15 angka.';
   if (f.k === 'nomor_npwp' && n.length !== 15 && n.length !== 16) return 'NPWP harus 15 atau 16 angka.';
   if (f.k === 'tanggal_lahir' && n > new Date().toISOString().slice(0, 10)) return 'Tanggal lahir tidak boleh melewati hari ini.';
   if (f.k === 'code_warna' && !/^#[0-9A-Fa-f]{6}$/.test(n)) return 'Kode warna belum benar, contoh: #0A1F47';
@@ -470,7 +470,6 @@ $('#nav').addEventListener('click', e => {
 function gambarProfil() {
   const st = STATUS[S.status];
   $('#profilMenu').innerHTML = `<div class="ina-action-dropdown__list">
-    <div class="ina-action-dropdown__group-header">Admin Contoh &middot; Super Admin</div>
     <button class="ina-action-dropdown__item" data-p="akun" role="menuitem"><span class="ina-action-dropdown__item-icon">${ik('user')}</span><span class="ina-action-dropdown__item-content">Akun Saya</span></button>
     <div class="ina-action-dropdown__divider"></div>
     <button class="ina-action-dropdown__item" data-p="keluar" role="menuitem"><span class="ina-action-dropdown__item-icon">${ik('keluar')}</span><span class="ina-action-dropdown__item-content">Keluar</span></button></div>`;
@@ -732,7 +731,7 @@ function simpan() {
   SEMUA.forEach(f => { const g = periksa(f, S.form[f.k]); if (g) S.galat[f.k] = g; });
   const salah = SEMUA.filter(f => S.galat[f.k]);
   if (salah.length) { gambar(); fokusIsian(salah[0].k); return; }
-  const F = S.form, nik = F.nik.slice(0, 4) + '********' + F.nik.slice(-4);
+  const F = S.form, nik = esc(F.nik);
   const dok = [F.id_card && 'Scan KTP', F.lampiran && 'Lampiran', F.dokumen_tambahan && 'Logo stempel'].filter(Boolean);
   dialog({ judul: S.status === 'belum' ? 'Simpan pendaftaran TERA?' : 'Perbarui pendaftaran TERA?',
     isi:`<p>Pastikan data berikut sudah sesuai dengan KTP dan SK pengangkatan Anda.</p>
@@ -811,7 +810,7 @@ $('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tu
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Registrasi TERA', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital (halaman 20–22 dan rekomendasi IDDS). Daftar yang sama tersedia di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {

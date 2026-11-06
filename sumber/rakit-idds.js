@@ -17,6 +17,14 @@ if (html.includes('aria-label="Notifikasi"') && !html.includes('id="notif-bersam
   const i = html.lastIndexOf('</body>');
   html = i < 0 ? html + notif : html.slice(0, i) + notif + '\n' + html.slice(i);
 }
+// Sesi bersama: prototipe tenant saling terhubung (masuk simulasi, menu profil, menu per peran). Disisipkan sebelum sidebar.
+if (/Backlog-(HE-(VERIF|MINUTA|MINUTA-V2|EAW|EAWK|CA|USER|TERA|ORDER)|IDDS-TN-[A-Z]+)-Prototype\.html$/.test(out) && !html.includes('id="sesi-bersama-js"')) {
+  const ikon = JSON.parse(fs.readFileSync(path.join(d, 'aset', 'tabler-sidebar.json'), 'utf8'));
+  const se = fs.readFileSync(path.join(d, 'sesi-bersama.html'), 'utf8').replace('__TABLER__', () => JSON.stringify(ikon));
+  html = html.replace('<head>', () => '<head>\n<script id="sesi-kepala-js">try { window.SESI_PROTO = JSON.parse(localStorage.getItem(\'eppat-sesi\')); var t = JSON.parse(localStorage.getItem(\'eppat-trial\')) || {}; if (window.SESI_PROTO && window.SESI_PROTO.paket === \'trial\') { if (t.nama) window.SESI_PROTO.nama = t.nama; if (t.email) window.SESI_PROTO.email = t.email; } window.PAKET_TRIAL = window.SESI_PROTO && window.SESI_PROTO.paket === \'trial\' && !(t.db && t.db.ent) ? { batas:!!t.batas, pengguna:5, transaksi:10, upgrade:\'Backlog-HE-TRIAL-Prototype.html#berlangganan\' } : null; } catch (e) { window.SESI_PROTO = null; window.PAKET_TRIAL = null; }</script>');
+  const i = html.lastIndexOf('</body>');
+  html = i < 0 ? html + se : html.slice(0, i) + se + '\n' + html.slice(i);
+}
 // Sidebar pola IDDS (struktur Expand/Collapse, kartu profil pengguna; warna brand tetap): sisipkan bila halaman bersidebar.
 if (html.includes('<aside class="sidebar') && !html.includes('id="sidebar-idds-js"')) {
   const sb = fs.readFileSync(path.join(d, 'sidebar-idds.html'), 'utf8');
@@ -34,6 +42,20 @@ if (html.includes('Lihat di layar') && !html.includes('id="sorot-bersama-js"')) 
   const so = fs.readFileSync(path.join(d, 'sorot-bersama.html'), 'utf8');
   const i = html.lastIndexOf('</body>');
   html = i < 0 ? html + so : html.slice(0, i) + so + '\n' + html.slice(i);
+}
+// Kabar bersama: pesan hasil tindakan tampil sebagai IDDS Alert di atas kartu terkait, bukan toast di kanan bawah.
+if (html.includes('id="toastWadah"') && !html.includes('id="kabar-bersama-js"')) {
+  const kb = fs.readFileSync(path.join(d, 'kabar-bersama.html'), 'utf8');
+  const i = html.lastIndexOf('</body>');
+  html = i < 0 ? html + kb : html.slice(0, i) + kb + '\n' + html.slice(i);
+}
+// Penanda versi (versi.json): label di protobar sesudah tautan "Daftar prototipe" + lencana "Baru di vN" di Daftar perubahan.
+{
+  const V = JSON.parse(fs.readFileSync(path.join(d, 'versi.json'), 'utf8'));
+  const a = V.arsip[0];
+  const label = `<span class="versi-proto" title="Versi ${V.versi}, ${V.keterangan}. ${a ? `Arsip ${a.versi} (${a.tanggal}) ada di daftar prototipe.` : ''}">${V.versi} · ${V.tanggal}</span>`;
+  if (!html.includes('class="versi-proto"')) html = html.replace(/(Daftar prototipe<\/a>)/, `$1${label}`);
+  if (!html.includes('id="versi-proto-css"')) html = html.replace('</head>', '<style id="versi-proto-css">.versi-proto{display:inline-block;padding:3px 10px;border-radius:999px;background:#E6EDEA;color:#0f1a17;font:600 11px/16px Inter,sans-serif}.versi-ubah{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;background:var(--ina-primary-100,#dcebe5);color:var(--ina-primary-700,#1b5e4a);font:600 11px/18px Inter,sans-serif;vertical-align:middle}</style>\n</head>');
 }
 // Pilihan tema prototipe (E-PPAT | INAgov | Default IDDS): bagian kepala tepat setelah <head> (tanpa kedip), pil protobar sebelum </body>.
 if (html.includes('@idds/styles') && !html.includes('id="tema-proto-js"')) {

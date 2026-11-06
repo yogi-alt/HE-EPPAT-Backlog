@@ -1,0 +1,210 @@
+<!-- ===== Sesi bersama (sesi-bersama.html, disisipkan rakit-idds.js ke prototipe tenant) =====
+     Masuk simulasi per peran, menu profil (Akun Saya, Ganti Peran, Keluar), menu sidebar per peran, dan penjaga halaman.
+     Tanpa sesi, prototipe tampil seperti biasa, sehingga tautan langsung dari daftar prototipe tetap berjalan.
+     Menu per peran mengikuti live (dilihat 20 Okt 2026 dengan akun tiap peran); aturan Super Admin dan Super Admin + PPAT mengikuti masukan Peruri. -->
+<style id="sesi-bersama-css">
+.sesi-sembunyi{display:none!important}
+.sesi-tanpa-ingat .ingat,.sesi-tanpa-daftar [data-akun="ca"],.sesi-tanpa-daftar [data-tab="ca"]{display:none!important}
+.protobar .sesi-pilih{border:1px solid rgba(255,255,255,.25);background:transparent;color:#E6EDEA;font:500 11px Inter,sans-serif;padding:4px 8px;border-radius:999px;cursor:pointer}
+.protobar .sesi-pilih option{color:#1f2a2e;background:#fff}
+#menuSesi .ina-action-dropdown__menu{position:absolute;top:calc(100% + 6px);right:0;left:auto;min-width:260px;z-index:60;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.user .ina-action-dropdown__item{text-decoration:none}
+.user .ina-action-dropdown__item:hover{text-decoration:none}
+.user .ina-action-dropdown__divider{height:1px;margin:4px 0;padding:0;background:var(--ina-stroke-primary)}
+#profilMenu{min-width:260px}
+.user.sesi-pemicu{cursor:pointer}
+.user.sesi-pemicu:hover{background:var(--ina-background-secondary)}
+.user.sesi-pemicu:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px}
+.sesi-tolak{position:fixed;inset:0;z-index:900;display:grid;place-items:center;padding:64px 16px 24px;background:var(--ina-background-secondary)}
+.sesi-tolak-kartu{width:100%;max-width:440px;padding:28px;border:1px solid var(--ina-stroke-primary);border-radius:16px;background:var(--ina-background-primary,#fff)}
+.sesi-tolak-kartu h2{margin:0 0 8px;font-size:20px;line-height:28px;font-weight:600;color:var(--ina-content-primary)}
+.sesi-tolak-kartu p{margin:0 0 16px;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+.sesi-tolak-aksi{display:flex;flex-wrap:wrap;gap:12px}
+#lencanaTrial{flex:none;white-space:nowrap}
+#spandukTrial{padding:24px 32px 0}
+#spandukTrial + .page{padding-top:16px}
+#spandukTrial .ina-alert__content{display:flex;flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap;width:100%}
+#spandukTrial .ina-alert__text-section{flex:1;min-width:240px}
+#spandukTrial .spanduk-aksi{display:flex;align-items:center;gap:8px}
+#spandukTrial .ina-button{text-decoration:none}
+.sb-trial{padding:0 0 8px}
+.sb-trial .ina-button{width:100%;justify-content:center;text-decoration:none}
+.sidebar.sb-ciut .sb-trial-teks{display:none}
+@media (max-width:760px){ #spandukTrial{padding:16px 16px 0} #lencanaTrial .lt-opsi{display:none} }
+</style>
+<script id="sesi-bersama-js">
+(() => {
+  const KUNCI = 'eppat-sesi', MASUK = 'Backlog-IDDS-TN-MASUK-Prototype.html', AKUN_SAYA = 'Backlog-HE-CA-Prototype.html#akun', REG_CA = 'Backlog-HE-CA-Prototype.html#ca';
+  const SYS = 'Backlog-IDDS-TN-SYSTEM-Prototype.html', EP = 'Backlog-IDDS-TN-EPPAT-Prototype.html', CMS = 'Backlog-IDDS-TN-CMS-Prototype.html';
+    const AKUN = [
+    { kunci:'admin', label:'Super Admin', nama:'Admin Contoh', email:'admin@contoh.id', peran:['ROLE_ADMIN'], ca:'kurang' },
+    { kunci:'admin-ppat', label:'Super Admin + PPAT', nama:'Admin Contoh', email:'admin.ppat@contoh.id', peran:['ROLE_ADMIN', 'ROLE_PPAT'], ca:'kurang' },
+    { kunci:'admin-trial', label:'Super Admin Trial', nama:'Contoh PPAT Baru', email:'ppat.baru@contoh.id', peran:['ROLE_ADMIN'], ca:'kurang', paket:'trial' },
+    { kunci:'ppat', label:'PPAT', nama:'PPAT Contoh Satu', email:'ppat1@contoh.id', peran:['ROLE_PPAT'], ca:'aktif' },
+    { kunci:'asisten', label:'Asisten', nama:'Asisten Contoh', email:'asisten1@contoh.id', peran:['ROLE_ASISTEN'], ca:'ekyc' },
+    { kunci:'klien', label:'Klien', nama:'Contoh Klien Satu', email:'klien1@contoh.id', peran:['ROLE_KLIEN'], ca:'kurang' }
+  ];
+  const STATUS_CA = { kurang:['Belum terdaftar', 'neutral'], ekyc:['Menunggu eKYC', 'info'], aktif:['Aktif', 'success'] };
+  const STAF = ['Permohonan AJB', 'Dashboard Akta', 'Verifikasi Berkas', 'Penyusunan Akta', 'Penyusunan Akta v2', 'Penandatanganan Akta', 'Salinan Akta', 'Profil Kantor'];
+  const MENU_PERAN = { ROLE_PPAT:[...STAF, 'Daftar Pengguna', 'Aktivasi e-Meterai'], /* Daftar Pengguna untuk kebutuhan prototipe; di live PPAT tidak memilikinya */ ROLE_ASISTEN:[...STAF, 'Daftar Pengguna', 'Dashboard Sistem'], ROLE_KLIEN:['Penandatanganan Akta'] };
+  /* layar di dalam satu prototipe yang punya syarat menu sendiri */
+  const LAYAR_MENU = { '#peran':'Peran & Izin', '#logs':'Log Aktivitas', '#pengaturan':'Pengaturan', '#emeterai':'Aktivasi e-Meterai' };
+  const LANDAS = { ROLE_ADMIN:SYS + '#dasbor', ROLE_PPAT:EP + '#dashboard', ROLE_ASISTEN:EP + '#dashboard', ROLE_KLIEN:'Backlog-HE-EAWK-Prototype.html' };
+  /* halaman → menu yang menjadi syarat akses */
+  const HALAMAN = { 'HE-USER':'Daftar Pengguna', 'HE-VERIF':'Verifikasi Berkas', 'HE-MINUTA':'Penyusunan Akta', 'HE-MINUTA-V2':'Penyusunan Akta v2', 'HE-EAW':'Penandatanganan Akta', 'HE-ORDER':'Permohonan AJB', 'HE-TERA':'Aktivasi e-Meterai', 'IDDS-TN-EPPAT':'Dashboard Akta', 'IDDS-TN-SYSTEM':'Dashboard Sistem', 'IDDS-TN-CMS':'Halaman Depan' };
+  /* menu lengkap untuk halaman yang sidebarnya khusus Klien, saat dibuka peran staf */
+  const MENU = [
+    ['Layanan', [['Permohonan AJB', 'file-text', 'Backlog-HE-ORDER-Prototype.html']]],
+    ['Akta', [['Dashboard Akta', 'layout-dashboard', EP + '#dashboard'], ['Verifikasi Berkas', 'circle-check', 'Backlog-HE-VERIF-Prototype.html'], ['Penyusunan Akta', 'file-pencil', 'Backlog-HE-MINUTA-Prototype.html'], ['Penyusunan Akta v2', 'file-description', 'Backlog-HE-MINUTA-V2-Prototype.html'], ['Penandatanganan Akta', 'signature', 'Backlog-HE-EAW-Prototype.html'], ['Salinan Akta', 'files', EP + '#salinan']]],
+    ['Pengaturan Kantor', [['Profil Kantor', 'building', EP + '#profil'], ['Daftar Pengguna', 'users', 'Backlog-HE-USER-Prototype.html'], ['Peran & Izin', 'shield-lock', SYS + '#peran'], ['Log Aktivitas', 'history', SYS + '#logs'], ['Aktivasi e-Meterai', 'rubber-stamp', EP + '#emeterai']]],
+    ['Pengaturan Aplikasi', [['Dashboard Sistem', 'gauge', SYS + '#dasbor'], ['Pengaturan', 'settings', SYS + '#pengaturan']]],
+    ['Konten Situs', [['Halaman Depan', 'home', CMS + '#landing'], ['Tema Tampilan', 'palette', CMS + '#tema'], ['Master Konten', 'database', CMS + '#master'], ['Artikel & Halaman', 'article', CMS + '#posts'], ['Pustaka Media', 'photo', CMS + '#media']]]
+  ];
+  const IKON = __TABLER__;
+  const svg = (d, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+  const I_AKUN = '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />';
+  const I_TAMENG = '<path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />';
+  const I_GANTI = '<path d="M7 10h14l-4 -4" /><path d="M17 14h-14l4 4" />';
+  const I_KELUAR = '<path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" />';
+  const $ = s => document.querySelector(s);
+  const baca = () => { try { return JSON.parse(localStorage.getItem(KUNCI)); } catch (e) { return null; } };
+  const simpan = s => { try { localStorage.setItem(KUNCI, JSON.stringify(s)); } catch (e) { /* peramban menolak penyimpanan: prototipe tetap berjalan */ } };
+  const sesi = baca();
+  /* paket Trial: keadaan dibagi dengan Backlog-HE-TRIAL (kunci eppat-trial); setelah upgrade akun menjadi Super Admin biasa */
+  const KUNCI_TRIAL = 'eppat-trial', HAL_UPGRADE = 'Backlog-HE-TRIAL-Prototype.html#berlangganan';
+  const bacaTrial = () => { try { return JSON.parse(localStorage.getItem(KUNCI_TRIAL)) || {}; } catch (e) { return {}; } };
+  const simpanTrial = t => { try { localStorage.setItem(KUNCI_TRIAL, JSON.stringify(t)); } catch (e) { /* lihat simpan() */ } };
+  const sudahEnt = () => !!(bacaTrial().db || {}).ent;
+  if (sesi && sesi.paket === 'trial') { const t = bacaTrial(); if (sudahEnt()) sesi.label = 'Super Admin'; if (t.nama) sesi.nama = t.nama; if (t.email) sesi.email = t.email; }
+  const berkas = (location.pathname.split('/').pop().match(/^Backlog-(.+)-Prototype\.html$/) || [])[1] || '';
+
+  /* Super Admin saja tidak mendaftarkan TERA, e-Meterai, dan CA; bila merangkap PPAT, semuanya tersedia */
+  const dataSesi = a => ({ kunci:a.kunci, label:a.label, nama:a.nama, email:a.email, peran:a.peran, aktif:a.peran[0], ca:a.ca, caL:STATUS_CA[a.ca], paket:a.paket, tanpaDaftar:a.peran.includes('ROLE_ADMIN') && !a.peran.includes('ROLE_PPAT') });
+  const izin = (s, t) => (s.tanpaDaftar ? t !== 'Aktivasi e-Meterai' : !MENU_PERAN[s.aktif] || MENU_PERAN[s.aktif].includes(t));
+  const halamanBoleh = s => { const syarat = HALAMAN[berkas]; if (berkas === 'HE-EAWK') return s.aktif === 'ROLE_KLIEN'; if (berkas === 'HE-EAW' && s.aktif === 'ROLE_KLIEN') return false; if (LAYAR_MENU[location.hash] && !izin(s, LAYAR_MENU[location.hash])) return false; return !syarat || izin(s, syarat); };
+  window.sesiMasuk = kunci => {
+    if (kunci === 'admin-trial-ulang') { try { localStorage.removeItem(KUNCI_TRIAL); } catch (e) { /* lihat simpan() */ } kunci = 'admin-trial'; }
+    const a = AKUN.find(x => x.kunci === kunci || x.email === String(kunci).toLowerCase() || (x.paket && bacaTrial().email === kunci)) || AKUN[0];
+    simpan(dataSesi(a));
+    location.href = LANDAS[a.peran[0]];
+  };
+  const keluar = () => { try { localStorage.removeItem(KUNCI); } catch (e) { /* lihat simpan() */ } location.href = MASUK; };
+
+  /* halaman Masuk: pilihan simulasi ada di bawah tombol Masuk */
+  if (berkas === 'IDDS-TN-MASUK') {
+    document.addEventListener('click', e => { const b = e.target.closest('[data-sesi-masuk]'); if (b) window.sesiMasuk(b.dataset.sesiMasuk); });
+    return;
+  }
+
+  const itemCa = () => {
+    if (sesi && sesi.tanpaDaftar) return '';
+    const nama = (document.querySelector('header .user .uname') || {}).textContent;
+    const [l, j] = sesi && sesi.caL ? sesi.caL : STATUS_CA[(AKUN.find(a => a.nama === nama) || AKUN[0]).ca];
+    return `<button type="button" class="ina-action-dropdown__item" role="menuitem" data-sesi-href="${REG_CA}"><span class="ina-action-dropdown__item-icon">${svg(I_TAMENG)}</span><span class="ina-action-dropdown__item-content">Registrasi CA</span><span class="ina-badge ina-badge--soft ina-badge--${j} ina-badge--sm ina-badge--rounded-full">${l}</span></button>`;
+  };
+
+  /* Keluar berlaku di semua halaman, termasuk yang punya menu profil sendiri */
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-sesi-href]');
+    if (a) { e.preventDefault(); e.stopPropagation(); location.href = a.dataset.sesiHref; return; }
+    if (e.target.closest('[data-sesi-keluar], #user [data-luar="Keluar"], #user [data-p="keluar"]')) { e.stopPropagation(); keluar(); }
+  }, true);
+
+  /* kepala halaman */
+  const pemicu = $('header .user');
+  if (sesi && pemicu) {
+    document.body.classList.toggle('sesi-tanpa-daftar', !!sesi.tanpaDaftar);
+    document.body.classList.toggle('sesi-tanpa-ingat', !izin(sesi, 'Aktivasi e-Meterai'));
+    const set = (s, t) => { const el = pemicu.querySelector(s); if (el) el.textContent = t; };
+    set('.uname', sesi.nama); set('.urole', sesi.label); set('.ava', sesi.nama.charAt(0).toUpperCase());
+  }
+
+  /* pilihan peran di bilah prototipe: tetap di halaman ini bila perannya boleh membukanya */
+  const labelPeran = [...document.querySelectorAll('.protobar span')].find(el => /^Peran:/.test(el.textContent));
+  const kini = sesi ? sesi.kunci : (AKUN.find(a => a.label === ((pemicu && pemicu.querySelector('.urole')) || {}).textContent) || AKUN[0]).kunci;
+  const pilihPeran = `<span id="sesiPeran"><label for="sesiPilih">Peran:</label> <select id="sesiPilih" class="sesi-pilih">${AKUN.map(a => `<option value="${a.kunci}" ${a.kunci === kini ? 'selected' : ''}>${a.label}</option>`).join('')}</select></span>`;
+  if (labelPeran) labelPeran.outerHTML = pilihPeran;
+  else { const judul = $('.protobar b'); if (judul) judul.insertAdjacentHTML('afterend', `<span class="sep">&bull;</span>${pilihPeran}`); }
+  const pilih = $('#sesiPilih');
+  if (pilih) pilih.addEventListener('change', () => { const s = dataSesi(AKUN.find(a => a.kunci === pilih.value)); simpan(s); if (halamanBoleh(s)) location.reload(); else location.href = LANDAS[s.aktif]; });
+
+  /* menu profil untuk halaman yang belum memilikinya */
+  const milikSendiri = pemicu && pemicu.id === 'user' ? pemicu : null;
+  if (pemicu && !milikSendiri) {
+    pemicu.classList.add('sesi-pemicu', 'ina-action-dropdown');
+    pemicu.setAttribute('role', 'button'); pemicu.setAttribute('tabindex', '0'); pemicu.setAttribute('aria-haspopup', 'menu'); pemicu.setAttribute('aria-expanded', 'false');
+    pemicu.insertAdjacentHTML('beforeend', '<div id="menuSesi"></div>');
+    const wadah = $('#menuSesi');
+    const atur = buka => {
+      pemicu.setAttribute('aria-expanded', String(buka));
+      wadah.innerHTML = buka ? `<div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible" role="menu">
+        <button type="button" class="ina-action-dropdown__item" role="menuitem" data-sesi-href="${AKUN_SAYA}"><span class="ina-action-dropdown__item-icon">${svg(I_AKUN)}</span><span class="ina-action-dropdown__item-content">Akun Saya</span></button>${itemCa()}
+        <div class="ina-action-dropdown__divider" role="separator"></div>
+        <button type="button" class="ina-action-dropdown__item" role="menuitem" data-sesi-keluar><span class="ina-action-dropdown__item-icon">${svg(I_KELUAR)}</span><span class="ina-action-dropdown__item-content">Keluar</span></button></div>` : '';
+    };
+    pemicu.addEventListener('click', e => { e.stopPropagation(); atur(!wadah.innerHTML); });
+    pemicu.addEventListener('keydown', e => { if (e.target === pemicu && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); atur(!wadah.innerHTML); } });
+    document.addEventListener('click', () => { if (wadah.innerHTML) atur(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && wadah.innerHTML) atur(false); });
+  }
+  /* halaman dengan menu profil sendiri: lengkapi agar susunannya sama */
+  if (milikSendiri) {
+    const pasang = () => {
+      const bagi = milikSendiri.querySelector('.ina-action-dropdown__divider'); if (!bagi) return;
+      if (!bagi.parentElement.textContent.includes('Registrasi CA') && itemCa()) bagi.insertAdjacentHTML('beforebegin', itemCa());
+    };
+    pasang(); new MutationObserver(pasang).observe(milikSendiri, { childList:true, subtree:true });
+  }
+
+  if (!sesi) return;
+
+  /* sidebar per peran */
+  const nav = $('#nav'), boleh = t => izin(sesi, t);
+  const lengkap = () => MENU.map(([g, m]) => { const isi = m.filter(([t]) => boleh(t)); return isi.length ? `<button class="grp" aria-expanded="true"><span>${g}</span></button>
+    <div class="items">${isi.map(([t, k, h]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item" data-sesi-href="${h}">${svg(IKON[k] || '')}<span>${t}</span></a>`).join('')}</div>` : ''; }).join('');
+  const saring = () => {
+    if (!nav) return;
+    if (['HE-CA', 'HE-EAWK'].includes(berkas) && sesi.aktif !== 'ROLE_KLIEN') { if (!nav.querySelector('[data-sesi-href]')) nav.innerHTML = lengkap(); return; }
+    nav.querySelectorAll('a.nav-item').forEach(a => a.classList.toggle('sesi-sembunyi', !boleh(a.textContent.trim())));
+    nav.querySelectorAll('.items').forEach(w => {
+      const kosong = !w.querySelector('a.nav-item:not(.sesi-sembunyi)'); w.classList.toggle('sesi-sembunyi', kosong);
+      const g = w.previousElementSibling; if (g && g.classList.contains('grp')) g.classList.toggle('sesi-sembunyi', kosong);
+    });
+  };
+  if (nav) { saring(); new MutationObserver(saring).observe(nav, { childList:true }); }
+
+  /* paket Trial: spanduk, tombol di bawah menu, dan peta perjalanan di bilah prototipe (HE-TRIAL-03, -09) */
+  if (sesi.paket === 'trial') {
+    const t = bacaTrial(), ent = sudahEnt(), konten = $('.content'), I_PANAH = '<path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />', I_X = '<path d="M18 6l-12 12" /><path d="M6 6l12 12" />';
+    const bar = $('.protobar .kanan') || $('.protobar');
+    const tutup = '<button type="button" class="ina-button ina-button--tertiary ina-button--sm" data-tutup-spanduk aria-label="Tutup pesan">' + svg(I_X) + '</button>';
+    const spanduk = (j, id, isi, aksi) => konten && konten.insertAdjacentHTML('afterbegin', `<div id="spandukTrial" data-kunci="${id}"><div class="ina-alert ina-alert--${j}" role="status"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__description">${isi}</div></div><div class="spanduk-aksi">${aksi}${tutup}</div></div></div></div>`);
+    const ditutup = k => { try { return sessionStorage.getItem(k) === '1'; } catch (e) { return false; } };
+    if (ent) {
+      if (!t.kabarEnt) { spanduk('success', 'kabar', '<b>Paket Enterprise aktif.</b> Batas paket Trial sudah terbuka. Data dan pengguna Anda tetap ada.', ''); simpanTrial({ ...t, kabarEnt:true }); }
+      if (bar) bar.insertAdjacentHTML('afterbegin', '<span>Perjalanan: langkah 18 dari 19, Trial sudah menjadi Enterprise.</span>');
+    } else {
+      const sisa = t.db && t.db.trial ? Math.max(0, Math.ceil((t.db.trial.akhir - t.db.trial.mulai - (Date.now() - t.db.trial.nyata)) / 864e5)) : 30;
+      const ke = (uk, lbl) => `<a class="ina-button ina-button--primary ina-button--${uk}" href="${HAL_UPGRADE}">${lbl}</a>`;
+      const kepala = $('header .spacer'), lencana = `<span class="ina-badge ina-badge--soft ina-badge--info ina-badge--sm ina-badge--rounded-full" id="lencanaTrial"><span><span class="lt-opsi">Paket </span>Trial<span class="lt-opsi"> · sisa ${sisa} hari</span></span></span>`;
+      if (kepala) kepala.insertAdjacentHTML('afterend', lencana); else if (pemicu) pemicu.insertAdjacentHTML('beforebegin', lencana);
+      if (!ditutup('eppat-trial-spanduk')) spanduk('caution', 'eppat-trial-spanduk', `<b>Paket Trial, sisa ${sisa} hari.</b> Semua menu dapat dibuka. Tanda tangan dan stempel elektronik aktif setelah upgrade ke Enterprise.`, ke('sm', 'Mulai Berlangganan'));
+      /* di atas kartu profil yang menempel di bawah, agar tombol selalu terlihat walaupun menu panjang */
+      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai Berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai Berlangganan</span></a></div>`); });
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pasangTombol); else pasangTombol();
+      if (bar) bar.insertAdjacentHTML('afterbegin', `<span>Perjalanan: langkah 9 dari 19, coba menu lalu tekan Mulai Berlangganan.</span><button class="pil" id="simBatas" aria-pressed="${!!t.batas}" title="Mengisi kuota pengguna dan transaksi Trial sampai penuh">Batas paket: ${t.batas ? 'tercapai' : 'belum tercapai'}</button>`);
+      const b = $('#simBatas'); if (b) b.addEventListener('click', () => { simpanTrial({ ...bacaTrial(), batas:!t.batas }); location.reload(); });
+    }
+    document.addEventListener('click', e => { if (!e.target.closest('[data-tutup-spanduk]')) return; const w = $('#spandukTrial'); try { sessionStorage.setItem(w.dataset.kunci, '1'); } catch (x) { /* lihat simpan() */ } w.remove(); });
+  }
+
+  /* Klien memakai halaman tanda tangan miliknya */
+  if (berkas === 'HE-EAW' && sesi.aktif === 'ROLE_KLIEN') { location.replace(LANDAS.ROLE_KLIEN); return; }
+
+  /* penjaga halaman */
+  if (!halamanBoleh(sesi)) {
+    document.body.insertAdjacentHTML('beforeend', `<div class="sesi-tolak" role="alert"><div class="sesi-tolak-kartu"><h2>Halaman tidak tersedia</h2><p>Peran ${sesi.label} tidak memiliki akses ke halaman ini.</p>
+      <div class="sesi-tolak-aksi"><a class="ina-button ina-button--primary ina-button--md" href="${LANDAS[sesi.aktif]}">Ke Halaman Utama</a><button type="button" class="ina-button ina-button--secondary ina-button--md" data-sesi-keluar>Keluar</button></div></div></div>`);
+  }
+})();
+</script>

@@ -136,6 +136,10 @@
 .sesi-isi small{font-size:12.5px;color:var(--ina-content-secondary)}
 .ina-button[data-merah]{color:var(--ina-negative-600,#d50b0b)}
 .syarat-pw{list-style:none;margin:0;padding:12px 14px;border:1px solid var(--ina-stroke-primary);border-radius:10px;background:var(--ina-background-secondary);display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px 16px}
+/* dua kolom: kiri panjang + huruf besar + huruf kecil, kanan angka + simbol (daftar simbol boleh dua baris) */
+.syarat-pw{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,auto);grid-auto-flow:column}
+.syarat-pw li:last-child{grid-row:span 2;align-items:flex-start}
+@media (max-width:560px){.syarat-pw{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}.syarat-pw li:last-child{grid-row:auto}}
 .syarat-pw li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ina-content-secondary)}
 .syarat-pw .tanda{width:16px;height:16px;border-radius:999px;border:1.5px solid var(--ina-stroke-secondary);display:grid;place-items:center;flex:none}
 .syarat-pw li.ok{color:var(--ina-content-positive)}
@@ -293,7 +297,7 @@ const UBAH = [
     isi:'Tab memakai IDDS Tab yang sama dengan Akun Saya kantor. Lencana peran berbunyi "Platform Admin", sama dengan menu pengguna di kanan atas. Catatan email menjadi "Hubungi tim E-PPAT untuk mengubah email." Kode akun live (misalnya PLATFORM_ADMIN) ditampilkan sebagai baris "ID akun" dengan keterangan, sama dengan Akun Saya kantor. Formulir Ubah Data memakai IDDS Text Field. Pesan "Nama depan minimal 2 karakter." dan pesan format telepon tampil di bawah isian. Hasil simpan memakai IDDS Toast. Pindah tab atau menu saat ada perubahan menawarkan "Buang Perubahan" atau "Simpan & Lanjutkan".',
     lama:'Lencana peran "Super Admin" (dari is_admin) berbeda dengan "Platform Admin" di menu pengguna. Catatan "(hubungi admin untuk mengubah)" tidak jelas bagi admin platform. Banner sukses hilang sendiri setelah 3 detik tanpa aria-live.', ke:'akun', tab:'akun', sorot:'#kartuAkun' },
   { kode:'IDDS-PL-39', judul:'Akun Saya: Keamanan dengan syarat kata sandi 12 karakter dan 2FA terpandu',
-    isi:'Ganti kata sandi memakai IDDS Password Input dan daftar centang yang sama dengan layar Ganti Kata Sandi: minimal 12 karakter serta memuat huruf besar, huruf kecil, angka, dan simbol (IDDS-PL-08). Aktivasi 2FA dipandu dua langkah: pindai kode QR (atau salin kode rahasia), lalu ketik kode 6 digit di IDDS One-Time Password. Pesan galat kode tampil di bawah kolom kode. Menonaktifkan 2FA dan mengeluarkan perangkat memakai IDDS Modal Confirmation. Bahasa dibakukan: "Password" menjadi "kata sandi", "device" menjadi "perangkat", "logout/revoke" menjadi "keluarkan", dan "authenticator" menjadi "autentikator".',
+    isi:'Ganti kata sandi memakai IDDS Password Input dan daftar centang yang sama dengan layar Ganti Kata Sandi: minimal 12 karakter serta memuat huruf besar, huruf kecil, angka, dan simbol (- _ ? ! & + % # @ * $ ^) (IDDS-PL-08). Aktivasi 2FA dipandu dua langkah: pindai kode QR (atau salin kode rahasia), lalu ketik kode 6 digit di IDDS One-Time Password. Pesan galat kode tampil di bawah kolom kode. Menonaktifkan 2FA dan mengeluarkan perangkat memakai IDDS Modal Confirmation. Bahasa dibakukan: "Password" menjadi "kata sandi", "device" menjadi "perangkat", "logout/revoke" menjadi "keluarkan", dan "authenticator" menjadi "autentikator".',
     lama:'Kartu "Ganti Password" hanya meminta "Minimal 8 karakter" tanpa tombol tampilkan. Padahal, layar Ganti Kata Sandi wajib meminta 12 karakter dan 4 jenis karakter, sehingga admin dapat menurunkan kekuatan kata sandinya. Nonaktifkan 2FA dilakukan lewat panel kuning di dalam kartu. Istilah bercampur bahasa Inggris: Password, device, logout, di-logout, revoke ("Gagal revoke."), secret, Add account, dan TOTP.', ke:'akun', tab:'aman', sorot:'#kartuPassword' },
   { kode:'IDDS-PL-40', judul:'Bantuan di setiap halaman Sistem dan Akun Saya',
     isi:'Setting Theme, Pengaturan Global, dan Akun Saya memiliki tombol Bantuan di kanan judul yang membuka IDDS Drawer. Bantuan Pengaturan Global mengikuti tab yang sedang dibuka. Isinya menjelaskan SMTP dan Brevo, WhatsApp OCA, Peruri CA, kegunaan Gemini AI, serta dampak perubahan ke semua kantor PPAT. Setiap Bantuan berisi langkah, istilah, pertanyaan umum (IDDS Accordion), dan kontak dukungan yang sama dengan menu Monitoring (IDDS-PL-20). Kontak bergaris putus-putus adalah data contoh. Pola sama dengan IDDS-TN-15 dan IDDS-TN-25.',
@@ -414,7 +418,7 @@ const SESI = () => [
   { id:1, jenis:'Laptop', ket:'Chrome · Windows', ip:'10.0.0.12', mulai:'26 Okt 2026, 09.15', habis:'2 Nov 2026, 09.15', ini:true },
   { id:2, jenis:'Laptop', ket:'Firefox · macOS', ip:'10.0.0.40', mulai:'24 Okt 2026, 19.02', habis:'31 Okt 2026, 19.02', ini:false },
   { id:3, jenis:'Ponsel', ket:'Chrome · Android', ip:'10.0.0.35', mulai:'23 Okt 2026, 07.40', habis:'30 Okt 2026, 07.40', ini:false }];
-const SYARAT_PW = [['Minimal 12 karakter', s => s.length >= 12], ['Mengandung huruf besar', s => /[A-Z]/.test(s)], ['Mengandung huruf kecil', s => /[a-z]/.test(s)], ['Mengandung angka', s => /[0-9]/.test(s)], ['Mengandung simbol', s => /[^A-Za-z0-9]/.test(s)]];
+const SYARAT_PW = [['Minimal 12 karakter', s => s.length >= 12], ['Mengandung huruf besar', s => /[A-Z]/.test(s)], ['Mengandung huruf kecil', s => /[a-z]/.test(s)], ['Mengandung angka', s => /[0-9]/.test(s)], ['Mengandung simbol (- _ ? ! & + % # @ * $ ^)', s => /[-_?!&+%#@*$^]/.test(s) && !/[^A-Za-z0-9_?!&+%#@*$^-]/.test(s)]];
 const RAHASIA_2FA = 'JBSW Y3DP EHPK 3PXP';
 
 /* ---------------- keadaan ---------------- */
@@ -853,7 +857,7 @@ function simpanAkun(lanjut) {
   const v = id => $('#' + id).value.trim(); let ada = false;
   if (v('aDepan').length < 2) { galat('aDepan', 'Nama depan minimal 2 karakter.'); ada = true; }
   const telp = v('aTelp').replace(/[\s-]/g, '');
-  if (telp && !/^(\+?62|0)8\d{7,12}$/.test(telp)) { galat('aTelp', 'Nomor telepon harus diawali 08 atau 628 dan terdiri atas 10–14 digit. Contoh: 0812 3456 7890.'); ada = true; }
+  if (telp && (!/^(\+?62|0)8\d{7,}$/.test(telp) || telp.replace(/\D/g, '').length > 15)) { galat('aTelp', 'Nomor telepon harus diawali 08 atau 628 dan terdiri atas 10–15 digit. Contoh: 0812 3456 7890.'); ada = true; }
   if (ada) { $('#kartuAkun [aria-invalid="true"]')?.focus(); return false; }
   Object.assign(PROFIL, { depan:v('aDepan'), tengah:v('aTengah'), belakang:v('aBelakang'), telp:v('aTelp') });
   S.ubahAkun = false; S.akunKotor = false;
@@ -1122,7 +1126,7 @@ $('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar penyesuaian Platform · Sistem', lebar:true,
     isi:`<p>Menu Platform tidak dinilai dalam laporan Heuristic Evaluation. Isi, isian, dan alur mengikuti kode live dev-app.eppat.id/platform; yang disesuaikan adalah komponen IDDS dengan brand E-PPAT, letak pesan, konfirmasi, penjaga perubahan, bahasa, dan Bantuan per halaman. Setting Theme memakai komponen yang sama dengan Setting Theme kantor (IDDS-TN-19, IDDS-TN-20, IDDS-TN-24). Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });

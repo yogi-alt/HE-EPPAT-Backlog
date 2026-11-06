@@ -108,6 +108,15 @@ table.tb td .kc{font-size:12px;color:var(--ina-content-secondary)}
 table.tb tr.klik{cursor:pointer}
 table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .aksi-baris{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.kuota-trial{align-self:center;margin-right:12px;font-size:14px;color:var(--ina-content-secondary)}
+#lapisanBatas .ina-button{text-decoration:none}
+.aksi-baris:has(.aksi-wadah){flex-wrap:nowrap;align-items:center}
+.aksi-wadah{position:relative;display:inline-block}
+.aksi-wadah .ina-action-dropdown__menu{position:fixed;min-width:150px;z-index:60;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.aksi-wadah .ina-action-dropdown__menu[hidden]{display:none}
+.aksi-wadah .ikon-aksi{width:32px;height:32px;padding:0;justify-content:center}
+.aksi-wadah [data-hapus-pihak]{color:var(--ina-negative-600)}
+.tb:has(#kolStatusAkun) th,.tb:has(#kolStatusAkun) td{padding-left:12px;padding-right:12px}
 .kosong{padding:28px;text-align:center;color:var(--ina-content-secondary)}
 .halaman{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--ina-stroke-primary);font-size:13px;color:var(--ina-content-secondary)}
 .halaman > span{white-space:nowrap}
@@ -177,6 +186,61 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .seg button{border:0;border-radius:7px;background:transparent;padding:7px 14px;font:500 14px Inter,sans-serif;color:var(--ina-content-secondary);cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--ina-primary-primary);color:#fff}
 .fld{margin-bottom:16px}
+/* klien tanpa akun: formulir sama dengan Daftar Pengguna */
+/* tombol simulasi tetap dapat diklik saat dialog terbuka */
+body .protobar{z-index:1001}
+.ina-modal{padding-top:84px;box-sizing:border-box}
+.ina-modal__dialog{max-height:calc(100vh - 104px)}
+.tombol-klien-baru{margin-top:8px}
+#f-berkasObj .ina-single-file-upload,.panel-berkas .ina-single-file-upload{width:100%}
+.ulang-baris>.panel-berkas{margin-bottom:12px}
+.panel-berkas,#f-berkasObj{margin-bottom:12px}
+.panel-berkas .ina-file-upload__label,#f-berkasObj .ina-file-upload__label{display:block;margin:0 0 6px;line-height:20px}
+#f-berkasObj .ina-file-upload__label{margin-bottom:6px}
+.ulang-f{display:grid;gap:12px;margin-bottom:12px}
+.f12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px 16px}
+.s12{grid-column:span 12}.s6{grid-column:span 6}.s4{grid-column:span 4}.s3{grid-column:span 3}
+.sc{grid-column:span var(--s,12);min-width:0}
+.f12 .ina-text-field,.f12 .ina-text-area{margin-bottom:8px}
+@media (max-width:760px){.s6,.s4,.s3,.sc{grid-column:span 12}}
+#blokPihak .f-grid+.f-grid,#blokPT .f-grid+.f-grid{margin-top:12px}
+#blokPihak>.f-grid:first-child{margin-top:4px}
+.tab-kartu .ina-tab-horizontal__container{overflow-x:auto}
+.tab-kartu .ina-tab-horizontal__tab{flex:none}
+.ulang-baris{padding:12px;border:1px solid var(--ina-stroke-primary);border-radius:8px}
+.ulang-kepala{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.ket-f{margin:0;font-size:13px;line-height:20px;color:var(--ina-content-secondary)}
+.ulang-f>.ina-button{justify-self:start}
+.form-tab .bantu-sub:first-of-type{margin-top:16px}
+.tombol-klien-baru .ina-button{width:100%;justify-content:center}
+.kartu-pihak .catatan-akun{margin-top:10px}
+.kb-baris{margin-top:16px}
+.kb-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.f-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-baris{margin-top:16px}
+.lipat-ktp{margin-top:16px;border:1px solid var(--ina-stroke-primary);border-radius:8px}
+.lipat-ktp .ina-accordion{border-bottom:0}
+.lipat-ktp .ina-accordion__toggle{width:100%;padding:16px;text-align:left}
+.lipat-ktp .ina-accordion__title b{font-weight:600}
+.lipat-ktp .ina-accordion__title span{font-weight:400;color:var(--ina-content-secondary)}
+.lipat-ktp .ina-accordion__content--open{max-height:none;overflow:visible}
+.lipat-ktp .ina-accordion__body{padding:0 16px 16px}
+.lipat-form:not(:first-child){margin-top:16px}
+.lipat-form+.f12,.lipat-form+.bantu-sub{margin-top:16px}
+.lipat-form .ina-accordion__content{transition:none}
+.lipat-form .ina-accordion__content:not(.ina-accordion__content--open){visibility:hidden}
+.pilih-f{display:block;height:auto;padding:0;border:0;background:transparent;box-shadow:none}
+.pilih-f:focus-within{box-shadow:none;outline:0}
+.pilih-f .ina-select-dropdown__trigger{width:100%}
+.pilih-f.ina-text-field__wrapper--status-error .ina-select-dropdown__trigger{border-color:var(--ina-stroke-error,#d92d20)}
+.pilih-f .ina-select-dropdown__panel{z-index:40}
+.pilih-asli{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.lipat-ktp .ket-ktp{margin:0 0 12px;font-size:13px;line-height:20px;color:var(--ina-content-secondary)}
+.ocr-ktp{display:flex;flex-direction:column;gap:12px}
+.ocr-ktp .ina-file-upload__file-actions{width:auto}
+.ina-text-field select.ina-text-field__input{appearance:auto;background:transparent;border:0;width:100%;height:100%;font:inherit;font-size:14px;color:inherit;outline:0}
+@media (max-width:760px){.kb-grid3,.f-grid2,.f-grid3{grid-template-columns:1fr}}
 .fld > .ina-text-field__label{display:flex;align-items:center;gap:6px}
 .select-wadah{position:relative;display:block;width:100%}
 .select-wadah .ina-select-dropdown__panel{top:calc(100% + 4px);left:0;right:0;max-height:240px}
@@ -418,21 +482,21 @@ function terbilang(n) {
 }
 /* istilah teknis + penjelasan (HE-VERIF-01) */
 const ISTILAH = {
-  CA:'Sertifikat elektronik dari Peruri (Certificate Authority). Pihak dengan CA aktif sudah diverifikasi identitasnya oleh Peruri dan dapat menandatangani akta secara elektronik.',
+  CA:'Sertifikat elektronik dari Peruri (Certificate Authority). Pihak dengan sertifikat elektronik aktif sudah diverifikasi identitasnya oleh Peruri dan dapat menandatangani akta secara elektronik.',
   NJOP:'Nilai Jual Objek Pajak: nilai tanah per meter persegi yang ditetapkan pemerintah dan tercantum di SPPT PBB. Dipakai sebagai pembanding harga jual.',
   NIB:'Nomor Identifikasi Bidang tanah yang tercantum di sertifikat.',
   MANUAL:'Untuk pihak yang tidak punya akun E-PPAT. Asisten memeriksa identitas pihak secara langsung (KTP asli), lalu mencentang kotak ini.'
 };
 const istilah = (t, k) => denganTip(`<span class="istilah" tabindex="0">${t}</span>`, ISTILAH[k]);
-const BATAS_HARI = 3; /* angka contoh: verifikasi dianggap terlambat bila lebih dari 3 hari sejak order Siap */
+const BATAS_HARI = 3; /* angka contoh: verifikasi dianggap terlambat bila lebih dari 3 hari sejak order masuk tahap Verifikasi Berkas */
 
 /* ---------------- daftar perubahan ---------------- */
 const UBAH = [
   { kode:'HE-VERIF-01', judul:'Verifikasi Berkas: istilah CA dijelaskan dan status berbahasa Indonesia',
-    isi:'Istilah CA, NJOP, NIB, dan verifikasi manual diberi garis putus-putus dengan IDDS Tooltip. Label campuran dibakukan: "Verified" menjadi "Terverifikasi", "CA Kadaluarsa" menjadi "CA Kedaluwarsa". Tanda ✓, !, dan • pada tab diganti lencana bertulisan (Terverifikasi, Perlu dicek, Belum diverifikasi). Pihak yang belum terverifikasi diberi garis kuning dan satu kalimat solusi, misalnya "Minta pihak menyelesaikan eKYC di portal Peruri, lalu tekan Cek CA Semua Pihak lagi."',
+    isi:'Istilah CA, NJOP, NIB, dan verifikasi manual diberi garis putus-putus dengan IDDS Tooltip. Label campuran dibakukan: "Verified" menjadi "Terverifikasi", "CA Kadaluarsa" menjadi "Sertifikat Elektronik Kedaluwarsa". Tanda ✓, !, dan • pada tab diganti lencana bertulisan (Terverifikasi, Perlu dicek, Belum diverifikasi). Pihak yang belum terverifikasi diberi garis kuning dan satu kalimat solusi, misalnya "Minta pihak menyelesaikan eKYC di portal Peruri, lalu tekan Cek Sertifikat Semua Pihak lagi."',
     lama:'Istilah "CA" muncul berulang kali tanpa penjelasan (skor H2 halaman: 40). Lencana bercampur bahasa Inggris ("✓ Verified") dan salah eja ("CA Kadaluarsa"); status tab hanya berupa simbol ✓, !, •. Pihak yang belum terverifikasi hanya diberi keterangan "CA belum aktif" tanpa langkah perbaikan.', ke:'pihak-010', sorot:'#daftarPihak', sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
   { kode:'HE-VERIF-02', judul:'Daftar dan detail verifikasi: lama menunggu dan dampaknya terlihat',
-    isi:'Daftar memiliki kolom "Menunggu" (lama sejak permohonan berstatus Siap); permohonan yang menunggu lebih dari 3 hari diberi lencana kuning "Lewat 3 hari" dan tampil paling atas secara bawaan. Di halaman detail, IDDS Alert berjudul jumlah bagian yang belum diverifikasi (mis. "1 bagian lagi belum diverifikasi") serta menyebut sejak kapan permohonan menunggu dan dampaknya: penyusunan minuta baru dapat dimulai setelah ketiga verifikasi selesai.',
+    isi:'Daftar memiliki kolom "Menunggu" (lama sejak permohonan masuk tahap Verifikasi Berkas); permohonan yang menunggu lebih dari 3 hari diberi lencana kuning "Lewat 3 hari" dan tampil paling atas secara bawaan. Di halaman detail, IDDS Alert berjudul jumlah bagian yang belum diverifikasi (mis. "1 bagian lagi belum diverifikasi") serta menyebut sejak kapan permohonan menunggu dan dampaknya: penyusunan minuta baru dapat dimulai setelah ketiga verifikasi selesai.',
     lama:'Tidak ada informasi urgensi atau tenggat. Daftar hanya menampilkan tanggal order dibuat, dan halaman detail tidak menjelaskan akibat bila verifikasi belum selesai.', ke:'tunggu', sorot:'#infoTunggu', sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15) + masukan Peruri 30 Okt 2026' },
   { kode:'HE-VERIF-03', judul:'Simpan verifikasi: konfirmasi dan pemeriksaan isian',
     isi:'"Tandai Terverifikasi" (objek tanah) dan "Simpan & Verifikasi" (harga) membuka IDDS Modal Confirmation berisi ringkasan data yang diverifikasi. Untuk objek tanah, pengguna mencentang daftar periksa (sertifikat asli, tidak ada blokir/sengketa, data sesuai). Isian NJOP dan luas yang kosong ditandai di bawah isian, bukan melalui toast. Bila harga jual di bawah NJOP, catatan alasan wajib diisi sebelum verifikasi. Verifikasi manual pihak tanpa akun juga meminta konfirmasi.',
@@ -444,7 +508,7 @@ const UBAH = [
     isi:'Judul ganda "Verifikasi Berkas" di daftar dihapus. Tombol Kembali dan identitas permohonan memakai pola yang sama dengan prototipe Penandatanganan Akta. Tab memakai IDDS Tab Horizontal selebar halaman dengan lencana status. Setelah satu bagian terverifikasi, toast menunjukkan bagian berikutnya dan tab berpindah otomatis. Setelah ketiganya selesai, IDDS Alert menyatakan permohonan siap penyusunan dengan tombol "Buka Permohonan AJB".',
     lama:'Judul "Verifikasi Akta" muncul dua kali di daftar. Letak tombol Kembali berbeda dengan halaman lain (bukti HE). Tab buatan sendiri dengan simbol; setelah verifikasi hanya muncul toast, tanpa arahan ke bagian berikutnya atau ke tahap drafting.', ke:'harga-011', sorot:'#tabVerif', sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Verifikasi Berkas',
-    isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi urutan tiga verifikasi, pertanyaan umum (CA belum aktif, pihak tanpa akun, sumber NJOP, harga di bawah NJOP, salah verifikasi), dan kontak dukungan.',
+    isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi urutan tiga verifikasi, pertanyaan umum (sertifikat elektronik belum aktif, pihak tanpa akun, sumber NJOP, harga di bawah NJOP, salah verifikasi), dan kontak dukungan.',
     lama:'Tidak ada panduan atau bantuan di halaman ini (skor Help & Documentation halaman: 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
     isi:'Tabel, Input Search, Button Group, Select Dropdown, Tab Horizontal, kartu, lencana, Text Field, Text Area, Checkbox, alert, tombol, tooltip, Modal Confirmation, Spinner, toast, dan drawer memakai komponen INA Digital Design System dengan brand E-PPAT.',
@@ -452,8 +516,9 @@ const UBAH = [
 ];
 
 /* ---------------- data contoh (sama dengan prototipe Order AJB) ---------------- */
-const CA = { active:{ l:'CA Aktif', b:'success' }, pending:{ l:'CA Diproses', b:'info' }, expired:{ l:'CA Kedaluwarsa', b:'warning' }, revoked:{ l:'CA Dicabut', b:'error' }, none:{ l:'Belum ada CA', b:'neutral' } };
-const SOLUSI = { pending:'Minta pihak menyelesaikan eKYC di portal Peruri, lalu tekan Cek CA Semua Pihak lagi.', expired:'Minta pihak mengajukan registrasi CA ulang melalui Akun Saya.', revoked:'Sertifikat dicabut Peruri. Hubungi pihak untuk registrasi CA baru.', none:'Minta pihak melakukan registrasi CA melalui Akun Saya.' };
+const LABEL_TIPE = { PENJUAL:'Pihak Pertama', PEMBELI:'Pihak Kedua', SAKSI:'Saksi', PASANGAN:'Pasangan', LAINNYA:'Lainnya' };
+const CA = { active:{ l:'Sertifikat Elektronik Aktif', b:'success' }, pending:{ l:'Sertifikat Elektronik Diproses', b:'info' }, expired:{ l:'Sertifikat Elektronik Kedaluwarsa', b:'warning' }, revoked:{ l:'Sertifikat Elektronik Dicabut', b:'error' }, none:{ l:'Belum Ada Sertifikat Elektronik', b:'neutral' } };
+const SOLUSI = { pending:'Minta pihak menyelesaikan eKYC di portal Peruri, lalu tekan Cek Sertifikat Semua Pihak lagi.', expired:'Minta pihak mengajukan registrasi CA ulang melalui Akun Saya.', revoked:'Sertifikat dicabut Peruri. Hubungi pihak untuk registrasi CA baru.', none:'Minta pihak melakukan registrasi CA melalui Akun Saya.' };
 const OBJ = { hak:'SHM', sertifikat:'00001', nib:'00000000001', luas:120, lokasi:'Kel. Contoh, Kec. Contoh' };
 const ph = (nama, tipe, ca, akun = true) => ({ nama, tipe, ca, akun, manual:false });
 function contoh() {
@@ -522,7 +587,7 @@ function layarDaftar() {
     .sort((a, b) => S.urut === 'baru' ? b.siap - a.siap : a.siap - b.siap);
   const n = g => DATA.filter(x => !g || grupDari(x) === g).length;
   const grp = [['', 'Semua'], ['belum', 'Belum dimulai'], ['sebagian', 'Sebagian'], ['lengkap', 'Lengkap']];
-  return `${remah()}<h1>Verifikasi Berkas</h1><p class="sub">Pilih permohonan berstatus Siap untuk memeriksa data para pihak, objek tanah, dan harga sebelum minuta disusun.</p>
+  return `${remah()}<h1>Verifikasi Berkas</h1><p class="sub">Pilih permohonan untuk memeriksa data para pihak, objek tanah, dan harga sebelum minuta disusun.</p>
     <div class="saring-v ditandai" id="saringVerif">
       ${cari('cariVerif', 'Cari kode / klien…', S.cari, 'Cari order')}
       <div class="ina-button-group" role="group" aria-label="Saring kemajuan verifikasi">${grp.map(([v, t]) => `<button type="button" class="ina-button-group__button ${v === S.grup ? 'ina-button-group__button--selected' : ''}" aria-pressed="${v === S.grup}" data-grup="${v}"><span class="ina-button-group__button-content">${t} (${n(v)})</span></button>`).join('')}</div>
@@ -537,7 +602,7 @@ function layarDaftar() {
         return `<tr class="ina-table__row ina-table__row--clickable klik" data-buka="${x.kode}">
         <td class="ina-table__cell"><span class="kd">${x.kode}</span></td><td class="ina-table__cell">Akta Jual Beli</td><td class="ina-table__cell">${esc(x.klien)}</td>
         <td class="ina-table__cell">${lencanaProgres(x)}</td>
-        <td class="ina-table__cell"><div class="tunggu">${jml(x) >= 3 ? '<span>—</span><small>Selesai diverifikasi</small>' : `<span>${t} hari ${telat ? badge(`Lewat ${BATAS_HARI} hari`, 'warning', 'sm') : ''}</span><small>Siap sejak ${tgl(x.siap)}</small>`}</div></td>
+        <td class="ina-table__cell"><div class="tunggu">${jml(x) >= 3 ? '<span>—</span><small>Selesai diverifikasi</small>' : `<span>${t} hari ${telat ? badge(`Lewat ${BATAS_HARI} hari`, 'warning', 'sm') : ''}</span><small>Masuk verifikasi ${tgl(x.siap)}</small>`}</div></td>
         <td class="ina-table__cell">${tgl(x.dibuat)}</td>
         <td class="ina-table__cell" style="text-align:right">${tombol(jml(x) >= 3 ? 'Lihat' : 'Verifikasi', jml(x) >= 3 ? 'secondary' : 'primary', 'sm', `data-buka="${x.kode}"`, ik('tameng', 14))}</td></tr>`; }).join('')
         : `<tr><td colspan="7" class="ina-table__empty-cell kosong">Tidak ada permohonan yang cocok.<div style="margin-top:10px">${tombol('Hapus pencarian dan saringan', 'secondary', 'sm', 'data-reset-saring')}</div></td></tr>`}</tbody></table></div></div>
@@ -550,7 +615,7 @@ const TAB = [['pihak', 'Para Pihak', 'users'], ['objek', 'Objek Tanah', 'tanah']
 function layarDetail() {
   const x = o(), n = jml(x), t = lama(x);
   const info = n >= 3 ? `<div class="selesai-semua ditandai" id="selesaiSemua">${alert('success', 'Ketiga verifikasi selesai', `Permohonan ${x.kode} siap masuk tahap penyusunan minuta. Pindahkan status permohonan ke <b>Penyusunan</b> di menu Permohonan AJB.${usulan('HE-VERIF-05')}`, tombol('Buka Permohonan AJB', 'primary', 'sm', 'data-ke-order', ik('panah', 14)))}</div>`
-    : `<div class="info-tunggu ditandai" id="infoTunggu">${alert(t > BATAS_HARI ? 'caution' : 'info', t > BATAS_HARI ? `Menunggu verifikasi ${t} hari` : `${3 - n} bagian lagi belum diverifikasi`, `Permohonan berstatus Siap sejak ${tgl(x.siap)}${t > BATAS_HARI ? `, lebih dari batas ${est(BATAS_HARI + ' hari')}` : ''}. Penyusunan minuta baru dapat dimulai setelah para pihak, objek tanah, dan harga terverifikasi.${usulan('HE-VERIF-02')}`)}</div>`;
+    : `<div class="info-tunggu ditandai" id="infoTunggu">${alert(t > BATAS_HARI ? 'caution' : 'info', t > BATAS_HARI ? `Menunggu verifikasi ${t} hari` : `${3 - n} bagian lagi belum diverifikasi`, `Permohonan masuk tahap Verifikasi Berkas sejak ${tgl(x.siap)}${t > BATAS_HARI ? `, lebih dari batas ${est(BATAS_HARI + ' hari')}` : ''}. Penyusunan minuta baru dapat dimulai setelah para pihak, objek tanah, dan harga terverifikasi.${usulan('HE-VERIF-02')}`)}</div>`;
   return `${remah()}<h1>Verifikasi Berkas</h1><p class="sub">Periksa data para pihak, objek tanah, dan harga, lalu tandai setiap bagian yang sudah sesuai.</p>
     <div class="det-atas">${tombol('Kembali', 'secondary', 'sm', 'id="kembali"', ik('kiri', 14))}<span class="meta">${x.kode} · Akta Jual Beli · ${esc(x.klien)}</span></div>
     ${info}
@@ -561,12 +626,12 @@ function layarDetail() {
 const kepala = (ikon, judul, status, ket, kanan = '') => `<div class="kartu-kepala"><span class="ikon-bulat">${ik(ikon, 20)}</span><div style="flex:1;min-width:0"><h2>${judul} ${badge(...LBL[status], 'sm')}</h2><p>${ket}</p></div>${kanan}</div>`;
 function tabPihak(x) {
   const st = statusPihak(x);
-  const kanan = `<div class="kanan">${tombol('Cek CA Semua Pihak', 'primary', 'sm', `id="cekCa" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'ca' ? spinner : ik('kilau', 14))}<small>${x.dicek ? `Terakhir dicek ${x.dicek}` : 'Belum pernah dicek'}</small></div>`;
-  const isi = !x.dicek ? `<p class="periksa" style="padding-left:16px">Klik "Cek CA Semua Pihak" untuk memuat status tiap pihak.</p>`
+  const kanan = `<div class="kanan">${tombol('Cek Sertifikat Semua Pihak', 'primary', 'sm', `id="cekCa" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'ca' ? spinner : ik('kilau', 14))}<small>${x.dicek ? `Terakhir dicek ${x.dicek}` : 'Belum pernah dicek'}</small></div>`;
+  const isi = !x.dicek ? `<p class="periksa" style="padding-left:16px">Klik "Cek Sertifikat Semua Pihak" untuk memuat status tiap pihak.</p>`
     : `<ul class="daftar-pihak ditandai" id="daftarPihak">${x.pihak.map((p, i) => { const ok = pihakOk(p), c = CA[p.ca];
-      return `<li class="${ok ? '' : 'perlu'}"><span class="nm">${esc(p.nama)}</span><span class="peran">${p.tipe}</span>
+      return `<li class="${ok ? '' : 'perlu'}"><span class="nm">${esc(p.nama)}</span><span class="peran">${LABEL_TIPE[p.tipe] || p.tipe}</span>
         ${p.akun ? denganTip(badge(c.l, c.b, 'sm'), ISTILAH.CA) : `<label class="ina-checkbox cek" for="manual${i}"><input type="checkbox" id="manual${i}" class="ina-checkbox__input peer" data-manual="${i}" ${p.manual ? 'checked' : ''}><div class="ina-checkbox__box ina-checkbox__box--${p.manual ? 'checked' : 'unchecked'}">${p.manual ? ik('centang', 12) : ''}</div><div class="ina-checkbox__content"><span class="ina-checkbox__label">${istilah('Verifikasi manual', 'MANUAL')} (tanpa CA)</span></div></label>`}
-        <span class="kanan">${ok ? badge(`${ik('centang', 12)} Terverifikasi`, 'success', 'sm') : badge(p.akun ? 'CA belum aktif' : 'Belum diperiksa', 'warning', 'sm')}</span>
+        <span class="kanan">${ok ? badge(`${ik('centang', 12)} Terverifikasi`, 'success', 'sm') : badge(p.akun ? 'Sertifikat Elektronik Belum Aktif' : 'Belum diperiksa', 'warning', 'sm')}</span>
         ${ok ? '' : `<p class="solusi">${ik('info', 13)} ${p.akun ? SOLUSI[p.ca] : 'Pihak tidak punya akun E-PPAT. Periksa KTP asli pihak, lalu centang Verifikasi manual.'}${usulan('HE-VERIF-01')}</p>`}</li>`; }).join('')}</ul>`;
   return `<section class="ina-card ina-card--variant-basic kartu"><div class="ina-card__content">
     ${kepala('users', 'Verifikasi Para Pihak', st, `Pihak dengan ${istilah('sertifikat elektronik (CA)', 'CA')} aktif otomatis terverifikasi oleh Peruri.`, kanan)}
@@ -658,9 +723,9 @@ H.addEventListener('change', e => {
   if (!m.checked) { p.manual = false; x.v.pihak = false; gambar(); return; }
   m.checked = false;
   dialog({ judul:'Verifikasi pihak secara manual?', konfirmasi:true, kunciUtama:'#setuju',
-    isi:`<p><b>${esc(p.nama)}</b> (${p.tipe}) tidak punya akun E-PPAT, sehingga identitasnya tidak diperiksa Peruri. Verifikasi manual berarti Anda menyatakan sudah memeriksa identitas pihak secara langsung.${usulan('HE-VERIF-03')}</p>
+    isi:`<p><b>${esc(p.nama)}</b> (${LABEL_TIPE[p.tipe] || p.tipe}) tidak punya akun E-PPAT, sehingga identitasnya tidak diperiksa Peruri. Verifikasi manual berarti Anda menyatakan sudah memeriksa identitas pihak secara langsung.${usulan('HE-VERIF-03')}</p>
       ${pernyataan('Saya sudah mencocokkan KTP asli pihak dengan data di permohonan.')}`,
-    tombol:[['Batal','secondary',null],['Verifikasi Manual','primary',() => { p.manual = true; gambar(); toast(`${p.nama} diverifikasi manual. Tekan Cek CA Semua Pihak untuk memperbarui status.`, 'positive', 4000); }]] });
+    tombol:[['Batal','secondary',null],['Verifikasi Manual','primary',() => { p.manual = true; gambar(); toast(`${p.nama} diverifikasi manual. Tekan Cek Sertifikat Semua Pihak untuk memperbarui status.`, 'positive', 4000); }]] });
 });
 H.addEventListener('click', e => {
   const t = e.target;
@@ -776,15 +841,15 @@ $('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tu
 const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
 function bukaBantuan() {
   drawer({ judul:'Bantuan Verifikasi Berkas', isi:`
-    <p>Permohonan berstatus Siap masuk ke halaman ini. Penyusunan minuta baru dapat dimulai setelah tiga bagian berikut terverifikasi.</p>
+    <p>Permohonan yang pindah ke tahap Verifikasi Berkas masuk ke halaman ini. Penyusunan minuta baru dapat dimulai setelah tiga bagian berikut terverifikasi.</p>
     <ol class="bantu-langkah">
-      <li><b>Para Pihak:</b> tekan "Cek CA Semua Pihak". Pihak dengan sertifikat elektronik (CA) aktif otomatis terverifikasi. Pihak tanpa akun diverifikasi manual setelah KTP aslinya diperiksa.</li>
+      <li><b>Para Pihak:</b> tekan "Cek Sertifikat Semua Pihak". Pihak dengan sertifikat elektronik (CA) aktif otomatis terverifikasi. Pihak tanpa akun diverifikasi manual setelah KTP aslinya diperiksa.</li>
       <li><b>Objek Tanah:</b> cocokkan sertifikat asli dengan data permohonan, pastikan tidak ada blokir atau sengketa, lalu tandai terverifikasi.</li>
       <li><b>Harga Tanah:</b> isi NJOP per m² dari SPPT PBB tahun berjalan, bandingkan dengan harga jual, lalu simpan.</li>
     </ol>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
-    ${faq(1, 'Pihak berstatus "CA Diproses" atau "CA belum aktif"', 'Pihak belum menyelesaikan registrasi CA di Peruri. Minta pihak menyelesaikan eKYC, lalu tekan "Cek CA Semua Pihak" lagi untuk memperbarui status.')}
-    ${faq(2, 'Pihak tidak punya akun E-PPAT', 'Periksa KTP asli pihak secara langsung, lalu centang "Verifikasi manual". Pihak tanpa akun tidak dapat menandatangani secara elektronik sampai memiliki akun dan CA aktif.')}
+    ${faq(1, 'Pihak berstatus "Sertifikat Elektronik Diproses" atau "Sertifikat Elektronik Belum Aktif"', 'Pihak belum menyelesaikan registrasi CA di Peruri. Minta pihak menyelesaikan eKYC, lalu tekan "Cek Sertifikat Semua Pihak" lagi untuk memperbarui status.')}
+    ${faq(2, 'Pihak tidak punya akun E-PPAT', 'Periksa KTP asli pihak secara langsung, lalu centang "Verifikasi manual". Pihak tanpa akun tidak dapat menandatangani secara elektronik sampai memiliki akun dan sertifikat elektronik aktif.')}
     ${faq(3, 'Dari mana nilai NJOP diambil?', 'Dari SPPT PBB tahun berjalan untuk objek tanah tersebut. Isi nilai NJOP bumi per meter persegi.')}
     ${faq(4, 'Harga jual lebih rendah dari NJOP', 'Verifikasi tetap dapat disimpan, tetapi alasannya wajib ditulis di catatan, misalnya kesepakatan para pihak.')}
     ${faq(5, 'Saya salah memverifikasi', 'Verifikasi yang sudah disimpan tidak dapat diubah dari halaman ini. Segera beri tahu PPAT sebelum penyusunan minuta dimulai. Karena itu, periksa ringkasan di dialog konfirmasi sebelum menyimpan.')}
@@ -796,7 +861,7 @@ function bukaBantuan() {
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Verifikasi Berkas', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital (skor halaman 54,5; rincian dan gambar bukti di laporan lengkap UX Metric Lab) serta kode dan layar live akun Asisten. Tiga bagian verifikasi, aturan CA otomatis, dan perhitungan NJOP tetap seperti live; yang diubah adalah penjelasan istilah, informasi lama menunggu, konfirmasi, pencarian, dan navigasi. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {

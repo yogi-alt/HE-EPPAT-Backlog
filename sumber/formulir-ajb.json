@@ -1,0 +1,1991 @@
+{
+ "sumber": "Formulir AJB 2, tenant default Perdana Niaga, dibaca 5 Nov 2026",
+ "tabs": [
+  {
+   "name": "Narahubung",
+   "jenis": "TUNGGAL",
+   "fields": [
+    {
+     "kode": "narahubung_nama",
+     "label": "Nama",
+     "tipe": "teks",
+     "wajib": true,
+     "lebar": "setengah",
+     "ph": "Nama narahubung"
+    },
+    {
+     "kode": "narahubung_hp",
+     "label": "No. HP",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "08xxxx"
+    },
+    {
+     "kode": "narahubung_email",
+     "label": "Email",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "email@contoh.id"
+    },
+    {
+     "kode": "narahubung_catatan",
+     "label": "Catatan",
+     "tipe": "teks_panjang",
+     "wajib": false,
+     "lebar": "penuh",
+     "ph": "Catatan tambahan (opsional)"
+    }
+   ]
+  },
+  {
+   "name": "Pewaris",
+   "jenis": "TUNGGAL",
+   "fields": [
+    {
+     "kode": "ada_ahli_waris",
+     "label": "Ada pihak yang bertindak selaku ahli waris",
+     "tipe": "ya_tidak",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "",
+     "label": "Identitas pewaris",
+     "tipe": "judul",
+     "wajib": false,
+     "lebar": "penuh",
+     "bila": [
+      {
+       "field": "ada_ahli_waris",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "pewaris_sapaan",
+     "label": "Sebutan",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "opsi": [
+      "Almarhum",
+      "Almarhumah"
+     ],
+     "bila": [
+      {
+       "field": "ada_ahli_waris",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "pewaris_nama",
+     "label": "Nama pewaris",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "ada_ahli_waris",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "pewaris_nik",
+     "label": "NIK pewaris",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "ada_ahli_waris",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "pewaris_tempat_wafat",
+     "label": "Meninggal dunia di",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "ada_ahli_waris",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "pewaris_tanggal_wafat",
+     "label": "Tanggal wafat",
+     "tipe": "tanggal",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "ada_ahli_waris",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "",
+     "label": "Dasar kewarisan",
+     "tipe": "judul",
+     "wajib": false,
+     "lebar": "penuh",
+     "bila": [
+      {
+       "field": "ada_ahli_waris",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "skw_jenis",
+     "label": "Jenis surat keterangan waris",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "penuh",
+     "opsi": [
+      "Surat Keterangan Waris di bawah tangan",
+      "Keterangan Hak Waris notariil",
+      "Penetapan Pengadilan Agama",
+      "Penetapan Pengadilan Negeri",
+      "Surat Keterangan Waris dari Balai Harta Peninggalan"
+     ],
+     "bila": [
+      {
+       "field": "ada_ahli_waris",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "skw_nomor",
+     "label": "Nomor",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "ada_ahli_waris",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "skw_tanggal",
+     "label": "Tanggal",
+     "tipe": "tanggal",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "ada_ahli_waris",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "skw_penerbit",
+     "label": "Dibuat / diterbitkan oleh",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "ada_ahli_waris",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "skw_kota",
+     "label": "Di kota",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "ada_ahli_waris",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "skw_dikuatkan",
+     "label": "Dikuatkan / disaksikan oleh (bila ada)",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "penuh",
+     "bila": [
+      {
+       "field": "ada_ahli_waris",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Para Pihak",
+   "jenis": "DAFTAR",
+   "fields": [
+    {
+     "kode": "tipe_pihak",
+     "label": "Tipe Pihak",
+     "tipe": "pilihan",
+     "wajib": true,
+     "lebar": "penuh",
+     "bantu": "Pihak Pertama = penjual, Pihak Kedua = pembeli.",
+     "opsi": [
+      "Pihak Pertama",
+      "Pihak Kedua",
+      "Pasangan (harta bersama)",
+      "Saksi",
+      "Lainnya"
+     ]
+    },
+    {
+     "kode": "bentuk_pihak",
+     "label": "Bentuk Pihak",
+     "tipe": "pilihan_sejajar",
+     "wajib": true,
+     "lebar": "penuh",
+     "opsi": [
+      "Perorangan",
+      "Badan Hukum (PT)"
+     ]
+    },
+    {
+     "kode": "status_perkawinan",
+     "label": "Status Perkawinan",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bantu": "Menentukan sapaan di akta: Tuan / Nona / Nyonya / Nyonya Janda.",
+     "opsi": [
+      "Ikuti data profil pengguna",
+      "Belum Menikah",
+      "Kawin",
+      "Cerai Hidup",
+      "Cerai Mati"
+     ],
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      }
+     ]
+    },
+    {
+     "kode": "jenis_harta",
+     "label": "Jenis Harta",
+     "tipe": "pilihan",
+     "wajib": true,
+     "lebar": "sepertiga",
+     "bantu": "Harta Bersama → pihak ini wajib menambahkan pasangannya (suami/isteri) sebagai pihak Pasangan untuk persetujuan.",
+     "opsi": [
+      "Harta Sendiri",
+      "Harta Bersama"
+     ],
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      },
+      {
+       "field": "tipe_pihak",
+       "op": "≠",
+       "nilai": "Saksi"
+      }
+     ]
+    },
+    {
+     "kode": "kedudukan_khusus",
+     "label": "Kedudukan khusus",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bantu": "Dipakai bila pihak menghadap selaku ahli waris.",
+     "opsi": [
+      "Tidak ada",
+      "Bertindak selaku ahli waris"
+     ],
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      }
+     ]
+    },
+    {
+     "kode": "pasangan_role",
+     "label": "Pasangan dari pihak",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "opsi": [
+      "Pihak Pertama",
+      "Pihak Kedua"
+     ],
+     "bila": [
+      {
+       "field": "tipe_pihak",
+       "op": "=",
+       "nilai": "Pasangan (harta bersama)"
+      }
+     ]
+    },
+    {
+     "kode": "pasangan_sebagai",
+     "label": "Pasangan bertindak sebagai",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "opsi": [
+      "Persetujuan Saja",
+      "Ikut Bertindak"
+     ],
+     "bila": [
+      {
+       "field": "tipe_pihak",
+       "op": "=",
+       "nilai": "Pasangan (harta bersama)"
+      }
+     ]
+    },
+    {
+     "kode": "",
+     "label": "Perwakilan / Kuasa",
+     "tipe": "judul",
+     "wajib": false,
+     "lebar": "penuh",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      }
+     ]
+    },
+    {
+     "kode": "pihak_dikuasakan",
+     "label": "Pihak tidak hadir sendiri — diwakili penerima kuasa",
+     "tipe": "ya_tidak",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      }
+     ]
+    },
+    {
+     "kode": "bentuk_kuasa",
+     "label": "Bentuk Kuasa",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "bantu": "Di bawah tangan: akta menyebut suratnya beserta tanggalnya, tanpa notaris.",
+     "opsi": [
+      "Surat Kuasa di bawah tangan",
+      "Akta Kuasa notariil"
+     ],
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      },
+      {
+       "field": "pihak_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "tanggal_kuasa",
+     "label": "Tanggal Kuasa",
+     "tipe": "tanggal",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      },
+      {
+       "field": "pihak_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "no_akta_kuasa",
+     "label": "Nomor Akta Kuasa",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      },
+      {
+       "field": "pihak_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      },
+      {
+       "field": "bentuk_kuasa",
+       "op": "=",
+       "nilai": "Akta Kuasa notariil"
+      }
+     ]
+    },
+    {
+     "kode": "notaris_kuasa",
+     "label": "Notaris",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      },
+      {
+       "field": "pihak_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      },
+      {
+       "field": "bentuk_kuasa",
+       "op": "=",
+       "nilai": "Akta Kuasa notariil"
+      }
+     ]
+    },
+    {
+     "kode": "notaris_kuasa_kota",
+     "label": "Notaris di",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      },
+      {
+       "field": "pihak_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      },
+      {
+       "field": "bentuk_kuasa",
+       "op": "=",
+       "nilai": "Akta Kuasa notariil"
+      }
+     ]
+    },
+    {
+     "kode": "",
+     "label": "Pengguna Penerima Kuasa",
+     "tipe": "judul",
+     "wajib": false,
+     "lebar": "penuh",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      },
+      {
+       "field": "pihak_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "penerima_kuasa",
+     "label": "Pengguna Terdaftar",
+     "tipe": "referensi_user",
+     "wajib": false,
+     "lebar": "penuh",
+     "bantu": "Wajib dipilih dari pengguna terdaftar. Data dirinya terisi otomatis dari profilnya.",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      },
+      {
+       "field": "pihak_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "ket_penerima_kuasa",
+     "label": "Keterangan Penerima Kuasa",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "penuh",
+     "ph": "mis. Direktur Utama; atau dasar kuasa penghadap",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      },
+      {
+       "field": "pihak_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "user_klien",
+     "label": "Pengguna Klien",
+     "tipe": "referensi_user",
+     "wajib": false,
+     "lebar": "penuh",
+     "bantu": "Pihak harus terdaftar sebagai pengguna (fungsi Klien). Data dirinya terisi otomatis dari profilnya.",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Perorangan"
+      }
+     ]
+    },
+    {
+     "kode": "nama_perseroan",
+     "label": "Nama Perseroan",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "PT ...",
+     "bantu": "mis. PT Maju Jaya Sentosa",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "kota_kedudukan",
+     "label": "Kota Kedudukan",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "npwp_perseroan",
+     "label": "NPWP Perseroan",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "alamat_perseroan",
+     "label": "Alamat Perseroan",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "Alamat kantor pusat",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "jabatan_wakil",
+     "label": "Jabatan Wakil",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "bantu": "Jabatan yang tercetak di akta untuk orang yang bertindak atas nama perseroan.",
+     "opsi": [
+      "Direktur Utama",
+      "Direktur",
+      "Wakil Direktur Utama",
+      "Direktur Keuangan"
+     ],
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "persetujuan_komisaris",
+     "label": "Ada persetujuan Dewan Komisaris",
+     "tipe": "ya_tidak",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "",
+     "label": "Akta Pendirian",
+     "tipe": "lipat",
+     "wajib": false,
+     "lebar": "penuh",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "tanggal_akta_pendirian",
+     "label": "Tanggal Akta Pendirian",
+     "tipe": "tanggal",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "no_akta_pendirian",
+     "label": "Nomor Akta Pendirian",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "notaris_pendirian",
+     "label": "Notaris Pembuat",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "notaris_pendirian_kota",
+     "label": "Kota Notaris",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "pejabat_pengesah",
+     "label": "Pejabat Pengesah",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "bantu": "PT lama disahkan Menteri Kehakiman; yang baru oleh Menteri Hukum dan HAM.",
+     "opsi": [
+      "Menteri Hukum dan Hak Asasi Manusia",
+      "Menteri Kehakiman"
+     ],
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "tanggal_sk_menkumham",
+     "label": "Tanggal SK Menkumham",
+     "tipe": "tanggal",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "nomor_ahu",
+     "label": "Nomor AHU",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "ad_sesuai_uu40",
+     "label": "Anggaran dasar telah disesuaikan dengan UU 40/2007",
+     "tipe": "ya_tidak",
+     "wajib": false,
+     "lebar": "penuh",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "",
+     "label": "Akhir Akta Pendirian",
+     "tipe": "akhir_grup",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "",
+     "label": "Akta Perubahan",
+     "tipe": "grup_ulang",
+     "wajib": false,
+     "lebar": "penuh",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "tanggal_akta",
+     "label": "Tanggal Akta",
+     "tipe": "tanggal",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "no_akta",
+     "label": "Nomor Akta",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "notaris_akta",
+     "label": "Notaris Pembuat",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "notaris_akta_kota",
+     "label": "Kota Notaris",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "jenis_perubahan",
+     "label": "Jenis Perubahan",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "opsi": [
+      "susunan Pemegang Saham",
+      "anggaran dasar",
+      "susunan Direksi dan Komisaris"
+     ]
+    },
+    {
+     "kode": "jenis_bukti",
+     "label": "Jenis Bukti",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "opsi": [
+      "Surat Keputusan persetujuan",
+      "Surat Penerimaan Pemberitahuan"
+     ]
+    },
+    {
+     "kode": "instansi_bukti",
+     "label": "Instansi",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga"
+    },
+    {
+     "kode": "tanggal_bukti",
+     "label": "Tanggal Bukti",
+     "tipe": "tanggal",
+     "wajib": false,
+     "lebar": "sepertiga"
+    },
+    {
+     "kode": "no_bukti",
+     "label": "Nomor Bukti",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga"
+    },
+    {
+     "kode": "uraian_perubahan",
+     "label": "Uraian Perubahan",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "penuh",
+     "ph": "mis. perubahan susunan direksi"
+    },
+    {
+     "kode": "",
+     "label": "Akhir Akta Perubahan",
+     "tipe": "akhir_grup",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "",
+     "label": "Perwakilan (Penanda Tangan PT)",
+     "tipe": "judul",
+     "wajib": false,
+     "lebar": "penuh",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "user_wakil_pt",
+     "label": "Pengguna Terdaftar",
+     "tipe": "referensi_user",
+     "wajib": false,
+     "lebar": "penuh",
+     "bantu": "Wajib dipilih dari pengguna terdaftar. Data dirinya terisi otomatis dari profilnya.",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "jabatan_ket_wakil",
+     "label": "Jabatan/Keterangan Perwakilan",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "penuh",
+     "ph": "mis. Direktur Utama; atau dasar kuasa penghadap",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "wakil_dikuasakan",
+     "label": "Wakil perseroan tidak hadir sendiri — diwakili penerima kuasa",
+     "tipe": "ya_tidak",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      }
+     ]
+    },
+    {
+     "kode": "pt_bentuk_kuasa",
+     "label": "Bentuk Kuasa",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "bantu": "Di bawah tangan: akta menyebut suratnya beserta tanggalnya, tanpa notaris.",
+     "opsi": [
+      "Surat Kuasa di bawah tangan",
+      "Akta Kuasa notariil"
+     ],
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      },
+      {
+       "field": "wakil_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "pt_tanggal_kuasa",
+     "label": "Tanggal Kuasa",
+     "tipe": "tanggal",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      },
+      {
+       "field": "wakil_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "pt_no_akta_kuasa",
+     "label": "Nomor Akta Kuasa",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      },
+      {
+       "field": "wakil_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      },
+      {
+       "field": "pt_bentuk_kuasa",
+       "op": "=",
+       "nilai": "Akta Kuasa notariil"
+      }
+     ]
+    },
+    {
+     "kode": "pt_notaris_kuasa",
+     "label": "Notaris",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      },
+      {
+       "field": "wakil_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      },
+      {
+       "field": "pt_bentuk_kuasa",
+       "op": "=",
+       "nilai": "Akta Kuasa notariil"
+      }
+     ]
+    },
+    {
+     "kode": "pt_notaris_kuasa_kota",
+     "label": "Notaris di",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      },
+      {
+       "field": "wakil_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      },
+      {
+       "field": "pt_bentuk_kuasa",
+       "op": "=",
+       "nilai": "Akta Kuasa notariil"
+      }
+     ]
+    },
+    {
+     "kode": "",
+     "label": "Pengguna Penerima Kuasa",
+     "tipe": "judul",
+     "wajib": false,
+     "lebar": "penuh",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      },
+      {
+       "field": "wakil_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "pt_penerima_kuasa",
+     "label": "Pengguna Terdaftar",
+     "tipe": "referensi_user",
+     "wajib": false,
+     "lebar": "penuh",
+     "bantu": "Wajib dipilih dari pengguna terdaftar. Data dirinya terisi otomatis dari profilnya.",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      },
+      {
+       "field": "wakil_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "pt_ket_penerima_kuasa",
+     "label": "Keterangan Penerima Kuasa",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "penuh",
+     "ph": "mis. Direktur Utama; atau dasar kuasa penghadap",
+     "bila": [
+      {
+       "field": "bentuk_pihak",
+       "op": "=",
+       "nilai": "Badan Hukum (PT)"
+      },
+      {
+       "field": "wakil_dikuasakan",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "",
+     "label": "Bagian lipat",
+     "tipe": "lipat",
+     "wajib": false,
+     "lebar": "penuh"
+    }
+   ]
+  },
+  {
+   "name": "Dasar Perjanjian",
+   "jenis": "TUNGGAL",
+   "fields": [
+    {
+     "kode": "perjanjian_nama",
+     "label": "Nama Perjanjian",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "mis. Perjanjian Kredit"
+    },
+    {
+     "kode": "perjanjian_tanggal",
+     "label": "Tanggal Akta Perjanjian",
+     "tipe": "tanggal",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "perjanjian_nomor",
+     "label": "No. Akta Perjanjian",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "perjanjian_status_meterai",
+     "label": "Status Meterai",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "opsi": [
+      "Bermeterai",
+      "Tidak Bermeterai"
+     ]
+    },
+    {
+     "kode": "perjanjian_jenis_dokumen",
+     "label": "Jenis Dokumen",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "opsi": [
+      "Akta Notariil",
+      "Di Bawah Tangan"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Objek",
+   "jenis": "DAFTAR",
+   "fields": [
+    {
+     "kode": "",
+     "label": "Data Umum",
+     "tipe": "lipat",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "objek_status_sertipikat",
+     "label": "Status Sertipikat",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "opsi": [
+      "Sudah Terdaftar",
+      "Belum Terdaftar (bekas Hak Milik Adat)"
+     ]
+    },
+    {
+     "kode": "objek_jenis_hak",
+     "label": "Jenis Hak",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "opsi": [
+      "Sertipikat Hak Milik (SHM)",
+      "Sertipikat Hak Guna Bangunan (SHGB)",
+      "Sertipikat Hak Guna Usaha (SHGU)",
+      "Sertipikat Hak Milik atas Satuan Rumah Susun (SHRS)",
+      "Sertipikat Hak Pakai (HP)",
+      "Girik / Letter C",
+      "Lainnya"
+     ]
+    },
+    {
+     "kode": "objek_status",
+     "label": "Status Objek",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "opsi": [
+      "Utuh",
+      "Sebagian"
+     ]
+    },
+    {
+     "kode": "objek_input_sertipikat",
+     "label": "Input Sertipikat",
+     "tipe": "pilihan_sejajar",
+     "wajib": false,
+     "lebar": "penuh",
+     "bantu": "Bidang terdaftar.",
+     "opsi": [
+      "Analog",
+      "Elektronik"
+     ]
+    },
+    {
+     "kode": "objek_no_hak",
+     "label": "Nomor Hak",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "Nomor Hak Milik"
+    },
+    {
+     "kode": "objek_dokumen_ukur",
+     "label": "Dokumen Ukur",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "Surat Ukur"
+    },
+    {
+     "kode": "objek_tanggal_surat_ukur",
+     "label": "Tanggal Surat Ukur",
+     "tipe": "tanggal",
+     "wajib": false,
+     "lebar": "sepertiga"
+    },
+    {
+     "kode": "objek_no_surat_ukur",
+     "label": "Nomor Surat Ukur",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "ph": "Nomor Surat Ukur"
+    },
+    {
+     "kode": "objek_luas",
+     "label": "Luas (m²)",
+     "tipe": "angka",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "ph": "0"
+    },
+    {
+     "kode": "objek_nib",
+     "label": "NIB",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "Nomor Identifikasi Bidang"
+    },
+    {
+     "kode": "objek_nop_pbb",
+     "label": "SPPT PBB — Nomor Objek Pajak",
+     "tipe": "teks",
+     "wajib": true,
+     "lebar": "setengah",
+     "ph": "00.00.000.000.000-0000.0"
+    },
+    {
+     "kode": "objek_bagian_bersama",
+     "label": "Yang dibebani hanya bagian dari hak bersama — sisipkan “x per y” di depan nama hak",
+     "tipe": "ya_tidak",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "objek_uraian_objek",
+     "label": "Uraian Objek",
+     "tipe": "teks_panjang",
+     "wajib": false,
+     "lebar": "penuh",
+     "ph": "Uraian objek sebagaimana ditulis di akta"
+    },
+    {
+     "kode": "",
+     "label": "Alat Bukti",
+     "tipe": "grup_ulang",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "bukti_jenis",
+     "label": "Jenis",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "Girik / Petuk / Leter C / Verponding / Segel"
+    },
+    {
+     "kode": "bukti_nomor",
+     "label": "Nomor",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "Nomor alat bukti"
+    },
+    {
+     "kode": "bukti_tanggal",
+     "label": "Tanggal",
+     "tipe": "tanggal",
+     "wajib": false,
+     "lebar": "sepertiga"
+    },
+    {
+     "kode": "bukti_pejabat",
+     "label": "Dibuat di Hadapan",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "ph": "Nama pejabat"
+    },
+    {
+     "kode": "bukti_selaku",
+     "label": "Selaku",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "ph": "mis. Lurah Contoh"
+    },
+    {
+     "kode": "",
+     "label": "Akhir Alat Bukti",
+     "tipe": "akhir_grup",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "objek_sebut_nama_setempat",
+     "label": "Sebutkan nama setempat objek",
+     "tipe": "ya_tidak",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "",
+     "label": "Akhir Data Umum",
+     "tipe": "akhir_grup",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "",
+     "label": "Letak & Data Tambahan Objek",
+     "tipe": "lipat",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "objek_nama_pemilik_terdaftar",
+     "label": "Nama",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "penuh",
+     "ph": "Nama pemilik terdaftar"
+    },
+    {
+     "kode": "objek_provinsi",
+     "label": "Provinsi",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "Provinsi"
+    },
+    {
+     "kode": "objek_label_kota",
+     "label": "Sebutan kota",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "opsi": [
+      "Kota",
+      "Kabupaten"
+     ]
+    },
+    {
+     "kode": "objek_kota",
+     "label": "Kota / Kabupaten",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "Kota / Kabupaten"
+    },
+    {
+     "kode": "objek_kecamatan",
+     "label": "Kecamatan",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "Kecamatan"
+    },
+    {
+     "kode": "objek_label_kelurahan",
+     "label": "Sebutan kelurahan",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "opsi": [
+      "Kelurahan",
+      "Desa"
+     ]
+    },
+    {
+     "kode": "objek_kelurahan",
+     "label": "Kelurahan / Desa",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "Kelurahan / Desa"
+    },
+    {
+     "kode": "objek_jalan",
+     "label": "Jalan",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "penuh",
+     "ph": "Nama jalan, nomor, RT/RW"
+    },
+    {
+     "kode": "objek_meliputi",
+     "label": "Meliputi Pula — Bentuk Redaksi",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "penuh",
+     "opsi": [
+      "Diisi sendiri",
+      "Benda tidak bergerak",
+      "Bagian bersama satuan rumah susun"
+     ]
+    },
+    {
+     "kode": "objek_meliputi_isi",
+     "label": "Isi Keterangan",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "penuh",
+     "ph": "Redaksi yang diisi sendiri",
+     "bila": [
+      {
+       "field": "objek_meliputi",
+       "op": "=",
+       "nilai": "Diisi sendiri"
+      }
+     ]
+    },
+    {
+     "kode": "objek_npp",
+     "label": "Nilai Perbandingan Proporsional (%)",
+     "tipe": "angka",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "0"
+    },
+    {
+     "kode": "objek_luas_khusus",
+     "label": "Luas (meter persegi)",
+     "tipe": "angka",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "0"
+    },
+    {
+     "kode": "objek_termasuk_bangunan",
+     "label": "Termasuk Bangunan",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "opsi": [
+      "Ya",
+      "Tidak"
+     ]
+    },
+    {
+     "kode": "objek_termasuk_tanaman",
+     "label": "Termasuk Tanaman",
+     "tipe": "pilihan",
+     "wajib": false,
+     "lebar": "setengah",
+     "opsi": [
+      "Ya",
+      "Tidak"
+     ]
+    },
+    {
+     "kode": "objek_ket_bangunan_tanaman",
+     "label": "Keterangan Bangunan dan/atau Tanaman",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "penuh",
+     "ph": "Uraian bangunan dan/atau tanaman yang ikut dibebani"
+    },
+    {
+     "kode": "objek_no_imb",
+     "label": "Nomor IMB (Izin Mendirikan Bangunan)",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "Nomor izin mendirikan bangunan",
+     "bila": [
+      {
+       "field": "objek_termasuk_bangunan",
+       "op": "=",
+       "nilai": "Ya"
+      }
+     ]
+    },
+    {
+     "kode": "objek_tanggal_imb",
+     "label": "Tanggal IMB (Izin Mendirikan Bangunan)",
+     "tipe": "tanggal",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "objek_termasuk_bangunan",
+       "op": "=",
+       "nilai": "Ya"
+      }
+     ]
+    },
+    {
+     "kode": "",
+     "label": "Akhir Letak & Data Tambahan Objek",
+     "tipe": "akhir_grup",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "",
+     "label": "Bagian dari hak bersama",
+     "tipe": "judul",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "objek_bagian",
+     "label": "Ditulis sebagai",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "mis. Satu per tiga",
+     "bila": [
+      {
+       "field": "objek_bagian_bersama",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "",
+     "label": "Sebagian bidang",
+     "tipe": "judul",
+     "wajib": false,
+     "lebar": "penuh",
+     "bila": [
+      {
+       "field": "objek_status_sertipikat",
+       "op": "=",
+       "nilai": "Sudah Terdaftar"
+      },
+      {
+       "field": "objek_status",
+       "op": "=",
+       "nilai": "Sebagian"
+      }
+     ]
+    },
+    {
+     "kode": "objek_no_hak_asal",
+     "label": "Nomor hak asal",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "objek_status_sertipikat",
+       "op": "=",
+       "nilai": "Sudah Terdaftar"
+      },
+      {
+       "field": "objek_status",
+       "op": "=",
+       "nilai": "Sebagian"
+      }
+     ]
+    },
+    {
+     "kode": "objek_nib_asal",
+     "label": "NIB tanah asal",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "objek_status_sertipikat",
+       "op": "=",
+       "nilai": "Sudah Terdaftar"
+      },
+      {
+       "field": "objek_status",
+       "op": "=",
+       "nilai": "Sebagian"
+      }
+     ]
+    },
+    {
+     "kode": "objek_nop_asal",
+     "label": "NOP tanah asal",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "objek_status_sertipikat",
+       "op": "=",
+       "nilai": "Sudah Terdaftar"
+      },
+      {
+       "field": "objek_status",
+       "op": "=",
+       "nilai": "Sebagian"
+      }
+     ]
+    },
+    {
+     "kode": "",
+     "label": "Bekas Hak Milik Adat",
+     "tipe": "judul",
+     "wajib": false,
+     "lebar": "penuh",
+     "bila": [
+      {
+       "field": "objek_status_sertipikat",
+       "op": "=",
+       "nilai": "Belum Terdaftar (bekas Hak Milik Adat)"
+      }
+     ]
+    },
+    {
+     "kode": "objek_persil_nomor",
+     "label": "Persil Nomor",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "objek_status_sertipikat",
+       "op": "=",
+       "nilai": "Belum Terdaftar (bekas Hak Milik Adat)"
+      }
+     ]
+    },
+    {
+     "kode": "objek_persil_blok",
+     "label": "Blok",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "objek_status_sertipikat",
+       "op": "=",
+       "nilai": "Belum Terdaftar (bekas Hak Milik Adat)"
+      }
+     ]
+    },
+    {
+     "kode": "objek_kohir_nomor",
+     "label": "Kohir Nomor",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "sepertiga",
+     "bila": [
+      {
+       "field": "objek_status_sertipikat",
+       "op": "=",
+       "nilai": "Belum Terdaftar (bekas Hak Milik Adat)"
+      }
+     ]
+    },
+    {
+     "kode": "objek_peta_tanggal",
+     "label": "Tanggal Peta Bidang",
+     "tipe": "tanggal",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "objek_status_sertipikat",
+       "op": "=",
+       "nilai": "Belum Terdaftar (bekas Hak Milik Adat)"
+      }
+     ]
+    },
+    {
+     "kode": "objek_peta_nomor",
+     "label": "Nomor Peta Bidang",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "objek_status_sertipikat",
+       "op": "=",
+       "nilai": "Belum Terdaftar (bekas Hak Milik Adat)"
+      }
+     ]
+    },
+    {
+     "kode": "",
+     "label": "Batas-batas bidang",
+     "tipe": "judul",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "batas_utara",
+     "label": "Batas Utara",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "batas_timur",
+     "label": "Batas Timur",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "batas_selatan",
+     "label": "Batas Selatan",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "batas_barat",
+     "label": "Batas Barat",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "",
+     "label": "Sertipikat elektronik",
+     "tipe": "judul",
+     "wajib": false,
+     "lebar": "penuh",
+     "bila": [
+      {
+       "field": "objek_status_sertipikat",
+       "op": "=",
+       "nilai": "Sudah Terdaftar"
+      },
+      {
+       "field": "objek_input_sertipikat",
+       "op": "=",
+       "nilai": "Elektronik"
+      }
+     ]
+    },
+    {
+     "kode": "objek_kode_sertipikat",
+     "label": "Nomor Kode Sertipikat",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "objek_status_sertipikat",
+       "op": "=",
+       "nilai": "Sudah Terdaftar"
+      },
+      {
+       "field": "objek_input_sertipikat",
+       "op": "=",
+       "nilai": "Elektronik"
+      }
+     ]
+    },
+    {
+     "kode": "objek_atas_nama",
+     "label": "Terdaftar atas nama",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah",
+     "bila": [
+      {
+       "field": "objek_status_sertipikat",
+       "op": "=",
+       "nilai": "Sudah Terdaftar"
+      },
+      {
+       "field": "objek_input_sertipikat",
+       "op": "=",
+       "nilai": "Elektronik"
+      }
+     ]
+    },
+    {
+     "kode": "objek_nama_setempat",
+     "label": "Setempat dikenal sebagai",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "penuh",
+     "ph": "mis. Perumahan Contoh Asri Blok A Nomor 1",
+     "bila": [
+      {
+       "field": "objek_sebut_nama_setempat",
+       "op": "=",
+       "nilai": "ya"
+      }
+     ]
+    },
+    {
+     "kode": "",
+     "label": "Data Harga",
+     "tipe": "lipat",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "objek_njop",
+     "label": "Data NJOP (Nilai Jual Objek Pajak)",
+     "tipe": "angka",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "0"
+    },
+    {
+     "kode": "objek_znt",
+     "label": "Data ZNT (Zona Nilai Tanah)",
+     "tipe": "angka",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "0"
+    },
+    {
+     "kode": "objek_harga_pasar",
+     "label": "Data Harga Pasar",
+     "tipe": "angka",
+     "wajib": false,
+     "lebar": "setengah",
+     "ph": "0"
+    },
+    {
+     "kode": "",
+     "label": "Akhir Data Harga",
+     "tipe": "akhir_grup",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "objek_harga_transaksi",
+     "label": "Harga Transaksi",
+     "tipe": "angka",
+     "wajib": false,
+     "lebar": "penuh"
+    },
+    {
+     "kode": "objek_sertipikat_berkas",
+     "label": "Sertipikat",
+     "tipe": "unggah",
+     "wajib": false,
+     "lebar": "penuh"
+    }
+   ]
+  },
+  {
+   "name": "Dokumen",
+   "jenis": "DAFTAR",
+   "fields": [
+    {
+     "kode": "dokumen_jenis",
+     "label": "Jenis Dokumen",
+     "tipe": "pilihan",
+     "wajib": true,
+     "lebar": "setengah",
+     "opsi": [
+      "KTP",
+      "Sertifikat",
+      "PBB",
+      "NPWP",
+      "Kartu Keluarga",
+      "Surat Kuasa",
+      "Lainnya"
+     ]
+    },
+    {
+     "kode": "dokumen_pemilik",
+     "label": "Pemilik Dokumen",
+     "tipe": "teks",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "dokumen_berkas",
+     "label": "File",
+     "tipe": "unggah",
+     "wajib": false,
+     "lebar": "setengah"
+    },
+    {
+     "kode": "dokumen_terverifikasi",
+     "label": "Sudah diverifikasi",
+     "tipe": "ya_tidak",
+     "wajib": false,
+     "lebar": "setengah"
+    }
+   ]
+  }
+ ]
+}

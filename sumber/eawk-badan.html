@@ -288,7 +288,7 @@ const ST = {
   SUDAH_TTD:{ l:'Sudah Anda tanda tangani', b:'success', hint:'Menunggu pihak lain.', grup:'menunggu' },
   SELESAI:{ l:'Selesai', b:'success', hint:'Semua pihak telah menandatangani.', grup:'selesai' }
 };
-const PERAN = { PENJUAL:'Penjual', PEMBELI:'Pembeli', SAKSI:'Saksi', PPAT:'PPAT' };
+const PERAN = { PENJUAL:'Pihak Pertama', PEMBELI:'Pihak Kedua', SAKSI:'Saksi', PPAT:'PPAT' };
 function akta(kode, peran, state, tgl, urut, opsi = {}) {
   const lain = { PENJUAL:'Contoh Penjual Dua', PEMBELI:'Contoh Pembeli Dua', SAKSI:'Contoh Saksi Dua' };
   const susunan = ['PENJUAL', 'PEMBELI', 'SAKSI', 'PPAT'];
@@ -329,8 +329,8 @@ function gambarNav() {
 $('#nav').addEventListener('click', e => { const a = e.target.closest('a'); if (!a) return; e.preventDefault(); keDaftar(); });
 function gambarMenu() {
   $('#menuProfil').innerHTML = S.menu ? `<div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible" role="menu">
-    <a class="ina-action-dropdown__item" role="menuitem" href="Backlog-HE-CA-Prototype.html"><span class="ina-action-dropdown__item-icon">${ik('user')}</span><span class="ina-action-dropdown__item-content">Akun Saya</span></a>
-    <a class="ina-action-dropdown__item" role="menuitem" href="Backlog-HE-CA-Prototype.html"><span class="ina-action-dropdown__item-icon">${ik('tameng')}</span><span class="ina-action-dropdown__item-content">Registrasi CA</span>${badge('Aktif', 'success', 'sm')}</a>
+    <a class="ina-action-dropdown__item" role="menuitem" href="Backlog-HE-CA-Prototype.html#akun"><span class="ina-action-dropdown__item-icon">${ik('user')}</span><span class="ina-action-dropdown__item-content">Akun Saya</span></a>
+    <a class="ina-action-dropdown__item" role="menuitem" href="Backlog-HE-CA-Prototype.html#ca"><span class="ina-action-dropdown__item-icon">${ik('tameng')}</span><span class="ina-action-dropdown__item-content">Registrasi CA</span>${badge(...((window.SESI_PROTO && window.SESI_PROTO.caL) || ['Aktif', 'success']), 'sm')}</a>
     <div class="ina-action-dropdown__divider" role="separator"></div>
     <button class="ina-action-dropdown__item" role="menuitem" data-luar="Keluar"><span class="ina-action-dropdown__item-icon">${ik('keluar')}</span><span class="ina-action-dropdown__item-content">Keluar</span></button></div>` : '';
   $('#user').setAttribute('aria-expanded', String(S.menu));
@@ -382,7 +382,7 @@ function layarDaftar() {
     <p class="ringkas-saring" aria-live="polite">Menampilkan ${rows.length} dari ${AKTA.length} akta${S.grup || S.cari ? '' : ` · ${n('perlu')} perlu tindakan Anda`}.</p>
     ${rows.length ? `<ul class="daftar-akta">${rows.map(x => { const st = ST[x.state], perlu = st.grup === 'perlu';
       return `<li><div class="ina-card ina-card--variant-basic item-akta ${perlu ? 'perlu' : ''}" role="button" tabindex="0" data-buka="${x.kode}" aria-label="${x.kode}, ${st.l}">
-        <div class="isi"><div class="baris1"><span class="kd">${x.kode}</span>${badge(x.peran, 'neutral', 'sm')}${badge(st.l, st.b, 'sm')}</div>
+        <div class="isi"><div class="baris1"><span class="kd">${x.kode}</span>${badge(PERAN[x.peran], 'neutral', 'sm')}${badge(st.l, st.b, 'sm')}</div>
           <div class="jenis">Akta Jual Beli</div><div class="hint">${esc(x.alasan ? x.alasan + ' Buka akta untuk melihat kontak kantor PPAT.' : st.hint)}</div>
           <span class="tgl">${ik('kalender', 12)} Diperbarui ${x.tgl}</span></div>
         <span class="aksi">${bisaTtd(x) ? 'Tanda tangani' : 'Lihat'} ${ik('chev', 14)}</span></div></li>`; }).join('')}</ul>`
@@ -449,7 +449,7 @@ function kartuInfo(x) {
   return `<div class="ina-card ina-card--variant-basic"><div class="ina-card__content">
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="kd-info">${x.kode}</span>${badge(st.l, st.b, 'sm')}${tanya('Status akta', 'Status menunjukkan tahap akta saat ini. "Giliran Anda" berarti akta menunggu tanda tangan Anda, "Menunggu giliran" berarti akta menunggu pihak lain, dan "Selesai" berarti semua pihak sudah menandatangani.')}</div>
     <div style="margin-top:4px;font-size:14px">Akta Jual Beli</div>
-    <dl class="kv"><dt>Peran Anda${tanya('Peran Anda', 'Peran menunjukkan kedudukan Anda dalam akta, misalnya Penjual sebagai pihak pertama, Pembeli sebagai pihak kedua, atau Saksi. Angka urutan menunjukkan giliran tanda tangan Anda.')}</dt><dd>${x.peran} · urutan ${s.seq + 1}</dd><dt>${istilah('Sertifikat (CA)', 'CA')}</dt><dd>${badge('Aktif', 'success', 'sm')}</dd><dt>Email OTP</dt><dd>${EMAIL}</dd>${x.state !== 'MENUNGGU_TERA' ? `<dt>Dokumen</dt><dd>${JHAL} halaman</dd>` : ''}</dl></div></div>`;
+    <dl class="kv"><dt>Peran Anda${tanya('Peran Anda', 'Peran menunjukkan kedudukan Anda dalam akta, misalnya Pihak Pertama sebagai penjual, Pihak Kedua sebagai pembeli, atau Saksi. Angka urutan menunjukkan giliran tanda tangan Anda.')}</dt><dd>${x.peran} · urutan ${s.seq + 1}</dd><dt>${istilah('Sertifikat (CA)', 'CA')}</dt><dd>${badge('Aktif', 'success', 'sm')}</dd><dt>Email OTP</dt><dd>${EMAIL}</dd>${x.state !== 'MENUNGGU_TERA' ? `<dt>Dokumen</dt><dd>${JHAL} halaman</dd>` : ''}</dl></div></div>`;
 }
 /* label live "Tertanda tangan" / "Sedang tanda tangan" dibakukan, sama dengan prototipe E-Akta Wizard PPAT */
 const STATUS_URUT = s => s.status === 'SIGNED' ? ['Sudah menandatangani', 'success'] : s.status === 'OTP_SENT' ? ['Sedang menandatangani', 'warning'] : ['Menunggu', 'neutral'];
@@ -676,7 +676,7 @@ function bukaBantuan() {
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Penandatanganan Akta (Klien)', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital, halaman 36–38 (skor halaman 46,4), gambar buktinya, dan kode serta layar live akun Klien. Urutan tanda tangan, status, dan OTP tetap seperti live; yang diubah adalah navigasi ke posisi tanda tangan, kejelasan instruksi, konfirmasi, informasi OTP, kontak kantor, pencarian daftar, dan panduan. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {

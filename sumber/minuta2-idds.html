@@ -108,6 +108,15 @@ table.tb td .kc{font-size:12px;color:var(--ina-content-secondary)}
 table.tb tr.klik{cursor:pointer}
 table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .aksi-baris{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.kuota-trial{align-self:center;margin-right:12px;font-size:14px;color:var(--ina-content-secondary)}
+#lapisanBatas .ina-button{text-decoration:none}
+.aksi-baris:has(.aksi-wadah){flex-wrap:nowrap;align-items:center}
+.aksi-wadah{position:relative;display:inline-block}
+.aksi-wadah .ina-action-dropdown__menu{position:fixed;min-width:150px;z-index:60;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.aksi-wadah .ina-action-dropdown__menu[hidden]{display:none}
+.aksi-wadah .ikon-aksi{width:32px;height:32px;padding:0;justify-content:center}
+.aksi-wadah [data-hapus-pihak]{color:var(--ina-negative-600)}
+.tb:has(#kolStatusAkun) th,.tb:has(#kolStatusAkun) td{padding-left:12px;padding-right:12px}
 .kosong{padding:28px;text-align:center;color:var(--ina-content-secondary)}
 .halaman{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--ina-stroke-primary);font-size:13px;color:var(--ina-content-secondary)}
 .halaman > span{white-space:nowrap}
@@ -177,6 +186,61 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .seg button{border:0;border-radius:7px;background:transparent;padding:7px 14px;font:500 14px Inter,sans-serif;color:var(--ina-content-secondary);cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--ina-primary-primary);color:#fff}
 .fld{margin-bottom:16px}
+/* klien tanpa akun: formulir sama dengan Daftar Pengguna */
+/* tombol simulasi tetap dapat diklik saat dialog terbuka */
+body .protobar{z-index:1001}
+.ina-modal{padding-top:84px;box-sizing:border-box}
+.ina-modal__dialog{max-height:calc(100vh - 104px)}
+.tombol-klien-baru{margin-top:8px}
+#f-berkasObj .ina-single-file-upload,.panel-berkas .ina-single-file-upload{width:100%}
+.ulang-baris>.panel-berkas{margin-bottom:12px}
+.panel-berkas,#f-berkasObj{margin-bottom:12px}
+.panel-berkas .ina-file-upload__label,#f-berkasObj .ina-file-upload__label{display:block;margin:0 0 6px;line-height:20px}
+#f-berkasObj .ina-file-upload__label{margin-bottom:6px}
+.ulang-f{display:grid;gap:12px;margin-bottom:12px}
+.f12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px 16px}
+.s12{grid-column:span 12}.s6{grid-column:span 6}.s4{grid-column:span 4}.s3{grid-column:span 3}
+.sc{grid-column:span var(--s,12);min-width:0}
+.f12 .ina-text-field,.f12 .ina-text-area{margin-bottom:8px}
+@media (max-width:760px){.s6,.s4,.s3,.sc{grid-column:span 12}}
+#blokPihak .f-grid+.f-grid,#blokPT .f-grid+.f-grid{margin-top:12px}
+#blokPihak>.f-grid:first-child{margin-top:4px}
+.tab-kartu .ina-tab-horizontal__container{overflow-x:auto}
+.tab-kartu .ina-tab-horizontal__tab{flex:none}
+.ulang-baris{padding:12px;border:1px solid var(--ina-stroke-primary);border-radius:8px}
+.ulang-kepala{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.ket-f{margin:0;font-size:13px;line-height:20px;color:var(--ina-content-secondary)}
+.ulang-f>.ina-button{justify-self:start}
+.form-tab .bantu-sub:first-of-type{margin-top:16px}
+.tombol-klien-baru .ina-button{width:100%;justify-content:center}
+.kartu-pihak .catatan-akun{margin-top:10px}
+.kb-baris{margin-top:16px}
+.kb-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.f-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-baris{margin-top:16px}
+.lipat-ktp{margin-top:16px;border:1px solid var(--ina-stroke-primary);border-radius:8px}
+.lipat-ktp .ina-accordion{border-bottom:0}
+.lipat-ktp .ina-accordion__toggle{width:100%;padding:16px;text-align:left}
+.lipat-ktp .ina-accordion__title b{font-weight:600}
+.lipat-ktp .ina-accordion__title span{font-weight:400;color:var(--ina-content-secondary)}
+.lipat-ktp .ina-accordion__content--open{max-height:none;overflow:visible}
+.lipat-ktp .ina-accordion__body{padding:0 16px 16px}
+.lipat-form:not(:first-child){margin-top:16px}
+.lipat-form+.f12,.lipat-form+.bantu-sub{margin-top:16px}
+.lipat-form .ina-accordion__content{transition:none}
+.lipat-form .ina-accordion__content:not(.ina-accordion__content--open){visibility:hidden}
+.pilih-f{display:block;height:auto;padding:0;border:0;background:transparent;box-shadow:none}
+.pilih-f:focus-within{box-shadow:none;outline:0}
+.pilih-f .ina-select-dropdown__trigger{width:100%}
+.pilih-f.ina-text-field__wrapper--status-error .ina-select-dropdown__trigger{border-color:var(--ina-stroke-error,#d92d20)}
+.pilih-f .ina-select-dropdown__panel{z-index:40}
+.pilih-asli{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.lipat-ktp .ket-ktp{margin:0 0 12px;font-size:13px;line-height:20px;color:var(--ina-content-secondary)}
+.ocr-ktp{display:flex;flex-direction:column;gap:12px}
+.ocr-ktp .ina-file-upload__file-actions{width:auto}
+.ina-text-field select.ina-text-field__input{appearance:auto;background:transparent;border:0;width:100%;height:100%;font:inherit;font-size:14px;color:inherit;outline:0}
+@media (max-width:760px){.kb-grid3,.f-grid2,.f-grid3{grid-template-columns:1fr}}
 .fld > .ina-text-field__label{display:flex;align-items:center;gap:6px}
 .select-wadah{position:relative;display:block;width:100%}
 .select-wadah .ina-select-dropdown__panel{top:calc(100% + 4px);left:0;right:0;max-height:240px}
@@ -650,7 +714,7 @@ const UBAH = [
     isi:'Bilah alat hanya menampilkan alat yang sering dipakai (urungkan, ulangi, tebal, miring, garis bawah, daftar, perataan, Sisipkan Variabel, Cek Ejaan) dalam satu baris berjarak lega. Alat lain dari live (judul, coret, warna, ukuran huruf, spasi, tautan, gambar, tabel, kode HTML, layar penuh) ada di menu "Lainnya" serta di bilah menu Format dan Sisipkan. Setiap ikon memiliki tooltip berisi nama alat dan pintasan papan ketik.',
     lama:'Lebih dari 30 ikon kecil dalam dua baris tanpa nama, sehingga sulit dipindai.', ke:'editor', sorot:'#bilahAlat', sumber:'Laporan HE INA Digital hlm. 25, 26' },
   { kode:'HE-MINUTA-03', judul:'Editor pasal: variabel tampil sebagai label yang mudah dibaca',
-    isi:'Variabel di kertas tampil sebagai label hijau (mis. "Nama Lengkap Penjual"), bukan kode {{penjual_nama}}. Kode tetap dapat dilihat lewat Tampilan › Tampilkan kode variabel atau sakelar di panel Bagian. Tombol "Sisipkan Variabel" membuka panel dengan pencarian, penjelasan singkat, dan contoh nilai dari permohonan ini. Variabel yang salah ketik ditandai kuning, dihitung di kepala naskah ("1 variabel belum terisi"), dan penanda itu membawa langsung ke variabelnya.',
+    isi:'Variabel di kertas tampil sebagai label hijau (mis. "Nama Lengkap Pihak Pertama"), bukan kode {{penjual_nama}}. Kode tetap dapat dilihat lewat Tampilan › Tampilkan kode variabel atau sakelar di panel Bagian. Tombol "Sisipkan Variabel" membuka panel dengan pencarian, penjelasan singkat, dan contoh nilai dari permohonan ini. Variabel yang salah ketik ditandai kuning, dihitung di kepala naskah ("1 variabel belum terisi"), dan penanda itu membawa langsung ke variabelnya.',
     lama:'Naskah menampilkan kode mentah seperti {{saksi1_gelar}}{{saksi1_nama}}; daftar variabel tanpa pencarian, tanpa penjelasan, dan tanpa contoh nilai; salah ketik variabel tidak terdeteksi di editor minuta.', ke:'variabel', sorot:'#bilahAlat', sumber:'Laporan HE INA Digital hlm. 25, 26' },
   { kode:'HE-MINUTA-04', judul:'Daftar pasal: umpan balik setelah hapus dan saat pindah pasal',
     isi:'Hapus pasal meminta konfirmasi lewat dialog IDDS bertombol merah; setelah ditutup, fokus kembali ke daftar. Setelah pasal dihapus, muncul toast "Pasal 9 · Pasal Baru dihapus" beserta keterangan bahwa nomor pasal lain sudah disesuaikan. Jika ada perubahan yang belum disimpan saat pindah bagian atau kembali ke daftar, muncul dialog IDDS dengan pilihan Simpan & Lanjutkan, Buang Perubahan, atau Batal. Status "Belum disimpan" terlihat di kepala naskah dan di kaki kertas.',
@@ -673,8 +737,8 @@ const UBAH = [
 const VAR = [
   ['Akta', [['akta_nomor','Nomor Akta','Diisi PPAT saat finalisasi'],['akta_hari','Hari Akta','Kamis'],['akta_tanggal','Tanggal Akta','23 Oktober 2026']]],
   ['PPAT', [['ppat_nama','Nama PPAT','PPAT Contoh Satu, S.H.'],['ppat_wilayah','Wilayah Kerja PPAT','Kota Contoh']]],
-  ['Penjual', [['penjual_gelar','Gelar/Status Penjual','Tuan'],['penjual_nama','Nama Lengkap Penjual','Contoh Penjual Satu'],['penjual_tempat_lahir','Tempat Lahir Penjual','Kota Contoh'],['penjual_tanggal_lahir','Tanggal Lahir Penjual','1 Januari 1980'],['penjual_pekerjaan','Pekerjaan Penjual','Karyawan Swasta'],['penjual_alamat','Alamat Penjual','Jalan Contoh Nomor 1, Kota Contoh']]],
-  ['Pembeli', [['pembeli_gelar','Gelar/Status Pembeli','Nyonya'],['pembeli_nama','Nama Lengkap Pembeli','Contoh Pembeli Satu'],['pembeli_tempat_lahir','Tempat Lahir Pembeli','Kota Contoh'],['pembeli_tanggal_lahir','Tanggal Lahir Pembeli','2 Februari 1985'],['pembeli_pekerjaan','Pekerjaan Pembeli','Wiraswasta'],['pembeli_alamat','Alamat Pembeli','Jalan Contoh Nomor 2, Kota Contoh']]],
+  ['Pihak Pertama', [['penjual_gelar','Gelar/Status Pihak Pertama','Tuan'],['penjual_nama','Nama Lengkap Pihak Pertama','Contoh Penjual Satu'],['penjual_tempat_lahir','Tempat Lahir Pihak Pertama','Kota Contoh'],['penjual_tanggal_lahir','Tanggal Lahir Pihak Pertama','1 Januari 1980'],['penjual_pekerjaan','Pekerjaan Pihak Pertama','Karyawan Swasta'],['penjual_alamat','Alamat Pihak Pertama','Jalan Contoh Nomor 1, Kota Contoh']]],
+  ['Pihak Kedua', [['pembeli_gelar','Gelar/Status Pihak Kedua','Nyonya'],['pembeli_nama','Nama Lengkap Pihak Kedua','Contoh Pembeli Satu'],['pembeli_tempat_lahir','Tempat Lahir Pihak Kedua','Kota Contoh'],['pembeli_tanggal_lahir','Tanggal Lahir Pihak Kedua','2 Februari 1985'],['pembeli_pekerjaan','Pekerjaan Pihak Kedua','Wiraswasta'],['pembeli_alamat','Alamat Pihak Kedua','Jalan Contoh Nomor 2, Kota Contoh']]],
   ['Objek', [['objek_nomor_sertifikat','Nomor Sertifikat','00001'],['objek_nib','NIB','00000000001'],['objek_luas','Luas Tanah (m²)','120'],['objek_lokasi','Lokasi Objek','Kel. Contoh, Kec. Contoh'],['objek_harga','Harga Jual Beli','750.000.000'],['objek_harga:terbilang','Harga Jual Beli (terbilang)','tujuh ratus lima puluh juta']]],
   ['Saksi', [['saksi1_gelar','Gelar Saksi 1','Tuan'],['saksi1_nama','Nama Saksi 1','Contoh Saksi Satu'],['saksi1_pekerjaan','Pekerjaan Saksi 1','Pegawai Kantor PPAT'],['saksi2_gelar','Gelar Saksi 2','Nyonya'],['saksi2_nama','Nama Saksi 2','Contoh Saksi Dua'],['saksi2_pekerjaan','Pekerjaan Saksi 2','Pegawai Kantor PPAT']]]
 ];
@@ -992,7 +1056,7 @@ function panelBagian(x, fin) {
     <div class="grup-p"><h4>Variabel</h4>
       <span style="display:inline-flex;align-items:center">${toggle('tampilKode', 'Tampilkan kode variabel', S.kode)}${tanya('Kode variabel', 'Kode variabel ditulis di antara kurung kurawal ganda, misalnya &#123;&#123;penjual_nama&#125;&#125;. Sistem mengganti kode ini dengan data permohonan saat pratinjau dan PDF dibuat.')}</span>
       <p class="ket-kecil">Label hijau di kertas akan terisi otomatis dari data permohonan saat pratinjau dan PDF.${usulan('HE-MINUTA-03')}</p>
-      ${asing.length && !fin ? `<div class="galat-var">${alert('caution', `${asing.length} variabel tidak dikenal`, `${asing.map(k => `<b>{{${esc(k)}}}</b>`).join(', ')} tidak ada di daftar variabel Akta Jual Beli, sehingga tidak akan terisi. Hapus label kuning tersebut, lalu sisipkan ulang lewat <b>Sisipkan Variabel</b>${asing.includes('penjual_alamatt') ? ' (mungkin maksudnya <b>Alamat Penjual</b>)' : ''}.${usulan('HE-MINUTA-03')}`)}</div>` : ''}
+      ${asing.length && !fin ? `<div class="galat-var">${alert('caution', `${asing.length} variabel tidak dikenal`, `${asing.map(k => `<b>{{${esc(k)}}}</b>`).join(', ')} tidak ada di daftar variabel Akta Jual Beli, sehingga tidak akan terisi. Hapus label kuning tersebut, lalu sisipkan ulang lewat <b>Sisipkan Variabel</b>${asing.includes('penjual_alamatt') ? ' (mungkin maksudnya <b>Alamat Pihak Pertama</b>)' : ''}.${usulan('HE-MINUTA-03')}`)}</div>` : ''}
     </div>
     ${fin ? '' : `<div class="grup-p"><h4>Urutan</h4><div class="baris-tbl">${tombol('Naikkan', 'secondary', 'sm', `data-geser="${it.id}:-1" ${i === 0 ? 'disabled' : ''}`, ik('atas', 14))}${tombol('Turunkan', 'secondary', 'sm', `data-geser="${it.id}:1" ${i === n.length - 1 ? 'disabled' : ''}`, ik('bawah', 14))}</div></div>
     <div class="grup-p">${tombol(`Hapus ${ps ? 'pasal' : 'catatan'}`, 'tertiary', 'sm', `data-hapus="${it.id}" id="hapusBagian"`, ik('sampah', 15))}</div>`}`;
@@ -1330,7 +1394,7 @@ function segarVar() {
   const r = $('#tombolVar'), kiri = Math.max(0, Math.min((r ? r.offsetLeft : 0) - 8, ($('#bilahAlat')?.clientWidth || 400) - 396));
   /* struktur IDDS Select Dropdown: __panel > __search > __options > __option */
   w.innerHTML = `<div class="ina-select-dropdown pop-wadah" style="left:${kiri}px"><div class="ina-select-dropdown__panel panel-var" role="dialog" aria-label="Sisipkan variabel">
-    <div class="kepala-var"><b>Sisipkan variabel</b><p>Variabel adalah isian otomatis. Saat pratinjau dan PDF dibuat, variabel diganti dengan data dari permohonan ini, misalnya nama penjual.</p></div>
+    <div class="kepala-var"><b>Sisipkan variabel</b><p>Variabel adalah isian otomatis. Saat pratinjau dan PDF dibuat, variabel diganti dengan data dari permohonan ini, misalnya nama Pihak Pertama.</p></div>
     <div class="ina-select-dropdown__search"><input id="cariVar" type="search" class="ina-select-dropdown__search-input" placeholder="Cari: nama, saksi, harga…" aria-label="Cari variabel" value="${esc(S.cariVar || '')}" autocomplete="off"></div>
     <div class="ina-select-dropdown__options" role="listbox">${isi.length ? isi.map(([g, a]) => `<div class="grup-var" role="presentation">${g}</div>${a.map(([k, l, c]) => `<button type="button" class="ina-select-dropdown__option opsi-var" role="option" data-sisip="${k}"><span class="ina-select-dropdown__option-content"><span class="ina-select-dropdown__option-label">${l}</span><span class="c">Contoh: ${esc(c)}</span></span><code>{{${k}}}</code></button>`).join('')}`).join('') : '<div class="ina-select-dropdown__empty">Variabel tidak ditemukan.</div>'}</div></div></div>`;
 }
@@ -1515,14 +1579,14 @@ function bukaBantuan() {
     <ol class="bantu-langkah">
       <li><b>Buka minuta</b> berstatus Penyusunan dari daftar.</li>
       <li><b>Pilih pasal atau catatan</b> di panel Navigasi atau langsung di kertas, lalu sunting isinya di kertas dan judulnya di panel Bagian.</li>
-      <li><b>Sisipkan variabel</b> untuk data yang terisi otomatis, misalnya nama penjual atau harga.</li>
+      <li><b>Sisipkan variabel</b> untuk data yang terisi otomatis, misalnya nama Pihak Pertama atau harga.</li>
       <li><b>Simpan</b> setiap pasal yang diubah.</li>
       <li><b>Cek Ejaan</b> dan <b>Pratinjau Akta</b> untuk memeriksa hasil akhir.</li>
       <li><b>Beritahu PPAT</b> bahwa minuta siap difinalisasi.</li>
     </ol>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${faq(1, 'Apa beda pasal dan catatan?', 'Pasal diberi nomor otomatis sesuai urutannya. Catatan adalah bagian tanpa nomor, seperti pembukaan akta, para pihak, objek, para saksi, dan penutup.')}
-    ${faq(2, 'Apa itu variabel?', 'Variabel adalah isian otomatis, misalnya "Nama Lengkap Penjual". Di editor variabel tampil sebagai label hijau. Saat pratinjau dan PDF dibuat, label diganti dengan data dari permohonan. Label kuning berarti variabel tidak dikenal dan tidak akan terisi.')}
+    ${faq(2, 'Apa itu variabel?', 'Variabel adalah isian otomatis, misalnya "Nama Lengkap Pihak Pertama". Di editor variabel tampil sebagai label hijau. Saat pratinjau dan PDF dibuat, label diganti dengan data dari permohonan. Label kuning berarti variabel tidak dikenal dan tidak akan terisi.')}
     ${faq(3, 'Mengapa Cek Ejaan tidak dapat digunakan?', 'Fitur Cek Ejaan perlu diaktifkan oleh admin sistem. Selama belum aktif, Anda tetap dapat menyunting dan menyimpan pasal seperti biasa.')}
     ${faq(4, 'Apakah pasal yang terhapus bisa dikembalikan?', 'Tidak. Tambahkan kembali lewat tombol Tambah Pasal, lalu isi ulang judul dan isinya. Nomor pasal lain menyesuaikan secara otomatis.')}
     ${faq(5, 'Siapa yang memfinalisasi akta?', 'PPAT. Asisten menyusun naskah, lalu menekan Beritahu PPAT. PPAT memeriksa, mengisi nomor dan tanggal akta, kemudian memfinalisasi. Setelah final, pasal tidak dapat diubah.')}
@@ -1534,7 +1598,7 @@ function bukaBantuan() {
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Penyusunan Akta v2', lebar:true,
     isi:`<p>Usulan tampilan v2 untuk Penyusunan Akta, disusun dari laporan Heuristic Evaluation INA Digital, halaman 25–27 (skor halaman 47,1), beserta gambar buktinya. <b>Fitur tidak berubah dari live</b>: setiap menu dan tombol memetakan ke fitur yang sudah ada. Yang diubah adalah tata letak editor, kepadatan, kejelasan istilah, panduan, dan umpan balik. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {

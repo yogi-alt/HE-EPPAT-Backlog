@@ -204,7 +204,7 @@ const UBAH = [
     isi:'Semua petunjuk, kolom Kunci, pilihan Tipe, keadaan kosong, dan konfirmasi hapus memakai kurung kurawal ganda. Penulisan ini sama dengan hasil tombol "Sisipkan Variabel" dan dengan yang diterima pengecek isi. Contoh petunjuk Kunci: "Ditulis sebagai {{kunci}} di isi pasal, misalnya {{penjual_nama}}." Contoh petunjuk Isi: "Sisipkan variabel lewat tombol Sisipkan Variabel atau tulis {{kunci}}." Di dialog, isian Kunci menampilkan pengapit {{ }}. Nilai Tipe mentah "single/list" menjadi "Tunggal/Daftar", dan isian "Nilai Default" menjadi "Nilai Awal". Contoh kunci mengikuti data live, misalnya {{penjual_nama}}.',
     lama:'Petunjuk menulis {nama_penjual} dengan kurung tunggal, padahal pengecek isi menolak kurung tunggal dan tombol Variabel menyisipkan {{…}}. Pengguna yang mengikuti petunjuk langsung mendapat peringatan.', ke:'variabel', sorot:'#tabelVar' },
   { kode:'IDDS-PL-28', judul:'Variabel: tombol urutan berlabel dan hapus menunjukkan pasal terdampak',
-    isi:'Tombol naik/turun punya nama aksesibel ("Naikkan Nama Lengkap Penjual", "Turunkan Nama Lengkap Penjual") dan nonaktif di ujung daftar. Perpindahan urutan diumumkan ke pembaca layar. Dialog variabel memakai IDDS Modal dengan pesan galat di bawah isian dan penjaga perubahan. Hapus variabel memakai konfirmasi merah yang mendaftar bagian template yang masih memakai variabel itu, sehingga admin tahu bagian yang perlu diubah.',
+    isi:'Tombol naik/turun punya nama aksesibel ("Naikkan Nama Lengkap Pihak Pertama", "Turunkan Nama Lengkap Pihak Pertama") dan nonaktif di ujung daftar. Perpindahan urutan diumumkan ke pembaca layar. Dialog variabel memakai IDDS Modal dengan pesan galat di bawah isian dan penjaga perubahan. Hapus variabel memakai konfirmasi merah yang mendaftar bagian template yang masih memakai variabel itu, sehingga admin tahu bagian yang perlu diubah.',
     lama:'Tombol urutan hanya berupa ikon tanpa label. Konfirmasi hapus hanya menulis "Pasal yang memakainya tidak otomatis terupdate" tanpa menunjukkan pasalnya.', ke:'hapusVar', sorot:null },
   { kode:'IDDS-PL-29', judul:'Pasal & Catatan: pengecek isi, penjaga perubahan, dan status bagian',
     isi:'Subjudul menjadi "Susun pasal dan catatan template ini sesuai urutan di akta." Dialog bagian memakai IDDS Modal, Text Field, dan Checkbox, dan pesan galat Judul serta Nomor tampil di bawah isian. Tombol penyisip berlabel "Sisipkan Variabel" sesuai saran pengecek. Pengecek isi tampil sebagai IDDS Alert peringatan "Ada 1 hal yang perlu dicek sebelum disimpan". Alert memuat saran untuk setiap temuan serta tombol "Perbaiki Dulu" dan "Simpan Saja". Bagian yang masih punya temuan diberi lencana "Perlu dicek" di tabel. Menutup dialog yang sudah diubah meminta konfirmasi. Simpan, hapus (dengan konfirmasi merah), dan ubah urutan selalu diakhiri umpan balik.',
@@ -258,8 +258,8 @@ const V = (jenis, key, label, grup, tipe = 'single', def = '') => ({ jenis, key,
 const PIHAK = [['gelar', 'Gelar/Status'], ['nama', 'Nama Lengkap'], ['tempat_lahir', 'Tempat Lahir'], ['tanggal_lahir', 'Tanggal Lahir'], ['pekerjaan', 'Pekerjaan'], ['jalan', 'Alamat Jalan'], ['rt', 'RT'], ['rw', 'RW'], ['kelurahan', 'Kelurahan'], ['kecamatan', 'Kecamatan'], ['kota', 'Kota/Kabupaten'], ['nik', 'NIK'], ['kewarganegaraan', 'Kewarganegaraan'], ['npwp', 'NPWP']];
 const SAKSI = [['gelar', 'Gelar'], ['nama', 'Nama'], ['tempat_lahir', 'Tempat Lahir'], ['tanggal_lahir', 'Tanggal Lahir'], ['pekerjaan', 'Pekerjaan'], ['jalan', 'Alamat Jalan'], ['rt', 'RT'], ['rw', 'RW'], ['kelurahan', 'Kelurahan'], ['kecamatan', 'Kecamatan'], ['kota', 'Kota'], ['provinsi', 'Provinsi'], ['nik', 'NIK'], ['domisili', 'Keterangan Domisili']];
 const VAR0 = () => [
-  ...PIHAK.map(([k, l]) => V('AJB', 'penjual_' + k, l + ' Penjual', 'Penjual')),
-  ...PIHAK.map(([k, l]) => V('AJB', 'pembeli_' + k, l + ' Pembeli', 'Pembeli')),
+  ...PIHAK.map(([k, l]) => V('AJB', 'penjual_' + k, l + ' Pihak Pertama', 'Pihak Pertama')),
+  ...PIHAK.map(([k, l]) => V('AJB', 'pembeli_' + k, l + ' Pihak Kedua', 'Pihak Kedua')),
   ...[['jenis_hak', 'Jenis Hak'], ['surat_ukur_nomor', 'Nomor Surat Ukur'], ['surat_ukur_tanggal', 'Tanggal Surat Ukur'], ['provinsi', 'Provinsi Objek'], ['kabupaten_kota', 'Kota/Kabupaten Objek'], ['kecamatan', 'Kecamatan Objek'], ['desa_kelurahan', 'Kelurahan Objek'], ['lokasi_tanah', 'Letak/Lokasi Tanah'], ['luas_tanah', 'Luas Tanah (m2)'], ['npp', 'NPP (%)'], ['harga_jual', 'Harga Jual Beli']].map(([k, l]) => V('AJB', k, l, 'Objek Tanah')),
   ...SAKSI.map(([k, l]) => V('AJB', 'saksi1_' + k, l + ' Saksi I', 'Saksi I')),
   ...SAKSI.map(([k, l]) => V('AJB', 'saksi2_' + k, l + ' Saksi II', 'Saksi II')),
@@ -605,7 +605,7 @@ function dialogVar(v) {
   let awal;
   const o = dialog({ judul: baru ? `Tambah Variabel — ${esc(j.name)}` : `Ubah Variabel — ${esc(v.label)}`,
     isi:`<div class="ditandai">${tf('vKunci', 'Kunci', baru ? '' : v.key, 'penjual_nama', baru, baru ? `Ditulis sebagai ${vv('kunci')} di isi pasal, misalnya ${vv('penjual_nama')}. Gunakan huruf kecil, angka, atau garis bawah.` : 'Kunci tidak dapat diubah setelah dibuat.', baru ? 'autocomplete="off" spellcheck="false"' : 'disabled', '{{', '}}')}</div>
-      <div class="f-baris">${tf('vLabel', 'Label', baru ? '' : v.label, 'Nama Lengkap Penjual', true, 'Nama yang tampil di editor saat menyusun draf.')}</div>
+      <div class="f-baris">${tf('vLabel', 'Label', baru ? '' : v.label, 'Nama Lengkap Pihak Pertama', true, 'Nama yang tampil di editor saat menyusun draf.')}</div>
       <div class="f-baris">${tf('vGrup', 'Grup', baru ? 'Umum' : v.grup, 'Umum', false, 'Pengelompokan di editor, misalnya Para Pihak atau Objek.')}</div>
       <div class="f-baris">${pilihan('vTipe', 'Tipe', [['single', 'Tunggal — satu nilai, misalnya {{penjual_nama}}'], ['list', 'Daftar — nilai berulang, misalnya {{pihak:list}}']], baru ? 'single' : v.tipe)}</div>
       <div class="f-baris">${tf('vDef', 'Nilai Awal', baru ? '' : v.def, '', false, 'Opsional. Dipakai saat draf dibuat.')}</div>
@@ -802,7 +802,7 @@ const lgkh = a => `<ol class="bantu-langkah">${a.map(x => `<li>${x}</li>`).join(
 const istilah = a => `<dl class="bantu-istilah">${a.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
 const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
 const FAQ_VAR = [
-  ['Apa itu variabel?', `Variabel adalah isian yang berbeda di setiap akta, misalnya nama penjual atau nomor sertipikat. Di isi pasal, variabel ditulis ${vv('penjual_nama')}. Saat draf disusun, tulisan itu diganti dengan data order secara otomatis.`],
+  ['Apa itu variabel?', `Variabel adalah isian yang berbeda di setiap akta, misalnya nama Pihak Pertama atau nomor sertipikat. Di isi pasal, variabel ditulis ${vv('penjual_nama')}. Saat draf disusun, tulisan itu diganti dengan data order secara otomatis.`],
   ['Bagaimana cara menyisipkan variabel ke pasal?', `Buka Pasal &amp; Catatan, klik Ubah pada bagian yang dituju, letakkan kursor di isi, lalu klik <b>Sisipkan Variabel</b> dan pilih variabelnya. Anda juga dapat mengetik ${vv('kunci')} langsung.`],
   ['Mengapa pengecek isi menolak {penjual_nama}?', `Variabel harus ditulis dengan kurung kurawal ganda, ${vv('penjual_nama')}. Tulisan dengan kurung tunggal tidak dikenali dan akan tercetak apa adanya di akta.`],
   ['Apa arti "Variabel tidak dikenal"?', `Kunci di dalam ${vv('…')} tidak ada di daftar variabel jenis akta ini. Periksa ejaannya, atau tambahkan variabelnya di tab Variabel.`]
@@ -826,7 +826,7 @@ const BANTUAN = {
     <h4 class="bantu-sub">Langkah menyiapkan template</h4>
     ${lgkh(['Di tab <b>Variabel</b>, tambah variabel yang dibutuhkan, misalnya ' + vv('penjual_nama') + '.', 'Di tab <b>Template</b>, klik <b>Tambah Template</b>. Pilih template sumber di <b>Salin isi dari</b> agar tidak mulai dari nol.', 'Klik <b>Pasal &amp; Catatan</b> untuk menyusun isinya.', 'Klik <b>Jadikan Utama</b> pada template yang dipakai otomatis.'])}
     <h4 class="bantu-sub">Istilah</h4>
-    ${istilah([['Template utama', 'Template yang dipilih otomatis saat draf baru disusun. Satu jenis akta punya satu template utama.'], ['Kunci', `Nama variabel di isi pasal, ditulis ${vv('kunci')}.`], ['Tunggal', 'Variabel berisi satu nilai, misalnya nama penjual.'], ['Daftar', `Variabel berisi beberapa nilai berulang, misalnya daftar saksi, ditulis ${vv('saksi:list')}.`], ['Grup', 'Pengelompokan variabel di editor, misalnya Para Pihak atau Objek.']])}
+    ${istilah([['Template utama', 'Template yang dipilih otomatis saat draf baru disusun. Satu jenis akta punya satu template utama.'], ['Kunci', `Nama variabel di isi pasal, ditulis ${vv('kunci')}.`], ['Tunggal', 'Variabel berisi satu nilai, misalnya nama Pihak Pertama.'], ['Daftar', `Variabel berisi beberapa nilai berulang, misalnya daftar saksi, ditulis ${vv('saksi:list')}.`], ['Grup', 'Pengelompokan variabel di editor, misalnya Para Pihak atau Objek.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('d', [...FAQ_VAR,
       ['Untuk apa urutan variabel?', 'Urutan menentukan posisi variabel di editor saat menyusun draf. Taruh variabel yang paling sering diisi di atas dengan tombol naik dan turun.'],
@@ -853,7 +853,7 @@ $('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
 $('#bukaUbah').addEventListener('click', () => {
   const o = dialog({ judul:'Daftar penyesuaian IDDS · Jenis Akta', lebar:true,
     isi:`<p>Isi, kolom, dan alur mengikuti kode live dev-app.eppat.id/platform (Akta › Jenis Akta). Yang disesuaikan adalah komponen IDDS dengan brand E-PPAT, letak pesan, konfirmasi, penjaga perubahan, bahasa, dan Bantuan per layar. Daftar yang sama dicatat di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${esc(u.isi)}</p><div class="lama"><b>Saat ini:</b> ${esc(u.lama)}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div><p>${esc(u.isi)}</p><div class="lama"><b>Saat ini:</b> ${esc(u.lama)}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
   o.el.querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); tutup(o); lihat(UBAH[+b.dataset.lihat]); });

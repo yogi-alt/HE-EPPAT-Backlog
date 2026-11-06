@@ -70,6 +70,7 @@ html:not([data-brand='eppat']) .content,html:not([data-brand='eppat']) main.tn{b
 })();
 </script>
 
+<script id="sesi-kepala-js">try { window.SESI_PROTO = JSON.parse(localStorage.getItem('eppat-sesi')); var t = JSON.parse(localStorage.getItem('eppat-trial')) || {}; if (window.SESI_PROTO && window.SESI_PROTO.paket === 'trial') { if (t.nama) window.SESI_PROTO.nama = t.nama; if (t.email) window.SESI_PROTO.email = t.email; } window.PAKET_TRIAL = window.SESI_PROTO && window.SESI_PROTO.paket === 'trial' && !(t.db && t.db.ent) ? { batas:!!t.batas, pengguna:5, transaksi:10, upgrade:'Backlog-HE-TRIAL-Prototype.html#berlangganan' } : null; } catch (e) { window.SESI_PROTO = null; window.PAKET_TRIAL = null; }</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Backlog E-PPAT Peruri — Tenant · Akta & Pengaturan Kantor</title>
@@ -320,6 +321,15 @@ table.tb td .kc{font-size:12px;color:var(--ina-content-secondary)}
 table.tb tr.klik{cursor:pointer}
 table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .aksi-baris{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.kuota-trial{align-self:center;margin-right:12px;font-size:14px;color:var(--ina-content-secondary)}
+#lapisanBatas .ina-button{text-decoration:none}
+.aksi-baris:has(.aksi-wadah){flex-wrap:nowrap;align-items:center}
+.aksi-wadah{position:relative;display:inline-block}
+.aksi-wadah .ina-action-dropdown__menu{position:fixed;min-width:150px;z-index:60;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.aksi-wadah .ina-action-dropdown__menu[hidden]{display:none}
+.aksi-wadah .ikon-aksi{width:32px;height:32px;padding:0;justify-content:center}
+.aksi-wadah [data-hapus-pihak]{color:var(--ina-negative-600)}
+.tb:has(#kolStatusAkun) th,.tb:has(#kolStatusAkun) td{padding-left:12px;padding-right:12px}
 .kosong{padding:28px;text-align:center;color:var(--ina-content-secondary)}
 .halaman{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--ina-stroke-primary);font-size:13px;color:var(--ina-content-secondary)}
 .halaman > span{white-space:nowrap}
@@ -389,6 +399,61 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .seg button{border:0;border-radius:7px;background:transparent;padding:7px 14px;font:500 14px Inter,sans-serif;color:var(--ina-content-secondary);cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--ina-primary-primary);color:#fff}
 .fld{margin-bottom:16px}
+/* klien tanpa akun: formulir sama dengan Daftar Pengguna */
+/* tombol simulasi tetap dapat diklik saat dialog terbuka */
+body .protobar{z-index:1001}
+.ina-modal{padding-top:84px;box-sizing:border-box}
+.ina-modal__dialog{max-height:calc(100vh - 104px)}
+.tombol-klien-baru{margin-top:8px}
+#f-berkasObj .ina-single-file-upload,.panel-berkas .ina-single-file-upload{width:100%}
+.ulang-baris>.panel-berkas{margin-bottom:12px}
+.panel-berkas,#f-berkasObj{margin-bottom:12px}
+.panel-berkas .ina-file-upload__label,#f-berkasObj .ina-file-upload__label{display:block;margin:0 0 6px;line-height:20px}
+#f-berkasObj .ina-file-upload__label{margin-bottom:6px}
+.ulang-f{display:grid;gap:12px;margin-bottom:12px}
+.f12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px 16px}
+.s12{grid-column:span 12}.s6{grid-column:span 6}.s4{grid-column:span 4}.s3{grid-column:span 3}
+.sc{grid-column:span var(--s,12);min-width:0}
+.f12 .ina-text-field,.f12 .ina-text-area{margin-bottom:8px}
+@media (max-width:760px){.s6,.s4,.s3,.sc{grid-column:span 12}}
+#blokPihak .f-grid+.f-grid,#blokPT .f-grid+.f-grid{margin-top:12px}
+#blokPihak>.f-grid:first-child{margin-top:4px}
+.tab-kartu .ina-tab-horizontal__container{overflow-x:auto}
+.tab-kartu .ina-tab-horizontal__tab{flex:none}
+.ulang-baris{padding:12px;border:1px solid var(--ina-stroke-primary);border-radius:8px}
+.ulang-kepala{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.ket-f{margin:0;font-size:13px;line-height:20px;color:var(--ina-content-secondary)}
+.ulang-f>.ina-button{justify-self:start}
+.form-tab .bantu-sub:first-of-type{margin-top:16px}
+.tombol-klien-baru .ina-button{width:100%;justify-content:center}
+.kartu-pihak .catatan-akun{margin-top:10px}
+.kb-baris{margin-top:16px}
+.kb-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.f-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-baris{margin-top:16px}
+.lipat-ktp{margin-top:16px;border:1px solid var(--ina-stroke-primary);border-radius:8px}
+.lipat-ktp .ina-accordion{border-bottom:0}
+.lipat-ktp .ina-accordion__toggle{width:100%;padding:16px;text-align:left}
+.lipat-ktp .ina-accordion__title b{font-weight:600}
+.lipat-ktp .ina-accordion__title span{font-weight:400;color:var(--ina-content-secondary)}
+.lipat-ktp .ina-accordion__content--open{max-height:none;overflow:visible}
+.lipat-ktp .ina-accordion__body{padding:0 16px 16px}
+.lipat-form:not(:first-child){margin-top:16px}
+.lipat-form+.f12,.lipat-form+.bantu-sub{margin-top:16px}
+.lipat-form .ina-accordion__content{transition:none}
+.lipat-form .ina-accordion__content:not(.ina-accordion__content--open){visibility:hidden}
+.pilih-f{display:block;height:auto;padding:0;border:0;background:transparent;box-shadow:none}
+.pilih-f:focus-within{box-shadow:none;outline:0}
+.pilih-f .ina-select-dropdown__trigger{width:100%}
+.pilih-f.ina-text-field__wrapper--status-error .ina-select-dropdown__trigger{border-color:var(--ina-stroke-error,#d92d20)}
+.pilih-f .ina-select-dropdown__panel{z-index:40}
+.pilih-asli{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.lipat-ktp .ket-ktp{margin:0 0 12px;font-size:13px;line-height:20px;color:var(--ina-content-secondary)}
+.ocr-ktp{display:flex;flex-direction:column;gap:12px}
+.ocr-ktp .ina-file-upload__file-actions{width:auto}
+.ina-text-field select.ina-text-field__input{appearance:auto;background:transparent;border:0;width:100%;height:100%;font:inherit;font-size:14px;color:inherit;outline:0}
+@media (max-width:760px){.kb-grid3,.f-grid2,.f-grid3{grid-template-columns:1fr}}
 .fld > .ina-text-field__label{display:flex;align-items:center;gap:6px}
 .select-wadah{position:relative;display:block;width:100%}
 .select-wadah .ina-select-dropdown__panel{top:calc(100% + 4px);left:0;right:0;max-height:240px}
@@ -603,11 +668,12 @@ a.ina-button{text-decoration:none}
 ol.bantu-langkah{padding-left:22px}
 @media (max-width:760px){ .bantu-istilah{grid-template-columns:1fr} .bantu-istilah dd{margin-bottom:6px} }
 </style>
+<style id="versi-proto-css">.versi-proto{display:inline-block;padding:3px 10px;border-radius:999px;background:#E6EDEA;color:#0f1a17;font:600 11px/16px Inter,sans-serif}.versi-ubah{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;background:var(--ina-primary-100,#dcebe5);color:var(--ina-primary-700,#1b5e4a);font:600 11px/18px Inter,sans-serif;vertical-align:middle}</style>
 </head>
 <body>
 
 <div class="protobar">
-  <a href="index.html#tenant">&#9776; Daftar prototipe</a>
+  <a href="index.html#tenant">&#9776; Daftar prototipe</a><span class="versi-proto" title="Versi v2, sedang dikerjakan dari masukan Peruri. Arsip v1 (3 Nov 2026) ada di daftar prototipe.">v2 · 4 Nov 2026</span>
   <span class="sep">&bull;</span><b>Tenant · Akta &amp; Pengaturan Kantor</b><span class="sep">&bull;</span><span>Peran: Super Admin</span>
   <span class="sep">&bull;</span><span>Layar:</span><span id="pilLayar"></span>
   <span class="sep">&bull;</span><span>Izin Profil Kantor:</span><button class="pil" id="pilIzin" aria-pressed="true">Boleh mengubah</button>
@@ -708,7 +774,7 @@ const rasio = (a, b) => { const x = lum(a), y = lum(b); if (x == null || y == nu
 /* ---------------- daftar penyesuaian ---------------- */
 const UBAH = [
   { kode:'IDDS-TN-27', judul:'Dashboard: kartu, grafik, dan warna status seragam',
-    isi:'Kartu ringkasan memakai IDDS Card. Keterangan setiap status menjelaskan artinya, sama dengan prototipe Permohonan AJB: "Klien mengajukan", "Mengumpulkan data", "Data lengkap", "Pembuatan akta", "Akta selesai". Warna grafik diambil dari token warna status tema (bukan kode warna tetap) dan sekeluarga dengan warna lencana statusnya. Pengecualiannya Penyusunan: grafik memakai warna brand agar Penyusunan dapat dibedakan dari Pengumpulan, karena keduanya berlencana "info" di live dan di prototipe Permohonan AJB. Legenda donat selalu menampilkan semua status beserta jumlah dan persentasenya. Grafik batang menulis nama jenis akta lengkap beserta jumlahnya, sehingga angka terbaca tanpa tooltip.',
+    isi:'Kartu ringkasan memakai IDDS Card. Keterangan setiap status menjelaskan artinya, sama dengan prototipe Permohonan AJB: "Mengumpulkan data", "Data lengkap", "Pembuatan akta", "Akta selesai". Warna grafik diambil dari token warna status tema (bukan kode warna tetap) dan sekeluarga dengan warna lencana statusnya. Pengecualiannya Penyusunan: grafik memakai warna brand agar Penyusunan dapat dibedakan dari Pengumpulan, karena keduanya berlencana "info" di live dan di prototipe Permohonan AJB. Legenda donat selalu menampilkan semua status beserta jumlah dan persentasenya. Grafik batang menulis nama jenis akta lengkap beserta jumlahnya, sehingga angka terbaca tanpa tooltip.',
     lama:'Keterangan kartu hanya "order". Warna grafik ditulis langsung di kode (slate/biru/kuning/hijau) dan tidak ikut tema. Status bernilai 0 hilang dari legenda. Jumlah hanya tampil di tooltip saat kursor di atas grafik, dan sumbu batang hanya memakai kode (AJB).', ke:'dashboard', sorot:'#grafikStatus' },
   { kode:'IDDS-TN-28', judul:'Dashboard: daftar permohonan dapat dibuka dan data dapat dimuat ulang',
     isi:'"Perlu tindakan" menyebut tindakan berikutnya untuk setiap permohonan (misalnya "Lengkapi berkas", "Mulai verifikasi"). Setiap baris adalah tautan ke Permohonan AJB yang dapat difokus dengan keyboard. Di kanan judul tampil waktu pembaruan dan tombol "Muat Ulang". Bila data gagal dimuat, IDDS Alert menyediakan tombol "Coba Lagi". Keadaan ini dapat dicoba lewat pil "Simulasi galat Dashboard" di bilah atas.',
@@ -717,7 +783,7 @@ const UBAH = [
     isi:'Isian memakai IDDS Text Field/Text Area yang terhubung dengan labelnya. Pesan galat tampil di bawah isian saat fokus meninggalkan isian dan saat menyimpan, tanpa kotak galat ganda dan toast. Email memakai tipe email, dan telepon memakai tipe telepon. Pengguna yang hanya punya izin Lihat melihat isian terkunci dengan IDDS Alert penjelasan (coba lewat pil "Izin Profil Kantor" di bilah atas). Kaki formulir menampilkan jumlah perubahan yang belum disimpan. Pindah tab atau menu saat ada perubahan meminta konfirmasi.',
     lama:'Pesan galat hanya muncul setelah Simpan dan tampil di kotak galat serta toast sekaligus. Formulir tetap aktif untuk pengguna tanpa izin Ubah dan baru ditolak server. Pindah tab Profil ↔ Layanan Akta membuang isian tanpa peringatan.', ke:'profil', sorot:'#formProfil' },
   { kode:'IDDS-TN-30', judul:'Profil Kantor: PPAT penanda tangan dan kartu sidebar yang jelas',
-    isi:'Pilihan "PPAT Penanda Tangan" menampilkan status CA pengguna terpilih (IDDS Badge "CA aktif" / "CA belum aktif"). Bila belum ada pengguna PPAT, tersedia tautan ke Peran & Izin. Warna kartu sidebar diberi IDDS Badge kontras WCAG. Pratinjau kartu selalu tampil (memakai contoh bila data kosong), dan kartu di sidebar langsung berubah setelah disimpan.',
+    isi:'Pilihan "PPAT Penanda Tangan" menampilkan status CA pengguna terpilih (IDDS Badge "Sertifikat Elektronik Aktif" / "Sertifikat Elektronik Belum Aktif"). Bila belum ada pengguna PPAT, tersedia tautan ke Peran & Izin. Warna kartu sidebar diberi IDDS Badge kontras WCAG. Pratinjau kartu selalu tampil (memakai contoh bila data kosong), dan kartu di sidebar langsung berubah setelah disimpan.',
     lama:'Tidak terlihat apakah PPAT terpilih sudah punya CA aktif, padahal CA aktif disyaratkan. Petunjuk "Atur role fungsi PPAT di menu Peran & Izin dulu" bukan tautan. Warna kartu dapat diisi bebas tanpa cek kontras. Pratinjau hilang bila data kosong, dan kartu sidebar baru berubah setelah halaman dimuat ulang.', ke:'profilKartu', sorot:'#seksiKartu' },
   { kode:'IDDS-TN-31', judul:'Layanan Akta: menonaktifkan layanan meminta konfirmasi',
     isi:'Setiap layanan memakai IDDS Toggle. Menonaktifkan layanan memunculkan IDDS Modal Confirmation yang menjelaskan bahwa menu Permohonan layanan itu hilang untuk seluruh pengguna kantor. Hasilnya diumumkan lewat IDDS Toast berisi nama layanan ("Akta Jual Beli diaktifkan."). Layanan yang belum tersedia berlencana "Segera hadir" dengan keterangan yang terlihat, bukan hanya tooltip.',
@@ -729,7 +795,7 @@ const UBAH = [
     isi:'Hasil pindai (scan) akta diunggah lewat IDDS File Upload: seret-lepas, PDF maks. 20 MB, dan pesan galat di bawah kotak unggah. Alasan "Kirim Salinan" belum aktif tampil sebagai teks bantuan di bawah tombol, bukan hanya tooltip. Catatan Renvoi memakai IDDS Badge "Belum disimpan" dan meminta konfirmasi bila halaman ditinggalkan sebelum disimpan. Tombol hapus hasil pindai berlabel nama berkas.',
     lama:'Alasan tombol nonaktif hanya ada di atribut title sehingga tidak terjangkau di layar sentuh dan pembaca layar. Perubahan renvoi hilang tanpa peringatan saat kembali ke daftar. Tombol hapus hasil pindai hanya berupa ikon tanpa label.', ke:'detail', sorot:'#kartuInfo' },
   { kode:'IDDS-TN-34', judul:'Kirim Salinan dan Riwayat: validasi email dan konfirmasi cabut',
-    isi:'Dialog Kirim memakai IDDS Checkbox untuk setiap penerima. Peran ditulis "Penjual/Pembeli/Saksi", bukan kode, dan format email diperiksa di bawah isiannya. Sebelum mengirim, tampil ringkasan jumlah penerima. Di Riwayat, "Cabut Tautan" meminta konfirmasi lewat IDDS Modal Confirmation karena tindakan ini tidak dapat dibatalkan.',
+    isi:'Dialog Kirim memakai IDDS Checkbox untuk setiap penerima. Peran ditulis "Pihak Pertama/Pihak Kedua/Saksi", bukan kode, dan format email diperiksa di bawah isiannya. Sebelum mengirim, tampil ringkasan jumlah penerima. Di Riwayat, "Cabut Tautan" meminta konfirmasi lewat IDDS Modal Confirmation karena tindakan ini tidak dapat dibatalkan.',
     lama:'Peran tampil sebagai kode mentah (PENJUAL, PEMBELI). Format email tidak diperiksa di dialog ini, berbeda dengan dialog kirim di E-Akta Wizard. "Cabut" langsung dijalankan tanpa konfirmasi.', ke:'kirim', sorot:null },
   { kode:'IDDS-TN-35', judul:'Aktivasi e-Meterai: status terlihat dan email divalidasi di isian',
     isi:'Bagian atas menampilkan status aktivasi (IDDS Badge "Belum diaktifkan" / "Aktif") beserta email yang tersimpan. Isian Email bertanda wajib, dan pesan galatnya tampil di bawah isian. Mengganti email yang sudah tersimpan meminta konfirmasi. Alamat portal ditulis benar, yaitu e-meterai.co.id. Tautannya membuka tab baru, dan keterangan itu tertulis pada tautan.',
@@ -743,14 +809,13 @@ const UBAH = [
 ];
 
 /* ---------------- data contoh (sama dengan prototipe Order AJB, Verifikasi, Minuta, E-Akta Wizard) ---------------- */
-const ST = { BARU:{ l:'Baru', s:'Klien mengajukan', b:'neutral', w:'var(--ina-neutral-400,#a3a3a3)', t:'Hubungi klien dan lengkapi data order', ik:'dok' },
-  PENGUMPULAN:{ l:'Pengumpulan', s:'Mengumpulkan data', b:'info', w:'var(--ina-guide-500,#2563eb)', t:'Lengkapi berkas dan data para pihak', ik:'daftar' },
-  SIAP:{ l:'Siap', s:'Data lengkap', b:'warning', w:'var(--ina-warning-500,#eebb04)', t:'Mulai verifikasi akta', ik:'centang' },
-  DRAFTING:{ l:'Penyusunan', s:'Pembuatan akta', b:'info', w:'var(--ina-primary-500,#3d6b5e)', t:'Susun minuta akta', ik:'edit' },
+const ST = { PENGUMPULAN:{ l:'Pengumpulan Berkas', s:'Dibuat oleh Asisten / PPAT', b:'info', w:'var(--ina-guide-500,#2563eb)', t:'Lengkapi berkas dan data para pihak', ik:'daftar' },
+  SIAP:{ l:'Verifikasi Berkas', s:'Data lengkap, siap diperiksa', b:'warning', w:'var(--ina-warning-500,#eebb04)', t:'Mulai verifikasi akta', ik:'centang' },
+  DRAFTING:{ l:'Penyusunan Akta', s:'Pembuatan akta', b:'info', w:'var(--ina-primary-500,#3d6b5e)', t:'Susun minuta akta', ik:'edit' },
   SELESAI:{ l:'Selesai', s:'Akta selesai', b:'success', w:'var(--ina-positive-500,#16a34a)', t:'', ik:'stempel' } };
 const O = (kode, nama, status, tgl) => ({ kode, nama, status, tgl, jenis:'AJB' });
 const ORDER = [
-  O('ORD-CONTOH-001', 'Contoh Narahubung Satu', 'BARU', '2026-10-22'), O('ORD-CONTOH-002', 'Contoh Narahubung Dua', 'PENGUMPULAN', '2026-10-21'),
+  O('ORD-CONTOH-001', 'Contoh Narahubung Satu', 'PENGUMPULAN', '2026-10-22'), O('ORD-CONTOH-002', 'Contoh Narahubung Dua', 'PENGUMPULAN', '2026-10-21'),
   O('ORD-CONTOH-003', 'Contoh Narahubung Tiga', 'SIAP', '2026-10-20'), O('ORD-CONTOH-010', 'Contoh Narahubung Sepuluh', 'SIAP', '2026-10-24'),
   O('ORD-CONTOH-011', 'Contoh Narahubung Sebelas', 'SIAP', '2026-10-23'), O('ORD-CONTOH-012', 'Contoh Narahubung Dua Belas', 'PENGUMPULAN', '2026-10-25'),
   O('ORD-CONTOH-006', 'Contoh Narahubung Enam', 'DRAFTING', '2026-10-19'), O('ORD-CONTOH-004', 'Contoh Narahubung Empat', 'DRAFTING', '2026-10-18'),
@@ -762,7 +827,7 @@ const LAYANAN0 = () => [{ kode:'AJB', nama:'Akta Jual Beli', aktif:true, ada:tru
 const PROFIL0 = () => ({ ppat_nama:'PPAT Contoh Satu, S.H.', ppat_sk:'1/KEP-CONTOH/2020', ppat_wilayah:'Kota Contoh', ppat_telepon:'0210000000', ppat_email:'kantor@contoh.id', ppat_alamat:'Jalan Contoh No. 10, Kota Contoh', ppat_notaris_user_id:'1', ppat_card_enabled:true, ppat_card_color:'#DAC999', ppat_card_text_color:'#1F1F1F' });
 const USER_PPAT = [{ id:'1', nama:'PPAT Contoh Satu', email:'ppat1@contoh.id', ca:true }];
 const PIHAK_SALINAN = () => [{ id:1, nama:'Contoh Penjual Satu', peran:'PENJUAL', email:'penjual1@contoh.id' }, { id:2, nama:'Contoh Pembeli Satu', peran:'PEMBELI', email:'pembeli1@contoh.id' }, { id:3, nama:'Contoh Saksi Satu', peran:'SAKSI', email:'' }, { id:4, nama:'Contoh Saksi Dua', peran:'SAKSI', email:'saksi2@contoh.id' }];
-const PERAN_PIHAK = { PENJUAL:'Penjual', PEMBELI:'Pembeli', SAKSI:'Saksi', PASANGAN:'Pasangan', MANUAL:'Ditambahkan manual' };
+const PERAN_PIHAK = { PENJUAL:'Pihak Pertama', PEMBELI:'Pihak Kedua', SAKSI:'Saksi', PASANGAN:'Pasangan', MANUAL:'Ditambahkan manual' };
 function contohSalinan() {
   return [
     { kode:'ORD-CONTOH-005', nama:'Contoh Narahubung Lima', nomor:'5/2026', tgl:'2026-10-15', final:'2026-10-15', scan:[{ id:1, nama:'akta-5-2026-scan.pdf', mb:3.4 }], renvoi:'', riwayat:[
@@ -829,7 +894,7 @@ function pindah(ke, lanjut) { jaga(() => { S.layar = ke; S.detail = null; S.gala
 function layarDashboard() {
   const n = k => ORDER.filter(o => o.status === k).length, total = ORDER.length;
   const kartu = [['Total Permohonan', total, 'Semua permohonan akta', 'order', 'var(--ina-primary-50)', 'var(--ina-primary-primary)'], ...Object.entries(ST).map(([k, s]) => [s.l, n(k), s.s, s.ik, null, null, k])];
-  const perlu = ORDER.filter(o => ['BARU', 'PENGUMPULAN', 'SIAP'].includes(o.status)).sort((a, b) => a.tgl.localeCompare(b.tgl)), terbaru = [...ORDER].sort((a, b) => b.tgl.localeCompare(a.tgl)).slice(0, 6);
+  const perlu = ORDER.filter(o => ['PENGUMPULAN', 'SIAP'].includes(o.status)).sort((a, b) => a.tgl.localeCompare(b.tgl)), terbaru = [...ORDER].sort((a, b) => b.tgl.localeCompare(a.tgl)).slice(0, 6);
   const ingat = S.tera ? `<div class="ingat">${alert('caution', '', 'Stempel Elektronik (TERA) kantor Anda belum didaftarkan. Lengkapi data pendaftaran TERA agar akta bisa distempel elektronik.', `<div style="display:flex;gap:8px;align-items:center">${tombol('Daftar TERA', 'primary', 'sm', 'data-ke-tera', ik('panah', 14))}<button type="button" class="ina-alert__close-button" data-tutup-tera aria-label="Tutup pengingat">${ik('x', 16)}</button></div>`)}</div>` : '';
   if (S.dashGagal) return `${remah('Akta', 'Dashboard Akta')}<h1>Dashboard Akta</h1><p class="sub">Pantau jumlah permohonan per status dan permohonan yang perlu ditindaklanjuti.</p>
     <div style="margin-top:20px">${alert('critical', 'Dashboard gagal dimuat', 'Periksa koneksi internet Anda, lalu coba lagi.', tombol('Coba Lagi', 'secondary', 'sm', 'id="cobaLagi"', ik('ulang', 14)))}</div>`;
@@ -888,7 +953,7 @@ function formProfil() {
       <div class="lebar">${ta('p-ppat_alamat', 'Alamat Kantor', p.ppat_alamat, 'Alamat lengkap kantor PPAT', true, '', `data-prof="ppat_alamat" ${dis} ${S.galatP.ppat_alamat ? 'aria-invalid="true"' : ''}`).replace('ina-text-area__wrapper--status-neutral', S.galatP.ppat_alamat ? 'ina-text-area__wrapper--status-error' : 'ina-text-area__wrapper--status-neutral').replace('<div class="ina-text-area__helper-text" id="h-p-ppat_alamat" data-bantu=""></div>', S.galatP.ppat_alamat ? `<div class="ina-text-area__helper-text ina-text-area__helper-text--error" id="h-p-ppat_alamat">${S.galatP.ppat_alamat}</div>` : '<div class="ina-text-area__helper-text" id="h-p-ppat_alamat"></div>')}</div></div>
     <div class="seksi"><h3>${ik('pena', 16)} PPAT Penanda Tangan (e-Akta)</h3>
       <div class="f-dua"><div>${pilihan('p-ttd', 'PPAT penanda tangan', [['', USER_PPAT.length ? 'Pilih PPAT' : 'Belum ada pengguna berfungsi PPAT'], ...USER_PPAT.map(x => [x.id, `${esc(x.nama)} (${esc(x.email)})`])], p.ppat_notaris_user_id, 'Pengguna berfungsi PPAT yang menandatangani akta secara elektronik. Wajib memiliki sertifikat elektronik (CA) aktif.', `data-prof="ppat_notaris_user_id" ${dis}`)}</div>
-        <div style="align-self:center">${u ? (u.ca ? badge('CA aktif', 'success') : badge('CA belum aktif', 'warning')) : `<span class="ket">Belum ada pengguna berfungsi PPAT. Atur di <a href="${SYS}#peran">Peran &amp; Izin</a>.</span>`}${usulan('IDDS-TN-30')}</div></div></div>
+        <div style="align-self:center">${u ? (u.ca ? badge('Sertifikat Elektronik Aktif', 'success') : badge('Sertifikat Elektronik Belum Aktif', 'warning')) : `<span class="ket">Belum ada pengguna berfungsi PPAT. Atur di <a href="${SYS}#peran">Peran &amp; Izin</a>.</span>`}${usulan('IDDS-TN-30')}</div></div></div>
     <div class="seksi ditandai" id="seksiKartu"><h3>${ik('kartuId', 16)} Kartu identitas kantor di sidebar</h3><p class="ket">Kartu di bawah logo sidebar, diambil dari data kantor di atas.</p>
       <div class="f-dua f-baris"><div>
         <div class="toggle-baris" style="padding:0">${cekBox('p-kartu', p.ppat_card_enabled, 'Tampilkan kartu di sidebar', '', `data-prof-cek="ppat_card_enabled" ${dis}`)}</div>
@@ -1183,7 +1248,7 @@ const BANTUAN = {
     <ul class="bantu-langkah">${Object.values(ST).map(s => `<li><b>${s.l}:</b> ${s.s.toLowerCase()}.</li>`).join('')}</ul>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('d', [
-      ['Apa isi daftar "Perlu tindakan"?', 'Permohonan berstatus Baru, Pengumpulan, dan Siap, diurutkan dari yang paling lama menunggu. Setiap baris menyebut tindakan berikutnya.'],
+      ['Apa isi daftar "Perlu tindakan"?', 'Permohonan berstatus Pengumpulan Berkas dan Verifikasi Berkas, diurutkan dari yang paling lama menunggu. Setiap baris menyebut tindakan berikutnya.'],
       ['Bagaimana membuka detail permohonan?', 'Klik baris permohonan. Halaman Permohonan AJB terbuka.'],
       ['Mengapa angka belum berubah?', 'Klik "Muat Ulang" di kanan atas untuk mengambil data terbaru.'],
       ['Mengapa hanya Akta Jual Beli yang tampil?', 'Grafik hanya menampilkan layanan akta yang aktif. Saat ini baru Akta Jual Beli yang tersedia.'],
@@ -1191,12 +1256,12 @@ const BANTUAN = {
     ${kontak()}` }),
   profil:() => ({ judul:'Bantuan Profil Kantor', isi:`<p>Data kantor dipakai sebagai kop dan variabel isi akta, serta kartu identitas di sidebar.</p>
     <h4 class="bantu-sub">Langkah</h4>
-    ${lgkh(['Lengkapi isian bertanda bintang.', 'Pilih PPAT penanda tangan yang sudah memiliki CA aktif.', 'Atur kartu sidebar bila perlu, lalu klik <b>Simpan Perubahan</b>.'])}
+    ${lgkh(['Lengkapi isian bertanda bintang.', 'Pilih PPAT penanda tangan yang sudah memiliki sertifikat elektronik aktif.', 'Atur kartu sidebar bila perlu, lalu klik <b>Simpan Perubahan</b>.'])}
     ${istilah([['CA', 'Sertifikat elektronik dari Peruri untuk tanda tangan elektronik.'], ['PPAT penanda tangan', 'Pengguna berfungsi PPAT yang menandatangani akta elektronik kantor.'], ['Layanan akta', 'Jenis akta yang dilayani kantor; setiap layanan aktif punya menu Permohonan sendiri.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('p', [
       ['Di mana data ini dipakai?', 'Pada kop dan isi akta (nama PPAT, nomor SK, wilayah kerja, alamat), serta kartu identitas di sidebar.'],
-      ['Mengapa PPAT penanda tangan wajib memiliki CA aktif?', 'Akta elektronik ditandatangani dengan sertifikat elektronik dari Peruri. Tanpa CA aktif, penandatanganan gagal. PPAT mendaftar CA sendiri lewat Akun Saya.'],
+      ['Mengapa PPAT penanda tangan wajib memiliki sertifikat elektronik aktif?', 'Akta elektronik ditandatangani dengan sertifikat elektronik dari Peruri. Tanpa sertifikat elektronik aktif, penandatanganan gagal. PPAT mendaftar CA sendiri lewat Akun Saya.'],
       ['Mengapa daftar PPAT penanda tangan kosong?', 'Belum ada pengguna dengan peran berfungsi PPAT. Buat pengguna di Daftar Pengguna, lalu beri peran berfungsi PPAT di Peran &amp; Izin.'],
       ['Format telepon apa yang diterima?', 'Angka 7–15 digit, boleh diawali tanda +. Spasi, tanda hubung, dan tanda kurung diabaikan.'],
       ['Mengapa isian tidak bisa diubah?', 'Peran Anda hanya punya izin Lihat untuk Profil Kantor. Minta Super Admin mengubahnya atau memberi izin Ubah.'],
@@ -1238,7 +1303,7 @@ $('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar penyesuaian Akta', lebar:true,
     isi:`<p>Menu ini tidak dinilai dalam laporan Heuristic Evaluation. Isi, isian, dan alur mengikuti kode live dev-app.eppat.id/t/default; yang disesuaikan adalah komponen IDDS dengan brand E-PPAT, letak pesan, konfirmasi, aksesibilitas, bahasa, dan Bantuan per halaman sesuai saran HE-UMUM-02. Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta (termasuk tab Salinan) ada di prototipe Dari HE. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });
@@ -1594,6 +1659,217 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
 })();
 </script>
 
+<!-- ===== Sesi bersama (sesi-bersama.html, disisipkan rakit-idds.js ke prototipe tenant) =====
+     Masuk simulasi per peran, menu profil (Akun Saya, Ganti Peran, Keluar), menu sidebar per peran, dan penjaga halaman.
+     Tanpa sesi, prototipe tampil seperti biasa, sehingga tautan langsung dari daftar prototipe tetap berjalan.
+     Menu per peran mengikuti live (dilihat 20 Okt 2026 dengan akun tiap peran); aturan Super Admin dan Super Admin + PPAT mengikuti masukan Peruri. -->
+<style id="sesi-bersama-css">
+.sesi-sembunyi{display:none!important}
+.sesi-tanpa-ingat .ingat,.sesi-tanpa-daftar [data-akun="ca"],.sesi-tanpa-daftar [data-tab="ca"]{display:none!important}
+.protobar .sesi-pilih{border:1px solid rgba(255,255,255,.25);background:transparent;color:#E6EDEA;font:500 11px Inter,sans-serif;padding:4px 8px;border-radius:999px;cursor:pointer}
+.protobar .sesi-pilih option{color:#1f2a2e;background:#fff}
+#menuSesi .ina-action-dropdown__menu{position:absolute;top:calc(100% + 6px);right:0;left:auto;min-width:260px;z-index:60;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.user .ina-action-dropdown__item{text-decoration:none}
+.user .ina-action-dropdown__item:hover{text-decoration:none}
+.user .ina-action-dropdown__divider{height:1px;margin:4px 0;padding:0;background:var(--ina-stroke-primary)}
+#profilMenu{min-width:260px}
+.user.sesi-pemicu{cursor:pointer}
+.user.sesi-pemicu:hover{background:var(--ina-background-secondary)}
+.user.sesi-pemicu:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px}
+.sesi-tolak{position:fixed;inset:0;z-index:900;display:grid;place-items:center;padding:64px 16px 24px;background:var(--ina-background-secondary)}
+.sesi-tolak-kartu{width:100%;max-width:440px;padding:28px;border:1px solid var(--ina-stroke-primary);border-radius:16px;background:var(--ina-background-primary,#fff)}
+.sesi-tolak-kartu h2{margin:0 0 8px;font-size:20px;line-height:28px;font-weight:600;color:var(--ina-content-primary)}
+.sesi-tolak-kartu p{margin:0 0 16px;font-size:14px;line-height:21px;color:var(--ina-content-secondary)}
+.sesi-tolak-aksi{display:flex;flex-wrap:wrap;gap:12px}
+#lencanaTrial{flex:none;white-space:nowrap}
+#spandukTrial{padding:24px 32px 0}
+#spandukTrial + .page{padding-top:16px}
+#spandukTrial .ina-alert__content{display:flex;flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap;width:100%}
+#spandukTrial .ina-alert__text-section{flex:1;min-width:240px}
+#spandukTrial .spanduk-aksi{display:flex;align-items:center;gap:8px}
+#spandukTrial .ina-button{text-decoration:none}
+.sb-trial{padding:0 0 8px}
+.sb-trial .ina-button{width:100%;justify-content:center;text-decoration:none}
+.sidebar.sb-ciut .sb-trial-teks{display:none}
+@media (max-width:760px){ #spandukTrial{padding:16px 16px 0} #lencanaTrial .lt-opsi{display:none} }
+</style>
+<script id="sesi-bersama-js">
+(() => {
+  const KUNCI = 'eppat-sesi', MASUK = 'Backlog-IDDS-TN-MASUK-Prototype.html', AKUN_SAYA = 'Backlog-HE-CA-Prototype.html#akun', REG_CA = 'Backlog-HE-CA-Prototype.html#ca';
+  const SYS = 'Backlog-IDDS-TN-SYSTEM-Prototype.html', EP = 'Backlog-IDDS-TN-EPPAT-Prototype.html', CMS = 'Backlog-IDDS-TN-CMS-Prototype.html';
+    const AKUN = [
+    { kunci:'admin', label:'Super Admin', nama:'Admin Contoh', email:'admin@contoh.id', peran:['ROLE_ADMIN'], ca:'kurang' },
+    { kunci:'admin-ppat', label:'Super Admin + PPAT', nama:'Admin Contoh', email:'admin.ppat@contoh.id', peran:['ROLE_ADMIN', 'ROLE_PPAT'], ca:'kurang' },
+    { kunci:'admin-trial', label:'Super Admin Trial', nama:'Contoh PPAT Baru', email:'ppat.baru@contoh.id', peran:['ROLE_ADMIN'], ca:'kurang', paket:'trial' },
+    { kunci:'ppat', label:'PPAT', nama:'PPAT Contoh Satu', email:'ppat1@contoh.id', peran:['ROLE_PPAT'], ca:'aktif' },
+    { kunci:'asisten', label:'Asisten', nama:'Asisten Contoh', email:'asisten1@contoh.id', peran:['ROLE_ASISTEN'], ca:'ekyc' },
+    { kunci:'klien', label:'Klien', nama:'Contoh Klien Satu', email:'klien1@contoh.id', peran:['ROLE_KLIEN'], ca:'kurang' }
+  ];
+  const STATUS_CA = { kurang:['Belum terdaftar', 'neutral'], ekyc:['Menunggu eKYC', 'info'], aktif:['Aktif', 'success'] };
+  const STAF = ['Permohonan AJB', 'Dashboard Akta', 'Verifikasi Berkas', 'Penyusunan Akta', 'Penyusunan Akta v2', 'Penandatanganan Akta', 'Salinan Akta', 'Profil Kantor'];
+  const MENU_PERAN = { ROLE_PPAT:[...STAF, 'Daftar Pengguna', 'Aktivasi e-Meterai'], /* Daftar Pengguna untuk kebutuhan prototipe; di live PPAT tidak memilikinya */ ROLE_ASISTEN:[...STAF, 'Daftar Pengguna', 'Dashboard Sistem'], ROLE_KLIEN:['Penandatanganan Akta'] };
+  /* layar di dalam satu prototipe yang punya syarat menu sendiri */
+  const LAYAR_MENU = { '#peran':'Peran & Izin', '#logs':'Log Aktivitas', '#pengaturan':'Pengaturan', '#emeterai':'Aktivasi e-Meterai' };
+  const LANDAS = { ROLE_ADMIN:SYS + '#dasbor', ROLE_PPAT:EP + '#dashboard', ROLE_ASISTEN:EP + '#dashboard', ROLE_KLIEN:'Backlog-HE-EAWK-Prototype.html' };
+  /* halaman → menu yang menjadi syarat akses */
+  const HALAMAN = { 'HE-USER':'Daftar Pengguna', 'HE-VERIF':'Verifikasi Berkas', 'HE-MINUTA':'Penyusunan Akta', 'HE-MINUTA-V2':'Penyusunan Akta v2', 'HE-EAW':'Penandatanganan Akta', 'HE-ORDER':'Permohonan AJB', 'HE-TERA':'Aktivasi e-Meterai', 'IDDS-TN-EPPAT':'Dashboard Akta', 'IDDS-TN-SYSTEM':'Dashboard Sistem', 'IDDS-TN-CMS':'Halaman Depan' };
+  /* menu lengkap untuk halaman yang sidebarnya khusus Klien, saat dibuka peran staf */
+  const MENU = [
+    ['Layanan', [['Permohonan AJB', 'file-text', 'Backlog-HE-ORDER-Prototype.html']]],
+    ['Akta', [['Dashboard Akta', 'layout-dashboard', EP + '#dashboard'], ['Verifikasi Berkas', 'circle-check', 'Backlog-HE-VERIF-Prototype.html'], ['Penyusunan Akta', 'file-pencil', 'Backlog-HE-MINUTA-Prototype.html'], ['Penyusunan Akta v2', 'file-description', 'Backlog-HE-MINUTA-V2-Prototype.html'], ['Penandatanganan Akta', 'signature', 'Backlog-HE-EAW-Prototype.html'], ['Salinan Akta', 'files', EP + '#salinan']]],
+    ['Pengaturan Kantor', [['Profil Kantor', 'building', EP + '#profil'], ['Daftar Pengguna', 'users', 'Backlog-HE-USER-Prototype.html'], ['Peran & Izin', 'shield-lock', SYS + '#peran'], ['Log Aktivitas', 'history', SYS + '#logs'], ['Aktivasi e-Meterai', 'rubber-stamp', EP + '#emeterai']]],
+    ['Pengaturan Aplikasi', [['Dashboard Sistem', 'gauge', SYS + '#dasbor'], ['Pengaturan', 'settings', SYS + '#pengaturan']]],
+    ['Konten Situs', [['Halaman Depan', 'home', CMS + '#landing'], ['Tema Tampilan', 'palette', CMS + '#tema'], ['Master Konten', 'database', CMS + '#master'], ['Artikel & Halaman', 'article', CMS + '#posts'], ['Pustaka Media', 'photo', CMS + '#media']]]
+  ];
+  const IKON = {"stack-2":"<path d=\"M12 4l-8 4l8 4l8 -4l-8 -4\" /> <path d=\"M4 12l8 4l8 -4\" /> <path d=\"M4 16l8 4l8 -4\" />","feather":"<path d=\"M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4\" /> <path d=\"M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4\" />","layout-dashboard":"<path d=\"M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1\" /> <path d=\"M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1\" /> <path d=\"M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1\" /> <path d=\"M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1\" />","circle-check":"<path d=\"M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0\" /> <path d=\"M9 12l2 2l4 -4\" />","file-pencil":"<path d=\"M14 3v4a1 1 0 0 0 1 1h4\" /> <path d=\"M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z\" /> <path d=\"M10 18l5 -5a1.414 1.414 0 0 0 -2 -2l-5 5v2h2z\" />","signature":"<path d=\"M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2\" />","files":"<path d=\"M15 3v4a1 1 0 0 0 1 1h4\" /> <path d=\"M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z\" /> <path d=\"M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2\" />","adjustments-horizontal":"<path d=\"M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\" /> <path d=\"M4 6l8 0\" /> <path d=\"M16 6l4 0\" /> <path d=\"M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\" /> <path d=\"M4 12l2 0\" /> <path d=\"M10 12l10 0\" /> <path d=\"M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\" /> <path d=\"M4 18l11 0\" /> <path d=\"M19 18l1 0\" />","building":"<path d=\"M3 21l18 0\" /> <path d=\"M9 8l1 0\" /> <path d=\"M9 12l1 0\" /> <path d=\"M9 16l1 0\" /> <path d=\"M14 8l1 0\" /> <path d=\"M14 12l1 0\" /> <path d=\"M14 16l1 0\" /> <path d=\"M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16\" />","users":"<path d=\"M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0\" /> <path d=\"M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2\" /> <path d=\"M16 3.13a4 4 0 0 1 0 7.75\" /> <path d=\"M21 21v-2a4 4 0 0 0 -3 -3.85\" />","shield-lock":"<path d=\"M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3\" /> <path d=\"M12 11m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0\" /> <path d=\"M12 12l0 2.5\" />","history":"<path d=\"M12 8l0 4l2 2\" /> <path d=\"M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5\" />","rubber-stamp":"<path d=\"M21 17.85h-18c0 -4.05 1.421 -4.05 3.79 -4.05c5.21 0 1.21 -4.59 1.21 -6.8a4 4 0 1 1 8 0c0 2.21 -4 6.8 1.21 6.8c2.369 0 3.79 0 3.79 4.05z\" /> <path d=\"M5 21h14\" />","settings":"<path d=\"M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z\" /> <path d=\"M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0\" />","layout-cards":"<path d=\"M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z\" /> <path d=\"M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z\" />","home":"<path d=\"M5 12l-2 0l9 -9l9 9l-2 0\" /> <path d=\"M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7\" /> <path d=\"M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6\" />","palette":"<path d=\"M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25\" /> <path d=\"M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0\" /> <path d=\"M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0\" /> <path d=\"M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0\" />","database":"<path d=\"M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0\" /> <path d=\"M4 6v6a8 3 0 0 0 16 0v-6\" /> <path d=\"M4 12v6a8 3 0 0 0 16 0v-6\" />","article":"<path d=\"M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z\" /> <path d=\"M7 8h10\" /> <path d=\"M7 12h10\" /> <path d=\"M7 16h10\" />","photo":"<path d=\"M15 8h.01\" /> <path d=\"M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z\" /> <path d=\"M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5\" /> <path d=\"M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3\" />","file-text":"<path d=\"M14 3v4a1 1 0 0 0 1 1h4\" /> <path d=\"M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z\" /> <path d=\"M9 9l1 0\" /> <path d=\"M9 13l6 0\" /> <path d=\"M9 17l6 0\" />","gauge":"<path d=\"M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0\" /> <path d=\"M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0\" /> <path d=\"M13.41 10.59l2.59 -2.59\" /> <path d=\"M7 12a5 5 0 0 1 5 -5\" />","file-description":"<path d=\"M14 3v4a1 1 0 0 0 1 1h4\" /> <path d=\"M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z\" /> <path d=\"M9 17h6\" /> <path d=\"M9 13h6\" />"};
+  const svg = (d, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+  const I_AKUN = '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />';
+  const I_TAMENG = '<path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />';
+  const I_GANTI = '<path d="M7 10h14l-4 -4" /><path d="M17 14h-14l4 4" />';
+  const I_KELUAR = '<path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" />';
+  const $ = s => document.querySelector(s);
+  const baca = () => { try { return JSON.parse(localStorage.getItem(KUNCI)); } catch (e) { return null; } };
+  const simpan = s => { try { localStorage.setItem(KUNCI, JSON.stringify(s)); } catch (e) { /* peramban menolak penyimpanan: prototipe tetap berjalan */ } };
+  const sesi = baca();
+  /* paket Trial: keadaan dibagi dengan Backlog-HE-TRIAL (kunci eppat-trial); setelah upgrade akun menjadi Super Admin biasa */
+  const KUNCI_TRIAL = 'eppat-trial', HAL_UPGRADE = 'Backlog-HE-TRIAL-Prototype.html#berlangganan';
+  const bacaTrial = () => { try { return JSON.parse(localStorage.getItem(KUNCI_TRIAL)) || {}; } catch (e) { return {}; } };
+  const simpanTrial = t => { try { localStorage.setItem(KUNCI_TRIAL, JSON.stringify(t)); } catch (e) { /* lihat simpan() */ } };
+  const sudahEnt = () => !!(bacaTrial().db || {}).ent;
+  if (sesi && sesi.paket === 'trial') { const t = bacaTrial(); if (sudahEnt()) sesi.label = 'Super Admin'; if (t.nama) sesi.nama = t.nama; if (t.email) sesi.email = t.email; }
+  const berkas = (location.pathname.split('/').pop().match(/^Backlog-(.+)-Prototype\.html$/) || [])[1] || '';
+
+  /* Super Admin saja tidak mendaftarkan TERA, e-Meterai, dan CA; bila merangkap PPAT, semuanya tersedia */
+  const dataSesi = a => ({ kunci:a.kunci, label:a.label, nama:a.nama, email:a.email, peran:a.peran, aktif:a.peran[0], ca:a.ca, caL:STATUS_CA[a.ca], paket:a.paket, tanpaDaftar:a.peran.includes('ROLE_ADMIN') && !a.peran.includes('ROLE_PPAT') });
+  const izin = (s, t) => (s.tanpaDaftar ? t !== 'Aktivasi e-Meterai' : !MENU_PERAN[s.aktif] || MENU_PERAN[s.aktif].includes(t));
+  const halamanBoleh = s => { const syarat = HALAMAN[berkas]; if (berkas === 'HE-EAWK') return s.aktif === 'ROLE_KLIEN'; if (berkas === 'HE-EAW' && s.aktif === 'ROLE_KLIEN') return false; if (LAYAR_MENU[location.hash] && !izin(s, LAYAR_MENU[location.hash])) return false; return !syarat || izin(s, syarat); };
+  window.sesiMasuk = kunci => {
+    if (kunci === 'admin-trial-ulang') { try { localStorage.removeItem(KUNCI_TRIAL); } catch (e) { /* lihat simpan() */ } kunci = 'admin-trial'; }
+    const a = AKUN.find(x => x.kunci === kunci || x.email === String(kunci).toLowerCase() || (x.paket && bacaTrial().email === kunci)) || AKUN[0];
+    simpan(dataSesi(a));
+    location.href = LANDAS[a.peran[0]];
+  };
+  const keluar = () => { try { localStorage.removeItem(KUNCI); } catch (e) { /* lihat simpan() */ } location.href = MASUK; };
+
+  /* halaman Masuk: pilihan simulasi ada di bawah tombol Masuk */
+  if (berkas === 'IDDS-TN-MASUK') {
+    document.addEventListener('click', e => { const b = e.target.closest('[data-sesi-masuk]'); if (b) window.sesiMasuk(b.dataset.sesiMasuk); });
+    return;
+  }
+
+  const itemCa = () => {
+    if (sesi && sesi.tanpaDaftar) return '';
+    const nama = (document.querySelector('header .user .uname') || {}).textContent;
+    const [l, j] = sesi && sesi.caL ? sesi.caL : STATUS_CA[(AKUN.find(a => a.nama === nama) || AKUN[0]).ca];
+    return `<button type="button" class="ina-action-dropdown__item" role="menuitem" data-sesi-href="${REG_CA}"><span class="ina-action-dropdown__item-icon">${svg(I_TAMENG)}</span><span class="ina-action-dropdown__item-content">Registrasi CA</span><span class="ina-badge ina-badge--soft ina-badge--${j} ina-badge--sm ina-badge--rounded-full">${l}</span></button>`;
+  };
+
+  /* Keluar berlaku di semua halaman, termasuk yang punya menu profil sendiri */
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-sesi-href]');
+    if (a) { e.preventDefault(); e.stopPropagation(); location.href = a.dataset.sesiHref; return; }
+    if (e.target.closest('[data-sesi-keluar], #user [data-luar="Keluar"], #user [data-p="keluar"]')) { e.stopPropagation(); keluar(); }
+  }, true);
+
+  /* kepala halaman */
+  const pemicu = $('header .user');
+  if (sesi && pemicu) {
+    document.body.classList.toggle('sesi-tanpa-daftar', !!sesi.tanpaDaftar);
+    document.body.classList.toggle('sesi-tanpa-ingat', !izin(sesi, 'Aktivasi e-Meterai'));
+    const set = (s, t) => { const el = pemicu.querySelector(s); if (el) el.textContent = t; };
+    set('.uname', sesi.nama); set('.urole', sesi.label); set('.ava', sesi.nama.charAt(0).toUpperCase());
+  }
+
+  /* pilihan peran di bilah prototipe: tetap di halaman ini bila perannya boleh membukanya */
+  const labelPeran = [...document.querySelectorAll('.protobar span')].find(el => /^Peran:/.test(el.textContent));
+  const kini = sesi ? sesi.kunci : (AKUN.find(a => a.label === ((pemicu && pemicu.querySelector('.urole')) || {}).textContent) || AKUN[0]).kunci;
+  const pilihPeran = `<span id="sesiPeran"><label for="sesiPilih">Peran:</label> <select id="sesiPilih" class="sesi-pilih">${AKUN.map(a => `<option value="${a.kunci}" ${a.kunci === kini ? 'selected' : ''}>${a.label}</option>`).join('')}</select></span>`;
+  if (labelPeran) labelPeran.outerHTML = pilihPeran;
+  else { const judul = $('.protobar b'); if (judul) judul.insertAdjacentHTML('afterend', `<span class="sep">&bull;</span>${pilihPeran}`); }
+  const pilih = $('#sesiPilih');
+  if (pilih) pilih.addEventListener('change', () => { const s = dataSesi(AKUN.find(a => a.kunci === pilih.value)); simpan(s); if (halamanBoleh(s)) location.reload(); else location.href = LANDAS[s.aktif]; });
+
+  /* menu profil untuk halaman yang belum memilikinya */
+  const milikSendiri = pemicu && pemicu.id === 'user' ? pemicu : null;
+  if (pemicu && !milikSendiri) {
+    pemicu.classList.add('sesi-pemicu', 'ina-action-dropdown');
+    pemicu.setAttribute('role', 'button'); pemicu.setAttribute('tabindex', '0'); pemicu.setAttribute('aria-haspopup', 'menu'); pemicu.setAttribute('aria-expanded', 'false');
+    pemicu.insertAdjacentHTML('beforeend', '<div id="menuSesi"></div>');
+    const wadah = $('#menuSesi');
+    const atur = buka => {
+      pemicu.setAttribute('aria-expanded', String(buka));
+      wadah.innerHTML = buka ? `<div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible" role="menu">
+        <button type="button" class="ina-action-dropdown__item" role="menuitem" data-sesi-href="${AKUN_SAYA}"><span class="ina-action-dropdown__item-icon">${svg(I_AKUN)}</span><span class="ina-action-dropdown__item-content">Akun Saya</span></button>${itemCa()}
+        <div class="ina-action-dropdown__divider" role="separator"></div>
+        <button type="button" class="ina-action-dropdown__item" role="menuitem" data-sesi-keluar><span class="ina-action-dropdown__item-icon">${svg(I_KELUAR)}</span><span class="ina-action-dropdown__item-content">Keluar</span></button></div>` : '';
+    };
+    pemicu.addEventListener('click', e => { e.stopPropagation(); atur(!wadah.innerHTML); });
+    pemicu.addEventListener('keydown', e => { if (e.target === pemicu && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); atur(!wadah.innerHTML); } });
+    document.addEventListener('click', () => { if (wadah.innerHTML) atur(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && wadah.innerHTML) atur(false); });
+  }
+  /* halaman dengan menu profil sendiri: lengkapi agar susunannya sama */
+  if (milikSendiri) {
+    const pasang = () => {
+      const bagi = milikSendiri.querySelector('.ina-action-dropdown__divider'); if (!bagi) return;
+      if (!bagi.parentElement.textContent.includes('Registrasi CA') && itemCa()) bagi.insertAdjacentHTML('beforebegin', itemCa());
+    };
+    pasang(); new MutationObserver(pasang).observe(milikSendiri, { childList:true, subtree:true });
+  }
+
+  if (!sesi) return;
+
+  /* sidebar per peran */
+  const nav = $('#nav'), boleh = t => izin(sesi, t);
+  const lengkap = () => MENU.map(([g, m]) => { const isi = m.filter(([t]) => boleh(t)); return isi.length ? `<button class="grp" aria-expanded="true"><span>${g}</span></button>
+    <div class="items">${isi.map(([t, k, h]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item" data-sesi-href="${h}">${svg(IKON[k] || '')}<span>${t}</span></a>`).join('')}</div>` : ''; }).join('');
+  const saring = () => {
+    if (!nav) return;
+    if (['HE-CA', 'HE-EAWK'].includes(berkas) && sesi.aktif !== 'ROLE_KLIEN') { if (!nav.querySelector('[data-sesi-href]')) nav.innerHTML = lengkap(); return; }
+    nav.querySelectorAll('a.nav-item').forEach(a => a.classList.toggle('sesi-sembunyi', !boleh(a.textContent.trim())));
+    nav.querySelectorAll('.items').forEach(w => {
+      const kosong = !w.querySelector('a.nav-item:not(.sesi-sembunyi)'); w.classList.toggle('sesi-sembunyi', kosong);
+      const g = w.previousElementSibling; if (g && g.classList.contains('grp')) g.classList.toggle('sesi-sembunyi', kosong);
+    });
+  };
+  if (nav) { saring(); new MutationObserver(saring).observe(nav, { childList:true }); }
+
+  /* paket Trial: spanduk, tombol di bawah menu, dan peta perjalanan di bilah prototipe (HE-TRIAL-03, -09) */
+  if (sesi.paket === 'trial') {
+    const t = bacaTrial(), ent = sudahEnt(), konten = $('.content'), I_PANAH = '<path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />', I_X = '<path d="M18 6l-12 12" /><path d="M6 6l12 12" />';
+    const bar = $('.protobar .kanan') || $('.protobar');
+    const tutup = '<button type="button" class="ina-button ina-button--tertiary ina-button--sm" data-tutup-spanduk aria-label="Tutup pesan">' + svg(I_X) + '</button>';
+    const spanduk = (j, id, isi, aksi) => konten && konten.insertAdjacentHTML('afterbegin', `<div id="spandukTrial" data-kunci="${id}"><div class="ina-alert ina-alert--${j}" role="status"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__description">${isi}</div></div><div class="spanduk-aksi">${aksi}${tutup}</div></div></div></div>`);
+    const ditutup = k => { try { return sessionStorage.getItem(k) === '1'; } catch (e) { return false; } };
+    if (ent) {
+      if (!t.kabarEnt) { spanduk('success', 'kabar', '<b>Paket Enterprise aktif.</b> Batas paket Trial sudah terbuka. Data dan pengguna Anda tetap ada.', ''); simpanTrial({ ...t, kabarEnt:true }); }
+      if (bar) bar.insertAdjacentHTML('afterbegin', '<span>Perjalanan: langkah 18 dari 19, Trial sudah menjadi Enterprise.</span>');
+    } else {
+      const sisa = t.db && t.db.trial ? Math.max(0, Math.ceil((t.db.trial.akhir - t.db.trial.mulai - (Date.now() - t.db.trial.nyata)) / 864e5)) : 30;
+      const ke = (uk, lbl) => `<a class="ina-button ina-button--primary ina-button--${uk}" href="${HAL_UPGRADE}">${lbl}</a>`;
+      const kepala = $('header .spacer'), lencana = `<span class="ina-badge ina-badge--soft ina-badge--info ina-badge--sm ina-badge--rounded-full" id="lencanaTrial"><span><span class="lt-opsi">Paket </span>Trial<span class="lt-opsi"> · sisa ${sisa} hari</span></span></span>`;
+      if (kepala) kepala.insertAdjacentHTML('afterend', lencana); else if (pemicu) pemicu.insertAdjacentHTML('beforebegin', lencana);
+      if (!ditutup('eppat-trial-spanduk')) spanduk('caution', 'eppat-trial-spanduk', `<b>Paket Trial, sisa ${sisa} hari.</b> Semua menu dapat dibuka. Tanda tangan dan stempel elektronik aktif setelah upgrade ke Enterprise.`, ke('sm', 'Mulai Berlangganan'));
+      /* di atas kartu profil yang menempel di bawah, agar tombol selalu terlihat walaupun menu panjang */
+      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai Berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai Berlangganan</span></a></div>`); });
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pasangTombol); else pasangTombol();
+      if (bar) bar.insertAdjacentHTML('afterbegin', `<span>Perjalanan: langkah 9 dari 19, coba menu lalu tekan Mulai Berlangganan.</span><button class="pil" id="simBatas" aria-pressed="${!!t.batas}" title="Mengisi kuota pengguna dan transaksi Trial sampai penuh">Batas paket: ${t.batas ? 'tercapai' : 'belum tercapai'}</button>`);
+      const b = $('#simBatas'); if (b) b.addEventListener('click', () => { simpanTrial({ ...bacaTrial(), batas:!t.batas }); location.reload(); });
+    }
+    document.addEventListener('click', e => { if (!e.target.closest('[data-tutup-spanduk]')) return; const w = $('#spandukTrial'); try { sessionStorage.setItem(w.dataset.kunci, '1'); } catch (x) { /* lihat simpan() */ } w.remove(); });
+  }
+
+  /* Klien memakai halaman tanda tangan miliknya */
+  if (berkas === 'HE-EAW' && sesi.aktif === 'ROLE_KLIEN') { location.replace(LANDAS.ROLE_KLIEN); return; }
+
+  /* penjaga halaman */
+  if (!halamanBoleh(sesi)) {
+    document.body.insertAdjacentHTML('beforeend', `<div class="sesi-tolak" role="alert"><div class="sesi-tolak-kartu"><h2>Halaman tidak tersedia</h2><p>Peran ${sesi.label} tidak memiliki akses ke halaman ini.</p>
+      <div class="sesi-tolak-aksi"><a class="ina-button ina-button--primary ina-button--md" href="${LANDAS[sesi.aktif]}">Ke Halaman Utama</a><button type="button" class="ina-button ina-button--secondary ina-button--md" data-sesi-keluar>Keluar</button></div></div></div>`);
+  }
+})();
+</script>
+
 <!-- ===== Sidebar pola IDDS (sidebar-idds.html, disisipkan rakit-idds.js ke setiap prototipe bersidebar) =====
      Struktur mengikuti pola Sidebar IDDS (design.inadigital.go.id/pattern/sidebar): label grup kecil sentence case + chevron,
      item ikon + label (default/hover/terpilih), kartu profil pengguna di bawah, kategori Expand/Collapse, laci di layar sempit.
@@ -1829,6 +2105,77 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
     };
     setTimeout(coba, 450);
   }, true);
+})();
+</script>
+
+<!-- ===== Kabar bersama (kabar-bersama.html, disisipkan rakit-idds.js ke prototipe yang punya #toastWadah) =====
+     Pesan hasil tindakan pengguna ("Email verifikasi dikirim ulang.", "Perubahan disimpan.", …) tidak lagi muncul sebagai
+     toast di kanan bawah, tetapi sebagai IDDS Alert di bagian atas kartu tempat tombol diklik, agar tidak terlewat.
+     Urutan wadah: kartu/dialog/laci tempat tombol diklik → kartu yang sama setelah layar digambar ulang → dialog/laci
+     yang terbuka → kartu utama halaman → atas isi halaman.
+     Pesan milik kontrol prototipe (protobar, Daftar perubahan, "Lihat di layar", teks yang menyebut "prototipe") tetap toast. -->
+<style id="kabar-bersama-css">
+.kabar-sisip{text-align:left;flex:none;width:100%;grid-column:1/-1;box-sizing:border-box;margin:0 0 16px}
+.kabar-sisip .ina-alert__content{flex:1;min-width:0}
+.kabar-sisip .ina-alert__description{margin:2px 0 0}
+</style>
+<script id="kabar-bersama-js">
+(() => {
+  const wadah = document.getElementById('toastWadah');
+  if (!wadah) return;
+  const KARTU = '.ina-modal__body, .ina-drawer__content, .ina-card__content, .ob-kartu, .ina-card, section, .builder, .kartu, .panel';
+  const META = '.protobar, .daftar-ubah, [data-lihat], #notif-bersama';
+  const LUAR = '.sidebar, .topbar, .ob-nav, header, nav';
+  const IKON = {
+    success:'<path d="M5 12l5 5l10 -10" />',
+    info:'<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" />'
+  };
+  const svg = (p, s) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+  const tampak = el => !!el && el.isConnected && el.getClientRects().length > 0;
+  let asal = null, jejak = null;
+  /* catat tombol yang terakhir dipakai beserta kartunya, untuk menemukan kartu yang sama bila layar digambar ulang */
+  const catat = e => {
+    asal = e.target instanceof Element ? e.target : null;
+    const k = asal && !asal.closest(LUAR) ? asal.closest(KARTU) : null;
+    if (!k) { jejak = null; return; }
+    const pemilih = k.id ? '#' + CSS.escape(k.id) : k.tagName.toLowerCase() + (k.classList[0] ? '.' + CSS.escape(k.classList[0]) : '');
+    jejak = { pemilih, ke:[...document.querySelectorAll(pemilih)].indexOf(k) };
+  };
+  document.addEventListener('pointerdown', catat, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') catat(e); }, true);
+  const isiKartu = k => (k.classList.contains('ina-card') && k.querySelector(':scope > .ina-card__content')) || k;
+  function cariWadah() {
+    if (asal && asal.isConnected && !asal.closest(LUAR)) { const k = asal.closest(KARTU); if (tampak(k)) return isiKartu(k); }
+    if (jejak) { const k = document.querySelectorAll(jejak.pemilih)[jejak.ke]; if (tampak(k)) return isiKartu(k); }
+    const lap = [...document.querySelectorAll('.ina-modal__body, .ina-drawer__content')].filter(tampak).pop();
+    if (lap) return lap;
+    const utama = document.querySelector('#halaman .ob-kartu');
+    if (tampak(utama)) return utama;
+    return [document.getElementById('halamanApp'), document.getElementById('halaman'), document.querySelector('main')].find(tampak) || null;
+  }
+  function sisipkan() {
+    const t = wadah.querySelector('.ina-toast');
+    if (!t) return;
+    const judul = (t.querySelector('.ina-toast__title') || {}).textContent || '';
+    const desk = (t.querySelector('.ina-toast__description') || {}).textContent || '';
+    const meta = (asal && asal.isConnected && asal.closest(META)) || /prototipe/i.test(judul + ' ' + desk);
+    const tujuan = meta ? null : cariWadah();
+    if (!tujuan) return; /* tetap toast */
+    const jenis = t.className.includes('state-positive') ? 'success' : 'info';
+    document.querySelectorAll('.kabar-sisip').forEach(x => x.remove());
+    /* wadah grid atau flex sebaris: alert di atas kartu (bukan di dalam) agar tidak ikut meregang/terjepit */
+    const gaya = getComputedStyle(tujuan), luar = gaya.display.includes('grid') || (gaya.display.includes('flex') && !gaya.flexDirection.startsWith('column') && gaya.flexWrap === 'nowrap');
+    tujuan.insertAdjacentHTML(luar ? 'beforebegin' : 'afterbegin', `<div class="ina-alert ina-alert--${jenis} kabar-sisip" role="status"><span class="ina-alert__icon">${svg(IKON[jenis], 20)}</span>
+      <div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">${judul.replace(/</g, '&lt;')}</div>${desk ? `<div class="ina-alert__description">${desk.replace(/</g, '&lt;')}</div>` : ''}</div></div>
+      <button type="button" class="ina-alert__close-button" aria-label="Tutup pesan">${svg('<path d="M18 6l-12 12" /><path d="M6 6l12 12" />', 16)}</button></div>`);
+    wadah.innerHTML = '';
+    const a = document.querySelector('.kabar-sisip'), r = a.getBoundingClientRect();
+    if (r.top < 0 || r.bottom > innerHeight) a.scrollIntoView({ block:'nearest', behavior:'smooth' });
+  }
+  /* tunggu satu giliran: beberapa prototipe menambah keterangan ke toast sesudah toast dibuat */
+  let antre = 0;
+  new MutationObserver(() => { clearTimeout(antre); antre = setTimeout(sisipkan, 0); }).observe(wadah, { childList:true, subtree:true });
+  document.addEventListener('click', e => { const b = e.target.closest('.kabar-sisip .ina-alert__close-button'); if (b) b.closest('.kabar-sisip').remove(); });
 })();
 </script>
 

@@ -108,6 +108,15 @@ table.tb td .kc{font-size:12px;color:var(--ina-content-secondary)}
 table.tb tr.klik{cursor:pointer}
 table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .aksi-baris{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.kuota-trial{align-self:center;margin-right:12px;font-size:14px;color:var(--ina-content-secondary)}
+#lapisanBatas .ina-button{text-decoration:none}
+.aksi-baris:has(.aksi-wadah){flex-wrap:nowrap;align-items:center}
+.aksi-wadah{position:relative;display:inline-block}
+.aksi-wadah .ina-action-dropdown__menu{position:fixed;min-width:150px;z-index:60;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.aksi-wadah .ina-action-dropdown__menu[hidden]{display:none}
+.aksi-wadah .ikon-aksi{width:32px;height:32px;padding:0;justify-content:center}
+.aksi-wadah [data-hapus-pihak]{color:var(--ina-negative-600)}
+.tb:has(#kolStatusAkun) th,.tb:has(#kolStatusAkun) td{padding-left:12px;padding-right:12px}
 .kosong{padding:28px;text-align:center;color:var(--ina-content-secondary)}
 .halaman{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--ina-stroke-primary);font-size:13px;color:var(--ina-content-secondary)}
 .halaman > span{white-space:nowrap}
@@ -177,6 +186,61 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .seg button{border:0;border-radius:7px;background:transparent;padding:7px 14px;font:500 14px Inter,sans-serif;color:var(--ina-content-secondary);cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--ina-primary-primary);color:#fff}
 .fld{margin-bottom:16px}
+/* klien tanpa akun: formulir sama dengan Daftar Pengguna */
+/* tombol simulasi tetap dapat diklik saat dialog terbuka */
+body .protobar{z-index:1001}
+.ina-modal{padding-top:84px;box-sizing:border-box}
+.ina-modal__dialog{max-height:calc(100vh - 104px)}
+.tombol-klien-baru{margin-top:8px}
+#f-berkasObj .ina-single-file-upload,.panel-berkas .ina-single-file-upload{width:100%}
+.ulang-baris>.panel-berkas{margin-bottom:12px}
+.panel-berkas,#f-berkasObj{margin-bottom:12px}
+.panel-berkas .ina-file-upload__label,#f-berkasObj .ina-file-upload__label{display:block;margin:0 0 6px;line-height:20px}
+#f-berkasObj .ina-file-upload__label{margin-bottom:6px}
+.ulang-f{display:grid;gap:12px;margin-bottom:12px}
+.f12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px 16px}
+.s12{grid-column:span 12}.s6{grid-column:span 6}.s4{grid-column:span 4}.s3{grid-column:span 3}
+.sc{grid-column:span var(--s,12);min-width:0}
+.f12 .ina-text-field,.f12 .ina-text-area{margin-bottom:8px}
+@media (max-width:760px){.s6,.s4,.s3,.sc{grid-column:span 12}}
+#blokPihak .f-grid+.f-grid,#blokPT .f-grid+.f-grid{margin-top:12px}
+#blokPihak>.f-grid:first-child{margin-top:4px}
+.tab-kartu .ina-tab-horizontal__container{overflow-x:auto}
+.tab-kartu .ina-tab-horizontal__tab{flex:none}
+.ulang-baris{padding:12px;border:1px solid var(--ina-stroke-primary);border-radius:8px}
+.ulang-kepala{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.ket-f{margin:0;font-size:13px;line-height:20px;color:var(--ina-content-secondary)}
+.ulang-f>.ina-button{justify-self:start}
+.form-tab .bantu-sub:first-of-type{margin-top:16px}
+.tombol-klien-baru .ina-button{width:100%;justify-content:center}
+.kartu-pihak .catatan-akun{margin-top:10px}
+.kb-baris{margin-top:16px}
+.kb-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.f-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-baris{margin-top:16px}
+.lipat-ktp{margin-top:16px;border:1px solid var(--ina-stroke-primary);border-radius:8px}
+.lipat-ktp .ina-accordion{border-bottom:0}
+.lipat-ktp .ina-accordion__toggle{width:100%;padding:16px;text-align:left}
+.lipat-ktp .ina-accordion__title b{font-weight:600}
+.lipat-ktp .ina-accordion__title span{font-weight:400;color:var(--ina-content-secondary)}
+.lipat-ktp .ina-accordion__content--open{max-height:none;overflow:visible}
+.lipat-ktp .ina-accordion__body{padding:0 16px 16px}
+.lipat-form:not(:first-child){margin-top:16px}
+.lipat-form+.f12,.lipat-form+.bantu-sub{margin-top:16px}
+.lipat-form .ina-accordion__content{transition:none}
+.lipat-form .ina-accordion__content:not(.ina-accordion__content--open){visibility:hidden}
+.pilih-f{display:block;height:auto;padding:0;border:0;background:transparent;box-shadow:none}
+.pilih-f:focus-within{box-shadow:none;outline:0}
+.pilih-f .ina-select-dropdown__trigger{width:100%}
+.pilih-f.ina-text-field__wrapper--status-error .ina-select-dropdown__trigger{border-color:var(--ina-stroke-error,#d92d20)}
+.pilih-f .ina-select-dropdown__panel{z-index:40}
+.pilih-asli{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.lipat-ktp .ket-ktp{margin:0 0 12px;font-size:13px;line-height:20px;color:var(--ina-content-secondary)}
+.ocr-ktp{display:flex;flex-direction:column;gap:12px}
+.ocr-ktp .ina-file-upload__file-actions{width:auto}
+.ina-text-field select.ina-text-field__input{appearance:auto;background:transparent;border:0;width:100%;height:100%;font:inherit;font-size:14px;color:inherit;outline:0}
+@media (max-width:760px){.kb-grid3,.f-grid2,.f-grid3{grid-template-columns:1fr}}
 .fld > .ina-text-field__label{display:flex;align-items:center;gap:6px}
 .select-wadah{position:relative;display:block;width:100%}
 .select-wadah .ina-select-dropdown__panel{top:calc(100% + 4px);left:0;right:0;max-height:240px}
@@ -450,6 +514,8 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 #lapisanDrawer .ina-drawer__panel--width-xl{width:min(1080px,100vw);max-width:100vw}
 
 /* Jalur Trial lalu Upgrade (IDDS-OB-56…60) */
+.waktu-baris{display:block;margin:2px 0 8px}
+.waktu-baris .ina-badge{display:inline-flex;align-items:center;gap:6px}
 .sisa-trial{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:6px}
 .sisa-trial div{padding:10px 4px;border:1px solid var(--ina-stroke-primary);border-radius:12px;background:var(--ina-background-primary);text-align:center}
 .sisa-trial b{display:block;font:700 24px/30px Inter,sans-serif;color:var(--ina-primary-primary)}
@@ -602,7 +668,7 @@ const UBAH = [
     isi:'Kartu tagihan menampilkan nomor VA, nominal "Rp3.500.000", hitung mundur, dan batas waktu lengkap dengan tahun ("27 Okt 2026, 14.53"). Tombol "Salin" menyebut nomornya untuk pembaca layar. Panduan umum diganti dengan cara bayar per kanal BRI dalam IDDS Accordion (ATM, BRImo, Internet Banking, bank lain). Label "Reference" menjadi "Referensi". Cek Status Pembayaran menampilkan "Belum ada pembayaran masuk" beserta jam pengecekan dan perkiraan waktu verifikasi. Perkiraannya paling lama 10 menit setelah transfer, sesuai email instruksi di live.',
     lama:'Kartu "BRI Virtual Account · Pembayaran Terverifikasi" berisi "Selesaikan Pembayaran Dalam 23:59:24" dan "Berlaku sampai 13 Okt, 14.10" tanpa tahun. Label tertulis "Reference", dan nominal "Rp 1". "Panduan Pembayaran" berisi tiga kalimat umum yang sama untuk semua kanal. Hasil Cek Status Pembayaran (bukti 26 Okt 23.05, halaman Upgrade) hanya berupa kotak "Pembayaran belum terdeteksi. Silakan transfer terlebih dahulu." tanpa jam pengecekan (lihat IDDS-OB-58).', ke:{ t:'pelanggan', layar:'dasbor', langkah:5 }, sorot:'#kartuVa' },
   { kode:'IDDS-OB-48', judul:'Riwayat tahap tersinkron: Proses Pembayaran "Sedang berjalan" sejak VA dibuat',
-    isi:'Pelanggan (Progres Registrasi Anda) dan operator (Detail Pendaftar) melihat IDDS Stepper sembilan tahap dari data yang sama. Tahap Proses Pembayaran bertanda "Sedang berjalan sejak 26 Okt 2026, 14.53" begitu VA dibuat. Sebelum VA dibuat, tahap itu bertanda "Menunggu tagihan dibuat". Tagihan kedaluwarsa atau gagal ditandai "Tertahan" beserta sebabnya. Proses Administrasi bertanda "Dimulai otomatis setelah lunas". Waktu tahap dicatat saat kejadian: Proses Pembayaran mulai saat VA dibuat dan selesai saat bank mengonfirmasi, sehingga tahap tidak lagi bertanggal sama. Progres pelanggan menampilkan sembilan tahap, termasuk Verifikasi Anggota, sama dengan tampilan operator. Status pendaftar di tabel memakai nama tahap baku ("Pilih Produk"). Detail Transaksi memuat Riwayat Status tagihan yang sama dengan rekam jejak.',
+    isi:'Pelanggan melihat Progres Registrasi Anda dalam tujuh tahap bernomor urut, sesuai masukan Peruri. Operator melihat sembilan tahap di Detail Pendaftar dari data yang sama. Tahap Proses Pembayaran bertanda "Sedang berjalan sejak 26 Okt 2026, 14.53" begitu VA dibuat. Sebelum VA dibuat, tahap itu bertanda "Menunggu tagihan dibuat". Tagihan kedaluwarsa atau gagal ditandai "Tertahan" beserta sebabnya. Proses Aktivasi bertanda "Dimulai otomatis setelah lunas". Waktu tahap dicatat saat kejadian: Proses Pembayaran mulai saat VA dibuat dan selesai saat bank mengonfirmasi, sehingga tahap tidak lagi bertanggal sama. Progres pelanggan menampilkan sembilan tahap, termasuk Verifikasi Anggota, sama dengan tampilan operator. Status pendaftar di tabel memakai nama tahap baku ("Pilih Produk"). Detail Transaksi memuat Riwayat Status tagihan yang sama dengan rekam jejak.',
     lama:'Detail Riwayat "Uji Onboarding HE (PPAT990002)" mencatat Pendaftaran 26 Okt, 14.47 … Pilih Produk 26 Okt, 14.52. Proses Pembayaran tetap "Menunggu..." padahal VA kode 002 sudah dibuat pukul 14.52 dan berstatus UNPAID. Lunas, Proses Administrasi, dan Selesai juga "Menunggu...". Status di tabel tertulis "Pilih product". Setelah lunas (bukti 26 Okt 22.45), Proses Pembayaran, Lunas, Proses Administrasi, dan Selesai bertanggal sama "26 Okt, 22.45" padahal VA dibuat pukul 14.53. Akibatnya, lama tahap pembayaran tidak terbaca (pola yang sama dengan temuan #23). Progres pelanggan hanya menampilkan delapan tahap karena Verifikasi Anggota tidak tampil.', ke:{ t:'operator', layar:'onboarding-detail', langkah:4 }, sorot:'#riwayatTahap' },
   { kode:'IDDS-OB-49', judul:'Detail Transaksi: Waktu Pembuatan VA, Batas Waktu, dan Waktu Pembayaran terisi',
     isi:'Detail Transaksi Pembayaran menampilkan status tagihan sebagai lencana, "Waktu Pembuatan VA" (misalnya 26 Okt 2026, 14.53), "Batas Waktu" (24 jam sesudahnya), dan "Waktu Pembayaran" sesuai rekam jejak. Metode ditulis "Virtual Account BRI (002)", paket "Enterprise", dan nominal "Rp3.500.000". Nilai yang belum ada ditulis "Belum dibayar", bukan "-".',
@@ -638,7 +704,7 @@ const UBAH = [
     isi:'Riwayat Transaksi memuat baris Trial (ORD-TRIAL-…) dengan "Paket Trial 30 hari", metode "Gratis", "Rp0", Jatuh Tempo "Tidak berlaku (gratis)", dan lencana "Gratis". Keterangannya menyebut tanggal berakhir atau tanggal diganti Enterprise. Baris ORD-UPGRADE-… berketerangan "Upgrade ke Enterprise", bukan perpanjangan. Metode ditulis "Virtual Account BRI", status berupa lencana "Lunas", dan Jatuh Tempo berisi "Tidak berlaku (sudah dibayar)". Di sisi operator, Verifikasi Pembayaran memuat order yang sama, dan Detail Transaksi menulis Jenis Order "Upgrade dari Trial ke Enterprise".',
     lama:'Setelah upgrade, Riwayat Transaksi hanya berisi "ORD-RENEW-1793030676". Upgrade tercatat sebagai perpanjangan, dan Trial tidak tercatat. Metode tertulis "VIRTUAL_ACCOUNT" dan status "LUNAS". Jatuh Tempo "27 Okt 2026, 23.05" tetap tampil walaupun tagihan sudah "Dibayar: 26 Okt 2026, 23.06".', ke:{ t:'pelanggan', layar:'riwayat', jalur:'trial', langkah:7 }, sorot:'#tabelRiwayat' },
   { kode:'IDDS-OB-60', judul:'Trial dan Upgrade: stepper urut waktu, lencana status akun, dan email aktivasi tidak ganda',
-    isi:'Progres Registrasi tetap sembilan tahap, termasuk Verifikasi Anggota. Saat Trial, Proses Pembayaran dan Lunas bertanda "Tidak perlu (Trial gratis)", sedangkan Proses Administrasi dan Selesai tercatat pada waktu Trial aktif. Pembayaran upgrade dicatat di Progres Upgrade tersendiri (Upgrade dimulai, Proses Pembayaran, Lunas, Enterprise aktif), sehingga waktu di setiap stepper selalu urut. Lencana berubah sesuai keadaan: "Status akun: Onboarding", lalu "Status akun: Trial aktif", lalu "Status akun: Aktif". Email "Akun e-PPAT Anda Sudah Aktif" (tanpa kata sandi; pengguna masuk dengan kata sandi pendaftaran) hanya dikirim sekali saat Trial aktif. Saat upgrade, hanya email "Pembayaran Berhasil Diterima" yang dikirim. Email itu menyatakan paket Enterprise aktif serta alamat aplikasi dan kata sandi tidak berubah. Operator melihat Riwayat Tahap, Paket Langganan, dan Progres Upgrade yang sama di Detail Pendaftar.',
+    isi:'Progres Registrasi pelanggan memakai tujuh tahap, tanpa Masuk Pertama dan Verifikasi Anggota. Saat Trial, Proses Pembayaran dan Lunas bertanda "Tidak perlu (Trial gratis)", sedangkan Proses Aktivasi dan Selesai tercatat pada waktu Trial aktif. Pembayaran upgrade dicatat di Progres Upgrade tersendiri (Upgrade dimulai, Proses Pembayaran, Lunas, Enterprise aktif), sehingga waktu di setiap stepper selalu urut. Lencana berubah sesuai keadaan: "Status akun: Onboarding", lalu "Status akun: Trial aktif", lalu "Status akun: Aktif". Email "Akun e-PPAT Anda Sudah Aktif" (tanpa kata sandi; pengguna masuk dengan kata sandi pendaftaran) hanya dikirim sekali saat Trial aktif. Saat upgrade, hanya email "Pembayaran Berhasil Diterima" yang dikirim. Email itu menyatakan paket Enterprise aktif serta alamat aplikasi dan kata sandi tidak berubah. Operator melihat Riwayat Tahap, Paket Langganan, dan Progres Upgrade yang sama di Detail Pendaftar.',
     lama:'Stepper awal melompat dari tahap 3 (Login Pertama) ke tahap 5 (Pilih Produk) karena Verifikasi Anggota tidak tampil. Saat Trial aktif, Pilih Produk, Proses Administrasi, dan Selesai semuanya bertanggal "26 Okt, 23.03", sedangkan Proses Pembayaran dan Lunas hilang dari stepper. Setelah upgrade, Proses Pembayaran dan Lunas "26 Okt, 23.06" tampil sebelum Proses Administrasi dan Selesai "26 Okt, 23.03", sehingga urutan waktu terbalik. Lencana tetap "STATUS AKUN: ONBOARDING" saat Trial maupun setelah Enterprise aktif. Email "Akun e-PPAT Anda Sudah Aktif" terkirim dua kali, yaitu pukul 23.03 (Trial) dan 23.06 (Enterprise), bersama "Pembayaran Berhasil Diterima" pukul 23.06. Kartu tetap bertuliskan "Cek email Anda untuk mendapatkan password login".', ke:{ t:'operator', layar:'onboarding-detail', jalur:'trial', langkah:7 }, sorot:'#paketOp' }
 ];
 
@@ -651,7 +717,7 @@ const tglJam = w => `${tglPendek(w)}, ${jam(w)}`;
 const rupiah = n => 'Rp' + n.toLocaleString('id-ID');
 
 /* Sembilan tahap progres (urutan live) */
-const TAHAP = ['Pendaftaran', 'Verifikasi Email', 'Masuk Pertama', 'Verifikasi Anggota', 'Pilih Produk', 'Proses Pembayaran', 'Lunas', 'Proses Administrasi', 'Selesai'];
+const TAHAP = ['Pendaftaran', 'Verifikasi Data', 'Masuk Pertama', 'Verifikasi Anggota', 'Pilih Produk', 'Proses Pembayaran', 'Lunas', 'Proses Aktivasi', 'Selesai'];
 const I_LUNAS = 6;
 const lencanaTahap = (st, uk = 'sm') => st < 0 ? badge('Belum ada status', 'neutral', uk) : st === 0 ? badge('Pendaftaran', 'warning', uk) : st === I_LUNAS || st === 8 ? badge(TAHAP[st], 'success', uk) : badge(TAHAP[st], 'info', uk);
 const ANGKA = ['Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh'];
@@ -698,7 +764,7 @@ const PAKET = {
    ===================================================================================== */
 /* Dua jalur simulasi. Setiap langkah punya "fase" agar layar & aksi tidak bergantung pada nomor langkah. */
 const NAMA_LANGKAH = {
-  enterprise:['Pilih paket', 'Pilih metode', 'Pilih bank', 'Tagihan VA dibuat', 'Menunggu pembayaran', 'Pembayaran diterima', 'Lunas & Proses Administrasi', 'Selesai'],
+  enterprise:['Pilih paket', 'Pilih metode', 'Pilih bank', 'Tagihan VA dibuat', 'Menunggu pembayaran', 'Pembayaran diterima', 'Lunas & Proses Aktivasi', 'Selesai'],
   trial:['Pilih paket Trial', 'Trial aktif', 'Upgrade: pilih metode', 'Pilih bank', 'Tagihan VA dibuat', 'Menunggu pembayaran', 'Enterprise aktif'] };
 const FASE = { enterprise:['paket', 'metode', 'bank', 'va', 'tunggu', 'lunas', 'admin', 'selesai'], trial:['paket', 'trial', 'metode', 'bank', 'va', 'tunggu', 'aktif'] };
 const JALUR = { enterprise:'Enterprise langsung', trial:'Trial lalu Upgrade' };
@@ -756,7 +822,7 @@ function masuk(k) { SIM.langkah = k; Object.keys(SNAP).forEach(j => { if (+j > k
 const masukF = f => masuk(nf(f));
 function mulaiSim(j) {
   SIM = SIM0(j || (SIM && SIM.jalur) || 'enterprise'); SNAP = {}; jamReal = Date.now();
-  catat('Sistem', 1, 'Simulasi dimulai', `Jalur ${JALUR[SIM.jalur]}. Calon PPAT Contoh Satu sudah menyelesaikan Verifikasi Anggota (26 Okt 2026, 14.51) dan dapat memilih paket.`);
+  catat('Sistem', 1, 'Simulasi dimulai', `Jalur ${JALUR[SIM.jalur]}. Calon PPAT Contoh Satu sudah menyelesaikan Verifikasi Data (26 Okt 2026, 14.49) dan dapat memilih paket.`);
   masuk(1);
 }
 function buatTagihan() {
@@ -773,7 +839,7 @@ function aksiPaket(pk) {
   SIM.paket = pk; SIM.dipesan = pk; maju(1);
   SIM.tahap[4] = { mulai:SIM.tahap[4].mulai, selesai:SIM.jam };
   if (pk === 'trial') {
-    /* Trial aktif seketika (sama dengan live): Proses Administrasi & Selesai pada menit yang sama, Proses Pembayaran & Lunas tidak perlu */
+    /* Trial aktif seketika (sama dengan live): Proses Aktivasi & Selesai pada menit yang sama, Proses Pembayaran & Lunas tidak perlu */
     SIM.tahap[5] = { lewat:true, selesai:SIM.jam }; SIM.tahap[6] = { lewat:true, selesai:SIM.jam };
     SIM.tahap[7] = { mulai:SIM.jam, selesai:SIM.jam }; SIM.tahap[8] = { mulai:SIM.jam, selesai:SIM.jam };
     SIM.trial = { invoice:'ORD-TRIAL-2610260001', mulai:SIM.jam, akhir:SIM.jam + 30 * 864e5, diganti:null };
@@ -819,7 +885,7 @@ function aksiBayar() {
   catat('Sistem', 6, 'Status order Lunas', 'Email "Pembayaran Berhasil Diterima" dikirim dengan sapaan "Yth. Bapak/Ibu Calon PPAT Contoh Satu".');
   masuk(6);
 }
-function aksiAdmin() { maju(1); SIM.tahap[7] = { mulai:SIM.jam }; catat('Sistem', 7, 'Proses Administrasi dimulai', `Aplikasi kantor ${URL0} sedang disiapkan. Perkiraan selesai ± 1 hari kerja (data contoh).`); masuk(7); }
+function aksiAdmin() { maju(1); SIM.tahap[7] = { mulai:SIM.jam }; catat('Sistem', 7, 'Proses Aktivasi dimulai', `Aplikasi kantor ${URL0} sedang disiapkan. Perkiraan selesai ± 1 hari kerja (data contoh).`); masuk(7); }
 function aksiSelesai() {
   maju(2);
   SIM.tahap[7].selesai = SIM.jam; SIM.tahap[8] = { mulai:SIM.jam, selesai:SIM.jam };
@@ -1010,17 +1076,18 @@ function pindah(ke, lanjut) {
 }
 function gantiTampilan(tp) { S.tampilan = tp; S.layar = tp === 'operator' ? S.layarO : S.layarP; S.menu = S.menuP = false; gambar(); window.scrollTo({ top:0 }); }
 
-/* ---------------- stepper sembilan tahap (salin Detail Pendaftar; satu sumber untuk kedua tampilan) ---------------- */
+/* ---------------- stepper (salin Detail Pendaftar; satu sumber: operator sembilan tahap, pelanggan tujuh tahap) ---------------- */
 const CEK_STEP = '<svg class="ina-stepper__check-icon" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" aria-hidden="true"><path d="M5 12l5 5l10 -10"/></svg>';
 const tahapP = p => p === P0() ? SIM.tahap : TAHAP.map((_, i) => i <= p.st ? { selesai:p.waktu[i] } : i === p.st + 1 ? { mulai:p.waktu[p.st] } : {});
-function stepper(T, vertikal, label, sim, NM = TAHAP, ket = ketTahap) {
+const TAMPIL = [0, 1, 4, 5, 6, 7, 8];
+function stepper(T, vertikal, label, sim, NM = TAHAP, ket = ketTahap, tampil = NM.map((_, i) => i)) {
   const kini = tahapKini(T);
-  return `<div class="ina-stepper ${vertikal ? 'ina-stepper--vertical stepper-vt' : 'ina-stepper--horizontal stepper-ob'}" role="list" aria-label="${label}">${NM.map((nm, i) => {
-    const ok = !!T[i].selesai, kls = ok ? 'completed' : i === kini ? 'active' : '';
-    return `${i ? `<div class="ina-stepper__separator ${ok ? 'ina-stepper__separator--completed' : ''}" aria-hidden="true"></div>` : ''}<div class="ina-stepper__item ${kls ? 'ina-stepper__item--' + kls : ''}" role="listitem" data-tahap-i="${i}" ${i === kini ? 'aria-current="step"' : ''}><div class="ina-stepper__icon-wrapper">${ok ? CEK_STEP : `<span class="ina-stepper__step-number">${i + 1}</span>`}</div><div class="ina-stepper__label"><span>${nm}</span><small>${ok ? (vertikal ? 'Selesai · ' : '<span class="sr">Selesai, </span>') : ''}${ket(T, i, kini, sim)}</small></div></div>`;
+  return `<div class="ina-stepper ${vertikal ? 'ina-stepper--vertical stepper-vt' : 'ina-stepper--horizontal stepper-ob'}" role="list" aria-label="${label}">${tampil.map((i, n) => {
+    const nm = NM[i], ok = !!T[i].selesai, kls = ok ? 'completed' : i === kini ? 'active' : '';
+    return `${n ? `<div class="ina-stepper__separator ${ok ? 'ina-stepper__separator--completed' : ''}" aria-hidden="true"></div>` : ''}<div class="ina-stepper__item ${kls ? 'ina-stepper__item--' + kls : ''}" role="listitem" data-tahap-i="${i}" ${i === kini ? 'aria-current="step"' : ''}><div class="ina-stepper__icon-wrapper">${ok ? CEK_STEP : `<span class="ina-stepper__step-number">${n + 1}</span>`}</div><div class="ina-stepper__label"><span>${nm}</span><small>${ok ? (vertikal ? 'Selesai · ' : '<span class="sr">Selesai, </span>') : ''}${ket(T, i, kini, sim)}</small></div></div>`;
   }).join('')}</div>`;
 }
-const stepperDua = (T, label, sim, NM, ket) => `<div class="gulir-step">${stepper(T, false, label, sim, NM, ket)}</div>${stepper(T, true, label, sim, NM, ket)}`;
+const stepperDua = (T, label, sim, NM, ket, tampil) => `<div class="gulir-step">${stepper(T, false, label, sim, NM, ket, tampil)}</div>${stepper(T, true, label, sim, NM, ket, tampil)}`;
 const stepperUp = () => stepperDua(SIM.up, 'Progres upgrade ke Enterprise', true, UP, ketUp);
 function sinkronP0() { const k = tahapKini(SIM.tahap); P0().st = k < 0 ? 8 : k - 1; P0().waktu = SIM.tahap.map(t => t.selesai); }
 
@@ -1032,11 +1099,12 @@ function heroDb() {
     /* jalur Trial lalu Upgrade: lencana mengikuti keadaan (IDDS-OB-60) */
     const ent = fase() === 'aktif';
     return `<section class="hero-db"><div><span class="ditandai" id="lencanaAkun">${badge(ent ? 'Status akun: Aktif' : 'Status akun: Trial aktif', ent ? 'success' : 'info', 'sm')}${usulan('IDDS-OB-60')}</span><h2>Selamat Datang di Portal e-PPAT</h2><p>${ent ? 'Aplikasi e-PPAT kantor Anda sudah aktif. Paket Enterprise berlaku.' : `Paket Trial Anda aktif sampai ${tglJam(SIM.trial.akhir)}. Upgrade ke Enterprise kapan saja untuk akses penuh.`}</p></div>
-    <span>${tombol('Cek Status Terbaru', 'secondary', 'md', `id="cekStatus" ${S.memuat === 'cek' ? 'disabled' : ''}`, S.memuat === 'cek' ? spinner : ik('ulang', 16))}</span></section>`;
+    </section>`;
   }
   return `<section class="hero-db"><div><span class="ditandai" id="lencanaAkun">${badge(aktif ? 'Status akun: Aktif' : diproses ? 'Status akun: Diproses' : 'Status akun: Onboarding', aktif ? 'success' : 'info', 'sm')}${usulan('IDDS-OB-54')}</span><h2>Selamat Datang di Portal e-PPAT</h2><p>${aktif ? `Aplikasi e-PPAT kantor Anda sudah aktif. Paket ${pk} berlaku.` : `Selesaikan langkah-langkah di bawah ini untuk mengaktifkan akun PPAT ${pk} Anda.`}</p></div>
-    <span>${tombol('Cek Status Terbaru', 'secondary', 'md', `id="cekStatus" ${S.memuat === 'cek' ? 'disabled' : ''}`, S.memuat === 'cek' ? spinner : ik('ulang', 16))}</span></section>`;
+    ${aktif ? '' : `<span>${tombol('Cek Progres Registrasi', 'secondary', 'md', `id="cekStatus" ${S.memuat === 'cek' ? 'disabled' : ''}`, S.memuat === 'cek' ? spinner : ik('ulang', 16))}</span>`}</section>`;
 }
+const lencanaWaktu = L => { const w = L === 4 || L === 5 ? ['Verifikasi pembayaran', 'beberapa menit setelah transfer'] : L === 7 ? ['Perkiraan selesai', est('± 1 hari kerja')] : null; return w ? `<span class="waktu-baris">${badge(`${ik('jam', 14)} ${w[0]}: <b>${w[1]}</b>`, 'warning', 'md')}</span>` : ''; };
 function kartuTahap() {
   const L = SIM.langkah, t = tAktif(), f = fase();
   if (diTrial()) {
@@ -1044,18 +1112,18 @@ function kartuTahap() {
       : f === 'aktif' ? ['Gunakan aplikasi kantor', `Paket Enterprise aktif sampai ${tglPendek(hinggaEnt())}. Masuk ke aplikasi kantor melalui tombol di bawah.`, '']
       : ['Selesaikan pembayaran upgrade', 'Lanjutkan di halaman Upgrade ke Enterprise. Trial tetap berjalan sampai pembayaran diterima.', `<span>${tombol('Lanjutkan Upgrade', 'primary', 'sm', 'id="lanjutUpgradeTahap" data-ke-p="upgrade"', ik('panah', 14))}</span>`];
     return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuTahap"><div class="ina-card__content"><h3>Progres Registrasi Anda${usulan('IDDS-OB-48')}${usulan('IDDS-OB-60')}</h3>
-      ${stepperDua(SIM.tahap, 'Progres registrasi', true)}
+      ${stepperDua(SIM.tahap, 'Progres registrasi', true, TAHAP, ketTahap, TAMPIL)}
       <div class="berikut-db" id="langkahDb">${alert('info', `Langkah berikutnya: ${B[0]}`, B[1], B[2])}</div></div></section>`;
   }
   const B = L === 1 ? ['Pilih paket layanan', 'Pilih Trial atau Enterprise di bawah. Trial langsung aktif dengan Aktifkan Trial Gratis; Enterprise dilanjutkan dengan Lanjut Pembayaran. Paket masih dapat diganti sebelum pembayaran diterima.']
     : L <= 3 ? ['Pilih cara pembayaran', 'Pilih Virtual Account, lalu bank. Tagihan baru dibuat setelah Anda menekan Buat Virtual Account.']
     : L <= 5 ? (t.status === 'kedaluwarsa' ? ['Buat tagihan baru', 'Tagihan sebelumnya kedaluwarsa. Buat tagihan baru, lalu bayar sebelum batas waktunya.'] : t.status === 'gagal' ? ['Ulangi pembayaran', 'Transfer sebelumnya ditolak bank. Periksa alasannya, lalu coba lagi.'] : ['Selesaikan pembayaran', `Bayar sebelum ${tglJam(t.batas)}. Pembayaran terverifikasi otomatis paling lama 10 menit setelah transfer berhasil.`])
-    : L === 6 ? ['Pembayaran diterima', 'Sistem memulai Proses Administrasi secara otomatis.']
-    : L === 7 ? ['Tunggu proses administrasi', `Tim Peruri menyiapkan aplikasi kantor Anda (perkiraan ${est('± 1 hari kerja')}). Anda akan menerima email berisi alamat aplikasi. Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran.`]
+    : L === 6 ? ['Pembayaran diterima', 'Sistem memulai Proses Aktivasi secara otomatis.']
+    : L === 7 ? ['Tunggu proses aktivasi', `Tim Peruri menyiapkan aplikasi kantor Anda (perkiraan ${est('± 1 hari kerja')}). Anda akan menerima email berisi alamat aplikasi. Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran.`]
     : ['Aplikasi kantor aktif', 'Masuk ke aplikasi kantor Anda melalui tombol di bawah.'];
   return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuTahap"><div class="ina-card__content"><h3>Progres Registrasi Anda${usulan('IDDS-OB-48')}</h3>
-    ${stepperDua(SIM.tahap, 'Progres registrasi', true)}
-    <div class="berikut-db" id="langkahDb">${alert('info', `Langkah berikutnya: ${B[0]}`, B[1])}</div></div></section>`;
+    ${stepperDua(SIM.tahap, 'Progres registrasi', true, TAHAP, ketTahap, TAMPIL)}
+    <div class="berikut-db" id="langkahDb">${alert('info', `Langkah berikutnya: ${B[0]}`, `${lencanaWaktu(L)}${B[1]}`)}</div></div></section>`;
 }
 function kartuBantuan() {
   return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="bantuanDb"><div class="ina-card__content bantuan-db">
@@ -1187,7 +1255,7 @@ function layarDasbor() {
       <section class="ina-card ina-card--variant-basic kartu-db" style="margin-top:0" id="kartuLunas"><div class="ina-card__content">${t
         ? `<h3>Pembayaran diterima</h3><p class="ket">Terima kasih. Tagihan ${rupiah(t.nominal)} sudah lunas pada ${tglJam(t.bayar)}.</p>`
         : '<h3>Paket Trial dipilih</h3><p class="ket">Paket Trial gratis, jadi tidak ada tagihan.</p>'}
-        <div style="margin-top:14px">${L === 6 ? alert('info', 'Proses Administrasi segera dimulai', 'Sistem memulai penyiapan aplikasi kantor secara otomatis.') : alert('info', 'Aplikasi kantor sedang disiapkan', `Perkiraan selesai ${est('± 1 hari kerja')}. Anda akan menerima email berisi alamat aplikasi. Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran.`)}</div>
+        <div style="margin-top:14px">${L === 6 ? alert('info', 'Proses Aktivasi segera dimulai', 'Sistem memulai penyiapan aplikasi kantor secara otomatis.') : alert('info', 'Aplikasi kantor sedang disiapkan', `Perkiraan selesai ${est('± 1 hari kerja')}. Anda akan menerima email berisi alamat aplikasi. Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran.`)}</div>
         ${t ? `<div class="ditandai" id="emailLunas" style="margin-top:14px"><b style="font-size:14px">Email yang Anda terima:${usulan('IDDS-OB-54')}</b>${emailBayar()}</div>` : ''}</div></section></div>${kartuBantuan()}`;
   const pk = PAKET[SIM.dipesan || 'enterprise'], sel = SIM.tahap[8].selesai, hingga = new Date(sel); if (SIM.dipesan === 'trial') hingga.setDate(hingga.getDate() + 30); else hingga.setFullYear(hingga.getFullYear() + 1);
   return `${heroDb()}${kartuTahap()}<div class="dua-kol" style="margin-top:16px">
@@ -1444,7 +1512,7 @@ document.addEventListener('click', e => {
   if (t.closest('#cobaLagi')) { aksiCobaLagi(); gambar(); $('#cekBayar')?.focus(); toast('Tagihan kembali Belum Dibayar. Silakan transfer ulang.'); return; }
   if (t.closest('#gantiBank')) { konfirmasiGantiBank(); return; }
   if (t.closest('#tombolGanti')) { konfirmasiGantiPaket(); return; }
-  if (t.closest('#cekStatus')) { S.memuat = 'cek'; gambar(); setTimeout(() => { S.memuat = ''; catat('Pelanggan', SIM.langkah, 'Cek Status Terbaru', `Belum ada perubahan. Tahap ${labelTahap()}.`); gambar(); $('#cekStatus')?.focus(); toast(`Belum ada perubahan · dicek ${jam(SIM.jam)}`, 'default', 4500, `Tahap saat ini: ${labelTahap()}.`); }, 500); return; }
+  if (t.closest('#cekStatus')) { S.memuat = 'cek'; gambar(); setTimeout(() => { S.memuat = ''; catat('Pelanggan', SIM.langkah, 'Cek Progres Registrasi', `Belum ada perubahan. Tahap ${labelTahap()}.`); gambar(); $('#cekStatus')?.focus(); toast(`Belum ada perubahan · dicek ${jam(SIM.jam)}`, 'default', 4500, `Tahap saat ini: ${labelTahap()}.`); }, 500); return; }
   if (t.closest('#bukaPerpanjang')) { pindah('perpanjang', () => $('#halamanP h1')?.focus()); return; }
   if (t.closest('#batalPerpanjang')) { catat('Pelanggan', SIM.langkah, 'Batal perpanjang', 'Tidak ada order ORD-RENEW yang dibuat.', null); pindah('riwayat', () => $('#bukaPerpanjang')?.focus()); toast('Perpanjangan dibatalkan. Tidak ada tagihan baru.'); return; }
   if (t.closest('#lanjutPerpanjang')) { toast('Pilih bank tidak disimulasikan ulang di sini.', 'default', 4000, 'Alurnya sama dengan langkah 3–8 pembayaran pertama.'); return; }
@@ -1602,7 +1670,7 @@ const FAQ_REKAM = ['Bagaimana membaca rekam jejak simulasi?', 'Rekam jejak ada d
 const BANTUAN = {
   pelanggan:() => ({ judul:'Bantuan Pembayaran', isi:`<p>Setelah memilih paket Enterprise, Anda membayar tagihan melalui Virtual Account. Aplikasi kantor disiapkan setelah pembayaran lunas. Bila memilih Trial, aplikasi kantor langsung aktif selama 30 hari dan Anda dapat upgrade ke Enterprise kapan saja.</p>
     <h4 class="bantu-sub">Langkah membayar</h4>
-    ${lgkh(['Pilih paket, lalu klik <b>Lanjut Pembayaran</b>.', 'Pilih <b>Virtual Account</b>, lalu <b>BRI Virtual Account</b>.', 'Klik <b>Buat Virtual Account</b>. Nomor VA dan batas waktu tampil.', 'Transfer nominal yang persis sama sebelum batas waktu. Lihat <b>Cara bayar</b> untuk tiap kanal.', 'Klik <b>Cek Status Pembayaran</b> bila status belum berubah.', 'Setelah lunas, tunggu Proses Administrasi. Email berisi alamat aplikasi akan dikirim. Masuk dengan kata sandi yang Anda buat saat pendaftaran.'])}
+    ${lgkh(['Pilih paket, lalu klik <b>Lanjut Pembayaran</b>.', 'Pilih <b>Virtual Account</b>, lalu <b>BRI Virtual Account</b>.', 'Klik <b>Buat Virtual Account</b>. Nomor VA dan batas waktu tampil.', 'Transfer nominal yang persis sama sebelum batas waktu. Lihat <b>Cara bayar</b> untuk tiap kanal.', 'Klik <b>Cek Status Pembayaran</b> bila status belum berubah.', 'Setelah lunas, tunggu Proses Aktivasi. Email berisi alamat aplikasi akan dikirim. Masuk dengan kata sandi yang Anda buat saat pendaftaran.'])}
     <h4 class="bantu-sub">Arti status tagihan</h4>${istilah(ARTI_STATUS)}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('p', [
@@ -1630,7 +1698,7 @@ const BANTUAN = {
       ['Berapa lama batas waktu Virtual Account?', '24 jam sejak VA dibuat. Waktunya tertulis di baris Waktu Pembuatan VA dan Batas Waktu.'],
       ['Pelanggan mentransfer nominal yang salah. Bagaimana?', 'VA hanya menerima nominal yang persis sama, jadi transfer itu ditolak bank dan status tidak berubah. Bila saldo pelanggan terpotong, teruskan bukti transfer ke tim dukungan.'],
       ['Pelanggan ingin mengganti bank. Apa dampaknya?', 'Tagihan lama berstatus Dibatalkan dan tagihan baru dibuat. Keduanya tampil di daftar transaksi.'],
-      ['Kapan aplikasi kantor pelanggan aktif?', `Setelah Lunas, tahap Proses Administrasi berjalan (perkiraan ${est('± 1 hari kerja')}). Bila belum aktif, periksa Riwayat Tahap di Detail Pendaftar lalu hubungi tim administrasi.`],
+      ['Kapan aplikasi kantor pelanggan aktif?', `Setelah Lunas, tahap Proses Aktivasi berjalan (perkiraan ${est('± 1 hari kerja')}). Bila belum aktif, periksa Riwayat Tahap di Detail Pendaftar lalu hubungi tim administrasi.`],
       ['Bisakah operator menandai tagihan lunas di mode uji?', 'Tidak. Tombol sandbox dihapus dari layar operator. Status hanya berubah dari konfirmasi bank; di lingkungan uji, transfer disimulasikan dari sisi bank sehingga tercatat dengan pelaku Bank.'],
       ['Mengapa tahap Proses Pembayaran "Sedang berjalan"?', 'Tahap ini dimulai saat VA dibuat dan selesai saat bank mengonfirmasi pembayaran.'],
       ['Bagaimana melihat pelanggan Trial yang upgrade?', 'Di Detail Pendaftar, bagian Paket Langganan menampilkan masa Trial, order upgrade, dan Progres Upgrade. Order upgrade tampil di Verifikasi Pembayaran dengan nomor ORD-UPGRADE dan Jenis Order "Upgrade dari Trial ke Enterprise". Trial tidak muncul di Verifikasi Pembayaran karena tidak ada tagihan.'],
@@ -1644,7 +1712,7 @@ $('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar penyesuaian Simulasi Pembayaran', lebar:true,
     isi:`<p>Isi, langkah, dan istilah mengikuti live dev.eppat.id (tangkapan 26 Okt 2026). Yang disesuaikan adalah komponen IDDS dengan brand E-PPAT, kejujuran status, bahasa, konfirmasi aksi berdampak, dan Bantuan. Data di prototipe ini adalah data contoh.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });

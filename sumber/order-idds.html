@@ -108,6 +108,15 @@ table.tb td .kc{font-size:12px;color:var(--ina-content-secondary)}
 table.tb tr.klik{cursor:pointer}
 table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .aksi-baris{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.kuota-trial{align-self:center;margin-right:12px;font-size:14px;color:var(--ina-content-secondary)}
+#lapisanBatas .ina-button{text-decoration:none}
+.aksi-baris:has(.aksi-wadah){flex-wrap:nowrap;align-items:center}
+.aksi-wadah{position:relative;display:inline-block}
+.aksi-wadah .ina-action-dropdown__menu{position:fixed;min-width:150px;z-index:60;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.aksi-wadah .ina-action-dropdown__menu[hidden]{display:none}
+.aksi-wadah .ikon-aksi{width:32px;height:32px;padding:0;justify-content:center}
+.aksi-wadah [data-hapus-pihak]{color:var(--ina-negative-600)}
+.tb:has(#kolStatusAkun) th,.tb:has(#kolStatusAkun) td{padding-left:12px;padding-right:12px}
 .kosong{padding:28px;text-align:center;color:var(--ina-content-secondary)}
 .halaman{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--ina-stroke-primary);font-size:13px;color:var(--ina-content-secondary)}
 .halaman > span{white-space:nowrap}
@@ -177,6 +186,61 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .seg button{border:0;border-radius:7px;background:transparent;padding:7px 14px;font:500 14px Inter,sans-serif;color:var(--ina-content-secondary);cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--ina-primary-primary);color:#fff}
 .fld{margin-bottom:16px}
+/* klien tanpa akun: formulir sama dengan Daftar Pengguna */
+/* tombol simulasi tetap dapat diklik saat dialog terbuka */
+body .protobar{z-index:1001}
+.ina-modal{padding-top:84px;box-sizing:border-box}
+.ina-modal__dialog{max-height:calc(100vh - 104px)}
+.tombol-klien-baru{margin-top:8px}
+#f-berkasObj .ina-single-file-upload,.panel-berkas .ina-single-file-upload{width:100%}
+.ulang-baris>.panel-berkas{margin-bottom:12px}
+.panel-berkas,#f-berkasObj{margin-bottom:12px}
+.panel-berkas .ina-file-upload__label,#f-berkasObj .ina-file-upload__label{display:block;margin:0 0 6px;line-height:20px}
+#f-berkasObj .ina-file-upload__label{margin-bottom:6px}
+.ulang-f{display:grid;gap:12px;margin-bottom:12px}
+.f12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px 16px}
+.s12{grid-column:span 12}.s6{grid-column:span 6}.s4{grid-column:span 4}.s3{grid-column:span 3}
+.sc{grid-column:span var(--s,12);min-width:0}
+.f12 .ina-text-field,.f12 .ina-text-area{margin-bottom:8px}
+@media (max-width:760px){.s6,.s4,.s3,.sc{grid-column:span 12}}
+#blokPihak .f-grid+.f-grid,#blokPT .f-grid+.f-grid{margin-top:12px}
+#blokPihak>.f-grid:first-child{margin-top:4px}
+.tab-kartu .ina-tab-horizontal__container{overflow-x:auto}
+.tab-kartu .ina-tab-horizontal__tab{flex:none}
+.ulang-baris{padding:12px;border:1px solid var(--ina-stroke-primary);border-radius:8px}
+.ulang-kepala{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.ket-f{margin:0;font-size:13px;line-height:20px;color:var(--ina-content-secondary)}
+.ulang-f>.ina-button{justify-self:start}
+.form-tab .bantu-sub:first-of-type{margin-top:16px}
+.tombol-klien-baru .ina-button{width:100%;justify-content:center}
+.kartu-pihak .catatan-akun{margin-top:10px}
+.kb-baris{margin-top:16px}
+.kb-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.f-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-baris{margin-top:16px}
+.lipat-ktp{margin-top:16px;border:1px solid var(--ina-stroke-primary);border-radius:8px}
+.lipat-ktp .ina-accordion{border-bottom:0}
+.lipat-ktp .ina-accordion__toggle{width:100%;padding:16px;text-align:left}
+.lipat-ktp .ina-accordion__title b{font-weight:600}
+.lipat-ktp .ina-accordion__title span{font-weight:400;color:var(--ina-content-secondary)}
+.lipat-ktp .ina-accordion__content--open{max-height:none;overflow:visible}
+.lipat-ktp .ina-accordion__body{padding:0 16px 16px}
+.lipat-form:not(:first-child){margin-top:16px}
+.lipat-form+.f12,.lipat-form+.bantu-sub{margin-top:16px}
+.lipat-form .ina-accordion__content{transition:none}
+.lipat-form .ina-accordion__content:not(.ina-accordion__content--open){visibility:hidden}
+.pilih-f{display:block;height:auto;padding:0;border:0;background:transparent;box-shadow:none}
+.pilih-f:focus-within{box-shadow:none;outline:0}
+.pilih-f .ina-select-dropdown__trigger{width:100%}
+.pilih-f.ina-text-field__wrapper--status-error .ina-select-dropdown__trigger{border-color:var(--ina-stroke-error,#d92d20)}
+.pilih-f .ina-select-dropdown__panel{z-index:40}
+.pilih-asli{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.lipat-ktp .ket-ktp{margin:0 0 12px;font-size:13px;line-height:20px;color:var(--ina-content-secondary)}
+.ocr-ktp{display:flex;flex-direction:column;gap:12px}
+.ocr-ktp .ina-file-upload__file-actions{width:auto}
+.ina-text-field select.ina-text-field__input{appearance:auto;background:transparent;border:0;width:100%;height:100%;font:inherit;font-size:14px;color:inherit;outline:0}
+@media (max-width:760px){.kb-grid3,.f-grid2,.f-grid3{grid-template-columns:1fr}}
 .fld > .ina-text-field__label{display:flex;align-items:center;gap:6px}
 .select-wadah{position:relative;display:block;width:100%}
 .select-wadah .ina-select-dropdown__panel{top:calc(100% + 4px);left:0;right:0;max-height:240px}
@@ -260,6 +324,8 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
   <a href="index.html">&#9776; Daftar prototipe</a>
   <span class="sep">&bull;</span><b>Permohonan AJB</b><span class="sep">&bull;</span><span>Peran: Asisten PPAT</span>
   <span class="kanan">
+    <button class="pil" id="simKtp" title="Ganti hasil baca OCR KTP. Saat formulir klien terbuka, foto langsung dibaca ulang dengan hasil yang dipilih.">Hasil OCR: terbaca</button>
+    <button class="pil" id="simAktif" title="Mensimulasikan pihak membuat kata sandi dari email undangan.">Simulasi akun pihak aktif</button>
     <button class="pil" id="aturUlang">Atur ulang contoh</button>
     <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai usulan</button>
     <button class="pil utama" id="bukaUbah">Daftar perubahan (10)</button>
@@ -295,6 +361,7 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 </div>
 
 <div id="lapisan"></div>
+<div id="lapisanKlien"></div>
 <div id="lapisanDrawer"></div>
 <div class="toast-wadah" id="toastWadah"></div>
 
@@ -319,7 +386,7 @@ const I = {
   seru:'<path d="M12 9v4" /><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z" /><path d="M12 16h.01" />',
   centang:'<path d="M5 12l5 5l10 -10" />',
   chev:'<path d="M9 6l6 6l-6 6" />',
-  bawah:'<path d="M6 9l6 6l6 -6" />',
+  bawah:'<path d="M6 9l6 6l6 -6" />', menu:'<path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" />',
   simpan:'<path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" /><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M14 4l0 4l-6 0l0 -4" />',
   tambah:'<path d="M12 5l0 14" /><path d="M5 12l14 0" />',
   edit:'<path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" />',
@@ -333,6 +400,10 @@ const I = {
   tb_help_circle:'<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 16v.01" /><path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" />',
   tb_stack_2:'<path d="M12 4l-8 4l8 4l8 -4l-8 -4" /> <path d="M4 12l8 4l8 -4" /> <path d="M4 16l8 4l8 -4" />', tb_feather:'<path d="M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4" /> <path d="M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4" />', tb_layout_dashboard:'<path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" /> <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />', tb_circle_check:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" />', tb_file_pencil:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M10 18l5 -5a1.414 1.414 0 0 0 -2 -2l-5 5v2h2z" />', tb_signature:'<path d="M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2" />', tb_files:'<path d="M15 3v4a1 1 0 0 0 1 1h4" /> <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z" /> <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />', tb_adjustments_horizontal:'<path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 6l8 0" /> <path d="M16 6l4 0" /> <path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 12l2 0" /> <path d="M10 12l10 0" /> <path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 18l11 0" /> <path d="M19 18l1 0" />', tb_building:'<path d="M3 21l18 0" /> <path d="M9 8l1 0" /> <path d="M9 12l1 0" /> <path d="M9 16l1 0" /> <path d="M14 8l1 0" /> <path d="M14 12l1 0" /> <path d="M14 16l1 0" /> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />', tb_users:'<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /> <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /> <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />', tb_shield_lock:'<path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /> <path d="M12 11m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12 12l0 2.5" />', tb_history:'<path d="M12 8l0 4l2 2" /> <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />', tb_rubber_stamp:'<path d="M21 17.85h-18c0 -4.05 1.421 -4.05 3.79 -4.05c5.21 0 1.21 -4.59 1.21 -6.8a4 4 0 1 1 8 0c0 2.21 -4 6.8 1.21 6.8c2.369 0 3.79 0 3.79 4.05z" /> <path d="M5 21h14" />', tb_settings:'<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />', tb_layout_cards:'<path d="M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /> <path d="M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />', tb_home:'<path d="M5 12l-2 0l9 -9l9 9l-2 0" /> <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /> <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />', tb_palette:'<path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" /> <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />', tb_database:'<path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /> <path d="M4 6v6a8 3 0 0 0 16 0v-6" /> <path d="M4 12v6a8 3 0 0 0 16 0v-6" />', tb_article:'<path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /> <path d="M7 8h10" /> <path d="M7 12h10" /> <path d="M7 16h10" />', tb_photo:'<path d="M15 8h.01" /> <path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z" /> <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5" /> <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3" />', tb_file_text:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 9l1 0" /> <path d="M9 13l6 0" /> <path d="M9 17l6 0" />', tb_gauge:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M13.41 10.59l2.59 -2.59" /> <path d="M7 12a5 5 0 0 1 5 -5" />', tb_file_description:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 17h6" /> <path d="M9 13h6" />' /* ikon Tabler sidebar */
 };
+I.muatUlang = '<path d="M4.05 11a8 8 0 1 1 .5 4m-.5 5v-5h5" />';
+I.sampah = '<path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />';
+I.unggahOk = '<path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M9 12l2 2l4 -4" />';
+I.unggahGagal = '<path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 10l4 4m0 -4l-4 4" />';
 const ik =(n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${I[n]}</svg>`;
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -350,10 +421,37 @@ document.addEventListener('click', e => { if (e.target.closest('.tanya-btn')) e.
 const T_NJOP = 'Nilai Jual Objek Pajak, yaitu nilai tanah dan bangunan yang ditetapkan pemerintah untuk menghitung pajak. Harga jual beli dibandingkan dengan NJOP saat verifikasi.';
 const T_NIB = 'Nomor Identifikasi Bidang, yaitu nomor unik bidang tanah dari BPN. Nomor ini tercantum di sertifikat.';
 const T_HAK = 'Jenis hak atas tanah sesuai sertifikat, misalnya SHM (Hak Milik) atau SHGB (Hak Guna Bangunan).';
-const T_HARGA = 'Nilai transaksi yang disepakati penjual dan pembeli. Harga ini dicantumkan di akta dan dibandingkan dengan NJOP saat verifikasi.';
+const T_HARGA = 'Nilai transaksi yang disepakati Pihak Pertama dan Pihak Kedua. Harga ini dicantumkan di akta dan dibandingkan dengan NJOP saat verifikasi.';
 
 /* ---------------- daftar perubahan ---------------- */
 const UBAH = [
+  { kode:'HE-ORDER-10', judul:'Tambah Objek: isian mengikuti live',
+    isi:'Tambah Objek dan Ubah Objek mengikuti tab Objek di Formulir AJB 2: isian dan aturan tampil sama dengan live. Formulir tetap satu halaman berkelompok sesuai HE-ORDER-07.',
+    lama:'Jenis hak diketik manual, dan isian surat ukur, wilayah, NJOP, serta Nilai Perbandingan Proporsional tidak ada di prototipe.', ke:'tab-objek', sorot:null, sumber:'Penyesuaian dengan live, 5 Nov 2026 (bukan temuan HE)', versi:'v2' },
+  { kode:'HE-ORDER-13', judul:'Tab Pewaris dan Dasar Perjanjian',
+    isi:'Tab Pewaris dan Dasar Perjanjian dibuat dari definisi Formulir AJB 2 di live, termasuk opsi, lebar kolom, dan aturan tampil.',
+    lama:'Hanya ada tab Narahubung, Para Pihak, Objek, dan Dokumen.', ke:'tab-pewaris', sorot:'#formPewaris', sumber:'Masukan 5 Nov 2026, mengikuti aplikasi live Perdana Niaga (bukan temuan HE)', versi:'v2' },
+  { kode:'HE-ORDER-17', judul:'Tambah Pihak dan Objek: unggah dokumen di atas tiap kelompok',
+    isi:'Kelompok yang berkaitan dengan dokumen memiliki unggahan paling atas: Akta Pendirian, SK Menkumham, Akta Perubahan, Surat Kuasa, Surat Persetujuan Dewan Komisaris, Sertipikat, Surat Ukur, SPPT PBB, Alat Bukti, IMB, Dokumen Hak Adat, dan Peta Bidang. Unggahan wajib selama kelompoknya tampil, kecuali Surat Ukur, IMB, dan Peta Bidang yang opsional.',
+    lama:'Hanya ada unggahan Sertipikat di bagian bawah form Objek.', ke:'tab-pihak', sorot:null, sumber:'Masukan 5 Nov 2026 (bukan temuan HE)', versi:'v2' },
+  { kode:'HE-ORDER-16', judul:'Tambah Pihak dan Objek: kelompok isian bisa dilipat',
+    isi:'Kelompok Akta Pendirian di Tambah Pihak serta Data Umum, Letak & Data Tambahan Objek, dan Data Harga di Tambah Objek memakai IDDS Accordion, sama seperti di live. Kelompok terbuka saat dialog dibuka. Bila ada isian wajib yang kosong di kelompok tertutup, kelompok itu terbuka otomatis saat Simpan.',
+    lama:'Semua isian tampil sekaligus; kelompok hanya berupa subjudul.', ke:'tab-pihak', sorot:null, sumber:'Masukan 5 Nov 2026, mengikuti aplikasi live Perdana Niaga (bukan temuan HE)', versi:'v2' },
+  { kode:'HE-ORDER-15', judul:'Para Pihak: kolom Status Akun dan Status Sertifikat',
+    isi:'Tabel para pihak menampilkan kolom Status Akun dan Status Sertifikat dengan nama status dan tooltip yang sama dengan Daftar Pengguna. Lencana status akun yang semula berada di bawah nama pindah ke kolom Status Akun. Ubah dan Hapus pindah ke menu aksi agar tabel muat di layar.',
+    lama:'Status akun hanya tampil di bawah nama klien baru, dan status sertifikat para pihak tidak terlihat.', ke:'tab-pihak', sorot:'#kolStatusAkun', sumber:'Masukan 5 Nov 2026 (bukan temuan HE)', versi:'v2' },
+  { kode:'HE-ORDER-14', judul:'Tambah Pihak: isian mengikuti live',
+    isi:'Tambah Pihak dan Ubah Pihak mengikuti tab Para Pihak di Formulir AJB 2: perorangan, kuasa, pasangan, dan Badan Hukum (PT). Sesudah pengguna dipilih tampil kartu identitas berisi NIK, tempat lahir, alamat, dan pekerjaan.',
+    lama:'Dialog hanya memuat tipe, bentuk, jenis harta, dan pencarian pengguna.', ke:'tab-pihak', sorot:null, sumber:'Masukan 5 Nov 2026, mengikuti aplikasi live Perdana Niaga (bukan temuan HE)', versi:'v2' },
+  { kode:'HE-ORDER-12', judul:'Tahapan permohonan dimulai dari Pengumpulan',
+    isi:'Tahap "Baru" dihapus karena permohonan dibuat oleh kantor, bukan diajukan klien. Permohonan baru langsung berstatus Pengumpulan. Tahapannya menjadi Pengumpulan Berkas, Verifikasi Berkas, Penyusunan Akta, dan Selesai, dengan nama dan keterangan mengikuti live. Permohonan yang masih kosong tetap dapat dihapus.',
+    lama:'Tahapan dimulai dari Baru dengan keterangan "Klien mengajukan".', ke:'daftar', sorot:null, sumber:'Masukan 5 Nov 2026 (bukan temuan HE)', versi:'v2' },
+  { kode:'HE-ORDER-11', judul:'Unggah wajib di form AJB, kecuali tab Dokumen',
+    isi:'Sertipikat di Tambah Objek dan Foto KTP pada klien tanpa akun wajib diunggah. Tab Dokumen tetap opsional dan tidak menjadi syarat pindah tahap. OCR hanya untuk KTP; sertipikat dan dokumen lain cukup unggah file. Tambah Dokumen mengikuti live.',
+    lama:'Berkas tidak wajib diunggah di form. Jenis Dokumen diketik manual, dan tidak ada pilihan Sudah diverifikasi.', ke:'tab-objek', sorot:'#f-berkasObj', sumber:'Masukan 5 Nov 2026 (bukan temuan HE)', versi:'v2' },
+  { kode:'HE-ORDER-09', judul:'Para pihak: klien tanpa akun, Buat Akun & Undang',
+    isi:'Di bawah pencarian ada tombol "Tambah Data Klien Baru" untuk klien yang belum ada di Daftar Pengguna. Formulirnya berisi nama, Foto KTP dengan OCR, dan Data KTP. Pihak baru mendapat aksi Buat Akun & Undang, yang meminta nama, email, dan Nomor HP; akunnya berstatus Diundang dan otomatis tampil di Daftar Pengguna. Permohonan tidak dapat pindah ke Verifikasi Berkas sebelum akun pihak aktif. Tombol "Simulasi akun pihak aktif" di bilah prototipe menirukan pengguna membuat kata sandi.',
+    lama:'Pihak harus sudah terdaftar sebagai pengguna klien.', ke:'tab-pihak', sorot:null, sumber:'Masukan 5 Nov 2026, mengikuti formulir Perdana Niaga (bukan temuan HE)', versi:'v2' },
   { kode:'HE-ORDER-01', judul:'Kartu status permohonan: syarat pindah status terlihat sebelum tombol ditekan',
     isi:'Di bawah stepper tampil daftar syarat tahap berikutnya (mis. untuk Siap: narahubung, penjual, pembeli, 2 saksi, objek), lengkap dengan tanda centang atau tautan "Lengkapi". Tombol "Pindah ke …" baru aktif setelah semua syarat terpenuhi.',
     lama:'Tombol "Pindah ke Siap" selalu aktif. Kekurangan data baru diberitahukan melalui dialog "Data belum lengkap" setelah tombol ditekan; untuk tahap lain tidak ada pengecekan.', ke:'detail-002', sorot:'#syarat', sumber:'Laporan HE INA Digital hlm. 23, 24' },
@@ -388,12 +486,12 @@ const UBAH = [
 
 /* ---------------- data contoh ---------------- */
 const KLIEN = [
-  { id:1, nama:'Contoh Penjual Satu', email:'penjual1@contoh.id', nik:'3200000000000011', hp:'081200000011', kota:'Kota Contoh' },
-  { id:2, nama:'Contoh Penjual Dua', email:'penjual2@contoh.id', nik:'3200000000000012', hp:'081200000012', kota:'Kota Contoh' },
-  { id:3, nama:'Contoh Pembeli Satu', email:'pembeli1@contoh.id', nik:'3200000000000021', hp:'081200000021', kota:'Kota Contoh' },
-  { id:4, nama:'Contoh Pembeli Dua', email:'pembeli2@contoh.id', nik:'', hp:'', kota:'' },
-  { id:5, nama:'Contoh Saksi Satu', email:'saksi1@contoh.id', nik:'3200000000000031', hp:'081200000031', kota:'Kota Contoh' },
-  { id:6, nama:'Contoh Saksi Dua', email:'saksi2@contoh.id', nik:'3200000000000032', hp:'081200000032', kota:'Kota Contoh' },
+  { id:1, nama:'Contoh Penjual Satu', email:'penjual1@contoh.id', nik:'3200000000000011', hp:'081200000011', kota:'Kota Contoh', ca:'active' },
+  { id:2, nama:'Contoh Penjual Dua', email:'penjual2@contoh.id', nik:'3200000000000012', hp:'081200000012', kota:'Kota Contoh', ca:'active' },
+  { id:3, nama:'Contoh Pembeli Satu', email:'pembeli1@contoh.id', nik:'3200000000000021', hp:'081200000021', kota:'Kota Contoh', ca:'active' },
+  { id:4, nama:'Contoh Pembeli Dua', email:'pembeli2@contoh.id', nik:'', hp:'', kota:'', ca:'active' },
+  { id:5, nama:'Contoh Saksi Satu', email:'saksi1@contoh.id', nik:'3200000000000031', hp:'081200000031', kota:'Kota Contoh', ca:'active' },
+  { id:6, nama:'Contoh Saksi Dua', email:'saksi2@contoh.id', nik:'3200000000000032', hp:'081200000032', kota:'Kota Contoh', ca:'active' },
   { id:7, nama:'Contoh Pasangan Satu', email:'pasangan1@contoh.id', nik:'3200000000000041', hp:'081200000041', kota:'Kota Contoh' }
 ];
 const k = id => KLIEN.find(x => x.id === id);
@@ -402,11 +500,11 @@ const OBJ = { hak:'SHM', sertifikat:'00001', nib:'00000000001', luas:'120', loka
 /* status verifikasi (menu Verifikasi live: Para Pihak / Objek Tanah / Harga Tanah) — HE-ORDER-08 */
 const V = (p = false, o = false, h = false) => ({ pihak:p, objek:o, harga:h });
 const verifSelesai = o => o.verif.pihak && o.verif.objek && o.verif.harga;
-const DOKS = [{ jenis:'KTP', pemilik:'Penjual', file:'ktp-penjual-contoh.pdf', ukuran:'210 KB' },{ jenis:'KTP', pemilik:'Pembeli', file:'ktp-pembeli-contoh.pdf', ukuran:'198 KB' },{ jenis:'SERTIFIKAT', pemilik:'Penjual', file:'sertifikat-contoh.pdf', ukuran:'1,2 MB' },{ jenis:'PBB', pemilik:'Penjual', file:'', ukuran:'' }];
+const DOKS = [{ jenis:'KTP', pemilik:'Pihak Pertama', file:'ktp-penjual-contoh.pdf', ukuran:'210 KB' },{ jenis:'KTP', pemilik:'Pihak Kedua', file:'ktp-pembeli-contoh.pdf', ukuran:'198 KB' },{ jenis:'Sertifikat', pemilik:'Pihak Pertama', file:'sertifikat-contoh.pdf', ukuran:'1,2 MB' },{ jenis:'PBB', pemilik:'Pihak Pertama', file:'', ukuran:'' }];
 const LENGKAP_PIHAK = () => [P('PENJUAL',1), P('PEMBELI',3), P('SAKSI',5), P('SAKSI',6)];
 function contoh() {
   return [
-    { kode:'ORD-CONTOH-001', status:'BARU', tanggal:'22 Okt 2026', kontak:{ nama:'Contoh Narahubung Satu', hp:'', email:'', catatan:'' }, pihak:[], objek:[], dok:[], verif:V(), minuta:false },
+    { kode:'ORD-CONTOH-001', status:'PENGUMPULAN', tanggal:'22 Okt 2026', kontak:{ nama:'Contoh Narahubung Satu', hp:'', email:'', catatan:'' }, pihak:[], objek:[], dok:[], verif:V(), minuta:false },
     { kode:'ORD-CONTOH-002', status:'PENGUMPULAN', tanggal:'21 Okt 2026', kontak:{ nama:'Contoh Narahubung Dua', hp:'081200000002', email:'narahubung2@contoh.id', catatan:'' }, pihak:[P('PENJUAL',1)], objek:[], dok:[{ ...DOKS[0] }], verif:V(), minuta:false },
     { kode:'ORD-CONTOH-003', status:'SIAP', tanggal:'20 Okt 2026', kontak:{ nama:'Contoh Narahubung Tiga', hp:'081200000003', email:'', catatan:'' }, pihak:[P('PENJUAL',1), P('PEMBELI',4), P('SAKSI',5), P('SAKSI',6)], objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true), minuta:false },
     { kode:'ORD-CONTOH-006', status:'DRAFTING', tanggal:'19 Okt 2026', kontak:{ nama:'Contoh Narahubung Enam', hp:'081200000006', email:'', catatan:'' }, pihak:LENGKAP_PIHAK(), objek:[{ ...OBJ }], dok:DOKS.map(d => ({ ...d })), verif:V(true, true, true), minuta:false },
@@ -415,28 +513,55 @@ function contoh() {
   ];
 }
 let ORDER = contoh();
+/* paket Trial: satu contoh order; data tetap ada setelah upgrade (HE-TRIAL-04, -09) */
+if (window.SESI_PROTO && window.SESI_PROTO.paket === 'trial') ORDER = ORDER.slice(0, 1);
+/* lapisan sendiri agar formulir Tambah Pihak yang sedang terbuka tidak hilang */
+function dialogBatas(judul, isi) {
+  const w = document.createElement('div'); w.id = 'lapisanBatas';
+  w.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-tutup></div><div class="ina-modal__container"><div class="ina-modal__dialog ina-modal__dialog--size-md" role="dialog" aria-modal="true" aria-labelledby="batasJudul">
+    <div class="ina-modal__header"><h2 class="ina-modal__title" id="batasJudul">${judul}</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-tutup>${ik('x', 22)}</button></div>
+    <div class="ina-modal__body"><p>${isi} Data Anda tetap ada.${usulan('HE-TRIAL-04')}</p></div>
+    <div class="ina-modal__footer">${tombol('Nanti Saja', 'secondary', 'md', 'data-tutup')}<a class="ina-button ina-button--primary ina-button--md" href="${window.PAKET_TRIAL.upgrade}">Mulai Berlangganan</a></div></div></div></div>`;
+  w.addEventListener('click', e => { if (e.target.closest('[data-tutup]')) w.remove(); });
+  document.body.appendChild(w); w.querySelector('[data-tutup].ina-button').focus();
+  return true;
+}
+const trialOrderPenuh = () => { const p = window.PAKET_TRIAL; return !!p && (p.batas || ORDER.length >= p.transaksi) && dialogBatas('Batas transaksi tercapai', `Paket Trial memuat ${p.transaksi} transaksi. Upgrade ke Enterprise untuk membuat permohonan baru.`); };
+const trialKlienPenuh = () => { const p = window.PAKET_TRIAL; return !!p && (p.batas ? 5 : 3) + bacaKB().filter(r => r.status !== 'NONE').length >= p.pengguna && dialogBatas('Batas pengguna tercapai', `Paket Trial memuat paling banyak ${p.pengguna} pengguna, termasuk klien dan akun pemilik. Upgrade ke Enterprise untuk menambah klien.`); };
 
 /* ---------------- status & syarat (aturan live: Penjual, Pembeli, 2 Saksi, objek) ---------------- */
-const URUT = ['BARU','PENGUMPULAN','SIAP','DRAFTING','SELESAI'];
-const ST = { BARU:{ l:'Baru', s:'Klien mengajukan', b:'neutral' }, PENGUMPULAN:{ l:'Pengumpulan', s:'Mengumpulkan data', b:'info' }, SIAP:{ l:'Siap', s:'Data lengkap', b:'warning' }, DRAFTING:{ l:'Penyusunan', s:'Pembuatan akta', b:'info' }, SELESAI:{ l:'Selesai', s:'Akta selesai', b:'success' } };
-const TIPE = { PENJUAL:'Penjual', PEMBELI:'Pembeli', PASANGAN:'Pasangan (harta bersama)', SAKSI:'Saksi', LAINNYA:'Lainnya' };
+const URUT = ['PENGUMPULAN','SIAP','DRAFTING','SELESAI'];
+const ST = { PENGUMPULAN:{ l:'Pengumpulan Berkas', s:'Dibuat oleh Asisten / PPAT', b:'info' }, SIAP:{ l:'Verifikasi Berkas', s:'Data lengkap, siap diperiksa', b:'warning' }, DRAFTING:{ l:'Penyusunan Akta', s:'Pembuatan akta', b:'info' }, SELESAI:{ l:'Selesai', s:'Akta selesai', b:'success' } };
+const TIPE = { PENJUAL:'Pihak Pertama', PEMBELI:'Pihak Kedua', PASANGAN:'Pasangan (harta bersama)', SAKSI:'Saksi', LAINNYA:'Lainnya' };
 const hitung = (o, t) => o.pihak.filter(p => p.tipe === t).length;
 const butuhPasangan = o => o.pihak.filter(p => (p.tipe === 'PENJUAL' || p.tipe === 'PEMBELI') && p.harta === 'BERSAMA').length;
+/* klien baru dari AJB disimpan bersama agar tampil di Daftar Pengguna (HE-ORDER-09) */
+const KUNCI_KB = 'eppat-klien-baru';
+const bacaKB = () => { try { return JSON.parse(localStorage.getItem(KUNCI_KB)) || []; } catch (e) { return []; } };
+const simpanKB = a => { try { localStorage.setItem(KUNCI_KB, JSON.stringify(a)); } catch (e) { /* peramban menolak penyimpanan: prototipe tetap berjalan */ } };
+const statusAkun = p => (p.baru ? (bacaKB().find(r => r.id === p.id) || {}).status || 'NONE' : 'ACTIVE');
+/* teks status sama dengan Daftar Pengguna (HE-ORDER-15) */
+const AKUN_PIHAK = { NONE:['Belum punya akun', 'neutral', 'Klien belum punya akun. Klik Buat Akun & Undang untuk mengirim undangan.'], INVITED:['Diundang', 'info', 'Undangan sudah dikirim ke email. Status berubah menjadi Aktif setelah pengguna membuat kata sandi.'], ACTIVE:['Aktif', 'success', 'Akun aktif. Pengguna dapat masuk dan memakai E-PPAT sesuai perannya.'] };
+const CA_PIHAK = { active:['Sertifikat Elektronik Aktif', 'success', 'Sertifikat elektronik aktif. Pengguna dapat menandatangani akta secara elektronik.'], none:['Belum registrasi', 'neutral', 'Pengguna belum mendaftarkan sertifikat elektronik. Registrasi dapat dimulai pengguna melalui Akun Saya, atau admin dari Ubah Pengguna.'] };
+const KET_AKUN = 'Status akun pengguna di E-PPAT. Status ini menentukan apakah pengguna dapat masuk.';
+const KET_CA = 'Status sertifikat elektronik (CA) dari Peruri. Sertifikat elektronik aktif diperlukan agar pengguna dapat menandatangani akta secara elektronik.';
+const lencanaTip = ([l, j, t]) => `<span class="ina-tooltip ina-tooltip--placement-top tanya">${kecil(l, j).replace('<span ', '<span tabindex="0" ')}<span class="ina-tooltip__content"><span class="ina-tooltip__bubble">${t}</span></span></span>`;
 function syaratData(o) {
   const s = [
     { k:'kontak', l:'Narahubung', ok: (o.kontak.nama || '').trim().length >= 2, tab:'kontak' },
-    { k:'penjual', l:'Penjual', ok: hitung(o, 'PENJUAL') >= 1, tab:'pihak', tipe:'PENJUAL' },
-    { k:'pembeli', l:'Pembeli', ok: hitung(o, 'PEMBELI') >= 1, tab:'pihak', tipe:'PEMBELI' },
-    { k:'saksi', l:`Saksi (${Math.min(hitung(o, 'SAKSI'), 2)} dari 2)`, ok: hitung(o, 'SAKSI') >= 2, tab:'pihak', tipe:'SAKSI' },
+    { k:'penjual', l:'Pihak Pertama (penjual) minimal 1 pihak', s:'Pihak Pertama', ok: hitung(o, 'PENJUAL') >= 1, tab:'pihak', tipe:'PENJUAL' },
+    { k:'pembeli', l:'Pihak Kedua (pembeli) minimal 1 pihak', s:'Pihak Kedua', ok: hitung(o, 'PEMBELI') >= 1, tab:'pihak', tipe:'PEMBELI' },
+    { k:'saksi', l:`Saksi harus 2 orang (${hitung(o, 'SAKSI')} dari 2)`, ok: hitung(o, 'SAKSI') === 2, tab:'pihak', tipe:'SAKSI' },
     { k:'objek', l:'Objek tanah', ok: o.objek.length >= 1, tab:'objek' }
   ];
+  const baru = o.pihak.filter(p => p.baru), aktif = baru.filter(p => statusAkun(p) === 'ACTIVE').length;
+  if (aktif < baru.length) s.push({ k:'akun', l:`Akun pihak aktif (${aktif} dari ${baru.length})`, ok:false, tab:'pihak' });
   if (butuhPasangan(o)) s.splice(4, 0, { k:'pasangan', l:'Pasangan (harta bersama)', ok: hitung(o, 'PASANGAN') >= butuhPasangan(o), tab:'pihak', tipe:'PASANGAN' });
   return s;
 }
 function syarat(o) {
   const ke = URUT[URUT.indexOf(o.status) + 1];
   if (!ke) return { ke:null, daftar:[] };
-  if (o.status === 'BARU') return { ke, daftar:[syaratData(o)[0]] };
   if (o.status === 'PENGUMPULAN') return { ke, daftar:syaratData(o) };
   /* HE-ORDER-08: syarat Drafting = tiga verifikasi; syarat Selesai = minuta difinalisasi PPAT */
   if (o.status === 'SIAP') return { ke, daftar:[
@@ -485,8 +610,8 @@ function layarDaftar() {
   const opsi = [['', 'Semua status'], ...URUT.map(s => [s, ST[s].l])];
   return `
     <nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link"><span class="ina-breadcrumb__text">Layanan</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6l-6 6" /></svg></span></li><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">Permohonan AJB</span></span></li></ol></nav>
-    <h1>Permohonan AJB</h1><p class="sub">Kelola permintaan Akta Jual Beli, mulai dari pengajuan klien sampai akta selesai.</p>
-    <div class="daftar-atas">${tombol('Buat Permohonan', 'primary', 'md', 'id="buatOrder"', ik('tambah', 16))}</div>
+    <h1>Permohonan AJB</h1><p class="sub">Kelola permintaan Akta Jual Beli, mulai dari pengumpulan berkas sampai akta selesai.</p>
+    <div class="daftar-atas">${window.PAKET_TRIAL ? `<span class="kuota-trial">${window.PAKET_TRIAL.batas ? window.PAKET_TRIAL.transaksi : ORDER.length} dari ${window.PAKET_TRIAL.transaksi} transaksi terpakai</span>` : ''}${tombol('Buat Permohonan', 'primary', 'md', 'id="buatOrder"', ik('tambah', 16))}</div>
     <div class="saring">
       <div class="cari-wadah"><label class="ina-text-field__label" for="cariOrder">Cari</label>
         <div class="ina-input-search"><div class="ina-input-search__wrapper"><span class="ina-input-search__search-icon">${ik('cari', 20)}</span><input id="cariOrder" class="ina-input-search__input" type="search" placeholder="Cari kode atau narahubung…" value="${esc(S.cari)}" autocomplete="off"></div></div></div>
@@ -497,7 +622,7 @@ function layarDaftar() {
       ${tombol('Muat Ulang', 'secondary', 'md', 'id="muatUlang"', ik('saring', 16))}
     </div>
     <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb">
-      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">Narahubung</th><th class="ina-table__header-cell">Status${tanya('Status permohonan', 'Status menunjukkan tahap permohonan saat ini. Permohonan berjalan berurutan dari Baru, Pengumpulan, Siap, Penyusunan, sampai Selesai.')}</th><th id="kolLengkap" class="ina-table__header-cell ditandai">Kelengkapan${tanya('Kelengkapan', 'Kolom ini menunjukkan kelengkapan data wajib, yaitu narahubung, penjual, pembeli, dua saksi, dan objek tanah.')} ${usulan('HE-ORDER-04')}</th><th class="ina-table__header-cell">Tanggal</th><th class="ina-table__header-cell"></th></tr></thead>
+      <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">Narahubung</th><th class="ina-table__header-cell">Status${tanya('Status permohonan', 'Status menunjukkan tahap permohonan saat ini. Permohonan berjalan berurutan dari Pengumpulan Berkas, Verifikasi Berkas, Penyusunan Akta, sampai Selesai.')}</th><th id="kolLengkap" class="ina-table__header-cell ditandai">Kelengkapan${tanya('Kelengkapan', 'Kolom ini menunjukkan kelengkapan data wajib, yaitu narahubung, penjual, pembeli, dua saksi, dan objek tanah.')} ${usulan('HE-ORDER-04')}</th><th class="ina-table__header-cell">Tanggal</th><th class="ina-table__header-cell"></th></tr></thead>
       <tbody class="ina-table__body">${rows.length ? rows.map(o => `<tr class="ina-table__row ina-table__row--clickable klik" data-buka="${o.kode}">
         <td class="ina-table__cell"><span class="kd">${o.kode}</span></td>
         <td class="ina-table__cell"><div>AJB</div><div class="kc">Akta Jual Beli</div></td>
@@ -505,7 +630,7 @@ function layarDaftar() {
         <td class="ina-table__cell">${badge(ST[o.status].l, ST[o.status].b)}</td>
         <td class="ina-table__cell">${kelengkapanSel(o)}</td>
         <td class="ina-table__cell">${o.tanggal}</td>
-        <td class="ina-table__cell"><div class="aksi-baris">${tombol('Edit', 'secondary', 'sm', `data-buka="${o.kode}"`, ik('edit', 14))}${o.status === 'BARU' ? tombol('Hapus', 'tertiary', 'sm', `data-hapus-order="${o.kode}" data-merah`) : ''}</div></td>
+        <td class="ina-table__cell"><div class="aksi-baris">${tombol('Edit', 'secondary', 'sm', `data-buka="${o.kode}"`, ik('edit', 14))}${o.status === 'PENGUMPULAN' && !o.pihak.length && !o.objek.length ? tombol('Hapus', 'tertiary', 'sm', `data-hapus-order="${o.kode}" data-merah`) : ''}</div></td>
       </tr>`).join('') : `<tr><td colspan="7" class="ina-table__empty-cell kosong">Tidak ada permohonan yang cocok.</td></tr>`}</tbody></table></div></div>
       <div class="halaman"><span>Menampilkan 1–${rows.length} dari ${rows.length}</span><div class="ina-pagination"><div class="ina-pagination__nav-container"><div class="ina-pagination__page-info">Halaman 1 dari 1</div><div class="ina-pagination__nav-buttons"><button type="button" class="ina-pagination__nav-button ina-pagination__nav-button--disabled" disabled aria-label="Sebelumnya">${ik('kiri', 16)}</button><button type="button" class="ina-pagination__page-button ina-pagination__page-button--active">1</button><button type="button" class="ina-pagination__nav-button ina-pagination__nav-button--disabled" disabled aria-label="Berikutnya">${ik('chev', 16)}</button></div></div></div></div>
     </div>`;
@@ -528,7 +653,9 @@ function langkahBerikut(o, sy) {
   if (x.minuta) return 'Minuta akta belum final. Minta PPAT memfinalisasi minuta di menu Penyusunan Akta sebelum permohonan ditandai Selesai.';
   if (x.k === 'kontak') return 'Lengkapi nama narahubung di tab Narahubung.';
   if (x.k === 'objek') return 'Tambahkan objek tanah di tab Objek.';
-  return `Tambahkan ${x.k === 'saksi' ? 'saksi' : x.l.toLowerCase()} di tab Para Pihak.`;
+  if (x.k === 'akun') return 'Undang pihak baru di tab Para Pihak, lalu tunggu pihak membuat kata sandi.';
+  if (x.k === 'saksi') return hitung(o, 'SAKSI') > 2 ? 'Saksi harus 2 orang. Hapus saksi yang berlebih di tab Para Pihak.' : 'Tambahkan saksi sampai 2 orang di tab Para Pihak.';
+  return `Tambahkan ${x.s || x.l.toLowerCase()} di tab Para Pihak.`;
 }
 function kartuStatus(o) {
   const sy = syarat(o), siap = sy.daftar.every(x => x.ok), kurang = sy.daftar.filter(x => !x.ok).length;
@@ -545,7 +672,7 @@ function kartuStatus(o) {
       const daftar = tampilSyarat ? `<div class="syarat-daftar">${sy.daftar.map(x => `<span class="syarat-item">${badge(`${ik(x.ok ? 'centang' : 'seru', 12)} ${x.l}`, x.ok ? 'success' : 'warning')}${TSY[x.k] || ''}${x.ok ? '' : x.verif ? tombol('Verifikasi Sekarang', 'link', 'sm', 'data-verif') : x.minuta ? tombol('Buka Minuta', 'link', 'sm', 'data-minuta') : tombol('Lengkapi', 'link', 'sm', `data-lengkapi="${x.k}"`)}</span>`).join('')}</div>` : '';
       return `<div class="syarat-alert ditandai" id="syarat">${alert(jenis, judul, `${daftar}<div class="langkah-berikut" id="langkahBerikut"><b>Langkah berikutnya:</b> ${langkahBerikut(o, sy)}${usulan('HE-ORDER-05')}${o.status === 'SIAP' || o.status === 'DRAFTING' ? usulan('HE-ORDER-08') : ''}</div>`)}</div>`;
     })()}
-    <div class="status-kaki"><p>Status saat ini: <b>${ST[o.status].l}</b>${tanya('Status permohonan', 'Status menunjukkan tahap permohonan saat ini. Permohonan berjalan berurutan dari Baru, Pengumpulan, Siap, Penyusunan, sampai Selesai, dan tidak dapat dikembalikan ke tahap sebelumnya.')}</p>
+    <div class="status-kaki"><p>Status saat ini: <b>${ST[o.status].l}</b>${tanya('Status permohonan', 'Status menunjukkan tahap permohonan saat ini. Permohonan berjalan berurutan dari Pengumpulan Berkas, Verifikasi Berkas, Penyusunan Akta, sampai Selesai, dan tidak dapat dikembalikan ke tahap sebelumnya.')}</p>
       <div class="kanan">${sy.ke && !siap ? `<span class="alasan">Lengkapi ${kurang} syarat di atas untuk melanjutkan.</span>` : ''}${tombolPindah}</div></div>
   </div>`;
 }
@@ -553,26 +680,28 @@ function tandaTab(o, t) {
   if (t === 'kontak') return (o.kontak.nama || '').trim().length >= 2 ? kecil('Lengkap', 'success') : kecil('Kurang', 'warning');
   if (t === 'pihak') { const n = syaratData(o).filter(x => x.tab === 'pihak' && !x.ok).length; return n ? kecil(`Kurang ${n}`, 'warning') : kecil('Lengkap', 'success'); }
   if (t === 'objek') return o.objek.length ? kecil(`${o.objek.length} objek`, 'success') : kecil('Belum ada', 'warning');
+  if (t === 'pewaris') return o.pewaris && o.pewaris.ada_ahli_waris ? kecil(o.pewaris.pewaris_nama ? 'Terisi' : 'Belum diisi', o.pewaris.pewaris_nama ? 'success' : 'warning') : '';
+  if (t === 'perjanjian') return o.perjanjian && o.perjanjian.perjanjian_nama ? kecil('Terisi', 'success') : '';
   return kecil(`${o.dok.filter(d => d.file).length}/${o.dok.length} terunggah`, 'neutral');
 }
 function layarDetail() {
   const o = ord(), kunci = o.status === 'SELESAI';
-  const TIPTAB = { kontak:'Orang yang dapat dihubungi kantor untuk permohonan ini.', pihak:'Penjual, pembeli, saksi, dan pihak lain yang tercantum dalam akta.', objek:'Tanah atau bangunan yang diperjualbelikan.', dokumen:'Berkas pendukung seperti KTP, sertifikat, dan PBB.' };
-  const tabs = [['kontak','Narahubung'],['pihak','Para Pihak'],['objek','Objek'],['dokumen','Dokumen']];
+  const TIPTAB = { kontak:'Orang yang dapat dihubungi kantor untuk permohonan ini.', pihak:'Pihak Pertama, Pihak Kedua, saksi, dan pihak lain yang tercantum dalam akta.', objek:'Tanah atau bangunan yang diperjualbelikan.', dokumen:'Berkas pendukung seperti KTP, sertifikat, dan PBB.', pewaris:'Data pewaris bila ada pihak yang bertindak selaku ahli waris.', perjanjian:'Perjanjian yang menjadi dasar permohonan ini.' };
+  const tabs = [['kontak','Narahubung'],['pewaris','Pewaris'],['pihak','Para Pihak'],['perjanjian','Dasar Perjanjian'],['objek','Objek'],['dokumen','Dokumen']];
   return `
     <nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link"><span class="ina-breadcrumb__text">Layanan</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6l-6 6" /></svg></span></li><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">Permohonan AJB</span></span></li></ol></nav>
-    <h1>Permohonan AJB</h1><p class="sub">Kelola permintaan Akta Jual Beli, mulai dari pengajuan klien sampai akta selesai.</p>
+    <h1>Permohonan AJB</h1><p class="sub">Kelola permintaan Akta Jual Beli, mulai dari pengumpulan berkas sampai akta selesai.</p>
     <div class="det-kepala"><div>${tombol('Kembali', 'secondary', 'sm', 'id="kembali"', ik('kiri', 14))}
       <div class="kode">${o.kode}</div><h2>AJB - Akta Jual Beli</h2><p class="sub">Dibuat ${o.tanggal}</p></div>
       ${o.status === 'DRAFTING' ? tombol('Buka Penyusunan Akta', 'primary', 'md', 'data-luar="Penyusunan Akta"', ik('edit', 16)) : ''}</div>
     ${kartuStatus(o)}
-    ${o.status === 'SIAP' && !verifSelesai(o) ? `<div class="info-baris">${alert('info', '', 'Permohonan sudah <b>Siap</b> dan masuk antrean <b>Verifikasi Berkas</b> — periksa para pihak, objek tanah, dan harga sebelum penyusunan.', tombol('Verifikasi Sekarang', 'primary', 'sm', 'data-verif', ik('tameng', 14)))}</div>` : ''}
+    ${o.status === 'SIAP' && !verifSelesai(o) ? `<div class="info-baris">${alert('info', '', 'Permohonan masuk tahap <b>Verifikasi Berkas</b>. Periksa para pihak, objek tanah, dan harga sebelum penyusunan.', tombol('Verifikasi Sekarang', 'primary', 'sm', 'data-verif', ik('tameng', 14)))}</div>` : ''}
     <div class="tab-kartu ditandai">
       <div class="ina-tab-horizontal ina-tab-horizontal--use-brand-color"><div class="ina-tab-horizontal__container" role="tablist">${tabs.map(([kk, t]) =>
         `<button type="button" role="tab" data-tab="${kk}" aria-selected="${S.tab === kk}" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline ${S.tab === kk ? 'ina-tab-horizontal__tab--selected' : ''}"><span title="${TIPTAB[kk]}">${t}</span>${kunci ? '' : tandaTab(o, kk)}</button>`).join('')}${usulan('HE-ORDER-04')}</div></div>
       <div class="tab-isi">
         ${kunci ? `<div class="kunci">${alert('info', '', `${ik('kunci', 14)} Akta sudah <b>selesai</b> — data permohonan dikunci (hanya dapat dilihat). Untuk salinan, buka menu <b>Salinan Akta</b>.`)}</div>` : ''}
-        ${S.tab === 'kontak' ? tabKontak(o, kunci) : S.tab === 'pihak' ? tabPihak(o, kunci) : S.tab === 'objek' ? tabObjek(o, kunci) : tabDok(o, kunci)}
+        ${S.tab === 'kontak' ? tabKontak(o, kunci) : S.tab === 'pewaris' ? tabPewaris(o, kunci) : S.tab === 'perjanjian' ? tabPerjanjian(o, kunci) : S.tab === 'pihak' ? tabPihak(o, kunci) : S.tab === 'objek' ? tabObjek(o, kunci) : tabDok(o, kunci)}
       </div>
     </div>`;
 }
@@ -583,22 +712,32 @@ function tabKontak(o, kunci) {
     <div class="ina-text-area lebar"><label class="ina-text-area__label" for="kCat">Catatan</label><div class="ina-text-area__wrapper ina-text-area__wrapper--status-neutral ${kunci ? 'ina-text-area__wrapper--disabled' : ''}"><textarea id="kCat" class="ina-text-area__input" rows="3" placeholder="Catatan tambahan (opsional)" ${kunci ? 'disabled' : ''}>${esc(o.kontak.catatan)}</textarea></div></div></div>
     ${kunci ? '' : `<div class="f-kaki">${tombol('Simpan Narahubung', 'primary', 'md', 'id="simpanKontak"', ik('simpan', 16))}</div>`}`;
 }
+const aksiAkun = (p, i) => { const s = statusAkun(p); return s === 'NONE' ? tombol('Buat Akun & Undang', 'primary', 'sm', `data-undang-pihak="${i}"`) : s === 'INVITED' ? tombol('Kirim Ulang Undangan', 'secondary', 'sm', `data-undang-pihak="${i}"`) : ''; };
+/* menu aksi per baris, sama dengan Daftar Pengguna (HE-USER-04); posisi tetap agar tidak terpotong tabel */
+const menuPihak = (p, i) => `<span class="aksi-wadah ina-action-dropdown"><span class="ina-tooltip ina-tooltip--placement-left tanya"><button type="button" class="ina-button ina-button--secondary ina-button--sm ikon-aksi" data-aksi-pihak aria-haspopup="menu" aria-expanded="false" aria-label="Aksi untuk ${esc(p.nama)}">${ik('menu', 16)}</button><span class="ina-tooltip__content" role="tooltip"><span class="ina-tooltip__bubble">Aksi</span></span></span><div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible" role="menu" hidden><button type="button" class="ina-action-dropdown__item" role="menuitem" data-ubah-pihak="${i}"><span class="ina-action-dropdown__item-icon">${ik('edit')}</span><span class="ina-action-dropdown__item-content">Ubah</span></button><button type="button" class="ina-action-dropdown__item" role="menuitem" data-hapus-pihak="${i}"><span class="ina-action-dropdown__item-icon">${ik('sampah')}</span><span class="ina-action-dropdown__item-content">Hapus</span></button></div></span>`;
+let aksiDibuka = 0;
+const tutupAksi = () => document.querySelectorAll('.aksi-wadah .ina-action-dropdown__menu:not([hidden])').forEach(m => { m.hidden = true; m.parentElement.querySelector('[data-aksi-pihak]').setAttribute('aria-expanded', false); });
+document.addEventListener('click', e => { const b = e.target.closest('[data-aksi-pihak]'); if (!b) { tutupAksi(); return; } const m = b.closest('.aksi-wadah').querySelector('.ina-action-dropdown__menu'), buka = m.hidden; tutupAksi(); if (!buka) return; m.hidden = false; aksiDibuka = Date.now(); b.setAttribute('aria-expanded', true); const r = b.getBoundingClientRect(), h = m.offsetHeight; m.style.top = (r.bottom + 4 + h > innerHeight ? r.top - h - 4 : r.bottom + 4) + 'px'; m.style.left = Math.max(8, r.right - m.offsetWidth) + 'px'; });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') tutupAksi(); });
+addEventListener('scroll', () => { if (Date.now() - aksiDibuka > 300) tutupAksi(); }, true);
 function tabPihak(o, kunci) {
-  const kurang = syaratData(o).filter(x => x.tab === 'pihak' && !x.ok).map(x => x.l);
-  return `<div class="tab-bar"><p>${kunci ? '' : kurang.length ? `Belum ada: ${kurang.join(', ')}.` : 'Semua pihak yang dibutuhkan sudah ada.'}</p>${kunci ? '' : tombol('Tambah Pihak', 'primary', 'md', 'data-tambah-pihak=""', ik('tambah', 16))}</div>
-    <div class="tabel-wadah" style="margin-top:0"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb"><thead class="ina-table__header"><tr><th class="ina-table__header-cell">Tipe${tanya('Tipe pihak', 'Tipe menunjukkan peran seseorang dalam akta. Penjual adalah pihak pertama, pembeli adalah pihak kedua, dan saksi menyaksikan penandatanganan.')}</th><th class="ina-table__header-cell">Bentuk${tanya('Bentuk pihak', 'Pilih Perorangan untuk orang pribadi. Pilih Badan Hukum untuk perusahaan, misalnya PT, yang diwakili oleh kuasanya.')}</th><th class="ina-table__header-cell">Nama · NIK</th><th class="ina-table__header-cell ditandai" id="kolKontak">Kontak (email · HP) ${usulan('HE-ORDER-06')}</th><th class="ina-table__header-cell"></th></tr></thead>
-    <tbody class="ina-table__body">${o.pihak.length ? o.pihak.map((p, i) => `<tr class="ina-table__row"><td class="ina-table__cell">${badge(TIPE[p.tipe].replace(' (harta bersama)', '').toUpperCase(), 'info')}</td>
-      <td class="ina-table__cell">${badge(p.tipe === 'SAKSI' ? '—' : p.bentuk, 'neutral')}${p.harta === 'BERSAMA' ? '<div class="sub2">Harta bersama</div>' : ''}</td>
-      <td class="ina-table__cell"><div class="nm">${esc(p.nama)}</div><div class="sub2">${p.nik ? p.nik.slice(0, 4) + '********' + p.nik.slice(-4) : kecil('NIK belum diisi', 'warning')}</div></td>
+  const kurang = syaratData(o).filter(x => x.tab === 'pihak' && !x.ok && x.tipe).map(x => x.l);
+  return `<div class="tab-bar"><p>${kunci ? '' : kurang.length ? `Belum ada: ${kurang.join(', ')}.` : o.pihak.some(p => statusAkun(p) !== 'ACTIVE') ? 'Semua pihak sudah ada. Permohonan menunggu akun pihak baru aktif.' : 'Semua pihak yang dibutuhkan sudah ada.'}</p>${kunci ? '' : tombol('Tambah Pihak', 'primary', 'md', 'data-tambah-pihak=""', ik('tambah', 16))}</div>
+    <div class="tabel-wadah" style="margin-top:0"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb"><thead class="ina-table__header"><tr><th class="ina-table__header-cell">Tipe${tanya('Tipe pihak', 'Tipe menunjukkan peran seseorang dalam akta. Pihak Pertama adalah penjual, Pihak Kedua adalah pembeli, dan saksi menyaksikan penandatanganan.')}</th><th class="ina-table__header-cell">Bentuk${tanya('Bentuk pihak', 'Pilih Perorangan untuk orang pribadi. Pilih Badan Hukum untuk perusahaan, misalnya PT, yang diwakili oleh kuasanya.')}</th><th class="ina-table__header-cell">Nama · NIK</th><th class="ina-table__header-cell ditandai" id="kolKontak">Kontak (email · HP) ${usulan('HE-ORDER-06')}</th><th class="ina-table__header-cell ditandai" id="kolStatusAkun">Status Akun${tanya('Status Akun', KET_AKUN)} ${usulan('HE-ORDER-15')}</th><th class="ina-table__header-cell ditandai" id="kolStatusCa">Status Sertifikat${tanya('Status Sertifikat', KET_CA)} ${usulan('HE-ORDER-15')}</th><th class="ina-table__header-cell"></th></tr></thead>
+    <tbody class="ina-table__body">${o.pihak.length ? o.pihak.map((p, i) => `<tr class="ina-table__row"><td class="ina-table__cell">${kecil(TIPE[p.tipe].replace(' (harta bersama)', '').toUpperCase(), 'info')}</td>
+      <td class="ina-table__cell">${kecil(p.tipe === 'SAKSI' ? '—' : p.bentuk, 'neutral')}${p.harta === 'BERSAMA' ? '<div class="sub2">Harta bersama</div>' : ''}</td>
+      <td class="ina-table__cell"><div class="nm">${esc(p.nama)}</div><div class="sub2">${p.nik ? p.nik.slice(0, 4) + '********' + p.nik.slice(-4) : (p.pt ? 'Badan hukum' : kecil('NIK belum diisi', 'warning'))}</div></td>
       <td class="ina-table__cell"><div>${esc(p.email) || '—'}</div><div class="sub2">${p.hp ? esc(p.hp) : 'No. HP belum diisi'}</div></td>
-      <td class="ina-table__cell">${kunci ? '' : `<div class="aksi-baris">${tombol('Ubah', 'secondary', 'sm', `data-luar="Ubah pihak"`)}${tombol('Hapus', 'tertiary', 'sm', `data-hapus-pihak="${i}" data-merah`)}</div>`}</td></tr>`).join('')
-      : `<tr><td colspan="5" class="ina-table__empty-cell kosong">Belum ada para pihak.</td></tr>`}</tbody></table></div></div></div>`;
+      <td class="ina-table__cell">${lencanaTip(AKUN_PIHAK[statusAkun(p)])}</td>
+      <td class="ina-table__cell">${lencanaTip(CA_PIHAK[p.ca || 'none'])}</td>
+      <td class="ina-table__cell">${kunci ? '' : `<div class="aksi-baris">${aksiAkun(p, i)}${menuPihak(p, i)}</div>`}</td></tr>`).join('')
+      : `<tr><td colspan="7" class="ina-table__empty-cell kosong">Belum ada para pihak.</td></tr>`}</tbody></table></div></div></div>`;
 }
 function tabObjek(o, kunci) {
   return `<div class="tab-bar"><p>${o.objek.length || kunci ? '' : 'Tambahkan minimal satu objek tanah.'}</p>${kunci ? '' : tombol('Tambah Objek', 'primary', 'md', 'id="tambahObjek"', ik('tambah', 16))}</div>
     <div class="tabel-wadah" style="margin-top:0"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb"><thead class="ina-table__header"><tr><th class="ina-table__header-cell">Hak${tanya('Jenis hak', T_HAK)}</th><th class="ina-table__header-cell">Sertifikat / NIB${tanya('NIB', T_NIB)}</th><th class="ina-table__header-cell">Luas</th><th class="ina-table__header-cell">Lokasi</th><th class="ina-table__header-cell ditandai" id="kolHarga">Harga jual beli${tanya('Harga jual beli', T_HARGA)} ${usulan('HE-ORDER-07')}</th><th class="ina-table__header-cell"></th></tr></thead>
     <tbody class="ina-table__body">${o.objek.length ? o.objek.map((x, i) => `<tr class="ina-table__row"><td class="ina-table__cell">${badge(x.hak, 'neutral')}</td><td class="ina-table__cell"><div class="nm">${esc(x.sertifikat)}</div><div class="sub2">NIB ${esc(x.nib)}</div></td><td class="ina-table__cell">${esc(x.luas)} m²</td><td class="ina-table__cell">${esc(x.lokasi || '-')}</td><td class="ina-table__cell">${x.harga ? 'Rp' + rupiah(x.harga) : kecil('Belum diisi', 'warning')}</td>
-      <td class="ina-table__cell">${kunci ? '' : `<div class="aksi-baris">${tombol('Ubah', 'secondary', 'sm', 'data-luar="Ubah objek"')}${tombol('Hapus', 'tertiary', 'sm', `data-hapus-objek="${i}" data-merah`)}</div>`}</td></tr>`).join('')
+      <td class="ina-table__cell">${kunci ? '' : `<div class="aksi-baris">${tombol('Ubah', 'secondary', 'sm', `data-ubah-objek="${i}"`)}${tombol('Hapus', 'tertiary', 'sm', `data-hapus-objek="${i}" data-merah`)}</div>`}</td></tr>`).join('')
       : `<tr><td colspan="6" class="ina-table__empty-cell kosong">Belum ada objek.</td></tr>`}</tbody></table></div></div></div>`;
 }
 function tabDok(o, kunci) {
@@ -623,16 +762,19 @@ H.addEventListener('click', e => {
   if (t.closest('#muatUlang')) { toast('Daftar permohonan dimuat ulang.'); return; }
   const ho = t.closest('[data-hapus-order]'); if (ho) { e.stopPropagation(); konfirmHapus(`Hapus permohonan ${ho.dataset.hapusOrder}?`, 'Permohonan dan seluruh datanya akan dihapus. Tindakan ini tidak dapat dibatalkan.', () => { ORDER = ORDER.filter(o => o.kode !== ho.dataset.hapusOrder); gambar(); toast('Permohonan dihapus.', 'positive'); }); return; }
   const b = t.closest('[data-buka]'); if (b) { buka(b.dataset.buka); return; }
-  if (t.closest('#buatOrder')) { dialogBuatOrder(); return; }
+  if (t.closest('#buatOrder')) { if (trialOrderPenuh()) return; dialogBuatOrder(); return; }
   if (t.closest('#kembali')) { S.layar = 'daftar'; gambar(); return; }
   const tb = t.closest('[data-tab]'); if (tb) { S.tab = tb.dataset.tab; gambar(); return; }
   const lk = t.closest('[data-lengkapi]'); if (lk) { const x = syaratData(ord()).find(y => y.k === lk.dataset.lengkapi); S.tab = x.tab; gambar(); if (x.tipe) dialogPihak(x.tipe); else if (x.tab === 'objek') dialogObjek(); else document.getElementById('kNama')?.focus(); return; }
   if (t.closest('[data-verif]')) { const v = ord().verif; dialog({ judul:'Verifikasi order', isi:`<p>Verifikasi dilakukan di menu <b>Verifikasi Berkas</b> dalam tiga bagian. Status saat ini:</p><dl class="ringkas-kv"><dt>Para pihak (CA)</dt><dd>${v.pihak ? 'Terverifikasi' : 'Belum'}</dd><dt>Objek tanah</dt><dd>${v.objek ? 'Terverifikasi' : 'Belum'}</dd><dt>Harga (NJOP)${tanya('NJOP', T_NJOP)}</dt><dd>${v.harga ? 'Terverifikasi' : 'Belum'}</dd></dl><p>Di prototipe ini, verifikasi dapat ditandai selesai untuk mensimulasikan alur.</p>`, tombol:[['Batal','tertiary',null],['Buka Prototipe Verifikasi','secondary',() => { location.href = 'Backlog-HE-VERIF-Prototype.html'; }],['Tandai semua terverifikasi','primary',() => { ord().verif = V(true, true, true); gambar(); toast('Verifikasi selesai (simulasi).', 'positive'); }]] }); return; }
   if (t.closest('[data-minuta]')) { dialog({ judul:'Minuta akta belum final', isi:'<p>Minuta disusun Asisten di menu <b>Penyusunan Akta</b>, lalu PPAT memfinalisasinya dengan nomor dan tanggal akta. Setelah final, permohonan dapat ditandai Selesai.</p><p>Di prototipe ini, finalisasi dapat disimulasikan.</p>', tombol:[['Batal','tertiary',null],['Buka Prototipe Penyusunan Akta','secondary',() => { location.href = 'Backlog-HE-MINUTA-Prototype.html'; }],['Tandai minuta final (simulasi)','primary',() => { ord().minuta = true; gambar(); toast('Minuta ditandai final (simulasi).', 'positive'); }]] }); return; }
   if (t.closest('#pindah')) { konfirmPindah(); return; }
-  if (t.closest('#simpanKontak')) { const o = ord(); const nm = $('#kNama').value.trim(); if (nm.length < 2) { toast('Nama narahubung minimal 2 karakter.', 'destructive'); return; } Object.assign(o.kontak, { nama:nm, hp:$('#kHp').value.trim(), email:$('#kEmail').value.trim(), catatan:$('#kCat').value }); gambar(); toast('Narahubung tersimpan.', 'positive'); return; }
+  if (t.closest('#simpanKontak')) { const o = ord(); const nm = $('#kNama').value.trim(); if (nm.length < 2) { toast('Nama narahubung minimal 2 karakter.', 'destructive'); return; } if ($('#kHp').value.replace(/\D/g, '').length > 15) { toast('No. HP maksimal 15 digit.', 'destructive'); return; } Object.assign(o.kontak, { nama:nm, hp:$('#kHp').value.trim(), email:$('#kEmail').value.trim(), catatan:$('#kCat').value }); gambar(); toast('Narahubung tersimpan.', 'positive'); return; }
   const tp = t.closest('[data-tambah-pihak]'); if (tp) { dialogPihak(); return; }
-  const hp = t.closest('[data-hapus-pihak]'); if (hp) { const o = ord(), p = o.pihak[+hp.dataset.hapusPihak]; konfirmHapus('Hapus pihak?', `Hapus <b>${esc(p.nama)}</b> (${TIPE[p.tipe]}) dari daftar para pihak? Tindakan ini tidak dapat dibatalkan.`, () => { o.pihak.splice(+hp.dataset.hapusPihak, 1); gambar(); toast('Pihak dihapus.', 'positive'); }); return; }
+  const ep = t.closest('[data-ubah-pihak]'); if (ep) { dialogPihak(null, +ep.dataset.ubahPihak); return; }
+  const eo = t.closest('[data-ubah-objek]'); if (eo) { dialogObjek(+eo.dataset.ubahObjek); return; }
+  const up = t.closest('[data-undang-pihak]'); if (up) { undangPihak(ord().pihak[+up.dataset.undangPihak]); return; }
+  const hp = t.closest('[data-hapus-pihak]'); if (hp) { const o = ord(), p = o.pihak[+hp.dataset.hapusPihak]; konfirmHapus('Hapus pihak?', `Hapus <b>${esc(p.nama)}</b> (${TIPE[p.tipe]}) dari daftar para pihak? Tindakan ini tidak dapat dibatalkan.`, () => { lepasKB(p); o.pihak.splice(+hp.dataset.hapusPihak, 1); gambar(); toast('Pihak dihapus.', 'positive'); }); return; }
   if (t.closest('#tambahObjek')) { dialogObjek(); return; }
   const hob = t.closest('[data-hapus-objek]'); if (hob) { konfirmHapus('Hapus objek?', 'Hapus objek dari permohonan? Tindakan ini tidak dapat dibatalkan.', () => { ord().objek.splice(+hob.dataset.hapusObjek, 1); gambar(); toast('Objek dihapus.', 'positive'); }); return; }
   if (t.closest('#tambahDok')) { dialogDok(); return; }
@@ -647,7 +789,6 @@ function konfirmPindah() {
   const o = ord(), sy = syarat(o), ke = sy.ke;
   if (!ke || !sy.daftar.every(x => x.ok)) return;
   const DAMPAK = {
-    PENGUMPULAN:'Kantor mulai mengumpulkan data para pihak, objek, dan dokumen.',
     SIAP:'Permohonan masuk antrean Verifikasi Berkas. Setelah ini, menambah, mengubah, atau menghapus pihak akan mengembalikan permohonan ke tahap Verifikasi.',
     DRAFTING:'Pembuatan minuta akta dimulai di menu Penyusunan Akta.'
   };
@@ -663,59 +804,350 @@ function konfirmPindah() {
   function lanjut() { o.status = ke; gambar(); toast(`Status permohonan berpindah ke ${ST[ke].l}.`, 'positive'); }
 }
 
-/* ---------------- tambah pihak (HE-ORDER-03) ---------------- */
-function tipeBerikut(o) { const x = syaratData(o).find(y => y.tab === 'pihak' && !y.ok); return x ? x.tipe : 'LAINNYA'; }
-function dialogPihak(tipeAwal) {
-  const o = ord();
-  const F = { tipe: tipeAwal || tipeBerikut(o), bentuk:'Perorangan', harta:'SENDIRI', klien:null, cari:'', sumber:'external', buka:null, galat:'' };
-  let jumlahTambah = 0;
-  const isi = () => {
-    const kurang = syaratData(o).filter(x => x.tab === 'pihak' && !x.ok).map(x => x.l);
-    const utama = F.tipe === 'PENJUAL' || F.tipe === 'PEMBELI';
-    const sudah = new Set(o.pihak.map(p => p.id));
-    const hasil = KLIEN.filter(c => !sudah.has(c.id) && (!F.cari || (c.nama + c.email).toLowerCase().includes(F.cari.toLowerCase())));
-    return `
-      <div class="belum-ada">${ik('info', 16)}<span>${kurang.length ? `Belum ada: <b>${kurang.join(', ')}</b>` : 'Semua pihak yang dibutuhkan sudah ada.'}</span>${jumlahTambah ? `<span style="margin-left:auto;color:var(--ina-content-positive)">${jumlahTambah} pihak ditambahkan</span>` : ''}${usulan('HE-ORDER-03')}</div>
-      <div class="fld ina-select-dropdown select-wadah"><label class="ina-text-field__label">Tipe Pihak<span class="ina-text-field__required">*</span>${tip('Penjual dan pembeli adalah pihak utama. Saksi dibutuhkan 2 orang. Pasangan ditambahkan bila penjual atau pembeli memilih harta bersama.')}</label>
-        <button type="button" class="ina-select-dropdown__trigger ina-select-dropdown__trigger--size-md" data-dp="tipe"><span class="ina-select-dropdown__trigger-text ina-select-dropdown__trigger-text--selected">${TIPE[F.tipe]}</span>${ik('bawah')}</button>
-        ${F.buka === 'tipe' ? `<div class="ina-select-dropdown__panel"><div class="ina-select-dropdown__options">${Object.entries(TIPE).map(([v, t]) => `<button type="button" class="ina-select-dropdown__option ${v === F.tipe ? 'ina-select-dropdown__option--selected-single' : ''}" data-dtipe="${v}">${t}</button>`).join('')}</div></div>` : ''}</div>
-      ${utama ? `<div class="fld"><label class="ina-text-field__label">Bentuk Pihak<span class="ina-text-field__required">*</span>${tip('Pilih Badan Hukum (PT) bila pihak adalah perusahaan.')}</label>${grup([['Perorangan','Perorangan'],['Badan Hukum (PT)','Badan Hukum (PT)']], F.bentuk, 'dbentuk')}</div>
-      <div class="fld"><label class="ina-text-field__label">Jenis Harta<span class="ina-text-field__required">*</span>${tip('Harta Bersama berarti objek dimiliki bersama suami/isteri. Pasangannya wajib ditambahkan sebagai pihak Pasangan untuk memberi persetujuan.')}</label>${grup([['SENDIRI','Harta Sendiri'],['BERSAMA','Harta Bersama']], F.harta, 'dharta')}</div>` : ''}
-      ${F.tipe === 'SAKSI' ? `<div class="fld"><label class="ina-text-field__label">Sumber Saksi${tip('Saksi bisa dari luar kantor (klien terdaftar) atau dari pegawai kantor PPAT.')}</label>${grup([['external','Eksternal (Klien)'],['internal','Internal (Asisten)']], F.sumber, 'dsumber')}</div>` : ''}
-      <div class="fld ina-text-field" style="position:relative"><label class="ina-text-field__label" for="cariKlien">${F.tipe === 'SAKSI' && F.sumber === 'internal' ? 'Pengguna Asisten/Pegawai' : 'Pengguna Klien'}<span class="ina-text-field__required">*</span></label>
-        ${F.klien ? `<div class="kartu-pihak"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(F.klien.nama)}</b>${tombol('Ganti', 'link', 'sm', 'data-dganti')}</div><dl><div><dt>NIK</dt><dd>${F.klien.nik ? F.klien.nik.slice(0, 4) + '********' + F.klien.nik.slice(-4) : '—'}</dd></div><div><dt>Telepon</dt><dd>${F.klien.hp || '—'}</dd></div><div><dt>Email</dt><dd>${F.klien.email}</dd></div><div><dt>Kota domisili</dt><dd>${F.klien.kota || '—'}</dd></div></dl>
-          ${!F.klien.nik ? `<div style="margin-top:10px">${alert('caution', '', 'Profil pengguna ini belum lengkap (NIK belum diisi). Anda tetap bisa menyimpan; lengkapi datanya nanti agar siap untuk akta.')}</div>` : ''}</div>`
-        : `<div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ${F.galat ? 'ina-text-field__wrapper--status-error' : ''}"><div class="ina-text-field__prefix-icon">${ik('cari')}</div><input id="cariKlien" class="ina-text-field__input" placeholder="Cari nama / email pengguna klien…" value="${esc(F.cari)}" autocomplete="off"></div>
-          ${F.buka === 'klien' ? `<div class="ina-select-dropdown__panel cari-panel"><div class="ina-select-dropdown__options">${hasil.length ? hasil.map(c => `<button type="button" class="ina-select-dropdown__option" data-dklien="${c.id}"><span>${esc(c.nama)}<small>${esc(c.email)}</small></span>${c.nik ? '' : badge('NIK kosong', 'warning')}</button>`).join('') : '<div class="kosong" style="padding:10px">Tidak ada pengguna klien yang cocok.</div>'}</div></div>` : ''}
-          <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text ${F.galat ? 'ina-text-field__helper-text--error' : ''}">${F.galat || 'Pihak harus terdaftar sebagai pengguna (fungsi Klien). Data diri terisi otomatis dari profilnya.'}</div></div>`}
-      </div>`;
-  };
-  dialog({ judul:'Tambah Para Pihak', isi:isi(), lebar:false,
-    tombol:[['Batal','secondary',null],['Simpan & Tambah Lagi','secondary',() => simpan(true), true],['Simpan','primary',() => simpan(false), true]] });
-  const L = $('#lapisan');
-  const segar = () => { L.querySelector('.ina-modal__body').innerHTML = isi(); const c = L.querySelector('#cariKlien'); if (c && F.buka === 'klien') { c.focus(); c.setSelectionRange(c.value.length, c.value.length); } };
-  function simpan(lagi) {
-    if (!F.klien) { F.galat = 'Pilih pengguna klien terlebih dahulu.'; segar(); return false; }
-    o.pihak.push({ tipe:F.tipe, bentuk:F.tipe === 'SAKSI' ? '—' : F.bentuk, harta:F.harta, ...F.klien });
-    gambar();
-    if (!lagi) { toast(`${TIPE[F.tipe]} ditambahkan.`, 'positive'); return true; }
-    jumlahTambah++; toast(`${TIPE[F.tipe]} ditambahkan. Lanjutkan menambah pihak berikutnya.`, 'positive');
-    Object.assign(F, { tipe:tipeBerikut(o), bentuk:'Perorangan', harta:'SENDIRI', klien:null, cari:'', galat:'', buka:null }); segar(); return false;
-  }
-  L.querySelector('.ina-modal__body').addEventListener('click', e => {
-    const t = e.target;
-    if (t.closest('[data-dp="tipe"]')) { F.buka = F.buka === 'tipe' ? null : 'tipe'; segar(); return; }
-    const dt = t.closest('[data-dtipe]'); if (dt) { F.tipe = dt.dataset.dtipe; F.buka = null; segar(); return; }
-    const db = t.closest('[data-dbentuk]'); if (db) { F.bentuk = db.dataset.dbentuk; segar(); return; }
-    const dh = t.closest('[data-dharta]'); if (dh) { F.harta = dh.dataset.dharta; segar(); return; }
-    const ds = t.closest('[data-dsumber]'); if (ds) { F.sumber = ds.dataset.dsumber; segar(); return; }
-    const dk = t.closest('[data-dklien]'); if (dk) { F.klien = k(+dk.dataset.dklien); F.buka = null; F.galat = ''; segar(); return; }
-    if (t.closest('[data-dganti]')) { F.klien = null; F.buka = 'klien'; segar(); return; }
-    if (t.id === 'cariKlien') { F.buka = 'klien'; segar(); return; }
-    if (F.buka) { F.buka = null; segar(); }
-  });
-  L.querySelector('.ina-modal__body').addEventListener('input', e => { if (e.target.id === 'cariKlien') { F.cari = e.target.value; F.buka = 'klien'; segar(); } });
+/* ---------------- mesin isian AJB (HE-ORDER-13, HE-ORDER-14) ---------------- */
+const ambilV = (V, k) => k.split('.').reduce((a, x) => (a == null ? a : a[x]), V);
+const taruhV = (V, k, n) => { const s = k.split('.'); let a = V; s.slice(0, -1).forEach((x, i) => { if (a[x] == null) a[x] = /^\d+$/.test(s[i + 1]) ? [] : {}; a = a[x]; }); a[s[s.length - 1]] = n; };
+const idF = k => 'x-' + k.replace(/\./g, '-');
+const bilanganUang = v => { const n = +String(v || '').replace(/\D/g, ''); return n ? `${terbilang(n)} rupiah` : 'Belum diisi'; };
+const tutupPilihF = () => document.querySelectorAll('.pilih-f .ina-select-dropdown__panel:not([hidden])').forEach(p => { p.hidden = true; p.previousElementSibling.setAttribute('aria-expanded', false); });
+document.addEventListener('click', e => { const k = e.target.closest('[data-pilih-f]'), o = e.target.closest('[data-opsi-f]');
+  if (k) { const p = k.nextElementSibling, buka = p.hidden; tutupPilihF(); p.hidden = !buka; k.setAttribute('aria-expanded', buka); return; }
+  if (o) { const s = o.closest('.pilih-f').querySelector('select'); s.value = o.dataset.opsiF; tutupPilihF(); s.dispatchEvent(new Event('change', { bubbles:true })); return; }
+  tutupPilihF(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') tutupPilihF(); });
+document.addEventListener('change', e => { if (!e.target.classList?.contains('pilih-asli')) return; const w = e.target.closest('.pilih-f'), s = e.target, x = w.querySelector('.ina-select-dropdown__trigger-text'); x.textContent = s.selectedOptions[0]?.textContent || ''; x.classList.toggle('ina-select-dropdown__trigger-text--selected', !!s.value); w.querySelectorAll('[data-opsi-f]').forEach(b => { const on = b.dataset.opsiF === s.value; b.classList.toggle('ina-select-dropdown__option--selected-single', on); b.setAttribute('aria-selected', on); }); }, true);
+function isianF(f, V, dis = '') {
+  const id = idF(f.k), v = ambilV(V, f.k) ?? '', lebar = f.lebar ? 'lebar' : '', w = f.w ? '<span class="ina-text-field__required">*</span>' : '', sts = f.st ? `ina-text-field__wrapper--status-${f.st}` : '';
+  const bantu = f.t === 'uang' && !f.b ? bilanganUang(v) : f.b || '';
+  const kaki = `<div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text ${f.st ? 'ina-text-field__helper-text--' + f.st : ''}" id="h-${id}">${bantu}</div></div>`;
+  if (f.t === 'cek') return `<div class="${lebar || 'lebar'}"><label class="ina-checkbox" for="${id}"><input type="checkbox" id="${id}" class="ina-checkbox__input peer" data-fk="${f.k}" ${v ? 'checked' : ''} ${dis}><div class="ina-checkbox__box ina-checkbox__box--${v ? 'checked' : 'unchecked'}">${v ? ik('centang', 12) : ''}</div><div class="ina-checkbox__content"><span class="ina-checkbox__label">${f.l}</span></div></label></div>`;
+  if (f.t === 'area') return `<div class="ina-text-area lebar" id="f-${id}"><label class="ina-text-area__label" for="${id}">${f.l}${w}</label><div class="ina-text-area__wrapper ina-text-area__wrapper--status-neutral"><textarea id="${id}" class="ina-text-area__input" rows="3" placeholder="${f.ph || ''}" data-fk="${f.k}" ${dis}>${esc(v)}</textarea></div>${kaki}</div>`;
+  const label = `<label class="ina-text-field__label" for="${id}">${f.l}${w}${f.tip || ''}</label>`;
+  if (f.t === 'pilih') { const opsi = f.o.map(x => { const [a, b] = [].concat(x); return [String(a), b ?? a]; }), awal = opsi.find(x => x[0] === String(v)) || (f.ph === undefined ? opsi[0] : null), nilai = awal ? awal[0] : '';
+    return `<div class="ina-text-field ${lebar}" id="f-${id}">${label}<div class="ina-text-field__wrapper pilih-f select-wadah ina-select-dropdown ${sts}"><select id="${id}" class="pilih-asli" data-fk="${f.k}" tabindex="-1" aria-hidden="true" ${dis}>${f.ph !== undefined ? `<option value="">${f.ph}</option>` : ''}${opsi.map(([a, b]) => `<option value="${esc(a)}" ${a === nilai ? 'selected' : ''}>${esc(b)}</option>`).join('')}</select><button type="button" class="ina-select-dropdown__trigger ina-select-dropdown__trigger--size-md" data-pilih-f aria-haspopup="listbox" aria-expanded="false" aria-label="${esc(f.l)}" ${dis}><span class="ina-select-dropdown__trigger-text ${awal ? 'ina-select-dropdown__trigger-text--selected' : ''}">${esc(awal ? awal[1] : f.ph)}</span>${ik('bawah')}</button><div class="ina-select-dropdown__panel" hidden><div class="ina-select-dropdown__options" role="listbox">${opsi.map(([a, b]) => `<button type="button" role="option" class="ina-select-dropdown__option ${a === nilai ? 'ina-select-dropdown__option--selected-single' : ''}" aria-selected="${a === nilai}" data-opsi-f="${esc(a)}">${esc(b)}</button>`).join('')}</div></div></div>${kaki}</div>`; }
+  const tipe = f.t === 'tgl' ? 'date' : 'text', num = f.t === 'angka' || f.t === 'uang' ? 'inputmode="numeric"' : '';
+  return `<div class="ina-text-field ${lebar}" id="f-${id}">${label}<div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ${sts}">${f.t === 'uang' ? '<span class="ina-text-field__prefix-icon" style="font-size:14px;font-weight:500">Rp</span>' : ''}<input id="${id}" type="${tipe}" class="ina-text-field__input" placeholder="${f.ph || ''}" value="${esc(v)}" data-fk="${f.k}" ${f.t === 'uang' ? 'data-uang' : ''} ${num} ${f.max ? `maxlength="${f.max}"` : ''} ${dis}></div>${kaki}</div>`;
 }
+const kelompokF = (judul, fs, V, dis) => `${judul ? `<h4 class="bantu-sub">${judul}</h4>` : ''}<div class="f-grid">${fs.filter(Boolean).map(f => isianF(f, V, dis)).join('')}</div>`;
+const ulangF = (kunci, judulBaris, tambah, kosong, fs, V) => { const a = V[kunci] || []; return `<div class="ulang-f">${a.length ? a.map((_, i) => `<div class="ulang-baris"><div class="ulang-kepala"><b>${judulBaris} ${i + 1}</b>${tombol('Hapus', 'tertiary', 'sm', `data-rep-hapus="${kunci}" data-rep-i="${i}" data-merah`)}</div><div class="f-grid">${fs(a[i]).filter(Boolean).map(f => isianF({ ...f, k:`${kunci}.${i}.${f.k}` }, V)).join('')}</div></div>`).join('') : `<p class="ket-f">${kosong}</p>`}${tombol(tambah, 'secondary', 'sm', `data-rep-tambah="${kunci}"`, ik('tambah', 14))}</div>`; };
+/* ikat isian ke data; pilihan dan centang menggambar ulang karena bisa memunculkan isian lain */
+function ikatIsian(w, V, segar) {
+  w.addEventListener('input', e => { const k = e.target.dataset.fk; if (!k || e.target.type === 'checkbox' || e.target.tagName === 'SELECT') return;
+    if (e.target.dataset.uang !== undefined) { e.target.value = rupiah(e.target.value); const h = document.getElementById('h-' + idF(k)); if (h) h.textContent = bilanganUang(e.target.value); }
+    taruhV(V, k, e.target.value); e.target.closest('.ina-text-field__wrapper')?.classList.remove('ina-text-field__wrapper--status-error'); });
+  w.addEventListener('change', e => { const k = e.target.dataset.fk; if (!k) return; if (e.target.type === 'checkbox') { taruhV(V, k, e.target.checked); segar(); } else if (e.target.tagName === 'SELECT') { taruhV(V, k, e.target.value); segar(); } });
+  w.addEventListener('click', e => { const a = e.target.closest('[data-rep-tambah]'); if (a) { const k = a.dataset.repTambah; V[k] = [...(V[k] || []), {}]; segar(); return; } const h = e.target.closest('[data-rep-hapus]'); if (h) { V[h.dataset.repHapus].splice(+h.dataset.repI, 1); segar(); } });
+}
+/* definisi "Formulir AJB 2" dari aplikasi live (sumber/formulir-ajb.json); penyajian mengikuti IDDS dan temuan HE */
+const FORM_AJB = [{"name":"Narahubung","jenis":"TUNGGAL","fields":[{"kode":"narahubung_nama","label":"Nama","tipe":"teks","wajib":true,"lebar":"setengah","ph":"Nama narahubung"},{"kode":"narahubung_hp","label":"No. HP","tipe":"teks","wajib":false,"lebar":"setengah","ph":"08xxxx"},{"kode":"narahubung_email","label":"Email","tipe":"teks","wajib":false,"lebar":"setengah","ph":"email@contoh.id"},{"kode":"narahubung_catatan","label":"Catatan","tipe":"teks_panjang","wajib":false,"lebar":"penuh","ph":"Catatan tambahan (opsional)"}]},{"name":"Pewaris","jenis":"TUNGGAL","fields":[{"kode":"ada_ahli_waris","label":"Ada pihak yang bertindak selaku ahli waris","tipe":"ya_tidak","wajib":false,"lebar":"penuh"},{"kode":"","label":"Identitas pewaris","tipe":"judul","wajib":false,"lebar":"penuh","bila":[{"field":"ada_ahli_waris","op":"=","nilai":"ya"}]},{"kode":"pewaris_sapaan","label":"Sebutan","tipe":"pilihan","wajib":false,"lebar":"sepertiga","opsi":["Almarhum","Almarhumah"],"bila":[{"field":"ada_ahli_waris","op":"=","nilai":"ya"}]},{"kode":"pewaris_nama","label":"Nama pewaris","tipe":"teks","wajib":false,"lebar":"setengah","bila":[{"field":"ada_ahli_waris","op":"=","nilai":"ya"}]},{"kode":"pewaris_nik","label":"NIK pewaris","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"ada_ahli_waris","op":"=","nilai":"ya"}]},{"kode":"pewaris_tempat_wafat","label":"Meninggal dunia di","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"ada_ahli_waris","op":"=","nilai":"ya"}]},{"kode":"pewaris_tanggal_wafat","label":"Tanggal wafat","tipe":"tanggal","wajib":false,"lebar":"setengah","bila":[{"field":"ada_ahli_waris","op":"=","nilai":"ya"}]},{"kode":"","label":"Dasar kewarisan","tipe":"judul","wajib":false,"lebar":"penuh","bila":[{"field":"ada_ahli_waris","op":"=","nilai":"ya"}]},{"kode":"skw_jenis","label":"Jenis surat keterangan waris","tipe":"pilihan","wajib":false,"lebar":"penuh","opsi":["Surat Keterangan Waris di bawah tangan","Keterangan Hak Waris notariil","Penetapan Pengadilan Agama","Penetapan Pengadilan Negeri","Surat Keterangan Waris dari Balai Harta Peninggalan"],"bila":[{"field":"ada_ahli_waris","op":"=","nilai":"ya"}]},{"kode":"skw_nomor","label":"Nomor","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"ada_ahli_waris","op":"=","nilai":"ya"}]},{"kode":"skw_tanggal","label":"Tanggal","tipe":"tanggal","wajib":false,"lebar":"setengah","bila":[{"field":"ada_ahli_waris","op":"=","nilai":"ya"}]},{"kode":"skw_penerbit","label":"Dibuat / diterbitkan oleh","tipe":"teks","wajib":false,"lebar":"setengah","bila":[{"field":"ada_ahli_waris","op":"=","nilai":"ya"}]},{"kode":"skw_kota","label":"Di kota","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"ada_ahli_waris","op":"=","nilai":"ya"}]},{"kode":"skw_dikuatkan","label":"Dikuatkan / disaksikan oleh (bila ada)","tipe":"teks","wajib":false,"lebar":"penuh","bila":[{"field":"ada_ahli_waris","op":"=","nilai":"ya"}]}]},{"name":"Para Pihak","jenis":"DAFTAR","fields":[{"kode":"tipe_pihak","label":"Tipe Pihak","tipe":"pilihan","wajib":true,"lebar":"penuh","bantu":"Pihak Pertama = penjual, Pihak Kedua = pembeli.","opsi":["Pihak Pertama","Pihak Kedua","Pasangan (harta bersama)","Saksi","Lainnya"]},{"kode":"bentuk_pihak","label":"Bentuk Pihak","tipe":"pilihan_sejajar","wajib":true,"lebar":"penuh","opsi":["Perorangan","Badan Hukum (PT)"]},{"kode":"status_perkawinan","label":"Status Perkawinan","tipe":"pilihan","wajib":false,"lebar":"sepertiga","bantu":"Menentukan sapaan di akta: Tuan / Nona / Nyonya / Nyonya Janda.","opsi":["Ikuti data profil pengguna","Belum Menikah","Kawin","Cerai Hidup","Cerai Mati"],"bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"}]},{"kode":"jenis_harta","label":"Jenis Harta","tipe":"pilihan","wajib":true,"lebar":"sepertiga","bantu":"Harta Bersama → pihak ini wajib menambahkan pasangannya (suami/isteri) sebagai pihak Pasangan untuk persetujuan.","opsi":["Harta Sendiri","Harta Bersama"],"bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"},{"field":"tipe_pihak","op":"≠","nilai":"Saksi"}]},{"kode":"kedudukan_khusus","label":"Kedudukan khusus","tipe":"pilihan","wajib":false,"lebar":"sepertiga","bantu":"Dipakai bila pihak menghadap selaku ahli waris.","opsi":["Tidak ada","Bertindak selaku ahli waris"],"bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"}]},{"kode":"pasangan_role","label":"Pasangan dari pihak","tipe":"pilihan","wajib":false,"lebar":"setengah","opsi":["Pihak Pertama","Pihak Kedua"],"bila":[{"field":"tipe_pihak","op":"=","nilai":"Pasangan (harta bersama)"}]},{"kode":"pasangan_sebagai","label":"Pasangan bertindak sebagai","tipe":"pilihan","wajib":false,"lebar":"setengah","opsi":["Persetujuan Saja","Ikut Bertindak"],"bila":[{"field":"tipe_pihak","op":"=","nilai":"Pasangan (harta bersama)"}]},{"kode":"","label":"Perwakilan / Kuasa","tipe":"judul","wajib":false,"lebar":"penuh","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"}]},{"kode":"pihak_dikuasakan","label":"Pihak tidak hadir sendiri — diwakili penerima kuasa","tipe":"ya_tidak","wajib":false,"lebar":"setengah","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"}]},{"kode":"bentuk_kuasa","label":"Bentuk Kuasa","tipe":"pilihan","wajib":false,"lebar":"setengah","bantu":"Di bawah tangan: akta menyebut suratnya beserta tanggalnya, tanpa notaris.","opsi":["Surat Kuasa di bawah tangan","Akta Kuasa notariil"],"bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"},{"field":"pihak_dikuasakan","op":"=","nilai":"ya"}]},{"kode":"tanggal_kuasa","label":"Tanggal Kuasa","tipe":"tanggal","wajib":false,"lebar":"setengah","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"},{"field":"pihak_dikuasakan","op":"=","nilai":"ya"}]},{"kode":"no_akta_kuasa","label":"Nomor Akta Kuasa","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"},{"field":"pihak_dikuasakan","op":"=","nilai":"ya"},{"field":"bentuk_kuasa","op":"=","nilai":"Akta Kuasa notariil"}]},{"kode":"notaris_kuasa","label":"Notaris","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"},{"field":"pihak_dikuasakan","op":"=","nilai":"ya"},{"field":"bentuk_kuasa","op":"=","nilai":"Akta Kuasa notariil"}]},{"kode":"notaris_kuasa_kota","label":"Notaris di","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"},{"field":"pihak_dikuasakan","op":"=","nilai":"ya"},{"field":"bentuk_kuasa","op":"=","nilai":"Akta Kuasa notariil"}]},{"kode":"","label":"Pengguna Penerima Kuasa","tipe":"judul","wajib":false,"lebar":"penuh","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"},{"field":"pihak_dikuasakan","op":"=","nilai":"ya"}]},{"kode":"penerima_kuasa","label":"Pengguna Terdaftar","tipe":"referensi_user","wajib":false,"lebar":"penuh","bantu":"Wajib dipilih dari pengguna terdaftar. Data dirinya terisi otomatis dari profilnya.","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"},{"field":"pihak_dikuasakan","op":"=","nilai":"ya"}]},{"kode":"ket_penerima_kuasa","label":"Keterangan Penerima Kuasa","tipe":"teks","wajib":false,"lebar":"penuh","ph":"mis. Direktur Utama; atau dasar kuasa penghadap","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"},{"field":"pihak_dikuasakan","op":"=","nilai":"ya"}]},{"kode":"user_klien","label":"Pengguna Klien","tipe":"referensi_user","wajib":false,"lebar":"penuh","bantu":"Pihak harus terdaftar sebagai pengguna (fungsi Klien). Data dirinya terisi otomatis dari profilnya.","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Perorangan"}]},{"kode":"nama_perseroan","label":"Nama Perseroan","tipe":"teks","wajib":false,"lebar":"setengah","ph":"PT ...","bantu":"mis. PT Maju Jaya Sentosa","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"kota_kedudukan","label":"Kota Kedudukan","tipe":"teks","wajib":false,"lebar":"setengah","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"npwp_perseroan","label":"NPWP Perseroan","tipe":"teks","wajib":false,"lebar":"setengah","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"alamat_perseroan","label":"Alamat Perseroan","tipe":"teks","wajib":false,"lebar":"setengah","ph":"Alamat kantor pusat","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"jabatan_wakil","label":"Jabatan Wakil","tipe":"pilihan","wajib":false,"lebar":"setengah","bantu":"Jabatan yang tercetak di akta untuk orang yang bertindak atas nama perseroan.","opsi":["Direktur Utama","Direktur","Wakil Direktur Utama","Direktur Keuangan"],"bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"persetujuan_komisaris","label":"Ada persetujuan Dewan Komisaris","tipe":"ya_tidak","wajib":false,"lebar":"setengah","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"","label":"Akta Pendirian","tipe":"lipat","wajib":false,"lebar":"penuh","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"tanggal_akta_pendirian","label":"Tanggal Akta Pendirian","tipe":"tanggal","wajib":false,"lebar":"setengah","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"no_akta_pendirian","label":"Nomor Akta Pendirian","tipe":"teks","wajib":false,"lebar":"setengah","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"notaris_pendirian","label":"Notaris Pembuat","tipe":"teks","wajib":false,"lebar":"setengah","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"notaris_pendirian_kota","label":"Kota Notaris","tipe":"teks","wajib":false,"lebar":"setengah","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"pejabat_pengesah","label":"Pejabat Pengesah","tipe":"pilihan","wajib":false,"lebar":"setengah","bantu":"PT lama disahkan Menteri Kehakiman; yang baru oleh Menteri Hukum dan HAM.","opsi":["Menteri Hukum dan Hak Asasi Manusia","Menteri Kehakiman"],"bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"tanggal_sk_menkumham","label":"Tanggal SK Menkumham","tipe":"tanggal","wajib":false,"lebar":"setengah","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"nomor_ahu","label":"Nomor AHU","tipe":"teks","wajib":false,"lebar":"setengah","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"ad_sesuai_uu40","label":"Anggaran dasar telah disesuaikan dengan UU 40/2007","tipe":"ya_tidak","wajib":false,"lebar":"penuh","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"","label":"Akhir Akta Pendirian","tipe":"akhir_grup","wajib":false,"lebar":"penuh"},{"kode":"","label":"Akta Perubahan","tipe":"grup_ulang","wajib":false,"lebar":"penuh","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"tanggal_akta","label":"Tanggal Akta","tipe":"tanggal","wajib":false,"lebar":"setengah"},{"kode":"no_akta","label":"Nomor Akta","tipe":"teks","wajib":false,"lebar":"setengah"},{"kode":"notaris_akta","label":"Notaris Pembuat","tipe":"teks","wajib":false,"lebar":"setengah"},{"kode":"notaris_akta_kota","label":"Kota Notaris","tipe":"teks","wajib":false,"lebar":"setengah"},{"kode":"jenis_perubahan","label":"Jenis Perubahan","tipe":"pilihan","wajib":false,"lebar":"setengah","opsi":["susunan Pemegang Saham","anggaran dasar","susunan Direksi dan Komisaris"]},{"kode":"jenis_bukti","label":"Jenis Bukti","tipe":"pilihan","wajib":false,"lebar":"setengah","opsi":["Surat Keputusan persetujuan","Surat Penerimaan Pemberitahuan"]},{"kode":"instansi_bukti","label":"Instansi","tipe":"teks","wajib":false,"lebar":"sepertiga"},{"kode":"tanggal_bukti","label":"Tanggal Bukti","tipe":"tanggal","wajib":false,"lebar":"sepertiga"},{"kode":"no_bukti","label":"Nomor Bukti","tipe":"teks","wajib":false,"lebar":"sepertiga"},{"kode":"uraian_perubahan","label":"Uraian Perubahan","tipe":"teks","wajib":false,"lebar":"penuh","ph":"mis. perubahan susunan direksi"},{"kode":"","label":"Akhir Akta Perubahan","tipe":"akhir_grup","wajib":false,"lebar":"penuh"},{"kode":"","label":"Perwakilan (Penanda Tangan PT)","tipe":"judul","wajib":false,"lebar":"penuh","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"user_wakil_pt","label":"Pengguna Terdaftar","tipe":"referensi_user","wajib":false,"lebar":"penuh","bantu":"Wajib dipilih dari pengguna terdaftar. Data dirinya terisi otomatis dari profilnya.","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"jabatan_ket_wakil","label":"Jabatan/Keterangan Perwakilan","tipe":"teks","wajib":false,"lebar":"penuh","ph":"mis. Direktur Utama; atau dasar kuasa penghadap","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"wakil_dikuasakan","label":"Wakil perseroan tidak hadir sendiri — diwakili penerima kuasa","tipe":"ya_tidak","wajib":false,"lebar":"setengah","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"}]},{"kode":"pt_bentuk_kuasa","label":"Bentuk Kuasa","tipe":"pilihan","wajib":false,"lebar":"setengah","bantu":"Di bawah tangan: akta menyebut suratnya beserta tanggalnya, tanpa notaris.","opsi":["Surat Kuasa di bawah tangan","Akta Kuasa notariil"],"bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"},{"field":"wakil_dikuasakan","op":"=","nilai":"ya"}]},{"kode":"pt_tanggal_kuasa","label":"Tanggal Kuasa","tipe":"tanggal","wajib":false,"lebar":"setengah","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"},{"field":"wakil_dikuasakan","op":"=","nilai":"ya"}]},{"kode":"pt_no_akta_kuasa","label":"Nomor Akta Kuasa","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"},{"field":"wakil_dikuasakan","op":"=","nilai":"ya"},{"field":"pt_bentuk_kuasa","op":"=","nilai":"Akta Kuasa notariil"}]},{"kode":"pt_notaris_kuasa","label":"Notaris","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"},{"field":"wakil_dikuasakan","op":"=","nilai":"ya"},{"field":"pt_bentuk_kuasa","op":"=","nilai":"Akta Kuasa notariil"}]},{"kode":"pt_notaris_kuasa_kota","label":"Notaris di","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"},{"field":"wakil_dikuasakan","op":"=","nilai":"ya"},{"field":"pt_bentuk_kuasa","op":"=","nilai":"Akta Kuasa notariil"}]},{"kode":"","label":"Pengguna Penerima Kuasa","tipe":"judul","wajib":false,"lebar":"penuh","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"},{"field":"wakil_dikuasakan","op":"=","nilai":"ya"}]},{"kode":"pt_penerima_kuasa","label":"Pengguna Terdaftar","tipe":"referensi_user","wajib":false,"lebar":"penuh","bantu":"Wajib dipilih dari pengguna terdaftar. Data dirinya terisi otomatis dari profilnya.","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"},{"field":"wakil_dikuasakan","op":"=","nilai":"ya"}]},{"kode":"pt_ket_penerima_kuasa","label":"Keterangan Penerima Kuasa","tipe":"teks","wajib":false,"lebar":"penuh","ph":"mis. Direktur Utama; atau dasar kuasa penghadap","bila":[{"field":"bentuk_pihak","op":"=","nilai":"Badan Hukum (PT)"},{"field":"wakil_dikuasakan","op":"=","nilai":"ya"}]},{"kode":"","label":"Bagian lipat","tipe":"lipat","wajib":false,"lebar":"penuh"}]},{"name":"Dasar Perjanjian","jenis":"TUNGGAL","fields":[{"kode":"perjanjian_nama","label":"Nama Perjanjian","tipe":"teks","wajib":false,"lebar":"setengah","ph":"mis. Perjanjian Kredit"},{"kode":"perjanjian_tanggal","label":"Tanggal Akta Perjanjian","tipe":"tanggal","wajib":false,"lebar":"setengah"},{"kode":"perjanjian_nomor","label":"No. Akta Perjanjian","tipe":"teks","wajib":false,"lebar":"setengah"},{"kode":"perjanjian_status_meterai","label":"Status Meterai","tipe":"pilihan","wajib":false,"lebar":"setengah","opsi":["Bermeterai","Tidak Bermeterai"]},{"kode":"perjanjian_jenis_dokumen","label":"Jenis Dokumen","tipe":"pilihan","wajib":false,"lebar":"setengah","opsi":["Akta Notariil","Di Bawah Tangan"]}]},{"name":"Objek","jenis":"DAFTAR","fields":[{"kode":"","label":"Data Umum","tipe":"lipat","wajib":false,"lebar":"penuh"},{"kode":"objek_status_sertipikat","label":"Status Sertipikat","tipe":"pilihan","wajib":false,"lebar":"sepertiga","opsi":["Sudah Terdaftar","Belum Terdaftar (bekas Hak Milik Adat)"]},{"kode":"objek_jenis_hak","label":"Jenis Hak","tipe":"pilihan","wajib":false,"lebar":"sepertiga","opsi":["Sertipikat Hak Milik (SHM)","Sertipikat Hak Guna Bangunan (SHGB)","Sertipikat Hak Guna Usaha (SHGU)","Sertipikat Hak Milik atas Satuan Rumah Susun (SHRS)","Sertipikat Hak Pakai (HP)","Girik / Letter C","Lainnya"]},{"kode":"objek_status","label":"Status Objek","tipe":"pilihan","wajib":false,"lebar":"sepertiga","opsi":["Utuh","Sebagian"]},{"kode":"objek_input_sertipikat","label":"Input Sertipikat","tipe":"pilihan_sejajar","wajib":false,"lebar":"penuh","bantu":"Bidang terdaftar.","opsi":["Analog","Elektronik"]},{"kode":"objek_no_hak","label":"Nomor Hak","tipe":"teks","wajib":false,"lebar":"setengah","ph":"Nomor Hak Milik"},{"kode":"objek_dokumen_ukur","label":"Dokumen Ukur","tipe":"teks","wajib":false,"lebar":"setengah","ph":"Surat Ukur"},{"kode":"objek_tanggal_surat_ukur","label":"Tanggal Surat Ukur","tipe":"tanggal","wajib":false,"lebar":"sepertiga"},{"kode":"objek_no_surat_ukur","label":"Nomor Surat Ukur","tipe":"teks","wajib":false,"lebar":"sepertiga","ph":"Nomor Surat Ukur"},{"kode":"objek_luas","label":"Luas (m²)","tipe":"angka","wajib":false,"lebar":"sepertiga","ph":"0"},{"kode":"objek_nib","label":"NIB","tipe":"teks","wajib":false,"lebar":"setengah","ph":"Nomor Identifikasi Bidang"},{"kode":"objek_nop_pbb","label":"SPPT PBB — Nomor Objek Pajak","tipe":"teks","wajib":true,"lebar":"setengah","ph":"00.00.000.000.000-0000.0"},{"kode":"objek_bagian_bersama","label":"Yang dibebani hanya bagian dari hak bersama — sisipkan “x per y” di depan nama hak","tipe":"ya_tidak","wajib":false,"lebar":"setengah"},{"kode":"objek_uraian_objek","label":"Uraian Objek","tipe":"teks_panjang","wajib":false,"lebar":"penuh","ph":"Uraian objek sebagaimana ditulis di akta"},{"kode":"","label":"Alat Bukti","tipe":"grup_ulang","wajib":false,"lebar":"penuh"},{"kode":"bukti_jenis","label":"Jenis","tipe":"teks","wajib":false,"lebar":"setengah","ph":"Girik / Petuk / Leter C / Verponding / Segel"},{"kode":"bukti_nomor","label":"Nomor","tipe":"teks","wajib":false,"lebar":"setengah","ph":"Nomor alat bukti"},{"kode":"bukti_tanggal","label":"Tanggal","tipe":"tanggal","wajib":false,"lebar":"sepertiga"},{"kode":"bukti_pejabat","label":"Dibuat di Hadapan","tipe":"teks","wajib":false,"lebar":"sepertiga","ph":"Nama pejabat"},{"kode":"bukti_selaku","label":"Selaku","tipe":"teks","wajib":false,"lebar":"sepertiga","ph":"mis. Lurah Contoh"},{"kode":"","label":"Akhir Alat Bukti","tipe":"akhir_grup","wajib":false,"lebar":"penuh"},{"kode":"objek_sebut_nama_setempat","label":"Sebutkan nama setempat objek","tipe":"ya_tidak","wajib":false,"lebar":"setengah"},{"kode":"","label":"Akhir Data Umum","tipe":"akhir_grup","wajib":false,"lebar":"penuh"},{"kode":"","label":"Letak & Data Tambahan Objek","tipe":"lipat","wajib":false,"lebar":"penuh"},{"kode":"objek_nama_pemilik_terdaftar","label":"Nama","tipe":"teks","wajib":false,"lebar":"penuh","ph":"Nama pemilik terdaftar"},{"kode":"objek_provinsi","label":"Provinsi","tipe":"teks","wajib":false,"lebar":"setengah","ph":"Provinsi"},{"kode":"objek_label_kota","label":"Sebutan kota","tipe":"pilihan","wajib":false,"lebar":"setengah","opsi":["Kota","Kabupaten"]},{"kode":"objek_kota","label":"Kota / Kabupaten","tipe":"teks","wajib":false,"lebar":"setengah","ph":"Kota / Kabupaten"},{"kode":"objek_kecamatan","label":"Kecamatan","tipe":"teks","wajib":false,"lebar":"setengah","ph":"Kecamatan"},{"kode":"objek_label_kelurahan","label":"Sebutan kelurahan","tipe":"pilihan","wajib":false,"lebar":"setengah","opsi":["Kelurahan","Desa"]},{"kode":"objek_kelurahan","label":"Kelurahan / Desa","tipe":"teks","wajib":false,"lebar":"setengah","ph":"Kelurahan / Desa"},{"kode":"objek_jalan","label":"Jalan","tipe":"teks","wajib":false,"lebar":"penuh","ph":"Nama jalan, nomor, RT/RW"},{"kode":"objek_meliputi","label":"Meliputi Pula — Bentuk Redaksi","tipe":"pilihan","wajib":false,"lebar":"penuh","opsi":["Diisi sendiri","Benda tidak bergerak","Bagian bersama satuan rumah susun"]},{"kode":"objek_meliputi_isi","label":"Isi Keterangan","tipe":"teks","wajib":false,"lebar":"penuh","ph":"Redaksi yang diisi sendiri","bila":[{"field":"objek_meliputi","op":"=","nilai":"Diisi sendiri"}]},{"kode":"objek_npp","label":"Nilai Perbandingan Proporsional (%)","tipe":"angka","wajib":false,"lebar":"setengah","ph":"0"},{"kode":"objek_luas_khusus","label":"Luas (meter persegi)","tipe":"angka","wajib":false,"lebar":"setengah","ph":"0"},{"kode":"objek_termasuk_bangunan","label":"Termasuk Bangunan","tipe":"pilihan","wajib":false,"lebar":"setengah","opsi":["Ya","Tidak"]},{"kode":"objek_termasuk_tanaman","label":"Termasuk Tanaman","tipe":"pilihan","wajib":false,"lebar":"setengah","opsi":["Ya","Tidak"]},{"kode":"objek_ket_bangunan_tanaman","label":"Keterangan Bangunan dan/atau Tanaman","tipe":"teks","wajib":false,"lebar":"penuh","ph":"Uraian bangunan dan/atau tanaman yang ikut dibebani"},{"kode":"objek_no_imb","label":"Nomor IMB (Izin Mendirikan Bangunan)","tipe":"teks","wajib":false,"lebar":"setengah","ph":"Nomor izin mendirikan bangunan","bila":[{"field":"objek_termasuk_bangunan","op":"=","nilai":"Ya"}]},{"kode":"objek_tanggal_imb","label":"Tanggal IMB (Izin Mendirikan Bangunan)","tipe":"tanggal","wajib":false,"lebar":"setengah","bila":[{"field":"objek_termasuk_bangunan","op":"=","nilai":"Ya"}]},{"kode":"","label":"Akhir Letak & Data Tambahan Objek","tipe":"akhir_grup","wajib":false,"lebar":"penuh"},{"kode":"","label":"Bagian dari hak bersama","tipe":"judul","wajib":false,"lebar":"penuh"},{"kode":"objek_bagian","label":"Ditulis sebagai","tipe":"teks","wajib":false,"lebar":"setengah","ph":"mis. Satu per tiga","bila":[{"field":"objek_bagian_bersama","op":"=","nilai":"ya"}]},{"kode":"","label":"Sebagian bidang","tipe":"judul","wajib":false,"lebar":"penuh","bila":[{"field":"objek_status_sertipikat","op":"=","nilai":"Sudah Terdaftar"},{"field":"objek_status","op":"=","nilai":"Sebagian"}]},{"kode":"objek_no_hak_asal","label":"Nomor hak asal","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"objek_status_sertipikat","op":"=","nilai":"Sudah Terdaftar"},{"field":"objek_status","op":"=","nilai":"Sebagian"}]},{"kode":"objek_nib_asal","label":"NIB tanah asal","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"objek_status_sertipikat","op":"=","nilai":"Sudah Terdaftar"},{"field":"objek_status","op":"=","nilai":"Sebagian"}]},{"kode":"objek_nop_asal","label":"NOP tanah asal","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"objek_status_sertipikat","op":"=","nilai":"Sudah Terdaftar"},{"field":"objek_status","op":"=","nilai":"Sebagian"}]},{"kode":"","label":"Bekas Hak Milik Adat","tipe":"judul","wajib":false,"lebar":"penuh","bila":[{"field":"objek_status_sertipikat","op":"=","nilai":"Belum Terdaftar (bekas Hak Milik Adat)"}]},{"kode":"objek_persil_nomor","label":"Persil Nomor","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"objek_status_sertipikat","op":"=","nilai":"Belum Terdaftar (bekas Hak Milik Adat)"}]},{"kode":"objek_persil_blok","label":"Blok","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"objek_status_sertipikat","op":"=","nilai":"Belum Terdaftar (bekas Hak Milik Adat)"}]},{"kode":"objek_kohir_nomor","label":"Kohir Nomor","tipe":"teks","wajib":false,"lebar":"sepertiga","bila":[{"field":"objek_status_sertipikat","op":"=","nilai":"Belum Terdaftar (bekas Hak Milik Adat)"}]},{"kode":"objek_peta_tanggal","label":"Tanggal Peta Bidang","tipe":"tanggal","wajib":false,"lebar":"setengah","bila":[{"field":"objek_status_sertipikat","op":"=","nilai":"Belum Terdaftar (bekas Hak Milik Adat)"}]},{"kode":"objek_peta_nomor","label":"Nomor Peta Bidang","tipe":"teks","wajib":false,"lebar":"setengah","bila":[{"field":"objek_status_sertipikat","op":"=","nilai":"Belum Terdaftar (bekas Hak Milik Adat)"}]},{"kode":"","label":"Batas-batas bidang","tipe":"judul","wajib":false,"lebar":"penuh"},{"kode":"batas_utara","label":"Batas Utara","tipe":"teks","wajib":false,"lebar":"setengah"},{"kode":"batas_timur","label":"Batas Timur","tipe":"teks","wajib":false,"lebar":"setengah"},{"kode":"batas_selatan","label":"Batas Selatan","tipe":"teks","wajib":false,"lebar":"setengah"},{"kode":"batas_barat","label":"Batas Barat","tipe":"teks","wajib":false,"lebar":"setengah"},{"kode":"","label":"Sertipikat elektronik","tipe":"judul","wajib":false,"lebar":"penuh","bila":[{"field":"objek_status_sertipikat","op":"=","nilai":"Sudah Terdaftar"},{"field":"objek_input_sertipikat","op":"=","nilai":"Elektronik"}]},{"kode":"objek_kode_sertipikat","label":"Nomor Kode Sertipikat","tipe":"teks","wajib":false,"lebar":"setengah","bila":[{"field":"objek_status_sertipikat","op":"=","nilai":"Sudah Terdaftar"},{"field":"objek_input_sertipikat","op":"=","nilai":"Elektronik"}]},{"kode":"objek_atas_nama","label":"Terdaftar atas nama","tipe":"teks","wajib":false,"lebar":"setengah","bila":[{"field":"objek_status_sertipikat","op":"=","nilai":"Sudah Terdaftar"},{"field":"objek_input_sertipikat","op":"=","nilai":"Elektronik"}]},{"kode":"objek_nama_setempat","label":"Setempat dikenal sebagai","tipe":"teks","wajib":false,"lebar":"penuh","ph":"mis. Perumahan Contoh Asri Blok A Nomor 1","bila":[{"field":"objek_sebut_nama_setempat","op":"=","nilai":"ya"}]},{"kode":"","label":"Data Harga","tipe":"lipat","wajib":false,"lebar":"penuh"},{"kode":"objek_njop","label":"Data NJOP (Nilai Jual Objek Pajak)","tipe":"angka","wajib":false,"lebar":"setengah","ph":"0"},{"kode":"objek_znt","label":"Data ZNT (Zona Nilai Tanah)","tipe":"angka","wajib":false,"lebar":"setengah","ph":"0"},{"kode":"objek_harga_pasar","label":"Data Harga Pasar","tipe":"angka","wajib":false,"lebar":"setengah","ph":"0"},{"kode":"","label":"Akhir Data Harga","tipe":"akhir_grup","wajib":false,"lebar":"penuh"},{"kode":"objek_harga_transaksi","label":"Harga Transaksi","tipe":"angka","wajib":false,"lebar":"penuh"},{"kode":"objek_sertipikat_berkas","label":"Sertipikat","tipe":"unggah","wajib":false,"lebar":"penuh"}]},{"name":"Dokumen","jenis":"DAFTAR","fields":[{"kode":"dokumen_jenis","label":"Jenis Dokumen","tipe":"pilihan","wajib":true,"lebar":"setengah","opsi":["KTP","Sertifikat","PBB","NPWP","Kartu Keluarga","Surat Kuasa","Lainnya"]},{"kode":"dokumen_pemilik","label":"Pemilik Dokumen","tipe":"teks","wajib":false,"lebar":"setengah"},{"kode":"dokumen_berkas","label":"File","tipe":"unggah","wajib":false,"lebar":"setengah"},{"kode":"dokumen_terverifikasi","label":"Sudah diverifikasi","tipe":"ya_tidak","wajib":false,"lebar":"setengah"}]}];
+const tabForm = n => FORM_AJB.find(t => t.name === n);
+const UANG_F = new Set(['objek_njop', 'objek_znt', 'objek_harga_pasar', 'objek_harga_transaksi']);
+const nilaiF = (V, k) => { const v = V[k]; return v === true ? 'ya' : v === false || v == null ? '' : String(v); };
+const cocokF = (s, V) => { if (s.grup) return s.grup.some(x => cocokF(x, V)); const a = nilaiF(V, s.field).toLowerCase(), b = String(s.nilai ?? '').toLowerCase(); return s.op === '=' ? a === b : s.op === '≠' ? a !== b : s.op === 'terisi' ? !!a : !a; };
+const tampilF = (f, V) => (f.bila || []).every(s => cocokF(s, V));
+const STRUKTUR = ['judul', 'lipat', 'akhir_grup', 'grup_ulang'];
+const SPAN = { penuh:12, setengah:6, sepertiga:4, seperempat:3 };
+const KLIEN_BARU = {};
+const profil = u => (u ? { tempat:'Kota Contoh', alamat:'Jalan Contoh No. 1', pekerjaan:'Karyawan Swasta', ...u } : u);
+const cariKlien = id => profil(KLIEN.find(x => x.id === +id) || KLIEN_BARU[id] || bacaKB().find(r => r.id === +id));
+/* penjelasan istilah pada isian form AJB (saran HE: istilah dijelaskan di dekat isian) */
+const TIP_F = {
+  objek_njop:'Nilai Jual Objek Pajak, yaitu nilai tanah dan bangunan yang ditetapkan pemerintah daerah. Nilai ini tercantum di SPPT PBB.',
+  objek_znt:'Zona Nilai Tanah, yaitu nilai tanah per wilayah dari peta ATR/BPN.',
+  objek_harga_pasar:'Perkiraan harga tanah di pasaran saat ini.',
+  objek_harga_transaksi:T_HARGA,
+  pewaris_sapaan:'Pilih Almarhum untuk laki-laki atau Almarhumah untuk perempuan.',
+  perjanjian_status_meterai:'Pilih Bermeterai bila dokumen perjanjian sudah dibubuhi meterai.',
+  perjanjian_jenis_dokumen:'Akta Notariil dibuat di hadapan notaris. Dokumen Di Bawah Tangan dibuat sendiri oleh para pihak.'
+};
+const fKeIsian = (f, c) => { const t = c.tanda && c.tanda[f.kode]; return { tip:TIP_F[f.kode] && tanya(f.label, TIP_F[f.kode]), k:f.kode, l:f.label, t:{ pilihan:'pilih', tanggal:'tgl', teks_panjang:'area', ya_tidak:'cek', angka:UANG_F.has(f.kode) ? 'uang' : 'angka' }[f.tipe] || 'teks', ph:f.tipe === 'pilihan' ? (f.opsi[0] && /^Ikuti|^Tidak ada/.test(f.opsi[0]) ? undefined : 'Pilih') : f.ph || (UANG_F.has(f.kode) ? '0' : undefined), o:f.opsi, w:f.wajib || (c.wajib || []).includes(f.kode), b:t === 'ragu' ? 'Kurang jelas terbaca. Periksa dan perbaiki bila perlu.' : t ? 'Terisi dari dokumen. Periksa kembali.' : f.bantu || (/(^|_)nik$/.test(f.kode) ? '16 digit sesuai KTP.' : ''), st:t === 'ragu' ? 'warning' : '', max:/(^|_)nik$/.test(f.kode) ? 16 : undefined }; };
+/* NIK hanya menerima angka, sama dengan formulir TERA (HE-TERA-05) */
+document.addEventListener('input', e => { if (e.target.matches?.('input[maxlength="16"][data-fk]')) e.target.value = e.target.value.replace(/\D/g, ''); }, true);
+function kartuUser(f, V, c) {
+  const k = f.kode, u = V[k] ? cariKlien(V[k]) : null, baruBoleh = k === 'user_klien' && V.tipe_pihak !== 'Saksi', err = (c.galat || {})[k];
+  if (u) { const judul = k === 'user_klien' ? (V.pihak_dikuasakan ? 'Identitas pemberi kuasa, pihak (KTP)' : V.tipe_pihak === 'Saksi' ? 'Identitas saksi (KTP)' : 'Identitas penghadap (KTP)') : f.label;
+    return `<div class="kartu-pihak ditandai" id="kartu-${k}"><div style="display:flex;justify-content:space-between;gap:8px"><b>${judul}: ${esc(u.nama)}</b>${tombol('Ganti pengguna', 'link', 'sm', `data-ganti-user="${k}"`)}</div><dl><div><dt>NIK</dt><dd>${u.nik ? u.nik.slice(0, 4) + '********' + u.nik.slice(-4) : '—'}</dd></div><div><dt>Tempat lahir</dt><dd>${esc(u.tempat) || '—'}</dd></div><div><dt>Alamat</dt><dd>${esc(u.alamat) || '—'}</dd></div><div><dt>Pekerjaan</dt><dd>${esc(u.pekerjaan) || '—'}</dd></div></dl>
+      ${u.baru ? `<div class="catatan-akun">${alert('info', '', 'Belum punya akun. Setelah disimpan, klik <b>Buat Akun &amp; Undang</b> di daftar para pihak.')}</div>` : `<p class="ket-f" style="margin-top:8px">Identitasnya dibaca dari data diri akun ini saat akta dirakit. Perbaikannya di menu Daftar Pengguna.</p>`}
+      ${!u.nik ? `<div style="margin-top:10px">${alert('caution', '', 'Profil pengguna ini belum lengkap (NIK belum diisi). Anda tetap bisa menyimpan; lengkapi datanya nanti agar siap untuk akta.')}</div>` : ''}${usulan('HE-ORDER-14')}</div>`; }
+  const q = (c.cari[k] || '').toLowerCase(), sudah = c.sudah || new Set(), hasil = KLIEN.filter(x => !sudah.has(x.id) && (!q || (x.nama + x.email).toLowerCase().includes(q)));
+  return `<div class="ina-text-field" style="position:relative"><label class="ina-text-field__label" for="cari-${k}">${f.label}<span class="ina-text-field__required">*</span></label>
+    <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ${err ? 'ina-text-field__wrapper--status-error' : ''}"><div class="ina-text-field__prefix-icon">${ik('cari')}</div><input id="cari-${k}" class="ina-text-field__input" data-cari-user="${k}" placeholder="Cari nama / email…" value="${esc(c.cari[k] || '')}" autocomplete="off"></div>
+    ${c.buka === k ? `<div class="ina-select-dropdown__panel cari-panel"><div class="ina-select-dropdown__options">${hasil.length ? hasil.map(x => `<button type="button" class="ina-select-dropdown__option" data-pilih-user="${k}" data-uid="${x.id}"><span>${esc(x.nama)}<small>${esc(x.email)}</small></span>${x.nik ? '' : badge('NIK kosong', 'warning')}</button>`).join('') : '<div class="kosong" style="padding:10px">Tidak ada pengguna yang cocok.</div>'}</div></div>` : ''}
+    ${baruBoleh ? `<div class="tombol-klien-baru ditandai">${tombol('Tambah Data Klien Baru', 'secondary', 'md', 'data-dbaru')}<p class="ket-f" style="margin-top:6px">Untuk klien yang belum ada di Daftar Pengguna.</p>${usulan('HE-ORDER-09')}</div>` : ''}
+    <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text ${err ? 'ina-text-field__helper-text--error' : ''}">${err || f.bantu || ''}</div></div></div>`;
+}
+function ulangForm(g, fs, V, c) { const k = g.kode || g.label.replace(/\W+/g, '_').toLowerCase(), a = V[k] || [];
+  return `<h4 class="bantu-sub">${g.label}</h4><div class="ulang-f">${a.length ? a.map((_, i) => `<div class="ulang-baris"><div class="ulang-kepala"><b>${g.label} ${i + 1}</b>${tombol('Hapus', 'tertiary', 'sm', `data-rep-hapus="${k}" data-rep-i="${i}" data-merah`)}</div>${BERKAS_ULANG.has(g.label) ? panelF({ k:`${k}.${i}.berkas`, l:g.label }, V) : ''}<div class="f12">${fs.map(f => `<div class="s${SPAN[f.lebar] || 12}">${isianF({ ...fKeIsian(f, c), k:`${k}.${i}.${f.kode}` }, V)}</div>`).join('')}</div></div>`).join('') : `<p class="ket-f">Belum ada ${g.label.toLowerCase()}.</p>`}${tombol('Tambah ' + g.label, 'secondary', 'sm', `data-rep-tambah="${k}"`, ik('tambah', 14))}</div>`; }
+/* unggah dokumen per kelompok isian, paling atas di kelompoknya; wajib selama kelompoknya tampil, kecuali yang bertanda opsional (HE-ORDER-17) */
+const belumF = V => V.objek_status_sertipikat === 'Belum Terdaftar (bekas Hak Milik Adat)';
+const BERKAS_GRUP = {
+  'Akta Pendirian':[{ k:'b_akta_pendirian', l:'Akta Pendirian' }, { k:'b_sk_menkumham', l:'SK Menkumham' }],
+  'Data Umum':[{ sertipikat:true, tampil:V => !belumF(V) }, { k:'b_surat_ukur', l:'Surat Ukur', opsional:true, tampil:V => !belumF(V) }, { k:'b_sppt', l:'SPPT PBB' }],
+  'Letak & Data Tambahan Objek':[{ k:'b_imb', l:'IMB', opsional:true, tampil:V => V.objek_termasuk_bangunan === 'Ya' }],
+  'Bekas Hak Milik Adat':[{ k:'b_hak_adat', l:'Dokumen Hak Adat (Girik/Letter C)' }, { k:'b_peta_bidang', l:'Peta Bidang', opsional:true }]
+};
+const BERKAS_SESUDAH = { pihak_dikuasakan:{ k:'b_surat_kuasa', l:'Surat Kuasa' }, wakil_dikuasakan:{ k:'b_pt_surat_kuasa', l:'Surat Kuasa' }, persetujuan_komisaris:{ k:'b_persetujuan_komisaris', l:'Surat Persetujuan Dewan Komisaris' } };
+const BERKAS_ULANG = new Set(['Akta Perubahan', 'Alat Bukti']);
+let BERKAS_TAMPAK = [], GALAT_B = {};
+const panelF = (d, V) => { BERKAS_TAMPAK.push({ ...d, V }); const x = ambilV(V, d.k), id = 'u-' + idF(d.k), er = GALAT_B[d.k];
+  return `<div class="panel-berkas" data-berkas="${d.k}"><div class="ina-file-upload__label" id="l-${id}">${d.l}${d.opsional ? "" : `<span class="ina-text-field__required">*</span>`}</div><div class="ina-single-file-upload"><input type="file" class="ina-single-file-upload__input" id="${id}" accept="application/pdf,image/jpeg,image/png" aria-labelledby="l-${id}" data-unggah-f="${d.k}"><div class="ina-single-file-upload__container" role="button" tabindex="0" aria-label="${x ? 'File: ' + esc(x.nama) : 'Unggah ' + esc(d.l)}">${x ? `<div class="ina-single-file-upload__icon-wrapper ina-single-file-upload__icon-wrapper--file">${ik('dok', 16)}</div><div class="ina-single-file-upload__content"><div class="ina-single-file-upload__title">${esc(x.nama)}</div><div class="ina-single-file-upload__description">${x.ukuran}</div></div><button type="button" class="ina-single-file-upload__delete-button" data-hapus-unggah="${d.k}" aria-label="Hapus ${esc(x.nama)}">${ik('sampah', 18)}</button>` : `<div class="ina-single-file-upload__icon-wrapper ina-single-file-upload__icon-wrapper--default">${ik('unggah', 24)}</div><div class="ina-single-file-upload__content"><div class="ina-single-file-upload__title">Pilih atau seret berkas</div><div class="ina-single-file-upload__description">PDF, JPG, atau PNG, maksimal 10 MB.</div></div>`}</div></div>${er ? `<div class="ina-file-upload__errors"><div class="ina-file-upload__error-message">${esc(er)}</div></div>` : ''}</div>`; };
+const cekBerkas = () => { GALAT_B = {}; BERKAS_TAMPAK.filter(d => !d.opsional && !ambilV(d.V, d.k)).forEach(d => { GALAT_B[d.k] = `${d.l} wajib diunggah.`; }); return Object.keys(GALAT_B).length; };
+function ikatBerkas(w, V, segar) {
+  const pasang = (k, f) => { const ukuran = f.size >= 1048576 ? (f.size / 1048576).toFixed(1).replace('.', ',') + ' MB' : Math.max(1, Math.round(f.size / 1024)) + ' KB';
+    if (!/^(application\/pdf|image\/(jpeg|png))$/.test(f.type)) GALAT_B[k] = `${f.name}: Format tidak didukung. Gunakan PDF, JPG, atau PNG.`;
+    else if (f.size > 10485760) GALAT_B[k] = `${f.name}: Ukuran terlalu besar. Gunakan berkas maksimal 10 MB.`;
+    else { taruhV(V, k, { nama:f.name, ukuran }); delete GALAT_B[k]; }
+    segar(); };
+  w.addEventListener('change', e => { const k = e.target.dataset.unggahF; if (k && e.target.files[0]) pasang(k, e.target.files[0]); });
+  w.addEventListener('click', e => { const h = e.target.closest('[data-hapus-unggah]'); if (h) { taruhV(V, h.dataset.hapusUnggah, null); segar(); return; } const c = e.target.closest('.panel-berkas [role="button"]'); if (c) c.closest('.panel-berkas').querySelector('input').click(); });
+  w.addEventListener('keydown', e => { const c = e.target.closest('.panel-berkas [role="button"]'); if (c && e.target === c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); c.click(); } });
+  w.addEventListener('dragover', e => { if (e.target.closest('.panel-berkas')) e.preventDefault(); });
+  w.addEventListener('drop', e => { const p = e.target.closest('.panel-berkas'); if (!p) return; e.preventDefault(); if (e.dataTransfer.files[0]) pasang(p.dataset.berkas, e.dataTransfer.files[0]); });
+}
+/* kelompok lipat live memakai IDDS Accordion, terbuka saat dialog dibuka (HE-ORDER-16) */
+const LIPAT_TUTUP = new Set();
+const bukaLipat = l => { const k = l.querySelector('.ina-accordion__toggle'); k.setAttribute('aria-expanded', true); k.querySelector('.ina-accordion__icon').classList.add('ina-accordion__icon--open'); k.nextElementSibling.classList.add('ina-accordion__content--open'); LIPAT_TUTUP.delete(l.dataset.lipat); };
+const lipatForm = label => { const buka = !LIPAT_TUTUP.has(label), id = 'lipat-' + label.replace(/\W+/g, '-').toLowerCase(); return `<div class="lipat-ktp lipat-form" data-lipat="${label}"><div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="${buka}" aria-controls="${id}"><div class="ina-accordion__title"><b>${label}</b></div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon ${buka ? 'ina-accordion__icon--open' : ''}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></div></button><div id="${id}" class="ina-accordion__content ${buka ? 'ina-accordion__content--open' : ''}"><div class="ina-accordion__body">`; };
+document.addEventListener('click', e => {
+  const k = e.target.closest('.lipat-form .ina-accordion__toggle');
+  if (k) { const l = k.closest('.lipat-form'); if (k.getAttribute('aria-expanded') === 'true') { k.setAttribute('aria-expanded', false); k.querySelector('.ina-accordion__icon').classList.remove('ina-accordion__icon--open'); k.nextElementSibling.classList.remove('ina-accordion__content--open'); LIPAT_TUTUP.add(l.dataset.lipat); } else bukaLipat(l); return; }
+  if (!e.target.closest('.ina-modal__footer')) return;
+  /* isian bergalat di kelompok tertutup: buka kelompoknya lalu arahkan kursor ke sana */
+  requestAnimationFrame(() => { const SALAH = '.ina-text-field__wrapper--status-error, .ina-file-upload__error-message', galat = document.querySelector('#lapisan .ina-modal__body')?.querySelector(SALAH); if (!galat) return; document.querySelectorAll('#lapisan .lipat-form').forEach(l => { if (l.querySelector(SALAH)) bukaLipat(l); }); setTimeout(() => { const el = galat.isConnected && galat.classList.contains('ina-file-upload__error-message') ? galat.closest('.panel-berkas, #f-berkasObj')?.querySelector('[role="button"]') : galat.querySelector('input, button'); el?.focus(); el?.scrollIntoView({ block:'center' }); }, 250); });
+});
+function renderForm(fields, V, c = {}) {
+  let out = '', sel = [], dalamLipat = false; c.cari = c.cari || {}; BERKAS_TAMPAK = [];
+  /* isian terakhir tiap baris mengisi sisa kolom agar tepi kanan rata */
+  const siram = () => { if (!sel.length) return; let pakai = 0; sel.forEach((x, i) => { const n = sel[i + 1]; if (!n || pakai + x[0] + n[0] > 12) { x[0] = 12 - pakai; pakai = 0; } else pakai += x[0]; }); out += `<div class="f12">${sel.map(([s, h]) => `<div class="sc" style="--s:${s}">${h}</div>`).join('')}</div>`; sel = []; };
+  for (let i = 0; i < fields.length; i++) { const f = fields[i];
+    if (f.tipe === 'akhir_grup' && dalamLipat) { siram(); out += '</div></div></div></div>'; dalamLipat = false; continue; }
+    if (f.tipe === 'akhir_grup' || (c.lewati || []).includes(f.kode)) continue;
+    if (f.tipe === 'judul' || f.tipe === 'lipat') {
+      let ada = false; for (let j = i + 1; j < fields.length && !['judul', 'lipat'].includes(fields[j].tipe); j++) if (!STRUKTUR.includes(fields[j].tipe) && tampilF(fields[j], V) && !(c.lewati || []).includes(fields[j].kode)) { ada = true; break; }
+      if (ada && tampilF(f, V) && f.label !== 'Bagian lipat') { siram(); if (f.tipe === 'lipat') { out += lipatForm(f.label); dalamLipat = true; } else out += `<h4 class="bantu-sub">${f.label}</h4>`; (BERKAS_GRUP[f.label] || []).filter(d => !d.tampil || d.tampil(V)).forEach(d => sel.push([6, d.sertipikat ? c.unggah.objek_sertipikat_berkas() : panelF(d, V)])); siram(); } continue; }
+    if (f.tipe === 'grup_ulang') { let j = i + 1; const fs = []; for (; j < fields.length && fields[j].tipe !== 'akhir_grup'; j++) fs.push(fields[j]); if (tampilF(f, V)) { siram(); out += ulangForm(f, fs, V, c); } i = j; continue; }
+    if (!tampilF(f, V)) continue;
+    const s = SPAN[f.lebar] || 12;
+    if (f.tipe === 'referensi_user') { sel.push([12, kartuUser(f, V, c)]); continue; }
+    if (f.tipe === 'pilihan_sejajar') { const v = V[f.kode] || f.opsi[0]; sel.push([s, `<div class="ina-text-field"><span class="ina-text-field__label">${f.label}${f.wajib ? '<span class="ina-text-field__required">*</span>' : ''}</span><div class="ina-button-group" role="group">${f.opsi.map(o => `<button type="button" class="ina-button-group__button ${o === v ? 'ina-button-group__button--selected' : ''}" aria-pressed="${o === v}" data-sj="${f.kode}" data-sjv="${esc(o)}" ${(c.mati || []).includes(o) ? 'disabled' : ''}>${esc(o)}</button>`).join('')}</div>${f.bantu ? `<div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text">${f.bantu}</div></div>` : ''}</div>`]); continue; }
+    if (f.tipe === 'unggah' && c.unggah && c.unggah[f.kode]) continue;
+    if (f.tipe === 'unggah') { sel.push([s, `<div class="ina-text-field"><span class="ina-text-field__label">${f.label}</span><div>${tombol('Pilih berkas', 'secondary', 'sm', 'disabled', ik('unggah', 14))}</div><div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text">Simpan barisnya dulu, baru berkasnya bisa diunggah.</div></div></div>`]); continue; }
+    sel.push([s, isianF(fKeIsian(f, c), V, c.dis)]);
+    if (BERKAS_SESUDAH[f.kode] && V[f.kode]) { siram(); sel.push([12, panelF(BERKAS_SESUDAH[f.kode], V)]); siram(); } }
+  siram(); if (dalamLipat) out += '</div></div></div></div>'; return out;
+}
+/* tab formulir tunggal: Pewaris dan Dasar Perjanjian */
+function tabTunggal(o, kunci, nama, kunciData, usul, tombolTeks) { const V = o[kunciData] = o[kunciData] || {}; return `<div class="form-tab ditandai" id="form-${kunciData}" data-form="${kunciData}">${renderForm(tabForm(nama).fields, V, { dis:kunci ? 'disabled' : '' })}${usulan(usul)}${kunci ? '' : `<div class="f-kaki">${tombol(tombolTeks, 'primary', 'md', `data-simpan-form="${kunciData}"`, ik('simpan', 16))}</div>`}</div>`; }
+const tabPewaris = (o, kunci) => tabTunggal(o, kunci, 'Pewaris', 'pewaris', 'HE-ORDER-13', 'Simpan Pewaris');
+const tabPerjanjian = (o, kunci) => tabTunggal(o, kunci, 'Dasar Perjanjian', 'perjanjian', 'HE-ORDER-13', 'Simpan Dasar Perjanjian');
+document.addEventListener('input', e => { const f = e.target.closest('.form-tab'); const k = e.target.dataset.fk; if (!f || !k || e.target.type === 'checkbox' || e.target.tagName === 'SELECT') return; taruhV(ord()[f.dataset.form], k, e.target.value); e.target.closest('.ina-text-field__wrapper')?.classList.remove('ina-text-field__wrapper--status-error'); const h = document.getElementById('h-' + idF(k)); if (h?.classList.contains('ina-text-field__helper-text--error')) { h.textContent = ''; h.classList.remove('ina-text-field__helper-text--error'); } });
+document.addEventListener('change', e => { const f = e.target.closest('.form-tab'); const k = e.target.dataset.fk; if (!f || !k) return; if (e.target.type === 'checkbox') { taruhV(ord()[f.dataset.form], k, e.target.checked); gambar(); } else if (e.target.tagName === 'SELECT') { taruhV(ord()[f.dataset.form], k, e.target.value); gambar(); } });
+document.addEventListener('click', e => { const b = e.target.closest('[data-simpan-form]'); if (!b) return; const n = b.dataset.simpanForm, V = ord()[n];
+  const salah = (k, m) => { const w = document.querySelector(`#f-${idF(k)} .ina-text-field__wrapper`), h = document.getElementById('h-' + idF(k)); w?.classList.add('ina-text-field__wrapper--status-error'); if (h) { h.textContent = m; h.classList.add('ina-text-field__helper-text--error'); } document.getElementById(idF(k))?.focus(); };
+  if (n === 'pewaris' && V.ada_ahli_waris) { if (V.pewaris_nik && !/^\d{16}$/.test(V.pewaris_nik)) { salah('pewaris_nik', 'NIK harus 16 digit angka.'); return; } if (V.pewaris_tanggal_wafat && V.pewaris_tanggal_wafat > new Date().toISOString().slice(0, 10)) { salah('pewaris_tanggal_wafat', 'Tanggal wafat tak boleh melewati hari ini.'); return; } }
+  toast(n === 'pewaris' ? 'Data pewaris disimpan.' : 'Dasar perjanjian disimpan.', 'positive'); });
+/* interaksi bersama dialog: pilihan sejajar */
+function ikatSejajar(w, V, segar) { w.addEventListener('click', e => { const b = e.target.closest('[data-sj]'); if (b && !b.disabled) { V[b.dataset.sj] = b.dataset.sjv; segar(); } }); }
+
+/* ---------------- tambah dan ubah pihak (HE-ORDER-03, HE-ORDER-14) ---------------- */
+const KODE_TIPE = { 'Pihak Pertama':'PENJUAL', 'Pihak Kedua':'PEMBELI', 'Pasangan (harta bersama)':'PASANGAN', Saksi:'SAKSI', Lainnya:'LAINNYA' };
+function tipeBerikut(o) { const x = syaratData(o).find(y => y.tab === 'pihak' && !y.ok && y.tipe); return x ? x.tipe : 'LAINNYA'; }
+const awalPihak = t => ({ tipe_pihak:TIPE[t], bentuk_pihak:'Perorangan', status_perkawinan:'Ikuti data profil pengguna', jenis_harta:'Harta Sendiri', kedudukan_khusus:'Tidak ada', pasangan_sebagai:'Persetujuan Saja', bentuk_kuasa:'Surat Kuasa di bawah tangan', pt_bentuk_kuasa:'Surat Kuasa di bawah tangan' });
+const dariPihak = p => (p.isian ? JSON.parse(JSON.stringify(p.isian)) : { ...awalPihak(p.tipe), bentuk_pihak:p.pt ? 'Badan Hukum (PT)' : 'Perorangan', jenis_harta:p.harta === 'BERSAMA' ? 'Harta Bersama' : 'Harta Sendiri', ...(p.pt ? { nama_perseroan:p.nama } : { user_klien:p.id }) });
+function dialogPihak(tipeAwal, idx) {
+  LIPAT_TUTUP.clear(); GALAT_B = {};
+  const o = ord(), lama = idx == null ? null : o.pihak[idx], form = tabForm('Para Pihak').fields;
+  const V = lama ? dariPihak(lama) : awalPihak(tipeAwal || tipeBerikut(o)); let jumlahTambah = 0;
+  const C = { cari:{}, buka:null, galat:{}, galatAtas:'', mati:[] };
+  const isi = () => {
+    const utama = V.tipe_pihak === 'Pihak Pertama' || V.tipe_pihak === 'Pihak Kedua'; if (!utama) V.bentuk_pihak = 'Perorangan'; C.mati = utama ? [] : ['Badan Hukum (PT)'];
+    C.sudah = new Set(o.pihak.filter(p => p !== lama).map(p => p.id));
+    const kurang = syaratData(o).filter(x => x.tab === 'pihak' && !x.ok && x.tipe).map(x => x.l);
+    return `${C.galatAtas ? `<div class="fld">${alert('critical', '', esc(C.galatAtas))}</div>` : ''}
+      ${lama ? '' : `<div class="belum-ada">${ik('info', 16)}<span>${kurang.length ? `Belum ada: <b>${kurang.join(', ')}</b>` : 'Semua pihak yang dibutuhkan sudah ada.'}</span>${jumlahTambah ? `<span style="margin-left:auto;color:var(--ina-content-positive)">${jumlahTambah} pihak ditambahkan</span>` : ''}${usulan('HE-ORDER-03')}</div>`}
+      <div class="ditandai" id="blokPihak">${renderForm(form, V, C)}${usulan('HE-ORDER-14')}${usulan('HE-ORDER-16')}${usulan('HE-ORDER-17')}</div>`; };
+  dialog({ judul:lama ? 'Ubah Pihak' : 'Tambah Pihak', isi:isi(), lebar:true, tombol:lama ? [['Batal', 'secondary', null], ['Simpan Perubahan', 'primary', () => simpan(false), true]] : [['Batal', 'secondary', null], ['Simpan & Tambah Lagi', 'secondary', () => simpan(true), true], ['Simpan', 'primary', () => simpan(false), true]] });
+  const L = $('#lapisan'), badan = L.querySelector('.ina-modal__body');
+  const segar = () => { const y = badan.scrollTop; badan.innerHTML = isi(); badan.scrollTop = y; if (C.buka) { const c = document.getElementById('cari-' + C.buka); if (c) { c.focus(); c.setSelectionRange(c.value.length, c.value.length); } } };
+  function periksa() { const pt = V.bentuk_pihak === 'Badan Hukum (PT)'; C.galat = {};
+    if (!V.tipe_pihak) return 'Tipe pihak wajib dipilih.';
+    if (pt) { if (!(V.nama_perseroan || '').trim()) return 'Nama perseroan wajib diisi.'; if (!V.user_wakil_pt) return 'Perwakilan (penanda tangan PT) wajib dipilih dari pengguna terdaftar.'; if (V.wakil_dikuasakan && !V.pt_penerima_kuasa) return 'Penerima kuasa wajib dipilih dari pengguna terdaftar.'; return ''; }
+    if (V.tipe_pihak === 'Pasangan (harta bersama)' && !V.pasangan_role) return 'Pilih pihak induk (pasangan dari siapa).';
+    if (V.pihak_dikuasakan && !V.penerima_kuasa) return 'Penerima kuasa wajib dipilih dari pengguna terdaftar.';
+    if (!V.user_klien) { C.galat.user_klien = 'Pilih pengguna klien terlebih dahulu.'; return 'Pilih pengguna klien terlebih dahulu.'; } return ''; }
+  function simpan(lagi) {
+    const salah = periksa(); C.galatAtas = salah; if (salah) { segar(); badan.scrollTop = 0; return false; }
+    if (cekBerkas()) { segar(); return false; }
+    const pt = V.bentuk_pihak === 'Badan Hukum (PT)', u = pt ? { id:(lama && lama.pt && lama.id) || Math.max(5000, ...o.pihak.map(p => p.id || 0)) + 1, nama:V.nama_perseroan.trim(), email:'', hp:'', nik:'', kota:V.kota_kedudukan || '', pt:true } : cariKlien(V.user_klien), kode = KODE_TIPE[V.tipe_pihak];
+    const data = { tipe:kode, bentuk:kode === 'SAKSI' ? '—' : V.bentuk_pihak, harta:V.jenis_harta === 'Harta Bersama' ? 'BERSAMA' : 'SENDIRI', isian:JSON.parse(JSON.stringify(V)) };
+    if (lama) { if (lama.baru && lama.id !== u.id) lepasKB(lama); o.pihak[idx] = { ...data, ...u }; } else o.pihak.push({ ...data, ...u });
+    if (u.baru) { const r = bacaKB().find(x => x.id === u.id); simpanKB([...bacaKB().filter(x => x.id !== u.id), { ...u, status:(r && r.status) || 'NONE', pihak:{ kode:o.kode, ...data } }]); }
+    if (V.kedudukan_khusus === 'Bertindak selaku ahli waris') { o.pewaris = o.pewaris || {}; o.pewaris.ada_ahli_waris = true; }
+    gambar();
+    if (!lagi) { toast(lama ? 'Data pihak diperbarui.' : `${TIPE[kode]} ditambahkan.`, 'positive'); return true; }
+    jumlahTambah++; toast(`${TIPE[kode]} ditambahkan. Lanjutkan menambah pihak berikutnya.`, 'positive');
+    Object.keys(V).forEach(k => delete V[k]); Object.assign(V, awalPihak(tipeBerikut(o))); C.cari = {}; C.buka = null; C.galatAtas = ''; segar(); badan.scrollTop = 0; return false;
+  }
+  ikatIsian(badan, V, segar); ikatSejajar(badan, V, segar); ikatBerkas(badan, V, segar);
+  badan.addEventListener('click', e => { const t = e.target;
+    const p = t.closest('[data-pilih-user]'); if (p) { V[p.dataset.pilihUser] = +p.dataset.uid; C.buka = null; delete C.galat[p.dataset.pilihUser]; C.galatAtas = ''; segar(); return; }
+    const g = t.closest('[data-ganti-user]'); if (g) { delete V[g.dataset.gantiUser]; C.buka = g.dataset.gantiUser; segar(); return; }
+    if (t.closest('[data-dbaru]')) { if (trialKlienPenuh()) return; C.buka = null; bukaKlienBaru(r => { KLIEN_BARU[r.id] = r; V.user_klien = r.id; C.galat = {}; C.galatAtas = ''; segar(); }); return; }
+    const c = t.closest('[data-cari-user]'); if (c) { if (C.buka !== c.dataset.cariUser) { C.buka = c.dataset.cariUser; segar(); } return; }
+    if (C.buka) { C.buka = null; segar(); } });
+  badan.addEventListener('input', e => { const k = e.target.dataset.cariUser; if (k) { C.cari[k] = e.target.value; C.buka = k; segar(); } });
+}
+
+/* ---------------- klien tanpa akun (HE-ORDER-09): formulir sama dengan Daftar Pengguna ---------------- */
+function lepasKB(p) { if (!p.baru) return; const a = bacaKB(), r = a.find(x => x.id === p.id); if (!r) return; simpanKB(r.status === 'NONE' ? a.filter(x => x !== r) : a.map(x => (x === r ? { ...x, pihak:null } : x))); }
+function undangPihak(p) {
+  if (statusAkun(p) === 'INVITED') { toast('Undangan dikirim ulang.', 'positive', 4000, `Tautan baru dikirim ke ${esc(p.email)} dan berlaku 72 jam.`); return; }
+  dialog({ judul:'Buat Akun & Undang', isi:`<p>Periksa data berikut. Tautan undangan dikirim ke email ini dan berlaku 72 jam.</p><dl class="ringkas-kv ditandai" id="ringkasUndang"><dt>Nama</dt><dd>${esc(p.nama)}</dd><dt>Email</dt><dd>${esc(p.email)}</dd><dt>Nomor HP</dt><dd>${esc(p.hp) || '—'}</dd><dt>NIK</dt><dd>${esc(p.nik) || '—'}</dd><dt>Peran</dt><dd>Klien</dd></dl>${usulan('HE-ORDER-09')}<p class="ket-f">Akun tampil di Daftar Pengguna dengan status Diundang. Permohonan tidak dapat pindah ke Verifikasi Berkas sebelum akun ini aktif.</p>`,
+    tombol:[['Batal', 'secondary', null], ['Buat Akun & Undang', 'primary', () => {
+      simpanKB(bacaKB().map(r => (r.id === p.id ? { ...r, status:'INVITED' } : r)));
+      $('#lapisan').innerHTML = ''; gambar(); toast('Akun dibuat dan undangan dikirim.', 'positive', 4500, `${esc(p.nama)} tampil di Daftar Pengguna dengan status Diundang.`);
+    }, true]] });
+}
+const bukaKlienBaru = (() => {
+  Object.assign(S, { ktp:null, ktpSim:0, ktpBerkas:null });
+const KTP_CONTOH = { uDepan:'Contoh', uTengah:'Klien', uBelakang:'Baru', kNik:'3171014507880001', kJk:'P', kTempat:'Jakarta', kTgl:'1988-07-05', kKerja:'Karyawan Swasta', kWarga:'Indonesia', kAlamat:'Jalan Contoh No. 10', kRt:'001', kRw:'002', kKel:'Kelurahan Contoh', kKec:'Kecamatan Contoh', kKota:'Kota Contoh', kProv:'Provinsi Contoh' };
+const tf = (id, l, v = '', ph = '', wajib = false, bantu = '', tipe = 'text') => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}${wajib ? '<span class="ina-text-field__required">*</span>' : ''}</label>
+  <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><input id="${id}" type="${tipe}" class="ina-text-field__input" value="${esc(v)}" placeholder="${ph}"></div>
+  <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div></div>`;
+const pilihan = (id, l, opsi, v, wajib, bantu = '') => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}${wajib ? '<span class="ina-text-field__required">*</span>' : ''}</label>
+  <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><select id="${id}" class="ina-text-field__input">${opsi.map(([ov, ot]) => `<option value="${ov}" ${ov === v ? 'selected' : ''}>${ot}</option>`).join('')}</select></div>
+  <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div></div>`;
+
+/* OCR KTP elektronik: pola sama dengan Registrasi Onboarding (HE-REG-05) */
+const berkasKtp = k => {
+  const j = k.status === 'baca' ? 'uploading' : k.status === 'gagal' ? 'error' : 'success';
+  const ikon = j === 'uploading' ? ik('muatUlang', 20).replace('<svg ', '<svg class="ina-file-upload__file-icon--spinning" ') : ik(j === 'error' ? 'unggahGagal' : 'unggahOk', 20);
+  const aksi = j === 'uploading' ? `<button type="button" class="ina-file-upload__file-remove" data-ktp="batal" title="Batalkan" aria-label="Batalkan membaca ${esc(k.nama)}">${ik('x', 20)}</button>`
+    : (j === 'error' ? `<button type="button" class="ina-file-upload__file-retry" data-ktp="ulang" title="Coba lagi" aria-label="Baca ulang ${esc(k.nama)}">${ik('muatUlang', 20)}</button>` : '')
+      + `<button type="button" class="ina-file-upload__file-remove" data-ktp="hapus" title="Hapus file" aria-label="Hapus ${esc(k.nama)}">${ik('sampah', 20)}</button>`;
+  return `<div class="ina-file-upload__files"><div class="ina-file-upload__file ina-file-upload__file--${j}">
+    <div class="ina-file-upload__file-indicator"><div class="ina-file-upload__file-icon-wrapper ina-file-upload__file-icon-wrapper--${j}">${ikon}</div></div>
+    <div class="ina-file-upload__file-info"><div class="ina-file-upload__file-name">${esc(k.nama)}</div><div class="ina-file-upload__file-size">${k.ukuran}${j === 'uploading' ? ' · Membaca data KTP…' : ''}</div>${k.galat ? `<div class="ina-file-upload__file-error">${k.galat}</div>` : ''}</div>
+    <div class="ina-file-upload__file-actions">${aksi}</div></div></div>`;
+};
+function kartuKtp() {
+  const k = S.ktp || {};
+  const status = k.status === 'ok' ? alert('info', 'Data dari KTP sudah terisi', 'Periksa kembali isian di bawah. Perbaiki bila ada yang tidak sesuai.')
+    : k.status === 'ragu' ? alert('caution', 'Periksa isian yang ditandai', `Data dari KTP sudah terisi, tetapi ${k.ragu} kurang jelas terbaca. Pastikan isiannya sesuai KTP pengguna.`)
+    : '';
+  const tolak = k.tolak ? `<div class="ina-file-upload__errors"><div class="ina-file-upload__error-message">${esc(k.nama)}: ${k.tolak}</div></div>` : '';
+  return `<div class="ocr-ktp"><div class="ina-file-upload"><div class="ina-file-upload__label" id="lblKtp">Foto KTP elektronik<span class="ina-text-field__required">*</span></div>
+      <div class="ina-file-upload__dropzone" id="pilihKtp"><input type="file" class="ina-file-upload__input" id="berkasKtp" accept="image/jpeg,image/png,image/webp" aria-labelledby="lblKtp">
+        <div class="ina-file-upload__content"><div class="ina-file-upload__icon">${ik('unggah', 24)}</div>
+        <div class="ina-file-upload__text"><div class="ina-file-upload__title">Seret foto KTP ke sini atau klik untuk memilih</div><div class="ina-file-upload__description">NIK, jenis kelamin, tempat dan tanggal lahir, pekerjaan, kewarganegaraan, serta alamat akan terisi otomatis. JPG, PNG, atau WebP, maksimal 10 MB. Foto ini juga dipakai untuk registrasi sertifikat elektronik (CA).</div></div>
+        <button type="button" class="ina-file-upload__button" id="tombolKtp" aria-describedby="lblKtp">Pilih File</button></div></div>
+      ${k.nama && !k.tolak ? berkasKtp(k) : ''}${tolak}</div>
+    <div id="statusKtp" aria-live="polite">${status}</div></div>`;
+}
+function gambarKtp() { const w = $('#ocrKtp'); if (w) w.firstElementChild.outerHTML = kartuKtp(); }
+/* kode galat mengikuti API OCR KTP (POST /v1/ktp/ocr); keyakinan di bawah 0,85 ditandai untuk diperiksa */
+const GALAT_OCR = {
+  INVALID_FILE:['Format foto tidak didukung', 'Gunakan foto JPG, PNG, atau WebP.'],
+  FILE_TOO_LARGE:['Ukuran foto terlalu besar', 'Gunakan foto berukuran maksimal 10 MB.'],
+  IMAGE_BLURRY:['Foto KTP buram', 'Foto ulang KTP dengan kamera yang fokus dan tangan tidak bergerak.'],
+  NOT_A_KTP:['Dokumen bukan KTP elektronik', 'Pastikan yang difoto adalah KTP elektronik dan seluruh bagiannya terlihat.']
+};
+const SIM_OCR = [['normal', 'Hasil OCR: terbaca'], ['ragu', 'Hasil OCR: ada yang ragu'], ['IMAGE_BLURRY', 'Hasil OCR: foto buram'], ['NOT_A_KTP', 'Hasil OCR: bukan KTP']];
+const KTP_RAGU = { kTempat:'Tempat Lahir' };
+function bacaKtp(nama, byte, tipe = 'image/jpeg') {
+  S.ktpBerkas = { nama, byte, tipe };
+  const ukuran = byte >= 1048576 ? (byte / 1048576).toFixed(1).replace('.', ',') + ' MB' : Math.max(1, Math.round(byte / 1024)) + ' KB';
+  const tolak = !/^image\/(jpeg|png|webp)$/.test(tipe) ? 'INVALID_FILE' : byte > 10485760 ? 'FILE_TOO_LARGE' : '';
+  if (tolak) { S.ktp = { nama, ukuran, tolak:`${GALAT_OCR[tolak][0]}. ${GALAT_OCR[tolak][1]}` }; gambarKtp(); return; }
+  S.ktp = { nama, ukuran, status:'baca' }; gambarKtp();
+  setTimeout(() => {
+    if (!S.ktp || S.ktp.nama !== nama || !$('#ocrKtp')) return;
+    const sim = SIM_OCR[S.ktpSim][0];
+    if (GALAT_OCR[sim]) { S.ktp = { nama, ukuran, status:'gagal', galat:`${GALAT_OCR[sim][0]}. ${GALAT_OCR[sim][1]} Data juga dapat diisi manual.` }; gambarKtp(); return; }
+    const ragu = sim === 'ragu' ? KTP_RAGU : {};
+    for (const id of Object.keys(KTP_CONTOH)) {
+      const el = $('#' + id); if (!el) continue;
+      el.value = KTP_CONTOH[id];
+      const f = $('#f-' + id), h = $('#h-' + id), w = f && f.querySelector('.ina-text-field__wrapper');
+      if (f) f.classList.add('dari-ktp');
+      if (w) { w.classList.remove('ina-text-field__wrapper--status-error'); w.classList.toggle('ina-text-field__wrapper--status-warning', !!ragu[id]); }
+      if (h) { h.textContent = ragu[id] ? 'Kurang jelas terbaca. Periksa dan perbaiki bila perlu.' : 'Terisi dari KTP. Periksa kembali.'; h.classList.remove('ina-text-field__helper-text--error'); h.classList.toggle('ina-text-field__helper-text--warning', !!ragu[id]); }
+    }
+    const daftarRagu = Object.values(ragu);
+    S.ktp = { nama, ukuran, status:daftarRagu.length ? 'ragu' : 'ok', ragu:daftarRagu.join(', ') }; gambarKtp();
+  }, 1200);
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-ktp]');
+  if (a) { const k = S.ktpBerkas; if (a.dataset.ktp === 'ulang' && k) bacaKtp(k.nama, k.byte, k.tipe); else { S.ktp = null; gambarKtp(); $('#tombolKtp').focus(); } return; }
+  if (e.target.closest('#pilihKtp') && e.target.id !== 'berkasKtp') $('#berkasKtp').click();
+});
+document.addEventListener('change', e => { if (e.target.id === 'berkasKtp' && e.target.files[0]) { const f = e.target.files[0]; bacaKtp(f.name, f.size, f.type); e.target.value = ''; } });
+document.addEventListener('dragover', e => { if (e.target.closest && e.target.closest('#pilihKtp')) e.preventDefault(); });
+document.addEventListener('drop', e => { const z = e.target.closest && e.target.closest('#pilihKtp'); if (!z) return; e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) bacaKtp(f.name, f.size, f.type); });
+/* lepas tanda isi-otomatis (dipakai saat isian diubah, dan saat hasil OCR simulasi diganti) */
+function lepasDariKtp(f, kosongkan) { f.classList.remove('dari-ktp'); if (kosongkan) { const el = f.querySelector('input, select, textarea'); if (el) { if (el.tagName === 'SELECT') el.selectedIndex = 0; else el.value = ''; } }
+  f.querySelector('.ina-text-field__wrapper')?.classList.remove('ina-text-field__wrapper--status-warning'); const h = f.querySelector('.ina-text-field__helper-text'); if (h) { h.classList.remove('ina-text-field__helper-text--warning'); h.textContent = h.dataset.bantu || ''; } }
+document.addEventListener('input', e => { const f = e.target.closest && e.target.closest('.dari-ktp'); if (!f) return; lepasDariKtp(f); });
+
+const lipatKtp = (kunci = false) => `<div class="lipat-ktp ditandai ${kunci ? 'terkunci' : ''}" id="lipatKtp"><div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="isiKtp" ${kunci ? 'disabled' : ''}><div class="ina-accordion__title"><b>Data KTP</b></div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></div></button>
+  <div id="isiKtp" class="ina-accordion__content"><div class="ina-accordion__body">
+    <p class="ket-ktp">Dipakai saat pengguna menjadi pihak dalam akta. NIK &amp; NPWP disimpan terenkripsi dan hanya ditampilkan tersamar.</p>
+    <div class="ditandai" id="ocrKtp">${kartuKtp()}${usulan('HE-ORDER-09')}</div>
+    <div class="f-grid2">${tf('kNik', 'NIK', '', '32xxxxxxxxxxxxxx', false, '16 digit sesuai KTP')}${tf('kNpwp', 'NPWP', '', 'Nomor NPWP', false, 'Opsional')}
+      ${pilihan('kJk', 'Jenis Kelamin', [['', '—'], ['L', 'Laki-laki'], ['P', 'Perempuan']], '')}${tf('kGelar', 'Gelar', '', 'Gelar di depan/belakang nama', false, 'mis. Drs., S.H., Hj. (opsional)')}
+      ${tf('kTempat', 'Tempat Lahir')}${tf('kTgl', 'Tanggal Lahir', '', '', false, '', 'date')}
+      ${tf('kKerja', 'Pekerjaan', '', 'mis. Wiraswasta')}${tf('kWarga', 'Kewarganegaraan', '', 'Indonesia')}</div>
+    <div class="f-baris ina-text-area" id="f-kAlamat"><label class="ina-text-area__label" for="kAlamat">Alamat (sesuai KTP)</label><div class="ina-text-area__wrapper ina-text-area__wrapper--status-neutral"><textarea id="kAlamat" class="ina-text-area__input" rows="3" placeholder="Alamat lengkap"></textarea></div><div class="ina-text-field__helper-text" id="h-kAlamat" data-bantu=""></div></div>
+    <div class="f-grid2">${tf('kRt', 'RT', '', '001')}${tf('kRw', 'RW', '', '002')}
+      ${tf('kKel', 'Kelurahan/Desa', '', 'mis. Kelurahan Margasari / Desa Margasari', false, 'Tulis lengkap seperti di KTP — tercetak apa adanya di akta.')}${tf('kKec', 'Kecamatan')}
+      ${tf('kKota', 'Kota/Kabupaten', '', 'mis. Kota Bandung / Kabupaten Bandung', false, 'Tulis lengkap seperti di KTP — tercetak apa adanya di akta.')}${tf('kProv', 'Provinsi')}</div>
+    <div class="f-baris">${tf('kDomisili', 'Domisili Sementara', '', 'mis. Kota Jakarta Selatan', false, "Opsional — bila sedang berada di kota berbeda dari alamat KTP. Tercetak di akta: 'Untuk Sementara berada di …'")}</div>
+  </div></div></div>${usulan('HE-ORDER-09')}</div>`;
+function galat(id, pesan) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); w?.classList.add('ina-text-field__wrapper--status-error'); if (h) { h.textContent = pesan; h.classList.add('ina-text-field__helper-text--error'); } }
+function bersih(id) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); w?.classList.remove('ina-text-field__wrapper--status-error'); if (h) { h.classList.remove('ina-text-field__helper-text--error'); h.textContent = h.dataset.bantu || ''; } }
+  $('#simKtp').addEventListener('click', e => { S.ktpSim = (S.ktpSim + 1) % SIM_OCR.length; e.currentTarget.textContent = SIM_OCR[S.ktpSim][1]; const hasil = SIM_OCR[S.ktpSim][1].replace('Hasil OCR: ', '');
+    if (!$('#ocrKtp')) { toast(`Hasil OCR diganti: ${hasil}. Buka formulir klien tanpa akun untuk mencobanya.`); return; }
+    document.querySelectorAll('.dari-ktp').forEach(f => lepasDariKtp(f, true));
+    const b = S.ktpBerkas || { nama:'ktp-contoh.jpg', byte:430000, tipe:'image/jpeg' }; bacaKtp(b.nama, b.byte, b.tipe); toast(`Hasil OCR diganti: ${hasil}.`); });
+  const ISIAN = ['kNik', 'kNpwp', 'kJk', 'kGelar', 'kTempat', 'kTgl', 'kKerja', 'kWarga', 'kAlamat', 'kRt', 'kRw', 'kKel', 'kKec', 'kKota', 'kProv', 'kDomisili'];
+  return selesai => {
+    const W = $('#lapisanKlien'), tutup = () => { W.innerHTML = ''; }, v = id => ($('#' + id)?.value ?? '').trim();
+    S.ktp = null; S.ktpBerkas = null;
+    W.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-kb="tutup"></div><div class="ina-modal__container">
+      <div class="ina-modal__dialog ina-modal__dialog--size-lg" role="dialog" aria-modal="true" aria-labelledby="judulKb">
+        <div class="ina-modal__header"><h2 class="ina-modal__title" id="judulKb">Tambah Data Klien Baru</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-kb="tutup">${ik('x', 22)}</button></div>
+        <div class="ina-modal__body"><div class="f-grid3 ditandai">${tf('uDepan', 'Nama Depan', '', '', true)}${tf('uTengah', 'Nama Tengah')}${tf('uBelakang', 'Nama Belakang')}</div>
+          <div class="ditandai" style="margin-top:16px">${tf('uEmail', 'Email', '', 'nama@contoh.id', true, '', 'email')}</div>
+          <div class="ditandai" style="margin-top:16px">${tf('uHp', 'Nomor HP', '', '08xxxxxxxxxx', false, 'Dipakai untuk OTP saat registrasi sertifikat elektronik (CA).', 'tel')}</div>
+          <p class="ket-f" style="margin-top:12px">Tidak ada kata sandi yang dibuat di sini. Tautan undangan dikirim ke email di atas saat Anda memilih Buat Akun &amp; Undang di daftar para pihak.</p>
+          ${lipatKtp()}</div>
+        <div class="ina-modal__footer"><button type="button" class="ina-button ina-button--secondary ina-button--md" data-kb="tutup">Batal</button><button type="button" class="ina-button ina-button--primary ina-button--md" data-kb="simpan">Simpan</button></div></div></div></div>`;
+    const lipat = buka => { const b = $('#lipatKtp .ina-accordion__toggle'); b.setAttribute('aria-expanded', buka); b.querySelector('.ina-accordion__icon').classList.toggle('ina-accordion__icon--open', buka); b.nextElementSibling.classList.toggle('ina-accordion__content--open', buka); };
+    lipat(true);
+    $('#kNik').maxLength = 16; $('#kNik').inputMode = 'numeric'; $('#uHp').maxLength = 15;
+    W.oninput = e => { const f = e.target.closest('.ina-text-field'); if (f) bersih(f.id.slice(2)); };
+    W.onclick = e => {
+      const tg = e.target.closest('#lipatKtp .ina-accordion__toggle'); if (tg) { lipat(tg.getAttribute('aria-expanded') !== 'true'); return; }
+      const a = e.target.closest('[data-kb]')?.dataset.kb; if (!a) return;
+      if (a === 'tutup') { tutup(); return; }
+      let ada = false;
+      if (v('uDepan').length < 2) { galat('uDepan', 'Nama depan minimal 2 karakter.'); ada = true; }
+      const email = v('uEmail').toLowerCase();
+      if (!/^\S+@\S+\.\S+$/.test(email)) { galat('uEmail', 'Format email tidak valid. Contoh: nama@contoh.id'); ada = true; }
+      else if ([...KLIEN, ...bacaKB()].some(x => x.email === email)) { galat('uEmail', 'Email ini sudah terdaftar. Cari penggunanya di kolom pencarian.'); ada = true; }
+      if (v('uHp') && !/^08\d{8,13}$/.test(v('uHp'))) { galat('uHp', 'Nomor HP diawali 08, 10–15 digit.'); ada = true; }
+      if (v('kNik') && !/^\d{16}$/.test(v('kNik'))) { galat('kNik', 'NIK harus 16 digit angka.'); lipat(true); ada = true; }
+      if (!S.ktp || !['ok', 'ragu', 'gagal'].includes(S.ktp.status)) { lipat(true); $('#statusKtp').innerHTML = alert('critical', '', 'Foto KTP wajib diunggah.'); $('#ocrKtp').scrollIntoView({ block:'center' }); ada = true; }
+      if (ada) { W.querySelector('.ina-text-field__wrapper--status-error input')?.focus(); return; }
+      const ktp = Object.fromEntries(ISIAN.map(id => [id, v(id)]));
+      const id = Math.max(1000, ...bacaKB().map(r => r.id), ...ORDER.flatMap(o => o.pihak.map(p => p.id || 0))) + 1;
+      const r = { id, baru:true, nama:[v('uDepan'), v('uTengah'), v('uBelakang')].filter(Boolean).join(' '), depan:v('uDepan'), tengah:v('uTengah'), belakang:v('uBelakang'), email, hp:v('uHp'), nik:ktp.kNik, kota:ktp.kKota, tempat:ktp.kTempat, alamat:ktp.kAlamat, pekerjaan:ktp.kKerja, ktp, foto:S.ktp.nama };
+      tutup(); selesai(r);
+    };
+    $('#uDepan').focus();
+  };
+})();
 
 /* ---------------- objek, dokumen, buat order (bentuk = live, diringkas) ---------------- */
 /* HE-ORDER-07: satu formulir berkelompok, tanda wajib, harga + terbilang, galat per isian */
@@ -726,45 +1158,67 @@ function terbilang(n) {
     : x < 2000 ? 'seribu ' + t(x - 1000) : x < 1e6 ? t(Math.floor(x / 1000)) + ' ribu ' + t(x % 1000) : x < 1e9 ? t(Math.floor(x / 1e6)) + ' juta ' + t(x % 1e6) : x < 1e12 ? t(Math.floor(x / 1e9)) + ' miliar ' + t(x % 1e9) : t(Math.floor(x / 1e12)) + ' triliun ' + t(x % 1e12);
   return t(n).replace(/\s+/g, ' ').trim();
 }
-function dialogObjek() {
-  const TOBJ = { oHak:tanya('Jenis hak', T_HAK), oSert:tanya('Nomor sertifikat', 'Isi dengan nomor sertifikat tanah yang tertulis di halaman depan sertifikat.'), oNib:tanya('NIB', T_NIB), oLuas:tanya('Luas', 'Isi dengan luas tanah dalam meter persegi sesuai sertifikat.'), oHarga:tanya('Harga jual beli', T_HARGA), oNop:tanya('NOP PBB', 'NOP adalah Nomor Objek Pajak yang tercantum di tagihan PBB tanah tersebut.') };
-  const isian = (id, l, ph, wajib, atr = '') => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}${wajib ? '<span class="ina-text-field__required">*</span>' : ''}${TOBJ[id] || ''}</label>
-    <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md">${atr.includes('rp') ? '<span class="ina-text-field__prefix-icon" style="font-size:14px;font-weight:500">Rp</span>' : ''}<input id="${id}" class="ina-text-field__input" placeholder="${ph}" ${atr.includes('angka') || atr.includes('rp') ? 'inputmode="numeric"' : ''}></div>
-    <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}"></div></div></div>`;
-  dialog({ judul:'Tambah Objek', isi:`<p style="margin:0 0 4px">Isian bertanda <span class="ina-text-field__required">*</span> wajib diisi.${usulan('HE-ORDER-07')}</p>
-    <h4 class="bantu-sub" style="margin-top:12px">Data sertifikat</h4>
-    <div class="f-grid">${isian('oHak', 'Jenis hak', 'SHM / SHGB / SHGU', false)}${isian('oSert', 'Nomor sertifikat', 'Sesuai sertifikat', true)}${isian('oNib', 'NIB', 'Nomor Identifikasi Bidang', false)}${isian('oLuas', 'Luas (m²)', 'Contoh: 120', true, 'angka')}</div>
-    <h4 class="bantu-sub">Lokasi</h4>
-    ${isian('oLok', 'Alamat objek', 'Jalan, kelurahan, kecamatan, kota', true)}
-    <h4 class="bantu-sub">Harga</h4>
-    ${isian('oHarga', 'Harga jual beli', 'Contoh: 750.000.000', true, 'rp')}
-    <h4 class="bantu-sub">Data tambahan (opsional)</h4>
-    <div class="f-grid">${isian('oPemilik', 'Nama pemilik terdaftar', 'Sesuai sertifikat', false)}${isian('oNop', 'NOP PBB', 'Nomor Objek Pajak', false)}</div>`,
-    tombol:[['Batal','secondary',null],['Simpan','primary',() => {
-      const v = id => $('#' + id).value.trim(), galat = {};
-      if (!v('oSert')) galat.oSert = 'Nomor sertifikat wajib diisi.';
-      if (!v('oLuas')) galat.oLuas = 'Luas wajib diisi.';
-      if (!v('oLok')) galat.oLok = 'Alamat objek wajib diisi.';
-      if (!v('oHarga').replace(/\D/g, '')) galat.oHarga = 'Harga jual beli wajib diisi. Harga dipakai saat verifikasi NJOP dan di akta.';
-      ['oSert', 'oLuas', 'oLok', 'oHarga'].forEach(id => { const w = $('#f-' + id + ' .ina-text-field__wrapper'), h = $('#h-' + id); w.classList.toggle('ina-text-field__wrapper--status-error', !!galat[id]); if (galat[id] || id !== 'oHarga') { h.textContent = galat[id] || ''; h.classList.toggle('ina-text-field__helper-text--error', !!galat[id]); } });
-      if (Object.keys(galat).length) { $('#' + Object.keys(galat)[0]).focus(); return false; }
-      ord().objek.push({ hak:v('oHak') || 'SHM', sertifikat:v('oSert'), nib:v('oNib') || '-', luas:v('oLuas'), lokasi:v('oLok'), harga:v('oHarga').replace(/\D/g, '') }); gambar(); toast('Objek ditambahkan.', 'positive');
+const HAK_LABEL = { SHM:'Sertipikat Hak Milik (SHM)', SHGB:'Sertipikat Hak Guna Bangunan (SHGB)', SHGU:'Sertipikat Hak Guna Usaha (SHGU)', SHRS:'Sertipikat Hak Milik atas Satuan Rumah Susun (SHRS)', HP:'Sertipikat Hak Pakai (HP)', GIRIK:'Girik / Letter C', LAINNYA:'Lainnya' };
+const awalObjek = () => ({ objek_status_sertipikat:'Sudah Terdaftar', objek_jenis_hak:HAK_LABEL.SHM, objek_status:'Utuh', objek_input_sertipikat:'Analog', objek_label_kota:'Kota', objek_label_kelurahan:'Kelurahan' });
+const dariObjek = x => (x.isian ? JSON.parse(JSON.stringify(x.isian)) : { ...awalObjek(), objek_jenis_hak:HAK_LABEL[x.hak] || HAK_LABEL.SHM, objek_no_hak:x.sertifikat, objek_nib:x.nib === '-' ? '' : x.nib, objek_luas:x.luas, objek_jalan:x.lokasi, objek_harga_transaksi:rupiah(x.harga || ''), objek_nop_pbb:'32.01.010.001.001-0001.0' });
+function dialogObjek(idx) {
+  LIPAT_TUTUP.clear(); GALAT_B = {};
+  /* isian, opsi, dan aturan tampil dari tab Objek Formulir AJB 2; satu formulir berkelompok (HE-ORDER-07) */
+  const lama = idx == null ? null : ord().objek[idx], V = lama ? dariObjek(lama) : awalObjek();
+  if (lama) { V.b_surat_ukur = V.b_surat_ukur || { nama:'surat-ukur-contoh.pdf', ukuran:'640 KB' }; V.b_sppt = V.b_sppt || { nama:'sppt-pbb-contoh.pdf', ukuran:'320 KB' }; }
+  const belum = () => V.objek_status_sertipikat === 'Belum Terdaftar (bekas Hak Milik Adat)', elektronik = () => V.objek_input_sertipikat === 'Elektronik' && !belum();
+  const C = () => ({ unggah:{ objek_sertipikat_berkas:panelBerkas }, wajib:[belum() || elektronik() ? null : 'objek_no_hak', 'objek_luas', 'objek_jalan', 'objek_harga_transaksi', elektronik() ? 'objek_kode_sertipikat' : null].filter(Boolean) });
+  /* unggah Sertipikat wajib; tanpa OCR karena API hanya KTP dan KK (HE-ORDER-11) */
+  const B = { berkas:lama ? lama.berkas || { nama:'sertifikat-contoh.pdf', ukuran:'1,2 MB' } : null, galat:'' };
+  const panelBerkas = () => `<div class="ditandai" id="f-berkasObj"><div class="ina-file-upload__label" id="lblObj">Sertipikat<span class="ina-text-field__required">*</span></div>
+    <div class="ina-single-file-upload"><input type="file" class="ina-single-file-upload__input" id="berkasObj" accept="application/pdf,image/jpeg,image/png" aria-labelledby="lblObj">
+      <div class="ina-single-file-upload__container" id="pilihObj" role="button" tabindex="0" aria-label="${B.berkas ? 'File: ' + esc(B.berkas.nama) : 'Unggah file'}">${B.berkas ? `<div class="ina-single-file-upload__icon-wrapper ina-single-file-upload__icon-wrapper--file">${ik('dok', 16)}</div><div class="ina-single-file-upload__content"><div class="ina-single-file-upload__title">${esc(B.berkas.nama)}</div><div class="ina-single-file-upload__description">${B.berkas.ukuran}</div></div><button type="button" class="ina-single-file-upload__delete-button" data-hapus-berkas aria-label="Hapus ${esc(B.berkas.nama)}">${ik('sampah', 18)}</button>` : `<div class="ina-single-file-upload__icon-wrapper ina-single-file-upload__icon-wrapper--default">${ik('unggah', 24)}</div><div class="ina-single-file-upload__content"><div class="ina-single-file-upload__title">Pilih atau seret berkas</div><div class="ina-single-file-upload__description">PDF, JPG, atau PNG, maksimal 10 MB.</div></div>`}</div></div>
+    ${B.galat ? `<div class="ina-file-upload__errors"><div class="ina-file-upload__error-message" id="galatBerkas">${esc(B.galat)}</div></div>` : ''}${usulan('HE-ORDER-11')}</div>`;
+  const isi = () => `<p style="margin:0 0 4px">Isian bertanda <span class="ina-text-field__required">*</span> wajib diisi.${usulan('HE-ORDER-07')}</p>
+    <div class="ditandai" id="isianSertifikat">${renderForm(tabForm('Objek').fields, V, C())}${usulan('HE-ORDER-10')}${usulan('HE-ORDER-16')}${usulan('HE-ORDER-17')}</div>`;
+  dialog({ judul:lama ? 'Ubah Objek' : 'Tambah Objek', isi:isi(), lebar:true, tombol:[['Batal', 'secondary', null], [lama ? 'Simpan Perubahan' : 'Simpan', 'primary', () => {
+      const P = { objek_no_hak:'Nomor hak wajib diisi.', objek_kode_sertipikat:'Nomor Kode Sertipikat wajib diisi.', objek_luas:'Luas wajib diisi.', objek_jalan:'Jalan wajib diisi.', objek_harga_transaksi:'Harga transaksi wajib diisi. Harga dipakai saat verifikasi NJOP dan di akta.', objek_nop_pbb:'SPPT PBB, Nomor Objek Pajak wajib diisi.' };
+      const kosong = [...C().wajib, 'objek_nop_pbb'].filter(k => !String(V[k] || '').trim());
+      kosong.forEach(k => { document.querySelector(`#f-${idF(k)} .ina-text-field__wrapper`)?.classList.add('ina-text-field__wrapper--status-error'); const h = document.getElementById('h-' + idF(k)); if (h) { h.textContent = P[k]; h.classList.add('ina-text-field__helper-text--error'); } });
+      const kurangB = cekBerkas(); B.galat = !B.berkas && !belum() ? 'Sertipikat wajib diunggah.' : '';
+      if (kurangB || B.galat) { const y = badan.scrollTop; badan.innerHTML = isi(); badan.scrollTop = y; kosong.forEach(k => { document.querySelector(`#f-${idF(k)} .ina-text-field__wrapper`)?.classList.add('ina-text-field__wrapper--status-error'); const h = document.getElementById('h-' + idF(k)); if (h) { h.textContent = P[k]; h.classList.add('ina-text-field__helper-text--error'); } }); (kosong.length ? document.getElementById(idF(kosong[0])) : $('#pilihObj'))?.scrollIntoView({ block:'center' }); return false; }
+      if (kosong.length) { document.getElementById(idF(kosong[0]))?.focus(); return false; }
+      const hak = (/\(([A-Z]+)\)/.exec(V.objek_jenis_hak) || [])[1] || (V.objek_jenis_hak.startsWith('Girik') ? 'GIRIK' : 'LAINNYA');
+      const data = { hak, sertifikat:V.objek_no_hak || V.objek_kode_sertipikat || V.objek_persil_nomor || '-', nib:V.objek_nib || '-', luas:V.objek_luas, lokasi:V.objek_jalan, harga:String(V.objek_harga_transaksi).replace(/\D/g, ''), berkas:B.berkas, isian:JSON.parse(JSON.stringify(V)) };
+      if (lama) ord().objek[idx] = data; else ord().objek.push(data);
+      gambar(); toast(lama ? 'Objek diperbarui.' : 'Objek ditambahkan.', 'positive');
     }, true]] });
-  $('#oHak').value = 'SHM';
-  /* galat hilang saat isian diperbaiki */
-  $('#lapisan .ina-modal__body').addEventListener('input', e => { const f = e.target.closest('.ina-text-field'); if (!f || e.target.id === 'oHarga') return; f.querySelector('.ina-text-field__wrapper').classList.remove('ina-text-field__wrapper--status-error'); const h = f.querySelector('.ina-text-field__helper-text'); h.textContent = ''; h.classList.remove('ina-text-field__helper-text--error'); });
-  $('#oHarga').addEventListener('input', e => { const d = e.target.value.replace(/\D/g, ''); e.target.value = d ? rupiah(d) : ''; const h = $('#h-oHarga'); h.classList.remove('ina-text-field__helper-text--error'); $('#f-oHarga .ina-text-field__wrapper').classList.remove('ina-text-field__wrapper--status-error'); h.textContent = d ? terbilang(+d) + ' rupiah' : ''; });
+  const badan = $('#lapisan .ina-modal__body');
+  const segar = () => { const y = badan.scrollTop; badan.innerHTML = isi(); badan.scrollTop = y; };
+  const pasangBerkas = f => {
+    const ukuran = f.size >= 1048576 ? (f.size / 1048576).toFixed(1).replace('.', ',') + ' MB' : Math.max(1, Math.round(f.size / 1024)) + ' KB';
+    if (!/^(application\/pdf|image\/(jpeg|png))$/.test(f.type)) B.galat = `${f.name}: Format tidak didukung. Gunakan PDF, JPG, atau PNG.`;
+    else if (f.size > 10485760) B.galat = `${f.name}: Ukuran terlalu besar. Gunakan berkas maksimal 10 MB.`;
+    else { B.berkas = { nama:f.name, ukuran }; B.galat = ''; }
+    segar();
+  };
+  ikatIsian(badan, V, segar); ikatSejajar(badan, V, segar); ikatBerkas(badan, V, segar);
+  badan.addEventListener('change', e => { if (e.target.id === 'berkasObj' && e.target.files[0]) { pasangBerkas(e.target.files[0]); e.target.value = ''; } });
+  badan.addEventListener('click', e => {
+    if (e.target.closest('[data-hapus-berkas]')) { B.berkas = null; segar(); return; }
+    if (e.target.closest('#pilihObj') && e.target.id !== 'berkasObj') $('#berkasObj').click();
+  });
+  badan.addEventListener('dragover', e => { if (e.target.closest('#pilihObj')) e.preventDefault(); });
+  badan.addEventListener('drop', e => { if (!e.target.closest('#pilihObj')) return; e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) pasangBerkas(f); });
 }
 function dialogDok() {
-  dialog({ judul:'Tambah Dokumen', isi:`<div class="f-grid">${tf('dJenis', `Jenis Dokumen${tanya('Jenis dokumen', 'Jenis dokumen menunjukkan berkas yang dilampirkan, misalnya KTP, KK (Kartu Keluarga), NPWP (Nomor Pokok Wajib Pajak), sertifikat tanah, atau bukti PBB (Pajak Bumi dan Bangunan).')}`, 'KTP', 'KTP / KK / NPWP / SERTIFIKAT / PBB', true)}${tf('dPemilik', 'Pemilik', 'Penjual', 'Penjual / Pembeli')}</div>`,
-    tombol:[['Batal','secondary',null],['Simpan','primary',() => { ord().dok.push({ jenis:($('#dJenis').value || 'KTP').toUpperCase(), pemilik:$('#dPemilik').value || '-', file:'', ukuran:'' }); gambar(); toast('Dokumen ditambahkan. Klik Unggah untuk mengunggah berkas.', 'positive'); }]] });
+  const V = {}, F = tabForm('Dokumen');
+  dialog({ judul:'Tambah Dokumen', isi:`<div class="ditandai" id="isianDok">${renderForm(F.fields, V, {})}${usulan('HE-ORDER-11')}</div>`, tombol:[['Batal', 'secondary', null], ['Simpan', 'primary', () => {
+    if (!V.dokumen_jenis) { const h = document.getElementById('h-' + idF('dokumen_jenis')); h.textContent = 'Jenis dokumen wajib dipilih.'; h.classList.add('ina-text-field__helper-text--error'); return false; }
+    ord().dok.push({ jenis:V.dokumen_jenis, pemilik:(V.dokumen_pemilik || '').trim() || '-', file:'', ukuran:'', verif:!!V.dokumen_terverifikasi }); gambar(); toast('Dokumen ditambahkan. Klik Unggah untuk mengunggah berkas.', 'positive'); }, true]] });
+  const b = $('#lapisan .ina-modal__body'); ikatIsian(b, V, () => { b.innerHTML = `<div class="ditandai" id="isianDok">${renderForm(F.fields, V, {})}</div>`; });
 }
 function dialogBuatOrder() {
   dialog({ judul:'Buat Permohonan', isi:`<div class="f-grid">${tf('bJenis', 'Jenis Akta', 'AJB - Akta Jual Beli', '', true, true)}${tf('bNama', 'Nama Narahubung', '', 'Nama narahubung', true)}${tf('bHp', 'No. HP', '', '08xxxx')}${tf('bEmail', 'Email', '', 'email@contoh.id', false, false, 'email')}</div>`,
     tombol:[['Batal','secondary',null],['Buat Permohonan','primary',() => {
-      const nm = $('#bNama').value.trim(); if (nm.length < 2) { toast('Nama narahubung minimal 2 karakter.', 'destructive'); return false; }
+      const nm = $('#bNama').value.trim(); if (nm.length < 2) { toast('Nama narahubung minimal 2 karakter.', 'destructive'); return false; } if ($('#bHp').value.replace(/\D/g, '').length > 15) { toast('No. HP maksimal 15 digit.', 'destructive'); return false; }
       const kode = 'ORD-CONTOH-' + String(ORDER.length + 1).padStart(3, '0');
-      ORDER.unshift({ kode, status:'BARU', tanggal:'23 Okt 2026', kontak:{ nama:nm, hp:$('#bHp').value, email:$('#bEmail').value, catatan:'' }, pihak:[], objek:[], dok:[], verif:false });
+      ORDER.unshift({ kode, status:'PENGUMPULAN', tanggal:'23 Okt 2026', kontak:{ nama:nm, hp:$('#bHp').value, email:$('#bEmail').value, catatan:'' }, pihak:[], objek:[], dok:[], verif:false });
       buka(kode); toast('Permohonan dibuat.', 'positive');
     }, true]] });
 }
@@ -827,9 +1281,9 @@ function dialog({ judul, isi, tombol: tb, lebar, kunciUtama, bahaya }) {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisan').innerHTML) $('#lapisan').innerHTML = ''; });
 let tt;
-function toast(teks, state = 'default', ms = 3000) {
+function toast(teks, state = 'default', ms = 3000, ket = '') {
   $('#toastWadah').innerHTML = `<div class="ina-toast ina-toast--state-${state} ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${ik(state === 'positive' ? 'centang' : 'info', 20)}</div>
-    <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p></div></div><button class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast>${ik('x', 16)}</button></div>`;
+    <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p>${ket ? `<p class="ina-toast__description">${ket}</p>` : ''}</div></div><button class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast>${ik('x', 16)}</button></div>`;
   clearTimeout(tt); tt = setTimeout(() => $('#toastWadah').innerHTML = '', ms);
 }
 $('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tutup-toast]')) $('#toastWadah').innerHTML = ''; });
@@ -840,9 +1294,9 @@ function bukaBantuan() {
     <p>Panduan singkat menyiapkan permohonan Akta Jual Beli sampai siap dibuatkan akta.</p>
     <ol class="bantu-langkah">
       <li><b>Buat permohonan</b> dan isi data narahubung.</li>
-      <li><b>Tambahkan para pihak:</b> penjual, pembeli, dan 2 saksi. Jika penjual atau pembeli memilih harta bersama, tambahkan juga pasangannya. Gunakan <b>Simpan &amp; Tambah Lagi</b> agar tidak perlu membuka dialog berulang kali.</li>
+      <li><b>Tambahkan para pihak:</b> Pihak Pertama, Pihak Kedua, dan 2 saksi. Jika salah satunya memilih harta bersama, tambahkan juga pasangannya. Gunakan <b>Simpan &amp; Tambah Lagi</b> agar tidak perlu membuka dialog berulang kali.</li>
       <li><b>Tambahkan objek tanah</b> dan unggah dokumen pendukung.</li>
-      <li><b>Pindah ke Siap</b> setelah semua syarat bercentang hijau, lalu lakukan verifikasi.</li>
+      <li><b>Pindah ke Verifikasi Berkas</b> setelah semua syarat bercentang hijau, lalu lakukan verifikasi.</li>
       <li><b>Pindah ke Penyusunan</b> untuk menyusun minuta, kemudian <b>Selesai</b> setelah minuta final.</li>
     </ol>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -858,7 +1312,7 @@ function bukaBantuan() {
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar perubahan Permohonan AJB', lebar:true,
     isi:`<p>Usulan disusun dari laporan Heuristic Evaluation INA Digital, halaman 23–24, dan keputusan tim: status tetap dipindah oleh pengguna (tidak otomatis), penambahan pihak dipercepat di dalam dialog, dan impor dari berkas ditempatkan di Daftar Pengguna. HE-ORDER-06 sampai 08 berasal dari penelusuran live dengan permohonan uji (23 Okt 2026). Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup','secondary',null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {
@@ -866,6 +1320,9 @@ $('#bukaUbah').addEventListener('click', () => {
   });
 });
 function lihat(u) {
+  if (u.ke === 'tab-objek') { const o = ORDER.find(x => x.status === 'PENGUMPULAN') || ORDER[0]; S.layar = 'detail'; S.aktif = o.kode; S.tab = 'objek'; gambar(); dialogObjek(); return; }
+  if (u.ke === 'tab-pewaris') { const o = ORDER.find(x => x.status === 'PENGUMPULAN') || ORDER[0]; S.layar = 'detail'; S.aktif = o.kode; S.tab = 'pewaris'; gambar(); return; }
+  if (u.ke === 'tab-pihak') { const o = ORDER.find(x => x.status === 'PENGUMPULAN') || ORDER[0]; S.layar = 'detail'; S.aktif = o.kode; S.tab = 'pihak'; gambar(); return; }
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
   if (u.ke === 'daftar') { S.layar = 'daftar'; gambar(); }
   if (u.ke === 'detail-002') buka('ORD-CONTOH-002');
@@ -877,10 +1334,15 @@ function lihat(u) {
   const el = u.sorot && $(u.sorot);
   if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); }
 }
-$('#aturUlang').addEventListener('click', () => { ORDER = contoh(); S.layar = 'daftar'; S.cari = ''; S.filter = ''; gambar(); toast('Data contoh dikembalikan ke awal.'); });
+$('#aturUlang').addEventListener('click', () => { simpanKB([]); ORDER = contoh(); S.layar = 'daftar'; S.cari = ''; S.filter = ''; gambar(); toast('Data contoh dikembalikan ke awal.'); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+/* pihak baru tetap ada setelah berpindah prototipe */
+const pulihkanKB = () => bacaKB().forEach(r => { const o = r.pihak && ORDER.find(x => x.kode === r.pihak.kode); if (o && !o.pihak.some(p => p.id === r.id)) { const { pihak, status, ...data } = r; o.pihak.push({ ...pihak, ...data }); } });
+pulihkanKB();
+$('#simAktif').addEventListener('click', () => { const a = bacaKB(), n = a.filter(r => r.status === 'INVITED').length; if (!n) { toast('Belum ada pihak berstatus Diundang.'); return; } simpanKB(a.map(r => (r.status === 'INVITED' ? { ...r, status:'ACTIVE' } : r))); gambar(); toast(`${n} akun pihak kini aktif.`, 'positive'); });
+$('#bukaUbah').textContent = `Daftar perubahan (${UBAH.length})`;
 gambar();
 })();
 </script>

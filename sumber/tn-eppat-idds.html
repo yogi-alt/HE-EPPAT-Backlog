@@ -108,6 +108,15 @@ table.tb td .kc{font-size:12px;color:var(--ina-content-secondary)}
 table.tb tr.klik{cursor:pointer}
 table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .aksi-baris{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.kuota-trial{align-self:center;margin-right:12px;font-size:14px;color:var(--ina-content-secondary)}
+#lapisanBatas .ina-button{text-decoration:none}
+.aksi-baris:has(.aksi-wadah){flex-wrap:nowrap;align-items:center}
+.aksi-wadah{position:relative;display:inline-block}
+.aksi-wadah .ina-action-dropdown__menu{position:fixed;min-width:150px;z-index:60;visibility:visible;opacity:1;pointer-events:auto;transform:none}
+.aksi-wadah .ina-action-dropdown__menu[hidden]{display:none}
+.aksi-wadah .ikon-aksi{width:32px;height:32px;padding:0;justify-content:center}
+.aksi-wadah [data-hapus-pihak]{color:var(--ina-negative-600)}
+.tb:has(#kolStatusAkun) th,.tb:has(#kolStatusAkun) td{padding-left:12px;padding-right:12px}
 .kosong{padding:28px;text-align:center;color:var(--ina-content-secondary)}
 .halaman{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--ina-stroke-primary);font-size:13px;color:var(--ina-content-secondary)}
 .halaman > span{white-space:nowrap}
@@ -177,6 +186,61 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .seg button{border:0;border-radius:7px;background:transparent;padding:7px 14px;font:500 14px Inter,sans-serif;color:var(--ina-content-secondary);cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--ina-primary-primary);color:#fff}
 .fld{margin-bottom:16px}
+/* klien tanpa akun: formulir sama dengan Daftar Pengguna */
+/* tombol simulasi tetap dapat diklik saat dialog terbuka */
+body .protobar{z-index:1001}
+.ina-modal{padding-top:84px;box-sizing:border-box}
+.ina-modal__dialog{max-height:calc(100vh - 104px)}
+.tombol-klien-baru{margin-top:8px}
+#f-berkasObj .ina-single-file-upload,.panel-berkas .ina-single-file-upload{width:100%}
+.ulang-baris>.panel-berkas{margin-bottom:12px}
+.panel-berkas,#f-berkasObj{margin-bottom:12px}
+.panel-berkas .ina-file-upload__label,#f-berkasObj .ina-file-upload__label{display:block;margin:0 0 6px;line-height:20px}
+#f-berkasObj .ina-file-upload__label{margin-bottom:6px}
+.ulang-f{display:grid;gap:12px;margin-bottom:12px}
+.f12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px 16px}
+.s12{grid-column:span 12}.s6{grid-column:span 6}.s4{grid-column:span 4}.s3{grid-column:span 3}
+.sc{grid-column:span var(--s,12);min-width:0}
+.f12 .ina-text-field,.f12 .ina-text-area{margin-bottom:8px}
+@media (max-width:760px){.s6,.s4,.s3,.sc{grid-column:span 12}}
+#blokPihak .f-grid+.f-grid,#blokPT .f-grid+.f-grid{margin-top:12px}
+#blokPihak>.f-grid:first-child{margin-top:4px}
+.tab-kartu .ina-tab-horizontal__container{overflow-x:auto}
+.tab-kartu .ina-tab-horizontal__tab{flex:none}
+.ulang-baris{padding:12px;border:1px solid var(--ina-stroke-primary);border-radius:8px}
+.ulang-kepala{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.ket-f{margin:0;font-size:13px;line-height:20px;color:var(--ina-content-secondary)}
+.ulang-f>.ina-button{justify-self:start}
+.form-tab .bantu-sub:first-of-type{margin-top:16px}
+.tombol-klien-baru .ina-button{width:100%;justify-content:center}
+.kartu-pihak .catatan-akun{margin-top:10px}
+.kb-baris{margin-top:16px}
+.kb-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.f-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-baris{margin-top:16px}
+.lipat-ktp{margin-top:16px;border:1px solid var(--ina-stroke-primary);border-radius:8px}
+.lipat-ktp .ina-accordion{border-bottom:0}
+.lipat-ktp .ina-accordion__toggle{width:100%;padding:16px;text-align:left}
+.lipat-ktp .ina-accordion__title b{font-weight:600}
+.lipat-ktp .ina-accordion__title span{font-weight:400;color:var(--ina-content-secondary)}
+.lipat-ktp .ina-accordion__content--open{max-height:none;overflow:visible}
+.lipat-ktp .ina-accordion__body{padding:0 16px 16px}
+.lipat-form:not(:first-child){margin-top:16px}
+.lipat-form+.f12,.lipat-form+.bantu-sub{margin-top:16px}
+.lipat-form .ina-accordion__content{transition:none}
+.lipat-form .ina-accordion__content:not(.ina-accordion__content--open){visibility:hidden}
+.pilih-f{display:block;height:auto;padding:0;border:0;background:transparent;box-shadow:none}
+.pilih-f:focus-within{box-shadow:none;outline:0}
+.pilih-f .ina-select-dropdown__trigger{width:100%}
+.pilih-f.ina-text-field__wrapper--status-error .ina-select-dropdown__trigger{border-color:var(--ina-stroke-error,#d92d20)}
+.pilih-f .ina-select-dropdown__panel{z-index:40}
+.pilih-asli{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.lipat-ktp .ket-ktp{margin:0 0 12px;font-size:13px;line-height:20px;color:var(--ina-content-secondary)}
+.ocr-ktp{display:flex;flex-direction:column;gap:12px}
+.ocr-ktp .ina-file-upload__file-actions{width:auto}
+.ina-text-field select.ina-text-field__input{appearance:auto;background:transparent;border:0;width:100%;height:100%;font:inherit;font-size:14px;color:inherit;outline:0}
+@media (max-width:760px){.kb-grid3,.f-grid2,.f-grid3{grid-template-columns:1fr}}
 .fld > .ina-text-field__label{display:flex;align-items:center;gap:6px}
 .select-wadah{position:relative;display:block;width:100%}
 .select-wadah .ina-select-dropdown__panel{top:calc(100% + 4px);left:0;right:0;max-height:240px}
@@ -496,7 +560,7 @@ const rasio = (a, b) => { const x = lum(a), y = lum(b); if (x == null || y == nu
 /* ---------------- daftar penyesuaian ---------------- */
 const UBAH = [
   { kode:'IDDS-TN-27', judul:'Dashboard: kartu, grafik, dan warna status seragam',
-    isi:'Kartu ringkasan memakai IDDS Card. Keterangan setiap status menjelaskan artinya, sama dengan prototipe Permohonan AJB: "Klien mengajukan", "Mengumpulkan data", "Data lengkap", "Pembuatan akta", "Akta selesai". Warna grafik diambil dari token warna status tema (bukan kode warna tetap) dan sekeluarga dengan warna lencana statusnya. Pengecualiannya Penyusunan: grafik memakai warna brand agar Penyusunan dapat dibedakan dari Pengumpulan, karena keduanya berlencana "info" di live dan di prototipe Permohonan AJB. Legenda donat selalu menampilkan semua status beserta jumlah dan persentasenya. Grafik batang menulis nama jenis akta lengkap beserta jumlahnya, sehingga angka terbaca tanpa tooltip.',
+    isi:'Kartu ringkasan memakai IDDS Card. Keterangan setiap status menjelaskan artinya, sama dengan prototipe Permohonan AJB: "Mengumpulkan data", "Data lengkap", "Pembuatan akta", "Akta selesai". Warna grafik diambil dari token warna status tema (bukan kode warna tetap) dan sekeluarga dengan warna lencana statusnya. Pengecualiannya Penyusunan: grafik memakai warna brand agar Penyusunan dapat dibedakan dari Pengumpulan, karena keduanya berlencana "info" di live dan di prototipe Permohonan AJB. Legenda donat selalu menampilkan semua status beserta jumlah dan persentasenya. Grafik batang menulis nama jenis akta lengkap beserta jumlahnya, sehingga angka terbaca tanpa tooltip.',
     lama:'Keterangan kartu hanya "order". Warna grafik ditulis langsung di kode (slate/biru/kuning/hijau) dan tidak ikut tema. Status bernilai 0 hilang dari legenda. Jumlah hanya tampil di tooltip saat kursor di atas grafik, dan sumbu batang hanya memakai kode (AJB).', ke:'dashboard', sorot:'#grafikStatus' },
   { kode:'IDDS-TN-28', judul:'Dashboard: daftar permohonan dapat dibuka dan data dapat dimuat ulang',
     isi:'"Perlu tindakan" menyebut tindakan berikutnya untuk setiap permohonan (misalnya "Lengkapi berkas", "Mulai verifikasi"). Setiap baris adalah tautan ke Permohonan AJB yang dapat difokus dengan keyboard. Di kanan judul tampil waktu pembaruan dan tombol "Muat Ulang". Bila data gagal dimuat, IDDS Alert menyediakan tombol "Coba Lagi". Keadaan ini dapat dicoba lewat pil "Simulasi galat Dashboard" di bilah atas.',
@@ -505,7 +569,7 @@ const UBAH = [
     isi:'Isian memakai IDDS Text Field/Text Area yang terhubung dengan labelnya. Pesan galat tampil di bawah isian saat fokus meninggalkan isian dan saat menyimpan, tanpa kotak galat ganda dan toast. Email memakai tipe email, dan telepon memakai tipe telepon. Pengguna yang hanya punya izin Lihat melihat isian terkunci dengan IDDS Alert penjelasan (coba lewat pil "Izin Profil Kantor" di bilah atas). Kaki formulir menampilkan jumlah perubahan yang belum disimpan. Pindah tab atau menu saat ada perubahan meminta konfirmasi.',
     lama:'Pesan galat hanya muncul setelah Simpan dan tampil di kotak galat serta toast sekaligus. Formulir tetap aktif untuk pengguna tanpa izin Ubah dan baru ditolak server. Pindah tab Profil ↔ Layanan Akta membuang isian tanpa peringatan.', ke:'profil', sorot:'#formProfil' },
   { kode:'IDDS-TN-30', judul:'Profil Kantor: PPAT penanda tangan dan kartu sidebar yang jelas',
-    isi:'Pilihan "PPAT Penanda Tangan" menampilkan status CA pengguna terpilih (IDDS Badge "CA aktif" / "CA belum aktif"). Bila belum ada pengguna PPAT, tersedia tautan ke Peran & Izin. Warna kartu sidebar diberi IDDS Badge kontras WCAG. Pratinjau kartu selalu tampil (memakai contoh bila data kosong), dan kartu di sidebar langsung berubah setelah disimpan.',
+    isi:'Pilihan "PPAT Penanda Tangan" menampilkan status CA pengguna terpilih (IDDS Badge "Sertifikat Elektronik Aktif" / "Sertifikat Elektronik Belum Aktif"). Bila belum ada pengguna PPAT, tersedia tautan ke Peran & Izin. Warna kartu sidebar diberi IDDS Badge kontras WCAG. Pratinjau kartu selalu tampil (memakai contoh bila data kosong), dan kartu di sidebar langsung berubah setelah disimpan.',
     lama:'Tidak terlihat apakah PPAT terpilih sudah punya CA aktif, padahal CA aktif disyaratkan. Petunjuk "Atur role fungsi PPAT di menu Peran & Izin dulu" bukan tautan. Warna kartu dapat diisi bebas tanpa cek kontras. Pratinjau hilang bila data kosong, dan kartu sidebar baru berubah setelah halaman dimuat ulang.', ke:'profilKartu', sorot:'#seksiKartu' },
   { kode:'IDDS-TN-31', judul:'Layanan Akta: menonaktifkan layanan meminta konfirmasi',
     isi:'Setiap layanan memakai IDDS Toggle. Menonaktifkan layanan memunculkan IDDS Modal Confirmation yang menjelaskan bahwa menu Permohonan layanan itu hilang untuk seluruh pengguna kantor. Hasilnya diumumkan lewat IDDS Toast berisi nama layanan ("Akta Jual Beli diaktifkan."). Layanan yang belum tersedia berlencana "Segera hadir" dengan keterangan yang terlihat, bukan hanya tooltip.',
@@ -517,7 +581,7 @@ const UBAH = [
     isi:'Hasil pindai (scan) akta diunggah lewat IDDS File Upload: seret-lepas, PDF maks. 20 MB, dan pesan galat di bawah kotak unggah. Alasan "Kirim Salinan" belum aktif tampil sebagai teks bantuan di bawah tombol, bukan hanya tooltip. Catatan Renvoi memakai IDDS Badge "Belum disimpan" dan meminta konfirmasi bila halaman ditinggalkan sebelum disimpan. Tombol hapus hasil pindai berlabel nama berkas.',
     lama:'Alasan tombol nonaktif hanya ada di atribut title sehingga tidak terjangkau di layar sentuh dan pembaca layar. Perubahan renvoi hilang tanpa peringatan saat kembali ke daftar. Tombol hapus hasil pindai hanya berupa ikon tanpa label.', ke:'detail', sorot:'#kartuInfo' },
   { kode:'IDDS-TN-34', judul:'Kirim Salinan dan Riwayat: validasi email dan konfirmasi cabut',
-    isi:'Dialog Kirim memakai IDDS Checkbox untuk setiap penerima. Peran ditulis "Penjual/Pembeli/Saksi", bukan kode, dan format email diperiksa di bawah isiannya. Sebelum mengirim, tampil ringkasan jumlah penerima. Di Riwayat, "Cabut Tautan" meminta konfirmasi lewat IDDS Modal Confirmation karena tindakan ini tidak dapat dibatalkan.',
+    isi:'Dialog Kirim memakai IDDS Checkbox untuk setiap penerima. Peran ditulis "Pihak Pertama/Pihak Kedua/Saksi", bukan kode, dan format email diperiksa di bawah isiannya. Sebelum mengirim, tampil ringkasan jumlah penerima. Di Riwayat, "Cabut Tautan" meminta konfirmasi lewat IDDS Modal Confirmation karena tindakan ini tidak dapat dibatalkan.',
     lama:'Peran tampil sebagai kode mentah (PENJUAL, PEMBELI). Format email tidak diperiksa di dialog ini, berbeda dengan dialog kirim di E-Akta Wizard. "Cabut" langsung dijalankan tanpa konfirmasi.', ke:'kirim', sorot:null },
   { kode:'IDDS-TN-35', judul:'Aktivasi e-Meterai: status terlihat dan email divalidasi di isian',
     isi:'Bagian atas menampilkan status aktivasi (IDDS Badge "Belum diaktifkan" / "Aktif") beserta email yang tersimpan. Isian Email bertanda wajib, dan pesan galatnya tampil di bawah isian. Mengganti email yang sudah tersimpan meminta konfirmasi. Alamat portal ditulis benar, yaitu e-meterai.co.id. Tautannya membuka tab baru, dan keterangan itu tertulis pada tautan.',
@@ -531,14 +595,13 @@ const UBAH = [
 ];
 
 /* ---------------- data contoh (sama dengan prototipe Order AJB, Verifikasi, Minuta, E-Akta Wizard) ---------------- */
-const ST = { BARU:{ l:'Baru', s:'Klien mengajukan', b:'neutral', w:'var(--ina-neutral-400,#a3a3a3)', t:'Hubungi klien dan lengkapi data order', ik:'dok' },
-  PENGUMPULAN:{ l:'Pengumpulan', s:'Mengumpulkan data', b:'info', w:'var(--ina-guide-500,#2563eb)', t:'Lengkapi berkas dan data para pihak', ik:'daftar' },
-  SIAP:{ l:'Siap', s:'Data lengkap', b:'warning', w:'var(--ina-warning-500,#eebb04)', t:'Mulai verifikasi akta', ik:'centang' },
-  DRAFTING:{ l:'Penyusunan', s:'Pembuatan akta', b:'info', w:'var(--ina-primary-500,#3d6b5e)', t:'Susun minuta akta', ik:'edit' },
+const ST = { PENGUMPULAN:{ l:'Pengumpulan Berkas', s:'Dibuat oleh Asisten / PPAT', b:'info', w:'var(--ina-guide-500,#2563eb)', t:'Lengkapi berkas dan data para pihak', ik:'daftar' },
+  SIAP:{ l:'Verifikasi Berkas', s:'Data lengkap, siap diperiksa', b:'warning', w:'var(--ina-warning-500,#eebb04)', t:'Mulai verifikasi akta', ik:'centang' },
+  DRAFTING:{ l:'Penyusunan Akta', s:'Pembuatan akta', b:'info', w:'var(--ina-primary-500,#3d6b5e)', t:'Susun minuta akta', ik:'edit' },
   SELESAI:{ l:'Selesai', s:'Akta selesai', b:'success', w:'var(--ina-positive-500,#16a34a)', t:'', ik:'stempel' } };
 const O = (kode, nama, status, tgl) => ({ kode, nama, status, tgl, jenis:'AJB' });
 const ORDER = [
-  O('ORD-CONTOH-001', 'Contoh Narahubung Satu', 'BARU', '2026-10-22'), O('ORD-CONTOH-002', 'Contoh Narahubung Dua', 'PENGUMPULAN', '2026-10-21'),
+  O('ORD-CONTOH-001', 'Contoh Narahubung Satu', 'PENGUMPULAN', '2026-10-22'), O('ORD-CONTOH-002', 'Contoh Narahubung Dua', 'PENGUMPULAN', '2026-10-21'),
   O('ORD-CONTOH-003', 'Contoh Narahubung Tiga', 'SIAP', '2026-10-20'), O('ORD-CONTOH-010', 'Contoh Narahubung Sepuluh', 'SIAP', '2026-10-24'),
   O('ORD-CONTOH-011', 'Contoh Narahubung Sebelas', 'SIAP', '2026-10-23'), O('ORD-CONTOH-012', 'Contoh Narahubung Dua Belas', 'PENGUMPULAN', '2026-10-25'),
   O('ORD-CONTOH-006', 'Contoh Narahubung Enam', 'DRAFTING', '2026-10-19'), O('ORD-CONTOH-004', 'Contoh Narahubung Empat', 'DRAFTING', '2026-10-18'),
@@ -550,7 +613,7 @@ const LAYANAN0 = () => [{ kode:'AJB', nama:'Akta Jual Beli', aktif:true, ada:tru
 const PROFIL0 = () => ({ ppat_nama:'PPAT Contoh Satu, S.H.', ppat_sk:'1/KEP-CONTOH/2020', ppat_wilayah:'Kota Contoh', ppat_telepon:'0210000000', ppat_email:'kantor@contoh.id', ppat_alamat:'Jalan Contoh No. 10, Kota Contoh', ppat_notaris_user_id:'1', ppat_card_enabled:true, ppat_card_color:'#DAC999', ppat_card_text_color:'#1F1F1F' });
 const USER_PPAT = [{ id:'1', nama:'PPAT Contoh Satu', email:'ppat1@contoh.id', ca:true }];
 const PIHAK_SALINAN = () => [{ id:1, nama:'Contoh Penjual Satu', peran:'PENJUAL', email:'penjual1@contoh.id' }, { id:2, nama:'Contoh Pembeli Satu', peran:'PEMBELI', email:'pembeli1@contoh.id' }, { id:3, nama:'Contoh Saksi Satu', peran:'SAKSI', email:'' }, { id:4, nama:'Contoh Saksi Dua', peran:'SAKSI', email:'saksi2@contoh.id' }];
-const PERAN_PIHAK = { PENJUAL:'Penjual', PEMBELI:'Pembeli', SAKSI:'Saksi', PASANGAN:'Pasangan', MANUAL:'Ditambahkan manual' };
+const PERAN_PIHAK = { PENJUAL:'Pihak Pertama', PEMBELI:'Pihak Kedua', SAKSI:'Saksi', PASANGAN:'Pasangan', MANUAL:'Ditambahkan manual' };
 function contohSalinan() {
   return [
     { kode:'ORD-CONTOH-005', nama:'Contoh Narahubung Lima', nomor:'5/2026', tgl:'2026-10-15', final:'2026-10-15', scan:[{ id:1, nama:'akta-5-2026-scan.pdf', mb:3.4 }], renvoi:'', riwayat:[
@@ -617,7 +680,7 @@ function pindah(ke, lanjut) { jaga(() => { S.layar = ke; S.detail = null; S.gala
 function layarDashboard() {
   const n = k => ORDER.filter(o => o.status === k).length, total = ORDER.length;
   const kartu = [['Total Permohonan', total, 'Semua permohonan akta', 'order', 'var(--ina-primary-50)', 'var(--ina-primary-primary)'], ...Object.entries(ST).map(([k, s]) => [s.l, n(k), s.s, s.ik, null, null, k])];
-  const perlu = ORDER.filter(o => ['BARU', 'PENGUMPULAN', 'SIAP'].includes(o.status)).sort((a, b) => a.tgl.localeCompare(b.tgl)), terbaru = [...ORDER].sort((a, b) => b.tgl.localeCompare(a.tgl)).slice(0, 6);
+  const perlu = ORDER.filter(o => ['PENGUMPULAN', 'SIAP'].includes(o.status)).sort((a, b) => a.tgl.localeCompare(b.tgl)), terbaru = [...ORDER].sort((a, b) => b.tgl.localeCompare(a.tgl)).slice(0, 6);
   const ingat = S.tera ? `<div class="ingat">${alert('caution', '', 'Stempel Elektronik (TERA) kantor Anda belum didaftarkan. Lengkapi data pendaftaran TERA agar akta bisa distempel elektronik.', `<div style="display:flex;gap:8px;align-items:center">${tombol('Daftar TERA', 'primary', 'sm', 'data-ke-tera', ik('panah', 14))}<button type="button" class="ina-alert__close-button" data-tutup-tera aria-label="Tutup pengingat">${ik('x', 16)}</button></div>`)}</div>` : '';
   if (S.dashGagal) return `${remah('Akta', 'Dashboard Akta')}<h1>Dashboard Akta</h1><p class="sub">Pantau jumlah permohonan per status dan permohonan yang perlu ditindaklanjuti.</p>
     <div style="margin-top:20px">${alert('critical', 'Dashboard gagal dimuat', 'Periksa koneksi internet Anda, lalu coba lagi.', tombol('Coba Lagi', 'secondary', 'sm', 'id="cobaLagi"', ik('ulang', 14)))}</div>`;
@@ -676,7 +739,7 @@ function formProfil() {
       <div class="lebar">${ta('p-ppat_alamat', 'Alamat Kantor', p.ppat_alamat, 'Alamat lengkap kantor PPAT', true, '', `data-prof="ppat_alamat" ${dis} ${S.galatP.ppat_alamat ? 'aria-invalid="true"' : ''}`).replace('ina-text-area__wrapper--status-neutral', S.galatP.ppat_alamat ? 'ina-text-area__wrapper--status-error' : 'ina-text-area__wrapper--status-neutral').replace('<div class="ina-text-area__helper-text" id="h-p-ppat_alamat" data-bantu=""></div>', S.galatP.ppat_alamat ? `<div class="ina-text-area__helper-text ina-text-area__helper-text--error" id="h-p-ppat_alamat">${S.galatP.ppat_alamat}</div>` : '<div class="ina-text-area__helper-text" id="h-p-ppat_alamat"></div>')}</div></div>
     <div class="seksi"><h3>${ik('pena', 16)} PPAT Penanda Tangan (e-Akta)</h3>
       <div class="f-dua"><div>${pilihan('p-ttd', 'PPAT penanda tangan', [['', USER_PPAT.length ? 'Pilih PPAT' : 'Belum ada pengguna berfungsi PPAT'], ...USER_PPAT.map(x => [x.id, `${esc(x.nama)} (${esc(x.email)})`])], p.ppat_notaris_user_id, 'Pengguna berfungsi PPAT yang menandatangani akta secara elektronik. Wajib memiliki sertifikat elektronik (CA) aktif.', `data-prof="ppat_notaris_user_id" ${dis}`)}</div>
-        <div style="align-self:center">${u ? (u.ca ? badge('CA aktif', 'success') : badge('CA belum aktif', 'warning')) : `<span class="ket">Belum ada pengguna berfungsi PPAT. Atur di <a href="${SYS}#peran">Peran &amp; Izin</a>.</span>`}${usulan('IDDS-TN-30')}</div></div></div>
+        <div style="align-self:center">${u ? (u.ca ? badge('Sertifikat Elektronik Aktif', 'success') : badge('Sertifikat Elektronik Belum Aktif', 'warning')) : `<span class="ket">Belum ada pengguna berfungsi PPAT. Atur di <a href="${SYS}#peran">Peran &amp; Izin</a>.</span>`}${usulan('IDDS-TN-30')}</div></div></div>
     <div class="seksi ditandai" id="seksiKartu"><h3>${ik('kartuId', 16)} Kartu identitas kantor di sidebar</h3><p class="ket">Kartu di bawah logo sidebar, diambil dari data kantor di atas.</p>
       <div class="f-dua f-baris"><div>
         <div class="toggle-baris" style="padding:0">${cekBox('p-kartu', p.ppat_card_enabled, 'Tampilkan kartu di sidebar', '', `data-prof-cek="ppat_card_enabled" ${dis}`)}</div>
@@ -971,7 +1034,7 @@ const BANTUAN = {
     <ul class="bantu-langkah">${Object.values(ST).map(s => `<li><b>${s.l}:</b> ${s.s.toLowerCase()}.</li>`).join('')}</ul>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('d', [
-      ['Apa isi daftar "Perlu tindakan"?', 'Permohonan berstatus Baru, Pengumpulan, dan Siap, diurutkan dari yang paling lama menunggu. Setiap baris menyebut tindakan berikutnya.'],
+      ['Apa isi daftar "Perlu tindakan"?', 'Permohonan berstatus Pengumpulan Berkas dan Verifikasi Berkas, diurutkan dari yang paling lama menunggu. Setiap baris menyebut tindakan berikutnya.'],
       ['Bagaimana membuka detail permohonan?', 'Klik baris permohonan. Halaman Permohonan AJB terbuka.'],
       ['Mengapa angka belum berubah?', 'Klik "Muat Ulang" di kanan atas untuk mengambil data terbaru.'],
       ['Mengapa hanya Akta Jual Beli yang tampil?', 'Grafik hanya menampilkan layanan akta yang aktif. Saat ini baru Akta Jual Beli yang tersedia.'],
@@ -979,12 +1042,12 @@ const BANTUAN = {
     ${kontak()}` }),
   profil:() => ({ judul:'Bantuan Profil Kantor', isi:`<p>Data kantor dipakai sebagai kop dan variabel isi akta, serta kartu identitas di sidebar.</p>
     <h4 class="bantu-sub">Langkah</h4>
-    ${lgkh(['Lengkapi isian bertanda bintang.', 'Pilih PPAT penanda tangan yang sudah memiliki CA aktif.', 'Atur kartu sidebar bila perlu, lalu klik <b>Simpan Perubahan</b>.'])}
+    ${lgkh(['Lengkapi isian bertanda bintang.', 'Pilih PPAT penanda tangan yang sudah memiliki sertifikat elektronik aktif.', 'Atur kartu sidebar bila perlu, lalu klik <b>Simpan Perubahan</b>.'])}
     ${istilah([['CA', 'Sertifikat elektronik dari Peruri untuk tanda tangan elektronik.'], ['PPAT penanda tangan', 'Pengguna berfungsi PPAT yang menandatangani akta elektronik kantor.'], ['Layanan akta', 'Jenis akta yang dilayani kantor; setiap layanan aktif punya menu Permohonan sendiri.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('p', [
       ['Di mana data ini dipakai?', 'Pada kop dan isi akta (nama PPAT, nomor SK, wilayah kerja, alamat), serta kartu identitas di sidebar.'],
-      ['Mengapa PPAT penanda tangan wajib memiliki CA aktif?', 'Akta elektronik ditandatangani dengan sertifikat elektronik dari Peruri. Tanpa CA aktif, penandatanganan gagal. PPAT mendaftar CA sendiri lewat Akun Saya.'],
+      ['Mengapa PPAT penanda tangan wajib memiliki sertifikat elektronik aktif?', 'Akta elektronik ditandatangani dengan sertifikat elektronik dari Peruri. Tanpa sertifikat elektronik aktif, penandatanganan gagal. PPAT mendaftar CA sendiri lewat Akun Saya.'],
       ['Mengapa daftar PPAT penanda tangan kosong?', 'Belum ada pengguna dengan peran berfungsi PPAT. Buat pengguna di Daftar Pengguna, lalu beri peran berfungsi PPAT di Peran &amp; Izin.'],
       ['Format telepon apa yang diterima?', 'Angka 7–15 digit, boleh diawali tanda +. Spasi, tanda hubung, dan tanda kurung diabaikan.'],
       ['Mengapa isian tidak bisa diubah?', 'Peran Anda hanya punya izin Lihat untuk Profil Kantor. Minta Super Admin mengubahnya atau memberi izin Ubah.'],
@@ -1026,7 +1089,7 @@ $('#bukaUbah').textContent = `Daftar penyesuaian (${UBAH.length})`;
 $('#bukaUbah').addEventListener('click', () => {
   dialog({ judul:'Daftar penyesuaian Akta', lebar:true,
     isi:`<p>Menu ini tidak dinilai dalam laporan Heuristic Evaluation. Isi, isian, dan alur mengikuti kode live dev-app.eppat.id/t/default; yang disesuaikan adalah komponen IDDS dengan brand E-PPAT, letak pesan, konfirmasi, aksesibilitas, bahasa, dan Bantuan per halaman sesuai saran HE-UMUM-02. Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta (termasuk tab Salinan) ada di prototipe Dari HE. Daftar yang sama ada di spreadsheet Backlog-HE-EPPAT-Peruri.xlsx.</p>
-      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code><b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
         <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });
