@@ -992,6 +992,60 @@
       "versi": "v2"
     },
     {
+      "kode": "HE-CA-11",
+      "fitur": "Registrasi CA (Klien)",
+      "judul": "Registrasi CA dan TERA dalam satu stepper",
+      "saat_ini": "Registrasi CA dan Registrasi TERA berada di dua tab dengan stepper dan formulir masing-masing, sehingga data diri diisi dua kali.",
+      "usulan": "Untuk PPAT dan Super Admin + PPAT, tab digabung menjadi Registrasi CA & TERA dengan satu stepper: Lengkapi data diri, Ajukan ke Peruri, Verifikasi & Pemeriksaan Peruri, Spesimen tanda tangan & stempel. Setiap tahap menampilkan jalur TTE dan jalur TERA karena keduanya selesai pada waktu berbeda; tahap selesai bila kedua jalur selesai. Data TERA cukup ID PPAT, rekening PPAT, dan SK PPAT terakhir; data diri lain memakai Data Diri (KTP). CA dan TERA diajukan bersama dalam satu dialog. Spesimen tanda tangan dapat dibuat begitu CA aktif; spesimen stempel (isi, warna, logo, pratinjau) setelah TERA disetujui. Penolakan TERA menampilkan alasan dan bagian yang diperbaiki tanpa memengaruhi CA. TERA dapat tidak diikutkan (TERA milik kantor). Notifikasi CA dan TERA digabung bila keduanya belum aktif. Asisten dan Klien tetap melihat Registrasi CA saja.",
+      "prinsip": "H1 Visibility of System Status; H8 Aesthetic and Minimalist Design",
+      "halaman": "Masukan 9 Nov 2026",
+      "prioritas": "Tinggi",
+      "layar": "Akun Saya › Registrasi CA & TERA",
+      "acuan": "Prototipe CA; Prototipe TERA",
+      "selesai_bila": "PPAT mendaftarkan CA dan TERA dari satu tab dan satu stepper, dan status kedua jalur terlihat di setiap tahap.",
+      "status": "Prototipe siap",
+      "catatan": "Masukan Peruri 9 Nov 2026 (MoM 03/11: Stepper TERA/TTE disatukan). Peruri mengonfirmasi bahwa data stempel (isi, warna, logo) diisi setelah TERA disetujui, tidak diperlukan saat pendaftaran.",
+      "tanggal": "2026-11-09",
+      "sumber": "Masukan Peruri",
+      "versi": "v2"
+    },
+    {
+      "kode": "HE-CA-12",
+      "fitur": "Registrasi CA (Klien)",
+      "judul": "Penolakan TERA: bagian yang salah dan cara memperbaikinya",
+      "saat_ini": "Penolakan hanya berupa satu kalimat alasan tanpa penanda isian.",
+      "usulan": "Alert penolakan menyebut siapa yang menolak (admin E-PPAT atau Peruri) dan tanggalnya, lalu daftar bagian yang salah. Setiap bagian memuat letak, alasan, cara memperbaiki, dan tombol Perbaiki yang membawa ke isiannya, termasuk ke Data Diri (KTP). Isian yang ditolak ditandai merah. Bagian yang sudah diubah bertanda centang, dan Ajukan Ulang TERA aktif setelah semua bagian diperbaiki. Status CA tidak terpengaruh.",
+      "prinsip": "H1 Visibility of System Status; H8 Aesthetic and Minimalist Design",
+      "halaman": "Masukan 9 Nov 2026",
+      "prioritas": "Tinggi",
+      "layar": "Akun Saya › Registrasi CA & TERA",
+      "acuan": "Prototipe CA; Prototipe TERA",
+      "selesai_bila": "Pengguna dapat melihat dan memperbaiki setiap bagian yang ditolak tanpa mencari sendiri.",
+      "status": "Prototipe siap",
+      "catatan": "Pemeriksa (admin E-PPAT/Peruri) perlu memilih bagian yang salah saat menolak; layar pemeriksaan di Platform belum disesuaikan.",
+      "tanggal": "2026-11-09",
+      "sumber": "MoM Workshop HE 03/11/2026",
+      "versi": "v2"
+    },
+    {
+      "kode": "HE-CA-13",
+      "fitur": "Registrasi CA (Klien)",
+      "judul": "Data pribadi dari Onboarding terkunci saat mengajukan CA",
+      "saat_ini": "Data diri untuk registrasi CA diisi ulang walaupun sudah ada dari pendaftaran Onboarding.",
+      "usulan": "Untuk Super Admin + PPAT yang mendaftar lewat Onboarding, Data Diri (KTP) terisi dari Onboarding (NIK, jenis kelamin, tempat dan tanggal lahir, kewarganegaraan, nomor HP, foto KTP) dan terkunci dengan keterangan Dari pendaftaran Onboarding. Nama di tab Akun tidak dapat diubah. Alert meminta menghubungi admin E-PPAT bila ada yang salah.",
+      "prinsip": "H1 Visibility of System Status; H8 Aesthetic and Minimalist Design",
+      "halaman": "Masukan 9 Nov 2026",
+      "prioritas": "Tinggi",
+      "layar": "Akun Saya › Registrasi CA & TERA",
+      "acuan": "Prototipe CA; Prototipe TERA",
+      "selesai_bila": "Super Admin + PPAT mengajukan CA tanpa mengisi ulang data pribadi, dan data tersebut tidak dapat diubah.",
+      "status": "Prototipe siap",
+      "catatan": "MoM Workshop HE 03/11/2026 no. 43; TERA sudah memakai aturan yang sama (HE-TERA-09).",
+      "tanggal": "2026-11-09",
+      "sumber": "MoM Workshop HE 03/11/2026",
+      "versi": "v2"
+    },
+    {
       "kode": "HE-UMUM-03",
       "fitur": "Daftar Pengguna",
       "judul": "Daftar Pengguna: impor pengguna klien dari berkas",
@@ -6587,6 +6641,18 @@
       "kode": "HE-REG-09",
       "perubahan": "NIK di email verifikasi pendaftaran Onboarding dan Trial tampil lengkap atas permintaan Peruri.",
       "berkas": "sumber/onboard-badan.html (trial-badan.html dibangkitkan)"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "HE-CA-11",
+      "perubahan": "Registrasi CA dan TERA digabung dalam satu tab dan satu stepper dengan jalur TTE dan TERA; data TERA hanya ID PPAT, rekening, SK PPAT; spesimen stempel setelah TERA disetujui; notifikasi digabung; tab dan pendaftaran di prototipe TERA mengarah ke tab gabungan.",
+      "berkas": "sumber/ca-badan.html, sumber/tera-idds.html, sumber/sesi-bersama.html"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "HE-CA-12; HE-CA-13",
+      "perubahan": "Penolakan TERA per bagian dengan tombol Perbaiki dan Ajukan Ulang setelah semua diperbaiki; data pribadi Super Admin + PPAT dari Onboarding terkunci di Data Diri (KTP) dan tab Akun.",
+      "berkas": "sumber/ca-badan.html"
     }
   ]
 }

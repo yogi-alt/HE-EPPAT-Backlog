@@ -659,9 +659,9 @@ $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.c
 /* ---------------- interaksi halaman ---------------- */
 const H = $('#halaman');
 H.addEventListener('click', e => {
-  if (e.target.closest('#daftarTera')) { pindahLayar('akun', 'tera'); return; }
+  if (e.target.closest('#daftarTera')) { location.href = 'Backlog-HE-CA-Prototype.html#ca'; return; }
   if (e.target.closest('#tutupIngat')) { dialog({ judul:'Tutup pengingat TERA?', konfirmasi:true, isi:'<p>Pengingat ini akan disembunyikan. Anda tetap dapat mendaftarkan TERA melalui menu profil › <b>Akun Saya</b> › tab <b>Registrasi TERA</b>. Pengingat muncul lagi pada kunjungan berikutnya selama TERA belum terdaftar.</p>', tombol:[['Batal','secondary',null],['OK','primary',() => { S.ingatTutup = true; gambar(); }]] }); return; }
-  const t = e.target.closest('[data-tab]'); if (t) { const luar = { profil:'akun', keamanan:'aman', data:'data', ca:'ca' }[t.dataset.tab]; if (luar) { location.href = 'Backlog-HE-CA-Prototype.html#' + luar; return; } S.tab = t.dataset.tab; gambar(); return; }
+  const t = e.target.closest('[data-tab]'); if (t) { const luar = { profil:'akun', keamanan:'aman', data:'data', ca:'ca', tera:'ca' }[t.dataset.tab]; if (luar) { location.href = 'Backlog-HE-CA-Prototype.html#' + luar; return; } S.tab = t.dataset.tab; gambar(); return; }
   const lc = e.target.closest('[data-loncat]'); if (lc) { fokusIsian(lc.dataset.loncat); return; }
   const bk = e.target.closest('[data-berkas]'); if (bk) { S.form[bk.dataset.berkas] = 'berkas-contoh.pdf'; perbaruiIsian(SEMUA.find(f => f.k === bk.dataset.berkas), null); return; }
   const pl = e.target.closest('[data-pilih]'); if (pl) { const k = pl.dataset.pilih, lama = S.selectBuka; S.selectBuka = lama === k ? null : k; if (lama && lama !== k) perbaruiIsian(SEMUA.find(f => f.k === lama), null); perbaruiIsian(SEMUA.find(f => f.k === k), null); return; }
@@ -848,7 +848,7 @@ $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('o
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
 { const st = AJB.teraStatus(); if (st && st !== 'belum') { S.status = st; S.form = TERISI(); S.simpanan = { ...S.form }; } } /* status kantor bersama */
 window.bukaDaftar = j => { if (j !== 'tera') return false; S.layar = 'akun'; S.tab = 'tera'; gambar(); return true; };
-if (location.hash === '#registrasi') { S.layar = 'akun'; S.tab = 'tera'; } /* tombol Daftar TERA dari prototipe lain */
+if (location.hash === '#registrasi') location.replace('Backlog-HE-CA-Prototype.html#ca'); /* pendaftaran TERA kini satu tab dengan CA (HE-CA-11) */
 gambar();
 })();
 </script>

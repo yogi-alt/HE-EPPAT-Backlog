@@ -2254,9 +2254,12 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
   window.segarNotif = () => {
     const w = $('#notifDaftar'); if (!w) return;
     const ca = TEKS_CA[window.AJB.caStatus(tampil.email) || tampil.ca], teraBelum = ['', 'belum', 'rejected'].includes(window.AJB.teraStatus());
-    const isi = tampil.tanpaDaftar || tampil.aktif === 'ROLE_ADMIN' && !tampil.peran.includes('ROLE_PPAT') ? [] : [
-      ca && ['ca', ca, 'Buka Registrasi CA', REG_CA],
-      tampil.peran.includes('ROLE_PPAT') && teraBelum && ['tera', 'Stempel Elektronik (TERA) kantor Anda belum didaftarkan. Lengkapi data pendaftaran TERA agar akta bisa distempel elektronik.', 'Daftar TERA', 'Backlog-HE-TERA-Prototype.html#registrasi']
+    const ppat = tampil.peran.includes('ROLE_PPAT'), teraIkut = (() => { try { return (JSON.parse(localStorage.getItem('eppat-tera-isian')) || {}).ikut !== false; } catch (e) { return true; } })();
+    const isi = tampil.tanpaDaftar || tampil.aktif === 'ROLE_ADMIN' && !ppat ? [] : ppat && ca && teraBelum && teraIkut
+      ? [['ca', 'Sertifikat elektronik (CA) dan stempel elektronik (TERA) kantor Anda belum aktif. Daftarkan keduanya sekaligus agar akta dapat ditandatangani dan distempel elektronik.', 'Buka Registrasi CA & TERA', REG_CA]].filter(x => !ditutup(x[0]))
+      : [
+      ca && ['ca', ca, ppat ? 'Buka Registrasi CA & TERA' : 'Buka Registrasi CA', REG_CA],
+      ppat && teraBelum && teraIkut && ['tera', window.AJB.teraStatus() === 'rejected' ? 'Pendaftaran stempel elektronik (TERA) kantor ditolak. Perbaiki datanya, lalu ajukan ulang.' : 'Stempel elektronik (TERA) kantor Anda belum didaftarkan. Lengkapi data TERA agar akta bisa distempel elektronik.', ppat ? 'Buka Registrasi CA & TERA' : 'Daftar TERA', REG_CA]
     ].filter(x => x && !ditutup(x[0]));
     w.innerHTML = isi.map(([k, teks, aksi, href]) => `<div class="ina-alert ina-alert--caution" role="status"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__description">${teks}</div></div><div class="notif-aksi"><a class="ina-button ina-button--primary ina-button--sm" href="${href}" data-notif-daftar="${k}">${aksi}</a><button type="button" class="ina-alert__close-button" aria-label="Tutup notifikasi" data-tutup-notif="${k}">${svg(I_TUTUP)}</button></div></div></div>`).join('');
   };
