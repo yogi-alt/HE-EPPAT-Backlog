@@ -509,6 +509,42 @@
       "catatan": "Masukan Peruri 6 Nov 2026."
     },
     {
+      "kode": "HE-ORDER-21",
+      "fitur": "Permohonan AJB",
+      "status": "Prototipe siap",
+      "tanggal": "2026-11-09",
+      "sumber": "Masukan Peruri",
+      "versi": "v2",
+      "halaman": "Masukan 9 Nov 2026",
+      "judul": "Stepper: tahap yang sudah lewat dapat dilihat lagi",
+      "saat_ini": "Hanya tahap yang sedang berjalan yang dapat dibuka. Hasil Verifikasi Berkas dan naskah tidak dapat dilihat lagi setelah permohonan pindah tahap.",
+      "usulan": "Di bawah status tahap yang sudah selesai, tampilkan tautan teks: Lihat hasil (Verifikasi Berkas), Lihat naskah (Penyusunan Akta), dan Lihat hasil (Penandatanganan Akta, setelah Selesai). Halaman terbuka hanya baca dengan keterangan bahwa tahap sudah selesai, dan Kembali membawa ke stepper yang sama. Tombol kerja tetap di samping tombol Pindah. Klien tidak melihat tautan ini.",
+      "prinsip": "H3 User Control and Freedom",
+      "prioritas": "Sedang",
+      "layar": "Permohonan AJB › stepper",
+      "acuan": "Prototipe ORDER; Prototipe VERIF; Prototipe MINUTA-V2",
+      "selesai_bila": "Tautan hanya muncul di tahap yang sudah selesai, dan halaman yang dibuka tidak dapat diubah.",
+      "catatan": "Masukan Peruri 9 Nov 2026."
+    },
+    {
+      "kode": "HE-ORDER-22",
+      "fitur": "Permohonan AJB",
+      "status": "Prototipe siap",
+      "tanggal": "2026-11-09",
+      "sumber": "Masukan Peruri",
+      "versi": "v2",
+      "halaman": "Masukan 9 Nov 2026",
+      "judul": "Tombol tahap Finalisasi untuk Asisten: Penyusunan Akta",
+      "saat_ini": "Di tahap Finalisasi Akta, Asisten melihat tombol Finalisasi Akta, padahal yang terbuka editor Penyusunan Akta dengan Beritahu PPAT.",
+      "usulan": "Untuk Asisten, tombol di samping Pindah bertulisan Penyusunan Akta. Asisten tetap dapat menyunting dan menekan Beritahu PPAT lagi sampai PPAT memfinalisasi, seperti live. Untuk PPAT, tombol tetap Finalisasi Akta.",
+      "prinsip": "H4 Consistency and Standards",
+      "prioritas": "Sedang",
+      "layar": "Permohonan AJB › stepper",
+      "acuan": "Prototipe ORDER",
+      "selesai_bila": "Label tombol sesuai halaman yang dibuka untuk setiap peran.",
+      "catatan": "Masukan Peruri 9 Nov 2026."
+    },
+    {
       "kode": "HE-MINUTA-01",
       "fitur": "Penyusunan Akta",
       "judul": "Detail minuta: istilah dan tombol dijelaskan singkat",
@@ -6455,6 +6491,12 @@
       "kode": "HE-TUGAS-01 s.d. 03; IDDS-TN-43 s.d. 60",
       "perubahan": "Menu baru tenant mengikuti live dengan IDDS dan prinsip HE: Tugas Saya per peran, Renvooi, Arsip Akta, Template Akta.",
       "berkas": "sumber/tugas-badan.html, sumber/tn-proses-badan.html, sumber/sesi-bersama.html, sumber/sidebar-seragam.js"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "HE-ORDER-21; HE-ORDER-22",
+      "perubahan": "Tautan Lihat hasil dan Lihat naskah di bawah tahap yang sudah selesai, membuka halaman hanya baca. Tombol tahap Finalisasi untuk Asisten bertulisan Penyusunan Akta.",
+      "berkas": "sumber/order-idds.html, sumber/verif-badan.html, sumber/minuta2-badan.html, sumber/ajb-bersama.html"
     }
   ]
 }

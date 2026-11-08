@@ -86,7 +86,7 @@ window.AJB = (() => {
   const tulis = d => { try { localStorage.setItem(KUNCI, JSON.stringify(d)); } catch (e) { /* peramban menolak penyimpanan: prototipe tetap berjalan */ } };
   const param = k => (location.hash.match(new RegExp(`[#&]${k}=([^&]+)`)) || [])[1] || '';
   return {
-    semua, kode:() => param('order'), peran:() => param('peran'),
+    semua, kode:() => param('order'), peran:() => param('peran'), lihat:() => param('lihat') === '1',
     ambil:k => semua()[k] || {},
     simpan:(k, isi) => { const d = semua(); d[k] = { ...d[k], ...isi }; tulis(d); },
     buang:k => { const d = semua(); delete d[k]; tulis(d); },
@@ -96,7 +96,7 @@ window.AJB = (() => {
     /* status pendaftaran: CA per pengguna, TERA per kantor; dipakai notifikasi di semua halaman */
     caStatus:email => bacaDaftar()['ca:' + email] || '', simpanCa:(email, k) => ubahDaftar('ca:' + email, k),
     teraStatus:() => bacaDaftar().tera || '', simpanTera:k => ubahDaftar('tera', k),
-    alamat:(hal, kode, peran) => `${HAL[hal]}#order=${kode}${peran ? '&peran=' + peran : ''}`,
+    alamat:(hal, kode, peran, lihat) => `${HAL[hal]}#order=${kode}${peran ? '&peran=' + peran : ''}${lihat ? '&lihat=1' : ''}`,
     keStepper:kode => { location.href = kode ? `${ORDER}#order=${kode}` : ORDER; }
   };
 })();

@@ -144,6 +144,9 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .status-kartu .stepper-v .ina-stepper__label{position:static;transform:none;white-space:normal;max-width:none}
 .status-kartu .ina-stepper__item--active .ina-stepper__label > span:first-child,.status-kartu .ina-stepper__item--completed .ina-stepper__label > span:first-child{font-weight:600;color:var(--ina-content-primary)}
 .tahap-status,.tahap-perkiraan{display:block;margin-top:6px}
+.tahap-lihat{display:inline-flex;align-items:center;gap:4px;margin-top:6px;font-size:12.5px;font-weight:600;color:var(--ina-content-link,var(--ina-primary-600));text-decoration:none}
+.tahap-lihat:hover{text-decoration:underline}
+.tahap-lihat:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px;border-radius:4px}
 .tahap-perkiraan .ina-badge{display:inline-flex;align-items:center;gap:6px}
 .status-kartu .ina-stepper__label small.tahap-waktu{margin-top:4px;font-size:11.5px}
 .waktu-baris{display:block;margin:2px 0 8px}
@@ -594,7 +597,8 @@ function lencanaProgres(x) { const n = jml(x); return badge(`${n}/3 terverifikas
 const TAB = [['pihak', 'Para Pihak', 'users'], ['objek', 'Objek Tanah', 'tanah'], ['harga', 'Harga Tanah', 'uang']];
 function layarDetail() {
   const x = o(), n = jml(x), t = lama(x);
-  const info = n >= 3 ? `<div class="selesai-semua ditandai" id="selesaiSemua">${alert('success', 'Ketiga verifikasi selesai', `Permohonan ${x.kode} siap masuk tahap penyusunan. Kembali ke stepper, lalu tekan <b>Pindah ke Penyusunan Akta</b>.${usulan('HE-VERIF-05')}`, tombol('Kembali ke Permohonan AJB', 'primary', 'sm', 'data-ke-daftar', ik('panah', 14)))}</div>`
+  const info = LIHAT ? `<div class="selesai-semua" id="selesaiSemua">${alert('info', 'Tahap Verifikasi Berkas sudah selesai', `Halaman ini hanya untuk dilihat. Hasil verifikasi permohonan ${x.kode} tidak dapat diubah.`, tombol('Kembali ke Permohonan AJB', 'primary', 'sm', 'data-ke-daftar', ik('panah', 14)))}</div>`
+    : n >= 3 ? `<div class="selesai-semua ditandai" id="selesaiSemua">${alert('success', 'Ketiga verifikasi selesai', `Permohonan ${x.kode} siap masuk tahap penyusunan. Kembali ke stepper, lalu tekan <b>Pindah ke Penyusunan Akta</b>.${usulan('HE-VERIF-05')}`, tombol('Kembali ke Permohonan AJB', 'primary', 'sm', 'data-ke-daftar', ik('panah', 14)))}</div>`
     : `<div class="info-tunggu ditandai" id="infoTunggu">${alert(t > BATAS_HARI ? 'caution' : 'info', t > BATAS_HARI ? `Menunggu verifikasi ${t} hari` : `${3 - n} bagian lagi belum diverifikasi`, `Permohonan masuk tahap Verifikasi Berkas sejak ${tgl(x.siap)}${t > BATAS_HARI ? `, lebih dari batas ${est(BATAS_HARI + ' hari')}` : ''}. Penyusunan minuta baru dapat dimulai setelah para pihak, objek tanah, dan harga terverifikasi.${usulan('HE-VERIF-02')}`)}</div>`;
   return `${remah()}<h1>Verifikasi Berkas</h1><p class="sub">Periksa data para pihak, objek tanah, dan harga, lalu tandai setiap bagian yang sudah sesuai.</p>
     <div class="det-atas">${tombol('Kembali', 'secondary', 'sm', 'id="kembali" aria-label="Kembali ke stepper Permohonan AJB"', ik('kiri', 14))}<span class="meta">${x.kode} · Akta Jual Beli · ${esc(x.klien)}</span></div>
@@ -606,11 +610,11 @@ function layarDetail() {
 const kepala = (ikon, judul, status, ket, kanan = '') => `<div class="kartu-kepala"><span class="ikon-bulat">${ik(ikon, 20)}</span><div style="flex:1;min-width:0"><h2>${judul} ${badge(...LBL[status], 'sm')}</h2><p>${ket}</p></div>${kanan}</div>`;
 function tabPihak(x) {
   const st = statusPihak(x);
-  const kanan = `<div class="kanan">${tombol('Cek Sertifikat Semua Pihak', 'primary', 'sm', `id="cekCa" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'ca' ? spinner : ik('kilau', 14))}<small>${x.dicek ? `Terakhir dicek ${x.dicek}` : 'Belum pernah dicek'}</small></div>`;
-  const isi = !x.dicek ? `<p class="periksa" style="padding-left:16px">Klik "Cek Sertifikat Semua Pihak" untuk memuat status tiap pihak.</p>`
+  const kanan = LIHAT ? '' : `<div class="kanan">${tombol('Cek Sertifikat Semua Pihak', 'primary', 'sm', `id="cekCa" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'ca' ? spinner : ik('kilau', 14))}<small>${x.dicek ? `Terakhir dicek ${x.dicek}` : 'Belum pernah dicek'}</small></div>`;
+  const isi = !x.dicek && !LIHAT ? `<p class="periksa" style="padding-left:16px">Klik "Cek Sertifikat Semua Pihak" untuk memuat status tiap pihak.</p>`
     : `<ul class="daftar-pihak ditandai" id="daftarPihak">${x.pihak.map((p, i) => { const ok = pihakOk(p), c = CA[p.ca];
       return `<li class="${ok ? '' : 'perlu'}"><span class="nm">${esc(p.nama)}</span><span class="peran">${LABEL_TIPE[p.tipe] || p.tipe}</span>
-        ${p.akun ? denganTip(badge(c.l, c.b, 'sm'), ISTILAH.CA) : `<label class="ina-checkbox cek" for="manual${i}"><input type="checkbox" id="manual${i}" class="ina-checkbox__input peer" data-manual="${i}" ${p.manual ? 'checked' : ''}><div class="ina-checkbox__box ina-checkbox__box--${p.manual ? 'checked' : 'unchecked'}">${p.manual ? ik('centang', 12) : ''}</div><div class="ina-checkbox__content"><span class="ina-checkbox__label">${istilah('Verifikasi manual', 'MANUAL')} (tanpa CA)</span></div></label>`}
+        ${p.akun ? denganTip(badge(c.l, c.b, 'sm'), ISTILAH.CA) : `<label class="ina-checkbox cek" for="manual${i}"><input type="checkbox" id="manual${i}" class="ina-checkbox__input peer" data-manual="${i}" ${p.manual ? 'checked' : ''} ${LIHAT ? 'disabled' : ''}><div class="ina-checkbox__box ina-checkbox__box--${p.manual ? 'checked' : 'unchecked'}">${p.manual ? ik('centang', 12) : ''}</div><div class="ina-checkbox__content"><span class="ina-checkbox__label">${istilah('Verifikasi manual', 'MANUAL')} (tanpa CA)</span></div></label>`}
         <span class="kanan">${ok ? badge(`${ik('centang', 12)} Terverifikasi`, 'success', 'sm') : badge(p.akun ? 'Sertifikat Elektronik Belum Aktif' : 'Belum diperiksa', 'warning', 'sm')}</span>
         ${ok ? '' : `<p class="solusi">${ik('info', 13)} ${p.akun ? SOLUSI[p.ca] : 'Pihak tidak punya akun E-PPAT. Periksa KTP asli pihak, lalu centang Verifikasi manual.'}${usulan('HE-VERIF-01')}</p>`}</li>`; }).join('')}</ul>`;
   return `<section class="ina-card ina-card--variant-basic kartu"><div class="ina-card__content">
@@ -627,7 +631,7 @@ function tabObjek(x) {
   </div></section>`;
 }
 function tabHarga(x) {
-  const st = statusBagian(x, 'harga'), kunci = st === 'ok' ? 'disabled' : '';
+  const st = statusBagian(x, 'harga'), kunci = st === 'ok' || LIHAT ? 'disabled' : '';
   const nilai = x.njop && x.luas ? x.njop * x.luas : null;
   const banding = nilai == null ? '' : x.harga >= nilai ? alert('success', '', `Harga jual ${rp(x.harga)} sama dengan atau di atas nilai NJOP. Harga wajar.`)
     : alert('caution', 'Harga jual di bawah NJOP', `Harga jual ${rp(x.harga)} lebih rendah ${rp(nilai - x.harga)} dari nilai NJOP. Tulis alasannya di catatan sebelum memverifikasi.${usulan('HE-VERIF-03')}`);
@@ -649,13 +653,16 @@ function tabHarga(x) {
 }
 
 /* ---------------- gambar & navigasi ---------------- */
-function gambar() { gambarNav(); $('#halaman').innerHTML = layarDetail(); pasangPanduan(); const x = o(); if (x) { const { dicek, v, catObjek, catHarga, njop, luas, pihak } = x; AJB.simpan(x.kode, { verif:{ ...v }, verifData:{ dicek, v, catObjek, catHarga, njop, luas, pihak } }); } }
+function gambar() { gambarNav(); $('#halaman').innerHTML = layarDetail(); pasangPanduan(); const x = o(); if (x) { const { dicek, v, catObjek, catHarga, njop, luas, pihak } = x; if (!LIHAT) AJB.simpan(x.kode, { verif:{ ...v }, verifData:{ dicek, v, catObjek, catHarga, njop, luas, pihak } }); } }
 function keDaftar() { AJB.keStepper(S.aktif); }
+const LIHAT = AJB.lihat();
 /* data order dari Permohonan AJB: hasil verifikasi tersimpan, atau order baru yang belum ada di contoh */
 function pastikan(kode) {
   const d = AJB.ambil(kode), y = d.order; let x = DATA.find(z => z.kode === kode);
   if (!x && y) { const b = y.objek[0] || {}; x = { kode, klien:y.kontak.nama, dibuat:HARI_INI, siap:HARI_INI, harga:+b.harga || 0, objek:y.objek.map(z => ({ ...z, luas:+z.luas })), pihak:y.pihak.map(p => ph(p.nama, p.tipe, p.ca === 'active' ? 'active' : null, p.ca === 'active')), dicek:null, v:{ ...y.verif }, catObjek:'', catHarga:'', njop:null, luas:+b.luas || 0 }; DATA.push(x); }
   if (x && d.verifData) Object.assign(x, d.verifData);
+  /* lihat saja: tahap sudah lewat, jadi hasilnya mengikuti verifikasi permohonan */
+  if (x && LIHAT) { if (y && y.verif) x.v = { ...y.verif }; if (x.v.pihak) x.pihak.forEach(p => { if (p.akun) p.ca = 'active'; else p.manual = true; }); }
   return x;
 }
 function buka(kode, tab) {

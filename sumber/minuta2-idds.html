@@ -144,6 +144,9 @@ table.tb tr.klik:hover td{background:var(--ina-primary-25)}
 .status-kartu .stepper-v .ina-stepper__label{position:static;transform:none;white-space:normal;max-width:none}
 .status-kartu .ina-stepper__item--active .ina-stepper__label > span:first-child,.status-kartu .ina-stepper__item--completed .ina-stepper__label > span:first-child{font-weight:600;color:var(--ina-content-primary)}
 .tahap-status,.tahap-perkiraan{display:block;margin-top:6px}
+.tahap-lihat{display:inline-flex;align-items:center;gap:4px;margin-top:6px;font-size:12.5px;font-weight:600;color:var(--ina-content-link,var(--ina-primary-600));text-decoration:none}
+.tahap-lihat:hover{text-decoration:underline}
+.tahap-lihat:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px;border-radius:4px}
 .tahap-perkiraan .ina-badge{display:inline-flex;align-items:center;gap:6px}
 .status-kartu .ina-stepper__label small.tahap-waktu{margin-top:4px;font-size:11.5px}
 .waktu-baris{display:block;margin:2px 0 8px}
@@ -803,7 +806,8 @@ const m = () => MINUTA.find(x => x.kode === S.aktif);
 const item = () => m() && m().naskah.find(x => x.id === S.pilih);
 const nomorPasal = (n, it) => n.filter(x => x.tipe === 'PASAL').indexOf(it) + 1;
 const ST = { DRAFTING:['Penyusunan','info'], SELESAI:['Selesai','success'] };
-const final = () => !!m() && m().status === 'SELESAI';
+const LIHAT = AJB.lihat(); /* dibuka dari tautan Lihat naskah di stepper: hanya baca */
+const final = () => LIHAT || (!!m() && m().status === 'SELESAI');
 const bisaEdit = () => !final() && !!item();
 const sempit = () => window.matchMedia('(max-width:900px)').matches;
 
@@ -867,7 +871,7 @@ function layarDetail() {
       </div>
       ${bilahAlat()}
       <div class="pita">${fin
-        ? alert('info', '', `${ik('kunci', 14)} Akta sudah difinalisasi${tanya('Finalisasi', T_FINAL)} dengan nomor <b>${esc(x.nomor)}</b>. Naskah hanya dapat dibaca.`, tombol('Kembali ke Permohonan AJB', 'primary', 'sm', 'data-ke-daftar', ik('panah', 14)))
+        ? alert('info', '', LIHAT && x.status !== 'SELESAI' ? `${ik('kunci', 14)} Tahap Penyusunan Akta sudah selesai. Halaman ini hanya untuk dilihat; untuk menyunting, buka tombol Penyusunan Akta di Permohonan AJB.` : `${ik('kunci', 14)} Akta sudah difinalisasi${tanya('Finalisasi', T_FINAL)} dengan nomor <b>${esc(x.nomor)}</b>. Naskah hanya dapat dibaca.`, tombol('Kembali ke Permohonan AJB', 'primary', 'sm', 'data-ke-daftar', ik('panah', 14)))
         : ppat ? alert('info', '', `Anda dapat menyunting pasal dan memfinalisasi akta. Periksa naskah, lalu klik <b>Finalisasi Akta</b>.${tanya('Finalisasi', T_FINAL)}${usulan('HE-MINUTA-01')}`)
         : alert('info', '', `Anda dapat menyunting isi pasal. Setelah selesai, klik <b>Beritahu PPAT</b> agar PPAT memeriksa dan memfinalisasi akta.${tanya('Finalisasi', T_FINAL)}${usulan('HE-MINUTA-01')}`)}</div>
       ${blokEjaan()}
