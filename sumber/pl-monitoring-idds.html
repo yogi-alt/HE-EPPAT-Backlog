@@ -468,7 +468,7 @@ const I = {
   gear:'<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />',
   log:'<path d="M12 8l0 4l2 2" /><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />',
   palet:'<path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" /><path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />',
-  daftar:'<path d="M9 6l11 0" /><path d="M9 12l11 0" /><path d="M9 18l11 0" /><path d="M5 6l0 .01" /><path d="M5 12l0 .01" /><path d="M5 18l0 .01" />',
+  edit:'<path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" />', daftar:'<path d="M9 6l11 0" /><path d="M9 12l11 0" /><path d="M9 18l11 0" /><path d="M5 6l0 .01" /><path d="M5 12l0 .01" /><path d="M5 18l0 .01" />',
   gedung:'<path d="M3 21l18 0" /><path d="M9 8l1 0" /><path d="M9 12l1 0" /><path d="M9 16l1 0" /><path d="M14 8l1 0" /><path d="M14 12l1 0" /><path d="M14 16l1 0" /><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />',
   bintang:'<path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />',
   stempel:'<path d="M21 17.85h-18c0 -4.05 1.421 -4.05 3.79 -4.05c5.21 0 1.21 -4.59 1.21 -6.8a4 4 0 1 1 8 0c0 2.21 -4 6.8 1.21 6.8c2.369 0 3.79 0 3.79 4.05z" /><path d="M5 21h14" />',
@@ -606,10 +606,10 @@ let S = S0();
 const BERKAS = 'Backlog-IDDS-PL-MONITORING-Prototype.html';
 const NAV = [
   { g:'Monitoring', ik:'monitor', m:[['Dasbor', 'grid', 'dasbor'], ['Daftar PPAT', 'gedung', 'ppat'], ['Paket Langganan', 'bintang', 'paket'], ['Log Aktivitas', 'daftar', 'log']] },
-  { g:'Akta', ik:'stempel', m:[['Jenis Akta', 'stempel']] },
+  { g:'Akta', ik:'stempel', m:[['Jenis Akta', 'stempel'], ['Form Design', 'edit'], ['Pustaka Kondisi', 'daftar'], ['Pustaka Pemeriksaan', 'tameng']] },
   { g:'Sistem', ik:'gear', m:[['Setting Theme', 'palet'], ['Pengaturan Global', 'gear']] }
 ];
-const PROTO = { 'Jenis Akta':'Backlog-IDDS-PL-AKTA-Prototype.html#jenis', 'Setting Theme':'Backlog-IDDS-PL-SISTEM-Prototype.html#tema', 'Pengaturan Global':'Backlog-IDDS-PL-SISTEM-Prototype.html#pengaturan' };
+const PROTO = { 'Jenis Akta':'Backlog-IDDS-PL-AKTA-Prototype.html#jenis', 'Form Design':'Backlog-IDDS-PL-RANCANG-Prototype.html#form', 'Pustaka Kondisi':'Backlog-IDDS-PL-RANCANG-Prototype.html#kondisi', 'Pustaka Pemeriksaan':'Backlog-IDDS-PL-RANCANG-Prototype.html#periksa', 'Setting Theme':'Backlog-IDDS-PL-SISTEM-Prototype.html#tema', 'Pengaturan Global':'Backlog-IDDS-PL-SISTEM-Prototype.html#pengaturan' };
 const grupBuka = new Set([0, 1, 2]);
 function gambarNav() {
   $('#nav').innerHTML = NAV.map((g, i) => `

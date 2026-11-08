@@ -1,0 +1,312 @@
+<style id="tugas-css">
+.kartu-akun{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}
+.kartu-akun.dua{grid-template-columns:repeat(2,minmax(0,1fr))}.kartu-akun.satu{grid-template-columns:minmax(0,1fr)}
+.kartu-akun section.ina-card .ina-card__content{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;padding:16px;text-align:left}
+.kartu-akun section.ina-card .ina-card__content > div{flex:1;min-width:0}
+.kartu-akun .ina-button{flex:none}
+.kartu-akun h3{margin:0;font:600 15px/22px Inter,sans-serif;color:var(--ina-primary-primary);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.kartu-akun p{margin:6px 0 0;font-size:13px;line-height:18px;color:var(--ina-content-secondary)}
+.kelompok{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.kelompok button{position:relative;text-align:left;padding:16px;border:1px solid var(--ina-stroke-primary);border-radius:16px;background:var(--ina-background-primary);color:var(--ina-content-primary);font:inherit;cursor:pointer}
+.kelompok button[aria-pressed="true"]{border-color:var(--ina-primary-500);box-shadow:0 0 0 1px var(--ina-primary-500)}
+.kelompok small{display:block;padding-right:40px;font:600 11px/15px Inter,sans-serif;letter-spacing:1px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.kelompok b{display:block;margin-top:12px;font:500 28px/34px Inter,sans-serif;color:var(--ina-primary-primary)}
+.kelompok span{font-size:13px;color:var(--ina-content-secondary)}
+.kelompok i{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:999px;display:grid;place-items:center;background:var(--ina-background-secondary);color:var(--ina-primary-primary)}
+.blok-tugas{margin-top:16px;padding:20px;border:1px solid var(--ina-stroke-primary);border-radius:16px;background:var(--ina-background-primary)}
+.blok-tugas .eb{font:600 11px/16px Inter,sans-serif;letter-spacing:1px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.blok-tugas h2{margin:4px 0 0;font:500 20px/28px Inter,sans-serif;color:var(--ina-primary-primary)}
+.blok-tugas>p{margin:6px 0 0;font-size:14px;line-height:20px;color:var(--ina-content-secondary)}
+.saring-t{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:12px;margin:16px 0 0}
+.grup-baris td{padding:10px 16px;font:600 12px/16px Inter,sans-serif;letter-spacing:.6px;text-transform:uppercase;color:var(--ina-content-secondary);background:var(--ina-background-secondary)}
+.tb .wkt{display:block;font-size:12px;color:var(--ina-content-secondary)}
+.kosong-t{padding:24px;text-align:center;color:var(--ina-content-secondary)}
+@media (max-width:760px){.kartu-akun,.kartu-akun.dua,.kelompok,.saring-t{grid-template-columns:minmax(0,1fr)}.tb thead{display:none}.tb tr{display:block;padding:8px 0}.tb td{display:block;padding:4px 16px;border:0}}
+</style>
+</head>
+<body>
+<div class="protobar">
+  <a href="index.html">&#9776; Daftar prototipe</a>
+  <span class="sep">&bull;</span><b>Tugas Saya</b><span class="sep">&bull;</span><span>Peran: Asisten</span>
+  <span class="kanan">
+    <button class="pil" id="aturUlang">Atur ulang contoh</button>
+    <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai usulan</button>
+    <button class="pil utama" id="bukaUbah">Daftar perubahan (6)</button>
+  </span>
+</div>
+
+<div class="app">
+  <div class="scrim" id="scrim"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><img src="__LOGO__" alt="E-PPAT"></div>
+    <div class="ina-card ina-card--variant-basic kantor"><div class="ina-card__content"><div>
+      <div class="eyebrow">Kantor Notaris &amp; PPAT</div>
+      <h3 class="ina-card__title">PPAT Contoh Satu, S.H.</h3>
+      <div class="ina-card__description kantor-info">
+        <div class="baris-kantor"><svg width="13" height="13" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 9l1 0" /><path d="M9 13l6 0" /><path d="M9 17l6 0" /></svg><span>SK · 1/KEP-CONTOH/2020</span></div>
+        <div class="baris-kantor"><svg width="13" height="13" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" /><path d="M9 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M15 8l2 0" /><path d="M15 12l2 0" /><path d="M7 16l10 0" /></svg><span>Wilayah · Kota Contoh</span></div>
+        <div class="baris-kantor"><svg width="13" height="13" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" /></svg><span>0210000000</span></div>
+        <div class="baris-kantor"><svg width="13" height="13" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l18 0" /><path d="M9 8l1 0" /><path d="M9 12l1 0" /><path d="M9 16l1 0" /><path d="M14 8l1 0" /><path d="M14 12l1 0" /><path d="M14 16l1 0" /><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" /></svg><span>Jalan Contoh No. 10, Kota Contoh</span></div></div></div></div></div>
+    <nav id="nav"></nav>
+    <div class="sidefoot">E-PPAT</div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg></button>
+      <div class="spacer"></div>
+      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat Landing</span></button>
+      <button class="ina-button ina-button--tertiary ina-button--md" aria-label="Notifikasi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg></button>
+      <div class="user"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Asisten Contoh</span><span class="urole">Asisten</span></span></div>
+    </header>
+    <div class="content"><div class="page" id="halaman"></div></div>
+  </div>
+</div>
+
+<div id="lapisan"></div>
+<div id="lapisanDrawer"></div>
+<div class="toast-wadah" id="toastWadah"></div>
+
+<script>
+(() => {
+/* ---------------- ikon & util (sama dengan prototipe Order AJB) ---------------- */
+const I = {
+  grid:'<path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />',
+  users:'<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />',
+  gear:'<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />',
+  dok:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 9l1 0" /><path d="M9 13l6 0" /><path d="M9 17l6 0" />',
+  tamengcek:'<path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" /><path d="M15 19l2 2l4 -4" />', tameng:'<path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />',
+  pena:'<path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" />', langkah:'<path d="M3.5 5.5l1.5 1.5l2.5 -2.5" /><path d="M3.5 11.5l1.5 1.5l2.5 -2.5" /><path d="M3.5 17.5l1.5 1.5l2.5 -2.5" /><path d="M11 6l9 0" /><path d="M11 12l9 0" /><path d="M11 18l9 0" />',
+  salin:'<path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />',
+  order:'<path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 12l.01 0" /><path d="M13 12l2 0" /><path d="M9 16l.01 0" /><path d="M13 16l2 0" />',
+  panah:'<path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />', kiri:'<path d="M15 6l-6 6l6 6" />', x:'<path d="M18 6l-12 12" /><path d="M6 6l12 12" />', info:'<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" />',
+  seru:'<path d="M12 9v4" /><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z" /><path d="M12 16h.01" />', centang:'<path d="M5 12l5 5l10 -10" />',
+  chev:'<path d="M9 6l6 6l-6 6" />', bawah:'<path d="M6 9l6 6l6 -6" />', cari:'<path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" />', jam:'<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 7v5l3 3" />',
+  kilau:'<path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6z" />', tanah:'<path d="M12 18.5l-3 -1.5l-6 3v-13l6 -3l6 3l6 -3v7.5" /><path d="M9 4v13" /><path d="M15 7v5.5" /><path d="M21.121 20.121a3 3 0 1 0 -4.242 0c.418 .419 1.125 1.045 2.121 1.879c1.051 -.89 1.759 -1.516 2.121 -1.879z" /><path d="M19 18v.01" />', uang:'<path d="M7 9m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" /><path d="M14 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 9v-2a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v6a2 2 0 0 0 2 2h2" />',
+  kunci:'<path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" /><path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" /><path d="M8 11v-4a4 4 0 1 1 8 0v4" />', log:'<path d="M12 8l0 4l2 2" /><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />', edit:'<path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" />', palet:'<path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" /><path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />', daftar:'<path d="M9 6l11 0" /><path d="M9 12l11 0" /><path d="M9 18l11 0" /><path d="M5 6l0 .01" /><path d="M5 12l0 .01" /><path d="M5 18l0 .01" />', gambar:'<path d="M15 8h.01" /><path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z" /><path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5" /><path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3" />', gedung:'<path d="M3 21l18 0" /><path d="M9 8l1 0" /><path d="M9 12l1 0" /><path d="M9 16l1 0" /><path d="M14 8l1 0" /><path d="M14 12l1 0" /><path d="M14 16l1 0" /><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />', meterai:'<path d="M9 14l6 -6" /><circle cx="9.5" cy="8.5" r=".5" fill="currentColor" /><circle cx="14.5" cy="13.5" r=".5" fill="currentColor" /><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" />' /* ikon sidebar seragam */,
+  tb_stack_2:'<path d="M12 4l-8 4l8 4l8 -4l-8 -4" /> <path d="M4 12l8 4l8 -4" /> <path d="M4 16l8 4l8 -4" />', tb_feather:'<path d="M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4" /> <path d="M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4" />', tb_layout_dashboard:'<path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" /> <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /> <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />', tb_circle_check:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" />', tb_file_pencil:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M10 18l5 -5a1.414 1.414 0 0 0 -2 -2l-5 5v2h2z" />', tb_signature:'<path d="M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2" />', tb_files:'<path d="M15 3v4a1 1 0 0 0 1 1h4" /> <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z" /> <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />', tb_adjustments_horizontal:'<path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 6l8 0" /> <path d="M16 6l4 0" /> <path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 12l2 0" /> <path d="M10 12l10 0" /> <path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M4 18l11 0" /> <path d="M19 18l1 0" />', tb_building:'<path d="M3 21l18 0" /> <path d="M9 8l1 0" /> <path d="M9 12l1 0" /> <path d="M9 16l1 0" /> <path d="M14 8l1 0" /> <path d="M14 12l1 0" /> <path d="M14 16l1 0" /> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />', tb_users:'<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /> <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /> <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />', tb_shield_lock:'<path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /> <path d="M12 11m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12 12l0 2.5" />', tb_history:'<path d="M12 8l0 4l2 2" /> <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />', tb_rubber_stamp:'<path d="M21 17.85h-18c0 -4.05 1.421 -4.05 3.79 -4.05c5.21 0 1.21 -4.59 1.21 -6.8a4 4 0 1 1 8 0c0 2.21 -4 6.8 1.21 6.8c2.369 0 3.79 0 3.79 4.05z" /> <path d="M5 21h14" />', tb_settings:'<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />', tb_layout_cards:'<path d="M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /> <path d="M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />', tb_home:'<path d="M5 12l-2 0l9 -9l9 9l-2 0" /> <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /> <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />', tb_palette:'<path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" /> <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />', tb_database:'<path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /> <path d="M4 6v6a8 3 0 0 0 16 0v-6" /> <path d="M4 12v6a8 3 0 0 0 16 0v-6" />', tb_article:'<path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /> <path d="M7 8h10" /> <path d="M7 12h10" /> <path d="M7 16h10" />', tb_photo:'<path d="M15 8h.01" /> <path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z" /> <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5" /> <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3" />', tb_file_text:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 9l1 0" /> <path d="M9 13l6 0" /> <path d="M9 17l6 0" />', tb_gauge:'<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M13.41 10.59l2.59 -2.59" /> <path d="M7 12a5 5 0 0 1 5 -5" />', tb_file_description:'<path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 17h6" /> <path d="M9 13h6" />', tb_clipboard_check:'<path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 14l2 2l4 -4" />', tb_archive:'<path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" /><path d="M10 12l4 0" />', tb_template:'<path d="M4 4m0 1a1 1 0 0 1 1 -1h14a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-14a1 1 0 0 1 -1 -1z" /><path d="M4 12m0 1a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1z" /><path d="M14 12l6 0" /><path d="M14 16l6 0" /><path d="M14 20l6 0" />' /* ikon Tabler sidebar */
+};
+const ik = (n, s = 16) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const usulan = kode => `<span class="tag-usulan">usulan &middot; ${kode}</span>`;
+const badge = (t, j, uk = 'md', atr = '') => `<span class="ina-badge ina-badge--soft ina-badge--${j} ina-badge--${uk} ina-badge--rounded-full" ${atr}>${t}</span>`;
+const tombol = (t, h = 'primary', uk = 'md', atr = '', ikon = '') => `<button type="button" class="ina-button ina-button--${h} ina-button--${uk}" ${atr}>${ikon}${t}</button>`;
+const alert = (j, judul, isi, ekstra = '', kls = '') => `<div class="ina-alert ina-alert--${j} ${kls}" role="status"><div class="ina-alert__content"><div class="ina-alert__text-section">${judul ? `<div class="ina-alert__title">${judul}</div>` : ''}<div class="ina-alert__description">${isi}</div></div>${ekstra}</div></div>`;
+const est = t => `<span class="isi-tim" title="Angka contoh. Ganti dengan ketentuan resmi kantor / tim E-PPAT.">${t}</span>`;
+const denganTip = (isi, t, letak = 'top') => `<span class="ina-tooltip ina-tooltip--placement-${letak}">${isi}<span class="ina-tooltip__content"><span class="ina-tooltip__bubble">${t}</span></span></span>`;
+const spinner = `<span class="ina-spinner ina-spinner--spinner-only" aria-hidden="true"><span class="ina-spinner__element ina-spinner__element--size-xs ina-spinner__element--color-primary"></span></span>`;
+const UBAH = [
+  { kode:'HE-TUGAS-01', versi:'v2', bukanHE:true, judul:'Tugas Saya: kelompok pekerjaan dari Permohonan AJB',
+    isi:'Kartu Verifikasi & Penyusunan Akta, Penandatanganan Akta, dan Renvooi menghitung permohonan menurut tahapnya. Baris membuka stepper permohonan itu, karena menu per tahap sudah tidak ada.',
+    lama:'Tugas tersebar di menu Verifikasi, Penyusunan, dan Penandatanganan.', ke:'kelompok', sorot:'#kartuKelompok', sumber:'Masukan Peruri, 6 Nov 2026' },
+  { kode:'HE-TUGAS-02', versi:'v2', bukanHE:true, judul:'Tugas Saya: kartu status akun',
+    isi:'Kartu Data diri & KTP, Sertifikat CA, dan Perlu tanda tangan Anda menunjukkan kesiapan akun. Super Admin tanpa PPAT hanya melihat Data diri & KTP.',
+    lama:'Status akun hanya terlihat di Akun Saya.', ke:'akun', sorot:'#kartuAkun', sumber:'Live tenant, 6 Nov 2026' },
+  { kode:'HE-TUGAS-03', versi:'v2', bukanHE:true, judul:'Tugas Saya Klien: akta yang perlu ditandatangani',
+    isi:'Klien dan para pihak hanya melihat akta yang mencantumkan mereka, dengan tombol Tanda tangani.',
+    lama:'Klien mencari akta di daftar Penandatanganan Akta.', ke:'akun', sorot:'#kartuAkun', sumber:'Live tenant, 6 Nov 2026' }
+];
+const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
+  { g:'', ik:'tb_stack_2', m:[['Tugas Saya','tb_clipboard_check','tugas']] },
+  { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text']] },
+  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Salinan Akta','tb_files'],['Renvooi','tb_file_pencil'],['Arsip Akta','tb_archive'],['Template Akta','tb_template']] },
+  { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building'],['Daftar Pengguna','tb_users'],['Peran & Izin','tb_shield_lock'],['Log Aktivitas','tb_history'],['Aktivasi e-Meterai','tb_rubber_stamp']] },
+  { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge'],['Pengaturan','tb_settings']] },
+  { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home'],['Tema Tampilan','tb_palette'],['Master Konten','tb_database'],['Artikel & Halaman','tb_article'],['Pustaka Media','tb_photo']] }
+];
+const grupBuka = new Set([0, 1, 2, 3, 4, 5]);
+function gambarNav() {
+  $('#nav').innerHTML = NAV.map((g, i) => `
+    <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
+    <div class="items" ${grupBuka.has(i) ? '' : 'hidden'}>${g.m.map(([t, ic, ke]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item ${ke ? 'on' : ''}" data-ke="${ke || ''}" data-nama="${t}">${ik(ic)}<span>${t}</span></a>`).join('')}</div>`).join('');
+}
+const PROTO = { 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Renvooi':'Backlog-IDDS-TN-PROSES-Prototype.html#renvooi', 'Arsip Akta':'Backlog-IDDS-TN-PROSES-Prototype.html#arsip', 'Template Akta':'Backlog-IDDS-TN-PROSES-Prototype.html#template', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
+$('#nav').addEventListener('click', e => {
+  const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
+  const a = e.target.closest('a'); if (!a) return; e.preventDefault();
+  if (!a.dataset.ke) { const nm = a.textContent.trim(); if (PROTO[nm]) { location.href = PROTO[nm]; return; } toast(`Menu ${nm} belum memiliki prototipe.`); return; }
+  gambar();
+});
+/* ---------------- data: Permohonan AJB mengikuti statusnya ---------------- */
+const O = (kode, nama, status, tanggal, x = {}) => ({ kode, nama, status, tanggal, verif:0, disusun:false, nomor:'', tgl:'', ttd:'', ttdSelesai:false, ...x });
+const ORDER_CONTOH = () => [
+  O('ORD-CONTOH-011', 'Contoh Narahubung Sebelas', 'SIAP', '23 Okt 2026', { verif:2 }), O('ORD-CONTOH-012', 'Contoh Narahubung Dua Belas', 'SIAP', '22 Okt 2026', { verif:3 }),
+  O('ORD-CONTOH-003', 'Contoh Narahubung Tiga', 'SIAP', '20 Okt 2026', { verif:1, klien:'PEMBELI' }), O('ORD-CONTOH-010', 'Contoh Narahubung Sepuluh', 'SIAP', '17 Okt 2026'),
+  O('ORD-CONTOH-006', 'Contoh Narahubung Enam', 'DRAFTING', '19 Okt 2026'), O('ORD-CONTOH-004', 'Contoh Narahubung Empat', 'FINALISASI', '18 Okt 2026', { disusun:true }),
+  O('ORD-CONTOH-007', 'Contoh Narahubung Tujuh', 'PENANDATANGANAN', '14 Okt 2026', { nomor:'7/2026', tgl:'21 Okt 2026', ttd:'Tanda tangan 1/5', klien:'PEMBELI', saksi:true }),
+  O('ORD-CONTOH-008', 'Contoh Narahubung Delapan', 'PENANDATANGANAN', '13 Okt 2026', { nomor:'8/2026', tgl:'20 Okt 2026', ttd:'Menunggu e-Meterai' }),
+  O('ORD-CONTOH-009', 'Contoh Narahubung Sembilan', 'PENANDATANGANAN', '12 Okt 2026', { nomor:'9/2026', tgl:'22 Okt 2026', ttd:'Belum mulai' })
+];
+/* status terbaru dari stepper Permohonan AJB, termasuk permohonan baru */
+function muatOrder() {
+  const d = AJB.semua(), a = ORDER_CONTOH();
+  Object.values(d).forEach(x => { const y = x.order; if (!y) return; let o = a.find(z => z.kode === y.kode);
+    if (!o) { if (['PENGUMPULAN', 'SELESAI'].includes(y.status)) return; o = O(y.kode, y.kontak.nama, y.status, y.tanggal); a.push(o); }
+    o.status = y.status; o.nama = y.kontak.nama || o.nama; o.verif = Object.values(x.verif || y.verif || {}).filter(Boolean).length; o.disusun = !!(x.disusun || y.disusun); o.nomor = x.nomor || y.nomor || o.nomor; o.tgl = x.tgl || y.tgl || o.tgl;
+    if (x.ttd || y.ttd) { o.ttd = (x.ttd || y.ttd).l; o.ttdSelesai = !!(x.ttd || y.ttd).selesai; }
+    const saya = y.pihak.find(p => p.email === SESI_T.email); if (saya) o.klien = saya.tipe; });
+  return a.filter(o => !['PENGUMPULAN', 'SELESAI'].includes(o.status));
+}
+const SESI_T = window.SESI_PROTO || { aktif:'ROLE_ASISTEN', peran:['ROLE_ASISTEN'], email:'asisten1@contoh.id', ca:'kurang' };
+const KLIEN = SESI_T.aktif === 'ROLE_KLIEN', PPAT = SESI_T.peran.includes('ROLE_PPAT'), TANPA_CA = !!SESI_T.tanpaDaftar;
+const PERAN_TTD = { PENJUAL:'Pihak Pertama', PEMBELI:'Pihak Kedua', SAKSI:'Saksi' };
+const ST_CA = { kurang:['Belum Registrasi', 'warning'], siap:['Belum Registrasi', 'warning'], ekyc:['Menunggu eKYC', 'info'], periksa:['Diperiksa Peruri', 'info'], aktif:['Aktif', 'success'], selesai:['Aktif', 'success'], kedaluwarsa:['Kedaluwarsa', 'warning'] };
+const S = { tab:'kerja', cari:'', tahap:'', hal:1, perHal:10 };
+const BLN = { Jan:0, Feb:1, Mar:2, Apr:3, Mei:4, Jun:5, Jul:6, Agu:7, Sep:8, Okt:9, Nov:10, Des:11 };
+const lalu = t => { const [d, m, y] = t.split(' '), n = Math.round((new Date(2026, 10, 6) - new Date(+y, BLN[m], +d)) / 864e5); return n <= 0 ? 'Hari ini' : `${n} hari lalu`; };
+const lencanaTahap = o => o.status === 'SIAP' ? badge(`${o.verif}/3 terverifikasi`, o.verif >= 3 ? 'success' : o.verif ? 'info' : 'neutral', 'sm') : o.status === 'DRAFTING' ? badge(o.disusun ? 'Selesai disusun' : 'Penyusunan', o.disusun ? 'success' : 'info', 'sm') : badge('Menunggu finalisasi PPAT', 'warning', 'sm');
+const ttdMenunggu = o => /^Tanda tangan/.test(o.ttd);
+const lencanaTtd = o => badge(o.ttd || 'Belum mulai', o.ttdSelesai ? 'success' : ttdMenunggu(o) ? 'info' : o.ttd === 'Belum mulai' ? 'neutral' : 'warning', 'sm');
+
+/* ---------------- kartu akun ---------------- */
+function kartuAkun(D) {
+  const ca = AJB.caStatus(SESI_T.email) || SESI_T.ca || 'kurang', lengkap = ca !== 'kurang', [cl, cj] = ST_CA[ca] || ST_CA.kurang, aktif = ['aktif', 'selesai'].includes(ca), perlu = D.filter(o => o.status === 'PENANDATANGANAN' && (KLIEN ? o.klien : SESI_T.aktif === 'ROLE_ASISTEN' && o.saksi)).length;
+  const kartu = (judul, lencana, ket, aksi = '') => `<section class="ina-card ina-card--variant-basic"><div class="ina-card__content"><div><h3>${judul} ${lencana}</h3><p>${ket}</p></div>${aksi}</div></section>`;
+  const akun = (l, k) => `<a class="ina-button ina-button--secondary ina-button--sm" style="text-decoration:none" href="Backlog-HE-CA-Prototype.html#${k}">${l}</a>`;
+  const isi = [kartu('Data diri &amp; KTP', badge(lengkap ? 'Lengkap' : 'Belum lengkap', lengkap ? 'success' : 'warning', 'sm'), lengkap ? 'Data diri sudah lengkap' : 'Kurang: NIK, Tanggal Lahir, Tempat Lahir, Foto KTP, No. HP', akun(lengkap ? 'Lihat' : 'Lengkapi', 'data'))];
+  if (!TANPA_CA) isi.push(kartu('Sertifikat CA', badge(cl, cj, 'sm'), aktif ? 'Siap untuk tanda tangan digital' : 'Wajib untuk tanda tangan digital', akun(aktif ? 'Lihat' : 'Selesaikan', 'ca')), kartu('Perlu tanda tangan Anda', badge(perlu ? `${perlu} akta menunggu` : 'Tak ada yang menunggu', perlu ? 'warning' : 'success', 'sm'), perlu ? 'Akta yang mencantumkan Anda sebagai penanda tangan' : 'Belum ada akta untuk Anda'));
+  return `<div class="kartu-akun ${isi.length === 1 ? 'satu' : ''} ditandai" id="kartuAkun">${isi.join('')}</div>${usulan('HE-TUGAS-02')}`;
+}
+/* ---------------- kelompok staf ---------------- */
+const kelompokKerja = D => PPAT ? D.filter(o => ['SIAP', 'FINALISASI'].includes(o.status)) : D.filter(o => ['SIAP', 'DRAFTING', 'FINALISASI'].includes(o.status));
+const kelompokTtd = D => D.filter(o => o.status === 'PENANDATANGANAN' && !o.ttdSelesai);
+const kelompokRenvooi = D => D.filter(o => o.status === 'PENANDATANGANAN' && o.ttdSelesai);
+function kartuKelompok(D) {
+  const k = kelompokKerja(D), t = kelompokTtd(D), r = kelompokRenvooi(D), n = s => k.filter(o => o.status === s).length, m = t.filter(ttdMenunggu).length;
+  const ket = PPAT ? `${n('SIAP')} verifikasi · ${n('FINALISASI')} menunggu finalisasi` : `${n('SIAP')} verifikasi · ${n('DRAFTING')} penyusunan · ${n('FINALISASI')} finalisasi`;
+  const b = (id, judul, jml, sub, ikon) => `<button type="button" data-kelompok="${id}" aria-pressed="${S.tab === id}"><small>${judul}</small><i>${ik(ikon)}</i><b>${jml}</b><span>${sub}</span></button>`;
+  return `<div class="kelompok ditandai" id="kartuKelompok">${b('kerja', 'Verifikasi &amp; Penyusunan Akta', k.length, ket, 'edit')}${b('ttd', 'Penandatanganan Akta', t.length, `${t.length - m} perlu tindakan · ${m} menunggu tanda tangan`, 'tameng')}${b('renvooi', 'Renvooi', r.length, `${r.length} menunggu ditutup`, 'salin')}</div>${usulan('HE-TUGAS-01')}`;
+}
+const saring = (a, q = S.cari.trim().toLowerCase()) => a.filter(o => (!q || `${o.kode} ${o.nama} AJB`.toLowerCase().includes(q)) && (!S.tahap || o.status === S.tahap));
+const halaman = n => `<div class="halaman"><span>Menampilkan ${n ? 1 : 0}–${n} dari ${n}</span></div>`;
+const pilih = (id, opsi, v) => `<select id="${id}" class="ina-select-asli" aria-label="${opsi[0][1]}">${opsi.map(([k, t]) => `<option value="${k}" ${k === v ? 'selected' : ''}>${t}</option>`).join('')}</select>`;
+const barisKerja = o => `<tr class="ina-table__row ina-table__row--clickable klik" data-order="${o.kode}"><td class="ina-table__cell"><span class="kd">${o.kode}</span></td><td class="ina-table__cell"><div>AJB</div><div class="kc">${esc(o.nama)}</div></td><td class="ina-table__cell">${o.tanggal}<span class="wkt">${lalu(o.tanggal)}</span></td><td class="ina-table__cell">${lencanaTahap(o)}</td><td class="ina-table__cell" style="text-align:right">${ik('chev')}</td></tr>`;
+function blokKerja(D) {
+  const rows = saring(kelompokKerja(D)), grup = PPAT ? [['SIAP', 'Verifikasi Berkas'], ['FINALISASI', 'Finalisasi Akta']] : [['SIAP', 'Verifikasi Berkas'], ['DRAFTING', 'Penyusunan Akta'], ['FINALISASI', 'Finalisasi Akta']];
+  const tahap = [['', 'Semua tahap'], ...grup];
+  return `<section class="blok-tugas"><div class="eb">Akta masuk</div><h2>Verifikasi &amp; Penyusunan Akta</h2><p>${PPAT ? 'Permohonan yang perlu diverifikasi atau menunggu finalisasi Anda.' : 'Permohonan yang perlu diverifikasi, sedang disusun, atau menunggu finalisasi PPAT.'} Pilih baris untuk membuka tahapnya di Permohonan AJB.</p>
+    <div class="saring-t">${cariIsian()}${pilihDd('layanan', 'Layanan', [['', 'Semua layanan'], ['AJB', 'AJB']], '')}${pilihDd('tahap', 'Tahap', tahap, S.tahap)}</div>
+    <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb"><thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">Masuk</th><th class="ina-table__header-cell">Status</th><th class="ina-table__header-cell"></th></tr></thead>
+    <tbody class="ina-table__body">${rows.length ? grup.map(([k, t]) => { const a = rows.filter(o => o.status === k); return a.length ? `<tr class="grup-baris"><td colspan="5">${t} (${a.length})</td></tr>${a.map(barisKerja).join('')}` : ''; }).join('') : '<tr><td colspan="5" class="kosong-t">Tidak ada tugas yang cocok.</td></tr>'}</tbody></table></div></div>${halaman(rows.length)}</div></section>`;
+}
+function blokTtd(D) {
+  const rows = saring(kelompokTtd(D));
+  return `<section class="blok-tugas"><div class="eb">Penyusunan penanda tangan</div><h2>Penandatanganan Akta</h2><p>Akta yang sudah difinalisasi PPAT. Susun penanda tangan dan posisinya, lalu kawal sampai selesai.</p>
+    <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb"><thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">No. Akta</th><th class="ina-table__header-cell">Tgl Akta</th><th class="ina-table__header-cell">Status</th><th class="ina-table__header-cell"></th></tr></thead>
+    <tbody class="ina-table__body">${rows.length ? rows.map(o => `<tr class="ina-table__row ina-table__row--clickable klik" data-order="${o.kode}"><td class="ina-table__cell"><span class="kd">${o.kode}</span></td><td class="ina-table__cell"><div>AJB</div><div class="kc">${esc(o.nama)}</div></td><td class="ina-table__cell">${esc(o.nomor) || '—'}</td><td class="ina-table__cell">${o.tgl || '—'}</td><td class="ina-table__cell">${lencanaTtd(o)}</td><td class="ina-table__cell" style="text-align:right">${ik('chev')}</td></tr>`).join('') : '<tr><td colspan="6" class="kosong-t">Tidak ada tugas di kelompok ini.</td></tr>'}</tbody></table></div></div>${halaman(rows.length)}</div></section>`;
+}
+function blokRenvooi(D) {
+  const rows = kelompokRenvooi(D);
+  return `<section class="blok-tugas"><div class="eb">Renvooi masuk</div><h2>Renvooi</h2><p>Akta final yang perlu ditutup. Catat renvooi pada minuta bila ada, lalu tekan Selesai untuk membuat entri salinan.</p>
+    ${rows.length ? `<div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb"><thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">No. Akta</th><th class="ina-table__header-cell">Tgl Akta</th><th class="ina-table__header-cell"></th></tr></thead><tbody class="ina-table__body">${rows.map(o => `<tr class="ina-table__row ina-table__row--clickable klik" data-renvooi="${o.kode}"><td class="ina-table__cell"><span class="kd">${o.kode}</span></td><td class="ina-table__cell"><div>AJB</div><div class="kc">${esc(o.nama)}</div></td><td class="ina-table__cell">${esc(o.nomor)}</td><td class="ina-table__cell">${o.tgl}</td><td class="ina-table__cell" style="text-align:right">${ik('chev')}</td></tr>`).join('')}</tbody></table></div></div></div>` : '<div class="kosong-t">Tidak ada tugas di kelompok ini.</div>'}</section>`;
+}
+function blokKlien(D) {
+  const rows = D.filter(o => o.status === 'PENANDATANGANAN' && o.klien);
+  return `<section class="blok-tugas ditandai" id="blokKlien"><div class="eb">Penandatanganan Akta</div><h2>Perlu Tanda Tangan Anda</h2><p>Akta yang mencantumkan Anda sebagai penanda tangan. Tombol Tanda tangani membuka Penandatanganan Akta.${usulan('HE-TUGAS-03')}</p>
+    <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb"><thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Jenis Akta</th><th class="ina-table__header-cell">No. Akta</th><th class="ina-table__header-cell">Tgl Akta</th><th class="ina-table__header-cell">Peran Anda</th><th class="ina-table__header-cell">Status</th><th class="ina-table__header-cell"></th></tr></thead>
+    <tbody class="ina-table__body">${rows.length ? rows.map(o => `<tr class="ina-table__row"><td class="ina-table__cell"><span class="kd">${o.kode}</span></td><td class="ina-table__cell">AJB</td><td class="ina-table__cell">${esc(o.nomor)}</td><td class="ina-table__cell">${o.tgl}</td><td class="ina-table__cell">${PERAN_TTD[o.klien] || 'Pihak'}</td><td class="ina-table__cell">${lencanaTtd(o)}</td><td class="ina-table__cell" style="text-align:right"><a class="ina-button ina-button--primary ina-button--sm" style="text-decoration:none" href="Backlog-HE-EAWK-Prototype.html#akta=${o.kode}">Tanda tangani</a></td></tr>`).join('') : '<tr><td colspan="7" class="kosong-t">Tidak ada akta yang menunggu tanda tangan Anda.</td></tr>'}</tbody></table></div></div>${halaman(rows.length)}</div></section>`;
+}
+const cariIsian = () => `<div class="ina-input-search"><div class="ina-input-search__wrapper"><span class="ina-input-search__search-icon">${ik('cari', 20)}</span><input id="cariTugas" class="ina-input-search__input" type="search" placeholder="Cari kode / nama / layanan" aria-label="Cari kode, nama, atau layanan" value="${esc(S.cari)}" autocomplete="off"></div></div>`;
+const pilihDd = (id, label, opsi, v) => `<select id="pilih-${id}" class="ina-text-field__input pilih-t" aria-label="${label}" data-saring="${id}" style="border:1px solid var(--ina-stroke-primary);border-radius:8px;min-height:44px;padding:0 12px;background:var(--ina-background-primary);color:var(--ina-content-primary)">${opsi.map(([k, t]) => `<option value="${k}" ${k === v ? 'selected' : ''}>${t}</option>`).join('')}</select>`;
+function gambar() {
+  gambarNav(); const D = muatOrder();
+  $('#halaman').innerHTML = `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">Tugas Saya</span></span></li></ol></nav><h1>Tugas Saya</h1><p class="sub">Pekerjaan yang menunggu Anda.</p>${kartuAkun(D)}${KLIEN ? blokKlien(D) : `${kartuKelompok(D)}${S.tab === 'kerja' ? blokKerja(D) : S.tab === 'ttd' ? blokTtd(D) : blokRenvooi(D)}`}`;
+  pasangPanduan();
+}
+const H = $('#halaman');
+H.addEventListener('click', e => {
+  const k = e.target.closest('[data-kelompok]'); if (k) { S.tab = k.dataset.kelompok; S.cari = ''; S.tahap = ''; gambar(); return; }
+  const o = e.target.closest('[data-order]'); if (o) { AJB.keStepper(o.dataset.order); return; }
+  const r = e.target.closest('[data-renvooi]'); if (r) { location.href = 'Backlog-IDDS-TN-PROSES-Prototype.html#renvooi'; return; }
+});
+H.addEventListener('input', e => { if (e.target.id !== 'cariTugas') return; S.cari = e.target.value; const p = e.target.selectionStart; gambar(); const n = $('#cariTugas'); n.focus(); n.setSelectionRange(p, p); });
+H.addEventListener('change', e => { if (e.target.dataset.saring === 'tahap') { S.tahap = e.target.value; gambar(); } });
+
+/* ---------------- tombol Bantuan di judul halaman (HE-UMUM-02) ---------------- */
+function pasangPanduan() {
+  const h = document.querySelector('#halaman h1'); if (!h || h.parentElement.classList.contains('judul-kiri')) return;
+  const w = document.createElement('div'); w.className = 'judul-halaman';
+  const kiri = document.createElement('div'); kiri.className = 'judul-kiri';
+  const sub = h.nextElementSibling && h.nextElementSibling.classList.contains('sub') ? h.nextElementSibling : null;
+  h.before(w); w.append(kiri); kiri.append(h); if (sub) kiri.append(sub);
+  w.insertAdjacentHTML('beforeend', `<button type="button" class="ina-button ina-button--secondary ina-button--md ditandai" id="bukaBantuan" aria-label="Bantuan untuk halaman ini"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 16v.01" /><path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /></svg><span>Bantuan</span></button>`);
+}
+document.addEventListener('click', e => { if (e.target.closest('#bukaBantuan')) bukaBantuan(); });
+
+/* ---------------- IDDS Drawer ---------------- */
+function drawer({ judul, isi }) {
+  const D = $('#lapisanDrawer'), hp = window.matchMedia('(max-width:760px)').matches;
+  D.innerHTML = `<div class="ina-drawer ina-drawer--position-${hp ? 'bottom' : 'right'}" role="dialog" aria-modal="true" aria-labelledby="drwJudul">
+    <div class="ina-drawer__backdrop" data-tutup-drawer></div>
+    <div class="ina-drawer__panel ina-drawer__panel--width-md">
+      <div class="ina-drawer__header"><h2 class="ina-drawer__title" id="drwJudul">${judul}</h2>
+        <button type="button" class="ina-drawer__close-button" aria-label="Tutup bantuan" data-tutup-drawer><svg class="ina-drawer__close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button></div>
+      <div class="ina-drawer__content">${isi}</div>
+    </div></div>`;
+  D.querySelector('.ina-drawer__close-button').focus();
+}
+function tutupDrawer() { $('#lapisanDrawer').innerHTML = ''; }
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-tutup-drawer]')) { tutupDrawer(); return; }
+  const tg = e.target.closest('#lapisanDrawer .ina-accordion__toggle'); if (!tg) return;
+  const b = tg.getAttribute('aria-expanded') !== 'true';
+  tg.setAttribute('aria-expanded', b);
+  tg.querySelector('.ina-accordion__icon').classList.toggle('ina-accordion__icon--open', b);
+  tg.nextElementSibling.classList.toggle('ina-accordion__content--open', b);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisanDrawer').innerHTML) tutupDrawer(); });
+
+/* ---------------- IDDS Modal & Toast ---------------- */
+function dialog({ judul, isi, tombol: tb, lebar, kunciUtama, konfirmasi }) {
+  const L = $('#lapisan');
+  L.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-i="-1"></div><div class="ina-modal__container">
+    <div class="ina-modal__dialog ina-modal__dialog--size-${lebar ? 'lg' : 'md'} ${konfirmasi ? 'ina-modal-confirmation' : ''}" role="${konfirmasi ? 'alertdialog' : 'dialog'}" aria-modal="true" aria-labelledby="dlgJudul">
+      <div class="ina-modal__header"><h2 class="ina-modal__title" id="dlgJudul">${judul}</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-i="-1">${ik('x', 22)}</button></div>
+      <div class="ina-modal__body">${isi}</div>
+      <div class="ina-modal__footer">${tb.map(([t, h], i) => `<button type="button" class="ina-button ina-button--${h} ina-button--md" data-i="${i}">${t}</button>`).join('')}</div></div></div></div>`;
+  const utama = L.querySelector('.ina-modal__footer .ina-button:last-child');
+  if (kunciUtama) { utama.disabled = true; const cb = L.querySelector(kunciUtama); cb.addEventListener('change', e => { utama.disabled = !e.target.checked; const bx = cb.nextElementSibling; bx.classList.toggle('ina-checkbox__box--checked', e.target.checked); bx.classList.toggle('ina-checkbox__box--unchecked', !e.target.checked); bx.innerHTML = e.target.checked ? ik('centang', 12) : ''; }); }
+  else utama.focus();
+  L.onclick = e => { const b = e.target.closest('[data-i]'); if (!b || b.disabled) return; const i = +b.dataset.i; L.innerHTML = ''; if (i >= 0 && tb[i][2]) tb[i][2](); };
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#lapisan').innerHTML) $('#lapisan').innerHTML = ''; });
+let tt;
+function toast(teks, state = 'default', ms = 3000, ket = '') {
+  $('#toastWadah').innerHTML = `<div class="ina-toast ina-toast--state-${state} ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${ik(state === 'positive' ? 'centang' : 'info', 20)}</div>
+    <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p>${ket ? `<p class="ina-toast__description">${ket}</p>` : ''}</div></div><button class="ina-toast__close-button" aria-label="Tutup notifikasi" data-tutup-toast>${ik('x', 16)}</button></div>`;
+  clearTimeout(tt); tt = setTimeout(() => $('#toastWadah').innerHTML = '', ms);
+}
+$('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tutup-toast]')) $('#toastWadah').innerHTML = ''; });
+
+const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
+function bukaBantuan() {
+  drawer({ judul:'Bantuan Tugas Saya', isi:`<p>Tugas Saya mengumpulkan pekerjaan yang menunggu Anda. Datanya berasal dari Permohonan AJB dan mengikuti tahap setiap permohonan.</p>
+    <ol class="bantu-langkah"><li><b>Lengkapi akun.</b> Periksa kartu Data diri, Sertifikat CA, dan Perlu tanda tangan Anda.</li><li><b>Pilih kelompok.</b> Klik kartu kelompok untuk melihat daftarnya.</li><li><b>Buka permohonan.</b> Klik baris untuk membuka tahapnya di Permohonan AJB.</li></ol>
+    <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${faq(1, 'Dari mana data Tugas Saya berasal?', 'Dari Permohonan AJB. Saat tahap permohonan berubah, baris ikut pindah kelompok.')}
+    ${faq(2, 'Mengapa tugas PPAT berbeda dengan Asisten?', 'PPAT melihat verifikasi dan akta yang menunggu finalisasi. Asisten melihat juga akta yang sedang disusun.')}
+    ${faq(3, 'Kapan akta masuk Renvooi?', 'Saat minuta sudah selesai ditandatangani dan perlu ditutup.')}` });
+}
+$('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
+$('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
+$('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+$('#bukaUbah').addEventListener('click', () => {
+  dialog({ judul:'Daftar perubahan Tugas Saya', lebar:true,
+    isi:`<p>Menu ini mengikuti live, dengan data dari Permohonan AJB.</p>
+      <div class="daftar-ubah">${UBAH.map((u, i) => `${u.bukanHE && !(UBAH[i - 1] || {}).bukanHE ? '<h4 class="kelompok-ubah">Dari penelusuran live (bukan temuan HE)</h4><p class="ket-kelompok">Usulan berikut tidak berasal dari laporan HE. Tim menemukannya saat menelusuri aplikasi live dan kodenya.</p>' : ''}<div class="it${u.bukanHE ? ' bukan-he' : ''}"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div>${u.sumber ? `<div class="sumber-ubah"><b>Sumber:</b> ${u.sumber}</div>` : ''}<p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div>
+        <div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
+    tombol:[['Tutup','secondary',null]] });
+  $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => {
+    const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]);
+  });
+});
+function lihat(u) { const el = $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } }
+$('#bukaUbah').textContent = `Daftar perubahan (${UBAH.length})`;
+$('#aturUlang').addEventListener('click', () => { AJB.hapus(); location.reload(); });
+addEventListener('pageshow', e => { if (e.persisted) location.reload(); });
+gambar();
+})();
+</script>
+</body>
+</html>

@@ -52,17 +52,18 @@
     { kunci:'asisten', label:'Asisten', nama:'Asisten Contoh', email:'asisten1@contoh.id', peran:['ROLE_ASISTEN'], ca:'kurang' },
     { kunci:'klien', label:'Klien', nama:'Contoh Klien Satu', email:'klien1@contoh.id', peran:['ROLE_KLIEN'], ca:'kurang' }
   ];
-  const STAF = ['Permohonan AJB', 'Dashboard Akta', 'Salinan Akta', 'Profil Kantor'];
-  const MENU_PERAN = { ROLE_PPAT:[...STAF, 'Daftar Pengguna', 'Aktivasi e-Meterai'], /* Daftar Pengguna untuk kebutuhan prototipe; di live PPAT tidak memilikinya */ ROLE_ASISTEN:[...STAF, 'Daftar Pengguna', 'Dashboard Sistem'], ROLE_KLIEN:['Permohonan AJB', 'Penandatanganan Akta'] };
+  const STAF = ['Tugas Saya', 'Permohonan AJB', 'Dashboard Akta', 'Salinan Akta', 'Renvooi', 'Arsip Akta', 'Template Akta', 'Profil Kantor'];
+  const MENU_PERAN = { ROLE_PPAT:[...STAF, 'Daftar Pengguna', 'Aktivasi e-Meterai'], /* Daftar Pengguna untuk kebutuhan prototipe; di live PPAT tidak memilikinya */ ROLE_ASISTEN:[...STAF, 'Daftar Pengguna', 'Dashboard Sistem'], ROLE_KLIEN:['Tugas Saya', 'Permohonan AJB', 'Penandatanganan Akta'] };
   /* layar di dalam satu prototipe yang punya syarat menu sendiri */
   const LAYAR_MENU = { '#peran':'Peran & Izin', '#logs':'Log Aktivitas', '#pengaturan':'Pengaturan', '#emeterai':'Aktivasi e-Meterai' };
-  const LANDAS = { ROLE_ADMIN:SYS + '#dasbor', ROLE_PPAT:EP + '#dashboard', ROLE_ASISTEN:EP + '#dashboard', ROLE_KLIEN:'Backlog-HE-EAWK-Prototype.html' };
+  const TUGAS = 'Backlog-HE-TUGAS-Prototype.html', LANDAS = { ROLE_ADMIN:TUGAS, ROLE_PPAT:TUGAS, ROLE_ASISTEN:TUGAS, ROLE_KLIEN:TUGAS };
   /* halaman → menu yang menjadi syarat akses */
-  const HALAMAN = { 'HE-USER':'Daftar Pengguna', 'HE-VERIF':'Permohonan AJB', 'HE-MINUTA-V2':'Permohonan AJB', 'HE-EAW':'Permohonan AJB', 'HE-ORDER':'Permohonan AJB', 'HE-TERA':'Aktivasi e-Meterai', 'IDDS-TN-EPPAT':'Dashboard Akta', 'IDDS-TN-SYSTEM':'Dashboard Sistem', 'IDDS-TN-CMS':'Halaman Depan' };
+  const HALAMAN = { 'HE-USER':'Daftar Pengguna', 'HE-VERIF':'Permohonan AJB', 'HE-MINUTA-V2':'Permohonan AJB', 'HE-EAW':'Permohonan AJB', 'HE-ORDER':'Permohonan AJB', 'HE-TUGAS':'Tugas Saya', 'IDDS-TN-PROSES':'Renvooi', 'HE-TERA':'Aktivasi e-Meterai', 'IDDS-TN-EPPAT':'Dashboard Akta', 'IDDS-TN-SYSTEM':'Dashboard Sistem', 'IDDS-TN-CMS':'Halaman Depan' };
   /* menu lengkap untuk halaman yang sidebarnya khusus Klien, saat dibuka peran staf */
   const MENU = [
+    ['', [['Tugas Saya', 'clipboard-check', TUGAS]]],
     ['Layanan', [['Permohonan AJB', 'file-text', 'Backlog-HE-ORDER-Prototype.html']]],
-    ['Akta', [['Dashboard Akta', 'layout-dashboard', EP + '#dashboard'], ['Salinan Akta', 'files', EP + '#salinan']]],
+    ['Akta', [['Dashboard Akta', 'layout-dashboard', EP + '#dashboard'], ['Salinan Akta', 'files', EP + '#salinan'], ['Renvooi', 'file-pencil', 'Backlog-IDDS-TN-PROSES-Prototype.html#renvooi'], ['Arsip Akta', 'archive', 'Backlog-IDDS-TN-PROSES-Prototype.html#arsip'], ['Template Akta', 'template', 'Backlog-IDDS-TN-PROSES-Prototype.html#template']]],
     ['Pengaturan Kantor', [['Profil Kantor', 'building', EP + '#profil'], ['Daftar Pengguna', 'users', 'Backlog-HE-USER-Prototype.html'], ['Peran & Izin', 'shield-lock', SYS + '#peran'], ['Log Aktivitas', 'history', SYS + '#logs'], ['Aktivasi e-Meterai', 'rubber-stamp', EP + '#emeterai']]],
     ['Pengaturan Aplikasi', [['Dashboard Sistem', 'gauge', SYS + '#dasbor'], ['Pengaturan', 'settings', SYS + '#pengaturan']]],
     ['Konten Situs', [['Halaman Depan', 'home', CMS + '#landing'], ['Tema Tampilan', 'palette', CMS + '#tema'], ['Master Konten', 'database', CMS + '#master'], ['Artikel & Halaman', 'article', CMS + '#posts'], ['Pustaka Media', 'photo', CMS + '#media']]]
@@ -197,7 +198,7 @@
   const saring = () => {
     if (!nav) return;
     if (['HE-CA', 'HE-EAWK'].includes(berkas) && sesi.aktif !== 'ROLE_KLIEN') { if (!nav.querySelector('[data-sesi-href]')) nav.innerHTML = lengkap(); return; }
-    if (berkas === 'HE-ORDER' && sesi.aktif === 'ROLE_KLIEN' && !nav.querySelector('[data-sesi-href]')) nav.querySelector('.items').insertAdjacentHTML('beforeend', `<a href="#" class="ina-button ina-button--link ina-button--md nav-item" data-sesi-href="Backlog-HE-EAWK-Prototype.html">${svg(IKON.signature || '')}<span>Penandatanganan Akta</span></a>`);
+    if (['HE-ORDER', 'HE-TUGAS'].includes(berkas) && sesi.aktif === 'ROLE_KLIEN' && !nav.querySelector('[data-sesi-href]')) [...nav.querySelectorAll('.items')].find(w => w.textContent.includes('Permohonan AJB')).insertAdjacentHTML('beforeend', `<a href="#" class="ina-button ina-button--link ina-button--md nav-item" data-sesi-href="Backlog-HE-EAWK-Prototype.html">${svg(IKON.signature || '')}<span>Penandatanganan Akta</span></a>`);
     nav.querySelectorAll('a.nav-item').forEach(a => a.classList.toggle('sesi-sembunyi', !boleh(a.textContent.trim())));
     nav.querySelectorAll('.items').forEach(w => {
       const kosong = !w.querySelector('a.nav-item:not(.sesi-sembunyi)'); w.classList.toggle('sesi-sembunyi', kosong);

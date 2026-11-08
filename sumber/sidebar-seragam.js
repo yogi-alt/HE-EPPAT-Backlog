@@ -4,12 +4,13 @@
 const fs = require('fs');
 const F = {
   sys:'Backlog-IDDS-TN-SYSTEM-Prototype.html', cms:'Backlog-IDDS-TN-CMS-Prototype.html', ep:'Backlog-IDDS-TN-EPPAT-Prototype.html',
-  user:'Backlog-HE-USER-Prototype.html', order:'Backlog-HE-ORDER-Prototype.html'
+  user:'Backlog-HE-USER-Prototype.html', order:'Backlog-HE-ORDER-Prototype.html', tugas:'Backlog-HE-TUGAS-Prototype.html', proses:'Backlog-IDDS-TN-PROSES-Prototype.html'
 };
 /* [label, ikon, tujuan] — tujuan dipakai bila menu bukan milik prototipe yang sedang dibuka */
 const MENU = [ /* nama & urutan menu baru (26 Okt 2026); hanya menu yang ada di live; ikon Tabler (aset/tabler-sidebar.json) */
+  ['', 'tb_stack_2', [['Tugas Saya', 'tb_clipboard_check', F.tugas]]], /* tanpa judul grup, seperti live */
   ['Layanan', 'tb_stack_2', [['Permohonan AJB', 'tb_file_text', F.order]]],
-  ['Akta', 'tb_feather', [['Dashboard Akta', 'tb_layout_dashboard', F.ep + '#dashboard'], ['Salinan Akta', 'tb_files', F.ep + '#salinan']]],
+  ['Akta', 'tb_feather', [['Dashboard Akta', 'tb_layout_dashboard', F.ep + '#dashboard'], ['Salinan Akta', 'tb_files', F.ep + '#salinan'], ['Renvooi', 'tb_file_pencil', F.proses + '#renvooi'], ['Arsip Akta', 'tb_archive', F.proses + '#arsip'], ['Template Akta', 'tb_template', F.proses + '#template']]],
   ['Pengaturan Kantor', 'tb_adjustments_horizontal', [['Profil Kantor', 'tb_building', F.ep + '#profil'], ['Daftar Pengguna', 'tb_users', F.user], ['Peran & Izin', 'tb_shield_lock', F.sys + '#peran'], ['Log Aktivitas', 'tb_history', F.sys + '#logs'], ['Aktivasi e-Meterai', 'tb_rubber_stamp', F.ep + '#emeterai']]],
   ['Pengaturan Aplikasi', 'tb_settings', [['Dashboard Sistem', 'tb_gauge', F.sys + '#dasbor'], ['Pengaturan', 'tb_settings', F.sys + '#pengaturan']]],
   ['Konten Situs', 'tb_layout_cards', [['Halaman Depan', 'tb_home', F.cms + '#landing'], ['Tema Tampilan', 'tb_palette', F.cms + '#tema'], ['Master Konten', 'tb_database', F.cms + '#master'], ['Artikel & Halaman', 'tb_article', F.cms + '#posts'], ['Pustaka Media', 'tb_photo', F.cms + '#media']]]
@@ -18,6 +19,8 @@ const MENU = [ /* nama & urutan menu baru (26 Okt 2026); hanya menu yang ada di 
 const SENDIRI = {
   'tera-idds.html':{ 'Dashboard Sistem':'dashboard' },
   'order-idds.html':{ 'Permohonan AJB':'order' },
+  'tugas-badan.html':{ 'Tugas Saya':'tugas' },
+  'tn-proses-badan.html':{ 'Renvooi':'renvooi', 'Arsip Akta':'arsip', 'Template Akta':'template' },
   /* layar tahap Permohonan AJB: tidak punya menu sendiri, menu induknya tetap menyala */
   'verif-badan.html':{ 'Permohonan AJB':'ajb' },
   'minuta2-badan.html':{ 'Permohonan AJB':'ajb' },
@@ -48,7 +51,7 @@ for (const [berkas, sendiri] of Object.entries(SENDIRI)) {
   const proto = `const PROTO = { ${MENU.flatMap(([, , m]) => m).filter(([l]) => !sendiri[l]).map(([l, , u]) => `${q(l)}:${q(u)}`).join(', ')} }; /* menu → prototipe */`;
   t = t.slice(0, p) + proto + t.slice(pz + '}; /* menu → prototipe */'.length);
   /* 3. semua grup terbuka */
-  t = t.replace(/const grupBuka = new Set\(\[[^\]]*\]\);/, 'const grupBuka = new Set([0, 1, 2, 3, 4]);');
+  t = t.replace(/const grupBuka = new Set\(\[[^\]]*\]\);/, 'const grupBuka = new Set([0, 1, 2, 3, 4, 5]);');
   /* 4. ikon yang belum ada */
   const ia = t.indexOf('const I = {'), iz = t.indexOf('\n};', ia);
   const blokI = t.slice(ia, iz), kurang = IKON.filter(k => !new RegExp(`[\\s{,]${k}:'`).test(blokI));

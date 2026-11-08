@@ -708,6 +708,7 @@ ol.bantu-langkah{padding-left:22px}
 .user .menu-kepala{display:flex;flex-direction:column;gap:2px;padding:8px 12px}
 .user .menu-kepala b{font:600 14px Inter,sans-serif;color:var(--ina-primary-primary)}
 .user .menu-kepala span{font-size:12px;color:var(--ina-content-secondary)}
+.cek-lintas{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px 16px;margin-top:8px}
 </style>
 <style id="versi-proto-css">.versi-proto{display:inline-block;padding:3px 10px;border-radius:999px;background:#E6EDEA;color:#0f1a17;font:600 11px/16px Inter,sans-serif}.versi-ubah{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;background:var(--ina-primary-100,#dcebe5);color:var(--ina-primary-700,#1b5e4a);font:600 11px/18px Inter,sans-serif;vertical-align:middle}</style>
 </head>
@@ -829,6 +830,21 @@ const UBAH = [
   { kode:'IDDS-PL-37', judul:'Pengaturan Global: simpan per tab dengan penanda, penjaga, dan konfirmasi berdampak',
     isi:'Kaki setiap tab menampilkan jumlah perubahan yang belum disimpan, dan tab itu diberi titik penanda. Batal mengembalikan isian. Pindah tab saat ada perubahan menawarkan "Buang Perubahan" atau "Simpan & Lanjutkan", dan pindah menu memunculkan "Tinggalkan halaman ini?". Tindakan berikut meminta konfirmasi lewat IDDS Modal Confirmation yang menyebut dampaknya ke semua kantor PPAT: mematikan WhatsApp OCA, Peruri CA, atau Gemini AI, mengganti penyedia email, dan mengosongkan URL onboarding. Tombol konfirmasi berwarna merah untuk mematikan layanan dan mengosongkan URL onboarding. Setelah dialog ditutup, fokus kembali ke tombol pemicunya. Hasil simpan memakai IDDS Toast dengan teks live.',
     lama:'Tidak ada penanda perubahan belum disimpan, dan pindah menu membuang perubahan tanpa peringatan. Mengganti penyedia ke "Disabled" atau mematikan Gemini langsung tersimpan tanpa konfirmasi, padahal berdampak ke OTP, CA, TERA, dan Cek Ejaan di semua kantor.', ke:'pgNonaktif', tab:'ai', sorot:null },
+  { kode:'IDDS-PL-73', versi:'v2', bukanHE:true, judul:'Pengaturan Umum: mode pemeliharaan',
+    isi:'Tab Umum memiliki sakelar mode pemeliharaan dengan pesan dan perkiraan waktu kembali dibuka. Saat diaktifkan muncul konfirmasi karena berlaku untuk semua kantor.',
+    lama:'Mode pemeliharaan belum ada di prototipe.', ke:'pengaturan', tab:'umum', sorot:'#pgPelihara', sumber:'Live Platform, 6 Nov 2026' },
+  { kode:'IDDS-PL-74', versi:'v2', bukanHE:true, judul:'Pengaturan Umum: daftar lintas order di sidebar',
+    isi:'Sakelar menentukan menu lintas order yang tampil di sidebar kantor. Bawaan Peruri mati, karena pekerjaan dibuka dari Permohonan AJB.',
+    lama:'Pengaturan ini belum ada di prototipe.', ke:'pengaturan', tab:'umum', sorot:'#pgLintas', sumber:'Live Platform, 6 Nov 2026' },
+  { kode:'IDDS-PL-75', versi:'v2', bukanHE:true, judul:'Peruri CA: isian dari server terkunci dan e-Meterai',
+    isi:'Isian yang diatur di server tampil nonaktif dengan keterangannya. Ditambah Akun e-Meterai, Mode, serta NIK/NPWP dan nama dipungut.',
+    lama:'Semua isian dapat diubah dan isian e-Meterai belum ada.', ke:'pengaturan', tab:'peruri', sorot:'#kartuPg', sumber:'Live Platform, 6 Nov 2026' },
+  { kode:'IDDS-PL-76', versi:'v2', bukanHE:true, judul:'AI & Baca Berkas: OCR internal',
+    isi:'Tab Gemini AI menjadi AI & Baca Berkas dan memuat OCR internal untuk membaca KTP, lengkap dengan konfirmasi saat dinonaktifkan.',
+    lama:'Hanya ada pengaturan Gemini AI.', ke:'pengaturan', tab:'ai', sorot:'#kartuPg', sumber:'Live Platform, 6 Nov 2026' },
+  { kode:'IDDS-PL-77', versi:'v2', bukanHE:true, judul:'Tab ATR/BPN: simulasi pengiriman',
+    isi:'Tab baru untuk memilih hasil simulasi pengiriman ke ATR/BPN: berhasil, ditolak, atau lambat.',
+    lama:'Tab ini belum ada di prototipe.', ke:'pengaturan', tab:'bpn', sorot:'#kartuPg', sumber:'Live Platform, 6 Nov 2026' },
   { kode:'IDDS-PL-38', judul:'Akun Saya: tab Akun dengan peran yang konsisten dan pesan galat di bawah isian',
     isi:'Tab memakai IDDS Tab yang sama dengan Akun Saya kantor. Lencana peran berbunyi "Platform Admin", sama dengan menu pengguna di kanan atas. Catatan email menjadi "Hubungi tim E-PPAT untuk mengubah email." Kode akun live (misalnya PLATFORM_ADMIN) ditampilkan sebagai baris "ID akun" dengan keterangan, sama dengan Akun Saya kantor. Formulir Ubah Data memakai IDDS Text Field. Pesan "Nama depan minimal 2 karakter." dan pesan format telepon tampil di bawah isian. Hasil simpan memakai IDDS Toast. Pindah tab atau menu saat ada perubahan menawarkan "Buang Perubahan" atau "Simpan & Lanjutkan".',
     lama:'Lencana peran "Super Admin" (dari is_admin) berbeda dengan "Platform Admin" di menu pengguna. Catatan "(hubungi admin untuk mengubah)" tidak jelas bagi admin platform. Banner sukses hilang sendiri setelah 3 detik tanpa aria-live.', ke:'akun', tab:'akun', sorot:'#kartuAkun' },
@@ -907,21 +923,22 @@ const lencanaKontras = (a, b, ket) => { const r = rasio(a, b); if (r == null) re
 
 /* ---------------- Pengaturan Global (model live: general, email, whatsapp, peruri, ai) ---------------- */
 const PG0 = () => ({
-  umum:{ onboarding_url:'https://onboarding.contoh.id' },
+  umum:{ onboarding_url:'https://onboarding.contoh.id', pelihara:false, pesan:'Sistem sedang dalam pemeliharaan.', kembali:'', lintas_verif:false, lintas_susun:false, lintas_ttd:false, lintas_renvoi:false, lintas_arsip:false },
   email:{ provider:'smtp', host:'smtp.contoh.id', port:'587', username:'notifikasi@contoh.id', password:'', encryption:'tls', brevo_key:'', from_email:'notifikasi@contoh.id', from_name:'E-PPAT' },
   wa:{ provider:'oca', template:'OTP_REGISTRASI', url:'https://wa.contoh.id/api/v2/push/message', token:'' },
-  peruri:{ provider:'active', system_id:'EPPAT-CONTOH', base_url:'https://esign.contoh.id/esign', gateway_url:'https://gateway.contoh.id/gateway/digitalSignatureOnPremise/1.0', jwt:'/jwt/token', api_key:'', onboarding:'/generateOnboardingLink/v2', check:'/checkCertificate/v1', tera_email:'' },
-  ai:{ status:'active', key:'', model:'gemini-2.5-flash' } });
+  peruri:{ provider:'active', system_id:'EPPAT-CONTOH', base_url:'https://esign.contoh.id/esign', gateway_url:'https://gateway.contoh.id/gateway/digitalSignatureOnPremise/1.0', jwt:'/jwt/token', api_key:'', onboarding:'/generateOnboardingLink/v2', check:'/checkCertificate/v1', tera_email:'', meterai_akun:'emeterai@contoh.id', mode:'', pungut_nik:'', pungut_nama:'' },
+  ai:{ status:'active', key:'', model:'gemini-2.5-flash', ocr_status:'active', ocr_key:'' },
+  bpn:{ hasil:'berhasil' } });
 /* rahasia yang sudah tersimpan di server (live mengirim "***") */
-const RAHASIA0 = () => ({ 'email.password':true, 'email.brevo_key':false, 'wa.token':true, 'peruri.api_key':true, 'ai.key':true });
+const RAHASIA0 = () => ({ 'email.password':true, 'email.brevo_key':false, 'wa.token':true, 'peruri.api_key':true, 'ai.key':true, 'ai.ocr_key':true });
 let PG = PG0(), PGF = salinObj(PG), RAHASIA = RAHASIA0();
-const TAB_PG = [['umum', 'Umum', 'gear'], ['email', 'Email SMTP', 'surat'], ['wa', 'WhatsApp OCA', 'telepon'], ['peruri', 'Peruri CA', 'tameng'], ['ai', 'Gemini AI', 'kilau']];
+const TAB_PG = [['umum', 'Umum', 'gear'], ['email', 'Email SMTP', 'surat'], ['wa', 'WhatsApp OCA', 'telepon'], ['peruri', 'Peruri CA', 'tameng'], ['ai', 'AI & Baca Berkas', 'kilau'], ['bpn', 'ATR/BPN', 'gedung']];
 const NAMA_TAB = Object.fromEntries(TAB_PG.map(([k, t]) => [k, t]));
 const bedaPg = t => Object.keys(PG[t]).filter(k => String(PG[t][k]) !== String(PGF[t][k]));
 const pgKotor = t => bedaPg(t).length > 0;
 /* isian per tab: id, label, jenis pemeriksaan, wajib bila */
 const ISIAN = {
-  umum:[{ k:'onboarding_url', id:'gOnb', l:'URL aplikasi onboarding', jenis:'url', tanpaSlash:true }],
+  umum:[{ k:'onboarding_url', id:'gOnb', l:'URL aplikasi onboarding', jenis:'url', tanpaSlash:true }, { k:'pesan', id:'gPesan', l:'Pesan pemeliharaan', wajib:f => f.pelihara }],
   email:[{ k:'host', id:'eHost', l:'Host SMTP', jenis:'host', wajib:f => f.provider === 'smtp' }, { k:'port', id:'ePort', l:'Port', jenis:'port', wajib:f => f.provider === 'smtp' }, { k:'username', id:'eUser', l:'Nama pengguna' },
     { k:'password', id:'ePw', l:'Kata sandi SMTP', rahasia:true }, { k:'brevo_key', id:'eBrevo', l:'Brevo API key', rahasia:true, wajib:f => f.provider === 'brevo_api' },
     { k:'from_email', id:'eFrom', l:'Email pengirim', jenis:'email', wajib:() => true }, { k:'from_name', id:'eNama', l:'Nama pengirim' }],
@@ -930,7 +947,8 @@ const ISIAN = {
     { k:'gateway_url', id:'pGw', l:'Gateway Base URL', jenis:'url', wajib:f => f.provider === 'active' }, { k:'jwt', id:'pJwt', l:'Endpoint JWT', jenis:'endpoint' },
     { k:'api_key', id:'pKey', l:'API key gateway', rahasia:true, wajib:f => f.provider === 'active' }, { k:'onboarding', id:'pOnb', l:'Endpoint onboarding', jenis:'endpoint' },
     { k:'check', id:'pCek', l:'Endpoint cek sertifikat', jenis:'endpoint' }, { k:'tera_email', id:'pTera', l:'Email TERA', jenis:'email' }],
-  ai:[{ k:'key', id:'aKey', l:'API key Gemini', rahasia:true, wajib:f => f.status === 'active' }, { k:'model', id:'aModel', l:'Model' }]
+  ai:[{ k:'key', id:'aKey', l:'API key Gemini', rahasia:true, wajib:f => f.status === 'active' }, { k:'model', id:'aModel', l:'Model' }, { k:'ocr_key', id:'aOcr', l:'API key OCR', rahasia:true, wajib:f => f.ocr_status === 'active' }],
+  bpn:[]
 };
 const SERVER_UJI = /(^|[\/.@-])(dev|staging|stg|uji|test)([\/.:-]|$)|apgdev|perdananiaga|yopmail|localhost/i;
 const reUrl = /^https?:\/\/[^\s\/$.?#][^\s]*$/i, reEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -966,7 +984,7 @@ let S = S0();
 const MON = 'Backlog-IDDS-PL-MONITORING-Prototype.html', AKTA = 'Backlog-IDDS-PL-AKTA-Prototype.html';
 const NAV = [
   { g:'Monitoring', ik:'monitor', m:[['Dasbor', 'grid', MON + '#dasbor'], ['Daftar PPAT', 'gedung', MON + '#ppat'], ['Paket Langganan', 'bintang', MON + '#paket'], ['Log Aktivitas', 'daftar', MON + '#log']] },
-  { g:'Akta', ik:'stempel', m:[['Jenis Akta', 'stempel', AKTA + '#jenis']] },
+  { g:'Akta', ik:'stempel', m:[['Jenis Akta', 'stempel', AKTA + '#jenis'], ['Form Design', 'edit', 'Backlog-IDDS-PL-RANCANG-Prototype.html#form'], ['Pustaka Kondisi', 'daftar', 'Backlog-IDDS-PL-RANCANG-Prototype.html#kondisi'], ['Pustaka Pemeriksaan', 'tameng', 'Backlog-IDDS-PL-RANCANG-Prototype.html#periksa']] },
   { g:'Sistem', ik:'gear', m:[['Setting Theme', 'palet', '', 'tema'], ['Pengaturan Global', 'gear', '', 'pengaturan']] }
 ];
 const grupBuka = new Set([0, 1, 2]);
@@ -1138,8 +1156,14 @@ function kakiPg(t) {
 const isi = (t, k) => PGF[t][k];
 const atrPg = (t, k, x = '') => `data-pg="${t}.${k}" ${x}`;
 function tabUmum() {
+  const f = PGF.umum;
   return `${kepala('gear', 'Pengaturan Umum', 'Tombol peningkatan paket di semua kantor PPAT membuka alamat aplikasi onboarding ini. Kosongkan alamat untuk menyembunyikan tombol.')}
-    <div class="form-dd"><div class="lebar">${tf('gOnb', 'URL aplikasi onboarding', isi('umum', 'onboarding_url'), 'Contoh: https://onboarding.contoh.id', false, 'Tulis tanpa garis miring (/) di akhir. Tombol "Mulai Berlangganan" di kantor paket Gratis membuka alamat ini.', atrPg('umum', 'onboarding_url', 'inputmode="url" autocomplete="off"'), 'url')}</div></div>`;
+    <div class="form-dd"><div class="lebar">${tf('gOnb', 'URL aplikasi onboarding', isi('umum', 'onboarding_url'), 'Contoh: https://onboarding.contoh.id', false, 'Tulis tanpa garis miring (/) di akhir. Tombol "Mulai Berlangganan" di kantor paket Gratis membuka alamat ini.', atrPg('umum', 'onboarding_url', 'inputmode="url" autocomplete="off"'), 'url')}</div></div>
+    <div class="uji ditandai" id="pgPelihara"><h3>Mode pemeliharaan</h3><p>Berlaku untuk semua kantor PPAT. Pengguna melihat halaman pemeliharaan dan tidak dapat masuk. Admin kantor dan admin platform tetap dapat masuk.${usulan('IDDS-PL-73')}</p>
+      ${cekBox('gPelihara', f.pelihara, 'Aktifkan mode pemeliharaan aplikasi', '', atrPg('umum', 'pelihara'))}
+      ${f.pelihara ? `<div class="form-dd" style="margin-top:12px">${tf('gPesan', 'Pesan pemeliharaan', f.pesan, 'Contoh: Sistem sedang dalam pemeliharaan.', true, '', atrPg('umum', 'pesan'))}${tf('gKembali', 'Perkiraan kembali dibuka', f.kembali, '', false, '', atrPg('umum', 'kembali'), 'datetime-local')}</div>` : ''}</div>
+    <div class="uji ditandai" id="pgLintas"><h3>Daftar lintas order di sidebar</h3><p>Berlaku untuk semua kantor PPAT. Saat dimatikan, menunya hilang dari sidebar, tetapi halaman kerjanya tetap terbuka lewat tombol di Permohonan AJB.${usulan('IDDS-PL-74')}</p>
+      <div class="cek-lintas">${[['lintas_verif', 'Verifikasi Berkas'], ['lintas_susun', 'Penyusunan Akta'], ['lintas_ttd', 'Penandatanganan Akta'], ['lintas_renvoi', 'Renvoi'], ['lintas_arsip', 'Arsip Akta']].map(([k, l]) => cekBox('g-' + k, f[k], l, '', atrPg('umum', k))).join('')}</div></div>`;
 }
 function tabEmail() {
   const f = PGF.email, smtp = f.provider === 'smtp';
@@ -1170,36 +1194,48 @@ function tabWa() {
     <div class="uji ditandai" id="ujiWa"><h3>Kirim WhatsApp uji</h3><p>Uji memakai pengaturan yang sudah disimpan, bukan isian yang belum disimpan.</p>
       <div class="uji-baris">${tf('wUji', 'Kirim WhatsApp uji ke', '', 'Contoh: 6281234567890', false, 'Awali dengan 62, tanpa spasi.', 'inputmode="numeric" autocomplete="off"')}${tombol(S.memuat === 'wUji' ? 'Mengirim…' : 'Kirim Uji', 'secondary', 'md', `id="kirimUjiWa" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'wUji' ? spinner : ik('kirim', 16))}</div>${usulan('IDDS-PL-35')}</div>`;
 }
+const DARI_SERVER = 'Diatur di server, tidak dapat diubah dari sini.';
 function tabPeruri() {
   const f = PGF.peruri, on = f.provider === 'active';
   return `${kepala('tameng', 'Peruri CA', 'E-PPAT memakai gateway sertifikat elektronik (CA) Peruri untuk registrasi dan tanda tangan digital di semua kantor PPAT.')}
     <div class="form-dd">
-      ${pilihan('pProv', 'Status', STATUS_OPSI, f.provider, on ? '' : 'Registrasi CA dan tanda tangan digital tidak tersedia selama nonaktif.', atrPg('peruri', 'provider'))}
-      ${tf('pSys', 'System ID', f.system_id, 'ID sistem dari Peruri', on, '', atrPg('peruri', 'system_id', 'autocomplete="off"'))}
+      ${pilihan('pProv', 'Status', STATUS_OPSI, f.provider, DARI_SERVER, atrPg('peruri', 'provider', 'disabled'))}
+      ${tf('pSys', 'System ID', f.system_id, 'ID sistem dari Peruri', on, DARI_SERVER, atrPg('peruri', 'system_id', 'autocomplete="off" disabled'))}
       <div class="lebar">${tf('pBase', 'Base URL eSign', f.base_url, 'Contoh: https://esign.peruri.co.id/esign', on, '', atrPg('peruri', 'base_url', 'inputmode="url" autocomplete="off"'), 'url')}</div>
-      <div class="lebar">${tf('pGw', 'Gateway Base URL', f.gateway_url, 'Contoh: https://gateway.peruri.co.id/gateway/digitalSignatureOnPremise/1.0', on, 'Endpoint di bawah ini memakai alamat ini sebagai awalan.', atrPg('peruri', 'gateway_url', 'inputmode="url" autocomplete="off"'), 'url')}</div>
-      ${tf('pJwt', 'Endpoint JWT (ambil token)', f.jwt, 'Contoh: /jwt/token', false, '', atrPg('peruri', 'jwt', 'autocomplete="off"'))}
+      <div class="lebar">${tf('pGw', 'Gateway Base URL', f.gateway_url, 'Contoh: https://gateway.peruri.co.id/gateway/digitalSignatureOnPremise/1.0', on, `Endpoint di bawah ini memakai alamat ini sebagai awalan. ${DARI_SERVER}`, atrPg('peruri', 'gateway_url', 'inputmode="url" autocomplete="off" disabled'), 'url')}</div>
+      ${tf('pJwt', 'Endpoint JWT (ambil token)', f.jwt, 'Contoh: /jwt/token', false, DARI_SERVER, atrPg('peruri', 'jwt', 'autocomplete="off" disabled'))}
       ${pwRahasia('pKey', 'API key gateway (x-Gateway-APIKey)', 'peruri.api_key', 'API key dari Peruri', on)}
       ${tf('pOnb', 'Endpoint onboarding', f.onboarding, '/generateOnboardingLink/v2', false, '', atrPg('peruri', 'onboarding', 'autocomplete="off"'))}
       ${tf('pCek', 'Endpoint cek sertifikat', f.check, '/checkCertificate/v1', false, '', atrPg('peruri', 'check', 'autocomplete="off"'))}
       <div class="lebar">${tf('pTera', 'Email TERA (tujuan OTP stempel)', f.tera_email, 'Contoh: nama@contoh.id', false, 'Email terdaftar TERA, tujuan kode OTP saat membubuhkan stempel TERA. Kosongkan untuk memakai email bawaan sistem.', atrPg('peruri', 'tera_email', 'autocomplete="off"'), 'email')}</div>
+      ${tf('pMeterai', 'Akun e-Meterai', f.meterai_akun, '', false, DARI_SERVER, atrPg('peruri', 'meterai_akun', 'disabled'))}
+      ${tf('pMode', 'Mode', f.mode, '', false, '', atrPg('peruri', 'mode', 'autocomplete="off"'))}
+      ${tf('pPNik', 'e-Meterai: NIK/NPWP dipungut', f.pungut_nik, '', false, '', atrPg('peruri', 'pungut_nik', 'autocomplete="off"'))}
+      ${tf('pPNama', 'e-Meterai: nama dipungut', f.pungut_nama, '', false, '', atrPg('peruri', 'pungut_nama', 'autocomplete="off"'))}${usulan('IDDS-PL-75')}
     </div>`;
 }
 function tabAi() {
   const f = PGF.ai;
-  return `${kepala('kilau', 'Gemini AI', 'Dipakai untuk fitur Cek Ejaan pasal akta. Satu API key berlaku untuk semua kantor PPAT. API key dibuat di Google AI Studio.')}
+  return `${kepala('kilau', 'Gemini AI', 'Dipakai untuk Cek Ejaan pasal akta, dan untuk membaca berkas otomatis bila OCR internal nonaktif. Satu API key berlaku untuk semua kantor PPAT. API key dibuat di Google AI Studio.')}
     <div class="form-dd">
       ${pilihan('aStatus', 'Status', STATUS_OPSI, f.status, f.status === 'active' ? '' : 'Cek Ejaan pasal akta tidak tersedia selama nonaktif.', atrPg('ai', 'status'))}
       <div class="lebar">${pwRahasia('aKey', 'API key Gemini', 'ai.key', 'Contoh: AIza…', f.status === 'active')}</div>
       ${tf('aModel', 'Model', f.model, 'gemini-2.5-flash', false, 'Kosongkan untuk memakai gemini-2.5-flash.', atrPg('ai', 'model', 'autocomplete="off"'))}
-    </div>`;
+    </div>
+    <div class="uji ditandai" id="pgOcr"><h3>OCR internal (baca KTP)</h3><p>Mesin baca berkas utama. Berkas dibaca di layanan OCR sendiri dan tidak dikirim ke pihak ketiga. Bila aktif, OCR menggantikan Gemini untuk baca otomatis, khusus dokumen KTP. Alamat layanan diatur di server.${usulan('IDDS-PL-76')}</p>
+      <div class="form-dd">${pilihan('aOcrSt', 'Status OCR', STATUS_OPSI, f.ocr_status, '', atrPg('ai', 'ocr_status'))}<div class="lebar">${pwRahasia('aOcr', 'API key OCR', 'ai.ocr_key', 'API key layanan OCR', f.ocr_status === 'active')}</div></div></div>`;
+}
+function tabBpn() {
+  const f = PGF.bpn;
+  return `${kepala('gedung', 'Pengiriman ke ATR/BPN (simulasi)', 'Integrasi ATR/BPN belum tersedia. Jawaban BPN disimulasikan, dan setiap pengiriman ditandai Simulasi di data dan di layar.')}
+    <div class="form-dd"><div class="lebar">${pilihan('bHasil', 'Hasil simulasi', [['berhasil', 'Berhasil: diterima dengan tanda terima (± 20 detik)'], ['tolak', 'Ditolak: dikembalikan dengan alasan (± 20 detik)'], ['lambat', 'Lambat: diterima setelah ± 5 menit']], f.hasil, 'Pilihan ini menentukan jawaban yang diterima semua kantor PPAT.', atrPg('bpn', 'hasil'))}</div></div>${usulan('IDDS-PL-77')}`;
 }
 function layarPengaturan() {
   const t = S.pgTab;
   const tabs = TAB_PG.map(([k, l, i]) => [k, l, i, pgKotor(k) ? '<span class="titik-ubah" aria-label="ada perubahan belum disimpan" role="img"></span>' : '']);
-  return `${remah('Sistem', 'Pengaturan Global')}<h1>Pengaturan Global</h1><p class="sub">Atur URL onboarding, email, WhatsApp, Peruri CA, dan Gemini AI untuk semua kantor PPAT.</p>
+  return `${remah('Sistem', 'Pengaturan Global')}<h1>Pengaturan Global</h1><p class="sub">Atur onboarding, email, WhatsApp, Peruri CA, AI, dan ATR/BPN untuk semua kantor PPAT.</p>
     <div class="ditandai" style="margin-top:20px" id="tabPg">${tabH(tabs, t, 'data-pg-tab', 'Bagian pengaturan')}${usulan('IDDS-PL-34')}</div>
-    <section class="ina-card ina-card--variant-basic kartu ditandai" id="kartuPg" aria-label="${NAMA_TAB[t]}">${({ umum:tabUmum, email:tabEmail, wa:tabWa, peruri:tabPeruri, ai:tabAi })[t]()}${kakiPg(t)}</section>`;
+    <section class="ina-card ina-card--variant-basic kartu ditandai" id="kartuPg" aria-label="${NAMA_TAB[t]}">${({ umum:tabUmum, email:tabEmail, wa:tabWa, peruri:tabPeruri, ai:tabAi, bpn:tabBpn })[t]()}${kakiPg(t)}</section>`;
 }
 /* status di kaki & titik tab tanpa menggambar ulang (fokus isian tetap) */
 function segarPg() {
@@ -1222,7 +1258,7 @@ function validasiPg(t) {
   if (pertama) { $('#' + pertama).focus(); return false; }
   return true;
 }
-const TOAST_PG = { umum:['Pengaturan umum disimpan.'], email:['Pengaturan email disimpan.'], wa:['Pengaturan WhatsApp disimpan.'], peruri:['Pengaturan Peruri CA disimpan.'], ai:['Pengaturan Gemini AI disimpan.'] };
+const TOAST_PG = { umum:['Pengaturan umum disimpan.'], email:['Pengaturan email disimpan.'], wa:['Pengaturan WhatsApp disimpan.'], peruri:['Pengaturan Peruri CA disimpan.'], ai:['Pengaturan AI & Baca Berkas disimpan.'], bpn:['Pengaturan ATR/BPN disimpan.'] };
 function simpanPg(t, lanjut) {
   if (!validasiPg(t)) return;
   const lama = PG[t], baru = PGF[t];
@@ -1237,6 +1273,8 @@ function simpanPg(t, lanjut) {
   const mati = (judul, isiK, label) => dialog({ judul, konfirmasi:true, bahaya:true, isi:`<p>${isiK}${usulan('IDDS-PL-37')}</p>`, tombol:[['Batal', 'secondary', null], [label, 'primary', jalan]] });
   if (t === 'wa' && lama.provider === 'oca' && baru.provider === 'disabled') { mati('Nonaktifkan WhatsApp OCA?', 'OTP registrasi tidak lagi dikirim lewat WhatsApp ke pendaftar di <b>semua kantor PPAT</b> sampai diaktifkan kembali.', 'Nonaktifkan dan Simpan'); return; }
   if (t === 'peruri' && lama.provider === 'active' && baru.provider === 'disabled') { mati('Nonaktifkan Peruri CA?', 'Registrasi sertifikat elektronik, tanda tangan digital, dan stempel TERA berhenti di <b>semua kantor PPAT</b> sampai diaktifkan kembali.', 'Nonaktifkan dan Simpan'); return; }
+  if (t === 'umum' && !lama.pelihara && baru.pelihara) { mati('Aktifkan mode pemeliharaan?', 'Pengguna di <b>semua kantor PPAT</b> tidak dapat masuk sampai mode ini dimatikan. Admin kantor dan admin platform tetap dapat masuk.', 'Aktifkan dan Simpan'); return; }
+  if (t === 'ai' && lama.ocr_status === 'active' && baru.ocr_status === 'disabled') { mati('Nonaktifkan OCR internal?', 'Baca otomatis KTP di <b>semua kantor PPAT</b> beralih ke Gemini AI, sehingga berkas dikirim ke pihak ketiga.', 'Nonaktifkan dan Simpan'); return; }
   if (t === 'ai' && lama.status === 'active' && baru.status === 'disabled') { mati('Nonaktifkan Gemini AI?', 'Fitur Cek Ejaan pasal akta tidak tersedia di <b>semua kantor PPAT</b> sampai diaktifkan kembali.', 'Nonaktifkan dan Simpan'); return; }
   if (t === 'email' && lama.provider !== baru.provider) {
     dialog({ judul:'Ganti penyedia email?', konfirmasi:true, isi:`<p>Semua email OTP, notifikasi, dan salinan akta untuk <b>semua kantor PPAT</b> akan dikirim lewat ${baru.provider === 'smtp' ? 'SMTP' : 'Brevo API'}. Kirim email uji setelah menyimpan.${usulan('IDDS-PL-37')}</p>`, tombol:[['Batal', 'secondary', null], ['Ganti dan Simpan', 'primary', jalan]] }); return; }
@@ -1500,6 +1538,7 @@ H.addEventListener('change', e => {
     const tp2 = t.dataset.temaPilih; if (tp2) { taruh(TEMA, tp2, t.value); gambar(); return; }
     const tc = t.dataset.temaCek; if (tc) { taruh(TEMA, tc, t.checked); gambar(); $(`[data-tema-cek="${tc}"]`)?.focus(); return; }
   }
+  if (S.layar === 'pengaturan' && t.type === 'checkbox' && t.dataset.pg) { taruh(PGF, t.dataset.pg, t.checked); const id = t.id; gambar(); $('#' + id)?.focus(); return; }
   if (S.layar === 'pengaturan' && t.tagName === 'SELECT' && t.dataset.pg) { taruh(PGF, t.dataset.pg, t.value); const id = t.id; gambar(); $('#' + id).focus(); }
 });
 H.addEventListener('focusout', e => {
@@ -1612,10 +1651,14 @@ const FAQ_PG = {
     ['Mengapa ada peringatan "server uji"?', 'Alamat mengandung kata seperti dev, staging, atau perdananiaga. Alamat uji tidak boleh dipakai di produksi karena berlaku untuk semua kantor.'],
     ['Bagaimana memastikan pengaturan Peruri benar?', 'Belum ada tombol uji koneksi. Setelah menyimpan, coba Registrasi CA di kantor uji dan periksa Log Aktivitas.'],
     ['Untuk apa Email TERA?', 'Tujuan kode OTP saat membubuhkan stempel TERA. Kosongkan untuk memakai email bawaan sistem.']] },
-  ai:{ intro:'Tab Gemini AI mengatur kunci layanan AI untuk fitur Cek Ejaan pasal akta di semua kantor.', istilah:[['Gemini AI', 'Layanan AI Google yang memeriksa ejaan pasal akta.'], ['Model', 'Versi Gemini yang dipakai. Bawaannya gemini-2.5-flash.']], faq:[
+  bpn:{ intro:'Tab ATR/BPN mengatur jawaban simulasi untuk pengiriman ke ATR/BPN, karena integrasinya belum tersedia.', istilah:[['Simulasi', 'Jawaban BPN dibuat oleh sistem, bukan dari ATR/BPN.']], faq:[
+    ['Apakah pengiriman ini sungguhan?', 'Belum. Setiap pengiriman ditandai Simulasi di data dan di layar.'],
+    ['Kapan pilihan ini berlaku?', 'Setelah disimpan, dan berlaku untuk semua kantor PPAT.']] },
+  ai:{ intro:'Tab AI & Baca Berkas mengatur Gemini AI untuk Cek Ejaan pasal akta dan OCR internal untuk membaca KTP di semua kantor.', istilah:[['Gemini AI', 'Layanan AI Google yang memeriksa ejaan pasal akta.'], ['Model', 'Versi Gemini yang dipakai. Bawaannya gemini-2.5-flash.']], faq:[
     ['Gemini AI dipakai untuk apa?', 'Untuk fitur Cek Ejaan pasal akta. Satu API key dipakai bersama oleh semua kantor PPAT.'],
     ['Di mana mendapatkan API key?', 'Buat API key di Google AI Studio dengan akun Google organisasi, lalu tempel di isian API key Gemini.'],
     ['Apa akibat menonaktifkan Gemini AI?', 'Cek Ejaan pasal akta tidak tersedia di semua kantor. Penyusunan akta tetap bisa dilakukan.'],
+    ['Apa beda OCR internal dan Gemini AI?', 'OCR internal membaca KTP di layanan sendiri, sehingga berkas tidak dikirim ke pihak ketiga. Bila OCR nonaktif, baca otomatis memakai Gemini AI.'],
     ['Perlukah mengganti model?', 'Biasanya tidak. Kosongkan isian Model untuk memakai gemini-2.5-flash.']] }
 };
 const BANTUAN = {
@@ -2027,6 +2070,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
 /* label grup: kecil, sentence case, rata kiri, chevron tepat setelah label */
 .sidebar .grp{padding:16px 8px 6px;font:500 12px/16px Inter,sans-serif;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.72)}
 .sidebar .grp > svg{display:none}
+.sidebar .grp:has(> span:first-of-type:empty){display:none} /* grup tanpa judul: Tugas Saya */
 .sidebar .grp > span:not(.chev){flex:0 1 auto}
 .sidebar .grp .chev{margin-left:0;color:currentColor}
 .sidebar .grp .chev svg{color:currentColor;width:12px;height:12px}

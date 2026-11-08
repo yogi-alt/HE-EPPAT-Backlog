@@ -275,7 +275,8 @@ const POSISI = { kurang:0, siap:1, ekyc:2, periksa:2, aktif:3, selesai:4, kedalu
 
 /* ---------------- sidebar (menu live Klien) & menu profil ---------------- */
 function gambarNav() {
-  $('#nav').innerHTML = `<button class="grp" aria-expanded="true">${ik('langkah', 14)}<span>Layanan</span><span class="chev">${ik('chev', 12)}</span></button>
+  $('#nav').innerHTML = `<div class="items"><a href="#" class="ina-button ina-button--link ina-button--md nav-item" data-sesi-href="Backlog-HE-TUGAS-Prototype.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 14l2 2l4 -4" /></svg><span>Tugas Saya</span></a></div>
+    <button class="grp" aria-expanded="true">${ik('langkah', 14)}<span>Layanan</span><span class="chev">${ik('chev', 12)}</span></button>
     <div class="items"><a href="#" class="ina-button ina-button--link ina-button--md nav-item" data-sesi-href="Backlog-HE-ORDER-Prototype.html">${ik('langkah')}<span>Permohonan AJB</span></a><a href="#" class="ina-button ina-button--link ina-button--md nav-item ${S.layar === 'eaw' ? 'on' : ''}" data-ke="eaw">${ik('langkah')}<span>Penandatanganan Akta</span></a></div>`;
 }
 $('#nav').addEventListener('click', e => { const a = e.target.closest('a[data-ke]'); if (!a) return; e.preventDefault(); location.href = 'Backlog-HE-EAWK-Prototype.html'; }); /* menu Klien → prototipe E-Akta Wizard (Klien) */
