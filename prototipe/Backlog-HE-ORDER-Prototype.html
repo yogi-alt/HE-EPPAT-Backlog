@@ -567,6 +567,21 @@ body .protobar{z-index:1001}
 }
 .status-kartu .stepper-v{display:none}
 .status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
+
+/* tour guide: walkthrough dengan coach marks (HE-ORDER-23) */
+.tur{position:fixed;inset:0;z-index:2000}
+.tur-tirai{position:absolute;inset:0}
+.tur-sorot{position:fixed;border-radius:12px;box-shadow:0 0 0 9999px rgba(15,23,30,.58);outline:2px solid var(--ina-primary-300,#9cc3b4);outline-offset:2px;transition:top .25s,left .25s,width .25s,height .25s;pointer-events:none}
+.tur-kotak{position:fixed;width:min(360px,calc(100vw - 32px));background:var(--ina-background-primary,#fff);color:var(--ina-content-primary);border-radius:12px;box-shadow:0 12px 32px rgba(15,23,30,.28);padding:16px 16px 14px}
+.tur-kotak h2{margin:2px 0 6px;font-size:16px;line-height:22px;font-weight:600}
+.tur-kotak p{margin:0;font-size:14px;line-height:20px;color:var(--ina-content-secondary)}
+.tur-langkah{font-size:12px;font-weight:600;color:var(--ina-primary-primary,#3d6b5e)}
+.tur-titik{display:flex;gap:6px;margin-top:12px}
+.tur-titik span{width:6px;height:6px;border-radius:999px;background:var(--ina-stroke-primary,#d0d5d3)}
+.tur-titik span.on{background:var(--ina-primary-primary,#3d6b5e);width:16px}
+.tur-kaki{display:flex;align-items:center;gap:8px;margin-top:14px}
+.tur-kaki [data-tur=lewati]{margin-right:auto}
+@media (max-width:760px){.tur-kotak{left:16px!important;right:16px;top:auto!important;bottom:16px;width:auto}}
 </style>
 <style id="order-halaman-css">
 /* khusus halaman Permohonan AJB (di luar CSS kerangka bersama): ikon ? bertooltip untuk istilah (pola bersama) */
@@ -586,6 +601,7 @@ body .protobar{z-index:1001}
   <span class="kanan">
     <button class="pil" id="simKtp" title="Ganti hasil baca OCR KTP. Saat formulir klien terbuka, foto langsung dibaca ulang dengan hasil yang dipilih.">Hasil OCR: terbaca</button>
     <button class="pil" id="simAktif" title="Mensimulasikan pihak membuat kata sandi dari email undangan.">Simulasi akun pihak aktif</button>
+    <button class="pil" id="mulaiTur" title="Memutar contoh tour guide di halaman detail permohonan.">Mulai tur</button>
     <button class="pil" id="aturUlang">Atur ulang contoh</button>
     <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai usulan</button>
     <button class="pil utama" id="bukaUbah">Daftar perubahan (10)</button>
@@ -746,6 +762,9 @@ const UBAH = [
   { kode:'HE-ORDER-20', versi:'v2', bukanHE:true, judul:'Buat Permohonan tanpa modal',
     isi:'Tombol Buat Permohonan langsung membuka Pengumpulan Berkas. Permohonan tersimpan dan masuk daftar setelah staf menyimpan salah satu data, misalnya Narahubung.',
     lama:'Modal Buat Permohonan harus diisi lebih dulu.', ke:'daftar', sorot:'#buatOrder', sumber:'Masukan Peruri, 6 Nov 2026' },
+  { kode:'HE-ORDER-23', versi:'v2', bukanHE:true, judul:'Contoh tour guide di detail Permohonan AJB',
+    isi:'Saat Asisten atau PPAT pertama kali membuka detail permohonan, tur singkat menyorot bagian penting satu per satu: stepper, syarat dan langkah berikutnya, tombol tahap, tombol Pindah, dan tautan tahap yang sudah selesai. Bagian lain diredupkan, dan kotak keterangan berisi judul, satu kalimat, posisi langkah, serta tombol Sebelumnya, Lanjut, dan Lewati tur. Isi tombol tahap mengikuti peran. Tur muncul sekali per pengguna, dapat dilewati atau ditutup dengan Esc, dan dapat diputar ulang dari Bantuan. Langkah yang elemennya tidak ada di tahap itu dilewati otomatis.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka halaman.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-ORDER-21', versi:'v2', bukanHE:true, judul:'Tahap yang sudah lewat dapat dilihat lagi',
     isi:'Di bawah status tahap yang sudah selesai ada tautan: Lihat hasil untuk Verifikasi Berkas, Buka naskah untuk Penyusunan Akta, dan Lihat hasil untuk Penandatanganan Akta setelah permohonan Selesai. Hasil verifikasi dan tanda tangan terbuka hanya baca. Naskah tetap dapat disunting sesuai peran sampai PPAT memfinalisasi, lalu terkunci. Tombol Kembali membawa ke stepper yang sama.',
     lama:'Hanya tahap yang sedang berjalan yang dapat dibuka. Hasil Verifikasi Berkas tidak dapat dilihat lagi setelah permohonan pindah tahap.', ke:'stepper-004', sorot:'#stepperAjb', sumber:'Masukan Peruri, 9 Nov 2026' },
@@ -1087,7 +1106,69 @@ function tabDok(o, kunci) {
 }
 
 /* ---------------- gambar ---------------- */
-function gambar() { gambarNav(); $('#halaman').innerHTML = S.layar === 'daftar' ? layarDaftar() : layarDetail(); pasangPanduan(); ORDER.forEach(o => { if (o.draf && adaData(o)) { delete o.draf; gambar(); toast('Permohonan tersimpan.', 'positive', 3000, `Kode permohonan: ${o.kode}.`); } if (!o.draf) AJB.simpan(o.kode, { order:o }); }); }
+function gambar() { gambarNav(); $('#halaman').innerHTML = S.layar === 'daftar' ? layarDaftar() : layarDetail(); pasangPanduan(); ORDER.forEach(o => { if (o.draf && adaData(o)) { delete o.draf; gambar(); toast('Permohonan tersimpan.', 'positive', 3000, `Kode permohonan: ${o.kode}.`); } if (!o.draf) AJB.simpan(o.kode, { order:o }); }); cekTur(); }
+/* ---------------- tour guide halaman detail (HE-ORDER-23) ----------------
+   Muncul sekali per pengguna saat pertama membuka detail permohonan; dapat diputar ulang dari Bantuan. */
+const TUR = { aktif:false, dicek:false, i:0, daftar:[] };
+const turPeran = () => { const s = window.SESI_PROTO; if (!s) return 'asisten'; if (s.aktif === 'ROLE_KLIEN') return null;
+  if (s.aktif !== 'ROLE_ASISTEN' && (s.peran || []).includes('ROLE_PPAT')) return 'ppat'; return (s.peran || []).includes('ROLE_ASISTEN') || s.aktif === 'ROLE_ASISTEN' ? 'asisten' : null; };
+const turKunci = () => 'eppat-tur:ajb-detail:' + (window.SESI_PROTO ? window.SESI_PROTO.email : 'tanpa-sesi');
+const turSudah = () => { try { return localStorage.getItem(turKunci()) === '1'; } catch (e) { return false; } };
+const terlihat = s => [...document.querySelectorAll(s)].find(x => x.offsetParent);
+function langkahTur() {
+  const ppat = turPeran() === 'ppat';
+  return [
+    { el:() => terlihat('#stepperAjb') || terlihat('.stepper-v'), j:'Tahap permohonan', t:'Permohonan berjalan melalui enam tahap. Status, waktu, dan keterangan setiap tahap tampil di sini.' },
+    { el:() => terlihat('#syarat'), j:'Syarat dan langkah berikutnya', t:'Kotak ini menunjukkan syarat yang belum terpenuhi dan langkah yang perlu Anda lakukan.' },
+    { el:() => terlihat('#bukaTahap'), j:'Tombol tahap', t:ppat ? 'Verifikasi Berkas, Penyusunan Akta, Finalisasi Akta, dan Penandatanganan Akta dibuka dari tombol ini, bukan dari menu samping. Finalisasi Akta hanya dilakukan PPAT.' : 'Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta dibuka dari tombol ini, bukan dari menu samping.' },
+    { el:() => terlihat('#pindah'), j:'Pindah tahap', t:'Setelah semua syarat terpenuhi, tombol ini memindahkan permohonan ke tahap berikutnya.' },
+    { el:() => terlihat('.tahap-lihat'), j:'Tahap yang sudah selesai', t:'Hasil verifikasi dan naskah dapat dibuka lagi dari tautan di bawah stepper.' }
+  ].filter(l => l.el());
+}
+function mulaiTur() {
+  if (S.layar !== 'detail' || !turPeran()) return;
+  TUR.daftar = langkahTur(); if (!TUR.daftar.length) return;
+  TUR.aktif = true; TUR.i = 0;
+  document.body.insertAdjacentHTML('beforeend', '<div class="tur" id="tur" role="dialog" aria-modal="true" aria-labelledby="turJudul"><div class="tur-tirai"></div><div class="tur-sorot"></div><div class="tur-kotak" aria-live="polite"></div></div>');
+  tampilTur();
+}
+function tampilTur() {
+  const L = TUR.daftar[TUR.i], n = TUR.daftar.length, el = L.el(), akhir = TUR.i === n - 1;
+  el.scrollIntoView({ block:'center' });
+  $('#tur .tur-kotak').innerHTML = `<div class="tur-langkah">Langkah ${TUR.i + 1} dari ${n}</div><h2 id="turJudul">${L.j}</h2><p>${L.t}</p>
+    <div class="tur-titik" aria-hidden="true">${TUR.daftar.map((_, k) => `<span class="${k === TUR.i ? 'on' : ''}"></span>`).join('')}</div>
+    <div class="tur-kaki">${tombol('Lewati tur', 'tertiary', 'sm', 'data-tur="lewati"')}${TUR.i ? tombol('Sebelumnya', 'secondary', 'sm', 'data-tur="mundur"') : ''}${tombol(akhir ? 'Selesai' : 'Lanjut', 'primary', 'sm', `data-tur="${akhir ? 'selesai' : 'maju'}"`)}</div>`;
+  letakTur(); $('#tur [data-tur="' + (akhir ? 'selesai' : 'maju') + '"]').focus({ preventScroll:true });
+}
+function letakTur() {
+  if (!TUR.aktif) return;
+  const el = TUR.daftar[TUR.i].el(); if (!el) return;
+  const r = el.getBoundingClientRect(), p = 8, s = $('#tur .tur-sorot'), k = $('#tur .tur-kotak');
+  Object.assign(s.style, { top:r.top - p + 'px', left:r.left - p + 'px', width:r.width + p * 2 + 'px', height:r.height + p * 2 + 'px' });
+  const w = k.offsetWidth, h = k.offsetHeight, vw = innerWidth, vh = innerHeight;
+  const top = r.bottom + p + 12 + h < vh ? r.bottom + p + 12 : r.top - p - 12 - h > 0 ? r.top - p - 12 - h : Math.max(16, vh - h - 16);
+  Object.assign(k.style, { top:top + 'px', left:Math.min(Math.max(16, r.left), vw - w - 16) + 'px' });
+}
+function tutupTur(selesai) {
+  if (!TUR.aktif) return; TUR.aktif = false; $('#tur')?.remove();
+  try { localStorage.setItem(turKunci(), '1'); } catch (e) { /* tanpa penyimpanan, tur dapat muncul lagi */ }
+  toast(selesai ? 'Tur selesai.' : 'Tur dilewati.', selesai ? 'positive' : 'default', 4000, 'Putar ulang kapan saja dari tombol Bantuan.');
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-tur]'); if (b) { const a = b.dataset.tur;
+    if (a === 'maju') { TUR.i++; tampilTur(); } else if (a === 'mundur') { TUR.i--; tampilTur(); } else tutupTur(a === 'selesai'); return; }
+  if (e.target.closest('[data-mulai-tur]')) { tutupDrawer(); mulaiTur(); }
+});
+document.addEventListener('keydown', e => { if (!TUR.aktif) return;
+  if (e.key === 'Escape') { e.stopPropagation(); tutupTur(false); }
+  else if (e.key === 'ArrowRight' && TUR.i < TUR.daftar.length - 1) { TUR.i++; tampilTur(); }
+  else if (e.key === 'ArrowLeft' && TUR.i) { TUR.i--; tampilTur(); }
+  else if (e.key === 'Tab') { const f = [...document.querySelectorAll('#tur button')]; const i = f.indexOf(document.activeElement); e.preventDefault(); f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus(); } }, true);
+addEventListener('resize', letakTur); addEventListener('scroll', letakTur, { passive:true });
+function cekTur() {
+  if (TUR.dicek || TUR.aktif || S.layar !== 'detail' || !turPeran() || turSudah()) return;
+  TUR.dicek = true; setTimeout(() => { if (S.layar === 'detail' && !$('#lapisan').innerHTML && !$('#lapisanDrawer').innerHTML) mulaiTur(); }, 700);
+}
 function buka(kode, tab = 'kontak') { S.layar = 'detail'; S.aktif = kode; S.tab = tab; gambar(); window.scrollTo({ top:0 }); }
 
 /* ---------------- interaksi ---------------- */
@@ -1629,6 +1710,7 @@ $('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tu
 function bukaBantuan() {
   drawer({ judul:'Bantuan Permohonan AJB', isi:`
     <p>Panduan singkat menyiapkan permohonan Akta Jual Beli sampai siap dibuatkan akta.</p>
+    ${S.layar === 'detail' && turPeran() ? `<p>${tombol('Mulai tur halaman ini', 'secondary', 'sm', 'data-mulai-tur', ik('panah', 14))}${usulan('HE-ORDER-23')}</p>` : ''}
     <ol class="bantu-langkah">
       <li><b>Buat permohonan</b> dan isi data narahubung.</li>
       <li><b>Tambahkan para pihak:</b> Pihak Pertama, Pihak Kedua, dan 2 saksi. Jika salah satunya memilih harta bersama, tambahkan juga pasangannya. Gunakan <b>Simpan &amp; Tambah Lagi</b> agar tidak perlu membuka dialog berulang kali.</li>
@@ -1667,12 +1749,17 @@ function lihat(u) {
   if (u.ke === 'konfirm-selesai') { buka('ORD-CONTOH-008'); konfirmPindah(true); return; }
   if (u.ke === 'stepper') buka('ORD-CONTOH-006');
   if (u.ke === 'stepper-004') buka('ORD-CONTOH-004');
+  if (u.ke === 'tur') { buka('ORD-CONTOH-004'); setTimeout(mulaiTur, 300); return; }
   if (u.ke === 'pihak-003') buka('ORD-CONTOH-003', 'pihak');
   if (u.ke === 'objek-dialog') { buka('ORD-CONTOH-003', 'objek'); dialogObjek(); return; }
   if (u.ke === 'syarat-003') buka('ORD-CONTOH-003');
   const el = u.sorot && $(u.sorot);
   if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); }
 }
+$('#mulaiTur').addEventListener('click', () => {
+  if (!turPeran()) { toast('Contoh tur ini untuk Asisten dan PPAT.', 'default', 4000); return; }
+  if (S.layar !== 'detail') buka('ORD-CONTOH-004'); setTimeout(mulaiTur, 300);
+});
 $('#aturUlang').addEventListener('click', () => { simpanKB([]); AJB.hapus(); history.replaceState(null, '', location.pathname); ORDER = contoh(); S.layar = 'daftar'; S.cari = ''; S.filter = ''; gambar(); toast('Data contoh dikembalikan ke awal.'); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
