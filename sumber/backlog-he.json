@@ -1750,7 +1750,7 @@
       "fitur": "Registrasi (Onboarding)",
       "judul": "Verifikasi Data: email verifikasi dilengkapi ringkasan data pendaftaran",
       "saat_ini": "Email \"Verifikasi Email E-PPAT\" hanya berisi sapaan, tombol Verifikasi Email Sekarang, dan URL verifikasi; tidak memuat data pendaftaran.",
-      "usulan": "Email verifikasi live tetap dipakai dan dilengkapi: ringkasan data pendaftaran (nama, NIK dan nomor telepon disamarkan, ID PPAT / SK PPAT, URL Tenant) serta kalimat \"Periksa juga data pendaftaran Anda. Bila ada yang salah, jangan klik tombol di bawah dan hubungi Hotline 1500159.\" Kata \"address\" diganti \"alamat\". Layar Cek Email ditambah kalimat \"Periksa juga data pendaftaran Anda di email tersebut.\"",
+      "usulan": "Email verifikasi live tetap dipakai dan dilengkapi: ringkasan data pendaftaran (nama, NIK lengkap, nomor telepon disamarkan, ID PPAT / SK PPAT, URL Tenant) serta kalimat \"Periksa juga data pendaftaran Anda. Bila ada yang salah, jangan klik tombol di bawah dan hubungi Hotline 1500159.\" Kata \"address\" diganti \"alamat\". Layar Cek Email ditambah kalimat \"Periksa juga data pendaftaran Anda di email tersebut.\"",
       "prinsip": "H5 Error Prevention; H1 Visibility of System Status",
       "halaman": "Masukan Peruri 4 Nov 2026",
       "prioritas": "Sedang",
@@ -1758,7 +1758,7 @@
       "acuan": "prototipe/Backlog-HE-ONBOARDING-Prototype.html › Cek Email › Lihat contoh email verifikasi",
       "selesai_bila": "Email verifikasi menampilkan ringkasan data pendaftaran sehingga klik verifikasi sekaligus menandai data sudah diperiksa pendaftar.",
       "status": "Prototipe siap",
-      "catatan": "Masukan Peruri setelah peninjauan v1 (3 Nov 2026): tahap Verifikasi Data. Acuan isi: email live \"Verifikasi Email E-PPAT\" dari noreply@eppat.id (dilihat 26 Okt 2026). Perlu keputusan Peruri: langkah pendaftar bila data salah (saat ini diarahkan ke Hotline karena belum ada fitur ubah data sebelum masuk).",
+      "catatan": "Masukan Peruri setelah peninjauan v1 (3 Nov 2026): tahap Verifikasi Data. Acuan isi: email live \"Verifikasi Email E-PPAT\" dari noreply@eppat.id (dilihat 26 Okt 2026). Perlu keputusan Peruri: langkah pendaftar bila data salah (saat ini diarahkan ke Hotline karena belum ada fitur ubah data sebelum masuk). NIK di email tampil lengkap atas permintaan Peruri (9 Nov 2026); penyamaran adalah keputusan keamanan pemilik sistem, bukan aturan HE.",
       "tanggal": "2026-11-04",
       "sumber": "Masukan Peruri 4 Nov 2026 (bukan temuan HE) · bentuk tampilan usulan tim",
       "versi": "v2"
@@ -6569,6 +6569,24 @@
       "kode": "HE-ORDER-21",
       "perubahan": "Tautan Penyusunan Akta menjadi Buka naskah dan membuka editor biasa sesuai peran. Naskah hanya terkunci setelah PPAT memfinalisasi.",
       "berkas": "sumber/order-idds.html, sumber/minuta2-badan.html"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "HE-CA-10",
+      "perubahan": "Akun Saya dan Penandatanganan Akta untuk staf menampilkan menu sesuai peran; menu Klien hanya untuk Klien.",
+      "berkas": "sumber/sesi-bersama.html"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "HE-CA-07; HE-ORDER-09",
+      "perubahan": "NIK tampil lengkap tanpa tanda bintang di Data Diri (KTP) dan di Para Pihak Permohonan AJB.",
+      "berkas": "sumber/ca-badan.html, sumber/order-idds.html"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "HE-REG-09",
+      "perubahan": "NIK di email verifikasi pendaftaran Onboarding dan Trial tampil lengkap atas permintaan Peruri.",
+      "berkas": "sumber/onboard-badan.html (trial-badan.html dibangkitkan)"
     }
   ]
 }

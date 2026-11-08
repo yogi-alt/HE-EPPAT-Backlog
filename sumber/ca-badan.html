@@ -262,7 +262,7 @@ const DATA = [['nik','NIK','16 digit sesuai KTP'],['tempat','Tempat lahir','Sesu
 const kurang = () => DATA.filter(([k]) => !S.profil[k]);
 const DATA_SEMUA = [DATA[0], DATA[1], DATA[2], ['alamat', 'Alamat sesuai KTP', 'Untuk identitas di akta'], DATA[4], DATA[3]];
 const kurangSemua = () => DATA_SEMUA.filter(([k]) => !S.profil[k]);
-const samarNik = n => n ? n.slice(0, 4) + '********' + n.slice(-4) : '—';
+const samarNik = n => n || '—'; /* NIK tampil lengkap (masukan Peruri), tanpa tanda bintang */
 const tglId = d => d ? new Intl.DateTimeFormat('id-ID', { dateStyle:'long' }).format(new Date(d)) : '—';
 /* status live: none / pending / pending (in_review) / active / expired / revoked */
 const CA_SAMPAI = '26 Okt 2027'; /* contoh; sertifikat berlaku 1 tahun sejak aktif (informasi Peruri) */
@@ -377,13 +377,13 @@ function tabData() {
     <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ${atr.includes('disabled') ? 'ina-text-field__wrapper--disabled' : ''}"><input id="${id}" class="ina-text-field__input" value="${esc(v)}" placeholder="${ph}" ${atr}></div>
     <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div></div></div>`;
   const ops = l => `${l} <span class="opsional">(opsional)</span>`;
-  const nikBantu = p.nik ? `Tersimpan (${samarNik(p.nik)}). Isi hanya jika ingin mengganti.` : '16 digit sesuai KTP. Tanggal lahir dan jenis kelamin terisi otomatis dari NIK.';
+  const nikBantu = '16 digit sesuai KTP. Tanggal lahir dan jenis kelamin terisi otomatis dari NIK.';
   const grup = (judul, ket, isi) => `<section class="grup-dd"><h4>${judul}</h4><p class="ket-grup">${ket}</p><div class="form-dd">${isi}</div></section>`;
   return `<div class="ina-card ina-card--variant-basic kartu ditandai" id="kartuDataDiri"><div class="kartu-kepala"><span class="ikon-bulat">${ik('ktp', 20)}</span><div>
-      <h2>Data Diri (KTP)</h2><p>Data ini dipakai sebagai identitas Anda di akta dan dikirim otomatis ke Peruri saat registrasi sertifikat elektronik (CA). NIK &amp; NPWP disimpan terenkripsi dan ditampilkan tersamar.${usulan('HE-CA-07')}</p></div></div>
+      <h2>Data Diri (KTP)</h2><p>Data ini dipakai sebagai identitas Anda di akta dan dikirim otomatis ke Peruri saat registrasi sertifikat elektronik (CA). NIK &amp; NPWP disimpan terenkripsi.${usulan('HE-CA-07')}</p></div></div>
     ${alertKelengkapan()}
     ${grup('Identitas sesuai KTP', 'Isi sesuai yang tertulis di KTP Anda.',
-      `${ws('dNik', 'NIK', '', p.nik ? '••••••••' : '32xxxxxxxxxxxxxx', true, nikBantu, 'inputmode="numeric" maxlength="16" autocomplete="off"')}
+      `${ws('dNik', 'NIK', p.nik, '32xxxxxxxxxxxxxx', true, nikBantu, 'inputmode="numeric" maxlength="16" autocomplete="off"')}
       <div class="ina-text-field" id="f-dJk"><label class="ina-text-field__label" for="dJk">Jenis kelamin</label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><select id="dJk" class="ina-text-field__input"><option value="" ${!p.jk ? 'selected' : ''}>Pilih jenis kelamin</option><option value="L" ${p.jk === 'L' ? 'selected' : ''}>Laki-laki</option><option value="P" ${p.jk === 'P' ? 'selected' : ''}>Perempuan</option></select></div><div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-dJk" data-bantu="Terisi otomatis dari NIK.">Terisi otomatis dari NIK.</div></div></div>
       ${ws('dTempat', 'Tempat lahir', p.tempat, 'mis. Kota Bandung', true)}
       ${ws('dTgl', 'Tanggal lahir', p.tgl, '', true, 'Terisi otomatis dari NIK. Usia minimal 17 tahun.', 'type="date"')}
@@ -403,7 +403,7 @@ function tabData() {
       ${ws('dDomisili', ops('Domisili sementara'), p.domisili, 'mis. Kota Jakarta Selatan', false, "Isi bila saat penandatanganan Anda berada di kota lain. Tercetak di akta: 'Untuk sementara berada di …'")}`)}
     <section class="grup-dd"><h4>Foto KTP</h4><p class="ket-grup">Foto ini dikirim ke Peruri agar data Anda terisi otomatis di portal Peruri.</p>${unggahKtp(p.ktp, 'dd')}</section>
     <div class="kartu-kaki" style="align-items:center"><span class="status-simpan" id="statusDd">${ik('centang', 14)} Semua perubahan tersimpan</span>${tombol('Batal', 'secondary', 'md', 'id="batalDd" disabled')}${tombol('Simpan Data Diri', 'primary', 'md', 'id="simpanDd"', ik('centang', 16))}</div></div>
-    <p class="catatan-kunci">${ik('kunci', 13)} NIK &amp; NPWP Anda dienkripsi di server. Hanya ditampilkan tersamar; data lengkap hanya dapat dilihat oleh PPAT/notaris saat diperlukan untuk akta.</p>`;
+    <p class="catatan-kunci">${ik('kunci', 13)} NIK &amp; NPWP Anda dienkripsi di server.</p>`;
 }
 /* IDDS File Upload foto KTP — dipakai di tab Data Diri dan panel Lengkapi data */
 function unggahKtp(nama, id) {

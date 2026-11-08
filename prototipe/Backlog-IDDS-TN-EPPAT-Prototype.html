@@ -1905,11 +1905,11 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
 
   /* sidebar per peran */
   const nav = $('#nav'), boleh = t => izin(sesi, t);
-  const lengkap = () => MENU.map(([g, m]) => { const isi = m.filter(([t]) => boleh(t)); return isi.length ? `<button class="grp" aria-expanded="true"><span>${g}</span></button>
+  const lengkap = () => MENU.map(([g, m]) => { const isi = m.filter(([t]) => boleh(t)); return isi.length ? `<button class="grp" aria-expanded="true" data-menu-peran><span>${g}</span></button>
     <div class="items">${isi.map(([t, k, h]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item" data-sesi-href="${h}">${svg(IKON[k] || '')}<span>${t}</span></a>`).join('')}</div>` : ''; }).join('');
   const saring = () => {
     if (!nav) return;
-    if (['HE-CA', 'HE-EAWK'].includes(berkas) && sesi.aktif !== 'ROLE_KLIEN') { if (!nav.querySelector('[data-sesi-href]')) nav.innerHTML = lengkap(); return; }
+    if (['HE-CA', 'HE-EAWK'].includes(berkas) && sesi.aktif !== 'ROLE_KLIEN') { if (!nav.querySelector('[data-menu-peran]')) nav.innerHTML = lengkap(); return; } /* halaman ini bermenu Klien bawaan: staf mendapat menu perannya */
     if (['HE-ORDER', 'HE-TUGAS'].includes(berkas) && sesi.aktif === 'ROLE_KLIEN' && !nav.querySelector('[data-sesi-href]')) [...nav.querySelectorAll('.items')].find(w => w.textContent.includes('Permohonan AJB')).insertAdjacentHTML('beforeend', `<a href="#" class="ina-button ina-button--link ina-button--md nav-item" data-sesi-href="Backlog-HE-EAWK-Prototype.html">${svg(IKON.signature || '')}<span>Penandatanganan Akta</span></a>`);
     nav.querySelectorAll('a.nav-item').forEach(a => a.classList.toggle('sesi-sembunyi', !boleh(a.textContent.trim())));
     nav.querySelectorAll('.items').forEach(w => {

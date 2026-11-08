@@ -1064,7 +1064,7 @@ function tabPihak(o, kunci) {
     <div class="tabel-wadah" style="margin-top:0"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb"><thead class="ina-table__header"><tr><th class="ina-table__header-cell">Tipe${tanya('Tipe pihak', 'Tipe menunjukkan peran seseorang dalam akta. Pihak Pertama adalah penjual, Pihak Kedua adalah pembeli, dan saksi menyaksikan penandatanganan.')}</th><th class="ina-table__header-cell">Bentuk${tanya('Bentuk pihak', 'Pilih Perorangan untuk orang pribadi. Pilih Badan Hukum untuk perusahaan, misalnya PT, yang diwakili oleh kuasanya.')}</th><th class="ina-table__header-cell">Nama · NIK</th><th class="ina-table__header-cell ditandai" id="kolKontak">Kontak (email · HP) ${usulan('HE-ORDER-06')}</th><th class="ina-table__header-cell ditandai" id="kolStatusAkun">Status Akun${tanya('Status Akun', KET_AKUN)} ${usulan('HE-ORDER-15')}</th><th class="ina-table__header-cell ditandai" id="kolStatusCa">Status Sertifikat${tanya('Status Sertifikat', KET_CA)} ${usulan('HE-ORDER-15')}</th><th class="ina-table__header-cell"></th></tr></thead>
     <tbody class="ina-table__body">${o.pihak.length ? o.pihak.map((p, i) => `<tr class="ina-table__row"><td class="ina-table__cell">${kecil(TIPE[p.tipe].replace(' (harta bersama)', '').toUpperCase(), 'info')}</td>
       <td class="ina-table__cell">${kecil(p.tipe === 'SAKSI' ? '—' : p.bentuk, 'neutral')}${p.harta === 'BERSAMA' ? '<div class="sub2">Harta bersama</div>' : ''}</td>
-      <td class="ina-table__cell"><div class="nm">${esc(p.nama)}</div><div class="sub2">${p.nik ? p.nik.slice(0, 4) + '********' + p.nik.slice(-4) : (p.pt ? 'Badan hukum' : kecil('NIK belum diisi', 'warning'))}</div></td>
+      <td class="ina-table__cell"><div class="nm">${esc(p.nama)}</div><div class="sub2">${p.nik ? esc(p.nik) : (p.pt ? 'Badan hukum' : kecil('NIK belum diisi', 'warning'))}</div></td>
       <td class="ina-table__cell"><div>${esc(p.email) || '—'}</div><div class="sub2">${p.hp ? esc(p.hp) : 'No. HP belum diisi'}</div></td>
       <td class="ina-table__cell">${lencanaTip(AKUN_PIHAK[statusAkun(p)])}</td>
       <td class="ina-table__cell">${lencanaTip(CA_PIHAK[p.ca || 'none'])}</td>
@@ -1205,7 +1205,7 @@ document.addEventListener('input', e => { if (e.target.matches?.('input[maxlengt
 function kartuUser(f, V, c) {
   const k = f.kode, u = V[k] ? cariKlien(V[k]) : null, baruBoleh = k === 'user_klien' && V.tipe_pihak !== 'Saksi', err = (c.galat || {})[k];
   if (u) { const judul = k === 'user_klien' ? (V.pihak_dikuasakan ? 'Identitas pemberi kuasa, pihak (KTP)' : V.tipe_pihak === 'Saksi' ? 'Identitas saksi (KTP)' : 'Identitas penghadap (KTP)') : f.label;
-    return `<div class="kartu-pihak ditandai" id="kartu-${k}"><div style="display:flex;justify-content:space-between;gap:8px"><b>${judul}: ${esc(u.nama)}</b>${tombol('Ganti pengguna', 'link', 'sm', `data-ganti-user="${k}"`)}</div><dl><div><dt>NIK</dt><dd>${u.nik ? u.nik.slice(0, 4) + '********' + u.nik.slice(-4) : '—'}</dd></div><div><dt>Tempat lahir</dt><dd>${esc(u.tempat) || '—'}</dd></div><div><dt>Alamat</dt><dd>${esc(u.alamat) || '—'}</dd></div><div><dt>Pekerjaan</dt><dd>${esc(u.pekerjaan) || '—'}</dd></div></dl>
+    return `<div class="kartu-pihak ditandai" id="kartu-${k}"><div style="display:flex;justify-content:space-between;gap:8px"><b>${judul}: ${esc(u.nama)}</b>${tombol('Ganti pengguna', 'link', 'sm', `data-ganti-user="${k}"`)}</div><dl><div><dt>NIK</dt><dd>${u.nik ? esc(u.nik) : '—'}</dd></div><div><dt>Tempat lahir</dt><dd>${esc(u.tempat) || '—'}</dd></div><div><dt>Alamat</dt><dd>${esc(u.alamat) || '—'}</dd></div><div><dt>Pekerjaan</dt><dd>${esc(u.pekerjaan) || '—'}</dd></div></dl>
       ${u.baru ? `<div class="catatan-akun">${alert('info', '', 'Belum punya akun. Setelah disimpan, klik <b>Buat Akun &amp; Undang</b> di daftar para pihak.')}</div>` : `<p class="ket-f" style="margin-top:8px">Identitasnya dibaca dari data diri akun ini saat akta dirakit. Perbaikannya di menu Daftar Pengguna.</p>`}
       ${!u.nik ? `<div style="margin-top:10px">${alert('caution', '', 'Profil pengguna ini belum lengkap (NIK belum diisi). Anda tetap bisa menyimpan; lengkapi datanya nanti agar siap untuk akta.')}</div>` : ''}${usulan('HE-ORDER-14')}</div>`; }
   const q = (c.cari[k] || '').toLowerCase(), sudah = c.sudah || new Set(), hasil = KLIEN.filter(x => !sudah.has(x.id) && (!x.hanyaSaksi || V.tipe_pihak === 'Saksi') && (!q || (x.nama + x.email).toLowerCase().includes(q)));
@@ -2217,11 +2217,11 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
 
   /* sidebar per peran */
   const nav = $('#nav'), boleh = t => izin(sesi, t);
-  const lengkap = () => MENU.map(([g, m]) => { const isi = m.filter(([t]) => boleh(t)); return isi.length ? `<button class="grp" aria-expanded="true"><span>${g}</span></button>
+  const lengkap = () => MENU.map(([g, m]) => { const isi = m.filter(([t]) => boleh(t)); return isi.length ? `<button class="grp" aria-expanded="true" data-menu-peran><span>${g}</span></button>
     <div class="items">${isi.map(([t, k, h]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item" data-sesi-href="${h}">${svg(IKON[k] || '')}<span>${t}</span></a>`).join('')}</div>` : ''; }).join('');
   const saring = () => {
     if (!nav) return;
-    if (['HE-CA', 'HE-EAWK'].includes(berkas) && sesi.aktif !== 'ROLE_KLIEN') { if (!nav.querySelector('[data-sesi-href]')) nav.innerHTML = lengkap(); return; }
+    if (['HE-CA', 'HE-EAWK'].includes(berkas) && sesi.aktif !== 'ROLE_KLIEN') { if (!nav.querySelector('[data-menu-peran]')) nav.innerHTML = lengkap(); return; } /* halaman ini bermenu Klien bawaan: staf mendapat menu perannya */
     if (['HE-ORDER', 'HE-TUGAS'].includes(berkas) && sesi.aktif === 'ROLE_KLIEN' && !nav.querySelector('[data-sesi-href]')) [...nav.querySelectorAll('.items')].find(w => w.textContent.includes('Permohonan AJB')).insertAdjacentHTML('beforeend', `<a href="#" class="ina-button ina-button--link ina-button--md nav-item" data-sesi-href="Backlog-HE-EAWK-Prototype.html">${svg(IKON.signature || '')}<span>Penandatanganan Akta</span></a>`);
     nav.querySelectorAll('a.nav-item').forEach(a => a.classList.toggle('sesi-sembunyi', !boleh(a.textContent.trim())));
     nav.querySelectorAll('.items').forEach(w => {

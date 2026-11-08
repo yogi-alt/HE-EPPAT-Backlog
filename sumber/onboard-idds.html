@@ -693,7 +693,7 @@ const UBAH = [
     isi:'Setelah semua isian lolos pemeriksaan dan tombol Daftar Sekarang diklik, muncul IDDS Modal "Periksa kembali data Anda" berisi ringkasan: nama, NIK, email, nomor telepon, tempat dan tanggal lahir, kewarganegaraan, ID PPAT / SK PPAT, bank dan nomor rekening, serta URL Tenant. Tombol "Ubah Data" menutup dialog dan kembali ke formulir; "Ya, Daftar" mengirim pendaftaran.',
     lama:'Pendaftaran langsung dikirim saat Daftar Sekarang diklik, tanpa kesempatan memeriksa data.', ke:'reg', sorot:'#aksiForm', sumber:'Masukan Peruri 4 Nov 2026 (bukan temuan HE) · bentuk tampilan usulan tim', versi:'v2' },
   { kode:'HE-REG-09', judul:'Verifikasi Data: email verifikasi memuat ringkasan data pendaftaran',
-    isi:'Email verifikasi live (Verifikasi Email E-PPAT) dilengkapi ringkasan data pendaftaran (nama, NIK dan nomor telepon disamarkan, ID PPAT / SK PPAT, URL Tenant) dan satu kalimat: bila ada yang salah, jangan klik tombol dan hubungi Hotline 1500159. Isi lain tetap sama dengan live; hanya kata "address" diganti "alamat". Satu klik membuktikan email aktif sekaligus data sudah diperiksa pendaftar, sesuai nama tahap Verifikasi Data. Layar Cek Email ditambah kalimat "Periksa juga data pendaftaran Anda di email tersebut." dan tautan "Lihat contoh email verifikasi".',
+    isi:'Email verifikasi live (Verifikasi Email E-PPAT) dilengkapi ringkasan data pendaftaran (nama, NIK lengkap, nomor telepon disamarkan, ID PPAT / SK PPAT, URL Tenant) dan satu kalimat: bila ada yang salah, jangan klik tombol dan hubungi Hotline 1500159. Isi lain tetap sama dengan live; hanya kata "address" diganti "alamat". Satu klik membuktikan email aktif sekaligus data sudah diperiksa pendaftar, sesuai nama tahap Verifikasi Data. Layar Cek Email ditambah kalimat "Periksa juga data pendaftaran Anda di email tersebut." dan tautan "Lihat contoh email verifikasi".',
     lama:'Email verifikasi hanya berisi tautan untuk memverifikasi email, tanpa data pendaftaran.', ke:'verif', sorot:'#contohSurel', sumber:'Masukan Peruri 4 Nov 2026 (bukan temuan HE) · bentuk tampilan usulan tim', versi:'v2' },
   { kode:'HE-REG-10', judul:'Formulir Registrasi: nomor telepon maksimal 15 digit',
     isi:'Isian Nomor Telepon (awalan +62) menerima maksimal 15 digit dan memiliki teks bantuan "Diawali 8, tanpa 0 di depan. Maksimal 15 digit." Pesan galat menjadi "Nomor telepon diawali 8, 9–15 digit tanpa 0 di depan."',
@@ -965,10 +965,10 @@ function layarVerifEmail() {
     </section>`;
 }
 /* Verifikasi Data (masukan Peruri 4 Nov 2026): email verifikasi memuat ringkasan data pendaftaran; satu klik
-   membuktikan email aktif sekaligus data sudah diperiksa pendaftar. NIK dan nomor telepon disamarkan. */
+   membuktikan email aktif sekaligus data sudah diperiksa pendaftar. NIK tampil lengkap atas permintaan Peruri; nomor telepon disamarkan. */
 function surelVerifikasi() {
   const d = S.data || { nama:'Budi Santoso', nik:'3273011203850002', hp:'81234567890', idppat:'1/KEP-CONTOH/2020', tenant:'budi-santoso-bandung' };
-  const baris = [['Nama Lengkap', esc(d.nama)], ['NIK', d.nik.slice(0, 4) + '********' + d.nik.slice(-4)], ['Nomor Telepon', '+62 ' + d.hp.slice(0, 3) + '****' + d.hp.slice(-4)],
+  const baris = [['Nama Lengkap', esc(d.nama)], ['NIK', esc(d.nik)], ['Nomor Telepon', '+62 ' + d.hp.slice(0, 3) + '****' + d.hp.slice(-4)],
     ['ID PPAT / SK PPAT', esc(d.idppat)], ['URL Tenant', `dev-app.eppat.id/t/<b>${esc(d.tenant)}</b>`]];
   /* isi sama dengan email live "Verifikasi Email E-PPAT" (dilihat 26 Okt 2026); tambahan hanya ringkasan data + satu kalimat (bertanda) */
   dialog({ judul:'Contoh email verifikasi', lebar:true, tombol:[['Tutup', 'secondary']],
