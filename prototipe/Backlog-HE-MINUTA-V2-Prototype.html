@@ -1051,8 +1051,7 @@ const m = () => MINUTA.find(x => x.kode === S.aktif);
 const item = () => m() && m().naskah.find(x => x.id === S.pilih);
 const nomorPasal = (n, it) => n.filter(x => x.tipe === 'PASAL').indexOf(it) + 1;
 const ST = { DRAFTING:['Penyusunan','info'], SELESAI:['Selesai','success'] };
-const LIHAT = AJB.lihat(); /* dibuka dari tautan Lihat naskah di stepper: hanya baca */
-const final = () => LIHAT || (!!m() && m().status === 'SELESAI');
+const final = () => !!m() && m().status === 'SELESAI';
 const bisaEdit = () => !final() && !!item();
 const sempit = () => window.matchMedia('(max-width:900px)').matches;
 
@@ -1116,7 +1115,7 @@ function layarDetail() {
       </div>
       ${bilahAlat()}
       <div class="pita">${fin
-        ? alert('info', '', LIHAT && x.status !== 'SELESAI' ? `${ik('kunci', 14)} Tahap Penyusunan Akta sudah selesai. Halaman ini hanya untuk dilihat; untuk menyunting, buka tombol Penyusunan Akta di Permohonan AJB.` : `${ik('kunci', 14)} Akta sudah difinalisasi${tanya('Finalisasi', T_FINAL)} dengan nomor <b>${esc(x.nomor)}</b>. Naskah hanya dapat dibaca.`, tombol('Kembali ke Permohonan AJB', 'primary', 'sm', 'data-ke-daftar', ik('panah', 14)))
+        ? alert('info', '', `${ik('kunci', 14)} Akta sudah difinalisasi${tanya('Finalisasi', T_FINAL)} dengan nomor <b>${esc(x.nomor)}</b>. Naskah hanya dapat dibaca.`, tombol('Kembali ke Permohonan AJB', 'primary', 'sm', 'data-ke-daftar', ik('panah', 14)))
         : ppat ? alert('info', '', `Anda dapat menyunting pasal dan memfinalisasi akta. Periksa naskah, lalu klik <b>Finalisasi Akta</b>.${tanya('Finalisasi', T_FINAL)}${usulan('HE-MINUTA-01')}`)
         : alert('info', '', `Anda dapat menyunting isi pasal. Setelah selesai, klik <b>Beritahu PPAT</b> agar PPAT memeriksa dan memfinalisasi akta.${tanya('Finalisasi', T_FINAL)}${usulan('HE-MINUTA-01')}`)}</div>
       ${blokEjaan()}

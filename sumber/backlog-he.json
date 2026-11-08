@@ -157,6 +157,60 @@
       "sumber": "Laporan HE INA Digital hlm. 20"
     },
     {
+      "kode": "HE-TERA-08",
+      "fitur": "Registrasi TERA",
+      "judul": "Formulir TERA tanpa Identitas Organisasi / Perusahaan",
+      "saat_ini": "Formulir memuat kelompok Identitas Organisasi / Perusahaan berisi data kantor, SIUP/KBLI, NPWP, dan lampiran dokumen kantor.",
+      "usulan": "Hapus kelompok Identitas Organisasi / Perusahaan. Formulir berisi Identitas Perseorangan dan Pendaftaran Stempel.",
+      "prinsip": "H1 Visibility of System Status; H10 Help and Documentation",
+      "halaman": "Masukan 9 Nov 2026",
+      "prioritas": "Sedang",
+      "layar": "Akun Saya › Registrasi TERA",
+      "acuan": "Prototipe TERA",
+      "selesai_bila": "Kelompok Identitas Organisasi / Perusahaan tidak tampil.",
+      "status": "Prototipe siap",
+      "catatan": "Masukan Peruri 9 Nov 2026.",
+      "tanggal": "2026-11-09",
+      "sumber": "Masukan Peruri",
+      "versi": "v2"
+    },
+    {
+      "kode": "HE-TERA-09",
+      "fitur": "Registrasi TERA",
+      "judul": "Data diri TERA terisi otomatis dan terkunci",
+      "saat_ini": "Semua data diri diisi ulang walaupun sudah ada dari pendaftaran Onboarding atau sertifikat elektronik (CA).",
+      "usulan": "Super Admin + PPAT: data diri dari pendaftaran Onboarding (nama, NIK, email, telepon, kewarganegaraan, tempat dan tanggal lahir, ID PPAT, rekening, scan KTP) terisi dan terkunci. PPAT dengan CA aktif: data diri dari Data Diri (KTP) terisi dan terkunci, sedangkan ID PPAT dan rekening tetap diisi. Isian terkunci bertanda kunci dan menyebut asal datanya, dengan alert yang meminta pengguna menghubungi admin E-PPAT bila ada yang salah.",
+      "prinsip": "H1 Visibility of System Status; H10 Help and Documentation",
+      "halaman": "Masukan 9 Nov 2026",
+      "prioritas": "Sedang",
+      "layar": "Akun Saya › Registrasi TERA",
+      "acuan": "Prototipe TERA",
+      "selesai_bila": "Data diri yang sudah ada tidak perlu diisi dua kali dan tidak dapat diubah di formulir TERA.",
+      "status": "Prototipe siap",
+      "catatan": "Masukan Peruri 9 Nov 2026.",
+      "tanggal": "2026-11-09",
+      "sumber": "Masukan Peruri",
+      "versi": "v2"
+    },
+    {
+      "kode": "HE-TERA-10",
+      "fitur": "Registrasi TERA",
+      "judul": "Unggah SK PPAT terakhir dan batas ukuran berkas",
+      "saat_ini": "Tidak ada unggahan SK PPAT, dan unggahan KTP tidak menyebut batas ukuran berkas.",
+      "usulan": "Tambahkan unggahan wajib SK PPAT Terakhir di Identitas Perseorangan. Unggahan SK PPAT dan Scan KTP menyebut format dan batas ukuran: PDF, JPG, atau PNG, maks. 1 MB.",
+      "prinsip": "H1 Visibility of System Status; H10 Help and Documentation",
+      "halaman": "Masukan 9 Nov 2026",
+      "prioritas": "Sedang",
+      "layar": "Akun Saya › Registrasi TERA",
+      "acuan": "Prototipe TERA",
+      "selesai_bila": "SK PPAT wajib diunggah, dan setiap unggahan menyebut batas ukurannya.",
+      "status": "Prototipe siap",
+      "catatan": "Masukan Peruri 9 Nov 2026.",
+      "tanggal": "2026-11-09",
+      "sumber": "Masukan Peruri",
+      "versi": "v2"
+    },
+    {
       "kode": "HE-ORDER-01",
       "fitur": "Permohonan AJB",
       "judul": "Kartu status order: syarat pindah status terlihat sebelum tombol ditekan",
@@ -518,12 +572,12 @@
       "halaman": "Masukan 9 Nov 2026",
       "judul": "Stepper: tahap yang sudah lewat dapat dilihat lagi",
       "saat_ini": "Hanya tahap yang sedang berjalan yang dapat dibuka. Hasil Verifikasi Berkas dan naskah tidak dapat dilihat lagi setelah permohonan pindah tahap.",
-      "usulan": "Di bawah status tahap yang sudah selesai, tampilkan tautan teks: Lihat hasil (Verifikasi Berkas), Lihat naskah (Penyusunan Akta), dan Lihat hasil (Penandatanganan Akta, setelah Selesai). Halaman terbuka hanya baca dengan keterangan bahwa tahap sudah selesai, dan Kembali membawa ke stepper yang sama. Tombol kerja tetap di samping tombol Pindah. Klien tidak melihat tautan ini.",
+      "usulan": "Di bawah status tahap yang sudah selesai, tampilkan tautan teks: Lihat hasil (Verifikasi Berkas, hanya baca), Buka naskah (Penyusunan Akta), dan Lihat hasil (Penandatanganan Akta setelah Selesai, hanya baca). Naskah tetap dapat disunting sesuai peran sampai PPAT memfinalisasi: Asisten dengan Beritahu PPAT, PPAT dengan Finalisasi Akta. Setelah final, naskah terkunci. Kembali membawa ke stepper yang sama. Tombol kerja tetap di samping tombol Pindah. Klien tidak melihat tautan ini.",
       "prinsip": "H3 User Control and Freedom",
       "prioritas": "Sedang",
       "layar": "Permohonan AJB › stepper",
       "acuan": "Prototipe ORDER; Prototipe VERIF; Prototipe MINUTA-V2",
-      "selesai_bila": "Tautan hanya muncul di tahap yang sudah selesai, dan halaman yang dibuka tidak dapat diubah.",
+      "selesai_bila": "Tautan hanya muncul di tahap yang sudah selesai. Verifikasi dan tanda tangan tidak dapat diubah, dan naskah terkunci hanya setelah final.",
       "catatan": "Masukan Peruri 9 Nov 2026."
     },
     {
@@ -6497,6 +6551,24 @@
       "kode": "HE-ORDER-21; HE-ORDER-22",
       "perubahan": "Tautan Lihat hasil dan Lihat naskah di bawah tahap yang sudah selesai, membuka halaman hanya baca. Tombol tahap Finalisasi untuk Asisten bertulisan Penyusunan Akta.",
       "berkas": "sumber/order-idds.html, sumber/verif-badan.html, sumber/minuta2-badan.html, sumber/ajb-bersama.html"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "HE-TERA-08; HE-TERA-09; HE-TERA-10",
+      "perubahan": "Formulir TERA: kelompok Identitas Organisasi / Perusahaan dihapus, data diri dari Onboarding atau CA aktif terisi dan terkunci, unggahan SK PPAT terakhir wajib, batas ukuran berkas maks. 1 MB.",
+      "berkas": "sumber/tera-idds.html"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "HE-CA-10",
+      "perubahan": "Ikon menu Klien di Akun Saya dan Penandatanganan Akta disamakan dengan halaman lain: dokumen untuk Permohonan AJB, tanda tangan untuk Penandatanganan Akta.",
+      "berkas": "sumber/ca-badan.html, sumber/eawk-badan.html"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "HE-ORDER-21",
+      "perubahan": "Tautan Penyusunan Akta menjadi Buka naskah dan membuka editor biasa sesuai peran. Naskah hanya terkunci setelah PPAT memfinalisasi.",
+      "berkas": "sumber/order-idds.html, sumber/minuta2-badan.html"
     }
   ]
 }

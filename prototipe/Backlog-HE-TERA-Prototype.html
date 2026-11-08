@@ -422,6 +422,9 @@ h1{margin:0;font:500 28px/36px Inter,sans-serif;letter-spacing:-.3px;color:var(-
 .warna-baris input[type=color]{width:44px;height:44px;padding:2px;border:1px solid var(--ina-stroke-primary);border-radius:8px;background:var(--ina-background-primary);cursor:pointer;flex:none}
 .warna-baris .ina-text-field{flex:1}
 .berkas-baris{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ket-kunci{display:inline-flex;align-items:center;gap:4px}
+.ina-file-upload .ina-text-field__helper-text--error{color:var(--ina-content-negative)}
+.diri-kunci{margin:4px 0 16px}
 .berkas-baris .nama{font-size:13px;color:var(--ina-content-secondary)}
 .berkas-baris .nama.ada{color:var(--ina-content-positive)}
 .stempel-wadah{display:flex;gap:16px;align-items:center}
@@ -608,6 +611,15 @@ const UBAH = [
   { kode:'HE-TERA-06', judul:'Registrasi TERA: konfirmasi sebelum pendaftaran disimpan',
     isi:'Sebelum menyimpan, sistem menampilkan ringkasan data utama agar pengguna dapat memeriksanya sekali lagi.',
     lama:'Tombol "Simpan Pendaftaran" langsung menyimpan tanpa konfirmasi.', ke:'tera-konfirm', sorot:null, sumber:'Laporan HE INA Digital hlm. 20' },
+  { kode:'HE-TERA-08', versi:'v2', bukanHE:true, judul:'Formulir TERA tanpa Identitas Organisasi / Perusahaan',
+    isi:'Kelompok Identitas Organisasi / Perusahaan dihapus. Formulir berisi Identitas Perseorangan dan Pendaftaran Stempel.',
+    lama:'Formulir memuat kelompok Identitas Organisasi / Perusahaan berisi data kantor, SIUP/KBLI, NPWP, dan lampiran dokumen kantor.', ke:'tera', sorot:'#tera', sumber:'Masukan Peruri, 9 Nov 2026' },
+  { kode:'HE-TERA-09', versi:'v2', bukanHE:true, judul:'Data diri terisi otomatis dan terkunci',
+    isi:'Data diri tidak diisi dua kali. Untuk Super Admin + PPAT, data dari pendaftaran Onboarding terisi dan terkunci. Untuk PPAT dengan sertifikat elektronik (CA) aktif, data dari Data Diri (KTP) terisi dan terkunci. Isian terkunci bertanda kunci dan menyebut asal datanya.',
+    lama:'Semua data diri diisi ulang walaupun sudah ada dari Onboarding atau CA.', ke:'tera', sorot:'#diriKunci', sumber:'Masukan Peruri, 9 Nov 2026' },
+  { kode:'HE-TERA-10', versi:'v2', bukanHE:true, judul:'Unggah SK PPAT terakhir dan batas ukuran berkas',
+    isi:'Identitas Perseorangan meminta unggahan SK PPAT terakhir (wajib). Unggahan SK PPAT dan Scan KTP menyebut format dan batas ukuran: PDF, JPG, atau PNG, maks. 1 MB.',
+    lama:'Tidak ada unggahan SK PPAT, dan unggahan KTP tidak menyebut batas ukuran.', ke:'tera', sorot:'#f-sk_ppat', sumber:'Masukan Peruri, 9 Nov 2026' },
   { kode:'HE-TERA-07', judul:'Registrasi TERA: tahapan proses dan perkiraan waktu',
     isi:'Bagian atas menampilkan empat tahap beserta perkiraan waktunya, lalu satu kalimat tentang langkah berikutnya. Dialog konfirmasi juga menyebut perkiraan waktu sampai stempel aktif. Jika pendaftaran ditolak, alasannya ikut ditampilkan.',
     lama:'Hanya lencana status dan kalimat "Data pendaftaran tersimpan. Pengajuan ke Peruri dilakukan manual oleh admin platform (API registrasi TERA belum tersedia)."', ke:'tera', sorot:'#tahap', sumber:'Laporan HE INA Digital hlm. 20' }
@@ -636,19 +648,8 @@ const BAGIAN = [
     { k:'tanggal_lahir', l:'Tanggal Lahir', tipe:'date' },
     { k:'id_ppat', l:'ID PPAT / Nomor SK', ph:'Sesuai surat SK', tip:'Nomor Surat Keputusan (SK) pengangkatan Anda sebagai PPAT. Tulis persis seperti di surat SK.' },
     { k:'rekening_ppat', l:'Rekening PPAT', ph:'Nomor rekening atas nama PPAT', angka:20 },
-    { k:'id_card', l:'Scan KTP (PDF/gambar)', berkas:true }
-  ]},
-  { judul:'Identitas Organisasi / Perusahaan', ket:'Sebagian data sudah terisi dari Profil Kantor. Periksa kembali sebelum menyimpan.', isian:[
-    { k:'nama_organisasi', l:'Nama Organisasi' },
-    { k:'email_organisasi', l:'Email Organisasi', tipe:'email', ph:'kantor@contoh.id' },
-    { k:'nomor_ppat_terdaftar', l:'Nomor PPAT Terdaftar', tip:'Umumnya sama dengan nomor SK pengangkatan PPAT.' },
-    { k:'alamat_organisasi', l:'Alamat Organisasi' },
-    { k:'nomor_siup_kbli', l:'Nomor SIUP / KBLI', ph:'Isi salah satu', tip:'SIUP adalah Surat Izin Usaha Perdagangan. KBLI adalah kode bidang usaha 5 angka yang tercantum pada NIB.' },
-    { k:'nomor_npwp', l:'Nomor NPWP', ph:'15 atau 16 angka', angka:16 },
-    { k:'telepon_organisasi', l:'Telepon Organisasi', ph:'021xxxxxxx', angka:15 },
-    { k:'jenis_dokumen', l:'Jenis Dokumen', pilih:[['','Pilih jenis dokumen'],['SIUP','SIUP'],['NPWP','NPWP'],['AKTA PENDIRIAN','Akta Pendirian']], tip:'Pilih jenis dokumen yang Anda unggah pada isian Lampiran.' },
-    { k:'email_admin_notaris', l:'Email Admin PPAT', tipe:'email', ph:'staf@contoh.id', tip:'Email staf kantor yang mengurus pendaftaran ini.' },
-    { k:'lampiran', l:'Lampiran (PDF/gambar)', berkas:true }
+    { k:'sk_ppat', l:'SK PPAT Terakhir', berkas:true, wajib:true, help:'Unggah SK pengangkatan PPAT yang terakhir. PDF, JPG, atau PNG, maks. 1 MB.' },
+    { k:'id_card', l:'Scan KTP', berkas:true, help:'PDF, JPG, atau PNG, maks. 1 MB.' }
   ]},
   { judul:'Pendaftaran Stempel', ket:'Atur teks dan warna stempel yang akan tampil pada akta.', isian:[
     { k:'isi_stempel', l:'Isi Stempel', wajib:true, ph:'Contoh: PPAT CONTOH SATU, S.H. KOTA CONTOH', help:'Biasanya berisi nama PPAT dan wilayah kerja.' },
@@ -658,19 +659,26 @@ const BAGIAN = [
   ]}
 ];
 const SEMUA = BAGIAN.flatMap(b => b.isian).filter(f => !f.pratinjau);
-const PROFIL = { nama_organisasi:'Kantor PPAT Contoh Satu', alamat_organisasi:'Jl. Contoh No. 1, Kota Contoh', email_organisasi:'kantor@contoh.id',
-  id_ppat:'1/KEP-CONTOH/2020', nomor_ppat_terdaftar:'1/KEP-CONTOH/2020', telepon_organisasi:'0210000000' };
-const KOSONG = () => ({ nama_lengkap:'', nik:'', email:'', nomor_telepon:'', kewarganegaraan:'WNI', tempat_lahir:'', tanggal_lahir:'', id_ppat:'', rekening_ppat:'',
-  nama_organisasi:'', email_organisasi:'', nomor_ppat_terdaftar:'', alamat_organisasi:'', nomor_siup_kbli:'', nomor_npwp:'', telepon_organisasi:'',
-  jenis_dokumen:'', email_admin_notaris:'', isi_stempel:'', code_warna:'#0A1F47', id_card:'', lampiran:'', dokumen_tambahan:'', ...PROFIL });
-const TERISI = () => ({ ...KOSONG(), nama_lengkap:'Contoh Satu', nik:'3200000000000001', email:'ppat@contoh.id', nomor_telepon:'081200000001', tempat_lahir:'Kota Contoh',
-  tanggal_lahir:'1980-01-01', rekening_ppat:'1234567890', nomor_siup_kbli:'69102', nomor_npwp:'000000000000001', jenis_dokumen:'AKTA PENDIRIAN',
-  email_admin_notaris:'staf@contoh.id', isi_stempel:'PPAT CONTOH SATU, S.H. KOTA CONTOH', id_card:'ktp-contoh.pdf', lampiran:'akta-pendirian-contoh.pdf' });
+const PROFIL = { id_ppat:'1/KEP-CONTOH/2020' };
+/* data diri yang sudah ada tidak diisi dua kali: Super Admin + PPAT dari pendaftaran Onboarding, PPAT lain dari Data Diri (KTP) bila CA aktif */
+const SESI_T = window.SESI_PROTO;
+const SUMBER_DIRI = !SESI_T ? null : (SESI_T.peran || []).includes('ROLE_ADMIN') && (SESI_T.peran || []).includes('ROLE_PPAT') ? 'onboarding' : AJB.caStatus(SESI_T.email) === 'active' ? 'ca' : null;
+const KUNCI_DIRI = { onboarding:['nama_lengkap', 'nik', 'email', 'nomor_telepon', 'kewarganegaraan', 'tempat_lahir', 'tanggal_lahir', 'id_ppat', 'rekening_ppat', 'id_card'],
+  ca:['nama_lengkap', 'nik', 'email', 'nomor_telepon', 'kewarganegaraan', 'tempat_lahir', 'tanggal_lahir', 'id_card'] }[SUMBER_DIRI] || [];
+const ASAL_DIRI = { onboarding:'pendaftaran Onboarding', ca:'Data Diri (KTP) sertifikat elektronik Anda' }[SUMBER_DIRI];
+const DIRI = SESI_T ? { nama_lengkap:SESI_T.nama, nik:'3200000000000001', email:SESI_T.email, nomor_telepon:'081200000001', kewarganegaraan:'WNI', tempat_lahir:'Kota Contoh',
+  tanggal_lahir:'1980-01-01', id_ppat:'1/KEP-CONTOH/2020', rekening_ppat:'1234567890', id_card:'ktp-contoh.pdf' } : {};
+const terkunci = k => KUNCI_DIRI.includes(k);
+const isiKunci = o => { KUNCI_DIRI.forEach(k => { o[k] = DIRI[k]; }); return o; };
+const KOSONG = () => isiKunci({ nama_lengkap:'', nik:'', email:'', nomor_telepon:'', kewarganegaraan:'WNI', tempat_lahir:'', tanggal_lahir:'', id_ppat:'', rekening_ppat:'',
+  isi_stempel:'', code_warna:'#0A1F47', sk_ppat:'', id_card:'', dokumen_tambahan:'', ...PROFIL });
+const TERISI = () => isiKunci({ ...KOSONG(), nama_lengkap:'Contoh Satu', nik:'3200000000000001', email:'ppat@contoh.id', nomor_telepon:'081200000001', tempat_lahir:'Kota Contoh',
+  tanggal_lahir:'1980-01-01', rekening_ppat:'1234567890', isi_stempel:'PPAT CONTOH SATU, S.H. KOTA CONTOH', sk_ppat:'sk-ppat-contoh.pdf', id_card:'ktp-contoh.pdf' });
 
 /* ---------------- pemeriksaan isian (HE-TERA-05) ---------------- */
 function periksa(f, v) {
   const n = String(v || '').trim();
-  if (f.wajib && !n) return `${f.l} wajib diisi.`;
+  if (f.wajib && !n) return f.berkas ? `${f.l} wajib diunggah.` : `${f.l} wajib diisi.`;
   if (!n) return '';
   if (f.k === 'nik' && n.length !== 16) return 'NIK harus 16 angka.';
   if (f.tipe === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(n)) return 'Format email belum benar, contoh: nama@contoh.id';
@@ -800,7 +808,7 @@ function tabTera() {
     <div class="kartu ditandai" id="teraKepala">
       <div class="judul-tera"><h3>${ik('stempel', 22)}Pendaftaran Stempel Elektronik (TERA)</h3>${S.status !== 'belum' ? badge(st.label, st.jenis) : ''}${usulan('HE-TERA-04')}${usulan('HE-UMUM-01')}</div>
       <p class="ket" style="margin-top:6px">TERA adalah stempel resmi kantor Anda yang dibubuhkan pada setiap akta elektronik. Lengkapi data di bawah ini, lalu admin E-PPAT akan mengajukannya ke Peruri untuk Anda. ${tombol('Lihat panduan pendaftaran', 'link', 'sm', 'data-bantuan')}${usulan('HE-UMUM-02')}</p>
-      ${perluTindakan() ? `<div class="siapkan"><b>Siapkan:</b>${['Scan KTP PPAT','SK pengangkatan PPAT','SIUP, NPWP, atau akta pendirian','Logo kantor (opsional)'].map(t => badge(t, 'neutral')).join('')}</div>` : ''}
+      ${perluTindakan() ? `<div class="siapkan"><b>Siapkan:</b>${[...(terkunci('id_card') ? [] : ['Scan KTP PPAT']),'SK PPAT terakhir','Logo kantor (opsional)'].map(t => badge(t, 'neutral')).join('')}</div>` : ''}
       ${tahapan()}
     </div>
     ${BAGIAN.map(kartuBagian).join('')}
@@ -835,7 +843,8 @@ function tahapan() {
 }
 
 function kartuBagian(b) {
-  return `<div class="kartu"><div class="eb" style="color:var(--ina-primary-primary)">${b.judul}</div><p class="ket ket-bagian">${b.ket}</p>
+  const kunci = b.judul === 'Identitas Perseorangan' && KUNCI_DIRI.length;
+  return `<div class="kartu"><div class="eb" style="color:var(--ina-primary-primary)">${b.judul}</div><p class="ket ket-bagian">${kunci ? 'Data diri sudah terisi, jadi Anda tidak perlu mengisinya lagi.' : b.ket}</p>${kunci ? `<div class="diri-kunci ditandai" id="diriKunci">${alert('info', '', `${ik('kunci', 14)} Data bertanda kunci diambil dari ${ASAL_DIRI} yang sudah diverifikasi, sehingga tidak dapat diubah di sini. Bila ada yang salah, hubungi admin E-PPAT.${usulan('HE-TERA-09')}`)}</div>` : ''}
     <div class="f-grid">${b.isian.map(f => f.pratinjau ? pratinjau() : isian(f)).join('')}</div></div>`;
 }
 
@@ -849,24 +858,25 @@ function bawah(f, v, g) {
   if (f.help || hitung) return `<div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text">${f.help || ''}</div>${hitung}</div>`;
   return '';
 }
+const ketKunci = () => `<div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text ket-kunci">${ik('kunci', 12)} Dari ${ASAL_DIRI}</div></div>`;
 function isian(f) {
-  const v = S.form[f.k] ?? '', g = S.galat[f.k], id = 'i-' + f.k, st = g ? ' ina-text-field__wrapper--status-error' : '';
-  if (f.berkas) return `<div class="ina-file-upload" id="f-${f.k}"><div class="ina-file-upload__label">${f.l}</div>
-    <div class="berkas-baris">${tombol('Pilih File', 'secondary', 'sm', `data-berkas="${f.k}"`, ik('unggah', 14))}<span class="nama ${v ? 'ada' : ''}">${v ? '&#10003; ' + esc(v) : 'Belum ada file. PDF, JPG, atau PNG.'}</span></div>
-    ${f.help ? `<div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text">${f.help}</div></div>` : ''}</div>`;
+  const v = S.form[f.k] ?? '', g = S.galat[f.k], id = 'i-' + f.k, st = g ? ' ina-text-field__wrapper--status-error' : '', kunci = terkunci(f.k);
+  if (f.berkas) return `<div class="ina-file-upload" id="f-${f.k}"><div class="ina-file-upload__label">${f.l}${f.wajib ? '<span class="ina-text-field__required">*</span>' : ''}</div>
+    <div class="berkas-baris">${kunci ? '' : tombol('Pilih File', 'secondary', 'sm', `data-berkas="${f.k}"`, ik('unggah', 14))}<span class="nama ${v ? 'ada' : ''}">${v ? '&#10003; ' + esc(v) : 'Belum ada file.'}</span></div>
+    ${kunci ? ketKunci() : g ? `<div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text ina-text-field__helper-text--error">${g}</div></div>` : f.help ? `<div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text">${f.help}</div></div>` : ''}</div>`;
   if (f.pilih) {
-    const pilihan = f.pilih.find(p => p[0] === v), buka = S.selectBuka === f.k;
+    const pilihan = f.pilih.find(p => p[0] === v), buka = S.selectBuka === f.k && !kunci;
     return `<div class="ina-select-dropdown select-wadah" id="f-${f.k}">${labelIsi(f)}
-      <button type="button" class="ina-select-dropdown__trigger ina-select-dropdown__trigger--size-md ${g ? 'ina-select-dropdown__trigger--status-error' : ''}" data-pilih="${f.k}" aria-haspopup="listbox" aria-expanded="${buka}">
+      <button type="button" class="ina-select-dropdown__trigger ina-select-dropdown__trigger--size-md ${g ? 'ina-select-dropdown__trigger--status-error' : ''} ${kunci ? 'ina-select-dropdown__trigger--disabled' : ''}" ${kunci ? 'disabled' : `data-pilih="${f.k}"`} aria-haspopup="listbox" aria-expanded="${buka}">
         <span class="ina-select-dropdown__trigger-text ${v ? 'ina-select-dropdown__trigger-text--selected' : 'ina-select-dropdown__trigger-text--placeholder'}">${esc(pilihan && v ? pilihan[1] : (f.pilih[0][0] === '' ? f.pilih[0][1] : 'Pilih'))}</span>${ik('bawah', 16)}</button>
       ${buka ? `<div class="ina-select-dropdown__panel" role="listbox"><div class="ina-select-dropdown__options">${f.pilih.filter(p => p[0] !== '').map(([a, b]) => `<button type="button" role="option" aria-selected="${a === v}" class="ina-select-dropdown__option ${a === v ? 'ina-select-dropdown__option--selected-single' : ''}" data-opsi="${f.k}" data-nilai="${a}">${b}</button>`).join('')}</div></div>` : ''}
-      ${bawah(f, v, g)}</div>`;
+      ${kunci ? ketKunci() : bawah(f, v, g)}</div>`;
   }
   if (f.warna) return `<div class="ina-text-field" id="f-${f.k}">${labelIsi(f, id)}<div class="warna-baris"><input type="color" data-k="${f.k}" value="${/^#[0-9A-Fa-f]{6}$/.test(v) ? v : '#0A1F47'}" aria-label="Pilih warna stempel">
       <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md${st}" style="flex:1"><input type="text" id="${id}" data-k="${f.k}" class="ina-text-field__input" value="${esc(v)}" maxlength="7"></div></div>${bawah(f, v, g)}</div>`;
   return `<div class="ina-text-field" id="f-${f.k}">${labelIsi(f, id)}
-    <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md${st}"><input type="${f.tipe || 'text'}" id="${id}" data-k="${f.k}" class="ina-text-field__input" value="${esc(v)}" placeholder="${esc(f.ph || '')}" ${f.angka ? 'inputmode="numeric"' : ''} aria-invalid="${!!g}"></div>
-    ${bawah(f, v, g)}</div>`;
+    <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md${st}${kunci ? ' ina-text-field__wrapper--disabled' : ''}"><input type="${f.tipe || 'text'}" id="${id}" ${kunci ? 'disabled' : `data-k="${f.k}"`} class="ina-text-field__input" value="${esc(v)}" placeholder="${esc(f.ph || '')}" ${f.angka ? 'inputmode="numeric"' : ''} aria-invalid="${!!g}"></div>
+    ${kunci ? ketKunci() : bawah(f, v, g)}</div>`;
 }
 function pratinjau() {
   const w = /^#[0-9A-Fa-f]{6}$/.test(S.form.code_warna) ? S.form.code_warna : '#0A1F47';
@@ -915,8 +925,8 @@ function bukaBantuan() {
   const isi = diTera ? `
     <p>Panduan singkat untuk mendaftarkan stempel elektronik (TERA) kantor Anda.</p>
     <ol class="bantu-langkah">
-      <li><b>Siapkan dokumen.</b> Scan KTP PPAT, SK pengangkatan PPAT, salah satu dokumen kantor (SIUP, NPWP, atau akta pendirian), dan logo kantor bila ada.</li>
-      <li><b>Lengkapi formulir.</b> Isi data PPAT sesuai KTP dan SK. Data kantor sebagian sudah terisi dari Profil Kantor.</li>
+      <li><b>Siapkan dokumen.</b> Scan KTP PPAT, SK PPAT terakhir, dan logo kantor bila ada. Setiap berkas berukuran maks. 1 MB.</li>
+      <li><b>Lengkapi formulir.</b> Isi data PPAT sesuai KTP dan SK. Data diri yang sudah ada dari pendaftaran Onboarding atau sertifikat elektronik (CA) terisi otomatis dan terkunci.</li>
       <li><b>Simpan pendaftaran.</b> Periksa ringkasan data, lalu klik Simpan.</li>
       <li><b>Tunggu proses.</b> Admin E-PPAT memeriksa data (± 1–2 hari kerja), lalu Peruri memproses (± 3–5 hari kerja). Pantau tahapannya di halaman ini.</li>
     </ol>
@@ -979,7 +989,7 @@ function simpan() {
   const salah = SEMUA.filter(f => S.galat[f.k]);
   if (salah.length) { gambar(); fokusIsian(salah[0].k); return; }
   const F = S.form, nik = esc(F.nik);
-  const dok = [F.id_card && 'Scan KTP', F.lampiran && 'Lampiran', F.dokumen_tambahan && 'Logo stempel'].filter(Boolean);
+  const dok = [F.sk_ppat && 'SK PPAT', F.id_card && 'Scan KTP', F.dokumen_tambahan && 'Logo stempel'].filter(Boolean);
   dialog({ judul: S.status === 'belum' ? 'Simpan pendaftaran TERA?' : 'Perbarui pendaftaran TERA?',
     isi:`<p>Pastikan data berikut sudah sesuai dengan KTP dan SK pengangkatan Anda.</p>
       <dl class="ringkas-kv"><dt>Nama Lengkap</dt><dd>${esc(F.nama_lengkap)}</dd><dt>NIK</dt><dd>${nik}</dd><dt>ID PPAT / Nomor SK</dt><dd>${esc(F.id_ppat || '—')}</dd><dt>Isi Stempel</dt><dd>${esc(F.isi_stempel)}</dd><dt>Dokumen</dt><dd>${dok.length ? dok.join(', ') : 'Belum ada dokumen yang diunggah'}</dd></dl>
@@ -1070,7 +1080,7 @@ function lihat(u) {
   if (u.ke === 'dashboard') { S.status = 'belum'; S.ingatTutup = false; S.form = KOSONG(); S.simpanan = null; S.layar = 'akun'; pindahLayar('dashboard'); }
   else if (u.ke === 'tutup-ingat') { S.status = 'belum'; S.ingatTutup = false; S.form = KOSONG(); S.simpanan = null; S.layar = 'akun'; pindahLayar('dashboard'); $('#tutupIngat').click(); return; }
   else {
-    if (u.ke === 'tera-galat') { S.status = 'belum'; S.form = { ...KOSONG(), nik:'320000000001', email:'ppat@contoh' }; S.simpanan = null; }
+    if (u.ke === 'tera-galat') { S.status = 'belum'; S.form = isiKunci({ ...KOSONG(), nik:'320000000001', email:'ppat@contoh' }); S.simpanan = null; }
     if (u.ke === 'tera-konfirm') { S.status = 'belum'; S.form = TERISI(); S.simpanan = null; }
     S.layar = 'akun'; S.tab = 'tera'; gambar();
     if (u.ke === 'tera-galat' || u.ke === 'tera-konfirm') { simpan(); return; }
