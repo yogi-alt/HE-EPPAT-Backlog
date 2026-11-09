@@ -392,13 +392,35 @@ body .protobar{z-index:1001}
 
 /* bilah alat (HE-MINUTA-02): satu baris berjarak lega */
 .alat{display:flex;align-items:center;gap:2px;flex-wrap:wrap;margin:6px 12px 8px;padding:4px 8px;background:var(--ina-background-secondary);border:1px solid var(--ina-stroke-primary);border-radius:12px;position:relative}
-.alat .pisah{width:1px;height:22px;background:var(--ina-stroke-primary);margin:0 6px}
-.alat .btn-alat.ina-button{width:34px;height:34px;min-height:0;padding:0;justify-content:center;font-weight:600;font-size:15px}
+.alat .pisah{width:1px;height:22px;background:var(--ina-stroke-primary);margin:0 3px}
+.alat .btn-alat.ina-button{width:32px;height:34px;min-height:0;padding:0;justify-content:center;font-weight:600;font-size:15px}
 .alat .btn-alat.i{font-style:italic;font-family:Georgia,serif}
 .alat .btn-alat.u span{text-decoration:underline}
 .alat .btn-alat:disabled{opacity:.4}
 .alat .ina-button--sm{white-space:nowrap}
 .alat .kanan-alat{margin-left:auto;display:flex;gap:6px;align-items:center}
+.alat .pil-alat{display:inline-flex;margin:0 2px}
+.alat .pil-alat .ina-text-field__wrapper{height:34px;min-height:0;padding:0 4px 0 8px;background:var(--ina-background-primary)}
+.alat .pil-alat select.ina-text-field__input{font-size:13px;padding:0;cursor:pointer}
+.alat .pil-alat select:disabled{cursor:not-allowed;opacity:.5}
+.alat .uk-alat{min-width:26px;text-align:center;font:600 13px Inter,sans-serif}
+.alat .btn-alat .warna-a{border-bottom:3px solid #c62828;line-height:1;padding:0 2px}
+.alat .btn-alat .sorot-a{background:#fff59d;padding:0 3px;border-radius:2px;font-size:13px}
+.alat .btn-alat.s span{text-decoration:line-through}
+.alat .btn-alat.pop{width:auto;padding:0 6px;gap:2px}
+.menu-lain .judul-pop{padding:8px 12px 4px;font:600 11px Inter,sans-serif;letter-spacing:.6px;text-transform:uppercase;color:var(--ina-content-secondary)}
+.menu-lain .ina-action-dropdown__item[aria-checked="true"]{font-weight:600}
+.menu-lain .cek-m{display:inline-flex;width:16px}
+.kertas table{width:100%;border-collapse:collapse;margin:0 0 8px}
+.kertas td{padding:2px 6px;vertical-align:top}
+.kertas .tbl-garis td{border:1px solid #333}
+.kertas .tbl-datar td{border-top:1px solid #333;border-bottom:1px solid #333}
+.kertas .tbl-ttd td{text-align:center;padding-top:6px}
+.kertas .isi-bag h2,.kertas .isi-bag h3,.kertas .isi-bag h4,.kertas .isi-bag h5{font:inherit;font-weight:700;margin:0 0 8px}
+.kertas .isi-bag h2{font-size:1.25em}
+.kertas .isi-bag h3{font-size:1.1em}
+.kertas .isi-bag h5{text-align:center}
+.kertas .isi-bag blockquote{margin:0 0 8px 2.5em;font-style:italic}
 .pop-wadah{position:absolute;left:8px;right:auto;top:calc(100% + 2px);z-index:16;width:auto}
 .pop-wadah .menu-lain.ina-action-dropdown__menu{position:relative;right:auto;left:auto;top:0;margin-top:0;min-width:240px;visibility:visible;opacity:1;pointer-events:auto;transform:none}
 .pop-wadah .panel-var.ina-select-dropdown__panel{position:relative;top:0;left:auto;right:auto;margin-top:0;width:380px;max-width:calc(100vw - 48px);display:flex;flex-direction:column;max-height:460px}
@@ -453,6 +475,25 @@ body .protobar{z-index:1001}
 .it-pasal .no.kon{border-radius:6px;background:var(--ina-primary-50);color:var(--ina-primary-600)}
 .kol-kepala .kiri-kk{display:inline-flex;align-items:center;gap:2px}
 .lampiran-nav{border-top:1px solid var(--ina-stroke-primary);padding:4px 10px}
+.tab-nav{padding:6px 10px 0}
+.tab-nav .ina-tab-horizontal,.tab-nav .ina-tab-horizontal__container{width:100%}
+.tab-nav .ina-tab-horizontal__tab{flex:1;justify-content:center}
+.cari-nav{padding:8px 10px 4px}
+.cari-nav .ina-input-search{width:100%}
+.kosong-nav{margin:12px 14px;font-size:13px;line-height:19px;color:var(--ina-content-secondary)}
+.lampiran-isi{margin:14px;font-size:13px;line-height:19px;color:var(--ina-content-secondary)}
+.menu-bar{display:flex;align-items:center;flex-wrap:wrap}
+.ringkas-naskah{margin-left:auto;padding-left:16px;font:12.5px Inter,sans-serif;color:var(--ina-content-secondary);white-space:nowrap}
+.ringkas-naskah b{font-weight:600;color:var(--ina-content-primary)}
+.ringkas-naskah .kurang{color:var(--ina-warning-700,#8a5a00)}
+.beda-it{border:1px solid var(--ina-stroke-primary);border-radius:10px;padding:12px 14px;margin-top:10px}
+.beda-it h4{margin:0 0 2px;font:600 14px Inter,sans-serif}
+.beda-it code{font-size:12px;color:var(--ina-content-secondary)}
+.beda-it dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 12px;margin:10px 0;font-size:14px}
+.beda-it dt{color:var(--ina-content-secondary)}
+.beda-it dd{margin:0;font-weight:500}
+.beda-it .baris-tbl{justify-content:flex-end}
+.beda-it .baris-tbl .ina-button{flex:0 0 auto}
 .lampiran-nav .lipat{display:flex;align-items:center;gap:8px;width:100%;border:0;background:transparent;padding:8px 4px;border-radius:8px;cursor:pointer;font:600 11.5px Inter,sans-serif;letter-spacing:.8px;text-transform:uppercase;color:var(--ina-content-secondary);text-align:left}
 .lampiran-nav .lipat:hover{background:var(--ina-background-secondary)}
 .lampiran-nav .lipat:focus-visible{outline:2px solid var(--ina-primary-500)}
@@ -487,12 +528,32 @@ body .protobar{z-index:1001}
 .kertas p{margin:0 0 8px}
 .kertas h2,.kertas h3{font-family:inherit;margin:0 0 8px}
 .hal-bingkai{max-width:620px;margin:0 auto}
+.kepala-hal{display:flex;margin:0 0 6px}
+.kepala-hal .ina-button{gap:4px;font-family:Inter,sans-serif}
 .hal-bingkai + .hal-bingkai{margin-top:28px}
 .hal{position:relative;box-sizing:border-box;aspect-ratio:21.5/33;background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.1),0 4px 14px rgba(15,23,42,.08)}
 .hal-kaki{position:absolute;bottom:0;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;box-sizing:border-box;padding:0 4px;font-size:.78em;line-height:1.4;text-align:center;color:#333;border-radius:4px}
 .hal-kaki .garis-f{position:absolute;left:0;right:0;top:22%;border-top:1px solid #9aa4b2}
-.hal-kaki[data-kaki]{cursor:pointer}
-.hal-kaki[data-kaki]:hover,.hal-kaki[data-kaki]:focus-visible{outline:1px dashed var(--ina-primary-500);outline-offset:-2px;background:var(--ina-primary-50)}
+.hal-kaki.ada-paraf{flex-direction:column;gap:3px}
+.kotak-paraf{display:flex;justify-content:flex-end;gap:8px;width:100%}
+.kotak-paraf span{display:flex;flex-direction:column;align-items:center;gap:2px;font:9px Inter,sans-serif;color:#555}
+.kotak-paraf i{display:block;width:34px;height:22px;border:1px solid #777}
+.garis-merah{position:absolute;border-left:1.5px solid #c62828;pointer-events:none}
+.hal-kop{position:absolute;top:0;display:flex;align-items:flex-end;box-sizing:border-box;padding:0 4px 8px;font-size:.78em;line-height:1.4;color:#333;border-radius:4px}
+[data-zona]{cursor:pointer}
+[data-zona]:hover,[data-zona]:focus-visible{outline:1px dashed var(--ina-primary-500);outline-offset:-2px;background:var(--ina-primary-50)}
+.zona-isi{width:100%}
+.hal-kop .zona-isi.bergaris{border-bottom:1px solid #9aa4b2;padding-bottom:2px}
+.hal-kaki .zona-isi.bergaris{border-top:1px solid #9aa4b2;padding-top:2px}
+.zona-kol{display:flex;gap:10px;width:100%}
+.zona-kol > span{flex:1;min-width:0}
+.zona-kol .ztx{flex:1;min-width:0;box-sizing:border-box;margin:0;padding:2px 4px;border:1px dashed var(--ina-primary-500);border-radius:4px;background:#fff;font:inherit;line-height:1.4;color:inherit;resize:none;overflow:hidden}
+.zona-kol .ztx:focus{outline:2px solid var(--ina-primary-500);outline-offset:0;border-style:solid}
+.zona-kol .ztx::placeholder{color:var(--ina-content-secondary)}
+[data-zona].ketik{cursor:default;background:var(--ina-primary-50);outline:1px solid var(--ina-primary-300);outline-offset:-1px}
+.bag .mrh{position:absolute;left:calc(-1 * var(--mrh-geser,12px));top:-3px;bottom:-3px;border-left:1.5px solid #c62828;pointer-events:none}
+.bag.putus .isi-bag > :last-child{background-image:linear-gradient(to right,#555 50%,transparent 50%);background-size:8px 1px;background-repeat:repeat-x;background-position:0 calc(100% - .3em)}
+.tanpa-label .bag .lbl-bag{display:none}
 .hal-kaki .var-chip.ina-badge{font-size:10.5px;line-height:15px;padding:0 5px;min-height:0;height:auto}
 .hal-nomor{margin:8px 0 0;text-align:center;font:12px Inter,sans-serif;color:var(--ina-content-secondary)}
 .hal-nomor .ina-tooltip{display:inline-flex}
@@ -558,6 +619,14 @@ body .protobar{z-index:1001}
 .ina-text-field__suffix{font-size:13px;color:var(--ina-content-secondary);padding-right:4px}
 .var-footer{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .var-footer .ina-badge{cursor:help}
+.chip-hal{display:flex;flex-wrap:wrap;gap:6px}
+.zona-tbl{display:flex;flex-wrap:wrap;gap:8px}
+.pola-zona{display:grid;gap:8px}
+.pola-zona .ina-button.ina-button--sm{height:auto;min-height:0;max-height:none;padding:8px 12px;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:2px;white-space:normal;line-height:1.4}
+.pola-zona .ina-button b{font-weight:600}
+.pola-zona .ina-button span{font-weight:400;font-size:12px;color:var(--ina-content-secondary)}
+.zona-kembali{margin:-4px 0 6px -8px}
+#zonaHapus.ina-button{color:var(--ina-negative-600)}
 .atur-kaki{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:18px;padding-top:14px;border-top:1px solid var(--ina-stroke-primary)}
 
 /* preview */
@@ -697,6 +766,14 @@ const I = {
   undo:'<path d="M9 14l-4 -4l4 -4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" />',
   redo:'<path d="M15 14l4 -4l-4 -4" /><path d="M19 10h-11a4 4 0 1 0 0 8h1" />',
   lain:'<path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />',
+  cetak:'<path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 15a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" />',
+  kurang:'<path d="M5 12l14 0" />',
+  lebar:'<path d="M7 8l-4 4l4 4" /><path d="M17 8l4 4l-4 4" /><path d="M3 12l18 0" />',
+  jorokKurang:'<path d="M20 6l-7 0" /><path d="M20 12l-9 0" /><path d="M20 18l-7 0" /><path d="M8 8l-4 4l4 4" />',
+  jorokTambah:'<path d="M20 6l-11 0" /><path d="M20 12l-7 0" /><path d="M20 18l-11 0" /><path d="M4 8l4 4l-4 4" />',
+  hapusFormat:'<path d="M17 15l4 4m0 -4l-4 4" /><path d="M7 6v-1h11v1" /><path d="M7 19l4 0" /><path d="M13 5l-4 14" />',
+  spasiBaris:'<path d="M3 8l3 -3l3 3" /><path d="M3 16l3 3l3 -3" /><path d="M6 5l0 14" /><path d="M13 6l7 0" /><path d="M13 12l7 0" /><path d="M13 18l7 0" />',
+  blok:'<path d="M4 5a1 1 0 0 1 1 -1h14a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-14a1 1 0 0 1 -1 -1z" /><path d="M4 13a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1z" /><path d="M14 12l6 0" /><path d="M14 16l6 0" /><path d="M14 20l6 0" />',
   ulang:'<path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />',
   log:'<path d="M12 8l0 4l2 2" /><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />', edit:'<path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" />', palet:'<path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" /><path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />', daftar:'<path d="M9 6l11 0" /><path d="M9 12l11 0" /><path d="M9 18l11 0" /><path d="M5 6l0 .01" /><path d="M5 12l0 .01" /><path d="M5 18l0 .01" />', gambar:'<path d="M15 8h.01" /><path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z" /><path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5" /><path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3" />', gedung:'<path d="M3 21l18 0" /><path d="M9 8l1 0" /><path d="M9 12l1 0" /><path d="M9 16l1 0" /><path d="M14 8l1 0" /><path d="M14 12l1 0" /><path d="M14 16l1 0" /><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />', meterai:'<path d="M9 14l6 -6" /><circle cx="9.5" cy="8.5" r=".5" fill="currentColor" /><circle cx="14.5" cy="13.5" r=".5" fill="currentColor" /><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" />' /* ikon sidebar seragam */,
   tb_help_circle:'<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 16v.01" /><path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" />',
@@ -740,7 +817,7 @@ const UBAH = [
     isi:'Tombol Pratinjau akta, Cek Ejaan, Beritahu PPAT, dan Finalisasi Akta memiliki tooltip yang menjelaskan fungsinya. Panel Navigasi menjelaskan beda pasal dan catatan. Pesan peran menyebut langkah berikutnya untuk Asisten dan PPAT. Label "Tampilkan judul di dokumen (Preview, PDF)" diganti menjadi "Tampilkan judul pasal di akta". Tab Lampiran diberi keterangan "Segera hadir". Ikon ? bertooltip menjelaskan istilah minuta akta, status minuta, finalisasi, kode variabel {{…}}, standar akta PPAT, margin, dan footer.',
     lama:'Tombol dan istilah tanpa penjelasan; pesan peran hanya berbunyi "Mode editor — Anda dapat mengubah konten pasal, tetapi tidak dapat memfinalisasi."; tab Lampiran nonaktif tanpa keterangan.', ke:'editor', sorot:'#aksiAtas', sumber:'Laporan HE INA Digital hlm. 25, 26' },
   { kode:'HE-MINUTA-02', judul:'Bilah alat editor minuta: lebih lega dan mudah dipindai',
-    isi:'Bilah alat hanya menampilkan alat yang sering dipakai (urungkan, ulangi, tebal, miring, garis bawah, daftar, perataan, Sisipkan Variabel, Cek Ejaan) dalam satu baris berjarak lega. Alat lain dari live (judul, coret, warna, ukuran huruf, spasi, tautan, gambar, tabel, kode HTML, layar penuh) ada di menu "Lainnya" serta di bilah menu Format dan Sisipkan. Setiap ikon memiliki tooltip berisi nama alat dan pintasan papan ketik.',
+    isi:'Susunan dan isi bilah alat mengikuti live: urungkan, lakukan lagi, cetak, perbesaran tampilan, gaya paragraf, jenis dan ukuran huruf seluruh akta, tebal, miring, garis bawah, coret, warna teks, warna sorot, Sisipkan variabel, perataan, spasi baris, daftar, jorokan, hapus format, Blok siap pakai, dan Lainnya. Alat dikelompokkan dengan pemisah, dan setiap ikon memiliki tooltip berisi nama alat, fungsinya, dan pintasan papan ketik. Perataan, spasi, blok, dan Lainnya dibuka sebagai menu IDDS. Cek ejaan dan Pengaturan halaman berada di kanan.',
     lama:'Lebih dari 30 ikon kecil dalam dua baris tanpa nama, sehingga sulit dipindai.', ke:'editor', sorot:'#bilahAlat', sumber:'Laporan HE INA Digital hlm. 25, 26' },
   { kode:'HE-MINUTA-03', judul:'Editor pasal: variabel tampil sebagai label yang mudah dibaca',
     isi:'Variabel di kertas tampil sebagai label hijau (mis. "Nama Lengkap Pihak Pertama"), bukan kode {{penjual_nama}}. Kode tetap dapat dilihat lewat Tampilan › Tampilkan kode variabel atau sakelar di panel Bagian. Tombol "Sisipkan variabel" membuka panel dengan pencarian, penjelasan singkat, dan contoh nilai dari permohonan ini. Variabel yang salah ketik ditandai kuning, dihitung di kepala naskah ("1 variabel belum terisi"), dan penanda itu membawa langsung ke variabelnya.',
@@ -759,7 +836,19 @@ const UBAH = [
     lama:'Tidak ada panduan maupun cara menghubungi dukungan dari halaman ini (skor Help & Documentation Minuta Akta: 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
     isi:'Tabel, tab, tombol, menu (Action Dropdown), tooltip, alert, lencana, dialog, laci, toast, dan isian memakai komponen INA Digital Design System dengan brand E-PPAT.',
-    lama:'Komponen dibuat sendiri.', ke:'editor', sorot:null, sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' }
+    lama:'Komponen dibuat sendiri.', ke:'editor', sorot:null, sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' },
+  { kode:'HE-MINUTA-11', versi:'v2', bukanHE:true, judul:'Nilai berbeda dari data order, ringkasan naskah, dan Navigasi seperti live',
+    isi:'Kepala naskah menampilkan penanda "1 nilai berbeda dari data order · Lihat" seperti live. Penanda membuka dialog IDDS yang menyebut variabel, bagiannya, nilai di data order, dan nilai di naskah, dengan pilihan Kembalikan ke data order atau Terapkan ke data order. Kanan bilah menu memuat ringkasan "Para Pihak · Objek · Dokumen · bagian · variabel belum terisi". Navigasi memiliki tab Akta dan Lampiran (0) serta kotak "Cari judul bagian" yang langsung menyaring daftar.',
+    lama:'Prototipe v2 belum menandai isian variabel yang berbeda dari data order, belum menampilkan ringkasan isi naskah, dan Navigasi belum memiliki tab Lampiran maupun pencarian judul bagian.', ke:'beda', sorot:'#penandaBeda', sumber:'Penelusuran live Perdana Niaga 9 Nov 2026 (kepala Naskah Akta, panel Variabel, Navigasi)' },
+  { kode:'HE-MINUTA-10', versi:'v2', bukanHE:true, judul:'Bilah alat lengkap dan Cari dan ganti seperti live',
+    isi:'Bilah alat memuat alat live: cetak, perbesaran tampilan (Sesuaikan, Selebar layar, 50–200%), gaya paragraf (teks normal, judul pasal, judul 1–3, kutipan), jenis dan ukuran huruf seluruh akta, coret, warna teks, warna sorot, spasi baris (seluruh akta atau paragraf ini), jorokan, hapus format, Blok siap pakai (10 blok seperti live, mis. tabel tanda tangan dua kolom), dan Lainnya (ubah kapitalisasi, tautan, pemisah halaman, halaman baru lanskap, tabel, putar halaman ini, lihat kode HTML). Menu Edit memuat Cari dan ganti (Ctrl+H), yang dibuka di panel kanan: cari berikutnya, ganti, dan ganti semua, tanpa mengubah variabel.',
+    lama:'Prototipe v2 hanya memuat alat yang sering dipakai, dan belum ada perbesaran tampilan, gaya paragraf, blok siap pakai, maupun Cari dan ganti seperti di live.', ke:'alat', sorot:'#bilahAlat', sumber:'Penelusuran live Perdana Niaga 9 Nov 2026 (bilah alat, menu Blok, Lainnya, Perataan, Spasi baris, Edit › Cari dan ganti)' },
+  { kode:'HE-MINUTA-09', versi:'v2', bukanHE:true, judul:'Kop dan kaki halaman, pengaturan bagian, dan menu seperti live',
+    isi:'Menu File memuat Kop halaman dan Kaki halaman seperti live, juga Unduh PDF, Cetak lewat pratinjau, dan Buka permohonan. Seperti live, isi kop dan kaki halaman diketik langsung di kertas: saat panelnya terbuka, setiap kolom di atas atau bawah kertas menjadi isian, dan perubahan berlaku untuk semua halaman. Panel kanan memuat isi cepat, jumlah kolom (1–4), tombol data otomatis (nomor halaman, nama PPAT, nomor akta, dan lain-lain) yang disisipkan di posisi kursor, serta garis pemisah. Panel dibuka dari menu File atau dengan mengklik bagian atas atau bawah kertas. Format › Pengaturan bagian ini membuka pengaturan bagian: tipe, garis putus-putus, dan garis merah per bagian. Menu Edit memakai "Lakukan lagi", dan menu Tampilan memuat Tampilkan label bagian dan Lampiran.',
+    lama:'Prototipe v2 hanya punya satu baris footer di Pengaturan Dokumen. Belum ada kop halaman, kolom, garis pemisah, pengaturan garis per bagian, serta butir menu File, Format, dan Tampilan seperti di live.', ke:'kop', sorot:'#panelIsi', sumber:'Penelusuran live Perdana Niaga 9 Nov 2026 (menu File, Edit, Format, Tampilan) dan prototipe Penyusunan Akta v2 Perdana Niaga' },
+  { kode:'HE-MINUTA-08', versi:'v2', bukanHE:true, judul:'Pengaturan halaman lengkap seperti live Perdana Niaga',
+    isi:'Pengaturan Dokumen memuat semua pengaturan halaman live: ukuran kertas (F4 atau A4), orientasi, margin, jenis huruf (Courier New, Times New Roman, Arial), ukuran huruf, spasi baris, aturan pemenggalan halaman (judul pasal tidak sendirian di akhir halaman, bagian Kondisi tidak dipotong), orientasi per halaman, garis merah di kiri naskah, dan kotak paraf di kaki setiap halaman. Setiap halaman dapat diputar lewat tombol di atas kertas atau nomor halaman di panel. Semua perubahan langsung terlihat di kertas, dan ringkasan di panel ikut berubah. Menu File memakai nama live: Pengaturan halaman.',
+    lama:'Prototipe v2 hanya mengatur margin, ukuran huruf, spasi, dan footer. Kertas, orientasi, dan jenis huruf terkunci, serta belum ada pemenggalan, orientasi per halaman, garis merah, dan kotak paraf seperti di live.', ke:'pengaturan-lengkap', sorot:'#panelIsi', sumber:'Penelusuran live Perdana Niaga 9 Nov 2026 (File › Pengaturan halaman) dan prototipe Penyusunan Akta v2 Perdana Niaga' }
 ];
 
 /* ---------------- variabel (kelompok mengikuti live; contoh nilai = data contoh) ---------------- */
@@ -800,13 +889,36 @@ const NASKAH = () => [
   { id:13, tipe:'CATATAN', judul:'Penutup', tampil:false, isi:'<p>Setelah akta ini dibacakan dan dijelaskan oleh saya, PPAT, kepada para pihak dan para saksi, akta ini ditandatangani oleh para pihak, para saksi, dan saya, PPAT.</p>' },
   { id:14, tipe:'CATATAN', judul:'TTD', tampil:false, isi:'<p>PIHAK PERTAMA: {{penjual_nama}}<br>PIHAK KEDUA: {{pembeli_nama}}</p><p>SAKSI: {{saksi1_nama}} dan {{saksi2_nama}}</p><p>PPAT: {{ppat_nama}}</p>' }
 ];
-const STANDAR = { kertas:'F4 / Folio (21,5 × 33 cm)', orientasi:'Tegak', atas:'2', bawah:'2', kiri:'6', kanan:'2', huruf:'Courier New', ukuran:'12', spasi:'2', footer:false, footerTeks:'{{jenis_akta}} Nomor {{deed_number}} · {{ppat_nama}} · Halaman {page} dari {total}' };
+/* ukuran kertas (cm) dan jenis huruf yang tersedia di live */
+const KERTAS = { 'F4 / Folio (21,5 × 33 cm)':[21.5, 33], 'A4 (21 × 29,7 cm)':[21, 29.7] };
+const HURUF = { 'Courier New':'Courier,monospace', 'Times New Roman':'Times,serif', 'Arial':'Helvetica,sans-serif' };
+const SPASI = ['1', '1.15', '1.5', '2', '2.5', '3'];
+const STANDAR = { kertas:'F4 / Folio (21,5 × 33 cm)', orientasi:'Tegak', atas:'2', bawah:'2', kiri:'6', kanan:'2', huruf:'Courier New', ukuran:'12', spasi:'2', yatim:true, utuhKondisi:true, garisMerah:false, paraf:false, mendatar:[], kop:false, kopKol:['{{ppat_nama}} · Daerah Kerja {{ppat_wilayah}}'], kopGaris:true, footer:false, footerKol:['{{jenis_akta}} Nomor {{deed_number}}', 'Halaman {page} dari {total}'], footerGaris:true };
+/* kop dan kaki halaman (live: File › Kop halaman / Kaki halaman) */
+const ZONA = {
+  kop:{ nama:'kop halaman', judul:'Kop Halaman', aktif:'kop', kol:'kopKol', garis:'kopGaris', garisL:'Garis pemisah di bawah kop halaman',
+    ket:'Kop halaman adalah teks kecil di bagian atas setiap halaman, misalnya nama PPAT dan nomor akta. Kop halaman tampil saat menyusun, di Pratinjau Akta, dan di PDF.',
+    pola:[['Identitas PPAT', ['{{ppat_nama}} · Daerah Kerja {{ppat_wilayah}}']], ['Jenis akta dan nomor akta', ['{{jenis_akta}}', 'Nomor {{deed_number}}']], ['Nomor akta dan nomor halaman', ['Akta Nomor {{deed_number}}', 'Halaman {page} dari {total}']]] },
+  kaki:{ nama:'kaki halaman', judul:'Kaki Halaman', aktif:'footer', kol:'footerKol', garis:'footerGaris', garisL:'Garis pemisah di atas kaki halaman',
+    ket:'Kaki halaman adalah teks kecil di bagian bawah setiap halaman, misalnya jenis akta dan nomor halaman. Kaki halaman tampil saat menyusun, di Pratinjau Akta, dan di PDF.',
+    pola:[['Identitas PPAT dan nomor halaman', ['{{jenis_akta}}\n{{ppat_nama}}\nDaerah Kerja {{ppat_wilayah}}', 'Halaman {page} dari {total}']], ['Nomor halaman saja', ['Halaman {page} dari {total}']], ['Nomor akta dan nomor halaman', ['Akta Nomor {{deed_number}}', 'Halaman {page} dari {total}']]] }
+};
+const DATA_ZONA = [['{page}', 'Nomor halaman', '1'], ['{total}', 'Jumlah halaman', '3'], ['{date}', 'Tanggal cetak', '27 Okt 2026'], ['{{ppat_nama}}', 'Nama PPAT', 'nama PPAT'], ['{{ppat_wilayah}}', 'Wilayah kerja PPAT', 'wilayah kerja'], ['{{deed_number}}', 'Nomor akta', '13/2026 (diisi saat finalisasi)'], ['{{jenis_akta}}', 'Jenis akta', 'Akta Jual Beli']];
 const TGL_CETAK = '27 Okt 2026';
 const num = v => parseFloat(String(v).replace(',', '.')) || 0;
+const koma = v => String(v).replace('.', ',');
+/* halaman n mendatar: kebalikan orientasi dokumen bila nomornya ada di daftar pengecualian */
+const mendatar = (a, n) => (a.orientasi === 'Mendatar') !== (a.mendatar || []).includes(n);
+const ukuranHal = (a, md) => { const [w, h] = KERTAS[a.kertas] || KERTAS[STANDAR.kertas]; return md ? [h, w] : [w, h]; };
+/* kotak paraf membutuhkan margin bawah minimal 2,6 cm */
+const bawahNyata = a => a.paraf ? Math.max(num(a.bawah), 2.6) : num(a.bawah);
+const PXCM = 620 / 21.5;
+/* live: "1 nilai berbeda dari data order" = isian variabel yang diubah di naskah sehingga tidak sama dengan data permohonan */
+const BEDA = () => [{ k:'objek_lokasi', bagian:'Objek Jual Beli', order:'Kel. Contoh, Kec. Contoh', naskah:'Kel. Contoh Dua, Kec. Contoh' }];
 function contoh() {
   return [
-    { kode:'ORD-CONTOH-004', narahubung:'Contoh Narahubung Empat', status:'DRAFTING', nomor:'', tgl:'', naskah:NASKAH(), atur:{ ...STANDAR } },
-    { kode:'ORD-CONTOH-006', narahubung:'Contoh Narahubung Enam', status:'DRAFTING', nomor:'', tgl:'', naskah:NASKAH(), atur:{ ...STANDAR } },
+    { kode:'ORD-CONTOH-004', narahubung:'Contoh Narahubung Empat', status:'DRAFTING', nomor:'', tgl:'', naskah:NASKAH(), atur:{ ...STANDAR }, beda:BEDA() },
+    { kode:'ORD-CONTOH-006', narahubung:'Contoh Narahubung Enam', status:'DRAFTING', nomor:'', tgl:'', naskah:NASKAH(), atur:{ ...STANDAR }, beda:BEDA() },
     { kode:'ORD-CONTOH-005', narahubung:'Contoh Narahubung Lima', status:'SELESAI', nomor:'5/2026', tgl:'15 Okt 2026', naskah:NASKAH(), atur:{ ...STANDAR } }
   ];
 }
@@ -814,7 +926,7 @@ let MINUTA = contoh();
 let idBaru = 100;
 
 /* ---------------- keadaan ---------------- */
-const S = { layar:'detail', aktif:null, filter:'', cari:'', pilih:null, tab:'pasal', draf:null, ubah:false, kode:false, ejaanAktif:true, hasil:null, galatEjaan:false, memuat:'', galatJudul:'', kilau:null, aturBuka:false, aturAsal:null, lampiran:false,
+const S = { get lampiranTab() { return this.navTab === 'lampiran'; }, navTab:'akta', cariNav:'', zoom:'fit', cg:{ q:'', ganti:'', idx:-1 }, zona:null, zKol:0, label:true, layar:'detail', aktif:null, filter:'', cari:'', pilih:null, tab:'pasal', draf:null, ubah:false, kode:false, ejaanAktif:true, hasil:null, galatEjaan:false, memuat:'', galatJudul:'', kilau:null, aturBuka:false, aturAsal:null, lampiran:false,
   peran:'asisten', nav:true, panel:true };
 const PERAN = { asisten:{ nama:'Asisten Contoh', label:'Asisten', huruf:'A' }, ppat:{ nama:'PPAT Contoh Satu, S.H.', label:'PPAT', huruf:'P' } };
 const m = () => MINUTA.find(x => x.kode === S.aktif);
@@ -854,11 +966,35 @@ function belumTerisi() {
   return x.naskah.flatMap(it => { const isi = it.id === S.pilih && S.draf ? S.draf.isi : it.isi; return tidakDikenal(isi).map(k => ({ id:it.id, k })); });
 }
 
+/* ringkasan isi naskah di kanan bilah menu (live: Para Pihak 4 · Objek 1 · Dokumen 0 · 19 bagian) */
+function ringkasNaskah(x, kurang) {
+  const o = (AJB.ambil(x.kode) || {}).order || {}, pihak = (o.pihak || []).length || 4, dok = (o.dokumen || []).length;
+  return denganTip(`<span class="ringkas-naskah" tabindex="0">Para Pihak <b>${pihak}</b> · Objek <b>1</b> · Dokumen <b>${dok}</b> · <b>${x.naskah.length}</b> bagian${kurang.length ? ` · <span class="kurang">${kurang.length} variabel belum terisi</span>` : ''}</span>`, 'Ringkasan ini menghitung para pihak, objek, dan dokumen dari data permohonan, serta jumlah bagian naskah.', 'bottom-end');
+}
+/* nilai variabel di naskah yang berbeda dari data order: pilih nilai yang benar */
+function nilaiBeda() {
+  const x = m(), b = x.beda || []; if (!b.length) return;
+  dialog({ judul:'Nilai Berbeda dari Data Order', isi:`<p>Isian variabel berikut diubah di naskah sehingga tidak sama dengan data permohonan. Pilih nilai yang benar untuk setiap isian.${tanya('Nilai berbeda', 'Variabel biasanya terisi dari data permohonan. Jika isiannya diubah di naskah, sistem menandainya agar akta dan data permohonan tetap sama.')}</p>
+    ${b.map((v, i) => `<div class="beda-it"><h4>${esc(VMAP.get(v.k)?.l || v.k)}</h4><code>{{${esc(v.k)}}}</code> · <small>${esc(v.bagian)}</small>
+      <dl><dt>Data order</dt><dd>${v.order ? esc(v.order) : '<i>kosong</i>'}</dd><dt>Di naskah</dt><dd>${esc(v.naskah)}</dd></dl>
+      <div class="baris-tbl">${denganTip(tombol('Kembalikan ke data order', 'secondary', 'sm', `data-beda-kembali="${i}"`), 'Naskah kembali memakai nilai dari data permohonan.', 'top')}${denganTip(tombol('Terapkan ke data order', 'primary', 'sm', `data-beda-terap="${i}"`), 'Data permohonan diperbarui dengan nilai di naskah.', 'top-end')}</div></div>`).join('')}`,
+    tombol:[['Tutup', 'secondary', null]] });
+  $('#lapisan').querySelectorAll('[data-beda-kembali], [data-beda-terap]').forEach(el => el.addEventListener('click', () => {
+    const terap = el.dataset.bedaTerap !== undefined, i = +(terap ? el.dataset.bedaTerap : el.dataset.bedaKembali), v = b[i], nama = VMAP.get(v.k)?.l || v.k;
+    x.beda = b.filter((_, j) => j !== i); tutupDialog(); gambar();
+    toast(terap ? `Data order diperbarui: ${nama} menjadi "${v.naskah}".` : `${nama} di naskah kembali ke data order.`, 'positive', 4000, terap ? 'Simulasi: di aplikasi, data permohonan ikut berubah.' : '');
+  }));
+}
+function saringNav() {
+  const q = S.cariNav.trim().toLowerCase(), n = m().naskah; let ada = 0;
+  document.querySelectorAll('#daftarPasal [data-pilih]').forEach(li => { const it = n.find(z => z.id === +li.dataset.pilih), cocok = !q || `${it.judul} ${it.tipe === 'PASAL' ? 'pasal ' + nomorPasal(n, it) : ''}`.toLowerCase().includes(q); li.hidden = !cocok; if (cocok) ada++; });
+  const k = $('#kosongNav'); if (k) k.hidden = !!ada;
+}
 /* ---------------- layar editor v2 ---------------- */
 function layarDetail() {
   const x = m(), fin = final(), ppat = S.peran === 'ppat';
   const tbl = (id, label, ikon, t, hier = 'secondary', letak = 'bottom') => denganTip(tombol(label, hier, 'md', `id="${id}" aria-label="${label}. ${esc(t)}" ${S.memuat === id ? 'disabled aria-busy="true"' : ''}`, S.memuat === id ? spinner : ik(ikon, 16)), t, letak);
-  const kurang = fin ? [] : belumTerisi();
+  const kurang = fin ? [] : belumTerisi(), beda = fin ? [] : (x.beda || []);
   return `${remah('Penyusunan Akta', 'Permohonan AJB')}
     <h1>Penyusunan Akta</h1><p class="sub">Susun naskah minuta akta dari permohonan yang sudah diverifikasi.</p>
     <section class="dok" aria-label="Naskah akta ${x.kode}">
@@ -872,8 +1008,9 @@ function layarDetail() {
               ${kecil('AJB', 'info')}${kecil(ST[x.status][0], ST[x.status][1])}
               <span class="status-simpan ${S.ubah ? 'belum' : ''}" id="statusSimpan" role="status">${S.ubah ? `${ik('seru', 14)} Belum disimpan` : `${ik('awan', 15)} Tersimpan`}</span>
               ${kurang.length ? `<button type="button" class="ina-badge ina-badge--soft ina-badge--warning ina-badge--sm ina-badge--rounded-full penanda-var ditandai" id="penandaVar" aria-label="${kurang.length} variabel belum terisi. Lihat variabelnya.">${ik('seru', 12)} ${kurang.length} variabel belum terisi · Lihat</button>${usulan('HE-MINUTA-03')}` : ''}
+              ${beda.length ? denganTip(`<button type="button" class="ina-badge ina-badge--soft ina-badge--warning ina-badge--sm ina-badge--rounded-full penanda-var ditandai" id="penandaBeda" aria-label="${beda.length} nilai berbeda dari data order. Lihat nilainya.">${ik('seru', 12)} ${beda.length} nilai berbeda dari data order · Lihat</button>`, 'Isian variabel ini diubah di naskah sehingga tidak sama dengan data permohonan. Klik untuk memilih nilai yang benar.', 'bottom') : ''}
             </div>
-            <div class="menu-bar ditandai" id="menuBar" role="menubar" aria-label="Menu naskah">${Object.keys(MENU).map(k => `<button type="button" class="ina-button ina-button--tertiary ina-button--sm mb-btn" role="menuitem" data-menu="${k}" aria-haspopup="menu" aria-expanded="${S.menu === k}">${k}</button>`).join('')}${usulan('HE-MINUTA-07')}</div>
+            <div class="menu-bar ditandai" id="menuBar" role="menubar" aria-label="Menu naskah">${Object.keys(MENU).map(k => `<button type="button" class="ina-button ina-button--tertiary ina-button--sm mb-btn" role="menuitem" data-menu="${k}" aria-haspopup="menu" aria-expanded="${S.menu === k}">${k}</button>`).join('')}${usulan('HE-MINUTA-07')}${ringkasNaskah(x, kurang)}</div>
           </div>
         </div>
         <div class="dok-aksi ditandai" id="aksiAtas">
@@ -906,6 +1043,10 @@ function panelNav(x, fin) {
   const n = x.naskah;
   return `<aside class="nav-dok" id="navDok" aria-label="Navigasi naskah">
     <div class="kol-kepala"><span class="kiri-kk"><span class="cap">Navigasi</span>${kecil(n.length, 'neutral')}${tanya('Jenis bagian', 'Lingkaran bernomor menandai pasal. Sistem memberi nomor pasal otomatis sesuai urutan. Ikon paragraf (¶) menandai catatan, yaitu bagian tanpa nomor seperti pembukaan, para pihak, dan penutup.')}${usulan('HE-MINUTA-07')}</span>${denganTip(`<button type="button" class="ina-button ina-button--tertiary ina-button--sm" data-aksi="nav" aria-label="Tutup navigasi">${ik('navTutup', 18)}</button>`, 'Tombol ini menutup panel Navigasi.', 'bottom')}</div>
+    <div class="tab-nav"><div class="ina-tab-horizontal ina-tab-horizontal--use-brand-color"><div class="ina-tab-horizontal__container" role="tablist" aria-label="Isi navigasi">${[['akta', 'Akta'], ['lampiran', 'Lampiran (0)']].map(([k, l]) => `<button type="button" role="tab" data-navtab="${k}" aria-selected="${S.navTab === k}" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-sm ina-tab-horizontal__tab--variant-outline ${S.navTab === k ? 'ina-tab-horizontal__tab--selected' : ''}">${l}</button>`).join('')}</div></div></div>
+    ${S.navTab === 'lampiran' ? `<div class="lampiran-isi" role="tabpanel">${kecil('Segera hadir', 'neutral')}<p>Lampiran akta belum dapat ditambahkan. Fitur ini akan tersedia pada pembaruan berikutnya.</p></div>` : `
+    <div class="cari-nav"><div class="ina-input-search"><div class="ina-input-search__wrapper"><span class="ina-input-search__search-icon">${ik('cari', 18)}</span><input id="cariNav" class="ina-input-search__input" type="search" placeholder="Cari judul bagian" aria-label="Cari judul bagian" value="${esc(S.cariNav)}" autocomplete="off"></div></div></div>
+    <p class="kosong-nav" id="kosongNav" role="status" hidden>Tidak ada bagian dengan judul itu.</p>
     <ul class="daftar-pasal" id="daftarPasal">${n.map((it, i) => {
       const ps = it.tipe === 'PASAL';
       return `<li class="it-pasal ${ps ? '' : 'catatan'} ${it.id === S.pilih ? 'aktif' : ''} ${it.id === S.kilau ? 'baru' : ''}" data-pilih="${it.id}" data-asal="nav" tabindex="0" aria-current="${it.id === S.pilih}" aria-label="${ps ? 'Pasal ' + nomorPasal(n, it) : 'Catatan'}: ${esc(it.judul)}">
@@ -913,9 +1054,7 @@ function panelNav(x, fin) {
         ${ikonJenis(it, n)}
         <span class="nm">${esc(it.judul)}<small>${jenisBagian(it, n).ket}</small></span>
         ${fin ? '' : `<button type="button" class="ina-button ina-button--tertiary ina-button--sm hapus" data-hapus="${it.id}" aria-label="Hapus ${esc(it.judul)}" title="Hapus">${ik('sampah', 15)}</button>`}
-      </li>`; }).join('')}</ul>
-    <div class="lampiran-nav"><button type="button" class="lipat" id="lipatLampiran" aria-expanded="${S.lampiran}" aria-controls="isiLampiran"><span>Lampiran (0)</span>${kecil('Segera hadir', 'neutral')}<span class="chev" aria-hidden="true">${ik('bawah', 14)}</span></button>
-      <div id="isiLampiran" ${S.lampiran ? '' : 'hidden'}><p>Lampiran akta belum dapat ditambahkan. Fitur ini akan tersedia pada pembaruan berikutnya.</p></div></div>
+      </li>`; }).join('')}</ul>`}
     ${fin ? '' : `<div class="panel-kaki">${tombol('Tambah pasal', 'primary', 'sm', 'data-tambah="PASAL"', ik('tambah', 14))}${tombol('Tambah catatan', 'secondary', 'sm', 'data-tambah="CATATAN"', ik('tambah', 14))}</div>`}
   </aside>`;
 }
@@ -934,23 +1073,43 @@ function ikonJenis(it, n) {
 }
 const lblBag = (lencana, warna, nama) => `<span class="lbl-bag" aria-hidden="true">${kecil(lencana, warna)}<small>${esc(nama)}</small></span>`;
 /* naskah sebagai kertas: ukuran kertas, margin, huruf, dan spasi mengikuti Pengaturan Dokumen */
-const gayaHuruf = a => `font-family:'${a.huruf}',Courier,monospace;font-size:${(13 * (num(a.ukuran) || 12) / 12).toFixed(1)}px;line-height:${(num(a.spasi) || 2) * 0.95}`;
-const padHal = a => { const p = v => (num(v) / 21.5 * 100).toFixed(2) + '%'; return `padding:${p(a.atas)} ${p(a.kanan)} ${p(a.bawah)} ${p(a.kiri)}`; };
+const gayaHuruf = a => `font-family:'${a.huruf}',${HURUF[a.huruf] || HURUF['Courier New']};font-size:${(13 * (num(a.ukuran) || 12) / 12).toFixed(1)}px;line-height:${(num(a.spasi) || 2) * 0.95}`;
+const padHal = a => { const W = ukuranHal(a, mendatar(a, 1))[0], p = v => (num(v) / W * 100).toFixed(2) + '%'; return `padding:${p(a.atas)} ${p(a.kanan)} ${p(bawahNyata(a))} ${p(a.kiri)}`; };
+const bingkaiHal = a => { const [W, Hc] = ukuranHal(a, mendatar(a, 1)); return [`max-width:${Math.round(W * PXCM)}px`, `aspect-ratio:${W}/${Hc}`]; };
 function kertas(x, fin) {
   const a = x.atur, n = x.naskah;
-  return `<div class="kertas ${S.kode ? 'mode-kode' : ''}" id="kertas" style="${gayaHuruf(a)}" aria-label="Kertas naskah akta" data-bisa-kaki="1"><div class="hal-bingkai"><article class="hal" style="${padHal(a)}"><div class="hal-isi">${n.map(it => {
+  return `<div class="kertas ${S.kode ? 'mode-kode' : ''} ${S.label ? '' : 'tanpa-label'}" id="kertas" style="${gayaHuruf(a)}" aria-label="Kertas naskah akta" data-bisa-kaki="1"><div class="hal-bingkai" style="${bingkaiHal(a)[0]}"><article class="hal" style="${padHal(a)};${bingkaiHal(a)[1]}"><div class="hal-isi">${n.map(it => {
     const ps = it.tipe === 'PASAL', no = nomorPasal(n, it), aktif = it.id === S.pilih, d = aktif && S.draf ? S.draf : it, j = jenisBagian(it, n);
     const judul = ps ? `Pasal ${no}` : d.judul;
-    return `<section class="bag ${aktif ? 'aktif' : 'bisa-pilih'}" data-pilih="${it.id}" data-asal="kertas" data-lencana="${esc(j.lencana)}" data-warna="${j.warna}" data-nama="${esc(d.judul)}" aria-label="${ps ? 'Pasal ' + no : 'Catatan ' + esc(it.judul)}">
-      ${lblBag(j.lencana, j.warna, d.judul)}
+    return `<section class="bag ${aktif ? 'aktif' : 'bisa-pilih'}${d.putus ? ' putus' : ''}" data-pilih="${it.id}" data-tipe="${it.tipe}" data-asal="kertas" data-lencana="${esc(j.lencana)}" data-warna="${j.warna}" data-nama="${esc(d.judul)}" aria-label="${ps ? 'Pasal ' + no : 'Catatan ' + esc(it.judul)}">
+      ${a.garisMerah && d.merah !== false ? '<i class="mrh" aria-hidden="true"></i>' : ''}${lblBag(j.lencana, j.warna, d.judul)}
       ${d.tampil ? `<h5 class="jdl-bag">${esc(judul)}</h5>` : ''}
       <div class="isi-bag" ${aktif ? `id="editor" ${!fin ? 'contenteditable="true"' : ''} role="textbox" aria-multiline="true" aria-label="Isi ${esc(d.judul)}"` : ''}>${keChip(d.isi)}</div>
     </section>`; }).join('')}</div></article></div></div>`;
 }
-/* footer: kode diganti nilai contoh; nomor akta yang belum ada tampil sebagai penanda netral */
-function isiFooter(a, x, hal, total) {
+/* kop/kaki: kode diganti nilai contoh; nomor akta yang belum ada tampil sebagai penanda netral */
+function zonaHTML(a, x, z, hal, total, ketik = false) {
+  const kol = a[ZONA[z].kol] || [], N = kol.length, rata = i => N === 1 ? 'center' : !i ? 'left' : i === N - 1 ? 'right' : 'center';
+  return `<span class="zona-isi${a[ZONA[z].garis] ? ' bergaris' : ''}"><span class="zona-kol">${kol.map((s, i) => ketik
+    ? `<textarea class="ztx" data-z="${z}" data-zk="${i}" rows="1" placeholder="Ketik di sini" aria-label="Isi kolom ${i + 1} ${ZONA[z].nama}, halaman ${hal}" style="text-align:${rata(i)}">${esc(s)}</textarea>`
+    : `<span style="text-align:${rata(i)}">${isiZona(s, x, hal, total)}</span>`).join('')}</span></span>`;
+}
+/* perbesaran tampilan kertas (tidak mengubah ukuran huruf akta) */
+function zoomKini() { const k = $('#kertas'); return Math.round((k && parseFloat(k.style.zoom)) * 100 || 100); }
+function terapkanZoom() {
+  const k = $('#kertas'), kv = $('#kanvas'); if (!k) return;
+  k.style.zoom = '';
+  let z = 1;
+  if (S.zoom === 'lebar' && kv) { const lb = Math.max(...[...k.querySelectorAll('.hal-bingkai')].map(b => b.offsetWidth)); z = Math.max(.5, Math.min(2, (kv.clientWidth - 140) / lb)); }
+  else if (S.zoom !== 'fit') z = S.zoom / 100;
+  k.style.zoom = z;
+  const sel = $('#zoomAlat'); if (sel) sel.value = String(S.zoom);
+}
+/* isian kop/kaki di kertas memanjang mengikuti isinya */
+function tinggiZtx(w = document) { w.querySelectorAll('.ztx').forEach(o => { o.style.height = 'auto'; o.style.height = o.scrollHeight + 2 + 'px'; }); }
+function isiZona(teks, x, hal, total) {
   const nilai = { ppat_nama:VMAP.get('ppat_nama').c, ppat_wilayah:VMAP.get('ppat_wilayah').c, jenis_akta:'Akta Jual Beli' };
-  return esc(a.footerTeks || '')
+  return esc(teks || '').replace(/\n/g, '<br>')
     .replace(/\{page\}/g, hal).replace(/\{total\}/g, total).replace(/\{date\}/g, TGL_CETAK)
     .replace(/\{\{\s*deed_number\s*\}\}/g, x.nomor ? esc(x.nomor) : `<span class="var-chip ina-badge ina-badge--soft ina-badge--neutral ina-badge--sm ina-badge--rounded-md" title="Nomor akta diisi PPAT saat finalisasi.">Nomor akta</span>`)
     .replace(/\{\{\s*([a-z_]+)\s*\}\}/g, (m0, k) => nilai[k] ? esc(nilai[k]) : m0);
@@ -960,19 +1119,26 @@ function paginasi(w, a, x, bisaKlik) {
   if (!w) return;
   const hal0 = w.querySelector('.hal'), isi0 = hal0.querySelector('.hal-isi'), bk0 = hal0.parentElement;
   const Wd = hal0.offsetWidth; if (!Wd) return;
-  const pxcm = Wd / 21.5, H = (33 - num(a.atas) - num(a.bawah)) * pxcm;
+  const pxcm = Wd / ukuranHal(a, mendatar(a, 1))[0], bwh = bawahNyata(a), lebar1 = ukuranHal(a, mendatar(a, 1))[0] - num(a.kiri) - num(a.kanan);
+  /* tinggi muat per halaman, diukur pada lebar halaman pertama (halaman yang lebih sempit memuat lebih sedikit; yang lebih lebar dihitung sama agar tidak meluap) */
+  const kap = n => { const [Wn, Hn] = ukuranHal(a, mendatar(a, n)); return (Hn - num(a.atas) - bwh) * pxcm * Math.min(1, Math.max(.2, (Wn - num(a.kiri) - num(a.kanan)) / lebar1)); };
   /* label jenis bagian: di luar kertas bila ruang cukup, di margin kiri kertas bila margin cukup lebar, selain itu di atas bagian */
   const padL = num(a.kiri) * pxcm, luar = hal0.getBoundingClientRect().left - w.getBoundingClientRect().left >= 76;
-  w.style.setProperty('--lbl-geser', Math.round(luar ? padL + 12 : 10) + 'px');
+  w.style.setProperty('--lbl-geser', Math.round(luar ? padL + 12 : 10) + 'px'); w.style.setProperty('--mrh-geser', Math.round(.4 * pxcm) + 'px');
   w.classList.toggle('lbl-sempit', !luar && padL < 96);
   const t0 = isi0.getBoundingClientRect().top, unit = [];
   isi0.querySelectorAll(':scope > .bag').forEach(bag => {
-    const isi = bag.querySelector('.isi-bag'), anak = isi ? [...isi.children] : [];
-    if (bag.querySelector('#editor') || anak.length < 2) { const r = bag.getBoundingClientRect(); unit.push({ bag, t:r.top - t0, b:r.bottom - t0 }); return; }
-    anak.forEach((el, i) => { const r = el.getBoundingClientRect(); unit.push({ bag, el, t:(i ? r.top : bag.getBoundingClientRect().top) - t0, b:r.bottom - t0 + parseFloat(getComputedStyle(el).marginBottom || 0) }); });
+    const isi = bag.querySelector('.isi-bag'), anak = isi ? [...isi.children] : [], rb = bag.getBoundingClientRect();
+    /* Pemenggalan halaman: bagian Kondisi dipindah utuh bila muat satu halaman */
+    const utuh = bag.querySelector('#editor') || anak.length < 2 || (a.utuhKondisi && bag.dataset.tipe === 'KONDISI' && rb.height <= kap(1));
+    if (utuh) { unit.push({ bag, t:rb.top - t0, b:rb.bottom - t0 }); return; }
+    /* judul pasal ikut paragraf pertama; bila aturan dimatikan, judul boleh tertinggal sendirian di akhir halaman */
+    const jdl = !a.yatim && bag.querySelector('.jdl-bag');
+    if (jdl) unit.push({ bag, t:rb.top - t0, b:jdl.getBoundingClientRect().bottom - t0 });
+    anak.forEach((el, i) => { const r = el.getBoundingClientRect(); unit.push({ bag, el, t:(i || jdl ? r.top : rb.top) - t0, b:r.bottom - t0 + parseFloat(getComputedStyle(el).marginBottom || 0) }); });
   });
   let mulai = unit.length ? unit[0].t : 0, pg = 0;
-  unit.forEach((u, i) => { if (i && u.b - mulai > H) { pg++; mulai = u.t; } u.pg = pg; });
+  unit.forEach((u, i) => { if (i && u.b - mulai > kap(pg + 1)) { pg++; mulai = u.t; } u.pg = pg; });
   const total = pg + 1, wadah = [isi0];
   for (let i = 1; i < total; i++) { const bk = bk0.cloneNode(false), h = hal0.cloneNode(false), isi = isi0.cloneNode(false); h.append(isi); bk.append(h); w.append(bk); wadah.push(isi); }
   const perBag = new Map(); unit.forEach(u => { if (!perBag.has(u.bag)) perBag.set(u.bag, []); perBag.get(u.bag).push(u); });
@@ -981,18 +1147,29 @@ function paginasi(w, a, x, bisaKlik) {
     wadah[hs[0]].append(bag);
     hs.slice(1).forEach(p => {
       const lj = bag.cloneNode(false); lj.classList.add('lanjutan'); lj.classList.remove('aktif'); lj.classList.add('bisa-pilih');
-      lj.innerHTML = `${bag.dataset.lencana ? lblBag(bag.dataset.lencana + ' · lanjutan', bag.dataset.warna, bag.dataset.nama) : ''}<div class="isi-bag"></div>`;
-      us.filter(u => u.pg === p).forEach(u => lj.lastElementChild.append(u.el));
+      lj.innerHTML = `${bag.querySelector(':scope > .mrh') ? '<i class="mrh" aria-hidden="true"></i>' : ''}${bag.dataset.lencana ? lblBag(bag.dataset.lencana + ' · lanjutan', bag.dataset.warna, bag.dataset.nama) : ''}<div class="isi-bag"></div>`;
+      us.filter(u => u.pg === p && u.el).forEach(u => lj.lastElementChild.append(u.el));
       wadah[p].append(lj);
     });
   });
-  const kiri = (num(a.kiri) / 21.5 * 100).toFixed(2) + '%', kanan = (num(a.kanan) / 21.5 * 100).toFixed(2) + '%', tinggi = (num(a.bawah) * pxcm).toFixed(1) + 'px';
+  const px = v => (v * pxcm).toFixed(1) + 'px', putar = bisaKlik && !final();
+  const paraf = a.paraf ? `<span class="kotak-paraf" aria-label="Kotak paraf">${['Pihak Pertama', 'Pihak Kedua', 'PPAT'].map(p => `<span><i></i>${p}</span>`).join('')}</span>` : '';
   w.querySelectorAll('.hal').forEach((h, i) => {
-    const atr = bisaKlik ? `data-kaki role="button" tabindex="0" aria-label="Kaki halaman ${i + 1}. Buka pengaturan footer." title="Klik untuk mengatur footer di Pengaturan Dokumen."` : '';
-    h.insertAdjacentHTML('beforeend', `<div class="hal-kaki" ${atr} style="left:${kiri};right:${kanan};height:${tinggi}">${a.footer ? `<span class="garis-f" aria-hidden="true"></span><span class="hal-kaki-isi">${isiFooter(a, x, i + 1, total)}</span>` : ''}</div>`);
-    if (!a.footer) h.parentElement.insertAdjacentHTML('beforeend', `<p class="hal-nomor">${denganTip(`<span tabindex="0">Halaman ${i + 1} dari ${total}</span>`, 'Penanda ini hanya tampil di editor dan tidak ikut tercetak. Aktifkan footer di Pengaturan Dokumen agar nomor halaman tercetak.', 'top')}</p>`);
+    const n = i + 1, md = mendatar(a, n), [Wn, Hn] = ukuranHal(a, md), bk = h.parentElement;
+    /* ukuran tiap halaman mengikuti kertas dan orientasinya; margin dalam px agar sama di halaman tegak maupun mendatar */
+    if (i) { bk.style.maxWidth = 'none'; bk.style.width = px(Wn); }
+    h.style.aspectRatio = `${Wn}/${Hn}`; h.style.padding = `${px(num(a.atas))} ${px(num(a.kanan))} ${px(bwh)} ${px(num(a.kiri))}`;
+    if (putar) bk.insertAdjacentHTML('afterbegin', `<div class="kepala-hal">${denganTip(`<button type="button" class="ina-button ina-button--tertiary ina-button--sm" data-putar="${n}" aria-label="Halaman ${n} ${md ? 'mendatar' : 'tegak'}. Putar halaman ini.">${ik('ulang', 14)}${md ? 'Mendatar' : 'Tegak'}</button>`, `Tombol ini memutar halaman ${n} menjadi ${md ? 'tegak' : 'mendatar'}.`, 'top-start')}</div>`);
+    /* kop dan kaki halaman dapat diklik untuk membuka pengaturannya */
+    const atr = z => bisaKlik ? `data-zona="${z}" role="button" tabindex="0" aria-label="${z === 'kop' ? 'Kop' : 'Kaki'} halaman ${n}. Buka pengaturan ${ZONA[z].nama}." title="Klik untuk ${a[ZONA[z].aktif] ? 'mengetik dan mengatur' : 'menambah'} ${ZONA[z].nama}."` : '';
+    const sisi = `left:${px(num(a.kiri))};right:${px(num(a.kanan))}`;
+    const ketik = z => bisaKlik && S.zona === z && !final() && a[ZONA[z].aktif];
+    h.insertAdjacentHTML('beforeend', `<div class="hal-kop${ketik('kop') ? ' ketik' : ''}" ${atr('kop')} style="${sisi};height:${px(num(a.atas))}">${a.kop ? zonaHTML(a, x, 'kop', n, total, ketik('kop')) : ''}</div><div class="hal-kaki${a.paraf ? ' ada-paraf' : ''}${ketik('kaki') ? ' ketik' : ''}" ${atr('kaki')} style="${sisi};height:${px(bwh)}">${paraf}${a.footer ? zonaHTML(a, x, 'kaki', n, total, ketik('kaki')) : ''}</div>`);
+    if (!a.footer) h.parentElement.insertAdjacentHTML('beforeend', `<p class="hal-nomor">${denganTip(`<span tabindex="0">Halaman ${n} dari ${total}</span>`, 'Penanda ini hanya tampil di editor dan tidak ikut tercetak. Tambahkan kaki halaman agar nomor halaman tercetak.', 'top')}</p>`);
   });
-  w.dataset.total = total;
+  w.dataset.total = total; tinggiZtx(w);
+  if (bisaKlik) terapkanZoom();
+  const c = bisaKlik && $('#chipHal'); if (c) c.innerHTML = chipHal(a, total);
 }
 /* segarkan kertas saja (Pengaturan Dokumen berubah) tanpa menggambar ulang panel */
 function segarKertas() {
@@ -1014,23 +1191,57 @@ function blokEjaan() {
   </div></div></div>`;
 }
 
-/* ---------------- bilah alat (HE-MINUTA-02): alat live yang sering dipakai ---------------- */
-const ALAT = [
-  ['undo', ik('undo'), 'Urungkan (Ctrl+Z)'], ['redo', ik('redo'), 'Ulangi (Ctrl+Y)'], '|',
-  ['bold', '<b>B</b>', 'Tebal (Ctrl+B)'], ['italic', '<span>I</span>', 'Miring (Ctrl+I)', 'i'], ['underline', '<span>U</span>', 'Garis bawah (Ctrl+U)', 'u'], '|',
-  ['insertOrderedList', ik('ol'), 'Daftar bernomor'], ['insertUnorderedList', ik('ul'), 'Daftar berpoin'], '|',
-  ['justifyLeft', ik('rkiri'), 'Rata kiri'], ['justifyCenter', ik('rtengah'), 'Rata tengah'], ['justifyRight', ik('rkanan'), 'Rata kanan'], ['justifyFull', ik('rpenuh'), 'Rata kanan-kiri']
+/* ---------------- bilah alat (HE-MINUTA-02): susunan dan isi mengikuti live; setiap alat bernama lewat tooltip ---------------- */
+const ZOOM = [50, 75, 90, 100, 125, 150, 200];
+const GAYA = [['p', 'Teks normal'], ['h5', 'Judul pasal'], ['h2', 'Judul 1'], ['h3', 'Judul 2'], ['h4', 'Judul 3'], ['blockquote', 'Kutipan']];
+/* blok siap pakai (daftar sama dengan live) */
+const BLOK = [
+  ['Label : isi', '<p>Label&nbsp;&nbsp;&nbsp;&nbsp;: isi</p>'],
+  ['Baris jabatan (tabel)', '<table><tr><td style="width:30%">Nama</td><td style="width:4%">:</td><td>…</td></tr><tr><td>Jabatan</td><td>:</td><td>…</td></tr></table>'],
+  ['Kolom tanda tangan satu pihak', '<table class="tbl-ttd"><tr><td>PIHAK PERTAMA<br><br><br><br>(……………………………)</td></tr></table>'],
+  ['Judul tengah tebal', '<p style="text-align:center"><b>JUDUL</b></p>'],
+  ['Tabel bergaris', '<table class="tbl-garis"><tr><td>…</td><td>…</td><td>…</td></tr><tr><td>…</td><td>…</td><td>…</td></tr></table>'],
+  ['Tabel dua kolom tanpa garis', '<table><tr><td>…</td><td>…</td></tr><tr><td>…</td><td>…</td></tr></table>'],
+  ['Tabel garis mendatar saja', '<table class="tbl-datar"><tr><td>…</td><td>…</td></tr><tr><td>…</td><td>…</td></tr></table>'],
+  ['Tabel tanda tangan dua kolom', '<table class="tbl-ttd"><tr><td>PIHAK PERTAMA<br><br><br><br>(……………………………)</td><td>PIHAK KEDUA<br><br><br><br>(……………………………)</td></tr></table>'],
+  ['Tempat, tanggal (rata kanan)', '<p style="text-align:right">……………, ……………………… 2026</p>'],
+  ['Tanda tangan PPAT (rata kanan)', '<p style="text-align:right">Pejabat Pembuat Akta Tanah<br><br><br><br>{{ppat_nama}}</p>']
 ];
-/* alat live lainnya (sama dengan menu Lainnya di prototipe Penyusunan Akta) */
-const LAIN = [['h2', 'Judul besar'], ['h3', 'Judul kecil'], ['strikeThrough', 'Coret'], ['removeFormat', 'Hapus format'], '-', ['x:warna', 'Warna teks & stabilo'], ['x:ukuran', 'Ukuran huruf'], ['x:spasi', 'Spasi baris'], '-', ['x:tautan', 'Sisipkan tautan'], ['x:gambar', 'Sisipkan gambar'], ['x:tabel', 'Sisipkan tabel'], ['x:html', 'Sunting kode HTML'], ['x:penuh', 'Layar penuh']];
+/* menu tarik-turun bilah alat: [perintah, label] ; '#…' = judul kelompok ; perintah 'a:…' = aksi dokumen */
+const POP = {
+  rata:{ tombol:'#tombolRata', label:'Perataan', isi:() => [['justifyLeft', 'Rata kiri'], ['justifyCenter', 'Rata tengah'], ['justifyRight', 'Rata kanan'], ['justifyFull', 'Rata kanan-kiri']] },
+  spasi:{ tombol:'#tombolSpasi', label:'Spasi baris', isi:() => ['#Seluruh akta', ...SPASI.map(v => ['a:spasi:' + v, koma(v) + (v === '2' ? ' (ganda)' : ''), String(m().atur.spasi) === v]), '-', '#Paragraf ini', ['lsp:ikut', 'Ikut seluruh akta'], ...SPASI.map(v => ['lsp:' + v, koma(v)])] },
+  blok:{ tombol:'#tombolBlok', label:'Blok siap pakai', isi:() => BLOK.map((b, i) => ['blok:' + i, b[0]]) },
+  lain:{ tombol:'#tombolLain', label:'Alat lainnya', isi:() => ['#Ubah kapitalisasi', ['kap:besar', 'HURUF BESAR'], ['kap:kecil', 'huruf kecil'], ['kap:kata', 'Huruf Awal Kata'], ['kap:kalimat', 'Huruf awal kalimat'], ['kap:balik', 'bALIK kAPITAL'], '-', ['x:tautan', 'Tautan…'], ['x:pisah', 'Pemisah halaman'], ['x:lanskap', 'Halaman baru lanskap'], ['x:tabel', 'Tabel'], ['putarini', 'Putar halaman ini'], '-', ['x:html', 'Lihat kode HTML']] }
+};
 function bilahAlat() {
-  const ed = bisaEdit(), mati = ed ? '' : 'disabled';
+  const ed = bisaEdit(), mati = ed ? '' : 'disabled', dok = final() ? 'disabled' : '', a = m().atur;
+  const b = (cmd, isi, nama, tip, kelas = '', atr = mati) => denganTip(`<button type="button" class="ina-button ina-button--tertiary ina-button--sm btn-alat ${kelas}" data-cmd="${cmd}" aria-label="${nama}" ${atr}>${isi}</button>`, `<b>${nama}</b><br>${tip}`, 'top');
+  const ba = (aks, isi, nama, tip, atr = '') => denganTip(`<button type="button" class="ina-button ina-button--tertiary ina-button--sm btn-alat" data-aksi="${aks}" aria-label="${nama}" ${atr}>${isi}</button>`, `<b>${nama}</b><br>${tip}`, 'top');
+  const bp = (j, isi, nama, tip, atr = mati) => denganTip(`<button type="button" class="ina-button ina-button--tertiary ina-button--sm btn-alat pop" id="${POP[j].tombol.slice(1)}" data-pop="${j}" aria-label="${nama}" aria-haspopup="menu" aria-expanded="false" ${atr}>${isi}${ik('bawah', 12)}</button>`, `<b>${nama}</b><br>${tip}`, 'top');
+  const pil = (id, nama, opsi, v, tip, atr = '', lebar = 110) => denganTip(`<span class="ina-text-field pil-alat"><span class="ina-text-field__wrapper ina-text-field__wrapper--size-md" style="width:${lebar}px"><select id="${id}" class="ina-text-field__input" aria-label="${nama}" ${atr}>${opsi.map(([ov, ot]) => `<option value="${ov}" ${String(ov) === String(v) ? 'selected' : ''}>${ot}</option>`).join('')}</select></span></span>`, `<b>${nama}</b><br>${tip}`, 'top');
+  const pisah = '<span class="pisah" aria-hidden="true"></span>';
   return `<div class="alat ditandai" id="bilahAlat" role="toolbar" aria-label="Format teks">
-    ${ALAT.map(a => a === '|' ? '<span class="pisah" aria-hidden="true"></span>' : denganTip(`<button type="button" class="ina-button ina-button--tertiary ina-button--sm btn-alat ${a[3] || ''}" data-cmd="${a[0]}" aria-label="${a[2]}" ${mati}>${a[1]}</button>`, a[2], 'top')).join('')}
-    <span class="pisah" aria-hidden="true"></span>
-    ${tombol('Sisipkan variabel', 'secondary', 'sm', `id="tombolVar" aria-expanded="false" aria-haspopup="listbox" ${mati}`, ik('kurawal', 15))}
-    ${tombol('Lainnya', 'tertiary', 'sm', `id="tombolLain" aria-expanded="false" aria-haspopup="menu" ${mati}`, ik('lain', 16))}
-    <span class="kanan-alat">${denganTip(tombol('Cek ejaan', 'secondary', 'sm', `id="cekEjaan" aria-label="Cek Ejaan. Periksa salah ketik di semua pasal." ${S.memuat === 'cekEjaan' ? 'disabled aria-busy="true"' : ''}`, S.memuat === 'cekEjaan' ? spinner : ik('kilau', 15)), 'Sistem memeriksa salah ketik di semua pasal. Hasilnya berupa saran, dan teks tidak berubah otomatis.', 'bottom-end')}</span>
+    ${b('undo', ik('undo'), 'Urungkan', 'Tombol ini membatalkan perubahan terakhir. Pintasan: Ctrl+Z.')}${b('redo', ik('redo'), 'Lakukan lagi', 'Tombol ini mengulang perubahan yang baru dibatalkan. Pintasan: Ctrl+Y.')}
+    ${ba('cetak', ik('cetak'), 'Cetak', 'Tombol ini membuka Pratinjau Akta untuk mencetak naskah.')}${pisah}
+    ${ba('zoom:-', ik('kurang'), 'Perkecil tampilan', 'Tombol ini memperkecil tampilan kertas. Ukuran huruf akta tidak berubah.')}
+    ${pil('zoomAlat', 'Perbesaran tampilan', [['fit', 'Sesuaikan'], ['lebar', 'Selebar layar'], ...ZOOM.map(z => [z, z + '%'])], S.zoom, 'Daftar ini mengatur besar tampilan kertas. Ukuran huruf akta tidak berubah.', '', 104)}
+    ${ba('zoom:+', ik('tambah'), 'Perbesar tampilan', 'Tombol ini memperbesar tampilan kertas. Ukuran huruf akta tidak berubah.')}
+    ${ba('zoom:lebar', ik('lebar'), 'Sesuaikan lebar', 'Tombol ini menyesuaikan lebar kertas dengan lebar layar.')}${pisah}
+    ${pil('gayaAlat', 'Gaya paragraf', GAYA, 'p', 'Daftar ini mengubah paragraf yang dipilih menjadi teks normal, judul pasal, judul, atau kutipan.', mati, 112)}
+    ${pil('hurufAlat', 'Jenis huruf seluruh akta', Object.keys(HURUF).map(k => [k, k]), a.huruf, 'Daftar ini mengubah jenis huruf seluruh akta. Akta PPAT lazim memakai Courier New.', dok, 132)}
+    ${ba('fs:-1', ik('kurang', 14), 'Perkecil huruf', 'Tombol ini memperkecil huruf seluruh akta sebesar 1 pt.', dok)}<span class="uk-alat" title="Ukuran huruf seluruh akta (pt)">${esc(a.ukuran)}</span>${ba('fs:1', ik('tambah', 14), 'Perbesar huruf', 'Tombol ini memperbesar huruf seluruh akta sebesar 1 pt.', dok)}${pisah}
+    ${b('bold', '<b>B</b>', 'Tebal', 'Tombol ini menebalkan teks yang dipilih. Pintasan: Ctrl+B.')}${b('italic', '<span>I</span>', 'Miring', 'Tombol ini memiringkan teks yang dipilih. Pintasan: Ctrl+I.', 'i')}${b('underline', '<span>U</span>', 'Garis bawah', 'Tombol ini memberi garis bawah pada teks yang dipilih. Pintasan: Ctrl+U.', 'u')}${b('strikeThrough', '<span>S</span>', 'Coret', 'Tombol ini mencoret teks yang dipilih.', 's')}
+    ${b('foreColor', '<span class="warna-a">A</span>', 'Warna teks', 'Tombol ini memberi warna merah pada teks yang dipilih.')}${b('hiliteColor', '<span class="sorot-a">ab</span>', 'Warna sorot', 'Tombol ini menyorot teks yang dipilih dengan warna kuning.')}${pisah}
+    ${tombol('Sisipkan variabel', 'secondary', 'sm', `id="tombolVar" aria-expanded="false" aria-haspopup="listbox" ${mati}`, ik('kurawal', 15))}${pisah}
+    ${bp('rata', ik('rkiri'), 'Perataan', 'Daftar ini mengatur perataan paragraf yang dipilih.')}${bp('spasi', ik('spasiBaris'), 'Spasi baris', 'Daftar ini mengatur spasi baris seluruh akta atau paragraf yang dipilih.', dok)}
+    ${b('insertOrderedList', ik('ol'), 'Daftar bernomor', 'Tombol ini mengubah paragraf yang dipilih menjadi daftar bernomor.')}${b('insertUnorderedList', ik('ul'), 'Daftar bertanda', 'Tombol ini mengubah paragraf yang dipilih menjadi daftar bertanda titik.')}
+    ${b('outdent', ik('jorokKurang'), 'Kurangi jorokan', 'Tombol ini menggeser paragraf yang dipilih ke kiri.')}${b('indent', ik('jorokTambah'), 'Tambah jorokan', 'Tombol ini menggeser paragraf yang dipilih ke kanan.')}
+    ${b('removeFormat', ik('hapusFormat'), 'Hapus format', 'Tombol ini menghapus format tebal, miring, dan warna dari teks yang dipilih.')}${pisah}
+    ${denganTip(tombol('Blok', 'tertiary', 'sm', `id="tombolBlok" data-pop="blok" aria-label="Sisipkan blok siap pakai" aria-haspopup="menu" aria-expanded="false" ${mati}`, ik('blok', 15)), '<b>Sisipkan blok siap pakai</b><br>Daftar ini menyisipkan tabel atau baris siap pakai di posisi kursor.', 'top')}
+    ${denganTip(tombol('Lainnya', 'tertiary', 'sm', `id="tombolLain" data-pop="lain" aria-haspopup="menu" aria-expanded="false" ${mati}`, ik('lain', 16)), '<b>Lainnya</b><br>Daftar ini memuat kapitalisasi, tautan, pemisah halaman, tabel, dan kode HTML.', 'top')}
+    <span class="kanan-alat">${denganTip(tombol('Cek ejaan', 'secondary', 'sm', `id="cekEjaan" aria-label="Cek Ejaan. Periksa salah ketik di semua pasal." ${S.memuat === 'cekEjaan' ? 'disabled aria-busy="true"' : ''}`, S.memuat === 'cekEjaan' ? spinner : ik('kilau', 15)), 'Sistem memeriksa salah ketik di semua pasal. Hasilnya berupa saran, dan teks tidak berubah otomatis.', 'bottom-end')}
+      ${denganTip(tombol('Pengaturan halaman', 'secondary', 'sm', 'data-aksi="atur"', ik('gear', 15)), 'Tombol ini membuka pengaturan kertas, margin, huruf, spasi, garis merah, kotak paraf, dan orientasi.', 'bottom-end')}</span>
     ${usulan('HE-MINUTA-02')}
     <div id="wadahPop"></div>
   </div>`;
@@ -1045,20 +1256,25 @@ function panelKanan(x, fin) {
       </div></div>
       ${denganTip(`<button type="button" class="ina-button ina-button--tertiary ina-button--sm" data-aksi="panel" aria-label="Tutup panel Bagian">${ik('pnlTutup', 18)}</button>`, 'Tombol ini menutup panel Bagian.', 'bottom-end')}
     </div>
-    <div class="panel-isi" id="panelIsi">${S.tab === 'pasal' ? panelBagian(x, fin) : panelAtur(x, fin)}</div>
+    <div class="panel-isi" id="panelIsi">${S.tab === 'pasal' ? panelBagian(x, fin) : S.tab === 'cari' ? panelCari(x, fin) : panelAtur(x, fin)}</div>
   </aside>`;
 }
 function panelBagian(x, fin) {
   const it = item();
   if (!it) return `<div class="kosong-ed">${ik('dok', 40)}Pilih pasal atau catatan di Navigasi, atau klik naskah di kertas untuk mulai menyunting.</div>`;
   const ps = it.tipe === 'PASAL', no = nomorPasal(x.naskah, it), n = x.naskah, i = n.indexOf(it);
-  const d = S.draf || { judul:it.judul, isi:it.isi, tampil:it.tampil };
+  const d = S.draf || drafDari(it), a = x.atur;
   const asing = tidakDikenal(d.isi);
   return `<p class="ed-judul">${ik('pena', 16)} ${ps ? `Pasal ${no}` : 'Catatan'} ${kecil(ps ? 'Pasal' : 'Catatan', ps ? 'info' : 'neutral')}</p>
     <div class="ina-text-field"><label class="ina-text-field__label" for="judulPasal">Judul<span class="ina-text-field__required">*</span></label>
       <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ${S.galatJudul ? 'ina-text-field__wrapper--status-error' : ''} ${fin ? 'ina-text-field__wrapper--disabled' : ''}"><input id="judulPasal" class="ina-text-field__input" value="${esc(d.judul)}" ${fin ? 'disabled' : ''} ${S.galatJudul ? 'aria-invalid="true" aria-describedby="galatJudul"' : ''}></div>
       ${S.galatJudul ? `<div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text ina-text-field__helper-text--error" id="galatJudul">${S.galatJudul}</div></div>` : ''}</div>
     ${cek('tampilJudul', 'Tampilkan judul pasal di akta', d.tampil, '(berlaku untuk pratinjau dan PDF)', fin)}${usulan('HE-MINUTA-01')}
+    <div class="grup-p" id="aturBagian"><h4>Pengaturan bagian</h4><div class="g1">
+      <div class="ina-text-field"><label class="ina-text-field__label" for="tipeBagian">Tipe${tanya('Tipe bagian', 'Pasal diberi nomor otomatis sesuai urutannya. Catatan tidak bernomor, misalnya kop akta atau penutup.')}</label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ${fin || it.tipe === 'KONDISI' ? 'ina-text-field__wrapper--disabled' : ''}"><select id="tipeBagian" class="ina-text-field__input" ${fin || it.tipe === 'KONDISI' ? 'disabled' : ''}>${(it.tipe === 'KONDISI' ? [['KONDISI', 'Kondisi (disusun sistem)']] : [['PASAL', 'Pasal'], ['CATATAN', 'Catatan']]).map(([v, l]) => `<option value="${v}" ${(d.tipe || it.tipe) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></div></div>
+      <span style="display:inline-flex;align-items:center">${cek('garisPutus', 'Garis putus-putus', d.putus, '', fin)}${tanya('Garis putus-putus', 'Garis putus-putus mengisi sisa baris terakhir bagian ini. Ruang kosong itu tidak dapat ditambahi tulisan setelah akta ditandatangani.')}</span>
+      <span style="display:inline-flex;align-items:center">${cek('garisMerahBag', 'Garis merah di bagian ini', d.merah !== false, '', fin)}${tanya('Garis merah bagian', 'Garis merah menandai batas kiri naskah bagian ini. Garis hanya tampil bila garis merah di Pengaturan Dokumen menyala.')}</span></div>
+      ${d.merah !== false && !a.garisMerah && !fin ? `<div style="margin-top:10px">${alert('caution', 'Garis merah dokumen sedang mati', `Garis merah bagian ini belum tampil di kertas. ${tombol('Nyalakan di Pengaturan Dokumen', 'link', 'sm', 'id="keGarisMerah"')}`)}</div>` : ''}</div>
     <div class="grup-p"><h4>Variabel</h4>
       <span style="display:inline-flex;align-items:center">${toggle('tampilKode', 'Tampilkan kode variabel', S.kode)}${tanya('Kode variabel', 'Kode variabel ditulis di antara kurung kurawal ganda, misalnya &#123;&#123;penjual_nama&#125;&#125;. Sistem mengganti kode ini dengan data permohonan saat pratinjau dan PDF dibuat.')}</span>
       <p class="ket-kecil">Label hijau di kertas akan terisi otomatis dari data permohonan saat pratinjau dan PDF.${usulan('HE-MINUTA-03')}</p>
@@ -1070,48 +1286,139 @@ function panelBagian(x, fin) {
 
 /* ---------------- pengaturan dokumen (HE-MINUTA-06) ---------------- */
 function halamanMini(a) {
-  const W = 110, H = 169, sx = W / 21.5, sy = H / 33;
-  return `<div class="halaman-mini" aria-hidden="true"><div class="area" style="left:${a.kiri * sx}px;right:${a.kanan * sx}px;top:${a.atas * sy}px;bottom:${a.bawah * sy}px"></div><span class="jilid" style="left:${Math.max(2, a.kiri * sx / 2 - 4)}px">JILID</span></div><small>Area tulis (garis putus-putus)</small>`;
+  const [Wc, Hc] = ukuranHal(a, mendatar(a, 1)), s = 169 / Math.max(Wc, Hc), W = Math.round(Wc * s), H = Math.round(Hc * s), sx = s, sy = s;
+  return `<div class="halaman-mini" aria-hidden="true" style="width:${W}px;height:${H}px"><div class="area" style="left:${a.kiri * sx}px;right:${a.kanan * sx}px;top:${a.atas * sy}px;bottom:${bawahNyata(a) * sy}px"></div>${a.garisMerah ? `<span class="garis-merah" style="left:${(num(a.kiri) - .4) * sx}px;top:${a.atas * sy}px;bottom:${bawahNyata(a) * sy}px"></span>` : ''}<span class="jilid" style="left:${Math.max(2, a.kiri * sx / 2 - 4)}px">JILID</span></div><small>Area tulis (garis putus-putus)</small>`;
 }
 const samaStandar = a => Object.keys(STANDAR).every(k => String(a[k]) === String(STANDAR[k]));
+/* Orientasi per halaman: tombol nomor halaman di panel (jumlah halaman diisi setelah kertas dipotong) */
+function chipHal(a, total) {
+  const lain = (a.mendatar || []).filter(n => n <= total), arah = a.orientasi === 'Mendatar' ? 'tegak' : 'mendatar';
+  return `<div class="chip-hal" role="group" aria-label="Orientasi per halaman">${Array.from({ length:total }, (_, i) => { const n = i + 1, md = mendatar(a, n); return `<button type="button" class="ina-button ina-button--${md ? 'primary' : 'secondary'} ina-button--sm" data-putar="${n}" aria-pressed="${md}">Hal. ${n}${md ? ' · mendatar' : ''}</button>`; }).join('')}</div>
+    <p class="ket-kecil">${lain.length ? `Halaman ${lain.join(', ')} ${arah}.` : `Semua halaman ${a.orientasi.toLowerCase()}.`} Klik nomor halaman atau tombol putar di atas kertas untuk memutar halaman.</p>`;
+}
+const pilihAtur = (id, l, k, opsi, v, tip = '') => `<div class="ina-text-field"><label class="ina-text-field__label" for="${id}">${l}${tip}</label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><select id="${id}" class="ina-text-field__input" data-aturp="${k}">${opsi.map(([ov, ot]) => `<option value="${esc(ov)}" ${String(ov) === String(v) ? 'selected' : ''}>${ot}</option>`).join('')}</select></div></div>`;
+const PECAH = [['yatim', 'aYatim', 'Judul pasal tidak boleh sendirian di akhir halaman', 'Judul pasal pindah ke halaman berikutnya bila setelahnya tidak muat satu paragraf isi.'], ['utuhKondisi', 'aUtuh', 'Bagian Kondisi tidak dipotong', 'Setiap bagian Kondisi dipindahkan utuh ke halaman berikutnya bila tidak muat di sisa halaman.']];
 function panelAtur(x, fin) {
+  if (S.zona) return panelZona(x, fin);
   const a = x.atur, std = samaStandar(a);
   const fld = (id, l, v, suf, help = '') => `<div class="ina-text-field"><label class="ina-text-field__label" for="${id}">${l}</label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><input id="${id}" class="ina-text-field__input" inputmode="decimal" value="${esc(v)}" data-atur="${id.slice(2)}"><span class="ina-text-field__suffix">${suf}</span></div>${help ? `<div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text">${help}</div></div>` : ''}</div>`;
-  const FV = [['{page}', 'Nomor halaman', '1'], ['{total}', 'Jumlah halaman', '3'], ['{date}', 'Tanggal cetak', TGL_CETAK], ['{{ppat_nama}}', 'Nama PPAT', VMAP.get('ppat_nama').c], ['{{ppat_wilayah}}', 'Wilayah kerja PPAT', VMAP.get('ppat_wilayah').c], ['{{deed_number}}', 'Nomor akta', '13/2026 (diisi saat finalisasi)'], ['{{jenis_akta}}', 'Jenis akta', 'Akta Jual Beli']];
   return `<div class="atur-ringkas ditandai" id="ringkasAtur">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">${std ? badge(`${ik('centang', 12)} Mengikuti standar akta PPAT`, 'success') : badge('Diubah khusus untuk akta ini', 'warning')}${tanya('Standar akta PPAT', 'Standar akta adalah format kertas, margin, dan huruf yang ditetapkan kantor untuk semua akta. Format ini berlaku kecuali Anda mengubahnya khusus untuk akta ini.')}${usulan('HE-MINUTA-06')}</div>
       <p class="ket-kecil">Pengaturan ini dipakai untuk minuta dan salinan akta, dan langsung terlihat di kertas. ${std ? 'Anda tidak perlu mengubah apa pun kecuali akta ini memerlukan format khusus.' : 'Akta lain tetap memakai standar.'}</p>
       ${halamanMini(a)}
-      <dl><dt>Kertas</dt><dd>${a.kertas}, ${a.orientasi.toLowerCase()}</dd>
-        <dt>Margin${tanya('Margin', 'Margin adalah jarak antara tepi kertas dan area tulis. Margin kiri dibuat lebih lebar untuk jilid dan cap.')}</dt><dd>Kiri ${a.kiri} cm (untuk jilid/cap) · atas ${a.atas} · kanan ${a.kanan} · bawah ${a.bawah} cm</dd>
-        <dt>Huruf</dt><dd>${a.huruf} ${a.ukuran} pt, spasi ${a.spasi === '2' ? 'ganda (2)' : a.spasi}</dd>
-        <dt>Footer${tanya('Footer', 'Footer adalah teks kaki di bagian bawah setiap halaman akta, misalnya nomor halaman atau nama PPAT. Footer tampil saat menyusun, di Pratinjau Akta, dan di PDF.')}</dt><dd>${a.footer ? 'Aktif — tampil di setiap halaman' : 'Tidak aktif'}</dd></dl>
+      <dl><dt>Kertas</dt><dd>${a.kertas}, ${a.orientasi.toLowerCase()}${(a.mendatar || []).length ? ` (halaman ${a.mendatar.join(', ')} ${a.orientasi === 'Mendatar' ? 'tegak' : 'mendatar'})` : ''}</dd>
+        <dt>Margin${tanya('Margin', 'Margin adalah jarak antara tepi kertas dan area tulis. Margin kiri dibuat lebih lebar untuk jilid dan cap.')}</dt><dd>Kiri ${koma(a.kiri)} cm (untuk jilid/cap) · atas ${koma(a.atas)} · kanan ${koma(a.kanan)} · bawah ${koma(bawahNyata(a))} cm${bawahNyata(a) > num(a.bawah) ? ' (karena kotak paraf)' : ''}</dd>
+        <dt>Huruf</dt><dd>${a.huruf} ${a.ukuran} pt, spasi ${a.spasi === '2' ? 'ganda (2)' : koma(a.spasi)}</dd>
+        <dt>Pemenggalan halaman</dt><dd>${PECAH.filter(p => a[p[0]]).map(p => p[2]).join('; ') || 'Paragraf dan judul boleh dipenggal di mana saja'}</dd>
+        <dt>Garis merah dan kotak paraf${tanya('Garis merah dan kotak paraf', 'Garis merah menandai batas kiri naskah. Kotak paraf tercetak di kaki setiap halaman untuk paraf para pihak dan PPAT.')}</dt><dd>Garis merah ${a.garisMerah ? 'aktif' : 'tidak aktif'} · kotak paraf ${a.paraf ? 'aktif' : 'tidak aktif'}</dd>
+        <dt>Kop halaman${tanya('Kop halaman', ZONA.kop.ket)}</dt><dd>${a.kop ? 'Aktif, tampil di setiap halaman' : 'Tidak ada'}</dd>
+        <dt>Kaki halaman${tanya('Kaki halaman', ZONA.kaki.ket)}</dt><dd>${a.footer ? 'Aktif, tampil di setiap halaman' : 'Tidak ada'}</dd></dl>
     </div>
     ${fin ? '' : !S.aturBuka ? `<div class="atur-kaki">${std ? '' : tombol('Kembalikan ke standar', 'tertiary', 'sm', 'id="aturStandar"', ik('ulang', 15))}${tombol('Ubah untuk akta ini', 'secondary', 'sm', 'id="aturBuka"', ik('pena', 15))}</div>` : `
     <div class="atur-grup"><h4>Kertas</h4><div class="g1">
-      <div class="ina-text-field"><label class="ina-text-field__label">Ukuran kertas</label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ina-text-field__wrapper--disabled"><input class="ina-text-field__input" value="${a.kertas}" disabled></div></div>
-      <div class="ina-text-field"><label class="ina-text-field__label">Orientasi</label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ina-text-field__wrapper--disabled"><input class="ina-text-field__input" value="${a.orientasi}" disabled></div></div></div></div>
-    <div class="atur-grup"><h4>Margin</h4><div class="g2">${fld('a-atas', 'Atas', a.atas, 'cm')}${fld('a-bawah', 'Bawah', a.bawah, 'cm')}${fld('a-kiri', 'Kiri', a.kiri, 'cm', 'Lebih lebar untuk jilid/cap')}${fld('a-kanan', 'Kanan', a.kanan, 'cm')}</div></div>
+      ${pilihAtur('a-kertas', 'Ukuran kertas', 'kertas', Object.keys(KERTAS).map(k => [k, k]), a.kertas, tanya('Ukuran kertas', 'Akta PPAT lazim memakai kertas F4 (21,5 × 33 cm). Ukuran kertas berlaku untuk minuta dan salinan akta ini.'))}
+      ${pilihAtur('a-orientasi', 'Orientasi', 'orientasi', [['Tegak', 'Tegak'], ['Mendatar', 'Mendatar']], a.orientasi)}</div></div>
+    <div class="atur-grup"><h4>Margin${tanya('Margin', 'Margin kiri akta PPAT lazimnya 6 cm. Ruang itu dipakai untuk menjilid dan membubuhkan cap.')}</h4><div class="g2">${fld('a-atas', 'Atas', a.atas, 'cm')}${fld('a-bawah', 'Bawah', a.bawah, 'cm')}${fld('a-kiri', 'Kiri', a.kiri, 'cm', 'Lebih lebar untuk jilid/cap')}${fld('a-kanan', 'Kanan', a.kanan, 'cm')}</div></div>
     <div class="atur-grup"><h4>Huruf</h4><div class="g1">
-      <div class="ina-text-field"><label class="ina-text-field__label">Jenis huruf</label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ina-text-field__wrapper--disabled"><input class="ina-text-field__input" value="${a.huruf} (khas akta)" disabled></div></div></div>
-      <div class="g2" style="margin-top:12px">${fld('a-ukuran', 'Ukuran huruf', a.ukuran, 'pt')}${fld('a-spasi', 'Spasi baris', a.spasi, '×', '1 = tunggal, 2 = ganda')}</div></div>
-    <div class="atur-grup"><h4>Footer</h4>
-      ${cek('aFooter', 'Tampilkan footer di bagian bawah halaman', a.footer)}
-      <p class="ket-kecil">Footer tampil di bagian bawah setiap halaman saat menyusun, di Pratinjau Akta, dan di PDF.${usulan('HE-MINUTA-07')}</p>
-      <div class="ina-text-field" style="margin-top:12px"><label class="ina-text-field__label" for="aFooterTeks">Isi footer</label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><input id="aFooterTeks" class="ina-text-field__input" value="${esc(a.footerTeks)}" autocomplete="off"></div><div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text">Kertas langsung menampilkan isi footer dengan kode yang sudah diganti nilai contoh.</div></div></div>
-      <p class="ket-kecil" style="margin-top:10px">Kode yang dapat dipakai di footer. Arahkan kursor untuk melihat contoh.</p>
-      <div class="var-footer">${FV.map(([k, l, c]) => denganTip(kecil(`${l} · <code>${esc(k)}</code>`, 'neutral'), `Sistem mengganti ${esc(k)} dengan ${l.toLowerCase()}, misalnya ${esc(c)}.`, 'top')).join('')}</div></div>
+      ${pilihAtur('a-huruf', 'Jenis huruf', 'huruf', Object.keys(HURUF).map(k => [k, k === 'Courier New' ? 'Courier New (khas akta)' : k]), a.huruf, tanya('Jenis huruf', 'Jenis huruf berlaku untuk seluruh naskah. Akta PPAT lazim memakai Courier New.'))}</div>
+      <div class="g2" style="margin-top:12px">${fld('a-ukuran', 'Ukuran huruf', a.ukuran, 'pt')}${pilihAtur('a-spasi', 'Spasi baris', 'spasi', SPASI.map(v => [v, koma(v) + (v === '2' ? ' (ganda)' : '')]), a.spasi, tanya('Spasi baris', 'Akta PPAT lazim memakai spasi ganda (2). Perubahan spasi mengubah jumlah baris per halaman.'))}</div></div>
+    <div class="atur-grup"><h4>Pemenggalan halaman</h4><div class="g1">${PECAH.map(([k, id, l, p]) => `<span style="display:inline-flex;align-items:center">${cek(id, l, a[k])}${tanya(l, p)}</span>`).join('')}</div>
+      <p class="ket-kecil">Paragraf panjang dipenggal di tengah bila tidak muat. Sisanya berlanjut di halaman berikutnya.</p></div>
+    <div class="atur-grup"><h4>Orientasi per halaman${tanya('Orientasi per halaman', 'Halaman mendatar memberi ruang lebih lebar untuk tabel atau gambar. Isi naskah dapat bergeser karena ruangnya berubah.')}</h4><div id="chipHal">${chipHal(a, +($('#kertas')?.dataset.total || 1))}</div></div>
+    <div class="atur-grup"><h4>Garis merah</h4>${cek('aMerah', 'Gambar garis tepi merah di sisi kiri naskah', a.garisMerah)}
+      <p class="ket-kecil">Bawaannya mati. Garis merah menandai batas kiri naskah dan tidak mengubah jumlah halaman.</p></div>
+    <div class="atur-grup"><h4>Kotak paraf</h4>${cek('aParaf', 'Tampilkan kotak paraf di kaki setiap halaman', a.paraf)}
+      <p class="ket-kecil">Kotak kosong berlabel untuk paraf para pihak dan PPAT. Margin bawah otomatis menjadi minimal 2,6 cm.</p></div>
+    <div class="atur-grup"><h4>Kop dan kaki halaman</h4><div class="zona-tbl">${tombol('Atur kop halaman', 'secondary', 'sm', 'data-zona-buka="kop"')}${tombol('Atur kaki halaman', 'secondary', 'sm', 'data-zona-buka="kaki"')}</div>
+      <p class="ket-kecil">Kop dan kaki halaman tampil di setiap halaman saat menyusun, di Pratinjau Akta, dan di PDF. Anda juga dapat mengklik bagian atas atau bawah kertas.${usulan('HE-MINUTA-07')}</p></div>
     <div class="atur-kaki">${tombol('Kembalikan ke standar', 'tertiary', 'sm', 'id="aturStandar"', ik('ulang', 15))}${tombol('Batal', 'secondary', 'sm', 'id="aturBatal"')}${tombol('Simpan pengaturan', 'primary', 'sm', 'id="aturSimpan"', ik('simpan', 15))}</div>`}`;
+}
+
+/* panel Kop Halaman / Kaki Halaman: isi cepat, jumlah kolom, isi kolom, data otomatis, garis pemisah */
+function panelZona(x, fin) {
+  const z = S.zona, Z = ZONA[z], a = x.atur, kol = a[Z.kol] || [''], N = kol.length;
+  const posisi = i => N === 1 ? 'tengah' : !i ? 'kiri' : i === N - 1 ? 'kanan' : 'tengah';
+  let s = `<div class="zona-kembali">${tombol('Pengaturan Dokumen', 'tertiary', 'sm', 'id="zonaKembali" aria-label="Kembali ke Pengaturan Dokumen"', ik('kiri', 15))}</div>
+    <p class="ed-judul">${Z.judul}${tanya(Z.nama, Z.ket)}</p>`;
+  if (fin) return s + `<p class="ket-kecil">${a[Z.aktif] ? `${Z.judul} tampil di setiap halaman. Akta sudah final, sehingga isinya tidak dapat diubah.` : `Akta ini tidak memiliki ${Z.nama}.`}</p>`;
+  if (!a[Z.aktif]) return s + `<p class="ket-kecil">Akta ini belum memiliki ${Z.nama}.</p><div class="zona-tbl">${tombol(`Tambah ${Z.nama}`, 'primary', 'sm', 'id="zonaTambah"', ik('tambah', 14))}</div>`;
+  s += `${alert('info', `Ketik isi ${Z.nama} langsung di kertas`, `Kolom bergaris putus-putus di ${z === 'kop' ? 'atas' : 'bawah'} kertas dapat diketik. Perubahan berlaku untuk semua halaman.`)}
+    <div class="atur-grup"><h4>Isi cepat${tanya('Isi cepat', 'Isi cepat mengganti seluruh isi kolom dengan pola yang dipilih. Anda tetap dapat mengubah isinya setelah itu.')}</h4>
+      <div class="pola-zona">${Z.pola.map(([l, k], i) => `<button type="button" class="ina-button ina-button--secondary ina-button--sm" data-pola="${i}"><b>${l}</b><span>${k.map(v => isiZona(v, x, 1, 3).replace(/<br>/g, ' · ')).join('   |   ')}</span></button>`).join('')}</div></div>
+    <div class="atur-grup"><h4>Jumlah kolom${tanya('Jumlah kolom', 'Setiap kolom diisi terpisah dan dibagi rata selebar naskah. Kolom pertama rata kiri, kolom terakhir rata kanan.')}</h4>
+      <div class="zona-tbl" role="group" aria-label="Jumlah kolom">${[1, 2, 3, 4].map(n => `<button type="button" class="ina-button ina-button--${n === N ? 'primary' : 'secondary'} ina-button--sm" data-nkol="${n}" aria-pressed="${n === N}">${n}</button>`).join('')}</div></div>
+    <div class="atur-grup"><h4>Sisipkan data${tanya('Sisipkan data', 'Data diisi otomatis pada setiap halaman, misalnya nomor halaman. Klik dulu kolom di kertas, lalu pilih datanya.')}</h4>
+      <p class="ket-kecil">Klik kolom di kertas, lalu pilih data. Selama mengetik, kertas menampilkan kodenya (mis. {page}). Nilainya tampil setelah panel ditutup.</p>
+      <div class="var-footer">${DATA_ZONA.map(([k, l, c]) => denganTip(`<button type="button" class="ina-button ina-button--secondary ina-button--sm" data-token="${esc(k)}">${ik('tambah', 12)}${l}</button>`, `Sistem mengganti data ini dengan ${l.toLowerCase()}, misalnya ${esc(c)}.`, 'top')).join('')}</div></div>
+    <div class="atur-grup">${cek('zGaris', Z.garisL, a[Z.garis])}</div>
+    <div class="atur-grup">${denganTip(tombol(`Hapus ${Z.nama}`, 'tertiary', 'sm', 'id="zonaHapus"', ik('sampah', 15)), `Tombol ini menghapus ${Z.nama} dari semua halaman. Isinya tetap tersimpan bila ${Z.nama} ditambahkan lagi.`, 'top-start')}</div>`;
+  return s + `<div class="atur-kaki">${tombol('Batal', 'secondary', 'sm', 'id="aturBatal"')}${tombol('Simpan pengaturan', 'primary', 'sm', 'id="aturSimpan"', ik('simpan', 15))}</div>`;
+}
+
+/* Cari dan ganti (live: Edit › Cari dan ganti, Ctrl+H). Variabel tidak ikut dicari atau diganti. */
+const reCari = q => new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+function teksNode(root) { const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode:n => n.parentElement.closest('.var-chip') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT }); const a = []; while (w.nextNode()) a.push(w.currentNode); return a; }
+const bagianVar = s => s.split(/(\{\{[^}]*\}\})/);
+function daftarCocok() {
+  const q = S.cg.q.trim(), x = m(); if (!q || !x) return [];
+  const r = []; x.naskah.forEach(it => { const d = document.createElement('div'); d.innerHTML = it.id === S.pilih && S.ubah && $('#editor') ? serialisasi($('#editor')) : it.id === S.pilih && S.draf ? S.draf.isi : it.isi; let n = 0;
+    teksNode(d).forEach(tn => bagianVar(tn.nodeValue).forEach((s, i) => { if (i % 2 === 0) n += (s.match(reCari(q)) || []).length; }));
+    for (let i = 0; i < n; i++) r.push({ id:it.id, ke:i }); });
+  return r;
+}
+function infoCari() {
+  if (!S.cg.q.trim()) return 'Ketik kata atau kalimat yang ingin dicari.';
+  const n = daftarCocok().length; if (!n) return 'Teks tidak ditemukan di naskah.';
+  return S.cg.idx >= 0 ? `Kecocokan ${S.cg.idx + 1} dari ${n}.` : `${n} kecocokan ditemukan.`;
+}
+function panelCari(x, fin) {
+  const isian = (id, l, v, ph, mati = false) => `<div class="ina-text-field"><label class="ina-text-field__label" for="${id}">${l}</label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md ${mati ? 'ina-text-field__wrapper--disabled' : ''}"><input id="${id}" class="ina-text-field__input" value="${esc(v)}" placeholder="${ph}" autocomplete="off" ${mati ? 'disabled' : ''}></div></div>`;
+  return `<div class="zona-kembali">${tombol('Bagian', 'tertiary', 'sm', 'id="cariTutup" aria-label="Tutup Cari dan ganti, kembali ke panel Bagian"', ik('kiri', 15))}</div>
+    <p class="ed-judul">${ik('cari', 16)} Cari dan ganti</p>
+    <div class="g1">${isian('cariQ', 'Cari', S.cg.q, 'Kata atau kalimat di naskah')}${isian('cariG', 'Ganti dengan', S.cg.ganti, 'Kata pengganti', fin)}</div>
+    <p class="ket-kecil" id="infoCari" aria-live="polite">${infoCari()}</p>
+    <div class="zona-tbl">${tombol('Cari berikutnya', 'primary', 'sm', 'id="cariLanjut"', ik('cari', 14))}${tombol('Ganti', 'secondary', 'sm', `id="cariGanti" ${fin ? 'disabled' : ''}`)}${tombol('Ganti semua', 'secondary', 'sm', `id="cariSemua" ${fin ? 'disabled' : ''}`)}</div>
+    <p class="ket-kecil">Pencarian mencakup isi semua bagian naskah.${tanya('Pencarian', 'Pencarian tidak membedakan huruf besar dan huruf kecil. Variabel tidak ikut dicari atau diganti.')}</p>`;
+}
+/* pilih kecocokan ke-n di bagian yang sedang dibuka */
+function tandaiCocok(ke) {
+  const ed = $('#editor'); if (!ed) return; let k = 0; const re = reCari(S.cg.q.trim());
+  for (const tn of teksNode(ed)) { re.lastIndex = 0; let mm; while ((mm = re.exec(tn.nodeValue))) { if (k++ === ke) { const r = document.createRange(); r.setStart(tn, mm.index); r.setEnd(tn, mm.index + mm[0].length); const s = getSelection(); s.removeAllRanges(); s.addRange(r); rentang = r.cloneRange(); const kv = $('#kanvas'), el = tn.parentElement; if (kv && el) kv.scrollTop += el.getBoundingClientRect().top - kv.getBoundingClientRect().top - kv.clientHeight / 3; return; } } }
+}
+function cariBerikut() {
+  const d = daftarCocok(); if (!d.length) { S.cg.idx = -1; $('#infoCari').textContent = infoCari(); return; }
+  S.cg.idx = (S.cg.idx + 1) % d.length; const c = d[S.cg.idx];
+  const lanjut = () => { tandaiCocok(c.ke); const i = $('#infoCari'); if (i) i.textContent = infoCari(); };
+  if (c.id !== S.pilih) jagaPerubahan(() => { Object.assign(S, { pilih:c.id, draf:null, ubah:false, galatJudul:'' }); gambar(); lanjut(); $('#cariLanjut')?.focus(); });
+  else lanjut();
+}
+function gantiSatu() {
+  const s = getSelection(), ed = $('#editor'), q = S.cg.q.trim();
+  if (bisaEdit() && ed && rentang && ed.contains(rentang.startContainer) && rentang.toString().toLowerCase() === q.toLowerCase()) {
+    ed.focus(); s.removeAllRanges(); s.addRange(rentang); document.execCommand('insertText', false, S.cg.ganti); tandaiUbah(); simpanPasal(); S.cg.idx--;
+  }
+  cariBerikut();
+}
+function gantiSemua() {
+  const q = S.cg.q.trim(); if (!q || final()) return;
+  jagaPerubahan(() => {
+    let n = 0;
+    m().naskah.forEach(it => { const d = document.createElement('div'); d.innerHTML = it.isi;
+      teksNode(d).forEach(tn => { tn.nodeValue = bagianVar(tn.nodeValue).map((s, i) => i % 2 ? s : s.replace(reCari(q), () => { n++; return S.cg.ganti; })).join(''); });
+      it.isi = d.innerHTML; });
+    S.cg.idx = -1; S.draf = null; S.ubah = false; gambar();
+    toast(n ? `${n} teks diganti dan langsung tersimpan.` : 'Teks tidak ditemukan di naskah.', n ? 'positive' : 'default', 4000, n ? 'Variabel tidak ikut diganti.' : '');
+  });
 }
 
 /* ---------------- bilah menu: setiap butir = fitur live ---------------- */
 /* [aksi, label, pintasan/keterangan, syarat aktif] ; '-' = pemisah ; aksi 'segera:…' = fitur live yang belum tersedia */
 const MENU = {
-  File:[['atur', 'Pengaturan dokumen…', 'Atur kertas, margin, huruf, dan footer.'], ['preview', 'Pratinjau akta', 'Lihat akta dengan data yang sudah terisi.'], '-', ['kembali', 'Tutup naskah', 'Kembali ke stepper Permohonan AJB.']],
-  Edit:[['c:undo', 'Urungkan', 'Ctrl+Z', 'ed'], ['c:redo', 'Ulangi', 'Ctrl+Y', 'ed'], '-', ['simpan', 'Simpan bagian ini', '', 'ubah'], ['batal', 'Batalkan perubahan', '', 'ubah'], '-', ['c:x:html', 'Sunting kode HTML', '', 'ed']],
-  Tampilan:[['nav', 'Panel Navigasi', '', 'cek:nav'], ['panel', 'Panel Bagian', '', 'cek:panel'], ['kode', 'Tampilkan kode variabel', '', 'cek:kode'], '-', ['c:x:penuh', 'Layar penuh', '', 'ed']],
+  File:[['atur', 'Pengaturan halaman…', 'Kertas, margin, huruf, spasi, garis merah'], ['zona:kop', 'Kop halaman…', 'Teks di bagian atas setiap halaman'], ['zona:kaki', 'Kaki halaman…', 'Teks dan nomor di bagian bawah setiap halaman'], '-', ['preview', 'Pratinjau akta', 'Lihat akta dengan data yang sudah terisi.'], ['unduh', 'Unduh PDF', 'Unduh naskah akta sebagai PDF.'], ['cetak', 'Cetak lewat pratinjau', 'Buka Pratinjau Akta, lalu cetak dari sana.'], '-', ['kembali', 'Buka permohonan', 'Kembali ke stepper Permohonan AJB.']],
+  Edit:[['c:undo', 'Urungkan', 'Ctrl+Z', 'ed'], ['c:redo', 'Lakukan lagi', 'Ctrl+Y', 'ed'], '-', ['cari', 'Cari dan ganti', 'Ctrl+H'], '-', ['simpan', 'Simpan bagian ini', '', 'ubah'], ['batal', 'Batalkan perubahan', '', 'ubah']],
+  Tampilan:[['nav', 'Tampilkan navigasi', '', 'cek:nav'], ['panel', 'Tampilkan panel Bagian', '', 'cek:panel'], '-', ['label', 'Tampilkan label bagian', '', 'cek:label'], ['kode', 'Tampilkan kode variabel', '', 'cek:kode'], ['lampiran', 'Lampiran', '', 'cek:lampiranTab'], '-', ['c:x:penuh', 'Layar penuh', '', 'ed']],
   Sisipkan:[['tambah:PASAL', 'Pasal baru', 'Sistem menambahkannya di akhir daftar.', 'draf'], ['tambah:CATATAN', 'Catatan baru', 'Catatan adalah bagian tanpa nomor.', 'draf'], ['var', 'Variabel…', 'Variabel terisi otomatis dari permohonan.', 'ed'], '-', ['c:x:tautan', 'Tautan', '', 'ed'], ['c:x:gambar', 'Gambar', '', 'ed'], ['c:x:tabel', 'Tabel', '', 'ed'], '-', ['segera:lampiran', 'Lampiran', 'Lampiran akta akan tersedia pada pembaruan berikutnya.']],
-  Format:[['c:bold', 'Tebal', 'Ctrl+B', 'ed'], ['c:italic', 'Miring', 'Ctrl+I', 'ed'], ['c:underline', 'Garis bawah', 'Ctrl+U', 'ed'], ['c:strikeThrough', 'Coret', '', 'ed'], '-', ['c:h2', 'Judul besar', '', 'ed'], ['c:h3', 'Judul kecil', '', 'ed'], '-', ['c:justifyLeft', 'Rata kiri', '', 'ed'], ['c:justifyCenter', 'Rata tengah', '', 'ed'], ['c:justifyRight', 'Rata kanan', '', 'ed'], ['c:justifyFull', 'Rata kanan-kiri', '', 'ed'], '-', ['c:insertOrderedList', 'Daftar bernomor', '', 'ed'], ['c:insertUnorderedList', 'Daftar berpoin', '', 'ed'], '-', ['c:x:warna', 'Warna teks & stabilo', '', 'ed'], ['c:x:ukuran', 'Ukuran huruf', '', 'ed'], ['c:x:spasi', 'Spasi baris', '', 'ed'], ['c:removeFormat', 'Hapus format', '', 'ed']],
+  Format:[['c:bold', 'Tebal', 'Ctrl+B', 'ed'], ['c:italic', 'Miring', 'Ctrl+I', 'ed'], ['c:underline', 'Garis bawah', 'Ctrl+U', 'ed'], '-', ['bagian', 'Pengaturan bagian ini…', 'Tipe, judul, garis putus-putus, garis merah', 'pilih'], ['atur', 'Pengaturan halaman…', 'Kertas, margin, huruf, spasi, garis merah']],
   Alat:[['ejaan', 'Cek ejaan', 'Sistem memeriksa salah ketik di semua pasal.'], ['kurang', 'Variabel belum terisi', '', 'kurang'], '-', ['beritahu', 'Beritahu PPAT', 'PPAT menerima notifikasi bahwa minuta siap diperiksa.', 'asisten'], ['finalisasi', 'Finalisasi Akta', 'PPAT memberi nomor dan tanggal, lalu sistem mengunci naskah.', 'ppat']],
   Bantuan:[['bantuan', 'Bantuan Penyusunan Akta', 'Panel ini memuat langkah, pertanyaan umum, dan kontak.']]
 };
@@ -1120,6 +1427,7 @@ function syarat(s) {
   if (s === 'ed') return bisaEdit();
   if (s === 'ubah') return bisaEdit() && S.ubah;
   if (s === 'draf') return !final();
+  if (s === 'pilih') return !!item();
   if (s === 'kurang') return !final() && belumTerisi().length > 0;
   if (s === 'asisten') return !final() && S.peran === 'asisten';
   if (s === 'ppat') return !final() && S.peran === 'ppat';
@@ -1154,8 +1462,12 @@ function aksi(a) {
   if (a.startsWith('c:')) { jalankan(a.slice(2)); return; }
   if (a.startsWith('tambah:')) { const t = a.slice(7); jagaPerubahan(() => tambahItem(t)); return; }
   if (a.startsWith('segera:')) return;
+  if (a.startsWith('zona:')) { bukaZona(a.slice(5)); return; }
+  if (a.startsWith('zoom:')) { const v = a.slice(5), kini = zoomKini(); S.zoom = v === 'lebar' ? 'lebar' : v === '+' ? (ZOOM.find(z => z > kini + 1) || 200) : ([...ZOOM].reverse().find(z => z < kini - 1) || 50); terapkanZoom(); return; }
+  if (a.startsWith('fs:')) { if (final()) return; const v = Math.min(20, Math.max(8, num(m().atur.ukuran) + +a.slice(3))); m().atur.ukuran = String(v); gambar(); toast(`Ukuran huruf seluruh akta menjadi ${v} pt.`); return; }
+  if (a.startsWith('spasi:')) { tutupPop(); if (final()) return; m().atur.spasi = a.slice(6); gambar(); toast(`Spasi baris seluruh akta menjadi ${koma(a.slice(6))}.`); return; }
   switch (a) {
-    case 'atur': jagaPerubahan(() => { Object.assign(S, { tab:'atur', panel:true, draf:null, ubah:false }); if (sempit()) S.nav = false; gambar(); }); break;
+    case 'atur': jagaPerubahan(() => { Object.assign(S, { tab:'atur', panel:true, draf:null, ubah:false, zona:null }); if (sempit()) S.nav = false; gambar(); }); break;
     case 'preview': jagaPerubahan(pratinjau); break;
     case 'kembali': jagaPerubahan(keDaftar); break;
     case 'simpan': simpanPasal(); break;
@@ -1163,6 +1475,12 @@ function aksi(a) {
     case 'nav': S.nav = !S.nav; if (sempit() && S.nav) S.panel = false; gambar(); fokusPanel(S.nav ? '#navDok .kol-kepala .ina-button' : '[data-aksi="nav"]'); break;
     case 'panel': S.panel = !S.panel; if (sempit() && S.panel) S.nav = false; gambar(); fokusPanel(S.panel ? '#panelDok [role="tab"][aria-selected="true"]' : '[data-aksi="panel"]'); break;
     case 'kode': aturKode(!S.kode); break;
+    case 'cari': Object.assign(S, { tab:'cari', panel:true, zona:null }); if (sempit()) S.nav = false; gambar(); $('#cariQ')?.focus(); break;
+    case 'label': S.label = !S.label; $('#kertas')?.classList.toggle('tanpa-label', !S.label); break;
+    case 'lampiran': S.navTab = S.navTab === 'lampiran' ? 'akta' : 'lampiran'; S.nav = true; gambar(); $(`[data-navtab="${S.navTab}"]`)?.focus(); break;
+    case 'bagian': jagaPerubahan(() => { Object.assign(S, { tab:'pasal', panel:true, zona:null }); if (sempit()) S.nav = false; gambar(); const el = $('#aturBagian'); if (el) { el.scrollIntoView({ block:'center' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2000); } }); break;
+    case 'unduh': toast('Simulasi: PDF naskah akta diunduh.', 'positive', 4000, 'Di aplikasi, PDF memakai pengaturan halaman, kop, dan kaki halaman yang sama dengan kertas.'); break;
+    case 'cetak': jagaPerubahan(() => { pratinjau(); toast('Simulasi: dialog cetak peramban terbuka dari Pratinjau Akta.'); }); break;
     case 'var': togglePop('var'); break;
     case 'ejaan': cekEjaan(); break;
     case 'kurang': lompatVar(); break;
@@ -1174,10 +1492,11 @@ function aksi(a) {
 function fokusPanel(sel) { const el = [...document.querySelectorAll(sel)].find(e => e.getClientRects().length); el?.focus(); }
 
 /* ---------------- gambar ---------------- */
+const drafDari = it => ({ judul:it.judul, isi:it.isi, tampil:it.tampil, tipe:it.tipe, putus:!!it.putus, merah:it.merah !== false });
 function simpanDraf() {
   const ed = $('#editor'), it = item(); if (!ed || !it || !S.ubah) return;
-  const d = S.draf || { judul:it.judul, isi:it.isi, tampil:it.tampil }, j = $('#judulPasal'), tj = $('#tampilJudul');
-  S.draf = { judul:j ? j.value : d.judul, isi:serialisasi(ed), tampil:tj ? tj.checked : d.tampil };
+  const d = S.draf || drafDari(it), j = $('#judulPasal'), tj = $('#tampilJudul'), tp = $('#tipeBagian'), pt = $('#garisPutus'), mr = $('#garisMerahBag');
+  S.draf = { judul:j ? j.value : d.judul, isi:serialisasi(ed), tampil:tj ? tj.checked : d.tampil, tipe:tp ? tp.value : d.tipe, putus:pt ? pt.checked : d.putus, merah:mr ? mr.checked : d.merah };
 }
 function serialisasi(ed) {
   const c = ed.cloneNode(true);
@@ -1188,8 +1507,8 @@ function gambar() {
   simpanDraf(); gambarNav(); tutupMenu();
   const gul = ['#kanvas', '#daftarPasal', '#panelIsi'].map(s => [s, $(s)?.scrollTop || 0]);
   $('#halaman').innerHTML = layarDetail();
-  paginasi($('#kertas'), m().atur, m(), true);
-  const x = m(); AJB.simpan(x.kode, { minutaData:{ naskah:x.naskah, atur:x.atur }, minuta:x.status === 'SELESAI', nomor:x.nomor, tgl:x.tgl });
+  paginasi($('#kertas'), m().atur, m(), true); if (S.cariNav) saringNav();
+  const x = m(); AJB.simpan(x.kode, { minutaData:{ naskah:x.naskah, atur:x.atur, beda:x.beda || [] }, minuta:x.status === 'SELESAI', nomor:x.nomor, tgl:x.tgl });
   gul.forEach(([s, v]) => { const el = $(s); if (el) el.scrollTop = v; });
   pasangPanduan(); S.kilau = null; perbaruiKepala();
   ciutSidebar();
@@ -1208,14 +1527,14 @@ function perbaruiKepala() {
   document.querySelectorAll('#pilLayar [data-layar]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.layar === layar)));
 }
 /* pengaturan dokumen yang belum disimpan dikembalikan saat formulir ditinggalkan */
-function batalAtur() { if (S.aturBuka && S.aturAsal && m()) m().atur = { ...S.aturAsal }; S.aturAsal = null; S.aturBuka = false; }
+function batalAtur() { if (S.aturBuka && S.aturAsal && m()) m().atur = { ...S.aturAsal }; S.aturAsal = null; S.aturBuka = false; S.zona = null; }
 function keDaftar() { batalAtur(); AJB.keStepper(S.aktif); }
 /* naskah per order: tersimpan di Permohonan AJB agar tetap ada setelah berpindah layar */
 function pastikan(kode) {
   const d = AJB.ambil(kode), y = d.order; let x = MINUTA.find(z => z.kode === kode);
   if (!x && !y) return null;
   if (!x) { x = { kode, narahubung:y.kontak.nama, status:'DRAFTING', nomor:'', tgl:'', naskah:NASKAH(), atur:{ ...STANDAR } }; MINUTA.push(x); }
-  if (d.minutaData) { Object.assign(x, d.minutaData); idBaru = Math.max(idBaru, ...x.naskah.map(n => n.id + 1)); }
+  if (d.minutaData) { Object.assign(x, d.minutaData); x.atur = { ...STANDAR, ...x.atur }; delete x.atur.footerTeks; idBaru = Math.max(idBaru, ...x.naskah.map(n => n.id + 1)); }
   const asal = { ...y, ...d };
   if (asal.minuta) Object.assign(x, { status:'SELESAI', nomor:asal.nomor || x.nomor, tgl:asal.tgl || x.tgl });
   return x;
@@ -1223,7 +1542,7 @@ function pastikan(kode) {
 /* peran mengikuti sesi; tanpa sesi, tombol Finalisasi Akta di stepper membuka editor sebagai PPAT */
 function peranAwal() { const s = window.SESI_PROTO; return s && s.aktif === 'ROLE_ASISTEN' ? 'asisten' : (s && (s.peran || []).includes('ROLE_PPAT')) || AJB.peran() === 'ppat' ? 'ppat' : 'asisten'; }
 function buka(kode, pilih = null, tab = 'pasal') {
-  batalAtur(); Object.assign(S, { layar:'detail', aktif:kode, pilih, tab, draf:null, ubah:false, hasil:null, galatEjaan:false, galatJudul:'', aturBuka:false, nav:!sempit(), panel:!sempit() });
+  batalAtur(); Object.assign(S, { zona:null, layar:'detail', aktif:kode, pilih, tab, draf:null, ubah:false, hasil:null, galatEjaan:false, galatJudul:'', aturBuka:false, nav:!sempit(), panel:!sempit() });
   gambar(); window.scrollTo({ top:0 });
   if (pilih) gulirKe(pilih);
 }
@@ -1259,7 +1578,7 @@ function jagaPerubahan(lanjut) {
 function simpanPasal() {
   simpanDraf(); const it = item(), d = S.draf; if (!it || !d) return;
   if (!d.judul.trim()) { S.galatJudul = 'Judul wajib diisi.'; S.panel = true; S.tab = 'pasal'; gambar(); $('#judulPasal')?.focus(); return false; }
-  Object.assign(it, { judul:d.judul.trim(), isi:d.isi, tampil:d.tampil });
+  Object.assign(it, { judul:d.judul.trim(), isi:d.isi, tampil:d.tampil, tipe:d.tipe || it.tipe, putus:!!d.putus, merah:d.merah !== false });
   S.draf = null; S.ubah = false; S.galatJudul = ''; gambar(); toast('Pasal disimpan.', 'positive');
 }
 function batalPasal() { S.draf = null; S.ubah = false; S.galatJudul = ''; gambar(); toast('Perubahan dibatalkan.'); }
@@ -1274,27 +1593,60 @@ H.addEventListener('input', e => {
     if (t.id === 'judulPasal') { if (S.galatJudul && t.value.trim()) S.galatJudul = ''; const it = item(), h = $('.bag.aktif .jdl-bag'); if (it && it.tipe !== 'PASAL' && h) h.textContent = t.value; }
     return;
   }
+  if (t.id === 'cariNav') { S.cariNav = t.value; saringNav(); return; }
+  if (t.id === 'cariQ') { S.cg.q = t.value; S.cg.idx = -1; $('#infoCari').textContent = infoCari(); return; }
+  if (t.id === 'cariG') { S.cg.ganti = t.value; return; }
   if (t.id === 'cariVar') { S.cariVar = t.value; segarVar(); const n = $('#cariVar'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); return; }
   /* Pengaturan Dokumen: kertas langsung dipotong ulang (disimpan dengan Simpan Pengaturan, dikembalikan dengan Batal) */
   if (t.dataset.atur && num(t.value) > 0) { m().atur[t.dataset.atur] = t.value.trim().replace(',', '.'); segarKertas(); return; }
-  if (t.id === 'aFooterTeks') { m().atur.footerTeks = t.value; segarKertas(); }
+  if (t.classList.contains('ztx')) { const Z = ZONA[t.dataset.z], i = +t.dataset.zk; m().atur[Z.kol] = m().atur[Z.kol].map((v, j) => j === i ? t.value : v);
+    document.querySelectorAll(`#kertas .ztx[data-z="${t.dataset.z}"][data-zk="${i}"]`).forEach(o => { if (o !== t) o.value = t.value; }); tinggiZtx(); return; }
 });
 H.addEventListener('change', e => {
   const t = e.target;
   if (t.id === 'tampilJudul') { setCek(t); tandaiUbah(); simpanDraf(); gambar(); $('#tampilJudul')?.focus(); return; }
-  if (t.id === 'aFooter') { setCek(t); m().atur.footer = t.checked; segarKertas(); return; }
+  if (['tipeBagian', 'garisPutus', 'garisMerahBag'].includes(t.id)) { if (t.type === 'checkbox') setCek(t); tandaiUbah(); simpanDraf(); gambar(); $('#' + t.id)?.focus(); return; }
+  if (t.id === 'zGaris') { setCek(t); m().atur[ZONA[S.zona].garis] = t.checked; segarKertas(); return; }
+  if (t.id === 'zoomAlat') { S.zoom = /^\d+$/.test(t.value) ? +t.value : t.value; terapkanZoom(); return; }
+  if (t.id === 'gayaAlat') { jalankan('gaya:' + t.value); return; }
+  if (t.id === 'hurufAlat') { if (final()) return; m().atur.huruf = t.value; gambar(); toast(`Jenis huruf seluruh akta menjadi ${t.value}.`); return; }
+  if (t.dataset.aturp) { m().atur[t.dataset.aturp] = t.value; segarKertas(); segarRingkas(); return; }
+  const ck = { aYatim:'yatim', aUtuh:'utuhKondisi', aMerah:'garisMerah', aParaf:'paraf' }[t.id];
+  if (ck) { setCek(t); m().atur[ck] = t.checked; segarKertas(); segarRingkas(); return; }
 });
-/* klik kaki halaman → tab Pengaturan Dokumen, fokus ke isian footer */
-function bukaFooter() {
+/* ringkasan dan gambar halaman di panel ikut berubah tanpa menggambar ulang formulir */
+function segarRingkas() {
+  const r = $('#ringkasAtur'); if (!r) return;
+  const tmp = document.createElement('div'); tmp.innerHTML = panelAtur(m(), final()); const b = tmp.querySelector('#ringkasAtur'); if (b) r.innerHTML = b.innerHTML;
+}
+/* putar satu halaman (tombol di atas kertas atau nomor halaman di panel) */
+function putarHal(n) {
+  if (final()) return;
+  const a = m().atur, ada = (a.mendatar || []).includes(n);
+  a.mendatar = ada ? a.mendatar.filter(v => v !== n) : [...(a.mendatar || []), n].sort((p, q) => p - q);
+  segarKertas(); segarRingkas();
+  if (!S.aturBuka) AJB.simpan(m().kode, { minutaData:{ naskah:m().naskah, atur:a } });
+  toast(mendatar(a, n) ? `Halaman ${n} menjadi mendatar.` : `Halaman ${n} menjadi tegak.`, 'positive', 4000, 'Isi naskah dapat bergeser karena ruang halamannya berubah.');
+}
+/* klik kop/kaki di kertas atau File › Kop halaman / Kaki halaman → panel pengaturannya */
+function bukaZona(z) {
   jagaPerubahan(() => {
-    Object.assign(S, { tab:'atur', panel:true, draf:null, ubah:false });
+    Object.assign(S, { tab:'atur', panel:true, draf:null, ubah:false, zona:z, zEl:null });
     if (!final() && !S.aturBuka) { S.aturBuka = true; S.aturAsal = { ...m().atur }; }
     if (sempit()) S.nav = false;
     gambar();
-    const f = $('#aFooterTeks') || $('#ringkasAtur'); if (f) { f.scrollIntoView({ block:'center' }); if (f.id === 'ringkasAtur') f.setAttribute('tabindex', '-1'); f.focus(); }
+    const f = $('#kertas .ztx') || $('#zonaTambah') || $('#zonaKembali'); if (f) { f.scrollIntoView({ block:'center' }); f.focus(); }
   });
 }
-H.addEventListener('mousedown', e => { if (e.target.closest('.btn-alat, .menu-lain button, .opsi-var')) e.preventDefault(); });
+/* sisipkan data (mis. nomor halaman) di posisi kursor kolom yang terakhir diklik */
+function sisipToken(k) {
+  const el = S.zEl && document.contains(S.zEl) ? S.zEl : $('#kertas .ztx');
+  if (!el) { toast(`Klik dulu salah satu kolom ${ZONA[S.zona].nama} di kertas.`); return; }
+  const a = el.selectionStart ?? el.value.length, b = el.selectionEnd ?? a;
+  el.setRangeText(k, a, b, 'end'); el.dispatchEvent(new Event('input', { bubbles:true })); el.focus();
+}
+H.addEventListener('focusin', e => { if (e.target.classList && e.target.classList.contains('ztx')) S.zEl = e.target; });
+H.addEventListener('mousedown', e => { if (e.target.closest('.btn-alat, .menu-lain button, .opsi-var, [data-token], #tombolBlok, #tombolLain')) e.preventDefault(); });
 /* IDDS Toggle "Tampilkan kode variabel" */
 function aturKode(on) {
   S.kode = on; $('#kertas')?.classList.toggle('mode-kode', on);
@@ -1304,7 +1656,7 @@ function aturKode(on) {
 }
 H.addEventListener('keydown', e => {
   if (e.target.id === 'tampilKode' && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); aturKode(!S.kode); return; }
-  if (e.target.matches && e.target.matches('[data-kaki]') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); bukaFooter(); return; }
+  if (e.target.matches && e.target.matches('[data-zona]') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); bukaZona(e.target.dataset.zona); return; }
   const li = e.target.closest('#daftarPasal [data-pilih]'); if (li && e.target === li && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); const id = +li.dataset.pilih; jagaPerubahan(() => pilihItem(id, { gulir:true, fokusNav:true })); return; }
   /* bilah menu: panah kiri/kanan berpindah, panah bawah/Enter membuka */
   const mb = e.target.closest('.mb-btn');
@@ -1320,7 +1672,9 @@ H.addEventListener('click', e => {
   if (t.closest('[data-ke-daftar]')) { e.preventDefault(); jagaPerubahan(keDaftar); return; }
   if (t.closest('[data-ke-order-daftar]')) { e.preventDefault(); jagaPerubahan(() => AJB.keStepper()); return; }
   if (t.closest('#tampilKode, [data-toggle-label="tampilKode"]')) { aturKode(!S.kode); return; }
-  if (t.closest('#kertas [data-kaki]')) { bukaFooter(); return; }
+  if (t.closest('.ztx')) return;
+  const zKlik = t.closest('#kertas [data-zona]'); if (zKlik) { bukaZona(zKlik.dataset.zona); return; }
+  const nt = t.closest('[data-navtab]'); if (nt) { S.navTab = nt.dataset.navtab; gambar(); $(`[data-navtab="${S.navTab}"]`)?.focus(); return; }
   const lp = t.closest('#lipatLampiran'); if (lp) { S.lampiran = !S.lampiran; lp.setAttribute('aria-expanded', S.lampiran); $('#isiLampiran').hidden = !S.lampiran; return; }
   const f = t.closest('[data-filter]'); if (f) { S.filter = f.dataset.filter; gambar(); return; }
   const b = t.closest('[data-buka]'); if (b) { buka(b.dataset.buka); return; }
@@ -1329,6 +1683,7 @@ H.addEventListener('click', e => {
   const ak = t.closest('[data-aksi]'); if (ak) { aksi(ak.dataset.aksi); return; }
   if (t.closest('#kembali')) { jagaPerubahan(keDaftar); return; }
   if (t.closest('#penandaVar')) { lompatVar(); return; }
+  if (t.closest('#penandaBeda')) { nilaiBeda(); return; }
   const gs = t.closest('[data-geser]'); if (gs) { e.stopPropagation(); const [id, arah] = gs.dataset.geser.split(':').map(Number); geser(id, arah, gs.closest('.panel-dok') ? 'panel' : 'nav'); return; }
   const hp = t.closest('[data-hapus]'); if (hp) { e.stopPropagation(); hapusItem(+hp.dataset.hapus, hp); return; }
   const pl = t.closest('[data-pilih]');
@@ -1349,14 +1704,27 @@ H.addEventListener('click', e => {
   const bp = t.closest('[data-buka-pasal]'); if (bp) { const id = +bp.dataset.bukaPasal; jagaPerubahan(() => pilihItem(id, { gulir:true })); return; }
   const cm = t.closest('[data-cmd]'); if (cm) { jalankan(cm.dataset.cmd); return; }
   if (t.closest('#tombolVar')) { togglePop('var'); return; }
-  if (t.closest('#tombolLain')) { togglePop('lain'); return; }
+  const pp = t.closest('[data-pop]'); if (pp) { togglePop(pp.dataset.pop); return; }
   const ov = t.closest('[data-sisip]'); if (ov) { sisipVar(ov.dataset.sisip); return; }
   if (t.closest('#simpanPasal')) { simpanPasal(); return; }
   if (t.closest('#batalPasal')) { batalPasal(); return; }
+  const pu = t.closest('[data-putar]'); if (pu) { putarHal(+pu.dataset.putar); return; }
+  if (t.closest('#cariLanjut')) { cariBerikut(); return; }
+  if (t.closest('#cariGanti')) { gantiSatu(); return; }
+  if (t.closest('#cariSemua')) { gantiSemua(); return; }
+  if (t.closest('#cariTutup')) { S.tab = 'pasal'; gambar(); return; }
+  const zBuka = t.closest('[data-zona-buka]'); if (zBuka) { bukaZona(zBuka.dataset.zonaBuka); return; }
+  if (t.closest('#zonaKembali')) { S.zona = null; gambar(); $('[data-zona-buka]')?.focus(); return; }
+  if (t.closest('#zonaTambah')) { m().atur[ZONA[S.zona].aktif] = true; gambar(); $('#kertas .ztx')?.focus(); toast(`${ZONA[S.zona].judul} ditambahkan ke semua halaman.`, 'positive'); return; }
+  if (t.closest('#zonaHapus')) { const Z = ZONA[S.zona]; m().atur[Z.aktif] = false; gambar(); $('#zonaTambah')?.focus(); toast(`${Z.judul} dihapus dari semua halaman.`, 'default', 4000, `Isinya tetap tersimpan bila ${Z.nama} ditambahkan lagi.`); return; }
+  const zPola = t.closest('[data-pola]'); if (zPola) { const Z = ZONA[S.zona], pp = Z.pola[+zPola.dataset.pola]; m().atur[Z.kol] = [...pp[1]]; gambar(); toast(`Isi ${Z.nama} diganti dengan pola "${pp[0]}".`); return; }
+  const zNk = t.closest('[data-nkol]'); if (zNk) { const Z = ZONA[S.zona], n = +zNk.dataset.nkol, k = m().atur[Z.kol]; m().atur[Z.kol] = Array.from({ length:n }, (_, i) => k[i] || ''); S.zEl = null; gambar(); $(`[data-nkol="${n}"]`)?.focus(); return; }
+  const zTok = t.closest('[data-token]'); if (zTok) { sisipToken(zTok.dataset.token); return; }
+  if (t.closest('#keGarisMerah')) { jagaPerubahan(() => { Object.assign(S, { tab:'atur', panel:true, zona:null }); if (!S.aturBuka) { S.aturBuka = true; S.aturAsal = { ...m().atur }; } gambar(); const c = $('#aMerah'); if (c) { c.closest('.atur-grup').scrollIntoView({ block:'center' }); c.focus(); } }); return; }
   if (t.closest('#aturBuka')) { S.aturBuka = true; S.aturAsal = { ...m().atur }; gambar(); return; }
   if (t.closest('#aturBatal')) { batalAtur(); gambar(); return; }
-  if (t.closest('#aturStandar')) { m().atur = { ...STANDAR }; S.aturBuka = false; S.aturAsal = null; gambar(); toast('Pengaturan dikembalikan ke standar akta PPAT.', 'positive'); return; }
-  if (t.closest('#aturSimpan')) { const a = m().atur; H.querySelectorAll('[data-atur]').forEach(i => { a[i.dataset.atur] = num(i.value) > 0 ? i.value.trim().replace(',', '.') : (S.aturAsal || a)[i.dataset.atur]; }); a.footer = !!$('#aFooter')?.checked; a.footerTeks = $('#aFooterTeks')?.value ?? a.footerTeks; S.aturBuka = false; S.aturAsal = null; gambar(); toast('Pengaturan dokumen disimpan untuk akta ini.', 'positive'); return; }
+  if (t.closest('#aturStandar')) { m().atur = { ...STANDAR, mendatar:[] }; S.aturBuka = false; S.aturAsal = null; S.zona = null; gambar(); toast('Pengaturan dikembalikan ke standar akta PPAT.', 'positive'); return; }
+  if (t.closest('#aturSimpan')) { const a = m().atur; H.querySelectorAll('[data-atur]').forEach(i => { a[i.dataset.atur] = num(i.value) > 0 ? i.value.trim().replace(',', '.') : (S.aturAsal || a)[i.dataset.atur]; }); S.aturBuka = false; S.aturAsal = null; S.zona = null; gambar(); toast('Pengaturan dokumen disimpan untuk akta ini.', 'positive'); return; }
 });
 /* butir menu */
 $('#wadahMenu').addEventListener('mousedown', e => { if (e.target.closest('.ina-action-dropdown__item')) e.preventDefault(); });
@@ -1372,7 +1740,7 @@ $('#wadahMenu').addEventListener('keydown', e => {
 });
 document.addEventListener('click', e => {
   if (S.menu && !e.target.closest('#wadahMenu, .mb-btn')) tutupMenu();
-  if ($('#wadahPop') && $('#wadahPop').innerHTML && !e.target.closest('#wadahPop, #tombolVar, #tombolLain, [data-aksi="var"]')) tutupPop();
+  if ($('#wadahPop') && $('#wadahPop').innerHTML && !e.target.closest('#wadahPop, #tombolVar, [data-pop], [data-aksi="var"]')) tutupPop();
 });
 /* menu ikut posisi tombolnya saat halaman digulir; ditutup bila tombolnya keluar layar */
 window.addEventListener('scroll', () => { if (!S.menu) return; const b = $(`.mb-btn[data-menu="${S.menu}"]`), w = $('#wadahMenu .wadah-menu'); if (!b || !w) return; const r = b.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) { tutupMenu(); return; } w.style.top = (r.bottom + 4) + 'px'; w.style.left = Math.max(8, Math.min(r.left, innerWidth - 268)) + 'px'; }, true);
@@ -1382,6 +1750,8 @@ window.addEventListener('resize', () => { if (S.menu) tutupMenu(); });
 let rentang = null;
 document.addEventListener('selectionchange', () => {
   const ed = $('#editor'), s = getSelection(); if (!ed || !s.rangeCount || !ed.contains(s.getRangeAt(0).commonAncestorContainer)) return;
+  /* Gaya paragraf mengikuti paragraf tempat kursor berada */
+  const gs = $('#gayaAlat'); if (gs) { let el = s.anchorNode && (s.anchorNode.nodeType === 1 ? s.anchorNode : s.anchorNode.parentElement); while (el && el.parentElement !== ed && el !== ed) el = el.parentElement; const tg = el && el !== ed ? el.tagName.toLowerCase() : 'p'; gs.value = GAYA.some(x => x[0] === tg) ? tg : 'p'; }
   /* kursor tidak boleh berada di dalam label variabel (tidak dapat disunting) → pindahkan ke sesudah label */
   const dlm = s.anchorNode && (s.anchorNode.nodeType === 1 ? s.anchorNode : s.anchorNode.parentElement).closest('.var-chip');
   if (dlm && s.isCollapsed) { const r = document.createRange(); r.setStartAfter(dlm); r.collapse(true); s.removeAllRanges(); s.addRange(r); return; }
@@ -1395,16 +1765,28 @@ function pulihkanKursor() {
 function jalankan(cmd) {
   tutupPop(); if (!bisaEdit()) return; pulihkanKursor();
   if (cmd.startsWith('x:')) { toast('Alat ini tetap ada seperti di live; tidak disimulasikan di prototipe.'); return; }
-  if (cmd === 'h2' || cmd === 'h3') document.execCommand('formatBlock', false, cmd); else document.execCommand(cmd, false, null);
+  if (cmd === 'putarini') { const bk = getSelection().anchorNode?.parentElement?.closest('.hal-bingkai'); putarHal(bk ? [...document.querySelectorAll('#kertas .hal-bingkai')].indexOf(bk) + 1 : 1); return; }
+  if (cmd.startsWith('gaya:')) document.execCommand('formatBlock', false, cmd.slice(5));
+  else if (cmd.startsWith('blok:')) document.execCommand('insertHTML', false, keChip(BLOK[+cmd.slice(5)][1]));
+  else if (cmd.startsWith('lsp:')) { const s = getSelection(), ed = $('#editor'); let el = s.anchorNode && (s.anchorNode.nodeType === 1 ? s.anchorNode : s.anchorNode.parentElement); while (el && el.parentElement !== ed && el !== ed) el = el.parentElement; if (!el || el === ed) { toast('Klik dulu paragraf yang ingin diatur.'); return; } el.style.lineHeight = cmd === 'lsp:ikut' ? '' : String(num(cmd.slice(4)) * 0.95); }
+  else if (cmd.startsWith('kap:')) { const s = getSelection(), tx = s.toString(); if (!tx) { toast('Pilih dulu teks yang ingin diubah kapitalisasinya.'); return; }
+    const ubah = { besar:v => v.toUpperCase(), kecil:v => v.toLowerCase(), kata:v => v.toLowerCase().replace(/(^|\s)(\S)/g, (z, a, c) => a + c.toUpperCase()), kalimat:v => v.toLowerCase().replace(/(^\s*|[.!?]\s+)(\S)/g, (z, a, c) => a + c.toUpperCase()), balik:v => [...v].map(c => c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()).join('') }[cmd.slice(4)];
+    document.execCommand('insertText', false, ubah(tx)); }
+  else if (cmd === 'foreColor') document.execCommand('foreColor', false, '#c62828');
+  else if (cmd === 'hiliteColor') document.execCommand('hiliteColor', false, '#fff59d');
+  else document.execCommand(cmd, false, null);
   tandaiUbah();
 }
 let popAktif = null;
-function tutupPop() { popAktif = null; const w = $('#wadahPop'); if (w) w.innerHTML = ''; ['#tombolVar', '#tombolLain'].forEach(s => $(s)?.setAttribute('aria-expanded', 'false')); }
+function tutupPop() { popAktif = null; const w = $('#wadahPop'); if (w) w.innerHTML = ''; ['#tombolVar', ...Object.values(POP).map(p => p.tombol)].forEach(s => $(s)?.setAttribute('aria-expanded', 'false')); }
 function togglePop(j) {
   if (!bisaEdit()) return;
   if (popAktif === j) { tutupPop(); return; }
-  tutupPop(); popAktif = j; $(j === 'var' ? '#tombolVar' : '#tombolLain').setAttribute('aria-expanded', 'true');
-  if (j === 'lain') { const r = $('#tombolLain'); $('#wadahPop').innerHTML = `<div class="ina-action-dropdown pop-wadah" style="left:${Math.max(0, r.offsetLeft - 8)}px"><div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible menu-lain" role="menu" aria-label="Alat lainnya">${LAIN.map(x => x === '-' ? '<div class="ina-action-dropdown__divider" role="separator"></div>' : `<button type="button" class="ina-action-dropdown__item" role="menuitem" data-cmd="${x[0]}"><span class="ina-action-dropdown__item-content">${x[1]}</span></button>`).join('')}</div></div>`; return; }
+  tutupPop(); popAktif = j; $(j === 'var' ? '#tombolVar' : POP[j].tombol).setAttribute('aria-expanded', 'true');
+  if (POP[j]) { const r = $(POP[j].tombol), al = $('#bilahAlat'), kiri = Math.max(0, Math.min(r.getBoundingClientRect().left - al.getBoundingClientRect().left - 8, al.clientWidth - 260));
+    $('#wadahPop').innerHTML = `<div class="ina-action-dropdown pop-wadah" style="left:${kiri}px"><div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible menu-lain" role="menu" aria-label="${POP[j].label}">${POP[j].isi().map(x => x === '-' ? '<div class="ina-action-dropdown__divider" role="separator"></div>' : typeof x === 'string' ? `<div class="judul-pop" role="presentation">${x.slice(1)}</div>`
+      : `<button type="button" class="ina-action-dropdown__item" role="${x[2] === undefined ? 'menuitem' : 'menuitemradio'}" ${x[2] === undefined ? '' : `aria-checked="${x[2]}"`} ${x[0].startsWith('a:') ? `data-aksi="${x[0].slice(2)}"` : `data-cmd="${x[0]}"`}>${x[2] === undefined ? '' : `<span class="cek-m" aria-hidden="true">${x[2] ? ik('centang', 14) : ''}</span>`}<span class="ina-action-dropdown__item-content">${x[1]}</span></button>`).join('')}</div></div>`;
+    $('#wadahPop .ina-action-dropdown__item')?.focus({ preventScroll:true }); return; }
   S.cariVar = ''; segarVar(); $('#cariVar').focus();
 }
 function segarVar() {
@@ -1507,7 +1889,7 @@ function finalisasi() {
 }
 function pratinjau() {
   const x = m(), n = x.naskah, a = x.atur;
-  const isi = n.map(it => `<section class="bag">${it.tampil ? `<h5>${esc(it.tipe === 'PASAL' ? `Pasal ${nomorPasal(n, it)}` : it.judul)}</h5>` : ''}<div class="isi-bag">${it.isi.replace(RE_VAR, (z, k) => VMAP.has(k) ? `<span class="isi-var">${esc(VMAP.get(k).c)}</span>` : `<span class="isi-var galat" title="Variabel tidak dikenal">{{${esc(k)}}}</span>`)}</div></section>`).join('');
+  const isi = n.map(it => `<section class="bag">${it.tampil ? `<h5>${esc(it.tipe === 'PASAL' ? `Pasal ${nomorPasal(n, it)}` : it.judul)}</h5>` : ''}<div class="isi-bag">${it.isi.replace(RE_VAR, (z, k) => VMAP.has(k) ? `<span class="isi-var">${esc(((x.beda || []).find(v => v.k === k) || {}).naskah || VMAP.get(k).c)}</span>` : `<span class="isi-var galat" title="Variabel tidak dikenal">{{${esc(k)}}}</span>`)}</div></section>`).join('');
   dialog({ judul:`Pratinjau Akta · ${x.kode}`, lebar:true, isi:`<p>Bagian berlatar hijau adalah data yang terisi otomatis dari permohonan. Bagian kuning adalah variabel yang tidak dikenal.</p><div class="pratinjau"><div class="kertas" id="kertasPratinjau" style="${gayaHuruf(a)}"><div class="hal-bingkai"><article class="hal" style="${padHal(a)}"><div class="hal-isi">${isi}</div></article></div></div></div>`, tombol:[['Tutup','secondary',null],['Unduh PDF','primary',() => toast('Unduh PDF tidak disimulasikan di prototipe.')]] });
   const kp = $('#kertasPratinjau'); paginasi(kp, a, x, false); kp.classList.add('lbl-sempit');
 }
@@ -1576,6 +1958,8 @@ function dialog({ judul, isi, tombol: tb, lebar, bahaya, konfirmasi, kembali }) 
   };
 }
 document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'h' && S.layar === 'detail' && m()) { e.preventDefault(); aksi('cari'); return; }
+  if (e.key === 'Enter' && e.target.id === 'cariQ') { e.preventDefault(); cariBerikut(); return; }
   if (e.key !== 'Escape') return;
   if ($('#lapisan').innerHTML) { tutupDialog(); return; }
   if ($('#lapisanDrawer').innerHTML) { tutupDrawer(); return; }
@@ -1631,6 +2015,10 @@ function lihat(u) {
   if (u.ke === 'editor' || u.ke === 'tataletak') buka('ORD-CONTOH-004', 4);
   if (u.ke === 'variabel') { buka('ORD-CONTOH-004', 2); togglePop('var'); }
   if (u.ke === 'pengaturan') buka('ORD-CONTOH-004', null, 'atur');
+  if (u.ke === 'beda') { buka('ORD-CONTOH-004'); if (!(m().beda || []).length) m().beda = BEDA(); gambar(); nilaiBeda(); return; }
+  if (u.ke === 'alat') { buka('ORD-CONTOH-004', 4); return; }
+  if (u.ke === 'kop') { buka('ORD-CONTOH-004'); bukaZona('kaki'); return; }
+  if (u.ke === 'pengaturan-lengkap') { buka('ORD-CONTOH-004', null, 'atur'); S.aturBuka = true; S.aturAsal = { ...m().atur }; gambar(); }
   if (u.ke === 'ejaan-galat') { setEjaan(false); buka('ORD-CONTOH-004', 4); cekEjaan(); return; }
   if (u.ke === 'hapus') { const ps = MINUTA.find(x => x.kode === 'ORD-CONTOH-004').naskah.filter(x => x.tipe === 'PASAL').pop(); if (!ps) { buka('ORD-CONTOH-004'); return; } buka('ORD-CONTOH-004', ps.id); hapusItem(ps.id, $(`#daftarPasal [data-hapus="${ps.id}"]`)); return; }
   const el = u.sorot && $(u.sorot);
