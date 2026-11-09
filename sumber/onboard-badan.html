@@ -282,7 +282,7 @@ body.mode-app .ob{display:none}
   <span id="pilLayar"></span>
   <span class="kanan">
     <span>Contoh: sandi <b>salah123</b> = gagal masuk · kode <b>000000</b> = salah</span>
-    <button class="pil" id="simKtp" title="Ganti hasil baca OCR KTP. Di layar Registrasi, foto langsung dibaca ulang dengan hasil yang dipilih.">Hasil OCR: terbaca</button>
+    <button class="pil" id="simKtp" title="Ganti cara baca OCR KTP. Foto asli dibaca layanan OCR sungguhan; pilihan lain memakai data contoh. Di layar Registrasi, foto langsung dibaca ulang dengan hasil yang dipilih.">Hasil OCR: foto asli</button>
     <button class="pil" id="simKedaluwarsa" title="Saat kode OTP email ditampilkan">Simulasi kode kedaluwarsa</button>
     <button class="pil" id="mulaiTur" title="Memutar contoh tour guide di Dasbor pelanggan.">Mulai tur</button>
     <button class="pil" id="aturUlang">Atur ulang contoh</button>
@@ -583,39 +583,81 @@ const GALAT_OCR = {
   IMAGE_BLURRY:['Foto KTP buram', 'Foto ulang KTP dengan kamera yang fokus dan tangan tidak bergerak.'],
   NOT_A_KTP:['Dokumen bukan KTP elektronik', 'Pastikan yang difoto adalah KTP elektronik dan seluruh bagiannya terlihat.']
 };
-const SIM_OCR = [['normal', 'Hasil OCR: terbaca'], ['ragu', 'Hasil OCR: ada yang ragu'], ['IMAGE_BLURRY', 'Hasil OCR: foto buram'], ['NOT_A_KTP', 'Hasil OCR: bukan KTP']];
+const SIM_OCR = [['asli', 'Hasil OCR: foto asli'], ['normal', 'Hasil OCR: terbaca'], ['ragu', 'Hasil OCR: ada yang ragu'], ['IMAGE_BLURRY', 'Hasil OCR: foto buram'], ['NOT_A_KTP', 'Hasil OCR: bukan KTP']];
+/* OCR asli lewat perantara Vercel (/api/ocr-ktp); kunci API hanya di server, foto tidak disimpan.
+   Foto besar diperkecil dulu agar muat batas kiriman (4,5 MB). Kunci tidak sah atau layanan tidak terjangkau → data contoh. */
+const judulKtp = t => t.toLowerCase().replace(/(^|[\s\-/.(])([a-z])/g, (m, a, b) => a + b.toUpperCase())
+  .replace(/\b(Dki|Di|Rt|Rw)\b/g, s => s.toUpperCase()); /* singkatan tetap kapital */
+Object.assign(GALAT_OCR, {
+  IMAGE_TOO_SMALL:['Foto KTP terlalu kecil', 'Foto ulang KTP lebih dekat sehingga tulisannya terbaca.'],
+  IMAGE_GLARE:['Foto KTP silau', 'Foto ulang KTP tanpa pantulan cahaya pada kartu.'],
+  IMAGE_TOO_DARK:['Foto KTP terlalu gelap', 'Foto ulang KTP di tempat yang lebih terang.'],
+  CARD_NOT_FOUND:['KTP tidak ditemukan di foto', 'Pastikan seluruh kartu KTP terlihat di dalam foto.'],
+  RATE_LIMITED:['Terlalu banyak permintaan', 'Tunggu satu menit, lalu coba lagi.'],
+  SERVER_BUSY:['Layanan OCR sedang sibuk', 'Coba lagi beberapa saat lagi.']
+});
+async function fotoOcr(berkas) {
+  const g = await createImageBitmap(berkas), s = Math.min(1, 2000 / Math.max(g.width, g.height));
+  if (s === 1 && berkas.size < 3145728) return new Promise((ok, gagal) => { const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = gagal; r.readAsDataURL(berkas); });
+  const c = document.createElement('canvas'); c.width = Math.round(g.width * s); c.height = Math.round(g.height * s);
+  c.getContext('2d').drawImage(g, 0, 0, c.width, c.height); return c.toDataURL('image/jpeg', 0.92);
+}
+async function ocrAsli(berkas) {
+  const r = await fetch('/api/ocr-ktp', { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify({ image_base64:await fotoOcr(berkas) }) });
+  const j = await r.json().catch(() => null), k = j && j.error && j.error.code;
+  if (!j || ['UNAUTHORIZED', 'NOT_CONFIGURED', 'UPSTREAM_UNREACHABLE', 'INTERNAL_ERROR'].includes(k)) throw new Error(k || 'tanpa jawaban');
+  if (k || !r.ok) return { galat:GALAT_OCR[k] ? `${GALAT_OCR[k][0]}. ${GALAT_OCR[k][1]}` : j.error.message };
+  const nilai = {}, ragu = {}, p = PETA_OCR(j.data || {});
+  for (const id of Object.keys(p)) {
+    if (!p[id] || !$('#' + id)) continue; nilai[id] = p[id];
+    const m = (j.fields || {})[SUMBER_OCR[id]];
+    if (m && m.confidence < 0.85) ragu[id] = ($('#f-' + id + ' label')?.textContent || id).replace('*', '').trim();
+  }
+  return { nilai, ragu };
+}
+const PETA_OCR = d => ({ rNik:d.nik, rNama:d.nama && judulKtp(d.nama), rTempat:d.tempat_lahir && judulKtp(d.tempat_lahir), rTgl:d.tanggal_lahir, rWarga:d.kewarganegaraan });
+const SUMBER_OCR = { rNik:'nik', rNama:'nama', rTempat:'tempat_lahir', rTgl:'tanggal_lahir', rWarga:'kewarganegaraan' };
 const KTP_RAGU = { rTempat:'Tempat Lahir' };
-function bacaKtp(nama, byte, tipe = 'image/jpeg') {
-  S.ktpBerkas = { nama, byte, tipe };
+function bacaKtp(nama, byte, tipe = 'image/jpeg', berkas) {
+  S.ktpBerkas = { nama, byte, tipe, berkas };
   const ukuran = byte >= 1048576 ? (byte / 1048576).toFixed(1).replace('.', ',') + ' MB' : Math.max(1, Math.round(byte / 1024)) + ' KB';
   const tolak = !/^image\/(jpeg|png|webp)$/.test(tipe) ? 'INVALID_FILE' : byte > 10485760 ? 'FILE_TOO_LARGE' : '';
   if (tolak) { S.ktp = { nama, ukuran, tolak:`${GALAT_OCR[tolak][0]}. ${GALAT_OCR[tolak][1]}` }; gambarKtp(); return; }
   S.ktp = { nama, ukuran, status:'baca' }; gambarKtp();
+  const masih = () => S.ktp && S.ktp.nama === nama && S.ktp.status === 'baca' && S.layar === 'daftar';
+  const gagal = galat => { S.ktp = { nama, ukuran, status:'gagal', galat:`${galat} Anda juga dapat mengisi data secara manual.` }; gambarKtp(); };
+  const sim = SIM_OCR[S.ktpSim][0];
+  if (sim === 'asli' && berkas) {
+    ocrAsli(berkas).then(h => { if (!masih()) return; if (h.galat) gagal(h.galat); else isiKtp(nama, ukuran, h.nilai, h.ragu); })
+      .catch(() => { if (!masih()) return; toast('Layanan OCR tidak dapat dihubungi. Isian memakai data contoh.'); isiKtp(nama, ukuran, KTP_CONTOH, {}); });
+    return;
+  }
   setTimeout(() => {
-    if (!S.ktp || S.ktp.nama !== nama || S.layar !== 'daftar') return;
-    const sim = SIM_OCR[S.ktpSim][0];
-    if (GALAT_OCR[sim]) { S.ktp = { nama, ukuran, status:'gagal', galat:`${GALAT_OCR[sim][0]}. ${GALAT_OCR[sim][1]} Anda juga dapat mengisi data secara manual.` }; gambarKtp(); return; }
-    const ragu = sim === 'ragu' ? KTP_RAGU : {};
-    for (const id of Object.keys(KTP_CONTOH)) {
-      const el = $('#' + id); if (!el) continue;
-      el.value = KTP_CONTOH[id];
-      const f = $('#f-' + id), h = $('#h-' + id), w = f && f.querySelector('.ina-text-field__wrapper');
-      if (f) f.classList.add('dari-ktp');
-      if (w) { w.classList.remove('ina-text-field__wrapper--status-error'); w.classList.toggle('ina-text-field__wrapper--status-warning', !!ragu[id]); }
-      if (h) { h.textContent = ragu[id] ? 'Kurang jelas terbaca. Periksa dan perbaiki bila perlu.' : 'Terisi dari KTP. Periksa kembali.'; h.classList.toggle('ina-text-field__helper-text--warning', !!ragu[id]); }
-    }
-    const daftarRagu = Object.values(ragu);
-    S.ktp = { nama, ukuran, status:daftarRagu.length ? 'ragu' : 'ok', ragu:daftarRagu.join(', ') }; gambarKtp(); segarSaranUrl();
+    if (!masih()) return;
+    if (GALAT_OCR[sim]) { gagal(`${GALAT_OCR[sim][0]}. ${GALAT_OCR[sim][1]}`); return; }
+    isiKtp(nama, ukuran, KTP_CONTOH, sim === 'ragu' ? KTP_RAGU : {});
   }, 1200);
+}
+function isiKtp(nama, ukuran, nilai, ragu) {
+  for (const id of Object.keys(nilai)) {
+    const el = $('#' + id); if (!el) continue;
+    el.value = nilai[id];
+    const f = $('#f-' + id), h = $('#h-' + id), w = f && f.querySelector('.ina-text-field__wrapper');
+    if (f) f.classList.add('dari-ktp');
+    if (w) { w.classList.remove('ina-text-field__wrapper--status-error'); w.classList.toggle('ina-text-field__wrapper--status-warning', !!ragu[id]); }
+    if (h) { h.textContent = ragu[id] ? 'Kurang jelas terbaca. Periksa dan perbaiki bila perlu.' : 'Terisi dari KTP. Periksa kembali.'; h.classList.toggle('ina-text-field__helper-text--warning', !!ragu[id]); }
+  }
+  const daftarRagu = [...new Set(Object.values(ragu))];
+  S.ktp = { nama, ukuran, status:daftarRagu.length ? 'ragu' : 'ok', ragu:daftarRagu.join(', ') }; gambarKtp(); segarSaranUrl();
 }
 document.addEventListener('click', e => {
   const a = e.target.closest('[data-ktp]');
-  if (a) { const k = S.ktpBerkas; if (a.dataset.ktp === 'ulang' && k) bacaKtp(k.nama, k.byte, k.tipe); else { S.ktp = null; gambarKtp(); $('#tombolKtp').focus(); } return; }
+  if (a) { const k = S.ktpBerkas; if (a.dataset.ktp === 'ulang' && k) bacaKtp(k.nama, k.byte, k.tipe, k.berkas); else { S.ktp = null; gambarKtp(); $('#tombolKtp').focus(); } return; }
   if (e.target.closest('#pilihKtp') && e.target.id !== 'berkasKtp') $('#berkasKtp').click();
 });
-document.addEventListener('change', e => { if (e.target.id === 'berkasKtp' && e.target.files[0]) { const f = e.target.files[0]; bacaKtp(f.name, f.size, f.type); e.target.value = ''; } });
+document.addEventListener('change', e => { if (e.target.id === 'berkasKtp' && e.target.files[0]) { const f = e.target.files[0]; bacaKtp(f.name, f.size, f.type, f); e.target.value = ''; } });
 document.addEventListener('dragover', e => { if (e.target.closest && e.target.closest('#pilihKtp')) e.preventDefault(); });
-document.addEventListener('drop', e => { const z = e.target.closest && e.target.closest('#pilihKtp'); if (!z) return; e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) bacaKtp(f.name, f.size, f.type); });
+document.addEventListener('drop', e => { const z = e.target.closest && e.target.closest('#pilihKtp'); if (!z) return; e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) bacaKtp(f.name, f.size, f.type, f); });
 /* isian yang diubah pengguna setelah OCR kembali ke teks bantuan semula */
 /* lepas tanda isi-otomatis (dipakai saat pengguna mengubah isian, dan saat hasil OCR simulasi diganti) */
 function lepasDariKtp(f, kosongkan) { f.classList.remove('dari-ktp'); if (kosongkan) { const el = f.querySelector('input, select'); if (el) { if (el.tagName === 'SELECT') el.selectedIndex = 0; else el.value = ''; } }
@@ -1262,7 +1304,7 @@ $('#simKtp').addEventListener('click', e => { S.ktpSim = (S.ktpSim + 1) % SIM_OC
   /* di layar Registrasi: baca ulang foto yang sedang diunggah (atau foto contoh) dengan hasil baru */
   document.querySelectorAll('.dari-ktp').forEach(f => lepasDariKtp(f, true)); segarSaranUrl();
   const k = S.ktpBerkas || { nama:'ktp-contoh.jpg', byte:430000, tipe:'image/jpeg' };
-  bacaKtp(k.nama, k.byte, k.tipe); $('#ocrKtp')?.scrollIntoView({ block:'center', behavior:'smooth' }); toast(`Hasil OCR diganti: ${hasil}.`); });
+  bacaKtp(k.nama, k.byte, k.tipe, k.berkas); $('#ocrKtp')?.scrollIntoView({ block:'center', behavior:'smooth' }); toast(`Hasil OCR diganti: ${hasil}.`); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 { const h = location.hash.slice(1); if (LAYAR.some(([k]) => k === h)) S.layar = h; }
 window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (h !== S.layar && LAYAR.some(([k]) => k === h)) ke(h); });
