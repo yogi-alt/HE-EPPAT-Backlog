@@ -734,19 +734,19 @@ const UBAH = [
     isi:'Kartu Status Sistem menampilkan hasil dengan ikon dan teks ("Sehat" atau "Terganggu"), komponen yang diperiksa ("Basis data & Redis"), dan waktu pemeriksaan terakhir. Tombol "Periksa Ulang" menjalankan pemeriksaan lagi dan menampilkan "Memeriksa…" selama berjalan. Perubahan status diumumkan ke pembaca layar (aria-live).',
     lama:'Status hanya diperiksa sekali saat halaman dibuka, tanpa waktu pemeriksaan dan tanpa cara memeriksa ulang. Status buruk berlabel "Degraded".', ke:'dasbor', sorot:'#kartuStatus' },
   { kode:'IDDS-PL-13', judul:'Dasbor: aktivitas dan PPAT teramai dapat ditindaklanjuti',
-    isi:'Aktivitas lintas-PPAT memakai nama aktivitas yang sama dengan Log Aktivitas (misalnya "Masuk", "Unduh dokumen akta"). Aktivitas gagal diberi IDDS Badge "Gagal", bukan hanya titik merah. Kantor PPAT ditampilkan dengan IDDS Badge berisi alamatnya. Tombol "Lihat Semua" membuka Log Aktivitas. Setiap kantor di "PPAT teramai" dapat diklik untuk membuka Daftar PPAT dengan pencarian kantor tersebut.',
+    isi:'Aktivitas lintas-PPAT memakai nama aktivitas yang sama dengan Log Aktivitas (misalnya "Masuk", "Unduh dokumen akta"). Aktivitas gagal diberi IDDS Badge "Gagal", bukan hanya titik merah. Kantor PPAT ditampilkan dengan IDDS Badge berisi alamatnya. Tombol "Lihat semua" membuka Log Aktivitas. Setiap kantor di "PPAT teramai" dapat diklik untuk membuka Daftar PPAT dengan pencarian kantor tersebut.',
     lama:'Aktivitas tampil sebagai kode sistem (LOGIN, DRAFT_DOWNLOAD, TOKEN_REFRESH). Aktivitas gagal dan berhasil hanya dibedakan dengan warna titik. Daftar "Top by user" tidak dapat diklik.', ke:'dasbor', sorot:'#aktLintas' },
   { kode:'IDDS-PL-14', judul:'Daftar PPAT: subjudul yang tepat dan rujukan ke aplikasi Onboarding',
     isi:'Subjudul menyebut apa yang benar-benar dapat dilakukan: "Lihat dan cari kantor PPAT yang terdaftar di E-PPAT." Judul ganda dihapus. IDDS Alert menjelaskan bahwa kantor PPAT baru, perubahan paket, dan admin kantor diatur di aplikasi Onboarding (konsol operator). Alert itu memuat tombol "Buka Onboarding" dan tautan ke Pengaturan Global, tempat alamat Onboarding diatur.',
     lama:'Subjudul berbunyi "Kelola kantor PPAT (tenant)", padahal halaman hanya dapat dibaca. Paragraf di bawahnya merujuk "server onboarding" tanpa tautan.', ke:'ppat', sorot:'#infoPpat' },
   { kode:'IDDS-PL-15', judul:'Daftar PPAT: tabel, lencana, pencarian, dan halaman IDDS',
-    isi:'Tabel memakai IDDS Table. Nama kantor ditulis tebal dengan alamat /t/… di bawahnya. Lencana dibuat konsisten: Paket memakai nama paket ("Enterprise", "Gratis"), Status memakai "Aktif" (hijau) dan "Ditangguhkan" (kuning), dan Registrasi memakai "Dibuka" (hijau) dan "Ditutup" (abu-abu). Masa berlaku yang lewat diberi lencana "Kedaluwarsa". Pencarian memakai IDDS Input Search berlabel "Cari PPAT", dan jumlah kantor yang tampil ada di kanannya. Hasil kosong menawarkan "Hapus Pencarian". Navigasi memakai IDDS Pagination (20 per halaman). Saringan status dan paket tidak ditambahkan karena API live belum menyediakannya.',
+    isi:'Tabel memakai IDDS Table. Nama kantor ditulis tebal dengan alamat /t/… di bawahnya. Lencana dibuat konsisten: Paket memakai nama paket ("Enterprise", "Gratis"), Status memakai "Aktif" (hijau) dan "Ditangguhkan" (kuning), dan Registrasi memakai "Dibuka" (hijau) dan "Ditutup" (abu-abu). Masa berlaku yang lewat diberi lencana "Kedaluwarsa". Pencarian memakai IDDS Input Search berlabel "Cari PPAT", dan jumlah kantor yang tampil ada di kanannya. Hasil kosong menawarkan "Hapus pencarian". Navigasi memakai IDDS Pagination (20 per halaman). Saringan status dan paket tidak ditambahkan karena API live belum menyediakannya.',
     lama:'Paket tampil sebagai kode mentah ("ENTERPRISE", "FREE"). Ejaan "Kadaluarsa" tidak baku. Navigasi "‹ Sebelumnya · Hal 1/51 · Berikutnya ›" berupa tombol polos.', ke:'ppat', sorot:'#tabelPpat' },
   { kode:'IDDS-PL-16', judul:'Paket Langganan: katalog hanya baca dengan lencana yang jelas',
     isi:'Subjudul menggambarkan isi halaman dengan tepat: "Lihat batas order, pengguna, masa berlaku, dan registrasi CA setiap paket." Judul kolom memakai singkatan baku "Maks. Order" dan "Maks. Pengguna". Keterangan "dikelola di Onboarding" memakai IDDS Alert dengan tombol "Buka Onboarding". Tabel memakai IDDS Table dengan jumlah paket di bawahnya. Kolom Registrasi CA memakai lencana "Aktif"/"Nonaktif" sehingga sepadan dengan kolom Status. Judul kolom Registrasi CA dan nilai "Tanpa batas" diberi tooltip penjelasan.',
     lama:'Subjudul berbunyi "Kelola batas fitur per paket", padahal paket tidak dapat diubah. Registrasi CA berlabel "Mati", sedangkan status paket berlabel "Nonaktif". Singkatan CA tidak dijelaskan.', ke:'paket', sorot:'#tabelPaket' },
   { kode:'IDDS-PL-17', judul:'Log Aktivitas: saringan berlabel memakai IDDS Select Dropdown',
-    isi:'Dua saringan memakai IDDS Select Dropdown dengan label dan nilai awal yang terlihat: PPAT ("Semua PPAT") dan Jenis aktivitas ("Semua aktivitas"). Opsi jenis aktivitas memakai label yang sama dengan kolom Aksi. Jumlah hasil tampil di kanan, dan tombol "Hapus Saringan" muncul bila saringan aktif. Panel dapat dipakai dengan keyboard (panah, Enter, Esc).',
+    isi:'Dua saringan memakai IDDS Select Dropdown dengan label dan nilai awal yang terlihat: PPAT ("Semua PPAT") dan Jenis aktivitas ("Semua aktivitas"). Opsi jenis aktivitas memakai label yang sama dengan kolom Aksi. Jumlah hasil tampil di kanan, dan tombol "Hapus saringan" muncul bila saringan aktif. Panel dapat dipakai dengan keyboard (panah, Enter, Esc).',
     lama:'Dua kotak pilihan tidak punya teks awal (kosong). Opsinya berbahasa Inggris ("Login", "Logout", "Refresh token") dan tidak sama dengan isi kolom Aksi.', ke:'log', sorot:'#saringLog' },
   { kode:'IDDS-PL-18', judul:'Log Aktivitas: tabel dan halaman mudah dibaca',
     isi:'Tabel memakai IDDS Table. Waktu ditulis lengkap dengan tahun ("26 Okt 2026, 19.06"). Kolom PPAT menampilkan nama kantor dan alamat /t/… (aktivitas admin platform berlabel "Platform"), sehingga sama dengan saringan. Aksi memakai label bahasa Indonesia; status memakai IDDS Badge "Berhasil"/"Gagal". Navigasi memakai IDDS Pagination 20 per halaman.',
@@ -804,7 +804,7 @@ let PPAT = contohPpat();
 const NM_PPAT = slug => (PPAT.find(t => t.slug === slug) || {}).nama || slug;
 
 /* Log aktivitas: kode live → label (peta AKT sama dengan Tenant · System) */
-const AKT = { LOGIN:'Masuk', LOGOUT:'Keluar', LOGIN_FAILED:'Gagal masuk', TOKEN_REFRESH:'Sesi diperpanjang', PASSWORD_CHANGE:'Ganti kata sandi', '2FA_ENABLED':'Aktifkan verifikasi 2 faktor', '2FA_DISABLED':'Nonaktifkan verifikasi 2 faktor', NIK_VIEW:'Buka NIK lengkap', DRAFT_EDIT:'Ubah pasal draf', DRAFT_PREVIEW:'Pratinjau draf', DRAFT_DOWNLOAD:'Unduh dokumen akta', ORDER_FINALIZE:'Finalisasi akta', USER_CREATE:'Tambah pengguna', USER_UPDATE:'Ubah pengguna', USER_DELETE:'Hapus pengguna', USER_RESET_PW:'Atur ulang kata sandi pengguna', ROLE_CREATE:'Tambah peran', ROLE_UPDATE:'Ubah peran', ROLE_DELETE:'Hapus peran', PERMISSION_UPDATE:'Ubah izin peran' };
+const AKT = { LOGIN:'Masuk', LOGOUT:'Keluar', LOGIN_FAILED:'Gagal masuk', TOKEN_REFRESH:'Sesi diperpanjang', PASSWORD_CHANGE:'Ganti kata sandi', '2FA_ENABLED':'Aktifkan verifikasi 2 faktor', '2FA_DISABLED':'Nonaktifkan verifikasi 2 faktor', NIK_VIEW:'Buka NIK lengkap', DRAFT_EDIT:'Ubah pasal draf', DRAFT_PREVIEW:'Pratinjau draf', DRAFT_DOWNLOAD:'Unduh dokumen akta', ORDER_FINALIZE:'Finalisasi Akta', USER_CREATE:'Tambah pengguna', USER_UPDATE:'Ubah pengguna', USER_DELETE:'Hapus pengguna', USER_RESET_PW:'Atur ulang kata sandi pengguna', ROLE_CREATE:'Tambah peran', ROLE_UPDATE:'Ubah peran', ROLE_DELETE:'Hapus peran', PERMISSION_UPDATE:'Ubah izin peran' };
 /* opsi saringan live: hanya 5 aksi autentikasi */
 const OPSI_AKT = [['', 'Semua aktivitas'], ['LOGIN', AKT.LOGIN], ['LOGOUT', AKT.LOGOUT], ['LOGIN_FAILED', AKT.LOGIN_FAILED], ['TOKEN_REFRESH', AKT.TOKEN_REFRESH], ['PASSWORD_CHANGE', AKT.PASSWORD_CHANGE]];
 function contohLog() {
@@ -918,7 +918,7 @@ function layarDasbor() {
     <div class="dasbor-dua">
       <section class="blok ditandai" id="aktLintas" aria-labelledby="jdAkt">
         <div class="blok-atas"><div><div class="eb">Aktivitas lintas-PPAT</div><h2 id="jdAkt">Pantau penggunaan</h2></div>
-          ${tombol('Lihat Semua', 'secondary', 'sm', 'data-ke-layar="log" aria-label="Lihat semua aktivitas di Log Aktivitas"', ik('panah', 14))}</div>${usulan('IDDS-PL-13')}
+          ${tombol('Lihat semua', 'secondary', 'sm', 'data-ke-layar="log" aria-label="Lihat semua aktivitas di Log Aktivitas"', ik('panah', 14))}</div>${usulan('IDDS-PL-13')}
         <ul class="akt">${akt.length ? akt.map(a => `<li><span class="titik ${a.ok ? '' : 'gagal'}" aria-hidden="true"></span><div>
           <div class="baris1"><b>${esc(a.aktor)}</b><span>· ${AKT[a.kode] || a.kode}</span>${a.ok ? '' : badge('Gagal', 'error', 'sm')}</div>
           <div class="baris2">${badge(a.tenant === '-' ? 'Platform' : '/t/' + a.tenant, 'neutral', 'sm')}<span class="wkt">${lalu(a.w)}</span></div></div></li>`).join('') : '<li class="wkt">Belum ada aktivitas.</li>'}</ul>
@@ -950,7 +950,7 @@ function layarPpat() {
         <td class="ina-table__cell">${lencanaStatus(t.status)}</td>
         <td class="ina-table__cell">${t.reg ? badge('Dibuka', 'success', 'sm') : badge('Ditutup', 'neutral', 'sm')}</td>
         <td class="ina-table__cell" style="white-space:nowrap">${tglPendek(t.dibuat)}</td></tr>`).join('')
-        : `<tr><td colspan="6" class="ina-table__empty-cell kosong">${S.cari ? `Tidak ada kantor PPAT yang cocok dengan "${esc(S.cari)}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : 'Belum ada kantor PPAT terdaftar.'}</td></tr>`}</tbody></table></div></div>
+        : `<tr><td colspan="6" class="ina-table__empty-cell kosong">${S.cari ? `Tidak ada kantor PPAT yang cocok dengan "${esc(S.cari)}".<div style="margin-top:10px">${tombol('Hapus pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : 'Belum ada kantor PPAT terdaftar.'}</td></tr>`}</tbody></table></div></div>
       ${paginasi('ppat', hal, n)}</div>${usulan('IDDS-PL-15')}`;
 }
 
@@ -987,7 +987,7 @@ function layarLog() {
     <div class="saring-pl ditandai" id="saringLog" role="search">
       ${pilihDropdown('ppat', 'PPAT', OPSI_PPAT(), S.fPpat)}
       ${pilihDropdown('akt', 'Jenis aktivitas', OPSI_AKT, S.fAkt)}
-      ${disaring ? tombol('Hapus Saringan', 'tertiary', 'md', 'id="hapusSaring"', ik('x', 14)) : ''}
+      ${disaring ? tombol('Hapus saringan', 'tertiary', 'md', 'id="hapusSaring"', ik('x', 14)) : ''}
       ${usulan('IDDS-PL-17')}
       <span class="jumlah" aria-live="polite">${n} aktivitas</span>
     </div>
@@ -1000,7 +1000,7 @@ function layarLog() {
         <td class="ina-table__cell">${AKT[a.kode] || a.kode}</td>
         <td class="ina-table__cell">${a.ok ? badge('Berhasil', 'success', 'sm') : badge('Gagal', 'error', 'sm')}</td>
         <td class="ina-table__cell mono">${a.ip || '—'}</td></tr>`).join('')
-        : `<tr><td colspan="6" class="ina-table__empty-cell kosong">${disaring ? `Tidak ada aktivitas yang cocok dengan saringan.<div style="margin-top:10px">${tombol('Hapus Saringan', 'secondary', 'sm', 'data-hapus-saring')}</div>` : 'Belum ada aktivitas.'}</td></tr>`}</tbody></table></div></div>
+        : `<tr><td colspan="6" class="ina-table__empty-cell kosong">${disaring ? `Tidak ada aktivitas yang cocok dengan saringan.<div style="margin-top:10px">${tombol('Hapus saringan', 'secondary', 'sm', 'data-hapus-saring')}</div>` : 'Belum ada aktivitas.'}</td></tr>`}</tbody></table></div></div>
       ${paginasi('log', hal, n)}</div>${usulan('IDDS-PL-18')}`;
 }
 
@@ -1138,13 +1138,13 @@ const BANTUAN = {
       ['Mengapa ada kantor PPAT yang ditangguhkan?', 'Biasanya karena masa berlaku paket sudah lewat atau kantor dinonaktifkan oleh operator. Lihat kolom Masa Berlaku di Daftar PPAT.'],
       ['Bagaimana menangguhkan atau mengaktifkan kantor PPAT?', 'Tidak dari sini. Status kantor diatur di aplikasi Onboarding (konsol operator).'],
       ['Apa arti aktivitas bertanda Gagal?', 'Aktivitas tidak berhasil, misalnya kata sandi salah saat masuk. Beberapa kegagalan berturut-turut dari akun yang sama perlu diperiksa di Log Aktivitas.'],
-      ['Bagaimana melihat semua aktivitas?', 'Klik "Lihat Semua" untuk membuka Log Aktivitas. Di sana Anda dapat menyaring per kantor PPAT dan jenis aktivitas.'],
+      ['Bagaimana melihat semua aktivitas?', 'Klik "Lihat semua" untuk membuka Log Aktivitas. Di sana Anda dapat menyaring per kantor PPAT dan jenis aktivitas.'],
       ['Bisakah saya membuka data kantor dari daftar Pengguna terbanyak?', 'Ya. Klik nama kantor untuk membuka Daftar PPAT yang langsung mencari kantor tersebut.'],
       ['Mengapa angka belum berubah?', 'Angka dimuat saat halaman dibuka. Muat ulang halaman untuk melihat data terbaru.']])}
     ${kontak()}` }),
   ppat:() => ({ judul:'Bantuan Daftar PPAT', isi:`<p>Daftar PPAT menampilkan semua kantor PPAT yang terdaftar di E-PPAT beserta paket, masa berlaku, dan statusnya. Halaman ini hanya untuk melihat data.</p>
     <h4 class="bantu-sub">Langkah mencari kantor</h4>
-    ${lgkh(['Ketik nama kantor atau alamatnya (mis. <b>ppat-contoh-satu</b>) di kotak <b>Cari PPAT</b>.', 'Hasil langsung tersaring. Pindah halaman di bawah tabel bila hasilnya lebih dari 20.', 'Klik <b>Hapus Pencarian</b> bila tidak ada hasil.'])}
+    ${lgkh(['Ketik nama kantor atau alamatnya (mis. <b>ppat-contoh-satu</b>) di kotak <b>Cari PPAT</b>.', 'Hasil langsung tersaring. Pindah halaman di bawah tabel bila hasilnya lebih dari 20.', 'Klik <b>Hapus pencarian</b> bila tidak ada hasil.'])}
     <h4 class="bantu-sub">Arti kolom</h4>
     ${istilah([['Paket', 'Paket langganan kantor. Rincian batasnya ada di Paket Langganan.'], ['Masa Berlaku', 'Tanggal paket berakhir. "Tanpa batas" berarti tidak ada tanggal akhir. Lencana Kedaluwarsa berarti tanggalnya sudah lewat.'], ['Status', 'Aktif: kantor dapat dipakai. Ditangguhkan: pengguna kantor tidak dapat masuk.'], ['Registrasi', 'Dibuka: calon pengguna dapat mendaftar sendiri ke kantor itu. Ditutup: akun hanya dibuat admin kantor.'], ['Dibuat', 'Tanggal kantor didaftarkan.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1171,7 +1171,7 @@ const BANTUAN = {
     ${kontak()}` }),
   log:() => ({ judul:'Bantuan Log Aktivitas', isi:`<p>Log Aktivitas mencatat aktivitas di semua kantor PPAT dan aktivitas admin platform, misalnya masuk, keluar, dan unduh dokumen akta.</p>
     <h4 class="bantu-sub">Langkah mencari</h4>
-    ${lgkh(['Pilih kantor di saringan <b>PPAT</b>, atau biarkan <b>Semua PPAT</b>.', 'Pilih <b>Jenis aktivitas</b>, misalnya Gagal masuk.', 'Pindah halaman di bawah tabel untuk aktivitas yang lebih lama.', 'Klik <b>Hapus Saringan</b> untuk kembali ke semua aktivitas.'])}
+    ${lgkh(['Pilih kantor di saringan <b>PPAT</b>, atau biarkan <b>Semua PPAT</b>.', 'Pilih <b>Jenis aktivitas</b>, misalnya Gagal masuk.', 'Pindah halaman di bawah tabel untuk aktivitas yang lebih lama.', 'Klik <b>Hapus saringan</b> untuk kembali ke semua aktivitas.'])}
     <h4 class="bantu-sub">Arti aktivitas</h4>
     ${istilah([['Masuk / Keluar', 'Pengguna masuk atau keluar dari aplikasi.'], ['Gagal masuk', 'Percobaan masuk ditolak, mis. kata sandi salah.'], ['Sesi diperpanjang', 'Sistem memperpanjang sesi masuk pengguna secara otomatis.'], ['Ganti kata sandi', 'Pengguna mengganti kata sandinya.'], ['Pratinjau draf', 'Pengguna membuka pratinjau draf akta.'], ['Unduh dokumen akta', 'Pengguna mengunduh dokumen akta.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1387,7 +1387,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
             <h2 class="notif-judul" id="notifJudul" tabindex="-1">Notifikasi</h2>
             <p class="notif-jumlah" id="notifJumlah" aria-live="polite"></p>
           </div>
-          <button type="button" class="ina-button ina-button--tertiary ina-button--sm" id="notifSemua" hidden><span>Tandai Semua Dibaca</span></button>
+          <button type="button" class="ina-button ina-button--tertiary ina-button--sm" id="notifSemua" hidden><span>Tandai semua dibaca</span></button>
         </div>
         <div class="notif-saring">
           <div class="ina-button-group" role="group" aria-label="Saring notifikasi">
@@ -1447,7 +1447,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
         return;
       }
       if (kondisi === 'galat') {
-        isi.innerHTML = `<div class="notif-galat"><div class="ina-alert ina-alert--critical" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Notifikasi gagal dimuat.</div><div class="ina-alert__description">Periksa koneksi Anda, lalu coba lagi.</div></div><button type="button" class="ina-button ina-button--secondary ina-button--sm" id="notifUlang"><span>Coba Lagi</span></button></div></div></div>`;
+        isi.innerHTML = `<div class="notif-galat"><div class="ina-alert ina-alert--critical" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Notifikasi gagal dimuat.</div><div class="ina-alert__description">Periksa koneksi Anda, lalu coba lagi.</div></div><button type="button" class="ina-button ina-button--secondary ina-button--sm" id="notifUlang"><span>Coba lagi</span></button></div></div></div>`;
         return;
       }
       const daftar = DATA.filter(d => saring === 'semua' || !dibaca(d));
@@ -1462,7 +1462,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
       kondisi = 'muat';
       render();
       setTimeout(() => {
-        if (gagalSimulasi) { gagalSimulasi = false; kondisi = 'galat'; } // gagal sekali, "Coba Lagi" berhasil
+        if (gagalSimulasi) { gagalSimulasi = false; kondisi = 'galat'; } // gagal sekali, "Coba lagi" berhasil
         else kondisi = 'siap';
         render();
       }, 300);

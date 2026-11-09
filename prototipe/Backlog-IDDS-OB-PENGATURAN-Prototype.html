@@ -874,25 +874,25 @@ const UBAH = [
     isi:'Formulir memakai IDDS Modal dan IDDS Text Field berlabel Indonesia: Kode Menu Induk, Kode Menu, Status, Nama Menu, URL / Path, Deskripsi Menu, dan Ikon Navigasi. Kode baru terisi otomatis. Pesan galat tampil di bawah isian (aria-invalid), misalnya "Kode Menu sudah dipakai menu Dasbor." atau "URL harus diawali garis miring (/).". Pilihan ikon berupa grup radio berlabel Indonesia ("Tanpa Ikon", "Dasbor", "Pengaturan", …) yang dapat dipilih dengan tombol panah. Pada Edit Menu, kode dikunci karena menjadi dasar kode sub-menu.',
     lama:'Formulir memakai label "Code Menu *", "Parent Menu Code", "Status Aktif", dan "Icon Navigasi". Ikon dipilih dari nama teknis berbahasa Inggris ("LayoutDashboard", "Settings2", "UserCog", "ListTree"). Pesan galat tidak menempel pada isian.', ke:'menu-admin', sorot:'#tambahMenuUtama' },
   { kode:'IDDS-OB-35', judul:'Menu: konfirmasi Hapus Menu yang menyebut dampaknya',
-    isi:'Hapus Menu membuka IDDS Modal konfirmasi "Hapus menu Verifikasi?". Dialog menyebut kode menu, jumlah sub-menu yang ikut terhapus, dan bahwa menu hilang dari menu samping dan Peran Pengguna. Tombol konfirmasi "Hapus Menu" berwarna merah. Batal atau Esc mengembalikan fokus ke tombol asal. Setelah menu terhapus, IDDS Toast mengumumkan hasilnya.',
+    isi:'Hapus Menu membuka IDDS Modal konfirmasi "Hapus menu Verifikasi?". Dialog menyebut kode menu, jumlah sub-menu yang ikut terhapus, dan bahwa menu hilang dari menu samping dan Peran Pengguna. Tombol konfirmasi "Hapus menu" berwarna merah. Batal atau Esc mengembalikan fokus ke tombol asal. Setelah menu terhapus, IDDS Toast mengumumkan hasilnya.',
     lama:'Konfirmasi hanya berisi "Ya, Hapus" / "Batal" tanpa menyebut sub-menu yang ikut terhapus.', ke:'menu-admin', sorot:'#pohonMenu' },
   { kode:'IDDS-OB-36', judul:'Daftar Pengguna: label berbahasa Indonesia, saringan IDDS Chip, dan pencarian berlabel',
-    isi:'Halaman berjudul "Daftar Pengguna Customer" dengan subjudul "Tambah, ubah, atau hapus akun pengguna customer." Kolom menjadi Kode, Avatar, Nama, Email, Dibuat, Tipe, Status, MFA, dan Aksi. Saringan Semua/Aktif/Nonaktif memakai IDDS Chip (aria-pressed) dengan jumlahnya. Pencarian berlabel "Cari pengguna", dan jumlah hasil diumumkan. MFA kosong ditulis "Belum diatur", bukan "—". Tombol "Add User" menjadi "Tambah Pengguna".',
+    isi:'Halaman berjudul "Daftar Pengguna Customer" dengan subjudul "Tambah, ubah, atau hapus akun pengguna customer." Kolom menjadi Kode, Avatar, Nama, Email, Dibuat, Tipe, Status, MFA, dan Aksi. Saringan Semua/Aktif/Nonaktif memakai IDDS Chip (aria-pressed) dengan jumlahnya. Pencarian berlabel "Cari pengguna", dan jumlah hasil diumumkan. MFA kosong ditulis "Belum diatur", bukan "—". Tombol "Add User" menjadi "Tambah pengguna".',
     lama:'Judul berbunyi "Customer" dengan subjudul "Kelola data pengguna customer". Kolom berbunyi "Code", "Name", "Created", "Type", dan "Actions", dan MFA kosong ditulis "—". Tombol berlabel "Add User", dan teks paginasi berbunyi "Menampilkan 1–10 dari total 760".', ke:'pengguna-customer', sorot:'#saringPengguna' },
   { kode:'IDDS-OB-37', judul:'Daftar Pengguna: dialog Tambah Pengguna dengan pesan galat di bawah isian',
     isi:'Dialog Tambah Pengguna memakai IDDS Modal dengan isian yang sama dengan live: Nama Depan, Nama Tengah, Nama Belakang, Avatar, Email, Kata Sandi, Tipe, Jenis Kelamin, dan Deskripsi. Pesan galat tampil di bawah isian yang salah. Kesalahan yang diperiksa adalah nama depan kosong, format email salah, email sudah terdaftar, atau kata sandi kurang dari 12 karakter tanpa huruf besar, huruf kecil, angka, dan simbol. Fokus pindah ke isian pertama yang salah.',
     lama:'Dialog berjudul "Tambah User" dengan isian "Password", contoh "email@example.com", dan tombol "Tambah User". Pesan galat tidak menempel pada isian.', ke:'pengguna-customer', sorot:'#tambahPengguna' },
   { kode:'IDDS-OB-38', judul:'Daftar Pengguna: aksi Edit dan Hapus menyebut nama pengguna',
-    isi:'Ikon Edit dan Hapus memakai aria-label dan IDDS Tooltip berisi nama pengguna. Hapus membuka konfirmasi "Hapus pengguna Calon PPAT Contoh Satu?" yang menyebut email dan dampaknya. Dialog memuat tombol "Hapus Pengguna" berwarna merah dan saran menonaktifkan akun bila hanya ingin menghentikan sementara. Akun yang sedang dipakai (Admin Contoh) tidak dapat dihapus, dan alasannya tertulis di baris tersebut.',
+    isi:'Ikon Edit dan Hapus memakai aria-label dan IDDS Tooltip berisi nama pengguna. Hapus membuka konfirmasi "Hapus pengguna Calon PPAT Contoh Satu?" yang menyebut email dan dampaknya. Dialog memuat tombol "Hapus pengguna" berwarna merah dan saran menonaktifkan akun bila hanya ingin menghentikan sementara. Akun yang sedang dipakai (Admin Contoh) tidak dapat dihapus, dan alasannya tertulis di baris tersebut.',
     lama:'Ikon pensil dan tempat sampah tidak bertuliskan teks. Konfirmasi berbunyi "Hapus User?" dengan tombol "Ya, Hapus" dan "Batal".', ke:'pengguna-admin', sorot:'#tabelPengguna' },
   { kode:'IDDS-OB-39', judul:'Edit Pengguna: halaman bertab IDDS Tabs berbahasa Indonesia',
-    isi:'Edit Pengguna memakai pola yang sama dengan Profil Saya: kartu kiri dan IDDS Tabs "PPAT", "Kantor PPAT", dan "Kata Sandi". Saat tab Kantor PPAT dibuka, kartu kiri "Foto Profil" berganti menjadi "Logo Kantor" (nama kantor dan ID PPAT), sama dengan live. Remah berbunyi "Beranda › Daftar Pengguna Customer › Edit Pengguna", dan tombol kembali berlabel "Kembali ke Daftar Pengguna Customer". Blok "Data Remarks" menjadi "Status Akun" dengan sakelar berlabel "Akun aktif" dan teks Aktif/Nonaktif. Tab Kantor PPAT memuat semua isi live dengan markup yang sama dengan Profil Saya. Nama Kantor diberi lencana status kantor (IDDS Badge) dengan tooltip yang menjelaskan kapan kantor aktif. Isi lainnya: Detail Registrasi (ID PPAT / Kode Kantor dan URL Web terkunci dengan keterangan, Bank, Nomor Rekening); Info Kontak Kantor; dan Lokasi Kantor (Alamat Lengkap, Kelurahan, Kecamatan, Kota/Kabupaten, GPS Lat, GPS Long). Peta contoh dapat diklik, diperbesar/diperkecil, dan dicari lewat IDDS Input Search berlabel, dan koordinat GPS terisi otomatis. Tab diakhiri tombol Batal dan "Simpan Data Kantor". Tabel kontak memakai kolom No., Akun / Nomor, Jenis Kontak, Status, dan Aksi.',
+    isi:'Edit Pengguna memakai pola yang sama dengan Profil Saya: kartu kiri dan IDDS Tabs "PPAT", "Kantor PPAT", dan "Kata Sandi". Saat tab Kantor PPAT dibuka, kartu kiri "Foto Profil" berganti menjadi "Logo Kantor" (nama kantor dan ID PPAT), sama dengan live. Remah berbunyi "Beranda › Daftar Pengguna Customer › Edit Pengguna", dan tombol kembali berlabel "Kembali ke Daftar Pengguna Customer". Blok "Data Remarks" menjadi "Status Akun" dengan sakelar berlabel "Akun aktif" dan teks Aktif/Nonaktif. Tab Kantor PPAT memuat semua isi live dengan markup yang sama dengan Profil Saya. Nama Kantor diberi lencana status kantor (IDDS Badge) dengan tooltip yang menjelaskan kapan kantor aktif. Isi lainnya: Detail Registrasi (ID PPAT / Kode Kantor dan URL Web terkunci dengan keterangan, Bank, Nomor Rekening); Info Kontak Kantor; dan Lokasi Kantor (Alamat Lengkap, Kelurahan, Kecamatan, Kota/Kabupaten, GPS Lat, GPS Long). Peta contoh dapat diklik, diperbesar/diperkecil, dan dicari lewat IDDS Input Search berlabel, dan koordinat GPS terisi otomatis. Tab diakhiri tombol Batal dan "Simpan data kantor". Tabel kontak memakai kolom No., Akun / Nomor, Jenis Kontak, Status, dan Aksi.',
     lama:'Remah berbunyi "Home › Customer › Edit Customer", dan tab berlabel "Password". Blok "Data Remarks" memuat sakelar "Active". Tabel kontak memakai kolom "Contact Account / Code", "Contact Type", "Active", dan "Action" dengan jenis "Email"/"Phone". Di tab Kantor PPAT, lencana "Nonaktif" tidak dijelaskan, ID PPAT / Kode Kantor dan URL Web tampil abu-abu tanpa keterangan, dan Bank berisi "-- Pilih Bank --". Tabel Info Kontak kosong bertuliskan "No contacts yet.". Peta Leaflet memiliki tombol "+"/"−" tanpa label, kotak cari "Cari lokasi (cth: Monas, Jakarta)..." tanpa label, dan keterangan "Geser pin pada peta untuk mengisi koordinat GPS secara otomatis."', ke:'pengguna-edit', sorot:'#tabEdit' },
   { kode:'IDDS-OB-40', judul:'Edit Pengguna: tab Kata Sandi untuk admin, pesan galat di bawah isian, dan penjaga perubahan',
-    isi:'Tab Kata Sandi hanya berisi Kata Sandi Baru dan Konfirmasi Kata Sandi. Isian "Kata Sandi Saat Ini" dihapus karena admin mengubah kata sandi pengguna lain dan tidak mengetahui kata sandinya. Syarat kata sandi tampil sebagai daftar centang seperti layar Registrasi (minimal 12 karakter, huruf besar, huruf kecil, angka, dan simbol (- _ ? ! & + % # @ * $ ^)) dan tercentang saat mengetik. Tombol "Perbarui" menjadi "Simpan Kata Sandi" agar seragam dengan "Simpan PPAT" dan "Simpan Data Kantor". Setiap tab menampilkan status "Belum disimpan" di samping tombol simpan dan titik penanda pada tab yang berubah. Pesan galat tampil di bawah isian, misalnya "Nama Depan wajib diisi.", "Nomor Rekening hanya boleh berisi angka.", "GPS Lat berupa angka antara -90 dan 90.", atau "Konfirmasi kata sandi tidak sama.". Bila halaman ditinggalkan sebelum disimpan, muncul "Tinggalkan halaman ini?" dengan pilihan Tetap di Sini atau Tinggalkan. Atur Ulang MFA meminta konfirmasi bertombol merah.',
+    isi:'Tab Kata Sandi hanya berisi Kata Sandi Baru dan Konfirmasi Kata Sandi. Isian "Kata Sandi Saat Ini" dihapus karena admin mengubah kata sandi pengguna lain dan tidak mengetahui kata sandinya. Syarat kata sandi tampil sebagai daftar centang seperti layar Registrasi (minimal 12 karakter, huruf besar, huruf kecil, angka, dan simbol (- _ ? ! & + % # @ * $ ^)) dan tercentang saat mengetik. Tombol "Perbarui" menjadi "Simpan kata sandi" agar seragam dengan "Simpan PPAT" dan "Simpan data kantor". Setiap tab menampilkan status "Belum disimpan" di samping tombol simpan dan titik penanda pada tab yang berubah. Pesan galat tampil di bawah isian, misalnya "Nama Depan wajib diisi.", "Nomor Rekening hanya boleh berisi angka.", "GPS Lat berupa angka antara -90 dan 90.", atau "Konfirmasi kata sandi tidak sama.". Bila halaman ditinggalkan sebelum disimpan, muncul "Tinggalkan halaman ini?" dengan pilihan Tetap di Sini atau Tinggalkan. Atur Ulang MFA meminta konfirmasi bertombol merah.',
     lama:'Tab "Password" berisi isian "Kata Sandi Saat Ini", "Kata Sandi Baru", dan "Konfirmasi Kata Sandi", padahal admin mengubah kata sandi pengguna lain. Di bawahnya hanya tertulis "Min. 12 karakter · Huruf besar, kecil, angka & simbol" dengan bilah kekuatan, dan tombol simpan berlabel "Perbarui". Tidak ada tanda perubahan yang belum disimpan, dan perubahan hilang tanpa peringatan saat pengguna pindah menu.', ke:'pengguna-edit', sorot:'#kaki-ppat' },
   { kode:'IDDS-OB-41', judul:'Peran Pengguna: sakelar berlabel, konfirmasi cabut akses, dan status tersimpan',
-    isi:'Setiap sakelar memakai IDDS Toggle dengan label yang menyebut menu dan pengguna, misalnya "Akses menu Harga Produk untuk Operator Contoh Dua". Mematikan sakelar membuka konfirmasi "Cabut akses Harga Produk?" dengan tombol "Cabut Akses" berwarna merah. Menyalakan sakelar langsung memberi akses. Status penyimpanan selalu terlihat di atas tabel ("Tersimpan pukul 19.06: …") dan diumumkan (aria-live).',
+    isi:'Setiap sakelar memakai IDDS Toggle dengan label yang menyebut menu dan pengguna, misalnya "Akses menu Harga Produk untuk Operator Contoh Dua". Mematikan sakelar membuka konfirmasi "Cabut akses Harga Produk?" dengan tombol "Cabut akses" berwarna merah. Menyalakan sakelar langsung memberi akses. Status penyimpanan selalu terlihat di atas tabel ("Tersimpan pukul 19.06: …") dan diumumkan (aria-live).',
     lama:'Mematikan sakelar langsung mencabut akses tanpa konfirmasi, dan tidak ada tanda tersimpan. Sakelar tidak berlabel. Saat gagal, muncul pesan "Gagal · Tidak dapat terhubung ke server." dengan tombol OK.', ke:'peran-operator', sorot:'#statusPeran' },
   { kode:'IDDS-OB-42', judul:'Peran Pengguna: tabel akses yang mudah dibaca',
     isi:'Halaman berjudul "Peran Pengguna Operator" dengan subjudul "Atur menu yang dapat dibuka setiap pengguna operator." Kolom pertama "Pengguna" tetap terlihat saat tabel digulir ke samping. Grup kolom memakai nama Indonesia ("Utama", "Pengaturan"). Pencarian "Cari pengguna" dan IDDS Pagination 10 baris per halaman memudahkan pembacaan daftar customer yang panjang. Ringkasan "8 pengguna · 13 menu" tetap ada.',
@@ -1091,7 +1091,7 @@ $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('op
 function jaga(lanjut) {
   if (!S.kotor) { lanjut(); return; }
   dialog({ judul:'Tinggalkan halaman ini?', konfirmasi:true, bahaya:true, isi:'<p>Perubahan yang belum disimpan akan hilang.</p>',
-    tombol:[['Tetap di Sini', 'secondary', null], ['Tinggalkan', 'primary', () => { S.kotor = false; lanjut(); }]] });
+    tombol:[['Tetap di sini', 'secondary', null], ['Tinggalkan', 'primary', () => { S.kotor = false; lanjut(); }]] });
 }
 function keLuar(url) { jaga(() => { location.href = url; }); }
 /* ===================== akhir KERANGKA STAF ONBOARDING · JS ===================== */
@@ -1144,10 +1144,10 @@ function layarMenu(jenis) {
   return `${remah([`Menu ${t}`])}<h1>Menu ${t}</h1><p class="sub">Atur susunan menu samping aplikasi ${t.toLowerCase()}.</p>
     <div class="saring-ob ditandai" id="saringMenu" role="search"><div class="baris"><div><label class="lbl" for="cariMenu">Cari menu</label>${cariIsian('cariMenu', 'Cari nama atau kode menu…', nilaiCari(), 'Cari menu menurut nama atau kode')}</div>
       <span class="jumlah" aria-live="polite">${q ? `${nCocok} menu cocok` : `${L.length} menu`}</span>${usulan('IDDS-OB-32')}
-      <span class="kanan">${tombol('Tambah Menu Utama', 'primary', 'md', 'id="tambahMenuUtama"', ik('tambah', 16))}</span></div></div>
+      <span class="kanan">${tombol('Tambah menu utama', 'primary', 'md', 'id="tambahMenuUtama"', ik('tambah', 16))}</span></div></div>
     <div class="tabel-wadah ditandai" id="pohonMenu"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Susunan menu ${t.toLowerCase()}">
       <thead class="ina-table__header"><tr>${['Kode', 'Nama Menu', 'URL', 'Deskripsi', 'Status', '<span style="display:block;text-align:right">Aksi</span>'].map(th).join('')}</tr></thead>
-      <tbody class="ina-table__body">${baris || `<tr><td colspan="6" class="ina-table__empty-cell kosong">${q ? `Tidak ada menu yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : 'Belum ada menu. Tambahkan lewat Tambah Menu Utama.'}</td></tr>`}</tbody></table></div></div></div>
+      <tbody class="ina-table__body">${baris || `<tr><td colspan="6" class="ina-table__empty-cell kosong">${q ? `Tidak ada menu yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : 'Belum ada menu. Tambahkan lewat Tambah Menu Utama.'}</td></tr>`}</tbody></table></div></div></div>
     ${usulan('IDDS-OB-31')}${usulan('IDDS-OB-33')}${usulan('IDDS-OB-35')}`;
 }
 function dialogMenu(mode, kodeAcuan) {
@@ -1194,7 +1194,7 @@ function hapusMenu(kode) {
   const jenis = jenisDari(S.layar), L = MENU[jenis], m = L.find(x => x.kode === kode), tur = turunanDari(L, kode);
   dialog({ judul:`Hapus menu ${esc(m.nama)}?`, konfirmasi:true, bahaya:true,
     isi:`<div class="modal-gap"><p>Menu <b>${esc(m.nama)}</b> (kode ${m.kode}) dihapus dari menu samping ${JENIS[jenis].t.toLowerCase()} dan dari Peran Pengguna.</p>${tur.length ? `<p><b>${tur.length} sub-menu ikut terhapus:</b> ${tur.map(x => esc(x.nama)).join(', ')}.</p>` : ''}<p>Tindakan ini tidak dapat dibatalkan.</p></div>`,
-    tombol:[['Batal', 'secondary', null], ['Hapus Menu', 'primary', () => {
+    tombol:[['Batal', 'secondary', null], ['Hapus menu', 'primary', () => {
       const buang = new Set([kode, ...tur.map(x => x.kode)]); MENU[jenis] = L.filter(x => !buang.has(x.kode));
       gambar(); $('#tambahMenuUtama').focus(); toast(`Menu ${m.nama} dihapus.`, 'positive', 3500, tur.length ? `${tur.length} sub-menu ikut terhapus.` : '');
     }]] });
@@ -1207,11 +1207,11 @@ function layarPengguna(jenis) {
   const rows = L.filter(u => (c === 'semua' || (c === 'aktif') === u.aktif) && (!q || `${namaLengkap(u)} ${u.kode} ${u.email}`.toLowerCase().includes(q)));
   const { n, hal, awal, isi } = potongHal(rows);
   const nmC = { semua:'', aktif:'aktif', nonaktif:'nonaktif' }[c];
-  const kosong = q ? `Tidak ada pengguna${nmC ? ' ' + nmC : ''} yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : c !== 'semua' ? `Belum ada pengguna ${nmC}.<div style="margin-top:10px">${tombol('Tampilkan Semua', 'secondary', 'sm', 'id="tampilSemua"')}</div>` : 'Belum ada pengguna.';
+  const kosong = q ? `Tidak ada pengguna${nmC ? ' ' + nmC : ''} yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : c !== 'semua' ? `Belum ada pengguna ${nmC}.<div style="margin-top:10px">${tombol('Tampilkan semua', 'secondary', 'sm', 'id="tampilSemua"')}</div>` : 'Belum ada pengguna.';
   return `${remah([`Daftar Pengguna ${t}`])}<h1>Daftar Pengguna ${t}</h1><p class="sub">Tambah, ubah, atau hapus akun pengguna ${t.toLowerCase()}.</p>
     <div class="saring-ob ditandai" id="saringPengguna" role="search">
       <div class="baris"><div><label class="lbl" for="cariPengguna">Cari pengguna</label>${cariIsian('cariPengguna', 'Cari nama, kode, atau email…', nilaiCari(), 'Cari pengguna menurut nama, kode, atau email')}</div>
-        <span class="jumlah" aria-live="polite">${n} pengguna</span><span class="kanan">${tombol('Tambah Pengguna', 'primary', 'md', 'id="tambahPengguna"', ik('tambah', 16))}</span></div>
+        <span class="jumlah" aria-live="polite">${n} pengguna</span><span class="kanan">${tombol('Tambah pengguna', 'primary', 'md', 'id="tambahPengguna"', ik('tambah', 16))}</span></div>
       <div class="ina-chip"><div class="ina-chip__list" role="group" aria-label="Saring menurut status">${chip('semua', 'Semua', L.length, c === 'semua')}${chip('aktif', 'Aktif', nA, c === 'aktif')}${chip('nonaktif', 'Nonaktif', L.length - nA, c === 'nonaktif')}</div></div>${usulan('IDDS-OB-36')}
     </div>
     <div class="tabel-wadah ditandai" id="tabelPengguna"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Daftar pengguna ${t.toLowerCase()}">
@@ -1238,14 +1238,14 @@ function dialogTambahPengguna() {
   dialog({ judul:'Tambah Pengguna', lebar:true,
     isi:`<div class="form-d tiga">
       ${tf('uDepan', 'Nama Depan', '', 'Nama depan', true, '', 'autocomplete="off"')}${tf('uTengah', 'Nama Tengah', '', 'Nama tengah')}${tf('uBelakang', 'Nama Belakang', '', 'Nama belakang')}
-      <div class="lebar"><span class="lbl-isian" id="lblAvatar">Avatar</span><div class="pilih-berkas">${tombol('Pilih File Gambar', 'secondary', 'sm', 'id="pilihAvatar" aria-describedby="lblAvatar namaAvatar"', ik('gambar', 16))}<span class="nama-berkas" id="namaAvatar">Belum ada gambar dipilih. JPG atau PNG, maksimal ${est('2 MB')}.</span></div></div>
+      <div class="lebar"><span class="lbl-isian" id="lblAvatar">Avatar</span><div class="pilih-berkas">${tombol('Pilih file gambar', 'secondary', 'sm', 'id="pilihAvatar" aria-describedby="lblAvatar namaAvatar"', ik('gambar', 16))}<span class="nama-berkas" id="namaAvatar">Belum ada gambar dipilih. JPG atau PNG, maksimal ${est('2 MB')}.</span></div></div>
       <div class="lebar">${tf('uEmail', 'Email', '', 'nama@contoh.id', true, '', 'autocomplete="off" inputmode="email"', 'email')}</div>
       <div class="lebar">${pwIsian('uSandi', 'Kata Sandi', 'Minimal 12 karakter', SYARAT_PW)}</div>
     </div><div class="form-d">
       ${pilihan('uTipe', 'Tipe', Object.entries(JENIS).map(([k, v]) => [k, v.t]), jenis, '', '', true)}${pilihan('uJk', 'Jenis Kelamin', [['Laki-laki', 'Laki-laki'], ['Perempuan', 'Perempuan']], 'Laki-laki', '', '', true)}
       <div class="lebar">${ta('uDesk', 'Deskripsi', '', 'Deskripsi (opsional)', '', '', 2)}</div>
     </div>${usulan('IDDS-OB-37')}`,
-    tombol:[['Batal', 'secondary', null], ['Tambah Pengguna', 'primary', simpanPenggunaBaru, true, '', ik('tambah', 16)]] });
+    tombol:[['Batal', 'secondary', null], ['Tambah pengguna', 'primary', simpanPenggunaBaru, true, '', ik('tambah', 16)]] });
   pasangBersih('#lapisan');
   $('#pilihAvatar').addEventListener('click', () => { $('#namaAvatar').textContent = 'avatar-contoh.png dipilih.'; });
 }
@@ -1269,7 +1269,7 @@ function hapusPengguna(kode) {
   const jenis = jenisDari(S.layar), u = PENGGUNA[jenis].find(x => x.kode === kode), nm = namaLengkap(u);
   dialog({ judul:`Hapus pengguna ${esc(nm)}?`, konfirmasi:true, bahaya:true,
     isi:`<div class="modal-gap"><p>Akun <b>${esc(nm)}</b> (${esc(u.email)}) dihapus permanen dan tidak dapat dipulihkan. Pengguna tidak dapat masuk lagi.</p><p>Bila hanya ingin menghentikan akses sementara, nonaktifkan akun di halaman Edit.</p></div>`,
-    tombol:[['Batal', 'secondary', null], ['Hapus Pengguna', 'primary', () => {
+    tombol:[['Batal', 'secondary', null], ['Hapus pengguna', 'primary', () => {
       PENGGUNA[jenis] = PENGGUNA[jenis].filter(x => x.kode !== kode); gambar(); $('#cariPengguna').focus(); toast(`${nm} dihapus.`, 'positive');
     }]] });
 }
@@ -1319,7 +1319,7 @@ function panelPpat(u) {
 }
 function blokKontak(u, kunci) {
   const L = u[kunci], kantor = kunci === 'kontakKantor';
-  return `<div class="sub-blok" id="${kantor ? 'blokKontakKantor' : 'blokKontak'}"><h3 class="sub-kepala">${ik('telepon', 18)} Info Kontak${kantor ? ' Kantor' : ''} <span class="kanan">${tombol('Tambah Kontak', 'primary', 'sm', `data-tambah-kontak="${kunci}"`, ik('tambah', 16))}</span></h3>
+  return `<div class="sub-blok" id="${kantor ? 'blokKontakKantor' : 'blokKontak'}"><h3 class="sub-kepala">${ik('telepon', 18)} Info Kontak${kantor ? ' Kantor' : ''} <span class="kanan">${tombol('Tambah kontak', 'primary', 'sm', `data-tambah-kontak="${kunci}"`, ik('tambah', 16))}</span></h3>
     <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Info kontak${kantor ? ' kantor' : ''} ${esc(namaLengkap(u))}">
       <thead class="ina-table__header"><tr>${['No.', 'Akun / Nomor', 'Jenis Kontak', 'Status', 'Aksi'].map(th).join('')}</tr></thead>
       <tbody class="ina-table__body">${L.length ? L.map((k, i) => `<tr class="ina-table__row"><td class="ina-table__cell">${i + 1}.</td>
@@ -1350,7 +1350,7 @@ function panelKantor(u) {
         ${tf('kLat', 'GPS Lat', k.lat, '-6.2088', false, '', 'data-f="kantor.lat" inputmode="decimal"')}${tf('kLng', 'GPS Long', k.lng, '106.8456', false, '', 'data-f="kantor.lng" inputmode="decimal"')}
       </div>
       <div>${petaKantor(k)}</div></div>
-      ${kakiTab('kantor', tombol('Simpan Data Kantor', 'primary', 'md', `id="simpanKantor" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'kantor' ? spinner : ik('simpan', 16)))}</div>`;
+      ${kakiTab('kantor', tombol('Simpan data kantor', 'primary', 'md', `id="simpanKantor" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'kantor' ? spinner : ik('simpan', 16)))}</div>`;
 }
 /* peta contoh Lokasi Kantor: salinan Profil Saya (OB-MASUK) */
 const petaKantor = k => `<div class="peta"><svg class="dasar" id="petaDasar" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Peta lokasi kantor (contoh). Klik peta untuk memindahkan pin."><rect width="400" height="300" fill="#eef1ec"/><g stroke="#d9c79a" stroke-width="7" fill="none"><path d="M0 210 L400 120"/><path d="M120 0 L210 300"/></g><g stroke="#fff" stroke-width="4" fill="none"><path d="M0 80 L400 60"/><path d="M0 260 L400 230"/><path d="M300 0 L330 300"/><path d="M40 0 L80 300"/></g><g fill="#cfe3d4"><rect x="230" y="150" width="50" height="40" rx="6"/><rect x="140" y="30" width="60" height="30" rx="6"/></g><g transform="translate(${posPin(k)})" color="#c0392b"><path d="M0 -26c-8 0-14 6-14 14 0 10 14 24 14 24s14-14 14-24c0-8-6-14-14-14z" fill="currentColor"/><circle cx="0" cy="-12" r="5" fill="#fff"/></g></svg>
@@ -1363,11 +1363,11 @@ function panelSandi(u) {
   return `<div class="sub-blok"><h3 class="sub-kepala">${ik('kunci', 18)} Kata Sandi</h3>
     <div class="form-d">${pwIsian('sBaru', 'Kata Sandi Baru', 'Minimal 12 karakter', '', `data-f="sandi.baru" value="${esc(F.sandi.baru)}"`)}${pwIsian('sUlang', 'Konfirmasi Kata Sandi', 'Ketik ulang kata sandi baru', '', `data-f="sandi.ulang" value="${esc(F.sandi.ulang)}"`)}
       <div class="lebar ditandai" id="blokSyarat">${syaratPw('syaratEdit', F.sandi.baru)}${usulan('IDDS-OB-40')}</div></div>
-    ${kakiTab('sandi', tombol('Simpan Kata Sandi', 'primary', 'md', `id="perbaruiSandi" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'sandi' ? spinner : ik('simpan', 16)))}</div>
+    ${kakiTab('sandi', tombol('Simpan kata sandi', 'primary', 'md', `id="perbaruiSandi" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'sandi' ? spinner : ik('simpan', 16)))}</div>
     <div class="sub-blok" id="blokMfa"><h3 class="sub-kepala">${ik('tameng', 18)} Verifikasi Dua Langkah (MFA)</h3>
       <div class="mfa-baris"><div><p>Status: ${u.mfa ? badge(`Aktif · ${u.mfa}`, 'success', 'sm') : badge('Belum diatur', 'neutral', 'sm')}</p>
         <p class="ket">${u.mfa ? 'Atur Ulang MFA menghapus verifikasi dua langkah pengguna ini. Saat masuk berikutnya, pengguna wajib memilih metode lagi.' : 'Pengguna akan diminta mengatur verifikasi dua langkah saat masuk berikutnya.'}</p></div>
-        ${u.mfa ? tombol('Atur Ulang MFA', 'secondary', 'md', `id="resetMfa" aria-label="Atur Ulang MFA ${esc(namaLengkap(u))}"`, ik('ulang', 16)) : ''}</div></div>`;
+        ${u.mfa ? tombol('Atur ulang MFA', 'secondary', 'md', `id="resetMfa" aria-label="Atur Ulang MFA ${esc(namaLengkap(u))}"`, ik('ulang', 16)) : ''}</div></div>`;
 }
 function segarKotor() {
   Object.keys(NAMA_TAB).forEach(t => {
@@ -1413,7 +1413,7 @@ function simpanTab(t) {
 }
 function batalTab(t) {
   dialog({ judul:'Batalkan perubahan?', konfirmasi:true, bahaya:true, isi:`<p>Isian di tab ${NAMA_TAB[t]} dikembalikan ke data yang tersimpan.</p>`,
-    tombol:[['Tetap Ubah', 'secondary', null], ['Batalkan Perubahan', 'primary', () => { F[t] = JSON.parse(JSON.stringify(SNAP[t])); hitungKotor(); gambar(); $(`#tab-${t}`).focus(); }]] });
+    tombol:[['Tetap ubah', 'secondary', null], ['Batalkan perubahan', 'primary', () => { F[t] = JSON.parse(JSON.stringify(SNAP[t])); hitungKotor(); gambar(); $(`#tab-${t}`).focus(); }]] });
 }
 function gantiTab(t) { if (t === S.tab) return; S.tab = t; gambar(); $(`#tab-${t}`).focus(); }
 function dialogKontak(kunci, id) {
@@ -1449,7 +1449,7 @@ function layarPeran(jenis) {
         <tr>${kol.map(m => { const ind = tingkat(m.kode) === 2 ? L.find(x => x.kode === indukDari(m.kode)) : null; return `<th class="ina-table__header-cell" scope="col">${ind ? `<small>${esc(ind.nama)}</small>` : ''}${esc(m.nama)}</th>`; }).join('')}</tr></thead>
       <tbody class="ina-table__body">${isi.length ? isi.map(u => { const nm = namaLengkap(u); return `<tr class="ina-table__row"><th class="ina-table__cell kol-user" scope="row"><b>${esc(nm)}</b><span class="kc">${JENIS[u.tipe].t}${u.aktif ? '' : ' · Nonaktif'}</span></th>
         ${kol.map(m => { const ind = tingkat(m.kode) === 2 ? L.find(x => x.kode === indukDari(m.kode)) : null; return `<td class="ina-table__cell">${sakelar(`data-akses="${u.kode}:${m.kode}"`, `Akses menu ${ind ? ind.nama + ' › ' : ''}${m.nama} untuk ${nm}`, punyaAkses(jenis, u.kode, m.kode))}</td>`; }).join('')}</tr>`; }).join('')
-        : `<tr><td colspan="${kol.length + 1}" class="ina-table__empty-cell kosong">${q ? `Tidak ada pengguna yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : 'Belum ada pengguna.'}</td></tr>`}</tbody></table></div></div>
+        : `<tr><td colspan="${kol.length + 1}" class="ina-table__empty-cell kosong">${q ? `Tidak ada pengguna yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : 'Belum ada pengguna.'}</td></tr>`}</tbody></table></div></div>
       <div class="ringkas-peran">${PENGGUNA[jenis].length} pengguna · ${kol.length} menu</div>
       ${paginasi('pr', hal, n)}</div>${usulan('IDDS-OB-42')}`;
 }
@@ -1465,7 +1465,7 @@ function ubahAkses(el) {
   if (on) { terapkan(); return; }
   dialog({ judul:`Cabut akses ${esc(m.nama)}?`, konfirmasi:true, bahaya:true,
     isi:`<div class="modal-gap"><p><b>${esc(nm)}</b> tidak dapat lagi membuka menu <b>${esc(m.nama)}</b>. Menu itu hilang dari menu samping pengguna saat ia memuat ulang halaman.</p><p>Akses dapat diberikan lagi kapan saja dengan menyalakan sakelar.</p></div>`,
-    tombol:[['Batal', 'secondary', null], ['Cabut Akses', 'primary', terapkan]] });
+    tombol:[['Batal', 'secondary', null], ['Cabut akses', 'primary', terapkan]] });
 }
 
 /* ---------------- layar: Harga Produk ---------------- */
@@ -1474,7 +1474,7 @@ function layarHarga() {
   const q = nilaiCari().trim().toLowerCase(), rows = PRODUK.filter(p => !q || `${p.kode} ${p.nama}`.toLowerCase().includes(q));
   return `${remah(['Harga Produk'])}<h1>Harga Produk</h1><p class="sub">Atur produk, durasi, dan harga paket E-PPAT.</p>
     <div class="saring-ob" id="saringHarga" role="search"><div class="baris"><div><label class="lbl" for="cariHarga">Cari produk</label>${cariIsian('cariHarga', 'Cari kode atau nama produk…', nilaiCari(), 'Cari produk menurut kode atau nama')}</div>
-      <span class="jumlah" aria-live="polite">${rows.length} produk</span><span class="kanan">${tombol('Tambah Produk', 'primary', 'md', 'id="tambahProduk"', ik('tambah', 16))}</span></div></div>
+      <span class="jumlah" aria-live="polite">${rows.length} produk</span><span class="kanan">${tombol('Tambah produk', 'primary', 'md', 'id="tambahProduk"', ik('tambah', 16))}</span></div></div>
     <div class="tabel-wadah ditandai" id="tabelHarga"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Daftar produk">
       <thead class="ina-table__header"><tr>${['Kode', 'Foto', 'Nama Produk', 'Durasi', 'Harga', 'Status', 'Dibuat', 'Diubah', '<span style="display:block;text-align:right">Aksi</span>'].map(th).join('')}</tr></thead>
       <tbody class="ina-table__body">${rows.length ? rows.map(p => { const h = hargaAktif(p); return `<tr class="ina-table__row">
@@ -1487,7 +1487,7 @@ function layarHarga() {
         <td class="ina-table__cell">${tglJam(p.dibuat)}</td>
         <td class="ina-table__cell">${p.diubah ? tglJam(p.diubah) : kosongTeks('Belum pernah')}</td>
         <td class="ina-table__cell"><div class="aksi-baris">${ikonTombol('pena', `Edit produk ${p.nama}`, `data-edit-produk="${p.kode}"`)}${ikonTombol('sampah', `Hapus produk ${p.nama}`, `data-hapus-produk="${p.kode}"`)}</div></td></tr>`; }).join('')
-        : `<tr><td colspan="9" class="ina-table__empty-cell kosong">${q ? `Tidak ada produk yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : 'Belum ada produk.'}</td></tr>`}</tbody></table></div></div></div>${usulan('IDDS-OB-43')}`;
+        : `<tr><td colspan="9" class="ina-table__empty-cell kosong">${q ? `Tidak ada produk yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : 'Belum ada produk.'}</td></tr>`}</tbody></table></div></div></div>${usulan('IDDS-OB-43')}`;
 }
 function isiFormProduk(p) {
   SNAPP = p ? { kode:p.kode, nama:p.nama, singkat:p.singkat, lengkap:p.lengkap, durasi:String(p.durasi), aktif:p.aktif, foto:p.foto, hargaBaru:'' } : { kode:'', nama:'', singkat:'', lengkap:'', durasi:'0', aktif:true, foto:'', hargaBaru:'' };
@@ -1502,10 +1502,10 @@ function formProduk(edit) {
       <div class="lebar">${ta('prLengkap', 'Deskripsi Lengkap (Opsional)', FP.lengkap, 'Satu fitur per baris', 'Satu fitur per baris; tampil sebagai daftar di kartu paket.', 'data-fp="lengkap"', 5)}</div>
       ${tf('prDurasi', 'Durasi (Hari)', FP.durasi, '0', true, 'Masa berlaku produk setelah dibayar.', 'data-fp="durasi" inputmode="numeric"')}
       <div><span class="lbl-isian">Status</span><div style="margin-top:10px"><span class="ket-toggle">${sakelar('id="togProduk" data-tog-produk', 'Produk aktif', FP.aktif)}<span id="ketProduk">${FP.aktif ? 'Aktif' : 'Nonaktif'}</span></span></div></div>
-      <div class="lebar"><span class="lbl-isian" id="lblFoto">Foto/Gambar Produk (Opsional)</span><div class="pilih-berkas">${tombol('Pilih Foto', 'secondary', 'sm', 'id="pilihFotoProduk" aria-describedby="lblFoto"', ik('gambar', 16))}<span class="nama-berkas">${FP.foto ? esc(FP.foto) : 'Belum ada foto.'}</span></div>
+      <div class="lebar"><span class="lbl-isian" id="lblFoto">Foto/Gambar Produk (Opsional)</span><div class="pilih-berkas">${tombol('Pilih foto', 'secondary', 'sm', 'id="pilihFotoProduk" aria-describedby="lblFoto"', ik('gambar', 16))}<span class="nama-berkas">${FP.foto ? esc(FP.foto) : 'Belum ada foto.'}</span></div>
         ${tf('prFoto', '', FP.foto, 'Atau tulis path/URL gambar', false, '', 'data-fp="foto" aria-label="Path atau URL foto produk"')}</div>
     </div>
-    <div class="kartu-kaki"><span class="kaki-st ${kotorProduk() ? 'ada' : ''}" id="stProduk" aria-live="polite">${kotorProduk() ? `${ik('info', 14)} Belum disimpan` : `${ik('centang', 14)} Belum ada perubahan`}</span>${tombol('Batal', 'secondary', 'md', 'id="batalProduk"')}${tombol('Simpan Produk', 'primary', 'md', `id="simpanProduk" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'produk' ? spinner : ik('centang', 16))}</div>`;
+    <div class="kartu-kaki"><span class="kaki-st ${kotorProduk() ? 'ada' : ''}" id="stProduk" aria-live="polite">${kotorProduk() ? `${ik('info', 14)} Belum disimpan` : `${ik('centang', 14)} Belum ada perubahan`}</span>${tombol('Batal', 'secondary', 'md', 'id="batalProduk"')}${tombol('Simpan produk', 'primary', 'md', `id="simpanProduk" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'produk' ? spinner : ik('centang', 16))}</div>`;
 }
 function layarTambahProduk() {
   return `${remah(['Harga Produk', '#harga'], ['Tambah Produk'])}<h1>Tambah Produk</h1><p class="sub">Isi data produk baru, lalu tambahkan harganya lewat Edit Produk.</p>
@@ -1550,19 +1550,19 @@ function hapusProduk(kode) {
   const p = PRODUK.find(x => x.kode === kode);
   dialog({ judul:`Hapus produk ${esc(p.nama)}?`, konfirmasi:true, bahaya:true,
     isi:`<div class="modal-gap"><p>Produk <b>${esc(p.nama)}</b> (${esc(p.kode)}) beserta ${p.harga.length} riwayat harganya dihapus permanen.</p><p>Calon PPAT tidak dapat memilih produk ini lagi. Bila hanya ingin menyembunyikannya sementara, nonaktifkan produk di halaman Edit.</p></div>`,
-    tombol:[['Batal', 'secondary', null], ['Hapus Produk', 'primary', () => { PRODUK = PRODUK.filter(x => x !== p); gambar(); $('#tambahProduk').focus(); toast(`Produk ${p.nama} dihapus.`, 'positive'); }]] });
+    tombol:[['Batal', 'secondary', null], ['Hapus produk', 'primary', () => { PRODUK = PRODUK.filter(x => x !== p); gambar(); $('#tambahProduk').focus(); toast(`Produk ${p.nama} dihapus.`, 'positive'); }]] });
 }
 function ubahHargaAktif(id) {
   const p = PRODUK.find(x => x.kode === S.produk), h = p.harga.find(x => x.id === id), lama = hargaAktif(p);
   const fokus = () => $(`[data-tog-harga="${id}"]`)?.focus();
   if (h.aktif) {
     dialog({ judul:`Nonaktifkan harga ${rupiah(h.n)}?`, konfirmasi:true, bahaya:true, isi:`<p>Produk <b>${esc(p.nama)}</b> tidak punya harga aktif sehingga tidak dapat dibeli sampai ada harga yang diaktifkan.</p>`,
-      tombol:[['Batal', 'secondary', null], ['Nonaktifkan Harga', 'primary', () => { h.aktif = false; p.diubah = '2026-10-26T19:06'; gambar(); fokus(); toast(`Harga ${rupiah(h.n)} dinonaktifkan.`, 'positive'); }]] });
+      tombol:[['Batal', 'secondary', null], ['Nonaktifkan harga', 'primary', () => { h.aktif = false; p.diubah = '2026-10-26T19:06'; gambar(); fokus(); toast(`Harga ${rupiah(h.n)} dinonaktifkan.`, 'positive'); }]] });
     return;
   }
   dialog({ judul:`Jadikan ${rupiah(h.n)} harga aktif?`, konfirmasi:true, bahaya:true,
     isi:`<p>Pendaftar baru membayar <b>${rupiah(h.n)}</b> untuk ${esc(p.nama)}.${lama ? ` Harga ${rupiah(lama.n)} menjadi tidak aktif.` : ''} Tagihan yang sudah dibuat tidak berubah.</p>`,
-    tombol:[['Batal', 'secondary', null], ['Jadikan Harga Aktif', 'primary', () => { p.harga.forEach(x => { x.aktif = x === h; }); p.diubah = '2026-10-26T19:06'; gambar(); fokus(); toast(`${rupiah(h.n)} kini menjadi harga aktif ${p.nama}.`, 'positive'); }]] });
+    tombol:[['Batal', 'secondary', null], ['Jadikan harga aktif', 'primary', () => { p.harga.forEach(x => { x.aktif = x === h; }); p.diubah = '2026-10-26T19:06'; gambar(); fokus(); toast(`${rupiah(h.n)} kini menjadi harga aktif ${p.nama}.`, 'positive'); }]] });
 }
 function tambahHarga() {
   const p = PRODUK.find(x => x.kode === S.produk), n = +angkaRp(FP.hargaBaru);
@@ -1575,7 +1575,7 @@ function tambahHarga() {
 function hapusHarga(id) {
   const p = PRODUK.find(x => x.kode === S.produk), h = p.harga.find(x => x.id === id);
   dialog({ judul:`Hapus harga ${rupiah(h.n)}?`, konfirmasi:true, bahaya:true, isi:`<p>Harga <b>${rupiah(h.n)}</b> (${tglJam(h.w)}) dihapus dari riwayat harga ${esc(p.nama)}.</p>`,
-    tombol:[['Batal', 'secondary', null], ['Hapus Harga', 'primary', () => { p.harga = p.harga.filter(x => x !== h); gambar(); $('#hargaBaru').focus(); toast(`Harga ${rupiah(h.n)} dihapus.`, 'positive'); }]] });
+    tombol:[['Batal', 'secondary', null], ['Hapus harga', 'primary', () => { p.harga = p.harga.filter(x => x !== h); gambar(); $('#hargaBaru').focus(); toast(`Harga ${rupiah(h.n)} dihapus.`, 'positive'); }]] });
 }
 
 /* ---------------- layar: Paket Langganan ---------------- */
@@ -1586,7 +1586,7 @@ function layarPaket() {
   return `${remah(['Paket Langganan'])}<h1>Paket Langganan</h1><p class="sub">Atur paket langganan yang dapat dipilih calon PPAT.</p>
     <div class="saring-ob" id="saringPaket" role="search">
       <div class="baris"><div><label class="lbl" for="cariPaket">Cari paket</label>${cariIsian('cariPaket', 'Cari kode atau nama paket…', nilaiCari(), 'Cari paket menurut kode atau nama')}</div><span class="jumlah" aria-live="polite">${rows.length} paket</span>
-        <span class="kanan">${tombol('Tambah Paket', 'primary', 'md', 'id="tambahPaket"', ik('tambah', 16))}</span></div>
+        <span class="kanan">${tombol('Tambah paket', 'primary', 'md', 'id="tambahPaket"', ik('tambah', 16))}</span></div>
       <div class="ina-chip"><div class="ina-chip__list" role="group" aria-label="Saring menurut status">${chip('semua', 'Semua', PAKET.length, c === 'semua')}${chip('aktif', 'Aktif', nA, c === 'aktif')}${chip('nonaktif', 'Nonaktif', PAKET.length - nA, c === 'nonaktif')}</div></div></div>
     <div class="tabel-wadah ditandai" id="tabelPaket"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Daftar paket langganan">
       <thead class="ina-table__header"><tr>${['Kode', 'Nama', 'Maks. Order', 'Maks. Pengguna', 'Masa (Hari)', 'CA', 'Status', '<span style="display:block;text-align:right">Aksi</span>'].map(th).join('')}</tr></thead>
@@ -1596,7 +1596,7 @@ function layarPaket() {
         <td class="ina-table__cell">${batas(p.order)}</td><td class="ina-table__cell">${batas(p.user)}</td><td class="ina-table__cell">${batas(p.masa)}</td>
         <td class="ina-table__cell">${p.ca ? 'Ya' : 'Tidak'}</td><td class="ina-table__cell">${lencanaStatus(p.aktif)}</td>
         <td class="ina-table__cell"><div class="aksi-baris">${ikonTombol('pena', `Edit paket ${p.nama}`, `data-edit-paket="${p.kode}"`)}${p.sistem ? tombol(ik('sampah', 16), 'tertiary', 'sm', `class="ikon-saja" disabled aria-label="Hapus paket ${esc(p.nama)} tidak tersedia" aria-describedby="alasan-p${p.kode}"`) : ikonTombol('sampah', `Hapus paket ${p.nama}`, `data-hapus-paket="${p.kode}"`)}</div>${p.sistem ? `<div class="alasan" id="alasan-p${p.kode}">Paket sistem tidak dapat dihapus.</div>` : ''}</td></tr>`).join('')
-        : `<tr><td colspan="8" class="ina-table__empty-cell kosong">${q ? `Tidak ada paket yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : `Belum ada paket ${c === 'aktif' ? 'aktif' : 'nonaktif'}.<div style="margin-top:10px">${tombol('Tampilkan Semua', 'secondary', 'sm', 'id="tampilSemua"')}</div>`}</td></tr>`}</tbody></table></div></div></div>${usulan('IDDS-OB-44')}`;
+        : `<tr><td colspan="8" class="ina-table__empty-cell kosong">${q ? `Tidak ada paket yang cocok dengan "${esc(nilaiCari())}".<div style="margin-top:10px">${tombol('Hapus pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>` : `Belum ada paket ${c === 'aktif' ? 'aktif' : 'nonaktif'}.<div style="margin-top:10px">${tombol('Tampilkan semua', 'secondary', 'sm', 'id="tampilSemua"')}</div>`}</td></tr>`}</tbody></table></div></div></div>${usulan('IDDS-OB-44')}`;
 }
 const isianBatas = (id, l, v) => `<div class="lebar"><div class="batas-baris">${tf(id, l, v == null ? '' : String(v), v == null ? 'Tanpa batas' : 'Contoh: 5', false, '', `inputmode="numeric" ${v == null ? 'disabled' : ''}`)}${cekBox(id + 'Tb', v == null, 'Tanpa batas', `data-tanpa-batas="${id}"`)}</div></div>`;
 function dialogPaket(kode) {
@@ -1632,7 +1632,7 @@ function hapusPaket(kode) {
   const p = PAKET.find(x => x.kode === kode);
   dialog({ judul:`Hapus paket ${esc(p.nama)}?`, konfirmasi:true, bahaya:true,
     isi:`<div class="modal-gap"><p>Paket <b>${esc(p.nama)}</b> (${esc(p.kode)}) dihapus dari katalog dan tidak dapat dipilih lagi oleh calon PPAT.</p><p>Bila hanya ingin menyembunyikannya sementara, hapus centang "Paket aktif" lewat Edit.</p></div>`,
-    tombol:[['Batal', 'secondary', null], ['Hapus Paket', 'primary', () => { PAKET = PAKET.filter(x => x !== p); gambar(); $('#tambahPaket').focus(); toast(`Paket ${p.nama} dihapus.`, 'positive'); }]] });
+    tombol:[['Batal', 'secondary', null], ['Hapus paket', 'primary', () => { PAKET = PAKET.filter(x => x !== p); gambar(); $('#tambahPaket').focus(); toast(`Paket ${p.nama} dihapus.`, 'positive'); }]] });
 }
 
 /* ---------------- galat di bawah isian ---------------- */
@@ -1706,7 +1706,7 @@ H.addEventListener('click', e => {
   if (t.closest('#resetMfa')) {
     const u = penggunaEdit();
     dialog({ judul:`Atur Ulang MFA ${esc(namaLengkap(u))}?`, konfirmasi:true, bahaya:true, isi:`<p>Verifikasi dua langkah dan kode cadangan pengguna ini dihapus. Saat masuk berikutnya, pengguna wajib memilih metode verifikasi lagi.</p>`,
-      tombol:[['Batal', 'secondary', null], ['Atur Ulang MFA', 'primary', () => { u.mfa = null; gambar(); $('#tab-sandi').focus(); toast(`MFA ${namaLengkap(u)} direset.`, 'positive'); }]] });
+      tombol:[['Batal', 'secondary', null], ['Atur ulang MFA', 'primary', () => { u.mfa = null; gambar(); $('#tab-sandi').focus(); toast(`MFA ${namaLengkap(u)} direset.`, 'positive'); }]] });
     return;
   }
   const tk = t.closest('[data-tambah-kontak]'); if (tk) { dialogKontak(tk.dataset.tambahKontak); return; }
@@ -1845,7 +1845,7 @@ const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
 const BANTUAN = {
   menu:t => ({ judul:`Bantuan Menu ${t}`, isi:`<p>Halaman ini mengatur susunan menu samping aplikasi ${t.toLowerCase()}: nama, alamat halaman, ikon, urutan, dan status setiap menu.</p>
     <h4 class="bantu-sub">Langkah menambah menu</h4>
-    ${lgkh(['Klik <b>Tambah Menu Utama</b> untuk grup baru, atau ikon <b>+</b> di baris menu untuk sub-menu.', 'Periksa <b>Kode Menu</b> yang terisi otomatis.', 'Isi <b>Nama Menu</b> dan <b>URL / Path</b> (kosongkan bila menu menjadi induk).', 'Pilih <b>Ikon Navigasi</b>, lalu klik <b>Simpan</b>.'])}
+    ${lgkh(['Klik <b>Tambah menu utama</b> untuk grup baru, atau ikon <b>+</b> di baris menu untuk sub-menu.', 'Periksa <b>Kode Menu</b> yang terisi otomatis.', 'Isi <b>Nama Menu</b> dan <b>URL / Path</b> (kosongkan bila menu menjadi induk).', 'Pilih <b>Ikon Navigasi</b>, lalu klik <b>Simpan</b>.'])}
     <h4 class="bantu-sub">Arti kode menu</h4>
     ${istilah([['01…', 'Dua digit pertama: aplikasi (01 Admin, 02 Operator, 04 Customer).'], ['…01 0000', 'Menu utama (grup), misalnya Pengaturan.'], ['…0100', 'Menu tingkat pertama di bawah grup.'], ['…0101', 'Sub-menu tingkat kedua.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1859,7 +1859,7 @@ const BANTUAN = {
     ${kontak()}` }),
   pengguna:t => ({ judul:`Bantuan Daftar Pengguna ${t}`, isi:`<p>Halaman ini berisi semua akun pengguna ${t.toLowerCase()}. Anda dapat menambah, mengubah, atau menghapus akun.</p>
     <h4 class="bantu-sub">Langkah menambah pengguna</h4>
-    ${lgkh(['Klik <b>Tambah Pengguna</b>.', 'Isi nama depan, email, dan kata sandi awal (minimal 12 karakter).', 'Pilih <b>Tipe</b> dan <b>Jenis Kelamin</b>.', 'Klik <b>Tambah Pengguna</b>. Pengguna baru tampil di baris teratas.'])}
+    ${lgkh(['Klik <b>Tambah pengguna</b>.', 'Isi nama depan, email, dan kata sandi awal (minimal 12 karakter).', 'Pilih <b>Tipe</b> dan <b>Jenis Kelamin</b>.', 'Klik <b>Tambah pengguna</b>. Pengguna baru tampil di baris teratas.'])}
     <h4 class="bantu-sub">Arti kolom</h4>
     ${istilah([['Status', 'Aktif: dapat masuk. Nonaktif: tidak dapat masuk.'], ['MFA', 'Aktif: verifikasi dua langkah sudah diatur. Belum diatur: pengguna akan diminta mengaturnya saat masuk.'], ['Tipe', 'Admin, Operator, atau Customer. Tipe menentukan menu yang tersedia.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1873,7 +1873,7 @@ const BANTUAN = {
     ${kontak()}` }),
   'pengguna-edit':() => ({ judul:'Bantuan Edit Pengguna', isi:`<p>Edit Pengguna berisi data PPAT, data kantor, kontak, kata sandi, dan verifikasi dua langkah satu pengguna.</p>
     <h4 class="bantu-sub">Langkah mengubah data</h4>
-    ${lgkh(['Pilih tab <b>PPAT</b>, <b>Kantor PPAT</b>, atau <b>Kata Sandi</b>.', 'Ubah isian. Status di samping tombol simpan berubah menjadi <b>Belum disimpan</b>.', 'Klik <b>Simpan PPAT</b>, <b>Simpan Data Kantor</b>, atau <b>Simpan Kata Sandi</b>. Setiap tab disimpan sendiri-sendiri.'])}
+    ${lgkh(['Pilih tab <b>PPAT</b>, <b>Kantor PPAT</b>, atau <b>Kata Sandi</b>.', 'Ubah isian. Status di samping tombol simpan berubah menjadi <b>Belum disimpan</b>.', 'Klik <b>Simpan PPAT</b>, <b>Simpan data kantor</b>, atau <b>Simpan kata sandi</b>. Setiap tab disimpan sendiri-sendiri.'])}
     <h4 class="bantu-sub">Istilah</h4>
     ${istilah([['Status Akun', 'Sakelar Akun aktif menentukan apakah pengguna dapat masuk.'], ['Info Kontak', 'Email dan telepon pengguna. Kontak nonaktif tidak dipakai untuk menghubungi pengguna.'], ['Atur Ulang MFA', 'Menghapus verifikasi dua langkah sehingga pengguna mengaturnya lagi saat masuk.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1889,7 +1889,7 @@ const BANTUAN = {
     ${kontak()}` }),
   peran:t => ({ judul:`Bantuan Peran Pengguna ${t}`, isi:`<p>Halaman ini mengatur menu yang dapat dibuka setiap pengguna ${t.toLowerCase()}. Satu baris untuk satu pengguna, satu kolom untuk satu menu.</p>
     <h4 class="bantu-sub">Langkah mengatur akses</h4>
-    ${lgkh(['Cari pengguna di kotak <b>Cari pengguna</b>.', 'Nyalakan sakelar untuk memberi akses ke menu itu.', 'Matikan sakelar, lalu klik <b>Cabut Akses</b> di jendela konfirmasi untuk mencabut akses.', 'Lihat status di atas tabel untuk memastikan perubahan tersimpan.'])}
+    ${lgkh(['Cari pengguna di kotak <b>Cari pengguna</b>.', 'Nyalakan sakelar untuk memberi akses ke menu itu.', 'Matikan sakelar, lalu klik <b>Cabut akses</b> di jendela konfirmasi untuk mencabut akses.', 'Lihat status di atas tabel untuk memastikan perubahan tersimpan.'])}
     <h4 class="bantu-sub">Istilah</h4>
     ${istilah([['Sakelar menyala', 'Pengguna dapat membuka menu itu.'], ['Sakelar mati', 'Menu tidak tampil di menu samping pengguna.'], ['Utama / Pengaturan', 'Grup menu, sama seperti di menu samping.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1903,7 +1903,7 @@ const BANTUAN = {
     ${kontak()}` }),
   harga:() => ({ judul:'Bantuan Harga Produk', isi:`<p>Harga Produk berisi produk yang dapat dipilih calon PPAT, misalnya Enterprise dan Trial, beserta durasi dan harga aktifnya.</p>
     <h4 class="bantu-sub">Langkah menambah produk</h4>
-    ${lgkh(['Klik <b>Tambah Produk</b>.', 'Isi kode, nama, deskripsi, dan durasi, lalu klik <b>Simpan Produk</b>.', 'Klik ikon <b>Edit</b> pada produk itu, buka tab <b>Harga</b>, lalu tambahkan harga.'])}
+    ${lgkh(['Klik <b>Tambah produk</b>.', 'Isi kode, nama, deskripsi, dan durasi, lalu klik <b>Simpan produk</b>.', 'Klik ikon <b>Edit</b> pada produk itu, buka tab <b>Harga</b>, lalu tambahkan harga.'])}
     <h4 class="bantu-sub">Istilah</h4>
     ${istilah([['Harga aktif', 'Harga yang dibayar pendaftar baru. Hanya satu harga aktif per produk.'], ['Belum ada harga', 'Produk belum dapat dibeli karena belum punya harga aktif.'], ['Durasi', 'Masa berlaku produk setelah dibayar, dalam hari.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1917,7 +1917,7 @@ const BANTUAN = {
     ${kontak()}` }),
   produk:() => ({ judul:S.layar === 'harga-tambah' ? 'Bantuan Tambah Produk' : 'Bantuan Edit Produk', isi:`<p>Formulir ini berisi data produk: kode, nama, deskripsi, durasi, status, dan foto. Pada Edit Produk, tab Harga berisi riwayat harga.</p>
     <h4 class="bantu-sub">Langkah</h4>
-    ${lgkh(['Isi isian bertanda bintang: <b>Kode Produk</b>, <b>Nama Produk</b>, dan <b>Durasi (Hari)</b>.', 'Tulis satu fitur per baris di <b>Deskripsi Lengkap</b>.', 'Klik <b>Simpan Produk</b>. Pesan galat tampil di bawah isian yang perlu diperbaiki.', 'Di tab <b>Harga</b>, ketik nominal lalu klik <b>Tambah</b>.'])}
+    ${lgkh(['Isi isian bertanda bintang: <b>Kode Produk</b>, <b>Nama Produk</b>, dan <b>Durasi (Hari)</b>.', 'Tulis satu fitur per baris di <b>Deskripsi Lengkap</b>.', 'Klik <b>Simpan produk</b>. Pesan galat tampil di bawah isian yang perlu diperbaiki.', 'Di tab <b>Harga</b>, ketik nominal lalu klik <b>Tambah</b>.'])}
     <h4 class="bantu-sub">Istilah</h4>
     ${istilah([['Info Utama', 'Data produk yang tampil di kartu paket.'], ['Harga', 'Riwayat harga; satu harga aktif dipakai untuk tagihan baru.'], ['Belum disimpan', 'Ada perubahan yang belum disimpan di formulir ini.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1931,7 +1931,7 @@ const BANTUAN = {
     ${kontak()}` }),
   paket:() => ({ judul:'Bantuan Paket Langganan', isi:`<p>Paket Langganan berisi paket yang dapat dipilih calon PPAT beserta batas order, pengguna, masa berlaku, dan fitur CA.</p>
     <h4 class="bantu-sub">Langkah menambah paket</h4>
-    ${lgkh(['Klik <b>Tambah Paket</b>.', 'Isi kode dan nama paket.', 'Isi batas angka, atau centang <b>Tanpa batas</b>.', 'Centang <b>Fitur CA aktif</b> dan <b>Paket aktif</b> bila perlu, lalu klik <b>Simpan</b>.'])}
+    ${lgkh(['Klik <b>Tambah paket</b>.', 'Isi kode dan nama paket.', 'Isi batas angka, atau centang <b>Tanpa batas</b>.', 'Centang <b>Fitur CA aktif</b> dan <b>Paket aktif</b> bila perlu, lalu klik <b>Simpan</b>.'])}
     <h4 class="bantu-sub">Istilah</h4>
     ${istilah([['Paket sistem', 'Paket bawaan (Gratis dan Enterprise) yang dipakai alur pendaftaran; tidak dapat dihapus.'], ['CA', 'Fitur sertifikat elektronik untuk tanda tangan digital.'], ['Urutan Tampil', 'Urutan paket di daftar; angka kecil tampil lebih dulu.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>

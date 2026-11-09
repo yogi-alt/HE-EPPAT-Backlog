@@ -175,7 +175,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
             <h2 class="notif-judul" id="notifJudul" tabindex="-1">Notifikasi</h2>
             <p class="notif-jumlah" id="notifJumlah" aria-live="polite"></p>
           </div>
-          <button type="button" class="ina-button ina-button--tertiary ina-button--sm" id="notifSemua" hidden><span>Tandai Semua Dibaca</span></button>
+          <button type="button" class="ina-button ina-button--tertiary ina-button--sm" id="notifSemua" hidden><span>Tandai semua dibaca</span></button>
         </div>
         <div class="notif-saring">
           <div class="ina-button-group" role="group" aria-label="Saring notifikasi">
@@ -235,7 +235,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
         return;
       }
       if (kondisi === 'galat') {
-        isi.innerHTML = `<div class="notif-galat"><div class="ina-alert ina-alert--critical" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Notifikasi gagal dimuat.</div><div class="ina-alert__description">Periksa koneksi Anda, lalu coba lagi.</div></div><button type="button" class="ina-button ina-button--secondary ina-button--sm" id="notifUlang"><span>Coba Lagi</span></button></div></div></div>`;
+        isi.innerHTML = `<div class="notif-galat"><div class="ina-alert ina-alert--critical" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Notifikasi gagal dimuat.</div><div class="ina-alert__description">Periksa koneksi Anda, lalu coba lagi.</div></div><button type="button" class="ina-button ina-button--secondary ina-button--sm" id="notifUlang"><span>Coba lagi</span></button></div></div></div>`;
         return;
       }
       const daftar = DATA.filter(d => saring === 'semua' || !dibaca(d));
@@ -250,7 +250,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
       kondisi = 'muat';
       render();
       setTimeout(() => {
-        if (gagalSimulasi) { gagalSimulasi = false; kondisi = 'galat'; } // gagal sekali, "Coba Lagi" berhasil
+        if (gagalSimulasi) { gagalSimulasi = false; kondisi = 'galat'; } // gagal sekali, "Coba lagi" berhasil
         else kondisi = 'siap';
         render();
       }, 300);

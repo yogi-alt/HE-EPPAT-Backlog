@@ -641,7 +641,7 @@ body .protobar{z-index:1001}
     <header class="top">
       <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg></button>
       <div class="spacer"></div>
-      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat Landing</span></button>
+      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat landing</span></button>
       <button class="ina-button ina-button--tertiary ina-button--md" aria-label="Notifikasi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg></button>
       <div class="user"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Asisten Contoh</span><span class="urole">Asisten</span></span></div>
     </header>
@@ -1071,7 +1071,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
             <h2 class="notif-judul" id="notifJudul" tabindex="-1">Notifikasi</h2>
             <p class="notif-jumlah" id="notifJumlah" aria-live="polite"></p>
           </div>
-          <button type="button" class="ina-button ina-button--tertiary ina-button--sm" id="notifSemua" hidden><span>Tandai Semua Dibaca</span></button>
+          <button type="button" class="ina-button ina-button--tertiary ina-button--sm" id="notifSemua" hidden><span>Tandai semua dibaca</span></button>
         </div>
         <div class="notif-saring">
           <div class="ina-button-group" role="group" aria-label="Saring notifikasi">
@@ -1131,7 +1131,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
         return;
       }
       if (kondisi === 'galat') {
-        isi.innerHTML = `<div class="notif-galat"><div class="ina-alert ina-alert--critical" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Notifikasi gagal dimuat.</div><div class="ina-alert__description">Periksa koneksi Anda, lalu coba lagi.</div></div><button type="button" class="ina-button ina-button--secondary ina-button--sm" id="notifUlang"><span>Coba Lagi</span></button></div></div></div>`;
+        isi.innerHTML = `<div class="notif-galat"><div class="ina-alert ina-alert--critical" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Notifikasi gagal dimuat.</div><div class="ina-alert__description">Periksa koneksi Anda, lalu coba lagi.</div></div><button type="button" class="ina-button ina-button--secondary ina-button--sm" id="notifUlang"><span>Coba lagi</span></button></div></div></div>`;
         return;
       }
       const daftar = DATA.filter(d => saring === 'semua' || !dibaca(d));
@@ -1146,7 +1146,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
       kondisi = 'muat';
       render();
       setTimeout(() => {
-        if (gagalSimulasi) { gagalSimulasi = false; kondisi = 'galat'; } // gagal sekali, "Coba Lagi" berhasil
+        if (gagalSimulasi) { gagalSimulasi = false; kondisi = 'galat'; } // gagal sekali, "Coba lagi" berhasil
         else kondisi = 'siap';
         render();
       }, 300);
@@ -1455,9 +1455,9 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
       if (kepala) kepala.insertAdjacentHTML('afterend', lencana); else if (pemicu) pemicu.insertAdjacentHTML('beforebegin', lencana);
       if (!ditutup('eppat-trial-spanduk')) spanduk('caution', 'eppat-trial-spanduk', `<b>Paket Trial, sisa ${sisa} hari.</b> Semua menu dapat dibuka. Tanda tangan dan stempel elektronik aktif setelah upgrade ke Enterprise.`, ke('sm', 'Mulai Berlangganan'));
       /* di atas kartu profil yang menempel di bawah, agar tombol selalu terlihat walaupun menu panjang */
-      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai Berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai Berlangganan</span></a></div>`); });
+      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai Berlangganan</span></a></div>`); });
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pasangTombol); else pasangTombol();
-      if (bar) bar.insertAdjacentHTML('afterbegin', `<span>Perjalanan: langkah 9 dari 19, coba menu lalu tekan Mulai Berlangganan.</span><button class="pil" id="simBatas" aria-pressed="${!!t.batas}" title="Mengisi kuota pengguna dan transaksi Trial sampai penuh">Batas paket: ${t.batas ? 'tercapai' : 'belum tercapai'}</button>`);
+      if (bar) bar.insertAdjacentHTML('afterbegin', `<span>Perjalanan: langkah 9 dari 19, coba menu lalu tekan Mulai berlangganan.</span><button class="pil" id="simBatas" aria-pressed="${!!t.batas}" title="Mengisi kuota pengguna dan transaksi Trial sampai penuh">Batas paket: ${t.batas ? 'tercapai' : 'belum tercapai'}</button>`);
       const b = $('#simBatas'); if (b) b.addEventListener('click', () => { simpanTrial({ ...bacaTrial(), batas:!t.batas }); location.reload(); });
     }
     document.addEventListener('click', e => { if (!e.target.closest('[data-tutup-spanduk]')) return; const w = $('#spandukTrial'); try { sessionStorage.setItem(w.dataset.kunci, '1'); } catch (x) { /* lihat simpan() */ } w.remove(); });
@@ -1469,7 +1469,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
   /* penjaga halaman */
   if (!halamanBoleh(sesi)) {
     document.body.insertAdjacentHTML('beforeend', `<div class="sesi-tolak" role="alert"><div class="sesi-tolak-kartu"><h2>Halaman tidak tersedia</h2><p>Peran ${sesi.label} tidak memiliki akses ke halaman ini.</p>
-      <div class="sesi-tolak-aksi"><a class="ina-button ina-button--primary ina-button--md" href="${LANDAS[sesi.aktif]}">Ke Halaman Utama</a><button type="button" class="ina-button ina-button--secondary ina-button--md" data-sesi-keluar>Keluar</button></div></div></div>`);
+      <div class="sesi-tolak-aksi"><a class="ina-button ina-button--primary ina-button--md" href="${LANDAS[sesi.aktif]}">Ke halaman utama</a><button type="button" class="ina-button ina-button--secondary ina-button--md" data-sesi-keluar>Keluar</button></div></div></div>`);
   }
 })();
 </script>

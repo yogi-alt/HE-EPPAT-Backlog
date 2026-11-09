@@ -50,8 +50,8 @@ g('${DB.lunas ? \'\' : `<div class="kaki-db ditandai" id="gantiPaket">', '${DB.t
 g("'QRIS atau Virtual Account sesuai pilihan.'", "'Pilih bank untuk membuat Virtual Account.'");
 
 /* Pilih paket: Trial aktif seketika */
-g("'Pilih Trial atau Enterprise di bawah, lalu tekan Lanjut Pembayaran. Paket masih dapat diganti sebelum pembayaran diterima.'", "'Pilih Trial atau Enterprise di bawah. Trial langsung aktif tanpa pembayaran. Enterprise dilanjutkan dengan pembayaran.'");
-g("tombol('Lanjut Pembayaran', 'primary', 'md', `id=\"lanjutBayar\" ${DB.paket ? '' : 'disabled'}`, ik('panah', 16))", "tombol(DB.paket === 'trial' ? 'Aktifkan Trial Gratis' : 'Lanjut Pembayaran', 'primary', 'md', `id=\"lanjutBayar\" ${DB.paket && !S.memuat ? '' : 'disabled'}`, S.memuat === 'trial' ? spinner : ik('panah', 16))");
+g("'Pilih Trial atau Enterprise di bawah, lalu tekan Lanjut pembayaran. Paket masih dapat diganti sebelum pembayaran diterima.'", "'Pilih Trial atau Enterprise di bawah. Trial langsung aktif tanpa pembayaran. Enterprise dilanjutkan dengan pembayaran.'");
+g("tombol('Lanjut pembayaran', 'primary', 'md', `id=\"lanjutBayar\" ${DB.paket ? '' : 'disabled'}`, ik('panah', 16))", "tombol(DB.paket === 'trial' ? 'Aktifkan Trial Gratis' : 'Lanjut pembayaran', 'primary', 'md', `id=\"lanjutBayar\" ${DB.paket && !S.memuat ? '' : 'disabled'}`, S.memuat === 'trial' ? spinner : ik('panah', 16))");
 g("if (t.closest('#lanjutBayar')) { DB.dipesan = DB.paket;", "if (t.closest('#lanjutBayar')) { if (DB.paket === 'trial') { aktifkanTrial(); return; } DB.dipesan = DB.paket;");
 
 /* Virtual Account upgrade: order baru dibuat di sini */
@@ -60,8 +60,8 @@ g("DB.va = { no:'1462900000000001', ref:'REF-CONTOH-0001', habis, sampai:'27 Okt
 
 /* masuk portal dari tenant: kembali ke halaman Upgrade */
 g('<h2>Masuk ke e-PPAT</h2>\n', "<h2>Masuk ke e-PPAT</h2>\n    ${S.balik ? pesanBalik() : ''}\n");
-g("${tombol('Aktifkan &amp; Masuk', 'primary', 'lg',", "${tombol(S.balik ? 'Masuk' : 'Aktifkan &amp; Masuk', 'primary', 'lg',");
-g("spinner + 'Aktifkan &amp; Masuk'", "spinner + (S.balik ? 'Masuk' : 'Aktifkan &amp; Masuk')");
+g("${tombol('Aktifkan &amp; masuk', 'primary', 'lg',", "${tombol(S.balik ? 'Masuk' : 'Aktifkan &amp; masuk', 'primary', 'lg',");
+g("spinner + 'Aktifkan &amp; masuk'", "spinner + (S.balik ? 'Masuk' : 'Aktifkan &amp; masuk')");
 g("setTimeout(() => { OTP = null; ke('dasbor'); toast('Verifikasi dua langkah aktif. Selamat datang di Portal e-PPAT.', 'positive', 4000); }, 700);", 'setTimeout(() => { OTP = null; selesaiMasukPortal(); }, 700);');
 
 /* menu Dasbor portal selama Trial selalu ke Dasbor */

@@ -304,7 +304,7 @@
     <header class="top">
       <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg></button>
       <div class="spacer"></div>
-      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat Landing</span></button>
+      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat landing</span></button>
       <button class="ina-button ina-button--tertiary ina-button--md" aria-label="Notifikasi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg></button>
       <div class="user"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Asisten Contoh</span><span class="urole">Asisten</span></span></div>
     </header>
@@ -396,13 +396,13 @@ const UBAH = [
     isi:'Editor berada di dalam kerangka aplikasi seperti halaman lain, dengan menu samping, header, remah, dan judul halaman. Kepala naskah ringkas dalam satu baris: tombol kembali, ikon naskah, judul "Naskah Akta · kode", lencana jenis dan status, keterangan "Tersimpan" atau "Belum disimpan", serta penanda variabel yang belum terisi. Bilah menu (File, Edit, Tampilan, Sisipkan, Format, Alat, Bantuan) berada di bawah judul. Di kanan ada Pratinjau Akta dan satu tombol utama sesuai peran: Beritahu PPAT untuk Asisten dan Finalisasi Akta untuk PPAT; akta final hanya menampilkan Pratinjau Akta. Editor terdiri atas panel Navigasi di kiri, kertas di tengah, dan panel Bagian di kanan. Kedua panel dapat ditutup agar kertas lebih lega, dan area kerja mengisi tinggi layar di bawah kepala naskah. Panel Navigasi memakai ikon jenis bagian yang seragam (lingkaran bernomor untuk pasal, ikon paragraf ¶ untuk catatan) dengan ikon ? yang menjelaskannya, dan bagian Lampiran dapat dilipat (tetap "Segera hadir"). Di margin kiri kertas, setiap bagian diberi lencana jenis dan nama bagian. Naskah dipecah per halaman sesuai ukuran kertas dan margin dari Pengaturan Dokumen. Bila footer diaktifkan, setiap halaman menampilkan footer dengan kode yang sudah diganti nilai contoh (nomor halaman, jumlah halaman, tanggal, nama PPAT, wilayah, nomor akta, jenis akta). Bila footer tidak aktif, penanda kecil "Halaman X dari Y" tampil di luar kertas dan tidak ikut tercetak. Perubahan Pengaturan Dokumen langsung memotong ulang halaman, dan klik kaki halaman membuka isian footer. Saat editor dibuka, menu samping aplikasi otomatis diciutkan menjadi ikon agar kertas lebih lega; saat kembali ke daftar, menu samping kembali seperti pilihan terakhir pengguna. Fitur tidak berubah dari live. Catatan untuk tim aplikasi: pemotongan halaman di prototipe hanya perkiraan dari tinggi blok; di aplikasi, pemotongan harus memakai aturan yang sama dengan pembuat PDF agar editor, pratinjau, dan PDF sama persis.',
     lama:'Laporan HE menilai tampilan editor terlalu padat dan sulit dipindai, serta kurva pembelajarannya tinggi. Di live, kepala halaman berisi empat tombol, daftar pasal berupa kartu bertumpuk di kiri, editor berada di dalam tab dengan bilah alat dua baris berisi lebih dari 30 ikon tanpa nama, dan naskah tampil di kotak sempit tanpa batas halaman sehingga tidak terlihat utuh seperti akta. Footer hanya muncul di PDF; live menulis "Hanya muncul di PDF (minuta/salinan), bukan di preview", sehingga footer tidak terlihat saat menyusun.', ke:'tataletak', sorot:'#ruangKerja', sumber:'Laporan HE UX Metric Lab, Highlight #4 (skor 47,1) · tampilan usulan tim' },
   { kode:'HE-MINUTA-01', judul:'Detail minuta: istilah dan tombol dijelaskan singkat',
-    isi:'Tombol Pratinjau Akta, Cek Ejaan, Beritahu PPAT, dan Finalisasi Akta memiliki tooltip yang menjelaskan fungsinya. Panel Navigasi menjelaskan beda pasal dan catatan. Pesan peran menyebut langkah berikutnya untuk Asisten dan PPAT. Label "Tampilkan judul di dokumen (Preview, PDF)" diganti menjadi "Tampilkan judul pasal di akta". Tab Lampiran diberi keterangan "Segera hadir". Ikon ? bertooltip menjelaskan istilah minuta akta, status minuta, finalisasi, kode variabel {{…}}, standar akta PPAT, margin, dan footer.',
+    isi:'Tombol Pratinjau akta, Cek Ejaan, Beritahu PPAT, dan Finalisasi Akta memiliki tooltip yang menjelaskan fungsinya. Panel Navigasi menjelaskan beda pasal dan catatan. Pesan peran menyebut langkah berikutnya untuk Asisten dan PPAT. Label "Tampilkan judul di dokumen (Preview, PDF)" diganti menjadi "Tampilkan judul pasal di akta". Tab Lampiran diberi keterangan "Segera hadir". Ikon ? bertooltip menjelaskan istilah minuta akta, status minuta, finalisasi, kode variabel {{…}}, standar akta PPAT, margin, dan footer.',
     lama:'Tombol dan istilah tanpa penjelasan; pesan peran hanya berbunyi "Mode editor — Anda dapat mengubah konten pasal, tetapi tidak dapat memfinalisasi."; tab Lampiran nonaktif tanpa keterangan.', ke:'editor', sorot:'#aksiAtas', sumber:'Laporan HE INA Digital hlm. 25, 26' },
   { kode:'HE-MINUTA-02', judul:'Bilah alat editor minuta: lebih lega dan mudah dipindai',
     isi:'Bilah alat hanya menampilkan alat yang sering dipakai (urungkan, ulangi, tebal, miring, garis bawah, daftar, perataan, Sisipkan Variabel, Cek Ejaan) dalam satu baris berjarak lega. Alat lain dari live (judul, coret, warna, ukuran huruf, spasi, tautan, gambar, tabel, kode HTML, layar penuh) ada di menu "Lainnya" serta di bilah menu Format dan Sisipkan. Setiap ikon memiliki tooltip berisi nama alat dan pintasan papan ketik.',
     lama:'Lebih dari 30 ikon kecil dalam dua baris tanpa nama, sehingga sulit dipindai.', ke:'editor', sorot:'#bilahAlat', sumber:'Laporan HE INA Digital hlm. 25, 26' },
   { kode:'HE-MINUTA-03', judul:'Editor pasal: variabel tampil sebagai label yang mudah dibaca',
-    isi:'Variabel di kertas tampil sebagai label hijau (mis. "Nama Lengkap Pihak Pertama"), bukan kode {{penjual_nama}}. Kode tetap dapat dilihat lewat Tampilan › Tampilkan kode variabel atau sakelar di panel Bagian. Tombol "Sisipkan Variabel" membuka panel dengan pencarian, penjelasan singkat, dan contoh nilai dari permohonan ini. Variabel yang salah ketik ditandai kuning, dihitung di kepala naskah ("1 variabel belum terisi"), dan penanda itu membawa langsung ke variabelnya.',
+    isi:'Variabel di kertas tampil sebagai label hijau (mis. "Nama Lengkap Pihak Pertama"), bukan kode {{penjual_nama}}. Kode tetap dapat dilihat lewat Tampilan › Tampilkan kode variabel atau sakelar di panel Bagian. Tombol "Sisipkan variabel" membuka panel dengan pencarian, penjelasan singkat, dan contoh nilai dari permohonan ini. Variabel yang salah ketik ditandai kuning, dihitung di kepala naskah ("1 variabel belum terisi"), dan penanda itu membawa langsung ke variabelnya.',
     lama:'Naskah menampilkan kode mentah seperti {{saksi1_gelar}}{{saksi1_nama}}; daftar variabel tanpa pencarian, tanpa penjelasan, dan tanpa contoh nilai; salah ketik variabel tidak terdeteksi di editor minuta.', ke:'variabel', sorot:'#bilahAlat', sumber:'Laporan HE INA Digital hlm. 25, 26' },
   { kode:'HE-MINUTA-04', judul:'Daftar pasal: umpan balik setelah hapus dan saat pindah pasal',
     isi:'Hapus pasal meminta konfirmasi lewat dialog IDDS bertombol merah; setelah ditutup, fokus kembali ke daftar. Setelah pasal dihapus, muncul toast "Pasal 9 · Pasal Baru dihapus" beserta keterangan bahwa nomor pasal lain sudah disesuaikan. Jika ada perubahan yang belum disimpan saat pindah bagian atau kembali ke daftar, muncul dialog IDDS dengan pilihan Simpan & Lanjutkan, Buang Perubahan, atau Batal. Status "Belum disimpan" terlihat di kepala naskah dan di kaki kertas.',
@@ -536,7 +536,7 @@ function layarDetail() {
           </div>
         </div>
         <div class="dok-aksi ditandai" id="aksiAtas">
-          ${tbl('preview', 'Pratinjau Akta', 'mata', 'Tombol ini menampilkan akta dengan data para pihak, objek, dan saksi yang sudah terisi.')}
+          ${tbl('preview', 'Pratinjau akta', 'mata', 'Tombol ini menampilkan akta dengan data para pihak, objek, dan saksi yang sudah terisi.')}
           ${fin || ppat ? '' : tbl('beritahu', 'Beritahu PPAT', 'lonceng', 'Tombol ini mengirim notifikasi ke PPAT bahwa minuta siap diperiksa dan difinalisasi.', 'primary', 'bottom-end')}
           ${!fin && ppat ? tbl('finalisasi', 'Finalisasi Akta', 'stempel', 'PPAT memberi nomor dan tanggal akta, lalu sistem mengunci naskah. Setelah final, pasal tidak dapat diubah.', 'primary', 'bottom-end') : ''}
           ${usulan('HE-MINUTA-01')}
@@ -575,7 +575,7 @@ function panelNav(x, fin) {
       </li>`; }).join('')}</ul>
     <div class="lampiran-nav"><button type="button" class="lipat" id="lipatLampiran" aria-expanded="${S.lampiran}" aria-controls="isiLampiran"><span>Lampiran (0)</span>${kecil('Segera hadir', 'neutral')}<span class="chev" aria-hidden="true">${ik('bawah', 14)}</span></button>
       <div id="isiLampiran" ${S.lampiran ? '' : 'hidden'}><p>Lampiran akta belum dapat ditambahkan. Fitur ini akan tersedia pada pembaruan berikutnya.</p></div></div>
-    ${fin ? '' : `<div class="panel-kaki">${tombol('Tambah Pasal', 'primary', 'sm', 'data-tambah="PASAL"', ik('tambah', 14))}${tombol('Tambah Catatan', 'secondary', 'sm', 'data-tambah="CATATAN"', ik('tambah', 14))}</div>`}
+    ${fin ? '' : `<div class="panel-kaki">${tombol('Tambah pasal', 'primary', 'sm', 'data-tambah="PASAL"', ik('tambah', 14))}${tombol('Tambah catatan', 'secondary', 'sm', 'data-tambah="CATATAN"', ik('tambah', 14))}</div>`}
   </aside>`;
 }
 /* naskah sebagai kertas: margin, huruf, dan spasi mengikuti Pengaturan Dokumen */
@@ -687,9 +687,9 @@ function bilahAlat() {
   return `<div class="alat ditandai" id="bilahAlat" role="toolbar" aria-label="Format teks">
     ${ALAT.map(a => a === '|' ? '<span class="pisah" aria-hidden="true"></span>' : denganTip(`<button type="button" class="ina-button ina-button--tertiary ina-button--sm btn-alat ${a[3] || ''}" data-cmd="${a[0]}" aria-label="${a[2]}" ${mati}>${a[1]}</button>`, a[2], 'top')).join('')}
     <span class="pisah" aria-hidden="true"></span>
-    ${tombol('Sisipkan Variabel', 'secondary', 'sm', `id="tombolVar" aria-expanded="false" aria-haspopup="listbox" ${mati}`, ik('kurawal', 15))}
+    ${tombol('Sisipkan variabel', 'secondary', 'sm', `id="tombolVar" aria-expanded="false" aria-haspopup="listbox" ${mati}`, ik('kurawal', 15))}
     ${tombol('Lainnya', 'tertiary', 'sm', `id="tombolLain" aria-expanded="false" aria-haspopup="menu" ${mati}`, ik('lain', 16))}
-    <span class="kanan-alat">${denganTip(tombol('Cek Ejaan', 'secondary', 'sm', `id="cekEjaan" aria-label="Cek Ejaan. Periksa salah ketik di semua pasal." ${S.memuat === 'cekEjaan' ? 'disabled aria-busy="true"' : ''}`, S.memuat === 'cekEjaan' ? spinner : ik('kilau', 15)), 'Sistem memeriksa salah ketik di semua pasal. Hasilnya berupa saran, dan teks tidak berubah otomatis.', 'bottom-end')}</span>
+    <span class="kanan-alat">${denganTip(tombol('Cek ejaan', 'secondary', 'sm', `id="cekEjaan" aria-label="Cek Ejaan. Periksa salah ketik di semua pasal." ${S.memuat === 'cekEjaan' ? 'disabled aria-busy="true"' : ''}`, S.memuat === 'cekEjaan' ? spinner : ik('kilau', 15)), 'Sistem memeriksa salah ketik di semua pasal. Hasilnya berupa saran, dan teks tidak berubah otomatis.', 'bottom-end')}</span>
     ${usulan('HE-MINUTA-02')}
     <div id="wadahPop"></div>
   </div>`;
@@ -721,7 +721,7 @@ function panelBagian(x, fin) {
     <div class="grup-p"><h4>Variabel</h4>
       <span style="display:inline-flex;align-items:center">${toggle('tampilKode', 'Tampilkan kode variabel', S.kode)}${tanya('Kode variabel', 'Kode variabel ditulis di antara kurung kurawal ganda, misalnya &#123;&#123;penjual_nama&#125;&#125;. Sistem mengganti kode ini dengan data permohonan saat pratinjau dan PDF dibuat.')}</span>
       <p class="ket-kecil">Label hijau di kertas akan terisi otomatis dari data permohonan saat pratinjau dan PDF.${usulan('HE-MINUTA-03')}</p>
-      ${asing.length && !fin ? `<div class="galat-var">${alert('caution', `${asing.length} variabel tidak dikenal`, `${asing.map(k => `<b>{{${esc(k)}}}</b>`).join(', ')} tidak ada di daftar variabel Akta Jual Beli, sehingga tidak akan terisi. Hapus label kuning tersebut, lalu sisipkan ulang lewat <b>Sisipkan Variabel</b>${asing.includes('penjual_alamatt') ? ' (mungkin maksudnya <b>Alamat Pihak Pertama</b>)' : ''}.${usulan('HE-MINUTA-03')}`)}</div>` : ''}
+      ${asing.length && !fin ? `<div class="galat-var">${alert('caution', `${asing.length} variabel tidak dikenal`, `${asing.map(k => `<b>{{${esc(k)}}}</b>`).join(', ')} tidak ada di daftar variabel Akta Jual Beli, sehingga tidak akan terisi. Hapus label kuning tersebut, lalu sisipkan ulang lewat <b>Sisipkan variabel</b>${asing.includes('penjual_alamatt') ? ' (mungkin maksudnya <b>Alamat Pihak Pertama</b>)' : ''}.${usulan('HE-MINUTA-03')}`)}</div>` : ''}
     </div>
     ${fin ? '' : `<div class="grup-p"><h4>Urutan</h4><div class="baris-tbl">${tombol('Naikkan', 'secondary', 'sm', `data-geser="${it.id}:-1" ${i === 0 ? 'disabled' : ''}`, ik('atas', 14))}${tombol('Turunkan', 'secondary', 'sm', `data-geser="${it.id}:1" ${i === n.length - 1 ? 'disabled' : ''}`, ik('bawah', 14))}</div></div>
     <div class="grup-p">${tombol(`Hapus ${ps ? 'pasal' : 'catatan'}`, 'tertiary', 'sm', `data-hapus="${it.id}" id="hapusBagian"`, ik('sampah', 15))}</div>`}`;
@@ -760,7 +760,7 @@ function panelAtur(x, fin) {
       <div class="ina-text-field" style="margin-top:12px"><label class="ina-text-field__label" for="aFooterTeks">Isi footer</label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><input id="aFooterTeks" class="ina-text-field__input" value="${esc(a.footerTeks)}" autocomplete="off"></div><div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text">Kertas langsung menampilkan isi footer dengan kode yang sudah diganti nilai contoh.</div></div></div>
       <p class="ket-kecil" style="margin-top:10px">Kode yang dapat dipakai di footer. Arahkan kursor untuk melihat contoh.</p>
       <div class="var-footer">${FV.map(([k, l, c]) => denganTip(kecil(`${l} · <code>${esc(k)}</code>`, 'neutral'), `Sistem mengganti ${esc(k)} dengan ${l.toLowerCase()}, misalnya ${esc(c)}.`, 'top')).join('')}</div></div>
-    <div class="atur-kaki">${tombol('Kembalikan ke standar', 'tertiary', 'sm', 'id="aturStandar"', ik('ulang', 15))}${tombol('Batal', 'secondary', 'sm', 'id="aturBatal"')}${tombol('Simpan Pengaturan', 'primary', 'sm', 'id="aturSimpan"', ik('simpan', 15))}</div>`}`;
+    <div class="atur-kaki">${tombol('Kembalikan ke standar', 'tertiary', 'sm', 'id="aturStandar"', ik('ulang', 15))}${tombol('Batal', 'secondary', 'sm', 'id="aturBatal"')}${tombol('Simpan pengaturan', 'primary', 'sm', 'id="aturSimpan"', ik('simpan', 15))}</div>`}`;
 }
 
 /* ---------------- bilah menu: setiap butir = fitur live ---------------- */
@@ -771,7 +771,7 @@ const MENU = {
   Tampilan:[['nav', 'Panel Navigasi', '', 'cek:nav'], ['panel', 'Panel Bagian', '', 'cek:panel'], ['kode', 'Tampilkan kode variabel', '', 'cek:kode'], '-', ['c:x:penuh', 'Layar penuh', '', 'ed']],
   Sisipkan:[['tambah:PASAL', 'Pasal baru', 'Sistem menambahkannya di akhir daftar.', 'draf'], ['tambah:CATATAN', 'Catatan baru', 'Catatan adalah bagian tanpa nomor.', 'draf'], ['var', 'Variabel…', 'Variabel terisi otomatis dari permohonan.', 'ed'], '-', ['c:x:tautan', 'Tautan', '', 'ed'], ['c:x:gambar', 'Gambar', '', 'ed'], ['c:x:tabel', 'Tabel', '', 'ed'], '-', ['segera:lampiran', 'Lampiran', 'Lampiran akta akan tersedia pada pembaruan berikutnya.']],
   Format:[['c:bold', 'Tebal', 'Ctrl+B', 'ed'], ['c:italic', 'Miring', 'Ctrl+I', 'ed'], ['c:underline', 'Garis bawah', 'Ctrl+U', 'ed'], ['c:strikeThrough', 'Coret', '', 'ed'], '-', ['c:h2', 'Judul besar', '', 'ed'], ['c:h3', 'Judul kecil', '', 'ed'], '-', ['c:justifyLeft', 'Rata kiri', '', 'ed'], ['c:justifyCenter', 'Rata tengah', '', 'ed'], ['c:justifyRight', 'Rata kanan', '', 'ed'], ['c:justifyFull', 'Rata kanan-kiri', '', 'ed'], '-', ['c:insertOrderedList', 'Daftar bernomor', '', 'ed'], ['c:insertUnorderedList', 'Daftar berpoin', '', 'ed'], '-', ['c:x:warna', 'Warna teks & stabilo', '', 'ed'], ['c:x:ukuran', 'Ukuran huruf', '', 'ed'], ['c:x:spasi', 'Spasi baris', '', 'ed'], ['c:removeFormat', 'Hapus format', '', 'ed']],
-  Alat:[['ejaan', 'Cek ejaan', 'Sistem memeriksa salah ketik di semua pasal.'], ['kurang', 'Variabel belum terisi', '', 'kurang'], '-', ['beritahu', 'Beritahu PPAT', 'PPAT menerima notifikasi bahwa minuta siap diperiksa.', 'asisten'], ['finalisasi', 'Finalisasi akta', 'PPAT memberi nomor dan tanggal, lalu sistem mengunci naskah.', 'ppat']],
+  Alat:[['ejaan', 'Cek ejaan', 'Sistem memeriksa salah ketik di semua pasal.'], ['kurang', 'Variabel belum terisi', '', 'kurang'], '-', ['beritahu', 'Beritahu PPAT', 'PPAT menerima notifikasi bahwa minuta siap diperiksa.', 'asisten'], ['finalisasi', 'Finalisasi Akta', 'PPAT memberi nomor dan tanggal, lalu sistem mengunci naskah.', 'ppat']],
   Bantuan:[['bantuan', 'Bantuan Penyusunan Akta', 'Panel ini memuat langkah, pertanyaan umum, dan kontak.']]
 };
 function syarat(s) {
@@ -913,7 +913,7 @@ function jagaPerubahan(lanjut) {
   if (!S.ubah) { lanjut(); return; }
   simpanDraf(); const it = item(), nama = it ? (it.tipe === 'PASAL' ? `Pasal ${nomorPasal(m().naskah, it)}` : it.judul) : 'pasal';
   dialog({ judul:'Simpan perubahan dulu?', isi:`<p>Perubahan pada <b>${esc(nama)}</b> belum disimpan. Jika Anda lanjut tanpa menyimpan, perubahan tersebut akan hilang.${usulan('HE-MINUTA-04')}</p>`, konfirmasi:true,
-    tombol:[['Batal','tertiary',null],['Buang Perubahan','secondary',() => { S.draf = null; S.ubah = false; lanjut(); }],['Simpan & Lanjutkan','primary',() => { if (simpanPasal() === false) return false; lanjut(); }]] });
+    tombol:[['Batal','tertiary',null],['Buang perubahan','secondary',() => { S.draf = null; S.ubah = false; lanjut(); }],['Simpan & lanjutkan','primary',() => { if (simpanPasal() === false) return false; lanjut(); }]] });
 }
 function simpanPasal() {
   simpanDraf(); const it = item(), d = S.draf; if (!it || !d) return;
@@ -1260,14 +1260,14 @@ function bukaBantuan() {
       <li><b>Pilih pasal atau catatan</b> di panel Navigasi atau langsung di kertas, lalu sunting isinya di kertas dan judulnya di panel Bagian.</li>
       <li><b>Sisipkan variabel</b> untuk data yang terisi otomatis, misalnya nama Pihak Pertama atau harga.</li>
       <li><b>Simpan</b> setiap pasal yang diubah.</li>
-      <li><b>Cek Ejaan</b> dan <b>Pratinjau Akta</b> untuk memeriksa hasil akhir.</li>
+      <li><b>Cek ejaan</b> dan <b>Pratinjau akta</b> untuk memeriksa hasil akhir.</li>
       <li><b>Beritahu PPAT</b> bahwa minuta siap difinalisasi.</li>
     </ol>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${faq(1, 'Apa beda pasal dan catatan?', 'Pasal diberi nomor otomatis sesuai urutannya. Catatan adalah bagian tanpa nomor, seperti pembukaan akta, para pihak, objek, para saksi, dan penutup.')}
     ${faq(2, 'Apa itu variabel?', 'Variabel adalah isian otomatis, misalnya "Nama Lengkap Pihak Pertama". Di editor variabel tampil sebagai label hijau. Saat pratinjau dan PDF dibuat, label diganti dengan data dari permohonan. Label kuning berarti variabel tidak dikenal dan tidak akan terisi.')}
     ${faq(3, 'Mengapa Cek Ejaan tidak dapat digunakan?', 'Fitur Cek Ejaan perlu diaktifkan oleh admin sistem. Selama belum aktif, Anda tetap dapat menyunting dan menyimpan pasal seperti biasa.')}
-    ${faq(4, 'Apakah pasal yang terhapus bisa dikembalikan?', 'Tidak. Tambahkan kembali lewat tombol Tambah Pasal, lalu isi ulang judul dan isinya. Nomor pasal lain menyesuaikan secara otomatis.')}
+    ${faq(4, 'Apakah pasal yang terhapus bisa dikembalikan?', 'Tidak. Tambahkan kembali lewat tombol Tambah pasal, lalu isi ulang judul dan isinya. Nomor pasal lain menyesuaikan secara otomatis.')}
     ${faq(5, 'Siapa yang memfinalisasi akta?', 'PPAT. Asisten menyusun naskah, lalu menekan Beritahu PPAT. PPAT memeriksa, mengisi nomor dan tanggal akta, kemudian memfinalisasi. Setelah final, pasal tidak dapat diubah.')}
     <h4 class="bantu-sub">Kontak dukungan ${usulan('HE-UMUM-02')}</h4>
     <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>` });

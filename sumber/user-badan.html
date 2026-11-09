@@ -159,7 +159,7 @@ body .protobar{z-index:1001}
     <header class="top">
       <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg></button>
       <div class="spacer"></div>
-      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat Landing</span></button>
+      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat landing</span></button>
       <button class="ina-button ina-button--tertiary ina-button--md" aria-label="Notifikasi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg></button>
       <div class="user"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Admin Contoh</span><span class="urole">Super Admin</span></span></div>
     </header>
@@ -263,13 +263,13 @@ const UBAH = [
     isi:'Akun Super Admin yang didaftarkan melalui Onboarding tampil di daftar. Peran Super Admin dan Status Akun terkunci, akun tidak dapat dipilih untuk aksi massal, dan menu aksinya hanya Ubah Data. Peran lain dapat ditambahkan, misalnya PPAT agar akun ini dapat mendaftarkan TERA, TTE, dan e-Meterai.',
     lama:'Akun Super Admin tidak tampil di Daftar Pengguna.', ke:'daftar', sorot:'tr[data-id="0"]', sumber:'Masukan Peruri 5 Nov 2026 (bukan temuan HE)', versi:'v2' },
   { kode:'HE-USER-14', judul:'Atur Ulang Kata Sandi: tautan email, tanpa kata sandi sementara',
-    isi:'Admin mengirim tautan ke email pengguna, sehingga kata sandi tidak lagi dibuat atau ditampilkan. Tautan membuka layar Buat Kata Sandi Baru. Layar lama "Ganti Kata Sandi" di halaman Masuk yang meminta kata sandi sementara diganti dengan layar ini.',
+    isi:'Admin mengirim tautan ke email pengguna, sehingga kata sandi tidak lagi dibuat atau ditampilkan. Tautan membuka layar Buat Kata Sandi Baru. Layar lama "Ganti kata sandi" di halaman Masuk yang meminta kata sandi sementara diganti dengan layar ini.',
     lama:'Sistem membuat kata sandi acak 12 karakter, mengirimnya ke email, dan menampilkannya sekali kepada admin. Saat masuk, pengguna wajib menggantinya.', ke:'daftar', sorot:null, sumber:'Masukan 5 Nov 2026, menyesuaikan alur undangan (bukan temuan HE)', versi:'v2' },
   { kode:'HE-USER-15', judul:'Aksi Nonaktifkan dengan konfirmasi',
     isi:'Menu aksi dan aksi massal memiliki Nonaktifkan, dengan dialog konfirmasi yang menjelaskan bedanya dengan Tangguhkan. Tooltip Status Akun dan Bantuan memakai definisi yang sama: Ditangguhkan berarti akses dihentikan sementara, Non-aktif berarti akun berhenti dipakai.',
     lama:'Tidak ada aksi Nonaktifkan. Status Non-aktif hanya dapat dipilih di isian Status Akun pada Ubah Data, tanpa konfirmasi.', ke:'daftar', sorot:'#kolomStatus', sumber:'Usulan tim, diskusi 5 Nov 2026 (bukan temuan HE)', versi:'v2' },
   { kode:'HE-UMUM-03', judul:'Daftar Pengguna: impor pengguna klien dari berkas',
-    isi:'Tombol "Impor dari Berkas" membuka dialog tiga langkah: unduh templat CSV, unggah berkas (IDDS File Upload), lalu pratinjau. Baris yang bermasalah ditandai beserta alasannya (email tidak valid, email sudah terdaftar, nama kosong) dan tidak ikut disimpan. Klien hasil impor langsung dapat dipilih sebagai pihak di Permohonan AJB.',
+    isi:'Tombol "Impor dari berkas" membuka dialog tiga langkah: unduh templat CSV, unggah berkas (IDDS File Upload), lalu pratinjau. Baris yang bermasalah ditandai beserta alasannya (email tidak valid, email sudah terdaftar, nama kosong) dan tidak ikut disimpan. Klien hasil impor langsung dapat dipilih sebagai pihak di Permohonan AJB.',
     lama:'Pengguna klien hanya dapat ditambahkan satu per satu.', ke:'impor', sorot:null, sumber:'Laporan HE INA Digital hlm. 23, 40 (Kesimpulan no. 5) + keputusan tim 23 Okt 2026' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Daftar Pengguna',
     isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi penjelasan peran, status akun, Status Sertifikat, syarat kata sandi, impor berkas, dan kontak dukungan.',
@@ -316,7 +316,7 @@ let USER = window.SESI_PROTO && window.SESI_PROTO.paket === 'trial' ? akunTrial(
 function trialPenuh() {
   const p = window.PAKET_TRIAL; if (!p || USER.length < p.pengguna) return false;
   dialog({ judul:'Batas pengguna tercapai', konfirmasi:true, isi:`<p>Paket Trial memuat paling banyak ${p.pengguna} pengguna, termasuk akun pemilik. Upgrade ke Enterprise untuk menambah pengguna. Data Anda tetap ada.${usulan('HE-TRIAL-04')}</p>`,
-    tombol:[['Nanti Saja', 'secondary', null], ['Mulai Berlangganan', 'primary', () => { location.href = p.upgrade; }]] });
+    tombol:[['Nanti saja', 'secondary', null], ['Mulai berlangganan', 'primary', () => { location.href = p.upgrade; }]] });
   return true;
 }
 /* status CA live + penjelasan (HE-USER-01) */
@@ -391,8 +391,8 @@ function layar() {
       </div>
       <div class="kanan">
         ${cari('cariUser', 'Cari nama / email…', S.cari, 'Cari user')}
-        ${tombol('Impor dari Berkas', 'secondary', 'sm', 'id="impor"', ik('unggah', 14))}${usulan('HE-UMUM-03')}
-        ${tombol('Tambah Pengguna', 'primary', 'sm', 'id="tambah"', ik('user', 14))}
+        ${tombol('Impor dari berkas', 'secondary', 'sm', 'id="impor"', ik('unggah', 14))}${usulan('HE-UMUM-03')}
+        ${tombol('Tambah pengguna', 'primary', 'sm', 'id="tambah"', ik('user', 14))}
       </div>
     </div>
     ${dipilih.length ? `<div class="massal ditandai" id="bilahMassal" role="region" aria-label="Aksi untuk pengguna terpilih"><b>${dipilih.length} pengguna dipilih</b>
@@ -559,7 +559,7 @@ const lipatKtp = (kunci = false) => `<div class="lipat-ktp ditandai ${kunci ? 't
 /* kartu Sertifikat Elektronik (CA Peruri): hanya untuk akun Aktif, pola Perdana Niaga */
 const ISIAN_KTP = ['kNik', 'kNpwp', 'kJk', 'kGelar', 'kTempat', 'kTgl', 'kKerja', 'kWarga', 'kAlamat', 'kRt', 'kRw', 'kKel', 'kKec', 'kKota', 'kProv', 'kDomisili'];
 const kartuCa = u => { const aktif = u.ca === 'active';
-  return `<div class="kartu-ca ditandai" id="kartuCa"><div><b>Sertifikat Elektronik (CA Peruri)</b><p>${aktif ? 'Sertifikat sudah terbit. Data KTP terkunci karena sudah dipakai pada sertifikat. Perubahan hanya bisa lewat pencabutan dan pendaftaran ulang di Peruri.' : 'Daftarkan pengguna ini ke Peruri. Pastikan data dirinya sah dan lengkap — data dikirim atas nama pengguna, dan pengguna menerima email untuk melanjutkan sampai selesai.'}</p></div>${tombol(aktif ? 'Cek Status Sertifikat' : 'Registrasi CA', 'secondary', 'md', 'id="bukaRegCa"', ik('tameng', 18))}${usulan('HE-USER-08')}</div>`; };
+  return `<div class="kartu-ca ditandai" id="kartuCa"><div><b>Sertifikat Elektronik (CA Peruri)</b><p>${aktif ? 'Sertifikat sudah terbit. Data KTP terkunci karena sudah dipakai pada sertifikat. Perubahan hanya bisa lewat pencabutan dan pendaftaran ulang di Peruri.' : 'Daftarkan pengguna ini ke Peruri. Pastikan data dirinya sah dan lengkap — data dikirim atas nama pengguna, dan pengguna menerima email untuk melanjutkan sampai selesai.'}</p></div>${tombol(aktif ? 'Cek status sertifikat' : 'Registrasi CA', 'secondary', 'md', 'id="bukaRegCa"', ik('tameng', 18))}${usulan('HE-USER-08')}</div>`; };
 function umur(tgl) { const l = new Date(tgl), k = new Date(); let n = k.getFullYear() - l.getFullYear(); if (k.getMonth() < l.getMonth() || (k.getMonth() === l.getMonth() && k.getDate() < l.getDate())) n--; return n; }
 function kurangCa() {
   const v = id => ($('#' + id)?.value ?? '').trim(), a = [];
@@ -643,7 +643,7 @@ function layarSandi(u) {
     ${pwIsian('sandiBaru', 'Kata Sandi', 'Minimal 12 karakter', '')}
     <ul class="syarat-pw" id="syaratPw">${SYARAT_PW.map(([l]) => `<li><span class="tanda"></span>${esc(l)}</li>`).join('')}</ul>
     ${pwIsian('sandiUlang', 'Ulangi Kata Sandi', '', '')}
-    <div class="undangan-aksi">${tombol('Simpan Kata Sandi', 'primary', 'md', 'id="simpanSandi" disabled')}</div>${usulan('HE-USER-09')}</div></div>`;
+    <div class="undangan-aksi">${tombol('Simpan kata sandi', 'primary', 'md', 'id="simpanSandi" disabled')}</div>${usulan('HE-USER-09')}</div></div>`;
   const cek = () => {
     const a = $('#sandiBaru').value, b = $('#sandiUlang').value, ok = SYARAT_PW.map(([, uji]) => uji(a)), beda = !!b && a !== b;
     document.querySelectorAll('#syaratPw li').forEach((li, i) => { li.classList.toggle('ok', ok[i]); li.querySelector('.tanda').innerHTML = ok[i] ? ik('centang', 12) : ''; });
@@ -702,7 +702,7 @@ function dialogReset(u) {
   dialog({ judul:`Atur ulang kata sandi — ${esc(u.nama)}`, konfirmasi:true,
     isi:`<div class="modal-gap ditandai" id="isiReset"><p>Tautan untuk membuat kata sandi baru akan dikirim ke <b>${esc(u.email)}</b>. Kata sandi lama dinonaktifkan dan <b>pengguna otomatis keluar dari semua perangkat</b>.${usulan('HE-USER-14')}</p>
       ${alert('info', '', 'Tautan berlaku 72 jam dan hanya dapat dipakai sekali.')}</div>`,
-    tombol:[['Batal', 'secondary', null], ['Kirim Tautan', 'primary', () => { toast('Tautan dikirim.', 'positive', 4000, `Tautan untuk membuat kata sandi baru dikirim ke ${esc(u.email)}.`); }]] });
+    tombol:[['Batal', 'secondary', null], ['Kirim tautan', 'primary', () => { toast('Tautan dikirim.', 'positive', 4000, `Tautan untuk membuat kata sandi baru dikirim ke ${esc(u.email)}.`); }]] });
 }
 
 /* ---------------- Tangguhkan / Aktifkan (live) + massal (HE-USER-02) ---------------- */
@@ -741,7 +741,7 @@ function dialogImpor() {
   dialog({ judul:'Impor pengguna dari berkas', lebar:true,
     isi:`<div class="modal-gap"><p>Tambahkan banyak pengguna sekaligus. Pengguna hasil impor berstatus Diundang dan menerima undangan melalui email.${usulan('HE-UMUM-03')}</p>
       <div class="langkah-impor">${badge('1. Unduh templat', 'brand', 'sm')}${badge('2. Unggah berkas', 'neutral', 'sm')}${badge('3. Periksa dan simpan', 'neutral', 'sm')}</div>
-      <div>${tombol('Unduh Templat CSV', 'secondary', 'sm', 'id="unduhTemplat"', ik('unduh', 14))} <span class="sel-email">Kolom: nama, email, nomor HP (opsional).</span></div>
+      <div>${tombol('Unduh templat CSV', 'secondary', 'sm', 'id="unduhTemplat"', ik('unduh', 14))} <span class="sel-email">Kolom: nama, email, nomor HP (opsional).</span></div>
       <div class="ditandai" id="isianPeranImpor">${pilihan('iPeran', 'Peran untuk semua pengguna', [['ROLE_ASISTEN', 'Asisten'], ['ROLE_PPAT', 'PPAT'], ['ROLE_KLIEN', 'Klien']], 'ROLE_KLIEN')}${usulan('HE-USER-11')}</div>
       <div class="ina-file-upload" id="f-impor"><div class="ina-file-upload__label">Berkas pengguna<span class="ina-text-field__required">*</span></div>
         <div class="ina-file-upload__dropzone" role="button" tabindex="0" id="pilihBerkas" aria-label="Pilih berkas CSV atau Excel"><div class="ina-file-upload__content"><div class="ina-file-upload__icon">${ik('unggah', 24)}</div>
@@ -749,7 +749,7 @@ function dialogImpor() {
           <span class="ina-file-upload__button">Pilih File</span></div></div>
         <div class="ina-file-upload__files" id="berkasImpor"></div></div>
       <div id="pratinjau"></div></div>`,
-    tombol:[['Batal', 'secondary', null], ['Simpan Pengguna Valid', 'primary', () => simpanImpor(), true]] });
+    tombol:[['Batal', 'secondary', null], ['Simpan pengguna valid', 'primary', () => simpanImpor(), true]] });
   const L = $('#lapisan'), simpan = L.querySelector('.ina-modal__footer .ina-button:last-child'); simpan.disabled = true;
   L.querySelector('#unduhTemplat').addEventListener('click', e => { e.stopPropagation(); toast('Templat CSV diunduh (simulasi).'); });
   const pilih = e => { e.stopPropagation();
@@ -840,7 +840,7 @@ function bukaBantuan() {
     ${faq(1, 'Apa arti Status Sertifikat?', KET_CA + ' Registrasi CA dapat dimulai pengguna melalui Akun Saya, atau admin melalui tombol Registrasi CA di Ubah Pengguna untuk akun yang sudah aktif.')}
     ${faq(2, 'Apa beda Ditangguhkan dan Non-aktif?', 'Ditangguhkan: akses dihentikan sementara, misalnya selama pemeriksaan, dan akun diharapkan aktif kembali. Non-aktif: akun berhenti dipakai, misalnya pegawai sudah keluar. Pada keduanya pengguna tidak bisa masuk, dan akun dapat diaktifkan kembali bila diperlukan.')}
     ${faq(3, 'Bagaimana pengguna baru mendapat kata sandi?', 'Admin tidak membuat kata sandi. Pengguna menerima email undangan, lalu membuat kata sandi sendiri lewat tautan di email. Tautan berlaku 72 jam dan hanya dapat dipakai sekali.')}
-    ${faq(4, 'Bagaimana mengimpor banyak pengguna?', 'Klik "Impor dari Berkas", pilih peran untuk semua pengguna, unduh templat CSV, isi nama dan email, lalu unggah. Baris yang bermasalah ditampilkan beserta alasannya dan tidak ikut disimpan.')}
+    ${faq(4, 'Bagaimana mengimpor banyak pengguna?', 'Klik "Impor dari berkas", pilih peran untuk semua pengguna, unduh templat CSV, isi nama dan email, lalu unggah. Baris yang bermasalah ditampilkan beserta alasannya dan tidak ikut disimpan.')}
     ${faq(5, 'Pengguna tidak menerima email kata sandi', 'Untuk akun berstatus Diundang, gunakan Kirim Ulang Undangan. Untuk akun lain, gunakan Atur Ulang Kata Sandi untuk mengirim tautan baru.')}
     ${faq(7, 'Bisakah pengguna memiliki lebih dari satu peran?', 'Bisa. Super Admin mencentang beberapa peran di Tambah Pengguna atau Ubah Data.')}
     ${faq(8, 'Mengapa peran Super Admin tidak dapat diubah?', 'Akun Super Admin didaftarkan melalui Onboarding, sehingga peran dan status akunnya terkunci. Tanpa peran PPAT, akun ini tidak mendaftarkan TERA, TTE, dan e-Meterai. Tambahkan PPAT bila akun ini juga mendaftarkannya.')}

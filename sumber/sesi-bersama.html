@@ -227,9 +227,9 @@
       if (kepala) kepala.insertAdjacentHTML('afterend', lencana); else if (pemicu) pemicu.insertAdjacentHTML('beforebegin', lencana);
       if (!ditutup('eppat-trial-spanduk')) spanduk('caution', 'eppat-trial-spanduk', `<b>Paket Trial, sisa ${sisa} hari.</b> Semua menu dapat dibuka. Tanda tangan dan stempel elektronik aktif setelah upgrade ke Enterprise.`, ke('sm', 'Mulai Berlangganan'));
       /* di atas kartu profil yang menempel di bawah, agar tombol selalu terlihat walaupun menu panjang */
-      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai Berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai Berlangganan</span></a></div>`); });
+      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai Berlangganan</span></a></div>`); });
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pasangTombol); else pasangTombol();
-      if (bar) bar.insertAdjacentHTML('afterbegin', `<span>Perjalanan: langkah 9 dari 19, coba menu lalu tekan Mulai Berlangganan.</span><button class="pil" id="simBatas" aria-pressed="${!!t.batas}" title="Mengisi kuota pengguna dan transaksi Trial sampai penuh">Batas paket: ${t.batas ? 'tercapai' : 'belum tercapai'}</button>`);
+      if (bar) bar.insertAdjacentHTML('afterbegin', `<span>Perjalanan: langkah 9 dari 19, coba menu lalu tekan Mulai berlangganan.</span><button class="pil" id="simBatas" aria-pressed="${!!t.batas}" title="Mengisi kuota pengguna dan transaksi Trial sampai penuh">Batas paket: ${t.batas ? 'tercapai' : 'belum tercapai'}</button>`);
       const b = $('#simBatas'); if (b) b.addEventListener('click', () => { simpanTrial({ ...bacaTrial(), batas:!t.batas }); location.reload(); });
     }
     document.addEventListener('click', e => { if (!e.target.closest('[data-tutup-spanduk]')) return; const w = $('#spandukTrial'); try { sessionStorage.setItem(w.dataset.kunci, '1'); } catch (x) { /* lihat simpan() */ } w.remove(); });
@@ -241,7 +241,7 @@
   /* penjaga halaman */
   if (!halamanBoleh(sesi)) {
     document.body.insertAdjacentHTML('beforeend', `<div class="sesi-tolak" role="alert"><div class="sesi-tolak-kartu"><h2>Halaman tidak tersedia</h2><p>Peran ${sesi.label} tidak memiliki akses ke halaman ini.</p>
-      <div class="sesi-tolak-aksi"><a class="ina-button ina-button--primary ina-button--md" href="${LANDAS[sesi.aktif]}">Ke Halaman Utama</a><button type="button" class="ina-button ina-button--secondary ina-button--md" data-sesi-keluar>Keluar</button></div></div></div>`);
+      <div class="sesi-tolak-aksi"><a class="ina-button ina-button--primary ina-button--md" href="${LANDAS[sesi.aktif]}">Ke halaman utama</a><button type="button" class="ina-button ina-button--secondary ina-button--md" data-sesi-keluar>Keluar</button></div></div></div>`);
   }
 })();
 </script>

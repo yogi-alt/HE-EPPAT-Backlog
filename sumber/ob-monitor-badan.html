@@ -199,19 +199,19 @@ const UBAH = [
     isi:'Grup menu "NAVIGATION" menjadi "Utama", menu "Dashboard" menjadi "Dasbor", dan remah "Home" menjadi "Beranda" (IDDS Breadcrumb). Urutan menu tetap seperti live. Menu bertingkat live (Verifikasi, Menu, Daftar Pengguna, Peran Pengguna) tampil sebagai grup tersendiri agar menu cukup dua tingkat; tombol grup memakai aria-expanded. Ikon menu berupa ikon garis satu warna. Kerangka menu samping mengikuti pola Sidebar IDDS dengan warna brand E-PPAT tetap: label grup kecil berhuruf biasa dengan chevron buka/tutup, menu berupa ikon dan label dengan tanda arahkan dan tanda menu aktif, paling banyak dua tingkat (grup lalu menu), dan kartu profil pengguna (inisial, nama, peran) di bagian bawah dengan versi aplikasi di bawahnya. Tombol di samping logo menciutkan menu menjadi ikon saja; nama menu tampil sebagai tooltip dan tetap dibacakan pembaca layar. Pilihan ciut diingat peramban. Di layar sempit menu tetap berupa laci. Berlaku juga di aplikasi pelanggan (Dasbor, Riwayat Transaksi). Menu akun memakai IDDS Action Dropdown dengan kepala nama dan peran ("Admin Contoh · Admin") serta pilihan "Keluar". Menu akun dapat dipakai dengan papan ketik (panah dan Esc).',
     lama:'Menu samping gelap ala live dengan label grup berhuruf kapital, tanpa kartu profil pengguna, dan tanpa mode ciut. Menu bertingkat tiga (grup, menu induk, submenu). Menu samping memakai grup "NAVIGATION" dan "PENGATURAN" serta menu "Dashboard". Remah berbunyi "Home › Dashboard", dan avatar menampilkan "SYSADMIN · Admin".', ke:'dasbor', sorot:'#sidebar' },
   { kode:'IDDS-OB-12', judul:'Dasbor: judul, subjudul sesuai isi, dan kartu ringkasan IDDS Card',
-    isi:'Halaman berjudul "Dasbor Admin" dengan subjudul satu kalimat yang sesuai isi: "Pantau ringkasan pendaftaran, verifikasi, dan pembayaran calon PPAT." Empat kartu ringkasan memakai IDDS Card dengan ikon garis. Tautan "Lihat Detail" di setiap kartu membuka menu terkait. Untuk pembaca layar, tautan itu menyebut tujuannya, misalnya "Lihat detail Perlu Verifikasi Anggota di Verifikasi Anggota". Keterangan kartu memakai bahasa sehari-hari: "Menunggu verifikasi anggota" dan "Semua tagihan pembayaran".',
+    isi:'Halaman berjudul "Dasbor Admin" dengan subjudul satu kalimat yang sesuai isi: "Pantau ringkasan pendaftaran, verifikasi, dan pembayaran calon PPAT." Empat kartu ringkasan memakai IDDS Card dengan ikon garis. Tautan "Lihat detail" di setiap kartu membuka menu terkait. Untuk pembaca layar, tautan itu menyebut tujuannya, misalnya "Lihat detail Perlu Verifikasi Anggota di Verifikasi Anggota". Keterangan kartu memakai bahasa sehari-hari: "Menunggu verifikasi anggota" dan "Semua tagihan pembayaran".',
     lama:'Judul berbunyi "Dashboard Admin" dengan subjudul "Selamat datang kembali, SYSADMIN. Berikut ringkasan aktivitas sistem hari ini.", padahal angka kartu adalah jumlah keseluruhan, bukan hari ini. Tautan "Detail" tidak menyebut tujuan. Keterangan kartu berbunyi "Status pending verifikasi" dan "Total invoice pembayaran".', ke:'dasbor', sorot:'#kpi' },
   { kode:'IDDS-OB-13', judul:'Dasbor: tiga daftar terbaru dengan lencana berbahasa Indonesia',
-    isi:'Daftar Pendaftaran Terbaru, Transaksi Terbaru, dan Pemilihan Produk Terbaru memakai IDDS Badge berlabel Indonesia. Lencananya adalah "Menunggu" (kuning), "Lunas" dan "Disetujui" (hijau), "Belum Dibayar" (kuning), serta paket "Trial" dan "Enterprise". Nominal ditulis "Rp3.500.000" tanpa spasi. Tombol "Lihat Semua" menyebut daftar tujuannya untuk pembaca layar. Tombol itu membuka Manajemen Onboarding, Verifikasi Pembayaran, atau Verifikasi Produk.',
+    isi:'Daftar Pendaftaran Terbaru, Transaksi Terbaru, dan Pemilihan Produk Terbaru memakai IDDS Badge berlabel Indonesia. Lencananya adalah "Menunggu" (kuning), "Lunas" dan "Disetujui" (hijau), "Belum Dibayar" (kuning), serta paket "Trial" dan "Enterprise". Nominal ditulis "Rp3.500.000" tanpa spasi. Tombol "Lihat semua" menyebut daftar tujuannya untuk pembaca layar. Tombol itu membuka Manajemen Onboarding, Verifikasi Pembayaran, atau Verifikasi Produk.',
     lama:'Lencana berisi kode mentah "Pending", "PAID", "UNPAID", "APPROVED", "TRIAL", dan "ENTERPRISE". Nominal ditulis dengan spasi ("Rp 1").', ke:'dasbor', sorot:'#terbaru' },
   { kode:'IDDS-OB-14', judul:'Manajemen Onboarding: subjudul sesuai isi dan pencarian berlabel',
     isi:'Subjudul menyebut tindakan yang benar-benar dapat dilakukan di halaman ini: "Pantau tahap pendaftaran setiap calon PPAT, dari pendaftaran sampai selesai." Pencarian memakai IDDS Input Search dengan label "Cari pendaftar" yang terlihat. Hasil tersaring langsung, dan jumlah pendaftar yang tampil diumumkan di kanan (aria-live).',
     lama:'Subjudul berbunyi "Kelola pendaftaran user baru, verifikasi pembayaran, dan monitor registrasi.", padahal verifikasi pembayaran ada di menu lain. Kotak cari hanya berisi teks contoh "Cari nama, email, ID PPAT..." tanpa label.', ke:'onboarding', sorot:'#saringOb' },
   { kode:'IDDS-OB-15', judul:'Manajemen Onboarding: saringan tahap memakai IDDS Chip',
-    isi:'Sepuluh saringan tahap (Semua, Pendaftaran … Selesai) memakai IDDS Chip dalam grup berlabel "Saring menurut tahap". Chip terpilih ditandai aria-pressed sehingga dibacakan "ditekan". Chip dapat dipilih dengan Tab lalu Enter atau Spasi, dan dapat digabung dengan pencarian. Bila tidak ada pendaftar di suatu tahap, tabel menampilkan "Belum ada pendaftar di tahap …" dengan tombol "Tampilkan Semua".',
+    isi:'Sepuluh saringan tahap (Semua, Pendaftaran … Selesai) memakai IDDS Chip dalam grup berlabel "Saring menurut tahap". Chip terpilih ditandai aria-pressed sehingga dibacakan "ditekan". Chip dapat dipilih dengan Tab lalu Enter atau Spasi, dan dapat digabung dengan pencarian. Bila tidak ada pendaftar di suatu tahap, tabel menampilkan "Belum ada pendaftar di tahap …" dengan tombol "Tampilkan semua".',
     lama:'Saringan tahap berupa pil bergaya khusus tanpa jumlah hasil. Tahap tanpa pendaftar hanya menampilkan tabel kosong.', ke:'onboarding', sorot:'#chipTahap' },
   { kode:'IDDS-OB-16', judul:'Manajemen Onboarding: tabel, lencana tahap, dan aksi yang jelas',
-    isi:'Tabel memakai IDDS Table dengan kolom tetap: No, ID PPAT, Nama Pengguna, URL, Kontak, Status, dan Aksi. Warna lencana tahap konsisten: "Pendaftaran" kuning, tahap proses biru, "Lunas" dan "Selesai" hijau, serta "Belum ada status" abu-abu. Nilai kosong ditulis "Belum ada", bukan "-". Tombol aksi "Lihat Detail" menyebut nama pendaftar (aria-label). Navigasi memakai IDDS Pagination 10 baris per halaman dengan teks "Menampilkan 1–10 dari 46". Pencarian tanpa hasil menawarkan tombol "Hapus Pencarian".',
+    isi:'Tabel memakai IDDS Table dengan kolom tetap: No, ID PPAT, Nama Pengguna, URL, Kontak, Status, dan Aksi. Warna lencana tahap konsisten: "Pendaftaran" kuning, tahap proses biru, "Lunas" dan "Selesai" hijau, serta "Belum ada status" abu-abu. Nilai kosong ditulis "Belum ada", bukan "-". Tombol aksi "Lihat detail" menyebut nama pendaftar (aria-label). Navigasi memakai IDDS Pagination 10 baris per halaman dengan teks "Menampilkan 1–10 dari 46". Pencarian tanpa hasil menawarkan tombol "Hapus pencarian".',
     lama:'Lencana "Belum ada status" berwarna kuning, sama dengan "Pendaftaran". Nilai kosong ditulis "-". Tombol "Detail" tidak menyebut nama pendaftar, dan teks paginasi berbunyi "Menampilkan 1–10 dari total 760".', ke:'onboarding', sorot:'#tabelOb' },
   { kode:'IDDS-OB-17', judul:'Detail Pendaftar: halaman detail dengan IDDS Stepper sembilan tahap',
     isi:'Detail dibuka sebagai halaman (Beranda › Manajemen Onboarding › Detail Pendaftar) dengan tombol "Kembali ke Manajemen Onboarding". Tombol ini mengembalikan saringan dan halaman tabel sebelumnya. Ringkasan memuat data yang sama dengan baris tabel (ID PPAT, URL, kontak, status). Riwayat tahap memakai IDDS Stepper. Tahap selesai bercentang dengan tanggal lengkap ("26 Okt 2026, 16.44"), tahap berikutnya bertanda "Sedang berjalan", dan tahap lain bertanda "Belum dimulai". Di layar sempit, stepper berubah menjadi vertikal.',
@@ -343,7 +343,7 @@ $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('op
 function jaga(lanjut) {
   if (!S.kotor) { lanjut(); return; }
   dialog({ judul:'Tinggalkan halaman ini?', konfirmasi:true, bahaya:true, isi:'<p>Perubahan yang belum disimpan akan hilang.</p>',
-    tombol:[['Tetap di Sini', 'secondary', null], ['Tinggalkan', 'primary', () => { S.kotor = false; lanjut(); }]] });
+    tombol:[['Tetap di sini', 'secondary', null], ['Tinggalkan', 'primary', () => { S.kotor = false; lanjut(); }]] });
 }
 function keLuar(url) { jaga(() => { location.href = url; }); }
 /* ===================== akhir KERANGKA STAF ONBOARDING · JS ===================== */
@@ -395,8 +395,8 @@ function layarOnboarding() {
   const rows = tampilData(), n = rows.length, hal = Math.min(S.hal, Math.max(1, Math.ceil(n / PER_HAL))), awal = (hal - 1) * PER_HAL, isi = rows.slice(awal, awal + PER_HAL);
   S.hal = hal;
   const nmTahap = S.tahap === 'semua' ? '' : TAHAP[+S.tahap];
-  const kosong = S.cari ? `Tidak ada pendaftar yang cocok dengan "${esc(S.cari)}"${nmTahap ? ` di tahap ${nmTahap}` : ''}.<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>`
-    : nmTahap ? `Belum ada pendaftar di tahap ${nmTahap}.<div style="margin-top:10px">${tombol('Tampilkan Semua', 'secondary', 'sm', 'id="tampilSemua"')}</div>` : 'Belum ada pendaftar.';
+  const kosong = S.cari ? `Tidak ada pendaftar yang cocok dengan "${esc(S.cari)}"${nmTahap ? ` di tahap ${nmTahap}` : ''}.<div style="margin-top:10px">${tombol('Hapus pencarian', 'secondary', 'sm', 'id="hapusCari"')}</div>`
+    : nmTahap ? `Belum ada pendaftar di tahap ${nmTahap}.<div style="margin-top:10px">${tombol('Tampilkan semua', 'secondary', 'sm', 'id="tampilSemua"')}</div>` : 'Belum ada pendaftar.';
   return `${remah(['Manajemen Onboarding'])}<h1>Manajemen Onboarding</h1><p class="sub">Pantau tahap pendaftaran setiap calon PPAT, dari pendaftaran sampai selesai.</p>
     <div class="saring-ob ditandai" id="saringOb" role="search">
       <div class="baris"><div><label class="lbl" for="cariOb">Cari pendaftar</label>${cariIsian('cariOb', 'Cari nama, email, atau ID PPAT…', S.cari, 'Cari pendaftar menurut nama, email, atau ID PPAT')}</div>
@@ -412,7 +412,7 @@ function layarOnboarding() {
         <td class="ina-table__cell">${urlKantor(p)}</td>
         <td class="ina-table__cell"><div class="kontak-email">${esc(p.email).replace('@', '<wbr>@')}</div><div class="kc">${p.telp || 'Belum ada nomor telepon'}</div></td>
         <td class="ina-table__cell">${lencanaTahap(p.st)}</td>
-        <td class="ina-table__cell"><div class="aksi-baris">${tombol('Lihat Detail', 'secondary', 'sm', `data-detail="${DATA.indexOf(p)}" aria-label="Lihat detail ${esc(p.nama)}"`, ik('mata', 14))}</div></td></tr>`).join('')
+        <td class="ina-table__cell"><div class="aksi-baris">${tombol('Lihat detail', 'secondary', 'sm', `data-detail="${DATA.indexOf(p)}" aria-label="Lihat detail ${esc(p.nama)}"`, ik('mata', 14))}</div></td></tr>`).join('')
         : `<tr><td colspan="7" class="ina-table__empty-cell kosong">${kosong}</td></tr>`}</tbody></table></div></div>
       ${paginasi('ob', hal, n)}</div>${usulan('IDDS-OB-16')}`;
 }
@@ -475,7 +475,7 @@ H.addEventListener('click', e => {
     const p = DATA[S.pilih];
     dialog({ judul:'Jalankan provisi manual?', konfirmasi:true, bahaya:true,
       isi:`<div class="modal-gap"><p>Sistem akan menyiapkan ulang aplikasi kantor <b>${esc(p.nama)}</b> di <b>dev-app.eppat.id/t/${p.slug}</b>.</p><p>Gunakan hanya bila aplikasi kantor belum aktif setelah pembayaran lunas. Proses ini tidak dapat dibatalkan setelah berjalan.</p></div>`,
-      tombol:[['Batal', 'secondary', null], ['Jalankan Provisi', 'primary', () => {
+      tombol:[['Batal', 'secondary', null], ['Jalankan provisi', 'primary', () => {
         S.provisi = true; gambar(); $('#provisiManual').focus();
         setTimeout(() => { S.provisi = false; p.provisi = SEKARANG.getTime(); if (S.layar === 'onboarding-detail') { gambar(); $('#provisiManual')?.focus(); } toast('Provisi manual berhasil dijalankan.', 'positive', 3500, `Aplikasi kantor ${p.nama} sedang disiapkan.`); }, 900);
       }]] });
@@ -566,15 +566,15 @@ const BANTUAN = {
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('d', [
       ['Apakah angka di kartu hanya untuk hari ini?', 'Tidak. Angka di kartu adalah jumlah keseluruhan sejak portal dipakai.'],
-      ['Bagaimana melihat pendaftar yang perlu diverifikasi?', 'Klik "Lihat Detail" di kartu Perlu Verifikasi Anggota. Halaman Verifikasi Anggota akan terbuka.'],
+      ['Bagaimana melihat pendaftar yang perlu diverifikasi?', 'Klik "Lihat detail" di kartu Perlu Verifikasi Anggota. Halaman Verifikasi Anggota akan terbuka.'],
       ['Mengapa tagihan berstatus Belum Dibayar?', 'Pendaftar belum mentransfer ke nomor Virtual Account. Tagihan dapat kedaluwarsa bila tidak dibayar sampai batas waktunya. Periksa di Verifikasi Pembayaran.'],
       ['Apa beda Trial dan Enterprise?', 'Trial adalah paket coba gratis dengan batas waktu dan transaksi. Enterprise adalah paket berbayar. Rinciannya ada di Pengaturan › Harga Produk.'],
-      ['Bagaimana melihat daftar lengkap?', 'Klik "Lihat Semua" di kanan atas setiap daftar.'],
+      ['Bagaimana melihat daftar lengkap?', 'Klik "Lihat semua" di kanan atas setiap daftar.'],
       ['Mengapa angka belum berubah?', 'Angka dimuat saat halaman dibuka. Muat ulang halaman untuk melihat data terbaru.']])}
     ${kontak()}` }),
   onboarding:() => ({ judul:'Bantuan Manajemen Onboarding', isi:`<p>Manajemen Onboarding menampilkan semua pendaftar dan tahap terakhir yang sudah mereka selesaikan, dari Pendaftaran sampai Selesai.</p>
     <h4 class="bantu-sub">Langkah mencari pendaftar</h4>
-    ${lgkh(['Ketik nama, email, atau ID PPAT di kotak <b>Cari pendaftar</b>.', 'Pilih tahap di chip saringan, misalnya <b>Proses Pembayaran</b>, atau biarkan <b>Semua</b>.', 'Klik <b>Lihat Detail</b> untuk membuka riwayat tahap pendaftar.', 'Klik <b>Hapus Pencarian</b> atau <b>Tampilkan Semua</b> bila tidak ada hasil.'])}
+    ${lgkh(['Ketik nama, email, atau ID PPAT di kotak <b>Cari pendaftar</b>.', 'Pilih tahap di chip saringan, misalnya <b>Proses Pembayaran</b>, atau biarkan <b>Semua</b>.', 'Klik <b>Lihat detail</b> untuk membuka riwayat tahap pendaftar.', 'Klik <b>Hapus pencarian</b> atau <b>Tampilkan semua</b> bila tidak ada hasil.'])}
     <h4 class="bantu-sub">Arti tahap</h4>
     ${istilah(ARTI_TAHAP.concat([['Belum ada status', 'Akun customer yang belum memulai pendaftaran PPAT.']]))}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -590,7 +590,7 @@ const BANTUAN = {
     <h4 class="bantu-sub">Cara membaca riwayat tahap</h4>
     ${istilah([['Bercentang', 'Tahap sudah selesai. Tanggal dan jam selesai tertulis di bawahnya.'], ['Sedang berjalan', 'Tahap berikutnya yang sedang ditunggu, dari pendaftar atau dari operator.'], ['Belum dimulai', 'Tahap yang belum dapat dikerjakan.']])}
     <h4 class="bantu-sub">Langkah provisi manual</h4>
-    ${lgkh(['Pastikan status pendaftar sudah <b>Lunas</b> atau sesudahnya.', 'Klik <b>Provisi Manual</b>, baca penjelasannya, lalu klik <b>Jalankan Provisi</b>.', 'Tunggu sampai tombol kembali aktif. Waktu provisi terakhir tertulis di samping tombol.'])}
+    ${lgkh(['Pastikan status pendaftar sudah <b>Lunas</b> atau sesudahnya.', 'Klik <b>Provisi Manual</b>, baca penjelasannya, lalu klik <b>Jalankan provisi</b>.', 'Tunggu sampai tombol kembali aktif. Waktu provisi terakhir tertulis di samping tombol.'])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('r', [
       ['Kapan provisi manual dipakai?', 'Bila pembayaran sudah lunas tetapi aplikasi kantor belum aktif, misalnya karena penyiapan otomatis gagal.'],

@@ -664,7 +664,7 @@ const UBAH = [
     isi:'Bila akun benar tetapi bukan admin platform, kartu menampilkan IDDS Alert "Akun ini bukan admin platform." Alert itu juga menjelaskan bahwa akun kantor PPAT masuk lewat alamat kantor masing-masing. Email tetap terisi agar mudah diperbaiki.',
     lama:'Dialog "Gagal masuk" berisi "Akun ini bukan platform admin." (susunan kata mengikuti bahasa Inggris) tanpa arahan ke mana akun tersebut harus masuk.', ke:'bukan', sorot:'#galatMasuk' },
   { kode:'IDDS-PL-07', judul:'Halaman Masuk platform: istilah dibakukan',
-    isi:'"Login untuk" menjadi "Masuk untuk", dan "authenticator" menjadi "autentikator". Frasa "me-reset 2FA" menjadi "mengatur ulang verifikasi 2 faktor", dan "Kembali ke login" menjadi "Kembali ke Halaman Masuk". "Ganti Password", "Password Sementara", dan "Ubah Password" menjadi "Ganti Kata Sandi", "Kata Sandi Sementara", dan "Ubah Kata Sandi". "Password Berhasil Diubah!" menjadi "Kata sandi berhasil diubah". Teks sama dengan halaman Masuk tenant.',
+    isi:'"Login untuk" menjadi "Masuk untuk", dan "authenticator" menjadi "autentikator". Frasa "me-reset 2FA" menjadi "mengatur ulang verifikasi 2 faktor", dan "Kembali ke login" menjadi "Kembali ke halaman masuk". "Ganti Password", "Password Sementara", dan "Ubah Password" menjadi "Ganti kata sandi", "Kata Sandi Sementara", dan "Ubah kata sandi". "Password Berhasil Diubah!" menjadi "Kata sandi berhasil diubah". Teks sama dengan halaman Masuk tenant.',
     lama:'Istilah bercampur bahasa Inggris: "Login", "authenticator", "me-reset 2FA", dan "Password" di layar ganti kata sandi, sedangkan halaman Masuk memakai "Kata Sandi".', ke:'2fa', sorot:'#info2fa' },
   { kode:'IDDS-PL-08', judul:'Syarat kata sandi sama di semua layar platform',
     isi:'Layar Ganti Kata Sandi memakai daftar centang yang sama dengan tenant: minimal 12 karakter serta memuat huruf besar, huruf kecil, angka, dan simbol (- _ ? ! & + % # @ * $ ^). Akun Saya > Keamanan di platform diusulkan memakai daftar centang yang sama (lihat HE-CA-08 dan HE-USER-03).',
@@ -692,7 +692,7 @@ const pwIsian = (id, l, ph, ac = 'new-password', bantu = '') => `<div class="ina
 
 /* baris atas kartu: tombol kembali (IDDS secondary sm) + Bantuan (IDDS-PL-10) */
 const atasTn = (kembali = '') => `<div class="atas-tn">${kembali}<div class="kanan-tn ditandai">${tombol('Bantuan', 'secondary', 'sm', 'id="bukaBantuan" aria-haspopup="dialog" aria-label="Bantuan untuk halaman ini"', ik('tanya', 14))}${usulan('IDDS-PL-10')}</div></div>`;
-const kembaliMasuk = () => tombol('Kembali ke Halaman Masuk', 'secondary', 'sm', 'data-ke="masuk"', ik('kiri', 14));
+const kembaliMasuk = () => tombol('Kembali ke halaman masuk', 'secondary', 'sm', 'data-ke="masuk"', ik('kiri', 14));
 
 /* ---------------- Masuk ---------------- */
 function layarMasuk() {
@@ -721,7 +721,7 @@ function layar2fa() {
 }
 /* ganti kata sandi sementara — teks & syarat sama dengan tenant */
 function layarGanti() {
-  if (S.berhasil) return `<div class="wadah">${atasTn()}<section class="kartu-tn status-tn"><span class="bulat">${ik('centang', 34)}</span><h1>Kata sandi berhasil diubah</h1><p>Gunakan kata sandi baru setiap kali Anda masuk.</p>${tombol('Lanjut ke Aplikasi', 'primary', 'lg', 'class="penuh" data-ke-app', ik('panah', 16))}</section></div>`;
+  if (S.berhasil) return `<div class="wadah">${atasTn()}<section class="kartu-tn status-tn"><span class="bulat">${ik('centang', 34)}</span><h1>Kata sandi berhasil diubah</h1><p>Gunakan kata sandi baru setiap kali Anda masuk.</p>${tombol('Lanjut ke aplikasi', 'primary', 'lg', 'class="penuh" data-ke-app', ik('panah', 16))}</section></div>`;
   return `<div class="wadah">${atasTn()}<section class="kartu-tn" aria-labelledby="judulGanti">
       <div class="kepala-tn"><span class="ikon">${ik('kunci', 20)}</span><div><div class="eb">Keamanan akun</div><h1 id="judulGanti">Ganti Kata Sandi</h1></div></div>
       <p class="pengantar">Akun <b>${esc(S.email || 'sementara@contoh.id')}</b> masih memakai kata sandi sementara. Demi keamanan, ganti kata sandi sebelum memakai aplikasi.</p>
@@ -730,7 +730,7 @@ function layarGanti() {
       ${pwIsian('gBaru', 'Kata Sandi Baru', 'Buat kata sandi baru')}
       <div class="ditandai">${syaratHtml('syaratGanti')}${usulan('IDDS-PL-08')}</div>
       ${pwIsian('gUlang', 'Konfirmasi Kata Sandi Baru', 'Ulangi kata sandi baru')}
-      ${tombol('Ubah Kata Sandi', 'primary', 'lg', 'id="kirimGanti" class="penuh" disabled')}
+      ${tombol('Ubah kata sandi', 'primary', 'lg', 'id="kirimGanti" class="penuh" disabled')}
       <div class="kaki-tn" style="margin-top:14px;padding-top:12px">${tombol('Keluar', 'tertiary', 'sm', 'data-ke="masuk"')}</div>
     </section></div>`;
 }

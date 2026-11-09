@@ -342,7 +342,7 @@ const UBAH = [
     isi:'Dialog memakai IDDS Modal dan Text Field. Nama kosong atau nama yang sudah dipakai ditolak dengan pesan di bawah isian. Menutup dialog yang sudah diisi meminta konfirmasi. Setelah Form baru disimpan, editor langsung terbuka dengan satu tab kosong.',
     lama:'Isian sama, tetapi kalimat penjelasannya kaku ("ia langsung lahir dengan satu tab kosong"), dan dialog dapat tertutup tanpa peringatan.', ke:'formBaru', sorot:null },
   { kode:'IDDS-PL-45', judul:'Hapus form: konfirmasi merah dan alasan bila form masih dipakai layanan',
-    isi:'Hapus memakai IDDS Modal Confirmation dengan tombol merah "Hapus Form" dan menyebut jumlah tab serta elemen yang ikut hilang. Bila form masih dipakai layanan, dialog menjelaskan alasannya lebih dulu dan tidak menawarkan tombol hapus.',
+    isi:'Hapus memakai IDDS Modal Confirmation dengan tombol merah "Hapus form" dan menyebut jumlah tab serta elemen yang ikut hilang. Bila form masih dipakai layanan, dialog menjelaskan alasannya lebih dulu dan tidak menawarkan tombol hapus.',
     lama:'Tombol Hapus tampil sama untuk semua form tanpa penjelasan kaitannya dengan layanan.', ke:'formHapus', sorot:null },
   { kode:'IDDS-PL-46', judul:'Editor Rancang: tiga kolom yang rapi, palet berpenjelasan, dan tampilan ponsel',
     isi:'Editor menyusun Jenis Elemen, kanvas, serta panel Tab dalam tiga kolom yang turun menjadi satu kolom di layar sempit. Kepala editor menampilkan jumlah tab, elemen, dan layanan yang langsung berubah saat rancangan diubah, ditambah lencana "Belum disimpan". Keterangan "tanpa nilai" pada palet dijelaskan lewat tooltip. Tab kosong menampilkan petunjuk menambah elemen.',
@@ -571,12 +571,12 @@ function konfirmHapusForm(f) {
   }
   dialog({ judul:`Hapus "${esc(f.nama)}"?`, konfirmasi:true, bahaya:true,
     isi:`<p>Form ini dihapus permanen beserta ${f.tabs.length} tab dan ${jumlahEl(f)} elemen. Tindakan ini tidak dapat dibatalkan.${usulan('IDDS-PL-45')}</p>`,
-    tombol:[['Batal', 'secondary', null], ['Hapus Form', 'primary', () => { FORM = FORM.filter(x => x !== f); gambar(); toast(`${f.nama} dihapus.`, 'positive'); }]] });
+    tombol:[['Batal', 'secondary', null], ['Hapus form', 'primary', () => { FORM = FORM.filter(x => x !== f); gambar(); toast(`${f.nama} dihapus.`, 'positive'); }]] });
 }
 function dialogImporForm() {
   dialog({ judul:'Impor berkas form',
     isi:`<p>Impor membuat form baru dari berkas ekspor. Form yang sudah ada tidak tertimpa.${usulan('IDDS-PL-58')}</p>`,
-    tombol:[['Batal', 'secondary', null], ['Pilih Berkas', 'primary', () => {
+    tombol:[['Batal', 'secondary', null], ['Pilih berkas', 'primary', () => {
       const dasar = 'Contoh Formulir Impor (impor 6 Nov 2026)'; let nama = dasar, i = 2;
       while (FORM.some(x => x.nama === nama)) nama = `${dasar} ${i++}`;
       const b = { id:++nid, nama, status:'siap', versi:1, layanan:[], tabs:AJB_TABS.filter(t => ['Narahubung', 'Dasar Perjanjian'].includes(t.name)).map(tabDari), ringkasan:RINGKAS0() };
@@ -605,15 +605,15 @@ const isiPanelTab = () => { const t = tabAktif(); return `<h3 class="ed-judul">T
   <div class="f-baris">${pilihan('tBentuk', 'Bentuk tab', [['tunggal', 'Tunggal — satu isian'], ['daftar', 'Daftar — banyak baris']], t.bentuk, 'Daftar berisi banyak baris, misalnya Para Pihak. Tunggal berisi satu isian per order.')}</div>
   <div class="f-baris">${tf('tSimpan', 'Teks tombol simpan', t.teksSimpan, '', false, 'Teks yang kosong diisi bawaan saat disimpan. Teks yang sudah Anda tulis tidak ditimpa.')}</div>
   <div class="cek-mini"><b>Cek kelengkapan${tanya('Cek kelengkapan', 'Cek memberi tahu pengisi bahwa datanya masih kurang. Cek tidak memblokir penyimpanan.')}</b><p id="jumlahCek">${t.cek.length} cek kelengkapan</p>${tombol('Atur…', 'secondary', 'sm', 'id="aturCek" aria-label="Atur cek kelengkapan"')}</div>
-  <div class="tab-aksi">${tombol('Simpan Tab', 'primary', 'sm', 'id="simpanTab"')}${tombol('Hapus Tab', 'secondary', 'sm', 'class="bahaya" id="hapusTab"')}</div>`; };
+  <div class="tab-aksi">${tombol('Simpan tab', 'primary', 'sm', 'id="simpanTab"')}${tombol('Hapus tab', 'secondary', 'sm', 'class="bahaya" id="hapusTab"')}</div>`; };
 const metaEd = () => { const f = S.ed.draf; return `${f.tabs.length} tab · ${jumlahEl(f)} elemen · dipakai ${f.layanan.length} layanan`; };
 const statusEd = () => `${edKotor() ? badge('Belum disimpan', 'warning', 'sm') : ''}${lencanaForm(S.ed.draf)}`;
 function layarRancang() {
   const f = S.ed.draf;
   return `${remah(['Akta'], ['Form Design', 'data-ke-form'], [f.nama])}<h1>Form Design</h1><p class="sub">Rancangan formulir order dan versi siapnya.</p>
-    <section class="ed-kepala">${tombol('Daftar Form', 'secondary', 'md', 'data-ke-form aria-label="Kembali ke daftar form"', ik('kiri', 16))}
+    <section class="ed-kepala">${tombol('Daftar form', 'secondary', 'md', 'data-ke-form aria-label="Kembali ke daftar form"', ik('kiri', 16))}
       <div class="ed-nama"><h2>${esc(f.nama)}</h2><p id="edMeta">${metaEd()}</p></div>
-      <div class="ed-aksi ditandai" id="edAksi"><span id="edStatus" style="display:inline-flex;gap:6px;flex-wrap:wrap">${statusEd()}</span>${tombol('Ringkasan &amp; Peran', 'secondary', 'md', 'id="bukaRingkasan"')}${tombol('Simpan sebagai Draft', 'secondary', 'md', 'id="simpanDraft"')}${tombol('Kunci Form', 'primary', 'md', 'id="kunciForm"', ik('gembok', 16))}${usulan('IDDS-PL-52')}</div></section>
+      <div class="ed-aksi ditandai" id="edAksi"><span id="edStatus" style="display:inline-flex;gap:6px;flex-wrap:wrap">${statusEd()}</span>${tombol('Ringkasan &amp; peran', 'secondary', 'md', 'id="bukaRingkasan"')}${tombol('Simpan sebagai draft', 'secondary', 'md', 'id="simpanDraft"')}${tombol('Kunci form', 'primary', 'md', 'id="kunciForm"', ik('gembok', 16))}${usulan('IDDS-PL-52')}</div></section>
     <div class="ed-grid">
       <div class="ed-kartu ditandai" id="palet"><h3 class="ed-judul">Jenis Elemen${tanya('Tanpa nilai', 'Elemen tanpa nilai hanya menyusun tampilan formulir. Elemen ini tidak menyimpan isian.')}</h3>
         <div class="palet-daftar">${Object.entries(JENIS).map(([k, t]) => `<button type="button" class="palet-btn" data-palet="${k}" aria-label="Tambah elemen ${t}">${t}${TANPA.has(k) ? ' <small>· tanpa nilai</small>' : ''}</button>`).join('')}</div>${usulan('IDDS-PL-46')}</div>
@@ -658,7 +658,7 @@ function konfirmHapusEl(id) {
   const t = tabAktif(), x = t.el.find(y => y.id === id), pk = x.kode ? kondisiPemakai(x.kode) : [];
   dialog({ judul:`Hapus "${esc(x.label)}"?`, konfirmasi:true, bahaya:true,
     isi:`<p>Elemen ini dihapus dari tab ${esc(t.nama)}.${usulan('IDDS-PL-47')}</p>${pk.length ? alert('caution', 'Isian ini dipakai kondisi', `<ul class="dampak">${pk.map(k => `<li>${esc(k.nama)}</li>`).join('')}</ul>Kondisi itu akan ditandai Perlu dicek setelah form disimpan.`) : ''}`,
-    tombol:[['Batal', 'secondary', null], ['Hapus Elemen', 'primary', () => { t.el = t.el.filter(y => y !== x); t.cek = t.cek.filter(k => k !== x.kode); if (S.ed.el === id) S.ed.el = null; ubahEd(); segarkanEd(); $('#jumlahCek').textContent = `${t.cek.length} cek kelengkapan`; umumkan(`${x.label} dihapus.`); }]] });
+    tombol:[['Batal', 'secondary', null], ['Hapus elemen', 'primary', () => { t.el = t.el.filter(y => y !== x); t.cek = t.cek.filter(k => k !== x.kode); if (S.ed.el === id) S.ed.el = null; ubahEd(); segarkanEd(); $('#jumlahCek').textContent = `${t.cek.length} cek kelengkapan`; umumkan(`${x.label} dihapus.`); }]] });
 }
 const kalimatBila = b => (b || []).map(s => { const k = cariIsian(s.field); return `${k ? k.label : s.field} ${s.op === '=' ? 'sama dengan' : 'tidak sama dengan'} ${s.nilai}`; }).join(' dan ');
 function dialogProperti(id) {
@@ -722,7 +722,7 @@ function konfirmHapusTab() {
   if (f.tabs.length === 1) { dialog({ judul:'Tab belum bisa dihapus', konfirmasi:true, isi:`${alert('caution', '', 'Form harus punya minimal satu tab. Tambah tab lain dulu bila ingin menghapus tab ini.')}`, tombol:[['Tutup', 'secondary', null]] }); return; }
   dialog({ judul:`Hapus tab "${esc(t.nama)}"?`, konfirmasi:true, bahaya:true,
     isi:`<p>Tab ini dihapus dari rancangan beserta ${t.el.length} elemen di dalamnya.${usulan('IDDS-PL-49')}</p>`,
-    tombol:[['Batal', 'secondary', null], ['Hapus Tab', 'primary', () => { f.tabs.splice(S.ed.tab, 1); S.ed.tab = Math.max(0, S.ed.tab - 1); S.ed.el = null; S.ed.tabKotor = false; ubahEd(); gambar(); }]] });
+    tombol:[['Batal', 'secondary', null], ['Hapus tab', 'primary', () => { f.tabs.splice(S.ed.tab, 1); S.ed.tab = Math.max(0, S.ed.tab - 1); S.ed.el = null; S.ed.tabKotor = false; ubahEd(); gambar(); }]] });
 }
 function dialogCek() {
   const t = tabAktif(), isian = t.el.filter(punyaNilai), banyak = t.bentuk === 'daftar';
@@ -793,7 +793,7 @@ function simpanDraft() {
   if (f.status === 'siap' && f.layanan.length) {
     dialog({ judul:'Simpan sebagai Draft?', konfirmasi:true,
       isi:`<p>Form ini dipakai layanan ${f.layanan.map(esc).join(', ')}. Status form berubah dari Siap v${f.versi} menjadi Draft sampai Anda menguncinya lagi.${usulan('IDDS-PL-52')}</p>`,
-      tombol:[['Batal', 'secondary', null], ['Simpan sebagai Draft', 'primary', jalan]] });
+      tombol:[['Batal', 'secondary', null], ['Simpan sebagai draft', 'primary', jalan]] });
     return;
   }
   jalan();
@@ -804,7 +804,7 @@ function kunciForm() {
   if (!jumlahEl(f)) { dialog({ judul:'Form belum bisa dikunci', konfirmasi:true, isi:`${alert('caution', '', 'Form ini belum punya elemen. Tambah minimal satu elemen, lalu kunci form.')}${usulan('IDDS-PL-52')}`, tombol:[['Tutup', 'secondary', null]] }); return; }
   dialog({ judul:'Kunci Form?', konfirmasi:true,
     isi:`<p>Rancangan ini menjadi <b>Siap v${v}</b> dan bisa dipilih saat menghubungkan layanan. Rancangan Draft masih bisa berubah bentuk, jadi hanya form terkunci yang boleh dipakai layanan.${usulan('IDDS-PL-52')}</p>${kosong.length ? alert('caution', 'Ada tab kosong', `Tab ${kosong.map(t => esc(t.nama)).join(', ')} belum punya elemen.`) : ''}`,
-    tombol:[['Batal', 'secondary', null], ['Kunci Form', 'primary', () => { simpanForm({ status:'siap', versi:v }); gambar(); window.scrollTo({ top:0 }); toast(`${f.nama} dikunci sebagai Siap v${v}.`, 'positive'); }]] });
+    tombol:[['Batal', 'secondary', null], ['Kunci form', 'primary', () => { simpanForm({ status:'siap', versi:v }); gambar(); window.scrollTo({ top:0 }); toast(`${f.nama} dikunci sebagai Siap v${v}.`, 'positive'); }]] });
 }
 
 /* ---------------- Pustaka Kondisi ---------------- */
@@ -925,12 +925,12 @@ function konfirmHapusK() {
   const k = KOND.find(x => x.kode === S.kDraf.asal), p = pemakaiKondisi(k);
   if (p.length) { dialog({ judul:`${esc(k.nama)} belum bisa dihapus`, konfirmasi:true, isi:alert('caution', 'Kondisi ini masih dirujuk', `<ul class="dampak">${p.map(x => `<li>${esc(x)}</li>`).join('')}</ul>Lepaskan rujukannya dulu.`), tombol:[['Tutup', 'secondary', null]] }); return; }
   dialog({ judul:`Hapus "${esc(k.nama)}"?`, konfirmasi:true, bahaya:true, isi:`<p>Kondisi ini dihapus permanen dari pustaka. Tindakan ini tidak dapat dibatalkan.${usulan('IDDS-PL-53')}</p>`,
-    tombol:[['Batal', 'secondary', null], ['Hapus Kondisi', 'primary', () => { KOND = KOND.filter(x => x !== k); S.kDraf = null; S.kPilih = null; if (S.kSaring !== 'semua' && !kondisiTersaring().length) S.kSaring = 'semua'; segarkanK(); toast(`Kondisi ${k.nama} dihapus.`, 'positive'); }]] });
+    tombol:[['Batal', 'secondary', null], ['Hapus kondisi', 'primary', () => { KOND = KOND.filter(x => x !== k); S.kDraf = null; S.kPilih = null; if (S.kSaring !== 'semua' && !kondisiTersaring().length) S.kSaring = 'semua'; segarkanK(); toast(`Kondisi ${k.nama} dihapus.`, 'positive'); }]] });
 }
 function imporK() {
   const jalan = () => {
     dialog({ judul:'Impor kondisi', isi:`<p>Impor tidak menimpa pustaka. Kondisi dengan kode yang sudah ada dilewati.${usulan('IDDS-PL-58')}</p>`,
-      tombol:[['Batal', 'secondary', null], ['Pilih Berkas', 'primary', () => {
+      tombol:[['Batal', 'secondary', null], ['Pilih berkas', 'primary', () => {
         const baru = KOND_IMPOR().filter(k => !KOND.some(x => x.kode === k.kode)), lewat = KOND_IMPOR().length - baru.length;
         KOND.push(...baru); segarkanK();
         toast(`Impor selesai: ${baru.length} kondisi masuk, ${lewat} dilewati.`, 'positive', 5000, lewat ? 'Kondisi yang kodenya sudah ada tidak diubah.' : '');
@@ -1004,7 +1004,7 @@ function simpanP() {
   if (asli && asli.aktif && !d.aktif && pakai.length) {
     dialog({ judul:`Matikan ${esc(asli.nama)}?`, konfirmasi:true, bahaya:true,
       isi:`<p>Pemeriksaan ini dipakai di ${pakai.length} tempat. Setelah dimatikan, pemeriksaan tidak bisa dipilih lagi di Form Design dan rel status.${usulan('IDDS-PL-56')}</p>`,
-      tombol:[['Batal', 'secondary', null], ['Matikan Pemeriksaan', 'primary', jalan]] });
+      tombol:[['Batal', 'secondary', null], ['Matikan pemeriksaan', 'primary', jalan]] });
     return;
   }
   jalan();
@@ -1013,7 +1013,7 @@ function konfirmHapusP() {
   const p = PERIKSA.find(x => x.kode === S.pDraf.asal), pk = dipakaiPeriksa(p);
   if (pk.length) { dialog({ judul:`${esc(p.nama)} belum bisa dihapus`, konfirmasi:true, isi:alert('caution', 'Pemeriksaan ini masih dipakai', `<ul class="dampak">${pk.map(x => `<li>${esc(x)}</li>`).join('')}</ul>Lepaskan pemakaiannya dulu.`), tombol:[['Tutup', 'secondary', null]] }); return; }
   dialog({ judul:`Hapus "${esc(p.nama)}"?`, konfirmasi:true, bahaya:true, isi:`<p>Pemeriksaan ini dihapus permanen beserta ${p.jawaban.length} jawabannya. Tindakan ini tidak dapat dibatalkan.${usulan('IDDS-PL-56')}</p>`,
-    tombol:[['Batal', 'secondary', null], ['Hapus Pemeriksaan', 'primary', () => { PERIKSA = PERIKSA.filter(x => x !== p); S.pDraf = null; S.pPilih = null; segarkanP(); toast(`Pemeriksaan ${p.nama} dihapus.`, 'positive'); }]] });
+    tombol:[['Batal', 'secondary', null], ['Hapus pemeriksaan', 'primary', () => { PERIKSA = PERIKSA.filter(x => x !== p); S.pDraf = null; S.pPilih = null; segarkanP(); toast(`Pemeriksaan ${p.nama} dihapus.`, 'positive'); }]] });
 }
 
 /* ---------------- gambar ---------------- */
@@ -1051,7 +1051,7 @@ H.addEventListener('click', e => {
   b = c('[data-properti]'); if (b) { dialogProperti(+b.dataset.properti); return; }
   b = c('[data-hapus-el]'); if (b) { konfirmHapusEl(+b.dataset.hapusEl); return; }
   if (c('#aturCek')) { dialogCek(); return; }
-  if (c('#simpanTab')) { if (terapkanTab()) toast(`Tab ${tabAktif().nama} disimpan di rancangan.`, 'positive', 4000, 'Klik Simpan sebagai Draft atau Kunci Form untuk menyimpan form.'); return; }
+  if (c('#simpanTab')) { if (terapkanTab()) toast(`Tab ${tabAktif().nama} disimpan di rancangan.`, 'positive', 4000, 'Klik Simpan sebagai draft atau Kunci Form untuk menyimpan form.'); return; }
   if (c('#hapusTab')) { konfirmHapusTab(); return; }
   if (c('#bukaRingkasan')) { dialogRingkasan(); return; }
   if (c('#simpanDraft')) { simpanDraft(); return; }
@@ -1139,7 +1139,7 @@ function tutupSemua() { while (LAPIS.length) { const o = LAPIS.pop(); o.el.remov
 function konfirmBuang(fn) {
   dialog({ judul:'Buang perubahan?', konfirmasi:true, bahaya:true,
     isi:`<p>Perubahan yang belum disimpan akan hilang.${usulan('IDDS-PL-52')}</p>`,
-    tombol:[['Kembali ke Formulir', 'secondary', null], ['Buang Perubahan', 'primary', fn]] });
+    tombol:[['Kembali ke formulir', 'secondary', null], ['Buang perubahan', 'primary', fn]] });
 }
 /* checkbox & toggle di dialog */
 document.addEventListener('change', e => { const c = e.target.closest('.ina-checkbox__input'); if (!c) return; const bx = c.nextElementSibling; bx.className = `ina-checkbox__box ina-checkbox__box--${c.checked ? 'checked' : 'unchecked'}`; bx.innerHTML = c.checked ? ik('centang', 12) : ''; });
@@ -1202,7 +1202,7 @@ const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
 const BANTUAN = {
   form:() => ({ judul:'Bantuan Form Design', isi:`<p>Form Design menyimpan rancangan formulir order. Kantor PPAT mengisi formulir ini saat membuat order layanan.</p>
     <h4 class="bantu-sub">Langkah membuat form</h4>
-    ${lgkh(['Klik tombol <b>Form</b>, lalu isi nama form.', 'Di editor, tambah elemen dari <b>Jenis Elemen</b> dan atur tab.', 'Klik <b>Kunci Form</b> setelah rancangan selesai.', 'Pilih form itu di <b>Jenis Akta</b> agar layanan memakainya.'])}
+    ${lgkh(['Klik tombol <b>Form</b>, lalu isi nama form.', 'Di editor, tambah elemen dari <b>Jenis Elemen</b> dan atur tab.', 'Klik <b>Kunci form</b> setelah rancangan selesai.', 'Pilih form itu di <b>Jenis Akta</b> agar layanan memakainya.'])}
     <h4 class="bantu-sub">Istilah</h4>
     ${istilah([['Siap vN', 'Form sudah dikunci dan bisa dipilih layanan. N adalah nomor versi.'], ['Draft', 'Rancangan masih bisa berubah dan belum bisa dipilih layanan.'], ['Field', 'Isian pada formulir, termasuk elemen penyusun tampilan.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1211,9 +1211,9 @@ const BANTUAN = {
       ['Apakah impor menimpa form yang ada?', 'Tidak. Impor selalu membuat form baru.'],
       ['Apa yang berubah setelah ekspor?', 'Tidak ada. Ekspor hanya menyiapkan berkas rancangan.']])}
     ${kontak()}` }),
-  rancang:() => ({ judul:'Bantuan Editor Rancang', isi:`<p>Editor menyusun tab dan elemen sebuah form. Perubahan baru tersimpan setelah Anda klik <b>Simpan sebagai Draft</b> atau <b>Kunci Form</b>.</p>
+  rancang:() => ({ judul:'Bantuan Editor Rancang', isi:`<p>Editor menyusun tab dan elemen sebuah form. Perubahan baru tersimpan setelah Anda klik <b>Simpan sebagai draft</b> atau <b>Kunci form</b>.</p>
     <h4 class="bantu-sub">Langkah merancang</h4>
-    ${lgkh(['Pilih tab, atau klik tombol <b>Tab</b> untuk menambah tab baru.', 'Klik salah satu <b>Jenis Elemen</b>. Elemen masuk ke tab yang sedang dibuka.', 'Seret kartu elemen untuk mengubah urutannya, atau pilih kartu lalu tekan tombol geser.', 'Pilih kartu elemen untuk mengatur lebar, menyalin, atau menghapusnya.', 'Buka <b>Properti elemen</b> untuk mengubah label, kunci, dan pilihannya.', 'Klik <b>Atur…</b> di panel Tab untuk menentukan isian yang harus terisi.', 'Klik <b>Ringkasan &amp; Peran</b> untuk mengatur baris ringkas order.', 'Klik <b>Kunci Form</b> bila rancangan sudah selesai.'])}
+    ${lgkh(['Pilih tab, atau klik tombol <b>Tab</b> untuk menambah tab baru.', 'Klik salah satu <b>Jenis Elemen</b>. Elemen masuk ke tab yang sedang dibuka.', 'Seret kartu elemen untuk mengubah urutannya, atau pilih kartu lalu tekan tombol geser.', 'Pilih kartu elemen untuk mengatur lebar, menyalin, atau menghapusnya.', 'Buka <b>Properti elemen</b> untuk mengubah label, kunci, dan pilihannya.', 'Klik <b>Atur…</b> di panel Tab untuk menentukan isian yang harus terisi.', 'Klik <b>Ringkasan &amp; peran</b> untuk mengatur baris ringkas order.', 'Klik <b>Kunci form</b> bila rancangan sudah selesai.'])}
     <h4 class="bantu-sub">Istilah</h4>
     ${istilah([['Tanpa nilai', 'Elemen yang hanya menyusun tampilan, misalnya Judul bagian. Elemen ini tidak menyimpan isian.'], ['Kunci', `Nama isian. Template akta memakainya sebagai variabel, misalnya ${vv('narahubung_nama')}.`], ['Tunggal', 'Tab berisi satu isian per order.'], ['Daftar', 'Tab berisi banyak baris, misalnya Para Pihak.'], ['Cek kelengkapan', 'Pemberitahuan bahwa data pengisi masih kurang.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>

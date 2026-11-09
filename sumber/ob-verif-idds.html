@@ -590,25 +590,25 @@ const UBAH = [
     isi:'Subjudul menyebut tindakan yang dapat dilakukan: "Periksa data anggota yang mendaftar, lalu setujui atau tolak verifikasinya." Pencarian memakai IDDS Input Search dengan label "Cari anggota" yang terlihat, dan jumlah anggota yang tampil diumumkan (aria-live). Saringan Semua, Belum Verifikasi, dan Sudah Verifikasi memakai IDDS Chip dalam grup berlabel, lengkap dengan jumlahnya. Chip terpilih ditandai aria-pressed dan dapat dipilih dengan papan ketik.',
     lama:'Subjudul berbunyi "Kelola dan verifikasi anggota yang mendaftar.". Kotak cari hanya berisi teks contoh "Cari nama, email, ID PPAT..." tanpa label. Saringan berupa pil bergaya khusus.', ke:'anggota', sorot:'#saringAg' },
   { kode:'IDDS-OB-22', judul:'Verifikasi Anggota: tabel, lencana status, dan aksi yang jelas',
-    isi:'Tabel memakai IDDS Table dengan kolom tetap: No, ID PPAT, Nama Pengguna, URL Web, Kontak, Status, dan Aksi. Judul kolom "Nama User" dibakukan menjadi "Nama Pengguna". Warna lencana status konsisten: "Sudah Diverifikasi" hijau, "Menunggu Verifikasi" kuning, dan "Ditolak" merah. Tombol "Lihat Detail" menyebut nama anggota (aria-label). Navigasi memakai IDDS Pagination dengan teks "Menampilkan 1–10 dari 24". Pencarian atau saringan tanpa hasil menawarkan "Hapus Pencarian" atau "Tampilkan Semua".',
+    isi:'Tabel memakai IDDS Table dengan kolom tetap: No, ID PPAT, Nama Pengguna, URL Web, Kontak, Status, dan Aksi. Judul kolom "Nama User" dibakukan menjadi "Nama Pengguna". Warna lencana status konsisten: "Sudah Diverifikasi" hijau, "Menunggu Verifikasi" kuning, dan "Ditolak" merah. Tombol "Lihat detail" menyebut nama anggota (aria-label). Navigasi memakai IDDS Pagination dengan teks "Menampilkan 1–10 dari 24". Pencarian atau saringan tanpa hasil menawarkan "Hapus pencarian" atau "Tampilkan semua".',
     lama:'Lencana status "Sudah Diverifikasi" terpotong menjadi dua baris. Tombol "Detail" tidak menyebut nama anggota, dan teks paginasi berbunyi "Menampilkan 1–10 dari total 476".', ke:'anggota', sorot:'#tabelAg' },
   { kode:'IDDS-OB-23', judul:'Detail Verifikasi: remah, tombol Kembali, foto profil, dan IDDS Tabs',
     isi:'Remah menjadi "Beranda › Verifikasi Anggota › Detail Verifikasi" sesuai nama menu. Tombol Kembali berlabel "Kembali ke Verifikasi Anggota" dan mengembalikan saringan, halaman tabel, serta fokus ke baris asal. Area foto profil menjadi tombol dengan nama anggota (aria-label). Saat tab Kantor PPAT dibuka, kartu kiri berganti menjadi "Logo Kantor" berisi nama kantor dan ID PPAT, sama dengan live dan Profil Saya. Tab PPAT dan Kantor PPAT memakai IDDS Tabs (role tab, aria-selected, panah kiri/kanan). Seperti di live, Info Kontak PPAT hanya tampil di tab PPAT.',
     lama:'Remah berbunyi "Home › Anggota › Detail". Tombol kembali hanya berupa ikon panah tanpa label. Area foto berupa gambar dengan teks "Klik gambar untuk mengubah foto". Di tab Kantor PPAT, kartu kiri "Logo Kantor" berupa gambar dengan teks "Klik gambar untuk mengubah logo".', ke:'anggota-detail', sorot:'#tabDetail' },
   { kode:'IDDS-OB-24', judul:'Detail Verifikasi: formulir PPAT dan Kantor PPAT dengan pesan galat di bawah isian dan penjaga perubahan',
-    isi:'Isian Kode, Jenis Kelamin, Nama Depan, Nama Tengah, dan Nama Belakang tetap seperti live. Bila Nama Depan kosong, pesan galat tampil di bawah isian (aria-invalid dan aria-describedby) dan fokus pindah ke isian itu. Setelah tersimpan, keterangan di samping tombol menampilkan waktu simpan. Tab Kantor PPAT memuat semua isi live dengan markup, teks, dan ikon yang sama dengan Profil Saya. Isinya: Nama Kantor; Detail Registrasi (ID PPAT / Kode Kantor dan URL Web terkunci dengan keterangan, Bank, Nomor Rekening); Info Kontak Kantor; dan Lokasi Kantor (Alamat Lengkap, Kelurahan, Kecamatan, Kota/Kabupaten, GPS Lat, GPS Long). Peta contoh dapat diklik, diperbesar/diperkecil, dan dicari lewat IDDS Input Search berlabel, sehingga koordinat GPS terisi otomatis. Kaki tab menampilkan "Belum disimpan" atau "Belum ada perubahan", lalu tombol Batal (meminta konfirmasi) dan "Simpan Data Kantor". Pesan galat tampil di bawah isian bila nama kantor kosong, nomor rekening bukan 6–20 angka, atau GPS di luar rentang. Bila pengguna pindah halaman saat ada perubahan yang belum disimpan, muncul dialog "Tinggalkan halaman ini?".',
-    lama:'Galat hanya berupa notifikasi sementara, dan tidak ada peringatan saat halaman ditinggalkan dengan perubahan yang belum disimpan. Di tab Kantor PPAT, ID PPAT / Kode Kantor dan URL Web tampil abu-abu tanpa keterangan, dan Bank berisi "-- Pilih Bank --". Peta Leaflet memiliki tombol "+"/"−" tanpa label, kotak cari "Cari lokasi (cth: Monas, Jakarta)..." tanpa label, dan keterangan "Geser pin pada peta untuk mengisi koordinat GPS secara otomatis.". Tombol Batal dan "Simpan Data Kantor" tidak disertai tanda perubahan yang belum disimpan.', ke:'anggota-detail', sorot:'#panel-ppat' },
+    isi:'Isian Kode, Jenis Kelamin, Nama Depan, Nama Tengah, dan Nama Belakang tetap seperti live. Bila Nama Depan kosong, pesan galat tampil di bawah isian (aria-invalid dan aria-describedby) dan fokus pindah ke isian itu. Setelah tersimpan, keterangan di samping tombol menampilkan waktu simpan. Tab Kantor PPAT memuat semua isi live dengan markup, teks, dan ikon yang sama dengan Profil Saya. Isinya: Nama Kantor; Detail Registrasi (ID PPAT / Kode Kantor dan URL Web terkunci dengan keterangan, Bank, Nomor Rekening); Info Kontak Kantor; dan Lokasi Kantor (Alamat Lengkap, Kelurahan, Kecamatan, Kota/Kabupaten, GPS Lat, GPS Long). Peta contoh dapat diklik, diperbesar/diperkecil, dan dicari lewat IDDS Input Search berlabel, sehingga koordinat GPS terisi otomatis. Kaki tab menampilkan "Belum disimpan" atau "Belum ada perubahan", lalu tombol Batal (meminta konfirmasi) dan "Simpan data kantor". Pesan galat tampil di bawah isian bila nama kantor kosong, nomor rekening bukan 6–20 angka, atau GPS di luar rentang. Bila pengguna pindah halaman saat ada perubahan yang belum disimpan, muncul dialog "Tinggalkan halaman ini?".',
+    lama:'Galat hanya berupa notifikasi sementara, dan tidak ada peringatan saat halaman ditinggalkan dengan perubahan yang belum disimpan. Di tab Kantor PPAT, ID PPAT / Kode Kantor dan URL Web tampil abu-abu tanpa keterangan, dan Bank berisi "-- Pilih Bank --". Peta Leaflet memiliki tombol "+"/"−" tanpa label, kotak cari "Cari lokasi (cth: Monas, Jakarta)..." tanpa label, dan keterangan "Geser pin pada peta untuk mengisi koordinat GPS secara otomatis.". Tombol Batal dan "Simpan data kantor" tidak disertai tanda perubahan yang belum disimpan.', ke:'anggota-detail', sorot:'#panel-ppat' },
   { kode:'IDDS-OB-25', judul:'Detail Verifikasi: Info Kontak berbahasa Indonesia dengan sakelar IDDS Toggle',
-    isi:'Kolom tabel kontak menjadi "No.", "Akun / Nomor", "Jenis Kontak", "Status", dan "Aksi", sama dengan Profil Saya dan Edit Pengguna. Jenis "Phone" menjadi "Telepon". Sakelar Aktif memakai IDDS Toggle (role switch) dengan aria-label yang menyebut kontaknya. Menonaktifkan kontak meminta konfirmasi dengan tombol merah. Tombol ubah menyebut kontaknya. "Tambah Kontak" dan "Ubah Kontak" membuka IDDS Modal yang menampilkan pesan galat di bawah isian bila format email atau nomor telepon salah. Di tab Kantor PPAT, tabel "Info Kontak Kantor" memakai markup Profil Saya dengan kolom, dialog, dan konfirmasi yang sama. Tabel kosong bertuliskan "Belum ada kontak. Tambahkan email atau nomor telepon lewat Tambah Kontak."',
+    isi:'Kolom tabel kontak menjadi "No.", "Akun / Nomor", "Jenis Kontak", "Status", dan "Aksi", sama dengan Profil Saya dan Edit Pengguna. Jenis "Phone" menjadi "Telepon". Sakelar Aktif memakai IDDS Toggle (role switch) dengan aria-label yang menyebut kontaknya. Menonaktifkan kontak meminta konfirmasi dengan tombol merah. Tombol ubah menyebut kontaknya. "Tambah kontak" dan "Ubah Kontak" membuka IDDS Modal yang menampilkan pesan galat di bawah isian bila format email atau nomor telepon salah. Di tab Kantor PPAT, tabel "Info Kontak Kantor" memakai markup Profil Saya dengan kolom, dialog, dan konfirmasi yang sama. Tabel kosong bertuliskan "Belum ada kontak. Tambahkan email atau nomor telepon lewat Tambah Kontak."',
     lama:'Tabel memakai kolom "Contact Account / Code", "Contact Type", "Active", dan "Action" dengan jenis "Phone". Sakelar dan ikon pensil tidak berlabel, dan kontak dapat dinonaktifkan tanpa konfirmasi. Tabel Info Kontak di tab Kantor PPAT memakai kolom yang sama dan, bila kosong, bertuliskan "No contacts yet.".', ke:'anggota-detail', sorot:'#blokKontak' },
   { kode:'IDDS-OB-26', judul:'Detail Verifikasi: keputusan Setujui atau Tolak',
-    isi:'Kartu "Status verifikasi" menampilkan status anggota dengan lencana. Untuk anggota yang menunggu, tombol "Setujui" dan "Tolak" selalu terlihat. Setujui membuka dialog konfirmasi. Tolak membuka dialog yang mewajibkan alasan minimal 10 karakter. Bila alasan kosong, pesan galat tampil di bawah isian. Tombol "Tolak Anggota" berwarna merah. Alasan yang belum dikirim disimpan sebagai draf, dan pindah halaman memunculkan dialog "Tinggalkan halaman ini?".',
+    isi:'Kartu "Status verifikasi" menampilkan status anggota dengan lencana. Untuk anggota yang menunggu, tombol "Setujui" dan "Tolak" selalu terlihat. Setujui membuka dialog konfirmasi. Tolak membuka dialog yang mewajibkan alasan minimal 10 karakter. Bila alasan kosong, pesan galat tampil di bawah isian. Tombol "Tolak anggota" berwarna merah. Alasan yang belum dikirim disimpan sebagai draf, dan pindah halaman memunculkan dialog "Tinggalkan halaman ini?".',
     lama:'Halaman detail tidak menampilkan status verifikasi maupun tombol untuk menyetujui atau menolak. Admin tidak tahu cara menyelesaikan verifikasi dari halaman ini.', ke:'anggota-detail', sorot:'#blokKeputusan' },
   { kode:'IDDS-OB-27', judul:'Verifikasi Produk: subjudul sesuai isi, pencarian berlabel, chip, dan lencana berbahasa Indonesia',
     isi:'Subjudul berbunyi "Lihat calon PPAT yang sudah memilih paket Enterprise atau Trial." Pencarian memakai label "Cari order" yang terlihat. Saringan Semua Produk, Enterprise, dan Trial memakai IDDS Chip dengan jumlahnya. Kode paket mentah ditampilkan sebagai lencana "Enterprise" dan "Trial", dan status "Aktif" berlencana hijau. Seperti di live, baris tidak memiliki aksi. Bantuan menjelaskan bahwa status paket berubah secara otomatis.',
     lama:'Subjudul berbunyi "Daftar user yang telah sampai pada tahap memilih produk Enterprise atau Trial.". Lencana berisi kode mentah "ENTERPRISE" dan "TRIAL". Teks contoh pencarian terpotong ("kode orde").', ke:'produk', sorot:'#tabelPr' },
-  { kode:'IDDS-OB-28', judul:'Verifikasi Pembayaran: status berbahasa Indonesia, nominal baku, dan tombol Muat Ulang',
-    isi:'Subjudul sesuai isi: "Pantau tagihan Virtual Account calon PPAT dan status pembayarannya." Chip saringan menjadi "Semua Status", "Lunas", "Belum Dibayar", "Kedaluwarsa", dan "Gagal". Warna lencana: Lunas hijau, Belum Dibayar dan Kedaluwarsa kuning, serta Gagal merah. Paket dan metode ditulis "Enterprise" dan "Virtual Account", sedangkan nominal ditulis "Rp3.500.000". Tombol "Reload" menjadi "Muat Ulang" yang menampilkan "Memuat…" lalu waktu pembaruan terakhir. Tombol "Lihat Detail" menyebut nomor tagihan. Kolom "Nama User" menjadi "Nama Pengguna".',
+  { kode:'IDDS-OB-28', judul:'Verifikasi Pembayaran: status berbahasa Indonesia, nominal baku, dan tombol Muat ulang',
+    isi:'Subjudul sesuai isi: "Pantau tagihan Virtual Account calon PPAT dan status pembayarannya." Chip saringan menjadi "Semua Status", "Lunas", "Belum Dibayar", "Kedaluwarsa", dan "Gagal". Warna lencana: Lunas hijau, Belum Dibayar dan Kedaluwarsa kuning, serta Gagal merah. Paket dan metode ditulis "Enterprise" dan "Virtual Account", sedangkan nominal ditulis "Rp3.500.000". Tombol "Reload" menjadi "Muat ulang" yang menampilkan "Memuat…" lalu waktu pembaruan terakhir. Tombol "Lihat detail" menyebut nomor tagihan. Kolom "Nama User" menjadi "Nama Pengguna".',
     lama:'Subjudul menyebut "simulasi tagihan" yang tidak ada di halaman. Chip berbunyi "Paid (Lunas)", "Unpaid (Belum Bayar)", "Expired", dan "Failed". Lencana berisi "PAID"/"UNPAID", metode ditulis "VIRTUAL ACCOUNT", dan nominal "Rp 1". Tombol "Reload" tidak menampilkan status.', ke:'pembayaran', sorot:'#saringPb' },
   { kode:'IDDS-OB-29', judul:'Detail Transaksi Pembayaran: halaman detail dengan label berbahasa Indonesia',
     isi:'Detail dibuka sebagai halaman (Beranda › Verifikasi Pembayaran › Detail Transaksi Pembayaran). Tombol "Kembali ke Verifikasi Pembayaran" mengembalikan saringan, halaman tabel, dan fokus ke baris asal. Status tagihan tampil sebagai lencana. Label dibakukan menjadi "Waktu Pembuatan VA" dan "Waktu Pembayaran". Nilai kosong ditulis "Belum ada" atau "Belum dibayar", bukan "-".',
@@ -772,7 +772,7 @@ $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('op
 function jaga(lanjut) {
   if (!S.kotor) { lanjut(); return; }
   dialog({ judul:'Tinggalkan halaman ini?', konfirmasi:true, bahaya:true, isi:'<p>Perubahan yang belum disimpan akan hilang.</p>',
-    tombol:[['Tetap di Sini', 'secondary', null], ['Tinggalkan', 'primary', () => { S.kotor = false; lanjut(); }]] });
+    tombol:[['Tetap di sini', 'secondary', null], ['Tinggalkan', 'primary', () => { S.kotor = false; lanjut(); }]] });
 }
 function keLuar(url) { jaga(() => { location.href = url; }); }
 /* ===================== akhir KERANGKA STAF ONBOARDING · JS ===================== */
@@ -795,8 +795,8 @@ const th = t => `<th class="ina-table__header-cell" scope="col">${t}</th>`;
 const urlKantor = p => p.slug ? `<a class="url-kantor" href="https://dev-app.eppat.id/t/${p.slug}" target="_blank" rel="noopener" data-url-kantor aria-label="Buka aplikasi kantor ${esc(p.nama)} di tab baru">dev-app.eppat.id/t/<wbr>${p.slug}</a>` : '<span class="kc">Belum ada</span>';
 const chipSaring = (id, label, jenis, opsi, aktif) => `<div class="ina-chip ditandai" id="${id}"><div class="ina-chip__list" role="group" aria-label="${label}">${opsi.map(([k, t, n]) => `<button type="button" class="ina-chip__item ina-chip__item--size-small ina-chip__item--variant-outline ${aktif === k ? 'ina-chip__item--selected' : ''}" data-saring="${jenis}:${k}" aria-pressed="${aktif === k}">${t}<span class="jml-chip">${n.toLocaleString('id-ID')}</span></button>`).join('')}</div></div>`;
 const potongHal = (rows, st) => { const n = rows.length, hal = Math.min(st.hal, Math.max(1, Math.ceil(n / PER_HAL))), awal = (hal - 1) * PER_HAL; st.hal = hal; return { n, hal, awal, isi:rows.slice(awal, awal + PER_HAL) }; };
-const kosongBaris = (kol, cari, nmSaring, benda) => `<tr><td colspan="${kol}" class="ina-table__empty-cell kosong">${cari ? `Tidak ada ${benda} yang cocok dengan "${esc(cari)}"${nmSaring ? ` di saringan ${nmSaring}` : ''}.<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'data-hapus-cari')}</div>`
-  : nmSaring ? `Belum ada ${benda} di saringan ${nmSaring}.<div style="margin-top:10px">${tombol('Tampilkan Semua', 'secondary', 'sm', 'data-tampil-semua')}</div>` : `Belum ada ${benda}.`}</td></tr>`;
+const kosongBaris = (kol, cari, nmSaring, benda) => `<tr><td colspan="${kol}" class="ina-table__empty-cell kosong">${cari ? `Tidak ada ${benda} yang cocok dengan "${esc(cari)}"${nmSaring ? ` di saringan ${nmSaring}` : ''}.<div style="margin-top:10px">${tombol('Hapus pencarian', 'secondary', 'sm', 'data-hapus-cari')}</div>`
+  : nmSaring ? `Belum ada ${benda} di saringan ${nmSaring}.<div style="margin-top:10px">${tombol('Tampilkan semua', 'secondary', 'sm', 'data-tampil-semua')}</div>` : `Belum ada ${benda}.`}</td></tr>`;
 
 /* ---------------- layar: Verifikasi Anggota ---------------- */
 const SARING_AG = [['semua', 'Semua'], ['belum', 'Belum Verifikasi'], ['sudah', 'Sudah Verifikasi']];
@@ -820,7 +820,7 @@ function layarAnggota() {
         <td class="ina-table__cell">${urlKantor(p)}</td>
         <td class="ina-table__cell"><div class="kontak-email">${esc(p.email).replace('@', '<wbr>@')}</div><div class="kc">${p.telp}</div></td>
         <td class="ina-table__cell">${lencanaVerif(p.verif)}</td>
-        <td class="ina-table__cell"><div class="aksi-baris">${tombol('Lihat Detail', 'secondary', 'sm', `data-detail="${DATA.indexOf(p)}" aria-label="Lihat detail ${esc(p.nama)}"`, ik('mata', 14))}</div></td></tr>`).join('')
+        <td class="ina-table__cell"><div class="aksi-baris">${tombol('Lihat detail', 'secondary', 'sm', `data-detail="${DATA.indexOf(p)}" aria-label="Lihat detail ${esc(p.nama)}"`, ik('mata', 14))}</div></td></tr>`).join('')
         : kosongBaris(7, S.ag.cari, nmS, 'anggota')}</tbody></table></div></div>
       ${paginasi('ag', hal, n)}</div>${usulan('IDDS-OB-22')}`;
 }
@@ -856,7 +856,7 @@ function layarDetailAnggota() {
             ${tf('ppatDepan', 'Nama Depan', f.depan, 'Contoh: Calon', true)}${tf('ppatTengah', 'Nama Tengah', f.tengah)}${tf('ppatBelakang', 'Nama Belakang', f.belakang)}</div>
           <div class="form-kaki"><span class="ket-simpan" aria-live="polite" id="ketSimpanPpat">${f.simpan ? `Tersimpan ${tglJam(f.simpan)}.` : ''}</span>${tombol('Simpan PPAT', 'primary', 'md', 'id="simpanPpat"')}</div>${usulan('IDDS-OB-24')}</section>
         <section class="blok ditandai" id="panel-kantor" role="tabpanel" aria-labelledby="tab-kantor" ${S.tab === 'kantor' ? '' : 'hidden'}>${panelKantor(p, f)}${usulan('IDDS-OB-24')}</section>
-        <section class="blok ditandai" id="blokKontak" aria-labelledby="jdKontak" ${S.tab === 'kantor' ? 'hidden' : ''}><div class="blok-atas"><h2 id="jdKontak" style="display:flex;align-items:center;gap:8px">${ik('telepon', 18)}Info Kontak</h2>${tombol('Tambah Kontak', 'primary', 'md', 'id="tambahKontak"', ik('tambah', 16))}</div>
+        <section class="blok ditandai" id="blokKontak" aria-labelledby="jdKontak" ${S.tab === 'kantor' ? 'hidden' : ''}><div class="blok-atas"><h2 id="jdKontak" style="display:flex;align-items:center;gap:8px">${ik('telepon', 18)}Info Kontak</h2>${tombol('Tambah kontak', 'primary', 'md', 'id="tambahKontak"', ik('tambah', 16))}</div>
           <div class="tabel-wadah" style="margin-top:14px"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" id="tabelKontak" aria-label="Kontak ${esc(p.nama)}">
             <thead class="ina-table__header"><tr>${['No.', 'Akun / Nomor', 'Jenis Kontak', 'Status', '<span style="display:block;text-align:right">Aksi</span>'].map(th).join('')}</tr></thead>
             <tbody class="ina-table__body">${kontakBaris}</tbody></table></div></div></div>${usulan('IDDS-OB-25')}</section>
@@ -872,7 +872,7 @@ const kotorKtr = () => !!$('#kNama') && JSON.stringify(drafKtr()) !== JSON.strin
 const kakiKtr = tombolSimpan => `<div class="kartu-kaki"><span class="kaki-st ${S.ktrKotor ? 'ada' : ''}" data-st="kantor" aria-live="polite">${S.ktrKotor ? `${ik('info', 14)} Belum disimpan` : `${ik('centang', 14)} Belum ada perubahan`}</span>${tombol('Batal', 'secondary', 'md', 'data-batal="kantor"', ik('x', 16))}${tombolSimpan}</div>`;
 function blokKontakKantor(p) {
   const L = p.kontakKtr;
-  return `<div class="sub-blok ditandai" id="blokKontakKantor"><h3 class="sub-kepala">${ik('telepon', 18)} Info Kontak Kantor <span class="kanan">${tombol('Tambah Kontak', 'primary', 'sm', 'data-tambah-kontak="kantor"', ik('tambah', 16))}</span></h3>
+  return `<div class="sub-blok ditandai" id="blokKontakKantor"><h3 class="sub-kepala">${ik('telepon', 18)} Info Kontak Kantor <span class="kanan">${tombol('Tambah kontak', 'primary', 'sm', 'data-tambah-kontak="kantor"', ik('tambah', 16))}</span></h3>
     <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Info kontak kantor">
       <thead class="ina-table__header"><tr>${['No.', 'Akun / Nomor', 'Jenis Kontak', 'Status', 'Aksi'].map(th).join('')}</tr></thead>
       <tbody class="ina-table__body">${L.length ? L.map((k, i) => `<tr class="ina-table__row"><td class="ina-table__cell">${i + 1}.</td>
@@ -905,7 +905,7 @@ function panelKantor(p, f) {
         <div class="zoom">${tombol(ik('plus', 16), 'secondary', 'sm', 'class="ikon-saja" data-zoom="1" aria-label="Perbesar peta"')}${tombol(ik('minus', 16), 'secondary', 'sm', 'class="ikon-saja" data-zoom="-1" aria-label="Perkecil peta"')}</div>
         <div class="cari-peta"><div class="ina-input-search"><div class="ina-input-search__wrapper"><span class="ina-input-search__search-icon">${ik('cari', 18)}</span><input id="cariLokasi" class="ina-input-search__input" type="search" placeholder="Cari lokasi (mis. Monas, Jakarta)…" aria-label="Cari lokasi di peta" autocomplete="off"></div></div></div></div>
         <p class="peta-ket">Klik peta atau cari lokasi untuk mengisi koordinat GPS secara otomatis.</p></div></div>
-      ${kakiKtr(tombol('Simpan Data Kantor', 'primary', 'md', `id="simpanKantor" ${S.memuatKtr ? 'disabled' : ''}`, S.memuatKtr ? '<span class="ina-spinner ina-spinner--spinner-only" aria-hidden="true"><span class="ina-spinner__element ina-spinner__element--size-xs ina-spinner__element--color-primary"></span></span>' : ik('simpan', 16)))}</div>`;
+      ${kakiKtr(tombol('Simpan data kantor', 'primary', 'md', `id="simpanKantor" ${S.memuatKtr ? 'disabled' : ''}`, S.memuatKtr ? '<span class="ina-spinner ina-spinner--spinner-only" aria-hidden="true"><span class="ina-spinner__element ina-spinner__element--size-xs ina-spinner__element--color-primary"></span></span>' : ik('simpan', 16)))}</div>`;
 }
 const posPin = k => { const lat = parseFloat(k.lat), lng = parseFloat(k.lng); if (isNaN(lat) || isNaN(lng)) return '200 150'; return `${Math.max(20, Math.min(380, 200 + (lng - 106.8456) * 4000))} ${Math.max(30, Math.min(290, 150 - (lat + 6.2088) * 4000))}`; };
 function segarKtr() {
@@ -918,7 +918,7 @@ function isiKtr(d) { KTR_ISIAN.forEach(([id, k]) => { const i = $('#' + id); if 
 function batalKantor() {
   if (!kotorKtr()) { toast('Belum ada perubahan untuk dibatalkan.'); return; }
   dialog({ judul:'Batalkan perubahan?', konfirmasi:true, bahaya:true, isi:`<p>Isian di tab Kantor PPAT dikembalikan ke data yang tersimpan.${usulan('IDDS-OB-24')}</p>`,
-    tombol:[['Lanjutkan Mengisi', 'secondary', null], ['Buang Perubahan', 'primary', () => { isiKtr(profil(pAktif()).ktr); toast('Perubahan dibatalkan.'); }]] });
+    tombol:[['Lanjutkan mengisi', 'secondary', null], ['Buang perubahan', 'primary', () => { isiKtr(profil(pAktif()).ktr); toast('Perubahan dibatalkan.'); }]] });
 }
 function simpanKantor() {
   const k = drafKtr(); let ada = false; KTR_ISIAN.forEach(([id]) => bersih(id));
@@ -971,7 +971,7 @@ function layarPembayaran() {
     <div class="saring-ob ditandai" id="saringPb" role="search">
       <div class="baris"><div><label class="lbl" for="cariPb">Cari transaksi</label>${cariIsian('cariPb', 'Cari nama, nomor invoice, atau VA…', S.pb.cari, 'Cari transaksi menurut nama, nomor invoice, atau nomor Virtual Account')}</div>
         <span class="jumlah" aria-live="polite">${n} transaksi</span>
-        <div class="atas-kanan"><span class="ket-muat" aria-live="polite" id="ketMuat">${S.muat ? 'Memuat data terbaru…' : S.dimuat ? `Diperbarui ${tglJam(S.dimuat)}` : ''}</span>${tombol(S.muat ? 'Memuat…' : 'Muat Ulang', 'secondary', 'md', `id="muatUlang" ${S.muat ? 'disabled' : ''}`, ik('ulang', 16))}</div></div>
+        <div class="atas-kanan"><span class="ket-muat" aria-live="polite" id="ketMuat">${S.muat ? 'Memuat data terbaru…' : S.dimuat ? `Diperbarui ${tglJam(S.dimuat)}` : ''}</span>${tombol(S.muat ? 'Memuat…' : 'Muat ulang', 'secondary', 'md', `id="muatUlang" ${S.muat ? 'disabled' : ''}`, ik('ulang', 16))}</div></div>
       ${chipSaring('chipPb', 'Saring menurut status pembayaran', 'pb', SARING_PB.map(([k, t]) => [k, t, TRANSAKSI.filter(x => k === 'semua' || x.status === k).length]), S.pb.saring)}${usulan('IDDS-OB-28')}
     </div>
     <div class="tabel-wadah tabel-v" id="tabelPb"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Daftar transaksi pembayaran">
@@ -981,7 +981,7 @@ function layarPembayaran() {
         <td class="ina-table__cell">${esc(t.p.nama)}</td><td class="ina-table__cell">${lencanaPaket(t.paket)}</td>
         <td class="ina-table__cell">Virtual Account</td><td class="ina-table__cell"><span class="mono">${t.va}</span></td>
         <td class="ina-table__cell" style="white-space:nowrap">${rupiah(t.nominal)}</td><td class="ina-table__cell">${lencanaBayar(t.status)}</td>
-        <td class="ina-table__cell"><div class="aksi-baris">${tombol('Lihat Detail', 'secondary', 'sm', `data-trx="${TRANSAKSI.indexOf(t)}" aria-label="Lihat detail transaksi ${t.invoice}"`, ik('mata', 14))}</div></td></tr>`).join('')
+        <td class="ina-table__cell"><div class="aksi-baris">${tombol('Lihat detail', 'secondary', 'sm', `data-trx="${TRANSAKSI.indexOf(t)}" aria-label="Lihat detail transaksi ${t.invoice}"`, ik('mata', 14))}</div></td></tr>`).join('')
         : kosongBaris(9, S.pb.cari, nmS, 'transaksi')}</tbody></table></div></div>
       ${paginasi('pb', hal, n)}</div>`;
 }
@@ -1029,7 +1029,7 @@ function tolak() {
   dialog({ judul:'Tolak verifikasi anggota?', konfirmasi:true, bahaya:true,
     isi:`<div class="modal-gap"><p>Verifikasi <b>${esc(p.nama)}</b> (${p.id}) akan ditolak. Alasan dikirim ke email anggota agar ia dapat memperbaiki datanya.</p>
       ${ta('alasanTolak', 'Alasan penolakan', S.alasan, 'Contoh: Nomor SK PPAT tidak sesuai dengan data asosiasi.', 'Wajib diisi, minimal 10 karakter.', '', 3, true)}</div>`,
-    tombol:[['Batal', 'secondary', null], ['Tolak Anggota', 'primary', () => {
+    tombol:[['Batal', 'secondary', null], ['Tolak anggota', 'primary', () => {
       const v = S.alasan.trim();
       if (!v) { galat('alasanTolak', 'Alasan penolakan wajib diisi.'); $('#alasanTolak').focus(); return; }
       if (v.length < 10) { galat('alasanTolak', 'Alasan terlalu singkat. Tulis minimal 10 karakter.'); $('#alasanTolak').focus(); return; }
@@ -1213,7 +1213,7 @@ const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
 const BANTUAN = {
   anggota:() => ({ judul:'Bantuan Verifikasi Anggota', isi:`<p>Verifikasi Anggota menampilkan calon PPAT yang sudah masuk pertama kali. Di sini Anda memeriksa data keanggotaan mereka sebelum mereka dapat memilih paket.</p>
     <h4 class="bantu-sub">Langkah memverifikasi</h4>
-    ${lgkh(['Pilih chip <b>Belum Verifikasi</b> untuk melihat anggota yang perlu diperiksa.', 'Klik <b>Lihat Detail</b> pada baris anggota.', 'Periksa data PPAT, data kantor, dan kontak.', 'Klik <b>Setujui</b> bila data sesuai, atau <b>Tolak</b> dan tulis alasannya.'])}
+    ${lgkh(['Pilih chip <b>Belum Verifikasi</b> untuk melihat anggota yang perlu diperiksa.', 'Klik <b>Lihat detail</b> pada baris anggota.', 'Periksa data PPAT, data kantor, dan kontak.', 'Klik <b>Setujui</b> bila data sesuai, atau <b>Tolak</b> dan tulis alasannya.'])}
     <h4 class="bantu-sub">Arti status</h4>
     ${istilah([['Menunggu Verifikasi', 'Anggota sudah masuk pertama kali dan menunggu diperiksa.'], ['Sudah Diverifikasi', 'Data anggota sudah disetujui. Anggota dapat memilih paket.'], ['Ditolak', 'Data anggota tidak disetujui. Anggota menerima alasan penolakan lewat email.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1227,7 +1227,7 @@ const BANTUAN = {
     ${kontak()}` }),
   'anggota-detail':() => ({ judul:'Bantuan Detail Verifikasi', isi:`<p>Detail Verifikasi menampilkan data PPAT, data kantor, dan kontak anggota. Dari halaman ini Anda menyetujui atau menolak verifikasinya.</p>
     <h4 class="bantu-sub">Langkah memutuskan verifikasi</h4>
-    ${lgkh(['Buka tab <b>PPAT</b> dan <b>Kantor PPAT</b>, lalu periksa datanya.', 'Perbaiki data bila perlu, lalu klik <b>Simpan PPAT</b> atau <b>Simpan Data Kantor</b>.', 'Klik <b>Setujui</b>, lalu konfirmasi di dialog.', 'Atau klik <b>Tolak</b>, tulis alasan minimal 10 karakter, lalu klik <b>Tolak Anggota</b>.'])}
+    ${lgkh(['Buka tab <b>PPAT</b> dan <b>Kantor PPAT</b>, lalu periksa datanya.', 'Perbaiki data bila perlu, lalu klik <b>Simpan PPAT</b> atau <b>Simpan data kantor</b>.', 'Klik <b>Setujui</b>, lalu konfirmasi di dialog.', 'Atau klik <b>Tolak</b>, tulis alasan minimal 10 karakter, lalu klik <b>Tolak anggota</b>.'])}
     <h4 class="bantu-sub">Istilah</h4>
     ${istilah([['Kode', 'Kode pengguna yang dibuat sistem. Tidak dapat diubah.'], ['Kontak aktif', 'Kontak yang menerima pemberitahuan pendaftaran dan verifikasi.'], ['Draf alasan', 'Alasan penolakan yang sudah diketik tetapi belum dikirim.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1235,14 +1235,14 @@ const BANTUAN = {
       ['Apa yang terjadi setelah saya menyetujui?', 'Status anggota menjadi Sudah Diverifikasi dan tahap Verifikasi Anggota selesai. Anggota dapat lanjut memilih paket.'],
       ['Apa yang terjadi setelah saya menolak?', 'Status anggota menjadi Ditolak. Alasan penolakan dikirim ke email anggota.'],
       ['Mengapa alasan penolakan wajib diisi?', 'Agar anggota tahu data apa yang perlu diperbaiki sebelum mendaftar ulang.'],
-      ['Mengapa muncul dialog "Tinggalkan halaman ini?"', 'Ada perubahan data atau draf alasan yang belum disimpan atau dikirim. Pilih "Tetap di Sini" untuk menyimpannya dulu.'],
+      ['Mengapa muncul dialog "Tinggalkan halaman ini?"', 'Ada perubahan data atau draf alasan yang belum disimpan atau dikirim. Pilih "Tetap di sini" untuk menyimpannya dulu.'],
       ['Bagaimana menonaktifkan kontak?', 'Klik sakelar Aktif pada baris kontak, lalu konfirmasi. Kontak nonaktif tidak menerima pemberitahuan.'],
       ['Bagaimana kembali ke daftar?', 'Klik "Kembali ke Verifikasi Anggota". Saringan dan halaman tabel tetap seperti sebelumnya.'],
       ['Bagaimana mengisi koordinat GPS kantor?', 'Di tab Kantor PPAT, klik titik kantor pada peta atau ketik nama tempat di kotak Cari lokasi, lalu tekan Enter. GPS Lat dan GPS Long terisi otomatis.']])}
     ${kontak()}` }),
   produk:() => ({ judul:'Bantuan Verifikasi Produk', isi:`<p>Verifikasi Produk menampilkan setiap order paket yang dibuat calon PPAT, baik Trial maupun Enterprise.</p>
     <h4 class="bantu-sub">Langkah mencari order</h4>
-    ${lgkh(['Ketik nama, ID PPAT, atau kode order di kotak <b>Cari order</b>.', 'Pilih chip <b>Enterprise</b> atau <b>Trial</b> untuk menyaring menurut paket.', 'Klik <b>Hapus Pencarian</b> atau <b>Tampilkan Semua</b> bila tidak ada hasil.'])}
+    ${lgkh(['Ketik nama, ID PPAT, atau kode order di kotak <b>Cari order</b>.', 'Pilih chip <b>Enterprise</b> atau <b>Trial</b> untuk menyaring menurut paket.', 'Klik <b>Hapus pencarian</b> atau <b>Tampilkan semua</b> bila tidak ada hasil.'])}
     <h4 class="bantu-sub">Istilah</h4>
     ${istilah([['Trial', 'Paket coba gratis dengan batas waktu dan transaksi.'], ['Enterprise', 'Paket berbayar. Tagihannya terlihat di Verifikasi Pembayaran.'], ['ORD-RENEW', 'Order perpanjangan paket Enterprise.'], ['Aktif', 'Paket sudah berjalan.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1256,17 +1256,17 @@ const BANTUAN = {
     ${kontak()}` }),
   pembayaran:() => ({ judul:'Bantuan Verifikasi Pembayaran', isi:`<p>Verifikasi Pembayaran menampilkan semua tagihan Virtual Account untuk paket Enterprise beserta status pembayarannya.</p>
     <h4 class="bantu-sub">Langkah memeriksa tagihan</h4>
-    ${lgkh(['Pilih status di chip saringan, misalnya <b>Belum Dibayar</b>.', 'Ketik nama, nomor invoice, atau nomor VA di kotak <b>Cari transaksi</b>.', 'Klik <b>Lihat Detail</b> untuk melihat rincian tagihan.', 'Klik <b>Muat Ulang</b> untuk mengambil status pembayaran terbaru.'])}
+    ${lgkh(['Pilih status di chip saringan, misalnya <b>Belum Dibayar</b>.', 'Ketik nama, nomor invoice, atau nomor VA di kotak <b>Cari transaksi</b>.', 'Klik <b>Lihat detail</b> untuk melihat rincian tagihan.', 'Klik <b>Muat ulang</b> untuk mengambil status pembayaran terbaru.'])}
     <h4 class="bantu-sub">Arti status</h4>
     ${istilah([['Lunas', 'Tagihan sudah dibayar.'], ['Belum Dibayar', 'Tagihan sudah dibuat dan menunggu dibayar.'], ['Kedaluwarsa', 'Tagihan tidak dibayar sampai batas waktunya. Anggota perlu membuat tagihan baru.'], ['Gagal', 'Pembayaran ditolak bank atau terjadi gangguan.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('b', [
-      ['Apakah status pembayaran berubah sendiri?', 'Ya. Status berubah saat bank mengirim konfirmasi. Klik Muat Ulang untuk melihat status terbaru.'],
-      ['Anggota sudah membayar, tetapi status masih Belum Dibayar. Apa yang harus dilakukan?', 'Klik Muat Ulang. Bila status tetap sama setelah 15 menit, minta bukti transfer dan hubungi tim dukungan.'],
+      ['Apakah status pembayaran berubah sendiri?', 'Ya. Status berubah saat bank mengirim konfirmasi. Klik Muat ulang untuk melihat status terbaru.'],
+      ['Anggota sudah membayar, tetapi status masih Belum Dibayar. Apa yang harus dilakukan?', 'Klik Muat ulang. Bila status tetap sama setelah 15 menit, minta bukti transfer dan hubungi tim dukungan.'],
       ['Apa yang harus dilakukan bila tagihan kedaluwarsa?', 'Minta anggota masuk ke portal dan memilih paket lagi agar tagihan baru dibuat.'],
       ['Apa arti angka di kolom VA / Kode?', 'Nomor Virtual Account tujuan transfer untuk tagihan itu.'],
       ['Apakah saya dapat mengubah status secara manual?', 'Tidak. Status hanya berubah dari konfirmasi bank agar catatan pembayaran tetap sah.'],
-      ['Mengapa saringan Gagal kosong?', 'Belum ada pembayaran yang gagal. Klik Tampilkan Semua untuk melihat semua transaksi.']])}
+      ['Mengapa saringan Gagal kosong?', 'Belum ada pembayaran yang gagal. Klik Tampilkan semua untuk melihat semua transaksi.']])}
     ${kontak()}` }),
   'pembayaran-detail':() => ({ judul:'Bantuan Detail Transaksi', isi:`<p>Detail Transaksi Pembayaran menampilkan rincian satu tagihan Virtual Account: pengguna, paket, nomor VA, nominal, dan waktu pembayarannya.</p>
     <h4 class="bantu-sub">Istilah</h4>

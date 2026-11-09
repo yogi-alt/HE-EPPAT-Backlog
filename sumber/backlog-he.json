@@ -1326,6 +1326,24 @@
       "versi": "v2"
     },
     {
+      "kode": "HE-EAWK-09",
+      "fitur": "Penandatanganan Akta (Klien)",
+      "judul": "Tanda tangan Klien per lembar minuta dan keterangannya",
+      "saat_ini": "Di live, setiap tugas tanda tangan Klien terikat satu lembar minuta (sheet_no), tetapi layar Klien tidak menyebut lembar. Klien bisa bingung saat diminta menandatangani akta yang sama untuk kedua kalinya.",
+      "usulan": "Daftar akta menampilkan lencana Lembar Pertama atau Lembar Kedua. Panel info dan dialog konfirmasi menyebut Minuta Lembar Pertama atau Kedua, dan halaman pertama PDF memuat tulisan lembarnya. Alert menjelaskan dua rangkap: pada Lembar Pertama, Klien diberi tahu bahwa Lembar Kedua menyusul; pada Lembar Kedua, Klien diberi tahu bahwa Lembar Pertama sudah ditandatangani, Lembar Pertama disimpan di kantor PPAT, dan Lembar Kedua disampaikan ke Kantor Pertanahan.",
+      "prinsip": "H10 Help and Documentation",
+      "halaman": "37 (Temuan 2)",
+      "prioritas": "Sedang",
+      "layar": "Penandatanganan Akta (Klien)",
+      "acuan": "Prototipe EAWK",
+      "selesai_bila": "Klien selalu tahu lembar mana yang sedang ditandatangani dan mengapa diminta menandatangani lagi.",
+      "status": "Prototipe siap",
+      "catatan": "Urutan per lembar mengikuti live (sheet_no). Keterangan lembar adalah usulan HE karena live belum menampilkannya.",
+      "tanggal": "2026-11-09",
+      "sumber": "Penelusuran live 9 Nov 2026",
+      "versi": "v2"
+    },
+    {
       "kode": "HE-VERIF-01",
       "fitur": "Verifikasi Berkas (Asisten/PPAT)",
       "judul": "Verifikasi Berkas: istilah CA dijelaskan dan status berbahasa Indonesia",
@@ -6759,8 +6777,20 @@
     {
       "tanggal": "2026-11-09",
       "kode": "IDDS-TN-44; IDDS-TN-50; IDDS-TN-55",
-      "perubahan": "Renvooi: tahap permohonan pindah ke Informasi Akta dan kartu sesi bernama Sesi Renvooi, sehingga status akta dan status sesi tidak tertukar. Bahasa di Arsip Akta, Renvooi, dan Template Akta dirapikan (SPOK, kata baku, Pratinjau Akta). Tombol naik/turun bagian di editor template memakai IDDS Button, juga di Platform.",
+      "perubahan": "Renvooi: lencana di kepala halaman mengikuti status renvooi, sama dengan kartu Renvooi seperti live. Bahasa di Arsip Akta, Renvooi, dan Template Akta dirapikan (SPOK, kata baku, Pratinjau Akta). Tombol naik/turun bagian di editor template memakai IDDS Button, juga di Platform.",
       "berkas": "sumber/tn-proses-badan.html, sumber/pl-akta-badan.html"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "HE-UMUM-01",
+      "perubahan": "Label tombol di semua prototipe v2 diseragamkan ke sentence case sesuai pedoman penulisan IDDS (204 label). Akronim, nama diri, dan nama menu/layar/lembar yang dirujuk tetap berhuruf kapital; judul halaman dan dialog tetap Title Case. Rujukan nama tombol di teks bantuan ikut disesuaikan.",
+      "berkas": "sumber/*-badan.html, sumber/order-idds.html, sumber/tera-idds.html, sumber/sesi-bersama.html, sumber/notifikasi-bersama.html, sumber/trial-sisip.js, sumber/buat-trial.js"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "HE-EAWK-09",
+      "perubahan": "Layar tanda tangan Klien menyebut lembar minuta di daftar, panel info, dialog, OTP, dan halaman pertama PDF, dengan penjelasan dua rangkap.",
+      "berkas": "sumber/eawk-badan.html"
     }
   ]
 }

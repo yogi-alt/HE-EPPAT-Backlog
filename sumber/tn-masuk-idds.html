@@ -476,10 +476,10 @@ const UBAH = [
     isi:'Kata sandi pendaftaran memakai daftar centang yang sama dengan Ganti Kata Sandi, Akun Saya, dan Tambah Pengguna. Syaratnya minimal 12 karakter serta memuat huruf besar, huruf kecil, angka, dan simbol (- _ ? ! & + % # @ * $ ^) (lihat HE-CA-08 dan HE-USER-03).',
     lama:'Kata sandi pendaftaran cukup "Minimal 8 karakter", sedangkan layar Ganti Kata Sandi pada proses masuk yang sama meminta 12 karakter dan 4 jenis karakter.', ke:'daftar', sorot:'#syaratDaftar' },
   { kode:'IDDS-TN-06', judul:'Halaman Masuk dan Daftar: istilah dibakukan',
-    isi:'"PPAT belum dipilih" menjadi "Kantor PPAT belum dipilih". Kata "Login" pada tautan kembali menjadi "Masuk". Tombol "Hapus draft" menjadi "Kosongkan Formulir" dan meminta konfirmasi. Pesan "Kode OTP sudah dikirim ke email dan WhatsApp." tetap dipakai.',
+    isi:'"PPAT belum dipilih" menjadi "Kantor PPAT belum dipilih". Kata "Login" pada tautan kembali menjadi "Masuk". Tombol "Hapus draft" menjadi "Kosongkan formulir" dan meminta konfirmasi. Pesan "Kode OTP sudah dikirim ke email dan WhatsApp." tetap dipakai.',
     lama:'Istilah bercampur bahasa Inggris, misalnya "Pilih Role", "Kembali ke login", dan "Hapus draft". Tombol "Hapus draft" langsung menghapus isian tanpa konfirmasi.', ke:'daftar', sorot:'#dNama' },
   { kode:'IDDS-TN-07', judul:'Verifikasi OTP: masa berlaku kode terlihat di layar',
-    isi:'Setiap kanal (Email dan WhatsApp) menampilkan hitung mundur "Kode berlaku 4:59" yang berubah kuning saat sisa waktunya kurang dari 1 menit. Jeda "Kirim ulang dalam 0:59" tampil sejak kode dikirim. Saat waktu habis, kolom kode dan tombol Verifikasi nonaktif, lalu muncul pesan "Kode sudah kedaluwarsa". Tombol "Kirim Ulang" memulai hitungan baru. Pola sama dengan HE-LOGIN-01, HE-EAW-04, dan HE-EAWK-05. Durasi 5 menit adalah angka contoh; masa berlaku sebenarnya mengikuti server.',
+    isi:'Setiap kanal (Email dan WhatsApp) menampilkan hitung mundur "Kode berlaku 4:59" yang berubah kuning saat sisa waktunya kurang dari 1 menit. Jeda "Kirim ulang dalam 0:59" tampil sejak kode dikirim. Saat waktu habis, kolom kode dan tombol Verifikasi nonaktif, lalu muncul pesan "Kode sudah kedaluwarsa". Tombol "Kirim ulang" memulai hitungan baru. Pola sama dengan HE-LOGIN-01, HE-EAW-04, dan HE-EAWK-05. Durasi 5 menit adalah angka contoh; masa berlaku sebenarnya mengikuti server.',
     lama:'Hanya ada tombol "Kirim ulang" dengan jeda 60 detik. Masa berlaku kode tidak disebut di layar.', ke:'otp', sorot:'#waktu-email' },
   { kode:'IDDS-TN-42', judul:'Pendaftaran mandiri hanya untuk Klien',
     isi:'Isian Peran dihapus karena pendaftar mandiri selalu menjadi Klien. Judul menjadi "Buat Akun Klien". Akun PPAT dan Asisten dibuat Super Admin melalui Daftar Pengguna. Di Peran & Izin, hanya Klien yang berstatus peran publik.',
@@ -507,7 +507,7 @@ const stepper = kini => `<div class="ina-stepper ina-stepper--horizontal stepper
 
 /* baris atas kartu: tombol kembali (IDDS secondary sm) + Bantuan (IDDS-TN-38) */
 const atasTn = (kembali = '') => `<div class="atas-tn">${kembali}<div class="kanan-tn ditandai">${tombol('Bantuan', 'secondary', 'sm', 'id="bukaBantuan" aria-haspopup="dialog" aria-label="Bantuan untuk halaman ini"', ik('tanya', 14))}${usulan('IDDS-TN-38')}</div></div>`;
-const kembaliMasuk = () => tombol('Kembali ke Halaman Masuk', 'secondary', 'sm', 'data-ke="masuk"', ik('kiri', 14));
+const kembaliMasuk = () => tombol('Kembali ke halaman masuk', 'secondary', 'sm', 'data-ke="masuk"', ik('kiri', 14));
 
 /* ---------------- Masuk ---------------- */
 /* perjalanan Trial (Backlog-HE-TRIAL): pilihan Trial ditonjolkan bila pengguna datang dari portal */
@@ -539,7 +539,7 @@ function layar2fa() {
 }
 /* buat kata sandi baru dari tautan email (Atur Ulang Kata Sandi, HE-USER-14) */
 function layarGanti() {
-  if (S.berhasil) return `<div class="wadah">${atasTn()}<section class="kartu-tn status-tn"><span class="bulat">${ik('centang', 34)}</span><h1>Kata sandi berhasil disimpan</h1><p>Gunakan kata sandi baru setiap kali Anda masuk.</p>${tombol('Lanjut ke Aplikasi', 'primary', 'lg', 'class="penuh" data-ke-app', ik('panah', 16))}</section></div>`;
+  if (S.berhasil) return `<div class="wadah">${atasTn()}<section class="kartu-tn status-tn"><span class="bulat">${ik('centang', 34)}</span><h1>Kata sandi berhasil disimpan</h1><p>Gunakan kata sandi baru setiap kali Anda masuk.</p>${tombol('Lanjut ke aplikasi', 'primary', 'lg', 'class="penuh" data-ke-app', ik('panah', 16))}</section></div>`;
   return `<div class="wadah">${atasTn()}<section class="kartu-tn" aria-labelledby="judulGanti">
       <div class="kepala-tn"><span class="ikon">${ik('kunci', 20)}</span><div><div class="eb">Atur ulang kata sandi</div><h1 id="judulGanti">Buat Kata Sandi Baru</h1></div></div>
       <p class="pengantar">Buat kata sandi baru untuk akun <b>${esc(S.email || 'nama@contoh.id')}</b>.</p>
@@ -547,7 +547,7 @@ function layarGanti() {
       ${pwIsian('gBaru', 'Kata Sandi Baru', 'Buat kata sandi baru')}
       ${syaratHtml('syaratGanti')}
       ${pwIsian('gUlang', 'Konfirmasi Kata Sandi Baru', 'Ulangi kata sandi baru')}
-      ${tombol('Simpan Kata Sandi', 'primary', 'lg', 'id="kirimGanti" class="penuh" disabled')}
+      ${tombol('Simpan kata sandi', 'primary', 'lg', 'id="kirimGanti" class="penuh" disabled')}
       <div class="kaki-tn" style="margin-top:14px;padding-top:12px">${tombol('Keluar', 'tertiary', 'sm', 'data-ke="masuk"')}</div>
     </section></div>`;
 }
@@ -572,7 +572,7 @@ function layarDaftar() {
       </div>
       <label class="setuju" for="dSetuju"><span class="ina-checkbox"><input type="checkbox" id="dSetuju" class="ina-checkbox__input peer" aria-describedby="h-dSetuju" ${d.setuju ? 'checked' : ''}><span class="ina-checkbox__box ina-checkbox__box--${d.setuju ? 'checked' : 'unchecked'}">${d.setuju ? ik('centang', 12) : ''}</span></span><span>Saya menyetujui ketentuan penggunaan layanan dan memastikan data yang saya masukkan benar.</span></label>
       <div class="ina-text-field__helper-text setuju-galat" id="h-dSetuju" role="alert" style="margin-top:6px"></div>
-      <div class="aksi-tn">${tombol('Kosongkan Formulir', 'secondary', 'md', 'id="kosongkan"', ik('sampah', 16))}${tombol(S.memuat ? 'Mengirim OTP…' : 'Daftar dan Kirim OTP', 'primary', 'md', `id="kirimDaftar" ${S.memuat ? 'disabled' : ''}`, S.memuat ? spinner : ik('panah', 16))}</div>
+      <div class="aksi-tn">${tombol('Kosongkan formulir', 'secondary', 'md', 'id="kosongkan"', ik('sampah', 16))}${tombol(S.memuat ? 'Mengirim OTP…' : 'Daftar dan Kirim OTP', 'primary', 'md', `id="kirimDaftar" ${S.memuat ? 'disabled' : ''}`, S.memuat ? spinner : ik('panah', 16))}</div>
     </section></div>`;
 }
 /* masa berlaku kode terlihat di layar (IDDS-TN-07, pola sama dengan HE-LOGIN-01 / HE-EAW-04 / HE-EAWK-05) */
@@ -582,11 +582,11 @@ function kanalOtp(k, judul, ikon, tujuan) {
   const ok = S.otp[k], sisa = S.otp.sisa[k], habis = sisa <= 0;
   return `<div class="otp-kanal ${ok ? 'ok' : ''}" id="kanal-${k}"><div class="atas">${ik(ikon, 18)}<b>${judul}</b><small>${tujuan}</small>${ok ? badge('Terverifikasi', 'success') : badge('Belum diverifikasi', 'neutral')}</div>
     ${ok ? '' : `<div class="baris"><div class="ina-one-time-password"><div class="ina-one-time-password__container" role="group" aria-label="Kode OTP ${judul}">${Array.from({ length:6 }, (_, i) => `<input class="ina-one-time-password__input" inputmode="numeric" maxlength="1" aria-label="Digit ${i + 1} ${judul}" data-otpk="${k}" data-i="${i}" ${habis ? 'disabled' : ''}>`).join('')}</div>
-      <div class="ina-one-time-password__helper-text ${habis ? 'ina-one-time-password__helper-text--error' : ''}" id="otpPesan-${k}" aria-live="polite">${habis ? 'Kode sudah kedaluwarsa. Pilih "Kirim Ulang" untuk mendapatkan kode baru.' : `Masukkan 6 digit kode yang dikirim ke ${k === 'email' ? 'email' : 'WhatsApp'}. Kode berlaku 5 menit.`}</div>
+      <div class="ina-one-time-password__helper-text ${habis ? 'ina-one-time-password__helper-text--error' : ''}" id="otpPesan-${k}" aria-live="polite">${habis ? 'Kode sudah kedaluwarsa. Pilih "Kirim ulang" untuk mendapatkan kode baru.' : `Masukkan 6 digit kode yang dikirim ke ${k === 'email' ? 'email' : 'WhatsApp'}. Kode berlaku 5 menit.`}</div>
       <div class="ditandai" style="display:inline-block"><span class="ina-badge ina-badge--soft ina-badge--${habis ? 'error' : sisa < 60 ? 'warning' : 'brand'} ina-badge--md ina-badge--rounded-full otp-waktu" id="waktu-${k}">${ik('jam', 14)} <span>${habis ? 'Waktu habis' : `Kode berlaku ${mmss(sisa)}`}</span></span>${usulan('IDDS-TN-07')}</div></div>
       <div class="tombol" id="tombol-${k}">${tombolKanal(k)}</div></div>`}</div>`;
 }
-const tombolKanal = k => `${tombol('Verifikasi', 'primary', 'md', `data-verif-otp="${k}" ${S.otp.sisa[k] <= 0 ? 'disabled' : ''}`)}${S.otp.jeda[k] > 0 && S.otp.sisa[k] > 0 ? `<span class="ina-text-field__helper-text">Kirim ulang dalam ${mmss(S.otp.jeda[k])}</span>` : tombol('Kirim Ulang', 'tertiary', 'md', `data-ulang-otp="${k}"`, ik('ulang', 14))}`;
+const tombolKanal = k => `${tombol('Verifikasi', 'primary', 'md', `data-verif-otp="${k}" ${S.otp.sisa[k] <= 0 ? 'disabled' : ''}`)}${S.otp.jeda[k] > 0 && S.otp.sisa[k] > 0 ? `<span class="ina-text-field__helper-text">Kirim ulang dalam ${mmss(S.otp.jeda[k])}</span>` : tombol('Kirim ulang', 'tertiary', 'md', `data-ulang-otp="${k}"`, ik('ulang', 14))}`;
 function layarOtp() {
   return `<div class="wadah lebar">${atasTn()}<section class="kartu-tn" aria-label="Verifikasi OTP">
       ${kepalaDaftar(1, 'Verifikasi OTP')}
@@ -598,7 +598,7 @@ function layarOtp() {
 function layarAktif() {
   return `<div class="wadah lebar">${atasTn()}<section class="kartu-tn">${kepalaDaftar(2, 'Akun Aktif')}
       <div class="status-tn" style="margin-top:20px"><span class="bulat">${ik('centang', 34)}</span><h1>Registrasi berhasil</h1><p>Akun Anda sudah aktif dan dapat digunakan untuk masuk ke aplikasi kantor ini.</p>
-      ${tombol('Masuk Sekarang', 'primary', 'lg', 'data-ke="masuk" style="margin-top:18px"', ik('panah', 16))}</div></section></div>`;
+      ${tombol('Masuk sekarang', 'primary', 'lg', 'data-ke="masuk" style="margin-top:18px"', ik('panah', 16))}</div></section></div>`;
 }
 
 /* ---------------- gambar & navigasi ---------------- */
@@ -807,7 +807,7 @@ const BANTUAN = {
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('o', [['Kode OTP tidak masuk.', 'Periksa folder Spam atau Promosi di email Anda. Untuk WhatsApp, pastikan nomor aktif dan terhubung ke internet. Bila kode belum masuk, tunggu jeda selesai, lalu pilih Kirim Ulang.'],
       ['Kode sudah kedaluwarsa.', 'Pilih Kirim Ulang untuk mendapatkan kode baru. Masukkan kode terbaru sebelum waktunya habis.'],
-      ['Mengapa ada jeda sebelum kirim ulang?', 'Jeda mencegah pengiriman kode berulang dalam waktu singkat. Tombol Kirim Ulang muncul setelah hitungan selesai.']])}
+      ['Mengapa ada jeda sebelum kirim ulang?', 'Jeda mencegah pengiriman kode berulang dalam waktu singkat. Tombol Kirim ulang muncul setelah hitungan selesai.']])}
     ${kontak()}` }),
   aktif:() => ({ judul:'Bantuan Akun Aktif', isi:`<p>Akun Anda sudah aktif dan dapat dipakai untuk masuk.</p>
     <h4 class="bantu-sub">Pertanyaan umum</h4>

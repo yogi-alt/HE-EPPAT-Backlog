@@ -280,7 +280,7 @@ const UBAH = [
     isi:'Markup dan teks sama dengan Setting Theme kantor (IDDS-TN-19). Tab utama dan sub-tab Komponen memakai IDDS Tab; pilihan memakai IDDS Select, Checkbox, dan Radio dengan label bahasa Indonesia. Perubahan tampil di Pratinjau Langsung dan baru berlaku untuk area platform setelah Simpan. Berpindah menu saat ada perubahan memunculkan dialog "Tinggalkan halaman ini?". Tombol Batal meminta konfirmasi, dan hasil simpan memakai IDDS Toast. Kartu pembungkus "Template Tampilan" tidak ditampilkan karena isinya mengulang judul dan subjudul halaman. Tab langsung berada di bawah judul, sama dengan Setting Theme kantor.',
     lama:'Perubahan langsung diterapkan ke seluruh area platform sebelum disimpan, lalu hilang tanpa peringatan saat pindah menu. Banner sukses/galat tidak dapat ditutup. Label bercampur bahasa Inggris (Preset IDDS, Custom, Hover, Background, Border, Preview, Density, Radius, Eyebrow, Overlay). Semua tab dibungkus kartu "Template Tampilan — Atur brand, warna, sidebar/navbar, konten, logo, dan gaya komponen aplikasi."', ke:'tema', sorot:'#pratinjauTema' },
   { kode:'IDDS-PL-33', judul:'Setting Theme: cek kontras dan pemilih media seragam (pola sama dengan IDDS-TN-20 dan IDDS-TN-24)',
-    isi:'Pasangan warna penting menampilkan IDDS Badge rasio kontras ("6,1 : 1 · Lolos AA" atau "Kurang kontras") sesuai WCAG 2.2 AA. Mengubah warna saat memakai preset memberi tahu bahwa sumber warna berpindah ke Kustom. "Pilih dari Media" membuka IDDS Modal "Pilih Gambar" berisi pencarian, tombol Unggah, dan kisi gambar media platform yang dapat difokus dengan keyboard.',
+    isi:'Pasangan warna penting menampilkan IDDS Badge rasio kontras ("6,1 : 1 · Lolos AA" atau "Kurang kontras") sesuai WCAG 2.2 AA. Mengubah warna saat memakai preset memberi tahu bahwa sumber warna berpindah ke Kustom. "Pilih dari media" membuka IDDS Modal "Pilih Gambar" berisi pencarian, tombol Unggah, dan kisi gambar media platform yang dapat difokus dengan keyboard.',
     lama:'Warna dapat diisi bebas tanpa cek kontras. Mengedit "Warna Custom" saat mode Preset diam-diam memindahkan mode. Pemilih media Setting Theme tidak punya pencarian.', ke:'tema', sorot:'#warnaKustom' },
   { kode:'IDDS-PL-34', judul:'Pengaturan Global: IDDS Tab dan bahasa isian yang konsisten',
     isi:'Tab Umum, Email SMTP, WhatsApp OCA, Peruri CA, dan Gemini AI memakai IDDS Tab dengan ikon garis. Setiap tab berupa IDDS Card dengan judul, deskripsi, dan label isian bergaya sama. Pilihan status seragam: "Aktif"/"Nonaktif". Label dibakukan: "Provider" menjadi "Penyedia", "Encryption" menjadi "Enkripsi", "Username" menjadi "Nama pengguna", "From Email/From Name" menjadi "Email pengirim/Nama pengirim", "Bearer Token" menjadi "Token akses (Bearer)", dan "Template Code ID" menjadi "ID templat pesan". Kata "diresolve", "greylisting", dan "tak ganti" diganti kalimat biasa. Keterangan URL onboarding tidak lagi menampilkan pola alamat teknis ({url}/upgrade-to-enterprise?email={email}). Keterangan itu menyebut "kantor paket Gratis" sesuai nama paket di Paket Langganan, bukan "tenant FREE". Urutan isian sama dengan live, termasuk Gemini AI: Status, API key, Model. Pesan galat muat menjadi "Pengaturan platform gagal dimuat.", dan teks muat menjadi "Memuat pengaturan…".',
@@ -292,7 +292,7 @@ const UBAH = [
     isi:'Kata sandi SMTP, Brevo API key, token OCA, API key Peruri, dan API key Gemini memakai IDDS Password Input dengan tombol tampilkan/sembunyikan. Rahasia yang sudah tersimpan tidak pernah ditampilkan. Isiannya kosong dengan placeholder "Tersimpan. Isi hanya bila ingin mengganti." dan pesan hijau "… sudah tersimpan." Saat diisi, pesan berganti menjadi "Nilai baru menggantikan yang tersimpan setelah Anda menyimpan."',
     lama:'Isian kata sandi biasa tanpa tombol tampilkan. Penanda tersimpan berbeda-beda: "Password SMTP sudah tersimpan.", "✓ Key sudah tersimpan.", dan placeholder "•••••• (tersimpan — kosongkan bila tak ganti)".', ke:'pengaturan', tab:'peruri', sorot:'#f-pKey' },
   { kode:'IDDS-PL-37', judul:'Pengaturan Global: simpan per tab dengan penanda, penjaga, dan konfirmasi berdampak',
-    isi:'Kaki setiap tab menampilkan jumlah perubahan yang belum disimpan, dan tab itu diberi titik penanda. Batal mengembalikan isian. Pindah tab saat ada perubahan menawarkan "Buang Perubahan" atau "Simpan & Lanjutkan", dan pindah menu memunculkan "Tinggalkan halaman ini?". Tindakan berikut meminta konfirmasi lewat IDDS Modal Confirmation yang menyebut dampaknya ke semua kantor PPAT: mematikan WhatsApp OCA, Peruri CA, atau Gemini AI, mengganti penyedia email, dan mengosongkan URL onboarding. Tombol konfirmasi berwarna merah untuk mematikan layanan dan mengosongkan URL onboarding. Setelah dialog ditutup, fokus kembali ke tombol pemicunya. Hasil simpan memakai IDDS Toast dengan teks live.',
+    isi:'Kaki setiap tab menampilkan jumlah perubahan yang belum disimpan, dan tab itu diberi titik penanda. Batal mengembalikan isian. Pindah tab saat ada perubahan menawarkan "Buang perubahan" atau "Simpan & lanjutkan", dan pindah menu memunculkan "Tinggalkan halaman ini?". Tindakan berikut meminta konfirmasi lewat IDDS Modal Confirmation yang menyebut dampaknya ke semua kantor PPAT: mematikan WhatsApp OCA, Peruri CA, atau Gemini AI, mengganti penyedia email, dan mengosongkan URL onboarding. Tombol konfirmasi berwarna merah untuk mematikan layanan dan mengosongkan URL onboarding. Setelah dialog ditutup, fokus kembali ke tombol pemicunya. Hasil simpan memakai IDDS Toast dengan teks live.',
     lama:'Tidak ada penanda perubahan belum disimpan, dan pindah menu membuang perubahan tanpa peringatan. Mengganti penyedia ke "Disabled" atau mematikan Gemini langsung tersimpan tanpa konfirmasi, padahal berdampak ke OTP, CA, TERA, dan Cek Ejaan di semua kantor.', ke:'pgNonaktif', tab:'ai', sorot:null },
   { kode:'IDDS-PL-73', versi:'v2', bukanHE:true, judul:'Pengaturan Umum: mode pemeliharaan',
     isi:'Tab Umum memiliki sakelar mode pemeliharaan dengan pesan dan perkiraan waktu kembali dibuka. Saat diaktifkan muncul konfirmasi karena berlaku untuk semua kantor.',
@@ -310,7 +310,7 @@ const UBAH = [
     isi:'Tab baru untuk memilih hasil simulasi pengiriman ke ATR/BPN: berhasil, ditolak, atau lambat.',
     lama:'Tab ini belum ada di prototipe.', ke:'pengaturan', tab:'bpn', sorot:'#kartuPg', sumber:'Live Platform, 6 Nov 2026' },
   { kode:'IDDS-PL-38', judul:'Akun Saya: tab Akun dengan peran yang konsisten dan pesan galat di bawah isian',
-    isi:'Tab memakai IDDS Tab yang sama dengan Akun Saya kantor. Lencana peran berbunyi "Platform Admin", sama dengan menu pengguna di kanan atas. Catatan email menjadi "Hubungi tim E-PPAT untuk mengubah email." Kode akun live (misalnya PLATFORM_ADMIN) ditampilkan sebagai baris "ID akun" dengan keterangan, sama dengan Akun Saya kantor. Formulir Ubah Data memakai IDDS Text Field. Pesan "Nama depan minimal 2 karakter." dan pesan format telepon tampil di bawah isian. Hasil simpan memakai IDDS Toast. Pindah tab atau menu saat ada perubahan menawarkan "Buang Perubahan" atau "Simpan & Lanjutkan".',
+    isi:'Tab memakai IDDS Tab yang sama dengan Akun Saya kantor. Lencana peran berbunyi "Platform Admin", sama dengan menu pengguna di kanan atas. Catatan email menjadi "Hubungi tim E-PPAT untuk mengubah email." Kode akun live (misalnya PLATFORM_ADMIN) ditampilkan sebagai baris "ID akun" dengan keterangan, sama dengan Akun Saya kantor. Formulir Ubah Data memakai IDDS Text Field. Pesan "Nama depan minimal 2 karakter." dan pesan format telepon tampil di bawah isian. Hasil simpan memakai IDDS Toast. Pindah tab atau menu saat ada perubahan menawarkan "Buang perubahan" atau "Simpan & lanjutkan".',
     lama:'Lencana peran "Super Admin" (dari is_admin) berbeda dengan "Platform Admin" di menu pengguna. Catatan "(hubungi admin untuk mengubah)" tidak jelas bagi admin platform. Banner sukses hilang sendiri setelah 3 detik tanpa aria-live.', ke:'akun', tab:'akun', sorot:'#kartuAkun' },
   { kode:'IDDS-PL-39', judul:'Akun Saya: Keamanan dengan syarat kata sandi 12 karakter dan 2FA terpandu',
     isi:'Ganti kata sandi memakai IDDS Password Input dan daftar centang yang sama dengan layar Ganti Kata Sandi: minimal 12 karakter serta memuat huruf besar, huruf kecil, angka, dan simbol (- _ ? ! & + % # @ * $ ^) (IDDS-PL-08). Aktivasi 2FA dipandu dua langkah: pindai kode QR (atau salin kode rahasia), lalu ketik kode 6 digit di IDDS One-Time Password. Pesan galat kode tampil di bawah kolom kode. Menonaktifkan 2FA dan mengeluarkan perangkat memakai IDDS Modal Confirmation. Bahasa dibakukan: "Password" menjadi "kata sandi", "device" menjadi "perangkat", "logout/revoke" menjadi "keluarkan", dan "authenticator" menjadi "autentikator".',
@@ -493,7 +493,7 @@ function jaga(lanjut) {
   const tema = S.layar === 'tema', n = tema ? 0 : bedaPg(S.pgTab).length;
   dialog({ judul:'Tinggalkan halaman ini?', konfirmasi:true,
     isi:`<p>${tema ? 'Perubahan tema belum disimpan. Tampilan area platform akan kembali ke tema tersimpan.' : `Ada ${n} perubahan di tab ${NAMA_TAB[S.pgTab]} yang belum disimpan. Perubahan itu akan hilang jika Anda meninggalkan halaman ini.`}${usulan(tema ? 'IDDS-PL-32' : 'IDDS-PL-37')}</p>`,
-    tombol:[['Tetap di Sini', 'secondary', null], ['Tinggalkan', 'primary', () => { if (tema) TEMA = salinObj(TEMA_F); else PGF[S.pgTab] = salinObj(PG[S.pgTab]); lanjut(); }]] });
+    tombol:[['Tetap di sini', 'secondary', null], ['Tinggalkan', 'primary', () => { if (tema) TEMA = salinObj(TEMA_F); else PGF[S.pgTab] = salinObj(PG[S.pgTab]); lanjut(); }]] });
 }
 function pindah(ke, lanjut) {
   jaga(() => { S.layar = ke; S.menu = false; history.replaceState(null, '', '#' + ke); gambar(); window.scrollTo({ top:0 }); lanjut && lanjut(); });
@@ -536,7 +536,7 @@ function temaChrome() {
 }
 const kartuAset = (k, l, v, ph) => `<div class="kartu-aset"><span class="thumb" style="${v ? `background-image:url('${v}')` : ''}">${v ? '' : ik('gambar', 20)}</span><div class="isi"><b>${l}</b>
   <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md" style="margin-top:6px"><input type="text" class="ina-text-field__input" value="${esc(v && v.startsWith('data:') ? '/uploads/' + (MEDIA.find(m => m.url === v)?.nama || 'gambar') : v)}" placeholder="${ph}" aria-label="URL ${esc(l)}" data-aset-url="${k}"></div>
-  <div class="aksi-baris">${tombol('Pilih dari Media', 'secondary', 'sm', `data-aset-pilih="${k}" data-label="${esc(l)}"`, ik('gambar', 14))}${v ? tombol('Kosongkan', 'tertiary', 'sm', `data-aset-kosong="${k}" aria-label="Kosongkan ${esc(l)}"`) : ''}</div></div></div>`;
+  <div class="aksi-baris">${tombol('Pilih dari media', 'secondary', 'sm', `data-aset-pilih="${k}" data-label="${esc(l)}"`, ik('gambar', 14))}${v ? tombol('Kosongkan', 'tertiary', 'sm', `data-aset-kosong="${k}" aria-label="Kosongkan ${esc(l)}"`) : ''}</div></div></div>`;
 function temaKonten() {
   const c = TEMA.chrome;
   return `<div class="sub-bagian" style="margin-top:0">${subJudul('Latar Konten', 'Warna dan gambar latar area konten. Kosongkan untuk mengikuti preset.')}
@@ -622,7 +622,7 @@ const atrPg = (t, k, x = '') => `data-pg="${t}.${k}" ${x}`;
 function tabUmum() {
   const f = PGF.umum;
   return `${kepala('gear', 'Pengaturan Umum', 'Tombol peningkatan paket di semua kantor PPAT membuka alamat aplikasi onboarding ini. Kosongkan alamat untuk menyembunyikan tombol.')}
-    <div class="form-dd"><div class="lebar">${tf('gOnb', 'URL aplikasi onboarding', isi('umum', 'onboarding_url'), 'Contoh: https://onboarding.contoh.id', false, 'Tulis tanpa garis miring (/) di akhir. Tombol "Mulai Berlangganan" di kantor paket Gratis membuka alamat ini.', atrPg('umum', 'onboarding_url', 'inputmode="url" autocomplete="off"'), 'url')}</div></div>
+    <div class="form-dd"><div class="lebar">${tf('gOnb', 'URL aplikasi onboarding', isi('umum', 'onboarding_url'), 'Contoh: https://onboarding.contoh.id', false, 'Tulis tanpa garis miring (/) di akhir. Tombol "Mulai berlangganan" di kantor paket Gratis membuka alamat ini.', atrPg('umum', 'onboarding_url', 'inputmode="url" autocomplete="off"'), 'url')}</div></div>
     <div class="uji ditandai" id="pgPelihara"><h3>Mode pemeliharaan</h3><p>Berlaku untuk semua kantor PPAT. Pengguna melihat halaman pemeliharaan dan tidak dapat masuk. Admin kantor dan admin platform tetap dapat masuk.${usulan('IDDS-PL-73')}</p>
       ${cekBox('gPelihara', f.pelihara, 'Aktifkan mode pemeliharaan aplikasi', '', atrPg('umum', 'pelihara'))}
       ${f.pelihara ? `<div class="form-dd" style="margin-top:12px">${tf('gPesan', 'Pesan pemeliharaan', f.pesan, 'Contoh: Sistem sedang dalam pemeliharaan.', true, '', atrPg('umum', 'pesan'))}${tf('gKembali', 'Perkiraan kembali dibuka', f.kembali, '', false, '', atrPg('umum', 'kembali'), 'datetime-local')}</div>` : ''}</div>
@@ -741,16 +741,16 @@ function simpanPg(t, lanjut) {
   if (t === 'ai' && lama.ocr_status === 'active' && baru.ocr_status === 'disabled') { mati('Nonaktifkan OCR internal?', 'Baca otomatis KTP di <b>semua kantor PPAT</b> beralih ke Gemini AI, sehingga berkas dikirim ke pihak ketiga.', 'Nonaktifkan dan Simpan'); return; }
   if (t === 'ai' && lama.status === 'active' && baru.status === 'disabled') { mati('Nonaktifkan Gemini AI?', 'Fitur Cek Ejaan pasal akta tidak tersedia di <b>semua kantor PPAT</b> sampai diaktifkan kembali.', 'Nonaktifkan dan Simpan'); return; }
   if (t === 'email' && lama.provider !== baru.provider) {
-    dialog({ judul:'Ganti penyedia email?', konfirmasi:true, isi:`<p>Semua email OTP, notifikasi, dan salinan akta untuk <b>semua kantor PPAT</b> akan dikirim lewat ${baru.provider === 'smtp' ? 'SMTP' : 'Brevo API'}. Kirim email uji setelah menyimpan.${usulan('IDDS-PL-37')}</p>`, tombol:[['Batal', 'secondary', null], ['Ganti dan Simpan', 'primary', jalan]] }); return; }
+    dialog({ judul:'Ganti penyedia email?', konfirmasi:true, isi:`<p>Semua email OTP, notifikasi, dan salinan akta untuk <b>semua kantor PPAT</b> akan dikirim lewat ${baru.provider === 'smtp' ? 'SMTP' : 'Brevo API'}. Kirim email uji setelah menyimpan.${usulan('IDDS-PL-37')}</p>`, tombol:[['Batal', 'secondary', null], ['Ganti dan simpan', 'primary', jalan]] }); return; }
   if (t === 'umum' && lama.onboarding_url && !baru.onboarding_url.trim()) {
-    dialog({ judul:'Sembunyikan tombol Mulai Berlangganan?', konfirmasi:true, bahaya:true, isi:`<p>URL onboarding kosong. Kantor paket Gratis tidak lagi melihat tombol "Mulai Berlangganan" untuk meningkatkan paket.${usulan('IDDS-PL-37')}</p>`, tombol:[['Batal', 'secondary', null], ['Kosongkan dan Simpan', 'primary', jalan]] }); return; }
+    dialog({ judul:'Sembunyikan tombol Mulai berlangganan?', konfirmasi:true, bahaya:true, isi:`<p>URL onboarding kosong. Kantor paket Gratis tidak lagi melihat tombol "Mulai berlangganan" untuk meningkatkan paket.${usulan('IDDS-PL-37')}</p>`, tombol:[['Batal', 'secondary', null], ['Kosongkan dan simpan', 'primary', jalan]] }); return; }
   jalan();
 }
 /* pindah tab saat ada perubahan (IDDS-PL-37) */
 function jagaTabPg(lanjut) {
   const t = S.pgTab; if (!pgKotor(t)) { lanjut(); return; }
   dialog({ judul:`Simpan perubahan di tab ${NAMA_TAB[t]}?`, konfirmasi:true, isi:`<p>Ada ${bedaPg(t).length} perubahan di tab ${NAMA_TAB[t]} yang belum disimpan. Jika Anda lanjut tanpa menyimpan, perubahan tersebut akan hilang.${usulan('IDDS-PL-37')}</p>`,
-    tombol:[['Batal', 'tertiary', null], ['Buang Perubahan', 'secondary', () => { PGF[t] = salinObj(PG[t]); lanjut(); }], ['Simpan & Lanjutkan', 'primary', () => simpanPg(t, lanjut)]] });
+    tombol:[['Batal', 'tertiary', null], ['Buang perubahan', 'secondary', () => { PGF[t] = salinObj(PG[t]); lanjut(); }], ['Simpan & lanjutkan', 'primary', () => simpanPg(t, lanjut)]] });
 }
 function kirimUji(jenis) {
   const id = jenis === 'email' ? 'eUji' : 'wUji', v = $('#' + id).value.trim();
@@ -780,9 +780,9 @@ function tabAkunInfo() {
     ${kepala('user', 'Ubah data akun', 'Nama dan telepon yang tampil di area platform.')}
     <div class="form-dd form-tiga">${tf('aDepan', 'Nama depan', p.depan, '', true)}${tf('aTengah', 'Nama tengah <span class="opsional">(opsional)</span>', p.tengah, '')}${tf('aBelakang', 'Nama belakang <span class="opsional">(opsional)</span>', p.belakang, '')}
       ${tf('aTelp', 'Telepon <span class="opsional">(opsional)</span>', p.telp, '0812 3456 7890', false, 'Kosongkan untuk menghapus nomor telepon.', 'inputmode="tel"')}</div>
-    <div class="kartu-kaki"><span class="kaki-st ${S.akunKotor ? 'ada' : ''}" id="statusAkun" aria-live="polite">${S.akunKotor ? `${ik('info', 14)} Belum disimpan` : `${ik('centang', 14)} Belum ada perubahan`}</span>${usulan('IDDS-PL-38')}${tombol('Batal', 'secondary', 'md', 'id="batalAkun"')}${tombol('Simpan Perubahan', 'primary', 'md', 'id="simpanAkun"', ik('centang', 16))}</div></div>`;
+    <div class="kartu-kaki"><span class="kaki-st ${S.akunKotor ? 'ada' : ''}" id="statusAkun" aria-live="polite">${S.akunKotor ? `${ik('info', 14)} Belum disimpan` : `${ik('centang', 14)} Belum ada perubahan`}</span>${usulan('IDDS-PL-38')}${tombol('Batal', 'secondary', 'md', 'id="batalAkun"')}${tombol('Simpan perubahan', 'primary', 'md', 'id="simpanAkun"', ik('centang', 16))}</div></div>`;
   return `<div class="ina-card ina-card--variant-basic kartu ditandai" id="kartuAkun">
-    ${kepala('user', judul, 'Identitas akun admin platform Anda.', tombol('Ubah Data', 'secondary', 'md', 'id="ubahAkun"', ik('pena', 16)))}
+    ${kepala('user', judul, 'Identitas akun admin platform Anda.', tombol('Ubah data', 'secondary', 'md', 'id="ubahAkun"', ik('pena', 16)))}
     <dl class="kv-akun">${[['Nama depan', esc(p.depan)], ['Nama tengah', esc(p.tengah) || '—'], ['Nama belakang', esc(p.belakang) || '—'],
       ['Email', esc(p.email) + '<small>Hubungi tim E-PPAT untuk mengubah email.</small>'], ['Telepon', esc(p.telp) || '—'],
       ['Masuk terakhir', '26 Okt 2026, 09.15'], ['Akun dibuat', '2 Jan 2026, 08.00'], ['ID akun', '<span class="mono">PLT-CONTOH01</span><small>Sebutkan ID ini saat menghubungi dukungan.</small>']].map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>${usulan('IDDS-PL-38')}</div>`;
@@ -814,7 +814,7 @@ function tabAman() {
       <h3><span class="langkah-no">2</span>Ketik kode dari aplikasi</h3>
       <div class="ina-one-time-password" style="margin-top:8px"><span class="ina-text-field__label" id="lblOtp">Kode 6 digit dari aplikasi autentikator<span class="ina-text-field__required">*</span></span><div class="ina-one-time-password__container" role="group" aria-labelledby="lblOtp" aria-describedby="otpPesan" style="margin-top:8px">${Array.from({ length:6 }, (_, i) => `<input class="ina-one-time-password__input" inputmode="numeric" maxlength="1" aria-label="Digit ${i + 1}" data-otp="${i}" autocomplete="one-time-code">`).join('')}</div>
         <div class="ina-one-time-password__helper-text" id="otpPesan" aria-live="polite"></div></div>
-      <div class="aksi-baris" style="margin-top:16px">${tombol('Batal', 'secondary', 'md', 'id="batal2fa"')}${tombol('Konfirmasi & Aktifkan', 'primary', 'md', 'id="konfirm2fa"', ik('tameng', 16))}</div></div></div>` : '';
+      <div class="aksi-baris" style="margin-top:16px">${tombol('Batal', 'secondary', 'md', 'id="batal2fa"')}${tombol('Konfirmasi & aktifkan', 'primary', 'md', 'id="konfirm2fa"', ik('tameng', 16))}</div></div></div>` : '';
   return `<div class="ina-card ina-card--variant-basic kartu ditandai" id="kartu2fa">
     ${kepala('tameng', `<span>Verifikasi 2 faktor (2FA)</span> ${aktif ? badge('Aktif', 'success', 'sm') : badge('Belum aktif', 'neutral', 'sm')}`, 'Tambahkan lapisan keamanan. Saat 2FA aktif, setiap kali masuk Anda diminta kode 6 digit dari aplikasi autentikator, misalnya Google Authenticator atau Authy.',
       aktif ? tombol('Nonaktifkan 2FA', 'secondary', 'md', 'id="matikan2fa" data-merah', ik('x', 16)) : S.fa === 'mati' ? tombol('Aktifkan 2FA', 'primary', 'md', 'id="aktifkan2fa"', ik('tameng', 16)) : '')}
@@ -824,9 +824,9 @@ function tabAman() {
     <div class="form-dd"><div class="lebar">${pwIsian('pLama', 'Kata sandi saat ini', 'Masukkan kata sandi yang Anda pakai sekarang', 'current-password')}</div>
       ${pwIsian('pBaru', 'Kata sandi baru', 'Buat kata sandi baru', 'new-password')}${pwIsian('pUlang', 'Ulangi kata sandi baru', 'Ketik ulang kata sandi baru', 'new-password')}
       <div class="lebar"><ul class="syarat-pw" id="syaratPw" aria-live="polite">${SYARAT_PW.map(([l], i) => `<li data-syarat="${i}"><span class="tanda" aria-hidden="true"></span>${l}</li>`).join('')}</ul></div></div>
-    <div class="kartu-kaki">${usulan('IDDS-PL-39')}${tombol('Ganti Kata Sandi', 'primary', 'md', 'id="gantiPw" disabled', ik('kunci', 16))}</div></div>
+    <div class="kartu-kaki">${usulan('IDDS-PL-39')}${tombol('Ganti kata sandi', 'primary', 'md', 'id="gantiPw" disabled', ik('kunci', 16))}</div></div>
   <div class="ina-card ina-card--variant-basic kartu ditandai" id="kartuSesi">
-    ${kepala('laptop', 'Perangkat yang sedang masuk', 'Keluarkan perangkat yang tidak Anda kenali atau tidak dipakai lagi.', sesiLain ? tombol('Keluarkan Semua Perangkat Lain', 'secondary', 'sm', 'data-keluar-semua', ik('keluar', 14)) : '')}
+    ${kepala('laptop', 'Perangkat yang sedang masuk', 'Keluarkan perangkat yang tidak Anda kenali atau tidak dipakai lagi.', sesiLain ? tombol('Keluarkan semua perangkat lain', 'secondary', 'sm', 'data-keluar-semua', ik('keluar', 14)) : '')}
     <ul class="daftar-sesi">${S.sesi.map(s => `<li><span class="ikon-bulat kecil" style="display:grid;place-items:center;background:var(--ina-primary-50);color:var(--ina-primary-600)">${ik(s.jenis === 'Ponsel' ? 'ponsel' : 'laptop', 18)}</span>
       <div class="sesi-isi"><b>${s.jenis} · ${s.ket} ${s.ini ? badge('Perangkat ini', 'success', 'sm') : ''}</b><small>IP ${s.ip} · Masuk ${s.mulai} · Berlaku sampai ${s.habis}</small></div>
       ${tombol(s.ini ? 'Keluar dari Perangkat Ini' : 'Keluarkan', 'tertiary', 'sm', `data-keluar-sesi="${s.id}" data-merah aria-label="${s.ini ? 'Keluar dari perangkat ini' : `Keluarkan ${s.jenis} ${s.ket}`}"`, ik('keluar', 14))}</li>`).join('')}</ul>${usulan('IDDS-PL-39')}</div>`;
@@ -865,7 +865,7 @@ function keluarSesi(id) {
 }
 function keluarSemua() {
   dialog({ judul:'Keluarkan semua perangkat lain?', konfirmasi:true, bahaya:true, isi:'<p>Semua perangkat lain akan dikeluarkan dan perlu masuk lagi. Anda tetap masuk di perangkat ini.</p>',
-    tombol:[['Batal', 'secondary', null], ['Keluarkan Semua', 'primary', () => { const n = S.sesi.filter(s => !s.ini).length; S.sesi = S.sesi.filter(s => s.ini); gambar(); toast(`${n} perangkat lain sudah dikeluarkan.`, 'positive'); }]] });
+    tombol:[['Batal', 'secondary', null], ['Keluarkan semua', 'primary', () => { const n = S.sesi.filter(s => !s.ini).length; S.sesi = S.sesi.filter(s => s.ini); gambar(); toast(`${n} perangkat lain sudah dikeluarkan.`, 'positive'); }]] });
 }
 /* 2FA */
 function tandaiOtp(m) {
@@ -904,7 +904,7 @@ function simpanAkun(lanjut) {
 }
 function jagaAkun(lanjut) {
   dialog({ judul:'Simpan perubahan data akun?', konfirmasi:true, isi:`<p>Ada perubahan data akun yang belum disimpan. Jika Anda lanjut tanpa menyimpan, perubahan tersebut akan hilang.${usulan('IDDS-PL-38')}</p>`,
-    tombol:[['Batal', 'tertiary', null], ['Buang Perubahan', 'secondary', () => { S.akunKotor = false; S.ubahAkun = false; lanjut(); }], ['Simpan & Lanjutkan', 'primary', () => { simpanAkun(lanjut); }]] });
+    tombol:[['Batal', 'tertiary', null], ['Buang perubahan', 'secondary', () => { S.akunKotor = false; S.ubahAkun = false; lanjut(); }], ['Simpan & lanjutkan', 'primary', () => { simpanAkun(lanjut); }]] });
 }
 
 /* ---------------- gambar ---------------- */
@@ -951,7 +951,7 @@ H.addEventListener('click', e => {
   const ap = t.closest('[data-aset-pilih]'); if (ap) { const k = ap.dataset.asetPilih; pilihMedia(ap.dataset.label, m => { taruh(TEMA, k, m.url); if (k === 'chrome.content_bg_image' && !TEMA.chrome.content_bg_opacity) TEMA.chrome.content_bg_opacity = 100; gambar(); }); return; }
   const ak = t.closest('[data-aset-kosong]'); if (ak) { taruh(TEMA, ak.dataset.asetKosong, ''); gambar(); return; }
   if (t.closest('#temaSimpan')) { TEMA_F = salinObj(TEMA); gambar(); toast('Tema platform tersimpan.', 'positive', 3500, 'Tampilan baru berlaku untuk area platform dan halaman Masuk platform.'); return; }
-  if (t.closest('#temaBatal')) { dialog({ judul:'Batalkan perubahan tema?', konfirmasi:true, isi:`<p>Semua perubahan sejak terakhir disimpan akan dikembalikan.${usulan('IDDS-PL-32')}</p>`, tombol:[['Lanjut Mengubah', 'secondary', null], ['Batalkan Perubahan', 'primary', () => { TEMA = salinObj(TEMA_F); gambar(); toast('Perubahan tema dibatalkan.'); }]] }); return; }
+  if (t.closest('#temaBatal')) { dialog({ judul:'Batalkan perubahan tema?', konfirmasi:true, isi:`<p>Semua perubahan sejak terakhir disimpan akan dikembalikan.${usulan('IDDS-PL-32')}</p>`, tombol:[['Lanjut mengubah', 'secondary', null], ['Batalkan perubahan', 'primary', () => { TEMA = salinObj(TEMA_F); gambar(); toast('Perubahan tema dibatalkan.'); }]] }); return; }
   /* Pengaturan Global */
   const pt = t.closest('[data-pg-tab]'); if (pt) { const k = pt.dataset.pgTab; if (k === S.pgTab) return; jagaTabPg(() => { S.pgTab = k; gambar(); $(`[data-pg-tab="${k}"]`).focus(); }); return; }
   if (t.closest('#pgBatal')) { PGF[S.pgTab] = salinObj(PG[S.pgTab]); gambar(); toast('Perubahan dibatalkan.'); return; }
@@ -1095,8 +1095,8 @@ const istilah = a => `<dl class="bantu-istilah">${a.map(([k, v]) => `<dt>${k}</d
 const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
 const FAQ_PG = {
   umum:{ intro:'Tab Umum berisi URL aplikasi onboarding, tempat kantor paket Gratis meningkatkan paketnya.', istilah:[['Onboarding', 'Aplikasi pendaftaran dan peningkatan paket kantor PPAT.']], faq:[
-    ['Apa itu URL aplikasi onboarding?', 'Alamat aplikasi tempat kantor PPAT meningkatkan paket. Tombol "Mulai Berlangganan" di kantor paket Gratis membuka alamat ini beserta email admin kantornya.'],
-    ['Mengapa tombol Mulai Berlangganan tidak muncul di kantor?', 'Tombol hanya tampil untuk kantor paket Gratis dan bila URL onboarding terisi. Bila URL dikosongkan, tombol disembunyikan di semua kantor.'],
+    ['Apa itu URL aplikasi onboarding?', 'Alamat aplikasi tempat kantor PPAT meningkatkan paket. Tombol "Mulai berlangganan" di kantor paket Gratis membuka alamat ini beserta email admin kantornya.'],
+    ['Mengapa tombol Mulai berlangganan tidak muncul di kantor?', 'Tombol hanya tampil untuk kantor paket Gratis dan bila URL onboarding terisi. Bila URL dikosongkan, tombol disembunyikan di semua kantor.'],
     ['Mengapa alamat tidak boleh diakhiri garis miring?', 'Aplikasi menambahkan alamat halaman peningkatan paket di belakangnya. Garis miring di akhir membuat alamat itu salah sehingga bisa gagal dibuka.']] },
   email:{ intro:'Tab Email SMTP mengatur cara aplikasi mengirim email: OTP registrasi, notifikasi alur kerja, dan salinan akta untuk semua kantor.', istilah:[['SMTP', 'Cara standar mengirim email lewat server email (host, port, nama pengguna, kata sandi).'], ['Brevo API', 'Layanan pengiriman email lewat internet (HTTPS). Umumnya lebih cepat dan tidak tertahan antrean server penerima.'], ['TLS / SSL', 'Enkripsi agar isi email dan kata sandi tidak terbaca selama dikirim.']], faq:[
     ['Apa itu SMTP?', 'Server yang mengirim email atas nama aplikasi. Isi host, port, nama pengguna, dan kata sandi dari penyedia email Anda.'],

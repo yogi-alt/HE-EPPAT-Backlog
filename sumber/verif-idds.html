@@ -454,7 +454,7 @@ body .protobar{z-index:1001}
     <header class="top">
       <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg></button>
       <div class="spacer"></div>
-      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat Landing</span></button>
+      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat landing</span></button>
       <button class="ina-button ina-button--tertiary ina-button--md" aria-label="Notifikasi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg></button>
       <div class="user"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Asisten Contoh</span><span class="urole">Asisten</span></span></div>
     </header>
@@ -523,14 +523,14 @@ const BATAS_HARI = 3; /* angka contoh: verifikasi dianggap terlambat bila lebih 
 /* ---------------- daftar perubahan ---------------- */
 const UBAH = [
   { kode:'HE-VERIF-01', judul:'Verifikasi Berkas: istilah CA dijelaskan dan status berbahasa Indonesia',
-    isi:'Istilah CA, NJOP, NIB, dan verifikasi manual diberi garis putus-putus dengan IDDS Tooltip. Label campuran dibakukan: "Verified" menjadi "Terverifikasi", "CA Kadaluarsa" menjadi "Sertifikat Elektronik Kedaluwarsa". Tanda ✓, !, dan • pada tab diganti lencana bertulisan (Terverifikasi, Perlu dicek, Belum diverifikasi). Pihak yang belum terverifikasi diberi garis kuning dan satu kalimat solusi, misalnya "Minta pihak menyelesaikan eKYC di portal Peruri, lalu tekan Cek Sertifikat Semua Pihak lagi."',
+    isi:'Istilah CA, NJOP, NIB, dan verifikasi manual diberi garis putus-putus dengan IDDS Tooltip. Label campuran dibakukan: "Verified" menjadi "Terverifikasi", "CA Kadaluarsa" menjadi "Sertifikat Elektronik Kedaluwarsa". Tanda ✓, !, dan • pada tab diganti lencana bertulisan (Terverifikasi, Perlu dicek, Belum diverifikasi). Pihak yang belum terverifikasi diberi garis kuning dan satu kalimat solusi, misalnya "Minta pihak menyelesaikan eKYC di portal Peruri, lalu tekan Cek sertifikat semua pihak lagi."',
     lama:'Istilah "CA" muncul berulang kali tanpa penjelasan (skor H2 halaman: 40). Lencana bercampur bahasa Inggris ("✓ Verified") dan salah eja ("CA Kadaluarsa"); status tab hanya berupa simbol ✓, !, •. Pihak yang belum terverifikasi hanya diberi keterangan "CA belum aktif" tanpa langkah perbaikan.', ke:'pihak-010', sorot:'#daftarPihak', sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
   { kode:'HE-VERIF-02', judul:'Daftar dan detail verifikasi: lama menunggu dan dampaknya terlihat',
     isi:'Daftar memiliki kolom "Menunggu" (lama sejak permohonan masuk tahap Verifikasi Berkas); permohonan yang menunggu lebih dari 3 hari diberi lencana kuning "Lewat 3 hari" dan tampil paling atas secara bawaan. Di halaman detail, IDDS Alert berjudul jumlah bagian yang belum diverifikasi (mis. "1 bagian lagi belum diverifikasi") serta menyebut sejak kapan permohonan menunggu dan dampaknya: penyusunan minuta baru dapat dimulai setelah ketiga verifikasi selesai.',
     lama:'Tidak ada informasi urgensi atau tenggat. Daftar hanya menampilkan tanggal order dibuat, dan halaman detail tidak menjelaskan akibat bila verifikasi belum selesai.', ke:'tunggu', sorot:'#infoTunggu', sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15) + masukan Peruri 30 Okt 2026' },
   { kode:'HE-VERIF-03', judul:'Simpan verifikasi: konfirmasi dan pemeriksaan isian',
-    isi:'"Tandai Terverifikasi" (objek tanah) dan "Simpan & Verifikasi" (harga) membuka IDDS Modal Confirmation berisi ringkasan data yang diverifikasi. Untuk objek tanah, pengguna mencentang daftar periksa (sertifikat asli, tidak ada blokir/sengketa, data sesuai). Isian NJOP dan luas yang kosong ditandai di bawah isian, bukan melalui toast. Bila harga jual di bawah NJOP, catatan alasan wajib diisi sebelum verifikasi. Verifikasi manual pihak tanpa akun juga meminta konfirmasi.',
-    lama:'Tombol "Tandai Terverifikasi" dan "Simpan & Verifikasi" langsung mengubah status tanpa konfirmasi (skor H6 halaman: 0). NJOP kosong hanya memunculkan toast "Isi NJOP/m² dan luas tanah dulu."; harga jual di bawah NJOP hanya diberi teks kecil "⚠ … periksa" dan verifikasi tetap dapat disimpan tanpa catatan.', ke:'konfirm-objek', sorot:null, sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
+    isi:'"Tandai terverifikasi" (objek tanah) dan "Simpan & verifikasi" (harga) membuka IDDS Modal Confirmation berisi ringkasan data yang diverifikasi. Untuk objek tanah, pengguna mencentang daftar periksa (sertifikat asli, tidak ada blokir/sengketa, data sesuai). Isian NJOP dan luas yang kosong ditandai di bawah isian, bukan melalui toast. Bila harga jual di bawah NJOP, catatan alasan wajib diisi sebelum verifikasi. Verifikasi manual pihak tanpa akun juga meminta konfirmasi.',
+    lama:'Tombol "Tandai terverifikasi" dan "Simpan & verifikasi" langsung mengubah status tanpa konfirmasi (skor H6 halaman: 0). NJOP kosong hanya memunculkan toast "Isi NJOP/m² dan luas tanah dulu."; harga jual di bawah NJOP hanya diberi teks kecil "⚠ … periksa" dan verifikasi tetap dapat disimpan tanpa catatan.', ke:'konfirm-objek', sorot:null, sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
   { kode:'HE-VERIF-05', judul:'Detail verifikasi: navigasi konsisten dan langkah berikutnya jelas',
     isi:'Judul ganda "Verifikasi Berkas" di daftar dihapus. Tombol Kembali dan identitas permohonan memakai pola yang sama dengan prototipe Penandatanganan Akta. Tab memakai IDDS Tab Horizontal selebar halaman dengan lencana status. Setelah satu bagian terverifikasi, toast menunjukkan bagian berikutnya dan tab berpindah otomatis. Setelah ketiganya selesai, IDDS Alert menyatakan permohonan siap penyusunan dengan tombol "Buka Permohonan AJB".',
     lama:'Judul "Verifikasi Akta" muncul dua kali di daftar. Letak tombol Kembali berbeda dengan halaman lain (bukti HE). Tab buatan sendiri dengan simbol; setelah verifikasi hanya muncul toast, tanpa arahan ke bagian berikutnya atau ke tahap drafting.', ke:'harga-011', sorot:'#tabVerif', sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
@@ -545,7 +545,7 @@ const UBAH = [
 /* ---------------- data contoh (sama dengan prototipe Order AJB) ---------------- */
 const LABEL_TIPE = { PENJUAL:'Pihak Pertama', PEMBELI:'Pihak Kedua', SAKSI:'Saksi', PASANGAN:'Pasangan', LAINNYA:'Lainnya' };
 const CA = { active:{ l:'Sertifikat Elektronik Aktif sampai 26 Okt 2027', b:'success' }, pending:{ l:'Sertifikat Elektronik Diproses', b:'info' }, expired:{ l:'Sertifikat Elektronik Kedaluwarsa', b:'warning' }, revoked:{ l:'Sertifikat Elektronik Dicabut', b:'error' }, none:{ l:'Belum Ada Sertifikat Elektronik', b:'neutral' } };
-const SOLUSI = { pending:'Minta pihak menyelesaikan eKYC di portal Peruri, lalu tekan Cek Sertifikat Semua Pihak lagi.', expired:'Minta pihak mengajukan registrasi CA ulang melalui Akun Saya.', revoked:'Sertifikat dicabut Peruri. Hubungi pihak untuk registrasi CA baru.', none:'Minta pihak melakukan registrasi CA melalui Akun Saya.' };
+const SOLUSI = { pending:'Minta pihak menyelesaikan eKYC di portal Peruri, lalu tekan Cek sertifikat semua pihak lagi.', expired:'Minta pihak mengajukan registrasi CA ulang melalui Akun Saya.', revoked:'Sertifikat dicabut Peruri. Hubungi pihak untuk registrasi CA baru.', none:'Minta pihak melakukan registrasi CA melalui Akun Saya.' };
 const OBJ = { hak:'SHM', sertifikat:'00001', nib:'00000000001', luas:120, lokasi:'Kel. Contoh, Kec. Contoh' };
 const ph = (nama, tipe, ca, akun = true) => ({ nama, tipe, ca, akun, manual:false });
 function contoh() {
@@ -625,8 +625,8 @@ function layarDetail() {
 const kepala = (ikon, judul, status, ket, kanan = '') => `<div class="kartu-kepala"><span class="ikon-bulat">${ik(ikon, 20)}</span><div style="flex:1;min-width:0"><h2>${judul} ${badge(...LBL[status], 'sm')}</h2><p>${ket}</p></div>${kanan}</div>`;
 function tabPihak(x) {
   const st = statusPihak(x);
-  const kanan = LIHAT ? '' : `<div class="kanan">${tombol('Cek Sertifikat Semua Pihak', 'primary', 'sm', `id="cekCa" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'ca' ? spinner : ik('kilau', 14))}<small>${x.dicek ? `Terakhir dicek ${x.dicek}` : 'Belum pernah dicek'}</small></div>`;
-  const isi = !x.dicek && !LIHAT ? `<p class="periksa" style="padding-left:16px">Klik "Cek Sertifikat Semua Pihak" untuk memuat status tiap pihak.</p>`
+  const kanan = LIHAT ? '' : `<div class="kanan">${tombol('Cek sertifikat semua pihak', 'primary', 'sm', `id="cekCa" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'ca' ? spinner : ik('kilau', 14))}<small>${x.dicek ? `Terakhir dicek ${x.dicek}` : 'Belum pernah dicek'}</small></div>`;
+  const isi = !x.dicek && !LIHAT ? `<p class="periksa" style="padding-left:16px">Klik "Cek sertifikat semua pihak" untuk memuat status tiap pihak.</p>`
     : `<ul class="daftar-pihak ditandai" id="daftarPihak">${x.pihak.map((p, i) => { const ok = pihakOk(p), c = CA[p.ca];
       return `<li class="${ok ? '' : 'perlu'}"><span class="nm">${esc(p.nama)}</span><span class="peran">${LABEL_TIPE[p.tipe] || p.tipe}</span>
         ${p.akun ? denganTip(badge(c.l, c.b, 'sm'), ISTILAH.CA) : `<label class="ina-checkbox cek" for="manual${i}"><input type="checkbox" id="manual${i}" class="ina-checkbox__input peer" data-manual="${i}" ${p.manual ? 'checked' : ''} ${LIHAT ? 'disabled' : ''}><div class="ina-checkbox__box ina-checkbox__box--${p.manual ? 'checked' : 'unchecked'}">${p.manual ? ik('centang', 12) : ''}</div><div class="ina-checkbox__content"><span class="ina-checkbox__label">${istilah('Verifikasi manual', 'MANUAL')} (tanpa CA)</span></div></label>`}
@@ -642,7 +642,7 @@ function tabObjek(x) {
     ${kepala('tanah', 'Verifikasi Objek Tanah', st, 'Konfirmasi data objek secara manual (integrasi BPN menyusul).')}
     ${ob.length ? ob.map(b => `<dl class="objek"><div><dt>Hak</dt><dd>${b.hak}</dd></div><div><dt>No. Sertifikat</dt><dd>${b.sertifikat}</dd></div><div><dt>${istilah('NIB', 'NIB')}</dt><dd>${b.nib}</dd></div><div><dt>Luas</dt><dd>${b.luas} m²</dd></div><div class="lebar"><dt>Lokasi</dt><dd>${esc(b.lokasi)}</dd></div></dl>`).join('') : alert('critical', '', 'Belum ada objek tanah di permohonan ini. Tambahkan objek di Permohonan AJB.')}
     <div class="ina-text-area" id="f-catObjek"><label class="ina-text-area__label" for="catObjek">Catatan Verifikasi <span class="opsional" style="font-weight:400;color:var(--ina-content-secondary)">(opsional)</span></label><div class="ina-text-area__wrapper ina-text-area__wrapper--status-neutral"><textarea id="catObjek" class="ina-text-area__input" rows="3" placeholder="Mis. sertifikat asli dicek, tidak ada sengketa/blokir." ${st === 'ok' ? 'disabled' : ''}>${esc(x.catObjek)}</textarea></div></div>
-    <div class="kartu-kaki">${st === 'ok' ? `<span class="ket">${ik('centang', 14)} Objek tanah sudah terverifikasi.</span>` : `<span class="ket">Anda akan diminta mengonfirmasi hasil pemeriksaan.</span>${tombol('Tandai Terverifikasi', 'primary', 'md', `id="verifObjek" ${ob.length && !S.memuat ? '' : 'disabled'}`, S.memuat === 'objek' ? spinner : ik('centang', 16))}`}</div>
+    <div class="kartu-kaki">${st === 'ok' ? `<span class="ket">${ik('centang', 14)} Objek tanah sudah terverifikasi.</span>` : `<span class="ket">Anda akan diminta mengonfirmasi hasil pemeriksaan.</span>${tombol('Tandai terverifikasi', 'primary', 'md', `id="verifObjek" ${ob.length && !S.memuat ? '' : 'disabled'}`, S.memuat === 'objek' ? spinner : ik('centang', 16))}`}</div>
   </div></section>`;
 }
 function tabHarga(x) {
@@ -663,7 +663,7 @@ function tabHarga(x) {
     <div class="hitung"><div><span>Nilai NJOP (NJOP × luas)</span><b id="nilaiNjop">${rp(nilai)}</b><small id="nilaiTerbilang">${nilai ? terbilang(nilai) + ' rupiah' : 'Isi NJOP per m² dan luas tanah.'}</small></div><div><span>Harga Jual (dari permohonan)</span><b>${rp(x.harga)}</b><small>${terbilang(x.harga)} rupiah</small></div></div>
     <div class="banding" id="banding">${banding}</div>
     <div class="ina-text-area" id="f-catHarga"><label class="ina-text-area__label" for="catHarga">Catatan<span id="wajibCat">${nilai != null && x.harga < nilai ? '<span class="ina-text-field__required">*</span>' : ' <span style="font-weight:400;color:var(--ina-content-secondary)">(opsional)</span>'}</span></label><div class="ina-text-area__wrapper ina-text-area__wrapper--status-neutral"><textarea id="catHarga" class="ina-text-area__input" rows="2" placeholder="Mis. NJOP sesuai SPPT PBB tahun berjalan." ${kunci}>${esc(x.catHarga)}</textarea></div><div class="ina-text-field__helper-text" id="h-catHarga" data-bantu=""></div></div>
-    <div class="kartu-kaki">${st === 'ok' ? `<span class="ket">${ik('centang', 14)} Harga tanah sudah terverifikasi.</span>` : tombol('Simpan & Verifikasi', 'primary', 'md', `id="verifHarga" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'harga' ? spinner : ik('centang', 16))}</div>
+    <div class="kartu-kaki">${st === 'ok' ? `<span class="ket">${ik('centang', 14)} Harga tanah sudah terverifikasi.</span>` : tombol('Simpan & verifikasi', 'primary', 'md', `id="verifHarga" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'harga' ? spinner : ik('centang', 16))}</div>
   </div></section>`;
 }
 
@@ -734,7 +734,7 @@ H.addEventListener('change', e => {
   dialog({ judul:'Verifikasi pihak secara manual?', konfirmasi:true, kunciUtama:'#setuju',
     isi:`<p><b>${esc(p.nama)}</b> (${LABEL_TIPE[p.tipe] || p.tipe}) tidak punya akun E-PPAT, sehingga identitasnya tidak diperiksa Peruri. Verifikasi manual berarti Anda menyatakan sudah memeriksa identitas pihak secara langsung.${usulan('HE-VERIF-03')}</p>
       ${pernyataan('Saya sudah mencocokkan KTP asli pihak dengan data di permohonan.')}`,
-    tombol:[['Batal','secondary',null],['Verifikasi Manual','primary',() => { p.manual = true; gambar(); toast(`${p.nama} diverifikasi manual. Tekan Cek Sertifikat Semua Pihak untuk memperbarui status.`, 'positive', 4000); }]] });
+    tombol:[['Batal','secondary',null],['Verifikasi manual','primary',() => { p.manual = true; gambar(); toast(`${p.nama} diverifikasi manual. Tekan Cek sertifikat semua pihak untuk memperbarui status.`, 'positive', 4000); }]] });
 });
 H.addEventListener('click', e => {
   const t = e.target;
@@ -774,7 +774,7 @@ function konfirmObjek() {
       <ol class="periksa"><li>Sertifikat asli sesuai dengan data di permohonan.</li><li>Tidak ada blokir atau sengketa atas tanah.</li><li>Luas dan lokasi sesuai dengan sertifikat.</li></ol>
       ${ringkas([['Objek', `${b.hak} No. ${b.sertifikat}`], ['NIB', b.nib], ['Luas', `${b.luas} m²`], ['Catatan', x.catObjek ? esc(x.catObjek) : '—']])}
       ${pernyataan('Saya sudah memeriksa ketiga hal di atas.')}`,
-    tombol:[['Batal','secondary',null],['Tandai Terverifikasi','primary',() => tunggu('objek', 700, () => selesaiBagian(x, 'objek'))]] });
+    tombol:[['Batal','secondary',null],['Tandai terverifikasi','primary',() => tunggu('objek', 700, () => selesaiBagian(x, 'objek'))]] });
 }
 function konfirmHarga() {
   const x = o(); let ada = false;
@@ -787,7 +787,7 @@ function konfirmHarga() {
     isi:`<p>Status harga tanah akan berubah menjadi <b>Terverifikasi</b> dan dihitung sebagai syarat penyusunan.${usulan('HE-VERIF-03')}</p>
       ${ringkas([['NJOP per m²', rp(x.njop)], ['Luas', `${x.luas} m²`], ['Nilai NJOP', rp(nilai)], ['Harga jual', rp(x.harga)], ['Catatan', x.catHarga ? esc(x.catHarga) : '—']])}
       ${x.harga < nilai ? alert('caution', '', 'Harga jual di bawah NJOP. Alasan sudah dicatat.') : ''}`,
-    tombol:[['Batal','secondary',null],['Simpan & Verifikasi','primary',() => tunggu('harga', 700, () => selesaiBagian(x, 'harga'))]] });
+    tombol:[['Batal','secondary',null],['Simpan & verifikasi','primary',() => tunggu('harga', 700, () => selesaiBagian(x, 'harga'))]] });
 }
 
 /* ---------------- tombol Bantuan di judul halaman (HE-UMUM-02) ---------------- */
@@ -852,12 +852,12 @@ function bukaBantuan() {
   drawer({ judul:'Bantuan Verifikasi Berkas', isi:`
     <p>Permohonan yang pindah ke tahap Verifikasi Berkas masuk ke halaman ini. Penyusunan minuta baru dapat dimulai setelah tiga bagian berikut terverifikasi.</p>
     <ol class="bantu-langkah">
-      <li><b>Para Pihak:</b> tekan "Cek Sertifikat Semua Pihak". Pihak dengan sertifikat elektronik (CA) aktif otomatis terverifikasi. Pihak tanpa akun diverifikasi manual setelah KTP aslinya diperiksa.</li>
+      <li><b>Para Pihak:</b> tekan "Cek sertifikat semua pihak". Pihak dengan sertifikat elektronik (CA) aktif otomatis terverifikasi. Pihak tanpa akun diverifikasi manual setelah KTP aslinya diperiksa.</li>
       <li><b>Objek Tanah:</b> cocokkan sertifikat asli dengan data permohonan, pastikan tidak ada blokir atau sengketa, lalu tandai terverifikasi.</li>
       <li><b>Harga Tanah:</b> isi NJOP per m² dari SPPT PBB tahun berjalan, bandingkan dengan harga jual, lalu simpan.</li>
     </ol>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
-    ${faq(1, 'Pihak berstatus "Sertifikat Elektronik Diproses" atau "Sertifikat Elektronik Belum Aktif"', 'Pihak belum menyelesaikan registrasi CA di Peruri. Minta pihak menyelesaikan eKYC, lalu tekan "Cek Sertifikat Semua Pihak" lagi untuk memperbarui status.')}
+    ${faq(1, 'Pihak berstatus "Sertifikat Elektronik Diproses" atau "Sertifikat Elektronik Belum Aktif"', 'Pihak belum menyelesaikan registrasi CA di Peruri. Minta pihak menyelesaikan eKYC, lalu tekan "Cek sertifikat semua pihak" lagi untuk memperbarui status.')}
     ${faq(2, 'Pihak tidak punya akun E-PPAT', 'Periksa KTP asli pihak secara langsung, lalu centang "Verifikasi manual". Pihak tanpa akun tidak dapat menandatangani secara elektronik sampai memiliki akun dan sertifikat elektronik aktif.')}
     ${faq(3, 'Dari mana nilai NJOP diambil?', 'Dari SPPT PBB tahun berjalan untuk objek tanah tersebut. Isi nilai NJOP bumi per meter persegi.')}
     ${faq(4, 'Harga jual lebih rendah dari NJOP', 'Verifikasi tetap dapat disimpan, tetapi alasannya wajib ditulis di catatan, misalnya kesepakatan para pihak.')}

@@ -87,8 +87,8 @@ function heroTrial() {
 }
 function kartuTahapTrial() {
   const ket = i => i < 4 ? TGL[i] : i === 4 ? tglJam(DB.trial.mulai).replace(/ 2026,/, ',') : i === 5 || i === 6 ? 'Tidak perlu (Trial gratis)' : tglJam(DB.trial.mulai).replace(/ 2026,/, ',');
-  const B = DB.ent ? null : DB.va ? ['Selesaikan pembayaran upgrade', `Transfer ke Virtual Account sebelum batas waktu. Trial tetap berjalan sampai pembayaran diterima.<div style="margin-top:8px">${tombol('Lanjutkan Upgrade', 'primary', 'sm', 'data-ke-upgrade', ik('panah', 14))}</div>`]
-    : S.keUpgrade ? ['Lanjutkan upgrade ke Enterprise', `Tekan Upgrade Sekarang untuk memilih pembayaran. Trial tetap berjalan sampai pembayaran diterima.<div style="margin-top:8px">${tombol('Upgrade Sekarang', 'primary', 'sm', 'data-ke-upgrade', ik('panah', 14))}</div>`]
+  const B = DB.ent ? null : DB.va ? ['Selesaikan pembayaran upgrade', `Transfer ke Virtual Account sebelum batas waktu. Trial tetap berjalan sampai pembayaran diterima.<div style="margin-top:8px">${tombol('Lanjutkan upgrade', 'primary', 'sm', 'data-ke-upgrade', ik('panah', 14))}</div>`]
+    : S.keUpgrade ? ['Lanjutkan upgrade ke Enterprise', `Tekan Upgrade sekarang untuk memilih pembayaran. Trial tetap berjalan sampai pembayaran diterima.<div style="margin-top:8px">${tombol('Upgrade sekarang', 'primary', 'sm', 'data-ke-upgrade', ik('panah', 14))}</div>`]
     : ['Masuk ke aplikasi kantor', 'Gunakan Trial sebagai Super Admin dengan email dan kata sandi pendaftaran. Upgrade ke Enterprise kapan saja; data dan alamat aplikasi tetap sama.'];
   return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuTahap"><div class="ina-card__content"><h3>Progres Registrasi Anda${usulan('HE-OB-05')}</h3>
     ${stepperH(TAMPIL.map(i => TAHAP[i]), TAMPIL.length, n => `<small>${ket(TAMPIL[n])}</small>`, 'Tahapan registrasi')}
@@ -104,7 +104,7 @@ function kartuProgresUp() {
 function kartuSiapTrial() {
   return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuSiap" style="margin-top:0"><div class="ina-card__content"><span class="siap-ikon">${ik('centangL', 28)}</span><h3>Aplikasi e-PPAT Anda Siap!</h3><p class="ket">Akun aplikasi e-PPAT Anda telah berhasil dibuat dan siap digunakan.</p>
     <div class="akses"><small>Alamat aplikasi e-PPAT Anda</small><a href="#" class="url-kantor" data-ke-tenant>https://${url0()}</a></div>
-    <div class="tombol-blok">${tombol(DB.ent ? 'Kembali ke Aplikasi e-PPAT' : 'Masuk ke Aplikasi e-PPAT', 'primary', 'md', 'id="masukApp"', ik('masuk', 16))}${tombol('Lupa kata sandi?', 'link', 'md', 'data-luar="Lupa kata sandi"')}</div>
+    <div class="tombol-blok">${tombol(DB.ent ? 'Kembali ke Aplikasi e-PPAT' : 'Masuk ke aplikasi e-PPAT', 'primary', 'md', 'id="masukApp"', ik('masuk', 16))}${tombol('Lupa kata sandi?', 'link', 'md', 'data-luar="Lupa kata sandi"')}</div>
     <div style="margin-top:12px">${alert('info', '', 'Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kata sandi tidak pernah dikirim melalui email.')}</div>${usulan('HE-TRIAL-05')}</div></section>`;
 }
 const sisaAngka = () => { const s = Math.max(0, Math.floor((DB.trial.akhir - DB.trial.mulai - (Date.now() - DB.trial.nyata)) / 1000)); return [Math.floor(s / 86400), Math.floor(s % 86400 / 3600), Math.floor(s % 3600 / 60), s % 60]; };
@@ -117,7 +117,7 @@ function kartuTrial() {
     <h4 class="sub-kartu">Batas paket Trial</h4><ul class="fitur-ok">${PAKET.trial.fitur.slice(0, 3).map(x => `<li>${ik('centang', 14)}${x}</li>`).join('')}</ul>
     <div class="akses kartu-upgrade"><h4>Upgrade ke Enterprise</h4><p class="ket">Dapatkan akses penuh tanpa batas: e-Sign, e-Seal, analitik lengkap, dan dukungan teknis mendalam. Data dan alamat aplikasi tetap sama.</p>
       ${DB.va ? '<p class="ket" style="margin-top:6px">Tagihan upgrade sudah dibuat. Trial tetap berjalan sampai pembayaran diterima.</p>' : ''}
-      <div class="tombol-blok">${tombol(DB.va ? 'Lanjutkan Upgrade' : 'Upgrade Sekarang', 'primary', 'md', 'id="upgradeSekarang"', ik('panah', 16))}</div></div>${usulan('HE-TRIAL-01')}</div></section>`;
+      <div class="tombol-blok">${tombol(DB.va ? 'Lanjutkan upgrade' : 'Upgrade sekarang', 'primary', 'md', 'id="upgradeSekarang"', ik('panah', 16))}</div></div>${usulan('HE-TRIAL-01')}</div></section>`;
 }
 function kartuEntAktif() {
   const p = PAKET.enterprise;
@@ -149,34 +149,34 @@ const barisTrial = () => `<tr class="ina-table__row" id="barisTrial"><td class="
   <td class="ina-table__cell">Gratis<div class="kc">Tanpa pembayaran</div></td><td class="ina-table__cell">Rp0</td><td class="ina-table__cell"><span class="kc">Tidak berlaku (gratis)</span></td>
   <td class="ina-table__cell rw-status">${badge('Gratis', 'success', 'sm')}<div class="kc">${DB.ent ? `Diganti Enterprise ${tglJam(DB.ent)}` : `Berakhir ${tglJam(DB.trial.akhir)}`}</div></td><td class="ina-table__cell"></td></tr>`;
 const barisUpgrade = () => `<tr class="ina-table__row" id="barisUpgrade"><td class="ina-table__cell"><span class="kd" style="cursor:auto">${DB.va.invoice}</span><div class="kc">Upgrade ke Enterprise</div><div class="kc">Ref. ${DB.va.ref}</div>${DB.ent ? `<div class="kc">Dibayar: ${tglJam(DB.ent)}</div>` : ''}</td><td class="ina-table__cell">Virtual Account ${DB.bank}<div class="kc">${DB.va.no}</div></td><td class="ina-table__cell">${HARGA()}</td>
-  <td class="ina-table__cell">${DB.ent ? '<span class="kc">Tidak berlaku (sudah dibayar)</span>' : DB.va.sampai}</td><td class="ina-table__cell rw-status">${DB.ent ? badge('Lunas', 'success', 'sm') : badge('Belum dibayar', 'warning', 'sm')}</td><td class="ina-table__cell" style="text-align:right">${DB.ent ? '' : tombol('Bayar Sekarang', 'link', 'sm', 'data-ke-upgrade')}</td></tr>`;
+  <td class="ina-table__cell">${DB.ent ? '<span class="kc">Tidak berlaku (sudah dibayar)</span>' : DB.va.sampai}</td><td class="ina-table__cell rw-status">${DB.ent ? badge('Lunas', 'success', 'sm') : badge('Belum dibayar', 'warning', 'sm')}</td><td class="ina-table__cell" style="text-align:right">${DB.ent ? '' : tombol('Bayar sekarang', 'link', 'sm', 'data-ke-upgrade')}</td></tr>`;
 function layarRiwayatTrial() {
   return `${remahApp('Riwayat Transaksi')}<h1>Riwayat Transaksi</h1><p class="sub">Lihat seluruh transaksi pembayaran layanan e-PPAT Anda.</p>
-    <div style="display:flex;justify-content:flex-end;margin-top:12px">${DB.ent ? tombol('Perpanjang Langganan', 'secondary', 'md', 'id="bukaPerpanjang"') : tombol(DB.va ? 'Lanjutkan Upgrade' : 'Upgrade ke Enterprise', 'primary', 'md', 'data-ke-upgrade', ik('panah', 16))}</div>
+    <div style="display:flex;justify-content:flex-end;margin-top:12px">${DB.ent ? tombol('Perpanjang langganan', 'secondary', 'md', 'id="bukaPerpanjang"') : tombol(DB.va ? 'Lanjutkan upgrade' : 'Upgrade ke Enterprise', 'primary', 'md', 'data-ke-upgrade', ik('panah', 16))}</div>
     <div class="tabel-wadah ditandai" id="tabelRiwayat"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Riwayat transaksi">
       <thead class="ina-table__header"><tr><th class="ina-table__header-cell" scope="col">Detail Transaksi</th><th class="ina-table__header-cell" scope="col">Metode</th><th class="ina-table__header-cell" scope="col">Jumlah</th><th class="ina-table__header-cell" scope="col">Jatuh Tempo</th><th class="ina-table__header-cell" scope="col">Status</th><th class="ina-table__header-cell" scope="col"><span class="sr-only">Aksi</span></th></tr></thead>
       <tbody class="ina-table__body">${DB.va ? barisUpgrade() : ''}${barisTrial()}</tbody></table></div></div></div>${usulan('HE-TRIAL-08')}`;
 }
 function layarPerpanjang() {
   const p = PAKET.enterprise;
-  return `${remahApp('Perpanjang Langganan')}<h1>Perpanjang Langganan</h1><p class="sub">Perpanjang paket Enterprise kantor Anda untuk satu tahun berikutnya.</p>
+  return `${remahApp('Perpanjang langganan')}<h1>Perpanjang langganan</h1><p class="sub">Perpanjang paket Enterprise kantor Anda untuk satu tahun berikutnya.</p>
     <div class="dua-kol" style="margin-top:16px"><section class="ina-card ina-card--variant-basic kartu-db" style="margin-top:0"><div class="ina-card__content"><h3>Ringkasan Pesanan</h3><p class="ket">Paket yang akan diperpanjang.</p>
       <div class="paket" style="grid-template-columns:1fr"><label class="dipilih" style="cursor:default"><span class="atas"><h4>${p.n}</h4>${badge(...p.lencana, 'sm')}</span><div class="harga">${p.harga}</div><ul>${p.fitur.map(f => `<li>${f}</li>`).join('')}</ul></label></div></div></section>
     <section class="ina-card ina-card--variant-basic kartu-db" id="blokPerpanjang" style="margin-top:0"><div class="ina-card__content"><h3>Pilih Metode Pembayaran</h3><p class="ket">Langkahnya sama dengan pembayaran upgrade.</p>
       <div style="margin-top:14px">${alert('info', 'Belum ada tagihan', 'Order perpanjangan dibuat saat Anda menekan Buat Virtual Account. Menekan Batal tidak membuat tagihan.')}</div>
-      <div class="tombol-blok">${tombol('Lanjut Pilih Bank', 'primary', 'md', 'id="lanjutPerpanjang"', ik('panah', 16))}${tombol('Batal', 'secondary', 'md', 'id="batalPerpanjang"')}</div></div></section></div>`;
+      <div class="tombol-blok">${tombol('Lanjut pilih bank', 'primary', 'md', 'id="lanjutPerpanjang"', ik('panah', 16))}${tombol('Batal', 'secondary', 'md', 'id="batalPerpanjang"')}</div></div></section></div>`;
 }
 let jamTrial;
 function jalankanJamTrial() { clearInterval(jamTrial); if ($('#sisaTrial')) jamTrial = setInterval(() => { const e = $('#sisaTrial'); if (!e) { clearInterval(jamTrial); return; } e.innerHTML = hitungTrial(); }, 1000); if ($('#sisaVa')) jalankanJamVa(); }
 
 /* ---------- peta perjalanan di bilah prototipe (catatan prototipe, bukan bagian layar) ---------- */
 const PETA = [
-  ['Isi Registrasi', 'Lengkapi formulir, lalu tekan Daftar Sekarang.'], ['Cek email', 'Buka tautan verifikasi di email.'], ['Verifikasi berhasil', 'Tekan Masuk Sekarang.'],
+  ['Isi Registrasi', 'Lengkapi formulir, lalu tekan Daftar sekarang.'], ['Cek email', 'Buka tautan verifikasi di email.'], ['Verifikasi berhasil', 'Tekan Masuk sekarang.'],
   ['Masuk portal', 'Masuk dengan email dan kata sandi.'], ['Verifikasi dua langkah', 'Pilih Email OTP, lalu isi kode.'], ['Pilih paket Trial', 'Pilih Trial, lalu tekan Aktifkan Trial Gratis.'],
-  ['Trial aktif', 'Tekan Masuk ke Aplikasi e-PPAT.'], ['Masuk aplikasi kantor', 'Pilih simulasi Super Admin Trial.'], ['Pakai aplikasi Trial', 'Coba menu dan batas paket.'],
-  ['Mulai Berlangganan', 'Tekan tombol di bawah menu atau di spanduk.'], ['Masuk portal lagi', 'Hanya bila sesi portal sudah berakhir.'], ['Dasbor portal', 'Tekan Upgrade Sekarang.'], ['Upgrade: pilih metode', 'Pilih Virtual Account.'],
+  ['Trial aktif', 'Tekan Masuk ke aplikasi e-PPAT.'], ['Masuk aplikasi kantor', 'Pilih simulasi Super Admin Trial.'], ['Pakai aplikasi Trial', 'Coba menu dan batas paket.'],
+  ['Mulai berlangganan', 'Tekan tombol di bawah menu atau di spanduk.'], ['Masuk portal lagi', 'Hanya bila sesi portal sudah berakhir.'], ['Dasbor portal', 'Tekan Upgrade sekarang.'], ['Upgrade: pilih metode', 'Pilih Virtual Account.'],
   ['Upgrade: pilih bank', 'Pilih BRI, lalu tekan Buat Virtual Account.'], ['Upgrade: bayar', 'Tekan Simulasikan Transfer dari Bank di bilah ini.'], ['Enterprise aktif', 'Lihat Riwayat Transaksi atau kembali ke aplikasi.'],
-  ['Riwayat Transaksi', 'Trial dan Upgrade tercatat terpisah.'], ['Kembali ke aplikasi kantor', 'Spanduk dan tombol Mulai Berlangganan sudah hilang.'], ['Perpanjang Langganan', 'Dipakai sebelum masa Enterprise berakhir.']];
+  ['Riwayat Transaksi', 'Trial dan Upgrade tercatat terpisah.'], ['Kembali ke aplikasi kantor', 'Spanduk dan tombol Mulai berlangganan sudah hilang.'], ['Perpanjang langganan', 'Dipakai sebelum masa Enterprise berakhir.']];
 function posisiPeta() {
   const l = S.layar;
   if (l === 'daftar') return 1; if (l === 'verif') return 2; if (l === 'verifOk') return 3;
@@ -210,7 +210,7 @@ const pilAktif = () => S.layar === 'dasbor' ? (DB.ent ? 'enterprise' : DB.trial 
 const bantuanDasborAsli = BANTUAN.dasbor;
 const FAQ_TRIAL = [['Berapa lama Paket Trial berlaku?', '30 hari sejak Trial aktif. Sisa masa dan tanggal berakhirnya tampil di kartu Paket Trial aktif di Dasbor.'],
   ['Apa batas Paket Trial?', 'Trial berisi 10 transaksi dan paling banyak 5 pengguna, termasuk akun pemilik. Semua menu dapat dibuka. Tanda tangan dan stempel elektronik belum termasuk.'],
-  ['Bagaimana cara upgrade ke Enterprise?', 'Tekan Upgrade Sekarang di Dasbor atau Mulai Berlangganan di aplikasi kantor. Pilih Virtual Account, pilih BRI, tekan Buat Virtual Account, lalu transfer sebelum batas waktu. Trial tetap berjalan selama pembayaran belum diterima.'],
+  ['Bagaimana cara upgrade ke Enterprise?', 'Tekan Upgrade sekarang di Dasbor atau Mulai Berlangganan di aplikasi kantor. Pilih Virtual Account, pilih BRI, tekan Buat Virtual Account, lalu transfer sebelum batas waktu. Trial tetap berjalan selama pembayaran belum diterima.'],
   ['Apakah data saya hilang setelah upgrade?', 'Tidak. Pengguna, order, dan alamat aplikasi tetap sama. Anda juga tidak perlu mendaftar ulang.'],
   ['Apakah saya menerima email aktivasi lagi setelah upgrade?', 'Tidak. Setelah upgrade, Anda menerima email Pembayaran Berhasil Diterima. Gunakan alamat aplikasi dan kata sandi yang sama.']];
 BANTUAN.dasbor = () => DB.trial ? { judul:DB.ent ? 'Bantuan Paket Enterprise' : 'Bantuan Paket Trial', isi:`<p>${DB.ent ? 'Paket Enterprise kantor Anda sudah aktif.' : 'Paket Trial kantor Anda sudah aktif dan aplikasi siap digunakan.'}</p><h4 class="bantu-sub">Pertanyaan umum</h4>${fq('t', FAQ_TRIAL)}${kontak()}` } : bantuanDasborAsli();
@@ -221,19 +221,19 @@ BANTUAN.perpanjang = () => ({ judul:'Bantuan Perpanjang Langganan', isi:`<p>Perp
 const SUMBER_TRIAL = 'Penelusuran live dev.eppat.id dan dev-app.eppat.id 6 Nov 2026; Panduan Trial ePPAT v3';
 UBAH.push(
   { kode:'HE-TRIAL-01', bukanHE:true, versi:'v2', judul:'Trial aktif: status akun, sisa masa, dan batas paket jelas',
-    isi:'Lencana menjadi "Status akun: Trial aktif" dan kalimat pembuka menyebut tanggal berakhir Trial. Kartu Paket Trial memuat hitung mundur, tanggal berakhir, batas paket, dan tombol Upgrade Sekarang. Langkah berikutnya menunjuk ke aplikasi kantor.',
+    isi:'Lencana menjadi "Status akun: Trial aktif" dan kalimat pembuka menyebut tanggal berakhir Trial. Kartu Paket Trial memuat hitung mundur, tanggal berakhir, batas paket, dan tombol Upgrade sekarang. Langkah berikutnya menunjuk ke aplikasi kantor.',
     lama:'Setelah Trial aktif, lencana tetap "STATUS AKUN: ONBOARDING" dan kalimat pembuka tetap meminta pengguna mengaktifkan akun PPAT Enterprise. Batas paket tidak tampil di kartu Trial.', ke:'tr-aktif', sorot:'#kartuTrial', sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-02', bukanHE:true, versi:'v2', judul:'Email aktivasi tanpa kata sandi dan hanya sekali',
     isi:'Email Akun e-PPAT Anda Sudah Aktif dikirim sekali saat Trial aktif dan tidak memuat kata sandi. Saat upgrade, pengguna hanya menerima instruksi pembayaran dan Pembayaran Berhasil Diterima.',
     lama:'Email memuat kata sandi dalam teks biasa dan terkirim dua kali (saat Trial dan setelah upgrade). Email pembayaran menyebut konfigurasi instansi maksimal 1x24 jam, padahal aplikasi sudah aktif. Dasbor meminta "Cek email Anda untuk mendapatkan password login".', ke:'tr-aktif', sorot:'#emailTrial', sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-03', bukanHE:true, versi:'v2', judul:'Tenant: satu istilah Trial, sisa masa terlihat, dan Mulai Berlangganan selalu ada',
-    isi:'Lencana Paket Trial dengan sisa hari tampil di header portal dan tenant, lalu hilang setelah upgrade. Spanduk memakai istilah Trial dan menampilkan sisa hari. Tombol Mulai Berlangganan selalu ada di bawah menu. Spanduk TERA tidak tampil untuk Super Admin karena TERA didaftarkan peran PPAT. Lihat dengan masuk sebagai Super Admin Trial.',
+    isi:'Lencana Paket Trial dengan sisa hari tampil di header portal dan tenant, lalu hilang setelah upgrade. Spanduk memakai istilah Trial dan menampilkan sisa hari. Tombol Mulai berlangganan selalu ada di bawah menu. Spanduk TERA tidak tampil untuk Super Admin karena TERA didaftarkan peran PPAT. Lihat dengan masuk sebagai Super Admin Trial.',
     lama:'Portal menyebut Trial, tenant menyebut Paket Gratis. Header tidak menunjukkan paket yang sedang dipakai, dan spanduk tidak menampilkan sisa hari. Spanduk TERA tetap meminta pendaftaran walaupun paket belum memuat tanda tangan dan stempel elektronik.', ke:'tr-aktif', sorot:null, sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-04', bukanHE:true, versi:'v2', judul:'Batas paket dicegah sebelum mengisi formulir',
-    isi:'Daftar Pengguna dan Permohonan AJB menampilkan pemakaian ("3 dari 5 pengguna", "1 dari 10 transaksi"). Saat batas tercapai, dialog muncul sebelum formulir dibuka, dengan kalimat manusiawi dan tombol Mulai Berlangganan. Aturan yang sama berlaku saat menambah klien dari Permohonan AJB.',
+    isi:'Daftar Pengguna dan Permohonan AJB menampilkan pemakaian ("3 dari 5 pengguna", "1 dari 10 transaksi"). Saat batas tercapai, dialog muncul sebelum formulir dibuka, dengan kalimat manusiawi dan tombol Mulai berlangganan. Aturan yang sama berlaku saat menambah klien dari Permohonan AJB.',
     lama:'Pesan "batas paket langganan tercapai: paket Gratis maksimal 5 pengguna, upgrade untuk menambah" baru muncul setelah formulir diisi dan disimpan, tanpa tombol ke halaman upgrade. Akun pemilik tidak tampil tetapi ikut dihitung. Kartu menjanjikan 10 transaksi, sedangkan aplikasi menolak order kedua.', ke:'tr-aktif', sorot:null, sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-05', bukanHE:true, versi:'v2', judul:'Masuk ke Aplikasi langsung membuka halaman Masuk',
-    isi:'Tombol Masuk ke Aplikasi e-PPAT membuka halaman Masuk tenant. Bila sesi tenant masih ada, tombol langsung membuka Dasbor.',
+    isi:'Tombol Masuk ke aplikasi e-PPAT membuka halaman Masuk tenant. Bila sesi tenant masih ada, tombol langsung membuka Dasbor.',
     lama:'Tombol membuka tab baru berisi Halaman Depan tenant, dan footer menampilkan pesan teknis "Master footer yang dipilih tidak ditemukan". Pengguna harus menekan Masuk lagi untuk melihat formulir.', ke:'tr-aktif', sorot:'#kartuSiap', sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-06', bukanHE:true, versi:'v2', judul:'Mulai Berlangganan kembali ke Dasbor portal, tagihan dibuat saat Buat Virtual Account',
     isi:'Bila sesi portal masih aktif, Mulai Berlangganan langsung membuka Dasbor portal tanpa masuk ulang. Bila berakhir, pengguna masuk dulu, lalu kembali ke Dasbor yang sama. Kartu Upgrade disorot dan langkah berikutnya menunjuk ke Upgrade Sekarang. Membuka halaman Upgrade tidak membuat order.',
@@ -245,5 +245,5 @@ UBAH.push(
     isi:'Riwayat memuat baris Paket Trial (Rp0, Gratis) dan baris Upgrade ke Enterprise. Metode ditulis Virtual Account BRI dan status berupa lencana. Selama Trial, tombol di atas tabel mengarah ke upgrade, bukan perpanjangan.',
     lama:'Hanya ada ORD-RENEW-…, sehingga upgrade tercatat sebagai perpanjangan dan Trial tidak tercatat. Metode tertulis VIRTUAL_ACCOUNT, dan Jatuh Tempo tetap tampil walaupun tagihan lunas.', ke:'tr-riwayat', sorot:'#tabelRiwayat', sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-09', bukanHE:true, versi:'v2', judul:'Tenant berubah otomatis setelah upgrade',
-    isi:'Tanpa masuk ulang, spanduk Trial dan tombol Mulai Berlangganan hilang, batas paket terbuka, dan data masa Trial tetap ada. Tenant menampilkan pesan satu kali bahwa paket Enterprise sudah aktif.',
+    isi:'Tanpa masuk ulang, spanduk Trial dan tombol Mulai berlangganan hilang, batas paket terbuka, dan data masa Trial tetap ada. Tenant menampilkan pesan satu kali bahwa paket Enterprise sudah aktif.',
     lama:'Perubahan paket di tenant sudah otomatis, tetapi tidak ada pesan apa pun. Pengguna hanya melihat spanduk menghilang.', ke:'tr-ent', sorot:'#kartuSiap', sumber:SUMBER_TRIAL });

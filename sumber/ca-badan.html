@@ -185,7 +185,7 @@
     <header class="top">
       <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg></button>
       <div class="spacer"></div>
-      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat Landing</span></button>
+      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat landing</span></button>
       <button class="ina-button ina-button--tertiary ina-button--md" aria-label="Notifikasi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg></button>
       <div class="user ina-action-dropdown" id="user" tabindex="0" role="button" aria-haspopup="menu" aria-expanded="false"><span class="ina-avatar ina-avatar--circle ava">K</span><span class="txt"><span class="uname">Contoh Klien Satu</span><span class="urole">Klien</span></span><div id="menuProfil"></div></div>
     </header>
@@ -251,9 +251,9 @@ const UBAH = [
     lama:'Istilah CA dan eKYC tidak dijelaskan di tempat munculnya; penjelasan CA hanya berupa teks kecil di bawah kartu; teks memakai istilah "OTP & liveness".', ke:'siap', sorot:'#kartuCa', sumber:'Laporan HE INA Digital hlm. 34' },
   { kode:'HE-CA-04', judul:'Banner CA: tombol langsung membuka tab Registrasi CA',
     isi:'Tombol pada banner ("Buka Registrasi CA") membuka Akun Saya langsung di tab Registrasi CA. Isi banner mengikuti status (belum terdaftar, menunggu eKYC, diperiksa Peruri, kedaluwarsa). Setelah banner ditutup, Registrasi CA tetap dapat dibuka dari menu profil yang menampilkan status CA.',
-    lama:'Tombol "Registrasi CA" dan "Cek / Lanjutkan" pada banner membuka tab Akun, bukan tab Registrasi CA; tombol "Lengkapi Sekarang" pada dialog pengingat juga membuka tab Akun, bukan tab Data Diri (KTP) (terbukti di live 26 Okt 2026). Setelah banner ditutup, tidak ada jalan pintas yang terlihat.', ke:'banner', sorot:'#notifDaftar', sumber:'Laporan HE INA Digital hlm. 34' },
+    lama:'Tombol "Registrasi CA" dan "Cek / Lanjutkan" pada banner membuka tab Akun, bukan tab Registrasi CA; tombol "Lengkapi sekarang" pada dialog pengingat juga membuka tab Akun, bukan tab Data Diri (KTP) (terbukti di live 26 Okt 2026). Setelah banner ditutup, tidak ada jalan pintas yang terlihat.', ke:'banner', sorot:'#notifDaftar', sumber:'Laporan HE INA Digital hlm. 34' },
   { kode:'HE-CA-05', judul:'Tab Registrasi CA: satu pesan per status, bahasa baku, dan hasil cek status terlihat',
-    isi:'Setiap status hanya menampilkan pesan yang relevan. Catatan Peruri diterjemahkan ("Waiting for Verification" → "Menunggu verifikasi Peruri"). Ejaan dibakukan: Kedaluwarsa, Spesimen, tautan. Hasil "Cek Status Sertifikat" ditampilkan beserta waktu pengecekan ("Status belum berubah · dicek 10.32"). Masa berlaku tautan eKYC tertulis jelas.',
+    isi:'Setiap status hanya menampilkan pesan yang relevan. Catatan Peruri diterjemahkan ("Waiting for Verification" → "Menunggu verifikasi Peruri"). Ejaan dibakukan: Kedaluwarsa, Spesimen, tautan. Hasil "Cek status sertifikat" ditampilkan beserta waktu pengecekan ("Status belum berubah · dicek 10.32"). Masa berlaku tautan eKYC tertulis jelas.',
     lama:'Hasil penelusuran live: akun berstatus "Sedang Diproses" masih menampilkan "Registrasi CA belum bisa dibuat — lengkapi Data Diri dulu … Masih kurang: Foto KTP, Nomor HP"; catatan Peruri berbahasa Inggris ("Catatan Peruri: Success", "Waiting for Verification"); label "Kadaluarsa" dan "Specimen" tidak baku; tombol "Buat Ulang Link".', ke:'periksa', sorot:'#kartuCa', sumber:'Laporan HE INA Digital hlm. 34, 35 + penelusuran live' },
   { kode:'HE-CA-06', judul:'Data diri: pesan galat jelas dan muncul di dekat isian',
     isi:'Kesalahan data diri (tab Data Diri dan tab Akun) ditampilkan tepat di bawah isian atau berkas yang bermasalah, dengan bahasa awam dan cara memperbaikinya. Foto KTP memakai IDDS File Upload; foto beresolusi rendah ditandai merah di daftar berkas beserta ukurannya. Nomor HP yang sudah dipakai akun lain dijelaskan tanpa awalan teknis.',
@@ -262,7 +262,7 @@ const UBAH = [
     isi:'Semua data yang diperlukan untuk akta dan registrasi CA diisi di tab Data Diri (KTP), termasuk nomor HP (sebelumnya di tab Akun; kini tab Akun hanya menampilkannya). Isian dikelompokkan seperti urutan KTP: Identitas sesuai KTP, Alamat sesuai KTP, Kontak dan domisili, Foto KTP — tiap kelompok memiliki satu kalimat penjelasan. Isian wajib bertanda *, isian lain bertanda "(opsional)". Alert di atas menunjukkan "n dari 6 isian wajib terisi" dan tombol "Ke isian berikutnya". Kaki formulir menunjukkan "Belum disimpan" / "Semua perubahan tersimpan"; pindah tab dengan perubahan belum disimpan memunculkan konfirmasi. Format NIK, NPWP, nomor HP, dan RT/RW diperiksa sebelum disimpan.',
     lama:'Satu daftar panjang 17 isian tanpa pengelompokan; nomor HP di tab Akun sehingga data CA tersebar di dua tab; tidak ada penanda isian wajib; perubahan dapat hilang saat pindah tab tanpa peringatan; beda "Kota Domisili" dan "Domisili Sementara" tidak jelas.', ke:'datadiri', sorot:'#kartuDataDiri', sumber:'Laporan HE INA Digital hlm. 34–35' },
   { kode:'HE-CA-08', judul:'Tab Akun dan Keamanan: seragam, berbahasa Indonesia, dan aman dipakai',
-    isi:'Keempat tab Akun Saya memakai pola kartu yang sama (ikon, judul, satu kalimat keterangan, tombol di kaki). Tab Akun: nama diubah lewat "Ubah Nama" dengan status "Belum disimpan" dan konfirmasi bila pindah tab sebelum disimpan; nomor HP ditautkan ke tab Data Diri; peran "Klien" dijelaskan dengan tooltip; ID akun diberi keterangan kegunaannya. Tab Keamanan: isian kata sandi memakai IDDS Password Input dengan tombol tampilkan/sembunyikan; syarat kata sandi diseragamkan dengan layar ganti kata sandi sementara (minimal 12 karakter, huruf besar, huruf kecil, angka, simbol) dan ditampilkan sebagai daftar centang yang terisi saat mengetik; kecocokan ulangan diperiksa; tombol "Ganti Kata Sandi" baru aktif bila semua sesuai; pesan "kata sandi saat ini tidak sesuai" tampil di bawah isian. Bagian sesi menjadi "Perangkat yang sedang masuk" dengan jenis perangkat, label "Perangkat ini", dan konfirmasi sebelum mengeluarkan perangkat.',
+    isi:'Keempat tab Akun Saya memakai pola kartu yang sama (ikon, judul, satu kalimat keterangan, tombol di kaki). Tab Akun: nama diubah lewat "Ubah nama" dengan status "Belum disimpan" dan konfirmasi bila pindah tab sebelum disimpan; nomor HP ditautkan ke tab Data Diri; peran "Klien" dijelaskan dengan tooltip; ID akun diberi keterangan kegunaannya. Tab Keamanan: isian kata sandi memakai IDDS Password Input dengan tombol tampilkan/sembunyikan; syarat kata sandi diseragamkan dengan layar ganti kata sandi sementara (minimal 12 karakter, huruf besar, huruf kecil, angka, simbol) dan ditampilkan sebagai daftar centang yang terisi saat mengetik; kecocokan ulangan diperiksa; tombol "Ganti kata sandi" baru aktif bila semua sesuai; pesan "kata sandi saat ini tidak sesuai" tampil di bawah isian. Bagian sesi menjadi "Perangkat yang sedang masuk" dengan jenis perangkat, label "Perangkat ini", dan konfirmasi sebelum mengeluarkan perangkat.',
     lama:'Bahasa bercampur Inggris: "device", "di-logout", "login", "Logout dari sini", "Logout Semua", "Sesi ini". Pola kartu tiap tab berbeda (judul huruf kapital kecil di atas, ikon hanya di sebagian kartu). ID akun teknis (USR_…) ditampilkan tanpa keterangan. Syarat kata sandi tidak seragam: layar ganti kata sandi sementara meminta 12 karakter + huruf besar, huruf kecil, angka, simbol, sedangkan tab Keamanan, Tambah User, dan Registrasi hanya meminta minimal 8 karakter.', ke:'keamanan', sorot:'#kartuPassword', sumber:'Laporan HE INA Digital hlm. 34–35' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Registrasi CA',
     isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi urutan registrasi, pertanyaan umum (apa itu CA, apa yang dilakukan di portal Peruri, berapa lama, tautan kedaluwarsa, CA kedaluwarsa), dan kontak dukungan.',
@@ -411,9 +411,9 @@ function tabAkunInfo() {
     ${kepala('user', 'Ubah nama akun', 'Tulis nama sesuai KTP agar nama Anda di akta benar.')}
     <div class="form-dd">${tfAkun('aDepan', 'Nama depan', p.depan, '', true)}${tfAkun('aTengah', 'Nama tengah <span class="opsional">(opsional)</span>', p.tengah, '')}${tfAkun('aBelakang', 'Nama belakang <span class="opsional">(opsional)</span>', p.belakang, '')}</div>
     <p class="ket-grup" style="margin-top:12px">Nomor HP diubah di tab Data Diri (KTP).</p>
-    <div class="kartu-kaki" style="align-items:center"><span class="status-simpan" id="statusDd">${ik('centang', 14)} Belum ada perubahan</span>${tombol('Batal', 'secondary', 'md', 'id="batalAkun"')}${tombol('Simpan Perubahan', 'primary', 'md', 'id="simpanAkun"', ik('centang', 16))}${usulan('HE-CA-08')}</div></div>`;
+    <div class="kartu-kaki" style="align-items:center"><span class="status-simpan" id="statusDd">${ik('centang', 14)} Belum ada perubahan</span>${tombol('Batal', 'secondary', 'md', 'id="batalAkun"')}${tombol('Simpan perubahan', 'primary', 'md', 'id="simpanAkun"', ik('centang', 16))}${usulan('HE-CA-08')}</div></div>`;
   return `${S.dariCa ? alertKelengkapan() : ''}<div class="ina-card ina-card--variant-basic kartu ditandai" id="kartuAkun">
-    ${kepala('user', judul, 'Identitas yang Anda pakai untuk masuk ke E-PPAT.', tombol('Ubah Nama', 'secondary', 'md', 'id="ubahAkun"', ik('pena', 16)))}
+    ${kepala('user', judul, 'Identitas yang Anda pakai untuk masuk ke E-PPAT.', tombol('Ubah nama', 'secondary', 'md', 'id="ubahAkun"', ik('pena', 16)))}
     <dl class="kv-akun">${[['Nama depan', esc(p.depan)], ['Nama tengah', esc(p.tengah) || '—'], ['Nama belakang', esc(p.belakang) || '—'],
       ['Email', esc(p.email) + '<small>Hubungi admin kantor untuk mengubah email.</small>'],
       ['Nomor HP', (esc(p.hp) || '—') + `<small>Diubah di <a href="#" data-tab="data">tab Data Diri</a>.</small>`],
@@ -437,9 +437,9 @@ function tabAman() {
     <div class="form-dd"><div class="lebar">${pwIsian('pLama', 'Kata sandi saat ini', 'Masukkan kata sandi yang Anda pakai sekarang', '', 'current-password')}</div>
       ${pwIsian('pBaru', 'Kata sandi baru', 'Buat kata sandi baru', '', 'new-password')}${pwIsian('pUlang', 'Ulangi kata sandi baru', 'Ketik ulang kata sandi baru', '', 'new-password')}
       <div class="lebar"><ul class="syarat-pw" id="syaratPw" aria-live="polite">${SYARAT_PW.map(([l], i) => `<li data-syarat="${i}"><span class="tanda" aria-hidden="true"></span>${l}</li>`).join('')}</ul></div></div>
-    <div class="kartu-kaki">${tombol('Ganti Kata Sandi', 'primary', 'md', 'id="gantiPw" disabled', ik('kunci', 16))}${usulan('HE-CA-08')}</div></div>
+    <div class="kartu-kaki">${tombol('Ganti kata sandi', 'primary', 'md', 'id="gantiPw" disabled', ik('kunci', 16))}${usulan('HE-CA-08')}</div></div>
   <div class="ina-card ina-card--variant-basic kartu ditandai" id="kartuSesi">
-    ${kepala('laptop', 'Perangkat yang sedang masuk', 'Keluarkan perangkat yang tidak Anda kenali atau tidak dipakai lagi.', sesiLain ? tombol('Keluarkan Semua Perangkat Lain', 'secondary', 'sm', 'data-keluar-semua', ik('keluar', 14)) : '')}
+    ${kepala('laptop', 'Perangkat yang sedang masuk', 'Keluarkan perangkat yang tidak Anda kenali atau tidak dipakai lagi.', sesiLain ? tombol('Keluarkan semua perangkat lain', 'secondary', 'sm', 'data-keluar-semua', ik('keluar', 14)) : '')}
     <ul class="daftar-sesi">${S.sesi.map(s => `<li><span class="ikon-bulat kecil">${ik(s.jenis === 'Ponsel' ? 'ponsel' : 'laptop', 18)}</span>
       <div class="sesi-isi"><b>${s.jenis} · ${s.ket}</b> ${s.ini ? badge('Perangkat ini', 'success', 'sm') : ''}<small>IP ${s.ip} · Masuk ${s.mulai} · Berlaku sampai ${s.habis}</small></div>
       ${tombol(s.ini ? 'Keluar dari Perangkat Ini' : 'Keluarkan', 'tertiary', 'sm', `data-keluar-sesi="${s.id}" data-merah`, ik('keluar', 14))}</li>`).join('')}</ul>${usulan('HE-CA-08')}</div>`;
@@ -523,9 +523,9 @@ function langkahBerikut() {
     siap:['info', ajukanBersama() ? 'Ajukan registrasi CA & TERA' : 'Ajukan registrasi CA', `Data diri Anda sudah lengkap. ${ajukanBersama() ? 'Data TERA ikut diajukan dalam pengajuan yang sama. ' : ''}Setelah diajukan, portal Peruri terbuka di tab baru untuk ${istilah('eKYC', 'EKYC')}. Tautan yang sama juga dikirim ke email Anda.`, tombol(ajukanBersama() ? 'Ajukan Registrasi CA & TERA' : 'Ajukan Registrasi CA', 'primary', 'md', `id="ajukan" ${m === 'ajukan' ? 'disabled' : ''}`, m === 'ajukan' ? spinner : ik('tamengcek', 16))],
     ekyc:['info', 'Selesaikan eKYC di portal Peruri', `Di portal Peruri Anda akan (1) menyetujui syarat layanan, (2) memasukkan kode OTP dari email dan SMS, (3) memeriksa data pribadi yang sudah terisi, (4) mengambil ${istilah('swafoto', 'SWAFOTO')}, dan (5) mengirim pengajuan. Tautan yang sama ada di email dari no-reply-digital@peruri.co.id dan berlaku sampai ${est('27 Okt 2026, 09.15')}.`, tombol('Lanjutkan eKYC di Peruri', 'primary', 'md', 'id="lanjutEkyc"', ik('luar', 16))],
     periksa:['info', 'Menunggu pemeriksaan Peruri', `eKYC Anda sudah selesai. Peruri sedang memeriksa identitas Anda, biasanya ${est('± 1 hari kerja')}. Anda akan menerima notifikasi dan email setelah sertifikat elektronik aktif. Anda tidak perlu membuka tautan lagi.`, ''],
-    aktif:['info', 'Masukkan spesimen tanda tangan', `Sertifikat elektronik Anda aktif sampai <b>${CA_SAMPAI}</b> (berlaku 1 tahun). Registrasi selesai setelah Anda memasukkan ${istilah('spesimen', 'SPESIMEN')} tanda tangan.`, tombol('Masukkan Spesimen', 'primary', 'md', 'data-spesimen', ik('pena', 16))],
+    aktif:['info', 'Masukkan spesimen tanda tangan', `Sertifikat elektronik Anda aktif sampai <b>${CA_SAMPAI}</b> (berlaku 1 tahun). Registrasi selesai setelah Anda memasukkan ${istilah('spesimen', 'SPESIMEN')} tanda tangan.`, tombol('Masukkan spesimen', 'primary', 'md', 'data-spesimen', ik('pena', 16))],
     selesai:['success', 'Registrasi CA selesai', `Sertifikat elektronik Anda aktif sampai <b>${CA_SAMPAI}</b> (berlaku 1 tahun). Anda sudah dapat menandatangani akta secara elektronik.`, S.dariTtd ? `<a class="ina-button ina-button--primary ina-button--md" href="${S.dariTtd}">Kembali ke Penandatanganan Akta</a>` : ''],
-    kedaluwarsa:['caution', 'Ajukan registrasi ulang', 'Sertifikat elektronik Anda sudah kedaluwarsa. Data diri Anda masih tersimpan sehingga Anda cukup mengajukan ulang dan menyelesaikan eKYC kembali.', tombol('Registrasi Ulang', 'primary', 'md', `id="ajukan" ${m === 'ajukan' ? 'disabled' : ''}`, m === 'ajukan' ? spinner : ik('ulang', 16))]
+    kedaluwarsa:['caution', 'Ajukan registrasi ulang', 'Sertifikat elektronik Anda sudah kedaluwarsa. Data diri Anda masih tersimpan sehingga Anda cukup mengajukan ulang dan menyelesaikan eKYC kembali.', tombol('Registrasi ulang', 'primary', 'md', `id="ajukan" ${m === 'ajukan' ? 'disabled' : ''}`, m === 'ajukan' ? spinner : ik('ulang', 16))]
   }[k];
   return `<div class="berikut ditandai" id="langkahBerikut">${alert(B[0], `${PPAT_T ? 'Sertifikat elektronik (TTE): ' : ''}${k === 'selesai' ? '' : 'Langkah berikutnya: '}${B[1]}${usulan('HE-CA-01')}`, B[2], B[3] ? `<div class="aksi">${B[3]}</div>` : '')}</div>${alertTera()}`;
 }
@@ -544,7 +544,7 @@ function tabCa() {
       ${kartuDataTera()}
       <div class="kaki-kartu">
         ${kd === 'ekyc' ? tombol('Buat tautan baru', 'secondary', 'sm', 'id="tautanBaru"', ik('ulang', 14)) : ''}
-        ${['ekyc', 'periksa', 'aktif', 'selesai'].includes(kd) ? tombol('Cek Status Sertifikat', 'secondary', 'sm', `id="cekStatus" ${S.memuat === 'cek' ? 'disabled' : ''}`, S.memuat === 'cek' ? spinner : ik('ulang', 14)) : ''}
+        ${['ekyc', 'periksa', 'aktif', 'selesai'].includes(kd) ? tombol('Cek status sertifikat', 'secondary', 'sm', `id="cekStatus" ${S.memuat === 'cek' ? 'disabled' : ''}`, S.memuat === 'cek' ? spinner : ik('ulang', 14)) : ''}
         <span class="waktu" id="hasilCek" aria-live="polite">${S.hasilCek || (['ekyc', 'periksa', 'aktif', 'selesai'].includes(kd) ? `Terakhir dicek ${S.dicek}` : '')}${usulan('HE-CA-05')}</span>
       </div>
     </div>
@@ -567,8 +567,8 @@ function kartuSpesimen() {
   return `<div class="ina-card ina-card--variant-basic kartu ditandai" id="kartuSpesimen"><div class="kartu-kepala"><span class="ikon-bulat">${ik('pena', 20)}</span><div>
       <h2><span>${istilah('Spesimen', 'SPESIMEN')} tanda tangan</span> ${ada ? badge('Sudah ada', 'success', 'sm') : aktif ? badge('Belum ada', 'warning', 'sm') : badge('Terkunci', 'neutral', 'sm')}${usulan('HE-CA-09')}</h2>
       <p>Gambar tanda tangan Anda yang tampil pada akta.</p></div></div>
-    ${ada ? `<div class="kotak-ttd" aria-label="Spesimen tanda tangan">${S.spesimen ? `<img src="${S.spesimen}" alt="Spesimen tanda tangan Anda">` : 'Contoh Klien'}</div><div class="kaki-kartu">${tombol('Ubah Spesimen', 'secondary', 'sm', 'data-spesimen', ik('pena', 14))}</div>`
-      : aktif ? `<div class="kaki-kartu">${tombol('Masukkan Spesimen', 'secondary', 'sm', 'data-spesimen', ik('pena', 14))}</div>`
+    ${ada ? `<div class="kotak-ttd" aria-label="Spesimen tanda tangan">${S.spesimen ? `<img src="${S.spesimen}" alt="Spesimen tanda tangan Anda">` : 'Contoh Klien'}</div><div class="kaki-kartu">${tombol('Ubah spesimen', 'secondary', 'sm', 'data-spesimen', ik('pena', 14))}</div>`
+      : aktif ? `<div class="kaki-kartu">${tombol('Masukkan spesimen', 'secondary', 'sm', 'data-spesimen', ik('pena', 14))}</div>`
       : `<div class="spesimen-kunci">${alert('info', '', `${ik('kunci', 14)} Spesimen tanda tangan dapat dibuat setelah sertifikat elektronik (CA) Anda aktif.`)}</div>`}
   </div>`;
 }
@@ -580,17 +580,17 @@ function alertTera() {
   if (T.status === 'rejected' && T.tolak) {
     const sisa = sisaTolak(), daftar = T.tolak.butir.map(k => { const b = BUTIR_TOLAK[k], ok = sudahDiperbaiki(k);
       return `<li class="${ok ? 'ok' : 'kurang'}"><span class="bulat">${ik(ok ? 'centang' : 'seru', 13)}</span><span><b>${b.l}</b> <small class="letak">· ${b.letak}</small>${ok ? '<small>Sudah diperbaiki.</small>' : `<small>${b.alasan} ${b.cara}</small>`}</span>${ok ? '' : tombol('Perbaiki', 'secondary', 'sm', `data-perbaiki="${k}"`, ik('pena', 14))}</li>`; }).join('');
-    const ajukan = tombol('Ajukan Ulang TERA', 'primary', 'md', `id="ajukanTera" ${sisa.length || m === 'tera' ? 'disabled' : ''}`, m === 'tera' ? spinner : ik('ulang', 16));
+    const ajukan = tombol('Ajukan ulang TERA', 'primary', 'md', `id="ajukanTera" ${sisa.length || m === 'tera' ? 'disabled' : ''}`, m === 'tera' ? spinner : ik('ulang', 16));
     return `<div class="berikut ditandai" id="alertTera">${alert('critical', `Stempel elektronik (TERA): pendaftaran ditolak ${T.tolak.oleh} · ${T.tolak.tanggal}${usulan('HE-CA-12')}`,
       `${sisa.length ? `${sisa.length} dari ${T.tolak.butir.length} bagian perlu diperbaiki. Status sertifikat elektronik (TTE) tidak terpengaruh.` : 'Semua bagian sudah diperbaiki. Ajukan ulang agar diperiksa kembali.'}<ul class="cek-list tolak-list">${daftar}</ul><div class="aksi-tolak">${ajukan}${sisa.length ? '<span class="alasan-nonaktif">Aktif setelah semua bagian diperbaiki.</span>' : ''}</div>`)}</div>`;
   }
   const B = T.status === 'rejected' ? ['critical', 'Pendaftaran TERA ditolak', 'Perbaiki data TERA, lalu ajukan ulang.', tombol('Ke Data TERA', 'primary', 'md', 'data-ke-tera', ik('pena', 16))]
     : pt === 0 ? ['caution', `Langkah berikutnya: lengkapi ${n.length} data TERA`, `Isi ${n.join(', ')} di bagian Data TERA di bawah. Data diri lainnya memakai Data Diri (KTP), sehingga tidak diisi dua kali.`, tombol('Ke Data TERA', 'primary', 'md', 'data-ke-tera', ik('panah', 16))]
     : pt === 1 ? (ajukanBersama() || S.kondisi === 'kurang' ? ['info', 'Data TERA lengkap', S.kondisi === 'kurang' ? 'TERA akan diajukan bersama sertifikat elektronik setelah data diri Anda lengkap.' : 'TERA ikut diajukan bersama sertifikat elektronik melalui tombol di atas.', '']
-      : ['info', 'Langkah berikutnya: ajukan pendaftaran TERA', 'Data TERA sudah lengkap. Ajukan agar admin E-PPAT memeriksanya lalu meneruskannya ke Peruri.', tombol('Ajukan Pendaftaran TERA', 'primary', 'md', `id="ajukanTera" ${m === 'tera' ? 'disabled' : ''}`, m === 'tera' ? spinner : ik('tamengcek', 16))])
+      : ['info', 'Langkah berikutnya: ajukan pendaftaran TERA', 'Data TERA sudah lengkap. Ajukan agar admin E-PPAT memeriksanya lalu meneruskannya ke Peruri.', tombol('Ajukan pendaftaran TERA', 'primary', 'md', `id="ajukanTera" ${m === 'tera' ? 'disabled' : ''}`, m === 'tera' ? spinner : ik('tamengcek', 16))])
     : T.status === 'pending' ? ['info', 'TERA diperiksa admin E-PPAT', `Pemeriksaan biasanya ${est('± 1–2 hari kerja')}, lalu diteruskan ke Peruri (${est('± 3–5 hari kerja')}). Anda tidak perlu melakukan apa pun. Sertifikat elektronik tidak menunggu proses ini.`, '']
     : T.status === 'submitted' ? ['info', 'TERA diproses Peruri', `Perkiraan selesai ${est('± 3–5 hari kerja')}. Anda akan menerima notifikasi saat TERA disetujui.`, '']
-    : pt === 3 ? ['info', 'Langkah berikutnya: buat spesimen stempel', 'TERA kantor sudah disetujui Peruri. Atur isi dan warna stempel yang tampil pada akta.', tombol('Buat Spesimen Stempel', 'primary', 'md', 'data-stempel', ik('stempel', 16))]
+    : pt === 3 ? ['info', 'Langkah berikutnya: buat spesimen stempel', 'TERA kantor sudah disetujui Peruri. Atur isi dan warna stempel yang tampil pada akta.', tombol('Buat spesimen stempel', 'primary', 'md', 'data-stempel', ik('stempel', 16))]
     : ['success', 'Stempel elektronik (TERA) aktif', 'Stempel kantor siap dibubuhkan pada akta di Penandatanganan Akta.', ''];
   return `<div class="berikut ditandai" id="alertTera">${alert(B[0], `Stempel elektronik (TERA): ${B[1]}${usulan('HE-CA-11')}`, B[2], B[3] ? `<div class="aksi">${B[3]}</div>` : '')}</div>`;
 }
@@ -604,7 +604,7 @@ function kartuDataTera() {
   return `<section class="grup-dd kartu-tera ditandai" id="dataTera"><h4>${ik('stempel', 16)} Data TERA</h4><p class="ket-grup">Hanya data yang belum ada di Data Diri (KTP). Nama, NIK, tempat dan tanggal lahir, nomor HP, dan foto KTP memakai Data Diri.${usulan('HE-CA-11')}</p>
     <div class="form-dd">${tf('idppat', 'ID PPAT / Nomor SK', 'Sesuai surat SK')}${tf('rekening', 'Rekening PPAT', 'Nomor rekening atas nama PPAT')}
       <div class="ina-file-upload ${tolakSk ? 'berkas-galat' : ''}" id="f-tsk"><div class="ina-file-upload__label">SK PPAT Terakhir<span class="ina-text-field__required">*</span></div>
-        <div class="berkas-baris">${tombol(T.sk ? 'Ganti File' : 'Pilih File', 'secondary', 'sm', 'data-unggah-sk', ik('unggahB', 14))}<span class="nama ${T.sk ? 'ada' : ''}">${T.sk ? '&#10003; ' + esc(T.sk) : 'Belum ada file.'}</span></div>
+        <div class="berkas-baris">${tombol(T.sk ? 'Ganti File' : 'Pilih file', 'secondary', 'sm', 'data-unggah-sk', ik('unggahB', 14))}<span class="nama ${T.sk ? 'ada' : ''}">${T.sk ? '&#10003; ' + esc(T.sk) : 'Belum ada file.'}</span></div>
         <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text ${galatSk || tolakSk ? 'ina-text-field__helper-text--error' : betulSk ? 'ket-betul' : ''}">${galatSk ? 'SK PPAT terakhir wajib diunggah.' : tolakSk ? `Ditolak: ${BUTIR_TOLAK.sk.alasan} ${BUTIR_TOLAK.sk.cara}` : betulSk ? `${ik('centang', 12)} Sudah diganti. PDF, JPG, atau PNG, maks. 1 MB.` : 'PDF, JPG, atau PNG, maks. 1 MB.'}</div></div></div></div>
     ${T.status === 'belum' ? `<label class="ina-checkbox cek ikut-tera" for="ikutTera"><input type="checkbox" id="ikutTera" class="ina-checkbox__input peer" checked data-ikut-tera="0"><div class="ina-checkbox__box ina-checkbox__box--checked">${ik('centang', 12)}</div><div class="ina-checkbox__content"><span class="ina-checkbox__label">Daftarkan juga stempel elektronik (TERA) kantor</span><span class="ina-checkbox__description">Hapus centang bila TERA kantor didaftarkan nanti.</span></div></label>` : ''}
   </section>`;
@@ -615,8 +615,8 @@ function kartuStempel() {
   return `<div class="ina-card ina-card--variant-basic kartu ditandai" id="kartuStempel"><div class="kartu-kepala"><span class="ikon-bulat">${ik('stempel', 20)}</span><div>
       <h2><span>Spesimen stempel (TERA)</span> ${s ? badge('Sudah ada', 'success', 'sm') : pt === 3 ? badge('Belum ada', 'warning', 'sm') : badge('Terkunci', 'neutral', 'sm')}${usulan('HE-CA-11')}</h2>
       <p>Isi dan warna stempel kantor yang tampil pada akta.</p></div></div>
-    ${s ? `<div class="stempel-wadah"><div class="stempel" style="color:${s.warna}"><span>${esc(s.isi)}</span></div><p>Bentuk akhir stempel mengikuti ketentuan Peruri.</p></div><div class="kaki-kartu">${tombol('Ubah Spesimen Stempel', 'secondary', 'sm', 'data-stempel', ik('pena', 14))}</div>`
-      : pt === 3 ? `<div class="kaki-kartu">${tombol('Buat Spesimen Stempel', 'secondary', 'sm', 'data-stempel', ik('stempel', 14))}</div>`
+    ${s ? `<div class="stempel-wadah"><div class="stempel" style="color:${s.warna}"><span>${esc(s.isi)}</span></div><p>Bentuk akhir stempel mengikuti ketentuan Peruri.</p></div><div class="kaki-kartu">${tombol('Ubah spesimen stempel', 'secondary', 'sm', 'data-stempel', ik('pena', 14))}</div>`
+      : pt === 3 ? `<div class="kaki-kartu">${tombol('Buat spesimen stempel', 'secondary', 'sm', 'data-stempel', ik('stempel', 14))}</div>`
       : `<div class="spesimen-kunci">${alert('info', '', `${ik('kunci', 14)} Spesimen stempel dapat dibuat setelah TERA kantor disetujui Peruri. Spesimen tanda tangan tidak perlu menunggu TERA.`)}</div>`}
   </div>`;
 }
@@ -626,9 +626,9 @@ function dialogStempel() {
   dialog({ judul:'Spesimen stempel (TERA)', isi:`<p>Atur teks dan warna stempel yang tampil pada akta.</p>
       <div class="ina-text-field" id="f-sIsi"><label class="ina-text-field__label" for="sIsi">Isi Stempel<span class="ina-text-field__required">*</span></label><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><input id="sIsi" class="ina-text-field__input" value="${esc(s.isi)}" placeholder="Contoh: PPAT CONTOH SATU, S.H. KOTA CONTOH"></div><div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-sIsi">Wajib diisi. Biasanya berisi nama PPAT dan wilayah kerja.</div></div></div>
       <div class="ina-text-field" style="margin-top:12px"><label class="ina-text-field__label" for="sWarna">Warna Stempel</label><div class="warna-baris"><input type="color" id="sWarna" value="${s.warna}" aria-label="Pilih warna stempel"><span class="ina-text-field__helper-text">Pilih warna gelap agar stempel tetap jelas saat dicetak.</span></div></div>
-      <div class="ina-file-upload" style="margin-top:12px"><div class="ina-file-upload__label">Logo Stempel <span class="opsional">(opsional)</span></div><div class="berkas-baris">${tombol('Pilih File', 'secondary', 'sm', 'id="sLogo"', ik('unggahB', 14))}<span class="nama" id="sLogoNama">${s.logo ? '&#10003; ' + esc(s.logo) : 'PNG atau JPG, maks. 1 MB.'}</span></div></div>
+      <div class="ina-file-upload" style="margin-top:12px"><div class="ina-file-upload__label">Logo Stempel <span class="opsional">(opsional)</span></div><div class="berkas-baris">${tombol('Pilih file', 'secondary', 'sm', 'id="sLogo"', ik('unggahB', 14))}<span class="nama" id="sLogoNama">${s.logo ? '&#10003; ' + esc(s.logo) : 'PNG atau JPG, maks. 1 MB.'}</span></div></div>
       <div class="stempel-wadah" id="sPratinjau">${pratinjau(s.isi, s.warna)}</div>`,
-    tombol:[['Batal','secondary',null],['Simpan Spesimen Stempel','primary',() => {
+    tombol:[['Batal','secondary',null],['Simpan spesimen stempel','primary',() => {
       T.stempel = { ...nilai }; setTera('active'); gambar();
       toast('Spesimen stempel tersimpan.', 'positive', 4500, S.kondisi === 'selesai' ? 'Registrasi CA & TERA selesai.' : 'Stempel elektronik kantor siap dipakai.');
     }]] });
@@ -642,14 +642,14 @@ function konfirmAjukanTera() {
   dialog({ judul:T.status === 'rejected' ? 'Ajukan ulang pendaftaran TERA?' : 'Ajukan pendaftaran TERA?', konfirmasi:true,
     isi:`<p>Data berikut dikirim ke admin E-PPAT untuk diperiksa, lalu diteruskan ke Peruri.</p>${ringkas([['Nama', esc(S.profil.nama)], ['NIK', esc(S.profil.nik) || '—'], ['Tempat lahir', esc(S.profil.tempat) || '—'], ['ID PPAT / Nomor SK', esc(T.idppat)], ['Rekening PPAT', esc(T.rekening)], ['SK PPAT', esc(T.sk)]])}
       <p>Perkiraan sampai TERA disetujui: <b>${est('± 4–7 hari kerja')}</b>.</p>`,
-    tombol:[['Periksa Lagi','secondary',null],['Ajukan','primary',() => tunggu('tera', 800, () => { T.tolak = null; setTera('pending'); gambar(); toast('Pendaftaran TERA diajukan.', 'positive', 4500, 'Admin E-PPAT akan memeriksanya.'); })]] });
+    tombol:[['Periksa lagi','secondary',null],['Ajukan','primary',() => tunggu('tera', 800, () => { T.tolak = null; setTera('pending'); gambar(); toast('Pendaftaran TERA diajukan.', 'positive', 4500, 'Admin E-PPAT akan memeriksanya.'); })]] });
 }
 
 /* spesimen digores di kotak; registrasi selesai setelah disimpan (HE-CA-09) */
 function dialogSpesimen() {
   let gbr = '';
   dialog({ judul:'Masukkan spesimen tanda tangan', isi:`<p>Goreskan tanda tangan Anda di kotak ini. Spesimen tampil pada akta yang Anda tanda tangani.</p><canvas id="kanvasTtd" class="kanvas-ttd" width="480" height="180" aria-label="Kotak spesimen tanda tangan"></canvas><div class="kaki-kartu">${tombol('Bersihkan', 'tertiary', 'sm', 'id="bersihTtd"', ik('ulang', 14))}</div>`,
-    tombol:[['Batal','secondary',null],['Simpan Spesimen','primary',() => { setKondisi('selesai'); AJB.simpanSpesimen(EMAIL_P, gbr); S.spesimen = gbr; gambar(); toast('Registrasi CA selesai.', 'positive', 4500, `Sertifikat elektronik Anda aktif sampai ${CA_SAMPAI}.`); }]] });
+    tombol:[['Batal','secondary',null],['Simpan spesimen','primary',() => { setKondisi('selesai'); AJB.simpanSpesimen(EMAIL_P, gbr); S.spesimen = gbr; gambar(); toast('Registrasi CA selesai.', 'positive', 4500, `Sertifikat elektronik Anda aktif sampai ${CA_SAMPAI}.`); }]] });
   const k = $('#kanvasTtd'), c = k.getContext('2d'), simpan = $('#lapisan .ina-modal__footer .ina-button:last-child');
   simpan.disabled = true; c.lineWidth = 2.5; c.lineCap = 'round'; c.strokeStyle = '#1f2a2e';
   const titik = e => { const r = k.getBoundingClientRect(); return [(e.clientX - r.left) * k.width / r.width, (e.clientY - r.top) * k.height / r.height]; };
@@ -726,7 +726,7 @@ function konfirmAjukan() {
       ${ringkas([['Nama', esc(p.nama)], ['NIK', esc(p.nik) || '—'], ['Tempat, tanggal lahir', `${esc(p.tempat)}, ${tglId(p.tgl)}`], ['Nomor HP', esc(p.hp)], ['Foto KTP', esc(p.ktp)], ...(bersama ? [['ID PPAT / Nomor SK', esc(T.idppat)], ['Rekening PPAT', esc(T.rekening)], ['SK PPAT', esc(T.sk)]] : [])])}
       ${bersama ? `<p>Sertifikat elektronik dan TERA diproses terpisah. Sertifikat elektronik aktif lebih dulu (${est('± 1 hari kerja')}) dan tidak menunggu TERA (${est('± 4–7 hari kerja')}).</p>` : ''}
       <label class="ina-checkbox cek" for="setuju"><input type="checkbox" id="setuju" class="ina-checkbox__input peer"><div class="ina-checkbox__box ina-checkbox__box--unchecked"></div><div class="ina-checkbox__content"><span class="ina-checkbox__label">Data di atas sesuai dengan KTP saya.</span></div></label>`,
-    tombol:[['Ubah Data','secondary',() => { bukaDataDiri(); }],['Ajukan & Buka Portal Peruri','primary',() => {
+    tombol:[['Ubah data','secondary',() => { bukaDataDiri(); }],['Ajukan & buka Portal Peruri','primary',() => {
       tunggu('ajukan', 900, () => { S.kondisi = 'ekyc'; setKondisi('ekyc'); if (bersama) setTera('pending'); S.dicek = 'baru saja'; gambar(); toast(bersama ? 'Registrasi CA & TERA diajukan.' : 'Registrasi CA diajukan.', 'positive', 4500, 'Portal Peruri dibuka di tab baru (disimulasikan). Selesaikan eKYC di sana.'); });
     }]] });
 }
@@ -746,7 +746,7 @@ function modalAwal() {
   const k = kurangSemua(); if (!S.modalAwal || !k.length) return; S.modalAwal = false;
   dialog({ judul:`<span style="display:inline-flex;align-items:center;gap:10px"><span style="color:var(--ina-warning-600)">${ik('seru', 20)}</span>Lengkapi Data Diri</span>`,
     isi:`<p>Data diri Anda belum lengkap. Lengkapi agar dapat dipakai saat pembuatan akta dan untuk registrasi sertifikat elektronik (CA).${usulan('HE-CA-02')}</p><ul class="modal-daftar">${k.map(([, l]) => `<li>${l}</li>`).join('')}</ul>`,
-    tombol:[['Nanti','secondary',null],['Lengkapi Sekarang','primary',() => { bukaDataDiri(); }]] });
+    tombol:[['Nanti','secondary',null],['Lengkapi sekarang','primary',() => { bukaDataDiri(); }]] });
 }
 function bukaAkun(tab) { S.layar = 'akun'; S.tab = tab; if (tab === 'ca') S.dariCa = false; gambar(); window.scrollTo({ top:0 }); if (tab === 'ca') $('#kartuCa')?.focus?.(); }
 const H = $('#halaman');
@@ -865,7 +865,7 @@ function keluarSesi(id) {
 }
 function keluarSemua() {
   dialog({ judul:'Keluarkan semua perangkat lain?', konfirmasi:true, isi:'<p>Semua perangkat lain akan dikeluarkan dan perlu masuk lagi. Anda tetap masuk di perangkat ini.</p>',
-    tombol:[['Batal','secondary',null],['Keluarkan Semua','primary',() => { const n = S.sesi.filter(s => !s.ini).length; S.sesi = S.sesi.filter(s => s.ini); gambar(); toast(`${n} perangkat lain sudah dikeluarkan.`, 'positive'); }]] });
+    tombol:[['Batal','secondary',null],['Keluarkan semua','primary',() => { const n = S.sesi.filter(s => !s.ini).length; S.sesi = S.sesi.filter(s => s.ini); gambar(); toast(`${n} perangkat lain sudah dikeluarkan.`, 'positive'); }]] });
 }
 function tandaiUbahDd() {
   if (S.ddUbah) return; S.ddUbah = true;
@@ -876,7 +876,7 @@ function jagaDd(lanjut) {
   if (!(S.ddUbah && S.layar === 'akun')) { lanjut(); return; }
   const dd = S.tab === 'data';
   dialog({ judul:dd ? 'Simpan perubahan data diri?' : 'Simpan perubahan nama akun?', konfirmasi:true, isi:`<p>Ada perubahan ${dd ? 'di tab Data Diri' : 'pada nama akun'} yang belum disimpan. Jika Anda lanjut tanpa menyimpan, perubahan tersebut akan hilang.</p>`,
-    tombol:[['Batal','tertiary',null],['Buang Perubahan','secondary',() => { S.ddUbah = false; S.ubahAkun = false; cobaKtpDd = 0; ktpDd = null; lanjut(); }],['Simpan & Lanjutkan','primary',() => { dd ? simpanDataDiri(lanjut) : simpanAkun(lanjut); }]] });
+    tombol:[['Batal','tertiary',null],['Buang perubahan','secondary',() => { S.ddUbah = false; S.ubahAkun = false; cobaKtpDd = 0; ktpDd = null; lanjut(); }],['Simpan & lanjutkan','primary',() => { dd ? simpanDataDiri(lanjut) : simpanAkun(lanjut); }]] });
 }
 
 /* ---------------- tombol Bantuan di judul halaman (HE-UMUM-02) ---------------- */
@@ -949,7 +949,7 @@ function bukaBantuan() {
     ${faq(1, 'Apa itu sertifikat elektronik (CA)?', 'Sertifikat dari Peruri yang membuktikan bahwa tanda tangan elektronik pada akta benar-benar milik Anda.')}
     ${faq(2, 'Apa yang dilakukan di portal Peruri?', 'Anda menyetujui syarat layanan, memasukkan kode OTP dari email dan SMS, memeriksa data pribadi, mengambil swafoto, lalu mengirim pengajuan. Data diri Anda sudah terisi otomatis sehingga Anda tidak perlu mengetik ulang. Bila portal tampil dalam bahasa Inggris, pilih ID di kanan atas.')}
     ${faq(3, 'Tautan eKYC sudah kedaluwarsa', 'Klik "Buat tautan baru" di tab Registrasi CA, lalu klik "Lanjutkan eKYC di Peruri".')}
-    ${faq(4, 'Status tidak berubah setelah eKYC', 'Pemeriksaan Peruri biasanya selesai dalam satu hari kerja. Anda dapat menekan "Cek Status Sertifikat" untuk memperbarui status.')}
+    ${faq(4, 'Status tidak berubah setelah eKYC', 'Pemeriksaan Peruri biasanya selesai dalam satu hari kerja. Anda dapat menekan "Cek status sertifikat" untuk memperbarui status.')}
     ${faq(5, 'Sertifikat saya kedaluwarsa', 'Ajukan registrasi ulang. Data diri Anda masih tersimpan sehingga Anda cukup menyelesaikan eKYC kembali.')}
     <h4 class="bantu-sub">Kontak dukungan ${usulan('HE-UMUM-02')}</h4>
     <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>` });

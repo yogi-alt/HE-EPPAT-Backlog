@@ -357,34 +357,34 @@ const th = t => `<th class="ina-table__header-cell" scope="col">${t}</th>`;
 /* ---------------- daftar penyesuaian ---------------- */
 const UBAH = [
   { kode:'IDDS-OB-01', judul:'Beranda: navigasi lengkap, tombol Masuk dan Daftar, serta menu ponsel',
-    isi:'Bilah navigasi Beranda memakai label yang sama dengan layar Masuk dan Registrasi, yaitu "Masuk" dan "Daftar". Kedua tombol itu membuka halaman Masuk dan Registrasi. Menu Beranda, Tentang e-PPAT, Fitur, Cara Kerja, dan Berita menggulir ke bagian terkait dan memindahkan fokus ke judul bagian. Di layar sempit, tombol "Menu" membuka daftar menu beserta tombol Masuk dan Daftar. Bagian pembuka diberi tombol "Daftar Sekarang" dan "Masuk" agar pengunjung tahu langkah berikutnya.',
+    isi:'Bilah navigasi Beranda memakai label yang sama dengan layar Masuk dan Registrasi, yaitu "Masuk" dan "Daftar". Kedua tombol itu membuka halaman Masuk dan Registrasi. Menu Beranda, Tentang e-PPAT, Fitur, Cara Kerja, dan Berita menggulir ke bagian terkait dan memindahkan fokus ke judul bagian. Di layar sempit, tombol "Menu" membuka daftar menu beserta tombol Masuk dan Daftar. Bagian pembuka diberi tombol "Daftar sekarang" dan "Masuk" agar pengunjung tahu langkah berikutnya.',
     lama:'Navigasi Beranda hanya memiliki tombol "Login". Halaman pendaftaran hanya dapat dibuka dari halaman masuk lewat tautan "Register sekarang". Bagian pembuka "Selamat Datang di EPPAT" tidak memiliki tombol tindakan.', ke:'beranda', sorot:'#navUtama' },
   { kode:'IDDS-OB-02', judul:'Beranda: isi memakai IDDS Card, Cara Kerja sesuai keadaan, dan Berita dapat dibuka',
-    isi:'Jenis akta, keunggulan layanan, dan sembilan fitur memakai IDDS Card dengan ikon garis satu warna. Singkatan APHB, APHT, dan SKMHT diberi IDDS Tooltip berisi kepanjangannya. Bagian Cara Kerja tidak lagi berupa bingkai video kosong. Isinya lima langkah dari pendaftaran sampai aplikasi kantor aktif (sama dengan alur di layar Registrasi), keterangan bahwa video sedang disiapkan, dan tombol "Daftar Sekarang". Kartu Berita menampilkan judul utuh, tanggal, ringkasan, dan tombol "Baca Berita". Label tombol itu menyebut judul berita untuk pembaca layar.',
+    isi:'Jenis akta, keunggulan layanan, dan sembilan fitur memakai IDDS Card dengan ikon garis satu warna. Singkatan APHB, APHT, dan SKMHT diberi IDDS Tooltip berisi kepanjangannya. Bagian Cara Kerja tidak lagi berupa bingkai video kosong. Isinya lima langkah dari pendaftaran sampai aplikasi kantor aktif (sama dengan alur di layar Registrasi), keterangan bahwa video sedang disiapkan, dan tombol "Daftar sekarang". Kartu Berita menampilkan judul utuh, tanggal, ringkasan, dan tombol "Baca berita". Label tombol itu menyebut judul berita untuk pembaca layar.',
     lama:'Bagian Cara Kerja berisi bingkai video bertuliskan "Cinematic Experience Coming Soon". Judul berita terpotong, berhuruf kapital, dan tanpa tanggal ("KEMENTERIAN ATR/BPN RESPON..", "PP IPPAT SUKSES GELAR SEMNAS"). Ringkasan berita juga terpotong ("akarta – Pengurus Pusat Ikatan Pejabat Pembuat Akta..."). Singkatan jenis akta tidak dijelaskan.', ke:'beranda', sorot:'#bagianCara' },
   { kode:'IDDS-OB-03', judul:'Beranda dan Profil Saya: bahasa dan ejaan baku',
     isi:'Nama aplikasi ditulis seragam "e-PPAT", sama dengan judul "Masuk ke e-PPAT". Salah ketik diperbaiki menjadi elektronik, efisien, dukungan, Kementerian, fleksibel, familier, drafting, e-Meterai, SKMHT, dan Jakarta. Kalimat panjang dipecah. Label Inggris diganti: Login → Masuk, Register → Daftar, Reset Kata Sandi → Atur Ulang Kata Sandi, Home → Beranda, Dashboard → Dasbor (menu samping Profil Saya), Profile → Profil Saya, Password → Kata Sandi, Customer → Pelanggan, dan NAVIGATION → Navigasi. Kolom Contact Account / Code, Contact Type, Active, dan Action menjadi Akun / Nomor, Jenis Kontak, Status, dan Aksi. Phone menjadi Telepon, "No contacts yet." menjadi "Belum ada kontak.", dan "online" menjadi "daring".',
     lama:'Nama aplikasi ditulis berganti-ganti ("EPPAT", "ePPAT", "e-PPAT"). Ada salah ketik "elektonik", "efiesien", "dukuan", "kementrian", "fleksible", "elektornik", "dafting", "e-Materai", "SKHMT", dan "akarta". Label masih berbahasa Inggris: "Login", "Register", "Reset Kata Sandi", "Home", "Dashboard", "Profile", "Password", "Customer", "NAVIGATION", "Contact Account / Code", "Contact Type", "Active", "Action", "Phone", dan "No contacts yet.".', ke:'beranda', sorot:'#bagianFitur' },
   { kode:'IDDS-OB-04', judul:'Lupa Kata Sandi: pesan galat di bawah isian dan konfirmasi terkirim yang jelas',
-    isi:'Email yang kosong atau salah format ditandai dengan pesan galat di bawah isian ("Email wajib diisi.", "Format email tidak valid. Contoh: nama@contoh.id") dan atribut aria-invalid. Tombol "Kirim Tautan Atur Ulang" menampilkan status memuat. Setelah tautan terkirim, kartu berganti menjadi "Cek Email Anda". Kartu ini memuat email tujuan yang disamarkan, masa berlaku tautan, dan saran memeriksa folder spam. Kartu juga memuat tombol "Kirim Ulang Tautan" yang aktif setelah hitung mundur 60 detik, "Ganti Email", dan "Kembali ke Halaman Masuk". Demi keamanan akun, pesan tidak menyebut apakah email terdaftar.',
+    isi:'Email yang kosong atau salah format ditandai dengan pesan galat di bawah isian ("Email wajib diisi.", "Format email tidak valid. Contoh: nama@contoh.id") dan atribut aria-invalid. Tombol "Kirim tautan atur ulang" menampilkan status memuat. Setelah tautan terkirim, kartu berganti menjadi "Cek Email Anda". Kartu ini memuat email tujuan yang disamarkan, masa berlaku tautan, dan saran memeriksa folder spam. Kartu juga memuat tombol "Kirim ulang tautan" yang aktif setelah hitung mundur 60 detik, "Ganti email", dan "Kembali ke halaman masuk". Demi keamanan akun, pesan tidak menyebut apakah email terdaftar.',
     lama:'Kartu berisi isian Email dan tombol "Kirim Tautan Reset". Setelah tautan dikirim, muncul pesan "Terkirim!" yang meminta pengguna memeriksa kotak masuk email. Pesan itu tidak menyebut email tujuan, masa berlaku tautan, atau cara mengirim ulang.', ke:'lupa-kirim', sorot:'#kartuTerkirim' },
   { kode:'IDDS-OB-05', judul:'Atur Ulang Kata Sandi: daftar syarat kata sandi seperti Registrasi',
     isi:'Syarat kata sandi tampil sebagai daftar centang yang terisi saat pengguna mengetik, sama dengan layar Registrasi: minimal 12 karakter, huruf besar, huruf kecil, angka, dan simbol (- _ ? ! & + % # @ * $ ^). Isian "Ulangi Kata Sandi Baru" langsung memberi tahu apakah isinya sudah sama. Pesan galat tampil di bawah isian (aria-invalid). Kartu menyebut akun yang kata sandinya diatur ulang dengan email yang disamarkan. Isian memakai IDDS Password Input dengan tombol tampilkan/sembunyikan berlabel.',
     lama:'Di bawah isian Kata Sandi Baru hanya ada bilah kekuatan berlabel "Kuat" dan teks "Gunakan kombinasi huruf, angka & simbol". Syarat yang belum terpenuhi tidak ditampilkan.', ke:'reset', sorot:'#syaratReset' },
   { kode:'IDDS-OB-06', judul:'Atur Ulang Kata Sandi: tautan kedaluwarsa dan konfirmasi berhasil',
-    isi:'Tautan yang kedaluwarsa atau sudah dipakai membuka kartu "Tautan Sudah Kedaluwarsa". Kartu ini menjelaskan masa berlaku tautan dan menyediakan tombol "Minta Tautan Baru" ke halaman Lupa Kata Sandi. Setelah kata sandi disimpan, kartu "Kata Sandi Berhasil Diubah" tetap tampil sampai pengguna memilih "Masuk Sekarang". Pola ini sama dengan "Verifikasi Berhasil!" di layar Registrasi. Meninggalkan formulir yang sudah diisi memunculkan dialog "Tinggalkan halaman ini?".',
-    lama:'Setelah "Simpan Kata Sandi" ditekan, muncul pesan "Berhasil!" lalu halaman Masuk langsung terbuka. Keadaan tautan kedaluwarsa tidak terlihat di panduan maupun di tangkapan layar live.', ke:'reset-kedaluwarsa', sorot:'#kartuKedaluwarsa' },
+    isi:'Tautan yang kedaluwarsa atau sudah dipakai membuka kartu "Tautan Sudah Kedaluwarsa". Kartu ini menjelaskan masa berlaku tautan dan menyediakan tombol "Minta tautan baru" ke halaman Lupa Kata Sandi. Setelah kata sandi disimpan, kartu "Kata Sandi Berhasil Diubah" tetap tampil sampai pengguna memilih "Masuk sekarang". Pola ini sama dengan "Verifikasi Berhasil!" di layar Registrasi. Meninggalkan formulir yang sudah diisi memunculkan dialog "Tinggalkan halaman ini?".',
+    lama:'Setelah "Simpan kata sandi" ditekan, muncul pesan "Berhasil!" lalu halaman Masuk langsung terbuka. Keadaan tautan kedaluwarsa tidak terlihat di panduan maupun di tangkapan layar live.', ke:'reset-kedaluwarsa', sorot:'#kartuKedaluwarsa' },
   { kode:'IDDS-OB-07', judul:'Profil Saya: IDDS Tab, foto, pesan galat di bawah isian, dan penjaga perubahan',
-    isi:'Tab PPAT, Kantor PPAT, dan Kata Sandi memakai IDDS Tab yang dapat dipindah dengan tombol panah. Foto Profil dan Logo Kantor berupa tombol berlabel (misalnya "Ubah foto profil") dengan keterangan format dan ukuran berkas di bawahnya. Berkas yang tidak sesuai ditolak dengan pesan di bawah gambar. Isian wajib bertanda *, dan pesan galat tampil di bawah isian (aria-invalid). Kaki setiap tab menampilkan "Belum disimpan" atau "Belum ada perubahan", dan tab yang berubah diberi titik penanda. Tab PPAT diberi tombol Batal seperti tab lain, dan Batal meminta konfirmasi. Pindah tab saat ada perubahan menawarkan "Buang Perubahan", sedangkan pindah halaman memunculkan "Tinggalkan halaman ini?". Isian Kode, ID PPAT, dan URL Web yang terkunci diberi keterangan.',
+    isi:'Tab PPAT, Kantor PPAT, dan Kata Sandi memakai IDDS Tab yang dapat dipindah dengan tombol panah. Foto Profil dan Logo Kantor berupa tombol berlabel (misalnya "Ubah foto profil") dengan keterangan format dan ukuran berkas di bawahnya. Berkas yang tidak sesuai ditolak dengan pesan di bawah gambar. Isian wajib bertanda *, dan pesan galat tampil di bawah isian (aria-invalid). Kaki setiap tab menampilkan "Belum disimpan" atau "Belum ada perubahan", dan tab yang berubah diberi titik penanda. Tab PPAT diberi tombol Batal seperti tab lain, dan Batal meminta konfirmasi. Pindah tab saat ada perubahan menawarkan "Buang perubahan", sedangkan pindah halaman memunculkan "Tinggalkan halaman ini?". Isian Kode, ID PPAT, dan URL Web yang terkunci diberi keterangan.',
     lama:'Tab dibuat sendiri di atas pita hijau. Tidak ada penanda perubahan yang belum disimpan. Tab PPAT hanya memiliki tombol "Simpan PPAT". Isian Kode, ID PPAT / Kode Kantor, dan URL Web tampil abu-abu tanpa keterangan.', ke:'profil', tab:'ppat', sorot:'#tabProfil' },
   { kode:'IDDS-OB-08', judul:'Profil Saya: tabel Info Kontak dan dialog Tambah/Ubah Kontak',
     isi:'Tabel Info Kontak memakai IDDS Table berlabel Indonesia. Kolom Status memakai IDDS Toggle bertulisan "Aktif"/"Nonaktif" dengan aria-label yang menyebut kontaknya. Menonaktifkan kontak meminta konfirmasi dengan tombol merah. Tombol ubah berupa ikon pensil berlabel "Ubah kontak …". Dialog Tambah Kontak Baru dan Ubah Kontak memakai IDDS Modal. Pilihan Jenis Kontak (Email/Telepon) mengubah contoh dan aturan isian Akun / Nomor. Format salah dan kontak ganda ditolak dengan pesan di bawah isian tanpa menutup dialog. Setelah dialog ditutup, fokus kembali ke tombol pemicunya.',
     lama:'Tabel memakai kolom "No.", "Contact Account / Code", "Contact Type", "Active", dan "Action", dengan jenis kontak "Email"/"Phone". Tabel kosong bertuliskan "No contacts yet.". Sakelar Active tidak menampilkan teks status, dan ikon pensil tidak berlabel.', ke:'kontak', tab:'ppat', sorot:'#blokKontak' },
   { kode:'IDDS-OB-09', judul:'Profil Saya: tab Kata Sandi dan MFA dengan syarat seragam dan konfirmasi tindakan berdampak',
-    isi:'Tab Kata Sandi memakai IDDS Password Input dan daftar centang syarat yang sama dengan Registrasi dan Atur Ulang Kata Sandi. Kata sandi saat ini yang salah, kata sandi baru yang sama dengan yang lama, dan konfirmasi yang belum sama dijelaskan di bawah isian. Tombol "Buat Ulang Kode Cadangan" dan "Atur Ulang MFA" meminta konfirmasi lewat IDDS Modal Confirmation bertombol merah yang menyebut dampaknya. Kode cadangan baru ditampilkan sekali dengan tombol Salin dan Unduh. Status MFA memakai IDDS Badge, dan keterangan Atur Ulang MFA ditujukan kepada pemilik akun.',
+    isi:'Tab Kata Sandi memakai IDDS Password Input dan daftar centang syarat yang sama dengan Registrasi dan Atur Ulang Kata Sandi. Kata sandi saat ini yang salah, kata sandi baru yang sama dengan yang lama, dan konfirmasi yang belum sama dijelaskan di bawah isian. Tombol "Buat ulang kode cadangan" dan "Atur ulang MFA" meminta konfirmasi lewat IDDS Modal Confirmation bertombol merah yang menyebut dampaknya. Kode cadangan baru ditampilkan sekali dengan tombol Salin dan Unduh. Status MFA memakai IDDS Badge, dan keterangan Atur Ulang MFA ditujukan kepada pemilik akun.',
     lama:'Tab berlabel "Password". Di bawah isian Kata Sandi Baru hanya tertulis "Min. 12 karakter · Huruf besar, kecil, angka & simbol" dengan bilah kekuatan. Keterangan "Reset akan menghapus MFA pengguna ini; ia wajib mendaftar ulang …" ditulis untuk admin, bukan untuk pemilik akun.', ke:'profil', tab:'sandi', sorot:'#blokMfa' },
   { kode:'IDDS-OB-10', judul:'Beranda, Lupa Kata Sandi, Atur Ulang, dan Profil Saya: Bantuan khusus layar',
-    isi:'Beranda (di bawah tombol "Daftar Sekarang" dan "Masuk"), kartu Lupa Kata Sandi, Atur Ulang Kata Sandi, dan Kata Sandi Berhasil Diubah memiliki tautan "Butuh bantuan?". Tautan ini sama dengan layar Registrasi dan Masuk (HE-UMUM-02). Profil Saya memiliki tombol Bantuan di kanan judul. Semuanya membuka IDDS Drawer khusus layar berisi penjelasan, langkah, istilah, pertanyaan umum (IDDS Accordion), dan kontak dukungan (data contoh bergaris putus-putus). Bantuan Beranda menjelaskan apa itu e-PPAT, cara mendaftar, siapa yang dapat mendaftar, serta paket dan biaya. Bantuan Kata Sandi Berhasil Diubah menjelaskan langkah masuk dan tindakan bila pengguna lupa kata sandi lagi.',
+    isi:'Beranda (di bawah tombol "Daftar sekarang" dan "Masuk"), kartu Lupa Kata Sandi, Atur Ulang Kata Sandi, dan Kata Sandi Berhasil Diubah memiliki tautan "Butuh bantuan?". Tautan ini sama dengan layar Registrasi dan Masuk (HE-UMUM-02). Profil Saya memiliki tombol Bantuan di kanan judul. Semuanya membuka IDDS Drawer khusus layar berisi penjelasan, langkah, istilah, pertanyaan umum (IDDS Accordion), dan kontak dukungan (data contoh bergaris putus-putus). Bantuan Beranda menjelaskan apa itu e-PPAT, cara mendaftar, siapa yang dapat mendaftar, serta paket dan biaya. Bantuan Kata Sandi Berhasil Diubah menjelaskan langkah masuk dan tindakan bila pengguna lupa kata sandi lagi.',
     lama:'Halaman Lupa Kata Sandi, Reset Kata Sandi, dan Profile tidak memiliki panduan atau kontak dukungan.', ke:'bantuan-profil', sorot:null }
 ];
 
@@ -420,7 +420,7 @@ function jaga(lanjut) {
   const prof = S.layar === 'profil', tabs = Object.keys(NAMA_TAB).filter(kotorTab).map(t => NAMA_TAB[t]);
   dialog({ judul:'Tinggalkan halaman ini?', konfirmasi:true, bahaya:true,
     isi:`<p>${prof ? `Ada perubahan di tab ${tabs.join(' dan ')} yang belum disimpan.` : 'Kata sandi baru yang sudah Anda ketik belum disimpan.'} Perubahan itu akan hilang jika Anda meninggalkan halaman ini.${usulan(prof ? 'IDDS-OB-07' : 'IDDS-OB-06')}</p>`,
-    tombol:[['Tetap di Sini', 'secondary', null], ['Tinggalkan', 'primary', () => { buangSemua(); lanjut(); }]] });
+    tombol:[['Tetap di sini', 'secondary', null], ['Tinggalkan', 'primary', () => { buangSemua(); lanjut(); }]] });
 }
 function pindah(ke, lanjut) {
   jaga(() => { S.layar = ke; S.menu = false; S.panel = false; S.memuat = ''; history.replaceState(null, '', '#' + ke); gambar(); window.scrollTo({ top:0 }); lanjut && lanjut(); });
@@ -474,7 +474,7 @@ function layarBeranda() {
   const singkat = a => SINGKAT[a] ? denganTip(`<span class="istilah" tabindex="0">${a}</span>`, SINGKAT[a]) : a;
   return `<section class="br-hero" id="bagianAtas" aria-labelledby="jdAtas"><div><h1 id="jdAtas">Selamat Datang di e-PPAT</h1>
       <p>Portal resmi layanan Pejabat Pembuat Akta Tanah (PPAT) dari Kementerian ATR/BPN secara digital yang cepat, nyaman, dan efisien.</p>
-      <div class="br-cta ditandai" id="ctaAtas">${tautan('Daftar Sekarang', HE + '#daftar', 'primary', 'lg')}${tautan('Masuk', HE + '#masuk', 'secondary', 'lg')}${usulan('IDDS-OB-01')}</div>${bantuanLink()}</div></section>
+      <div class="br-cta ditandai" id="ctaAtas">${tautan('Daftar sekarang', HE + '#daftar', 'primary', 'lg')}${tautan('Masuk', HE + '#masuk', 'secondary', 'lg')}${usulan('IDDS-OB-01')}</div>${bantuanLink()}</div></section>
     <div class="br-bagian br-tentang" id="bagianTentang">
       <div><div class="eb">Tentang e-PPAT</div><h2 id="jdTentang">Akta tanah elektronik untuk PPAT</h2>
         <p>e-PPAT adalah aplikasi untuk mengajukan pembuatan akta secara digital dengan aman, cepat, dan transparan.</p>
@@ -490,9 +490,9 @@ function layarBeranda() {
     <div class="br-bagian" id="bagianCara" style="padding-top:0"><div class="br-cara ditandai"><h2 id="jdCara">Cara kerja e-PPAT</h2><p class="sub-br">Pelajari bagaimana e-PPAT membantu pembuatan akta tanah Anda lebih cepat.${usulan('IDDS-OB-02')}</p>
       <div class="cara-kartu"><p class="video-ket">${ik('video', 18)} Video cara kerja sedang disiapkan. Sementara itu, berikut lima langkah sampai aplikasi kantor Anda aktif.</p>
         <ol class="cara-langkah">${ALUR.map(([j, t], i) => `<li><span class="no" aria-hidden="true">${i + 1}</span><b>${j}</b>${t}</li>`).join('')}</ol>
-        <div class="cara-kaki">${tautan('Daftar Sekarang', HE + '#daftar', 'primary', 'md', '', ik('panah', 16))}</div></div></div></div>
+        <div class="cara-kaki">${tautan('Daftar sekarang', HE + '#daftar', 'primary', 'md', '', ik('panah', 16))}</div></div></div></div>
     <div class="br-bagian" id="bagianBerita" style="padding-top:0"><h2 id="jdBerita">Berita</h2>
-      <div class="berita-grid ditandai" id="gridBerita">${BERITA.map((b, i) => `<article class="ina-card ina-card--variant-basic berita"><img src="${gbrBerita(...b.g)}" alt=""><div class="isi"><time>${b.tgl}</time><h3>${b.judul}</h3><p>${b.ringkas}</p>${tombol('Baca Berita', 'link', 'sm', `data-berita="${i}" aria-label="Baca berita: ${esc(b.judul)}"`, '')}</div></article>`).join('')}</div>${usulan('IDDS-OB-02')}</div>`;
+      <div class="berita-grid ditandai" id="gridBerita">${BERITA.map((b, i) => `<article class="ina-card ina-card--variant-basic berita"><img src="${gbrBerita(...b.g)}" alt=""><div class="isi"><time>${b.tgl}</time><h3>${b.judul}</h3><p>${b.ringkas}</p>${tombol('Baca berita', 'link', 'sm', `data-berita="${i}" aria-label="Baca berita: ${esc(b.judul)}"`, '')}</div></article>`).join('')}</div>${usulan('IDDS-OB-02')}</div>`;
 }
 
 /* ================= Lupa Kata Sandi (live: /forgot-password) ================= */
@@ -505,7 +505,7 @@ function layarLupa() {
       <div class="kotak-surel"><small>Dikirim ke</small><b>${esc(samar(L.email))}</b></div>
       <p>Tautan berlaku ${est('60 menit')} dan hanya dapat dipakai sekali. Tidak ada di kotak masuk? Periksa folder spam atau promosi.</p>
       <p class="ulang-baris" id="ulangBaris" aria-live="polite">${teksUlang()}</p>
-      <div class="tombol-blok">${tombol('Kirim Ulang Tautan', 'secondary', 'lg', `id="kirimUlang" ${L.ulang > 0 || S.memuat ? 'disabled' : ''}`, S.memuat === 'ulang' ? spinner : ik('ulang', 16))}${tombol('Ganti Email', 'tertiary', 'lg', 'id="gantiEmail"')}${tautan('Kembali ke Halaman Masuk', HE + '#masuk', 'primary', 'lg', '', ik('panah', 16))}</div>
+      <div class="tombol-blok">${tombol('Kirim ulang tautan', 'secondary', 'lg', `id="kirimUlang" ${L.ulang > 0 || S.memuat ? 'disabled' : ''}`, S.memuat === 'ulang' ? spinner : ik('ulang', 16))}${tombol('Ganti email', 'tertiary', 'lg', 'id="gantiEmail"')}${tautan('Kembali ke halaman masuk', HE + '#masuk', 'primary', 'lg', '', ik('panah', 16))}</div>
       ${usulan('IDDS-OB-04')}${bantuanLink()}</section></div>`;
   return `<div class="kolom-kartu">${kembali}<section class="ob-kartu kecil" aria-labelledby="jdLupa">
     <img class="logo" src="__OB_LOGO__" alt="E-PPAT"><h2 id="jdLupa">Lupa Kata Sandi</h2>
@@ -513,7 +513,7 @@ function layarLupa() {
     <div class="ditandai" id="isianLupa"><div class="ina-text-field" id="f-lEmail"><label class="ina-text-field__label" for="lEmail">Email<span class="ina-text-field__required">*</span></label>
       <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><span class="ikon-isian">${ik('surat', 18)}</span><input id="lEmail" type="email" class="ina-text-field__input" placeholder="Masukkan email Anda" autocomplete="email" aria-required="true" aria-describedby="h-lEmail" value="${esc(L.email)}"></div>
       <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text" id="h-lEmail" data-bantu="Gunakan email yang Anda daftarkan.">Gunakan email yang Anda daftarkan.</div></div></div>${usulan('IDDS-OB-04')}</div>
-    ${tombol('Kirim Tautan Atur Ulang', 'primary', 'lg', `id="kirimLupa" class="lebar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'lupa' ? spinner : '')}
+    ${tombol('Kirim tautan atur ulang', 'primary', 'lg', `id="kirimLupa" class="lebar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'lupa' ? spinner : '')}
     ${bantuanLink()}</section></div>`;
 }
 const teksUlang = () => S.lupa.ulang > 0 ? `Tidak menerima email? Kirim ulang dalam ${Math.floor(S.lupa.ulang / 60)}:${String(S.lupa.ulang % 60).padStart(2, '0')}.` : 'Tidak menerima email? Anda dapat mengirim ulang tautan sekarang.';
@@ -542,7 +542,7 @@ function layarReset() {
   if (S.kedaluwarsa) return `<div class="kolom-kartu sedang">${kembali}<section class="ob-kartu sedang status-kartu ditandai" id="kartuKedaluwarsa" aria-labelledby="jdKedaluwarsa">
       <span class="ikon-besar waspada">${ik('jam', 34)}</span><h2 id="jdKedaluwarsa">Tautan Sudah Kedaluwarsa</h2>
       <p>Tautan untuk membuat kata sandi baru berlaku ${est('60 menit')} dan hanya dapat dipakai sekali.</p><p>Minta tautan baru, lalu buka tautan dari email terbaru.</p>
-      <div class="tombol-blok">${tombol('Minta Tautan Baru', 'primary', 'lg', 'id="mintaBaru"', ik('surat', 16))}</div>${usulan('IDDS-OB-06')}${bantuanLink()}</section></div>`;
+      <div class="tombol-blok">${tombol('Minta tautan baru', 'primary', 'lg', 'id="mintaBaru"', ik('surat', 16))}</div>${usulan('IDDS-OB-06')}${bantuanLink()}</section></div>`;
   return `<div class="kolom-kartu">${kembali}<section class="ob-kartu kecil" aria-labelledby="jdReset">
     <img class="logo" src="__OB_LOGO__" alt="E-PPAT"><h2 id="jdReset">Atur Ulang Kata Sandi</h2>
     <p class="sub">Buat kata sandi baru untuk akun Anda.</p>
@@ -550,14 +550,14 @@ function layarReset() {
     ${pwIsian('rBaru', 'Kata Sandi Baru', 'Minimal 12 karakter')}
     ${pwIsian('rUlang', 'Ulangi Kata Sandi Baru', 'Ketik ulang kata sandi baru')}
     <div class="ditandai">${syaratPw('syaratReset')}${usulan('IDDS-OB-05')}</div>
-    ${tombol('Simpan Kata Sandi', 'primary', 'lg', `id="simpanReset" class="lebar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'reset' ? spinner : '')}
+    ${tombol('Simpan kata sandi', 'primary', 'lg', `id="simpanReset" class="lebar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'reset' ? spinner : '')}
     ${bantuanLink()}</section></div>`;
 }
 function layarResetOk() {
   return `<div class="kolom-kartu sedang"><section class="ob-kartu sedang status-kartu ditandai" id="kartuBerhasil" aria-labelledby="jdBerhasil">
     <span class="ikon-besar">${ik('centang', 34)}</span><h2 id="jdBerhasil">Kata Sandi Berhasil Diubah</h2>
     <p>Kata sandi akun Anda sudah diganti. Masuk dengan kata sandi baru.</p>
-    ${tautan('Masuk Sekarang', HE + '#masuk', 'primary', 'lg', 'class="lebar" id="masukSekarang"', ik('panah', 16))}${usulan('IDDS-OB-06')}${bantuanLink()}</section></div>`;
+    ${tautan('Masuk sekarang', HE + '#masuk', 'primary', 'lg', 'class="lebar" id="masukSekarang"', ik('panah', 16))}${usulan('IDDS-OB-06')}${bantuanLink()}</section></div>`;
 }
 function cekSyarat(daftarId, nilai) {
   const ok = SYARAT_PW.map(([, uji]) => uji(nilai));
@@ -577,7 +577,7 @@ function simpanReset() {
   if (!b) { setPw('rUlang', 'Ulangi kata sandi baru.', 'error'); ada = true; }
   else if (b !== a) { setPw('rUlang', 'Kata sandi belum sama.', 'error'); ada = true; }
   if (ada) { $('.ob-kartu [aria-invalid="true"]')?.focus(); return; }
-  S.memuat = 'reset'; $('#simpanReset').disabled = true; $('#simpanReset').innerHTML = spinner + 'Simpan Kata Sandi';
+  S.memuat = 'reset'; $('#simpanReset').disabled = true; $('#simpanReset').innerHTML = spinner + 'Simpan kata sandi';
   setTimeout(() => { S.memuat = ''; S.reset = { baru:'', ulang:'' }; pindah('reset-ok', () => $('#masukSekarang')?.focus()); }, 700);
 }
 
@@ -622,7 +622,7 @@ function panelPpat() {
 }
 function blokKontak(pemilik) {
   const L = P.kontak[pemilik];
-  return `<div class="sub-blok ditandai" id="${pemilik === 'ppat' ? 'blokKontak' : 'blokKontakKantor'}"><h3 class="sub-kepala">${ik('telepon', 18)} Info Kontak${pemilik === 'kantor' ? ' Kantor' : ''} <span class="kanan">${tombol('Tambah Kontak', 'primary', 'sm', `data-tambah-kontak="${pemilik}"`, ik('tambah', 16))}</span></h3>
+  return `<div class="sub-blok ditandai" id="${pemilik === 'ppat' ? 'blokKontak' : 'blokKontakKantor'}"><h3 class="sub-kepala">${ik('telepon', 18)} Info Kontak${pemilik === 'kantor' ? ' Kantor' : ''} <span class="kanan">${tombol('Tambah kontak', 'primary', 'sm', `data-tambah-kontak="${pemilik}"`, ik('tambah', 16))}</span></h3>
     <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Info kontak ${pemilik === 'ppat' ? 'PPAT' : 'kantor'}">
       <thead class="ina-table__header"><tr>${['No.', 'Akun / Nomor', 'Jenis Kontak', 'Status', 'Aksi'].map(th).join('')}</tr></thead>
       <tbody class="ina-table__body">${L.length ? L.map((k, i) => `<tr class="ina-table__row"><td class="ina-table__cell">${i + 1}.</td>
@@ -655,7 +655,7 @@ function panelKantor() {
         <div class="zoom">${tombol(ik('plus', 16), 'secondary', 'sm', 'class="ikon-saja" data-zoom="1" aria-label="Perbesar peta"')}${tombol(ik('minus', 16), 'secondary', 'sm', 'class="ikon-saja" data-zoom="-1" aria-label="Perkecil peta"')}</div>
         <div class="cari-peta"><div class="ina-input-search"><div class="ina-input-search__wrapper"><span class="ina-input-search__search-icon">${ik('cari', 18)}</span><input id="cariLokasi" class="ina-input-search__input" type="search" placeholder="Cari lokasi (mis. Monas, Jakarta)…" aria-label="Cari lokasi di peta" autocomplete="off"></div></div></div></div>
         <p class="peta-ket">Klik peta atau cari lokasi untuk mengisi koordinat GPS secara otomatis.</p></div></div>
-      ${kakiTab('kantor', tombol('Simpan Data Kantor', 'primary', 'md', `id="simpanKantor" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'kantor' ? spinner : ik('simpan', 16)))}</div>`;
+      ${kakiTab('kantor', tombol('Simpan data kantor', 'primary', 'md', `id="simpanKantor" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'kantor' ? spinner : ik('simpan', 16)))}</div>`;
 }
 const posPin = k => { const lat = parseFloat(k.lat), lng = parseFloat(k.lng); if (isNaN(lat) || isNaN(lng)) return '200 150'; return `${Math.max(20, Math.min(380, 200 + (lng - 106.8456) * 4000))} ${Math.max(30, Math.min(290, 150 - (lat + 6.2088) * 4000))}`; };
 function panelSandi() {
@@ -668,7 +668,7 @@ function panelSandi() {
       <div class="mfa-baris"><div><p>Status: ${m.aktif ? badge(`Aktif · ${m.metode}`, 'success', 'sm') : badge('Belum diatur', 'neutral', 'sm')}</p>
         <p class="ket">Kode cadangan tersisa: <b>${m.aktif ? m.sisa : '—'}</b></p>
         <p class="ket">${m.aktif ? 'Atur Ulang MFA menghapus verifikasi dua langkah akun Anda. Saat masuk berikutnya, Anda diminta memilih metode lagi.' : 'Saat masuk berikutnya, Anda diminta memilih metode verifikasi dua langkah lagi.'}</p></div>
-        ${m.aktif ? `<div class="baris-tombol">${tombol('Buat Ulang Kode Cadangan', 'secondary', 'md', 'id="ulangKode"', ik('ulang', 16))}${tombol('Atur Ulang MFA', 'secondary', 'md', 'id="resetMfa"', ik('ulang', 16))}</div>` : ''}</div>${usulan('IDDS-OB-09')}
+        ${m.aktif ? `<div class="baris-tombol">${tombol('Buat ulang kode cadangan', 'secondary', 'md', 'id="ulangKode"', ik('ulang', 16))}${tombol('Atur ulang MFA', 'secondary', 'md', 'id="resetMfa"', ik('ulang', 16))}</div>` : ''}</div>${usulan('IDDS-OB-09')}
       ${kakiTab('sandi', tombol('Perbarui', 'primary', 'md', `id="perbaruiSandi" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'sandi' ? spinner : ik('simpan', 16)))}</div>`;
 }
 function segarKotor() {
@@ -730,13 +730,13 @@ function gantiTab(t, fokus = true) {
   const asal = S.tab;
   dialog({ judul:`Buang perubahan di tab ${NAMA_TAB[asal]}?`, konfirmasi:true, bahaya:true,
     isi:`<p>Perubahan di tab ${NAMA_TAB[asal]} belum disimpan. Simpan dulu bila ingin mempertahankannya.${usulan('IDDS-OB-07')}</p>`,
-    tombol:[['Tetap di Sini', 'secondary', null], ['Buang Perubahan', 'primary', () => { buangTab(asal); lanjut(); }]] });
+    tombol:[['Tetap di sini', 'secondary', null], ['Buang perubahan', 'primary', () => { buangTab(asal); lanjut(); }]] });
 }
 function buangTab(t) { if (t === 'sandi') F.sandi = { lama:'', baru:'', ulang:'' }; else F[t] = salinObj(P[t]); }
 function batalTab(t) {
   if (!kotorTab(t)) { toast('Belum ada perubahan untuk dibatalkan.'); return; }
   dialog({ judul:'Batalkan perubahan?', konfirmasi:true, bahaya:true, isi:`<p>Isian di tab ${NAMA_TAB[t]} dikembalikan ke data yang tersimpan.${usulan('IDDS-OB-07')}</p>`,
-    tombol:[['Lanjutkan Mengisi', 'secondary', null], ['Buang Perubahan', 'primary', () => { buangTab(t); gambar(); toast('Perubahan dibatalkan.'); }]] });
+    tombol:[['Lanjutkan mengisi', 'secondary', null], ['Buang perubahan', 'primary', () => { buangTab(t); gambar(); toast('Perubahan dibatalkan.'); }]] });
 }
 function simpanPpat() {
   const p = F.ppat; let ada = false;
@@ -776,18 +776,18 @@ const KODE_BARU = ['K7M2P-Q9R4T', 'W3X8Y-Z5A1B', 'C6D2F-G8H4J', 'L9N3P-R5S7T', '
 function ulangKode() {
   dialog({ judul:'Buat ulang kode cadangan?', konfirmasi:true, bahaya:true,
     isi:`<p>Delapan kode cadangan baru dibuat. Kode lama, termasuk ${P.mfa.sisa} kode yang belum dipakai, langsung tidak berlaku.${usulan('IDDS-OB-09')}</p>`,
-    tombol:[['Batal', 'secondary', null], ['Buat Ulang Kode', 'primary', () => {
+    tombol:[['Batal', 'secondary', null], ['Buat ulang kode', 'primary', () => {
       P.mfa.sisa = 8; gambar();
       dialog({ judul:'Kode cadangan baru', isi:`<p>Simpan kode ini di tempat aman. Setiap kode hanya dapat dipakai sekali dan tidak akan ditampilkan lagi.</p>
         <div class="kode-cadangan" aria-label="Daftar kode cadangan baru">${KODE_BARU.map(k => `<span>${k}</span>`).join('')}</div>
         <div class="baris-tombol">${tombol('Salin', 'secondary', 'sm', 'id="salinKode"', ik('salin', 14))}${tombol('Unduh (.txt)', 'secondary', 'sm', 'id="unduhKode"', ik('unduh', 14))}</div>`,
-        tombol:[['Saya Sudah Menyimpan', 'primary', () => toast('Kode cadangan baru berlaku.', 'positive')]] });
+        tombol:[['Saya sudah menyimpan', 'primary', () => toast('Kode cadangan baru berlaku.', 'positive')]] });
     }]] });
 }
 function resetMfa() {
   dialog({ judul:'Atur Ulang MFA?', konfirmasi:true, bahaya:true,
     isi:`<p>Verifikasi dua langkah (${P.mfa.metode}) dan semua kode cadangan akun Anda dihapus. Saat masuk berikutnya, Anda wajib memilih metode verifikasi dua langkah lagi.${usulan('IDDS-OB-09')}</p>`,
-    tombol:[['Batal', 'secondary', null], ['Atur Ulang MFA', 'primary', () => { P.mfa = { ...P.mfa, aktif:false, sisa:0 }; gambar(); $('#tab-sandi').focus(); toast('MFA direset.', 'positive', 4000, 'Pilih metode verifikasi dua langkah saat masuk berikutnya.'); }]] });
+    tombol:[['Batal', 'secondary', null], ['Atur ulang MFA', 'primary', () => { P.mfa = { ...P.mfa, aktif:false, sisa:0 }; gambar(); $('#tab-sandi').focus(); toast('MFA direset.', 'positive', 4000, 'Pilih metode verifikasi dua langkah saat masuk berikutnya.'); }]] });
 }
 /* kontak: dialog Tambah/Ubah (IDDS Modal) */
 let DK = null;
@@ -800,7 +800,7 @@ function isiKontak() {
 function dialogKontak(pemilik, id) {
   const k = id ? P.kontak[pemilik].find(x => x.id === id) : { jenis:'email', nilai:'', aktif:true };
   DK = { pemilik, id, jenis:k.jenis, nilai:k.nilai, aktif:k.aktif };
-  dialog({ judul:id ? 'Ubah Kontak' : 'Tambah Kontak Baru', isi:isiKontak(), tombol:[['Batal', 'secondary', null], ['Simpan Kontak', 'primary', simpanKontak, true]] });
+  dialog({ judul:id ? 'Ubah Kontak' : 'Tambah Kontak Baru', isi:isiKontak(), tombol:[['Batal', 'secondary', null], ['Simpan kontak', 'primary', simpanKontak, true]] });
   $('#kJenis').focus();
 }
 function simpanKontak() {
@@ -1003,7 +1003,7 @@ const BANTUAN = {
     ${kontak()}` }),
   berhasil:() => ({ judul:'Bantuan setelah kata sandi diubah', isi:`<p>Kata sandi baru Anda sudah tersimpan. Kata sandi lama tidak berlaku lagi.</p>
     <h4 class="bantu-sub">Langkah masuk</h4>
-    ${lgkh(['Pilih <b>Masuk Sekarang</b>.', 'Ketik email dan kata sandi baru Anda, lalu pilih <b>Masuk</b>.', 'Masukkan kode verifikasi dua langkah dari aplikasi autentikator atau email Anda.'])}
+    ${lgkh(['Pilih <b>Masuk sekarang</b>.', 'Ketik email dan kata sandi baru Anda, lalu pilih <b>Masuk</b>.', 'Masukkan kode verifikasi dua langkah dari aplikasi autentikator atau email Anda.'])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('h', [
       ['Saya lupa kata sandi lagi', 'Pilih <b>Lupa kata sandi?</b> di halaman Masuk, lalu minta tautan baru. Setiap tautan hanya dapat dipakai sekali.'],
@@ -1012,12 +1012,12 @@ const BANTUAN = {
     ${kontak()}` }),
   sandi:() => ({ judul:'Bantuan lupa kata sandi', isi:`<p>Bila lupa kata sandi, Anda dapat membuat kata sandi baru lewat tautan yang dikirim ke email akun Anda.</p>
     <h4 class="bantu-sub">Langkah</h4>
-    ${lgkh(['Di halaman Lupa Kata Sandi, ketik email yang Anda daftarkan, lalu pilih <b>Kirim Tautan Atur Ulang</b>.', 'Buka email <b>Reset Password E-PPAT</b>, lalu klik tombol <b>Reset Password</b>.', 'Buat kata sandi baru yang memenuhi semua syarat, ketik ulang, lalu pilih <b>Simpan Kata Sandi</b>.', 'Masuk dengan kata sandi baru.'])}
+    ${lgkh(['Di halaman Lupa Kata Sandi, ketik email yang Anda daftarkan, lalu pilih <b>Kirim tautan atur ulang</b>.', 'Buka email <b>Reset Password E-PPAT</b>, lalu klik tombol <b>Reset Password</b>.', 'Buat kata sandi baru yang memenuhi semua syarat, ketik ulang, lalu pilih <b>Simpan kata sandi</b>.', 'Masuk dengan kata sandi baru.'])}
     <h4 class="bantu-sub">Syarat kata sandi</h4>
     ${istilah([['Panjang', 'Minimal 12 karakter.'], ['Jenis karakter', 'Huruf besar, huruf kecil, angka, dan simbol (- _ ? ! & + % # @ * $ ^).']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('s', [
-      ['Email reset tidak masuk', 'Email bisa tiba 1–2 menit kemudian. Periksa folder spam atau promosi. Bila tetap tidak ada, pilih "Kirim Ulang Tautan" setelah hitung mundur selesai.'],
+      ['Email reset tidak masuk', 'Email bisa tiba 1–2 menit kemudian. Periksa folder spam atau promosi. Bila tetap tidak ada, pilih "Kirim ulang tautan" setelah hitung mundur selesai.'],
       ['Mengapa layar tidak memberi tahu apakah email saya terdaftar?', 'Demi keamanan. Bila email terdaftar, tautan pasti dikirim. Bila tidak ada email masuk, periksa ejaan email atau coba email lain yang mungkin Anda pakai saat mendaftar.'],
       ['Tautan saya kedaluwarsa', `Tautan berlaku ${est('60 menit')} dan hanya dapat dipakai sekali. Minta tautan baru dari halaman Lupa Kata Sandi. Tautan lama otomatis tidak berlaku.`],
       ['Saya tidak bisa membuka email akun lagi', 'Hubungi dukungan dengan menyebut nama lengkap dan ID PPAT Anda. Tim akan memverifikasi identitas sebelum mengganti email akun.'],
@@ -1028,7 +1028,7 @@ const BANTUAN = {
     <h4 class="bantu-sub">Isi setiap tab</h4>
     ${istilah([['PPAT', 'Nama, jenis kelamin, dan kontak pribadi Anda.'], ['Kantor PPAT', 'Nama kantor, rekening bank, kontak kantor, dan lokasi kantor.'], ['Kata Sandi', 'Ganti kata sandi, buat ulang kode cadangan, atau reset verifikasi dua langkah (MFA).']])}
     <h4 class="bantu-sub">Langkah mengubah data</h4>
-    ${lgkh(['Pilih tab yang ingin diubah.', 'Ubah isian. Tab yang berubah diberi titik penanda dan kaki kartu menulis <b>Belum disimpan</b>.', 'Pilih <b>Simpan PPAT</b>, <b>Simpan Data Kantor</b>, atau <b>Perbarui</b>. Pilih <b>Batal</b> untuk mengembalikan isian.'])}
+    ${lgkh(['Pilih tab yang ingin diubah.', 'Ubah isian. Tab yang berubah diberi titik penanda dan kaki kartu menulis <b>Belum disimpan</b>.', 'Pilih <b>Simpan PPAT</b>, <b>Simpan data kantor</b>, atau <b>Perbarui</b>. Pilih <b>Batal</b> untuk mengembalikan isian.'])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('p', [
       ['Mengapa Kode, ID PPAT, dan URL Web tidak dapat diubah?', 'Ketiganya dipakai sistem dan asosiasi PPAT untuk mengenali akun dan kantor Anda. Bila ada kesalahan, hubungi dukungan.'],

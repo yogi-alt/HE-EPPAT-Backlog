@@ -173,7 +173,7 @@ ol.bantu-langkah{padding-left:22px}
     <header class="top">
       <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg></button>
       <div class="spacer"></div>
-      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat Landing</span></button>
+      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat landing</span></button>
       <button class="ina-button ina-button--tertiary ina-button--md" aria-label="Notifikasi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg></button>
       <div class="user"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Admin Contoh</span><span class="urole">Super Admin</span></span></div>
     </header>
@@ -252,7 +252,7 @@ const UBAH = [
     isi:'Kartu ringkasan memakai IDDS Card. Keterangan setiap status menjelaskan artinya, sama dengan prototipe Permohonan AJB: "Mengumpulkan data", "Data lengkap", "Pembuatan akta", "Akta selesai". Warna grafik diambil dari token warna status tema (bukan kode warna tetap) dan sekeluarga dengan warna lencana statusnya. Pengecualiannya Penyusunan: grafik memakai warna brand agar Penyusunan dapat dibedakan dari Pengumpulan, karena keduanya berlencana "info" di live dan di prototipe Permohonan AJB. Legenda donat selalu menampilkan semua status beserta jumlah dan persentasenya. Grafik batang menulis nama jenis akta lengkap beserta jumlahnya, sehingga angka terbaca tanpa tooltip.',
     lama:'Keterangan kartu hanya "order". Warna grafik ditulis langsung di kode (slate/biru/kuning/hijau) dan tidak ikut tema. Status bernilai 0 hilang dari legenda. Jumlah hanya tampil di tooltip saat kursor di atas grafik, dan sumbu batang hanya memakai kode (AJB).', ke:'dashboard', sorot:'#grafikStatus' },
   { kode:'IDDS-TN-28', judul:'Dashboard: daftar permohonan dapat dibuka dan data dapat dimuat ulang',
-    isi:'"Perlu tindakan" menyebut tindakan berikutnya untuk setiap permohonan (misalnya "Lengkapi berkas", "Mulai verifikasi"). Setiap baris adalah tautan ke Permohonan AJB yang dapat difokus dengan keyboard. Di kanan judul tampil waktu pembaruan dan tombol "Muat Ulang". Bila data gagal dimuat, IDDS Alert menyediakan tombol "Coba Lagi". Keadaan ini dapat dicoba lewat pil "Simulasi galat Dashboard" di bilah atas.',
+    isi:'"Perlu tindakan" menyebut tindakan berikutnya untuk setiap permohonan (misalnya "Lengkapi berkas", "Mulai verifikasi"). Setiap baris adalah tautan ke Permohonan AJB yang dapat difokus dengan keyboard. Di kanan judul tampil waktu pembaruan dan tombol "Muat ulang". Bila data gagal dimuat, IDDS Alert menyediakan tombol "Coba lagi". Keadaan ini dapat dicoba lewat pil "Simulasi galat Dashboard" di bilah atas.',
     lama:'"Perlu tindakan" tidak menjelaskan tindakan yang dibutuhkan. Tidak ada waktu pembaruan atau tombol muat ulang. Pesan "Gagal memuat dashboard." tampil tanpa tombol coba lagi.', ke:'dashboard', sorot:'#perluTindakan' },
   { kode:'IDDS-TN-29', judul:'Profil Kantor: pesan galat di bawah isian dan izin Ubah dipatuhi',
     isi:'Isian memakai IDDS Text Field/Text Area yang terhubung dengan labelnya. Pesan galat tampil di bawah isian saat fokus meninggalkan isian dan saat menyimpan, tanpa kotak galat ganda dan toast. Email memakai tipe email, dan telepon memakai tipe telepon. Pengguna yang hanya punya izin Lihat melihat isian terkunci dengan IDDS Alert penjelasan (coba lewat pil "Izin Profil Kantor" di bilah atas). Kaki formulir menampilkan jumlah perubahan yang belum disimpan. Pindah tab atau menu saat ada perubahan meminta konfirmasi.',
@@ -267,10 +267,10 @@ const UBAH = [
     isi:'Daftar memakai IDDS Input Search, Table, dan Pagination. Kolom Status yang selalu "Selesai" diganti kolom "Salinan" yang menunjukkan langkah berikutnya: "Belum ada scan", "Siap dikirim", atau "Terkirim ke N pihak". Judul kolom ditulis lengkap ("Tanggal Akta").',
     lama:'Kolom Status selalu "Selesai" untuk semua baris sehingga tidak membantu. Judul kolom "Tgl Akta" disingkat. Pencarian memanggil server pada setiap ketikan.', ke:'salinan', sorot:'#tabelSalinan' },
   { kode:'IDDS-TN-33', judul:'Detail salinan: unggah, renvoi, dan alasan tombol nonaktif terlihat',
-    isi:'Hasil pindai (scan) akta diunggah lewat IDDS File Upload: seret-lepas, PDF maks. 20 MB, dan pesan galat di bawah kotak unggah. Alasan "Kirim Salinan" belum aktif tampil sebagai teks bantuan di bawah tombol, bukan hanya tooltip. Catatan Renvoi memakai IDDS Badge "Belum disimpan" dan meminta konfirmasi bila halaman ditinggalkan sebelum disimpan. Tombol hapus hasil pindai berlabel nama berkas.',
+    isi:'Hasil pindai (scan) akta diunggah lewat IDDS File Upload: seret-lepas, PDF maks. 20 MB, dan pesan galat di bawah kotak unggah. Alasan "Kirim salinan" belum aktif tampil sebagai teks bantuan di bawah tombol, bukan hanya tooltip. Catatan Renvoi memakai IDDS Badge "Belum disimpan" dan meminta konfirmasi bila halaman ditinggalkan sebelum disimpan. Tombol hapus hasil pindai berlabel nama berkas.',
     lama:'Alasan tombol nonaktif hanya ada di atribut title sehingga tidak terjangkau di layar sentuh dan pembaca layar. Perubahan renvoi hilang tanpa peringatan saat kembali ke daftar. Tombol hapus hasil pindai hanya berupa ikon tanpa label.', ke:'detail', sorot:'#kartuInfo' },
   { kode:'IDDS-TN-34', judul:'Kirim Salinan dan Riwayat: validasi email dan konfirmasi cabut',
-    isi:'Dialog Kirim memakai IDDS Checkbox untuk setiap penerima. Peran ditulis "Pihak Pertama/Pihak Kedua/Saksi", bukan kode, dan format email diperiksa di bawah isiannya. Sebelum mengirim, tampil ringkasan jumlah penerima. Di Riwayat, "Cabut Tautan" meminta konfirmasi lewat IDDS Modal Confirmation karena tindakan ini tidak dapat dibatalkan.',
+    isi:'Dialog Kirim memakai IDDS Checkbox untuk setiap penerima. Peran ditulis "Pihak Pertama/Pihak Kedua/Saksi", bukan kode, dan format email diperiksa di bawah isiannya. Sebelum mengirim, tampil ringkasan jumlah penerima. Di Riwayat, "Cabut tautan" meminta konfirmasi lewat IDDS Modal Confirmation karena tindakan ini tidak dapat dibatalkan.',
     lama:'Peran tampil sebagai kode mentah (PENJUAL, PEMBELI). Format email tidak diperiksa di dialog ini, berbeda dengan dialog kirim di E-Akta Wizard. "Cabut" langsung dijalankan tanpa konfirmasi.', ke:'kirim', sorot:null },
   { kode:'IDDS-TN-35', judul:'Aktivasi e-Meterai: status terlihat dan email divalidasi di isian',
     isi:'Bagian atas menampilkan status aktivasi (IDDS Badge "Belum diaktifkan" / "Aktif") beserta email yang tersimpan. Isian Email bertanda wajib, dan pesan galatnya tampil di bawah isian. Mengganti email yang sudah tersimpan meminta konfirmasi. Alamat portal ditulis benar, yaitu e-meterai.co.id. Tautannya membuka tab baru, dan keterangan itu tertulis pada tautan.',
@@ -279,7 +279,7 @@ const UBAH = [
     isi:'Dashboard, Profil Kantor, Salinan Akta (daftar dan detail), dan Aktivasi e-Meterai memiliki tombol Bantuan di kanan judul. Tombol ini membuka IDDS Drawer berisi penjelasan khusus halaman, pertanyaan umum (IDDS Accordion), dan kontak dukungan. Pola sama dengan saran HE-UMUM-02.',
     lama:'Tidak ada panduan atau kontak dukungan di halaman ini.', ke:'bantuan', sorot:null },
   { kode:'IDDS-TN-37', judul:'Menu Akta: istilah dan ejaan dibakukan',
-    isi:'Judul halaman disamakan dengan menu ("Dashboard Akta", bukan "Dashboard Drafting"). Istilah dibakukan: "Download Salinan" menjadi "Unduh Salinan", "Tgl Akta" menjadi "Tanggal Akta", "field wajib" menjadi "isian wajib", "Warna teks (font)" menjadi "Warna teks", dan "kadaluarsa" menjadi "kedaluwarsa". "E-Materai/e-Materai" menjadi "e-Meterai" sesuai KBBI dan Peruri, dan "Segera" menjadi "Segera hadir". Label status permohonan tetap sama dengan prototipe Permohonan AJB. Nama menu di sidebar tidak diubah di prototipe; usulan ejaan menu "Aktivasi e-Meterai" dicatat untuk keputusan tim.',
+    isi:'Judul halaman disamakan dengan menu ("Dashboard Akta", bukan "Dashboard Drafting"). Istilah dibakukan: "Download Salinan" menjadi "Unduh salinan", "Tgl Akta" menjadi "Tanggal Akta", "field wajib" menjadi "isian wajib", "Warna teks (font)" menjadi "Warna teks", dan "kadaluarsa" menjadi "kedaluwarsa". "E-Materai/e-Materai" menjadi "e-Meterai" sesuai KBBI dan Peruri, dan "Segera" menjadi "Segera hadir". Label status permohonan tetap sama dengan prototipe Permohonan AJB. Nama menu di sidebar tidak diubah di prototipe; usulan ejaan menu "Aktivasi e-Meterai" dicatat untuk keputusan tim.',
     lama:'Satu layar punya tiga nama ("Dashboard", "Dashboard Drafting", "Dashboard Akta"). Ejaan "E-Materai", "e-Materai", "e-Meterai", dan "meterai" bercampur. Ada istilah bahasa Inggris "Download", "field", dan "font".', ke:'emeterai', sorot:null }
 ];
 
@@ -287,7 +287,7 @@ const UBAH = [
 const ST = { PENGUMPULAN:{ l:'Pengumpulan Berkas', s:'Dibuat oleh Asisten / PPAT', b:'info', w:'var(--ina-guide-500,#2563eb)', t:'Lengkapi berkas dan data para pihak', ik:'daftar' },
   SIAP:{ l:'Verifikasi Berkas', s:'Data lengkap, siap diperiksa', b:'warning', w:'var(--ina-warning-500,#eebb04)', t:'Mulai verifikasi akta', ik:'centang' },
   DRAFTING:{ l:'Penyusunan Akta', s:'Pembuatan Akta Minuta & Salinan', b:'info', w:'var(--ina-primary-500,#3d6b5e)', t:'Susun minuta akta', ik:'edit' },
-  FINALISASI:{ l:'Finalisasi Akta', s:'Finalisasi Akta Minuta & Salinan', b:'warning', w:'var(--ina-secondary-500,#ae9358)', t:'Finalisasi akta', ik:'kunci' },
+  FINALISASI:{ l:'Finalisasi Akta', s:'Finalisasi Akta Minuta & Salinan', b:'warning', w:'var(--ina-secondary-500,#ae9358)', t:'Finalisasi Akta', ik:'kunci' },
   PENANDATANGANAN:{ l:'Penandatanganan Akta', s:'Penandatanganan Akta Minuta & Salinan', b:'info', w:'var(--ina-primary-300,#9db8ae)', t:'Selesaikan penandatanganan', ik:'tb_signature' },
   SELESAI:{ l:'Selesai', s:'Akta Minuta & Salinan selesai', b:'success', w:'var(--ina-positive-500,#16a34a)', t:'', ik:'stempel' } };
 const O = (kode, nama, status, tgl) => ({ kode, nama, status, tgl, jenis:'AJB' });
@@ -366,7 +366,7 @@ function jaga(lanjut) {
   const prof = S.layar === 'profil', em = emKotor();
   dialog({ judul:'Tinggalkan halaman ini?', konfirmasi:true,
     isi:`<p>${prof ? `Ada ${profKotor().length} perubahan profil kantor yang belum disimpan.` : em ? 'Email akun e-Meterai belum disimpan.' : 'Catatan renvoi belum disimpan.'} Perubahan itu akan hilang.${usulan(prof ? 'IDDS-TN-29' : em ? 'IDDS-TN-35' : 'IDDS-TN-33')}</p>`,
-    tombol:[['Tetap di Sini', 'secondary', null], ['Tinggalkan', 'primary', () => { PROFIL = salinObj(PROFIL_F); S.renvoiKotor = false; lanjut(); }]] });
+    tombol:[['Tetap di sini', 'secondary', null], ['Tinggalkan', 'primary', () => { PROFIL = salinObj(PROFIL_F); S.renvoiKotor = false; lanjut(); }]] });
 }
 function pindah(ke, lanjut) { jaga(() => { S.layar = ke; S.detail = null; S.galatP = {}; history.replaceState(null, '', '#' + ke); gambar(); window.scrollTo({ top:0 }); lanjut && lanjut(); }); }
 
@@ -377,12 +377,12 @@ function layarDashboard() {
   const perlu = ORDER.filter(o => o.status !== 'SELESAI').sort((a, b) => a.tgl.localeCompare(b.tgl)), terbaru = [...ORDER].sort((a, b) => b.tgl.localeCompare(a.tgl)).slice(0, 6);
   const ingat = S.tera ? `<div class="ingat">${alert('caution', '', 'Stempel Elektronik (TERA) kantor Anda belum didaftarkan. Lengkapi data pendaftaran TERA agar akta bisa distempel elektronik.', `<div style="display:flex;gap:8px;align-items:center">${tombol('Daftar TERA', 'primary', 'sm', 'data-ke-tera', ik('panah', 14))}<button type="button" class="ina-alert__close-button" data-tutup-tera aria-label="Tutup pengingat">${ik('x', 16)}</button></div>`)}</div>` : '';
   if (S.dashGagal) return `${remah('Akta', 'Dashboard Akta')}<h1>Dashboard Akta</h1><p class="sub">Pantau jumlah permohonan per status dan permohonan yang perlu ditindaklanjuti.</p>
-    <div style="margin-top:20px">${alert('critical', 'Dashboard gagal dimuat', 'Periksa koneksi internet Anda, lalu coba lagi.', tombol('Coba Lagi', 'secondary', 'sm', 'id="cobaLagi"', ik('ulang', 14)))}</div>`;
+    <div style="margin-top:20px">${alert('critical', 'Dashboard gagal dimuat', 'Periksa koneksi internet Anda, lalu coba lagi.', tombol('Coba lagi', 'secondary', 'sm', 'id="cobaLagi"', ik('ulang', 14)))}</div>`;
   const baris = (o, relatif) => `<li><a href="Backlog-HE-ORDER-Prototype.html#order=${o.kode}" data-buka-order="${o.kode}" aria-label="Buka permohonan ${o.kode}, ${esc(o.nama)}, status ${ST[o.status].l}"><span class="isi"><span class="kd">${o.kode}</span>${badge(ST[o.status].l, ST[o.status].b, 'sm')}<span class="nm">${esc(o.nama)}</span>
     <small>Akta Jual Beli · ${relatif ? lalu(o.tgl) : tglId(o.tgl)}${relatif && ST[o.status].t ? ` · <b style="color:var(--ina-content-primary);font-weight:600">${ST[o.status].t}</b>` : ''}</small></span>${ik('chev')}</a></li>`;
   return `${remah('Akta', 'Dashboard Akta')}<h1>Dashboard Akta</h1><p class="sub">Pantau jumlah permohonan per status dan permohonan yang perlu ditindaklanjuti.</p>
     ${ingat}
-    <div class="baris-atas" style="margin-top:16px"><span></span><span class="diperbarui ditandai">${ik('jam', 14)} Diperbarui pukul ${S.waktu} WIB ${tombol('Muat Ulang', 'tertiary', 'sm', 'id="muatUlang"', ik('ulang', 14))}${usulan('IDDS-TN-28')}</span></div>
+    <div class="baris-atas" style="margin-top:16px"><span></span><span class="diperbarui ditandai">${ik('jam', 14)} Diperbarui pukul ${S.waktu} WIB ${tombol('Muat ulang', 'tertiary', 'sm', 'id="muatUlang"', ik('ulang', 14))}${usulan('IDDS-TN-28')}</span></div>
     <div class="kpi">${kartu.map(([t, v, s, i, bg, fg, k]) => `<div class="ina-card ina-card--variant-basic"><small>${t}</small><i style="background:${bg || 'var(--ina-background-secondary)'};color:${fg || ST[k].w}">${ik(i)}</i><b>${v}</b><span>${s}</span></div>`).join('')}</div>
     <div class="dua">
       <section class="blok ditandai" id="grafikStatus" aria-labelledby="jdStatus"><div class="eb">Komposisi</div><h2 id="jdStatus">Permohonan per status</h2>${donat(total, n)}${usulan('IDDS-TN-27')}</section>
@@ -443,7 +443,7 @@ function formProfil() {
           <div class="eyb">Kantor Notaris &amp; PPAT</div><b>${esc(pv.nama)}</b><div>${ik('dok', 12)}SK · ${esc(pv.sk)}</div><div>${ik('kartuId', 12)}Wilayah · ${esc(pv.wil)}</div>${pv.tel ? `<div>${ik('telp', 12)}${esc(pv.tel)}</div>` : ''}<div>${ik('gedung', 12)}${esc(pv.al)}</div></div>
           ${p.ppat_card_enabled ? '' : '<p class="ket" style="margin-top:8px">Kartu tidak ditampilkan di sidebar.</p>'}</div></div></div>
     ${kunci ? '' : `<div class="kaki-form"><span class="kaki-st ${n ? 'ada' : ''}" aria-live="polite">${n ? `${ik('info', 14)} ${n} perubahan belum disimpan` : `${ik('centang', 14)} Semua perubahan sudah disimpan`}</span>${usulan('IDDS-TN-29')}
-      ${tombol('Batal', 'secondary', 'md', `id="batalProf" ${n ? '' : 'disabled'}`)}${tombol('Simpan Perubahan', 'primary', 'md', 'id="simpanProf"', ik('simpan', 16))}</div>`}
+      ${tombol('Batal', 'secondary', 'md', `id="batalProf" ${n ? '' : 'disabled'}`)}${tombol('Simpan perubahan', 'primary', 'md', 'id="simpanProf"', ik('simpan', 16))}</div>`}
   </section>`;
 }
 function simpanProfil() {
@@ -480,7 +480,7 @@ function layarSalinan() {
         <td class="ina-table__cell"><div>Akta Jual Beli</div><div class="kc">${esc(s.nama)}</div></td>
         <td class="ina-table__cell">${s.nomor}</td><td class="ina-table__cell">${tglId(s.tgl)}</td><td class="ina-table__cell">${statusSalinan(s)}</td>
         <td class="ina-table__cell" style="text-align:right"><button type="button" class="ina-button ina-button--tertiary ina-button--sm ikon-btn" data-buka-salinan="${s.kode}" aria-label="Buka salinan ${s.kode}">${ik('chev', 16)}</button></td></tr>`).join('')
-        : `<tr><td colspan="6" class="ina-table__empty-cell kosong">${q ? `Tidak ada akta yang cocok dengan "${esc(S.cari)}".<div style="margin-top:10px">${tombol('Hapus Pencarian', 'secondary', 'sm', 'id="hapusCariSalinan"')}</div>` : 'Belum ada akta yang difinalisasi. Akta muncul di sini setelah difinalisasi di Penyusunan Akta.'}</td></tr>`}</tbody></table></div></div>
+        : `<tr><td colspan="6" class="ina-table__empty-cell kosong">${q ? `Tidak ada akta yang cocok dengan "${esc(S.cari)}".<div style="margin-top:10px">${tombol('Hapus pencarian', 'secondary', 'sm', 'id="hapusCariSalinan"')}</div>` : 'Belum ada akta yang difinalisasi. Akta muncul di sini setelah difinalisasi di Penyusunan Akta.'}</td></tr>`}</tbody></table></div></div>
       <div class="halaman"><span>Menampilkan ${rows.length ? 1 : 0}–${rows.length} dari ${rows.length}</span><div class="ina-pagination"><div class="ina-pagination__nav-container"><div class="ina-pagination__page-info">Halaman 1 dari 1</div><div class="ina-pagination__nav-buttons"><button type="button" class="ina-pagination__nav-button ina-pagination__nav-button--disabled" disabled aria-label="Halaman sebelumnya">${ik('kiri', 16)}</button><button type="button" class="ina-pagination__page-button ina-pagination__page-button--active" aria-current="page">1</button><button type="button" class="ina-pagination__nav-button ina-pagination__nav-button--disabled" disabled aria-label="Halaman berikutnya">${ik('chev', 16)}</button></div></div></div></div>
     </div>
     <div style="margin-top:8px">${usulan('IDDS-TN-32')}</div>`;
@@ -491,7 +491,7 @@ function layarDetail() {
   return `${remah('Akta', 'Salinan Akta', s.kode)}<h1>Salinan Akta ${s.kode}</h1><p class="sub">Akta Jual Beli · ${esc(s.nama)}</p>
     <div class="aksi-baris" style="margin-top:12px">${tombol('Kembali', 'secondary', 'sm', 'id="kembaliSalinan"', ik('kiri', 14))}${badge('AJB', 'info', 'sm')}${badge('Selesai', 'success', 'sm')}</div>
     <section class="blok ditandai" id="kartuInfo" aria-labelledby="jdInfo"><div class="baris-atas"><h2 id="jdInfo" style="margin:0">Informasi Akta</h2>
-      <div class="aksi-baris">${tombol('Unduh Salinan', 'primary', 'md', 'id="unduhSalinan"', ik('unduh', 16))}${tombol('Kirim Salinan', 'secondary', 'md', `id="kirimSalinan" ${aktifKirim ? '' : 'disabled aria-describedby="alasanKirim"'}`, ik('surat', 16))}${tombol(rw ? `Riwayat (${rw})` : 'Riwayat', 'secondary', 'md', 'id="riwayatSalinan"', ik('jam', 16))}</div></div>
+      <div class="aksi-baris">${tombol('Unduh salinan', 'primary', 'md', 'id="unduhSalinan"', ik('unduh', 16))}${tombol('Kirim salinan', 'secondary', 'md', `id="kirimSalinan" ${aktifKirim ? '' : 'disabled aria-describedby="alasanKirim"'}`, ik('surat', 16))}${tombol(rw ? `Riwayat (${rw})` : 'Riwayat', 'secondary', 'md', 'id="riwayatSalinan"', ik('jam', 16))}</div></div>
       ${aktifKirim ? '' : `<p class="ket" id="alasanKirim" style="margin-top:8px;text-align:right">Unggah scan akta yang sudah ditandatangani untuk mengaktifkan Kirim Salinan.${usulan('IDDS-TN-33')}</p>`}
       <dl class="kv"><div><dt>Nomor Akta</dt><dd>${s.nomor}</dd></div><div><dt>Tanggal Akta</dt><dd>${tglId(s.tgl, true)}</dd></div><div><dt>Klien</dt><dd>${esc(s.nama)}</dd></div><div><dt>Difinalisasi</dt><dd>${tglId(s.final, true)}</dd></div></dl></section>
     <div class="dua">
@@ -505,7 +505,7 @@ function layarDetail() {
         <p class="ket">Catatan koreksi yang <b>tercetak pada salinan akta</b> sebelum penutup. Minuta asli tidak berubah.</p>
         <div class="f-baris">${editorMini('renvoi', s.renvoi, 'Catatan renvoi')}</div>
         <div class="ina-text-field__helper-text">Contoh: — Coretan: pada halaman 3 baris 12, kata "Budi" diganti menjadi "Budhi". —</div>
-        <div class="kaki-form" style="margin-top:12px">${tombol('Simpan Catatan', 'primary', 'md', `id="simpanRenvoi" ${S.renvoiKotor ? '' : 'disabled'}`, ik('simpan', 16))}</div></section>
+        <div class="kaki-form" style="margin-top:12px">${tombol('Simpan catatan', 'primary', 'md', `id="simpanRenvoi" ${S.renvoiKotor ? '' : 'disabled'}`, ik('simpan', 16))}</div></section>
     </div>`;
 }
 function dialogKirim(s) {
@@ -530,11 +530,11 @@ function dialogKirim(s) {
 const ST_RW = { terkirim:['Terkirim', 'info'], dibuka:['Dibuka', 'success'], gagal:['Gagal', 'error'], revoked:['Dicabut', 'neutral'] };
 function dialogRiwayat(s) {
   const isi = () => s.riwayat.length ? `<ul class="riwayat">${s.riwayat.map(r => `<li><div class="isi"><b>${esc(r.nama || r.email)}</b> ${badge(ST_RW[r.status][0], ST_RW[r.status][1], 'sm')}<small>${esc(r.email)} · ${r.w}</small></div>
-    ${['terkirim', 'dibuka'].includes(r.status) ? tombol('Cabut Tautan', 'secondary', 'sm', `data-cabut="${r.id}" class="bahaya" aria-label="Cabut tautan untuk ${esc(r.nama)}"`) : ''}</li>`).join('')}</ul>` : '<p class="kosong">Belum ada salinan yang dikirim.</p>';
+    ${['terkirim', 'dibuka'].includes(r.status) ? tombol('Cabut tautan', 'secondary', 'sm', `data-cabut="${r.id}" class="bahaya" aria-label="Cabut tautan untuk ${esc(r.nama)}"`) : ''}</li>`).join('')}</ul>` : '<p class="kosong">Belum ada salinan yang dikirim.</p>';
   dialog({ judul:'Riwayat Kirim Salinan', lebar:true, isi:isi(), tombol:[['Tutup', 'secondary', null]] });
   $('#lapisan .ina-modal__body').addEventListener('click', e => { const b = e.target.closest('[data-cabut]'); if (!b) return; const r = s.riwayat.find(x => x.id === +b.dataset.cabut);
     dialog2({ judul:'Cabut tautan salinan?', konfirmasi:true, isi:`<p>${esc(r.nama)} tidak dapat lagi mengunduh salinan lewat tautan yang sudah dikirim ke ${esc(r.email)}. Tindakan ini tidak dapat dibatalkan; kirim ulang bila tautan masih diperlukan.${usulan('IDDS-TN-34')}</p>`,
-      bahaya:true, tombol:[['Batal', 'secondary', null], ['Cabut Tautan', 'primary', () => { r.status = 'revoked'; $('#lapisan .ina-modal__body').innerHTML = isi(); gambar(); toast('Tautan dicabut.', 'positive'); }]] }); });
+      bahaya:true, tombol:[['Batal', 'secondary', null], ['Cabut tautan', 'primary', () => { r.status = 'revoked'; $('#lapisan .ina-modal__body').innerHTML = isi(); gambar(); toast('Tautan dicabut.', 'positive'); }]] }); });
 }
 
 /* ================= AKTIVASI e-METERAI ================= */
@@ -556,7 +556,7 @@ function layarEmeterai() {
           <p class="ket">Isi setelah Anda selesai mendaftar dan memastikan kuota cukup di portal Peruri.</p>
           <div class="f-baris">${tf('emEmail', 'Email', EMET.email, 'nama@contoh.id', true, 'Email yang terdaftar di e-meterai.co.id.', '', 'email')}</div>
           <div class="f-baris">${alert('info', '', 'Email harus sama persis dengan yang terdaftar di e-meterai.co.id. Bila berbeda, pembubuhan meterai pada dokumen akan gagal.')}</div>
-          <div class="kaki-form">${tombol('Simpan Perubahan', 'primary', 'md', 'id="simpanEmet"', ik('simpan', 16))}</div></section>
+          <div class="kaki-form">${tombol('Simpan perubahan', 'primary', 'md', 'id="simpanEmet"', ik('simpan', 16))}</div></section>
       </div>
     </div>`;
 }
@@ -565,7 +565,7 @@ function simpanEmet() {
   if (!v) { galat('emEmail', 'Email wajib diisi.'); $('#emEmail').focus(); return; }
   if (!reEmail.test(v)) { galat('emEmail', 'Format email tidak valid. Contoh: nama@contoh.id.'); $('#emEmail').focus(); return; }
   const jalan = () => { EMET = { email:v, disimpan:v }; gambar(); toast('Email e-Meterai disimpan.', 'positive', 3500, 'Pembubuhan e-Meterai siap dipakai.'); };
-  if (EMET.disimpan && EMET.disimpan !== v) { dialog({ judul:'Ganti email e-Meterai?', konfirmasi:true, isi:`<p>Email terdaftar akan diganti dari <b>${esc(EMET.disimpan)}</b> menjadi <b>${esc(v)}</b>. Pastikan email baru sudah terdaftar di e-meterai.co.id dan kuotanya cukup.${usulan('IDDS-TN-35')}</p>`, tombol:[['Batal', 'secondary', null], ['Ganti Email', 'primary', jalan]] }); return; }
+  if (EMET.disimpan && EMET.disimpan !== v) { dialog({ judul:'Ganti email e-Meterai?', konfirmasi:true, isi:`<p>Email terdaftar akan diganti dari <b>${esc(EMET.disimpan)}</b> menjadi <b>${esc(v)}</b>. Pastikan email baru sudah terdaftar di e-meterai.co.id dan kuotanya cukup.${usulan('IDDS-TN-35')}</p>`, tombol:[['Batal', 'secondary', null], ['Ganti email', 'primary', jalan]] }); return; }
   jalan();
 }
 
@@ -602,7 +602,7 @@ H.addEventListener('click', e => {
   /* Profil */
   const pt = t.closest('[data-prof-tab]'); if (pt) { const k = pt.dataset.profTab; if (k === S.profTab) return; jaga(() => { S.profTab = k; S.galatP = {}; gambar(); $(`[data-prof-tab="${k}"]`).focus(); }); return; }
   if (t.closest('#simpanProf')) { simpanProfil(); return; }
-  if (t.closest('#batalProf')) { dialog({ judul:'Batalkan perubahan?', konfirmasi:true, isi:`<p>${profKotor().length} perubahan profil kantor dikembalikan ke data tersimpan.</p>`, bahaya:true, tombol:[['Lanjut Mengubah', 'secondary', null], ['Batalkan Perubahan', 'primary', () => { PROFIL = salinObj(PROFIL_F); S.galatP = {}; gambar(); }]] }); return; }
+  if (t.closest('#batalProf')) { dialog({ judul:'Batalkan perubahan?', konfirmasi:true, isi:`<p>${profKotor().length} perubahan profil kantor dikembalikan ke data tersimpan.</p>`, bahaya:true, tombol:[['Lanjut mengubah', 'secondary', null], ['Batalkan perubahan', 'primary', () => { PROFIL = salinObj(PROFIL_F); S.galatP = {}; gambar(); }]] }); return; }
   const ly = t.closest('[data-layanan]') || t.closest('.ket-toggle')?.querySelector('[data-layanan]'); if (ly) { ubahLayanan(LAYANAN.find(l => l.kode === ly.dataset.layanan)); return; }
   /* Salinan */
   if (t.closest('#hapusCariSalinan')) { S.cari = ''; gambar(); $('#cariSalinan').focus(); return; }
@@ -730,13 +730,13 @@ const BANTUAN = {
     ${fq('d', [
       ['Apa isi daftar "Perlu tindakan"?', 'Permohonan yang belum Selesai, diurutkan dari yang paling lama menunggu. Setiap baris menyebut tindakan berikutnya.'],
       ['Bagaimana membuka detail permohonan?', 'Klik baris permohonan. Stepper permohonan itu terbuka di Permohonan AJB.'],
-      ['Mengapa angka belum berubah?', 'Klik "Muat Ulang" di kanan atas untuk mengambil data terbaru.'],
+      ['Mengapa angka belum berubah?', 'Klik "Muat ulang" di kanan atas untuk mengambil data terbaru.'],
       ['Mengapa hanya Akta Jual Beli yang tampil?', 'Grafik hanya menampilkan layanan akta yang aktif. Saat ini baru Akta Jual Beli yang tersedia.'],
       ['Ke mana permohonan setelah Selesai?', 'Minuta dan salinan akta yang selesai tersimpan di Arsip Akta.']])}
     ${kontak()}` }),
   profil:() => ({ judul:'Bantuan Profil Kantor', isi:`<p>Data kantor dipakai sebagai kop dan variabel isi akta, serta kartu identitas di sidebar.</p>
     <h4 class="bantu-sub">Langkah</h4>
-    ${lgkh(['Lengkapi isian bertanda bintang.', 'Pilih PPAT penanda tangan yang sudah memiliki sertifikat elektronik aktif.', 'Atur kartu sidebar bila perlu, lalu klik <b>Simpan Perubahan</b>.'])}
+    ${lgkh(['Lengkapi isian bertanda bintang.', 'Pilih PPAT penanda tangan yang sudah memiliki sertifikat elektronik aktif.', 'Atur kartu sidebar bila perlu, lalu klik <b>Simpan perubahan</b>.'])}
     ${istilah([['CA', 'Sertifikat elektronik dari Peruri untuk tanda tangan elektronik.'], ['PPAT penanda tangan', 'Pengguna berfungsi PPAT yang menandatangani akta elektronik kantor.'], ['Layanan akta', 'Jenis akta yang dilayani kantor; setiap layanan aktif punya menu Permohonan sendiri.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('p', [
@@ -751,12 +751,12 @@ const BANTUAN = {
     ${kontak()}` }),
   salinan:() => ({ judul:'Bantuan Salinan Akta', isi:`<p>Akta yang sudah difinalisasi di Penyusunan Akta muncul di sini untuk dicetak dan dikirim salinannya ke para pihak.</p>
     <h4 class="bantu-sub">Langkah</h4>
-    ${lgkh(['Buka akta, lalu klik <b>Unduh Salinan</b> untuk mencetak.', 'Tanda tangani salinan, pindai, lalu unggah scan-nya (PDF, ukuran maksimal 20 MB).', 'Klik <b>Kirim Salinan</b>, pilih penerima, dan pastikan emailnya benar.'])}
+    ${lgkh(['Buka akta, lalu klik <b>Unduh salinan</b> untuk mencetak.', 'Tanda tangani salinan, pindai, lalu unggah scan-nya (PDF, ukuran maksimal 20 MB).', 'Klik <b>Kirim salinan</b>, pilih penerima, dan pastikan emailnya benar.'])}
     ${istilah([['Salinan akta', 'Turunan akta untuk para pihak; minuta asli tetap disimpan kantor.'], ['Renvoi', 'Catatan perbaikan (coretan, tambahan, penggantian kata) yang tercetak pada salinan.'], ['Tautan salinan', 'Alamat unduhan yang dikirim lewat email, berlaku 7 hari.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('a', [
       ['Mengapa akta saya tidak ada di daftar?', 'Hanya akta yang sudah difinalisasi di Penyusunan Akta yang muncul. Periksa status permohonan di Permohonan AJB.'],
-      ['Mengapa tombol Kirim Salinan tidak aktif?', 'Belum ada scan akta. Unggah scan akta yang sudah ditandatangani terlebih dahulu.'],
+      ['Mengapa tombol Kirim salinan tidak aktif?', 'Belum ada scan akta. Unggah scan akta yang sudah ditandatangani terlebih dahulu.'],
       ['Apa arti status di kolom Salinan?', 'Belum ada scan: scan belum diunggah. Siap dikirim: scan ada, belum dikirim. Terkirim ke N pihak: tautan sudah dikirim.'],
       ['Apa arti status di Riwayat?', 'Terkirim: email terkirim. Dibuka: penerima sudah membuka tautan. Gagal: email tidak terkirim. Dicabut: tautan tidak berlaku lagi.'],
       ['Penerima tidak menerima email. Apa yang harus dilakukan?', 'Periksa alamat email di Riwayat. Minta penerima memeriksa folder spam, lalu kirim ulang salinan.'],
@@ -765,7 +765,7 @@ const BANTUAN = {
     ${kontak()}` }),
   emeterai:() => ({ judul:'Bantuan Aktivasi e-Meterai', isi:`<p>e-Meterai dibubuhkan pada salinan akta elektronik. Kuota dibeli sendiri di portal Peruri, lalu email akunnya disimpan di sini.</p>
     <h4 class="bantu-sub">Langkah</h4>
-    ${lgkh(['Daftar dan beli kuota di <b>e-meterai.co.id</b>.', 'Catat email yang Anda pakai di portal tersebut.', 'Isi email itu di halaman ini, lalu klik <b>Simpan Perubahan</b>.'])}
+    ${lgkh(['Daftar dan beli kuota di <b>e-meterai.co.id</b>.', 'Catat email yang Anda pakai di portal tersebut.', 'Isi email itu di halaman ini, lalu klik <b>Simpan perubahan</b>.'])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('e', [
       ['Berapa biaya setiap e-Meterai?', 'Bea meterai elektronik Rp10.000 per dokumen. Setiap pembubuhan memakai satu kuota.'],

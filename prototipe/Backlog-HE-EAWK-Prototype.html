@@ -597,6 +597,7 @@ body:has(#otpWaktu) .protobar{position:relative;z-index:3000}
 .user .ina-action-dropdown__item .ina-badge{margin-left:auto}
 
 /* panduan pertama kali (HE-EAWK-07) */
+.berikut .rangkap{margin-bottom:12px}
 .panduan-awal.ina-card{display:block;width:100%;max-width:none;margin-top:16px;padding:20px 22px;border-radius:16px;border:1px solid var(--ina-primary-200,#cfe3dc);background:var(--ina-primary-25,#f4faf7)}
 .panduan-awal .ina-card__content{padding:0;display:block}
 .panduan-awal .atas{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
@@ -782,7 +783,7 @@ body:has(#otpWaktu) .protobar{position:relative;z-index:3000}
     <header class="top">
       <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg></button>
       <div class="spacer"></div>
-      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat Landing</span></button>
+      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat landing</span></button>
       <button class="ina-button ina-button--tertiary ina-button--md" aria-label="Notifikasi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg></button>
       <div class="user ina-action-dropdown" id="user" tabindex="0" role="button" aria-haspopup="menu" aria-expanded="false"><span class="ina-avatar ina-avatar--circle ava">K</span><span class="txt"><span class="uname">Contoh Klien Satu</span><span class="urole">Klien</span></span><div id="menuProfil"></div></div>
     </header>
@@ -836,6 +837,9 @@ const KANTOR = { nama:'PPAT Contoh Satu, S.H.', telp:'0210000000', email:'kantor
 
 /* ---------------- daftar perubahan ---------------- */
 const UBAH = [
+  { kode:'HE-EAWK-09', versi:'v2', bukanHE:true, judul:'Tanda tangan per lembar minuta dan keterangannya',
+    isi:'Seperti live, setiap tugas tanda tangan terikat satu lembar minuta: Lembar Pertama dulu, lalu Lembar Kedua setelah semua pihak menandatangani Lembar Pertama. Daftar akta menampilkan lencana lembar, panel info dan dialog konfirmasi menyebut nama dokumennya, dan halaman pertama PDF memuat tulisan Lembar Pertama atau Lembar Kedua. Pada Lembar Kedua, alert menjelaskan alasan Klien menandatangani lagi: akta dibuat dua rangkap, Lembar Pertama disimpan di kantor PPAT, dan Lembar Kedua disampaikan ke Kantor Pertanahan.',
+    lama:'Live tidak menyebut lembar di layar Klien, sehingga Klien bisa bingung saat diminta menandatangani akta yang sama untuk kedua kalinya.', ke:'lembar2', sorot:'#ketLembar', sumber:'Penelusuran live 9 Nov 2026 (sheet_no pada tugas tanda tangan Klien)' },
   { kode:'HE-EAWK-01', judul:'Daftar akta Klien: cari, saring, dan urutkan',
     isi:'Di atas daftar ada IDDS Input Search (kode permohonan, jenis akta, atau peran), saringan status dengan jumlahnya (Semua, Perlu tindakan, Menunggu, Selesai), dan pilihan urutan (Perlu tindakan dulu, Terbaru, Terlama). Akta yang menunggu tindakan Anda diberi garis tepi kuning dan tampil paling atas. Setiap akta menampilkan tanggal pembaruan terakhir.',
     lama:'Daftar akta hanya dapat digulir; tidak ada pencarian, saringan status, urutan, atau tanggal. Akta yang perlu ditandatangani bercampur dengan akta yang sudah selesai.', ke:'daftar', sorot:'#saringAkta', sumber:'Laporan HE INA Digital hlm. 37 (Temuan 3)' },
@@ -858,7 +862,7 @@ const UBAH = [
     isi:'Di atas daftar akta ada kartu "Pertama kali menandatangani akta elektronik?" berisi tiga langkah singkat dan tombol "Lihat panduan lengkap". Kartu dapat ditutup dan panduan tetap dapat dibuka lagi melalui tombol Bantuan.',
     lama:'Tidak ada tutorial atau panduan awal. Instruksi baru muncul setelah pengguna membuka akta tertentu, sehingga pengguna baru tidak mendapat gambaran menyeluruh.', ke:'panduan', sorot:'#panduanAwal', sumber:'Laporan HE INA Digital hlm. 37 (Temuan 2)' },
   { kode:'HE-EAWK-08', versi:'v2', bukanHE:true, judul:'Tanda tangan ditahan sampai spesimen dimasukkan',
-    isi:'Saat giliran tanda tangan tiba dan spesimen belum ada, kartu Langkah berikutnya memberi tahu bahwa spesimen harus dimasukkan terlebih dahulu, walaupun sertifikat sudah aktif. Tombol Masukkan Spesimen membuka Registrasi CA, lalu pengguna kembali ke akta yang sama.',
+    isi:'Saat giliran tanda tangan tiba dan spesimen belum ada, kartu Langkah berikutnya memberi tahu bahwa spesimen harus dimasukkan terlebih dahulu, walaupun sertifikat sudah aktif. Tombol Masukkan spesimen membuka Registrasi CA, lalu pengguna kembali ke akta yang sama.',
     lama:'Pengguna dengan sertifikat aktif dapat menandatangani tanpa spesimen.', ke:'spesimen', sorot:'#kartuBerikut', sumber:'Masukan Peruri, 6 Nov 2026' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Penandatanganan Akta',
     isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi urutan tanda tangan, pertanyaan umum (apa itu tanda tangan elektronik, kapan giliran saya, OTP tidak masuk, salah tanda tangan, posisi belum ditentukan), kontak kantor PPAT, dan kontak dukungan E-PPAT. Ikon ? bertooltip menjelaskan istilah tanda tangan elektronik, sertifikat elektronik (CA), OTP, status akta, peran para pihak, urutan tanda tangan, dan posisi tanda tangan.',
@@ -888,19 +892,19 @@ function akta(kode, peran, state, tgl, urut, opsi = {}) {
   urutan.forEach(s => { if (s.seq < selesai) s.status = 'SIGNED'; });
   if (state === 'MENUNGGU_GILIRAN') urutan[saya.seq - 1].status = 'MENUNGGU';
   if (state === 'OTP_TERKIRIM') saya.status = 'OTP_SENT';
-  return { kode, peran, state, tgl, urut, hal:opsi.hal === undefined ? JHAL : opsi.hal, alasan:opsi.alasan || '', otpHabis:opsi.otpSisa ? Date.now() + opsi.otpSisa * 1000 : null, urutan };
+  return { kode, peran, state, tgl, urut, lembar:opsi.lembar || 1, hal:opsi.hal === undefined ? JHAL : opsi.hal, alasan:opsi.alasan || '', otpHabis:opsi.otpSisa ? Date.now() + opsi.otpSisa * 1000 : null, urutan };
 }
 function contoh() {
   return [
     akta('ORD-CONTOH-007', 'PEMBELI', 'GILIRAN_ANDA', '21 Okt 2026', 9), /* sama dengan Permohonan AJB */
-    akta('ORD-CONTOH-021', 'PEMBELI', 'GILIRAN_ANDA', '26 Okt 2026', 8),
+    akta('ORD-CONTOH-021', 'PEMBELI', 'GILIRAN_ANDA', '26 Okt 2026', 8, { lembar:2 }), /* Lembar Pertama sudah ditandatangani */
     akta('ORD-CONTOH-022', 'PENJUAL', 'OTP_TERKIRIM', '26 Okt 2026', 7, { otpSisa:580 }),
     akta('ORD-CONTOH-023', 'PENJUAL', 'GILIRAN_ANDA', '25 Okt 2026', 6, { hal:null, alasan:'Kantor PPAT belum menempatkan posisi tanda tangan Anda di dokumen.' }),
     akta('ORD-CONTOH-024', 'PEMBELI', 'MENUNGGU_GILIRAN', '24 Okt 2026', 5),
     akta('ORD-CONTOH-025', 'PENJUAL', 'MENUNGGU_TERA', '23 Okt 2026', 4),
     akta('ORD-CONTOH-026', 'SAKSI', 'SUDAH_TTD', '20 Okt 2026', 3),
-    akta('ORD-CONTOH-027', 'PEMBELI', 'SELESAI', '15 Okt 2026', 2),
-    akta('ORD-CONTOH-028', 'PENJUAL', 'SELESAI', '9 Okt 2026', 1)
+    akta('ORD-CONTOH-027', 'PEMBELI', 'SELESAI', '15 Okt 2026', 2, { lembar:2 }),
+    akta('ORD-CONTOH-028', 'PENJUAL', 'SELESAI', '9 Okt 2026', 1, { lembar:2 })
   ];
 }
 let AKTA = contoh();
@@ -908,6 +912,7 @@ const spesimenAda = () => !!AJB.spesimen(EMAIL);
 const caAktif = () => ['aktif', 'selesai'].includes(AJB.caStatus(EMAIL));
 const bisaTtd = x => (x.state === 'GILIRAN_ANDA' || x.state === 'OTP_TERKIRIM') && !!x.hal;
 const sayaDi = x => x.urutan.find(s => s.saya);
+const namaLembar = x => `Minuta Lembar ${x.lembar === 2 ? 'Kedua' : 'Pertama'}`;
 
 /* ---------------- keadaan ---------------- */
 const S = { layar:'daftar', aktif:null, hal:1, zoom:100, memuat:'', cari:'', grup:'', urut:'perlu', urutBuka:false, menu:false, panduan:true, kilau:false };
@@ -975,7 +980,7 @@ function layarDaftar() {
     <p class="ringkas-saring" aria-live="polite">Menampilkan ${rows.length} dari ${AKTA.length} akta${S.grup || S.cari ? '' : ` · ${n('perlu')} perlu tindakan Anda`}.</p>
     ${rows.length ? `<ul class="daftar-akta">${rows.map(x => { const st = ST[x.state], perlu = st.grup === 'perlu';
       return `<li><div class="ina-card ina-card--variant-basic item-akta ${perlu ? 'perlu' : ''}" role="button" tabindex="0" data-buka="${x.kode}" aria-label="${x.kode}, ${st.l}">
-        <div class="isi"><div class="baris1"><span class="kd">${x.kode}</span>${badge(PERAN[x.peran], 'neutral', 'sm')}${badge(st.l, st.b, 'sm')}</div>
+        <div class="isi"><div class="baris1"><span class="kd">${x.kode}</span>${badge(PERAN[x.peran], 'neutral', 'sm')}${badge(`Lembar ${x.lembar === 2 ? 'Kedua' : 'Pertama'}`, 'info', 'sm')}${badge(st.l, st.b, 'sm')}</div>
           <div class="jenis">Akta Jual Beli</div><div class="hint">${esc(x.alasan ? x.alasan + ' Buka akta untuk melihat kontak kantor PPAT.' : st.hint)}</div>
           <span class="tgl">${ik('kalender', 12)} Diperbarui ${x.tgl}</span></div>
         <span class="aksi">${bisaTtd(x) ? 'Tanda tangani' : 'Lihat'} ${ik('chev', 14)}</span></div></li>`; }).join('')}</ul>`
@@ -984,7 +989,7 @@ function layarDaftar() {
 
 /* ---------------- layar detail ---------------- */
 function isiHalaman(h) {
-  if (h === 1) return '<h3>AKTA JUAL BELI</h3><p style="text-align:center">Nomor: ……/2026</p>';
+  if (h === 1) return `<h3>AKTA JUAL BELI</h3><p style="text-align:center">Nomor: ……/2026</p><p style="text-align:center"><b>Lembar ${o()?.lembar === 2 ? 'Kedua' : 'Pertama'}</b></p>`;
   if (h === JHAL) return '<p>Demikian akta ini dibuat dan ditandatangani secara elektronik.</p><div class="ttd-blok"><div>PIHAK PERTAMA<br>(Penjual)</div><div>PIHAK KEDUA<br>(Pembeli)</div><div>SAKSI</div><div>PEJABAT PEMBUAT<br>AKTA TANAH</div></div>';
   return Array.from({ length:11 }, (_, i) => `<p>${['Pasal ' + (h - 1) + '.', 'Para pihak dengan ini menerangkan', 'bahwa objek jual beli telah', 'diperiksa dan disetujui bersama,', 'serta tunduk pada ketentuan yang', 'berlaku sebagaimana diuraikan', 'dalam akta ini. ————————————', 'Segala biaya yang timbul menjadi', 'tanggungan sesuai kesepakatan', 'para pihak. ———————————————', '————————————————————————'][i]}</p>`).join('');
 }
@@ -1009,10 +1014,13 @@ function penampil(x) {
 /* kartu "Langkah berikutnya" (HE-EAWK-03) */
 function kartuBerikut(x) {
   const st = ST[x.state], s = sayaDi(x), kepala = t => `<div class="eyebrow2">Langkah berikutnya${usulan('HE-EAWK-03')}</div><h4>${t}</h4>`;
-  const bungkus = isi => `<div class="ina-card ina-card--variant-basic berikut ditandai" id="kartuBerikut"><div class="ina-card__content">${isi}</div></div>`;
+  const rangkap = x.state === 'SELESAI' ? '' : x.lembar === 2
+    ? `<div class="rangkap ditandai" id="ketLembar">${alert('info', 'Minuta Lembar Kedua', `Anda sudah menandatangani Minuta Lembar Pertama. Akta dibuat dua rangkap, sehingga Anda juga menandatangani Lembar Kedua. Lembar Pertama disimpan di kantor PPAT, dan Lembar Kedua disampaikan ke Kantor Pertanahan.${usulan('HE-EAWK-09')}`)}</div>`
+    : `<div class="rangkap ditandai" id="ketLembar">${alert('info', 'Minuta Lembar Pertama', `Akta dibuat dua rangkap. Setelah semua pihak menandatangani Lembar Pertama, Anda akan diminta menandatangani Lembar Kedua.${usulan('HE-EAWK-09')}`)}</div>`;
+  const bungkus = isi => `<div class="ina-card ina-card--variant-basic berikut ditandai" id="kartuBerikut"><div class="ina-card__content">${rangkap}${isi}</div></div>`;
   if (x.state === 'GILIRAN_ANDA' && !x.hal) return bungkus(`${kepala('Menunggu Kantor PPAT')}${alert('caution', 'Posisi tanda tangan belum ditentukan', `${esc(x.alasan)} Anda dapat menandatangani setelah kantor menempatkannya. Hubungi kantor melalui kontak di bawah.`)}`);
   if (bisaTtd(x) && !caAktif()) return bungkus(`${kepala('Daftarkan sertifikat elektronik')}${alert('caution', 'Sertifikat elektronik belum aktif', `Anda perlu ${istilah('sertifikat elektronik (CA)', 'CA')} aktif sebelum menandatangani akta ini.`)}<a class="ina-button ina-button--primary ina-button--md" id="keCa" style="margin-top:12px;text-decoration:none" href="Backlog-HE-CA-Prototype.html#ca">Buka Registrasi CA</a>`);
-  if (bisaTtd(x) && !spesimenAda()) return bungkus(`${kepala('Masukkan spesimen terlebih dahulu')}${alert('caution', 'Spesimen tanda tangan belum ada', `Sertifikat elektronik Anda sudah aktif, tetapi Anda perlu memasukkan ${istilah('spesimen', 'SPESIMEN')} tanda tangan sebelum menandatangani akta ini.${usulan('HE-EAWK-08')}`)}<a class="ina-button ina-button--primary ina-button--md" id="keSpesimen" style="margin-top:12px;text-decoration:none" href="Backlog-HE-CA-Prototype.html#spesimen=${x.kode}">${ik('pena', 16)}Masukkan Spesimen</a>`);
+  if (bisaTtd(x) && !spesimenAda()) return bungkus(`${kepala('Masukkan spesimen terlebih dahulu')}${alert('caution', 'Spesimen tanda tangan belum ada', `Sertifikat elektronik Anda sudah aktif, tetapi Anda perlu memasukkan ${istilah('spesimen', 'SPESIMEN')} tanda tangan sebelum menandatangani akta ini.${usulan('HE-EAWK-08')}`)}<a class="ina-button ina-button--primary ina-button--md" id="keSpesimen" style="margin-top:12px;text-decoration:none" href="Backlog-HE-CA-Prototype.html#spesimen=${x.kode}">${ik('pena', 16)}Masukkan spesimen</a>`);
   if (bisaTtd(x)) {
     const otp = x.state === 'OTP_TERKIRIM', habis = otp && x.otpHabis <= Date.now();
     const L = [
@@ -1027,7 +1035,7 @@ function kartuBerikut(x) {
       return `${i ? `<div class="ina-stepper__separator ${L[i - 1].ok ? 'ina-stepper__separator--completed' : ''}"></div>` : ''}<div class="ina-stepper__item ${kls ? 'ina-stepper__item--' + kls : ''}" aria-current="${i === kini ? 'step' : 'false'}">
         <div class="ina-stepper__icon-wrapper">${l.ok ? `<svg class="ina-stepper__check-icon" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none"><path d="M5 12l5 5l10 -10"/></svg>` : `<span class="ina-stepper__step-number">${i + 1}</span>`}</div>
         <div class="ina-stepper__label"><span>${l.t}</span><small>${l.k}</small>${l.ekstra || ''}</div></div>`; }).join('')}</div>`;
-    const tb =otp && !habis ? tombol('Masukkan OTP & Tanda Tangani', 'primary', 'md', `id="aksiOtp" ${S.memuat ? 'disabled' : ''}`, ik('kunciOtp', 16)) + tombol('Kirim ulang OTP', 'secondary', 'md', `id="aksiKirim" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'kirim' ? spinner : ik('surat', 16))
+    const tb =otp && !habis ? tombol('Masukkan OTP & tanda tangani', 'primary', 'md', `id="aksiOtp" ${S.memuat ? 'disabled' : ''}`, ik('kunciOtp', 16)) + tombol('Kirim ulang OTP', 'secondary', 'md', `id="aksiKirim" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'kirim' ? spinner : ik('surat', 16))
       : tombol(otp ? 'Kirim ulang OTP' : 'Kirim OTP', 'primary', 'md', `id="aksiKirim" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'kirim' ? spinner : ik('surat', 16));
     return bungkus(`${kepala(otp && !habis ? 'Masukkan kode OTP' : 'Tanda tangani akta ini')}
       ${stepper}${tb}`);
@@ -1036,7 +1044,7 @@ function kartuBerikut(x) {
     return bungkus(`${kepala('Menunggu giliran Anda')}${alert('info', '', `<b>${esc(sb.nama)}</b> (${PERAN[sb.peran]}) belum menandatangani. Anda akan menerima notifikasi saat giliran Anda tiba. Sambil menunggu, Anda dapat membaca isi akta.`)}`); }
   if (x.state === 'MENUNGGU_TERA') return bungkus(`${kepala('Menunggu stempel PPAT')}${alert('neutral', '', `Kantor PPAT belum membubuhkan stempel elektronik (${istilah('TERA', 'TERA')}). Akta dapat dibaca dan ditandatangani setelah stempel dibubuhkan.`)}`);
   if (x.state === 'SUDAH_TTD') { const g = x.urutan.find(u => u.status !== 'SIGNED');
-    return bungkus(`${kepala('Tidak ada tindakan untuk Anda')}${alert('success', 'Tanda tangan Anda tercatat', `Menunggu pihak lain.${g ? ` Giliran saat ini: <b>${esc(g.nama)}</b>${g.peran === 'PPAT' ? '' : ` (${PERAN[g.peran]})`}.` : ''}`)}`); }
+    return bungkus(`${kepala('Tidak ada tindakan untuk Anda')}${alert('success', 'Tanda tangan Anda tercatat', `Menunggu pihak lain.${g ? ` Giliran saat ini: <b>${esc(g.nama)}</b>${g.peran === 'PPAT' ? '' : ` (${PERAN[g.peran]})`}.` : ''}${x.lembar === 2 ? '' : ' Lembar Kedua tersedia setelah semua pihak menandatangani Lembar Pertama.'}`)}`); }
   return bungkus(`${kepala('Akta selesai')}${alert('success', '', 'Semua pihak telah menandatangani akta ini. Tidak ada tindakan lagi untuk Anda.')}`);
 }
 function kartuInfo(x) {
@@ -1044,7 +1052,7 @@ function kartuInfo(x) {
   return `<div class="ina-card ina-card--variant-basic"><div class="ina-card__content">
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="kd-info">${x.kode}</span>${badge(st.l, st.b, 'sm')}${tanya('Status akta', 'Status menunjukkan tahap akta saat ini. "Giliran Anda" berarti akta menunggu tanda tangan Anda, "Menunggu giliran" berarti akta menunggu pihak lain, dan "Selesai" berarti semua pihak sudah menandatangani.')}</div>
     <div style="margin-top:4px;font-size:14px">Akta Jual Beli</div>
-    <dl class="kv"><dt>Peran Anda${tanya('Peran Anda', 'Peran menunjukkan kedudukan Anda dalam akta, misalnya Pihak Pertama sebagai penjual, Pihak Kedua sebagai pembeli, atau Saksi. Angka urutan menunjukkan giliran tanda tangan Anda.')}</dt><dd>${x.peran} · urutan ${s.seq + 1}</dd><dt>${istilah('Sertifikat (CA)', 'CA')}</dt><dd>${(caAktif() ? badge('Aktif sampai 26 Okt 2027', 'success', 'sm') : badge('Belum aktif', 'warning', 'sm'))}</dd><dt>Email OTP</dt><dd>${EMAIL}</dd>${x.state !== 'MENUNGGU_TERA' ? `<dt>Dokumen</dt><dd>${JHAL} halaman</dd>` : ''}</dl></div></div>`;
+    <dl class="kv"><dt>Peran Anda${tanya('Peran Anda', 'Peran menunjukkan kedudukan Anda dalam akta, misalnya Pihak Pertama sebagai penjual, Pihak Kedua sebagai pembeli, atau Saksi. Angka urutan menunjukkan giliran tanda tangan Anda.')}</dt><dd>${x.peran} · urutan ${s.seq + 1}</dd><dt>${istilah('Sertifikat (CA)', 'CA')}</dt><dd>${(caAktif() ? badge('Aktif sampai 26 Okt 2027', 'success', 'sm') : badge('Belum aktif', 'warning', 'sm'))}</dd><dt>Email OTP</dt><dd>${EMAIL}</dd><dt>Dokumen</dt><dd>${namaLembar(x)}${x.state !== 'MENUNGGU_TERA' ? ` · ${JHAL} halaman` : ''}</dd></dl></div></div>`;
 }
 /* label live "Tertanda tangan" / "Sedang tanda tangan" dibakukan, sama dengan prototipe E-Akta Wizard PPAT */
 const STATUS_URUT = s => s.status === 'SIGNED' ? ['Sudah menandatangani', 'success'] : s.status === 'OTP_SENT' ? ['Sedang menandatangani', 'warning'] : ['Menunggu', 'neutral'];
@@ -1116,7 +1124,7 @@ function konfirmTtd() {
   const x = o(), s = sayaDi(x);
   dialog({ judul:'Tanda tangani akta ini?', konfirmasi:true, kunciUtama:'#setuju',
     isi:`<p>Tanda tangan elektronik Anda akan dibubuhkan pada akta berikut dengan sertifikat elektronik (CA)${tanya('Sertifikat elektronik (CA)', ISTILAH.CA)} Anda. Tanda tangan yang sudah dibubuhkan <b>tidak dapat dibatalkan</b> dan berlaku sah secara hukum.${usulan('HE-EAWK-04')}</p>
-      ${ringkas([['Akta', `${x.kode} · Akta Jual Beli`], ['Peran Anda', `${PERAN[x.peran]} · urutan ${s.seq + 1}`], [`Posisi${tanya('Posisi tanda tangan', 'Posisi menunjukkan tempat tanda tangan Anda di dokumen. Kantor PPAT menentukan posisi ini.')}`, `Halaman ${x.hal} dari ${JHAL}`], ['Kode OTP dikirim ke', samar(EMAIL)]])}
+      ${ringkas([['Akta', `${x.kode} · Akta Jual Beli`], ['Dokumen', namaLembar(x)], ['Peran Anda', `${PERAN[x.peran]} · urutan ${s.seq + 1}`], [`Posisi${tanya('Posisi tanda tangan', 'Posisi menunjukkan tempat tanda tangan Anda di dokumen. Kantor PPAT menentukan posisi ini.')}`, `Halaman ${x.hal} dari ${JHAL}`], ['Kode OTP dikirim ke', samar(EMAIL)]])}
       ${pernyataan('Saya sudah membaca isi akta dan setuju menandatanganinya.')}`,
     tombol:[['Batal','secondary',null],['Kirim OTP','primary',() => kirimOtp(false)]] });
 }
@@ -1127,13 +1135,13 @@ function kirimOtp(ulang) {
 function tunggu(id, ms, lalu) { S.memuat = id; gambar(); setTimeout(() => { S.memuat = ''; lalu(); }, ms); }
 function bukaOtp() {
   const x = o();
-  dialogOtp({ judul:'Tanda tangani akta', email:samar(EMAIL), ket:'Contoh Klien Satu', tombolOk:'Tanda Tangani', sisa:Math.max(0, Math.round((x.otpHabis - Date.now()) / 1000)),
-    catatan:`Saat Anda menekan <b>Tanda Tangani</b>, tanda tangan elektronik langsung dibubuhkan pada ${x.kode} halaman ${x.hal} dan tidak dapat dibatalkan.`,
+  dialogOtp({ judul:'Tanda tangani akta', email:samar(EMAIL), ket:'Contoh Klien Satu', tombolOk:'Tanda tangani', sisa:Math.max(0, Math.round((x.otpHabis - Date.now()) / 1000)),
+    catatan:`Saat Anda menekan <b>Tanda tangani</b>, tanda tangan elektronik langsung dibubuhkan pada ${namaLembar(x)} ${x.kode} halaman ${x.hal} dan tidak dapat dibatalkan.`,
     kirimUlang:() => { x.otpHabis = Date.now() + 900000; gambar(); },
     selesai:() => {
       sayaDi(x).status = 'SIGNED'; const g = x.urutan.find(u => u.status !== 'SIGNED');
       x.state = g ? 'SUDAH_TTD' : 'SELESAI'; x.otpHabis = null; S.hal = x.hal; gambar();
-      toast('Tanda tangan Anda berhasil dibubuhkan.', 'positive', 4500, g ? `Giliran berikutnya: ${g.nama} (${PERAN[g.peran]}).` : 'Semua pihak telah menandatangani akta ini.');
+      toast(`Tanda tangan Anda pada ${namaLembar(x)} berhasil dibubuhkan.`, 'positive', 4500, g ? `Giliran berikutnya: ${g.nama} (${PERAN[g.peran]}).${x.lembar === 2 ? '' : ' Lembar Kedua tersedia setelah semua pihak menandatangani Lembar Pertama.'}` : 'Semua pihak telah menandatangani akta ini.');
     } });
 }
 
@@ -1279,6 +1287,7 @@ $('#bukaUbah').addEventListener('click', () => {
   });
 });
 function lihat(u) {
+  if (u.ke === 'lembar2') { buka('ORD-CONTOH-021'); const el = $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } return; }
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
   if (u.ke === 'daftar') keDaftar();
   if (u.ke === 'panduan') { S.panduan = true; try { localStorage.removeItem('eawk-panduan-tutup'); } catch (e) {} keDaftar(); }
@@ -1482,7 +1491,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
             <h2 class="notif-judul" id="notifJudul" tabindex="-1">Notifikasi</h2>
             <p class="notif-jumlah" id="notifJumlah" aria-live="polite"></p>
           </div>
-          <button type="button" class="ina-button ina-button--tertiary ina-button--sm" id="notifSemua" hidden><span>Tandai Semua Dibaca</span></button>
+          <button type="button" class="ina-button ina-button--tertiary ina-button--sm" id="notifSemua" hidden><span>Tandai semua dibaca</span></button>
         </div>
         <div class="notif-saring">
           <div class="ina-button-group" role="group" aria-label="Saring notifikasi">
@@ -1542,7 +1551,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
         return;
       }
       if (kondisi === 'galat') {
-        isi.innerHTML = `<div class="notif-galat"><div class="ina-alert ina-alert--critical" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Notifikasi gagal dimuat.</div><div class="ina-alert__description">Periksa koneksi Anda, lalu coba lagi.</div></div><button type="button" class="ina-button ina-button--secondary ina-button--sm" id="notifUlang"><span>Coba Lagi</span></button></div></div></div>`;
+        isi.innerHTML = `<div class="notif-galat"><div class="ina-alert ina-alert--critical" role="alert"><div class="ina-alert__content"><div class="ina-alert__text-section"><div class="ina-alert__title">Notifikasi gagal dimuat.</div><div class="ina-alert__description">Periksa koneksi Anda, lalu coba lagi.</div></div><button type="button" class="ina-button ina-button--secondary ina-button--sm" id="notifUlang"><span>Coba lagi</span></button></div></div></div>`;
         return;
       }
       const daftar = DATA.filter(d => saring === 'semua' || !dibaca(d));
@@ -1557,7 +1566,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
       kondisi = 'muat';
       render();
       setTimeout(() => {
-        if (gagalSimulasi) { gagalSimulasi = false; kondisi = 'galat'; } // gagal sekali, "Coba Lagi" berhasil
+        if (gagalSimulasi) { gagalSimulasi = false; kondisi = 'galat'; } // gagal sekali, "Coba lagi" berhasil
         else kondisi = 'siap';
         render();
       }, 300);
@@ -1866,9 +1875,9 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
       if (kepala) kepala.insertAdjacentHTML('afterend', lencana); else if (pemicu) pemicu.insertAdjacentHTML('beforebegin', lencana);
       if (!ditutup('eppat-trial-spanduk')) spanduk('caution', 'eppat-trial-spanduk', `<b>Paket Trial, sisa ${sisa} hari.</b> Semua menu dapat dibuka. Tanda tangan dan stempel elektronik aktif setelah upgrade ke Enterprise.`, ke('sm', 'Mulai Berlangganan'));
       /* di atas kartu profil yang menempel di bawah, agar tombol selalu terlihat walaupun menu panjang */
-      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai Berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai Berlangganan</span></a></div>`); });
+      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai Berlangganan</span></a></div>`); });
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pasangTombol); else pasangTombol();
-      if (bar) bar.insertAdjacentHTML('afterbegin', `<span>Perjalanan: langkah 9 dari 19, coba menu lalu tekan Mulai Berlangganan.</span><button class="pil" id="simBatas" aria-pressed="${!!t.batas}" title="Mengisi kuota pengguna dan transaksi Trial sampai penuh">Batas paket: ${t.batas ? 'tercapai' : 'belum tercapai'}</button>`);
+      if (bar) bar.insertAdjacentHTML('afterbegin', `<span>Perjalanan: langkah 9 dari 19, coba menu lalu tekan Mulai berlangganan.</span><button class="pil" id="simBatas" aria-pressed="${!!t.batas}" title="Mengisi kuota pengguna dan transaksi Trial sampai penuh">Batas paket: ${t.batas ? 'tercapai' : 'belum tercapai'}</button>`);
       const b = $('#simBatas'); if (b) b.addEventListener('click', () => { simpanTrial({ ...bacaTrial(), batas:!t.batas }); location.reload(); });
     }
     document.addEventListener('click', e => { if (!e.target.closest('[data-tutup-spanduk]')) return; const w = $('#spandukTrial'); try { sessionStorage.setItem(w.dataset.kunci, '1'); } catch (x) { /* lihat simpan() */ } w.remove(); });
@@ -1880,7 +1889,7 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
   /* penjaga halaman */
   if (!halamanBoleh(sesi)) {
     document.body.insertAdjacentHTML('beforeend', `<div class="sesi-tolak" role="alert"><div class="sesi-tolak-kartu"><h2>Halaman tidak tersedia</h2><p>Peran ${sesi.label} tidak memiliki akses ke halaman ini.</p>
-      <div class="sesi-tolak-aksi"><a class="ina-button ina-button--primary ina-button--md" href="${LANDAS[sesi.aktif]}">Ke Halaman Utama</a><button type="button" class="ina-button ina-button--secondary ina-button--md" data-sesi-keluar>Keluar</button></div></div></div>`);
+      <div class="sesi-tolak-aksi"><a class="ina-button ina-button--primary ina-button--md" href="${LANDAS[sesi.aktif]}">Ke halaman utama</a><button type="button" class="ina-button ina-button--secondary ina-button--md" data-sesi-keluar>Keluar</button></div></div></div>`);
   }
 })();
 </script>

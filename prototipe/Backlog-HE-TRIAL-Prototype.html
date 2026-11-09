@@ -935,7 +935,7 @@ const SYARAT_PW = [['Minimal 12 karakter', s => s.length >= 12], ['Mengandung hu
 /* ---------------- daftar perubahan ---------------- */
 const UBAH = [
   { kode:'HE-REG-01', judul:'Formulir Registrasi: tombol Batal dan konfirmasi sebelum keluar',
-    isi:'Formulir pendaftaran memiliki tombol "Batal" di samping "Daftar Sekarang". Bila formulir sudah terisi lalu pengguna menekan Batal, Masuk, atau menu navigasi, muncul IDDS Modal Confirmation "Tinggalkan pendaftaran?" yang menjelaskan bahwa data yang sudah diisi akan hilang.',
+    isi:'Formulir pendaftaran memiliki tombol "Batal" di samping "Daftar sekarang". Bila formulir sudah terisi lalu pengguna menekan Batal, Masuk, atau menu navigasi, muncul IDDS Modal Confirmation "Tinggalkan pendaftaran?" yang menjelaskan bahwa data yang sudah diisi akan hilang.',
     lama:'Tidak ada tombol batal atau kembali selama pendaftaran; pengguna hanya dapat memakai tombol kembali di peramban dan data yang sudah diisi hilang tanpa peringatan.', ke:'reg-batal', sorot:'#aksiForm', sumber:'Laporan HE UX Metric Lab, Highlight #11 (skor 91,7; PDF hlm. 15)' },
   { kode:'HE-REG-02', judul:'Formulir Registrasi: penjelasan isian ID PPAT / SK PPAT dan URL Tenant',
     isi:'Label "ID PPAT / SK PPAT" dan "URL Tenant" diberi IDDS Tooltip dan teks bantuan di bawah isian. Isian ID PPAT / SK PPAT berketerangan "Sesuai nomor SK PPAT yang terdaftar di ATR/BPN.". URL Tenant menampilkan pratinjau alamat lengkap aplikasi kantor (mis. dev-app.eppat.id/t/kantor-contoh), aturan penulisan (huruf kecil, angka, tanda hubung), daftar hal yang dihindari (spasi, huruf kapital, simbol, tanda hubung di awal atau akhir, kurang dari 3 karakter, nama yang sudah dipakai, data pribadi), dan hasil cek ketersediaan.',
@@ -956,7 +956,7 @@ const UBAH = [
     isi:'Setelah Nama Lengkap dan Tempat Lahir diisi (diketik atau dari OCR KTP), URL Tenant terisi otomatis dengan format nama-daerah, misalnya budi-santoso-bandung. Di bawahnya tampil sampai tiga rekomendasi (IDDS Chip) yang belum dipakai kantor lain, misalnya ppat-budi-santoso-bandung; bila perlu ditawarkan nomor urut seperti -2. Gelar seperti S.H. atau M.Kn. tidak dipakai. Pendaftar tetap dapat memilih rekomendasi lain atau mengetik URL sendiri; setelah kolom URL disentuh, isinya tidak lagi diganti otomatis. Tidak ada isian baru.',
     lama:'URL Tenant diketik sendiri tanpa rekomendasi.', ke:'reg', sorot:'#f-rTenant', sumber:'Masukan Peruri 4 Nov 2026 (bukan temuan HE) · bentuk tampilan usulan tim', versi:'v2' },
   { kode:'HE-REG-08', judul:'Formulir Registrasi: periksa kembali data sebelum mendaftar',
-    isi:'Setelah semua isian lolos pemeriksaan dan tombol Daftar Sekarang diklik, muncul IDDS Modal "Periksa kembali data Anda" berisi ringkasan: nama, NIK, email, nomor telepon, tempat dan tanggal lahir, kewarganegaraan, ID PPAT / SK PPAT, bank dan nomor rekening, serta URL Tenant. Tombol "Ubah Data" menutup dialog dan kembali ke formulir; "Ya, Daftar" mengirim pendaftaran.',
+    isi:'Setelah semua isian lolos pemeriksaan dan tombol Daftar sekarang diklik, muncul IDDS Modal "Periksa kembali data Anda" berisi ringkasan: nama, NIK, email, nomor telepon, tempat dan tanggal lahir, kewarganegaraan, ID PPAT / SK PPAT, bank dan nomor rekening, serta URL Tenant. Tombol "Ubah data" menutup dialog dan kembali ke formulir; "Ya, daftar" mengirim pendaftaran.',
     lama:'Pendaftaran langsung dikirim saat Daftar Sekarang diklik, tanpa kesempatan memeriksa data.', ke:'reg', sorot:'#aksiForm', sumber:'Masukan Peruri 4 Nov 2026 (bukan temuan HE) · bentuk tampilan usulan tim', versi:'v2' },
   { kode:'HE-REG-09', judul:'Verifikasi Data: email verifikasi memuat ringkasan data pendaftaran',
     isi:'Email verifikasi live (Verifikasi Email E-PPAT) dilengkapi ringkasan data pendaftaran (nama, NIK lengkap, nomor telepon disamarkan, ID PPAT / SK PPAT, URL Tenant) dan satu kalimat: bila ada yang salah, jangan klik tombol dan hubungi Hotline 1500159. Isi lain tetap sama dengan live; hanya kata "address" diganti "alamat". Satu klik membuktikan email aktif sekaligus data sudah diperiksa pendaftar, sesuai nama tahap Verifikasi Data. Layar Cek Email ditambah kalimat "Periksa juga data pendaftaran Anda di email tersebut." dan tautan "Lihat contoh email verifikasi".',
@@ -980,19 +980,19 @@ const UBAH = [
     isi:'Halaman pilih metode menjelaskan dalam satu kalimat apa itu verifikasi dua langkah dan kapan memilih aplikasi autentikator atau email. Setelah kode OTP email atau Google Authenticator benar, pengguna langsung masuk ke Dasbor; halaman kode cadangan tidak dipakai (masukan Peruri 4 Nov 2026).',
     lama:'Tidak ada penjelasan tentang verifikasi dua langkah bagi pengguna baru. Tombol "Saya sudah simpan, ke Dashboard" dapat ditekan tanpa benar-benar menyimpan kode.', ke:'mfa', sorot:'#penjelasanMfa', sumber:'Laporan HE UX Metric Lab, Highlight #7 (skor 68,6; PDF hlm. 15)' },
   { kode:'HE-OB-06', versi:'v2', bukanHE:true, judul:'Tour guide di Dasbor pelanggan',
-    isi:'Saat pelanggan pertama kali masuk Dasbor, tur singkat menyorot Progres Registrasi, Langkah berikutnya, Pilih Paket, tombol Cek Progres Registrasi, dan tombol Bantuan. Bentuk dan perilakunya sama dengan tur di Permohonan AJB: bagian lain diredupkan, kotak keterangan berisi posisi langkah, Sebelumnya, Lanjut, dan Lewati tur, muncul sekali per pengguna, dapat ditutup dengan Esc, dan dapat diputar ulang dari Bantuan. Tur untuk Super Admin dan Operator menyusul.',
+    isi:'Saat pelanggan pertama kali masuk Dasbor, tur singkat menyorot Progres Registrasi, Langkah berikutnya, Pilih Paket, tombol Cek progres registrasi, dan tombol Bantuan. Bentuk dan perilakunya sama dengan tur di Permohonan AJB: bagian lain diredupkan, kotak keterangan berisi posisi langkah, Sebelumnya, Lanjut, dan Lewati tur, muncul sekali per pengguna, dapat ditutup dengan Esc, dan dapat diputar ulang dari Bantuan. Tur untuk Super Admin dan Operator menyusul.',
     lama:'Tidak ada panduan saat pelanggan pertama kali masuk Dasbor.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-OB-01', judul:'Dashboard Onboarding: hasil cek status jelas dan dapat ditutup',
-    isi:'"Check Status Terbaru" diganti menjadi "Cek Progres Registrasi", sama dengan nama stepper "Progres Registrasi Anda" (masukan Peruri 4 Nov 2026). Tombol ini tidak ditampilkan lagi setelah semua tahap di stepper selesai (masukan Peruri 4 Nov 2026). Hasilnya ditampilkan sebagai IDDS Toast yang dapat ditutup, berisi jam pengecekan dan tahap saat ini (mis. "Belum ada perubahan · Tahap: Proses Pembayaran"). Bila ada perubahan, tahap yang berubah disorot di stepper.',
+    isi:'"Check Status Terbaru" diganti menjadi "Cek progres registrasi", sama dengan nama stepper "Progres Registrasi Anda" (masukan Peruri 4 Nov 2026). Tombol ini tidak ditampilkan lagi setelah semua tahap di stepper selesai (masukan Peruri 4 Nov 2026). Hasilnya ditampilkan sebagai IDDS Toast yang dapat ditutup, berisi jam pengecekan dan tahap saat ini (mis. "Belum ada perubahan · Tahap: Proses Pembayaran"). Bila ada perubahan, tahap yang berubah disorot di stepper.',
     lama:'Setiap kali status dicek, muncul dialog besar "Status Diperbarui — Status registrasi terbaru sudah dimuat." tanpa tombol tutup, walaupun tidak ada perubahan apa pun (skor User Control Dashboard: 20).', ke:'db-cek', sorot:'#cekStatus', sumber:'Laporan HE UX Metric Lab, Highlight #8 (skor 71,5; PDF hlm. 15)' },
   { kode:'HE-OB-02', judul:'Ringkasan Pesanan: paket dapat diganti sebelum pembayaran',
-    isi:'Ringkasan Pesanan memiliki tombol "Ganti Paket" selama pembayaran belum diterima. Bila Virtual Account sudah dibuat, IDDS Modal Confirmation menjelaskan bahwa tagihan lama dibatalkan dan tagihan baru dibuat untuk paket yang dipilih.',
-    lama:'Setelah "Lanjut Pembayaran", paket terkunci; tidak ada cara mengganti paket selain menghubungi admin atau memulai ulang.', ke:'db-bayar', sorot:'#gantiPaket', sumber:'Laporan HE UX Metric Lab, Highlight #8 (skor 71,5; PDF hlm. 15)' },
+    isi:'Ringkasan Pesanan memiliki tombol "Ganti paket" selama pembayaran belum diterima. Bila Virtual Account sudah dibuat, IDDS Modal Confirmation menjelaskan bahwa tagihan lama dibatalkan dan tagihan baru dibuat untuk paket yang dipilih.',
+    lama:'Setelah "Lanjut pembayaran", paket terkunci; tidak ada cara mengganti paket selain menghubungi admin atau memulai ulang.', ke:'db-bayar', sorot:'#gantiPaket', sumber:'Laporan HE UX Metric Lab, Highlight #8 (skor 71,5; PDF hlm. 15)' },
   { kode:'HE-OB-03', judul:'Dashboard Onboarding: langkah berikutnya, perkiraan waktu, dan bantuan',
     isi:'Di bawah stepper ada IDDS Alert "Langkah berikutnya" yang menyebut apa yang perlu dilakukan. Perkiraan waktu ditonjolkan sebagai IDDS Badge kuning di Langkah berikutnya dan di bawah tahap yang sedang berjalan, misalnya "Perkiraan selesai: ± 1 hari kerja" saat Proses Aktivasi dan "Verifikasi pembayaran: beberapa menit setelah transfer" saat Proses Pembayaran (masukan Peruri 4 Nov 2026). Kartu "Butuh bantuan?" menampilkan kontak dukungan; pertanyaan umum tiap tahap ada di tombol Bantuan di kanan atas.',
     lama:'Tidak ada panduan, tooltip, atau kontak dukungan di Dashboard maupun halaman pembayaran (skor Help & Documentation: 0).', ke:'db', sorot:'#langkahDb', sumber:'Laporan HE UX Metric Lab, Highlight #8 (skor 71,5; PDF hlm. 15)' },
   { kode:'HE-OB-04', judul:'Email aktivasi instansi: tanpa kata sandi dalam teks biasa',
-    isi:'Email aktivasi berisi alamat aplikasi kantor, email untuk masuk, dan tombol "Masuk ke Aplikasi e-PPAT", tanpa kata sandi. Email menjelaskan bahwa pengguna masuk dengan kata sandi yang dibuat saat pendaftaran, dan menunjukkan pilihan "Lupa kata sandi?" di halaman masuk. Layar Selesai menampilkan lencana "Status akun: Aktif", kartu "Aplikasi e-PPAT Anda Siap!" dengan tombol "Masuk ke Aplikasi e-PPAT" dan tautan "Lupa kata sandi?", serta pratinjau email ini.',
+    isi:'Email aktivasi berisi alamat aplikasi kantor, email untuk masuk, dan tombol "Masuk ke aplikasi e-PPAT", tanpa kata sandi. Email menjelaskan bahwa pengguna masuk dengan kata sandi yang dibuat saat pendaftaran, dan menunjukkan pilihan "Lupa kata sandi?" di halaman masuk. Layar Selesai menampilkan lencana "Status akun: Aktif", kartu "Aplikasi e-PPAT Anda Siap!" dengan tombol "Masuk ke aplikasi e-PPAT" dan tautan "Lupa kata sandi?", serta pratinjau email ini.',
     lama:'Email aktivasi menampilkan "EMAIL LOGIN", "PASSWORD" dalam teks biasa, dan "LINK LOGIN" (skor Privacy Dashboard: 0).', ke:'db-lunas', sorot:'#emailAktivasi', sumber:'Laporan HE UX Metric Lab, Highlight #8 (skor 71,5; PDF hlm. 15) · solusi usulan tim' },
   { kode:'HE-OB-05', judul:'Stepper Dashboard Onboarding: nomor urut dan istilah konsisten',
     isi:'Tahap ditampilkan bernomor urut 1–7 tanpa lompatan (Pendaftaran, Verifikasi Data, Pilih Produk, Proses Pembayaran, Lunas, Proses Aktivasi, Selesai), masing-masing dengan tanggal selesai atau keterangan status. Tahap Verifikasi Anggota tidak ditampilkan karena sedang ditahan oleh E-PPAT. Label teknis dibakukan: metode "VIRTUAL_ACCOUNT" di Riwayat Transaksi menjadi "Virtual Account BRI", status "BELUM DIBAYAR" menjadi lencana "Belum dibayar".',
@@ -1217,7 +1217,7 @@ function layarDaftar() {
         <div class="lebar">${tf('rTenant', `${denganTip('<span class="istilah" tabindex="0">URL Tenant</span>', TIP_URL)}`, 'username-tenant', true, 'Huruf kecil, angka, dan tanda hubung. Contoh: kantor-contoh', 'aria-describedby="hindariUrl"', 'dev-app.eppat.id/t/')}${saranHtml()}<div class="hindari-url" id="hindariUrl"><p>Hindari hal berikut:</p><ul>${HINDARI_URL.map(t => `<li>${t}</li>`).join('')}</ul></div></div>
       </div>
       <label class="setuju" for="rSetuju"><span class="ina-checkbox"><input type="checkbox" id="rSetuju" class="ina-checkbox__input peer" ${S.setuju ? 'checked' : ''}><span class="ina-checkbox__box ina-checkbox__box--${S.setuju ? 'checked' : 'unchecked'}">${S.setuju ? ik('centang', 12) : ''}</span></span><span>Dengan klik tombol daftar, saya telah membaca dan menyetujui serta tunduk kepada <a href="#" data-luar="Ketentuan Layanan e-PPAT">Ketentuan Layanan e-PPAT</a></span></label>
-      <div class="aksi-form ditandai" id="aksiForm">${tombol('Batal', 'secondary', 'lg', 'id="batalDaftar" class="batal"')}${tombol('Daftar Sekarang', 'primary', 'lg', `id="kirimDaftar" ${S.setuju && !S.memuat ? '' : 'disabled'}`, S.memuat === 'daftar' ? spinner : '')}${usulan('HE-REG-01')}</div>
+      <div class="aksi-form ditandai" id="aksiForm">${tombol('Batal', 'secondary', 'lg', 'id="batalDaftar" class="batal"')}${tombol('Daftar sekarang', 'primary', 'lg', `id="kirimDaftar" ${S.setuju && !S.memuat ? '' : 'disabled'}`, S.memuat === 'daftar' ? spinner : '')}${usulan('HE-REG-01')}</div>
       
     </section>`;
 }
@@ -1230,7 +1230,7 @@ function layarVerifEmail() {
     <div class="kotak-surel" style="margin:14px 0;padding:12px;border-radius:12px;background:var(--ina-background-secondary)"><small style="display:block;font-size:12px;color:var(--ina-content-secondary)">Email Pendaftaran Anda</small><b>${esc(samar(S.email || AKUN.email))}</b></div>
     <div class="contoh-surel ditandai" id="contohSurel">${tombol('Lihat contoh email verifikasi', 'link', 'sm', 'id="lihatSurel"', ik('surat', 16))}${usulan('HE-REG-09')}</div>
     ${alur(1)}
-    <div class="tombol-blok">${tombol('Kirim Ulang Email', 'secondary', 'lg', 'data-luar-ok="Email verifikasi dikirim ulang."')}${tombol('Lanjut ke Halaman Masuk', 'primary', 'lg', 'data-ke="masuk"', ik('panah', 16))}</div>
+    <div class="tombol-blok">${tombol('Kirim ulang email', 'secondary', 'lg', 'data-luar-ok="Email verifikasi dikirim ulang."')}${tombol('Lanjut ke halaman masuk', 'primary', 'lg', 'data-ke="masuk"', ik('panah', 16))}</div>
     </section>`;
 }
 /* Verifikasi Data (masukan Peruri 4 Nov 2026): email verifikasi memuat ringkasan data pendaftaran; satu klik
@@ -1244,7 +1244,7 @@ function surelVerifikasi() {
     isi:`<div class="surel"><div class="surel-kepala"><span>Dari: &lt;noreply@eppat.id&gt;</span><span>Subjek: <b>Verifikasi Email E-PPAT</b></span></div>
       <div class="surel-isi"><p><b>Verifikasi Email E-PPAT</b></p><p>Halo!</p><p>Terima kasih telah mendaftar di e-PPAT. Silakan klik tombol di bawah ini untuk memverifikasi alamat email Anda.</p>
         <div class="ditandai" id="dataSurel"><p>Periksa juga data pendaftaran Anda. Bila ada yang salah, jangan klik tombol di bawah dan hubungi Hotline 1500159.</p>${ringkasDaftar(baris)}</div>
-        ${tombol('Verifikasi Email Sekarang', 'primary', 'md', 'id="verifDariSurel"')}
+        ${tombol('Verifikasi email sekarang', 'primary', 'md', 'id="verifDariSurel"')}
         <small>Atau salin dan tempel URL berikut di browser Anda:<br>https://dev.eppat.id/verify-email?token=••••••••</small><small>© 2026 e-PPAT</small></div></div>` });
 }
 document.addEventListener('click', e => {
@@ -1254,7 +1254,7 @@ document.addEventListener('click', e => {
 function layarVerifOk() {
   return `<section class="ob-kartu sedang status-kartu" aria-label="Verifikasi berhasil">
     <span class="ikon-besar">${ik('centang', 34)}</span><h2>Verifikasi Berhasil!</h2><p>Email Anda berhasil diverifikasi! Langkah berikutnya: masuk dan amankan akun dengan verifikasi dua langkah.</p>
-    ${tombol('Masuk Sekarang', 'primary', 'lg', 'data-ke="masuk" class="lebar"', ik('panah', 16))}
+    ${tombol('Masuk sekarang', 'primary', 'lg', 'data-ke="masuk" class="lebar"', ik('panah', 16))}
     </section>`;
 }
 document.addEventListener('click', e => { const b = e.target.closest('[data-luar-ok]'); if (b) toast(b.dataset.luarOk, 'positive'); });
@@ -1295,7 +1295,7 @@ function layarOtp() {
         <div class="ina-one-time-password__helper-text" id="otpPesan" aria-live="polite"></div></div>
       ${email ? `<div class="ditandai" style="display:inline-block"><div class="ina-badge ina-badge--soft ina-badge--brand ina-badge--md ina-badge--rounded-full otp-waktu" id="otpWaktu">${ik('jam', 14)} <span>Kode berlaku 5:00</span></div>${usulan('HE-LOGIN-01')}</div><div class="otp-ulang" id="otpUlang"></div>` : '<p class="otp-ulang">Kode di aplikasi berganti setiap 30 detik. Masukkan kode yang sedang tampil.</p>'}
     </div>
-    ${tombol(S.balik ? 'Masuk' : 'Aktifkan &amp; Masuk', 'primary', 'lg', `id="kirimOtp" class="lebar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'otp' ? spinner : ik('panah', 16))}
+    ${tombol(S.balik ? 'Masuk' : 'Aktifkan &amp; masuk', 'primary', 'lg', `id="kirimOtp" class="lebar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'otp' ? spinner : ik('panah', 16))}
     </section>`;
 }
 function layarCadangan() {
@@ -1321,7 +1321,7 @@ function langkahTur() {
   return [
     { el:() => terlihat('#kartuTahap .ina-stepper') || terlihat('#kartuTahap'), j:'Progres registrasi', t:'Pendaftaran kantor Anda berjalan melalui tujuh tahap, dari Pendaftaran sampai Selesai. Tahap yang sedang berjalan ditandai di sini.' },
     { el:() => terlihat('#langkahDb'), j:'Langkah berikutnya', t:'Kotak ini menyebut hal yang perlu Anda lakukan sekarang beserta perkiraan waktunya.' },
-    { el:() => terlihat('.pilih-paket'), j:'Pilih paket', t:'Pilih Trial atau Enterprise, lalu tekan Lanjut Pembayaran. Paket masih dapat diganti sebelum pembayaran diterima.' },
+    { el:() => terlihat('.pilih-paket'), j:'Pilih paket', t:'Pilih Trial atau Enterprise, lalu tekan Lanjut pembayaran. Paket masih dapat diganti sebelum pembayaran diterima.' },
     { el:() => terlihat('#cekStatus'), j:'Cek progres', t:'Tekan tombol ini untuk memperbarui tahap pendaftaran Anda. Tombol hilang setelah semua tahap selesai.' },
     { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }
   ].filter(l => l.el());
@@ -1410,7 +1410,7 @@ const remahApp = t => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol c
 const TGL = ['26 Okt, 09.10', '26 Okt, 09.12', '26 Okt, 09.15', '26 Okt, 09.15'];
 function heroDb() {
   return `<section class="hero-db"><div>${badge(DB.aktif ? 'Status akun: Aktif' : DB.lunas ? 'Status akun: Diproses' : 'Status akun: Onboarding', DB.aktif ? 'success' : DB.lunas ? 'info' : 'success', 'sm')}<h2>Selamat Datang di Portal e-PPAT</h2><p>${DB.aktif ? `Aplikasi e-PPAT kantor Anda sudah aktif. Paket ${PAKET[DB.dipesan || 'enterprise'].n} berlaku.` : `Selesaikan langkah-langkah di bawah ini untuk mengaktifkan akun PPAT ${PAKET[DB.dipesan || 'enterprise'].n} Anda.`}</p></div>
-    ${DB.aktif ? '' : `<span>${tombol('Cek Progres Registrasi', 'secondary', 'md', `id="cekStatus" ${S.memuat === 'cek' ? 'disabled' : ''}`, S.memuat === 'cek' ? spinner : ik('ulang', 16))}${usulan('HE-OB-01')}</span>`}</section>`; /* semua tahap selesai: tidak ada status yang perlu dicek (masukan Peruri 4 Nov 2026) */
+    ${DB.aktif ? '' : `<span>${tombol('Cek progres registrasi', 'secondary', 'md', `id="cekStatus" ${S.memuat === 'cek' ? 'disabled' : ''}`, S.memuat === 'cek' ? spinner : ik('ulang', 16))}${usulan('HE-OB-01')}</span>`}</section>`; /* semua tahap selesai: tidak ada status yang perlu dicek (masukan Peruri 4 Nov 2026) */
 }
 /* stepper bernomor urut 1–7 (HE-OB-05) + langkah berikutnya (HE-OB-03).
    Tahap Verifikasi Anggota (indeks 3) sedang ditahan E-PPAT, jadi tidak ditampilkan ke pelanggan; nomor tetap urut. */
@@ -1442,14 +1442,14 @@ function layarDasbor() {
     <section class="ina-card ina-card--variant-basic kartu-db"><div class="ina-card__content"><h3>Pilih Paket Layanan Anda</h3><p class="ket">Mulai konfigurasi instansi e-PPAT Anda dengan memilih paket yang sesuai.</p>
       <fieldset class="ina-radio-input ina-radio-input--size-md radio-kartu dua pilih-paket" style="border:0;padding:0;margin:16px 0 0"><div class="ina-radio-input__group"><p class="ina-radio-input__main-label sr-only" style="position:absolute;left:-9999px">Paket layanan</p>${Object.entries(PAKET).map(([k, p]) => `<div class="ina-radio-input__option"><input type="radio" id="paket-${k}" name="paket" value="${k}" class="ina-radio-input__field" ${DB.paket === k ? 'checked' : ''}>
         <label for="paket-${k}" class="ina-radio-input__option-label"><span class="atas"><h4>${p.n}</h4>${badge(...p.lencana, 'sm')}</span><div class="harga">${p.harga}</div><ul>${p.fitur.map(f => `<li>${f}</li>`).join('')}</ul></label></div>`).join('')}</div></fieldset>
-      <div class="kaki-db"><span class="ket">${DB.paket ? `Paket dipilih: <b>${PAKET[DB.paket].n}</b>` : 'Pilih salah satu paket untuk melanjutkan.'}</span>${tombol(DB.paket === 'trial' ? 'Aktifkan Trial Gratis' : 'Lanjut Pembayaran', 'primary', 'md', `id="lanjutBayar" ${DB.paket && !S.memuat ? '' : 'disabled'}`, S.memuat === 'trial' ? spinner : ik('panah', 16))}</div></div></section>
+      <div class="kaki-db"><span class="ket">${DB.paket ? `Paket dipilih: <b>${PAKET[DB.paket].n}</b>` : 'Pilih salah satu paket untuk melanjutkan.'}</span>${tombol(DB.paket === 'trial' ? 'Aktifkan Trial Gratis' : 'Lanjut pembayaran', 'primary', 'md', `id="lanjutBayar" ${DB.paket && !S.memuat ? '' : 'disabled'}`, S.memuat === 'trial' ? spinner : ik('panah', 16))}</div></div></section>
     ${kartuBantuan()}`;
 }
 function kartuRingkasan() {
   const p = PAKET[DB.dipesan];
   return `<section class="ina-card ina-card--variant-basic kartu-db" style="margin-top:0"><div class="ina-card__content"><h3>Ringkasan Pesanan</h3><p class="ket">Detail paket berlangganan yang Anda pilih.</p>
     <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--ina-stroke-primary)"><div class="paket" style="grid-template-columns:1fr;margin-top:0"><label class="dipilih" style="cursor:default"><span class="atas"><h4>${p.n}</h4>${badge(...p.lencana, 'sm')}</span><div class="harga">${p.harga}</div><ul>${p.fitur.map(f => `<li>${f}</li>`).join('')}</ul></label></div></div>
-    ${DB.trial ? kakiUpgrade() : DB.lunas ? '' : `<div class="kaki-db ditandai" id="gantiPaket"><span class="ket">Paket dapat diganti selama pembayaran belum diterima.</span>${tombol('Ganti Paket', 'secondary', 'sm', 'id="tombolGanti"', ik('ulang', 14))}${usulan('HE-OB-02')}</div>`}</div></section>`;
+    ${DB.trial ? kakiUpgrade() : DB.lunas ? '' : `<div class="kaki-db ditandai" id="gantiPaket"><span class="ket">Paket dapat diganti selama pembayaran belum diterima.</span>${tombol('Ganti paket', 'secondary', 'sm', 'id="tombolGanti"', ik('ulang', 14))}${usulan('HE-OB-02')}</div>`}</div></section>`;
 }
 function kartuMetode() {
   if (DB.va) return kartuVa();
@@ -1474,7 +1474,7 @@ function kartuVa() {
     <div class="kv-va"><div>Nama VA<b>Pembayaran e-PPAT</b></div><div>Berlaku sampai<b>${DB.va.sampai}</b></div><div class="lebar">Referensi<b>${DB.va.ref}</b></div></div>
     <ol class="panduan-va"><li>Lakukan transfer sesuai nominal di atas melalui kanal bank yang Anda pilih.</li><li>Pastikan nomor Virtual Account yang dimasukkan benar.</li><li>Pembayaran akan diverifikasi secara otomatis oleh sistem.</li></ol>
     ${DB.hasilCek ? `<div id="hasilCekBayar">${alert('caution', 'Pembayaran belum terdeteksi', `Dicek pukul ${DB.hasilCek}. Bila Anda baru saja mentransfer, tunggu beberapa menit lalu cek lagi.`)}</div>` : ''}
-    <div class="tombol-blok">${tombol('Cek Status Pembayaran', 'primary', 'md', `id="cekBayar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'bayar' ? spinner : ik('ulang', 16))}${tombol('Ganti bank pembayaran', 'tertiary', 'md', 'id="gantiBank"')}</div></div></section>`;
+    <div class="tombol-blok">${tombol('Cek status pembayaran', 'primary', 'md', `id="cekBayar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'bayar' ? spinner : ik('ulang', 16))}${tombol('Ganti bank pembayaran', 'tertiary', 'md', 'id="gantiBank"')}</div></div></section>`;
 }
 function layarBayar() {
   if (!DB.dipesan) { S.layar = 'dasbor'; return layarDasbor(); }
@@ -1491,7 +1491,7 @@ function layarLunas() {
           <div class="email-pratinjau"><div class="kep">Dari: e-PPAT &lt;noreply@eppat.id&gt; · Subjek: Instansi e-PPAT Anda siap digunakan</div>
             <div class="isi">Yth. Bapak/Ibu Contoh PPAT Baru,<br>Instansi e-PPAT untuk kantor Anda telah berhasil dibuat dan siap digunakan.
               <div class="kotak"><small>ALAMAT APLIKASI</small>dev-app.eppat.id/t/kantor-contoh<small style="margin-top:8px">EMAIL UNTUK MASUK</small>${esc(S.email || 'ppat.baru@contoh.id')}</div>
-              ${tombol('Masuk ke Aplikasi e-PPAT', 'primary', 'sm', 'data-luar="Masuk ke Aplikasi e-PPAT"')}<p style="margin:10px 0 0;font-size:12.5px;color:var(--ina-content-secondary)">Masuk dengan email di atas dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kami tidak pernah mengirim kata sandi melalui email. Bila lupa, pilih <b>Lupa kata sandi?</b> di halaman masuk.</p></div></div></div></div></section></div>
+              ${tombol('Masuk ke aplikasi e-PPAT', 'primary', 'sm', 'data-luar="Masuk ke aplikasi e-PPAT"')}<p style="margin:10px 0 0;font-size:12.5px;color:var(--ina-content-secondary)">Masuk dengan email di atas dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kami tidak pernah mengirim kata sandi melalui email. Bila lupa, pilih <b>Lupa kata sandi?</b> di halaman masuk.</p></div></div></div></div></section></div>
     ${kartuBantuan()}`;
 }
 /* tahap Selesai: aplikasi kantor aktif (sama dengan OB-BAYAR, IDDS-OB-54) */
@@ -1502,12 +1502,12 @@ function layarSelesai() {
     <div class="dua-kol" style="margin-top:16px">
       <section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuSiap" style="margin-top:0"><div class="ina-card__content"><span class="siap-ikon">${ik('centangL', 28)}</span><h3>Aplikasi e-PPAT Anda Siap!</h3><p class="ket">Akun aplikasi e-PPAT Anda telah berhasil dibuat dan siap digunakan.</p>
         <div class="akses"><small>Alamat aplikasi e-PPAT Anda</small><a href="#" class="url-kantor" data-luar="Aplikasi kantor">https://${url}</a></div>
-        <div class="tombol-blok">${tombol('Masuk ke Aplikasi e-PPAT', 'primary', 'md', 'data-luar="Masuk ke Aplikasi e-PPAT"', ik('masuk', 16))}${tombol('Lupa kata sandi?', 'link', 'md', 'data-luar="Lupa kata sandi"')}</div>
+        <div class="tombol-blok">${tombol('Masuk ke aplikasi e-PPAT', 'primary', 'md', 'data-luar="Masuk ke aplikasi e-PPAT"', ik('masuk', 16))}${tombol('Lupa kata sandi?', 'link', 'md', 'data-luar="Lupa kata sandi"')}</div>
         <div style="margin-top:12px">${alert('info', '', 'Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kata sandi tidak pernah dikirim melalui email.')}</div>
         <div class="ditandai" id="emailAktif" style="margin-top:14px"><div class="email-pratinjau"><div class="kep">Dari: e-PPAT &lt;noreply@eppat.id&gt; · Subjek: Akun e-PPAT Anda Sudah Aktif</div>
           <div class="isi">Yth. Bapak/Ibu Contoh PPAT Baru,<br>Instansi e-PPAT untuk kantor Anda telah berhasil dibuat dan siap digunakan.
             <div class="kotak"><small>ALAMAT APLIKASI</small>${url}<small style="margin-top:8px">EMAIL UNTUK MASUK</small>${esc(S.email || 'ppat.baru@contoh.id')}</div>
-            ${tombol('Masuk ke Aplikasi e-PPAT', 'primary', 'sm', 'data-luar="Masuk ke Aplikasi e-PPAT"')}<p style="margin:10px 0 0;font-size:12.5px;color:var(--ina-content-secondary)">Masuk dengan email di atas dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kami tidak pernah mengirim kata sandi melalui email. Bila lupa, pilih <b>Lupa kata sandi?</b> di halaman masuk.</p></div></div></div>${usulan('HE-OB-04')}</div></section>
+            ${tombol('Masuk ke aplikasi e-PPAT', 'primary', 'sm', 'data-luar="Masuk ke aplikasi e-PPAT"')}<p style="margin:10px 0 0;font-size:12.5px;color:var(--ina-content-secondary)">Masuk dengan email di atas dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kami tidak pernah mengirim kata sandi melalui email. Bila lupa, pilih <b>Lupa kata sandi?</b> di halaman masuk.</p></div></div></div>${usulan('HE-OB-04')}</div></section>
       ${kartuRingkasan()}</div>
     ${kartuBantuan()}`;
 }
@@ -1515,11 +1515,11 @@ function layarRiwayat() {
   if (DB.trial) return layarRiwayatTrial();
   const ada = !!DB.va;
   return `${remahApp('Riwayat Transaksi')}<h1>Riwayat Transaksi</h1><p class="sub">Daftar seluruh transaksi pembayaran layanan e-PPAT Anda.</p>
-    <div style="display:flex;justify-content:flex-end;margin-top:12px">${tombol('Perpanjang Langganan', 'secondary', 'md', 'data-luar="Perpanjang Langganan"')}</div>
+    <div style="display:flex;justify-content:flex-end;margin-top:12px">${tombol('Perpanjang langganan', 'secondary', 'md', 'data-luar="Perpanjang langganan"')}</div>
     <div class="tabel-wadah ditandai" id="tabelRiwayat"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb">
       <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Detail Transaksi</th><th class="ina-table__header-cell">Metode${usulan('HE-OB-05')}</th><th class="ina-table__header-cell">Jumlah</th><th class="ina-table__header-cell">Jatuh Tempo</th><th class="ina-table__header-cell">Status</th><th class="ina-table__header-cell"></th></tr></thead>
       <tbody class="ina-table__body">${ada ? `<tr class="ina-table__row"><td class="ina-table__cell"><span class="kd">ORD-ENTERPRISE-CONTOH</span><div class="kc">Ref. ${DB.va.ref}</div></td><td class="ina-table__cell">Virtual Account ${DB.bank}<div class="kc">${DB.va.no}</div></td><td class="ina-table__cell">${PAKET[DB.dipesan].harga}</td><td class="ina-table__cell">${DB.va.sampai}</td>
-        <td class="ina-table__cell rw-status">${DB.lunas ? badge('Lunas', 'success', 'sm') : badge('Belum dibayar', 'warning', 'sm')}</td><td class="ina-table__cell" style="text-align:right">${DB.lunas ? '' : tombol('Bayar Sekarang', 'link', 'sm', 'data-ke="bayar"', '')}</td></tr>`
+        <td class="ina-table__cell rw-status">${DB.lunas ? badge('Lunas', 'success', 'sm') : badge('Belum dibayar', 'warning', 'sm')}</td><td class="ina-table__cell" style="text-align:right">${DB.lunas ? '' : tombol('Bayar sekarang', 'link', 'sm', 'data-ke="bayar"', '')}</td></tr>`
         : `<tr><td colspan="6" class="ina-table__empty-cell" style="text-align:center;padding:28px;color:var(--ina-content-secondary)">Belum ada transaksi. Transaksi muncul setelah Anda membuat tagihan pembayaran.</td></tr>`}</tbody></table></div></div></div>
     `;
 }
@@ -1542,7 +1542,7 @@ document.addEventListener('click', e => {
     const lanjut = () => { DB.dipesan = ''; DB.metodeBayar = ''; DB.bank = ''; DB.va = null; DB.hasilCek = ''; S.layar = 'dasbor'; gambar(); toast('Silakan pilih paket lain.'); };
     if (!DB.va) { lanjut(); return; }
     dialog({ judul:'Ganti paket?', konfirmasi:true, isi:`<p>Tagihan Virtual Account <b>${DB.va.no}</b> untuk paket ${PAKET[DB.dipesan].n} akan dibatalkan. Tagihan baru dibuat setelah Anda memilih paket lain.${usulan('HE-OB-02')}</p>${alert('caution', '', 'Jangan mentransfer ke nomor Virtual Account lama setelah dibatalkan.')}`,
-      tombol:[['Batal', 'secondary', null], ['Ganti Paket', 'primary', lanjut]] });
+      tombol:[['Batal', 'secondary', null], ['Ganti paket', 'primary', lanjut]] });
     return;
   }
   if (t.closest('#cekStatus') && S.layar === 'lunas') {
@@ -1564,7 +1564,7 @@ function ke(layar) { if (layar !== 'dasbor') S.keUpgrade = false; S.layar = siap
 function jaga(lanjut) {
   if (S.layar !== 'daftar' || !S.ubah) { lanjut(); return; }
   dialog({ judul:'Tinggalkan pendaftaran?', konfirmasi:true, isi:`<p>Data yang sudah Anda isi di formulir pendaftaran akan hilang. Anda perlu mengisinya lagi bila ingin mendaftar.${usulan('HE-REG-01')}</p>`,
-    tombol:[['Lanjutkan Mengisi', 'secondary', null], ['Tinggalkan', 'primary', () => { S.ubah = false; S.setuju = false; lanjut(); }]] });
+    tombol:[['Lanjutkan mengisi', 'secondary', null], ['Tinggalkan', 'primary', () => { S.ubah = false; S.setuju = false; lanjut(); }]] });
 }
 
 /* ---------------- interaksi ---------------- */
@@ -1640,13 +1640,13 @@ function konfirmasiDaftar() {
     ['Bank', S.bank ? `${esc(S.bank)}${rek ? ' · ' + rek : ''}` : '—'], ['URL Tenant', `dev-app.eppat.id/t/<b>${v('rTenant')}</b>`]];
   dialog({ judul:'Periksa kembali data Anda', lebar:true,
     isi:`<p class="ket">Pastikan data berikut sudah benar. Email dipakai untuk mengirim tautan verifikasi, dan URL Tenant menjadi alamat aplikasi kantor Anda.</p>${ringkasDaftar(baris)}`,
-    tombol:[['Ubah Data', 'secondary', () => $('#rNama').focus()], ['Ya, Daftar', 'primary', kirimDaftarFinal]] });
+    tombol:[['Ubah data', 'secondary', () => $('#rNama').focus()], ['Ya, daftar', 'primary', kirimDaftarFinal]] });
 }
 function kirimDaftarFinal() {
   const v = id => ($('#' + id)?.value ?? '').trim();
   S.data = { nama:v('rNama'), nik:v('rNik'), hp:v('rHp'), idppat:v('rIdPpat'), tenant:v('rTenant') };
   S.email = v('rEmail'); S.memuat = 'daftar'; gambar();
-  setTimeout(() => { S.ubah = false; S.setuju = false; S.memuat = ''; dialog({ judul:'Pendaftaran Berhasil!', isi:`<div class="status-kartu"><span class="ikon-besar">${ik('centang', 34)}</span><p>Tautan verifikasi telah dikirim ke email Anda. Harap verifikasi email Anda sebelum masuk.</p></div>`, tombol:[['Lihat Petunjuk Verifikasi', 'primary', () => ke('verif')]] }); }, 700);
+  setTimeout(() => { S.ubah = false; S.setuju = false; S.memuat = ''; dialog({ judul:'Pendaftaran Berhasil!', isi:`<div class="status-kartu"><span class="ikon-besar">${ik('centang', 34)}</span><p>Tautan verifikasi telah dikirim ke email Anda. Harap verifikasi email Anda sebelum masuk.</p></div>`, tombol:[['Lihat petunjuk verifikasi', 'primary', () => ke('verif')]] }); }, 700);
 }
 function kirimMasuk() {
   const em = $('#mEmail').value.trim(), pw = $('#mPw').value; let ada = false;
@@ -1694,7 +1694,7 @@ function kirimOtp() {
   if (S.metode === 'email' && OTP.sisa <= 0) return;
   if (c.length < 6) { OTP.galat = 'Masukkan 6 digit kode.'; segarOtp(); return; }
   if (c === '000000') { OTP.coba--; OTP.galat = OTP.coba > 0 ? `Kode salah. ${S.metode === 'email' ? 'Pastikan Anda memakai kode dari email terbaru.' : 'Pastikan jam di ponsel Anda sudah tepat.'} Sisa percobaan: ${OTP.coba}.` : `Kode salah 3 kali. ${S.metode === 'email' ? 'Kirim ulang kode untuk mencoba lagi.' : 'Kembali ke halaman masuk dan coba lagi.'}`; kotak.forEach(k => k.value = ''); kotak[0].focus(); segarOtp(); return; }
-  clearInterval(pasangOtp.t); S.memuat = 'otp'; segarOtp(); $('#kirimOtp').innerHTML = spinner + (S.balik ? 'Masuk' : 'Aktifkan &amp; Masuk');
+  clearInterval(pasangOtp.t); S.memuat = 'otp'; segarOtp(); $('#kirimOtp').innerHTML = spinner + (S.balik ? 'Masuk' : 'Aktifkan &amp; masuk');
   setTimeout(() => { OTP = null; selesaiMasukPortal(); }, 700); /* tanpa halaman kode cadangan (masukan Peruri 4 Nov 2026) */
 }
 $('#simKedaluwarsa').addEventListener('click', () => { if (!OTP || S.metode !== 'email' || !$('#otpWaktu')) { toast('Buka halaman kode Email OTP terlebih dahulu (Masuk → Email OTP).'); return; } OTP.sisa = 0; segarOtp(); });
@@ -1751,7 +1751,7 @@ const BANTUAN = {
     ${fq(1, [['Apa yang diisi pada ID PPAT / SK PPAT dan URL Tenant?', `${TIP_ID} ${TIP_URL}`],
       ['Apa syarat kata sandi?', 'Minimal 12 karakter, dengan huruf besar, huruf kecil, angka, dan simbol (- _ ? ! & + % # @ * $ ^).'],
       ['Apakah foto KTP saya disimpan?', 'Tidak. Foto hanya dibaca untuk mengisi data dan tidak disimpan. Unggah KTP tidak wajib; data dapat diisi manual.'],
-      ['Apa yang terjadi setelah saya klik Daftar Sekarang?', 'Anda diminta memeriksa kembali data. Setelah Anda pilih Ya, Daftar, tautan verifikasi dikirim ke email Anda.']])}
+      ['Apa yang terjadi setelah saya klik Daftar sekarang?', 'Anda diminta memeriksa kembali data. Setelah Anda pilih Ya, Daftar, tautan verifikasi dikirim ke email Anda.']])}
     ${kontak()}` }),
   verif:() => ({ judul:'Bantuan Verifikasi Data', isi:`<p>Tautan verifikasi sudah dikirim ke email pendaftaran Anda. Email itu juga berisi ringkasan data pendaftaran.</p>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -1895,8 +1895,8 @@ function heroTrial() {
 }
 function kartuTahapTrial() {
   const ket = i => i < 4 ? TGL[i] : i === 4 ? tglJam(DB.trial.mulai).replace(/ 2026,/, ',') : i === 5 || i === 6 ? 'Tidak perlu (Trial gratis)' : tglJam(DB.trial.mulai).replace(/ 2026,/, ',');
-  const B = DB.ent ? null : DB.va ? ['Selesaikan pembayaran upgrade', `Transfer ke Virtual Account sebelum batas waktu. Trial tetap berjalan sampai pembayaran diterima.<div style="margin-top:8px">${tombol('Lanjutkan Upgrade', 'primary', 'sm', 'data-ke-upgrade', ik('panah', 14))}</div>`]
-    : S.keUpgrade ? ['Lanjutkan upgrade ke Enterprise', `Tekan Upgrade Sekarang untuk memilih pembayaran. Trial tetap berjalan sampai pembayaran diterima.<div style="margin-top:8px">${tombol('Upgrade Sekarang', 'primary', 'sm', 'data-ke-upgrade', ik('panah', 14))}</div>`]
+  const B = DB.ent ? null : DB.va ? ['Selesaikan pembayaran upgrade', `Transfer ke Virtual Account sebelum batas waktu. Trial tetap berjalan sampai pembayaran diterima.<div style="margin-top:8px">${tombol('Lanjutkan upgrade', 'primary', 'sm', 'data-ke-upgrade', ik('panah', 14))}</div>`]
+    : S.keUpgrade ? ['Lanjutkan upgrade ke Enterprise', `Tekan Upgrade sekarang untuk memilih pembayaran. Trial tetap berjalan sampai pembayaran diterima.<div style="margin-top:8px">${tombol('Upgrade sekarang', 'primary', 'sm', 'data-ke-upgrade', ik('panah', 14))}</div>`]
     : ['Masuk ke aplikasi kantor', 'Gunakan Trial sebagai Super Admin dengan email dan kata sandi pendaftaran. Upgrade ke Enterprise kapan saja; data dan alamat aplikasi tetap sama.'];
   return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuTahap"><div class="ina-card__content"><h3>Progres Registrasi Anda${usulan('HE-OB-05')}</h3>
     ${stepperH(TAMPIL.map(i => TAHAP[i]), TAMPIL.length, n => `<small>${ket(TAMPIL[n])}</small>`, 'Tahapan registrasi')}
@@ -1912,7 +1912,7 @@ function kartuProgresUp() {
 function kartuSiapTrial() {
   return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuSiap" style="margin-top:0"><div class="ina-card__content"><span class="siap-ikon">${ik('centangL', 28)}</span><h3>Aplikasi e-PPAT Anda Siap!</h3><p class="ket">Akun aplikasi e-PPAT Anda telah berhasil dibuat dan siap digunakan.</p>
     <div class="akses"><small>Alamat aplikasi e-PPAT Anda</small><a href="#" class="url-kantor" data-ke-tenant>https://${url0()}</a></div>
-    <div class="tombol-blok">${tombol(DB.ent ? 'Kembali ke Aplikasi e-PPAT' : 'Masuk ke Aplikasi e-PPAT', 'primary', 'md', 'id="masukApp"', ik('masuk', 16))}${tombol('Lupa kata sandi?', 'link', 'md', 'data-luar="Lupa kata sandi"')}</div>
+    <div class="tombol-blok">${tombol(DB.ent ? 'Kembali ke Aplikasi e-PPAT' : 'Masuk ke aplikasi e-PPAT', 'primary', 'md', 'id="masukApp"', ik('masuk', 16))}${tombol('Lupa kata sandi?', 'link', 'md', 'data-luar="Lupa kata sandi"')}</div>
     <div style="margin-top:12px">${alert('info', '', 'Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kata sandi tidak pernah dikirim melalui email.')}</div>${usulan('HE-TRIAL-05')}</div></section>`;
 }
 const sisaAngka = () => { const s = Math.max(0, Math.floor((DB.trial.akhir - DB.trial.mulai - (Date.now() - DB.trial.nyata)) / 1000)); return [Math.floor(s / 86400), Math.floor(s % 86400 / 3600), Math.floor(s % 3600 / 60), s % 60]; };
@@ -1925,7 +1925,7 @@ function kartuTrial() {
     <h4 class="sub-kartu">Batas paket Trial</h4><ul class="fitur-ok">${PAKET.trial.fitur.slice(0, 3).map(x => `<li>${ik('centang', 14)}${x}</li>`).join('')}</ul>
     <div class="akses kartu-upgrade"><h4>Upgrade ke Enterprise</h4><p class="ket">Dapatkan akses penuh tanpa batas: e-Sign, e-Seal, analitik lengkap, dan dukungan teknis mendalam. Data dan alamat aplikasi tetap sama.</p>
       ${DB.va ? '<p class="ket" style="margin-top:6px">Tagihan upgrade sudah dibuat. Trial tetap berjalan sampai pembayaran diterima.</p>' : ''}
-      <div class="tombol-blok">${tombol(DB.va ? 'Lanjutkan Upgrade' : 'Upgrade Sekarang', 'primary', 'md', 'id="upgradeSekarang"', ik('panah', 16))}</div></div>${usulan('HE-TRIAL-01')}</div></section>`;
+      <div class="tombol-blok">${tombol(DB.va ? 'Lanjutkan upgrade' : 'Upgrade sekarang', 'primary', 'md', 'id="upgradeSekarang"', ik('panah', 16))}</div></div>${usulan('HE-TRIAL-01')}</div></section>`;
 }
 function kartuEntAktif() {
   const p = PAKET.enterprise;
@@ -1957,34 +1957,34 @@ const barisTrial = () => `<tr class="ina-table__row" id="barisTrial"><td class="
   <td class="ina-table__cell">Gratis<div class="kc">Tanpa pembayaran</div></td><td class="ina-table__cell">Rp0</td><td class="ina-table__cell"><span class="kc">Tidak berlaku (gratis)</span></td>
   <td class="ina-table__cell rw-status">${badge('Gratis', 'success', 'sm')}<div class="kc">${DB.ent ? `Diganti Enterprise ${tglJam(DB.ent)}` : `Berakhir ${tglJam(DB.trial.akhir)}`}</div></td><td class="ina-table__cell"></td></tr>`;
 const barisUpgrade = () => `<tr class="ina-table__row" id="barisUpgrade"><td class="ina-table__cell"><span class="kd" style="cursor:auto">${DB.va.invoice}</span><div class="kc">Upgrade ke Enterprise</div><div class="kc">Ref. ${DB.va.ref}</div>${DB.ent ? `<div class="kc">Dibayar: ${tglJam(DB.ent)}</div>` : ''}</td><td class="ina-table__cell">Virtual Account ${DB.bank}<div class="kc">${DB.va.no}</div></td><td class="ina-table__cell">${HARGA()}</td>
-  <td class="ina-table__cell">${DB.ent ? '<span class="kc">Tidak berlaku (sudah dibayar)</span>' : DB.va.sampai}</td><td class="ina-table__cell rw-status">${DB.ent ? badge('Lunas', 'success', 'sm') : badge('Belum dibayar', 'warning', 'sm')}</td><td class="ina-table__cell" style="text-align:right">${DB.ent ? '' : tombol('Bayar Sekarang', 'link', 'sm', 'data-ke-upgrade')}</td></tr>`;
+  <td class="ina-table__cell">${DB.ent ? '<span class="kc">Tidak berlaku (sudah dibayar)</span>' : DB.va.sampai}</td><td class="ina-table__cell rw-status">${DB.ent ? badge('Lunas', 'success', 'sm') : badge('Belum dibayar', 'warning', 'sm')}</td><td class="ina-table__cell" style="text-align:right">${DB.ent ? '' : tombol('Bayar sekarang', 'link', 'sm', 'data-ke-upgrade')}</td></tr>`;
 function layarRiwayatTrial() {
   return `${remahApp('Riwayat Transaksi')}<h1>Riwayat Transaksi</h1><p class="sub">Lihat seluruh transaksi pembayaran layanan e-PPAT Anda.</p>
-    <div style="display:flex;justify-content:flex-end;margin-top:12px">${DB.ent ? tombol('Perpanjang Langganan', 'secondary', 'md', 'id="bukaPerpanjang"') : tombol(DB.va ? 'Lanjutkan Upgrade' : 'Upgrade ke Enterprise', 'primary', 'md', 'data-ke-upgrade', ik('panah', 16))}</div>
+    <div style="display:flex;justify-content:flex-end;margin-top:12px">${DB.ent ? tombol('Perpanjang langganan', 'secondary', 'md', 'id="bukaPerpanjang"') : tombol(DB.va ? 'Lanjutkan upgrade' : 'Upgrade ke Enterprise', 'primary', 'md', 'data-ke-upgrade', ik('panah', 16))}</div>
     <div class="tabel-wadah ditandai" id="tabelRiwayat"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Riwayat transaksi">
       <thead class="ina-table__header"><tr><th class="ina-table__header-cell" scope="col">Detail Transaksi</th><th class="ina-table__header-cell" scope="col">Metode</th><th class="ina-table__header-cell" scope="col">Jumlah</th><th class="ina-table__header-cell" scope="col">Jatuh Tempo</th><th class="ina-table__header-cell" scope="col">Status</th><th class="ina-table__header-cell" scope="col"><span class="sr-only">Aksi</span></th></tr></thead>
       <tbody class="ina-table__body">${DB.va ? barisUpgrade() : ''}${barisTrial()}</tbody></table></div></div></div>${usulan('HE-TRIAL-08')}`;
 }
 function layarPerpanjang() {
   const p = PAKET.enterprise;
-  return `${remahApp('Perpanjang Langganan')}<h1>Perpanjang Langganan</h1><p class="sub">Perpanjang paket Enterprise kantor Anda untuk satu tahun berikutnya.</p>
+  return `${remahApp('Perpanjang langganan')}<h1>Perpanjang langganan</h1><p class="sub">Perpanjang paket Enterprise kantor Anda untuk satu tahun berikutnya.</p>
     <div class="dua-kol" style="margin-top:16px"><section class="ina-card ina-card--variant-basic kartu-db" style="margin-top:0"><div class="ina-card__content"><h3>Ringkasan Pesanan</h3><p class="ket">Paket yang akan diperpanjang.</p>
       <div class="paket" style="grid-template-columns:1fr"><label class="dipilih" style="cursor:default"><span class="atas"><h4>${p.n}</h4>${badge(...p.lencana, 'sm')}</span><div class="harga">${p.harga}</div><ul>${p.fitur.map(f => `<li>${f}</li>`).join('')}</ul></label></div></div></section>
     <section class="ina-card ina-card--variant-basic kartu-db" id="blokPerpanjang" style="margin-top:0"><div class="ina-card__content"><h3>Pilih Metode Pembayaran</h3><p class="ket">Langkahnya sama dengan pembayaran upgrade.</p>
       <div style="margin-top:14px">${alert('info', 'Belum ada tagihan', 'Order perpanjangan dibuat saat Anda menekan Buat Virtual Account. Menekan Batal tidak membuat tagihan.')}</div>
-      <div class="tombol-blok">${tombol('Lanjut Pilih Bank', 'primary', 'md', 'id="lanjutPerpanjang"', ik('panah', 16))}${tombol('Batal', 'secondary', 'md', 'id="batalPerpanjang"')}</div></div></section></div>`;
+      <div class="tombol-blok">${tombol('Lanjut pilih bank', 'primary', 'md', 'id="lanjutPerpanjang"', ik('panah', 16))}${tombol('Batal', 'secondary', 'md', 'id="batalPerpanjang"')}</div></div></section></div>`;
 }
 let jamTrial;
 function jalankanJamTrial() { clearInterval(jamTrial); if ($('#sisaTrial')) jamTrial = setInterval(() => { const e = $('#sisaTrial'); if (!e) { clearInterval(jamTrial); return; } e.innerHTML = hitungTrial(); }, 1000); if ($('#sisaVa')) jalankanJamVa(); }
 
 /* ---------- peta perjalanan di bilah prototipe (catatan prototipe, bukan bagian layar) ---------- */
 const PETA = [
-  ['Isi Registrasi', 'Lengkapi formulir, lalu tekan Daftar Sekarang.'], ['Cek email', 'Buka tautan verifikasi di email.'], ['Verifikasi berhasil', 'Tekan Masuk Sekarang.'],
+  ['Isi Registrasi', 'Lengkapi formulir, lalu tekan Daftar sekarang.'], ['Cek email', 'Buka tautan verifikasi di email.'], ['Verifikasi berhasil', 'Tekan Masuk sekarang.'],
   ['Masuk portal', 'Masuk dengan email dan kata sandi.'], ['Verifikasi dua langkah', 'Pilih Email OTP, lalu isi kode.'], ['Pilih paket Trial', 'Pilih Trial, lalu tekan Aktifkan Trial Gratis.'],
-  ['Trial aktif', 'Tekan Masuk ke Aplikasi e-PPAT.'], ['Masuk aplikasi kantor', 'Pilih simulasi Super Admin Trial.'], ['Pakai aplikasi Trial', 'Coba menu dan batas paket.'],
-  ['Mulai Berlangganan', 'Tekan tombol di bawah menu atau di spanduk.'], ['Masuk portal lagi', 'Hanya bila sesi portal sudah berakhir.'], ['Dasbor portal', 'Tekan Upgrade Sekarang.'], ['Upgrade: pilih metode', 'Pilih Virtual Account.'],
+  ['Trial aktif', 'Tekan Masuk ke aplikasi e-PPAT.'], ['Masuk aplikasi kantor', 'Pilih simulasi Super Admin Trial.'], ['Pakai aplikasi Trial', 'Coba menu dan batas paket.'],
+  ['Mulai berlangganan', 'Tekan tombol di bawah menu atau di spanduk.'], ['Masuk portal lagi', 'Hanya bila sesi portal sudah berakhir.'], ['Dasbor portal', 'Tekan Upgrade sekarang.'], ['Upgrade: pilih metode', 'Pilih Virtual Account.'],
   ['Upgrade: pilih bank', 'Pilih BRI, lalu tekan Buat Virtual Account.'], ['Upgrade: bayar', 'Tekan Simulasikan Transfer dari Bank di bilah ini.'], ['Enterprise aktif', 'Lihat Riwayat Transaksi atau kembali ke aplikasi.'],
-  ['Riwayat Transaksi', 'Trial dan Upgrade tercatat terpisah.'], ['Kembali ke aplikasi kantor', 'Spanduk dan tombol Mulai Berlangganan sudah hilang.'], ['Perpanjang Langganan', 'Dipakai sebelum masa Enterprise berakhir.']];
+  ['Riwayat Transaksi', 'Trial dan Upgrade tercatat terpisah.'], ['Kembali ke aplikasi kantor', 'Spanduk dan tombol Mulai berlangganan sudah hilang.'], ['Perpanjang langganan', 'Dipakai sebelum masa Enterprise berakhir.']];
 function posisiPeta() {
   const l = S.layar;
   if (l === 'daftar') return 1; if (l === 'verif') return 2; if (l === 'verifOk') return 3;
@@ -2018,7 +2018,7 @@ const pilAktif = () => S.layar === 'dasbor' ? (DB.ent ? 'enterprise' : DB.trial 
 const bantuanDasborAsli = BANTUAN.dasbor;
 const FAQ_TRIAL = [['Berapa lama Paket Trial berlaku?', '30 hari sejak Trial aktif. Sisa masa dan tanggal berakhirnya tampil di kartu Paket Trial aktif di Dasbor.'],
   ['Apa batas Paket Trial?', 'Trial berisi 10 transaksi dan paling banyak 5 pengguna, termasuk akun pemilik. Semua menu dapat dibuka. Tanda tangan dan stempel elektronik belum termasuk.'],
-  ['Bagaimana cara upgrade ke Enterprise?', 'Tekan Upgrade Sekarang di Dasbor atau Mulai Berlangganan di aplikasi kantor. Pilih Virtual Account, pilih BRI, tekan Buat Virtual Account, lalu transfer sebelum batas waktu. Trial tetap berjalan selama pembayaran belum diterima.'],
+  ['Bagaimana cara upgrade ke Enterprise?', 'Tekan Upgrade sekarang di Dasbor atau Mulai Berlangganan di aplikasi kantor. Pilih Virtual Account, pilih BRI, tekan Buat Virtual Account, lalu transfer sebelum batas waktu. Trial tetap berjalan selama pembayaran belum diterima.'],
   ['Apakah data saya hilang setelah upgrade?', 'Tidak. Pengguna, order, dan alamat aplikasi tetap sama. Anda juga tidak perlu mendaftar ulang.'],
   ['Apakah saya menerima email aktivasi lagi setelah upgrade?', 'Tidak. Setelah upgrade, Anda menerima email Pembayaran Berhasil Diterima. Gunakan alamat aplikasi dan kata sandi yang sama.']];
 BANTUAN.dasbor = () => DB.trial ? { judul:DB.ent ? 'Bantuan Paket Enterprise' : 'Bantuan Paket Trial', isi:`<p>${DB.ent ? 'Paket Enterprise kantor Anda sudah aktif.' : 'Paket Trial kantor Anda sudah aktif dan aplikasi siap digunakan.'}</p><h4 class="bantu-sub">Pertanyaan umum</h4>${fq('t', FAQ_TRIAL)}${kontak()}` } : bantuanDasborAsli();
@@ -2029,19 +2029,19 @@ BANTUAN.perpanjang = () => ({ judul:'Bantuan Perpanjang Langganan', isi:`<p>Perp
 const SUMBER_TRIAL = 'Penelusuran live dev.eppat.id dan dev-app.eppat.id 6 Nov 2026; Panduan Trial ePPAT v3';
 UBAH.push(
   { kode:'HE-TRIAL-01', bukanHE:true, versi:'v2', judul:'Trial aktif: status akun, sisa masa, dan batas paket jelas',
-    isi:'Lencana menjadi "Status akun: Trial aktif" dan kalimat pembuka menyebut tanggal berakhir Trial. Kartu Paket Trial memuat hitung mundur, tanggal berakhir, batas paket, dan tombol Upgrade Sekarang. Langkah berikutnya menunjuk ke aplikasi kantor.',
+    isi:'Lencana menjadi "Status akun: Trial aktif" dan kalimat pembuka menyebut tanggal berakhir Trial. Kartu Paket Trial memuat hitung mundur, tanggal berakhir, batas paket, dan tombol Upgrade sekarang. Langkah berikutnya menunjuk ke aplikasi kantor.',
     lama:'Setelah Trial aktif, lencana tetap "STATUS AKUN: ONBOARDING" dan kalimat pembuka tetap meminta pengguna mengaktifkan akun PPAT Enterprise. Batas paket tidak tampil di kartu Trial.', ke:'tr-aktif', sorot:'#kartuTrial', sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-02', bukanHE:true, versi:'v2', judul:'Email aktivasi tanpa kata sandi dan hanya sekali',
     isi:'Email Akun e-PPAT Anda Sudah Aktif dikirim sekali saat Trial aktif dan tidak memuat kata sandi. Saat upgrade, pengguna hanya menerima instruksi pembayaran dan Pembayaran Berhasil Diterima.',
     lama:'Email memuat kata sandi dalam teks biasa dan terkirim dua kali (saat Trial dan setelah upgrade). Email pembayaran menyebut konfigurasi instansi maksimal 1x24 jam, padahal aplikasi sudah aktif. Dasbor meminta "Cek email Anda untuk mendapatkan password login".', ke:'tr-aktif', sorot:'#emailTrial', sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-03', bukanHE:true, versi:'v2', judul:'Tenant: satu istilah Trial, sisa masa terlihat, dan Mulai Berlangganan selalu ada',
-    isi:'Lencana Paket Trial dengan sisa hari tampil di header portal dan tenant, lalu hilang setelah upgrade. Spanduk memakai istilah Trial dan menampilkan sisa hari. Tombol Mulai Berlangganan selalu ada di bawah menu. Spanduk TERA tidak tampil untuk Super Admin karena TERA didaftarkan peran PPAT. Lihat dengan masuk sebagai Super Admin Trial.',
+    isi:'Lencana Paket Trial dengan sisa hari tampil di header portal dan tenant, lalu hilang setelah upgrade. Spanduk memakai istilah Trial dan menampilkan sisa hari. Tombol Mulai berlangganan selalu ada di bawah menu. Spanduk TERA tidak tampil untuk Super Admin karena TERA didaftarkan peran PPAT. Lihat dengan masuk sebagai Super Admin Trial.',
     lama:'Portal menyebut Trial, tenant menyebut Paket Gratis. Header tidak menunjukkan paket yang sedang dipakai, dan spanduk tidak menampilkan sisa hari. Spanduk TERA tetap meminta pendaftaran walaupun paket belum memuat tanda tangan dan stempel elektronik.', ke:'tr-aktif', sorot:null, sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-04', bukanHE:true, versi:'v2', judul:'Batas paket dicegah sebelum mengisi formulir',
-    isi:'Daftar Pengguna dan Permohonan AJB menampilkan pemakaian ("3 dari 5 pengguna", "1 dari 10 transaksi"). Saat batas tercapai, dialog muncul sebelum formulir dibuka, dengan kalimat manusiawi dan tombol Mulai Berlangganan. Aturan yang sama berlaku saat menambah klien dari Permohonan AJB.',
+    isi:'Daftar Pengguna dan Permohonan AJB menampilkan pemakaian ("3 dari 5 pengguna", "1 dari 10 transaksi"). Saat batas tercapai, dialog muncul sebelum formulir dibuka, dengan kalimat manusiawi dan tombol Mulai berlangganan. Aturan yang sama berlaku saat menambah klien dari Permohonan AJB.',
     lama:'Pesan "batas paket langganan tercapai: paket Gratis maksimal 5 pengguna, upgrade untuk menambah" baru muncul setelah formulir diisi dan disimpan, tanpa tombol ke halaman upgrade. Akun pemilik tidak tampil tetapi ikut dihitung. Kartu menjanjikan 10 transaksi, sedangkan aplikasi menolak order kedua.', ke:'tr-aktif', sorot:null, sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-05', bukanHE:true, versi:'v2', judul:'Masuk ke Aplikasi langsung membuka halaman Masuk',
-    isi:'Tombol Masuk ke Aplikasi e-PPAT membuka halaman Masuk tenant. Bila sesi tenant masih ada, tombol langsung membuka Dasbor.',
+    isi:'Tombol Masuk ke aplikasi e-PPAT membuka halaman Masuk tenant. Bila sesi tenant masih ada, tombol langsung membuka Dasbor.',
     lama:'Tombol membuka tab baru berisi Halaman Depan tenant, dan footer menampilkan pesan teknis "Master footer yang dipilih tidak ditemukan". Pengguna harus menekan Masuk lagi untuk melihat formulir.', ke:'tr-aktif', sorot:'#kartuSiap', sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-06', bukanHE:true, versi:'v2', judul:'Mulai Berlangganan kembali ke Dasbor portal, tagihan dibuat saat Buat Virtual Account',
     isi:'Bila sesi portal masih aktif, Mulai Berlangganan langsung membuka Dasbor portal tanpa masuk ulang. Bila berakhir, pengguna masuk dulu, lalu kembali ke Dasbor yang sama. Kartu Upgrade disorot dan langkah berikutnya menunjuk ke Upgrade Sekarang. Membuka halaman Upgrade tidak membuat order.',
@@ -2053,7 +2053,7 @@ UBAH.push(
     isi:'Riwayat memuat baris Paket Trial (Rp0, Gratis) dan baris Upgrade ke Enterprise. Metode ditulis Virtual Account BRI dan status berupa lencana. Selama Trial, tombol di atas tabel mengarah ke upgrade, bukan perpanjangan.',
     lama:'Hanya ada ORD-RENEW-…, sehingga upgrade tercatat sebagai perpanjangan dan Trial tidak tercatat. Metode tertulis VIRTUAL_ACCOUNT, dan Jatuh Tempo tetap tampil walaupun tagihan lunas.', ke:'tr-riwayat', sorot:'#tabelRiwayat', sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-09', bukanHE:true, versi:'v2', judul:'Tenant berubah otomatis setelah upgrade',
-    isi:'Tanpa masuk ulang, spanduk Trial dan tombol Mulai Berlangganan hilang, batas paket terbuka, dan data masa Trial tetap ada. Tenant menampilkan pesan satu kali bahwa paket Enterprise sudah aktif.',
+    isi:'Tanpa masuk ulang, spanduk Trial dan tombol Mulai berlangganan hilang, batas paket terbuka, dan data masa Trial tetap ada. Tenant menampilkan pesan satu kali bahwa paket Enterprise sudah aktif.',
     lama:'Perubahan paket di tenant sudah otomatis, tetapi tidak ada pesan apa pun. Pengguna hanya melihat spanduk menghilang.', ke:'tr-ent', sorot:'#kartuSiap', sumber:SUMBER_TRIAL });
 
 /* ---------------- protobar & daftar perubahan ---------------- */

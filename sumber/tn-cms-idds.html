@@ -592,7 +592,7 @@ ol.bantu-langkah{padding-left:22px}
     <header class="top">
       <button class="ina-button ina-button--tertiary ina-button--md" id="burger" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg></button>
       <div class="spacer"></div>
-      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat Landing</span></button>
+      <button class="ina-button ina-button--secondary ina-button--md"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Lihat landing</span></button>
       <button class="ina-button ina-button--tertiary ina-button--md" aria-label="Notifikasi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg></button>
       <div class="user"><span class="ina-avatar ina-avatar--circle ava">A</span><span class="txt"><span class="uname">Admin Contoh</span><span class="urole">Super Admin</span></span></div>
     </header>
@@ -673,10 +673,10 @@ const logoSvg = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg x
 /* ---------------- daftar penyesuaian ---------------- */
 const UBAH = [
   { kode:'IDDS-TN-17', judul:'Halaman Depan: daftar halaman memakai komponen IDDS dan status berkonfirmasi',
-    isi:'Setiap halaman tampil sebagai IDDS Card berisi nama, alamat publik, dan lencana status "Tayang"/"Tidak tayang". Status diubah lewat IDDS Toggle "Tayang di situs" yang berlabel nama halaman. Toggle meminta konfirmasi sebelum menayangkan atau menyembunyikan halaman publik. Aksi utama "Ubah Tata Letak" tetap terlihat. Info, Ekspor, dan Hapus dikumpulkan di IDDS Action Dropdown berlabel nama halaman. Hapus memakai IDDS Modal Confirmation yang menyebut alamat publik yang ikut hilang. Kondisi kosong tidak lagi menyebut "migrasi 000009".',
+    isi:'Setiap halaman tampil sebagai IDDS Card berisi nama, alamat publik, dan lencana status "Tayang"/"Tidak tayang". Status diubah lewat IDDS Toggle "Tayang di situs" yang berlabel nama halaman. Toggle meminta konfirmasi sebelum menayangkan atau menyembunyikan halaman publik. Aksi utama "Ubah tata letak" tetap terlihat. Info, Ekspor, dan Hapus dikumpulkan di IDDS Action Dropdown berlabel nama halaman. Hapus memakai IDDS Modal Confirmation yang menyebut alamat publik yang ikut hilang. Kondisi kosong tidak lagi menyebut "migrasi 000009".',
     lama:'Status diubah dengan sekali klik pada lencana "Aktif/Non-aktif" tanpa konfirmasi, padahal lencana tidak tampak seperti tombol. Empat tombol berjajar di setiap baris. Kondisi kosong menyuruh "jalankan ulang migrasi 000009 atau buat manual via menu Templates".', ke:'landing', sorot:'#daftarHalaman' },
   { kode:'IDDS-TN-18', judul:'Penyusun tata letak: aksi blok selalu terlihat dan label berbahasa Indonesia',
-    isi:'Tombol naik, turun, duplikat, dan hapus pada setiap blok selalu terlihat, tidak hanya saat kursor di atas blok. Setiap tombol punya label pembaca layar yang menyebut nama blok. Panel Properti memakai IDDS Text Field, Select, Toggle, dan isian warna. Judul panel memakai nama blok yang rapi ("Grid Kartu", bukan "card grid"). Penanda "Belum disimpan" memakai IDDS Badge, dan hasil simpan memakai IDDS Toast. Kembali saat ada perubahan memunculkan IDDS Modal Confirmation. Penyusun yang sama dipakai di Artikel & Halaman ("Ubah Tata Letak").',
+    isi:'Tombol naik, turun, duplikat, dan hapus pada setiap blok selalu terlihat, tidak hanya saat kursor di atas blok. Setiap tombol punya label pembaca layar yang menyebut nama blok. Panel Properti memakai IDDS Text Field, Select, Toggle, dan isian warna. Judul panel memakai nama blok yang rapi ("Grid Kartu", bukan "card grid"). Penanda "Belum disimpan" memakai IDDS Badge, dan hasil simpan memakai IDDS Toast. Kembali saat ada perubahan memunculkan IDDS Modal Confirmation. Penyusun yang sama dipakai di Artikel & Halaman ("Ubah tata letak").',
     lama:'Aksi blok hanya muncul saat kursor di atas blok sehingga tidak terjangkau dengan layar sentuh dan keyboard. Label bercampur bahasa Inggris: "Save Layout", "● Unsaved", "Component", "Properties", "Layout Width", "Section ID", "Brand Title", "Show Arrows", "Bento Rows", "Add Row".', ke:'builder', sorot:'#kanvas' },
   { kode:'IDDS-TN-19', judul:'Tema Tampilan: IDDS Tab dan penjaga perubahan belum disimpan',
     isi:'Tab utama dan sub-tab Komponen memakai IDDS Tab; pilihan memakai IDDS Select, Checkbox, dan Radio. Perubahan tampil di "Pratinjau Langsung" dan baru berlaku untuk seluruh aplikasi setelah Simpan. Berpindah menu saat ada perubahan memunculkan dialog "Tinggalkan halaman ini?". Tombol Batal meminta konfirmasi, dan hasil simpan memakai IDDS Toast, bukan banner yang tidak dapat ditutup.',
@@ -700,7 +700,7 @@ const UBAH = [
     isi:'Setiap halaman Konten Situs (Halaman Depan, penyusun tata letak, Tema Tampilan, Master Konten, Artikel & Halaman, Pustaka Media) memiliki tombol Bantuan di kanan judul. Tombol ini membuka IDDS Drawer berisi penjelasan khusus halaman itu, pertanyaan umum (IDDS Accordion), dan kontak dukungan. Pola sama dengan saran HE-UMUM-02.',
     lama:'Tidak ada panduan atau kontak dukungan di halaman CMS.', ke:'bantuan', sorot:null },
   { kode:'IDDS-TN-26', judul:'Menu Konten Situs: istilah dan ejaan dibakukan',
-    isi:'Istilah dan ejaan dibakukan: "Save Layout" menjadi "Simpan Tata Letak", "Import/Export" menjadi "Impor/Ekspor", "Upload" menjadi "Unggah", "Non-aktif" menjadi "Nonaktif", "di-undo" menjadi "dibatalkan", dan "konfigurasi-nya" menjadi "konfigurasinya". Label isian juga dibakukan: "Code/Name" menjadi "Kode/Nama", "Excerpt" menjadi "Ringkasan", "Tags" menjadi "Tag", "Density" menjadi "Kerapatan", "Primary" menjadi "Warna utama", dan "Tambah Post" menjadi "Tambah Artikel/Halaman". Istilah teknis yang bocor ke layar ("DOMPurify", "sanitize", "WYSIWYG", "broken", "siblings", "properties picker") diganti kalimat biasa. Nama menu di sidebar tidak diubah.',
+    isi:'Istilah dan ejaan dibakukan: "Save Layout" menjadi "Simpan tata letak", "Import/Export" menjadi "Impor/Ekspor", "Upload" menjadi "Unggah", "Non-aktif" menjadi "Nonaktif", "di-undo" menjadi "dibatalkan", dan "konfigurasi-nya" menjadi "konfigurasinya". Label isian juga dibakukan: "Code/Name" menjadi "Kode/Nama", "Excerpt" menjadi "Ringkasan", "Tags" menjadi "Tag", "Density" menjadi "Kerapatan", "Primary" menjadi "Warna utama", dan "Tambah Post" menjadi "Tambah artikel/halaman". Istilah teknis yang bocor ke layar ("DOMPurify", "sanitize", "WYSIWYG", "broken", "siblings", "properties picker") diganti kalimat biasa. Nama menu di sidebar tidak diubah.',
     lama:'Label dan pesan bercampur bahasa Inggris dan istilah developer, misalnya "Block di builder yang memakai ID master ini akan jadi broken" dan "Markup di-sanitize via DOMPurify".', ke:'posts', sorot:null },
   { kode:'IDDS-TN-41', judul:'Tema Tampilan: tiga preset tema IDDS (E-PPAT, INAgov, Default)',
     isi:'Preset Brand dibagi dua kelompok IDDS Radio. Kelompok teratas "Preset tema IDDS" berlencana "Sesuai IDDS" dan direkomendasikan. Isinya "E-PPAT (bawaan)" (hijau #3D6B5E, menggantikan "e-PPAT Teal"), "INAgov" (biru #0956C3, brand bawaan IDDS), dan "Default IDDS" (abu-abu netral bawaan IDDS). Ketiganya dikonfirmasi Peruri sebagai penyedia IDDS. Setiap kartu punya contoh warna dan keterangan kapan dipakai. Memilih preset langsung mengubah Pratinjau Langsung: wadah pratinjau memakai data-brand yang sama dengan aplikasi (eppat, inagov, atau tanpa data-brand untuk Default). Preset live lainnya tetap ada di kelompok "Warna lain (di luar brand IDDS)" dengan keterangan "Warna ini bukan brand resmi IDDS. Pastikan kontrasnya lulus sebelum dipakai." Crimson dan Burgundy diberi peringatan kecil karena IDDS memakai merah untuk galat dan aksi hapus. Label Navy Blue menjadi "Biru dongker". Mode Kustom, penanda belum disimpan, konfirmasi Batal, dan Toast simpan tetap.',
@@ -918,7 +918,7 @@ function jaga(lanjut) {
   const tema = S.layar === 'tema';
   dialog({ judul:'Tinggalkan halaman ini?', konfirmasi:true,
     isi:`<p>${tema ? 'Perubahan tema belum disimpan. Tampilan aplikasi akan kembali ke tema tersimpan.' : 'Perubahan tata letak belum disimpan dan akan hilang.'}${usulan(tema ? 'IDDS-TN-19' : 'IDDS-TN-18')}</p>`,
-    tombol:[['Tetap di Sini', 'secondary', null], ['Tinggalkan', 'primary', () => { if (tema) TEMA = salinObj(TEMA_F); S.builder = null; lanjut(); }]] });
+    tombol:[['Tetap di sini', 'secondary', null], ['Tinggalkan', 'primary', () => { if (tema) TEMA = salinObj(TEMA_F); S.builder = null; lanjut(); }]] });
 }
 function pindah(ke, lanjut) {
   jaga(() => { S.layar = ke; S.builder = null; S.menuHal = null; history.replaceState(null, '', '#' + ke); gambar(); window.scrollTo({ top:0 }); lanjut && lanjut(); });
@@ -929,20 +929,20 @@ function layarLanding() {
   if (S.builder) return layarBuilder();
   return `${remah('Konten Situs', 'Halaman Depan')}<h1>Halaman Depan</h1><p class="sub">Susun dan tayangkan halaman publik kantor Anda.</p>
     <section class="blok baris-atas"><div><div class="eb">Total halaman</div><div style="font:500 22px Inter,sans-serif;color:var(--ina-primary-primary);margin-top:4px">${HAL.length} halaman</div></div>
-      <div class="aksi-baris">${tombol('Impor Tata Letak (ZIP)', 'secondary', 'md', 'id="imporZip"', ik('unggah', 16))}${tombol('Buat Halaman', 'primary', 'md', 'id="buatHal"', ik('tambah', 16))}</div></section>
+      <div class="aksi-baris">${tombol('Impor tata letak (ZIP)', 'secondary', 'md', 'id="imporZip"', ik('unggah', 16))}${tombol('Buat halaman', 'primary', 'md', 'id="buatHal"', ik('tambah', 16))}</div></section>
     <div class="daftar-kartu ditandai" id="daftarHalaman">${HAL.length ? HAL.map(h => `
       <div class="kartu-baris" data-hal="${h.id}">
         <span class="ikon-kotak">${ik('dok', 18)}</span>
         <div class="isi"><div class="nm">${esc(h.name)} ${badge(h.aktif ? 'Tayang' : 'Tidak tayang', h.aktif ? 'success' : 'neutral', 'sm')}</div>
           <div class="mono" style="margin-top:4px">Alamat publik: ${h.slug ? (h.slug === '/' ? '/ (beranda)' : '/' + esc(h.slug)) : '—'} · ${h.layout.length} blok</div></div>
         ${toggle('tayang' + h.id, 'Tayang di situs', h.aktif, `data-tayang="${h.id}"`, `Tayang di situs: ${h.name}`)}
-        <div class="aksi-baris">${tombol('Ubah Tata Letak', 'primary', 'sm', `data-ubah-tl="${h.id}"`, ik('edit', 14))}
+        <div class="aksi-baris">${tombol('Ubah tata letak', 'primary', 'sm', `data-ubah-tl="${h.id}"`, ik('edit', 14))}
           <span class="aksi-wadah ina-action-dropdown"><button type="button" class="ina-button ina-button--secondary ina-button--sm ikon-btn" data-menu-hal="${h.id}" aria-haspopup="menu" aria-expanded="${S.menuHal === h.id}" aria-label="Aksi lain untuk ${esc(h.name)}">${ik('titik', 16)}</button>
           ${S.menuHal === h.id ? `<div class="ina-action-dropdown__menu ina-action-dropdown__menu--visible" role="menu">
             <button type="button" class="ina-action-dropdown__item" role="menuitem" data-info-hal="${h.id}"><span class="ina-action-dropdown__item-icon">${ik('gear')}</span><span class="ina-action-dropdown__item-content">Ubah Info Halaman</span></button>
             <button type="button" class="ina-action-dropdown__item" role="menuitem" data-ekspor-hal="${h.id}"><span class="ina-action-dropdown__item-icon">${ik('unduh')}</span><span class="ina-action-dropdown__item-content">Ekspor (ZIP)</span></button>
             <button type="button" class="ina-action-dropdown__item" role="menuitem" data-hapus-hal="${h.id}"><span class="ina-action-dropdown__item-icon">${ik('sampah')}</span><span class="ina-action-dropdown__item-content">Hapus Halaman</span></button></div>` : ''}</span></div>
-      </div>`).join('') : `<div class="kosong-kotak">Belum ada halaman. Klik "Buat Halaman" untuk menyusun halaman pertama, atau "Impor Tata Letak (ZIP)" dari halaman yang pernah diekspor.</div>`}</div>
+      </div>`).join('') : `<div class="kosong-kotak">Belum ada halaman. Klik "Buat halaman" untuk menyusun halaman pertama, atau "Impor tata letak (ZIP)" dari halaman yang pernah diekspor.</div>`}</div>
     <div style="margin-top:8px">${usulan('IDDS-TN-17')}</div>`;
 }
 function konfirmTayang(h) {
@@ -989,7 +989,7 @@ function konfirmHapusHal(h) {
   dialog({ judul:`Hapus "${esc(h.name)}"?`, konfirmasi:true, bahaya:true,
     isi:`<div class="modal-gap">${h.aktif ? alert('critical', 'Halaman ini sedang tayang', `Menghapusnya membuat halaman publik di alamat <b>${h.slug === '/' ? '/' : '/' + esc(h.slug)}</b> ikut hilang.`) : '<p>Halaman ini tidak sedang tayang.</p>'}
       <p>Halaman beserta seluruh tata letaknya akan dihapus permanen dan tidak dapat dibatalkan.</p></div>`,
-    tombol:[['Batal', 'secondary', null], ['Hapus Halaman', 'primary', () => { HAL = HAL.filter(x => x !== h); gambar(); toast(`Halaman "${h.name}" dihapus.`, 'positive'); }]] });
+    tombol:[['Batal', 'secondary', null], ['Hapus halaman', 'primary', () => { HAL = HAL.filter(x => x !== h); gambar(); toast(`Halaman "${h.name}" dihapus.`, 'positive'); }]] });
 }
 function dialogImpor() {
   dialog({ judul:'Impor Tata Letak (ZIP)',
@@ -1023,7 +1023,7 @@ function layarBuilder() {
     <div class="builder ditandai" id="builder">
       <div class="b-alat">${tombol('Kembali', 'secondary', 'sm', 'id="bKembali"', ik('kiri', 14))}<span class="nm">${esc(B.nama)}</span>
         ${B.kotor ? badge('Belum disimpan', 'warning', 'sm') : badge('Tersimpan', 'success', 'sm')}${usulan('IDDS-TN-18')}
-        <span class="kanan">${tombol('Simpan Tata Letak', 'primary', 'sm', `id="bSimpan" ${B.kotor ? '' : 'disabled'}`, ik('simpan', 14))}</span></div>
+        <span class="kanan">${tombol('Simpan tata letak', 'primary', 'sm', `id="bSimpan" ${B.kotor ? '' : 'disabled'}`, ik('simpan', 14))}</span></div>
       <div class="b-tiga">
         <div class="b-palet" aria-label="Komponen"><div class="eb">Komponen</div><p class="ket" style="font-size:12.5px;margin-top:4px">Klik untuk menambah blok di akhir halaman.</p>
           ${jenis.map(k => tombol(BLOK[k].label, 'secondary', 'sm', `data-tambah-blok="${k}"`, ik(BLOK[k].ikon, 14))).join('')}
@@ -1069,7 +1069,7 @@ function pratinjau(b) {
 }
 /* panel Properti (isian = live, label dibakukan) */
 const isianWarna = (id, l, v, atr, bantu = '') => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}</label><div class="warna-isian"><input type="color" value="${/^#[0-9a-f]{6}$/i.test(v) ? v : '#000000'}" aria-label="Pilih ${esc(l)}" ${atr} data-warna-pick><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><input id="${id}" type="text" class="ina-text-field__input mono" value="${esc(v)}" placeholder="#ffffff" ${atr}></div></div>${bantu ? `<div class="ina-text-field__helper-text">${bantu}</div>` : ''}</div>`;
-const isianGambar = (id, l, v, atr, ph = '/uploads/foto.jpg', bantu = '') => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}</label><div class="gbr-isian"><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><input id="${id}" type="text" class="ina-text-field__input" value="${esc(v && v.startsWith('data:') ? '/uploads/' + (MEDIA.find(m => m.url === v)?.nama || 'gambar.jpg') : v)}" placeholder="${ph}" aria-describedby="h-${id}" ${atr}></div>${tombol('Pilih dari Media', 'secondary', 'md', `data-pilih-gambar="${id}"`, ik('gambar', 14))}</div><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div>${v ? `<div class="gbr-pratinjau"><img src="${v}" alt="Pratinjau ${esc(l)}"></div>` : ''}</div>`;
+const isianGambar = (id, l, v, atr, ph = '/uploads/foto.jpg', bantu = '') => `<div class="ina-text-field" id="f-${id}"><label class="ina-text-field__label" for="${id}">${l}</label><div class="gbr-isian"><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><input id="${id}" type="text" class="ina-text-field__input" value="${esc(v && v.startsWith('data:') ? '/uploads/' + (MEDIA.find(m => m.url === v)?.nama || 'gambar.jpg') : v)}" placeholder="${ph}" aria-describedby="h-${id}" ${atr}></div>${tombol('Pilih dari media', 'secondary', 'md', `data-pilih-gambar="${id}"`, ik('gambar', 14))}</div><div class="ina-text-field__helper-text" id="h-${id}" data-bantu="${esc(bantu)}">${bantu}</div>${v ? `<div class="gbr-pratinjau"><img src="${v}" alt="Pratinjau ${esc(l)}"></div>` : ''}</div>`;
 const editorMini = (id, v, ph, atr = '') => `<div class="mini-editor"><div class="alat-teks" role="toolbar" aria-label="Format teks">${[['bold', 'B', 'Tebal'], ['italic', 'I', 'Miring'], ['underline', 'U', 'Garis bawah'], ['insertUnorderedList', '•', 'Daftar'], ['createLink', ik('tautan', 14), 'Tautan'], ['gambar', ik('gambar', 14), 'Gambar dari Pustaka Media']].map(([c, t, l]) => `<button type="button" data-format="${c}" data-editor="${id}" aria-label="${l}" title="${l}">${t}</button>`).join('')}</div><div contenteditable="true" id="${id}" role="textbox" aria-multiline="true" aria-labelledby="lbl-${id}" data-ph="${esc(ph)}" ${atr}>${v}</div></div>`;
 const labelEditor = (id, l) => `<span class="ina-text-field__label" id="lbl-${id}">${l}</span>`;
 function panelProp() {
@@ -1088,9 +1088,9 @@ function panelProp() {
     if (t === 'master') { const daftar = MASTER[o.tipe].filter(m => m.aktif);
       return `<div class="f-baris">${pilihan(id, l, [['', daftar.length ? 'Pilih' : `Belum ada ${o.tipe} di Master Konten`], ...daftar.map(m => [m.id, esc(m.name)])], p[k], `Dikelola di Konten Situs › Master Konten › ${o.tipe === 'menu' ? 'Menu' : o.tipe === 'slider' ? 'Slider' : 'Footer'}.`, `${atr(k)} data-ulang-panel`)}</div>`; }
     if (t === 'rich') return `<div class="f-baris">${labelEditor(id, l)}${editorMini(id, p[k], o.ph, `data-prop-rich="${k}"`)}<div class="ina-text-field__helper-text">${o.bantu}</div></div>`;
-    if (t === 'bento') return `<div class="bento"><div class="baris-atas"><span class="eb">${l}</span>${tombol('Tambah Baris', 'secondary', 'sm', 'data-bento-tambah', ik('tambah', 14))}</div>
+    if (t === 'bento') return `<div class="bento"><div class="baris-atas"><span class="eb">${l}</span>${tombol('Tambah baris', 'secondary', 'sm', 'data-bento-tambah', ik('tambah', 14))}</div>
       ${p.bentoRows.length ? p.bentoRows.map((r, i) => `<div class="bento-baris"><div class="baris-atas"><b style="font-size:13px">Baris ${i + 1}</b><span class="aksi-baris">${pilihan('bk' + i, '', [1, 2, 3, 4].map(n => [n, `${n} kolom`]), r.cols, '', `data-bento-kolom="${i}" aria-label="Jumlah kolom baris ${i + 1}"`)}${tIkon('sampah', `Hapus baris ${i + 1}`, `data-bento-hapus="${i}"`)}</span></div>
-        ${r.cells.map((c, j) => `<div class="f-baris" style="margin-top:8px">${labelEditor(`bc${i}-${j}`, `Kartu ${j + 1}`)}${editorMini(`bc${i}-${j}`, c, `Isi kartu ${j + 1}…`, `data-bento-sel="${i}:${j}"`)}</div>`).join('')}</div>`).join('') : '<p class="ket" style="margin-top:8px">Belum ada baris. Klik "Tambah Baris".</p>'}</div>`;
+        ${r.cells.map((c, j) => `<div class="f-baris" style="margin-top:8px">${labelEditor(`bc${i}-${j}`, `Kartu ${j + 1}`)}${editorMini(`bc${i}-${j}`, c, `Isi kartu ${j + 1}…`, `data-bento-sel="${i}:${j}"`)}</div>`).join('')}</div>`).join('') : '<p class="ket" style="margin-top:8px">Belum ada baris. Klik "Tambah baris".</p>'}</div>`;
     return '';
   }).join('');
   return `<div class="eb">Properti</div><h3>${D.label}</h3>
@@ -1144,7 +1144,7 @@ function temaChrome() {
 }
 const kartuAset = (k, l, v, ph) => `<div class="kartu-aset"><span class="thumb" style="${v ? `background-image:url('${v}')` : ''}">${v ? '' : ik('gambar', 20)}</span><div class="isi"><b>${l}</b>
   <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md" style="margin-top:6px"><input type="text" class="ina-text-field__input" value="${esc(v && v.startsWith('data:') ? '/uploads/' + (MEDIA.find(m => m.url === v)?.nama || 'gambar') : v)}" placeholder="${ph}" aria-label="URL ${esc(l)}" data-aset-url="${k}"></div>
-  <div class="aksi-baris">${tombol('Pilih dari Media', 'secondary', 'sm', `data-aset-pilih="${k}" data-label="${esc(l)}"`, ik('gambar', 14))}${v ? tombol('Kosongkan', 'tertiary', 'sm', `data-aset-kosong="${k}"`) : ''}</div></div></div>`;
+  <div class="aksi-baris">${tombol('Pilih dari media', 'secondary', 'sm', `data-aset-pilih="${k}" data-label="${esc(l)}"`, ik('gambar', 14))}${v ? tombol('Kosongkan', 'tertiary', 'sm', `data-aset-kosong="${k}"`) : ''}</div></div></div>`;
 function temaKonten() {
   const c = TEMA.chrome;
   return `<div class="sub-bagian" style="margin-top:0">${subJudul('Latar Konten', 'Warna dan gambar latar area konten. Kosongkan untuk mengikuti preset.')}
@@ -1199,7 +1199,7 @@ function layarMaster() {
 }
 const kepalaMaster = (m, tipe, tambah = true) => `<div class="baris-atas"><div><h2 style="margin:0;display:flex;gap:8px;align-items:center">${esc(m.name)} ${m.aktif ? badge('Aktif', 'success', 'sm') : badge('Nonaktif', 'neutral', 'sm')}</h2>
   <div class="mono" style="margin-top:4px">Kode: ${esc(m.code)} · ${m.item.length} item · dipakai di ${HAL.filter(h => h.layout.some(b => +b.props[{ slider:'slider_id', menu:'menu_navbar_id', footer:'footer_id' }[tipe]] === m.id)).map(h => esc(h.name)).join(', ') || 'belum ada halaman'}</div></div>
-  <div class="aksi-baris">${tambah ? tombol('Tambah Item', 'primary', 'sm', 'id="tambahItem"', ik('tambah', 14)) : ''}${tombol(`Hapus ${NM_TIPE[tipe]}`, 'secondary', 'sm', 'id="hapusMaster" class="bahaya"', ik('sampah', 14))}</div></div>`;
+  <div class="aksi-baris">${tambah ? tombol('Tambah item', 'primary', 'sm', 'id="tambahItem"', ik('tambah', 14)) : ''}${tombol(`Hapus ${NM_TIPE[tipe]}`, 'secondary', 'sm', 'id="hapusMaster" class="bahaya"', ik('sampah', 14))}</div></div>`;
 function ringkasTeks(it, tipe) { const t = String((tipe === 'slider' ? (it.caption || it.subtitle) : (it.title || String(it.content || '').replace(/<[^>]+>/g, ' '))) || '').trim(); return t ? (t.length > 120 ? t.slice(0, 117) + '…' : t) : '(kosong)'; }
 const ringkasItem = (it, tipe) => esc(ringkasTeks(it, tipe));
 function editorItem(m, tipe) {
@@ -1207,7 +1207,7 @@ function editorItem(m, tipe) {
     ${m.item.length ? `<ul class="item-daftar">${m.item.map((it, i) => `<li>${tipe === 'slider' ? `<span class="th" style="background-image:url('${it.image_url}')" role="img" aria-label="Gambar slide ${i + 1}"></span>` : ''}
       <div class="isi"><b>${ringkasItem(it, tipe)}</b><small>${tipe === 'slider' ? esc(it.subtitle || '') + (it.link ? ' · tautan ' + esc(it.link) : '') : esc(it.content.replace(/<[^>]+>/g, ' '))}</small></div>
       <span class="aksi-baris">${tIkon('edit', `Ubah ${ringkasTeks(it, tipe)}`, `data-ubah-item="${it.id}"`)}${tIkon('sampah', `Hapus ${ringkasTeks(it, tipe)}`, `data-hapus-item="${it.id}"`)}</span></li>`).join('')}</ul>`
-      : `<div class="kosong-kotak" style="margin-top:12px">Belum ada item. Klik "Tambah Item" untuk mulai.</div>`}</section>`;
+      : `<div class="kosong-kotak" style="margin-top:12px">Belum ada item. Klik "Tambah item" untuk mulai.</div>`}</section>`;
 }
 function editorMenu(m) {
   const halaman = POST.filter(p => p.type === 'page' && p.status === 'published'), berita = POST.filter(p => p.type === 'post' && p.status === 'published');
@@ -1221,7 +1221,7 @@ function editorMenu(m) {
       <div class="f-baris gabung">${pilihan('mHal', 'Halaman', [['', 'Pilih halaman'], ...halaman.map(p => [p.id, esc(p.title)])], '')}${tIkon('tambah', 'Tambahkan halaman ke menu', 'data-menu-tambah="hal"', 'secondary')}</div>
       <div class="f-baris gabung">${pilihan('mBerita', 'Artikel/Berita', [['', 'Pilih artikel'], ...berita.map(p => [p.id, esc(p.title)])], '')}${tIkon('tambah', 'Tambahkan artikel ke menu', 'data-menu-tambah="berita"', 'secondary')}</div>
       <div class="f-baris"><span class="ina-text-field__label">Tautan kustom</span>${tf('mUrl', '', '', 'https://… atau #bagian', false, '', 'aria-label="URL tautan"')}${tf('mLabel', '', '', 'Label menu', false, '', 'aria-label="Label menu"')}
-        ${pilihan('mTarget', '', [['_self', 'Buka di tab yang sama'], ['_blank', 'Buka di tab baru']], '_self', '', 'aria-label="Cara membuka tautan"')}${tombol('Tambahkan Tautan', 'secondary', 'sm', 'data-menu-tambah="kustom"', ik('tambah', 14))}</div></section>
+        ${pilihan('mTarget', '', [['_self', 'Buka di tab yang sama'], ['_blank', 'Buka di tab baru']], '_self', '', 'aria-label="Cara membuka tautan"')}${tombol('Tambahkan tautan', 'secondary', 'sm', 'data-menu-tambah="kustom"', ik('tambah', 14))}</div></section>
     <section class="blok" style="margin:0"><div class="eb">Struktur Menu</div>${kepalaMaster(m, 'menu', false)}
       ${m.item.length ? `<ul class="pohon">${atas.map((x, i) => baris(x, i, atas, false) + m.item.filter(y => y.parent === x.id).map((y, j, sm) => baris(y, j, sm, true)).join('')).join('')}</ul>` : '<div class="kosong-kotak" style="margin-top:12px">Menu masih kosong. Tambahkan item dari panel kiri.</div>'}
       <div style="margin-top:12px">${alert('info', '', 'Gunakan tombol naik dan turun untuk mengatur urutan. Tombol panah kanan menjadikan item sub-menu dari item di atasnya; panah kiri mengeluarkannya.')}</div></section></div>`;
@@ -1269,7 +1269,7 @@ function dialogItem(m, tipe, it) {
 function layarPosts() {
   const rows = POST.filter(p => S.filterPost === 'all' || p.type === S.filterPost);
   return `${remah('Konten Situs', 'Artikel & Halaman')}<h1>Artikel &amp; Halaman</h1><p class="sub">Tulis dan terbitkan artikel, berita, serta halaman statis.</p>
-    <section class="blok baris-atas">${grupTombol([['all', 'Semua'], ['post', 'Artikel/Berita'], ['page', 'Halaman']], S.filterPost, 'data-filter-post', 'Saring jenis')}${tombol('Tambah Artikel/Halaman', 'primary', 'md', 'id="tambahPost"', ik('tambah', 16))}</section>
+    <section class="blok baris-atas">${grupTombol([['all', 'Semua'], ['post', 'Artikel/Berita'], ['page', 'Halaman']], S.filterPost, 'data-filter-post', 'Saring jenis')}${tombol('Tambah artikel/halaman', 'primary', 'md', 'id="tambahPost"', ik('tambah', 16))}</section>
     <div class="tabel-wadah ditandai" id="tabelPost"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Daftar artikel dan halaman">
       <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Judul</th><th class="ina-table__header-cell">Jenis</th><th class="ina-table__header-cell">Status</th><th class="ina-table__header-cell">Diterbitkan</th><th class="ina-table__header-cell"><span style="position:absolute;left:-9999px">Aksi</span></th></tr></thead>
       <tbody class="ina-table__body">${rows.length ? rows.map(p => `<tr class="ina-table__row">
@@ -1277,7 +1277,7 @@ function layarPosts() {
         <td class="ina-table__cell">${JENIS_POST[p.type]}</td>
         <td class="ina-table__cell">${badge(ST_POST[p.status][0], ST_POST[p.status][1], 'sm')}</td>
         <td class="ina-table__cell">${tglId(p.tanggal)}</td>
-        <td class="ina-table__cell" style="text-align:right;white-space:nowrap">${p.type === 'page' ? tombol('Ubah Tata Letak', 'secondary', 'sm', `data-tl-post="${p.id}"`, ik('edit', 14)) + ' ' : ''}${tIkon('edit', `Ubah ${p.title}`, `data-ubah-post="${p.id}"`)}${tIkon('sampah', `Hapus ${p.title}`, `data-hapus-post="${p.id}"`)}</td></tr>`).join('')
+        <td class="ina-table__cell" style="text-align:right;white-space:nowrap">${p.type === 'page' ? tombol('Ubah tata letak', 'secondary', 'sm', `data-tl-post="${p.id}"`, ik('edit', 14)) + ' ' : ''}${tIkon('edit', `Ubah ${p.title}`, `data-ubah-post="${p.id}"`)}${tIkon('sampah', `Hapus ${p.title}`, `data-hapus-post="${p.id}"`)}</td></tr>`).join('')
         : `<tr><td colspan="5" class="ina-table__empty-cell kosong">${S.filterPost === 'page' ? 'Belum ada halaman.' : S.filterPost === 'post' ? 'Belum ada artikel atau berita.' : 'Belum ada artikel atau halaman.'}</td></tr>`}</tbody></table></div></div></div>
     <div style="margin-top:8px">${usulan('IDDS-TN-22')}</div>`;
 }
@@ -1285,17 +1285,17 @@ function dialogPost(p) {
   const baru = !p, d = p ? { ...p } : { title:'', slug:'', type:'post', status:'draft', use_builder:false, cover:'', cover_aspect:'auto', excerpt:'', content:'', tags:'' };
   let slugManual = !baru, kotor = false;
   const isi = () => `${tf('pJudul', 'Judul', d.title, '', true)}
-    <div class="slug-baris" id="slugBaris">${slugManual ? `${tf('pSlug', '', d.slug, 'otomatis-dari-judul', false, '', 'aria-label="Alamat (slug)"')}${tombol('Buat Ulang dari Judul', 'tertiary', 'sm', 'id="slugReset"')}` : `<span>Alamat:</span><code>/${d.type === 'page' ? 'p/' : ''}${esc(d.slug) || '(otomatis dari judul)'}</code>${tombol('Ubah', 'tertiary', 'sm', 'id="slugUbah"')}`}</div>
+    <div class="slug-baris" id="slugBaris">${slugManual ? `${tf('pSlug', '', d.slug, 'otomatis-dari-judul', false, '', 'aria-label="Alamat (slug)"')}${tombol('Buat ulang dari judul', 'tertiary', 'sm', 'id="slugReset"')}` : `<span>Alamat:</span><code>/${d.type === 'page' ? 'p/' : ''}${esc(d.slug) || '(otomatis dari judul)'}</code>${tombol('Ubah', 'tertiary', 'sm', 'id="slugUbah"')}`}</div>
     <div class="f-dua f-baris">${pilihan('pJenis', 'Jenis', [['post', 'Artikel/Berita'], ['page', 'Halaman (statis)']], d.type)}${pilihan('pStatus', 'Status', [['draft', 'Draf'], ['published', 'Terbit'], ['archived', 'Diarsipkan']], d.status, 'Pilih Terbit agar konten tampil di situs publik.')}</div>
-    ${d.type === 'page' ? `<div class="f-baris toggle-baris" style="display:block">${cekBox('pBuilder', d.use_builder, 'Gunakan penyusun tata letak', d.use_builder ? 'Isi halaman diambil dari tata letak. Susun lewat tombol "Ubah Tata Letak" di daftar. Editor konten di bawah disembunyikan.' : 'Isi halaman diambil dari editor konten di bawah. Aktifkan untuk menyusun halaman dari blok (slider, grid kartu, dan lain-lain).')}</div>` : ''}
+    ${d.type === 'page' ? `<div class="f-baris toggle-baris" style="display:block">${cekBox('pBuilder', d.use_builder, 'Gunakan penyusun tata letak', d.use_builder ? 'Isi halaman diambil dari tata letak. Susun lewat tombol "Ubah tata letak" di daftar. Editor konten di bawah disembunyikan.' : 'Isi halaman diambil dari editor konten di bawah. Aktifkan untuk menyusun halaman dari blok (slider, grid kartu, dan lain-lain).')}</div>` : ''}
     <div class="f-baris">${isianGambar('pCover', 'Gambar Sampul', d.cover, '', '/uploads/sampul.jpg', 'Pilih dari Pustaka Media atau tempel URL.')}</div>
     ${d.cover ? `<div class="f-baris">${pilihan('pAspek', 'Tinggi Sampul (di halaman detail)', [['auto', 'Otomatis (ukuran asli)'], ['30', '30% — sangat rendah'], ['40', '40% — pendek'], ['50', '50% — 2:1 panorama'], ['56.25', '56,25% — 16:9 layar lebar'], ['66.66', '66,66% — 3:2 foto'], ['75', '75% — 4:3 klasik'], ['100', '100% — 1:1 persegi']], d.cover_aspect, 'Tinggi dalam persen terhadap lebar.')}</div>` : ''}
     <div class="f-baris">${ta('pRingkas', 'Ringkasan', d.excerpt, '', 'Satu atau dua kalimat, tanpa format.')}</div>
-    ${d.type === 'page' && d.use_builder ? `<div class="f-baris">${alert('info', '', `Penyusun tata letak aktif. Susun isi halaman lewat tombol <b>Ubah Tata Letak</b> di daftar.${baru ? ' Simpan halaman ini terlebih dahulu.' : ''}`)}</div>` : `<div class="f-baris">${labelEditor('pKonten', 'Konten')}${editorMini('pKonten', d.content, 'Mulai tulis artikel di sini…')}<div class="ina-text-field__helper-text">Sisipkan gambar dari Pustaka Media lewat tombol gambar di bilah alat.</div></div>`}
+    ${d.type === 'page' && d.use_builder ? `<div class="f-baris">${alert('info', '', `Penyusun tata letak aktif. Susun isi halaman lewat tombol <b>Ubah tata letak</b> di daftar.${baru ? ' Simpan halaman ini terlebih dahulu.' : ''}`)}</div>` : `<div class="f-baris">${labelEditor('pKonten', 'Konten')}${editorMini('pKonten', d.content, 'Mulai tulis artikel di sini…')}<div class="ina-text-field__helper-text">Sisipkan gambar dari Pustaka Media lewat tombol gambar di bilah alat.</div></div>`}
     <div class="f-baris">${tf('pTag', 'Tag', d.tags, '', false, 'Pisahkan dengan koma, misalnya akta, jual beli, panduan.')}</div>${usulan('IDDS-TN-22')}`;
   const ambilIsian = () => { const L = $('#lapisan'); d.title = L.querySelector('#pJudul').value; if (L.querySelector('#pSlug')) d.slug = L.querySelector('#pSlug').value; d.type = L.querySelector('#pJenis').value; d.status = L.querySelector('#pStatus').value; d.excerpt = L.querySelector('#pRingkas').value; d.tags = L.querySelector('#pTag').value; const k = L.querySelector('#pKonten'); if (k) d.content = k.innerHTML; const a = L.querySelector('#pAspek'); if (a) d.cover_aspect = a.value; const c = L.querySelector('#pBuilder'); if (c) d.use_builder = c.checked; };
   const batal = () => { if (!kotor) { $('#lapisan').innerHTML = ''; return; }
-    dialog2({ judul:'Buang perubahan?', bahaya:true, isi:`<p>Isian ${baru ? 'artikel/halaman baru' : `"${esc(p.title)}"`} belum disimpan dan akan hilang.${usulan('IDDS-TN-22')}</p>`, tombol:[['Lanjut Mengisi', 'secondary', null], ['Buang', 'primary', () => { $('#lapisan').innerHTML = ''; }]] }); };
+    dialog2({ judul:'Buang perubahan?', bahaya:true, isi:`<p>Isian ${baru ? 'artikel/halaman baru' : `"${esc(p.title)}"`} belum disimpan dan akan hilang.${usulan('IDDS-TN-22')}</p>`, tombol:[['Lanjut mengisi', 'secondary', null], ['Buang', 'primary', () => { $('#lapisan').innerHTML = ''; }]] }); };
   dialog({ judul: baru ? 'Tambah Artikel/Halaman' : `Ubah — ${esc(p.title)}`, lebar:true, isi:isi(), batalKustom:batal,
     tombol:[['Batal', 'secondary', batal, true], ['Simpan', 'primary', () => {
       ambilIsian(); if (!d.slug) d.slug = slugify(d.title);
@@ -1334,7 +1334,7 @@ function layarMedia() {
       <div class="inf"><b title="${esc(m.nama)}">${esc(m.nama)}</b><small>${jenisBerkas(m.mime)} · ${ukuran(m.size)}</small></div>
       <div class="aksi-baris">${tombol('Salin URL', 'secondary', 'sm', `data-salin-media="${m.id}" aria-label="Salin URL ${esc(m.nama)}"`, ik('salin', 14))}${tIkon('sampah', `Hapus ${m.nama}`, `data-hapus-media="${m.id}"`, 'secondary')}</div></div>`).join('')}</div>`
       : `<div class="kosong-kotak" style="margin-top:16px"><b style="display:block;font-size:16px;color:var(--ina-content-primary)">Pustaka Media kosong</b>Unggah gambar atau dokumen untuk dipakai di Artikel & Halaman dan Halaman Depan.</div>`}
-    <div style="margin-top:16px">${alert('info', '', 'Klik "Salin URL", lalu tempel di isian Gambar Sampul pada Artikel & Halaman atau isian gambar di penyusun tata letak. Anda juga bisa memakai tombol "Pilih dari Media" di isian tersebut.')}</div>
+    <div style="margin-top:16px">${alert('info', '', 'Klik "Salin URL", lalu tempel di isian Gambar Sampul pada Artikel & Halaman atau isian gambar di penyusun tata letak. Anda juga bisa memakai tombol "Pilih dari media" di isian tersebut.')}</div>
     <div style="margin-top:8px">${usulan('IDDS-TN-23')}</div>`;
 }
 const CONTOH_UNGGAH = [['brosur-layanan.pdf', 'application/pdf', 512000, '/uploads/brosur-layanan.pdf'], ['foto-tim-kantor.jpg', 'image/jpeg', 204800, gbr('Tim Kantor', '#4e7c6f', '#1d3530')]];
@@ -1408,12 +1408,12 @@ H.addEventListener('click', e => {
     const sl = t.closest('[data-blok-salin]'); if (sl) { const a = S.builder.blok, i = a.findIndex(b => b.id === sl.dataset.blokSalin), c = { ...salinObj(a[i]), id:'b' + idBaru() }; a.splice(i + 1, 0, c); S.builder.pilih = c.id; S.builder.kotor = true; segarBuilder(); toast(`${BLOK[c.type].label} diduplikat.`); return; }
     const hb = t.closest('[data-blok-hapus]'); if (hb) { const b = cariBlok(hb.dataset.blokHapus);
       dialog({ judul:`Hapus blok ${BLOK[b.type].label}?`, konfirmasi:true, bahaya:true, isi:`<p>Blok beserta seluruh pengaturannya akan dihapus dari tata letak. Perubahan ini baru permanen setelah Anda menyimpan tata letak.${usulan('IDDS-TN-18')}</p>`,
-        tombol:[['Batal', 'secondary', null], ['Hapus Blok', 'primary', () => { S.builder.blok = S.builder.blok.filter(x => x !== b); if (S.builder.pilih === b.id) S.builder.pilih = null; S.builder.kotor = true; segarBuilder(); toast('Blok dihapus.'); }]] }); return; }
+        tombol:[['Batal', 'secondary', null], ['Hapus blok', 'primary', () => { S.builder.blok = S.builder.blok.filter(x => x !== b); if (S.builder.pilih === b.id) S.builder.pilih = null; S.builder.kotor = true; segarBuilder(); toast('Blok dihapus.'); }]] }); return; }
     const pg = t.closest('[data-pilih-gambar]'); if (pg) { const k = $('#' + pg.dataset.pilihGambar).dataset.prop; pilihMedia(BLOK[cariBlok(S.builder.pilih).type].label, m => { cariBlok(S.builder.pilih).props[k] = m.url; S.builder.kotor = true; segarBuilder(); }); return; }
     const pt = t.closest('[data-prop-toggle]'); if (pt) { const b = cariBlok(S.builder.pilih), k = pt.dataset.propToggle; b.props[k] = !b.props[k]; S.builder.kotor = true; segarBuilder(); $(`[data-prop-toggle="${k}"]`)?.focus(); return; }
     if (t.closest('[data-bento-tambah]')) { cariBlok(S.builder.pilih).props.bentoRows.push({ cols:2, cells:['', ''] }); S.builder.kotor = true; segarBuilder(); return; }
     const bh = t.closest('[data-bento-hapus]'); if (bh) { const b = cariBlok(S.builder.pilih), i = +bh.dataset.bentoHapus;
-      dialog({ judul:`Hapus baris ${i + 1}?`, konfirmasi:true, bahaya:true, isi:'<p>Baris beserta isi kartunya akan dihapus dari blok ini.</p>', tombol:[['Batal', 'secondary', null], ['Hapus Baris', 'primary', () => { b.props.bentoRows.splice(i, 1); S.builder.kotor = true; segarBuilder(); }]] }); return; }
+      dialog({ judul:`Hapus baris ${i + 1}?`, konfirmasi:true, bahaya:true, isi:'<p>Baris beserta isi kartunya akan dihapus dari blok ini.</p>', tombol:[['Batal', 'secondary', null], ['Hapus baris', 'primary', () => { b.props.bentoRows.splice(i, 1); S.builder.kotor = true; segarBuilder(); }]] }); return; }
     const fm = t.closest('[data-format]'); if (fm) { formatTeks(fm); return; }
     const pb = t.closest('[data-pilih-blok]'); if (pb && !t.closest('.aksi')) { const id = pb.dataset.pilihBlok; S.builder.pilih = id; segarBuilder(); if (pb.matches('button')) $(`button[data-pilih-blok="${id}"]`)?.focus({ preventScroll:true }); return; }
   }
@@ -1425,7 +1425,7 @@ H.addEventListener('click', e => {
   const ap = t.closest('[data-aset-pilih]'); if (ap) { const k = ap.dataset.asetPilih; pilihMedia(ap.dataset.label, m => { taruh(TEMA, k, m.url); if (k === 'chrome.content_bg_image' && !TEMA.chrome.content_bg_opacity) TEMA.chrome.content_bg_opacity = 100; gambar(); }); return; }
   const ak = t.closest('[data-aset-kosong]'); if (ak) { taruh(TEMA, ak.dataset.asetKosong, ''); gambar(); return; }
   if (t.closest('#temaSimpan')) { TEMA_F = salinObj(TEMA); gambar(); toast('Tema tersimpan.', 'positive', 3500, 'Tampilan baru berlaku untuk seluruh pengguna.'); return; }
-  if (t.closest('#temaBatal')) { dialog({ judul:'Batalkan perubahan tema?', konfirmasi:true, isi:`<p>Semua perubahan sejak terakhir disimpan akan dikembalikan.${usulan('IDDS-TN-19')}</p>`, tombol:[['Lanjut Mengubah', 'secondary', null], ['Batalkan Perubahan', 'primary', () => { TEMA = salinObj(TEMA_F); gambar(); toast('Perubahan tema dibatalkan.'); }]] }); return; }
+  if (t.closest('#temaBatal')) { dialog({ judul:'Batalkan perubahan tema?', konfirmasi:true, isi:`<p>Semua perubahan sejak terakhir disimpan akan dikembalikan.${usulan('IDDS-TN-19')}</p>`, tombol:[['Lanjut mengubah', 'secondary', null], ['Batalkan perubahan', 'primary', () => { TEMA = salinObj(TEMA_F); gambar(); toast('Perubahan tema dibatalkan.'); }]] }); return; }
   /* Master Konten */
   const mt = t.closest('[data-master-tab]'); if (mt) { S.masterTab = mt.dataset.masterTab; gambar(); $(`[data-master-tab="${S.masterTab}"]`).focus(); return; }
   const pm = t.closest('[data-pilih-master]'); if (pm) { S.masterPilih[S.masterTab] = +pm.dataset.pilihMaster; gambar(); return; }
@@ -1586,7 +1586,7 @@ const dialog2 = o => bangunDialog($('#lapisan2'), o);
 /* penjaga formulir dialog (pola "Buang perubahan?" dialogPost, C28) */
 function batalFormulir(nama, cekKotor) {
   return () => { if (!cekKotor()) { $('#lapisan').innerHTML = ''; return; }
-    dialog2({ judul:'Buang perubahan?', bahaya:true, isi:`<p>Isian ${nama} belum disimpan dan akan hilang.</p>`, tombol:[['Lanjut Mengisi', 'secondary', null], ['Buang', 'primary', () => { $('#lapisan').innerHTML = ''; }]] }); };
+    dialog2({ judul:'Buang perubahan?', bahaya:true, isi:`<p>Isian ${nama} belum disimpan dan akan hilang.</p>`, tombol:[['Lanjut mengisi', 'secondary', null], ['Buang', 'primary', () => { $('#lapisan').innerHTML = ''; }]] }); };
 }
 document.addEventListener('keydown', e => { if (e.key !== 'Escape') return;
   if ($('#lapisan2').innerHTML) { $('#lapisan2')._batal(); return; }
@@ -1612,12 +1612,12 @@ const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
 const BANTUAN = {
   landing:() => ({ judul:'Bantuan Halaman Depan', isi:`<p>Halaman Depan berisi halaman publik kantor, misalnya Beranda dan Tentang Kami, yang dapat dibuka siapa saja.</p>
     <h4 class="bantu-sub">Langkah membuat halaman</h4>
-    ${lgkh(['Klik <b>Buat Halaman</b>, isi nama dan alamatnya.', 'Susun blok di <b>Ubah Tata Letak</b>, lalu klik <b>Simpan Tata Letak</b>.', 'Nyalakan <b>Tayang di situs</b> agar halaman bisa dibuka publik.'])}
+    ${lgkh(['Klik <b>Buat halaman</b>, isi nama dan alamatnya.', 'Susun blok di <b>Ubah tata letak</b>, lalu klik <b>Simpan tata letak</b>.', 'Nyalakan <b>Tayang di situs</b> agar halaman bisa dibuka publik.'])}
     ${istilah([['Alamat', 'Bagian akhir alamat situs, misalnya /tentang. Alamat / adalah beranda.'], ['Tayang', 'Halaman dapat dibuka publik.'], ['Tata letak', 'Susunan blok di halaman: navbar, slider, teks, kartu, gambar, artikel, footer.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('a', [
       ['Bagaimana menjadikan halaman sebagai beranda?', 'Isi alamatnya dengan / di Ubah Info Halaman, lalu tayangkan.'],
-      ['Mengapa perubahan saya belum terlihat di situs?', 'Pastikan Anda sudah klik Simpan Tata Letak dan halaman dalam status Tayang. Lalu muat ulang halaman situs.'],
+      ['Mengapa perubahan saya belum terlihat di situs?', 'Pastikan Anda sudah klik Simpan tata letak dan halaman dalam status Tayang. Lalu muat ulang halaman situs.'],
       ['Bisakah saya menyusun halaman tanpa terlihat publik?', 'Bisa. Biarkan sakelar Tayang di situs mati selama menyusun, lalu nyalakan setelah selesai.'],
       ['Alamat apa yang tidak boleh dipakai?', 'Alamat yang dipakai sistem, seperti admin, api, login, dan register. Aplikasi menolak alamat tersebut.'],
       ['Untuk apa Ekspor dan Impor?', 'Ekspor menyimpan tata letak dan gambarnya sebagai berkas ZIP. Berkas itu dapat diimpor sebagai cadangan atau dipakai di kantor lain. Setelah impor, pilih ulang slider, menu, dan footer.'],
@@ -1625,13 +1625,13 @@ const BANTUAN = {
     ${kontak()}` }),
   builder:() => ({ judul:'Bantuan Penyusun Tata Letak', isi:`<p>Halaman disusun dari blok. Setiap blok punya pengaturan di panel Properti.</p>
     <h4 class="bantu-sub">Langkah</h4>
-    ${lgkh(['Klik komponen di panel kiri untuk menambah blok di akhir halaman.', 'Klik blok di kanvas, lalu ubah isinya di panel <b>Properti</b>.', 'Atur urutan dengan tombol panah di kepala blok; duplikat atau hapus dengan tombol di sebelahnya.', 'Klik <b>Simpan Tata Letak</b>. Bila halaman sedang tayang, perubahan langsung terlihat publik.'])}
+    ${lgkh(['Klik komponen di panel kiri untuk menambah blok di akhir halaman.', 'Klik blok di kanvas, lalu ubah isinya di panel <b>Properti</b>.', 'Atur urutan dengan tombol panah di kepala blok; duplikat atau hapus dengan tombol di sebelahnya.', 'Klik <b>Simpan tata letak</b>. Bila halaman sedang tayang, perubahan langsung terlihat publik.'])}
     ${istilah([['Navbar', 'Bilah menu di atas halaman.'], ['Slider', 'Gambar besar yang berganti otomatis.'], ['Blok HTML', 'Teks bebas dengan judul, daftar, tabel, dan gambar.'], ['Grid Kartu', 'Kartu berjajar dalam baris dan kolom.'], ['Grid Artikel', 'Daftar artikel terbit dari Artikel &amp; Halaman.'], ['Footer', 'Bagian bawah halaman berisi kontak dan tautan.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('b', [
       ['Dari mana isi slider, menu, dan footer?', 'Dari Konten Situs › Master Konten. Pilih slider, menu, atau widget footer yang sudah dibuat di panel Properti.'],
       ['Apa itu ID Bagian?', 'Nama bagian yang dapat dituju dari menu. Misalnya ID Bagian layanan dapat dibuka lewat tautan menu #layanan.'],
-      ['Bagaimana memasang gambar?', 'Klik "Pilih dari Media" di isian gambar, lalu pilih gambar atau unggah gambar baru.'],
+      ['Bagaimana memasang gambar?', 'Klik "Pilih dari media" di isian gambar, lalu pilih gambar atau unggah gambar baru.'],
       ['Bagaimana menyembunyikan blok di ponsel?', 'Pada Blok HTML, nyalakan "Sembunyikan di ponsel". Jangan nyalakan juga "Sembunyikan di desktop", karena blok tidak akan tampil di mana pun.'],
       ['Mengapa blok yang saya hapus masih tampil di situs?', 'Penghapusan baru berlaku setelah Anda memilih Simpan Tata Letak.'],
       ['Apakah ada tombol urungkan (undo)?', 'Belum ada. Bila salah, klik Kembali lalu pilih Tinggalkan untuk membuang perubahan yang belum disimpan.'],
@@ -1677,12 +1677,12 @@ const BANTUAN = {
     ${kontak()}` }),
   media:() => ({ judul:'Bantuan Pustaka Media', isi:`<p>Pustaka Media menyimpan gambar dan dokumen untuk Artikel &amp; Halaman dan Halaman Depan.</p>
     <h4 class="bantu-sub">Langkah</h4>
-    ${lgkh(['Seret berkas ke kotak unggah atau klik untuk memilih. Bisa beberapa berkas sekaligus.', 'Klik <b>Salin URL</b> untuk menempelkan alamat berkas di tempat lain.', 'Atau pilih gambar langsung lewat tombol <b>Pilih dari Media</b> di isian gambar.'])}
+    ${lgkh(['Seret berkas ke kotak unggah atau klik untuk memilih. Bisa beberapa berkas sekaligus.', 'Klik <b>Salin URL</b> untuk menempelkan alamat berkas di tempat lain.', 'Atau pilih gambar langsung lewat tombol <b>Pilih dari media</b> di isian gambar.'])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('e', [
       ['Berkas apa saja yang diterima?', 'Gambar (JPG, PNG, SVG, WebP), PDF, Word, dan Excel.'],
       ['Mengapa unggahan gagal?', 'Biasanya karena jenis berkas tidak diterima atau ukurannya melebihi batas. Pesan galat menyebut penyebabnya.'],
-      ['Bagaimana mencari berkas?', 'Gunakan kolom cari di dialog Pilih Gambar, yang terbuka dari tombol "Pilih dari Media" di isian gambar.'],
+      ['Bagaimana mencari berkas?', 'Gunakan kolom cari di dialog Pilih Gambar, yang terbuka dari tombol "Pilih dari media" di isian gambar.'],
       ['Bisakah mengganti nama berkas?', 'Belum. Unggah ulang dengan nama baru, lalu hapus berkas lama bila tidak dipakai.'],
       ['Apa akibat menghapus berkas?', 'Gambar atau tautan di artikel dan halaman yang memakainya tidak akan tampil lagi. Dialog hapus menyebut tempat berkas itu dipakai.']])}
     ${kontak()}` })
