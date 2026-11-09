@@ -455,7 +455,7 @@ ol.bantu-langkah{padding-left:22px}
 .it-pasal.aktif{border-color:var(--ina-primary-500);background:var(--ina-primary-50)}
 .it-pasal:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:1px}
 .it-pasal .geser{display:flex;flex-direction:column}
-.it-pasal .geser button{border:0;background:transparent;padding:0 2px;height:14px;line-height:0;color:var(--ina-content-secondary);cursor:pointer}
+.it-pasal .geser button{border:0;background:transparent;padding:0 2px;height:14px;min-height:0;min-width:0;line-height:0;color:var(--ina-content-secondary);cursor:pointer}
 .it-pasal .geser button:disabled{opacity:.3;cursor:default}
 .it-pasal .no{width:24px;height:24px;border-radius:999px;display:grid;place-items:center;flex:none;background:var(--ina-primary-500);color:#fff;font:600 11px Inter,sans-serif}
 .it-pasal .no.cat{border-radius:6px;background:var(--ina-neutral-100,#f2f4f7);color:var(--ina-content-secondary)}
@@ -1453,7 +1453,7 @@ function itemNav(t, b, i, L) {
   const ket = [d.type === 'otomatis' ? 'Kondisi · disusun sistem' : '', d.tampil ? '' : 'judul disembunyikan'].filter(Boolean).join(' · ');
   const nama = esc(d.title || 'Tanpa judul');
   return `<li class="it-pasal ${aktif ? 'aktif' : ''}" data-pilih="${b.id}" data-asal="nav" tabindex="0" aria-current="${aktif}" aria-label="${LBL_TIPE[d.type]}: ${nama}">
-    <span class="geser"><button type="button" data-geser="${b.id}:-1" aria-label="Naikkan ${nama}" ${i ? '' : 'disabled'}>${ik('atas', 12)}</button><button type="button" data-geser="${b.id}:1" aria-label="Turunkan ${nama}" ${i < L.length - 1 ? '' : 'disabled'}>${ik('bawah', 12)}</button></span>
+    <span class="geser"><button type="button" class="ina-button ina-button--tertiary ina-button--sm" data-geser="${b.id}:-1" aria-label="Naikkan ${nama}" ${i ? '' : 'disabled'}>${ik('atas', 12)}</button><button type="button" class="ina-button ina-button--tertiary ina-button--sm" data-geser="${b.id}:1" aria-label="Turunkan ${nama}" ${i < L.length - 1 ? '' : 'disabled'}>${ik('bawah', 12)}</button></span>
     ${ikon}<span class="nm">${nama}${ket ? `<small>${ket}</small>` : ''}${m ? `<small class="perlu">${badge(`Perlu dicek (${m})`, 'warning', 'sm', `title="${m} hal perlu dicek. Buka bagian ini untuk melihatnya."`)}</small>` : ''}</span>
     <button type="button" class="ina-button ina-button--tertiary ina-button--sm ubah-b" data-edit-bag="${b.id}" aria-label="Edit ${nama}" title="Edit">${ik('edit', 15)}</button>
     <button type="button" class="ina-button ina-button--tertiary ina-button--sm hapus" data-hapus-bag="${b.id}" aria-label="Hapus ${nama}" title="Hapus">${ik('sampah', 15)}</button></li>`;

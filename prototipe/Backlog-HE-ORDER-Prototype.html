@@ -897,7 +897,7 @@ function syarat(o) {
     { k:'v-harga', l:'Verifikasi harga (NJOP)', ok:o.verif.harga, verif:true, tahap:'SIAP' }] };
   if (o.status === 'DRAFTING') return { ke, daftar:[{ k:'susun', l:'Naskah minuta selesai disusun', ok:!!(o.disusun || o.minuta), tahap:'DRAFTING' }] };
   if (o.status === 'FINALISASI') return { ke, daftar:[{ k:'minuta', l:'Minuta akta difinalisasi PPAT', ok:!!o.minuta, tahap:'FINALISASI' }] };
-  return { ke, daftar:[{ k:'ttd', l:'Minuta selesai ditandatangani', ok:!!(o.ttd && o.ttd.selesai), tahap:'PENANDATANGANAN' }, { k:'salinan', l:'Salinan selesai ditandatangani', ok:!!(o.salinan && o.salinan.selesai), tahap:'PENANDATANGANAN' }] };
+  return { ke, daftar:[{ k:'ttd', l:'Minuta Lembar Pertama dan Kedua selesai ditandatangani', ok:!!(o.ttd && o.ttd.selesai), tahap:'PENANDATANGANAN' }, { k:'salinan', l:'Salinan selesai ditandatangani', ok:!!(o.salinan && o.salinan.selesai), tahap:'PENANDATANGANAN' }] };
 }
 const kurangData = o => syaratData(o).filter(x => !x.ok).length;
 
@@ -1000,7 +1000,7 @@ function langkahBerikut(o, sy) {
   if (x.verif) return `Selesaikan ${kurang.map(y => y.l.replace('Verifikasi ', '')).join(', ')} melalui tombol Verifikasi Berkas.`;
   if (x.k === 'susun') return 'Susun naskah melalui tombol Penyusunan Akta, lalu tekan Beritahu PPAT.';
   if (x.k === 'minuta') return bisaFinal() ? 'PPAT memberi nomor dan tanggal akta melalui tombol Finalisasi Akta.' : 'PPAT memberi nomor dan tanggal akta. Sebelum itu, Anda masih dapat menyunting naskah melalui tombol Penyusunan Akta.';
-  if (x.k === 'ttd') return 'Selesaikan stempel TERA, tanda tangan elektronik, dan e-Meterai melalui tombol Penandatanganan Akta.';
+  if (x.k === 'ttd') return 'Selesaikan stempel TERA, tanda tangan elektronik, dan e-Meterai pada Minuta Lembar Pertama, lalu Lembar Kedua, melalui tombol Penandatanganan Akta.';
   if (x.k === 'salinan') return 'Selesaikan salinan di tab Salinan pada Penandatanganan Akta.';
   if (x.k === 'kontak') return 'Lengkapi nama narahubung di tab Narahubung.';
   if (x.k === 'objek') return 'Tambahkan objek tanah di tab Objek.';

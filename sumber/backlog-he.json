@@ -4419,6 +4419,24 @@
       "versi": "v2"
     },
     {
+      "kode": "HE-EAW-14",
+      "fitur": "Penandatanganan Akta (PPAT)",
+      "prinsip": "H5 Error Prevention; H3 User Control and Freedom",
+      "halaman": "Temuan penelusuran kode live (prototipe HE)",
+      "prioritas": "Sedang",
+      "layar": "Penandatanganan Akta",
+      "selesai_bila": "Ketiga dokumen ditandatangani berurutan, dan permohonan baru dapat Selesai setelah kedua rangkap minuta dan salinan selesai.",
+      "catatan": "Urutan berdasarkan prototipe Perdana Niaga Order APHT; layar E-Akta Wizard live belum ditelusuri.",
+      "judul": "Minuta Lembar Pertama, Minuta Lembar Kedua, dan Salinan",
+      "saat_ini": "Penandatanganan Akta hanya memiliki tab Minuta dan Salinan. Minuta dianggap satu dokumen, dan salinan diunggah sebagai PDF, padahal Arsip Akta dan Renvooi memakai dua rangkap minuta.",
+      "usulan": "Tab menjadi Minuta Lembar Pertama, Minuta Lembar Kedua, dan Salinan, dikerjakan berurutan. Setiap minuta melalui Stempel TERA, Tanda Tangan Elektronik semua penanda tangan, dan e-Meterai. Tab Lembar Kedua terbuka setelah Lembar Pertama selesai, dan tab Salinan terbuka setelah kedua rangkap tuntas; tab yang terkunci menampilkan ikon kunci, alasan, dan tombol ke tab sebelumnya. Salinan tidak lagi diunggah: satu Salinan Akta dibuat otomatis dari minuta final dan hanya ditandatangani PPAT. Halaman pertama dokumen menyebut lembarnya. Syarat Selesai di Permohonan AJB menyebut kedua rangkap, dan status setiap lembar di Arsip Akta mengikuti penandatanganannya.",
+      "acuan": "Prototipe EAW; Prototipe ORDER; Prototipe TN-PROSES",
+      "status": "Prototipe siap",
+      "tanggal": "2026-11-09",
+      "sumber": "Acuan prototipe Perdana Niaga (Order APHT) dan live Arsip Akta",
+      "versi": "v2"
+    },
+    {
       "kode": "IDDS-PL-42",
       "fitur": "Platform · Setting Theme (penyesuaian IDDS)",
       "prinsip": "Penyesuaian IDDS (Kesimpulan HE hal. 40 no. 1); H4 Consistency and Standards",
@@ -5337,7 +5355,7 @@
       "fitur": "Tenant · Masuk & Daftar",
       "judul": "Lembar naskah Renvooi",
       "saat_ini": "Belum ada di prototipe.",
-      "usulan": "Blok teks lalu pilih jenis; halaman dan baris tercatat sendiri; baris bercatatan ditandai.",
+      "usulan": "Blok teks lalu pilih jenis; halaman dan baris tercatat sendiri; baris bercatatan ditandai. Pilihan jenis tampil seperti live: kutipan teks, halaman, dan baris, lalu tombol Coretan dengan gantian, Tambahan, Coretan, dan Batal. Baris bercatatan menampilkan jenisnya di margin kiri, dan teks yang dicoret tampil tercoret. Lembar naskah tanpa garis isian, sama dengan live.",
       "prinsip": "H5 Error Prevention; H8 Aesthetic and Minimalist Design",
       "halaman": "Masukan 5 Nov 2026",
       "prioritas": "Sedang",
@@ -6725,6 +6743,24 @@
       "kode": "HE-ORDER-23; HE-OB-06",
       "perubahan": "Tur Permohonan AJB ditambah langkah baris tab (6 langkah). Tur baru di Dasbor pelanggan Onboarding dan Trial.",
       "berkas": "sumber/order-idds.html, sumber/onboard-badan.html (trial-badan.html dibangkitkan)"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "HE-EAW-14",
+      "perubahan": "Penandatanganan Akta memakai tiga dokumen berurutan: Minuta Lembar Pertama, Minuta Lembar Kedua, Salinan (tanpa unggah, hanya PPAT). Kondisi simulasi untuk ketiganya ditambahkan.",
+      "berkas": "sumber/eaw-badan.html, sumber/order-idds.html, sumber/tn-proses-badan.html"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "IDDS-TN-45; IDDS-TN-50; IDDS-TN-54",
+      "perubahan": "Lembar naskah Renvooi disamakan dengan live: pilihan jenis berupa kutipan dan tombol, label jenis di margin kiri, coretan tampil di naskah, tanpa garis isian. Arsip Akta: kartu Renvooi setinggi isinya, kepala detail dan tombol aksi dalam satu baris.",
+      "berkas": "sumber/tn-proses-badan.html"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "IDDS-TN-44; IDDS-TN-50; IDDS-TN-55",
+      "perubahan": "Renvooi: tahap permohonan pindah ke Informasi Akta dan kartu sesi bernama Sesi Renvooi, sehingga status akta dan status sesi tidak tertukar. Bahasa di Arsip Akta, Renvooi, dan Template Akta dirapikan (SPOK, kata baku, Pratinjau Akta). Tombol naik/turun bagian di editor template memakai IDDS Button, juga di Platform.",
+      "berkas": "sumber/tn-proses-badan.html, sumber/pl-akta-badan.html"
     }
   ]
 }

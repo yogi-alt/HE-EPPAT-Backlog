@@ -699,7 +699,7 @@ ol.bantu-langkah{padding-left:22px}
 .it-pasal.aktif{border-color:var(--ina-primary-500);background:var(--ina-primary-50)}
 .it-pasal:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:1px}
 .it-pasal .geser{display:flex;flex-direction:column}
-.it-pasal .geser button{border:0;background:transparent;padding:0 2px;height:14px;line-height:0;color:var(--ina-content-secondary);cursor:pointer}
+.it-pasal .geser button{border:0;background:transparent;padding:0 2px;height:14px;min-height:0;min-width:0;line-height:0;color:var(--ina-content-secondary);cursor:pointer}
 .it-pasal .geser button:disabled{opacity:.3;cursor:default}
 .it-pasal .no{width:24px;height:24px;border-radius:999px;display:grid;place-items:center;flex:none;background:var(--ina-primary-500);color:#fff;font:600 11px Inter,sans-serif}
 .it-pasal .no.cat{border-radius:6px;background:var(--ina-neutral-100,#f2f4f7);color:var(--ina-content-secondary)}
@@ -990,6 +990,7 @@ a.ina-button{text-decoration:none}
 .judul-det .kd{font:600 14px ui-monospace,Menlo,monospace;color:var(--ina-content-secondary)}
 .judul-det .pihak{margin:2px 0 0;font-size:14px;line-height:20px;color:var(--ina-content-secondary);overflow-wrap:anywhere}
 .tombol-baris{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.judul-det #aksiArsip{margin:0 0 0 auto}
 .rv-judul{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .rv-judul h2{margin:0;font:600 16px/24px Inter,sans-serif;color:var(--ina-content-primary)}
 .rv-alasan{margin-top:14px;max-width:520px}
@@ -1014,19 +1015,25 @@ a.ina-button{text-decoration:none}
 .rv-lembar .ukur b{color:var(--ina-content-primary);font-weight:600}
 .nk-gulir{max-height:640px;overflow:auto;padding:12px;border-radius:8px;background:var(--ina-background-secondary)}
 .nk-lembar{display:flex;flex-direction:column;align-items:center;gap:16px;min-width:min-content}
-.nk-hal{width:600px;max-width:none;background:#fff;color:#111;box-shadow:0 1px 3px rgba(15,23,42,.14);container-type:inline-size;flex:none}
-.nk-isi{position:relative;padding:3cqw 5cqw 6cqw 13cqw;font:2.45cqw/2 'Courier New',Courier,monospace;white-space:pre}
+.nk-hal{width:720px;max-width:none;background:#fff;color:#111;box-shadow:0 1px 3px rgba(15,23,42,.14);container-type:inline-size;flex:none}
+.nk-isi{position:relative;padding:3cqw 5cqw 6cqw 28cqw;font:2.45cqw/2 'Courier New',Courier,monospace;white-space:pre}
 .nk-kop{margin-right:-2cqw;font:1.7cqw/2 Inter,sans-serif;text-align:right;color:#555;user-select:none}
 .nk-b{position:relative;min-height:2em}
 .nk-b.tebal .nk-t{font-weight:700}
 .nk-no{position:absolute;left:-7cqw;width:4cqw;text-align:right;font:1.7cqw/4.9cqw Inter,sans-serif;color:#777;user-select:none}
-.nk-f{user-select:none;color:#333}
+.nk-jenis{position:absolute;left:-26cqw;width:17cqw;font:italic 1.9cqw/4.9cqw Inter,sans-serif;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;user-select:none}
+.nk-coret{text-decoration:line-through;text-decoration-thickness:1px}
+.nk-sisip{text-decoration:underline dotted;text-underline-offset:3px}
 .nk-b.ada-catatan .nk-no{color:var(--ina-primary-700,#1b5e4a);background:var(--ina-primary-100,#dcebe5);border-radius:4px;font-weight:700}
 #lembarNaskah .nk-t::selection{background:#bfdbfe}
+.apung[data-jenis="blok"]{width:auto;max-width:min(460px,calc(100vw - 16px));padding:14px 16px}
+.apung .kep-blok{margin:0 0 10px;font:14px/20px Inter,sans-serif;color:var(--ina-content-primary)}
+.apung .pilih-jenis{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.apung .pilih-jenis .ina-button,.apung [data-batal-blok]{width:auto;min-height:0;justify-content:center}
 .apung{position:fixed;z-index:1001;width:236px;max-width:calc(100vw - 16px);padding:6px;border:1px solid var(--ina-stroke-primary);border-radius:12px;background:var(--ina-background-primary);box-shadow:0 8px 24px rgba(15,23,42,.18)}
 .apung .kep{display:block;padding:6px 8px;font:600 11.5px Inter,sans-serif;letter-spacing:.6px;text-transform:uppercase;color:var(--ina-content-secondary)}
-.apung button{display:flex;align-items:center;gap:8px;width:100%;min-height:36px;padding:6px 8px;border:0;border-radius:8px;background:none;color:var(--ina-content-primary);font:14px Inter,sans-serif;text-align:left;cursor:pointer}
-.apung button:hover,.apung button:focus-visible{background:var(--ina-primary-50)}
+.apung:not([data-jenis="blok"]) button{display:flex;align-items:center;gap:8px;width:100%;min-height:36px;padding:6px 8px;border:0;border-radius:8px;background:none;color:var(--ina-content-primary);font:14px Inter,sans-serif;text-align:left;cursor:pointer}
+.apung:not([data-jenis="blok"]) button:hover,.apung:not([data-jenis="blok"]) button:focus-visible{background:var(--ina-primary-50)}
 .penampil{position:fixed;inset:0;z-index:1100;display:flex;align-items:center;justify-content:center;padding:8px}
 .penampil-latar{position:absolute;inset:0;background:rgba(15,23,42,.6)}
 .penampil-kotak{position:relative;display:flex;flex-direction:column;width:min(1024px,100%);height:100%;max-height:calc(100vh - 16px);border-radius:16px;overflow:hidden;background:#4b4f58}
@@ -1043,7 +1050,8 @@ a.ina-button{text-decoration:none}
 .ar-grid .blok{padding:0;overflow:hidden}
 .kep-kartu{padding:12px 16px;border-bottom:1px solid var(--ina-stroke-primary);font:600 11.5px Inter,sans-serif;letter-spacing:1.2px;text-transform:uppercase;color:var(--ina-content-secondary)}
 .isi-kartu{padding:14px 16px}
-.ar-renvooi{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:16px;height:100%;box-sizing:border-box}
+.ar-renvooi{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:16px;box-sizing:border-box}
+#kartuArRv{align-self:start}
 .ar-renvooi b{font-size:15px}
 .ar-renvooi .ina-button{margin-left:auto}
 .ar-versi{margin:0 0 12px;padding:10px 12px;border-radius:10px;background:var(--ina-background-secondary);font-size:14px;line-height:21px}
@@ -1473,9 +1481,11 @@ function barisNaskah(o, lembar = 'Lembar Pertama', catatan = []) {
 }
 const halDari = L => Math.ceil(L.length / PER_HAL);
 function lembarHTML(L, ada = [], nomor = true) {
+  const per = {}; ada.forEach(c => { if (typeof c === 'object') (per[`${c.hal}:${c.baris}`] = per[`${c.hal}:${c.baris}`] || []).push(c); });
+  const tandai = (s, cs) => { let h = esc(s); (cs || []).forEach(c => { const l = esc(c.lama); if (!l || !h.includes(l)) return; h = h.replace(l, c.jenis === 'Tambahan' ? `<span class="nk-sisip">${l}</span>` : `<s class="nk-coret">${l}</s>`); }); return h; };
   const n = halDari(L); let out = '';
   for (let h = 1; h <= n; h++) {
-    out += `<article class="nk-hal" aria-label="Halaman ${h} dari ${n}"><div class="nk-isi"><div class="nk-kop">Halaman ${h} dari ${n}</div>${L.slice((h - 1) * PER_HAL, h * PER_HAL).map((x, i) => `<div class="nk-b ${x.b ? 'tebal' : ''} ${ada.includes(`${h}:${i + 1}`) ? 'ada-catatan' : ''}" data-hal="${h}" data-baris="${i + 1}">${nomor ? `<span class="nk-no">${i + 1}</span>` : ''}<span class="nk-t">${esc(x.t)}</span>${x.c || !x.t ? '' : `<span class="nk-f" aria-hidden="true">${'-'.repeat(Math.max(0, LEBAR - x.t.length))}</span>`}</div>`).join('')}</div></article>`;
+    out += `<article class="nk-hal" aria-label="Halaman ${h} dari ${n}"><div class="nk-isi"><div class="nk-kop">Halaman ${h} dari ${n}</div>${L.slice((h - 1) * PER_HAL, h * PER_HAL).map((x, i) => `<div class="nk-b ${x.b ? 'tebal' : ''} ${per[`${h}:${i + 1}`] ? 'ada-catatan' : ''}" data-hal="${h}" data-baris="${i + 1}">${per[`${h}:${i + 1}`] ? `<span class="nk-jenis" aria-label="Catatan: ${per[`${h}:${i + 1}`].map(c => c.jenis).join(', ')}">${esc(per[`${h}:${i + 1}`][0].jenis)}</span>` : ''}${nomor ? `<span class="nk-no">${i + 1}</span>` : ''}<span class="nk-t">${tandai(x.t, per[`${h}:${i + 1}`])}</span></div>`).join('')}</div></article>`;
   }
   return `<div class="nk-lembar">${out}</div>`;
 }
@@ -1507,7 +1517,7 @@ let KIRIM_RW = muatKirim();
 const ingatTera = () => S.tera ? `<div class="ingat">${alert('caution', '', 'Stempel Elektronik (TERA) kantor Anda belum didaftarkan. Lengkapi data pendaftaran TERA agar akta bisa distempel elektronik.', `<div style="display:flex;gap:8px;align-items:center">${tombol('Daftar TERA', 'primary', 'sm', 'data-ke-tera', ik('panah', 14))}<button type="button" class="ina-alert__close-button" data-tutup-tera aria-label="Tutup pengingat">${ik('x', 16)}</button></div>`)}</div>` : '';
 /* ---------------- keadaan ---------------- */
 const LAYAR = [['renvooi', 'Renvooi'], ['arsip', 'Arsip Akta'], ['template', 'Template Akta']];
-const SUB = { renvooi:'Catat perbaikan minuta yang sudah final', arsip:'Entri terbentuk saat akta difinalisasi', template:'Template minuta milik kantor per layanan' };
+const SUB = { renvooi:'Catat perbaikan minuta yang sudah final', arsip:'Akta tercatat di arsip sejak difinalisasi', template:'Kelola template minuta kantor untuk setiap layanan' };
 const S0 = () => ({ layar:'renvooi', tera:true, baru:null, cariRv:'', rv:null, rvAsal:null, lembar:false, alasan:'', cariAr:'', jenisAr:'', barisAr:10, halAr:1, ar:null, layanan:'AJB', tpl:null,
   kiri:'bagian', cariBag:'', pilih:null, draf:null, ubah:false, tabK:'bagian', temuan:null, cariVarK:'', aturKerja:null, preview:false, zoom:110, laci:null });
 let S = S0();
@@ -1583,7 +1593,7 @@ function tutupApung(jenis) { const A = $('#apung'); if (A.hidden || (jenis && A.
 function tabelRenvooi() {
   const q = S.cariRv.trim().toLowerCase(), semua = AKTA.filter(rangkapTuntas), rows = semua.filter(o => !q || `${o.kode} ${klienAkta(o)} ${pihakAkta(o)} ${o.nomor}`.toLowerCase().includes(q));
   return `<div class="tabel-wadah ditandai" id="tabelRenvooi"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Daftar akta untuk renvooi">
-    <thead class="ina-table__header"><tr>${['Kode', 'Jenis Akta', 'No. Akta', 'Tgl Akta', 'Status'].map(t => `<th class="ina-table__header-cell">${t}</th>`).join('')}<th class="ina-table__header-cell"><span class="sr-only">Aksi</span></th></tr></thead>
+    <thead class="ina-table__header"><tr>${['Kode', 'Jenis Akta', 'Nomor Akta', 'Tanggal Akta', 'Status'].map(t => `<th class="ina-table__header-cell">${t}</th>`).join('')}<th class="ina-table__header-cell"><span class="sr-only">Aksi</span></th></tr></thead>
     <tbody class="ina-table__body">${rows.length ? rows.map(o => `<tr class="ina-table__row klik" data-buka-rv="${o.kode}">
       <td class="ina-table__cell"><button type="button" class="kd-btn" data-buka-rv="${o.kode}" aria-label="Buka renvooi ${o.kode}">${o.kode}</button></td>
       <td class="ina-table__cell">${jenisAkta(o)}</td><td class="ina-table__cell">${esc(o.nomor)}</td><td class="ina-table__cell">${esc(o.tgl)}</td>
@@ -1598,28 +1608,28 @@ function layarRenvooi() {
 const kartuCatatan = c => `<div class="rv-catatan"><div class="atas">${badge(esc(c.jenis), 'info', 'sm')}${c.diterapkan ? badge('Sudah diterapkan', 'success', 'sm') : badge('Belum diterapkan', 'warning', 'sm')}<span class="letak">hal. ${c.hal} baris ${c.baris}</span><span class="hitung">${[dicoret(c) ? `${dicoret(c)} dicoret` : '', ditambah(c) ? `${ditambah(c)} ditambah` : ''].filter(Boolean).join(' · ')}</span></div>
   ${c.jenis === 'Tambahan' ? `<p><small>sesudah:</small> ${esc(c.lama)}</p>` : `<p><small>lama:</small> <s>${esc(c.lama)}</s></p>`}${c.baru ? `<p><small>baru:</small> ${esc(c.baru)}</p>` : ''}</div>`;
 function lembarKartu(o, rv) {
-  const L = barisNaskah(o), ada = (rv ? rv.catatan : []).map(c => `${c.hal}:${c.baris}`), tutup = rvStatus(o.kode) === 'ditutup';
-  return `<div class="rv-lembar ditandai" id="kartuLembar"><p class="ket-lembar">${tutup ? 'Akta ini sudah ditutup. Lembar hanya bisa dibaca.' : 'Blok teks pada lembar di bawah lalu pilih jenisnya; halaman, baris, dan teksnya tercatat sendiri. Lembar ini <b>naskah beku</b>, memblok di sini tidak mengubahnya.'}${usulan('IDDS-TN-45')}</p>
+  const L = barisNaskah(o), ada = rv ? rv.catatan : [], tutup = rvStatus(o.kode) === 'ditutup';
+  return `<div class="rv-lembar ditandai" id="kartuLembar"><p class="ket-lembar">${tutup ? 'Akta ini sudah ditutup. Lembar hanya bisa dibaca.' : 'Blok teks pada lembar di bawah, lalu pilih jenis catatannya. Halaman, baris, dan teksnya tercatat otomatis. Lembar ini <b>naskah beku</b>, sehingga memblok teks tidak mengubah isinya.'}${usulan('IDDS-TN-45')}</p>
     <div class="ukur"><b>${halDari(L)} halaman</b> · ${L.length} baris · ${PER_HAL} baris per halaman</div>
     <div class="nk-gulir" id="lembarNaskah" tabindex="0" aria-label="Lembar naskah">${lembarHTML(L, ada)}</div></div>`;
 }
 function layarRvDetail() {
   const o = aktaDari(S.rv), rv = RV[o.kode], st = rvStatus(o.kode), C = rv ? rv.catatan : [], nT = tertunda(rv).length, tutup = st === 'ditutup';
   const nC = C.reduce((n, c) => n + dicoret(c), 0), nA = C.reduce((n, c) => n + ditambah(c), 0), stO = ST[o.status] || { l:o.status, b:'neutral' };
-  const alasanMati = nT ? '' : tutup ? 'Akta ini sudah ditutup.' : 'Alasan diisi setelah ada catatan baru dari lembar naskah.';
+  const alasanMati = nT ? '' : tutup ? 'Akta ini sudah ditutup.' : 'Alasan dapat diisi setelah ada catatan baru dari lembar naskah.';
   return `${kepala(['Renvooi', 'data-ke-daftar'], [o.kode])}
-    <div class="judul-det">${tombol('Kembali', 'secondary', 'md', 'id="rvKembali" aria-label="Kembali"', ik('kiri', 16))}<div class="isi"><div class="jd"><h2>Renvooi</h2><span class="kd">${o.kode}</span></div><div class="jd">${badge(jenisAkta(o), 'info', 'sm')}${badge(stO.l, stO.b, 'sm')}</div></div></div>
-    <section class="blok ditandai" id="infoAkta" aria-labelledby="jdInfo"><h2 id="jdInfo">Informasi Akta</h2><dl class="kv"><div><dt>Nomor Akta</dt><dd>${esc(o.nomor)}</dd></div><div><dt>Tanggal Akta</dt><dd>${esc(o.tgl)}</dd></div><div><dt>Klien</dt><dd>${esc(klienAkta(o))}</dd></div><div><dt>Difinalisasi</dt><dd>${esc(o.tgl)}</dd></div></dl>${usulan('IDDS-TN-44')}</section>
-    <section class="blok" aria-labelledby="jdRv"><div class="rv-judul"><h2 id="jdRv">Renvooi</h2>${lencanaRv(o.kode)}</div>
+    <div class="judul-det">${tombol('Kembali', 'secondary', 'md', 'id="rvKembali" aria-label="Kembali"', ik('kiri', 16))}<div class="isi"><div class="jd"><h2>Renvooi</h2><span class="kd">${o.kode}</span></div><div class="jd">${badge(jenisAkta(o), 'info', 'sm')}</div></div></div>
+    <section class="blok ditandai" id="infoAkta" aria-labelledby="jdInfo"><h2 id="jdInfo">Informasi Akta</h2><dl class="kv"><div><dt>Nomor Akta</dt><dd>${esc(o.nomor)}</dd></div><div><dt>Tanggal Akta</dt><dd>${esc(o.tgl)}</dd></div><div><dt>Klien</dt><dd>${esc(klienAkta(o))}</dd></div><div><dt>Difinalisasi</dt><dd>${esc(o.tgl)}</dd></div><div><dt>Tahap Permohonan</dt><dd>${badge(stO.l, stO.b, 'sm')}</dd></div></dl>${usulan('IDDS-TN-44')}</section>
+    <section class="blok" aria-labelledby="jdRv"><div class="rv-judul"><h2 id="jdRv">Sesi Renvooi</h2>${lencanaRv(o.kode)}</div>
       <div class="tombol-baris ditandai" id="aksiRv">${tombol(S.lembar ? 'Tutup lembar' : 'Buka lembar naskah', 'secondary', 'md', `id="rvLembar" aria-expanded="${S.lembar}"`)}${tombol('Pratinjau salinan', 'secondary', 'md', 'id="rvPratinjau"')}${tombol('Unduh catatan (tanpa isi naskah)', 'secondary', 'md', `id="rvUnduhCatatan" ${C.length ? '' : 'disabled aria-describedby="rvKetUnduh"'}`)}${tombol('Unduh dengan isi naskah', 'secondary', 'md', `id="rvUnduhIsi" ${C.length ? '' : 'disabled aria-describedby="rvKetUnduh"'}`)}</div>
       ${C.length ? '' : '<p class="rv-alasan-nonaktif" id="rvKetUnduh">Unduhan tersedia setelah ada catatan.</p>'}
       <div class="rv-alasan ditandai" id="wadahAlasan">${tf('rvAlasan', 'Alasan perbaikan', S.alasan, 'Misalnya: pembetulan pekerjaan Pihak Pertama', true, alasanMati, nT ? '' : 'disabled')}${usulan('IDDS-TN-46')}</div>
       <div class="tombol-baris rv-tutup">${tombol('Selesaikan Renvooi', 'primary', 'md', `id="rvSelesaikan" ${nT ? '' : 'disabled aria-describedby="h-rvAlasan"'}`, ik('centang', 16))}${tombol('Hapus sesi', 'tertiary', 'md', `class="bahaya-teks" id="rvHapus" ${rv && !tutup ? '' : 'disabled'}`, ik('sampah', 16))}${usulan('IDDS-TN-47')}${usulan('IDDS-TN-48')}</div>
-      <p class="rv-ket">Renvooi berjalan di atas <b>naskah beku</b> hasil finalisasi. Menyelesaikan renvooi <b>mengganti</b> Minuta Lembar Pertama, Minuta Lembar Kedua, dan Salinan dengan naskah hasil perbaikan. Berkas lama tidak disimpan. Akta kembali ke Penandatanganan Akta untuk ditandatangani, distempel, dan dibubuhi meterai ulang dari awal. Catatan perbaikannya tetap bisa diunduh sebagai rekaman.</p>
+      <p class="rv-ket">Renvooi berjalan di atas <b>naskah beku</b> hasil finalisasi. Menyelesaikan renvooi <b>mengganti</b> Minuta Lembar Pertama, Minuta Lembar Kedua, dan Salinan dengan naskah hasil perbaikan. Berkas lama tidak disimpan. Akta kembali ke Penandatanganan Akta untuk ditandatangani, distempel, dan dibubuhi meterai ulang dari awal. Catatan perbaikan tetap dapat diunduh sebagai rekaman.</p>
       ${C.length ? `<p class="rv-ringkas" id="rvRingkas">${C.length} catatan · ${nC} kata dicoret · ${nA} kata ditambah</p>${C.map(kartuCatatan).join('')}` : '<p class="rv-ringkas" id="rvRingkas">Belum ada catatan. Buka lembar naskah, lalu blok teks yang perlu diperbaiki.</p>'}
       ${S.lembar ? lembarKartu(o, rv) : ''}</section>
     ${o.status === 'PENANDATANGANAN' && diterapkan(rv).length ? `<div class="rv-lanjut" id="rvLanjut">${alert('info', '', 'Akta ini kembali ke Penandatanganan Akta. Tanda tangan, stempel, dan meterai diulang dari awal.', `<div class="aksi-baris">${tombol('Buka Penandatanganan Akta', 'primary', 'sm', 'id="rvKeTtd"', ik('panah', 14))}${tombol('Lihat Permohonan', 'secondary', 'sm', 'id="rvKeOrder"')}</div>`)}</div>` : ''}
-    <section class="blok ditandai" id="kartuSelesai"><div class="baris-atas"><p class="ket" style="flex:1 1 320px">${tutup ? 'Akta ini sudah ditutup. Entri Salinan ada di Penandatanganan Akta.' : 'Tekan Selesai untuk menutup akta ini dan membuat entri Salinan di Penandatanganan Akta. Salinan dicetak bersih, tanpa catatan renvooi.'}</p>${tombol('Selesai', 'primary', 'md', `id="rvSelesai" ${tutup || nT ? 'disabled' : ''}`, ik('centang', 16))}</div>${nT ? `<p class="rv-alasan-nonaktif">Selesaikan Renvooi dulu agar ${nT} catatan yang belum diterapkan tidak hilang.</p>` : ''}${usulan('IDDS-TN-49')}</section>`;
+    <section class="blok ditandai" id="kartuSelesai"><div class="baris-atas"><p class="ket" style="flex:1 1 320px">${tutup ? 'Akta ini sudah ditutup. Entri Salinan ada di Penandatanganan Akta.' : 'Tekan Selesai untuk menutup akta ini. Setelah itu, Salinan Akta dibuat di Penandatanganan Akta dan dicetak bersih tanpa catatan renvooi.'}</p>${tombol('Selesai', 'primary', 'md', `id="rvSelesai" ${tutup || nT ? 'disabled' : ''}`, ik('centang', 16))}</div>${nT ? `<p class="rv-alasan-nonaktif">Selesaikan Renvooi dulu agar ${nT} catatan yang belum diterapkan tidak hilang.</p>` : ''}${usulan('IDDS-TN-49')}</section>`;
 }
 /* blok teks di lembar naskah: halaman, baris, dan teksnya dibaca dari pilihan pengguna */
 let blok = null, tungguBlok;
@@ -1630,10 +1640,12 @@ function cekBlok() {
   const r = sel.getRangeAt(0), teks = sel.toString().replace(/\s+/g, ' ').trim(); if (!teks) { lepas(); return; }
   const t = [...W.querySelectorAll('.nk-t')].find(x => x.textContent.trim() && r.intersectsNode(x)); if (!t) { lepas(); return; }
   const b = t.closest('.nk-b'); blok = { hal:+b.dataset.hal, baris:+b.dataset.baris, teks };
-  apung('blok', `<span class="kep">Catat sebagai</span>${JENIS_CATATAN.map(j => `<button type="button" data-catat="${j}">${esc(j)}</button>`).join('')}`, r.getBoundingClientRect());
+  const kutip = teks.length > 40 ? teks.slice(0, 40) + '…' : teks;
+  apung('blok', `<p class="kep-blok">“${esc(kutip)}” · hal. ${blok.hal} baris ${blok.baris} — jadikan:</p><div class="pilih-jenis">${JENIS_CATATAN.map(j => tombol(j, 'secondary', 'sm', `data-catat="${j}"`)).join('')}</div>${tombol('Batal', 'tertiary', 'sm', 'data-batal-blok')}`, r.getBoundingClientRect());
 }
 document.addEventListener('selectionchange', () => { clearTimeout(tungguBlok); tungguBlok = setTimeout(cekBlok, 120); });
-const JENIS_CATATAN = ['Coretan', 'Coretan dengan gantian', 'Tambahan'];
+document.addEventListener('click', e => { if (e.target.closest('[data-batal-blok]')) { getSelection().removeAllRanges(); blok = null; tutupApung('blok'); } });
+const JENIS_CATATAN = ['Coretan dengan gantian', 'Tambahan', 'Coretan']; /* urutan sama dengan live */
 function catat(jenis) {
   const s = blok; if (!s) return;
   const k = S.rv, tulis = baru => {
@@ -1724,28 +1736,28 @@ function tabelArsip() {
       <td class="ina-table__cell">${jenisAkta(o)}</td><td class="ina-table__cell"><span class="mono-v">${o.kode}</span></td><td class="ina-table__cell">${esc(pihakAkta(o))}</td>
       <td class="ina-table__cell">${badge('Final', 'success', 'sm')}</td>
       <td class="ina-table__cell"><div class="aksi-baris">${tombol('Buka', 'secondary', 'sm', `data-buka-ar="${o.kode}" aria-label="Buka arsip akta ${esc(o.nomor)}"`)}</div></td></tr>`).join('')
-      : `<tr><td colspan="6" class="ina-table__empty-cell kosong">${saring ? 'Akta tidak ditemukan. Ubah kata kunci atau saringannya.' : 'Belum ada akta di arsip. Entri terbentuk saat akta difinalisasi.'}</td></tr>`}</tbody></table></div></div>${halArsip(semua.length)}</div>`;
+      : `<tr><td colspan="6" class="ina-table__empty-cell kosong">${saring ? 'Akta tidak ditemukan. Ubah kata kunci atau saringannya.' : 'Belum ada akta di arsip. Akta tercatat di arsip sejak difinalisasi.'}</td></tr>`}</tbody></table></div></div>${halArsip(semua.length)}</div>`;
 }
 function layarArsip() {
   const jenis = [...new Set(AKTA.map(jenisAkta))];
   return `${kepala(['Arsip Akta'])}<div class="saring-e">${cari('cariAr', 'Cari nomor akta / kode permohonan / nama pihak', S.cariAr, 'Cari arsip akta')}
       <div class="pilih-kecil">${pilihan('jenisAr', 'Jenis akta', [['', 'Semua jenis akta'], ...jenis.map(j => [j, j])], S.jenisAr)}</div>
-      <div class="pilih-baris">${pilihan('barisAr', 'Baris', [['10', '10'], ['20', '20'], ['50', '50']], String(S.barisAr))}</div></div>
+      <div class="pilih-baris">${pilihan('barisAr', 'Baris per halaman', [['10', '10'], ['20', '20'], ['50', '50']], String(S.barisAr))}</div></div>
     <div id="wadahAr">${tabelArsip()}</div>${usulan('IDDS-TN-50')}`;
 }
 const DOK_ARSIP = [['pertama', 'Minuta Lembar Pertama'], ['kedua', 'Minuta Lembar Kedua'], ['salinan', 'Salinan Akta']];
 const kirimBoleh = o => !!o.ttd.selesai && !!o.salinan.selesai;
-const statusDok = (o, d) => { const ok = d === 'salinan' ? !!o.salinan.selesai : rangkapTuntas(o) || diterapkan(RV[o.kode]).length > 0; return ok ? badge('Ditandatangani', 'success', 'sm') : badge('Belum ditandatangani', 'neutral', 'sm'); };
+const statusDok = (o, d) => { const ok = d === 'salinan' ? !!o.salinan.selesai : (o.ttd[d === 'kedua' ? 'l2' : 'l1'] ?? rangkapTuntas(o)) || diterapkan(RV[o.kode]).length > 0; return ok ? badge('Ditandatangani', 'success', 'sm') : badge('Belum ditandatangani', 'neutral', 'sm'); };
 function layarArDetail() {
   const o = aktaDari(S.ar), rv = RV[o.kode], R = KIRIM_RW[o.kode] || [], ada = diterapkan(rv).length > 0, v = versiBerlaku(o), proses = ada && v === 1, bisaRv = rangkapTuntas(o) || !!rv;
   return `${kepala(['Arsip Akta', 'data-ke-daftar'], [ringkasAkta(o)])}
-    <div class="judul-det">${tombol('Kembali', 'secondary', 'md', 'id="arKembali" aria-label="Kembali ke daftar arsip"', ik('kiri', 16))}<div class="isi"><div class="jd"><h2>${esc(ringkasAkta(o))}</h2><span class="kd">${o.kode}</span></div><p class="pihak">${esc(pihakAkta(o))}</p></div></div>
-    <div class="tombol-baris ditandai" id="aksiArsip">${tombol('Berkas akta lengkap', 'secondary', 'md', 'id="arBerkas"', ik('dok', 16))}${tombol('Unduh Semua Dokumen', 'secondary', 'md', 'id="arUnduhSemua"', ik('unduh', 16))}${tombol('Kirim Salinan Akta', 'primary', 'md', `id="arKirim" ${kirimBoleh(o) ? '' : 'disabled aria-describedby="alasanKirim"'}`, ik('surat', 16))}</div>
+    <div class="judul-det">${tombol('Kembali', 'secondary', 'md', 'id="arKembali" aria-label="Kembali ke daftar arsip"', ik('kiri', 16))}<div class="isi"><div class="jd"><h2>${esc(ringkasAkta(o))}</h2><span class="kd">${o.kode}</span></div><p class="pihak">${esc(pihakAkta(o))}</p></div>
+    <div class="tombol-baris ditandai" id="aksiArsip">${tombol('Berkas akta lengkap', 'secondary', 'md', 'id="arBerkas"', ik('dok', 16))}${tombol('Unduh Semua Dokumen', 'secondary', 'md', 'id="arUnduhSemua"', ik('unduh', 16))}${tombol('Kirim Salinan Akta', 'primary', 'md', `id="arKirim" ${kirimBoleh(o) ? '' : 'disabled aria-describedby="alasanKirim"'}`, ik('surat', 16))}</div></div>
     <div class="ar-grid">
       <section class="blok ditandai" id="kartuDokumen" aria-label="Dokumen"><div class="kep-kartu">Dokumen</div><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Dokumen akta">
         <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Dokumen</th><th class="ina-table__header-cell">Status</th><th class="ina-table__header-cell"><span class="sr-only">Aksi</span></th></tr></thead>
         <tbody class="ina-table__body">${DOK_ARSIP.map(([k, l]) => `<tr class="ina-table__row"><td class="ina-table__cell">${l}</td><td class="ina-table__cell">${statusDok(o, k)}</td><td class="ina-table__cell"><div class="aksi-baris">${tombol('Lihat', 'secondary', 'sm', `data-lihat-dok="${k}" aria-label="Lihat ${l}"`)}${tombol('Unduh', 'secondary', 'sm', `data-unduh-dok="${k}" aria-haspopup="menu" aria-label="Unduh ${l}"`, '')}</div></td></tr>`).join('')}</tbody></table></div></div>${usulan('IDDS-TN-51')}</section>
-      <section class="blok ditandai" id="kartuArRv" aria-label="Renvooi"><div class="ar-renvooi"><b>Renvooi</b>${lencanaRv(o.kode)}${rv ? `<span class="ket">${rv.catatan.length} catatan</span>` : ''}${tombol('Buka di menu Renvooi', 'secondary', 'sm', `id="arKeRv" ${bisaRv ? '' : 'disabled aria-describedby="arKetRv"'}`, ik('edit', 14))}${bisaRv ? '' : '<p class="rv-alasan-nonaktif" id="arKetRv" style="width:100%">Renvooi tersedia setelah kedua rangkap minuta tuntas ditandatangani.</p>'}${usulan('IDDS-TN-54')}</div></section>
+      <section class="blok ditandai" id="kartuArRv" aria-label="Sesi Renvooi"><div class="ar-renvooi"><b>Sesi Renvooi</b>${lencanaRv(o.kode)}${rv ? `<span class="ket">${rv.catatan.length} catatan</span>` : ''}${tombol('Buka di menu Renvooi', 'secondary', 'sm', `id="arKeRv" ${bisaRv ? '' : 'disabled aria-describedby="arKetRv"'}`, ik('edit', 14))}${bisaRv ? '' : '<p class="rv-alasan-nonaktif" id="arKetRv" style="width:100%">Renvooi tersedia setelah kedua rangkap minuta tuntas ditandatangani.</p>'}${usulan('IDDS-TN-54')}</div></section>
       <section class="blok ditandai" id="kartuVersi" aria-label="Riwayat Versi"><div class="kep-kartu">Riwayat Versi</div><div class="isi-kartu">
         ${proses ? '<p class="ar-versi">Perbaikan sedang berjalan. Minuta di atas adalah versi 1 yang masih sah, sampai versi barunya selesai ditandatangani.</p>' : ''}
         <div class="ar-versi-baris">Versi ${v}<small>${proses || !ada ? 'masih berlaku' : 'berlaku'}</small></div>${ada ? `<p class="ar-versi-alasan">Alasan perbaikan: ${esc(rv.alasan)}</p>` : '<p class="ar-versi-alasan">Belum ada perbaikan.</p>'}
@@ -1796,7 +1808,7 @@ const lencanaDaftar = t => `${t.milik === 'bawaan' ? badge('Bawaan platform', 'i
 function layarTemplate() {
   const Tp = tplDari(S.layanan);
   return `${kepala(['Template Akta'])}<div class="lay-baris"><div class="pilih-layanan">${pilihan('pilihLayanan', 'Layanan (jenis akta)', JA.map(j => [j.code, `${j.name} · ${j.code}`]), S.layanan)}</div>${tombol('Tambah Template', 'primary', 'md', 'id="tambahTpl"', ik('plus', 16))}</div>
-    <div class="tpl-info ditandai" id="tplInfo">${alert('info', '', 'Template bawaan platform hanya bisa dilihat. Buat template kantor sendiri (boleh disalin dari template mana pun) lalu sunting pasalnya atau impor dari berkas Word. Saat masuk penyusunan, staf memilih template mana yang dipakai.')}</div>
+    <div class="tpl-info ditandai" id="tplInfo">${alert('info', '', 'Template bawaan platform hanya dapat dilihat. Buat template kantor dengan menyalin template yang ada atau mengimpor berkas Word, lalu sunting pasalnya. Saat penyusunan akta, staf memilih template yang dipakai.')}</div>
     <div class="tabel-wadah ditandai" id="tabelTemplate"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Template ${esc(jenisDari(S.layanan).name)}">
       <thead class="ina-table__header"><tr><th class="ina-table__header-cell">Kode</th><th class="ina-table__header-cell">Nama Template</th><th class="ina-table__header-cell"><span class="sr-only">Aksi</span></th></tr></thead>
       <tbody class="ina-table__body">${Tp.length ? Tp.map(t => `<tr class="ina-table__row klik ${S.baru === 't' + t.id ? 'baru' : ''}" data-buka-tpl="${t.id}">
@@ -1966,11 +1978,11 @@ function masalah(t) {
 const bisaKunci = t => !masalah(t).length && (t.status !== 'siap' || t.adaUbah || S.ubah);
 const alasanKunci = t => { const n = masalah(t).length; return n ? `Selesaikan ${n} hal di atas dulu.` : bisaKunci(t) ? 'Tombol ini mengunci isi template menjadi versi baru untuk order baru.' : 'Belum ada perubahan untuk dikunci.'; };
 const statusSimpan = () => `<span class="status-simpan ${S.ubah ? 'belum' : ''}" id="statusSimpan" role="status">${S.ubah ? `${ik('seru', 14)} Belum disimpan` : `${ik('centang', 14)} Tersimpan`}</span>`;
-const aksiAtas = t => bacaSaja(t) ? `<div class="dok-aksi ditandai" id="aksiAtas">${denganTip(tombol('Preview Akta', 'secondary', 'md', 'id="previewAkta"', ik('mata', 16)), 'Tombol ini menampilkan akta berisi data contoh.')}${tombol('Salin &amp; Sunting', 'primary', 'md', `data-salin-tpl="${t.id}"`, ik('salin', 16))}${usulan('IDDS-TN-57')}</div>` : `<div class="dok-aksi ditandai" id="aksiAtas">
+const aksiAtas = t => bacaSaja(t) ? `<div class="dok-aksi ditandai" id="aksiAtas">${denganTip(tombol('Pratinjau Akta', 'secondary', 'md', 'id="previewAkta"', ik('mata', 16)), 'Tombol ini menampilkan akta berisi data contoh.')}${tombol('Salin &amp; Sunting', 'primary', 'md', `data-salin-tpl="${t.id}"`, ik('salin', 16))}${usulan('IDDS-TN-57')}</div>` : `<div class="dok-aksi ditandai" id="aksiAtas">
   ${denganTip(tombol('Simpan sebagai Draft', 'secondary', 'md', 'id="simpanDraft"', ik('simpan', 16)), 'Tombol ini menyimpan naskah tanpa mengubah versi yang dipakai order.')}
   ${denganTip(tombol('Kunci Template', 'secondary', 'md', `id="kunciTpl" ${bisaKunci(t) ? '' : 'disabled'}`, ik('kunci', 16)), alasanKunci(t))}
-  ${denganTip(tombol('Preview Akta', 'primary', 'md', 'id="previewAkta"', ik('mata', 16)), 'Tombol ini menampilkan akta berisi data contoh.', 'bottom-end')}${usulan('IDDS-TN-59')}</div>`;
-const pitaPeriksa = t => { if (bacaSaja(t)) return `<div class="pita ditandai" id="pitaBaca">${alert('info', '', 'Template bawaan platform dipakai semua kantor, jadi hanya bisa dilihat. Salin dulu untuk menyuntingnya.')}</div>`; const M = masalah(t); return `<div id="pitaPeriksa">${M.length ? `<div class="pita">${alert('caution', `${M.length} hal perlu diperiksa sebelum Kunci Template`, `<ul class="daftar-periksa">${M.map(m => `<li><span>${esc(m.teks)}</span>${tombol(m.aksi, 'secondary', 'sm', `data-periksa="${m.kunci}"`)}</li>`).join('')}</ul>`)}</div>` : ''}</div>`; };
+  ${denganTip(tombol('Pratinjau Akta', 'primary', 'md', 'id="previewAkta"', ik('mata', 16)), 'Tombol ini menampilkan akta berisi data contoh.', 'bottom-end')}${usulan('IDDS-TN-59')}</div>`;
+const pitaPeriksa = t => { if (bacaSaja(t)) return `<div class="pita ditandai" id="pitaBaca">${alert('info', '', 'Template bawaan platform dipakai oleh semua kantor sehingga hanya dapat dilihat. Salin dulu untuk menyuntingnya.')}</div>`; const M = masalah(t); return `<div id="pitaPeriksa">${M.length ? `<div class="pita">${alert('caution', `${M.length} hal perlu diperiksa sebelum Kunci Template`, `<ul class="daftar-periksa">${M.map(m => `<li><span>${esc(m.teks)}</span>${tombol(m.aksi, 'secondary', 'sm', `data-periksa="${m.kunci}"`)}</li>`).join('')}</ul>`)}</div>` : ''}</div>`; };
 
 /* variabel & syarat di kertas: label yang terbaca, bukan kode mentah */
 const keChip = (html, jenis) => html
@@ -1978,7 +1990,7 @@ const keChip = (html, jenis) => html
   .replace(/\{\{\s*([a-zA-Z0-9_:]+)\s*\}\}/g, (m, k) => { const v = varDari(jenis).find(x => x.key === k.split(':')[0]); return `<span class="var-chip ina-badge ina-badge--soft ${v ? 'ina-badge--brand' : 'galat ina-badge--warning'} ina-badge--sm ina-badge--rounded-md" title="{{${esc(k)}}}"><span class="vl">${esc(v ? v.label : k)}</span></span>`; });
 const gayaHal = (a, editor) => { const [w, h] = ukuranKertas(a), p = n => (n / w * 100).toFixed(3) + '%', f = (num(a.ukuran, 12) * 0.03528 / w * 100).toFixed(3) + 'cqw';
   return `aspect-ratio:${w}/${h};padding:${p(num(a.atas))} ${p(num(a.kanan))} ${p(margBawah(a))} ${p(num(a.kiri))};font-family:'${a.huruf}',monospace;font-size:${editor ? `max(12px,${f})` : f};line-height:${num(a.spasi, 2)}`; };
-const lencanaTpl = t => `${t.status === 'siap' ? badge(`Siap v${t.versi}`, 'success', 'sm') : badge('Draft', 'warning', 'sm')}${t.aktif ? '' : badge('Nonaktif', 'neutral', 'sm')}`;
+const lencanaTpl = t => `${t.status === 'siap' ? badge(`Siap · versi ${t.versi}`, 'success', 'sm') : badge('Draft', 'warning', 'sm')}${t.aktif ? '' : badge('Nonaktif', 'neutral', 'sm')}`;
 const lblJenis = d => d.type === 'pasal' ? ['Pasal', 'info'] : d.type === 'otomatis' ? ['Kondisi', 'success'] : ['Catatan', 'neutral'];
 function blokBag(t, b) {
   const aktif = b.id === S.pilih, d = aktif && S.draf ? S.draf : b, no = nomorPasal(t, b), [lb, wr] = lblJenis(d), ubah = aktif && !bacaSaja(t);
@@ -2013,7 +2025,7 @@ function itemNav(t, b, i, L) {
   const ket = [d.type === 'otomatis' ? 'Kondisi · disusun sistem' : '', d.tampil ? '' : 'judul disembunyikan'].filter(Boolean).join(' · ');
   const nama = esc(d.title || 'Tanpa judul');
   return `<li class="it-pasal ${aktif ? 'aktif' : ''}" data-pilih="${b.id}" data-asal="nav" tabindex="0" aria-current="${aktif}" aria-label="${LBL_TIPE[d.type]}: ${nama}">
-    <span class="geser"><button type="button" data-geser="${b.id}:-1" aria-label="Naikkan ${nama}" ${i && !baca ? '' : 'disabled'}>${ik('atas', 12)}</button><button type="button" data-geser="${b.id}:1" aria-label="Turunkan ${nama}" ${i < L.length - 1 && !baca ? '' : 'disabled'}>${ik('bawah', 12)}</button></span>
+    <span class="geser"><button type="button" class="ina-button ina-button--tertiary ina-button--sm" data-geser="${b.id}:-1" aria-label="Naikkan ${nama}" ${i && !baca ? '' : 'disabled'}>${ik('atas', 12)}</button><button type="button" class="ina-button ina-button--tertiary ina-button--sm" data-geser="${b.id}:1" aria-label="Turunkan ${nama}" ${i < L.length - 1 && !baca ? '' : 'disabled'}>${ik('bawah', 12)}</button></span>
     ${ikon}<span class="nm">${nama}${ket ? `<small>${ket}</small>` : ''}${m ? `<small class="perlu">${badge(`Perlu dicek (${m})`, 'warning', 'sm', `title="${m} hal perlu dicek. Buka bagian ini untuk melihatnya."`)}</small>` : ''}</span>
     <button type="button" class="ina-button ina-button--tertiary ina-button--sm ubah-b" data-edit-bag="${b.id}" aria-label="${baca ? 'Lihat' : 'Edit'} ${nama}" title="${baca ? 'Lihat' : 'Edit'}">${ik(baca ? 'mata' : 'edit', 15)}</button>
     ${baca ? '' : `<button type="button" class="ina-button ina-button--tertiary ina-button--sm hapus" data-hapus-bag="${b.id}" aria-label="Hapus ${nama}" title="Hapus">${ik('sampah', 15)}</button>`}</li>`;
@@ -2030,7 +2042,7 @@ function panelKiri(t) {
     <div class="nav-atas">${cari('cariBag', 'Cari judul...', S.cariBag, 'Cari judul bagian')}
       <div class="legenda" aria-hidden="true"><span><span class="no cat">${ik('dok', 11)}</span>Catatan</span><span><span class="no">1</span>Pasal</span><span><span class="no kon">${ik('gear', 11)}</span>Kondisi (disusun sistem)</span></div></div>
     ${daftarBag(t)}
-    <div class="panel-kaki kaki-tambah">${tombol('Tambah Pasal', 'primary', 'sm', `data-tambah-bag="pasal" ${mati}`, ik('plus', 14))}${tombol('Tambah Catatan', 'secondary', 'sm', `data-tambah-bag="catatan" ${mati}`, ik('plus', 14))}${tombol('Impor dari Word', 'secondary', 'sm', `id="imporWord" ${mati}`, ik('unggah', 14))}</div>${mati ? '<p class="ket-baca">Template bawaan platform dipakai semua kantor, jadi bagiannya tak bisa ditambah atau diubah. Tekan <b>Salin &amp; Sunting</b> untuk membuat salinan milik kantor.</p>' : ''}
+    <div class="panel-kaki kaki-tambah">${tombol('Tambah Pasal', 'primary', 'sm', `data-tambah-bag="pasal" ${mati}`, ik('plus', 14))}${tombol('Tambah Catatan', 'secondary', 'sm', `data-tambah-bag="catatan" ${mati}`, ik('plus', 14))}${tombol('Impor dari Word', 'secondary', 'sm', `id="imporWord" ${mati}`, ik('unggah', 14))}</div>${mati ? '<p class="ket-baca">Template bawaan platform dipakai semua kantor, jadi bagiannya tidak dapat ditambah atau diubah. Tekan <b>Salin &amp; Sunting</b> untuk membuat salinan milik kantor.</p>' : ''}
   </aside>`;
 }
 const cekTanya = (id, on, l, tip) => `<span class="cek-tanya">${cekBox(id, on, l)}${tanya(l, tip)}</span>`;
@@ -2105,7 +2117,7 @@ function panelSkenario(t) {
   return `<h3 class="atur-judul">Skenario</h3><p class="ket-kecil" style="margin-top:0">Isian karangan untuk memeriksa template tanpa membuat order. Skenario disimpan bersama template dan ikut berpindah bila template disalin.</p>
     <div class="aksi-sk">${tombol('Skenario kosong', 'secondary', 'sm', 'id="skKosong"', ik('plus', 14))}${tombol('Rakit semua', 'primary', 'sm', `id="skRakit" ${L.length ? '' : 'disabled'}`, ik('kilau', 14))}</div>
     ${L.length ? `<ul class="sk-daftar">${L.map((s, i) => `<li><div><b>${esc(s.nama)}</b><div class="kc">${s.hasil ? `Dirakit: ${s.hasil.bagian} bagian, ${s.hasil.temuan ? `${s.hasil.temuan} hal perlu dicek` : 'tanpa temuan'}` : 'Belum dirakit'}</div></div>${s.hasil ? (s.hasil.temuan ? badge('Perlu dicek', 'warning', 'sm') : badge('Lolos', 'success', 'sm')) : ''}${tombol(ik('sampah', 15), 'tertiary', 'sm', `class="bahaya-ikon" data-hapus-sk="${i}" aria-label="Hapus skenario ${esc(s.nama)}" title="Hapus skenario"`)}</li>`).join('')}</ul>${L.some(s => s.hasil) ? `<p class="ket-kecil">Periksa hasilnya di Preview Akta.</p>` : ''}`
-      : `<div class="sk-kosong"><b>Belum ada skenario</b><p>Skenario adalah data contoh untuk menguji template tanpa membuat order.</p><ol><li>Tekan <b>Skenario kosong</b> dan buat satu skenario untuk kasus yang paling sering, misalnya 1 penjual perorangan dan 1 pembeli.</li><li>Tambah skenario lain untuk kasus khusus, misalnya penjual ahli waris atau perseroan.</li><li>Tekan <b>Rakit semua</b>, lalu periksa hasilnya di <b>Preview Akta</b>.</li></ol></div>`}${usulan('IDDS-TN-58')}`;
+      : `<div class="sk-kosong"><b>Belum ada skenario</b><p>Skenario adalah data contoh untuk menguji template tanpa membuat order.</p><ol><li>Tekan <b>Skenario kosong</b> dan buat satu skenario untuk kasus yang paling sering, misalnya 1 penjual perorangan dan 1 pembeli.</li><li>Tambah skenario lain untuk kasus khusus, misalnya penjual ahli waris atau perseroan.</li><li>Tekan <b>Rakit semua</b>, lalu periksa hasilnya di <b>Pratinjau Akta</b>.</li></ol></div>`}${usulan('IDDS-TN-58')}`;
 }
 function panelKanan(t) {
   const tab = (k, l) => `<button type="button" role="tab" data-tabk="${k}" aria-selected="${S.tabK === k}" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline ${S.tabK === k ? 'ina-tab-horizontal__tab--selected' : ''}">${l}</button>`;
@@ -2118,7 +2130,7 @@ function segarPanel() { const p = $('#panelDok'), t = tplAktif(); if (p && t) { 
 const kakiKanvas = () => S.draf && !bacaSaja(tplAktif()) ? `<div class="kaki-kanvas" id="kakiKanvas"><span class="ket ${S.ubah ? 'belum' : ''}">${S.ubah ? `${ik('seru', 14)} Belum disimpan` : `${ik('centang', 14)} Semua perubahan tersimpan`}</span>${tombol('Batal', 'secondary', 'md', `id="batalBag" ${S.ubah ? '' : 'disabled'}`)}${tombol('Simpan', 'primary', 'md', `id="simpanBag" ${S.ubah ? '' : 'disabled'}`, ik('simpan', 16))}</div>` : '<div id="kakiKanvas"></div>';
 function layarPasal() {
   const t = tplAktif();
-  const atas = `${remah(['Akta'], ['Template Akta', 'data-ke-daftar'], [t.name])}<h1>${esc(t.name)}</h1><p class="sub">${bacaSaja(t) ? 'Template bawaan platform. Isinya hanya bisa dilihat.' : 'Kelola pasal, catatan, dan pengaturan halaman template ini.'}</p>`;
+  const atas = `${remah(['Akta'], ['Template Akta', 'data-ke-daftar'], [t.name])}<h1>${esc(t.name)}</h1><p class="sub">${bacaSaja(t) ? 'Template bawaan platform. Isinya hanya dapat dilihat.' : 'Kelola pasal, catatan, dan pengaturan halaman template ini.'}</p>`;
   if (S.preview) return atas + layarPreview(t);
   return `${atas}<section class="dok" aria-label="Editor template ${esc(t.name)}">
       <div class="dok-kepala"><div class="dok-kiri">${denganTip(`<button type="button" class="ina-button ina-button--tertiary ina-button--sm" id="kembali" data-ke-daftar aria-label="Kembali ke daftar template">${ik('kiri', 18)}</button>`, 'Tombol ini membuka kembali daftar template.')}
@@ -2481,7 +2493,7 @@ const BANTUAN = {
   template:() => ({ judul:'Panduan Template Akta', isi:`<p>Template Akta memuat template minuta per layanan. Template bawaan platform dipakai semua kantor, sedangkan template kantor bisa disunting.${usulan('IDDS-TN-60')}</p>
     <h4 class="bantu-sub">Langkah</h4>${lgkh(['Pilih layanan.', 'Tekan <b>Salin &amp; Sunting</b> pada template bawaan, atau <b>Tambah Template</b>.', 'Isi nama template, lalu tekan <b>Buat Template</b>.', 'Tekan <b>Pasal</b> untuk menyunting isinya.', 'Uji dengan Skenario dan Preview Akta, lalu tekan <b>Kunci Template</b>.'])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>${fq('tp', [['Mengapa template bawaan tidak bisa diubah?', 'Template bawaan dipakai semua kantor. Salin dulu untuk menyuntingnya.'], ['Kapan template kantor dipakai?', 'Saat masuk penyusunan, staf memilih template yang dipakai.'], ['Bagaimana cara menghapus template?', 'Tekan Ubah, lalu Hapus. Template bawaan tidak bisa dihapus.']])}${kontak()}` }),
-  pasal:() => ({ judul:'Panduan Editor Template', isi:`<p>${bacaSaja(tplAktif()) ? 'Template bawaan hanya bisa dilihat. Tekan Salin &amp; Sunting untuk membuat salinan milik kantor.' : 'Susun bagian template di sini. Isi bagian diketik langsung di kertas.'}${usulan('IDDS-TN-60')}</p>
+  pasal:() => ({ judul:'Panduan Editor Template', isi:`<p>${bacaSaja(tplAktif()) ? 'Template bawaan hanya dapat dilihat. Tekan Salin &amp; Sunting untuk membuat salinan milik kantor.' : 'Susun bagian template di sini. Isi bagian diketik langsung di kertas.'}${usulan('IDDS-TN-60')}</p>
     <h4 class="bantu-sub">Langkah</h4>${lgkh(['Pilih bagian di panel kiri.', 'Ketik isinya di kertas dan sisipkan data lewat tombol Variabel.', 'Atur kertas di Pengaturan Halaman.', 'Buat skenario, tekan Rakit semua, lalu periksa di Preview Akta.', 'Tekan Kunci Template agar bisa dipakai.'])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>${fq('ed', [['Apa beda Simpan sebagai Draft dan Kunci Template?', 'Draft menyimpan naskah tanpa mengubah versi yang dipakai. Kunci Template membuat versi baru untuk order baru.'], ['Apa fungsi Kembalikan ke redaksi bawaan?', 'Tombol ini mengganti isi bagian dengan redaksi template bawaan. Perubahan tersimpan setelah Anda klik Simpan.']])}${kontak()}` })
 };

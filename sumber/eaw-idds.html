@@ -547,7 +547,7 @@ body:has(#otpWaktu) .protobar{position:relative;z-index:3000} /* tombol simulasi
   <span class="sep">&bull;</span><span>PPAT penanda tangan salinan:</span>
   <button class="pil" data-sim-ppat="ada" aria-pressed="true">Ditetapkan</button>
   <button class="pil" data-sim-ppat="belum" aria-pressed="false">Belum ditetapkan</button>
-  <span class="sep">&bull;</span><span>Layar:</span><span id="pilLayar"></span>
+  <span class="sep">&bull;</span><span>Layar:</span><span id="pilLayar"></span><span class="sep">&bull;</span><span>Kondisi:</span><span id="pilKondisiTtd"></span>
   <span class="kanan">
     <button class="pil" id="simSpesimen" aria-pressed="false" title="Mensimulasikan penanda tangan yang belum memasukkan spesimen">Spesimen: sudah ada</button>
     <button class="pil" id="simKedaluwarsa" title="Saat dialog OTP terbuka">Simulasi OTP kedaluwarsa</button>
@@ -645,7 +645,7 @@ const tanya = (ist, penjelasan) => `<span class="ina-tooltip ina-tooltip--placem
 const TANYA = {
   status:['Status Penandatanganan', 'Kolom ini menunjukkan kemajuan penandatanganan minuta, mulai dari belum mulai, menunggu stempel TERA, tanda tangan para pihak, menunggu e-Meterai, sampai selesai.'],
   final:['Akta final', 'Akta final adalah akta yang sudah melewati finalisasi di Penyusunan Akta. Isi akta dikunci dan siap dibubuhi stempel, tanda tangan, dan meterai.'],
-  dok:['Minuta dan Salinan', 'Minuta adalah akta asli yang ditandatangani para pihak dan disimpan kantor PPAT. Salinan adalah turunan akta yang diberikan kepada para pihak.'],
+  dok:['Minuta dan Salinan', 'Minuta adalah akta asli yang dicetak dua rangkap. Lembar Pertama disimpan di kantor PPAT, dan Lembar Kedua disampaikan ke Kantor Pertanahan. Salinan adalah turunan akta yang diberikan kepada para pihak.'],
   langkah:['Status langkah', 'Selesai berarti langkah sudah dikerjakan. Sedang berjalan berarti langkah dapat dikerjakan sekarang. Terkunci berarti langkah menunggu langkah sebelumnya selesai.'],
   tera:['Stempel TERA', 'Stempel TERA adalah stempel elektronik resmi kantor PPAT yang terdaftar di Peruri. Stempel dibubuhkan satu kali sebelum tanda tangan.'],
   ttd:['Tanda Tangan Elektronik', 'Tanda tangan elektronik adalah tanda tangan tersertifikasi yang dibubuhkan dengan sertifikat elektronik (CA) setiap penanda tangan.'],
@@ -698,6 +698,9 @@ const UBAH = [
   { kode:'HE-EAW-09', judul:'Langkah e-Meterai: aktivasi diperiksa dan pemakaian kuota dikonfirmasi',
     isi:'Bila email akun e-Meterai kantor belum disimpan, nonaktifkan tombol Buat Nomor Seri dan tampilkan IDDS Alert yang mengarahkan ke menu Aktivasi e-Meterai. Bila sudah aktif, tampilkan akun e-Meterai yang dipakai di panel. Sebelum nomor seri dibuat atau dibuat ulang, tampilkan IDDS Modal Confirmation "Pakai 1 kuota e-Meterai?" yang menyebut biaya Rp10.000 dan akun Peruri yang dipakai. Bila kuota habis, tampilkan IDDS Alert critical yang menetap di bawah tombol dengan tautan pembelian kuota di e-Meterai.co.id. Gunakan label berbahasa Indonesia: "Buat Nomor Seri", "Bubuhkan e-Meterai", dan "Nomor seri e-Meterai". Perilaku ini dapat dicoba melalui simulasi "e-Meterai" di bilah atas.',
     lama:'Wizard tidak membaca email aktivasi e-Meterai dan tidak menampilkan sisa kuota. Tombol "1. Generate SN (kuota)" selalu aktif dan langsung memakai 1 kuota (Rp10.000) tanpa konfirmasi; tombol "Generate Ulang SN" juga tanpa konfirmasi. Email yang belum diisi atau kuota yang habis baru diketahui dari toast pesan server atau "Gagal generate SN meterai." yang hilang sendiri. Label memakai bahasa Inggris dan ejaan "E-Materai".', ke:'meterai', sorot:'#alertMeterai', sumber:'Penelusuran live (bukan temuan HE)', bukanHE:true },
+  { kode:'HE-EAW-14', versi:'v2', bukanHE:true, judul:'Minuta Lembar Pertama, Minuta Lembar Kedua, dan Salinan',
+    isi:'Salinan tidak lagi diunggah: satu Salinan Akta dibuat otomatis dari minuta final dan melalui langkah yang sama, hanya ditandatangani PPAT. Akta ditandatangani dalam tiga dokumen berurutan, sama dengan dokumen di Arsip Akta: Minuta Lembar Pertama (disimpan di kantor PPAT), Minuta Lembar Kedua (ke Kantor Pertanahan), lalu Salinan. Setiap minuta melalui Stempel TERA, Tanda Tangan Elektronik semua penanda tangan, dan e-Meterai. Tab Minuta Lembar Kedua terbuka setelah Lembar Pertama selesai, dan tab Salinan terbuka setelah kedua rangkap tuntas, dengan alasan dan tombol ke tab sebelumnya. Halaman pertama dokumen menyebut lembarnya. Status di Permohonan AJB dan Arsip Akta mengikuti setiap lembar.',
+    lama:'Hanya ada tab Minuta dan Salinan; minuta dianggap satu dokumen, padahal Arsip Akta dan Renvooi memakai dua rangkap minuta.', ke:'minuta2', sorot:'#kartuLangkah', sumber:'Acuan prototipe Perdana Niaga (Order APHT) dan live Arsip Akta' },
   { kode:'HE-EAW-10', judul:'Tab Salinan: daftar salinan elektronik dan letaknya setelah selesai',
     isi:'Buat tab Salinan berfungsi di layar detail. Saat tab dibuka, layar langsung masuk ke langkah Stempel TERA (atau langkah yang sedang berjalan) pada salinan aktif, yaitu salinan pertama yang belum selesai. Daftar salinan dibuka lewat tombol "Daftar Salinan" untuk mengganti salinan atau mengunggah salinan lain. Bila order belum punya salinan, tab menampilkan daftar kosong beserta kartu unggah, dan setelah unggah berhasil layar langsung masuk ke langkah Stempel TERA. Di atas daftar, tampilkan IDDS Alert info yang menjelaskan bahwa tab ini untuk salinan elektronik yang dibubuhi stempel TERA, tanda tangan elektronik, dan e-Meterai, lalu dikirim sebagai lampiran PDF. Setelah akta selesai, salinan tersimpan di Arsip Akta (ada tautannya); menu Salinan Akta tidak dipakai lagi. Kartu unggah tetap berisi Label (opsional) dan tombol "Unggah Salinan (PDF)". Galat format dan ukuran tampil di bawah isian, bukan toast, dan unggahan menampilkan status memuat. Setiap salinan memakai lencana status berbahasa Indonesia (Selesai, Diproses, Draf) serta lencana langkah Stempel TERA, Tanda Tangan Elektronik, dan e-Meterai. Bila PPAT penanda tangan belum ditetapkan, tampilkan IDDS Alert caution dengan tautan ke Profil Kantor. Tombol Bantuan di tab ini membuka tanya jawab khusus salinan.',
     lama:'Tab "Salinan" membuka daftar salinan terlebih dahulu; pengguna harus mengklik "Kelola" pada salah satu salinan untuk mulai membubuhkan stempel TERA. Tab ini berisi kartu unggah "Label (opsional)" dan tombol "Unggah Salinan (PDF)" dengan galat "File harus PDF." dan "Ukuran file ({x.x} MB) melebihi batas. Maksimal 20 MB." Kartu salinan memakai lencana "Selesai", "Proses", "Draft" dan "TERA ✓ / E-Sign / E-Materai". Pesan Order menyuruh membuka menu Akta Salinan, sedangkan Minuta menyebut "Akta masuk ke menu Salinan"; tidak ada penjelasan beda antara tab Salinan (lampiran) dan menu Akta Salinan (tautan 7 hari), padahal keduanya memakai istilah "Kirim Salinan".', ke:'salinan', sorot:'#infoSalinan', sumber:'Penelusuran live (bukan temuan HE)', bukanHE:true },
@@ -732,6 +735,15 @@ function contoh() {
     { ...a('ORD-CONTOH-009', 'Contoh Narahubung Sembilan', false, 0, false, '9/2026', '22 Okt 2026'), mulai:false }
   ].map(x => { if (x.kode === 'ORD-CONTOH-004') x.pihak.find(s => s.peran === 'PPAT').ca = false; if (['ORD-CONTOH-005', 'ORD-CONTOH-007'].includes(x.kode)) Object.assign(x.pihak[1], { nama:'Contoh Klien Satu', email:'klien1@contoh.id' }); return x; }); /* PPAT belum ber-CA (temuan live) */
 }
+/* Minuta dicetak dua rangkap: Lembar Pertama (disimpan di kantor PPAT) dan Lembar Kedua (ke Kantor Pertanahan).
+   Keduanya ditandatangani berurutan dengan langkah yang sama; salinan dibuat setelah kedua rangkap tuntas. */
+function lembarKedua(x, selesai) {
+  return { lembar:2, kode:x.kode, nama:x.nama, nomor:x.nomor, tgl:x.tgl, mulai:true,
+    tera:{ status:selesai ? 'STAMPED' : 'BELUM', hal:selesai ? JHAL : null, x:39, y:68 },
+    pihak:x.pihak.map(s => ({ ...s, status:selesai ? 'SIGNED' : 'MENUNGGU', hal:selesai || s.peran !== 'PPAT' ? s.hal || JHAL : null })),
+    meterai:{ status:selesai ? 'STAMPED' : 'NONE', hal:selesai ? JHAL : null, x:72, y:84, sn:selesai ? 'SN-CONTOH-0002' : '' } };
+}
+function pastikanLembar(x) { if (x && !x.lembar2) x.lembar2 = lembarKedua(x, posisi(x) === 3); return x; }
 let ORDER = contoh();
 /* salinan elektronik per order (tab Salinan, HE-EAW-10…12); bentuk data sama dengan order agar langkah Minuta dapat dipakai ulang */
 const salinanBaru = (kode, id, label, selesai = false) => ({ salinan:true, id, label, kode, mulai:true,
@@ -739,10 +751,12 @@ const salinanBaru = (kode, id, label, selesai = false) => ({ salinan:true, id, l
   pihak:[{ id:3, nama:'PPAT Contoh Satu', peran:'PPAT', email:'ppat1@contoh.id', ca:true, hal:selesai ? JHAL_S : null, x:40, y:78, status:selesai ? 'SIGNED' : 'MENUNGGU' }],
   meterai:{ status:selesai ? 'STAMPED' : 'NONE', hal:selesai ? JHAL_S : null, x:72, y:80, sn:selesai ? 'SN-CONTOH-0101' : '' } });
 const JHAL_S = 8;
-const contohSalinan = () => ({ 'ORD-CONTOH-013':[salinanBaru('ORD-CONTOH-013', 1, 'Salinan Pihak Pertama', true), salinanBaru('ORD-CONTOH-013', 2, 'Salinan Pihak Kedua')] });
+const contohSalinan = () => ({ 'ORD-CONTOH-013':[salinanBaru('ORD-CONTOH-013', 1, 'Salinan Akta', true)] });
 let SALINAN = contohSalinan(), idSal = 10;
 const daftarSal = kode => SALINAN[kode] || (SALINAN[kode] = []);
-const kunci = x => x.salinan ? `${x.kode}#${x.id}` : x.kode;
+/* satu Salinan Akta per akta, dibuat otomatis dari minuta final (tanpa unggah) */
+const salSatu = kode => { const L = daftarSal(kode); if (!L.length) L.push(salinanBaru(kode, ++idSal, 'Salinan Akta')); return L[0]; };
+const kunci = x => x.salinan ? `${x.kode}#${x.id}` : x.lembar === 2 ? `${x.kode}#L2` : x.kode;
 function statusSal(s) { /* status keseluruhan salinan, label Indonesia */
   if (s.tera.status === 'STAMPED' && s.pihak[0].status === 'SIGNED' && s.meterai.status === 'STAMPED') return ['Selesai', 'success'];
   if (s.tera.status === 'STAMPED' || s.meterai.status !== 'NONE') return ['Diproses', 'info'];
@@ -758,11 +772,17 @@ const PERAN = { PENJUAL:'Pihak Pertama', PEMBELI:'Pihak Kedua', SAKSI:'Saksi', P
 const ttdSelesai = o => o.pihak.filter(p => p.status === 'SIGNED').length;
 const giliran = o => o.pihak.find(p => p.status !== 'SIGNED');
 const posisi = o => o.tera.status !== 'STAMPED' ? 0 : ttdSelesai(o) < o.pihak.length ? 1 : o.meterai.status !== 'STAMPED' ? 2 : 3;
+ORDER.forEach(pastikanLembar);
 function statusDaftar(o) {
   if (!o.mulai) return ['Belum mulai', 'neutral'];
   if (o.tera.status !== 'STAMPED' && S.tera !== 'aktif') return ['Menunggu TERA kantor', 'warning']; /* HE-EAW-08 */
   const p = posisi(o);
   return p === 0 ? ['Menunggu TERA', 'warning'] : p === 1 ? [`Tanda tangan ${ttdSelesai(o)}/${o.pihak.length}`, 'info'] : p === 2 ? ['Menunggu e-Meterai', 'warning'] : ['Selesai', 'success'];
+}
+const tuntasL1 = x => posisi(x) === 3, tuntasMinuta = x => posisi(x) === 3 && !!x.lembar2 && posisi(x.lembar2) === 3;
+function statusAkta(x) {
+  if (!tuntasL1(x) || !x.lembar2) { const [l, j] = statusDaftar(x); return [l === 'Selesai' ? 'Lembar Pertama selesai' : `Lembar Pertama · ${l}`, l === 'Selesai' ? 'info' : j]; }
+  const [l, j] = statusDaftar(x.lembar2); return l === 'Selesai' ? ['Selesai', 'success'] : [`Lembar Kedua · ${l}`, j];
 }
 function statusLangkah(o, i) {
   const p = posisi(o);
@@ -780,7 +800,7 @@ const S = { layar:'detail', aktif:null, lihat:0, hal:1, zoom:100, memuat:'', lai
   tab:'minuta', sal:null, memuatSal:false, labelSal:'', galatUnggah:'', ppat:'ada' }; /* tab Salinan (HE-EAW-10…12) */
 const ord = () => ORDER.find(x => x.kode === S.aktif);
 /* saat mengelola salinan, objek aktif = salinan (bentuk datanya sama dengan order) */
-const o = () => { const x = ord(); return x && S.tab === 'salinan' && S.sal != null ? daftarSal(x.kode).find(s => s.id === S.sal) : x; };
+const o = () => { const x = ord(); if (x && S.tab === 'minuta2') return pastikanLembar(x).lembar2; return x && S.tab === 'salinan' && S.sal != null ? daftarSal(x.kode).find(s => s.id === S.sal) : x; };
 const EMAIL_METERAI = 'ppat1@contoh.id';
 const PROTO_TERA = 'Backlog-HE-TERA-Prototype.html#registrasi';
 
@@ -829,14 +849,19 @@ function layarDetail() {
     <div class="det-atas">${tombol('Kembali', 'secondary', 'sm', 'id="kembali" aria-label="Kembali ke stepper Permohonan AJB"', ik('kiri', 14))}<span class="meta">${d.kode} · Akta Jual Beli · ${esc(d.nama)}${d.nomor ? ` · No. ${esc(d.nomor)}` : ''}</span></div>
     ${HANYA_LIHAT ? `<div class="ditandai" id="hanyaLihat" style="margin-top:16px">${alert('info', 'Akun Anda belum berperan PPAT', `Anda dapat menentukan posisi kotak dan mengirim OTP ke para pihak. Stempel TERA, tanda tangan PPAT, dan e-Meterai memerlukan peran PPAT. Tambahkan peran itu di Daftar Pengguna.${usulan('HE-EAW-13')}<div class="alert-aksi">${tautan('Buka Daftar Pengguna', 'link', 'Backlog-HE-USER-Prototype.html')}</div>`)}</div>` : ''}
     <div class="ina-tab-horizontal ina-tab-horizontal--use-brand-color tab-dok"><div class="ina-tab-horizontal__container" role="tablist" aria-label="Dokumen akta">
-      ${tab('minuta', 'Minuta', 'dok')}${tab('salinan', 'Salinan', 'salin')}</div>${tq('dok')}</div>
-    <div role="tabpanel" aria-labelledby="tab-${S.tab}">${S.tab === 'minuta' ? isiMinuta() : S.sal != null && o() ? layarKelola() : layarSalinan()}</div>`;
+      ${tab('minuta', `Minuta Lembar Pertama${tuntasL1(d) ? ' ' + ik('centang', 13) : ''}`, 'dok')}${tab('minuta2', `Minuta Lembar Kedua${tuntasMinuta(d) ? ' ' + ik('centang', 13) : tuntasL1(d) ? '' : ' ' + ik('kunci', 13)}`, 'dok')}${tab('salinan', `Salinan${tuntasMinuta(d) ? '' : ' ' + ik('kunci', 13)}`, 'salin')}</div>${tq('dok')}</div>
+    <div role="tabpanel" aria-labelledby="tab-${S.tab}">${S.tab === 'minuta' ? isiMinuta() : S.tab === 'minuta2' ? (tuntasL1(d) ? isiMinuta() : kunciTab('Minuta Lembar Kedua dibuka setelah Minuta Lembar Pertama selesai ditandatangani.', 'minuta', 'Ke Minuta Lembar Pertama')) : !tuntasMinuta(d) ? kunciTab('Salinan dapat dibuat setelah kedua rangkap minuta selesai ditandatangani.', tuntasL1(d) ? 'minuta2' : 'minuta', tuntasL1(d) ? 'Ke Minuta Lembar Kedua' : 'Ke Minuta Lembar Pertama') : (siapkanSalinan(d), layarKelola())}</div>`;
+}
+/* tab Salinan langsung membuka Salinan Akta di langkah yang sedang berjalan */
+function siapkanSalinan(d) { if (S.sal != null) return; const s = salSatu(d.kode), p = Math.min(posisi(s), 2); S.sal = s.id; S.lihat = p; S.hal = halTujuan(s, p); }
+function kunciTab(teks, ke, label) {
+  return `<div class="ditandai" id="tabTerkunci" style="margin-top:16px">${alert('info', '', `${ik('kunci', 14)} ${teks}${usulan('HE-EAW-14')}`, `<div class="alert-aksi">${tombol(label, 'secondary', 'sm', `data-tab="${ke}"`, ik('panah', 14))}</div>`)}</div>`;
 }
 function isiMinuta() {
   const x = o(), p = posisi(x);
   return `
     <div class="kartu-langkah ditandai" id="kartuLangkah">${stepper(x, false)}${stepper(x, true)}
-      <p class="ket-langkah">${ik('info', 14)}<span>${p === 3 ? 'Semua langkah selesai. Akta final siap diunduh.' : `Langkah dikerjakan secara berurutan. Langkah berikutnya terbuka setelah langkah sebelumnya selesai.`}</span>${tq('langkah')}${usulan('HE-EAW-01')}</p></div>
+      <p class="ket-langkah">${ik('info', 14)}<span>${p === 3 ? (x.lembar === 2 ? 'Kedua rangkap minuta sudah tuntas ditandatangani. Lanjutkan ke tab Salinan.' : 'Minuta Lembar Pertama selesai. Lanjutkan ke tab Minuta Lembar Kedua.') : `Langkah dikerjakan secara berurutan. Langkah berikutnya terbuka setelah langkah sebelumnya selesai.`}</span>${tq('langkah')}${usulan('HE-EAW-01')}</p></div>
     ${kesiapan(x)}
     <div class="ruang">${penampil(x)}<div class="panel">${panel(x)}</div></div>`;
 }
@@ -892,8 +917,8 @@ function layarSalinan() {
 function layarKelola() {
   const x = o(), p = posisi(x), hasil = x.tera.status === 'STAMPED';
   const L = daftarSal(x.kode);
-  return `<div class="kelola-atas">${tombol('Daftar Salinan', 'secondary', 'sm', 'id="keDaftarSal" aria-label="Daftar Salinan: ganti salinan atau unggah salinan lain"', ik('kiri', 14))}
-      <div class="nama-sal"><span class="ket-aktif">Sedang dikerjakan (${L.indexOf(x) + 1} dari ${L.length}):</span><span>${esc(x.label)}</span>${badge(...statusSal(x), 'sm')}${hasil ? tombol('Kirim via Email', 'primary', 'sm', 'id="kirimSal"', ik('surat', 14)) : ''}</div></div>
+  return `<div class="sal-info ditandai" id="infoSalinan">${alert('info', '', `Salinan Akta dibuat otomatis dari minuta final, lalu distempel TERA, ditandatangani PPAT, dan dibubuhi e-Meterai. Setelah akta selesai, salinan tersimpan di <b>Arsip Akta</b>.${tq('menuSal')}${usulan('HE-EAW-14')}`)}</div>
+    <div class="kelola-atas"><div class="nama-sal"><span>Salinan Akta</span>${badge(...statusSal(x), 'sm')}${hasil ? tombol('Kirim via Email', 'primary', 'sm', 'id="kirimSal"', ik('surat', 14)) : ''}</div></div>
     <div class="kartu-langkah ditandai" id="kartuLangkahSal">${stepper(x, false)}${stepper(x, true)}
       <p class="ket-langkah">${ik('info', 14)}<span>${p === 3 ? 'Semua langkah selesai. Salinan siap dikirim.' : 'Urutan wajib: Stempel TERA → Tanda Tangan Elektronik → e-Meterai. Langkah berikutnya terbuka setelah langkah sebelumnya selesai.'}</span>${tq('langkah')}${usulan('HE-EAW-11')}</p></div>
     <div class="ruang">${penampil(x)}<div class="panel">${panel(x)}</div></div>`;
@@ -904,7 +929,7 @@ const salAktif = kode => { const L = daftarSal(kode); return L.find(s => statusS
 function bukaTab(k, langsung = true) {
   Object.assign(S, { tab:k, sal:null, lainBuka:false, galatUnggah:'' });
   if (k === 'salinan') { S.memuatSal = true; setTimeout(() => { S.memuatSal = false; if (S.tab !== 'salinan' || S.sal != null) return; const s = langsung && salAktif(ord().kode); if (s) { kelolaSal(s.id, false); $('#tab-salinan')?.focus(); } else gambar(); }, 400); }
-  else { const x = ord(); const p = Math.min(posisi(x), 2); S.lihat = p; S.hal = halTujuan(x, p); }
+  else { const x = o(); const p = Math.min(posisi(x), 2); S.lihat = p; S.hal = halTujuan(x, p); }
   gambar(); $(`#tab-${k}`)?.focus();
 }
 function kelolaSal(id, fokus = true) {
@@ -983,7 +1008,7 @@ function penandaDi(x) {
   return out;
 }
 function isiHalaman(h) {
-  if (h === 1) return `<h3>${o()?.salinan ? 'SALINAN<br>' : ''}AKTA JUAL BELI</h3><p style="text-align:center">Nomor: ……/2026</p>`;
+  if (h === 1) return `<h3>${o()?.salinan ? 'SALINAN<br>' : ''}AKTA JUAL BELI</h3><p style="text-align:center">Nomor: ……/2026</p>${o()?.salinan ? '' : `<p style="text-align:center"><b>Lembar ${o()?.lembar === 2 ? 'Kedua' : 'Pertama'}</b></p>`}`;
   if (h === JHAL) return '<p>Demikian akta ini dibuat dan ditandatangani secara elektronik.</p><div class="ttd-blok"><div>PIHAK PERTAMA<br>(Penjual)</div><div>PIHAK KEDUA<br>(Pembeli)</div></div>';
   return Array.from({ length:11 }, (_, i) => `<p>${['Pasal ' + (h - 1) + '.', 'Para pihak dengan ini menerangkan', 'bahwa objek jual beli telah', 'diperiksa dan disetujui bersama,', 'serta tunduk pada ketentuan yang', 'berlaku sebagaimana diuraikan', 'dalam akta ini. ————————————', 'Segala biaya yang timbul menjadi', 'tanggungan sesuai kesepakatan', 'para pihak. ———————————————', '————————————————————————'][i]}</p>`).join('');
 }
@@ -1030,7 +1055,7 @@ function menuLain(x) {
 }
 function kartuInfo(x, judulL) {
   const dl = x.salinan ? `<dt>Salinan</dt><dd>${esc(x.label)}</dd><dt>Kode</dt><dd class="kode">${x.kode}</dd><dt>Status${tq('statusSal')}</dt><dd>${badge(...statusSal(x), 'sm')}</dd>`
-    : `<dt>Kode</dt><dd class="kode">${x.kode}</dd><dt>Tanggal akta</dt><dd>${x.tgl || '—'}</dd><dt>Status${tq('status')}</dt><dd>${badge(...statusDaftar(x), 'sm')}</dd>`;
+    : `<dt>Dokumen</dt><dd>Minuta Lembar ${x.lembar === 2 ? 'Kedua' : 'Pertama'}</dd><dt>Kode</dt><dd class="kode">${x.kode}</dd><dt>Tanggal akta</dt><dd>${x.tgl || '—'}</dd><dt>Status${tq('status')}</dt><dd>${badge(...statusDaftar(x), 'sm')}</dd>`;
   return `<div class="ina-card ina-card--variant-basic"><div class="ina-card__content"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><h4 style="margin:0">${ik(LANGKAH[S.lihat].ik, 16)} Langkah ${S.lihat + 1}: ${judulL}${tq(['tera', 'ttd', 'meterai'][S.lihat])}</h4>${x.salinan ? '' : menuLain(x)}</div>
     <dl class="kv" style="margin-top:10px">${dl}</dl></div></div>`;
 }
@@ -1140,17 +1165,30 @@ function panelMeterai(x, p) {
 /* ---------------- gambar & navigasi ---------------- */
 function gambar() { gambarNav(); $('#halaman').innerHTML = layarDetail(); pasangPanduan(); S.kilau = null; gambarPil(); laporAjb(); }
 /* status akta kembali ke stepper Permohonan AJB */
-function laporAjb() { const x = ord(); if (!x) return; const [l, j] = statusDaftar(x), L = daftarSal(x.kode); AJB.simpan(x.kode, { eawData:x, salinanData:L, ttd:{ l, j, selesai:posisi(x) === 3 }, salinan:{ selesai:L.length > 0 && L.every(s => posisi(s) === 3) } }); }
+function laporAjb() { const x = pastikanLembar(ord()); if (!x) return; const [l, j] = statusAkta(x), L = daftarSal(x.kode); AJB.simpan(x.kode, { eawData:x, salinanData:L, ttd:{ l, j, selesai:tuntasMinuta(x), l1:posisi(x) >= 2, l2:posisi(x.lembar2) >= 2 }, salinan:{ selesai:L.length > 0 && L.every(s => posisi(s) === 3) } }); }
 /* pil layar di bilah atas agar setiap layar dapat dibuka langsung */
-const PIL = [['minuta', 'Minuta'], ['salinan', 'Salinan'], ['daftarsal', 'Daftar salinan']];
-const pilAktif = () => S.tab === 'minuta' ? 'minuta' : S.sal != null ? 'salinan' : 'daftarsal';
-function gambarPil() { const a = pilAktif(); $('#pilLayar').innerHTML = PIL.map(([k, t]) => `<button class="pil" data-pil="${k}" aria-pressed="${a === k}">${t}</button>`).join(' '); }
+const PIL = [['minuta', 'Minuta Lembar Pertama'], ['minuta2', 'Minuta Lembar Kedua'], ['salinan', 'Salinan']];
+const pilAktif = () => S.tab;
+const KONDISI_TTD = [['l1', 'Lembar Pertama berjalan'], ['l2', 'Lembar Pertama selesai'], ['sal', 'Kedua rangkap selesai'], ['selesai', 'Semua selesai']];
+const kondisiTtd = x => !tuntasL1(x) ? 'l1' : !tuntasMinuta(x) ? 'l2' : daftarSal(x.kode).length && daftarSal(x.kode).every(s => posisi(s) === 3) ? 'selesai' : 'sal';
+const tuntaskan = d => { d.tera = { ...d.tera, status:'STAMPED', hal:d.tera.hal || JHAL }; d.pihak.forEach(p => { p.status = 'SIGNED'; p.hal = p.hal || JHAL; }); d.meterai = { ...d.meterai, status:'STAMPED', hal:d.meterai.hal || JHAL, sn:d.meterai.sn || 'SN-CONTOH-0099' }; };
+const kosongkan = d => { d.tera = { ...d.tera, status:'BELUM', hal:null }; d.pihak.forEach(p => { p.status = 'MENUNGGU'; }); d.meterai = { ...d.meterai, status:'NONE', hal:null, sn:'' }; };
+function aturKondisiTtd(k) {
+  const x = pastikanLembar(ord()); if (!x) return;
+  if (k === 'l1') kosongkan(x); else tuntaskan(x);
+  if (['l1', 'l2'].includes(k)) kosongkan(x.lembar2); else tuntaskan(x.lembar2);
+  SALINAN[x.kode] = ['sal', 'selesai'].includes(k) ? [salinanBaru(x.kode, ++idSal, 'Salinan Akta', k === 'selesai')] : [];
+  const tab = { l1:'minuta', l2:'minuta2', sal:'salinan', selesai:'salinan' }[k];
+  Object.assign(S, { tab, sal:null, lainBuka:false }); const d = o() || x; const p = Math.min(posisi(tab === 'salinan' ? salSatu(x.kode) : d), 2); S.lihat = p; S.hal = halTujuan(tab === 'salinan' ? salSatu(x.kode) : d, p);
+  gambar(); toast(`Simulasi kondisi: ${KONDISI_TTD.find(y => y[0] === k)[1]}.`);
+}
+function gambarPil() { const kx = ord() && pastikanLembar(ord()); if ($('#pilKondisiTtd') && kx) $('#pilKondisiTtd').innerHTML = KONDISI_TTD.map(([k, t]) => `<button class="pil" data-kondisi-ttd="${k}" aria-pressed="${kondisiTtd(kx) === k}">${t}</button>`).join(' '); const a = pilAktif(); $('#pilLayar').innerHTML = PIL.map(([k, t]) => `<button class="pil" data-pil="${k}" aria-pressed="${a === k}">${t}</button>`).join(' '); }
 function bukaPil(k) {
   if (k === 'minuta') { buka('ORD-CONTOH-007'); return; }
+  if (k === 'minuta2') { const x = ORDER.find(y => y.kode === 'ORD-CONTOH-008'); Object.assign(x.meterai, { status:'STAMPED', hal:JHAL, sn:'SN-CONTOH-0008' }); x.lembar2 = lembarKedua(x, false); buka('ORD-CONTOH-008'); bukaTab('minuta2'); return; } /* Lembar Pertama selesai, Lembar Kedua berjalan */
   buka('ORD-CONTOH-013');
   if (k === 'daftarsal') { bukaTab('salinan', false); return; }
-  const L = daftarSal('ORD-CONTOH-013'); if (!L.length) L.push(salinanBaru('ORD-CONTOH-013', ++idSal, 'Salinan Pihak Kedua'));
-  kelolaSal(salAktif('ORD-CONTOH-013').id); /* pil Salinan: langsung ke langkah salinan aktif */
+  kelolaSal(salSatu('ORD-CONTOH-013').id); /* pil Salinan: langsung ke langkah salinan aktif */
 }
 function keDaftar() { AJB.keStepper(S.aktif); }
 /* akta dari Permohonan AJB: keadaan tersimpan, atau akta baru untuk order yang belum ada di contoh */
@@ -1159,6 +1197,7 @@ function pastikan(kode) {
   if (!x && !d.order) return null;
   if (!x) { x = a(kode, d.order.kontak.nama, false, 0, false); ORDER.push(x); ['PENJUAL', 'PEMBELI'].forEach(t => { const s = x.pihak.find(p => p.peran === t), u = d.order.pihak.find(p => p.tipe === t); if (u) Object.assign(s, { nama:u.nama, email:u.email }); }); }
   if (d.eawData) Object.assign(x, d.eawData);
+  pastikanLembar(x);
   if (d.salinanData) { SALINAN[kode] = d.salinanData; idSal = Math.max(idSal, ...d.salinanData.map(s => s.id + 1)); }
   if (y.nomor) Object.assign(x, { nomor:y.nomor, tgl:y.tgl });
   return x;
@@ -1204,7 +1243,7 @@ const H = $('#halaman');
 H.addEventListener('keydown', e => {
   if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-langkah], [data-lompat]')) { e.preventDefault(); e.target.click(); }
   if (e.target.id === 'inHal' && e.key === 'Enter') keHal(+e.target.value || 1);
-  if (e.target.matches('[role="tab"][data-tab]') && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { e.preventDefault(); bukaTab(S.tab === 'minuta' ? 'salinan' : 'minuta'); }
+  if (e.target.matches('[role="tab"][data-tab]') && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { e.preventDefault(); { const T = ['minuta', 'minuta2', 'salinan'], i = T.indexOf(S.tab); bukaTab(T[(i + (e.key === 'ArrowRight' ? 1 : 2)) % 3]); } }
 });
 H.addEventListener('change', e => { if (e.target.id === 'inHal') keHal(+e.target.value || 1); if (e.target.id === 'berkasSal' && e.target.files[0]) unggahSal(e.target.files[0]); });
 H.addEventListener('input', e => { if (e.target.id === 'labelSal') { S.labelSal = e.target.value; return; } if (e.target.id !== 'cariEaw') return; S.cari = e.target.value; const p = e.target.selectionStart; gambar(); const n = $('#cariEaw'); n.focus(); n.setSelectionRange(p, p); });
@@ -1413,7 +1452,7 @@ $('#toastWadah').addEventListener('click', e => { if (e.target.closest('[data-tu
 const faq = (i, q, a) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="faq-${i}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></div></button><div id="faq-${i}" class="ina-accordion__content"><div class="ina-accordion__body"><p>${a}</p></div></div></div>`;
 function bantuanSalinan() { /* bantuan khusus tab Salinan (HE-EAW-10) */
   drawer({ judul:'Bantuan Tab Salinan', isi:`
-    <p>Tab Salinan dipakai untuk membuat salinan akta elektronik: unggah PDF salinan, bubuhkan tiga langkah berurutan, lalu kirim ke para pihak sebagai lampiran email. Saat tab dibuka, layar langsung menampilkan langkah yang sedang berjalan pada salinan pertama yang belum selesai. Klik "Daftar Salinan" untuk mengganti salinan atau mengunggah salinan lain.</p>
+    <p>Salinan Akta dibuat otomatis dari minuta final setelah kedua rangkap minuta selesai ditandatangani. Salinan melalui tiga langkah berurutan dan hanya ditandatangani PPAT. Setelah itu, salinan dapat dikirim ke para pihak sebagai lampiran email.</p>
     <ol class="bantu-langkah">
       <li><b>Stempel TERA:</b> tentukan posisi stempel (opsional), lalu masukkan kode OTP dari email TERA kantor.</li>
       <li><b>Tanda Tangan Elektronik:</b> PPAT penanda tangan kantor menandatangani salinan dengan kode OTP.</li>
@@ -1422,24 +1461,24 @@ function bantuanSalinan() { /* bantuan khusus tab Salinan (HE-EAW-10) */
     <h4 class="bantu-sub">Pertanyaan umum ${usulan('HE-EAW-10')}</h4>
     ${faq(21, 'Di mana salinan tersimpan setelah selesai?', 'Tab Salinan menghasilkan salinan elektronik yang dibubuhi stempel TERA, tanda tangan elektronik, dan e-Meterai, lalu dikirim sebagai lampiran PDF. Setelah akta selesai, minuta dan salinan tersimpan di Arsip Akta. Dari sana salinan dapat diunduh dan dikirim ulang, dan riwayat pengirimannya terlihat.')}
     ${faq(22, 'Mengapa langkah 2 dan 3 terkunci?', 'Urutan langkah wajib: Stempel TERA, Tanda Tangan Elektronik, lalu e-Meterai. Peruri mensyaratkan stempel sebelum tanda tangan, dan e-Meterai dibubuhkan pada salinan yang sudah ditandatangani.')}
-    ${faq(23, 'Apakah setiap salinan memakai kuota e-Meterai?', 'Ya. Setiap pembuatan nomor seri, termasuk pembuatan ulang, memakai 1 kuota (Rp10.000) dari akun e-Meterai kantor. Kuota yang terpakai tidak dapat dikembalikan, termasuk bila salinan dihapus.')}
+    ${faq(23, 'Apakah setiap salinan memakai kuota e-Meterai?', 'Ya. Setiap pembuatan nomor seri, termasuk pembuatan ulang, memakai 1 kuota (Rp10.000) dari akun e-Meterai kantor. Kuota yang terpakai tidak dapat dikembalikan.')}
     ${faq(24, 'Bagaimana menentukan posisi stempel dan tanda tangan?', 'Seret kartu penanda ke halaman PDF atau klik "Tempatkan di halaman ini". Posisi bersifat opsional. Bila tidak ditentukan, sistem memakai posisi otomatis di halaman terakhir.')}
-    ${faq(25, 'Bagaimana mengirim salinan ke para pihak?', 'Klik "Kirim via Email" di layar Kelola. Pilih penerima dari daftar para pihak atau tambah penerima manual, lalu klik "Kirim Lampiran". Nama berkas dan langkah yang sudah dibubuhkan tampil di dialog.')}
-    ${faq(26, 'Apa yang terjadi bila salinan dihapus?', 'File salinan beserta stempel, tanda tangan, dan e-Meterai yang sudah dibubuhkan ikut terhapus dan tidak dapat dipulihkan. Minuta dan salinan lain tidak terpengaruh.')}
-    ${faq(27, 'Mengapa muncul peringatan PPAT penanda tangan belum ditetapkan?', 'Salinan ditandatangani oleh PPAT yang ditetapkan di Profil Kantor. Lengkapi data PPAT penanda tangan di Profil Kantor, lalu kembali ke tab ini.')}
+    ${faq(25, 'Bagaimana mengirim salinan ke para pihak?', 'Klik "Kirim via Email" di tab Salinan setelah stempel TERA dibubuhkan. Pilih penerima dari daftar para pihak atau tambah penerima manual, lalu klik "Kirim Lampiran". Nama berkas dan langkah yang sudah dibubuhkan tampil di dialog.')}
+        ${faq(27, 'Mengapa muncul peringatan PPAT penanda tangan belum ditetapkan?', 'Salinan ditandatangani oleh PPAT yang ditetapkan di Profil Kantor. Lengkapi data PPAT penanda tangan di Profil Kantor, lalu kembali ke tab ini.')}
     <h4 class="bantu-sub">Kontak dukungan</h4>
     <div class="bantu-kontak"><div><b>Email</b><span>${est('bantuan@contoh.id')}</span></div><div><b>Telepon / WhatsApp</b><span>${est('0800-0000-0000')}</span></div><div><b>Jam layanan</b><span>${est('Senin–Jumat, 08.00–17.00 WIB')}</span></div></div>` });
 }
 function bukaBantuan() {
   if (S.layar === 'detail' && S.tab === 'salinan') { bantuanSalinan(); return; }
   drawer({ judul:'Bantuan Penandatanganan Akta', isi:`
-    <p>Melalui Penandatanganan Akta, akta final dibubuhi stempel, tanda tangan, dan meterai elektronik dalam tiga langkah berurutan.</p>
+    <p>Akta final ditandatangani dalam tiga dokumen berurutan: Minuta Lembar Pertama, Minuta Lembar Kedua, lalu Salinan. Setiap dokumen dibubuhi stempel, tanda tangan, dan meterai elektronik dalam tiga langkah berurutan.</p>
     <ol class="bantu-langkah">
       <li><b>Stempel TERA:</b> tentukan posisi stempel (opsional), lalu masukkan kode OTP dari email TERA kantor.</li>
       <li><b>Tanda Tangan Elektronik:</b> tempatkan kotak tanda tangan setiap pihak, lalu kirim OTP sesuai urutan. Setiap penanda tangan menyampaikan kode OTP dari emailnya kepada Anda.</li>
       <li><b>e-Meterai:</b> tentukan posisi meterai, lalu bubuhkan. Satu kali pembubuhan memakai 1 kuota.</li>
     </ol>
     <h4 class="bantu-sub">Pertanyaan umum</h4>
+    ${faq(31, 'Mengapa minuta ditandatangani dua kali?', 'Minuta dicetak dua rangkap. Lembar Pertama disimpan di kantor PPAT, sedangkan Lembar Kedua disampaikan ke Kantor Pertanahan. Kedua rangkap ditandatangani oleh penanda tangan yang sama. Tab Minuta Lembar Kedua terbuka setelah Lembar Pertama selesai.')}
     ${faq(1, 'Apa beda stempel TERA dan tanda tangan elektronik?', 'Stempel TERA adalah stempel elektronik kantor PPAT, dibubuhkan sekali. Tanda tangan elektronik dibubuhkan oleh setiap pihak (Pihak Pertama, Pihak Kedua, Saksi, PPAT) dengan sertifikat (CA) masing-masing.')}
     ${faq(2, 'Kode OTP tidak masuk atau sudah kedaluwarsa', 'Kode berlaku 15 menit. Periksa folder spam. Jika belum masuk atau sudah kedaluwarsa, klik "Kirim ulang kode" di dialog OTP (aktif setelah 60 detik).')}
     ${faq(3, 'Penanda tangan belum memiliki sertifikat elektronik aktif', 'Penanda tangan perlu menyelesaikan Registrasi CA melalui menu Akun Saya. Setelah sertifikat elektronik aktif, tombol Kirim OTP untuk penanda tangan tersebut dapat digunakan.')}
@@ -1497,6 +1536,7 @@ function aturPpat(v) {
   Object.values(SALINAN).flat().forEach(s => { s.pihak[0].email = v === 'ada' ? 'ppat1@contoh.id' : ''; });
 }
 document.querySelector('.protobar').addEventListener('click', e => {
+  const kt = e.target.closest('[data-kondisi-ttd]'); if (kt) { aturKondisiTtd(kt.dataset.kondisiTtd); return; }
   const pl = e.target.closest('[data-pil]'); if (pl) { const k = pl.dataset.pil; bukaPil(k); $(`#pilLayar [data-pil="${k}"]`)?.focus(); return; }
   const pp = e.target.closest('[data-sim-ppat]'); if (pp) { aturPpat(pp.dataset.simPpat); gambar(); return; }
   const t = e.target.closest('[data-sim-tera]'), m = e.target.closest('[data-sim-meterai]'); if (!t && !m) return;
