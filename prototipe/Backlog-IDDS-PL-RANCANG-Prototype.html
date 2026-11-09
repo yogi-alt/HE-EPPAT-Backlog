@@ -1964,8 +1964,8 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
     { id: 'n6', jenis: 'verifikasi', judul: 'Berkas ORD-CONTOH-012 perlu diverifikasi', isi: 'Contoh Penjual Satu mengunggah KTP dan sertipikat. Periksa berkas sebelum akta disusun.', lalu: 42 * MENIT, baca: false, ke: 'Backlog-HE-ORDER-Prototype.html#order=ORD-CONTOH-012' },
     { id: 'n5', jenis: 'sistem', judul: 'Pemeliharaan sistem terjadwal', isi: 'E-PPAT tidak dapat diakses pada Sabtu, 31 Oktober 2026, pukul 22.00–23.00 WIB.', lalu: 2 * JAM, baca: false, ke: '' },
     { id: 'n4', jenis: 'sistem', judul: 'Pendaftaran TERA kantor diproses Peruri', isi: 'Peruri sedang memeriksa data TERA kantor Anda. Hasilnya akan dikirim lewat notifikasi dan email.', lalu: 3 * JAM, baca: true, ke: 'Backlog-HE-TERA-Prototype.html#registrasi' },
-    { id: 'n3', jenis: 'akta', judul: 'Akta ORD-CONTOH-005 selesai', isi: 'Akta sudah difinalisasi. Unggah scan akta, lalu kirim salinannya di menu Salinan Akta.', lalu: 7 * JAM, baca: true, ke: 'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan' },
-    { id: 'n2', jenis: 'salinan', judul: 'Salinan akta ORD-CONTOH-005 dibuka', isi: 'Contoh Penjual Satu membuka tautan salinan akta.', lalu: 26 * JAM, baca: true, ke: 'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan' },
+    { id: 'n3', jenis: 'akta', judul: 'Akta ORD-CONTOH-005 selesai', isi: 'Akta sudah selesai dan tersimpan di Arsip Akta. Kirim salinannya ke para pihak dari sana.', lalu: 7 * JAM, baca: true, ke: 'Backlog-IDDS-TN-PROSES-Prototype.html#arsip' },
+    { id: 'n2', jenis: 'salinan', judul: 'Salinan akta ORD-CONTOH-005 dibuka', isi: 'Contoh Penjual Satu membuka tautan salinan akta.', lalu: 26 * JAM, baca: true, ke: 'Backlog-IDDS-TN-PROSES-Prototype.html#arsip' },
     { id: 'n1', jenis: 'sistem', judul: 'Layanan e-Meterai belum aktif', isi: 'Aktifkan e-Meterai agar akta dapat dibubuhi meterai elektronik.', lalu: 50 * JAM, baca: true, ke: 'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai' }
   ].map(d => Object.assign({}, d, { waktu: sekarang - d.lalu }));
   /* Admin Platform: notifikasi tingkat platform (bukan notifikasi kantor) */

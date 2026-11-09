@@ -670,7 +670,7 @@ const profKotor = () => Object.keys(PROFIL_F).filter(k => PROFIL[k] !== PROFIL_F
 const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
   { g:'', ik:'tb_stack_2', m:[['Tugas Saya','tb_clipboard_check']] },
   { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text']] },
-  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard','dashboard'],['Salinan Akta','tb_files','salinan'],['Renvooi','tb_file_pencil'],['Arsip Akta','tb_archive'],['Template Akta','tb_template']] },
+  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard','dashboard'],['Renvooi','tb_file_pencil'],['Arsip Akta','tb_archive'],['Template Akta','tb_template']] },
   { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building','profil'],['Daftar Pengguna','tb_users'],['Peran & Izin','tb_shield_lock'],['Log Aktivitas','tb_history'],['Aktivasi e-Meterai','tb_rubber_stamp','emeterai']] },
   { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge'],['Pengaturan','tb_settings']] },
   { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home'],['Tema Tampilan','tb_palette'],['Master Konten','tb_database'],['Artikel & Halaman','tb_article'],['Pustaka Media','tb_photo']] }
@@ -1073,7 +1073,7 @@ const BANTUAN = {
       ['Bagaimana membuka detail permohonan?', 'Klik baris permohonan. Stepper permohonan itu terbuka di Permohonan AJB.'],
       ['Mengapa angka belum berubah?', 'Klik "Muat Ulang" di kanan atas untuk mengambil data terbaru.'],
       ['Mengapa hanya Akta Jual Beli yang tampil?', 'Grafik hanya menampilkan layanan akta yang aktif. Saat ini baru Akta Jual Beli yang tersedia.'],
-      ['Ke mana permohonan setelah Selesai?', 'Akta yang selesai dikelola salinannya di menu Salinan Akta.']])}
+      ['Ke mana permohonan setelah Selesai?', 'Minuta dan salinan akta yang selesai tersimpan di Arsip Akta.']])}
     ${kontak()}` }),
   profil:() => ({ judul:'Bantuan Profil Kantor', isi:`<p>Data kantor dipakai sebagai kop dan variabel isi akta, serta kartu identitas di sidebar.</p>
     <h4 class="bantu-sub">Langkah</h4>
@@ -1147,6 +1147,7 @@ const awal = (location.hash || '').slice(1); if (RENDER[awal]) S.layar = awal;
 window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (RENDER[h] && h !== S.layar) pindah(h); });
 gambarKartu(); gambar();
 })();
+if (location.hash === '#salinan') location.replace('Backlog-IDDS-TN-PROSES-Prototype.html#arsip'); /* menu Salinan Akta dihapus: salinan kini di Arsip Akta (MoM no. 40) */
 </script>
 </body>
 </html>

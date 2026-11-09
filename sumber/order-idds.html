@@ -518,7 +518,7 @@ const UBAH = [
     isi:'Tombol Buat Permohonan langsung membuka Pengumpulan Berkas. Permohonan tersimpan dan masuk daftar setelah staf menyimpan salah satu data, misalnya Narahubung.',
     lama:'Modal Buat Permohonan harus diisi lebih dulu.', ke:'daftar', sorot:'#buatOrder', sumber:'Masukan Peruri, 6 Nov 2026' },
   { kode:'HE-ORDER-23', versi:'v2', bukanHE:true, judul:'Contoh tour guide di detail Permohonan AJB',
-    isi:'Saat Asisten atau PPAT pertama kali membuka detail permohonan, tur singkat menyorot bagian penting satu per satu: stepper, syarat dan langkah berikutnya, tombol tahap, tombol Pindah, dan tautan tahap yang sudah selesai. Bagian lain diredupkan, dan kotak keterangan berisi judul, satu kalimat, posisi langkah, serta tombol Sebelumnya, Lanjut, dan Lewati tur. Isi tombol tahap mengikuti peran. Tur muncul sekali per pengguna, dapat dilewati atau ditutup dengan Esc, dan dapat diputar ulang dari Bantuan. Langkah yang elemennya tidak ada di tahap itu dilewati otomatis.',
+    isi:'Saat Asisten atau PPAT pertama kali membuka detail permohonan, tur singkat menyorot bagian penting satu per satu: stepper, syarat dan langkah berikutnya, tombol tahap, tombol Pindah, tautan tahap yang sudah selesai, dan baris tab data permohonan. Bagian lain diredupkan, dan kotak keterangan berisi judul, satu kalimat, posisi langkah, serta tombol Sebelumnya, Lanjut, dan Lewati tur. Isi tombol tahap mengikuti peran. Tur muncul sekali per pengguna, dapat dilewati atau ditutup dengan Esc, dan dapat diputar ulang dari Bantuan. Langkah yang elemennya tidak ada di tahap itu dilewati otomatis.',
     lama:'Tidak ada panduan saat pengguna pertama kali membuka halaman.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-ORDER-21', versi:'v2', bukanHE:true, judul:'Tahap yang sudah lewat dapat dilihat lagi',
     isi:'Di bawah status tahap yang sudah selesai ada tautan: Lihat hasil untuk Verifikasi Berkas, Buka naskah untuk Penyusunan Akta, dan Lihat hasil untuk Penandatanganan Akta setelah permohonan Selesai. Hasil verifikasi dan tanda tangan terbuka hanya baca. Naskah tetap dapat disunting sesuai peran sampai PPAT memfinalisasi, lalu terkunci. Tombol Kembali membawa ke stepper yang sama.',
@@ -664,7 +664,7 @@ const ord = () => ORDER.find(o => o.kode === S.aktif);
 const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
   { g:'', ik:'tb_stack_2', m:[['Tugas Saya','tb_clipboard_check']] },
   { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text','order']] },
-  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Salinan Akta','tb_files'],['Renvooi','tb_file_pencil'],['Arsip Akta','tb_archive'],['Template Akta','tb_template']] },
+  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Renvooi','tb_file_pencil'],['Arsip Akta','tb_archive'],['Template Akta','tb_template']] },
   { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building'],['Daftar Pengguna','tb_users'],['Peran & Izin','tb_shield_lock'],['Log Aktivitas','tb_history'],['Aktivasi e-Meterai','tb_rubber_stamp']] },
   { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge'],['Pengaturan','tb_settings']] },
   { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home'],['Tema Tampilan','tb_palette'],['Master Konten','tb_database'],['Artikel & Halaman','tb_article'],['Pustaka Media','tb_photo']] }
@@ -675,7 +675,7 @@ function gambarNav() {
     <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
     <div class="items" ${grupBuka.has(i) ? '' : 'hidden'}>${g.m.map(([t, ic, ke]) => `<a href="#" class="ina-button ina-button--link ina-button--md nav-item ${ke ? 'on' : ''}" data-ke="${ke || ''}">${ik(ic)}<span>${t}</span></a>`).join('')}</div>`).join('');
 }
-const PROTO = { 'Tugas Saya':'Backlog-HE-TUGAS-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Salinan Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#salinan', 'Renvooi':'Backlog-IDDS-TN-PROSES-Prototype.html#renvooi', 'Arsip Akta':'Backlog-IDDS-TN-PROSES-Prototype.html#arsip', 'Template Akta':'Backlog-IDDS-TN-PROSES-Prototype.html#template', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
+const PROTO = { 'Tugas Saya':'Backlog-HE-TUGAS-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Renvooi':'Backlog-IDDS-TN-PROSES-Prototype.html#renvooi', 'Arsip Akta':'Backlog-IDDS-TN-PROSES-Prototype.html#arsip', 'Template Akta':'Backlog-IDDS-TN-PROSES-Prototype.html#template', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
 $('#nav').addEventListener('click', e => {
   const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
   const a = e.target.closest('a'); if (!a) return; e.preventDefault();
@@ -748,7 +748,7 @@ function stepper(o, vertikal) {
 }
 const lencanaWaktu = o => PERKIRAAN[o.status] ? `<span class="waktu-baris">${badge(`${ik('jam', 14)} Perkiraan selesai: <b>${est(PERKIRAAN[o.status])}</b>`, 'warning')}</span>` : '';
 function langkahBerikut(o, sy) {
-  if (o.status === 'SELESAI') return 'Akta Minuta dan Salinan sudah selesai. Salinan akta tersedia di menu Salinan Akta.';
+  if (o.status === 'SELESAI') return 'Akta Minuta dan Salinan sudah selesai dan tersimpan di Arsip Akta.';
   const kurang = sy.daftar.filter(x => !x.ok);
   if (!kurang.length) return `Semua syarat terpenuhi. Klik <b>Pindah ke ${ST[sy.ke].l}</b> untuk melanjutkan.`;
   const x = kurang[0];
@@ -812,7 +812,7 @@ function layarDetail() {
       <div class="ina-tab-horizontal ina-tab-horizontal--use-brand-color"><div class="ina-tab-horizontal__container" role="tablist">${tabs.map(([kk, t]) =>
         `<button type="button" role="tab" data-tab="${kk}" aria-selected="${S.tab === kk}" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline ${S.tab === kk ? 'ina-tab-horizontal__tab--selected' : ''}"><span title="${TIPTAB[kk]}">${t}</span>${kunci ? '' : tandaTab(o, kk)}</button>`).join('')}${usulan('HE-ORDER-04')}</div></div>
       <div class="tab-isi">
-        ${kunci ? `<div class="kunci">${alert('info', '', `${ik('kunci', 14)} Akta sudah <b>selesai</b> — data permohonan dikunci (hanya dapat dilihat). Untuk salinan, buka menu <b>Salinan Akta</b>.`)}</div>` : ''}
+        ${kunci ? `<div class="kunci">${alert('info', '', `${ik('kunci', 14)} Akta sudah <b>selesai</b> — data permohonan dikunci (hanya dapat dilihat). Minuta dan salinan tersimpan di <b>Arsip Akta</b>.`)}</div>` : ''}
         ${S.tab === 'kontak' ? tabKontak(o, kunci) : S.tab === 'pewaris' ? tabPewaris(o, kunci) : S.tab === 'perjanjian' ? tabPerjanjian(o, kunci) : S.tab === 'pihak' ? tabPihak(o, kunci) : S.tab === 'objek' ? tabObjek(o, kunci) : tabDok(o, kunci)}
       </div>
     </div>`}`;
@@ -877,7 +877,8 @@ function langkahTur() {
     { el:() => terlihat('#syarat'), j:'Syarat dan langkah berikutnya', t:'Kotak ini menunjukkan syarat yang belum terpenuhi dan langkah yang perlu Anda lakukan.' },
     { el:() => terlihat('#bukaTahap'), j:'Tombol tahap', t:ppat ? 'Verifikasi Berkas, Penyusunan Akta, Finalisasi Akta, dan Penandatanganan Akta dibuka dari tombol ini, bukan dari menu samping. Finalisasi Akta hanya dilakukan PPAT.' : 'Verifikasi Berkas, Penyusunan Akta, dan Penandatanganan Akta dibuka dari tombol ini, bukan dari menu samping.' },
     { el:() => terlihat('#pindah'), j:'Pindah tahap', t:'Setelah semua syarat terpenuhi, tombol ini memindahkan permohonan ke tahap berikutnya.' },
-    { el:() => terlihat('.tahap-lihat'), j:'Tahap yang sudah selesai', t:'Hasil verifikasi dan naskah dapat dibuka lagi dari tautan di bawah stepper.' }
+    { el:() => terlihat('.tahap-lihat'), j:'Tahap yang sudah selesai', t:'Hasil verifikasi dan naskah dapat dibuka lagi dari tautan di bawah stepper.' },
+    { el:() => terlihat('#halaman [role="tablist"]'), j:'Data permohonan', t:'Data permohonan diisi per tab. Lencana Lengkap menandai tab yang sudah terisi, dan syarat pindah tahap merujuk ke tab ini.' }
   ].filter(l => l.el());
 }
 function mulaiTur() {
@@ -968,7 +969,7 @@ function konfirmPindah(contohSaja = false) {
     PENANDATANGANAN:'Akta final dibubuhi stempel TERA, tanda tangan elektronik, dan e-Meterai.'
   };
   if (ke === 'SELESAI') {
-    dialog({ judul:'Tandai permohonan Selesai?', isi:`<p>Setelah ditandai Selesai, <b>data permohonan dikunci</b> dan status <b>tidak dapat dikembalikan</b>. Salinan akta dikelola di menu Salinan Akta.</p>
+    dialog({ judul:'Tandai permohonan Selesai?', isi:`<p>Setelah ditandai Selesai, <b>data permohonan dikunci</b> dan status <b>tidak dapat dikembalikan</b>. Minuta dan salinan akta tersimpan di Arsip Akta.</p>
       <dl class="ringkas-kv"><dt>Kode permohonan</dt><dd>${o.kode}</dd><dt>Para pihak</dt><dd>${o.pihak.length} pihak</dd><dt>Objek</dt><dd>${o.objek.length} objek</dd></dl>
       <label class="ina-checkbox cek-setuju" id="labelSetuju"><input type="checkbox" id="setujuSelesai" class="ina-checkbox__input peer"><div class="ina-checkbox__box ina-checkbox__box--unchecked"></div><div class="ina-checkbox__content"><span class="ina-checkbox__label">Saya sudah memastikan akta minuta dan salinan selesai, dan data permohonan benar.</span></div></label>${usulan('HE-ORDER-02')}`,
       tombol:[['Batal','secondary',null],['Tandai Selesai','primary',() => lanjut()]], kunciUtama:'#setujuSelesai' });

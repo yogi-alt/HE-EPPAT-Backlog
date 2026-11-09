@@ -598,6 +598,21 @@ body.mode-app .ob{display:none}
   .ob-judul h1{font-size:24px;line-height:32px}
 }
 .daftar-ubah .sumber-ubah{margin:2px 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}.daftar-ubah .sumber-ubah b{color:var(--ina-content-primary)}.daftar-ubah .kelompok-ubah{margin:20px 0 2px;font:600 15px/22px Inter,sans-serif;color:var(--ina-content-primary)}.daftar-ubah .ket-kelompok{margin:0 0 8px;font-size:13px;color:var(--ina-content-secondary)}
+
+/* tour guide: walkthrough dengan coach marks (HE-OB-06), sama dengan Permohonan AJB */
+.tur{position:fixed;inset:0;z-index:2000}
+.tur-tirai{position:absolute;inset:0}
+.tur-sorot{position:fixed;border-radius:12px;box-shadow:0 0 0 9999px rgba(15,23,30,.58);outline:2px solid var(--ina-primary-300,#9cc3b4);outline-offset:2px;transition:top .25s,left .25s,width .25s,height .25s;pointer-events:none}
+.tur-kotak{position:fixed;width:min(360px,calc(100vw - 32px));background:var(--ina-background-primary,#fff);color:var(--ina-content-primary);border-radius:12px;box-shadow:0 12px 32px rgba(15,23,30,.28);padding:16px 16px 14px}
+.tur-kotak h2{margin:2px 0 6px;font-size:16px;line-height:22px;font-weight:600}
+.tur-kotak p{margin:0;font-size:14px;line-height:20px;color:var(--ina-content-secondary)}
+.tur-langkah{font-size:12px;font-weight:600;color:var(--ina-primary-primary,#3d6b5e)}
+.tur-titik{display:flex;gap:6px;margin-top:12px}
+.tur-titik span{width:6px;height:6px;border-radius:999px;background:var(--ina-stroke-primary,#d0d5d3)}
+.tur-titik span.on{background:var(--ina-primary-primary,#3d6b5e);width:16px}
+.tur-kaki{display:flex;align-items:center;gap:8px;margin-top:14px}
+.tur-kaki [data-tur=lewati]{margin-right:auto}
+@media (max-width:760px){.tur-kotak{left:16px!important;right:16px;top:auto!important;bottom:16px;width:auto}}
 </style>
 </head>
 <body>
@@ -610,6 +625,7 @@ body.mode-app .ob{display:none}
     <span>Contoh: sandi <b>salah123</b> = gagal masuk · kode <b>000000</b> = salah</span>
     <button class="pil" id="simKtp" title="Ganti hasil baca OCR KTP. Di layar Registrasi, foto langsung dibaca ulang dengan hasil yang dipilih.">Hasil OCR: terbaca</button>
     <button class="pil" id="simKedaluwarsa" title="Saat kode OTP email ditampilkan">Simulasi kode kedaluwarsa</button>
+    <button class="pil" id="mulaiTur" title="Memutar contoh tour guide di Dasbor pelanggan.">Mulai tur</button>
     <button class="pil" id="aturUlang">Atur ulang contoh</button>
     <button class="pil" id="sakelarPenanda" aria-pressed="false">Tandai usulan</button>
     <button class="pil utama" id="bukaUbah">Daftar perubahan</button>
@@ -728,6 +744,9 @@ const UBAH = [
   { kode:'HE-LOGIN-04', judul:'Verifikasi dua langkah: penjelasan metode',
     isi:'Halaman pilih metode menjelaskan dalam satu kalimat apa itu verifikasi dua langkah dan kapan memilih aplikasi autentikator atau email. Setelah kode OTP email atau Google Authenticator benar, pengguna langsung masuk ke Dasbor; halaman kode cadangan tidak dipakai (masukan Peruri 4 Nov 2026).',
     lama:'Tidak ada penjelasan tentang verifikasi dua langkah bagi pengguna baru. Tombol "Saya sudah simpan, ke Dashboard" dapat ditekan tanpa benar-benar menyimpan kode.', ke:'mfa', sorot:'#penjelasanMfa', sumber:'Laporan HE UX Metric Lab, Highlight #7 (skor 68,6; PDF hlm. 15)' },
+  { kode:'HE-OB-06', versi:'v2', bukanHE:true, judul:'Tour guide di Dasbor pelanggan',
+    isi:'Saat pelanggan pertama kali masuk Dasbor, tur singkat menyorot Progres Registrasi, Langkah berikutnya, Pilih Paket, tombol Cek Progres Registrasi, dan tombol Bantuan. Bentuk dan perilakunya sama dengan tur di Permohonan AJB: bagian lain diredupkan, kotak keterangan berisi posisi langkah, Sebelumnya, Lanjut, dan Lewati tur, muncul sekali per pengguna, dapat ditutup dengan Esc, dan dapat diputar ulang dari Bantuan. Tur untuk Super Admin dan Operator menyusul.',
+    lama:'Tidak ada panduan saat pelanggan pertama kali masuk Dasbor.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-OB-01', judul:'Dashboard Onboarding: hasil cek status jelas dan dapat ditutup',
     isi:'"Check Status Terbaru" diganti menjadi "Cek Progres Registrasi", sama dengan nama stepper "Progres Registrasi Anda" (masukan Peruri 4 Nov 2026). Tombol ini tidak ditampilkan lagi setelah semua tahap di stepper selesai (masukan Peruri 4 Nov 2026). Hasilnya ditampilkan sebagai IDDS Toast yang dapat ditutup, berisi jam pengecekan dan tahap saat ini (mis. "Belum ada perubahan · Tahap: Proses Pembayaran"). Bila ada perubahan, tahap yang berubah disorot di stepper.',
     lama:'Setiap kali status dicek, muncul dialog besar "Status Diperbarui — Status registrasi terbaru sudah dimuat." tanpa tombol tutup, walaupun tidak ada perubahan apa pun (skor User Control Dashboard: 20).', ke:'db-cek', sorot:'#cekStatus', sumber:'Laporan HE UX Metric Lab, Highlight #8 (skor 71,5; PDF hlm. 15)' },
@@ -1056,12 +1075,71 @@ function layarCadangan() {
 }
 
 /* ---------------- gambar ---------------- */
+/* ---------------- tour guide Dasbor pelanggan (HE-OB-06) ----------------
+   Muncul sekali saat pelanggan pertama kali masuk Dasbor; dapat diputar ulang dari Bantuan. */
+const TUR = { aktif:false, dicek:false, i:0, daftar:[] };
+const turKunci = () => 'eppat-tur:ob-dasbor:' + (S.email || AKUN.email);
+const turSudah = () => { try { return localStorage.getItem(turKunci()) === '1'; } catch (e) { return false; } };
+const terlihat = s => [...document.querySelectorAll(s)].find(x => x.offsetParent);
+function langkahTur() {
+  return [
+    { el:() => terlihat('#kartuTahap .ina-stepper') || terlihat('#kartuTahap'), j:'Progres registrasi', t:'Pendaftaran kantor Anda berjalan melalui tujuh tahap, dari Pendaftaran sampai Selesai. Tahap yang sedang berjalan ditandai di sini.' },
+    { el:() => terlihat('#langkahDb'), j:'Langkah berikutnya', t:'Kotak ini menyebut hal yang perlu Anda lakukan sekarang beserta perkiraan waktunya.' },
+    { el:() => terlihat('.pilih-paket'), j:'Pilih paket', t:'Pilih Trial atau Enterprise, lalu tekan Lanjut Pembayaran. Paket masih dapat diganti sebelum pembayaran diterima.' },
+    { el:() => terlihat('#cekStatus'), j:'Cek progres', t:'Tekan tombol ini untuk memperbarui tahap pendaftaran Anda. Tombol hilang setelah semua tahap selesai.' },
+    { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }
+  ].filter(l => l.el());
+}
+function mulaiTur() {
+  if (S.layar !== 'dasbor' || TUR.aktif) return;
+  TUR.daftar = langkahTur(); if (!TUR.daftar.length) return;
+  TUR.aktif = true; TUR.i = 0;
+  document.body.insertAdjacentHTML('beforeend', '<div class="tur" id="tur" role="dialog" aria-modal="true" aria-labelledby="turJudul"><div class="tur-tirai"></div><div class="tur-sorot"></div><div class="tur-kotak" aria-live="polite"></div></div>');
+  tampilTur();
+}
+function tampilTur() {
+  const L = TUR.daftar[TUR.i], n = TUR.daftar.length, el = L.el(), akhir = TUR.i === n - 1;
+  el.scrollIntoView({ block:'center' });
+  $('#tur .tur-kotak').innerHTML = `<div class="tur-langkah">Langkah ${TUR.i + 1} dari ${n}</div><h2 id="turJudul">${L.j}</h2><p>${L.t}</p>
+    <div class="tur-titik" aria-hidden="true">${TUR.daftar.map((_, k) => `<span class="${k === TUR.i ? 'on' : ''}"></span>`).join('')}</div>
+    <div class="tur-kaki">${tombol('Lewati tur', 'tertiary', 'sm', 'data-tur="lewati"')}${TUR.i ? tombol('Sebelumnya', 'secondary', 'sm', 'data-tur="mundur"') : ''}${tombol(akhir ? 'Selesai' : 'Lanjut', 'primary', 'sm', `data-tur="${akhir ? 'selesai' : 'maju'}"`)}</div>`;
+  letakTur(); $('#tur [data-tur="' + (akhir ? 'selesai' : 'maju') + '"]').focus({ preventScroll:true });
+}
+function letakTur() {
+  if (!TUR.aktif) return;
+  const el = TUR.daftar[TUR.i].el(); if (!el) return;
+  const r = el.getBoundingClientRect(), p = 8, s = $('#tur .tur-sorot'), k = $('#tur .tur-kotak');
+  Object.assign(s.style, { top:r.top - p + 'px', left:r.left - p + 'px', width:r.width + p * 2 + 'px', height:r.height + p * 2 + 'px' });
+  const w = k.offsetWidth, h = k.offsetHeight, vw = innerWidth, vh = innerHeight;
+  const top = r.bottom + p + 12 + h < vh ? r.bottom + p + 12 : r.top - p - 12 - h > 0 ? r.top - p - 12 - h : Math.max(16, vh - h - 16);
+  Object.assign(k.style, { top:top + 'px', left:Math.min(Math.max(16, r.left), vw - w - 16) + 'px' });
+}
+function tutupTur(selesai) {
+  if (!TUR.aktif) return; TUR.aktif = false; $('#tur')?.remove();
+  try { localStorage.setItem(turKunci(), '1'); } catch (e) { /* tanpa penyimpanan, tur dapat muncul lagi */ }
+  toast(selesai ? 'Tur selesai. Putar ulang kapan saja dari tombol Bantuan.' : 'Tur dilewati. Putar ulang kapan saja dari tombol Bantuan.', selesai ? 'positive' : 'default', 4000);
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-tur]'); if (b) { const a = b.dataset.tur;
+    if (a === 'maju') { TUR.i++; tampilTur(); } else if (a === 'mundur') { TUR.i--; tampilTur(); } else tutupTur(a === 'selesai'); return; }
+  if (e.target.closest('[data-mulai-tur]')) { $('#lapisanDrawer').innerHTML = ''; mulaiTur(); }
+});
+document.addEventListener('keydown', e => { if (!TUR.aktif) return;
+  if (e.key === 'Escape') { e.stopImmediatePropagation(); tutupTur(false); }
+  else if (e.key === 'ArrowRight' && TUR.i < TUR.daftar.length - 1) { TUR.i++; tampilTur(); }
+  else if (e.key === 'ArrowLeft' && TUR.i) { TUR.i--; tampilTur(); }
+  else if (e.key === 'Tab') { const f = [...document.querySelectorAll('#tur button')]; const i = f.indexOf(document.activeElement); e.preventDefault(); f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus(); } }, true);
+addEventListener('resize', letakTur); addEventListener('scroll', letakTur, { passive:true });
+function cekTur() {
+  if (TUR.dicek || TUR.aktif || S.layar !== 'dasbor' || turSudah()) return;
+  TUR.dicek = true; setTimeout(() => { if (S.layar === 'dasbor' && !$('#lapisan').innerHTML && !$('#lapisanDrawer').innerHTML) mulaiTur(); }, 800);
+}
 function gambar() {
   gambarNav();
   const app = APP.includes(S.layar);
   document.body.classList.toggle('mode-app', app);
   /* layar yang tidak tampil dikosongkan agar hanya ada satu tombol Bantuan */
-  if (app) { gambarNavApp(); $('#halaman').innerHTML = ''; $('#halamanApp').innerHTML = atasOb() + { dasbor:layarDasbor, bayar:layarBayar, lunas:layarLunas, selesai:layarSelesai, riwayat:layarRiwayat }[S.layar](); return; }
+  if (app) { gambarNavApp(); $('#halaman').innerHTML = ''; $('#halamanApp').innerHTML = atasOb() + { dasbor:layarDasbor, bayar:layarBayar, lunas:layarLunas, selesai:layarSelesai, riwayat:layarRiwayat }[S.layar](); cekTur(); return; }
   const isi = { daftar:layarDaftar, verif:layarVerifEmail, verifOk:layarVerifOk, masuk:layarMasuk, metode:layarMetode, otp:layarOtp, cadangan:layarCadangan }[S.layar]();
   $('#halamanApp').innerHTML = '';
   $('#halaman').innerHTML = `<div class="wadah-ob ${(isi.match(/class="ob-kartu (kecil|sedang|besar)/) || [])[1] || 'sedang'}">${atasOb()}${isi}</div>`;
@@ -1487,7 +1565,7 @@ const BANTUAN = {
     <dl class="bantu-istilah"><dt>Belum dibayar</dt><dd>Tagihan sudah dibuat dan menunggu pembayaran.</dd><dt>Lunas</dt><dd>Pembayaran sudah diterima.</dd></dl>
     ${kontak()}` })
 };
-function bukaBantuan() { drawer(BANTUAN[S.layar === 'masuk' && S.gagal ? 'gagal' : S.layar]()); }
+function bukaBantuan() { const b = BANTUAN[S.layar === 'masuk' && S.gagal ? 'gagal' : S.layar](); if (S.layar === 'dasbor') b.isi = `<p>${tombol('Mulai tur halaman ini', 'secondary', 'sm', 'data-mulai-tur', ik('panah', 14))}${usulan('HE-OB-06')}</p>` + b.isi; drawer(b); }
 
 /* ---------------- protobar & daftar perubahan ---------------- */
 $('#bukaUbah').addEventListener('click', () => {
@@ -1509,6 +1587,7 @@ function lihat(u) {
   if (u.ke === 'gagal') { S.gagal = true; S.email = 'ppat.baru@contoh.id'; ke('masuk'); }
   if (u.ke === 'mfa') ke('metode');
   if (u.ke === 'otp') { S.metode = 'email'; ke('otp'); }
+  if (u.ke === 'tur') { ke('dasbor'); setTimeout(mulaiTur, 300); return; }
   if (u.ke === 'db') ke('dasbor');
   if (u.ke === 'db-cek') { ke('dasbor'); $('#cekStatus').click(); return; }
   if (u.ke === 'db-bayar') { DB = { ...DB0(), paket:'enterprise', dipesan:'enterprise', metodeBayar:'va', bank:'BRI', va:{ no:'1462900000000001', ref:'REF-CONTOH-0001', habis:Date.now() + 86400000, sampai:'27 Okt 2026, 09.21' } }; ke('bayar'); jalankanJamVa(); }
@@ -1517,6 +1596,7 @@ function lihat(u) {
   const el = u.sorot && $(u.sorot);
   if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); }
 }
+$('#mulaiTur').addEventListener('click', () => { if (S.layar !== 'dasbor') ke('dasbor'); setTimeout(mulaiTur, 300); });
 $('#aturUlang').addEventListener('click', () => { Object.assign(S, { ubah:false, setuju:false, gagal:false, email:'', metode:'email', memuat:'', cekTenant:'', ktp:null, ktpSim:0, ktpBerkas:null, bank:'', bankBuka:false, bankCari:'', bankFokus:0, tenantManual:false }); $('#simKtp').textContent = SIM_OCR[0][1]; DB = DB0(); ke('daftar'); toast('Data contoh dikembalikan ke awal.'); });
 $('#simKtp').addEventListener('click', e => { S.ktpSim = (S.ktpSim + 1) % SIM_OCR.length; e.currentTarget.textContent = SIM_OCR[S.ktpSim][1]; const hasil = SIM_OCR[S.ktpSim][1].replace('Hasil OCR: ', '');
   if (S.layar !== 'daftar') { toast(`Foto KTP berikutnya: ${hasil}.`); return; }

@@ -590,7 +590,7 @@
       "halaman": "Masukan 9 Nov 2026",
       "judul": "Contoh tour guide di detail Permohonan AJB",
       "saat_ini": "Tidak ada panduan saat pengguna pertama kali membuka halaman.",
-      "usulan": "Walkthrough dengan coach marks: saat Asisten atau PPAT pertama kali membuka detail permohonan, lima langkah menyorot stepper, syarat dan langkah berikutnya, tombol tahap, tombol Pindah, dan tautan tahap yang sudah selesai. Bagian lain diredupkan; kotak keterangan berisi judul, satu kalimat, posisi langkah, serta Sebelumnya, Lanjut, dan Lewati tur. Isi mengikuti peran. Muncul sekali per pengguna, dapat ditutup dengan Esc, dan dapat diputar ulang dari Bantuan. Di ponsel kotak keterangan tampil di bawah layar.",
+      "usulan": "Walkthrough dengan coach marks: saat Asisten atau PPAT pertama kali membuka detail permohonan, enam langkah menyorot stepper, syarat dan langkah berikutnya, tombol tahap, tombol Pindah, tautan tahap yang sudah selesai, dan baris tab data permohonan. Bagian lain diredupkan; kotak keterangan berisi judul, satu kalimat, posisi langkah, serta Sebelumnya, Lanjut, dan Lewati tur. Isi mengikuti peran. Muncul sekali per pengguna, dapat ditutup dengan Esc, dan dapat diputar ulang dari Bantuan. Di ponsel kotak keterangan tampil di bawah layar.",
       "prinsip": "H10 Help and Documentation",
       "prioritas": "Sedang",
       "layar": "Permohonan AJB › detail (stepper)",
@@ -2023,6 +2023,24 @@
       "catatan": "Tahap Verifikasi Anggota sedang ditahan E-PPAT (arahan Peruri 30 Okt 2026), jadi tidak ditampilkan di stepper pelanggan; stepper bernomor 1–8.",
       "tanggal": "2026-10-26",
       "sumber": "Laporan HE UX Metric Lab, Highlight #8 (skor 71,5; PDF hlm. 15) + arahan Peruri 30 Okt 2026 · solusi usulan tim"
+    },
+    {
+      "kode": "HE-OB-06",
+      "fitur": "Dashboard (Onboarding)",
+      "judul": "Tour guide di Dasbor pelanggan Onboarding",
+      "saat_ini": "Tidak ada panduan saat pelanggan pertama kali masuk Dasbor.",
+      "usulan": "Walkthrough dengan coach marks, sama dengan tur Permohonan AJB: lima langkah menyorot Progres Registrasi, Langkah berikutnya, Pilih Paket, tombol Cek Progres Registrasi, dan tombol Bantuan. Muncul sekali per pengguna saat pertama masuk Dasbor, dapat dilewati atau ditutup dengan Esc, dan dapat diputar ulang dari Bantuan. Langkah yang elemennya tidak ada dilewati otomatis. Berlaku juga di Trial.",
+      "prinsip": "H10 Help and Documentation",
+      "halaman": "UX Metric Lab, Highlight #8 (skor 71,5; PDF hal. 15)",
+      "prioritas": "Rendah",
+      "layar": "Onboarding › Dasbor (pelanggan)",
+      "acuan": "Prototipe ONBOARDING; Prototipe TRIAL",
+      "selesai_bila": "Tur muncul sekali saat pelanggan pertama masuk Dasbor dan dapat diputar ulang dari Bantuan.",
+      "status": "Prototipe siap",
+      "catatan": "Tur untuk Super Admin dan Operator menyusul.",
+      "tanggal": "2026-11-09",
+      "sumber": "MoM Workshop HE 03/11/2026",
+      "versi": "v2"
     },
     {
       "kode": "HE-EAW-07",
@@ -5601,6 +5619,24 @@
       "tanggal": "2026-11-06",
       "sumber": "Live tenant",
       "versi": "v2"
+    },
+    {
+      "kode": "IDDS-TN-61",
+      "fitur": "Tenant · Masuk & Daftar",
+      "judul": "Menu Salinan Akta dihapus; salinan di Arsip Akta",
+      "saat_ini": "Menu Salinan Akta masih ada di grup Akta, padahal Arsip Akta sudah memuat minuta, salinan, riwayat versi, riwayat pengiriman, dan Kirim Salinan. Di live, menu Salinan Akta sudah tidak ada.",
+      "usulan": "Hapus menu Salinan Akta untuk semua peran. Grup Akta berisi Dashboard Akta, Renvooi, Arsip Akta, dan Template Akta. Teks yang menyebut menu Salinan Akta (stepper Selesai, dialog Selesai, Finalisasi Akta, tab Salinan di Penandatanganan Akta, notifikasi, Bantuan) diarahkan ke Arsip Akta, dan tautan lama ke Salinan Akta dialihkan ke Arsip Akta. Pembuatan dan penandatanganan salinan tetap di tab Salinan pada Penandatanganan Akta.",
+      "prinsip": "H5 Error Prevention; H8 Aesthetic and Minimalist Design",
+      "halaman": "Masukan 5 Nov 2026",
+      "prioritas": "Sedang",
+      "layar": "dev-app.eppat.id/t/<kantor> › Daftar",
+      "acuan": "Prototipe TN-MASUK; TN-SYSTEM",
+      "selesai_bila": "Menu Salinan Akta tidak tampil, dan semua rujukan salinan mengarah ke Arsip Akta.",
+      "status": "Prototipe siap",
+      "catatan": "MoM Workshop HE 03/11/2026 no. 40: arsip meliputi minuta dan salinan.",
+      "tanggal": "2026-11-09",
+      "sumber": "MoM Workshop HE 03/11/2026",
+      "versi": "v2"
     }
   ],
   "riwayat": [
@@ -6677,6 +6713,18 @@
       "kode": "HE-ORDER-23",
       "perubahan": "Contoh tour guide (walkthrough dengan coach marks) di detail Permohonan AJB untuk Asisten dan PPAT.",
       "berkas": "sumber/order-idds.html"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "IDDS-TN-61",
+      "perubahan": "Menu Salinan Akta dihapus dari grup Akta; teks dan tautan salinan diarahkan ke Arsip Akta.",
+      "berkas": "sumber/sidebar-seragam.js, sumber/sesi-bersama.html, sumber/order-idds.html, sumber/minuta2-badan.html, sumber/eaw-badan.html, sumber/tn-eppat-badan.html, sumber/notifikasi-bersama.html"
+    },
+    {
+      "tanggal": "2026-11-09",
+      "kode": "HE-ORDER-23; HE-OB-06",
+      "perubahan": "Tur Permohonan AJB ditambah langkah baris tab (6 langkah). Tur baru di Dasbor pelanggan Onboarding dan Trial.",
+      "berkas": "sumber/order-idds.html, sumber/onboard-badan.html (trial-badan.html dibangkitkan)"
     }
   ]
 }
