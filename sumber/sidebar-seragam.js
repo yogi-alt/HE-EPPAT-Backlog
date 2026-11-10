@@ -9,8 +9,10 @@ const F = {
 /* [label, ikon, tujuan] — tujuan dipakai bila menu bukan milik prototipe yang sedang dibuka */
 const MENU = [ /* nama & urutan menu baru (26 Okt 2026); hanya menu yang ada di live; ikon Tabler (aset/tabler-sidebar.json) */
   ['', 'tb_stack_2', [['Tugas Saya', 'tb_clipboard_check', F.tugas]]], /* tanpa judul grup, seperti live */
+  /* Dashboard Akta di section sendiri; Akta fokus operasional (masukan Workshop HE 3 Nov 2026, baris 32) */
+  ['Monitoring', 'tb_layout_dashboard', [['Dashboard Akta', 'tb_layout_dashboard', F.ep + '#dashboard']]],
   ['Layanan', 'tb_stack_2', [['Permohonan AJB', 'tb_file_text', F.order]]],
-  ['Akta', 'tb_feather', [['Dashboard Akta', 'tb_layout_dashboard', F.ep + '#dashboard'], ['Renvooi', 'tb_file_pencil', F.proses + '#renvooi'], ['Arsip Akta', 'tb_archive', F.proses + '#arsip'], ['Template Akta', 'tb_template', F.proses + '#template']]],
+  ['Akta', 'tb_feather', [['Renvooi', 'tb_file_pencil', F.proses + '#renvooi'], ['Arsip Akta', 'tb_archive', F.proses + '#arsip'], ['Template Akta', 'tb_template', F.proses + '#template']]],
   ['Pengaturan Kantor', 'tb_adjustments_horizontal', [['Profil Kantor', 'tb_building', F.ep + '#profil'], ['Daftar Pengguna', 'tb_users', F.user], ['Peran & Izin', 'tb_shield_lock', F.sys + '#peran'], ['Log Aktivitas', 'tb_history', F.sys + '#logs'], ['Aktivasi e-Meterai', 'tb_rubber_stamp', F.ep + '#emeterai']]],
   ['Pengaturan Aplikasi', 'tb_settings', [['Dashboard Sistem', 'tb_gauge', F.sys + '#dasbor'], ['Pengaturan', 'tb_settings', F.sys + '#pengaturan']]],
   ['Konten Situs', 'tb_layout_cards', [['Halaman Depan', 'tb_home', F.cms + '#landing'], ['Tema Tampilan', 'tb_palette', F.cms + '#tema'], ['Master Konten', 'tb_database', F.cms + '#master'], ['Artikel & Halaman', 'tb_article', F.cms + '#posts'], ['Pustaka Media', 'tb_photo', F.cms + '#media']]]
@@ -51,7 +53,7 @@ for (const [berkas, sendiri] of Object.entries(SENDIRI)) {
   const proto = `const PROTO = { ${MENU.flatMap(([, , m]) => m).filter(([l]) => !sendiri[l]).map(([l, , u]) => `${q(l)}:${q(u)}`).join(', ')} }; /* menu → prototipe */`;
   t = t.slice(0, p) + proto + t.slice(pz + '}; /* menu → prototipe */'.length);
   /* 3. semua grup terbuka */
-  t = t.replace(/const grupBuka = new Set\(\[[^\]]*\]\);/, 'const grupBuka = new Set([0, 1, 2, 3, 4, 5]);');
+  t = t.replace(/const grupBuka = new Set\(\[[^\]]*\]\);/, `const grupBuka = new Set([${MENU.map((m, i) => i).join(', ')}]);`);
   /* 4. ikon yang belum ada */
   const ia = t.indexOf('const I = {'), iz = t.indexOf('\n};', ia);
   const blokI = t.slice(ia, iz), kurang = IKON.filter(k => !new RegExp(`[\\s{,]${k}:'`).test(blokI));

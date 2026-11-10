@@ -1528,13 +1528,14 @@ const bacaSaja = t => t.milik === 'bawaan';
 /* ---------------- sidebar ---------------- */
 const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
   { g:'', ik:'tb_stack_2', m:[['Tugas Saya','tb_clipboard_check']] },
+  { g:'Monitoring', ik:'tb_layout_dashboard', m:[['Dashboard Akta','tb_layout_dashboard']] },
   { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text']] },
-  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Renvooi','tb_file_pencil','renvooi'],['Arsip Akta','tb_archive','arsip'],['Template Akta','tb_template','template']] },
+  { g:'Akta', ik:'tb_feather', m:[['Renvooi','tb_file_pencil','renvooi'],['Arsip Akta','tb_archive','arsip'],['Template Akta','tb_template','template']] },
   { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building'],['Daftar Pengguna','tb_users'],['Peran & Izin','tb_shield_lock'],['Log Aktivitas','tb_history'],['Aktivasi e-Meterai','tb_rubber_stamp']] },
   { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge'],['Pengaturan','tb_settings']] },
   { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home'],['Tema Tampilan','tb_palette'],['Master Konten','tb_database'],['Artikel & Halaman','tb_article'],['Pustaka Media','tb_photo']] }
 ];
-const grupBuka = new Set([0, 1, 2, 3, 4, 5]);
+const grupBuka = new Set([0, 1, 2, 3, 4, 5, 6]);
 function gambarNav() {
   $('#nav').innerHTML = NAV.map((g, i) => `
     <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
@@ -1551,7 +1552,7 @@ function gambarKartu() {
     <div class="ina-card__description kantor-info" style="color:inherit"><div class="baris-kantor">${ikKartu('dok')}<span>SK · ${esc(p.ppat_sk)}</span></div><div class="baris-kantor">${ikKartu('kartuId')}<span>Wilayah · ${esc(p.ppat_wilayah)}</span></div>
       ${p.ppat_telepon ? `<div class="baris-kantor">${ikKartu('telp')}<span>${esc(p.ppat_telepon)}</span></div>` : ''}<div class="baris-kantor">${ikKartu('gedung')}<span>${esc(p.ppat_alamat)}</span></div></div></div></div></div>` : '';
 }
-const PROTO = { 'Tugas Saya':'Backlog-HE-TUGAS-Prototype.html', 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
+const PROTO = { 'Tugas Saya':'Backlog-HE-TUGAS-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan', 'Halaman Depan':'Backlog-IDDS-TN-CMS-Prototype.html#landing', 'Tema Tampilan':'Backlog-IDDS-TN-CMS-Prototype.html#tema', 'Master Konten':'Backlog-IDDS-TN-CMS-Prototype.html#master', 'Artikel & Halaman':'Backlog-IDDS-TN-CMS-Prototype.html#posts', 'Pustaka Media':'Backlog-IDDS-TN-CMS-Prototype.html#media' }; /* menu → prototipe */
 $('#nav').addEventListener('click', e => {
   const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
   const a = e.target.closest('a'); if (!a) return; e.preventDefault();
@@ -2948,8 +2949,9 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
   /* menu lengkap untuk halaman yang sidebarnya khusus Klien, saat dibuka peran staf */
   const MENU = [
     ['', [['Tugas Saya', 'clipboard-check', TUGAS]]],
+    ['Monitoring', [['Dashboard Akta', 'layout-dashboard', EP + '#dashboard']]],
     ['Layanan', [['Permohonan AJB', 'file-text', 'Backlog-HE-ORDER-Prototype.html']]],
-    ['Akta', [['Dashboard Akta', 'layout-dashboard', EP + '#dashboard'], ['Renvooi', 'file-pencil', 'Backlog-IDDS-TN-PROSES-Prototype.html#renvooi'], ['Arsip Akta', 'archive', 'Backlog-IDDS-TN-PROSES-Prototype.html#arsip'], ['Template Akta', 'template', 'Backlog-IDDS-TN-PROSES-Prototype.html#template']]],
+    ['Akta', [['Renvooi', 'file-pencil', 'Backlog-IDDS-TN-PROSES-Prototype.html#renvooi'], ['Arsip Akta', 'archive', 'Backlog-IDDS-TN-PROSES-Prototype.html#arsip'], ['Template Akta', 'template', 'Backlog-IDDS-TN-PROSES-Prototype.html#template']]],
     ['Pengaturan Kantor', [['Profil Kantor', 'building', EP + '#profil'], ['Daftar Pengguna', 'users', 'Backlog-HE-USER-Prototype.html'], ['Peran & Izin', 'shield-lock', SYS + '#peran'], ['Log Aktivitas', 'history', SYS + '#logs'], ['Aktivasi e-Meterai', 'rubber-stamp', EP + '#emeterai']]],
     ['Pengaturan Aplikasi', [['Dashboard Sistem', 'gauge', SYS + '#dasbor'], ['Pengaturan', 'settings', SYS + '#pengaturan']]],
     ['Konten Situs', [['Halaman Depan', 'home', CMS + '#landing'], ['Tema Tampilan', 'palette', CMS + '#tema'], ['Master Konten', 'database', CMS + '#master'], ['Artikel & Halaman', 'article', CMS + '#posts'], ['Pustaka Media', 'photo', CMS + '#media']]]

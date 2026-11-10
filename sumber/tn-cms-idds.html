@@ -889,20 +889,21 @@ let S = S0();
 /* ---------------- sidebar ---------------- */
 const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
   { g:'', ik:'tb_stack_2', m:[['Tugas Saya','tb_clipboard_check']] },
+  { g:'Monitoring', ik:'tb_layout_dashboard', m:[['Dashboard Akta','tb_layout_dashboard']] },
   { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text']] },
-  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard'],['Renvooi','tb_file_pencil'],['Arsip Akta','tb_archive'],['Template Akta','tb_template']] },
+  { g:'Akta', ik:'tb_feather', m:[['Renvooi','tb_file_pencil'],['Arsip Akta','tb_archive'],['Template Akta','tb_template']] },
   { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building'],['Daftar Pengguna','tb_users'],['Peran & Izin','tb_shield_lock'],['Log Aktivitas','tb_history'],['Aktivasi e-Meterai','tb_rubber_stamp']] },
   { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge'],['Pengaturan','tb_settings']] },
   { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home','landing'],['Tema Tampilan','tb_palette','tema'],['Master Konten','tb_database','master'],['Artikel & Halaman','tb_article','posts'],['Pustaka Media','tb_photo','media']] }
 ];
-const grupBuka = new Set([0, 1, 2, 3, 4, 5]);
+const grupBuka = new Set([0, 1, 2, 3, 4, 5, 6]);
 function gambarNav() {
   $('#nav').innerHTML = NAV.map((g, i) => `
     <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
     <div class="items" ${grupBuka.has(i) ? '' : 'hidden'}>${g.m.map(([t, k, ke]) => `<a href="${ke ? '#' + ke : '#'}" class="ina-button ina-button--link ina-button--md nav-item ${ke && ke === S.layar ? 'on' : ''}" data-ke="${ke || ''}" ${ke === S.layar ? 'aria-current="page"' : ''}>${ik(k)}<span>${t}</span></a>`).join('')}</div>`).join('');
 }
 const SYS = 'Backlog-IDDS-TN-SYSTEM-Prototype.html';
-const PROTO = { 'Tugas Saya':'Backlog-HE-TUGAS-Prototype.html', 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Renvooi':'Backlog-IDDS-TN-PROSES-Prototype.html#renvooi', 'Arsip Akta':'Backlog-IDDS-TN-PROSES-Prototype.html#arsip', 'Template Akta':'Backlog-IDDS-TN-PROSES-Prototype.html#template', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan' }; /* menu → prototipe */
+const PROTO = { 'Tugas Saya':'Backlog-HE-TUGAS-Prototype.html', 'Dashboard Akta':'Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard', 'Permohonan AJB':'Backlog-HE-ORDER-Prototype.html', 'Renvooi':'Backlog-IDDS-TN-PROSES-Prototype.html#renvooi', 'Arsip Akta':'Backlog-IDDS-TN-PROSES-Prototype.html#arsip', 'Template Akta':'Backlog-IDDS-TN-PROSES-Prototype.html#template', 'Profil Kantor':'Backlog-IDDS-TN-EPPAT-Prototype.html#profil', 'Daftar Pengguna':'Backlog-HE-USER-Prototype.html', 'Peran & Izin':'Backlog-IDDS-TN-SYSTEM-Prototype.html#peran', 'Log Aktivitas':'Backlog-IDDS-TN-SYSTEM-Prototype.html#logs', 'Aktivasi e-Meterai':'Backlog-IDDS-TN-EPPAT-Prototype.html#emeterai', 'Dashboard Sistem':'Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor', 'Pengaturan':'Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan' }; /* menu → prototipe */
 $('#nav').addEventListener('click', e => {
   const g = e.target.closest('.grp'); if (g) { const i = +g.dataset.grp; grupBuka.has(i) ? grupBuka.delete(i) : grupBuka.add(i); gambarNav(); return; }
   const a = e.target.closest('a'); if (!a) return; e.preventDefault();

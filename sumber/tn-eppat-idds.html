@@ -669,13 +669,14 @@ const profKotor = () => Object.keys(PROFIL_F).filter(k => PROFIL[k] !== PROFIL_F
 /* ---------------- sidebar ---------------- */
 const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
   { g:'', ik:'tb_stack_2', m:[['Tugas Saya','tb_clipboard_check']] },
+  { g:'Monitoring', ik:'tb_layout_dashboard', m:[['Dashboard Akta','tb_layout_dashboard','dashboard']] },
   { g:'Layanan', ik:'tb_stack_2', m:[['Permohonan AJB','tb_file_text']] },
-  { g:'Akta', ik:'tb_feather', m:[['Dashboard Akta','tb_layout_dashboard','dashboard'],['Renvooi','tb_file_pencil'],['Arsip Akta','tb_archive'],['Template Akta','tb_template']] },
+  { g:'Akta', ik:'tb_feather', m:[['Renvooi','tb_file_pencil'],['Arsip Akta','tb_archive'],['Template Akta','tb_template']] },
   { g:'Pengaturan Kantor', ik:'tb_adjustments_horizontal', m:[['Profil Kantor','tb_building','profil'],['Daftar Pengguna','tb_users'],['Peran & Izin','tb_shield_lock'],['Log Aktivitas','tb_history'],['Aktivasi e-Meterai','tb_rubber_stamp','emeterai']] },
   { g:'Pengaturan Aplikasi', ik:'tb_settings', m:[['Dashboard Sistem','tb_gauge'],['Pengaturan','tb_settings']] },
   { g:'Konten Situs', ik:'tb_layout_cards', m:[['Halaman Depan','tb_home'],['Tema Tampilan','tb_palette'],['Master Konten','tb_database'],['Artikel & Halaman','tb_article'],['Pustaka Media','tb_photo']] }
 ];
-const grupBuka = new Set([0, 1, 2, 3, 4, 5]);
+const grupBuka = new Set([0, 1, 2, 3, 4, 5, 6]);
 function gambarNav() {
   $('#nav').innerHTML = NAV.filter(g => g.g !== 'Layanan' || LAYANAN[0].aktif).map((g, i) => `
     <button class="grp" data-grp="${i}" aria-expanded="${grupBuka.has(i)}">${ik(g.ik, 14)}<span>${g.g}</span><span class="chev">${ik('chev', 12)}</span></button>
