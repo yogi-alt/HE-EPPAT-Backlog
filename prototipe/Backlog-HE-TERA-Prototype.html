@@ -2144,14 +2144,18 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
     kabar(selesai ? 'Tur selesai.' : 'Tur dilewati.', 'Putar ulang kapan saja dari tombol Bantuan.');
   }
   /* muncul sendiri sekali per pengguna per layar, setelah layar tenang dan tidak ada dialog atau laci yang terbuka */
-  let jadwal;
+  /* menunggu layar tenang 800 ms, tetapi paling lama 1,2 detik sejak perubahan pertama,
+     agar layar yang terus berubah (mis. hitung mundur OTP) tidak menunda tur terus-menerus */
+  let jadwal = null, awalJadwal = 0;
   function cek() {
+    const kini = Date.now(); if (!jadwal) awalJadwal = kini;
     clearTimeout(jadwal);
     jadwal = setTimeout(() => {
+      jadwal = null;
       if (T.aktif) return;
       const t = berlaku(); if (!t || sudah(t) || T.dicek.has(t.kunci) || lapisanTerbuka()) return;
       if (mulai(t)) T.dicek.add(t.kunci);
-    }, 800);
+    }, Math.max(0, Math.min(800, awalJadwal + 1200 - kini)));
   }
   /* Bantuan: tombol "Mulai tur halaman ini" paling atas di laci Bantuan bila layar ini punya tur */
   function sisipBantuan() {

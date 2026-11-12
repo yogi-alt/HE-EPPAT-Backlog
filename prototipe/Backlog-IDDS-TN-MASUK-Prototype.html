@@ -717,7 +717,10 @@ const UBAH = [
     lama:'Pendaftar memilih peran Klien atau Asisten, dan judul berbunyi "Buat Akun PPAT".', ke:'daftar', sorot:'#dNama', sumber:'Masukan 5 Nov 2026 (bukan temuan HE)', versi:'v2' },
   { kode:'IDDS-TN-38', judul:'Halaman Masuk dan Daftar: Bantuan di setiap layar',
     isi:'Tombol Bantuan di atas kartu Masuk, Verifikasi 2 Faktor, Ganti Kata Sandi, Daftar, Verifikasi OTP, dan Akun Aktif membuka IDDS Drawer. Isinya mengikuti layar yang sedang dibuka: langkah singkat, pertanyaan umum, dan kontak dukungan. Pertanyaan umum mencakup lupa kata sandi, belum punya akun, kode OTP tidak masuk atau kedaluwarsa, kehilangan aplikasi autentikator, syarat kata sandi, pilihan peran, dan langkah setelah mendaftar. Pola sama dengan Bantuan di menu Pengaturan Aplikasi (IDDS-TN-15, HE-UMUM-02). Kontak bergaris putus-putus adalah data contoh.',
-    lama:'Tidak ada panduan atau kontak dukungan di halaman Masuk, Daftar, dan verifikasi.', ke:'bantuan', sorot:null }
+    lama:'Tidak ada panduan atau kontak dukungan di halaman Masuk, Daftar, dan verifikasi.', ke:'bantuan', sorot:null },
+  { kode:'IDDS-TN-62', versi:'v2', bukanHE:true, judul:'Tour guide Masuk, Verifikasi 2 Faktor, Kata Sandi Baru, dan Daftar',
+    isi:'Saat pengguna pertama kali membuka setiap layar, tur singkat menjelaskan isinya. Masuk: pengantar, email, kata sandi, tombol Masuk, tautan Daftar, dan Bantuan; bila gagal masuk, tur menunjukkan pesan galat dan isian yang perlu diperbaiki. Verifikasi 2 faktor: isian kode 6 digit dari aplikasi autentikator, tombol Verifikasi, dan jalan keluar bila kehilangan akses. Buat Kata Sandi Baru: isian kata sandi, syarat yang tercentang langsung, konfirmasi, dan tombol simpan. Daftar: langkah registrasi, nama, nomor WhatsApp, email, syarat kata sandi, persetujuan, Kosongkan formulir, dan Daftar dan Kirim OTP. Verifikasi OTP: kode email dan WhatsApp, masa berlaku, serta kirim ulang. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka halaman Masuk, verifikasi, dan Daftar.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
 ];
 
 /* ---------------- keadaan ---------------- */
@@ -1054,8 +1057,50 @@ $('#bukaUbah').addEventListener('click', () => {
     isi:`<p>Halaman ini tidak dinilai dalam laporan HE. Prototipe meniru layar dan kode live <i>dev-app.eppat.id/t/default</i> (dilihat 26 Okt 2026): isi, alur, dan aturan tetap seperti live; yang disesuaikan adalah komponen IDDS, letak pesan galat, dan bahasa.</p>
       <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div><div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
-  $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; const u = UBAH[+b.dataset.lihat]; if (u.ke === 'bantuan') { bukaBantuan(); return; } ke(u.ke); const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } });
+  $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; const u = UBAH[+b.dataset.lihat]; if (u.ke === 'bantuan') { bukaBantuan(); return; } if (u.ke === 'tur') { ke('masuk'); setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 400); return; } ke(u.ke); const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } });
 });
+/* ---------------- tour guide (IDDS-TN-62, komponen tur-bersama) ---------------- */
+const BANTU_TUR = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan layar ini, pertanyaan umum, dan kontak dukungan ada di sini, termasuk tombol untuk memutar ulang tur ini.' };
+[
+  { kunci:'tn-masuk', aktif:() => S.layar === 'masuk' && !S.galat, langkah:() => [
+    { el:'#pengantarMasuk', j:'Masuk ke aplikasi kantor', t:'Masuk dengan akun yang dibuat admin kantor. Bila belum punya akun, Anda dapat mendaftar sendiri.' },
+    { el:'#f-mEmail', j:'Email', t:'Isi email akun Anda.' },
+    { el:'#f-mPw', j:'Kata sandi', t:'Isi kata sandi Anda. Tekan ikon mata untuk melihat kata sandi yang diketik.' },
+    { el:'#kirimMasuk', j:'Masuk', t:'Tekan untuk masuk. Bila akun memakai verifikasi 2 faktor, Anda diminta kode dari aplikasi autentikator.' },
+    { el:'.kaki-tn [data-ke="daftar"]', j:'Daftar', t:'Belum punya akun? Daftar sendiri sebagai Klien lewat tautan ini.' }, BANTU_TUR] },
+  { kunci:'tn-masuk-galat', aktif:() => S.layar === 'masuk' && !!S.galat, langkah:() => [
+    { el:'#galatMasuk', j:'Gagal masuk', t:'Pesan ini menyebut penyebab gagal masuk.' },
+    { el:'#f-mEmail', j:'Periksa email', t:'Pastikan email sama dengan email akun Anda.' },
+    { el:'#f-mPw', j:'Periksa kata sandi', t:'Ketik ulang kata sandi. Tekan ikon mata untuk memeriksa ketikan Anda.' },
+    { el:'#kirimMasuk', j:'Coba lagi', t:'Tekan Masuk setelah isian diperbaiki.' }, BANTU_TUR] },
+  { kunci:'tn-2fa', aktif:() => S.layar === '2fa', langkah:() => [
+    { el:'.kartu-tn .pengantar', j:'Verifikasi 2 faktor', t:'Akun ini memakai verifikasi 2 faktor. Buka aplikasi autentikator di ponsel Anda.' },
+    { el:'.kartu-tn .ina-one-time-password', j:'Kode 6 digit', t:'Masukkan kode 6 digit yang sedang aktif di aplikasi autentikator.' },
+    { el:'#kirim2fa', j:'Verifikasi', t:'Tekan setelah kode lengkap. Setelah berhasil, Anda masuk ke aplikasi.' },
+    { el:'.kartu-tn .ina-alert', j:'Kehilangan akses', t:'Bila tidak dapat membuka aplikasi autentikator, hubungi admin kantor untuk mengatur ulang verifikasi 2 faktor.' },
+    { el:'.atas-tn [data-ke="masuk"]', j:'Kembali ke halaman masuk', t:'Kembali bila ingin masuk dengan akun lain.' }, BANTU_TUR] },
+  { kunci:'tn-ganti', aktif:() => S.layar === 'ganti' && !S.berhasil, langkah:() => [
+    { el:'.kartu-tn .pengantar', j:'Buat kata sandi baru', t:'Halaman ini dibuka dari tautan di email. Buat kata sandi baru untuk akun Anda.' },
+    { el:'#f-gBaru', j:'Kata sandi baru', t:'Ketik kata sandi baru Anda.' },
+    { el:'#syaratGanti', j:'Syarat kata sandi', t:'Setiap syarat langsung dicentang saat terpenuhi.' },
+    { el:'#f-gUlang', j:'Konfirmasi kata sandi', t:'Ketik ulang kata sandi yang sama.' },
+    { el:'#kirimGanti', j:'Simpan kata sandi', t:'Tombol aktif setelah semua syarat terpenuhi dan kedua kata sandi sama.' }, BANTU_TUR] },
+  { kunci:'tn-daftar', aktif:() => S.layar === 'daftar', langkah:() => [
+    { el:'.kartu-tn .stepper-tn', j:'Langkah registrasi', t:'Registrasi terdiri atas tiga langkah: isi data, verifikasi OTP, lalu akun aktif.' },
+    { el:'#f-dNama', j:'Nama lengkap', t:'Isi nama sesuai identitas.' },
+    { el:'#f-dHp', j:'Nomor WhatsApp', t:'Kode OTP dikirim ke nomor WhatsApp ini. Awali nomor dengan 62.' },
+    { el:'#f-dEmail', j:'Email', t:'Kode OTP juga dikirim ke email ini.' },
+    { el:'#syaratDaftar', j:'Syarat kata sandi', t:'Setiap syarat langsung dicentang saat terpenuhi. Ketik ulang kata sandi yang sama di isian konfirmasi.' },
+    { el:'.kartu-tn .setuju', j:'Persetujuan', t:'Centang persetujuan sebelum mendaftar.' },
+    { el:'#kosongkan', j:'Kosongkan formulir', t:'Isian tersimpan otomatis di perangkat ini sampai pendaftaran selesai. Tekan tombol ini untuk menghapusnya.' },
+    { el:'#kirimDaftar', j:'Daftar dan kirim OTP', t:'Tekan setelah semua isian wajib terisi. Isian yang salah ditandai dengan pesan di bawahnya.' }, BANTU_TUR] },
+  { kunci:'tn-otp', aktif:() => S.layar === 'otp', langkah:() => [
+    { el:'.kartu-tn .stepper-tn', j:'Verifikasi OTP', t:'Langkah kedua: pastikan email dan nomor WhatsApp Anda aktif.' },
+    { el:'#kanal-email', j:'Kode dari email', t:'Masukkan 6 digit kode yang dikirim ke email, lalu tekan Verifikasi.' },
+    { el:'#waktu-email', j:'Masa berlaku kode', t:'Kode berlaku sebentar. Sisa waktunya tampil di sini.' },
+    { el:'#tombol-email', j:'Kirim ulang', t:'Bila kode tidak masuk atau masa berlakunya habis, minta kode baru setelah jeda waktu selesai.' },
+    { el:'#kanal-wa', j:'Kode dari WhatsApp', t:'Lakukan hal yang sama untuk kode di WhatsApp. Akun aktif setelah keduanya terverifikasi.' }, BANTU_TUR] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-TN-62') })));
 $('#aturUlang').addEventListener('click', () => { S = S0(); gambar(); toast('Data contoh dikembalikan ke awal.'); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 gambar();
@@ -1468,6 +1513,162 @@ gambar();
   let antre = 0;
   new MutationObserver(() => { clearTimeout(antre); antre = setTimeout(sisipkan, 0); }).observe(wadah, { childList:true, subtree:true });
   document.addEventListener('click', e => { const b = e.target.closest('.kabar-sisip .ina-alert__close-button'); if (b) b.closest('.kabar-sisip').remove(); });
+})();
+</script>
+
+<!-- ===== Tur bersama (tur-bersama.html, disisipkan rakit-idds.js ke prototipe yang mendaftarkan tur lewat window.TUR_ANTRE) =====
+     Keputusan Workshop HE: semua modul memakai tour guide. Tur muncul sendiri saat pengguna pertama kali membuka layarnya
+     (sekali per pengguna per layar) dan dapat diputar ulang dari Bantuan › "Mulai tur halaman ini".
+     Bentuk dan perilaku sama dengan tur Permohonan AJB (HE-ORDER-23): bagian lain diredupkan, kotak keterangan berisi
+     posisi langkah, judul, satu kalimat, Sebelumnya/Lanjut/Lewati tur; Esc menutup, panah kiri/kanan berpindah langkah.
+     Pendaftaran di prototipe (di dalam skrip prototipe, sebelum komponen ini dimuat):
+       (window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+         kunci:'verif-detail',                 // nama layar, untuk penanda "sudah pernah dilihat"
+         aktif:() => S.layar === 'detail',     // tur berlaku untuk layar yang sedang tampil
+         langkah:() => [{ el:'#stepper', j:'Judul langkah', t:'Satu kalimat penjelasan.' }, …],
+         tanda:usulan('HE-VERIF-06')           // opsional: penanda usulan (markup) di sebelah tombol Bantuan
+       });
+     el boleh berupa pemilih CSS atau fungsi yang mengembalikan elemen; langkah yang elemennya tidak tampil dilewati.
+     Untuk memutar dari "Lihat di layar": window.TurBersama.mulai(). -->
+<style id="tur-bersama-css">
+.tur{position:fixed;inset:0;z-index:2000}
+.tur-tirai{position:absolute;inset:0}
+.tur-sorot{position:fixed;border-radius:12px;box-shadow:0 0 0 9999px rgba(15,23,30,.58);outline:2px solid var(--ina-primary-300,#9cc3b4);outline-offset:2px;transition:top .25s,left .25s,width .25s,height .25s;pointer-events:none}
+.tur-kotak{position:fixed;width:min(360px,calc(100vw - 32px));background:var(--ina-background-primary,#fff);color:var(--ina-content-primary);border-radius:12px;box-shadow:0 12px 32px rgba(15,23,30,.28);padding:16px 16px 14px;text-align:left}
+.tur-kotak h2{margin:2px 0 6px;font-size:16px;line-height:22px;font-weight:600}
+.tur-kotak p{margin:0;font-size:14px;line-height:20px;color:var(--ina-content-secondary)}
+.tur-langkah{font-size:12px;font-weight:600;color:var(--ina-primary-primary,#3d6b5e)}
+.tur-titik{display:flex;gap:6px;margin-top:12px}
+.tur-titik span{width:6px;height:6px;border-radius:999px;background:var(--ina-stroke-primary,#d0d5d3)}
+.tur-titik span.on{background:var(--ina-primary-primary,#3d6b5e);width:16px}
+.tur-kaki{display:flex;align-items:center;gap:8px;margin-top:14px}
+.tur-kaki [data-tur=lewati]{margin-right:auto}
+.tur-bantuan{margin:0 0 16px}
+/* laci Bantuan (berisi tombol Mulai tur) berada di atas bilah prototipe yang bisa tinggi saat tombolnya terbungkus */
+#lapisanDrawer .ina-drawer{z-index:1002}
+@media (max-width:760px){.tur-kotak{left:16px!important;right:16px;top:auto!important;bottom:16px;width:auto}.tur-kotak.atas{top:16px!important;bottom:auto}}
+</style>
+<script id="tur-bersama-js">
+(() => {
+  const DAFTAR = [];
+  const T = { aktif:null, i:0, langkah:[], dicek:new Set() };
+  const $ = s => document.querySelector(s);
+  const tampak = el => !!el && el.isConnected && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+  const cari = el => { if (typeof el === 'function') return el(); return [...document.querySelectorAll(el)].find(tampak); };
+  const email = () => (window.SESI_PROTO && window.SESI_PROTO.email) || 'tanpa-sesi';
+  const kunciLS = t => 'eppat-tur:' + t.kunci + ':' + ((t.email && t.email()) || email());
+  const sudah = t => { try { return localStorage.getItem(kunciLS(t)) === '1'; } catch (e) { return false; } };
+  const tandai = t => { try { localStorage.setItem(kunciLS(t), '1'); } catch (e) { /* tanpa penyimpanan, tur dapat muncul lagi */ } };
+  /* tidak ada tur selama layar "Halaman tidak tersedia" (peran tanpa akses, sesi-bersama) menutupi halaman */
+  const berlaku = () => document.querySelector('.sesi-tolak') ? undefined : DAFTAR.find(t => { try { return t.aktif(); } catch (e) { return false; } });
+  const tombol = (teks, jenis, atr) => `<button type="button" class="ina-button ina-button--${jenis} ina-button--sm" ${atr}>${teks}</button>`;
+  const svg = p => `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+  const lapisanTerbuka = () => [...document.querySelectorAll('#lapisan, #lapisanDrawer')].some(x => x.innerHTML.trim()) || [...document.querySelectorAll('.ina-modal, .ina-drawer')].some(tampak);
+
+  function kabar(teks, ket) {
+    const w = document.getElementById('toastWadah'); if (!w) return;
+    w.innerHTML = `<div class="ina-toast ina-toast--state-default ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${svg('<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" />')}</div>
+      <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p><p class="ina-toast__description">${ket}</p></div></div></div>`;
+    clearTimeout(kabar.w); kabar.w = setTimeout(() => { w.innerHTML = ''; }, 4000);
+  }
+  function mulai(t) {
+    t = t || berlaku(); if (!t || T.aktif) return false;
+    const L = (t.langkah() || []).filter(l => tampak(cari(l.el)));
+    if (!L.length) return false;
+    T.aktif = t; T.i = 0; T.langkah = L;
+    document.body.insertAdjacentHTML('beforeend', '<div class="tur" id="tur" role="dialog" aria-modal="true" aria-labelledby="turJudul"><div class="tur-tirai"></div><div class="tur-sorot"></div><div class="tur-kotak" aria-live="polite"></div></div>');
+    tampil(); return true;
+  }
+  function tampil() {
+    const L = T.langkah[T.i], n = T.langkah.length, akhir = T.i === n - 1, el = cari(L.el);
+    if (!tampak(el)) { if (akhir) { tutup(true); return; } T.langkah.splice(T.i, 1); tampil(); return; }
+    const k = $('#tur .tur-kotak');
+    k.innerHTML = `<div class="tur-langkah">Langkah ${T.i + 1} dari ${n}</div><h2 id="turJudul">${L.j}</h2><p>${L.t}</p>
+      <div class="tur-titik" aria-hidden="true">${T.langkah.map((_, k) => `<span class="${k === T.i ? 'on' : ''}"></span>`).join('')}</div>
+      <div class="tur-kaki">${tombol('Lewati tur', 'tertiary', 'data-tur="lewati"')}${T.i ? tombol('Sebelumnya', 'secondary', 'data-tur="mundur"') : ''}${tombol(akhir ? 'Selesai' : 'Lanjut', 'primary', `data-tur="${akhir ? 'selesai' : 'maju'}"`)}</div>`;
+    el.scrollIntoView({ block:'center' });
+    /* bagian yang tinggi: bila kotak tidak muat di atas, bawah, atau samping, gulir agar awal bagian itu berada di atas layar.
+       Bagian yang lebih tinggi dari layar (kertas, penampil PDF, daftar panjang) disorot sebatas layar dan kotak menutupi sebagian bawahnya. */
+    const r = el.getBoundingClientRect(), p = 8;
+    if (!tempat(r, k).muat) {
+      const kepala = [...document.querySelectorAll('header.top')].find(x => /sticky|fixed/.test(getComputedStyle(x).position));
+      window.scrollBy(0, r.top - ((kepala ? kepala.getBoundingClientRect().bottom : 0) + p + 12));
+    }
+    letak(); $('#tur [data-tur="' + (akhir ? 'selesai' : 'maju') + '"]').focus({ preventScroll:true });
+  }
+  /* letak kotak: di bawah, di atas, di kanan, lalu di kiri bagian yang disorot; di layar sempit kotak selalu di dasar layar (CSS) */
+  function tempat(r, k) {
+    const p = 8, g = 12, w = k.offsetWidth, h = k.offsetHeight, vw = innerWidth, vh = innerHeight, x = Math.min(Math.max(16, r.left), vw - w - 16), y = Math.min(Math.max(16, r.top), vh - h - 16);
+    if (matchMedia('(max-width:760px)').matches) {
+      if (r.bottom + p <= vh - h - 16 - g) return { muat:true };
+      if (r.top - p - g - h - 16 >= 0) return { muat:true, atas:true }; /* bagian di dasar halaman: kotak pindah ke atas layar */
+      /* tidak muat di keduanya: pilih tepi layar yang paling sedikit menutupi bagian yang disorot */
+      return { muat:false, atas:Math.max(0, 16 + h + p - r.top) < Math.max(0, r.bottom + p - (vh - h - 16)) };
+    }
+    if (r.bottom + p + g + h < vh) return { muat:true, top:r.bottom + p + g, left:x };
+    if (r.top - p - g - h > 0) return { muat:true, top:r.top - p - g - h, left:x };
+    if (r.right + p + g + w < vw - 16) return { muat:true, top:y, left:r.right + p + g };
+    if (r.left - p - g - w > 16) return { muat:true, top:y, left:r.left - p - g - w };
+    return { muat:false, top:Math.max(16, vh - h - 16), left:x };
+  }
+  function letak() {
+    if (!T.aktif) return;
+    const el = cari(T.langkah[T.i].el); if (!el) return;
+    const asli = el.getBoundingClientRect(), p = 8, s = $('#tur .tur-sorot'), k = $('#tur .tur-kotak');
+    /* sorotan dipotong sebatas layar agar tepinya tetap terlihat */
+    const atas = Math.max(asli.top, p), bawah = Math.min(asli.bottom, innerHeight - p), kiri = Math.max(asli.left, p), kanan = Math.min(asli.right, innerWidth - p);
+    const r = { top:atas, bottom:Math.max(bawah, atas), left:kiri, right:Math.max(kanan, kiri), height:Math.max(bawah - atas, 0), width:Math.max(kanan - kiri, 0) };
+    Object.assign(s.style, { top:r.top - p + 'px', left:r.left - p + 'px', width:r.width + p * 2 + 'px', height:r.height + p * 2 + 'px' });
+    const t = tempat(r, k);
+    k.classList.toggle('atas', !!t.atas);
+    if (t.top !== undefined) Object.assign(k.style, { top:t.top + 'px', left:t.left + 'px' });
+  }
+  function tutup(selesai) {
+    if (!T.aktif) return; tandai(T.aktif); T.aktif = null; $('#tur')?.remove();
+    kabar(selesai ? 'Tur selesai.' : 'Tur dilewati.', 'Putar ulang kapan saja dari tombol Bantuan.');
+  }
+  /* muncul sendiri sekali per pengguna per layar, setelah layar tenang dan tidak ada dialog atau laci yang terbuka */
+  /* menunggu layar tenang 800 ms, tetapi paling lama 1,2 detik sejak perubahan pertama,
+     agar layar yang terus berubah (mis. hitung mundur OTP) tidak menunda tur terus-menerus */
+  let jadwal = null, awalJadwal = 0;
+  function cek() {
+    const kini = Date.now(); if (!jadwal) awalJadwal = kini;
+    clearTimeout(jadwal);
+    jadwal = setTimeout(() => {
+      jadwal = null;
+      if (T.aktif) return;
+      const t = berlaku(); if (!t || sudah(t) || T.dicek.has(t.kunci) || lapisanTerbuka()) return;
+      if (mulai(t)) T.dicek.add(t.kunci);
+    }, Math.max(0, Math.min(800, awalJadwal + 1200 - kini)));
+  }
+  /* Bantuan: tombol "Mulai tur halaman ini" paling atas di laci Bantuan bila layar ini punya tur */
+  function sisipBantuan() {
+    const t = berlaku(), isi = document.querySelector('#lapisanDrawer .ina-drawer__content');
+    if (!t || !isi || isi.querySelector('[data-mulai-tur]')) return;
+    const u = t.tanda || '';
+    isi.insertAdjacentHTML('afterbegin', `<p class="tur-bantuan">${tombol(svg('<path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />') + 'Mulai tur halaman ini', 'secondary', 'data-mulai-tur')}${u}</p>`);
+  }
+  /* layar berganti saat tur berjalan (mis. tombol Kembali peramban): tur ditutup tanpa ditandai sudah dilihat */
+  const masihBerlaku = () => { try { return !document.querySelector('.sesi-tolak') && T.aktif.aktif(); } catch (e) { return false; } };
+  new MutationObserver(() => { if (!DAFTAR.length) return; sisipBantuan(); if (T.aktif) { if (masihBerlaku()) letak(); else { T.aktif = null; $('#tur')?.remove(); cek(); } } else cek(); }).observe(document.body, { childList:true, subtree:true });
+  document.addEventListener('click', e => {
+    if (!DAFTAR.length) return;
+    const b = e.target.closest('#tur [data-tur]');
+    if (b) { const a = b.dataset.tur; if (a === 'maju') { T.i++; tampil(); } else if (a === 'mundur') { T.i--; tampil(); } else tutup(a === 'selesai'); return; }
+    if (e.target.closest('#lapisanDrawer [data-mulai-tur]')) { e.stopPropagation(); const d = document.getElementById('lapisanDrawer'); if (d) d.innerHTML = ''; setTimeout(() => mulai(), 50); }
+  }, true);
+  document.addEventListener('keydown', e => {
+    if (!T.aktif) return;
+    if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); tutup(false); }
+    else if (e.key === 'ArrowRight' && T.i < T.langkah.length - 1) { T.i++; tampil(); }
+    else if (e.key === 'ArrowLeft' && T.i) { T.i--; tampil(); }
+    else if (e.key === 'Tab') { const f = [...document.querySelectorAll('#tur button')]; const i = f.indexOf(document.activeElement); e.preventDefault(); f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus(); }
+  }, true);
+  addEventListener('resize', letak); addEventListener('scroll', letak, { passive:true });
+  const daftar = t => { DAFTAR.push(t); cek(); };
+  (window.TUR_ANTRE || []).forEach(daftar);
+  window.TUR_ANTRE = { push:daftar };
+  window.TurBersama = { mulai:() => mulai(), daftar };
 })();
 </script>
 

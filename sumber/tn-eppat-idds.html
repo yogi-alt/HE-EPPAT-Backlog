@@ -575,6 +575,9 @@ const rasio = (a, b) => { const x = lum(a), y = lum(b); if (x == null || y == nu
 
 /* ---------------- daftar penyesuaian ---------------- */
 const UBAH = [
+  { kode:'IDDS-TN-66', versi:'v2', bukanHE:true, judul:'Tour guide Dashboard Akta, Profil Kantor, dan Aktivasi e-Meterai',
+    isi:'Saat pengguna pertama kali membuka halaman ini, tur singkat menjelaskan isinya. Dashboard Akta: waktu pembaruan dan Muat ulang, kartu ringkasan per status, grafik permohonan per status beserta arti warnanya, grafik per jenis akta, Perlu tindakan, dan Permohonan terbaru; bila data gagal dimuat, tur menunjuk tombol Coba lagi. Profil Kantor: tab Profil dan Layanan Akta, data kantor, PPAT penanda tangan, kartu identitas di sidebar, dan status simpan; peran yang hanya dapat melihat mendapat tur tanpa tombol simpan. Layanan Akta: sakelar layanan dan dampaknya. Aktivasi e-Meterai: status, langkah aktivasi, portal resmi Peruri, dan email akun e-Meterai. Bentuk dan perilakunya sama dengan tur Permohonan AJB: muncul sekali, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka Dashboard Akta, Profil Kantor, dan Aktivasi e-Meterai.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'IDDS-TN-27', judul:'Dashboard: kartu, grafik, dan warna status seragam',
     isi:'Kartu ringkasan memakai IDDS Card. Keterangan setiap status menjelaskan artinya, sama dengan prototipe Permohonan AJB: "Mengumpulkan data", "Data lengkap", "Pembuatan akta", "Akta selesai". Warna grafik diambil dari token warna status tema (bukan kode warna tetap) dan sekeluarga dengan warna lencana statusnya. Pengumpulan Berkas, Penyusunan Akta, dan Penandatanganan Akta sama-sama berlencana "info", seperti di live. Di grafik ketiganya memakai keluarga warna info dengan corak berbeda, dari biru muda sampai biru tua mengikuti urutan tahap, sehingga tetap dapat dibedakan tanpa memakai hijau yang mirip warna Selesai. Legenda donat selalu menampilkan semua status beserta jumlah dan persentasenya. Grafik batang menulis nama jenis akta lengkap beserta jumlahnya, sehingga angka terbaca tanpa tooltip.',
     lama:'Keterangan kartu hanya "order". Warna grafik ditulis langsung di kode (slate/biru/kuning/hijau) dan tidak ikut tema. Status bernilai 0 hilang dari legenda. Jumlah hanya tampil di tooltip saat kursor di atas grafik, dan sumbu batang hanya memakai kode (AJB).', ke:'dashboard', sorot:'#grafikStatus' },
@@ -1117,6 +1120,7 @@ $('#bukaUbah').addEventListener('click', () => {
   $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]); });
 });
 function lihat(u) {
+  if (u.ke === 'tur') { setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300); return; }
   const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
   if (u.ke === 'profilKartu') { pindah('profil', () => { S.profTab = 'profil'; gambar(); sorot(); }); return; }
@@ -1132,6 +1136,44 @@ $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('o
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
 const awal = (location.hash || '').slice(1); if (RENDER[awal]) S.layar = awal;
 window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (RENDER[h] && h !== S.layar) pindah(h); });
+/* ---------------- tour guide (IDDS-TN-66, komponen tur-bersama) ---------------- */
+const terlihatT = s => [...document.querySelectorAll(s)].find(x => x.offsetParent);
+/* bagian yang lebih tinggi dari ruang layar: sorot judulnya agar kotak keterangan tidak menutupinya */
+const pasT = (s, sub) => () => { const e = typeof s === 'function' ? s() : terlihatT(s); if (!e) return e;
+  const batas = innerHeight - (matchMedia('(max-width:760px)').matches ? 360 : 300);
+  return e.getBoundingClientRect().height <= batas ? e : ([...e.querySelectorAll(sub || 'h2, h3')].find(x => x.offsetParent) || e); };
+const BANTUAN_T = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' };
+[
+  { kunci:'tneppat-dashboard', aktif:() => S.layar === 'dashboard' && !S.dashGagal, langkah:() => [
+    { el:'.diperbarui', j:'Waktu pembaruan', t:'Data dashboard diambil pada waktu ini. Tekan Muat ulang untuk mengambil data terbaru.' },
+    { el:pasT('.kpi', '.ina-card'), j:'Ringkasan per status', t:'Setiap kartu menunjukkan jumlah permohonan pada satu status, dimulai dari total permohonan.' },
+    { el:pasT('#grafikStatus', 'h2'), j:'Permohonan per status', t:'Grafik dan legenda menunjukkan jumlah serta persentase permohonan per status. Pengumpulan Berkas, Penyusunan Akta, dan Penandatanganan Akta berlencana info, jadi di grafik ketiganya memakai biru dari muda ke tua sesuai urutan tahap.' },
+    { el:pasT('section[aria-labelledby="jdJenis"]', 'h2'), j:'Permohonan per jenis akta', t:'Jumlah permohonan untuk setiap layanan akta yang aktif di kantor ini.' },
+    { el:pasT('#perluTindakan', 'h2'), j:'Perlu tindakan', t:'Permohonan yang belum selesai, diurutkan dari yang paling lama. Klik baris untuk membuka permohonannya.' },
+    { el:pasT('section[aria-labelledby="jdBaru"]', 'h2'), j:'Permohonan terbaru', t:'Permohonan yang paling baru dibuat. Klik baris untuk membuka permohonannya.' },
+    BANTUAN_T] },
+  { kunci:'tneppat-dashboard-gagal', aktif:() => S.layar === 'dashboard' && S.dashGagal, langkah:() => [
+    { el:() => { const b = terlihatT('#cobaLagi'); return b && (b.closest('.ina-alert') || b); }, j:'Dashboard gagal dimuat', t:'Data tidak dapat dimuat. Periksa koneksi internet Anda, lalu tekan Coba lagi.' },
+    BANTUAN_T] },
+  { get kunci() { return S.bolehUbah ? 'tneppat-profil' : 'tneppat-profil-lihat'; }, aktif:() => S.layar === 'profil' && S.profTab === 'profil', langkah:() => [
+    { el:'.tab-wadah', j:'Profil dan layanan', t:'Tab Profil Kantor berisi identitas kantor. Tab Layanan Akta mengatur jenis akta yang dilayani kantor ini.' },
+    { el:'#formProfil .ina-alert', j:'Hanya dapat dilihat', t:'Peran Anda tidak memiliki izin mengubah Profil Kantor. Hubungi Super Admin bila data perlu diperbarui.' },
+    { el:pasT('#formProfil .f-dua.f-baris', 'label'), j:'Data kantor', t:'Nama PPAT, nomor SK, wilayah kerja, kontak, dan alamat kantor dipakai pada kop dan isi akta. Isian wajib bertanda bintang.' },
+    { el:pasT('#formProfil .seksi', 'h3'), j:'PPAT penanda tangan', t:'PPAT ini menandatangani akta secara elektronik dan wajib memiliki sertifikat elektronik aktif. Lencana di sampingnya menunjukkan statusnya.' },
+    { el:pasT('#seksiKartu', 'h3'), j:'Kartu identitas di sidebar', t:'Atur tampil tidaknya kartu kantor di sidebar dan warnanya. Lencana kontras menunjukkan apakah teks mudah dibaca, dan pratinjau langsung berubah.' },
+    { el:'#formProfil .kaki-form', j:'Simpan perubahan', t:'Jumlah perubahan yang belum disimpan tampil di sini. Tekan Simpan perubahan, atau Batal untuk membuangnya.' },
+    BANTUAN_T] },
+  { get kunci() { return S.bolehUbah ? 'tneppat-layanan' : 'tneppat-layanan-lihat'; }, aktif:() => S.layar === 'profil' && S.profTab === 'layanan', langkah:() => [
+    { el:'.tab-wadah', j:'Profil dan layanan', t:'Tab Layanan Akta mengatur jenis akta yang dilayani kantor ini.' },
+    { el:pasT('#daftarLayanan', 'b'), j:'Layanan akta', t:S.bolehUbah ? 'Nyalakan sakelar untuk menampilkan menu Permohonan jenis akta itu di sidebar. Mematikan layanan meminta konfirmasi karena berlaku untuk seluruh pengguna. Layanan bertanda Segera hadir belum tersedia.' : 'Daftar ini menunjukkan layanan akta yang aktif. Hanya Super Admin yang dapat mengubahnya. Layanan bertanda Segera hadir belum tersedia.' },
+    BANTUAN_T] },
+  { get kunci() { return EMET.disimpan ? 'tneppat-emeterai-aktif' : 'tneppat-emeterai'; }, aktif:() => S.layar === 'emeterai', langkah:() => [
+    { el:'#statusAkt', j:'Status e-Meterai', t:EMET.disimpan ? 'Pembubuhan e-Meterai sudah siap. Email terdaftar tampil di sini.' : 'e-Meterai belum diaktifkan. Ikuti langkah di bawah agar meterai dapat dibubuhkan pada akta.' },
+    { el:pasT('section[aria-labelledby="jdLangkah"]', 'h2'), j:'Langkah aktivasi', t:'Daftar dan beli kuota di portal Peruri, catat email yang terdaftar, lalu simpan email itu di halaman ini.' },
+    { el:'section[aria-labelledby="jdPortal"]', j:'Portal resmi e-Meterai', t:'Tombol ini membuka e-meterai.co.id di tab baru untuk mendaftar atau membeli kuota.' },
+    { el:pasT('section[aria-labelledby="jdEmail"]', 'h2'), j:'Email akun e-Meterai', t:EMET.disimpan ? 'Email ini harus sama persis dengan akun di e-meterai.co.id. Mengganti email meminta konfirmasi.' : 'Isi email yang sama persis dengan akun di e-meterai.co.id, lalu simpan. Bila berbeda, pembubuhan meterai akan gagal.' },
+    BANTUAN_T] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-TN-66') })));
 gambarKartu(); gambar();
 })();
 if (location.hash === '#salinan') location.replace('Backlog-IDDS-TN-PROSES-Prototype.html#arsip'); /* menu Salinan Akta dihapus: salinan kini di Arsip Akta (MoM no. 40) */

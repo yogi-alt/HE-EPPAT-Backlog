@@ -363,7 +363,10 @@ const UBAH = [
     lama:'Label dan pesan bercampur bahasa Inggris dan istilah developer, misalnya "Block di builder yang memakai ID master ini akan jadi broken" dan "Markup di-sanitize via DOMPurify".', ke:'posts', sorot:null },
   { kode:'IDDS-TN-41', judul:'Tema Tampilan: tiga preset tema IDDS (E-PPAT, INAgov, Default)',
     isi:'Preset Brand dibagi dua kelompok IDDS Radio. Kelompok teratas "Preset tema IDDS" berlencana "Sesuai IDDS" dan direkomendasikan. Isinya "E-PPAT (bawaan)" (hijau #3D6B5E, menggantikan "e-PPAT Teal"), "INAgov" (biru #0956C3, brand bawaan IDDS), dan "Default IDDS" (abu-abu netral bawaan IDDS). Ketiganya dikonfirmasi Peruri sebagai penyedia IDDS. Setiap kartu punya contoh warna dan keterangan kapan dipakai. Memilih preset langsung mengubah Pratinjau Langsung: wadah pratinjau memakai data-brand yang sama dengan aplikasi (eppat, inagov, atau tanpa data-brand untuk Default). Preset live lainnya tetap ada di kelompok "Warna lain (di luar brand IDDS)" dengan keterangan "Warna ini bukan brand resmi IDDS. Pastikan kontrasnya lulus sebelum dipakai." Crimson dan Burgundy diberi peringatan kecil karena IDDS memakai merah untuk galat dan aksi hapus. Label Navy Blue menjadi "Biru dongker". Mode Kustom, penanda belum disimpan, konfirmasi Batal, dan Toast simpan tetap.',
-    lama:'Sembilan preset warna bebas dalam satu daftar tanpa pembeda brand IDDS: Navy Dark, e-PPAT Teal (bawaan), Navy Blue ("Biru dongker standar IDDS"), Sky Blue, Deep Blue, Royal Blue, Crimson, Steel Blue, dan Burgundy. Label "Navy Blue: standar IDDS" tidak akurat karena standar IDDS adalah Default netral dan INAgov biru #0956C3. Merah (Crimson, Burgundy) dapat dipilih sebagai warna utama tanpa peringatan, padahal berisiko salah makna.', ke:'tema', sorot:'#presetTema' }
+    lama:'Sembilan preset warna bebas dalam satu daftar tanpa pembeda brand IDDS: Navy Dark, e-PPAT Teal (bawaan), Navy Blue ("Biru dongker standar IDDS"), Sky Blue, Deep Blue, Royal Blue, Crimson, Steel Blue, dan Burgundy. Label "Navy Blue: standar IDDS" tidak akurat karena standar IDDS adalah Default netral dan INAgov biru #0956C3. Merah (Crimson, Burgundy) dapat dipilih sebagai warna utama tanpa peringatan, padahal berisiko salah makna.', ke:'tema', sorot:'#presetTema' },
+  { kode:'IDDS-TN-64', versi:'v2', bukanHE:true, judul:'Tour guide Konten Situs',
+    isi:'Setiap layar Konten Situs memiliki tur singkat. Halaman Depan menyorot jumlah halaman, Impor tata letak, Buat halaman, kartu halaman, sakelar Tayang di situs, Ubah tata letak, dan menu aksi. Penyusun tata letak menyorot tombol Kembali, status simpan, Simpan tata letak, panel Komponen, kanvas, dan panel Properti. Tema Tampilan memiliki tur per tab (Brand & Warna, Sidebar & Navbar, Konten, Logo & Aset, Komponen) beserta Pratinjau Langsung dan tombol Simpan. Master Konten memiliki tur untuk Slider, Menu, dan Footer. Artikel & Halaman menyorot saringan jenis, Tambah artikel/halaman, dan daftar. Pustaka Media menyorot kotak unggah, kartu berkas, dan Salin URL. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka menu Konten Situs.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
 ];
 
 /* ---------------- data contoh ---------------- */
@@ -1362,9 +1365,79 @@ $('#bukaUbah').addEventListener('click', () => {
 function lihat(u) {
   const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke === 'tur') { pindah('landing', () => setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300)); return; }
   if (u.ke === 'builder') { pindah('landing', () => { bukaBuilder('landing', HAL[0].id); S.builder.pilih = S.builder.blok[2]?.id || null; segarBuilder(); sorot(); }); return; }
   if (u.ke === 'pilihMedia') { pindah('posts', () => dialogPost(POST[0])); return; }
   pindah(u.ke, sorot);
+}
+/* ---------------- tour guide Konten Situs (IDDS-TN-64, komponen tur-bersama) ---------------- */
+{
+  const lihatEl = s => [...document.querySelectorAll(s)].find(x => x.offsetParent);
+  /* bagian yang lebih tinggi dari ruang layar: sorot judul atau bagian atasnya */
+  const pas = (f, atas) => () => { const e = typeof f === 'function' ? f() : lihatEl(f); if (!e || e.getBoundingClientRect().height <= innerHeight - (matchMedia('(max-width:760px)').matches ? 420 : 300)) return e;
+    return (atas ? e.querySelector(atas) : [...e.querySelectorAll('h2, h3, legend, .eb, .b-kepala')].find(x => x.offsetParent)) || e; };
+  const sub = j => () => [...document.querySelectorAll('#halaman .sub-bagian')].find(x => x.offsetParent && x.querySelector('h3')?.textContent.trim() === j);
+  const PRATINJAU = [{ el:pas('#pratinjauTema'), j:'Pratinjau Langsung', t:'Setiap perubahan langsung tampil di sini. Seluruh aplikasi baru berubah setelah Anda menyimpan.' },
+    { el:'#temaSimpan', j:'Simpan atau batal', t:'Tombol Simpan aktif bila ada perubahan. Batal mengembalikan tema ke versi tersimpan.' }];
+  const TEMA_LANGKAH = {
+    brand:[{ el:pas(sub('Sumber warna')), j:'Sumber warna', t:'Pilih Preset bawaan sebagai titik awal, atau Kustom untuk mengatur warna sendiri.' },
+      { el:pas('#presetTema', 'h3'), j:'Preset brand', t:'Tiga preset bertanda Sesuai IDDS direkomendasikan. Warna lain perlu dicek kontrasnya sebelum dipakai.' },
+      { el:pas('#warnaKustom', 'h3'), j:'Warna kustom', t:'Atur warna utama, teks, latar, dan garis tepi. Lencana kontras menunjukkan apakah teks tetap mudah dibaca.' }],
+    chrome:[{ el:pas(sub('Warna Sidebar')), j:'Warna sidebar', t:'Atur warna menu samping. Kosongkan isian untuk mengikuti preset.' },
+      { el:pas(sub('Warna Navbar')), j:'Warna navbar', t:'Atur warna bilah atas aplikasi. Kosongkan isian untuk mengikuti preset.' },
+      { el:pas(sub('Warna Status')), j:'Warna status', t:'Atur warna penanda status. Kosongkan isian untuk mengikuti bawaan.' }],
+    konten:[{ el:pas(sub('Latar Konten')), j:'Latar konten', t:'Atur warna atau gambar latar area konten. Bila memakai gambar, atur juga mode, posisi, dan kepekatannya.' }],
+    aset:[{ el:() => lihatEl('#halaman .kartu-aset'), j:'Logo dan gambar', t:'Isi alamat gambar, atau tekan Pilih dari media untuk memakai berkas dari Pustaka Media. Gunakan PNG atau SVG berlatar transparan.' }],
+    komponen:[{ el:() => lihatEl('#halaman .sub-bagian .tab-wadah'), j:'Jenis komponen', t:'Pilih komponen yang ingin diatur, misalnya Tombol, Formulir, atau Halaman Masuk.' },
+      { el:() => lihatEl('#halaman .sub-bagian .f-tiga'), j:'Gaya komponen', t:'Atur bentuk dan gaya komponen terpilih. Hasilnya langsung tampil di Pratinjau Langsung.' },
+      { el:() => S.temaSub === 'login' && lihatEl('#halaman .sub-bagian .kartu-aset'), j:'Latar halaman masuk', t:'Pilih gambar latar untuk halaman masuk aplikasi kantor.' },
+      { el:pas(() => S.temaSub === 'login' && lihatEl('#halaman .sub-bagian .f-dua'), '.kartu-warna, .ina-text-field'), j:'Teks dan warna halaman masuk', t:'Atur warna kartu dan tombol, serta judul, label tombol, dan deskripsi halaman masuk.' }]
+  };
+  const NAMA_TAB = { brand:'Brand & Warna', chrome:'Sidebar & Navbar', konten:'Konten', aset:'Logo & Aset', komponen:'Komponen' };
+  const MASTER_LANGKAH = {
+    slider:[{ el:'#editorMaster .item-daftar, #editorMaster .kosong-kotak', j:'Item slider', t:'Setiap item berisi gambar, teks, dan tautan slide. Gunakan ikon pensil untuk mengubah dan ikon sampah untuk menghapus.' }],
+    footer:[{ el:'#editorMaster .item-daftar, #editorMaster .kosong-kotak', j:'Item footer', t:'Setiap item adalah satu kolom isi footer. Gunakan ikon pensil untuk mengubah dan ikon sampah untuk menghapus.' }],
+    menu:[{ el:pas('.menu-tambah', '.eb'), j:'Tambah item menu', t:'Tambahkan halaman, artikel, atau tautan kustom ke menu.' },
+      { el:pas(() => lihatEl('#halaman .pohon') || lihatEl('#editorMaster .kosong-kotak'), 'li'), j:'Struktur menu', t:'Atur urutan dengan tombol naik dan turun. Panah kanan menjadikan item sub-menu, panah kiri mengeluarkannya.' }]
+  };
+  const daftar = (window.TUR_ANTRE = window.TUR_ANTRE || []);
+  const tanda = usulan('IDDS-TN-64');
+  daftar.push({ kunci:'cms-landing', tanda, aktif:() => S.layar === 'landing' && !S.builder, langkah:() => [
+    { el:'#halaman .baris-atas', j:'Halaman situs', t:'Bagian ini menunjukkan jumlah halaman publik kantor Anda.' },
+    { el:'#imporZip', j:'Impor tata letak', t:'Impor halaman dari berkas ZIP yang pernah diekspor.' },
+    { el:'#buatHal', j:'Buat halaman', t:'Tekan untuk membuat halaman publik baru.' },
+    { el:pas('#daftarHalaman .kartu-baris'), j:'Kartu halaman', t:'Setiap kartu menampilkan nama, status tayang, alamat publik, dan jumlah blok halaman.' },
+    { el:() => lihatEl('#daftarHalaman [data-tayang]')?.closest('.ina-toggle, .toggle-baris, label') || lihatEl('#daftarHalaman [data-tayang]'), j:'Tayang di situs', t:'Nyalakan sakelar ini agar halaman tampil di situs publik. Perubahan status meminta konfirmasi.' },
+    { el:'#daftarHalaman [data-ubah-tl]', j:'Ubah tata letak', t:'Buka penyusun tata letak untuk mengatur blok halaman ini.' },
+    { el:'#daftarHalaman [data-menu-hal]', j:'Aksi lain', t:'Ubah info halaman, ekspor halaman ke ZIP, atau hapus halaman dari menu ini.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] });
+  daftar.push({ get kunci() { return 'cms-builder-' + (S.builder ? S.builder.asal : 'landing'); }, tanda, aktif:() => !!S.builder, langkah:() => [
+    { el:'#bKembali', j:'Kembali', t:'Kembali ke daftar. Bila ada perubahan yang belum disimpan, Anda diminta memilih dulu.' },
+    { el:'.b-alat .ina-badge', j:'Status simpan', t:'Lencana ini menunjukkan apakah tata letak sudah tersimpan.' },
+    { el:'#bSimpan', j:'Simpan tata letak', t:'Tombol aktif setelah ada perubahan. Tekan untuk menyimpan susunan blok.' },
+    { el:pas('.b-palet', '.eb'), j:'Komponen', t:S.builder && S.builder.asal !== 'landing' ? 'Klik komponen untuk menambah blok di akhir halaman. Navbar dan Footer otomatis diambil dari halaman beranda.' : 'Klik komponen untuk menambah blok di akhir halaman.' },
+    { el:pas('#kanvas', '.b-blok'), j:'Kanvas', t:'Susunan blok halaman tampil di sini. Pilih blok untuk mengubah propertinya, atau atur urutannya dengan tombol di kepala blok.' },
+    { el:pas('#panelProp', '.eb'), j:'Properti blok', t:'Isian blok yang dipilih tampil di sini. Perubahan langsung terlihat di kanvas.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] });
+  daftar.push({ get kunci() { return 'cms-tema-' + S.temaTab; }, tanda, aktif:() => S.layar === 'tema', langkah:() => [
+    { el:() => lihatEl('#halaman .tema .tab-wadah'), j:'Bagian tema', t:'Tema dibagi ke beberapa tab. Anda sedang membuka tab ' + NAMA_TAB[S.temaTab] + '.' },
+    ...TEMA_LANGKAH[S.temaTab], ...PRATINJAU, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] });
+  daftar.push({ get kunci() { return 'cms-master-' + S.masterTab; }, tanda, aktif:() => S.layar === 'master', langkah:() => [
+    { el:() => lihatEl('#halaman .tab-wadah'), j:'Jenis konten', t:'Pilih Slider, Menu, atau Footer. Setiap jenis dikelola di tabnya sendiri.' },
+    { el:() => lihatEl('#halaman .master-dua > section') && (lihatEl('#halaman .master-daftar') || lihatEl('#halaman .master-dua > section')), j:'Daftar ' + { slider:'slider', menu:'menu', footer:'footer' }[S.masterTab], t:'Pilih salah satu untuk mengelola itemnya di sebelah kanan.' },
+    { el:'#tambahMaster', j:'Tambah baru', t:'Buat ' + { slider:'slider', menu:'menu', footer:'footer' }[S.masterTab] + ' baru untuk dipakai di halaman publik.' },
+    { el:() => lihatEl('#editorMaster .baris-atas'), j:'Rincian', t:'Nama, status, kode, dan halaman yang memakainya tampil di sini.' },
+    { el:'#tambahItem', j:'Tambah item', t:'Tambahkan item baru ke daftar ini.' },
+    ...MASTER_LANGKAH[S.masterTab],
+    { el:'#hapusMaster', j:'Hapus', t:'Hapus beserta semua itemnya. Penghapusan selalu meminta konfirmasi.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] });
+  daftar.push({ kunci:'cms-posts', tanda, aktif:() => S.layar === 'posts' && !S.builder, langkah:() => [
+    { el:'#halaman .ina-button-group', j:'Saring jenis', t:'Tampilkan semua, hanya artikel dan berita, atau hanya halaman.' },
+    { el:'#tambahPost', j:'Tambah artikel atau halaman', t:'Tulis artikel, berita, atau halaman statis baru.' },
+    { el:() => lihatEl('#tabelPost thead') || lihatEl('#tabelPost tbody tr'), j:'Daftar artikel dan halaman', t:'Kolom Status menunjukkan apakah tulisan sudah terbit. Gunakan ikon pensil untuk mengubah dan ikon sampah untuk menghapus.' },
+    { el:'#tabelPost [data-tl-post]', j:'Ubah tata letak', t:'Halaman dapat disusun dengan blok seperti Halaman Depan.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] });
+  daftar.push({ kunci:'cms-media', tanda, aktif:() => S.layar === 'media', langkah:() => [
+    { el:'#zonaUnggah', j:'Unggah berkas', t:'Seret berkas ke kotak ini atau klik untuk memilih. Jenis dan ukuran berkas yang diterima tertulis di dalamnya.' },
+    { el:'#gridMedia .kartu-media', j:'Kartu berkas', t:'Setiap kartu menampilkan nama, jenis, dan ukuran berkas.' },
+    { el:'#gridMedia [data-salin-media]', j:'Salin URL', t:'Salin alamat berkas, lalu tempel di isian gambar atau tautan.' },
+    { el:'#gridMedia [data-hapus-media]', j:'Hapus berkas', t:'Dialog hapus menyebut tempat berkas itu dipakai sebelum Anda menghapusnya.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] });
 }
 $('#aturUlang').addEventListener('click', () => { MEDIA = contohMedia(); MASTER = contohMaster(); HAL = contohTemplate(); POST = contohPost(); TEMA = TEMA0(); TEMA_F = salinObj(TEMA); const l = S.layar; S = S0(); S.layar = l; gambar(); toast('Data contoh dikembalikan ke awal.'); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });

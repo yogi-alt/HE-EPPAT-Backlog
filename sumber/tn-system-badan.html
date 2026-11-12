@@ -243,7 +243,10 @@ const UBAH = [
     lama:'Istilah bercampur bahasa Inggris, misalnya "Peran \\ Module", "user dapat di-assign peran ini", "Ubah hak akses (permission)", dan "Buat role".', ke:'logs', sorot:null },
   { kode:'IDDS-TN-40', judul:'Menu samping: pola Sidebar IDDS, nama, dan urutan menu baru',
     isi:'Kerangka menu samping mengikuti pola Sidebar IDDS dengan warna brand E-PPAT tetap: label grup kecil berhuruf biasa dengan chevron buka/tutup, menu berupa ikon dan label dengan tanda arahkan dan tanda menu aktif, paling banyak dua tingkat (grup lalu menu), dan kartu profil pengguna (inisial, nama, peran) di bagian bawah dengan versi aplikasi di bawahnya. Tombol di samping logo menciutkan menu menjadi ikon saja; nama menu tampil sebagai tooltip dan tetap dibacakan pembaca layar. Pilihan ciut diingat peramban. Di layar sempit menu tetap berupa laci. Kartu profil kantor tetap tampil di atas menu. Menu samping disusun dalam lima grup berurutan. Layanan: Permohonan AJB. Akta: Dashboard Akta, Verifikasi Berkas, Penyusunan Akta, Penandatanganan Akta, Salinan Akta. Pengaturan Kantor: Profil Kantor, Daftar Pengguna, Peran & Izin, Log Aktivitas, Aktivasi e-Meterai. Pengaturan Aplikasi: Dashboard Sistem, Pengaturan. Konten Situs: Halaman Depan, Tema Tampilan, Master Konten, Artikel & Halaman, Pustaka Media. Judul halaman, remah, dan Bantuan mengikuti nama menu. Istilah di layar ikut dibakukan: Order menjadi Permohonan (kode ORD tetap), Drafting menjadi Penyusunan, E-Akta Wizard menjadi Penandatanganan Akta, User menjadi Pengguna, Logs menjadi Log Aktivitas, dan Materai menjadi Meterai. Minuta sebagai dokumen akta tetap disebut minuta.',
-    lama:'Menu samping gelap ala live dengan label grup berhuruf kapital, tanpa kartu profil pengguna, dan tanpa mode ciut. Menu dikelompokkan per modul teknis: System (Dasbor, Daftar User, Peran & Izin, Pengaturan, Logs), CMS (Landing Page, Setting Theme, Master Konten, Posts & Pages, Media Library), E-PPAT Module (Dashboard, Profil Kantor, Verifikasi Akta, Minuta, E-Akta Wizard, Akta Salinan, Aktivasi E-Materai), dan Layanan AJB (Order AJB).', ke:'dasbor', sorot:'#nav' }
+    lama:'Menu samping gelap ala live dengan label grup berhuruf kapital, tanpa kartu profil pengguna, dan tanpa mode ciut. Menu dikelompokkan per modul teknis: System (Dasbor, Daftar User, Peran & Izin, Pengaturan, Logs), CMS (Landing Page, Setting Theme, Master Konten, Posts & Pages, Media Library), E-PPAT Module (Dashboard, Profil Kantor, Verifikasi Akta, Minuta, E-Akta Wizard, Akta Salinan, Aktivasi E-Materai), dan Layanan AJB (Order AJB).', ke:'dasbor', sorot:'#nav' },
+  { kode:'IDDS-TN-63', versi:'v2', bukanHE:true, judul:'Tour guide Dashboard Sistem, Peran & Izin, Log Aktivitas, dan Pengaturan',
+    isi:'Saat pengguna pertama kali membuka setiap layar, tur singkat menjelaskan isinya. Dashboard Sistem: pengingat TERA, angka ringkasan, aksi cepat, aktivitas terbaru, dan Lihat semua log. Peran & Izin: Tambah peran, matriks izin, nama peran yang dapat diubah, sel izin, dan keterangan warna. Log Aktivitas: saringan jenis aktivitas dan pencarian, daftar aktivitas, dan halaman. Pengaturan: nama aplikasi, zona waktu, tagline, registrasi mandiri, mode pemeliharaan, serta status simpan dan tombol Simpan perubahan. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka Dashboard Sistem, Peran & Izin, Log Aktivitas, dan Pengaturan.', ke:'tur-dasbor', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
 ];
 
 /* ---------------- data contoh (nama sama dengan prototipe lain) ---------------- */
@@ -734,6 +737,7 @@ $('#bukaUbah').addEventListener('click', () => {
 function lihat(u) {
   const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke && u.ke.startsWith('tur-')) { pindah(u.ke.slice(4), () => setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300)); return; }
   if (u.ke === 'izin') { pindah('peran', () => dialogIzin(PERAN.find(r => r.code === 'ROLE_ASISTEN'), 'EPPAT_VERIFIKASI')); return; }
   if (u.ke === 'tambahPeran') { pindah('peran', () => dialogPeran(null)); return; }
   pindah(u.ke, sorot);
@@ -742,6 +746,36 @@ $('#aturUlang').addEventListener('click', () => { PERAN = contohPeran(); LOG = c
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+/* ---------------- tour guide per layar (IDDS-TN-63, komponen tur-bersama) ---------------- */
+const terlihatT = s => [...document.querySelectorAll(s)].find(x => x.offsetParent);
+const dekatT = (s, p) => () => { const e = terlihatT(s); return e && (e.closest(p) || e); };
+/* bagian yang lebih tinggi dari ruang tersisa: sorot judulnya saja agar kotak keterangan tidak menutupinya */
+const pasT = f => () => { const e = typeof f === 'function' ? f() : terlihatT(f); if (!e || e.getBoundingClientRect().height <= innerHeight - (matchMedia('(max-width:760px)').matches ? 360 : 300)) return e; return [...e.querySelectorAll('thead, h2, h3, .eb')].find(x => x.offsetParent) || e; };
+[
+  { kunci:'sys-dasbor', aktif:() => S.layar === 'dasbor', langkah:() => [
+    { el:'.ingat', j:'Pengingat TERA', t:'Stempel elektronik (TERA) kantor Anda belum didaftarkan. Tekan Daftar TERA untuk melengkapinya.' },
+    { el:'.kpi', j:'Ringkasan', t:'Angka ini menunjukkan jumlah pengguna, pengguna aktif, dan aktivitas terakhir di kantor Anda.' },
+    { el:pasT('#aksiCepat'), j:'Aksi cepat', t:'Pintasan untuk mengelola pengguna, mengatur peran dan izin, serta membuka pengaturan sistem.' },
+    { el:pasT('#aktTerbaru .akt'), j:'Aktivitas terbaru', t:'Aktivitas pengguna terakhir tampil di sini. Aktivitas yang gagal diberi lencana Gagal.' },
+    { el:'#aktTerbaru .lihat-semua', j:'Lihat semua log', t:'Buka Log Aktivitas untuk menelusuri seluruh riwayat aktivitas.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'sys-peran', aktif:() => S.layar === 'peran', langkah:() => [
+    { el:'#tambahPeran', j:'Tambah peran', t:'Tambahkan peran baru beserta fungsinya.' },
+    { el:pasT('#matriks'), j:'Matriks izin', t:'Baris berisi peran dan kolom berisi modul. Super Admin selalu memiliki akses penuh dan tidak dapat diubah.' },
+    { el:'[data-ubah-peran]', j:'Ubah peran', t:'Klik nama peran untuk mengubah peran itu.' },
+    { el:'.sel-izin', j:'Atur izin', t:'Klik sel untuk mengatur izin Lihat, Buat, Ubah, dan Hapus pada modul itu. Angka menunjukkan jumlah izin yang aktif.' },
+    { el:'.legenda', j:'Keterangan', t:'Arti tanda di sel: izin penuh, sebagian, atau tanpa izin. Izin berlaku setelah Anda menyimpannya.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'sys-logs', aktif:() => S.layar === 'logs', langkah:() => [
+    { el:'#saringLog', j:'Saring aktivitas', t:'Pilih jenis aktivitas atau cari kata di keterangan. Jumlah aktivitas yang cocok tampil di sebelahnya.' },
+    { el:() => terlihatT('.tabel-wadah thead') || terlihatT('.tabel-wadah tbody tr'), j:'Daftar aktivitas', t:'Setiap baris berisi waktu, pelaku, aktivitas, keterangan, status, dan alamat IP.' },
+    { el:'.halaman-bawah', j:'Halaman', t:'Daftar menampilkan 50 aktivitas per halaman.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'sys-pengaturan', aktif:() => S.layar === 'pengaturan', langkah:() => [
+    { el:'#f-aNama', j:'Nama aplikasi', t:'Nama ini tampil di aplikasi dan email. Isian ini wajib diisi.' },
+    { el:'#f-aZona', j:'Zona waktu', t:'Zona waktu dipakai untuk waktu di permohonan, log, dan email.' },
+    { el:'#f-aTagline', j:'Tagline', t:'Kalimat singkat yang tampil di bawah nama aplikasi.' },
+    { el:dekatT('[data-sakelar="allow_register"]', '.sakelar'), j:'Registrasi mandiri', t:'Saat aktif, calon pengguna dapat mendaftar sendiri ke kantor ini. Matikan untuk menutup pendaftaran.' },
+    { el:dekatT('[data-sakelar="maintenance_mode"]', '.sakelar'), j:'Mode pemeliharaan', t:'Saat aktif, pengguna selain admin melihat pesan pemeliharaan. Sebelum disimpan, Anda diminta mengonfirmasi.' },
+    { el:'.f-kaki', j:'Simpan perubahan', t:'Jumlah perubahan yang belum disimpan tampil di sini. Tekan Simpan perubahan untuk menerapkannya, atau Batal untuk mengembalikannya.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-TN-63') })));
 const awal = (location.hash || '').slice(1); if (RENDER[awal]) S.layar = awal;
 window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (RENDER[h] && h !== S.layar) pindah(h); });
 gambar();

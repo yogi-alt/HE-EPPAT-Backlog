@@ -1007,7 +1007,10 @@ const UBAH = [
     'Isi sama dengan live. Kunci Template belum menjelaskan dampak versinya.', 'tplKantor', '#aksiAtas'),
   U('IDDS-TN-60', 'Panduan di setiap layar',
     'Tombol Panduan di kanan judul membuka panel berisi langkah, istilah, pertanyaan umum, dan kontak dukungan untuk Renvooi, Arsip Akta, Template Akta, dan editor.',
-    'Tidak ada panduan di ketiga menu ini.', 'bantuan', null)
+    'Tidak ada panduan di ketiga menu ini.', 'bantuan', null),
+  { kode:'IDDS-TN-65', versi:'v2', bukanHE:true, judul:'Tour guide Renvooi, Arsip Akta, dan Template Akta',
+    isi:'Saat pengguna pertama kali membuka setiap layar, tur singkat menjelaskan isinya. Renvooi: pencarian, daftar akta dan status sesi, lalu di detail tombol Kembali, Informasi Akta, lembar naskah dan unduhan, catatan perbaikan, alasan perbaikan, Selesaikan renvooi atau Hapus sesi, dan Selesai untuk menutup akta. Arsip Akta: pencarian, saringan jenis akta, baris per halaman, dan daftar arsip, lalu di detail aksi dokumen, daftar dokumen, Renvooi, Riwayat Versi, dan Riwayat Pengiriman. Template Akta: pilihan layanan, Tambah template, keterangan template bawaan, dan daftar template, lalu di editor tombol Kembali, kode dan status, aksi simpan atau kunci, hal yang perlu diperiksa, bilah alat, daftar bagian, kertas naskah, dan panel editor. Template bawaan dan Preview Akta punya tur sendiri. Setiap tur muncul sekali, dapat dilewati, dan dapat diputar ulang dari Panduan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka Renvooi, Arsip Akta, Template Akta, dan editor template.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
 ];
 
 const ST = { PENGUMPULAN:{ l:'Pengumpulan Berkas', s:'Dibuat oleh Asisten / PPAT', b:'info', w:'var(--ina-guide-300,#84b4fb)', t:'Lengkapi berkas dan data para pihak', ik:'daftar' },
@@ -2270,7 +2273,8 @@ function lihat(u) {
      tplTambah:() => pindah('template', {}, () => { S.layanan = 'AJB'; gambar(); dialogTpl(null); sorot(); }),
      tplBawaan:() => pindah('pasal', { tpl:1 }, sorot),
      tplKantor:() => pindah('pasal', { tpl:kantor().id }, sorot),
-     bantuan:() => bukaBantuan() })[u.ke]();
+     bantuan:() => bukaBantuan(),
+     tur:() => pindah('renvooi', {}, () => setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 400)) })[u.ke]();
 }
 $('#pilLayar').addEventListener('click', e => { const b = e.target.closest('[data-pil]'); if (b) pindah(b.dataset.pil); });
 $('#aturUlang').addEventListener('click', () => {
@@ -2289,6 +2293,67 @@ $('#aturUlang').addEventListener('click', () => {
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+/* ---------------- tour guide (IDDS-TN-65, komponen tur-bersama) ---------------- */
+const terlihatTur = s => [...document.querySelectorAll(s)].find(x => x.getClientRects().length && getComputedStyle(x).visibility !== 'hidden');
+const hpTur = () => matchMedia('(max-width:760px)').matches;
+/* bagian yang lebih tinggi dari ruang layar: sorot bagian atasnya saja */
+const pasTur = (f, atas) => () => { const e = typeof f === 'function' ? f() : terlihatTur(f); if (!e || e.getBoundingClientRect().height <= innerHeight - (hpTur() ? 360 : 300)) return e; return (atas && e.querySelector(atas)) || e; };
+const tabelTur = id => () => hpTur() ? terlihatTur('#' + id + ' tbody tr') : terlihatTur('#' + id + ' thead');
+const BANTU_TUR = { el:'#bukaBantuan', j:'Panduan', t:'Langkah, istilah, pertanyaan umum, dan kontak dukungan ada di sini, termasuk tombol untuk memutar ulang tur ini.' };
+const TERA_TUR = { el:'.ingat', j:'Stempel TERA', t:'Pengingat ini tampil selama Stempel Elektronik (TERA) kantor belum didaftarkan.' };
+[
+  { kunci:'tnp-renvooi', aktif:() => S.layar === 'renvooi' && !S.rv && !S.tpl, langkah:() => [TERA_TUR,
+    { el:() => terlihatTur('#cariRv')?.closest('.ina-input-search'), j:'Cari akta', t:'Ketik kode permohonan, nama klien, atau nomor akta untuk menemukan akta.' },
+    { el:tabelTur('tabelRenvooi'), j:'Daftar akta', t:'Daftar ini memuat akta yang kedua rangkap minutanya sudah ditandatangani. Kolom Status menunjukkan keadaan renvooi: Belum dimulai, Berjalan, Selesai, atau Ditutup.' },
+    { el:() => terlihatTur('#tabelRenvooi .aksi-baris .ina-button'), j:'Buka renvooi', t:'Tekan Buka untuk mencatat perbaikan pada naskah akta.' }, BANTU_TUR] },
+  { get kunci() { return S.lembar ? 'tnp-rv-lembar' : 'tnp-rv-detail'; }, aktif:() => S.layar === 'renvooi' && !!S.rv && !S.tpl, langkah:() => [
+    { el:'#rvKembali', j:'Kembali', t:'Tekan untuk kembali ke daftar akta Renvooi.' },
+    { el:pasTur('#infoAkta', 'h2'), j:'Informasi akta', t:'Nomor, tanggal, klien, dan tanggal finalisasi akta yang diperbaiki tampil di sini.' },
+    { el:'#aksiRv', j:'Lembar naskah dan unduhan', t:'Buka lembar naskah untuk memblok teks yang perlu diperbaiki. Pratinjau salinan dan unduhan catatan juga ada di sini.' },
+    { el:pasTur('#kartuLembar', '.ket-lembar'), j:'Lembar naskah', t:'Blok teks pada lembar, lalu pilih jenis catatannya. Halaman, baris, dan teksnya tercatat otomatis tanpa mengubah naskah.' },
+    { el:'#rvRingkas', j:'Catatan perbaikan', t:'Jumlah catatan serta kata yang dicoret atau ditambah tampil di sini, diikuti kartu setiap catatan.' },
+    { el:'#wadahAlasan', j:'Alasan perbaikan', t:'Isi alasan setelah ada catatan baru. Alasan ini tampil di Riwayat Versi pada Arsip Akta.' },
+    { el:() => terlihatTur('#rvSelesaikan')?.closest('.rv-tutup'), j:'Selesaikan renvooi', t:'Selesaikan renvooi mengganti minuta dan salinan dengan naskah hasil perbaikan, lalu akta kembali ke Penandatanganan Akta. Hapus sesi membuang catatan yang belum diterapkan.' },
+    { el:'#rvLanjut', j:'Lanjut ke Penandatanganan Akta', t:'Tanda tangan, stempel, dan meterai akta ini diulang dari awal di Penandatanganan Akta.' },
+    { el:pasTur('#kartuSelesai', '.baris-atas'), j:'Tutup akta', t:'Tekan Selesai bila tidak ada perbaikan lagi. Setelah itu, Salinan Akta dibuat di Penandatanganan Akta tanpa catatan renvooi.' }, BANTU_TUR] },
+  { kunci:'tnp-arsip', aktif:() => S.layar === 'arsip' && !S.ar && !S.tpl, langkah:() => [TERA_TUR,
+    { el:() => terlihatTur('#cariAr')?.closest('.ina-input-search'), j:'Cari arsip', t:'Ketik nomor akta, kode permohonan, atau nama pihak.' },
+    { el:'#f-jenisAr', j:'Jenis akta', t:'Saring arsip menurut jenis akta.' },
+    { el:'#f-barisAr', j:'Baris per halaman', t:'Atur jumlah akta yang tampil di setiap halaman.' },
+    { el:tabelTur('tabelArsip'), j:'Daftar arsip', t:'Akta tercatat di arsip sejak difinalisasi. Tekan Buka untuk melihat dokumen dan riwayatnya.' }, BANTU_TUR] },
+  { kunci:'tnp-ar-detail', aktif:() => S.layar === 'arsip' && !!S.ar && !S.tpl, langkah:() => [
+    { el:'#arKembali', j:'Kembali', t:'Tekan untuk kembali ke daftar arsip.' },
+    { el:'#aksiArsip', j:'Aksi dokumen', t:'Buka berkas akta lengkap, unduh semua dokumen, atau kirim salinan akta lewat email.' },
+    { el:'#alasanKirim', j:'Kirim salinan belum tersedia', t:'Salinan dapat dikirim setelah akta selesai ditandatangani di Penandatanganan Akta.' },
+    { el:pasTur('#kartuDokumen', '.kep-kartu'), j:'Dokumen', t:'Minuta Lembar Pertama, Minuta Lembar Kedua, dan Salinan Akta tampil beserta status tanda tangannya. Lihat atau unduh setiap dokumen di sini.' },
+    { el:'#kartuArRv', j:'Renvooi', t:'Status renvooi akta ini. Perbaikan dicatat di menu Renvooi.' },
+    { el:pasTur('#kartuVersi', '.kep-kartu'), j:'Riwayat versi', t:'Versi minuta yang berlaku dan alasan perbaikannya tampil di sini.' },
+    { el:pasTur('#kartuKirimRw', '.kep-kartu'), j:'Riwayat pengiriman', t:'Setiap salinan yang dikirim tercatat beserta penerima dan kanalnya.' }, BANTU_TUR] },
+  { kunci:'tnp-template', aktif:() => S.layar === 'template' && !S.tpl, langkah:() => [TERA_TUR,
+    { el:'#f-pilihLayanan', j:'Layanan', t:'Pilih jenis akta untuk melihat template-nya.' },
+    { el:'#tambahTpl', j:'Tambah template', t:'Buat template kantor baru dari template yang ada atau dari berkas Word.' },
+    { el:'#tplInfo', j:'Template bawaan', t:'Template bawaan platform hanya dapat dilihat. Salin dulu untuk menyuntingnya.' },
+    { el:tabelTur('tabelTemplate'), j:'Daftar template', t:'Lencana menunjukkan asal template, template default, dan template yang nonaktif.' },
+    { el:() => terlihatTur('#tabelTemplate [data-salin-tpl]'), j:'Salin dan sunting', t:'Salin template bawaan menjadi template kantor yang dapat disunting.' },
+    { el:() => terlihatTur('#tabelTemplate [data-ubah-tpl]'), j:'Ubah template kantor', t:'Ubah nama, deskripsi, atau status template milik kantor.' }, BANTU_TUR] },
+  { get kunci() { return bacaSaja(tplAktif()) ? 'tnp-editor-bawaan' : 'tnp-editor'; }, aktif:() => !!S.tpl && !S.preview, langkah:() => { const baca = bacaSaja(tplAktif()); return [
+    { el:'#kembali', j:'Kembali ke daftar', t:'Tombol ini membuka kembali daftar template.' },
+    { el:'.dok-b1', j:'Kode dan status', t:baca ? 'Kode template dan lencana versinya tampil di sini.' : 'Kode template, lencana versinya, dan status simpan tampil di sini.' },
+    { el:'#aksiAtas', j:baca ? 'Pratinjau dan salin' : 'Simpan dan kunci', t:baca ? 'Pratinjau akta menampilkan naskah berisi data contoh. Tekan Salin & sunting untuk membuat template kantor.' : 'Simpan sebagai draft menyimpan naskah tanpa mengubah versi yang dipakai permohonan. Kunci template menetapkan versi baru setelah semua pemeriksaan lolos.' },
+    { el:'#pitaBaca', j:'Hanya dapat dilihat', t:'Template bawaan dipakai semua kantor, sehingga isinya terkunci.' },
+    { el:'#pitaPeriksa .pita', j:'Yang perlu diperiksa', t:'Daftar ini menyebut hal yang harus dibereskan sebelum template dapat dikunci.' },
+    { el:'#bilahAlat', j:'Bilah alat', t:'Format teks, sisipkan variabel atau syarat, dan atur spasi naskah dari sini.' },
+    { el:pasTur('#navDok', '.ina-tab-horizontal'), j:'Daftar bagian', t:baca ? 'Pilih pasal atau catatan untuk melihat isinya.' : 'Pilih pasal atau catatan untuk menyuntingnya. Tambah pasal, catatan, atau impor dari Word ada di bagian bawah.' },
+    { el:'.bar-hp', j:'Bagian dan panel', t:'Di layar sempit, daftar bagian dan panel editor dibuka dari tombol ini.' },
+    { el:pasTur('#kanvas', '.kanvas-isi'), j:'Kertas naskah', t:baca ? 'Naskah tampil seperti hasil cetak.' : 'Naskah tampil seperti hasil cetak. Klik bagian di kertas untuk menyuntingnya.' },
+    { el:() => terlihatTur('#panelDok .kol-kepala'), j:'Panel editor', t:'Tab Bagian, Variabel, Pengaturan Halaman, dan Skenario mengatur bagian yang dipilih, daftar variabel, ukuran kertas, dan data contoh.' },
+    { el:'#kakiKanvas.kaki-kanvas', j:'Simpan bagian', t:'Status simpan bagian yang sedang disunting tampil di sini beserta tombol Batal dan Simpan.' }, BANTU_TUR]; } },
+  { kunci:'tnp-preview', aktif:() => !!S.tpl && !!S.preview, langkah:() => [
+    { el:'#pratinjauAkta .pr-kepala', j:'Preview akta', t:'Akta tampil berisi data contoh dari skenario. Nomor halaman yang sedang dilihat tampil di kanan.' },
+    { el:() => terlihatTur('#pratinjauAkta [data-zoom]')?.parentElement, j:'Perbesar dan perkecil', t:'Atur ukuran tampilan kertas dengan tombol minus dan plus.' },
+    { el:'#unduhPdf', j:'Download PDF', t:'Unduh pratinjau akta sebagai berkas PDF.' },
+    { el:'#tutupPreview', j:'Kembali ke editor', t:'Tekan untuk kembali menyunting template.' }, BANTU_TUR] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-TN-65') })));
 const awal = (location.hash || '').slice(1); if (LAYAR.some(l => l[0] === awal)) S.layar = awal; else history.replaceState(null, '', '#renvooi');
 window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (LAYAR.some(l => l[0] === h) && (h !== S.layar || S.tpl)) pindah(h); });
 gambarKartu(); gambar();
