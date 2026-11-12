@@ -8,22 +8,22 @@
       "judul": "Pemasangan dan token warna",
       "isi": [
         {
-          "topik": "Urutan pemasangan CSS",
-          "aturan": "Muat CSS IDDS lebih dulu, lalu `eppat.css`. Pasang atribut `data-brand=\"eppat\"` pada elemen `<html>`. Komponen IDDS yang sudah dipakai live (`ina-button`, `ina-text-field`) langsung berwarna hijau E-PPAT.",
-          "contoh": "import '@idds/react/index.css';          // atau @idds/styles/dist/index.css\nimport './brand-eppat-idds/eppat.css';   // SETELAH CSS IDDS\n\ndocument.documentElement.setAttribute('data-brand', 'eppat');\n\n<!-- atau langsung di index.html -->\n<html lang=\"id\" data-brand=\"eppat\" data-theme=\"light\">",
+          "topik": "Pemasangan sesuai panduan resmi IDDS",
+          "aturan": "Ikuti panduan resmi IDDS untuk React (design.inadigital.go.id › Pengembang › React): pasang `@idds/react`, lalu impor `@idds/react/index.css` di entry point sebelum komponen atau CSS lain. Tambahan E-PPAT hanya satu: muat `eppat.css` setelah CSS IDDS dan pasang `data-brand=\"eppat\"` pada `<html>`. Komponen IDDS yang sudah dipakai live (`ina-button`, `ina-text-field`) langsung berwarna hijau E-PPAT.",
+          "contoh": "npm install @idds/react\nnpm install @tabler/icons-react tailwindcss @tailwindcss/vite\n\n// entry point: CSS IDDS lebih dulu\nimport '@idds/react/index.css';\nimport './brand-eppat-idds/eppat.css';   // SETELAH CSS IDDS\ndocument.documentElement.setAttribute('data-brand', 'eppat');\ndocument.documentElement.setAttribute('lang', 'id');",
           "acuan": "brand-eppat-idds/README.md; prototipe/Brand-Mode-EPPAT-IDDS.html",
           "kode": "HE-UMUM-01 / IDDS-TN-01"
         },
         {
           "topik": "Jangan memakai setBrandTheme untuk E-PPAT",
-          "aturan": "`setBrandTheme()` hanya menerima brand bawaan IDDS (inagov, inaku, bgn, bkn, lan, panrb, default). Jangan memanggilnya setelah `data-brand` terpasang karena fungsi itu menimpa atribut tersebut. Bila tidak dapat memuat berkas CSS tambahan, pakai `setCustomTheme(eppatTheme)`; cara ini tidak membawa penyesuaian mode gelap dan kontras.",
+          "aturan": "Menurut panduan resmi, `setBrandTheme()` hanya menerima brand bawaan IDDS (inagov, panrb, bkn, lan, default). E-PPAT bukan brand bawaan, jadi jangan memanggilnya setelah `data-brand` terpasang karena fungsi itu menimpa atribut tersebut. Bila tidak dapat memuat berkas CSS tambahan, pakai `setCustomTheme(eppatTheme)`; cara ini tidak membawa penyesuaian mode gelap dan kontras.",
           "contoh": "import { setCustomTheme } from '@idds/react';\nimport { eppatTheme } from './brand-eppat-idds/eppat-theme';\nsetCustomTheme(eppatTheme);",
           "acuan": "brand-eppat-idds/README.md",
           "kode": "HE-UMUM-01"
         },
         {
           "topik": "Tailwind",
-          "aturan": "Aplikasi live memakai Tailwind. Impor token E-PPAT agar kelas utilitas memakai warna yang sama dengan komponen IDDS. Jangan menulis kode warna heksadesimal langsung di kelas Tailwind; pakai token.",
+          "aturan": "Ikuti panduan resmi IDDS untuk Tailwind v4: impor `idds.css`, lalu berkas brand. E-PPAT memakai `brand-eppat-idds/tailwind/eppat.css` di tempat brand bawaan (misalnya `panrb.css`). Pakai kelas token seperti `text-content-primary` dan `bg-primary-50`; jangan menulis kode warna heksadesimal di kelas Tailwind.",
           "contoh": "@import 'tailwindcss';\n@import '@idds/styles/tailwind/css/idds.css';\n@import './brand-eppat-idds/tailwind/eppat.css';   /* Tailwind v4 */\n\n/* Tailwind v3: brand-eppat-idds/tailwind/eppat.js */",
           "acuan": "brand-eppat-idds/README.md",
           "kode": ""
@@ -37,8 +37,8 @@
         },
         {
           "topik": "Mode gelap",
-          "aturan": "Mode gelap aktif dengan `data-theme=\"dark\"` bersama `data-brand=\"eppat\"`. Di mode gelap warna utama berganti ke `--ina-primary-400` (#4E7C6F) dan sidebar ke #141C1F. Prototipe backlog hanya memakai mode terang. Deskripsi Alert IDDS 1.6.38 tampak pudar di mode gelap; ini perilaku CSS IDDS, bukan tema E-PPAT.",
-          "contoh": "<html lang=\"id\" data-brand=\"eppat\" data-theme=\"dark\">",
+          "aturan": "Aktifkan mode gelap dengan `setThemeMode('dark')` dari `@idds/react`, sesuai panduan resmi. Fungsi ini memasang `data-theme=\"dark\"` pada `<html>`, sedangkan `data-brand=\"eppat\"` tetap terpasang. Di mode gelap warna utama berganti ke `--ina-primary-400` (#4E7C6F) dan sidebar ke #141C1F. Prototipe backlog hanya memakai mode terang. Deskripsi Alert IDDS 1.6.38 tampak pudar di mode gelap; ini perilaku CSS IDDS, bukan tema E-PPAT.",
+          "contoh": "import { setThemeMode } from '@idds/react';\nsetThemeMode('dark');   // <html data-brand=\"eppat\" data-theme=\"dark\">",
           "acuan": "prototipe/Brand-Mode-EPPAT-IDDS.html › sakelar Terang / Gelap",
           "kode": ""
         },
@@ -71,9 +71,9 @@
           "kode": "IDDS-TN-20"
         },
         {
-          "topik": "Keputusan terbuka: warna lencana status",
-          "aturan": "Di live, warna lencana status diatur lewat CMS › Tema Tampilan (warna status). Prototipe IDDS memakai varian sentimen IDDS. Tim perlu memutuskan sumber warna mana yang dipakai sebelum lencana diganti.",
-          "contoh": "Keputusan tim: CMS › Tema Tampilan atau token sentimen IDDS.",
+          "topik": "Keputusan: warna lencana status ikut IDDS",
+          "aturan": "Keputusan 12 Nov 2026: lencana status memakai varian sentimen IDDS (neutral, info, success, warning, error), sama dengan seri Perdana Niaga. Isian Warna status di CMS › Tema Tampilan tidak lagi mengatur warna lencana. Status yang sama memakai varian yang sama di semua layar dan di grafik Dashboard.",
+          "contoh": "Selesai = success, Ditangguhkan = warning, Dicabut = error, Belum registrasi = neutral (lihat tabel di 3.13); warnanya tidak berubah walaupun Tema Tampilan diubah.",
           "acuan": "prototipe/Backlog-IDDS-TN-CMS-Prototype.html#tema; prototipe/Brand-Mode-EPPAT-IDDS.html",
           "kode": "HE-UMUM-01"
         }
@@ -85,8 +85,8 @@
       "isi": [
         {
           "topik": "Sidebar",
-          "aturan": "Sidebar selebar 240 px dan tetap terlihat saat halaman digulir. Latarnya `--ina-eppat-sidebar-bg`. Menu dibagi menjadi grup System, CMS, Akta, dan Layanan AJB. Judul grup adalah tombol dengan `aria-expanded`. Menu memakai ikon garis 16 px dengan `currentColor`. Menu aktif berlatar `--ina-eppat-sidebar-active` dan berteks putih tebal. Nama menu sidebar jangan diubah tanpa keputusan tim.",
-          "contoh": "<aside class=\"sidebar\">\n  <div class=\"brand\"><img src=\"logo.png\" alt=\"E-PPAT\"></div>\n  <!-- kartu kantor, lihat topik berikutnya -->\n  <nav>\n    <button class=\"grp\" aria-expanded=\"true\">System</button>\n    <div class=\"items\">\n      <a href=\"/dasbor\" class=\"ina-button ina-button--link ina-button--md nav-item on\" aria-current=\"page\">\n        <svg aria-hidden=\"true\">…</svg><span>Dasbor</span></a>\n    </div>\n  </nav>\n</aside>",
+          "aturan": "Sidebar selebar 240 px dan tetap terlihat saat halaman digulir. Latarnya `--ina-eppat-sidebar-bg`. Menu tenant: Tugas Saya (tanpa judul grup), lalu grup Monitoring, Layanan, Akta, Pengaturan Kantor, Pengaturan Aplikasi, dan Konten Situs. Judul grup adalah tombol dengan `aria-expanded`. Menu memakai ikon garis 16 px dengan `currentColor`. Menu aktif berlatar `--ina-eppat-sidebar-active` dan berteks putih tebal. Nama menu sidebar jangan diubah tanpa keputusan tim.",
+          "contoh": "<aside class=\"sidebar\">\n  <div class=\"brand\"><img src=\"logo.png\" alt=\"E-PPAT\"></div>\n  <!-- kartu kantor, lihat topik berikutnya -->\n  <nav>\n    <button class=\"grp\" aria-expanded=\"true\">Pengaturan Aplikasi</button>\n    <div class=\"items\">\n      <a href=\"/dasbor\" class=\"ina-button ina-button--link ina-button--md nav-item on\" aria-current=\"page\">\n        <svg aria-hidden=\"true\">…</svg><span>Dashboard Sistem</span></a>\n    </div>\n  </nav>\n</aside>",
           "acuan": "prototipe/Backlog-HE-ORDER-Prototype.html › sidebar; prototipe/Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor",
           "kode": "HE-UMUM-01"
         },
@@ -114,7 +114,7 @@
         {
           "topik": "Judul halaman dan subjudul",
           "aturan": "Satu halaman hanya punya satu H1. Di bawahnya ada subjudul berupa satu kalimat SPOK yang menyebut hal yang dapat dilakukan pengguna di halaman itu, dan diakhiri titik. Jangan menulis subjudul berupa daftar kata atau penjelasan teknis.",
-          "contoh": "Benar: Kelola permintaan Akta Jual Beli, mulai dari pengajuan klien sampai akta selesai.\nBenar: Pantau jumlah user, aktivitas terbaru, dan pengingat penting kantor Anda.\nSalah: Manajemen order AJB (CRUD)\nSalah: RBAC per modul",
+          "contoh": "Benar: Kelola permintaan Akta Jual Beli, mulai dari pengajuan klien sampai akta selesai.\nBenar: Pantau jumlah pengguna, aktivitas terbaru, dan pengingat penting kantor Anda.\nSalah: Manajemen order AJB (CRUD)\nSalah: RBAC per modul",
           "acuan": "prototipe/Backlog-HE-ORDER-Prototype.html › judul halaman; prototipe/Backlog-IDDS-TN-SYSTEM-Prototype.html#dasbor",
           "kode": "IDDS-TN-16"
         },
@@ -231,7 +231,7 @@
         },
         {
           "topik": "Toggle",
-          "aturan": "Pakai Toggle untuk menyalakan atau mematikan fitur, bukan kotak centang. Toggle memakai `role=\"switch\"`, `aria-checked`, dan dapat dioperasikan dengan Spasi atau Enter. Bila mematikan fitur berdampak bagi user lain (misalnya menonaktifkan layanan akta atau mode pemeliharaan), minta konfirmasi lebih dulu.",
+          "aturan": "Pakai Toggle untuk menyalakan atau mematikan fitur, bukan kotak centang. Toggle memakai `role=\"switch\"`, `aria-checked`, dan dapat dioperasikan dengan Spasi atau Enter. Bila mematikan fitur berdampak bagi pengguna lain (misalnya menonaktifkan layanan akta atau mode pemeliharaan), minta konfirmasi lebih dulu.",
           "contoh": "<span class=\"ina-toggle ina-toggle--size-sm ina-toggle--checked\" role=\"switch\" aria-checked=\"true\" tabindex=\"0\" id=\"aDaftar\" aria-label=\"Registrasi mandiri\">\n  <span class=\"ina-toggle__track ina-toggle__track--checked\"><span class=\"ina-toggle__thumb ina-toggle__thumb--checked\"></span></span>\n</span>",
           "acuan": "prototipe/Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan; prototipe/Backlog-IDDS-TN-EPPAT-Prototype.html#profil › Layanan Akta",
           "kode": "IDDS-TN-13 / IDDS-TN-31"
@@ -412,7 +412,7 @@
         },
         {
           "topik": "Kurangi langkah berulang",
-          "aturan": "Sediakan jalan pintas untuk pekerjaan berulang. Contoh: \"Simpan & tambah lagi\" di dialog Tambah Para Pihak, aksi massal Aktifkan/Tangguhkan untuk user terpilih, dan impor user dari berkas.",
+          "aturan": "Sediakan jalan pintas untuk pekerjaan berulang. Contoh: \"Simpan & tambah lagi\" di dialog Tambah Para Pihak, aksi massal Aktifkan/Tangguhkan untuk pengguna terpilih, dan impor pengguna dari berkas.",
           "contoh": "Tombol dialog: Batal · Simpan & tambah lagi · Simpan",
           "acuan": "prototipe/Backlog-HE-ORDER-Prototype.html › Tambah Para Pihak; prototipe/Backlog-HE-USER-Prototype.html",
           "kode": "HE-ORDER-03 / HE-USER-02 / HE-UMUM-03"
@@ -420,7 +420,7 @@
         {
           "topik": "Bantuan di setiap halaman",
           "aturan": "Setiap halaman punya tombol Bantuan (lihat bagian 2). Istilah teknis di formulir (CA, eKYC, TERA, NJOP, renvoi) dijelaskan dengan teks bantuan atau Tooltip di dekat istilahnya.",
-          "contoh": "Status Sertifikat — Status sertifikat elektronik (CA) dari Peruri. Sertifikat elektronik aktif diperlukan agar user dapat menandatangani akta secara elektronik.",
+          "contoh": "Status Sertifikat — Status sertifikat elektronik (CA) dari Peruri. Sertifikat elektronik aktif diperlukan agar pengguna dapat menandatangani akta secara elektronik.",
           "acuan": "prototipe/Backlog-HE-USER-Prototype.html › kolom Status Sertifikat; prototipe/Backlog-HE-CA-Prototype.html; prototipe/Backlog-HE-VERIF-Prototype.html",
           "kode": "HE-UMUM-02 / HE-USER-01 / HE-VERIF-01 / HE-CA-03"
         }
@@ -507,9 +507,9 @@
           "kode": "HE-USER-03 / IDDS-TN-26"
         },
         {
-          "topik": "User dan calon pengguna",
-          "aturan": "Pakai \"user\" untuk akun yang sudah terdaftar di aplikasi, sesuai nama menu Daftar Pengguna. Pakai \"calon pengguna\" untuk orang yang belum punya akun, misalnya pada pendaftaran mandiri. Pakai \"pengguna\" dalam kalimat umum tentang orang yang memakai layar.",
-          "contoh": "Peran ini dapat diberikan kepada user.\nSaat aktif, calon pengguna dapat mendaftar sendiri ke kantor PPAT ini melalui halaman registrasi.",
+          "topik": "Pengguna dan calon pengguna",
+          "aturan": "Pakai \"pengguna\" untuk akun yang sudah terdaftar di aplikasi, sesuai nama menu Daftar Pengguna, dan untuk kalimat umum tentang orang yang memakai layar. Pakai \"calon pengguna\" untuk orang yang belum punya akun, misalnya pada pendaftaran mandiri. Jangan memakai \"user\" di layar.",
+          "contoh": "Peran ini dapat diberikan kepada pengguna.\nSaat aktif, calon pengguna dapat mendaftar sendiri ke kantor PPAT ini melalui halaman registrasi.",
           "acuan": "prototipe/Backlog-IDDS-TN-SYSTEM-Prototype.html#peran; prototipe/Backlog-IDDS-TN-SYSTEM-Prototype.html#pengaturan",
           "kode": "IDDS-TN-16"
         },
@@ -632,7 +632,7 @@
         },
         {
           "topik": "Daftar Pengguna",
-          "aturan": "Salin Action Dropdown per baris, pilih banyak dan aksi massal, Badge status akun dan status CA dengan penjelasan, Password Input dengan daftar syarat, dan File Upload untuk impor user.",
+          "aturan": "Salin Action Dropdown per baris, pilih banyak dan aksi massal, Badge status akun dan status CA dengan penjelasan, Password Input dengan daftar syarat, dan File Upload untuk impor pengguna.",
           "contoh": "Pola: aksi massal, menu aksi, impor berkas",
           "acuan": "prototipe/Backlog-HE-USER-Prototype.html",
           "kode": "HE-USER-01 s.d. 04 / HE-UMUM-03"
