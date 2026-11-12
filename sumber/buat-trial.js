@@ -69,7 +69,7 @@ g("data-ke=\"${k === 'dasbor' ? (DB.aktif ?", "data-ke=\"${k === 'dasbor' ? (DB.
 
 /* sisipan, atur ulang, hash */
 g('/* ---------------- protobar & daftar perubahan ---------------- */', baca('trial-sisip.js') + '\n/* ---------------- protobar & daftar perubahan ---------------- */');
-g("if (u.ke === 'bantuan') { bukaBantuan(); return; }", "if (u.ke === 'bantuan') { bukaBantuan(); return; }\n  if (u.ke === 'tr-aktif') ke('trial');\n  if (u.ke === 'tr-ent') ke('enterprise');\n  if (u.ke === 'tr-riwayat') { siapkan('enterprise'); ke('riwayat'); }\n  if (u.ke === 'tr-masuk') { siapkan('trial'); S.balik = 'dasbor'; S.email = S.email || 'ppat.baru@contoh.id'; ke('masuk'); }");
+g("if (u.ke === 'bantuan') { bukaBantuan(); return; }", "if (u.ke === 'bantuan') { bukaBantuan(); return; }\n  if (u.ke === 'tr-tur') { ke('trial'); setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 400); return; }\n  if (u.ke === 'tr-aktif') ke('trial');\n  if (u.ke === 'tr-ent') ke('enterprise');\n  if (u.ke === 'tr-riwayat') { siapkan('enterprise'); ke('riwayat'); }\n  if (u.ke === 'tr-masuk') { siapkan('trial'); S.balik = 'dasbor'; S.email = S.email || 'ppat.baru@contoh.id'; ke('masuk'); }");
 g("DB = DB0(); ke('daftar');", "DB = DB0(); hapusTrial(); ke('daftar');");
 g("{ const h = location.hash.slice(1); if (LAYAR.some(([k]) => k === h)) S.layar = h; }", "muatTrial(); bukaHash(location.hash.slice(1));");
 g("window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (h !== S.layar && LAYAR.some(([k]) => k === h)) ke(h); });", "window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (h !== S.layar && (h === 'berlangganan' || LAYAR.some(([k]) => k === h))) { bukaHash(h); gambar(); } });");

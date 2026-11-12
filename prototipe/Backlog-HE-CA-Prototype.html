@@ -2675,7 +2675,9 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
     const u = t.tanda || '';
     isi.insertAdjacentHTML('afterbegin', `<p class="tur-bantuan">${tombol(svg('<path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />') + 'Mulai tur halaman ini', 'secondary', 'data-mulai-tur')}${u}</p>`);
   }
-  new MutationObserver(() => { if (!DAFTAR.length) return; sisipBantuan(); if (T.aktif) letak(); else cek(); }).observe(document.body, { childList:true, subtree:true });
+  /* layar berganti saat tur berjalan (mis. tombol Kembali peramban): tur ditutup tanpa ditandai sudah dilihat */
+  const masihBerlaku = () => { try { return !document.querySelector('.sesi-tolak') && T.aktif.aktif(); } catch (e) { return false; } };
+  new MutationObserver(() => { if (!DAFTAR.length) return; sisipBantuan(); if (T.aktif) { if (masihBerlaku()) letak(); else { T.aktif = null; $('#tur')?.remove(); cek(); } } else cek(); }).observe(document.body, { childList:true, subtree:true });
   document.addEventListener('click', e => {
     if (!DAFTAR.length) return;
     const b = e.target.closest('#tur [data-tur]');

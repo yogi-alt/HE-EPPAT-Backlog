@@ -414,6 +414,9 @@ const UBAH = [
   { kode:'HE-OB-06', versi:'v2', bukanHE:true, judul:'Tour guide di Dasbor pelanggan',
     isi:'Saat pelanggan pertama kali masuk Dasbor, tur singkat menyorot Progres Registrasi, Langkah berikutnya, Pilih Paket, tombol Cek progres registrasi, dan tombol Bantuan. Bentuk dan perilakunya sama dengan tur di Permohonan AJB: bagian lain diredupkan, kotak keterangan berisi posisi langkah, Sebelumnya, Lanjut, dan Lewati tur, muncul sekali per pengguna, dapat ditutup dengan Esc, dan dapat diputar ulang dari Bantuan. Tur untuk Super Admin dan Operator menyusul.',
     lama:'Tidak ada panduan saat pelanggan pertama kali masuk Dasbor.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
+  { kode:'HE-OB-07', versi:'v2', bukanHE:true, judul:'Tour guide Registrasi, Masuk, Pembayaran, dan Riwayat Transaksi',
+    isi:'Tur singkat juga muncul di layar lain yang dilalui pelanggan. Registrasi: langkah pendaftaran, isi otomatis dari KTP, data diri, email, syarat kata sandi, ID PPAT, alamat aplikasi, persetujuan, dan tombol Daftar sekarang. Masuk: isian email dan kata sandi, Lupa kata sandi, dan Daftar sekarang. Verifikasi dua langkah: pilihan Aplikasi Authenticator atau Email OTP, lalu isian kode, masa berlaku, dan kirim ulang. Pembayaran: ringkasan pesanan, ganti paket, metode pembayaran, lalu nomor Virtual Account, batas waktu, dan cek status pembayaran. Setelah lunas: email aktivasi dan Cek progres. Selesai: aplikasi siap. Riwayat Transaksi: daftar tagihan. Setiap layar dan keadaan punya tur sendiri yang muncul sekali, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tur hanya ada di Dasbor saat memilih paket. Layar Registrasi, Masuk, Verifikasi dua langkah, Pembayaran, Setelah lunas, Selesai, dan Riwayat Transaksi tidak memiliki panduan.', ke:'tur-daftar', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-OB-01', judul:'Dashboard Onboarding: hasil cek status jelas dan dapat ditutup',
     isi:'"Check Status Terbaru" diganti menjadi "Cek progres registrasi", sama dengan nama stepper "Progres Registrasi Anda" (masukan Peruri 4 Nov 2026). Tombol ini tidak ditampilkan lagi setelah semua tahap di stepper selesai (masukan Peruri 4 Nov 2026). Hasilnya ditampilkan sebagai IDDS Toast yang dapat ditutup, berisi jam pengecekan dan tahap saat ini (mis. "Belum ada perubahan · Tahap: Proses Pembayaran"). Bila ada perubahan, tahap yang berubah disorot di stepper.',
     lama:'Setiap kali status dicek, muncul dialog besar "Status Diperbarui — Status registrasi terbaru sudah dimuat." tanpa tombol tutup, walaupun tidak ada perubahan apa pun (skor User Control Dashboard: 20).', ke:'db-cek', sorot:'#cekStatus', sumber:'Laporan HE UX Metric Lab, Highlight #8 (skor 71,5; PDF hlm. 15)' },
@@ -798,7 +801,60 @@ function langkahTur() {
   ].filter(l => l.el());
 }
 /* mesin tur memakai komponen bersama sumber/tur-bersama.html; tanda sudah dilihat per email pelanggan yang mendaftar */
-(window.TUR_ANTRE = window.TUR_ANTRE || []).push({ kunci:'ob-dasbor', email:() => S.email || AKUN.email, aktif:() => S.layar === 'dasbor', langkah:langkahTur, tanda:usulan('HE-OB-06') });
+(window.TUR_ANTRE = window.TUR_ANTRE || []).push({ kunci:'ob-dasbor', email:() => S.email || AKUN.email, aktif:() => S.layar === 'dasbor' && !DB.trial, langkah:langkahTur, tanda:usulan('HE-OB-06') });
+/* tur layar lain yang dilalui pelanggan (HE-OB-07); setiap layar dan keadaan pembayaran punya tur sendiri */
+const kartuH3 = t => () => [...document.querySelectorAll('#halamanApp h3, #halaman h3')].find(h => h.offsetParent && h.textContent.trim().startsWith(t))?.closest('section, .ina-card');
+const dekat = (s, p) => () => { const e = terlihat(s); return e && (e.closest(p) || e); };
+/* kartu yang lebih tinggi dari ruang tersisa (layar sempit): sorot judulnya saja agar kotak keterangan tidak menutupinya */
+const pas = f => () => { const e = typeof f === 'function' ? f() : terlihat(f); if (!e || e.getBoundingClientRect().height <= innerHeight - (matchMedia('(max-width:760px)').matches ? 360 : 300)) return e; return [...e.querySelectorAll('h3, b, .kep')].find(x => x.offsetParent) || e; };
+[
+  { kunci:'ob-daftar', aktif:() => S.layar === 'daftar', langkah:() => [
+    { el:'#alurDaftar', j:'Langkah pendaftaran', t:'Pendaftaran terdiri atas dua langkah: isi formulir ini, lalu buka tautan verifikasi di email. Setelah itu Anda dapat masuk.' },
+    { el:'#ocrKtp', j:'Isi otomatis dari KTP', t:'Unggah foto KTP elektronik agar nama dan NIK terisi otomatis. Langkah ini opsional; periksa kembali hasilnya.' },
+    { el:'#f-rNama', j:'Data diri', t:'Isi nama lengkap dan NIK sesuai KTP elektronik.' },
+    { el:'#f-rEmail', j:'Email', t:'Tautan verifikasi dan informasi akun dikirim ke email ini.' },
+    { el:dekat('#syaratPw', '.lebar'), j:'Syarat kata sandi', t:'Setiap syarat langsung dicentang saat terpenuhi. Ketik ulang kata sandi yang sama di isian Ulangi Kata Sandi.' },
+    { el:'#f-rIdPpat', j:'ID PPAT', t:'Isi nomor SK PPAT yang terdaftar di ATR/BPN.' },
+    { el:dekat('#rTenant', '.lebar'), j:'Alamat aplikasi', t:'Alamat ini menjadi alamat aplikasi kantor Anda. Pakai huruf kecil, angka, dan tanda hubung.' },
+    { el:dekat('#rSetuju', 'label'), j:'Persetujuan', t:'Centang persetujuan syarat dan ketentuan sebelum mendaftar.' },
+    { el:'#kirimDaftar', j:'Daftar sekarang', t:'Tekan setelah semua isian wajib terisi. Isian yang salah ditandai dengan pesan di bawahnya.' }, { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'ob-masuk', aktif:() => S.layar === 'masuk', langkah:() => [
+    { el:'#isianMasuk', j:'Email dan kata sandi', t:'Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran.' },
+    { el:'.lupa', j:'Lupa kata sandi', t:'Tekan bila lupa kata sandi. Tautan untuk membuat kata sandi baru dikirim ke email Anda.' },
+    { el:'#kirimMasuk', j:'Masuk', t:'Setelah email dan kata sandi benar, Anda diminta verifikasi dua langkah.' },
+    { el:'[data-ke="daftar"]', j:'Belum punya akun', t:'Daftarkan kantor Anda di sini bila belum punya akun.' }, { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { get kunci() { return S.layar === 'otp' ? 'ob-otp' : 'ob-metode'; }, aktif:() => S.layar === 'metode' || S.layar === 'otp', langkah:() => [
+    { el:'#penjelasanMfa', j:'Verifikasi dua langkah', t:'Selain kata sandi, setiap kali masuk Anda diminta kode 6 digit. Pilih cara menerima kode.' },
+    { el:'[data-metode="app"]', j:'Aplikasi Authenticator', t:'Kode dibuat oleh aplikasi seperti Google Authenticator di ponsel Anda.' },
+    { el:'[data-metode="email"]', j:'Email OTP', t:'Kode dikirim ke email Anda setiap kali masuk.' },
+    { el:'#otpPesan', j:'Kode verifikasi', t:'Masukkan kode 6 digit dari cara yang Anda pilih.' },
+    { el:'#otpWaktu', j:'Masa berlaku kode', t:'Kode hanya berlaku sebentar. Sisa waktunya tampil di sini.' },
+    { el:'#otpUlang', j:'Kirim ulang kode', t:'Bila kode tidak masuk atau masa berlakunya habis, minta kode baru di sini.' },
+    { el:'#kirimOtp', j:'Verifikasi', t:'Tekan setelah kode lengkap. Setelah berhasil, Anda masuk ke Dasbor.' },
+    { el:'#kembaliMasuk', j:'Kembali ke halaman masuk', t:'Kembali bila ingin masuk dengan akun lain.' }, { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { get kunci() { return DB.va ? 'ob-bayar-va' : DB.metodeBayar ? 'ob-bayar-bank' : 'ob-bayar'; }, aktif:() => S.layar === 'bayar', langkah:() => [
+    { el:'#kartuTahap', j:'Progres registrasi', t:'Tahap Pembayaran sedang berjalan. Tahap berikutnya terbuka setelah pembayaran diterima.' },
+    { el:pas(kartuH3('Ringkasan Pesanan')), j:'Ringkasan pesanan', t:'Paket yang Anda pilih beserta harga dan fiturnya.' },
+    { el:'#gantiPaket', j:'Ganti paket', t:'Paket masih dapat diganti selama pembayaran belum diterima.' },
+    { el:pas(() => !DB.va && dekat('.tagihan', 'section')()), j:'Metode pembayaran', t:DB.metodeBayar ? 'Pilih bank Virtual Account. Bank yang bertanda Segera hadir belum dapat dipakai.' : 'Pilih cara membayar tagihan. Metode yang bertanda Segera hadir belum dapat dipakai.' },
+    { el:'#buatVa', j:'Buat Virtual Account', t:'Nomor Virtual Account dibuat setelah Anda memilih bank.' },
+    { el:'.no-va', j:'Nomor Virtual Account', t:'Transfer tagihan ke nomor ini. Tekan Salin agar nomor tidak salah ketik.' },
+    { el:dekat('#sisaVa', '.ina-alert'), j:'Batas waktu pembayaran', t:'Selesaikan transfer sebelum waktu ini habis. Setelah itu, buat Virtual Account baru.' },
+    { el:'#cekBayar', j:'Cek status pembayaran', t:'Pembayaran diverifikasi otomatis. Tekan tombol ini untuk memperbarui statusnya.' },
+    { el:'#gantiBank', j:'Ganti bank pembayaran', t:'Pilih bank lain bila perlu.' }, { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'ob-lunas', aktif:() => S.layar === 'lunas', langkah:() => [
+    { el:'#kartuTahap', j:'Progres registrasi', t:'Pembayaran sudah diterima. Aplikasi kantor Anda sedang disiapkan.' },
+    { el:pas(kartuH3('Pembayaran diterima')), j:'Pembayaran diterima', t:'Tagihan sudah lunas. Pembayaran ini tercatat di Riwayat Transaksi.' },
+    { el:pas('#emailAktivasi'), j:'Email aktivasi', t:'Setelah aplikasi siap, Anda menerima email berisi alamat aplikasi dan email untuk masuk. Kata sandi tidak pernah dikirim lewat email.' },
+    { el:'#cekStatus', j:'Cek progres', t:'Tekan tombol ini untuk memperbarui tahap pendaftaran Anda.' }, { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'ob-selesai', aktif:() => S.layar === 'selesai', langkah:() => [
+    { el:pas('#kartuSiap'), j:'Aplikasi siap', t:'Aplikasi e-PPAT kantor Anda sudah aktif. Alamat aplikasi dan email untuk masuk tercantum di sini.' },
+    { el:'#masukApp', j:'Masuk ke aplikasi', t:'Buka aplikasi kantor Anda, lalu masuk dengan email dan kata sandi pendaftaran.' },
+    { el:'#emailAktif', j:'Email aktivasi', t:'Ini contoh email aktivasi yang dikirim ke alamat email Anda.' }, { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'ob-riwayat', aktif:() => S.layar === 'riwayat', langkah:() => [
+    { el:'#tabelRiwayat', j:'Riwayat transaksi', t:'Semua tagihan paket tercatat di sini beserta metode dan status pembayarannya.' },
+    { el:'#bukaPerpanjang', j:'Perpanjang langganan', t:'Perpanjang paket Enterprise untuk satu tahun berikutnya dari sini.' }, { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { email:() => S.email || AKUN.email, tanda:usulan('HE-OB-07') })));
 function gambar() { gambarAsli(); simpanTrial(); gambarBar(); jalankanJamTrial(); }
 function gambarAsli() {
   gambarNav();
@@ -1483,7 +1539,36 @@ UBAH.push(
     lama:'Hanya ada ORD-RENEW-…, sehingga upgrade tercatat sebagai perpanjangan dan Trial tidak tercatat. Metode tertulis VIRTUAL_ACCOUNT, dan Jatuh Tempo tetap tampil walaupun tagihan lunas.', ke:'tr-riwayat', sorot:'#tabelRiwayat', sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-09', bukanHE:true, versi:'v2', judul:'Tenant berubah otomatis setelah upgrade',
     isi:'Tanpa masuk ulang, spanduk Trial dan tombol Mulai berlangganan hilang, batas paket terbuka, dan data masa Trial tetap ada. Tenant menampilkan pesan satu kali bahwa paket Enterprise sudah aktif.',
-    lama:'Perubahan paket di tenant sudah otomatis, tetapi tidak ada pesan apa pun. Pengguna hanya melihat spanduk menghilang.', ke:'tr-ent', sorot:'#kartuSiap', sumber:SUMBER_TRIAL });
+    lama:'Perubahan paket di tenant sudah otomatis, tetapi tidak ada pesan apa pun. Pengguna hanya melihat spanduk menghilang.', ke:'tr-ent', sorot:'#kartuSiap', sumber:SUMBER_TRIAL },
+  { kode:'HE-TRIAL-10', bukanHE:true, versi:'v2', judul:'Tour guide Dasbor Trial, Upgrade, dan Perpanjang',
+    isi:'Dasbor selama Trial punya tur sendiri: progres registrasi, langkah berikutnya, kartu Paket Trial aktif dengan sisa masa Trial, tombol Upgrade ke Enterprise, lalu Bantuan. Setelah Enterprise aktif, tur menyorot kartu Paket Enterprise aktif, aplikasi siap, dan tombol masuk ke aplikasi. Layar Upgrade ke Enterprise dan Perpanjang langganan juga punya tur: progres upgrade, catatan bahwa Trial tetap berjalan, ringkasan pesanan, metode pembayaran, dan tombol kembali. Bentuk dan perilakunya sama dengan tur Dasbor Onboarding.',
+    lama:'Dasbor Trial memakai tur Dasbor Onboarding sehingga kartu Trial dan tombol Upgrade ke Enterprise tidak dijelaskan, dan layar Upgrade serta Perpanjang tidak memiliki panduan.', ke:'tr-tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' });
+
+/* tur Dasbor Trial, Upgrade, dan Perpanjang (HE-TRIAL-10) */
+[
+  { get kunci() { return DB.ent ? 'tr-dasbor-ent' : 'tr-dasbor'; }, aktif:() => S.layar === 'dasbor' && !!DB.trial, langkah:() => [
+    { el:'#kartuTahap', j:'Progres registrasi', t:'Pendaftaran kantor Anda berjalan melalui beberapa tahap. Tahap yang sedang berjalan ditandai di sini.' },
+    { el:'#langkahDb', j:'Langkah berikutnya', t:'Kotak ini menyebut hal yang perlu Anda lakukan sekarang.' },
+    { el:'#kartuTrial', j:'Paket Trial aktif', t:'Kartu ini menunjukkan sisa masa Trial dan tanggal berakhirnya.' },
+    { el:'#upgradeSekarang', j:'Upgrade ke Enterprise', t:'Upgrade kapan saja selama Trial untuk akses penuh. Data dan alamat aplikasi tidak berubah.' },
+    { el:'#kartuEntAktif', j:'Paket Enterprise aktif', t:'Paket Enterprise sudah aktif. Masa berlakunya tercantum di sini.' },
+    { el:pas('#kartuSiap'), j:'Aplikasi siap', t:'Alamat aplikasi kantor Anda dan email untuk masuk tercantum di sini.' },
+    { el:'#masukApp', j:'Masuk ke aplikasi', t:'Buka aplikasi kantor Anda, lalu masuk dengan email dan kata sandi pendaftaran.' },
+    { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'tr-upgrade', aktif:() => S.layar === 'upgrade', langkah:() => [
+    { el:'#progresUpgrade', j:'Progres upgrade', t:'Upgrade berjalan melalui beberapa tahap, dari Upgrade dimulai sampai Enterprise aktif.' },
+    { el:'#catatanUpgrade', j:'Trial tetap berjalan', t:'Selama pembayaran belum diterima, Trial tetap berjalan. Data dan alamat aplikasi tidak berubah.' },
+    { el:pas(kartuH3('Ringkasan Pesanan')), j:'Ringkasan pesanan', t:'Paket Enterprise yang akan Anda bayar beserta harganya.' },
+    { el:() => dekat('.tagihan', 'section')() || kartuH3('Pilih Metode Pembayaran')(), j:'Metode pembayaran', t:'Pilih cara membayar, lalu ikuti langkah Virtual Account.' },
+    { el:'#kembaliDasbor', j:'Kembali ke Dasbor', t:'Kembali ke Dasbor tanpa membatalkan pesanan.' },
+    { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'tr-perpanjang', aktif:() => S.layar === 'perpanjang', langkah:() => [
+    { el:pas(kartuH3('Ringkasan Pesanan')), j:'Ringkasan pesanan', t:'Paket Enterprise yang akan diperpanjang untuk satu tahun berikutnya.' },
+    { el:kartuH3('Pilih Metode Pembayaran'), j:'Metode pembayaran', t:'Langkah pembayarannya sama dengan pembayaran upgrade.' },
+    { el:'#lanjutPerpanjang', j:'Lanjutkan perpanjangan', t:'Tekan untuk melanjutkan ke pembayaran.' },
+    { el:'#batalPerpanjang', j:'Batal', t:'Kembali tanpa memperpanjang langganan.' },
+    { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { email:() => S.email || AKUN.email, tanda:usulan('HE-TRIAL-10') })));
 
 /* ---------------- protobar & daftar perubahan ---------------- */
 $('#bukaUbah').addEventListener('click', () => {
@@ -1498,6 +1583,7 @@ $('#bukaUbah').textContent = `Daftar perubahan (${UBAH.length})`;
 function lihat(u) {
   S.ubah = false;
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke === 'tr-tur') { ke('trial'); setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 400); return; }
   if (u.ke === 'tr-aktif') ke('trial');
   if (u.ke === 'tr-ent') ke('enterprise');
   if (u.ke === 'tr-riwayat') { siapkan('enterprise'); ke('riwayat'); }
@@ -1510,6 +1596,7 @@ function lihat(u) {
   if (u.ke === 'mfa') ke('metode');
   if (u.ke === 'otp') { S.metode = 'email'; ke('otp'); }
   if (u.ke === 'tur') { ke('dasbor'); setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300); return; }
+  if (u.ke === 'tur-daftar') { ke('daftar'); setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 400); return; }
   if (u.ke === 'db') ke('dasbor');
   if (u.ke === 'db-cek') { ke('dasbor'); $('#cekStatus').click(); return; }
   if (u.ke === 'db-bayar') { DB = { ...DB0(), paket:'enterprise', dipesan:'enterprise', metodeBayar:'va', bank:'BRI', va:{ no:'1462900000000001', ref:'REF-CONTOH-0001', habis:Date.now() + 86400000, sampai:'27 Okt 2026, 09.21' } }; ke('bayar'); jalankanJamVa(); }

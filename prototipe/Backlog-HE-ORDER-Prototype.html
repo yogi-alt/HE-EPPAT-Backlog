@@ -748,6 +748,9 @@ const UBAH = [
   { kode:'HE-ORDER-20', versi:'v2', bukanHE:true, judul:'Buat Permohonan tanpa modal',
     isi:'Tombol Buat permohonan langsung membuka Pengumpulan Berkas. Permohonan tersimpan dan masuk daftar setelah staf menyimpan salah satu data, misalnya Narahubung.',
     lama:'Modal Buat Permohonan harus diisi lebih dulu.', ke:'daftar', sorot:'#buatOrder', sumber:'Masukan Peruri, 6 Nov 2026' },
+  { kode:'HE-ORDER-24', versi:'v2', bukanHE:true, judul:'Tour guide daftar Permohonan AJB dan pantauan Klien',
+    isi:'Saat pengguna pertama kali membuka daftar Permohonan AJB, tur singkat menyorot tombol Buat permohonan, pencarian, saringan status, Muat ulang, daftar permohonan, dan tombol Bantuan. Pada paket Trial, tur juga menyorot jumlah transaksi yang terpakai. Klien mendapat tur daftar permohonan yang melibatkannya, dan saat membuka permohonan, tur menyorot tahap permohonan, keadaan permohonan, dan tombol Buka Penandatanganan Akta bila gilirannya tiba. Bentuk dan perilakunya sama dengan tur detail permohonan: muncul sekali, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka daftar Permohonan AJB, dan Klien tidak mendapat panduan saat memantau permohonannya.', ke:'tur-daftar', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-ORDER-23', versi:'v2', bukanHE:true, judul:'Contoh tour guide di detail Permohonan AJB',
     isi:'Saat Asisten atau PPAT pertama kali membuka detail permohonan, tur singkat menyorot bagian penting satu per satu: stepper, syarat dan langkah berikutnya, tombol tahap, tombol Pindah, tautan tahap yang sudah selesai, dan baris tab data permohonan. Bagian lain diredupkan, dan kotak keterangan berisi judul, satu kalimat, posisi langkah, serta tombol Sebelumnya, Lanjut, dan Lewati tur. Isi tombol tahap mengikuti peran. Tur muncul sekali per pengguna, dapat dilewati atau ditutup dengan Esc, dan dapat diputar ulang dari Bantuan. Langkah yang elemennya tidak ada di tahap itu dilewati otomatis.',
     lama:'Tidak ada panduan saat pengguna pertama kali membuka halaman.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
@@ -1111,6 +1114,32 @@ function langkahTur() {
   ].filter(l => l.el());
 }
 /* mesin tur (sorotan, letak kotak, tombol, Esc, tanda sudah dilihat) memakai komponen bersama sumber/tur-bersama.html */
+/* tur daftar permohonan (staf dan Klien) dan pantauan detail Klien (HE-ORDER-24) */
+(window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+  get kunci() { return KLIEN_MODE ? 'ajb-daftar-klien' : 'ajb-daftar'; }, tanda:usulan('HE-ORDER-24'),
+  aktif:() => S.layar === 'daftar',
+  langkah:() => [
+    { el:'.daftar-atas .kuota-trial', j:'Transaksi paket Trial', t:'Paket Trial membatasi jumlah transaksi. Angka ini menunjukkan transaksi yang sudah terpakai.' },
+    { el:'#buatOrder', j:'Buat permohonan', t:'Tekan untuk membuat permohonan Akta Jual Beli baru. Formulirnya langsung terbuka, dan permohonan tersimpan setelah Anda menyimpan salah satu data.' },
+    { el:'.saring .cari-wadah', j:'Cari permohonan', t:'Ketik kode permohonan atau nama narahubung untuk menemukan permohonan.' },
+    { el:'#f-filter', j:'Saring status', t:'Tampilkan permohonan pada satu tahap saja, misalnya Verifikasi Berkas.' },
+    { el:'#muatUlang', j:'Muat ulang', t:'Perbarui daftar dengan data terbaru.' },
+    { el:() => terlihat('.tabel-wadah thead') || terlihat('.tabel-wadah tbody tr'), j:'Daftar permohonan', t:KLIEN_MODE ? 'Daftar ini hanya memuat permohonan yang melibatkan Anda. Kolom Status menunjukkan tahapnya. Klik baris atau tombol Lihat untuk memantau permohonan.' : 'Kolom Status menunjukkan tahap permohonan saat ini. Klik baris atau tombol Edit untuk membuka detailnya.' },
+    { el:'[data-hapus-order]', j:'Hapus permohonan kosong', t:'Tombol Hapus hanya muncul pada permohonan yang belum berisi para pihak dan objek.' },
+    { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan ada di sini, termasuk tombol untuk memutar ulang tur ini.' }
+  ]
+});
+(window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+  kunci:'ajb-detail-klien', tanda:usulan('HE-ORDER-24'),
+  aktif:() => S.layar === 'detail' && KLIEN_MODE,
+  langkah:() => [
+    { el:'#kembali', j:'Kembali ke daftar', t:'Tekan untuk kembali ke daftar permohonan yang melibatkan Anda.' },
+    { el:() => terlihat('#stepperAjb') || terlihat('.stepper-v'), j:'Tahap permohonan', t:'Permohonan berjalan melalui enam tahap. Tahap yang sedang dikerjakan kantor PPAT ditandai di sini.' },
+    { el:'#syarat', j:'Keadaan permohonan', t:'Kotak ini menyebut pekerjaan kantor PPAT saat ini. Saat akta siap ditandatangani, kotak ini memberi tahu Anda.' },
+    { el:'.status-kaki a.ina-button', j:'Buka Penandatanganan Akta', t:'Saat giliran Anda tiba, tombol ini membuka halaman tanda tangan akta.' },
+    { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan ada di sini, termasuk tombol untuk memutar ulang tur ini.' }
+  ]
+});
 (window.TUR_ANTRE = window.TUR_ANTRE || []).push({ kunci:'ajb-detail', aktif:() => S.layar === 'detail' && !!turPeran(), langkah:langkahTur, tanda:usulan('HE-ORDER-23') });
 function buka(kode, tab = 'kontak') { S.layar = 'detail'; S.aktif = kode; S.tab = tab; gambar(); window.scrollTo({ top:0 }); }
 
@@ -1731,6 +1760,7 @@ function lihat(u) {
   if (u.ke === 'tab-pihak') { const o = ORDER.find(x => x.status === 'PENGUMPULAN') || ORDER[0]; S.layar = 'detail'; S.aktif = o.kode; S.tab = 'pihak'; gambar(); return; }
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
   if (u.ke === 'daftar') { S.layar = 'daftar'; gambar(); }
+  if (u.ke === 'tur-daftar') { S.layar = 'daftar'; history.replaceState(null, '', location.pathname); gambar(); setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 400); return; }
   if (u.ke === 'detail-002') buka('ORD-CONTOH-002');
   if (u.ke === 'tambah-pihak') { buka('ORD-CONTOH-002', 'pihak'); dialogPihak(); return; }
   if (u.ke === 'konfirm-selesai') { buka('ORD-CONTOH-008'); konfirmPindah(true); return; }
@@ -2783,7 +2813,9 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
     const u = t.tanda || '';
     isi.insertAdjacentHTML('afterbegin', `<p class="tur-bantuan">${tombol(svg('<path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />') + 'Mulai tur halaman ini', 'secondary', 'data-mulai-tur')}${u}</p>`);
   }
-  new MutationObserver(() => { if (!DAFTAR.length) return; sisipBantuan(); if (T.aktif) letak(); else cek(); }).observe(document.body, { childList:true, subtree:true });
+  /* layar berganti saat tur berjalan (mis. tombol Kembali peramban): tur ditutup tanpa ditandai sudah dilihat */
+  const masihBerlaku = () => { try { return !document.querySelector('.sesi-tolak') && T.aktif.aktif(); } catch (e) { return false; } };
+  new MutationObserver(() => { if (!DAFTAR.length) return; sisipBantuan(); if (T.aktif) { if (masihBerlaku()) letak(); else { T.aktif = null; $('#tur')?.remove(); cek(); } } else cek(); }).observe(document.body, { childList:true, subtree:true });
   document.addEventListener('click', e => {
     if (!DAFTAR.length) return;
     const b = e.target.closest('#tur [data-tur]');

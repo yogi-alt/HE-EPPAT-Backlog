@@ -246,4 +246,33 @@ UBAH.push(
     lama:'Hanya ada ORD-RENEW-…, sehingga upgrade tercatat sebagai perpanjangan dan Trial tidak tercatat. Metode tertulis VIRTUAL_ACCOUNT, dan Jatuh Tempo tetap tampil walaupun tagihan lunas.', ke:'tr-riwayat', sorot:'#tabelRiwayat', sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-09', bukanHE:true, versi:'v2', judul:'Tenant berubah otomatis setelah upgrade',
     isi:'Tanpa masuk ulang, spanduk Trial dan tombol Mulai berlangganan hilang, batas paket terbuka, dan data masa Trial tetap ada. Tenant menampilkan pesan satu kali bahwa paket Enterprise sudah aktif.',
-    lama:'Perubahan paket di tenant sudah otomatis, tetapi tidak ada pesan apa pun. Pengguna hanya melihat spanduk menghilang.', ke:'tr-ent', sorot:'#kartuSiap', sumber:SUMBER_TRIAL });
+    lama:'Perubahan paket di tenant sudah otomatis, tetapi tidak ada pesan apa pun. Pengguna hanya melihat spanduk menghilang.', ke:'tr-ent', sorot:'#kartuSiap', sumber:SUMBER_TRIAL },
+  { kode:'HE-TRIAL-10', bukanHE:true, versi:'v2', judul:'Tour guide Dasbor Trial, Upgrade, dan Perpanjang',
+    isi:'Dasbor selama Trial punya tur sendiri: progres registrasi, langkah berikutnya, kartu Paket Trial aktif dengan sisa masa Trial, tombol Upgrade ke Enterprise, lalu Bantuan. Setelah Enterprise aktif, tur menyorot kartu Paket Enterprise aktif, aplikasi siap, dan tombol masuk ke aplikasi. Layar Upgrade ke Enterprise dan Perpanjang langganan juga punya tur: progres upgrade, catatan bahwa Trial tetap berjalan, ringkasan pesanan, metode pembayaran, dan tombol kembali. Bentuk dan perilakunya sama dengan tur Dasbor Onboarding.',
+    lama:'Dasbor Trial memakai tur Dasbor Onboarding sehingga kartu Trial dan tombol Upgrade ke Enterprise tidak dijelaskan, dan layar Upgrade serta Perpanjang tidak memiliki panduan.', ke:'tr-tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' });
+
+/* tur Dasbor Trial, Upgrade, dan Perpanjang (HE-TRIAL-10) */
+[
+  { get kunci() { return DB.ent ? 'tr-dasbor-ent' : 'tr-dasbor'; }, aktif:() => S.layar === 'dasbor' && !!DB.trial, langkah:() => [
+    { el:'#kartuTahap', j:'Progres registrasi', t:'Pendaftaran kantor Anda berjalan melalui beberapa tahap. Tahap yang sedang berjalan ditandai di sini.' },
+    { el:'#langkahDb', j:'Langkah berikutnya', t:'Kotak ini menyebut hal yang perlu Anda lakukan sekarang.' },
+    { el:'#kartuTrial', j:'Paket Trial aktif', t:'Kartu ini menunjukkan sisa masa Trial dan tanggal berakhirnya.' },
+    { el:'#upgradeSekarang', j:'Upgrade ke Enterprise', t:'Upgrade kapan saja selama Trial untuk akses penuh. Data dan alamat aplikasi tidak berubah.' },
+    { el:'#kartuEntAktif', j:'Paket Enterprise aktif', t:'Paket Enterprise sudah aktif. Masa berlakunya tercantum di sini.' },
+    { el:pas('#kartuSiap'), j:'Aplikasi siap', t:'Alamat aplikasi kantor Anda dan email untuk masuk tercantum di sini.' },
+    { el:'#masukApp', j:'Masuk ke aplikasi', t:'Buka aplikasi kantor Anda, lalu masuk dengan email dan kata sandi pendaftaran.' },
+    { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'tr-upgrade', aktif:() => S.layar === 'upgrade', langkah:() => [
+    { el:'#progresUpgrade', j:'Progres upgrade', t:'Upgrade berjalan melalui beberapa tahap, dari Upgrade dimulai sampai Enterprise aktif.' },
+    { el:'#catatanUpgrade', j:'Trial tetap berjalan', t:'Selama pembayaran belum diterima, Trial tetap berjalan. Data dan alamat aplikasi tidak berubah.' },
+    { el:pas(kartuH3('Ringkasan Pesanan')), j:'Ringkasan pesanan', t:'Paket Enterprise yang akan Anda bayar beserta harganya.' },
+    { el:() => dekat('.tagihan', 'section')() || kartuH3('Pilih Metode Pembayaran')(), j:'Metode pembayaran', t:'Pilih cara membayar, lalu ikuti langkah Virtual Account.' },
+    { el:'#kembaliDasbor', j:'Kembali ke Dasbor', t:'Kembali ke Dasbor tanpa membatalkan pesanan.' },
+    { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'tr-perpanjang', aktif:() => S.layar === 'perpanjang', langkah:() => [
+    { el:pas(kartuH3('Ringkasan Pesanan')), j:'Ringkasan pesanan', t:'Paket Enterprise yang akan diperpanjang untuk satu tahun berikutnya.' },
+    { el:kartuH3('Pilih Metode Pembayaran'), j:'Metode pembayaran', t:'Langkah pembayarannya sama dengan pembayaran upgrade.' },
+    { el:'#lanjutPerpanjang', j:'Lanjutkan perpanjangan', t:'Tekan untuk melanjutkan ke pembayaran.' },
+    { el:'#batalPerpanjang', j:'Batal', t:'Kembali tanpa memperpanjang langganan.' },
+    { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { email:() => S.email || AKUN.email, tanda:usulan('HE-TRIAL-10') })));
