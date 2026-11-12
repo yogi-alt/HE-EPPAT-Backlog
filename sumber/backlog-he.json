@@ -635,6 +635,24 @@
       "catatan": "Masukan Peruri 9 Nov 2026."
     },
     {
+      "kode": "HE-ORDER-24",
+      "fitur": "Permohonan AJB",
+      "judul": "Tour guide daftar Permohonan AJB dan pantauan Klien",
+      "saat_ini": "Tidak ada panduan saat pengguna pertama kali membuka daftar Permohonan AJB, dan Klien tidak mendapat panduan saat memantau permohonannya.",
+      "usulan": "Pasang tur di daftar Permohonan AJB: Buat permohonan, Cari, Saring status, Muat ulang, daftar permohonan (di ponsel baris pertama), tombol Hapus permohonan kosong, dan Bantuan; pada paket Trial juga jumlah transaksi terpakai. Klien mendapat tur daftar permohonan yang melibatkannya, dan di detail tur menyorot tombol Kembali, tahap permohonan, keadaan permohonan, dan tombol Buka Penandatanganan Akta saat gilirannya tiba. Tur muncul sekali per pengguna per layar, dapat dilewati (Lewati tur atau Esc), dan dapat diputar ulang dari Bantuan › Mulai tur halaman ini.",
+      "prinsip": "H10 Help and Documentation",
+      "halaman": "Masukan Workshop HE 03/11/2026",
+      "prioritas": "Sedang",
+      "layar": "Permohonan AJB › daftar (staf, Trial, Klien); detail (Klien)",
+      "acuan": "prototipe/Backlog-HE-ORDER-Prototype.html › Daftar perubahan › HE-ORDER-24",
+      "selesai_bila": "Tur muncul sekali di daftar sesuai peran dan di detail pantauan Klien, dan dapat diputar ulang dari Bantuan.",
+      "status": "Prototipe siap",
+      "catatan": "Komponen bersama sumber/tur-bersama.html.",
+      "tanggal": "2026-11-12",
+      "sumber": "MoM Workshop HE 03/11/2026",
+      "versi": "v2"
+    },
+    {
       "kode": "HE-MINUTA-01",
       "fitur": "Penyusunan Akta",
       "judul": "Detail minuta: istilah dan tombol dijelaskan singkat",
@@ -2254,6 +2272,24 @@
       "selesai_bila": "Tur muncul sekali saat pelanggan pertama masuk Dasbor dan dapat diputar ulang dari Bantuan.",
       "status": "Prototipe siap",
       "catatan": "Memakai komponen bersama sumber/tur-bersama.html sejak 12 Nov 2026; berlaku juga di Trial. Tur untuk Super Admin dan Operator menyusul.",
+      "tanggal": "2026-11-12",
+      "sumber": "MoM Workshop HE 03/11/2026",
+      "versi": "v2"
+    },
+    {
+      "kode": "HE-OB-07",
+      "fitur": "Dashboard (Onboarding)",
+      "judul": "Tour guide Registrasi, Masuk, Pembayaran, dan Riwayat Transaksi",
+      "saat_ini": "Tur hanya ada di Dasbor saat memilih paket. Layar Registrasi, Masuk, Verifikasi dua langkah, Pembayaran, Setelah lunas, Selesai, dan Riwayat Transaksi tidak memiliki panduan.",
+      "usulan": "Pasang tur di layar pelanggan lainnya. Registrasi: langkah pendaftaran, isi otomatis dari KTP, data diri, email, syarat kata sandi, ID PPAT, alamat aplikasi, persetujuan, Daftar sekarang. Masuk: email dan kata sandi, Lupa kata sandi, Masuk, Daftar sekarang. Verifikasi dua langkah: pilihan Aplikasi Authenticator atau Email OTP; layar kode: isian kode, masa berlaku, kirim ulang, Verifikasi. Pembayaran punya tur per keadaan: pilih metode, pilih bank, dan nomor Virtual Account (batas waktu, Cek status pembayaran, Ganti bank). Setelah lunas: pembayaran diterima, email aktivasi, Cek progres. Selesai: aplikasi siap. Riwayat Transaksi: daftar tagihan. Kartu yang lebih tinggi dari ruang layar disorot judulnya. Tur muncul sekali per pengguna per layar, dapat dilewati (Lewati tur atau Esc), dan dapat diputar ulang dari Bantuan › Mulai tur halaman ini.",
+      "prinsip": "H10 Help and Documentation",
+      "halaman": "Masukan Workshop HE 03/11/2026",
+      "prioritas": "Sedang",
+      "layar": "dev.eppat.id/register; /login › Verifikasi Dua Langkah; /dashboard › Pembayaran, Setelah lunas, Selesai; Riwayat Transaksi",
+      "acuan": "prototipe/Backlog-HE-ONBOARDING-Prototype.html › Daftar perubahan › HE-OB-07; prototipe/Backlog-HE-TRIAL-Prototype.html",
+      "selesai_bila": "Setiap layar dan keadaan pembayaran punya tur sendiri yang muncul sekali dan dapat diputar ulang dari Bantuan.",
+      "status": "Prototipe siap",
+      "catatan": "Komponen bersama sumber/tur-bersama.html. Cek email, Verifikasi berhasil, dan kode cadangan (tidak dipakai lagi) tidak diberi tur karena isinya satu pesan.",
       "tanggal": "2026-11-12",
       "sumber": "MoM Workshop HE 03/11/2026",
       "versi": "v2"
@@ -4883,6 +4919,24 @@
       "catatan": ""
     },
     {
+      "kode": "HE-TRIAL-10",
+      "fitur": "Trial ke Enterprise",
+      "judul": "Tour guide Dasbor Trial, Upgrade, dan Perpanjang",
+      "saat_ini": "Dasbor Trial memakai tur Dasbor Onboarding sehingga kartu Trial dan tombol Upgrade ke Enterprise tidak dijelaskan, dan layar Upgrade serta Perpanjang tidak memiliki panduan.",
+      "usulan": "Pasang tur Dasbor selama Trial: progres registrasi, langkah berikutnya, kartu Paket Trial aktif dengan sisa masa Trial, Upgrade ke Enterprise, aplikasi siap, masuk ke aplikasi, Bantuan. Setelah Enterprise aktif, tur menyorot kartu Paket Enterprise aktif. Layar Upgrade ke Enterprise: progres upgrade, catatan bahwa Trial tetap berjalan, ringkasan pesanan, metode pembayaran, Kembali ke Dasbor. Layar Perpanjang langganan: ringkasan pesanan, metode pembayaran, Lanjutkan, Batal. Tur muncul sekali per pengguna per layar, dapat dilewati (Lewati tur atau Esc), dan dapat diputar ulang dari Bantuan › Mulai tur halaman ini.",
+      "prinsip": "H10 Help and Documentation",
+      "halaman": "Masukan Workshop HE 03/11/2026",
+      "prioritas": "Sedang",
+      "layar": "Onboarding › Dasbor Trial; Upgrade ke Enterprise; Perpanjang langganan",
+      "acuan": "prototipe/Backlog-HE-TRIAL-Prototype.html › Daftar perubahan › HE-TRIAL-10",
+      "selesai_bila": "Dasbor Trial, Dasbor Enterprise, Upgrade, dan Perpanjang masing-masing punya tur yang muncul sekali dan dapat diputar ulang dari Bantuan.",
+      "status": "Prototipe siap",
+      "catatan": "Komponen bersama sumber/tur-bersama.html.",
+      "tanggal": "2026-11-12",
+      "sumber": "MoM Workshop HE 03/11/2026",
+      "versi": "v2"
+    },
+    {
       "kode": "IDDS-PL-73",
       "fitur": "Platform · Setting Theme (penyesuaian IDDS)",
       "prinsip": "Penyesuaian IDDS (Kesimpulan HE hal. 40 no. 1); H4 Consistency and Standards",
@@ -7121,6 +7175,24 @@
       "kode": "IDDS-TN-27",
       "perubahan": "Warna grafik Pengumpulan, Penyusunan, dan Penandatanganan memakai corak info (guide-300/500/700), bukan brand; lencana status ikut IDDS.",
       "berkas": "sumber/tn-eppat-badan.html; sumber/tn-proses-badan.html"
+    },
+    {
+      "tanggal": "2026-11-12",
+      "kode": "HE-ORDER-24",
+      "perubahan": "Ditambahkan ke spreadsheet: Tour guide daftar Permohonan AJB dan pantauan Klien.",
+      "berkas": "sumber/order-idds.html"
+    },
+    {
+      "tanggal": "2026-11-12",
+      "kode": "HE-OB-07",
+      "perubahan": "Ditambahkan ke spreadsheet: Tour guide Registrasi, Masuk, Pembayaran, dan Riwayat Transaksi.",
+      "berkas": "sumber/onboard-badan.html"
+    },
+    {
+      "tanggal": "2026-11-12",
+      "kode": "HE-TRIAL-10",
+      "perubahan": "Ditambahkan ke spreadsheet: Tour guide Dasbor Trial, Upgrade, dan Perpanjang.",
+      "berkas": "sumber/trial-sisip.js"
     }
   ]
 }

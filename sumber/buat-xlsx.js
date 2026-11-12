@@ -47,7 +47,20 @@ const URL_VERCEL = 'https://he-eppat.vercel.app/'; /* situs prototipe (repo yogi
 const berkasAcuan = a => ((String(a || '').match(/prototipe\/([^\s;›]+\.html)/) || [])[1]) || '';
 /* semua tautan tujuan dari teks acuan: prototipe → situs Vercel, berkas lain di repo → GitHub */
 const URL_REPO = 'https://github.com/yogi-alt/HE-EPPAT-Backlog/blob/main/';
-const tautanAcuan = a => [...new Set([...String(a || '').matchAll(/(prototipe\/[^\s;›]+\.html|brand-eppat-idds\/[^\s;›]+)/g)].map(m => m[1].startsWith('prototipe/') ? URL_VERCEL + m[1].slice(10) : URL_REPO + m[1]))];
+const tautanAcuanPenuh = a => [...new Set([...String(a || '').matchAll(/(prototipe\/[^\s;›]+\.html|brand-eppat-idds\/[^\s;›]+)/g)].map(m => m[1].startsWith('prototipe/') ? URL_VERCEL + m[1].slice(10) : URL_REPO + m[1]))];
+/* nama singkat di acuan ("Prototipe ORDER", "TN-MASUK", "OB Masuk") ikut menjadi tautan prototipe, sesuai urutan disebut */
+const SINGKAT_HE = { ORDER:'ORDER', VERIF:'VERIF', MINUTA:'MINUTA-V2', 'MINUTA-V2':'MINUTA-V2', EAW:'EAW', EAWK:'EAWK', USER:'USER', CA:'CA', TERA:'TERA', TUGAS:'TUGAS', ONBOARDING:'ONBOARDING', TRIAL:'TRIAL' };
+const tautanSingkat = a => {
+  if (!/prototipe/i.test(String(a || ''))) return [];
+  return [...String(a).matchAll(/\b(MINUTA-V2|MINUTA|EAWK|EAW|ORDER|VERIF|USER|CA|TERA|TUGAS|ONBOARDING|TRIAL|(?:TN|PL|OB)[- ](?:MASUK|SYSTEM|SISTEM|CMS|PROSES|EPPAT|MONITORING|MONITOR|AKTA|RANCANG|VERIF|PENGATURAN|BAYAR))\b/gi)].map(m => {
+    const k = m[1].toUpperCase().replace(' ', '-'), idds = k.match(/^(TN|PL|OB)-(.+)$/);
+    return URL_VERCEL + (idds ? 'Backlog-IDDS-' + idds[1] + '-' + idds[2] + '-Prototype.html' : 'Backlog-HE-' + SINGKAT_HE[k] + '-Prototype.html');
+  });
+};
+/* prototipe yang sudah dipindah ke arsip (mis. Penyusunan Akta v1) ditautkan ke prototipe/v1/ */
+const ADA_PROTO = new Set(fs.readdirSync(path.join(d, '..', 'prototipe'))), ADA_V1 = new Set(fs.existsSync(path.join(d, '..', 'prototipe', 'v1')) ? fs.readdirSync(path.join(d, '..', 'prototipe', 'v1')) : []);
+const keArsip = u => { if (!u.startsWith(URL_VERCEL)) return u; const f = u.slice(URL_VERCEL.length); return !ADA_PROTO.has(f) && ADA_V1.has(f) ? URL_VERCEL + 'v1/' + f : u; };
+const tautanAcuan = a => [...new Set([...tautanAcuanPenuh(a), ...tautanSingkat(a)].map(keArsip))];
 /* satu tautan per baris: prototipe utama yang dibahas backlog itu */
 const UTAMA = { 'HE-UMUM-01': 'Brand-Mode-EPPAT-IDDS.html' };
 const selTautan = (c, a, kode) => { const u = UTAMA[kode] ? [URL_VERCEL + UTAMA[kode]] : tautanAcuan(a).filter(x => x.startsWith(URL_VERCEL)); if (!u.length) return; c.value = { formula: `HYPERLINK("${u[0]}","${u[0]}")`, result: u[0] }; c.font = { name: FONT, size: 9, underline: true, color: { argb: 'FF0968F6' } }; };
