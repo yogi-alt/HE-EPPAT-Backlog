@@ -270,4 +270,6 @@ KET.forEach((k, i) => {
   r.eachCell(c => { c.font = { name: FONT, size: sub ? 11 : 10, bold: sub, color: { argb: sub ? HIJAU : 'FF1F1F1F' } }; c.alignment = { vertical: 'top', wrapText: true }; });
 });
 
+/* tinggi baris ditulis eksplisit agar teks tidak terpotong saat diimpor ke Google Sheets */
+wb.eachSheet(ws => require('./tinggi-baris')(ws, { mulai:3 }));
 wb.xlsx.writeFile(keluar).then(() => console.log('OK', keluar, data.item.length, 'usulan,', data.riwayat.length, 'riwayat |', KELOMPOK.map(k => `${k.sheet}: ${POS[k.sheet].items.length}`).join(' · ')));

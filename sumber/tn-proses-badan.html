@@ -683,11 +683,11 @@ const UBAH = [
     'Tidak ada panduan di ketiga menu ini.', 'bantuan', null)
 ];
 
-const ST = { PENGUMPULAN:{ l:'Pengumpulan Berkas', s:'Dibuat oleh Asisten / PPAT', b:'info', w:'var(--ina-guide-500,#2563eb)', t:'Lengkapi berkas dan data para pihak', ik:'daftar' },
+const ST = { PENGUMPULAN:{ l:'Pengumpulan Berkas', s:'Dibuat oleh Asisten / PPAT', b:'info', w:'var(--ina-guide-300,#84b4fb)', t:'Lengkapi berkas dan data para pihak', ik:'daftar' },
   SIAP:{ l:'Verifikasi Berkas', s:'Data lengkap, siap diperiksa', b:'warning', w:'var(--ina-warning-500,#eebb04)', t:'Mulai verifikasi akta', ik:'centang' },
-  DRAFTING:{ l:'Penyusunan Akta', s:'Pembuatan Akta Minuta & Salinan', b:'info', w:'var(--ina-primary-500,#3d6b5e)', t:'Susun minuta akta', ik:'edit' },
+  DRAFTING:{ l:'Penyusunan Akta', s:'Pembuatan Akta Minuta & Salinan', b:'info', w:'var(--ina-guide-500,#0968f6)', t:'Susun minuta akta', ik:'edit' },
   FINALISASI:{ l:'Finalisasi Akta', s:'Finalisasi Akta Minuta & Salinan', b:'warning', w:'var(--ina-secondary-500,#ae9358)', t:'Finalisasi Akta', ik:'kunci' },
-  PENANDATANGANAN:{ l:'Penandatanganan Akta', s:'Penandatanganan Akta Minuta & Salinan', b:'info', w:'var(--ina-primary-300,#9db8ae)', t:'Selesaikan penandatanganan', ik:'tb_signature' },
+  PENANDATANGANAN:{ l:'Penandatanganan Akta', s:'Penandatanganan Akta Minuta & Salinan', b:'info', w:'var(--ina-guide-700,#002a69)', t:'Selesaikan penandatanganan', ik:'tb_signature' },
   SELESAI:{ l:'Selesai', s:'Akta Minuta & Salinan selesai', b:'success', w:'var(--ina-positive-500,#16a34a)', t:'', ik:'stempel' } };
 const KONDISI = [['PIHAK_BADAN_HUKUM', 'Ada pihak badan hukum'], ['PIHAK_AHLI_WARIS', 'Ada pihak yang bertindak selaku ahli waris'], ['ADA_SAKSI', 'Saksi sudah didaftarkan'], ['OBJ_HAK_MILIK', 'Objek berupa Hak Milik'], ['OBJ_HGB', 'Objek berupa Hak Guna Bangunan'], ['OBJ_SARUSUN', 'Objek berupa satuan rumah susun'], ['OBJ_SERTIPIKAT_ELEKTRONIK', 'Sertipikat elektronik'], ['OBJ_JB_TERMASUK_BANGUNAN', 'Jual beli termasuk bangunan']];
 const namaKondisi = k => (KONDISI.find(x => x[0] === k) || [k, k])[1];

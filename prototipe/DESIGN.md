@@ -90,6 +90,7 @@ E-PPAT hanya mengganti token **brand**. Warna netral, warna status, tipografi, j
   - Badge status memakai varian Badge IDDS (neutral, info, success, warning, error), mengikuti tabel status di Panduan IDDS Developer bagian 3, sama dengan seri Perdana Niaga.
   - Isian "Warna status" di Konten Situs › Tema Tampilan tidak lagi mengatur warna lencana.
   - Status yang sama memakai varian yang sama di semua layar dan di grafik Dashboard.
+  - Pengumpulan Berkas, Penyusunan Akta, dan Penandatanganan Akta berlencana **info**. Jangan memakai brand untuk lencana status karena mirip hijau Selesai. Di grafik, ketiganya dibedakan dengan corak info: `--ina-guide-300`, `-500`, dan `-700`.
 - **Kontras minimal WCAG 2.2 AA:** teks biasa 4,5:1; teks besar dan batas komponen 3:1. `eppat.css` sudah menggelapkan warna bawaan IDDS yang di bawah standar.
 - **Celah IDDS 1.6.38 yang diketahui:** deskripsi Alert tampak pudar di mode gelap.
 - Jangan menimpa gaya IDDS dengan `!important` secara luas. Batasi penyesuaian ke `[data-brand='eppat'] .ina-…` dan pakai `var(--ina-…)`.

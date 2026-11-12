@@ -249,7 +249,7 @@ const rasio = (a, b) => { const x = lum(a), y = lum(b); if (x == null || y == nu
 /* ---------------- daftar penyesuaian ---------------- */
 const UBAH = [
   { kode:'IDDS-TN-27', judul:'Dashboard: kartu, grafik, dan warna status seragam',
-    isi:'Kartu ringkasan memakai IDDS Card. Keterangan setiap status menjelaskan artinya, sama dengan prototipe Permohonan AJB: "Mengumpulkan data", "Data lengkap", "Pembuatan akta", "Akta selesai". Warna grafik diambil dari token warna status tema (bukan kode warna tetap) dan sekeluarga dengan warna lencana statusnya. Pengecualiannya Penyusunan: grafik memakai warna brand agar Penyusunan dapat dibedakan dari Pengumpulan, karena keduanya berlencana "info" di live dan di prototipe Permohonan AJB. Legenda donat selalu menampilkan semua status beserta jumlah dan persentasenya. Grafik batang menulis nama jenis akta lengkap beserta jumlahnya, sehingga angka terbaca tanpa tooltip.',
+    isi:'Kartu ringkasan memakai IDDS Card. Keterangan setiap status menjelaskan artinya, sama dengan prototipe Permohonan AJB: "Mengumpulkan data", "Data lengkap", "Pembuatan akta", "Akta selesai". Warna grafik diambil dari token warna status tema (bukan kode warna tetap) dan sekeluarga dengan warna lencana statusnya. Pengumpulan Berkas, Penyusunan Akta, dan Penandatanganan Akta sama-sama berlencana "info", seperti di live. Di grafik ketiganya memakai keluarga warna info dengan corak berbeda, dari biru muda sampai biru tua mengikuti urutan tahap, sehingga tetap dapat dibedakan tanpa memakai hijau yang mirip warna Selesai. Legenda donat selalu menampilkan semua status beserta jumlah dan persentasenya. Grafik batang menulis nama jenis akta lengkap beserta jumlahnya, sehingga angka terbaca tanpa tooltip.',
     lama:'Keterangan kartu hanya "order". Warna grafik ditulis langsung di kode (slate/biru/kuning/hijau) dan tidak ikut tema. Status bernilai 0 hilang dari legenda. Jumlah hanya tampil di tooltip saat kursor di atas grafik, dan sumbu batang hanya memakai kode (AJB).', ke:'dashboard', sorot:'#grafikStatus' },
   { kode:'IDDS-TN-28', judul:'Dashboard: daftar permohonan dapat dibuka dan data dapat dimuat ulang',
     isi:'"Perlu tindakan" menyebut tindakan berikutnya untuk setiap permohonan (misalnya "Lengkapi berkas", "Mulai verifikasi"). Setiap baris adalah tautan ke Permohonan AJB yang dapat difokus dengan keyboard. Di kanan judul tampil waktu pembaruan dan tombol "Muat ulang". Bila data gagal dimuat, IDDS Alert menyediakan tombol "Coba lagi". Keadaan ini dapat dicoba lewat pil "Simulasi galat Dashboard" di bilah atas.',
@@ -284,11 +284,11 @@ const UBAH = [
 ];
 
 /* ---------------- data contoh (sama dengan prototipe Order AJB, Verifikasi, Minuta, E-Akta Wizard) ---------------- */
-const ST = { PENGUMPULAN:{ l:'Pengumpulan Berkas', s:'Dibuat oleh Asisten / PPAT', b:'info', w:'var(--ina-guide-500,#2563eb)', t:'Lengkapi berkas dan data para pihak', ik:'daftar' },
+const ST = { PENGUMPULAN:{ l:'Pengumpulan Berkas', s:'Dibuat oleh Asisten / PPAT', b:'info', w:'var(--ina-guide-300,#84b4fb)', t:'Lengkapi berkas dan data para pihak', ik:'daftar' },
   SIAP:{ l:'Verifikasi Berkas', s:'Data lengkap, siap diperiksa', b:'warning', w:'var(--ina-warning-500,#eebb04)', t:'Mulai verifikasi akta', ik:'centang' },
-  DRAFTING:{ l:'Penyusunan Akta', s:'Pembuatan Akta Minuta & Salinan', b:'info', w:'var(--ina-primary-500,#3d6b5e)', t:'Susun minuta akta', ik:'edit' },
+  DRAFTING:{ l:'Penyusunan Akta', s:'Pembuatan Akta Minuta & Salinan', b:'info', w:'var(--ina-guide-500,#0968f6)', t:'Susun minuta akta', ik:'edit' },
   FINALISASI:{ l:'Finalisasi Akta', s:'Finalisasi Akta Minuta & Salinan', b:'warning', w:'var(--ina-secondary-500,#ae9358)', t:'Finalisasi Akta', ik:'kunci' },
-  PENANDATANGANAN:{ l:'Penandatanganan Akta', s:'Penandatanganan Akta Minuta & Salinan', b:'info', w:'var(--ina-primary-300,#9db8ae)', t:'Selesaikan penandatanganan', ik:'tb_signature' },
+  PENANDATANGANAN:{ l:'Penandatanganan Akta', s:'Penandatanganan Akta Minuta & Salinan', b:'info', w:'var(--ina-guide-700,#002a69)', t:'Selesaikan penandatanganan', ik:'tb_signature' },
   SELESAI:{ l:'Selesai', s:'Akta Minuta & Salinan selesai', b:'success', w:'var(--ina-positive-500,#16a34a)', t:'', ik:'stempel' } };
 const O = (kode, nama, status, tgl) => ({ kode, nama, status, tgl, jenis:'AJB' });
 let ORDER = [
