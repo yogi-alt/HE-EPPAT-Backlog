@@ -3177,11 +3177,18 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
   /* Klien memakai halaman tanda tangan miliknya */
   if (berkas === 'HE-EAW' && sesi.aktif === 'ROLE_KLIEN') { location.replace(LANDAS.ROLE_KLIEN); return; }
 
-  /* penjaga halaman */
-  if (!halamanBoleh(sesi)) {
-    document.body.insertAdjacentHTML('beforeend', `<div class="sesi-tolak" role="alert"><div class="sesi-tolak-kartu"><h2>Halaman tidak tersedia</h2><p>Peran ${sesi.label} tidak memiliki akses ke halaman ini.</p>
-      <div class="sesi-tolak-aksi"><a class="ina-button ina-button--primary ina-button--md" href="${LANDAS[sesi.aktif]}">Ke halaman utama</a><button type="button" class="ina-button ina-button--secondary ina-button--md" data-sesi-keluar>Keluar</button></div></div></div>`);
-  }
+  /* penjaga halaman: diperiksa saat dimuat dan setiap kali layar berpindah di dalam halaman
+     (prototipe berpindah layar lewat history.replaceState, yang tidak memicu hashchange) */
+  const tolakHtml = navigasi => `<div class="sesi-tolak" role="alert"${navigasi ? ' data-navigasi="1"' : ''}><div class="sesi-tolak-kartu"><h2>Halaman tidak tersedia</h2><p>Peran ${sesi.label} tidak memiliki akses ke halaman ini.</p>
+      <div class="sesi-tolak-aksi"><a class="ina-button ina-button--primary ina-button--md" href="${LANDAS[sesi.aktif]}">Ke halaman utama</a><button type="button" class="ina-button ina-button--secondary ina-button--md" data-sesi-keluar>Keluar</button></div></div></div>`;
+  if (!halamanBoleh(sesi)) document.body.insertAdjacentHTML('beforeend', tolakHtml(false));
+  const periksaHalaman = () => {
+    const ada = document.querySelector('.sesi-tolak');
+    if (!halamanBoleh(sesi)) { if (!ada) document.body.insertAdjacentHTML('beforeend', tolakHtml(true)); }
+    else if (ada && ada.dataset.navigasi) ada.remove(); /* kembali ke layar yang boleh dibuka */
+  };
+  ['pushState', 'replaceState'].forEach(m => { const asli = history[m]; history[m] = function () { const hasil = asli.apply(this, arguments); setTimeout(periksaHalaman, 0); return hasil; }; });
+  addEventListener('hashchange', periksaHalaman); addEventListener('popstate', periksaHalaman);
 })();
 </script>
 

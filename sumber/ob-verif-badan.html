@@ -245,6 +245,9 @@ function bersih(id) { const p = jenisIsian(id), w = $(`#f-${id} .${p}__wrapper`)
 
 /* ---------------- daftar penyesuaian ---------------- */
 const UBAH = [
+  { kode:'IDDS-OB-63', versi:'v2', bukanHE:true, judul:'Tour guide Verifikasi Anggota, Produk, dan Pembayaran',
+    isi:'Saat staf Onboarding pertama kali membuka setiap layar, tur singkat menjelaskan isinya. Verifikasi Anggota: pencarian, saringan status verifikasi, daftar anggota, dan halaman. Detail Verifikasi: tombol Kembali, status verifikasi, tombol Setujui dan Tolak (bila menunggu keputusan), foto atau logo, tab PPAT dan Kantor PPAT beserta tombol simpannya, lokasi kantor, dan info kontak. Verifikasi Produk: pencarian, saringan produk, dan daftar order. Verifikasi Pembayaran: pencarian, waktu pembaruan dan Muat ulang, saringan status, dan daftar transaksi; Detail Transaksi: status dan rincian invoice. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat staf Onboarding pertama kali membuka Verifikasi Anggota, Verifikasi Produk, Verifikasi Pembayaran, dan layar detailnya.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'IDDS-OB-21', judul:'Verifikasi Anggota: subjudul sesuai isi, pencarian berlabel, dan saringan IDDS Chip',
     isi:'Subjudul menyebut tindakan yang dapat dilakukan: "Periksa data anggota yang mendaftar, lalu setujui atau tolak verifikasinya." Pencarian memakai IDDS Input Search dengan label "Cari anggota" yang terlihat, dan jumlah anggota yang tampil diumumkan (aria-live). Saringan Semua, Belum Verifikasi, dan Sudah Verifikasi memakai IDDS Chip dalam grup berlabel, lengkap dengan jumlahnya. Chip terpilih ditandai aria-pressed dan dapat dipilih dengan papan ketik.',
     lama:'Subjudul berbunyi "Kelola dan verifikasi anggota yang mendaftar.". Kotak cari hanya berisi teks contoh "Cari nama, email, ID PPAT..." tanpa label. Saringan berupa pil bergaya khusus.', ke:'anggota', sorot:'#saringAg' },
@@ -955,10 +958,60 @@ $('#bukaUbah').addEventListener('click', () => {
 function lihat(u) {
   const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke === 'tur') { pindah('anggota', () => setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300)); return; }
   pindah(u.ke, () => { if (u.ke === 'anggota-detail' && S.tab !== 'ppat') $('#tab-ppat').click(); sorot(); });
 }
 $('#aturUlang').addEventListener('click', () => { DATA = contohPendaftar(); siapkanAnggota(); PRODUK = contohProduk(); TRANSAKSI = contohTransaksi(); const l = S.layar; S = S0(); S.layar = l; gambar(); gambarMenu(); toast('Data contoh dikembalikan ke awal.'); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
+/* ---------------- tour guide per layar (IDDS-OB-63, komponen tur-bersama) ---------------- */
+const terlihatO = s => [...document.querySelectorAll(s)].find(x => x.offsetParent);
+const dekatO = (s, p) => () => { const e = terlihatO(s); return e && (e.closest(p) || e); };
+/* bagian yang lebih tinggi dari ruang tersisa: sorot judulnya saja agar kotak keterangan tidak menutupinya */
+const pasO = f => () => { const e = typeof f === 'function' ? f() : terlihatO(f); if (!e || e.getBoundingClientRect().height <= innerHeight - (matchMedia('(max-width:760px)').matches ? 360 : 300)) return e; return [...e.querySelectorAll('thead, h2, h3, .eb')].find(x => x.offsetParent) || e; };
+const tabelO = id => () => terlihatO(id + ' thead') || terlihatO(id + ' tbody tr');
+const putusan = () => !!terlihatO('#setujuiAg');
+const langkahKeputusan = () => [
+  { el:'#kembaliAg', j:'Kembali', t:'Kembali ke Verifikasi Anggota tanpa kehilangan saringan.' },
+  { el:'#blokKeputusan', j:'Status verifikasi', t:putusan() ? 'Periksa data PPAT, data kantor, dan kontak di bawah, lalu putuskan verifikasinya.' : 'Status verifikasi anggota ini beserta keterangan keputusannya.' },
+  { el:'#setujuiAg', j:'Setujui', t:'Tekan bila data sesuai. Sebelum disimpan, Anda diminta mengonfirmasi.' },
+  { el:'#tolakAg', j:'Tolak', t:'Tekan bila data tidak sesuai. Alasan penolakan wajib diisi dan dikirim ke email anggota.' }];
+[
+  { kunci:'obv-anggota', aktif:() => S.layar === 'anggota', langkah:() => [
+    { el:dekatO('#cariAg', '.baris > div'), j:'Cari anggota', t:'Ketik nama, email, atau ID PPAT untuk menemukan anggota.' },
+    { el:'#chipAg', j:'Saring status verifikasi', t:'Tampilkan anggota yang belum atau sudah diverifikasi. Angka menunjukkan jumlahnya.' },
+    { el:tabelO('#tabelAg'), j:'Daftar anggota', t:'Tekan Lihat detail untuk memeriksa data anggota dan memutuskan verifikasinya.' },
+    { el:'.halaman', j:'Halaman', t:'Pindah halaman untuk melihat anggota lainnya.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { get kunci() { return 'obv-detail-' + S.tab + (putusan() ? '-putus' : ''); }, aktif:() => S.layar === 'anggota-detail', langkah:() => S.tab === 'kantor' ? [
+    ...langkahKeputusan(),
+    { el:pasO('#kartuLogo'), j:'Logo kantor', t:'Klik logo untuk menggantinya.' },
+    { el:'#tabDetail', j:'Tab data', t:'Data dibagi ke tab PPAT dan Kantor PPAT.' },
+    { el:pasO('#panel-kantor'), j:'Data kantor PPAT', t:'Periksa detail registrasi dan alamat kantor PPAT.' },
+    { el:dekatO('#cariLokasi', '.ina-text-field, div'), j:'Lokasi kantor', t:'Cari alamat untuk menandai lokasi kantor di peta.' },
+    { el:'#simpanKantor', j:'Simpan kantor', t:'Simpan perubahan data kantor PPAT.' },
+    { el:pasO('#blokKontakKantor'), j:'Info kontak kantor', t:'Daftar email dan telepon kantor. Aktifkan, nonaktifkan, atau ubah kontak di sini.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] : [
+    ...langkahKeputusan(),
+    { el:pasO('#kartuFoto'), j:'Foto profil', t:'Klik foto untuk menggantinya.' },
+    { el:'#tabDetail', j:'Tab data', t:'Data dibagi ke tab PPAT dan Kantor PPAT.' },
+    { el:pasO('#panel-ppat'), j:'Data PPAT', t:'Periksa dan perbaiki data PPAT. Kode dibuat sistem dan tidak dapat diubah.' },
+    { el:'#simpanPpat', j:'Simpan PPAT', t:'Simpan perubahan data PPAT. Status simpan tampil di sebelahnya.' },
+    { el:pasO('#blokKontak'), j:'Info kontak', t:'Daftar email dan telepon anggota. Aktifkan atau nonaktifkan kontak, ubah, atau tambah kontak baru.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'obv-produk', aktif:() => S.layar === 'produk', langkah:() => [
+    { el:dekatO('#cariPr', '.baris > div'), j:'Cari order', t:'Ketik nama, ID PPAT, atau kode order untuk menemukan order produk.' },
+    { el:'#chipPr', j:'Saring produk', t:'Tampilkan order paket Enterprise atau Trial saja. Angka menunjukkan jumlahnya.' },
+    { el:tabelO('#tabelPr'), j:'Daftar order produk', t:'Setiap baris berisi pendaftar, kode order, produk yang dipilih, dan tanggal order.' },
+    { el:'.halaman', j:'Halaman', t:'Pindah halaman untuk melihat order lainnya.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'obv-pembayaran', aktif:() => S.layar === 'pembayaran', langkah:() => [
+    { el:dekatO('#cariPb', '.baris > div'), j:'Cari transaksi', t:'Ketik nama, nomor invoice, atau nomor Virtual Account untuk menemukan transaksi.' },
+    { el:'#ketMuat', j:'Waktu pembaruan', t:'Waktu data terakhir dimuat dari sistem pembayaran.' },
+    { el:'#muatUlang', j:'Muat ulang', t:'Perbarui daftar dengan status pembayaran terbaru.' },
+    { el:'#chipPb', j:'Saring status pembayaran', t:'Tampilkan transaksi Lunas, Belum Dibayar, Kedaluwarsa, atau Gagal. Angka menunjukkan jumlahnya.' },
+    { el:tabelO('#tabelPb'), j:'Daftar transaksi', t:'Tekan Lihat detail untuk membuka rincian invoice.' },
+    { el:'.halaman', j:'Halaman', t:'Pindah halaman untuk melihat transaksi lainnya.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'obv-trx', aktif:() => S.layar === 'pembayaran-detail', langkah:() => [
+    { el:'#kembaliPb', j:'Kembali', t:'Kembali ke Verifikasi Pembayaran tanpa kehilangan saringan.' },
+    { el:'#statusTrx', j:'Status pembayaran', t:'Status tagihan ini: Lunas, Belum Dibayar, Kedaluwarsa, atau Gagal.' },
+    { el:pasO('#blokTrx'), j:'Rincian transaksi', t:'Invoice, pengguna, paket, metode pembayaran, nomor Virtual Account, dan nominal tagihan.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-OB-63') })));
 const awal = (location.hash || '').slice(1); if (RENDER[awal]) S.layar = awal;
 window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (RENDER[h] && h !== S.layar) pindah(h); });
 gambar();

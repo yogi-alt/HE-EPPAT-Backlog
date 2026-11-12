@@ -385,7 +385,10 @@ const UBAH = [
     lama:'Tab berlabel "Password". Di bawah isian Kata Sandi Baru hanya tertulis "Min. 12 karakter · Huruf besar, kecil, angka & simbol" dengan bilah kekuatan. Keterangan "Reset akan menghapus MFA pengguna ini; ia wajib mendaftar ulang …" ditulis untuk admin, bukan untuk pemilik akun.', ke:'profil', tab:'sandi', sorot:'#blokMfa' },
   { kode:'IDDS-OB-10', judul:'Beranda, Lupa Kata Sandi, Atur Ulang, dan Profil Saya: Bantuan khusus layar',
     isi:'Beranda (di bawah tombol "Daftar sekarang" dan "Masuk"), kartu Lupa Kata Sandi, Atur Ulang Kata Sandi, dan Kata Sandi Berhasil Diubah memiliki tautan "Butuh bantuan?". Tautan ini sama dengan layar Registrasi dan Masuk (HE-UMUM-02). Profil Saya memiliki tombol Bantuan di kanan judul. Semuanya membuka IDDS Drawer khusus layar berisi penjelasan, langkah, istilah, pertanyaan umum (IDDS Accordion), dan kontak dukungan (data contoh bergaris putus-putus). Bantuan Beranda menjelaskan apa itu e-PPAT, cara mendaftar, siapa yang dapat mendaftar, serta paket dan biaya. Bantuan Kata Sandi Berhasil Diubah menjelaskan langkah masuk dan tindakan bila pengguna lupa kata sandi lagi.',
-    lama:'Halaman Lupa Kata Sandi, Reset Kata Sandi, dan Profile tidak memiliki panduan atau kontak dukungan.', ke:'bantuan-profil', sorot:null }
+    lama:'Halaman Lupa Kata Sandi, Reset Kata Sandi, dan Profile tidak memiliki panduan atau kontak dukungan.', ke:'bantuan-profil', sorot:null },
+  { kode:'IDDS-OB-61', versi:'v2', bukanHE:true, judul:'Tour guide Beranda, Lupa Kata Sandi, Atur Ulang Kata Sandi, dan Profil Saya',
+    isi:'Saat pengguna pertama kali membuka setiap layar, tur singkat menjelaskan isinya. Beranda: menu halaman, tombol Masuk dan Daftar, ajakan Daftar sekarang, layanan akta, fitur, cara kerja, berita, dan Butuh bantuan. Lupa Kata Sandi: isian email dan tombol kirim tautan; setelah terkirim, tur menjelaskan cek email, kirim ulang, dan ganti email. Atur Ulang Kata Sandi: kata sandi baru, syarat yang tercentang langsung, konfirmasi, dan simpan; bila tautan kedaluwarsa, tur menunjuk Minta tautan baru. Profil Saya punya tur per tab: PPAT (kode, nama, status simpan, info kontak), Kantor PPAT (nama kantor, data terkunci, rekening, kontak kantor, lokasi dan peta), dan Kata Sandi (kata sandi, syarat, verifikasi dua langkah). Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka Beranda, Lupa Kata Sandi, Atur Ulang Kata Sandi, dan Profil Saya.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
 ];
 
 /* ---------------- data contoh (netral) ---------------- */
@@ -1056,6 +1059,7 @@ $('#bukaUbah').addEventListener('click', () => {
 function lihat(u) {
   buangSemua();
   const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
+  if (u.ke === 'tur') { pindah('beranda', () => setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 400)); return; }
   if (u.ke === 'bantuan-profil') { S.tab = 'ppat'; pindah('profil', bukaBantuan); return; }
   if (u.ke === 'lupa-kirim') { S.lupa = { email:AKUN.email, terkirim:true, ulang:0 }; pindah('lupa', () => { mulaiHitung(); sorot(); }); return; }
   if (u.ke === 'reset-kedaluwarsa') { S.kedaluwarsa = true; pindah('reset', sorot); return; }
@@ -1064,6 +1068,57 @@ function lihat(u) {
   if (u.tab) S.tab = u.tab;
   pindah(u.ke, sorot);
 }
+/* ---------------- tour guide (IDDS-OB-61, komponen tur-bersama) ---------------- */
+const tampakOb = s => [...document.querySelectorAll(s)].find(x => x.getClientRects().length && getComputedStyle(x).visibility !== 'hidden');
+/* bagian yang lebih tinggi dari ruang layar: sorot judulnya saja agar kotak keterangan tidak menutupinya */
+const pasOb = (f, judul) => () => { const e = typeof f === 'function' ? f() : tampakOb(f); if (!e || e.getBoundingClientRect().height <= innerHeight - (matchMedia('(max-width:760px)').matches ? 420 : 300)) return e; return (judul && (e.querySelector(judul) || tampakOb(judul))) || [...e.querySelectorAll('h2, h3, .sub-kepala, label')].find(x => x.getClientRects().length) || e; };
+const BANTU_OB = { el:() => tampakOb('#bukaBantuan') || tampakOb('.bantu-link [data-bantuan]'), j:'Bantuan', t:'Langkah singkat, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' };
+[
+  { kunci:'ob-beranda', aktif:() => S.layar === 'beranda', langkah:() => [
+    { el:'#navMenu', j:'Menu halaman', t:'Tautan ke bagian Tentang, Fitur, Cara kerja, dan Berita di halaman ini.' },
+    { el:'#tombolMenu', j:'Menu', t:'Tekan Menu untuk membuka tautan bagian halaman ini.' },
+    { el:'#navAksi', j:'Masuk dan daftar', t:'Masuk bila sudah punya akun, atau daftarkan kantor PPAT Anda.' },
+    { el:'#ctaAtas', j:'Mulai di sini', t:'Tekan Daftar sekarang untuk mendaftarkan kantor, atau Masuk bila sudah punya akun.' },
+    { el:'#daftarAkta', j:'Layanan akta', t:'Jenis akta yang dapat Anda buat secara elektronik di e-PPAT.' },
+    { el:'#jdFitur', j:'Fitur', t:'Bagian ini menjelaskan fitur utama e-PPAT.' },
+    { el:'#jdCara', j:'Cara kerja', t:'Bagian ini menjelaskan langkah memakai e-PPAT, dari pendaftaran sampai akta selesai.' },
+    { el:'#jdBerita', j:'Berita', t:'Kabar terbaru tentang e-PPAT.' }, BANTU_OB] },
+  { get kunci() { return S.lupa.terkirim ? 'ob-lupa-terkirim' : 'ob-lupa'; }, aktif:() => S.layar === 'lupa', langkah:() => [
+    { el:'#jdLupa', j:'Lupa kata sandi', t:'Kami mengirim tautan ke email Anda untuk membuat kata sandi baru.' },
+    { el:'#f-lEmail', j:'Email', t:'Isi email akun Anda.' },
+    { el:'#kirimLupa', j:'Kirim tautan atur ulang', t:'Tekan untuk mengirim tautan ke email Anda.' },
+    { el:'#jdTerkirim', j:'Cek email Anda', t:'Tautan sudah dikirim. Buka email Anda, lalu ikuti tautannya untuk membuat kata sandi baru.' },
+    { el:'#ulangBaris', j:'Kirim ulang', t:'Bila email tidak masuk, kirim ulang tautan setelah hitung mundur selesai.' },
+    { el:'#gantiEmail', j:'Ganti email', t:'Salah mengetik email? Kembali dan ganti alamatnya.' }, BANTU_OB] },
+  { get kunci() { return S.kedaluwarsa ? 'ob-reset-kedaluwarsa' : 'ob-reset'; }, aktif:() => S.layar === 'reset', langkah:() => [
+    { el:'#jdReset', j:'Atur ulang kata sandi', t:'Buat kata sandi baru untuk akun Anda.' },
+    { el:'#f-rBaru', j:'Kata sandi baru', t:'Ketik kata sandi baru. Tekan ikon mata untuk melihat kata sandi yang diketik.' },
+    { el:'#syaratReset', j:'Syarat kata sandi', t:'Setiap syarat langsung dicentang saat terpenuhi.' },
+    { el:'#f-rUlang', j:'Konfirmasi kata sandi', t:'Ketik ulang kata sandi baru yang sama.' },
+    { el:'#simpanReset', j:'Simpan kata sandi', t:'Tekan setelah semua syarat terpenuhi dan kedua kata sandi sama.' },
+    { el:'#jdKedaluwarsa', j:'Tautan kedaluwarsa', t:'Tautan atur ulang hanya berlaku sementara, dan tautan ini sudah tidak dapat dipakai.' },
+    { el:'#mintaBaru', j:'Minta tautan baru', t:'Tekan untuk meminta tautan baru ke email Anda.' }, BANTU_OB] },
+  { get kunci() { return 'ob-profil-' + S.tab; }, aktif:() => S.layar === 'profil', langkah:() => [
+    { el:pasOb('#blokFoto', '#jdFoto'), j:S.tab === 'kantor' ? 'Logo kantor' : 'Foto profil', t:S.tab === 'kantor' ? 'Klik gambar untuk mengganti logo kantor. Format JPG atau PNG.' : 'Klik gambar untuk mengganti foto profil. Format JPG atau PNG.' },
+    { el:'#tabProfil', j:'Bagian profil', t:'Profil dibagi tiga tab: PPAT, Kantor PPAT, dan Kata Sandi. Titik pada tab menandai perubahan yang belum disimpan.' },
+    { el:'#f-pKode', j:'Kode PPAT', t:'Kode dibuat otomatis oleh sistem dan tidak dapat diubah.' },
+    { el:'#f-pDepan', j:'Nama', t:'Ubah jenis kelamin dan nama Anda di sini.' },
+    { el:'#panel-ppat .kartu-kaki', j:'Simpan PPAT', t:'Status di kiri menunjukkan ada perubahan yang belum disimpan. Tekan Simpan PPAT untuk menyimpannya.' },
+    { el:pasOb('#blokKontak'), j:'Info kontak', t:'Tambah, ubah, atau nonaktifkan email dan nomor telepon yang dapat dihubungi.' },
+    { el:'#f-kNama', j:'Nama kantor', t:'Ubah nama kantor PPAT Anda di sini.' },
+    { el:'#f-kId', j:'Data terkunci', t:'ID PPAT dan URL web terkunci sejak pendaftaran. Hubungi dukungan bila ada kesalahan.' },
+    { el:'#f-kBank', j:'Rekening kantor', t:'Isi bank dan nomor rekening kantor.' },
+    { el:pasOb('#blokKontakKantor'), j:'Info kontak kantor', t:'Tambah, ubah, atau nonaktifkan kontak kantor.' },
+    { el:'#f-kAlamat', j:'Lokasi kantor', t:'Isi alamat lengkap kantor beserta kelurahan, kecamatan, dan kota.' },
+    { el:pasOb('.peta'), j:'Peta', t:'Klik peta atau cari lokasi untuk mengisi koordinat GPS secara otomatis.' },
+    { el:'#panel-kantor .kartu-kaki', j:'Simpan data kantor', t:'Status di kiri menunjukkan ada perubahan yang belum disimpan. Tekan Simpan data kantor untuk menyimpannya.' },
+    { el:'#f-sLama', j:'Kata sandi saat ini', t:'Isi kata sandi yang Anda pakai sekarang.' },
+    { el:'#f-sBaru', j:'Kata sandi baru', t:'Ketik kata sandi baru, lalu ketik ulang di isian konfirmasi.' },
+    { el:'#syaratProfil', j:'Syarat kata sandi', t:'Setiap syarat langsung dicentang saat terpenuhi.' },
+    { el:pasOb('#blokMfa'), j:'Verifikasi dua langkah', t:'Status verifikasi dua langkah tampil di sini. Atur ulang MFA bila Anda berganti ponsel atau metode.' },
+    { el:'#panel-sandi .kartu-kaki', j:'Perbarui kata sandi', t:'Tekan Perbarui setelah semua syarat terpenuhi.' },
+    { el:'#userTombol', j:'Menu akun', t:'Buka menu akun untuk pindah ke halaman lain atau keluar.' }, BANTU_OB] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-OB-61') })));
 $('#simEmail').addEventListener('click', () => { if (S.layar === 'reset') { S.kedaluwarsa = false; gambar(); $('#rBaru').focus(); return; } S.kedaluwarsa = false; pindah('reset', () => $('#rBaru').focus()); });
 $('#simKedaluwarsa').addEventListener('click', () => { if (S.layar === 'reset') jaga(() => { buangSemua(); S.kedaluwarsa = true; gambar(); }); else { S.kedaluwarsa = true; pindah('reset'); } });
 $('#aturUlang').addEventListener('click', () => { clearInterval(jamUlang); P = P0(); F = F0(); const l = S.layar; S = S0(); S.layar = l; $('#lapisan').innerHTML = ''; gambar(); toast('Data contoh dikembalikan ke awal.'); });

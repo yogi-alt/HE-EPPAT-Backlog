@@ -530,6 +530,9 @@ const UBAH = [
   { kode:'IDDS-PL-20', judul:'Bantuan di setiap halaman Monitoring',
     isi:'Setiap halaman (Dasbor, Daftar PPAT, Paket Langganan, Log Aktivitas) memiliki tombol Bantuan di kanan judul. Tombol ini membuka IDDS Drawer berisi penjelasan isi halaman, langkah, daftar istilah, pertanyaan umum (IDDS Accordion), dan kontak dukungan.',
     lama:'Tidak ada panduan atau kontak dukungan di area platform.', ke:'bantuan', sorot:null },
+  { kode:'IDDS-PL-79', versi:'v2', bukanHE:true, judul:'Tour guide Dasbor, Daftar PPAT, Paket Langganan, dan Log Aktivitas',
+    isi:'Saat admin platform pertama kali membuka setiap halaman Monitoring, tur singkat menjelaskan isinya. Dasbor: kartu ringkasan, status sistem dan Periksa ulang, PPAT baru, aktivitas lintas-PPAT dan Lihat semua, serta PPAT teramai. Daftar PPAT: keterangan hanya untuk dilihat, Buka Onboarding, pencarian, daftar kantor, dan halaman. Paket Langganan: keterangan katalog, daftar paket, dan penjelasan kolom Registrasi CA. Log Aktivitas: saringan PPAT dan jenis aktivitas, daftar aktivitas, dan halaman. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per halaman, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat admin platform pertama kali membuka Dasbor, Daftar PPAT, Paket Langganan, dan Log Aktivitas.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'IDDS-PL-41', judul:'Kerangka: menu samping pola Sidebar IDDS',
     isi:'Kerangka menu samping mengikuti pola Sidebar IDDS dengan warna brand E-PPAT tetap: label grup kecil berhuruf biasa dengan chevron buka/tutup, menu berupa ikon dan label dengan tanda arahkan dan tanda menu aktif, paling banyak dua tingkat (grup lalu menu), dan kartu profil pengguna (inisial, nama, peran) di bagian bawah dengan versi aplikasi di bawahnya. Tombol di samping logo menciutkan menu menjadi ikon saja; nama menu tampil sebagai tooltip dan tetap dibacakan pembaca layar. Pilihan ciut diingat peramban. Di layar sempit menu tetap berupa laci. Kartu profil membuka menu akun yang sama dengan kepala halaman. Berlaku di Monitoring, Jenis Akta, dan Sistem.',
     lama:'Menu samping gelap ala live dengan label grup berhuruf kapital, tanpa kartu profil pengguna, dan tanpa mode ciut.', ke:'dasbor', sorot:'#sidebar' }
@@ -972,12 +975,50 @@ $('#bukaUbah').addEventListener('click', () => {
 function lihat(u) {
   const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke === 'tur') { pindah('dasbor', () => setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300)); return; }
   pindah(u.ke, sorot);
 }
 $('#aturUlang').addEventListener('click', () => { PPAT = contohPpat(); LOG = contohLog(); const l = S.layar; S = S0(); S.layar = l; gambar(); gambarMenu(); toast('Data contoh dikembalikan ke awal.'); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+/* tur halaman (komponen bersama sumber/tur-bersama.html) */
+const turTampak = s => [...document.querySelectorAll(s)].find(e => e.getClientRects().length && getComputedStyle(e).visibility !== 'hidden');
+/* bagian yang lebih tinggi dari ruang layar: sorot judul atau bagian atasnya agar kotak keterangan tidak menutupinya */
+const turPas = (f, anak) => () => { const e = typeof f === 'function' ? f() : turTampak(f); if (!e) return e; const batas = innerHeight - (matchMedia('(max-width:760px)').matches ? 360 : 300); if (e.getBoundingClientRect().height <= batas) return e; return (anak && [...e.querySelectorAll(anak)].find(x => x.getClientRects().length)) || [...e.querySelectorAll('h2, h3, legend, .eb, .blok-atas')].find(x => x.getClientRects().length) || e; };
+const turH3 = (t, wadah) => () => { const h = [...document.querySelectorAll('#halaman h3, #halaman h2')].find(x => x.getClientRects().length && x.textContent.trim().startsWith(t)); return h && (h.closest(wadah || '.sub-bagian, section, .uji, .ina-card') || h); };
+const turTabel = id => () => turTampak(id + ' thead') || turTampak(id + ' tbody tr');
+const TUR_BANTUAN = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' };
+/* tur Monitoring (IDDS-PL-79): satu tur per halaman */
+[
+  { kunci:'plmon-dasbor', aktif:() => S.layar === 'dasbor', langkah:() => [
+    { el:turPas('#kpi', '.ina-card'), j:'Ringkasan platform', t:'Angka ini menunjukkan jumlah kantor PPAT, yang aktif, yang ditangguhkan, dan total pengguna di semua kantor.' },
+    { el:'#kartuStatus', j:'Status sistem', t:'Kesehatan basis data dan Redis tampil di sini beserta waktu pemeriksaan terakhir.' },
+    { el:'#periksaUlang', j:'Periksa ulang', t:'Tekan tombol ini untuk memeriksa ulang status sistem.' },
+    { el:() => document.getElementById('jdBaru')?.closest('section'), j:'PPAT baru', t:'Jumlah kantor PPAT yang mendaftar dalam 30 hari terakhir.' },
+    { el:turPas('#aktLintas', '.blok-atas'), j:'Aktivitas lintas-PPAT', t:'Aktivitas terbaru dari semua kantor PPAT tampil di sini. Aktivitas yang gagal diberi lencana Gagal.' },
+    { el:'#aktLintas [data-ke-layar="log"]', j:'Lihat semua', t:'Buka Log Aktivitas untuk menelusuri dan menyaring semua aktivitas.' },
+    { el:turPas(() => document.getElementById('jdTop')?.closest('section')), j:'PPAT teramai', t:'Lima kantor PPAT dengan pengguna terbanyak. Klik nama kantor untuk membukanya di Daftar PPAT.' },
+    TUR_BANTUAN] },
+  { kunci:'plmon-ppat', aktif:() => S.layar === 'ppat', langkah:() => [
+    { el:'#infoPpat', j:'Hanya untuk dilihat', t:'Kantor PPAT baru, perubahan paket, dan admin kantor diatur di aplikasi Onboarding, bukan di halaman ini.' },
+    { el:'#bukaOnboarding', j:'Buka Onboarding', t:'Tekan untuk membuka konsol operator Onboarding.' },
+    { el:'.saring-pl', j:'Cari PPAT', t:'Ketik nama atau alamat kantor PPAT. Jumlah hasil tampil di sebelah kanan.' },
+    { el:turTabel('#tabelPpat'), j:'Daftar PPAT', t:'Setiap baris menampilkan paket, masa berlaku, status, dan registrasi kantor PPAT. Lencana Kedaluwarsa menandai masa berlaku yang sudah lewat.' },
+    { el:'#tabelPpat .halaman', j:'Halaman', t:'Lihat jumlah data yang tampil dan pindah halaman di sini.' },
+    TUR_BANTUAN] },
+  { kunci:'plmon-paket', aktif:() => S.layar === 'paket', langkah:() => [
+    { el:'.info-pl', j:'Katalog hanya untuk dilihat', t:'Paket dibuat dan diubah di aplikasi Onboarding. Halaman ini menampilkan paket yang berlaku saat ini.' },
+    { el:turTabel('#tabelPaket'), j:'Daftar paket', t:'Setiap paket menampilkan batas order, batas pengguna, masa berlaku, registrasi CA, dan statusnya.' },
+    { el:'#tabelPaket .tip-kol', j:'Registrasi CA', t:'Arahkan kursor atau fokus ke ikon ini untuk membaca arti kolom Registrasi CA.' },
+    TUR_BANTUAN] },
+  { kunci:'plmon-log', aktif:() => S.layar === 'log', langkah:() => [
+    { el:'#saringLog', j:'Saring aktivitas', t:'Pilih kantor PPAT dan jenis aktivitas untuk menyaring log. Jumlah aktivitas yang cocok tampil di sebelah kanan.' },
+    { el:'#hapusSaring', j:'Hapus saringan', t:'Tekan untuk menampilkan semua aktivitas lagi.' },
+    { el:turTabel('#tabelLog'), j:'Daftar aktivitas', t:'Setiap baris menampilkan waktu, kantor PPAT, pelaku, aksi, status, dan alamat IP.' },
+    { el:'#tabelLog .halaman', j:'Halaman', t:'Lihat jumlah data yang tampil dan pindah halaman di sini.' },
+    TUR_BANTUAN] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-PL-79') })));
 const awal = (location.hash || '').slice(1); if (RENDER[awal]) S.layar = awal;
 window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (RENDER[h] && h !== S.layar) pindah(h); });
 gambar();

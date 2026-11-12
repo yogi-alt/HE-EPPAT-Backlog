@@ -541,7 +541,10 @@ const UBAH = [
     lama:'Skenario dan Preview Akta belum ada di prototipe.', ke:'skenario', sorot:'#panelDok' },
   { kode:'IDDS-PL-72', versi:'v2', bukanHE:true, sumber:LIVE, judul:'Simpan sebagai Draft dan Kunci Template dengan daftar periksa',
     isi:'Kepala editor menampilkan versi template dan status simpan. Pita "n hal perlu diperiksa sebelum Kunci Template" menyebut semua hal yang tersisa dan menyediakan tombol untuk membukanya. Tooltip menjelaskan alasan Kunci Template nonaktif. Kunci Template meminta konfirmasi yang menyebut versi baru dan dampaknya bagi order, lalu lencana berubah menjadi Siap vN.',
-    lama:'Status template dan penguncian belum ada di prototipe. Di live, pita hanya menyebut skenario dan tombol Kunci template nonaktif tanpa penjelasan.', ke:'kunci', sorot:'#aksiAtas' }
+    lama:'Status template dan penguncian belum ada di prototipe. Di live, pita hanya menyebut skenario dan tombol Kunci template nonaktif tanpa penjelasan.', ke:'kunci', sorot:'#aksiAtas' },
+  { kode:'IDDS-PL-80', versi:'v2', bukanHE:true, judul:'Tour guide Jenis Akta, Template & Variabel, dan Editor Pasal',
+    isi:'Saat admin platform pertama kali membuka setiap layar, tur singkat menjelaskan isinya. Jenis Akta: Tambah jenis akta, impor dan ekspor, daftar jenis akta, dan aksi per layanan. Template & Variabel memiliki tur per tab: Template (daftar template, Tambah template, Impor berkas), Variabel (asal variabel, pencarian, Variabel dokumen, impor dan ekspor, kelompok variabel), dan Rel Status (status rel, urutan tahap, Tambah tahap, Pulihkan rel bawaan, Salin rel, Simpan rel, Terbit). Editor Pasal: status simpan, Simpan sebagai draft, Kunci template, Preview akta, hal yang perlu diperiksa, bilah alat, daftar bagian, kertas naskah, dan panel editor; saat sebuah bagian disunting, tur menjelaskan panel bagian serta Simpan dan Batal. Preview akta: jumlah halaman, data contoh, Download PDF, dan Kembali. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat admin platform pertama kali membuka Jenis Akta, Template & Variabel, Editor Pasal, dan Preview akta.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
 ];
 
 /* ---------------- data contoh (isi mengikuti rekaman live Platform; tahap memakai tahap Peruri) ---------------- */
@@ -1767,12 +1770,73 @@ $('#bukaUbah').addEventListener('click', () => {
     tombol:[['Tutup', 'secondary', null]] });
   o.el.querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); tutup(o); lihat(UBAH[+b.dataset.lihat]); });
 });
+/* ---------------- tour guide (IDDS-PL-80, komponen tur-bersama) ---------------- */
+{
+  const BANTUAN_T = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' };
+  const terlihatT = s => [...document.querySelectorAll(s)].find(x => x.getClientRects().length && getComputedStyle(x).visibility !== 'hidden');
+  /* bagian yang lebih tinggi dari ruang layar: sorot bagian atasnya agar kotak keterangan tidak menutupinya */
+  const pasT = (f, anak) => () => { const e = typeof f === 'function' ? f() : terlihatT(f); if (!e || e.getBoundingClientRect().height <= innerHeight - (matchMedia('(max-width:760px)').matches ? 360 : 300)) return e; return [...e.querySelectorAll(anak || 'h2, h3')].find(x => x.getClientRects().length) || e; };
+  const KEMBALI_D = { el:'#kembali', j:'Kembali', t:'Kembali ke daftar Jenis Akta.' };
+  const TAB_D = { el:'#tabDetail [role="tablist"]', j:'Tab jenis akta', t:'Template, Variabel, dan Rel Status jenis akta ini dibuka per tab. Angka di tab menunjukkan jumlah isinya.' };
+  [
+    { kunci:'pla-jenis', aktif:() => tampilan() === 'jenis', langkah:() => [
+      { el:'#tambahJenis', j:'Tambah jenis akta', t:'Tambahkan layanan akta baru beserta kode dan namanya.' },
+      { el:'#aksiImpor', j:'Impor dan ekspor', t:'Pindahkan data satu layanan atau seluruh paket antarlingkungan. Tekan ikon tanya untuk melihat isi setiap berkas.' },
+      { el:pasT(() => terlihatT('#tabelJenis thead') || terlihatT('#tabelJenis tbody tr'), 'td'), j:'Daftar jenis akta', t:'Setiap baris menampilkan kode, nama layanan, rel status, dan statusnya.' },
+      { el:'#tabelJenis .aksi-baris', j:'Aksi per layanan', t:'Tekan Ubah untuk mengubah data layanan, atau Template & variabel untuk membuka template dan variabelnya.' },
+      BANTUAN_T] },
+    { kunci:'pla-detail-template', aktif:() => tampilan() === 'detail' && S.tab === 'template', langkah:() => [KEMBALI_D, TAB_D,
+      { el:pasT('#panel-template .tabel-wadah', 'thead, tr'), j:'Daftar template', t:'Template naskah untuk jenis akta ini beserta statusnya. Template berstatus Siap sudah dikunci dan dapat dipakai layanan.' },
+      { el:'#tambahTpl', j:'Tambah template', t:'Buat template naskah baru untuk jenis akta ini.' },
+      { el:'#imporTpl', j:'Impor berkas', t:'Masukkan template dari berkas yang sudah ada.' },
+      BANTUAN_T] },
+    { kunci:'pla-detail-variabel', aktif:() => tampilan() === 'detail' && S.tab === 'variabel', langkah:() => [KEMBALI_D, TAB_D,
+      { el:'.var-penjelas', j:'Asal variabel', t:'Variabel formulir dibaca langsung dari Form Design. Lingkup menentukan tempat variabel terisi.' },
+      { el:'.var-cari', j:'Cari variabel', t:'Ketik nama atau kunci variabel untuk menemukannya.' },
+      { el:'#tambahVar', j:'Variabel dokumen', t:'Tambahkan variabel dokumen yang tidak berasal dari formulir.' },
+      { el:'#imporVar', j:'Impor dan ekspor', t:'Pindahkan daftar variabel dari atau ke berkas.' },
+      { el:pasT('#daftarVar .var-kel', 'h3'), j:'Kelompok variabel', t:'Variabel dikelompokkan per tab formulir, variabel sistem, dan variabel dokumen.' },
+      BANTUAN_T] },
+    { kunci:'pla-detail-rel', aktif:() => tampilan() === 'detail' && S.tab === 'rel', langkah:() => [KEMBALI_D, TAB_D,
+      { el:'#statusRel', j:'Status rel', t:'Lencana ini menunjukkan apakah rel status sudah terbit, masih draf, atau belum disimpan.' },
+      { el:'#kartuRel .rs-rangkai', j:'Urutan tahap', t:'Tahap permohonan berurutan dari awal sampai selesai.' },
+      { el:'#relTambah', j:'Tambah tahap', t:'Tambahkan tahap baru ke rel status.' },
+      { el:'#relPulih', j:'Pulihkan rel bawaan', t:'Kembalikan tahap ke rel bawaan bila perubahan tidak jadi dipakai.' },
+      { el:'#relSalin', j:'Salin rel', t:'Salin tahap dari layanan lain agar tidak menyusun ulang dari awal.' },
+      { el:'#relSimpan', j:'Simpan rel', t:'Simpan perubahan sebagai draf. Tombol aktif setelah ada perubahan.' },
+      { el:'#relTerbit', j:'Terbit', t:'Terbitkan rel agar dipakai permohonan baru.' },
+      BANTUAN_T] },
+    { get kunci() { return S.pilih ? 'pla-pasal-bagian' : 'pla-pasal'; }, aktif:() => tampilan() === 'pasal' && !S.preview, langkah:() => [
+      { el:'#kembali', j:'Kembali ke template', t:'Kembali ke daftar template jenis akta ini.' },
+      { el:'#statusSimpan', j:'Status simpan', t:'Menunjukkan apakah perubahan sudah tersimpan.' },
+      { el:'#simpanDraft', j:'Simpan sebagai draft', t:'Simpan perubahan tanpa mengunci template.' },
+      { el:'#kunciTpl', j:'Kunci template', t:'Kunci template setelah semua hal yang perlu diperiksa selesai. Template terkunci dapat dipakai layanan.' },
+      { el:'#previewAkta', j:'Preview akta', t:'Lihat hasil akta dengan data contoh dari skenario.' },
+      { el:pasT('#pitaPeriksa', '.ina-alert__title, h4, b'), j:'Yang perlu diperiksa', t:'Daftar ini menyebut hal yang harus dibereskan sebelum template dikunci. Tombol di setiap baris membawa Anda ke bagiannya.' },
+      { el:'#bilahAlat', j:'Bilah alat', t:'Atur format teks, sisipkan variabel, dan tandai teks bersyarat.' },
+      { el:'[data-laci="nav"]', j:'Daftar bagian', t:'Buka daftar bagian dan lampiran naskah dari tombol ini.' },
+      { el:pasT('#navDok', '.nav-atas'), j:'Daftar bagian', t:'Bagian dan lampiran naskah tersusun di sini. Cari judul bagian, ubah urutan, atau sunting bagian.' },
+      { el:pasT('#kertas', '.bag'), j:'Kertas naskah', t:'Klik bagian di kertas untuk menyuntingnya. Variabel tampil sebagai chip, dan teks bersyarat diberi tanda.' },
+      { el:'#simpanBag', j:'Simpan bagian', t:'Tekan Simpan untuk menyimpan bagian yang sedang disunting, atau Batal untuk membuang perubahannya.' },
+      { el:'[data-laci="panel"]', j:'Panel editor', t:'Buka panel Bagian, Variabel, Pengaturan Halaman, dan Skenario dari tombol ini.' },
+      { el:() => terlihatT('#panelDok .kol-kepala'), j:'Panel editor', t:S.pilih ? 'Atur tipe, judul, dan tampilan bagian yang sedang disunting. Tab lain berisi Variabel, Pengaturan Halaman, dan Skenario.' : 'Tab Bagian, Variabel, Pengaturan Halaman, dan Skenario ada di sini.' },
+      BANTUAN_T] },
+    { kunci:'pla-preview', aktif:() => tampilan() === 'pasal' && !!S.preview, langkah:() => [
+      { el:'#prHal', j:'Jumlah halaman', t:'Jumlah halaman akta yang dihasilkan tampil di sini.' },
+      { el:'.pr-pita', j:'Data contoh', t:'Data di preview berasal dari skenario. Bila belum ada skenario, isian tampil sebagai nama variabelnya.' },
+      { el:pasT('#prKanvas', '.hal, .pr-lembar > *'), j:'Hasil akta', t:'Akta tampil per halaman seperti hasil cetak.' },
+      { el:'#unduhPdf', j:'Download PDF', t:'Unduh hasil preview sebagai PDF.' },
+      { el:'#tutupPreview', j:'Kembali ke editor', t:'Tutup preview dan lanjutkan menyunting naskah.' },
+      BANTUAN_T] }
+  ].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-PL-80') })));
+}
 function lihat(u) {
   const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
   const ajb = () => jenisDari('AJB'), dlg = () => LAPIS[LAPIS.length - 1].el;
   const editor = fn => pindah('pasal', { tpl:1 }, fn);
   const bagianPasal = () => { const t = tplAktif(); return t.bag.find(b => b.type === 'pasal'); };
-  ({ jenis:() => pindah('jenis', {}, sorot),
+  ({ tur:() => pindah('jenis', {}, () => setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300)),
+     jenis:() => pindah('jenis', {}, sorot),
      tambah:() => pindah('jenis', {}, () => dialogJenis(null)),
      ubahJenis:() => pindah('jenis', {}, () => dialogJenis(ajb())),
      impor:() => pindah('jenis', {}, sorot),

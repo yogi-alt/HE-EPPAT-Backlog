@@ -351,7 +351,10 @@ const UBAH = [
     lama:'Subjudul berbunyi "Katalog paket langganan e-PPAT (sumber data langsung dari platform).", dan kolom berbunyi "Max Order" dan "Max User". Ikon hapus paket sistem hanya tampak pudar tanpa alasan. Nama paket tertulis "SATU BULAN".', ke:'paket', sorot:'#tabelPaket' },
   { kode:'IDDS-OB-45', judul:'Pengaturan: Bantuan di setiap halaman',
     isi:'Menu, Daftar Pengguna, Edit Pengguna, Peran Pengguna, Harga Produk (termasuk Tambah/Edit Produk), dan Paket Langganan memiliki tombol Bantuan di kanan judul. Tombol ini membuka IDDS Drawer berisi penjelasan halaman, langkah, istilah, pertanyaan umum (IDDS Accordion), serta kontak dukungan.',
-    lama:'Menu Pengaturan tidak memiliki panduan atau kontak dukungan.', ke:'bantuan', sorot:null }
+    lama:'Menu Pengaturan tidak memiliki panduan atau kontak dukungan.', ke:'bantuan', sorot:null },
+  { kode:'IDDS-OB-64', versi:'v2', bukanHE:true, judul:'Tour guide Pengaturan Onboarding',
+    isi:'Saat staf pertama kali membuka setiap halaman Pengaturan, tur singkat menjelaskan isinya. Menu Admin, Operator, dan Customer: pencarian, Tambah menu utama, pohon menu, buka-tutup sub-menu, dan aksi per menu. Daftar Pengguna: pencarian, saringan status, Tambah pengguna, kolom Status dan MFA, aksi Edit dan Hapus beserta alasannya, dan halaman. Edit Pengguna punya tur per tab: PPAT, Kantor PPAT, dan Kata Sandi. Peran Pengguna: pencarian, simpan otomatis, tabel akses, dan sakelar akses. Harga Produk, Tambah Produk, dan Edit Produk (tab Info Utama dan Harga), serta Paket Langganan juga punya tur sendiri. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat staf pertama kali membuka halaman Pengaturan Onboarding.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
 ];
 
 /* ---------------- data contoh (netral) ---------------- */
@@ -1410,6 +1413,7 @@ $('#bukaUbah').addEventListener('click', () => {
 function lihat(u) {
   const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke === 'tur') { const mulai = () => setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300); if (S.layar === 'menu-admin') mulai(); else pindah('menu-admin', mulai); return; }
   if (u.ke === S.layar) { sorot(); return; }
   pindah(u.ke, sorot);
 }
@@ -1417,6 +1421,79 @@ $('#aturUlang').addEventListener('click', () => {
   jaga(() => { MENU = contohMenu(); PENGGUNA = contohPengguna(); PRODUK = contohProduk(); PAKET = contohPaket(); CABUT = cabutAwal(); const l = S.layar; S = S0(); S.layar = l; siapkan(l); gambar(); gambarMenu(); toast('Data contoh dikembalikan ke awal.'); });
 });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
+
+/* ---------------- tour guide (IDDS-OB-64, komponen tur-bersama) ----------------
+   Setiap halaman, tab Edit Pengguna, dan tab Edit Produk punya kunci sendiri. */
+const terlihatT = s => [...document.querySelectorAll(s)].find(x => x.offsetParent);
+const hpT = () => matchMedia('(max-width:760px)').matches;
+/* bagian yang lebih tinggi dari ruang layar: sorot judul atau bagian atasnya */
+const pasT = (f, sub) => () => { const e = typeof f === 'function' ? f() : terlihatT(f); if (!e || e.getBoundingClientRect().height <= innerHeight - (hpT() ? 360 : 300)) return e; return (sub && [...e.querySelectorAll(sub)].find(x => x.offsetParent)) || e; };
+/* kepala tabel; di ponsel kepala tabel disembunyikan sehingga baris pertama yang disorot */
+const kepalaT = id => () => (!hpT() && terlihatT('#' + id + ' thead')) || terlihatT('#' + id + ' tbody tr');
+const cariT = id => () => { const e = terlihatT('#' + id); return e && (e.closest('.ina-input-search') || e); };
+const chipT = id => () => { const e = terlihatT('#' + id + ' [aria-pressed]'); return e && e.parentElement; };
+const isianT = id => () => { const e = terlihatT('#' + id); return e && (e.closest('.ina-text-field, .ina-password-input, .ina-select-dropdown') || e); };
+const jenisT = () => JENIS[jenisDari(S.layar)] ? JENIS[jenisDari(S.layar)].t.toLowerCase() : '';
+const BANTU_T = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' };
+[
+  { get kunci() { return 'obpgt-' + S.layar; }, aktif:() => S.layar.startsWith('menu-'), langkah:() => [
+    { el:cariT('cariMenu'), j:'Cari menu', t:'Ketik nama atau kode menu untuk menemukannya di pohon menu. Jumlah menu tampil di sebelahnya.' },
+    { el:'#tambahMenuUtama', j:'Tambah menu utama', t:'Tambahkan menu utama baru di menu samping aplikasi ' + jenisT() + '.' },
+    { el:pasT(kepalaT('pohonMenu')), j:'Pohon menu', t:'Menu utama dan sub-menunya tersusun berjenjang. Kolom Status menunjukkan menu yang aktif.' },
+    { el:'#pohonMenu .btn-buka', j:'Buka dan tutup sub-menu', t:'Tekan tombol ini untuk membuka atau menutup sub-menu di bawahnya.' },
+    { el:'#pohonMenu .aksi-baris', j:'Aksi menu', t:'Tambah sub-menu, ubah, atau hapus menu dari tombol di setiap baris. Hapus selalu meminta konfirmasi.' }, BANTU_T] },
+  { get kunci() { return 'obpgt-' + S.layar; }, aktif:() => /^pengguna-(admin|operator|customer)$/.test(S.layar), langkah:() => [
+    { el:cariT('cariPengguna'), j:'Cari pengguna', t:'Ketik nama, kode, atau email untuk menemukan pengguna.' },
+    { el:chipT('saringPengguna'), j:'Saring status', t:'Tampilkan semua pengguna, yang aktif saja, atau yang nonaktif saja. Angkanya menunjukkan jumlah.' },
+    { el:'#tambahPengguna', j:'Tambah pengguna', t:'Buat akun pengguna ' + jenisT() + ' baru.' },
+    { el:kepalaT('tabelPengguna'), j:'Daftar pengguna', t:'Kolom Status dan MFA menunjukkan keadaan akun dan verifikasi dua langkahnya.' },
+    { el:'#tabelPengguna .aksi-baris', j:'Ubah atau hapus', t:'Edit membuka data pengguna. Hapus selalu meminta konfirmasi, dan tombol yang tidak dapat dipakai disertai alasannya.' },
+    { el:'#halaman .halaman', j:'Halaman', t:'Daftar menampilkan sepuluh pengguna per halaman. Pindah halaman di sini.' }, BANTU_T] },
+  { get kunci() { return 'obpgt-edit-' + S.tab; }, aktif:() => S.layar === 'pengguna-edit', langkah:() => [
+    { el:'#kembaliPengguna', j:'Kembali', t:'Kembali ke daftar pengguna.' },
+    { el:pasT('#gantiFoto', 'img, svg'), j:S.tab === 'kantor' ? 'Logo kantor' : 'Foto profil', t:'Klik gambar untuk menggantinya. Pakai JPG atau PNG, maksimal 2 MB.' },
+    { el:'#tabEdit', j:'Tab data', t:'Data PPAT, Kantor PPAT, dan Kata Sandi disimpan terpisah di tabnya masing-masing.' },
+    { el:pasT('#panel-ppat', 'h3'), j:'Data PPAT', t:'Ubah kode, tipe, jenis kelamin, dan nama PPAT.' },
+    { el:'#togAktif', j:'Status akun', t:'Sakelar ini mengaktifkan atau menonaktifkan akun.' },
+    { el:pasT('#blokKontak', 'h3'), j:'Info kontak', t:'Email dan nomor telepon akun tercantum di sini. Tambah atau ubah kontak dari tombolnya.' },
+    { el:'#kaki-ppat', j:'Simpan data PPAT', t:'Status simpan tampil di sini. Tekan Simpan PPAT setelah mengubah data.' },
+    { el:'#stKantor', j:'Status kantor', t:'Lencana ini menunjukkan status kantor PPAT.' },
+    { el:isianT('kNama'), j:'Data kantor', t:'Isi nama kantor, ID, alamat aplikasi, bank, dan nomor rekening.' },
+    { el:pasT('#blokKontakKantor', 'h3'), j:'Kontak kantor', t:'Kontak kantor PPAT tercantum di sini.' },
+    { el:pasT('#blokLokasi', 'h3'), j:'Lokasi kantor', t:'Isi alamat, lalu tentukan titik lokasi kantor di peta.' },
+    { el:'#kaki-kantor', j:'Simpan data kantor', t:'Status simpan tampil di sini. Tekan tombol simpan setelah mengubah data kantor.' },
+    { el:isianT('sBaru'), j:'Kata sandi baru', t:'Ketik kata sandi baru, lalu ulangi di isian berikutnya.' },
+    { el:'#blokSyarat', j:'Syarat kata sandi', t:'Setiap syarat langsung dicentang saat terpenuhi.' },
+    { el:'#perbaruiSandi', j:'Perbarui kata sandi', t:'Tombol aktif setelah semua syarat terpenuhi dan kedua kata sandi sama.' },
+    { el:pasT('#blokMfa', 'h3'), j:'Verifikasi dua langkah', t:'Status verifikasi dua langkah (MFA) akun ini tampil di sini.' }, BANTU_T] },
+  { get kunci() { return 'obpgt-' + S.layar; }, aktif:() => S.layar.startsWith('peran-'), langkah:() => [
+    { el:cariT('cariPeran'), j:'Cari pengguna', t:'Ketik nama atau email untuk menemukan baris pengguna.' },
+    { el:'#statusPeran', j:'Simpan otomatis', t:'Perubahan akses tersimpan otomatis setiap kali sakelar diubah. Mencabut akses meminta konfirmasi.' },
+    { el:pasT(kepalaT('tabelPeran')), j:'Tabel akses', t:'Setiap baris adalah pengguna ' + jenisT() + ', dan setiap kolom adalah menu.' },
+    { el:'#tabelPeran [data-akses]', j:'Sakelar akses', t:'Nyalakan sakelar agar pengguna dapat membuka menu itu.' }, BANTU_T] },
+  { kunci:'obpgt-harga', aktif:() => S.layar === 'harga', langkah:() => [
+    { el:cariT('cariHarga'), j:'Cari produk', t:'Ketik kode atau nama produk untuk menemukannya.' },
+    { el:'#tambahProduk', j:'Tambah produk', t:'Buat produk baru, lalu tambahkan harganya lewat Edit Produk.' },
+    { el:kepalaT('tabelHarga'), j:'Daftar produk', t:'Setiap produk punya durasi, harga, dan status.' },
+    { el:'#tabelHarga .aksi-baris', j:'Ubah atau hapus', t:'Edit membuka data dan riwayat harga produk. Hapus selalu meminta konfirmasi.' }, BANTU_T] },
+  { get kunci() { return S.layar === 'harga-edit' ? 'obpgt-harga-edit-' + S.tabProduk : 'obpgt-harga-tambah'; }, aktif:() => S.layar === 'harga-tambah' || S.layar === 'harga-edit', langkah:() => [
+    { el:'#kembaliHarga', j:'Kembali', t:'Kembali ke daftar Harga Produk.' },
+    { el:'#tabProduk', j:'Tab produk', t:'Info Utama berisi data produk. Tab Harga berisi harga dan riwayatnya.' },
+    { el:isianT('prKode'), j:'Data produk', t:'Mulai dari kode produk, lalu isi nama, keterangan, dan durasinya di isian berikutnya.' },
+    { el:'#togProduk', j:'Status produk', t:'Sakelar ini mengaktifkan atau menonaktifkan produk.' },
+    { el:() => { const e = terlihatT('#pilihFotoProduk'); return e && (e.closest('.pilih-berkas') || e); }, j:'Foto produk', t:'Pilih foto produk dari perangkat Anda.' },
+    { el:'#stProduk', j:'Status simpan', t:'Keterangan ini menunjukkan apakah ada perubahan yang belum disimpan.' },
+    { el:'#simpanProduk', j:'Simpan produk', t:S.layar === 'harga-tambah' ? 'Simpan produk baru. Harganya ditambahkan setelah itu lewat Edit Produk.' : 'Simpan perubahan data produk.' },
+    { el:isianT('hargaBaru'), j:'Harga baru', t:'Isi harga baru produk ini dalam rupiah.' },
+    { el:'#tambahHarga', j:'Tambah harga', t:'Harga baru langsung tercatat di riwayat harga.' },
+    { el:pasT('#tabelRiwayatHarga', 'thead'), j:'Riwayat harga', t:'Semua harga produk ini tercatat di sini. Menghapus harga meminta konfirmasi.' }, BANTU_T] },
+  { kunci:'obpgt-paket', aktif:() => S.layar === 'paket', langkah:() => [
+    { el:cariT('cariPaket'), j:'Cari paket', t:'Ketik kode atau nama paket untuk menemukannya.' },
+    { el:chipT('saringPaket'), j:'Saring status', t:'Tampilkan semua paket, yang aktif saja, atau yang nonaktif saja.' },
+    { el:'#tambahPaket', j:'Tambah paket', t:'Buat paket langganan baru yang dapat dipilih calon PPAT.' },
+    { el:kepalaT('tabelPaket'), j:'Daftar paket', t:'Setiap paket punya batas order, batas pengguna, masa berlaku, dan status.' },
+    { el:'#tabelPaket .aksi-baris', j:'Ubah atau hapus', t:'Edit membuka data paket. Paket sistem tidak dapat dihapus, dan alasannya tertulis di bawah tombol.' }, BANTU_T] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-OB-64') })));
 const awal = (location.hash || '').slice(1); if (RENDER[awal]) S.layar = awal;
 siapkan(S.layar);
 window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (RENDER[h] && h !== S.layar) pindah(h); });

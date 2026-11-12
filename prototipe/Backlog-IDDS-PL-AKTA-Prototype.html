@@ -1081,7 +1081,10 @@ const UBAH = [
     lama:'Skenario dan Preview Akta belum ada di prototipe.', ke:'skenario', sorot:'#panelDok' },
   { kode:'IDDS-PL-72', versi:'v2', bukanHE:true, sumber:LIVE, judul:'Simpan sebagai Draft dan Kunci Template dengan daftar periksa',
     isi:'Kepala editor menampilkan versi template dan status simpan. Pita "n hal perlu diperiksa sebelum Kunci Template" menyebut semua hal yang tersisa dan menyediakan tombol untuk membukanya. Tooltip menjelaskan alasan Kunci Template nonaktif. Kunci Template meminta konfirmasi yang menyebut versi baru dan dampaknya bagi order, lalu lencana berubah menjadi Siap vN.',
-    lama:'Status template dan penguncian belum ada di prototipe. Di live, pita hanya menyebut skenario dan tombol Kunci template nonaktif tanpa penjelasan.', ke:'kunci', sorot:'#aksiAtas' }
+    lama:'Status template dan penguncian belum ada di prototipe. Di live, pita hanya menyebut skenario dan tombol Kunci template nonaktif tanpa penjelasan.', ke:'kunci', sorot:'#aksiAtas' },
+  { kode:'IDDS-PL-80', versi:'v2', bukanHE:true, judul:'Tour guide Jenis Akta, Template & Variabel, dan Editor Pasal',
+    isi:'Saat admin platform pertama kali membuka setiap layar, tur singkat menjelaskan isinya. Jenis Akta: Tambah jenis akta, impor dan ekspor, daftar jenis akta, dan aksi per layanan. Template & Variabel memiliki tur per tab: Template (daftar template, Tambah template, Impor berkas), Variabel (asal variabel, pencarian, Variabel dokumen, impor dan ekspor, kelompok variabel), dan Rel Status (status rel, urutan tahap, Tambah tahap, Pulihkan rel bawaan, Salin rel, Simpan rel, Terbit). Editor Pasal: status simpan, Simpan sebagai draft, Kunci template, Preview akta, hal yang perlu diperiksa, bilah alat, daftar bagian, kertas naskah, dan panel editor; saat sebuah bagian disunting, tur menjelaskan panel bagian serta Simpan dan Batal. Preview akta: jumlah halaman, data contoh, Download PDF, dan Kembali. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat admin platform pertama kali membuka Jenis Akta, Template & Variabel, Editor Pasal, dan Preview akta.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
 ];
 
 /* ---------------- data contoh (isi mengikuti rekaman live Platform; tahap memakai tahap Peruri) ---------------- */
@@ -2307,12 +2310,73 @@ $('#bukaUbah').addEventListener('click', () => {
     tombol:[['Tutup', 'secondary', null]] });
   o.el.querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); tutup(o); lihat(UBAH[+b.dataset.lihat]); });
 });
+/* ---------------- tour guide (IDDS-PL-80, komponen tur-bersama) ---------------- */
+{
+  const BANTUAN_T = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' };
+  const terlihatT = s => [...document.querySelectorAll(s)].find(x => x.getClientRects().length && getComputedStyle(x).visibility !== 'hidden');
+  /* bagian yang lebih tinggi dari ruang layar: sorot bagian atasnya agar kotak keterangan tidak menutupinya */
+  const pasT = (f, anak) => () => { const e = typeof f === 'function' ? f() : terlihatT(f); if (!e || e.getBoundingClientRect().height <= innerHeight - (matchMedia('(max-width:760px)').matches ? 360 : 300)) return e; return [...e.querySelectorAll(anak || 'h2, h3')].find(x => x.getClientRects().length) || e; };
+  const KEMBALI_D = { el:'#kembali', j:'Kembali', t:'Kembali ke daftar Jenis Akta.' };
+  const TAB_D = { el:'#tabDetail [role="tablist"]', j:'Tab jenis akta', t:'Template, Variabel, dan Rel Status jenis akta ini dibuka per tab. Angka di tab menunjukkan jumlah isinya.' };
+  [
+    { kunci:'pla-jenis', aktif:() => tampilan() === 'jenis', langkah:() => [
+      { el:'#tambahJenis', j:'Tambah jenis akta', t:'Tambahkan layanan akta baru beserta kode dan namanya.' },
+      { el:'#aksiImpor', j:'Impor dan ekspor', t:'Pindahkan data satu layanan atau seluruh paket antarlingkungan. Tekan ikon tanya untuk melihat isi setiap berkas.' },
+      { el:pasT(() => terlihatT('#tabelJenis thead') || terlihatT('#tabelJenis tbody tr'), 'td'), j:'Daftar jenis akta', t:'Setiap baris menampilkan kode, nama layanan, rel status, dan statusnya.' },
+      { el:'#tabelJenis .aksi-baris', j:'Aksi per layanan', t:'Tekan Ubah untuk mengubah data layanan, atau Template & variabel untuk membuka template dan variabelnya.' },
+      BANTUAN_T] },
+    { kunci:'pla-detail-template', aktif:() => tampilan() === 'detail' && S.tab === 'template', langkah:() => [KEMBALI_D, TAB_D,
+      { el:pasT('#panel-template .tabel-wadah', 'thead, tr'), j:'Daftar template', t:'Template naskah untuk jenis akta ini beserta statusnya. Template berstatus Siap sudah dikunci dan dapat dipakai layanan.' },
+      { el:'#tambahTpl', j:'Tambah template', t:'Buat template naskah baru untuk jenis akta ini.' },
+      { el:'#imporTpl', j:'Impor berkas', t:'Masukkan template dari berkas yang sudah ada.' },
+      BANTUAN_T] },
+    { kunci:'pla-detail-variabel', aktif:() => tampilan() === 'detail' && S.tab === 'variabel', langkah:() => [KEMBALI_D, TAB_D,
+      { el:'.var-penjelas', j:'Asal variabel', t:'Variabel formulir dibaca langsung dari Form Design. Lingkup menentukan tempat variabel terisi.' },
+      { el:'.var-cari', j:'Cari variabel', t:'Ketik nama atau kunci variabel untuk menemukannya.' },
+      { el:'#tambahVar', j:'Variabel dokumen', t:'Tambahkan variabel dokumen yang tidak berasal dari formulir.' },
+      { el:'#imporVar', j:'Impor dan ekspor', t:'Pindahkan daftar variabel dari atau ke berkas.' },
+      { el:pasT('#daftarVar .var-kel', 'h3'), j:'Kelompok variabel', t:'Variabel dikelompokkan per tab formulir, variabel sistem, dan variabel dokumen.' },
+      BANTUAN_T] },
+    { kunci:'pla-detail-rel', aktif:() => tampilan() === 'detail' && S.tab === 'rel', langkah:() => [KEMBALI_D, TAB_D,
+      { el:'#statusRel', j:'Status rel', t:'Lencana ini menunjukkan apakah rel status sudah terbit, masih draf, atau belum disimpan.' },
+      { el:'#kartuRel .rs-rangkai', j:'Urutan tahap', t:'Tahap permohonan berurutan dari awal sampai selesai.' },
+      { el:'#relTambah', j:'Tambah tahap', t:'Tambahkan tahap baru ke rel status.' },
+      { el:'#relPulih', j:'Pulihkan rel bawaan', t:'Kembalikan tahap ke rel bawaan bila perubahan tidak jadi dipakai.' },
+      { el:'#relSalin', j:'Salin rel', t:'Salin tahap dari layanan lain agar tidak menyusun ulang dari awal.' },
+      { el:'#relSimpan', j:'Simpan rel', t:'Simpan perubahan sebagai draf. Tombol aktif setelah ada perubahan.' },
+      { el:'#relTerbit', j:'Terbit', t:'Terbitkan rel agar dipakai permohonan baru.' },
+      BANTUAN_T] },
+    { get kunci() { return S.pilih ? 'pla-pasal-bagian' : 'pla-pasal'; }, aktif:() => tampilan() === 'pasal' && !S.preview, langkah:() => [
+      { el:'#kembali', j:'Kembali ke template', t:'Kembali ke daftar template jenis akta ini.' },
+      { el:'#statusSimpan', j:'Status simpan', t:'Menunjukkan apakah perubahan sudah tersimpan.' },
+      { el:'#simpanDraft', j:'Simpan sebagai draft', t:'Simpan perubahan tanpa mengunci template.' },
+      { el:'#kunciTpl', j:'Kunci template', t:'Kunci template setelah semua hal yang perlu diperiksa selesai. Template terkunci dapat dipakai layanan.' },
+      { el:'#previewAkta', j:'Preview akta', t:'Lihat hasil akta dengan data contoh dari skenario.' },
+      { el:pasT('#pitaPeriksa', '.ina-alert__title, h4, b'), j:'Yang perlu diperiksa', t:'Daftar ini menyebut hal yang harus dibereskan sebelum template dikunci. Tombol di setiap baris membawa Anda ke bagiannya.' },
+      { el:'#bilahAlat', j:'Bilah alat', t:'Atur format teks, sisipkan variabel, dan tandai teks bersyarat.' },
+      { el:'[data-laci="nav"]', j:'Daftar bagian', t:'Buka daftar bagian dan lampiran naskah dari tombol ini.' },
+      { el:pasT('#navDok', '.nav-atas'), j:'Daftar bagian', t:'Bagian dan lampiran naskah tersusun di sini. Cari judul bagian, ubah urutan, atau sunting bagian.' },
+      { el:pasT('#kertas', '.bag'), j:'Kertas naskah', t:'Klik bagian di kertas untuk menyuntingnya. Variabel tampil sebagai chip, dan teks bersyarat diberi tanda.' },
+      { el:'#simpanBag', j:'Simpan bagian', t:'Tekan Simpan untuk menyimpan bagian yang sedang disunting, atau Batal untuk membuang perubahannya.' },
+      { el:'[data-laci="panel"]', j:'Panel editor', t:'Buka panel Bagian, Variabel, Pengaturan Halaman, dan Skenario dari tombol ini.' },
+      { el:() => terlihatT('#panelDok .kol-kepala'), j:'Panel editor', t:S.pilih ? 'Atur tipe, judul, dan tampilan bagian yang sedang disunting. Tab lain berisi Variabel, Pengaturan Halaman, dan Skenario.' : 'Tab Bagian, Variabel, Pengaturan Halaman, dan Skenario ada di sini.' },
+      BANTUAN_T] },
+    { kunci:'pla-preview', aktif:() => tampilan() === 'pasal' && !!S.preview, langkah:() => [
+      { el:'#prHal', j:'Jumlah halaman', t:'Jumlah halaman akta yang dihasilkan tampil di sini.' },
+      { el:'.pr-pita', j:'Data contoh', t:'Data di preview berasal dari skenario. Bila belum ada skenario, isian tampil sebagai nama variabelnya.' },
+      { el:pasT('#prKanvas', '.hal, .pr-lembar > *'), j:'Hasil akta', t:'Akta tampil per halaman seperti hasil cetak.' },
+      { el:'#unduhPdf', j:'Download PDF', t:'Unduh hasil preview sebagai PDF.' },
+      { el:'#tutupPreview', j:'Kembali ke editor', t:'Tutup preview dan lanjutkan menyunting naskah.' },
+      BANTUAN_T] }
+  ].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-PL-80') })));
+}
 function lihat(u) {
   const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
   const ajb = () => jenisDari('AJB'), dlg = () => LAPIS[LAPIS.length - 1].el;
   const editor = fn => pindah('pasal', { tpl:1 }, fn);
   const bagianPasal = () => { const t = tplAktif(); return t.bag.find(b => b.type === 'pasal'); };
-  ({ jenis:() => pindah('jenis', {}, sorot),
+  ({ tur:() => pindah('jenis', {}, () => setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300)),
+     jenis:() => pindah('jenis', {}, sorot),
      tambah:() => pindah('jenis', {}, () => dialogJenis(null)),
      ubahJenis:() => pindah('jenis', {}, () => dialogJenis(ajb())),
      impor:() => pindah('jenis', {}, sorot),
@@ -2980,6 +3044,162 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
   let antre = 0;
   new MutationObserver(() => { clearTimeout(antre); antre = setTimeout(sisipkan, 0); }).observe(wadah, { childList:true, subtree:true });
   document.addEventListener('click', e => { const b = e.target.closest('.kabar-sisip .ina-alert__close-button'); if (b) b.closest('.kabar-sisip').remove(); });
+})();
+</script>
+
+<!-- ===== Tur bersama (tur-bersama.html, disisipkan rakit-idds.js ke prototipe yang mendaftarkan tur lewat window.TUR_ANTRE) =====
+     Keputusan Workshop HE: semua modul memakai tour guide. Tur muncul sendiri saat pengguna pertama kali membuka layarnya
+     (sekali per pengguna per layar) dan dapat diputar ulang dari Bantuan › "Mulai tur halaman ini".
+     Bentuk dan perilaku sama dengan tur Permohonan AJB (HE-ORDER-23): bagian lain diredupkan, kotak keterangan berisi
+     posisi langkah, judul, satu kalimat, Sebelumnya/Lanjut/Lewati tur; Esc menutup, panah kiri/kanan berpindah langkah.
+     Pendaftaran di prototipe (di dalam skrip prototipe, sebelum komponen ini dimuat):
+       (window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+         kunci:'verif-detail',                 // nama layar, untuk penanda "sudah pernah dilihat"
+         aktif:() => S.layar === 'detail',     // tur berlaku untuk layar yang sedang tampil
+         langkah:() => [{ el:'#stepper', j:'Judul langkah', t:'Satu kalimat penjelasan.' }, …],
+         tanda:usulan('HE-VERIF-06')           // opsional: penanda usulan (markup) di sebelah tombol Bantuan
+       });
+     el boleh berupa pemilih CSS atau fungsi yang mengembalikan elemen; langkah yang elemennya tidak tampil dilewati.
+     Untuk memutar dari "Lihat di layar": window.TurBersama.mulai(). -->
+<style id="tur-bersama-css">
+.tur{position:fixed;inset:0;z-index:2000}
+.tur-tirai{position:absolute;inset:0}
+.tur-sorot{position:fixed;border-radius:12px;box-shadow:0 0 0 9999px rgba(15,23,30,.58);outline:2px solid var(--ina-primary-300,#9cc3b4);outline-offset:2px;transition:top .25s,left .25s,width .25s,height .25s;pointer-events:none}
+.tur-kotak{position:fixed;width:min(360px,calc(100vw - 32px));background:var(--ina-background-primary,#fff);color:var(--ina-content-primary);border-radius:12px;box-shadow:0 12px 32px rgba(15,23,30,.28);padding:16px 16px 14px;text-align:left}
+.tur-kotak h2{margin:2px 0 6px;font-size:16px;line-height:22px;font-weight:600}
+.tur-kotak p{margin:0;font-size:14px;line-height:20px;color:var(--ina-content-secondary)}
+.tur-langkah{font-size:12px;font-weight:600;color:var(--ina-primary-primary,#3d6b5e)}
+.tur-titik{display:flex;gap:6px;margin-top:12px}
+.tur-titik span{width:6px;height:6px;border-radius:999px;background:var(--ina-stroke-primary,#d0d5d3)}
+.tur-titik span.on{background:var(--ina-primary-primary,#3d6b5e);width:16px}
+.tur-kaki{display:flex;align-items:center;gap:8px;margin-top:14px}
+.tur-kaki [data-tur=lewati]{margin-right:auto}
+.tur-bantuan{margin:0 0 16px}
+/* laci Bantuan (berisi tombol Mulai tur) berada di atas bilah prototipe yang bisa tinggi saat tombolnya terbungkus */
+#lapisanDrawer .ina-drawer{z-index:1002}
+@media (max-width:760px){.tur-kotak{left:16px!important;right:16px;top:auto!important;bottom:16px;width:auto}.tur-kotak.atas{top:16px!important;bottom:auto}}
+</style>
+<script id="tur-bersama-js">
+(() => {
+  const DAFTAR = [];
+  const T = { aktif:null, i:0, langkah:[], dicek:new Set() };
+  const $ = s => document.querySelector(s);
+  const tampak = el => !!el && el.isConnected && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+  const cari = el => { if (typeof el === 'function') return el(); return [...document.querySelectorAll(el)].find(tampak); };
+  const email = () => (window.SESI_PROTO && window.SESI_PROTO.email) || 'tanpa-sesi';
+  const kunciLS = t => 'eppat-tur:' + t.kunci + ':' + ((t.email && t.email()) || email());
+  const sudah = t => { try { return localStorage.getItem(kunciLS(t)) === '1'; } catch (e) { return false; } };
+  const tandai = t => { try { localStorage.setItem(kunciLS(t), '1'); } catch (e) { /* tanpa penyimpanan, tur dapat muncul lagi */ } };
+  /* tidak ada tur selama layar "Halaman tidak tersedia" (peran tanpa akses, sesi-bersama) menutupi halaman */
+  const berlaku = () => document.querySelector('.sesi-tolak') ? undefined : DAFTAR.find(t => { try { return t.aktif(); } catch (e) { return false; } });
+  const tombol = (teks, jenis, atr) => `<button type="button" class="ina-button ina-button--${jenis} ina-button--sm" ${atr}>${teks}</button>`;
+  const svg = p => `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+  const lapisanTerbuka = () => [...document.querySelectorAll('#lapisan, #lapisanDrawer')].some(x => x.innerHTML.trim()) || [...document.querySelectorAll('.ina-modal, .ina-drawer')].some(tampak);
+
+  function kabar(teks, ket) {
+    const w = document.getElementById('toastWadah'); if (!w) return;
+    w.innerHTML = `<div class="ina-toast ina-toast--state-default ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${svg('<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" />')}</div>
+      <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p><p class="ina-toast__description">${ket}</p></div></div></div>`;
+    clearTimeout(kabar.w); kabar.w = setTimeout(() => { w.innerHTML = ''; }, 4000);
+  }
+  function mulai(t) {
+    t = t || berlaku(); if (!t || T.aktif) return false;
+    const L = (t.langkah() || []).filter(l => tampak(cari(l.el)));
+    if (!L.length) return false;
+    T.aktif = t; T.i = 0; T.langkah = L;
+    document.body.insertAdjacentHTML('beforeend', '<div class="tur" id="tur" role="dialog" aria-modal="true" aria-labelledby="turJudul"><div class="tur-tirai"></div><div class="tur-sorot"></div><div class="tur-kotak" aria-live="polite"></div></div>');
+    tampil(); return true;
+  }
+  function tampil() {
+    const L = T.langkah[T.i], n = T.langkah.length, akhir = T.i === n - 1, el = cari(L.el);
+    if (!tampak(el)) { if (akhir) { tutup(true); return; } T.langkah.splice(T.i, 1); tampil(); return; }
+    const k = $('#tur .tur-kotak');
+    k.innerHTML = `<div class="tur-langkah">Langkah ${T.i + 1} dari ${n}</div><h2 id="turJudul">${L.j}</h2><p>${L.t}</p>
+      <div class="tur-titik" aria-hidden="true">${T.langkah.map((_, k) => `<span class="${k === T.i ? 'on' : ''}"></span>`).join('')}</div>
+      <div class="tur-kaki">${tombol('Lewati tur', 'tertiary', 'data-tur="lewati"')}${T.i ? tombol('Sebelumnya', 'secondary', 'data-tur="mundur"') : ''}${tombol(akhir ? 'Selesai' : 'Lanjut', 'primary', `data-tur="${akhir ? 'selesai' : 'maju'}"`)}</div>`;
+    el.scrollIntoView({ block:'center' });
+    /* bagian yang tinggi: bila kotak tidak muat di atas, bawah, atau samping, gulir agar awal bagian itu berada di atas layar.
+       Bagian yang lebih tinggi dari layar (kertas, penampil PDF, daftar panjang) disorot sebatas layar dan kotak menutupi sebagian bawahnya. */
+    const r = el.getBoundingClientRect(), p = 8;
+    if (!tempat(r, k).muat) {
+      const kepala = [...document.querySelectorAll('header.top')].find(x => /sticky|fixed/.test(getComputedStyle(x).position));
+      window.scrollBy(0, r.top - ((kepala ? kepala.getBoundingClientRect().bottom : 0) + p + 12));
+    }
+    letak(); $('#tur [data-tur="' + (akhir ? 'selesai' : 'maju') + '"]').focus({ preventScroll:true });
+  }
+  /* letak kotak: di bawah, di atas, di kanan, lalu di kiri bagian yang disorot; di layar sempit kotak selalu di dasar layar (CSS) */
+  function tempat(r, k) {
+    const p = 8, g = 12, w = k.offsetWidth, h = k.offsetHeight, vw = innerWidth, vh = innerHeight, x = Math.min(Math.max(16, r.left), vw - w - 16), y = Math.min(Math.max(16, r.top), vh - h - 16);
+    if (matchMedia('(max-width:760px)').matches) {
+      if (r.bottom + p <= vh - h - 16 - g) return { muat:true };
+      if (r.top - p - g - h - 16 >= 0) return { muat:true, atas:true }; /* bagian di dasar halaman: kotak pindah ke atas layar */
+      /* tidak muat di keduanya: pilih tepi layar yang paling sedikit menutupi bagian yang disorot */
+      return { muat:false, atas:Math.max(0, 16 + h + p - r.top) < Math.max(0, r.bottom + p - (vh - h - 16)) };
+    }
+    if (r.bottom + p + g + h < vh) return { muat:true, top:r.bottom + p + g, left:x };
+    if (r.top - p - g - h > 0) return { muat:true, top:r.top - p - g - h, left:x };
+    if (r.right + p + g + w < vw - 16) return { muat:true, top:y, left:r.right + p + g };
+    if (r.left - p - g - w > 16) return { muat:true, top:y, left:r.left - p - g - w };
+    return { muat:false, top:Math.max(16, vh - h - 16), left:x };
+  }
+  function letak() {
+    if (!T.aktif) return;
+    const el = cari(T.langkah[T.i].el); if (!el) return;
+    const asli = el.getBoundingClientRect(), p = 8, s = $('#tur .tur-sorot'), k = $('#tur .tur-kotak');
+    /* sorotan dipotong sebatas layar agar tepinya tetap terlihat */
+    const atas = Math.max(asli.top, p), bawah = Math.min(asli.bottom, innerHeight - p), kiri = Math.max(asli.left, p), kanan = Math.min(asli.right, innerWidth - p);
+    const r = { top:atas, bottom:Math.max(bawah, atas), left:kiri, right:Math.max(kanan, kiri), height:Math.max(bawah - atas, 0), width:Math.max(kanan - kiri, 0) };
+    Object.assign(s.style, { top:r.top - p + 'px', left:r.left - p + 'px', width:r.width + p * 2 + 'px', height:r.height + p * 2 + 'px' });
+    const t = tempat(r, k);
+    k.classList.toggle('atas', !!t.atas);
+    if (t.top !== undefined) Object.assign(k.style, { top:t.top + 'px', left:t.left + 'px' });
+  }
+  function tutup(selesai) {
+    if (!T.aktif) return; tandai(T.aktif); T.aktif = null; $('#tur')?.remove();
+    kabar(selesai ? 'Tur selesai.' : 'Tur dilewati.', 'Putar ulang kapan saja dari tombol Bantuan.');
+  }
+  /* muncul sendiri sekali per pengguna per layar, setelah layar tenang dan tidak ada dialog atau laci yang terbuka */
+  /* menunggu layar tenang 800 ms, tetapi paling lama 1,2 detik sejak perubahan pertama,
+     agar layar yang terus berubah (mis. hitung mundur OTP) tidak menunda tur terus-menerus */
+  let jadwal = null, awalJadwal = 0;
+  function cek() {
+    const kini = Date.now(); if (!jadwal) awalJadwal = kini;
+    clearTimeout(jadwal);
+    jadwal = setTimeout(() => {
+      jadwal = null;
+      if (T.aktif) return;
+      const t = berlaku(); if (!t || sudah(t) || T.dicek.has(t.kunci) || lapisanTerbuka()) return;
+      if (mulai(t)) T.dicek.add(t.kunci);
+    }, Math.max(0, Math.min(800, awalJadwal + 1200 - kini)));
+  }
+  /* Bantuan: tombol "Mulai tur halaman ini" paling atas di laci Bantuan bila layar ini punya tur */
+  function sisipBantuan() {
+    const t = berlaku(), isi = document.querySelector('#lapisanDrawer .ina-drawer__content');
+    if (!t || !isi || isi.querySelector('[data-mulai-tur]')) return;
+    const u = t.tanda || '';
+    isi.insertAdjacentHTML('afterbegin', `<p class="tur-bantuan">${tombol(svg('<path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />') + 'Mulai tur halaman ini', 'secondary', 'data-mulai-tur')}${u}</p>`);
+  }
+  /* layar berganti saat tur berjalan (mis. tombol Kembali peramban): tur ditutup tanpa ditandai sudah dilihat */
+  const masihBerlaku = () => { try { return !document.querySelector('.sesi-tolak') && T.aktif.aktif(); } catch (e) { return false; } };
+  new MutationObserver(() => { if (!DAFTAR.length) return; sisipBantuan(); if (T.aktif) { if (masihBerlaku()) letak(); else { T.aktif = null; $('#tur')?.remove(); cek(); } } else cek(); }).observe(document.body, { childList:true, subtree:true });
+  document.addEventListener('click', e => {
+    if (!DAFTAR.length) return;
+    const b = e.target.closest('#tur [data-tur]');
+    if (b) { const a = b.dataset.tur; if (a === 'maju') { T.i++; tampil(); } else if (a === 'mundur') { T.i--; tampil(); } else tutup(a === 'selesai'); return; }
+    if (e.target.closest('#lapisanDrawer [data-mulai-tur]')) { e.stopPropagation(); const d = document.getElementById('lapisanDrawer'); if (d) d.innerHTML = ''; setTimeout(() => mulai(), 50); }
+  }, true);
+  document.addEventListener('keydown', e => {
+    if (!T.aktif) return;
+    if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); tutup(false); }
+    else if (e.key === 'ArrowRight' && T.i < T.langkah.length - 1) { T.i++; tampil(); }
+    else if (e.key === 'ArrowLeft' && T.i) { T.i--; tampil(); }
+    else if (e.key === 'Tab') { const f = [...document.querySelectorAll('#tur button')]; const i = f.indexOf(document.activeElement); e.preventDefault(); f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus(); }
+  }, true);
+  addEventListener('resize', letak); addEventListener('scroll', letak, { passive:true });
+  const daftar = t => { DAFTAR.push(t); cek(); };
+  (window.TUR_ANTRE || []).forEach(daftar);
+  window.TUR_ANTRE = { push:daftar };
+  window.TurBersama = { mulai:() => mulai(), daftar };
 })();
 </script>
 

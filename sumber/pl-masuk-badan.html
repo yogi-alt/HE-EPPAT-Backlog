@@ -120,7 +120,10 @@ const UBAH = [
     lama:'Layar berisi nama aplikasi, judul "Sedang Dalam Pemeliharaan", pesan, dan tombol "Masuk sebagai admin". Tidak ada penjelasan admin yang dimaksud dan tidak ada bantuan.', ke:'pelihara', sorot:'#tombolPelihara' },
   { kode:'IDDS-PL-10', judul:'Bantuan di halaman Masuk platform',
     isi:'Tombol Bantuan di atas kartu Masuk, Verifikasi 2 Faktor, Ganti Kata Sandi, dan Pemeliharaan membuka IDDS Drawer. Isinya mengikuti layar yang dibuka: langkah singkat, pertanyaan umum, dan kontak dukungan tim E-PPAT. Pertanyaan umum mencakup lupa kata sandi, akun bukan admin platform, kehilangan aplikasi autentikator, syarat kata sandi, dan pemeliharaan. Pola sama dengan IDDS-TN-38. Kontak bergaris putus-putus adalah data contoh.',
-    lama:'Tidak ada panduan atau kontak dukungan di halaman Masuk platform, Verifikasi 2 Faktor, dan Pemeliharaan. Tidak ada tautan "Lupa kata sandi".', ke:'bantuan', sorot:null }
+    lama:'Tidak ada panduan atau kontak dukungan di halaman Masuk platform, Verifikasi 2 Faktor, dan Pemeliharaan. Tidak ada tautan "Lupa kata sandi".', ke:'bantuan', sorot:null },
+  { kode:'IDDS-PL-78', versi:'v2', bukanHE:true, judul:'Tour guide Masuk, Verifikasi 2 Faktor, Ganti Kata Sandi, dan Pemeliharaan platform',
+    isi:'Saat admin platform pertama kali membuka setiap layar, tur singkat menjelaskan isinya. Masuk: kembali ke beranda, pengantar Portal Platform, email, kata sandi, tombol Masuk, dan Bantuan; bila gagal masuk, tur menunjukkan pesan galat (termasuk akun yang bukan admin platform) dan isian yang perlu diperiksa. Verifikasi 2 faktor: kode 6 digit dari aplikasi autentikator, tombol Verifikasi, jalan keluar bila kehilangan akses, dan kembali ke halaman masuk. Ganti kata sandi: kata sandi sementara, kata sandi baru, syarat yang tercentang langsung, konfirmasi, tombol Ubah kata sandi, dan Keluar. Pemeliharaan: keterangan pemeliharaan dan tombol Masuk sebagai Admin Platform. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat admin platform pertama kali membuka halaman Masuk, Verifikasi 2 Faktor, Ganti Kata Sandi, dan Pemeliharaan.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
 ];
 
 /* ---------------- keadaan ---------------- */
@@ -364,8 +367,40 @@ $('#bukaUbah').addEventListener('click', () => {
     isi:`<p>Halaman ini tidak dinilai dalam laporan HE. Prototipe meniru layar dan kode live <i>dev-app.eppat.id/platform</i> (dilihat 26 Okt 2026): isi, alur, dan aturan tetap seperti live; yang disesuaikan adalah komponen IDDS, letak pesan galat, dan bahasa. Layar yang sama dengan halaman Masuk tenant memakai markup dan teks yang sama.</p>
       <div class="daftar-ubah">${UBAH.map((u, i) => `<div class="it"><div class="a"><code>${u.kode}</code>${u.versi ? '<span class="versi-ubah">Baru di ' + u.versi + '</span>' : ''}<b>${u.judul}</b></div><p>${u.isi}</p><div class="lama"><b>Saat ini:</b> ${u.lama}</div><div style="margin-top:10px">${tombol('Lihat di layar', 'secondary', 'sm', `data-lihat="${i}"`)}</div></div>`).join('')}</div>`,
     tombol:[['Tutup', 'secondary', null]] });
-  $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; asalDialog = null; const u = UBAH[+b.dataset.lihat]; if (u.ke === 'bantuan') { bukaBantuan(); return; } S.berhasil = false; ke(u.ke); const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } });
+  $('#lapisan').querySelector('.daftar-ubah').addEventListener('click', e => { const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; asalDialog = null; const u = UBAH[+b.dataset.lihat]; if (u.ke === 'bantuan') { bukaBantuan(); return; } if (u.ke === 'tur') { S.berhasil = false; ke('masuk'); setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 400); return; } S.berhasil = false; ke(u.ke); const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } });
 });
+/* ---------------- tour guide (IDDS-PL-78, komponen tur-bersama) ---------------- */
+const BANTU_TUR = { el:'#bukaBantuan', j:'Bantuan', t:'Langkah singkat, pertanyaan umum, dan kontak tim E-PPAT ada di sini, termasuk tombol untuk memutar ulang tur ini.' };
+[
+  { kunci:'pl-masuk', aktif:() => S.layar === 'masuk' && !S.galat, langkah:() => [
+    { el:'#kembaliBeranda', j:'Kembali ke Beranda', t:'Kembali ke halaman beranda E-PPAT.' },
+    { el:'#pengantarMasuk', j:'Portal Platform', t:'Halaman ini khusus admin platform. Hubungi tim E-PPAT bila Anda belum punya akses.' },
+    { el:'#f-mEmail', j:'Email', t:'Isi email akun admin platform Anda.' },
+    { el:'#f-mPw', j:'Kata sandi', t:'Isi kata sandi Anda. Tekan ikon mata untuk melihat kata sandi yang diketik.' },
+    { el:'#kirimMasuk', j:'Masuk', t:'Tekan untuk masuk. Bila akun memakai verifikasi 2 faktor, Anda diminta kode dari aplikasi autentikator.' }, BANTU_TUR] },
+  { get kunci() { return S.jenisGalat === 'bukan' ? 'pl-masuk-bukan' : 'pl-masuk-galat'; }, aktif:() => S.layar === 'masuk' && !!S.galat, langkah:() => [
+    { el:'#galatMasuk', j:'Gagal masuk', t:S.jenisGalat === 'bukan' ? 'Akun ini bukan akun admin platform. Masuk lewat aplikasi kantor Anda, atau hubungi tim E-PPAT bila perlu akses platform.' : 'Pesan ini menyebut penyebab gagal masuk.' },
+    { el:'#f-mEmail', j:'Periksa email', t:'Pastikan email sama dengan email akun admin platform Anda.' },
+    { el:'#f-mPw', j:'Periksa kata sandi', t:'Ketik ulang kata sandi. Tekan ikon mata untuk memeriksa ketikan Anda.' },
+    { el:'#kirimMasuk', j:'Coba lagi', t:'Tekan Masuk setelah isian diperbaiki.' }, BANTU_TUR] },
+  { kunci:'pl-2fa', aktif:() => S.layar === '2fa', langkah:() => [
+    { el:'.kartu-tn .pengantar', j:'Verifikasi 2 faktor', t:'Akun ini memakai verifikasi 2 faktor. Buka aplikasi autentikator di ponsel Anda.' },
+    { el:'.kartu-tn .ina-one-time-password', j:'Kode 6 digit', t:'Masukkan kode 6 digit yang sedang aktif di aplikasi autentikator.' },
+    { el:'#kirim2fa', j:'Verifikasi', t:'Tekan setelah kode lengkap. Setelah berhasil, Anda masuk ke aplikasi platform.' },
+    { el:'#info2fa', j:'Kehilangan akses', t:'Bila tidak dapat membuka aplikasi autentikator, hubungi tim E-PPAT untuk mengatur ulang verifikasi 2 faktor.' },
+    { el:'.atas-tn [data-ke="masuk"]', j:'Kembali ke halaman masuk', t:'Kembali bila ingin masuk dengan akun lain.' }, BANTU_TUR] },
+  { kunci:'pl-ganti', aktif:() => S.layar === 'ganti' && !S.berhasil, langkah:() => [
+    { el:'.kartu-tn .pengantar', j:'Ganti kata sandi sementara', t:'Akun Anda masih memakai kata sandi sementara. Ganti kata sandi sebelum memakai aplikasi.' },
+    { el:'#f-gLama', j:'Kata sandi sementara', t:'Isi kata sandi sementara yang Anda terima dari email atau admin.' },
+    { el:'#f-gBaru', j:'Kata sandi baru', t:'Ketik kata sandi baru Anda.' },
+    { el:'#syaratGanti', j:'Syarat kata sandi', t:'Setiap syarat langsung dicentang saat terpenuhi.' },
+    { el:'#f-gUlang', j:'Konfirmasi kata sandi', t:'Ketik ulang kata sandi baru yang sama.' },
+    { el:'#kirimGanti', j:'Ubah kata sandi', t:'Tombol aktif setelah semua syarat terpenuhi dan kedua kata sandi sama.' },
+    { el:'.kaki-tn [data-ke="masuk"]', j:'Keluar', t:'Tekan untuk kembali ke halaman masuk tanpa mengganti kata sandi.' }, BANTU_TUR] },
+  { kunci:'pl-pelihara', aktif:() => S.layar === 'pelihara', langkah:() => [
+    { el:'#judulPelihara', j:'Sedang dalam pemeliharaan', t:'Sistem sedang dipelihara. Pengguna belum dapat memakai aplikasi sampai pemeliharaan selesai.' },
+    { el:'#tombolPelihara', j:'Masuk sebagai Admin Platform', t:'Admin platform tetap dapat masuk selama pemeliharaan.' }, BANTU_TUR] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-PL-78') })));
 $('#aturUlang').addEventListener('click', () => { S = S0(); gambar(); toast('Data contoh dikembalikan ke awal.'); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 gambar();

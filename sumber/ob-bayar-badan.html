@@ -394,7 +394,10 @@ const UBAH = [
     lama:'Setelah upgrade, Riwayat Transaksi hanya berisi "ORD-RENEW-1793030676". Upgrade tercatat sebagai perpanjangan, dan Trial tidak tercatat. Metode tertulis "VIRTUAL_ACCOUNT" dan status "LUNAS". Jatuh Tempo "27 Okt 2026, 23.05" tetap tampil walaupun tagihan sudah "Dibayar: 26 Okt 2026, 23.06".', ke:{ t:'pelanggan', layar:'riwayat', jalur:'trial', langkah:7 }, sorot:'#tabelRiwayat' },
   { kode:'IDDS-OB-60', judul:'Trial dan Upgrade: stepper urut waktu, lencana status akun, dan email aktivasi tidak ganda',
     isi:'Progres Registrasi pelanggan memakai tujuh tahap, tanpa Masuk Pertama dan Verifikasi Anggota. Saat Trial, Proses Pembayaran dan Lunas bertanda "Tidak perlu (Trial gratis)", sedangkan Proses Aktivasi dan Selesai tercatat pada waktu Trial aktif. Pembayaran upgrade dicatat di Progres Upgrade tersendiri (Upgrade dimulai, Proses Pembayaran, Lunas, Enterprise aktif), sehingga waktu di setiap stepper selalu urut. Lencana berubah sesuai keadaan: "Status akun: Onboarding", lalu "Status akun: Trial aktif", lalu "Status akun: Aktif". Email "Akun e-PPAT Anda Sudah Aktif" (tanpa kata sandi; pengguna masuk dengan kata sandi pendaftaran) hanya dikirim sekali saat Trial aktif. Saat upgrade, hanya email "Pembayaran Berhasil Diterima" yang dikirim. Email itu menyatakan paket Enterprise aktif serta alamat aplikasi dan kata sandi tidak berubah. Operator melihat Riwayat Tahap, Paket Langganan, dan Progres Upgrade yang sama di Detail Pendaftar.',
-    lama:'Stepper awal melompat dari tahap 3 (Login Pertama) ke tahap 5 (Pilih Produk) karena Verifikasi Anggota tidak tampil. Saat Trial aktif, Pilih Produk, Proses Administrasi, dan Selesai semuanya bertanggal "26 Okt, 23.03", sedangkan Proses Pembayaran dan Lunas hilang dari stepper. Setelah upgrade, Proses Pembayaran dan Lunas "26 Okt, 23.06" tampil sebelum Proses Administrasi dan Selesai "26 Okt, 23.03", sehingga urutan waktu terbalik. Lencana tetap "STATUS AKUN: ONBOARDING" saat Trial maupun setelah Enterprise aktif. Email "Akun e-PPAT Anda Sudah Aktif" terkirim dua kali, yaitu pukul 23.03 (Trial) dan 23.06 (Enterprise), bersama "Pembayaran Berhasil Diterima" pukul 23.06. Kartu tetap bertuliskan "Cek email Anda untuk mendapatkan password login".', ke:{ t:'operator', layar:'onboarding-detail', jalur:'trial', langkah:7 }, sorot:'#paketOp' }
+    lama:'Stepper awal melompat dari tahap 3 (Login Pertama) ke tahap 5 (Pilih Produk) karena Verifikasi Anggota tidak tampil. Saat Trial aktif, Pilih Produk, Proses Administrasi, dan Selesai semuanya bertanggal "26 Okt, 23.03", sedangkan Proses Pembayaran dan Lunas hilang dari stepper. Setelah upgrade, Proses Pembayaran dan Lunas "26 Okt, 23.06" tampil sebelum Proses Administrasi dan Selesai "26 Okt, 23.03", sehingga urutan waktu terbalik. Lencana tetap "STATUS AKUN: ONBOARDING" saat Trial maupun setelah Enterprise aktif. Email "Akun e-PPAT Anda Sudah Aktif" terkirim dua kali, yaitu pukul 23.03 (Trial) dan 23.06 (Enterprise), bersama "Pembayaran Berhasil Diterima" pukul 23.06. Kartu tetap bertuliskan "Cek email Anda untuk mendapatkan password login".', ke:{ t:'operator', layar:'onboarding-detail', jalur:'trial', langkah:7 }, sorot:'#paketOp' },
+  { kode:'IDDS-OB-65', versi:'v2', bukanHE:true, judul:'Tour guide Simulasi Pembayaran pelanggan dan operator',
+    isi:'Setiap layar dan keadaan simulasi punya tur singkat. Pelanggan: Dasbor per tahap (pilih paket, metode pembayaran, pilih bank, nomor Virtual Account dan batas waktu, menunggu pembayaran, pembayaran diterima, proses aktivasi, aplikasi siap), Dasbor Trial dengan sisa masa Trial dan Upgrade, layar Upgrade ke Enterprise, Riwayat Transaksi, dan Perpanjang Langganan. Operator: Manajemen Onboarding (pencarian, saringan tahap, daftar pendaftar), Detail Pendaftar dengan riwayat tahap, Verifikasi Pembayaran (pencarian, saringan status, Muat ulang, daftar tagihan), dan Detail Transaksi. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar dan keadaan, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pelanggan atau operator pertama kali membuka layar pembayaran dan verifikasi pembayaran.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
 ];
 
 /* ---------------- data contoh (netral) ---------------- */
@@ -1408,6 +1411,7 @@ $('#bukaUbah').addEventListener('click', () => {
 });
 function lihat(u) {
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke === 'tur') { const mulai = () => setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300); if (S.tampilan === 'pelanggan' && S.layar === 'dasbor') mulai(); else pindah('dasbor', mulai); return; }
   const k = u.ke;
   if (k.langkah) { const j = k.jalur || 'enterprise'; if (SIM.jalur !== j) mulaiSim(j); keLangkah(k.langkah); if (k.cabang === 'kedaluwarsa' && bisaCabang()) aksiKedaluwarsa(); }
   S.trx = null; S.pilih = 0;
@@ -1418,6 +1422,91 @@ function lihat(u) {
 $('#aturUlang').addEventListener('click', konfirmasiMulaiUlang);
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 
+
+/* ---------------- tour guide (IDDS-OB-65, komponen tur-bersama) ----------------
+   Pelanggan: kunci per layar, jalur (Enterprise/Trial), dan tahap simulasi. Operator: kunci per layar. */
+const terlihatT = s => [...document.querySelectorAll(s)].find(x => x.offsetParent);
+const hpT = () => matchMedia('(max-width:760px)').matches;
+const pasT = (f, sub) => () => { const e = typeof f === 'function' ? f() : terlihatT(f); if (!e || e.getBoundingClientRect().height <= innerHeight - (hpT() ? 360 : 300)) return e; return (sub && [...e.querySelectorAll(sub)].find(x => x.offsetParent)) || e; };
+const kepalaT = id => () => (!hpT() && terlihatT('#' + id + ' thead')) || terlihatT('#' + id + ' tbody tr');
+const cariT = id => () => { const e = terlihatT('#' + id); return e && (e.closest('.ina-input-search') || e); };
+const kartuH3T = t => () => { const x = [...document.querySelectorAll('#halamanP h3, #halaman h3')].find(e => e.offsetParent && e.textContent.trim().startsWith(t)); return x && (x.closest('section, .ina-card') || x); };
+const BANTU_T = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' };
+const BANTU_DB = { el:pasT('#bantuanDb', 'h3'), j:'Butuh bantuan?', t:'Tekan Lihat bantuan untuk membuka panduan, pertanyaan umum, dan kontak dukungan, termasuk tombol untuk memutar ulang tur ini.' };
+/* langkah pembayaran yang dipakai Dasbor dan layar Upgrade */
+const BAYAR_T = () => [
+  { el:pasT('#metodeBayar', 'h3'), j:'Metode pembayaran', t:'Pilih Virtual Account. Metode yang belum tersedia disertai alasannya.' },
+  { el:pasT('#pilihBank', 'h3'), j:'Pilih bank', t:'Pilih bank Virtual Account. Bank yang belum tersedia tidak dapat dipilih.' },
+  { el:'#buatVa', j:'Buat Virtual Account', t:'Nomor Virtual Account dibuat setelah Anda memilih bank.' },
+  { el:'#kembaliMetode', j:'Kembali', t:'Kembali ke pilihan metode pembayaran.' },
+  { el:'#statusVa', j:'Batas waktu pembayaran', t:'Selesaikan transfer sebelum waktu ini habis. Setelah itu, buat Virtual Account baru.' },
+  { el:'#salinVa', j:'Salin nomor VA', t:'Salin nomor Virtual Account agar tidak salah ketik saat transfer.' },
+  { el:pasT('.cara-bayar', 'h4'), j:'Cara bayar', t:'Buka panduan pembayaran sesuai kanal bank yang Anda pakai.' },
+  { el:'#hasilCekBayar', j:'Hasil cek pembayaran', t:'Hasil pengecekan terakhir tampil di sini.' },
+  { el:'#cekBayar', j:'Cek status pembayaran', t:'Pembayaran diverifikasi otomatis. Tekan tombol ini untuk memperbarui statusnya.' },
+  { el:'#gantiBank', j:'Ganti bank pembayaran', t:'Pilih bank lain bila perlu.' }
+];
+[
+  { get kunci() { return 'obbayar-p-dasbor-' + SIM.jalur + '-' + fase(); }, aktif:() => S.tampilan === 'pelanggan' && S.layar === 'dasbor', langkah:() => [
+    { el:'#pesanBerhasil', j:'Pembayaran berhasil', t:'Paket Enterprise sudah aktif. Data dan alamat aplikasi dari masa Trial tetap dipakai.' },
+    { el:'#lencanaAkun', j:'Status akun', t:'Lencana ini menunjukkan status akun Anda saat ini.' },
+    { el:pasT('#kartuTahap', 'h3'), j:'Progres registrasi', t:'Pendaftaran kantor Anda berjalan melalui beberapa tahap. Tahap yang sedang berjalan ditandai di sini.' },
+    { el:'#langkahDb', j:'Langkah berikutnya', t:'Kotak ini menyebut hal yang perlu Anda lakukan sekarang beserta perkiraan waktunya.' },
+    { el:'#cekStatus', j:'Cek progres', t:'Tekan tombol ini untuk memperbarui tahap pendaftaran Anda.' },
+    { el:() => { const e = terlihatT('#paket-trial'); return e && (e.closest('fieldset') || e); }, j:'Pilih paket', t:'Pilih Trial atau Enterprise. Harga dan fitur setiap paket tercantum di kartunya.' },
+    { el:'#lanjutBayar', j:'Lanjut pembayaran', t:'Tombol aktif setelah Anda memilih paket.' },
+    { el:pasT(kartuH3T('Ringkasan Pesanan'), 'h3'), j:'Ringkasan pesanan', t:'Paket yang Anda pilih beserta harga dan fiturnya.' },
+    { el:'#gantiPaket', j:'Ganti paket', t:'Paket masih dapat diganti selama pembayaran belum diterima.' },
+    ...BAYAR_T(),
+    { el:pasT('#kartuLunas', 'h3'), j:'Pembayaran diterima', t:'Tagihan sudah lunas. Pembayaran ini tercatat di Riwayat Transaksi.' },
+    { el:pasT('#emailLunas', 'b, h4'), j:'Email pembayaran', t:'Ini contoh email bukti pembayaran yang Anda terima.' },
+    { el:pasT('#progresUpgrade', 'h3'), j:'Progres upgrade', t:'Upgrade ke Enterprise berjalan melalui beberapa tahap. Tahap yang sedang berjalan ditandai di sini.' },
+    { el:() => terlihatT('#lanjutUpgradeTahap') || terlihatT('#lanjutUpgrade'), j:'Lanjutkan upgrade', t:'Lanjutkan pembayaran upgrade ke Enterprise.' },
+    { el:pasT('#kartuSiap', 'h3'), j:'Aplikasi siap', t:'Aplikasi e-PPAT kantor Anda sudah aktif. Alamat aplikasi dan email untuk masuk tercantum di sini.' },
+    { el:'#masukApp', j:'Masuk ke aplikasi', t:'Buka aplikasi kantor Anda, lalu masuk dengan email dan kata sandi pendaftaran.' },
+    { el:pasT('#emailAktivasi', 'b, h4'), j:'Email aktivasi', t:'Email ini berisi alamat aplikasi dan email untuk masuk. Kata sandi tidak pernah dikirim lewat email.' },
+    { el:'#catatanEmailSekali', j:'Email dikirim sekali', t:'Email aktivasi hanya dikirim saat Trial aktif. Upgrade tidak mengirimnya ulang.' },
+    { el:pasT('#kartuTrial', 'h3'), j:'Paket Trial aktif', t:'Kartu ini menunjukkan batas paket Trial dan sisa masanya.' },
+    { el:'#sisaTrial', j:'Sisa masa Trial', t:'Jumlah hari Trial yang tersisa dan tanggal berakhirnya.' },
+    { el:'#upgradeSekarang', j:'Upgrade ke Enterprise', t:'Upgrade kapan saja selama Trial untuk akses penuh. Data dan alamat aplikasi tidak berubah.' },
+    { el:pasT('#kartuEntAktif', 'h3'), j:'Paket Enterprise aktif', t:'Paket Enterprise sudah aktif. Masa berlakunya tercantum di sini.' },
+    BANTU_DB] },
+  { get kunci() { return 'obbayar-p-upgrade-' + fase(); }, aktif:() => S.tampilan === 'pelanggan' && S.layar === 'upgrade', langkah:() => [
+    { el:'#kembaliDasborUp', j:'Kembali ke Dasbor', t:'Kembali ke Dasbor tanpa membatalkan pesanan.' },
+    { el:pasT('#progresUpgrade', 'h3'), j:'Progres upgrade', t:'Upgrade berjalan melalui beberapa tahap, dari Upgrade dimulai sampai Enterprise aktif.' },
+    { el:pasT('#ringkasUpgrade', 'h3'), j:'Ringkasan pesanan', t:'Paket Enterprise yang akan Anda bayar beserta harganya.' },
+    { el:'#catatanUpgrade', j:'Trial tetap berjalan', t:'Selama pembayaran belum diterima, Trial tetap berjalan. Data dan alamat aplikasi tidak berubah.' },
+    ...BAYAR_T(), BANTU_T] },
+  { kunci:'obbayar-p-riwayat', aktif:() => S.tampilan === 'pelanggan' && S.layar === 'riwayat', langkah:() => [
+    { el:'#bukaPerpanjang', j:'Perpanjang langganan', t:'Perpanjang paket Enterprise untuk satu tahun berikutnya dari sini.' },
+    { el:kepalaT('tabelRiwayat'), j:'Riwayat transaksi', t:'Setiap tagihan tercatat beserta metode, jumlah, jatuh tempo, dan statusnya.' }, BANTU_T] },
+  { kunci:'obbayar-p-perpanjang', aktif:() => S.tampilan === 'pelanggan' && S.layar === 'perpanjang', langkah:() => [
+    { el:pasT(kartuH3T('Ringkasan Pesanan'), 'h3'), j:'Ringkasan pesanan', t:'Paket Enterprise yang akan diperpanjang untuk satu tahun berikutnya.' },
+    { el:pasT('#blokPerpanjang', 'h3'), j:'Metode pembayaran', t:'Langkahnya sama dengan pembayaran pertama. Order perpanjangan baru dibuat saat Anda menekan Buat Virtual Account.' },
+    { el:'#lanjutPerpanjang', j:'Lanjut pilih bank', t:'Tekan untuk memilih bank Virtual Account. Langkah berikutnya sama dengan pembayaran pertama.' },
+    { el:'#batalPerpanjang', j:'Batal', t:'Kembali tanpa memperpanjang langganan.' }, BANTU_T] },
+  { kunci:'obbayar-o-onboarding', aktif:() => S.tampilan === 'operator' && S.layar === 'onboarding', langkah:() => [
+    { el:cariT('cariOb'), j:'Cari pendaftar', t:'Ketik nama, email, atau ID PPAT untuk menemukan pendaftar.' },
+    { el:'#chipTahap', j:'Saring tahap', t:'Tampilkan pendaftar pada satu tahap saja, misalnya Proses Pembayaran.' },
+    { el:pasT(kepalaT('tabelOb')), j:'Daftar pendaftar', t:'Kolom Status menunjukkan tahap pendaftaran setiap calon PPAT.' },
+    { el:'#tabelOb [data-detail]', j:'Lihat detail', t:'Buka data dan riwayat tahap pendaftar.' },
+    { el:'#halaman .halaman', j:'Halaman', t:'Pindah halaman bila pendaftar lebih dari sepuluh.' }, BANTU_T] },
+  { kunci:'obbayar-o-onboarding-detail', aktif:() => S.tampilan === 'operator' && S.layar === 'onboarding-detail', langkah:() => [
+    { el:'#kembaliOb', j:'Kembali', t:'Kembali ke Manajemen Onboarding.' },
+    { el:() => { const e = terlihatT('#jdRingkas'); return e && (e.closest('section, .ina-card') || e); }, j:'Data pendaftar', t:'Nama, kontak, dan paket calon PPAT tercantum di sini.' },
+    { el:pasT('#riwayatTahap', 'h2, h3'), j:'Riwayat tahap', t:'Setiap tahap pendaftaran tercatat beserta waktunya.' }, BANTU_T] },
+  { kunci:'obbayar-o-pembayaran', aktif:() => S.tampilan === 'operator' && S.layar === 'pembayaran', langkah:() => [
+    { el:cariT('cariPb'), j:'Cari tagihan', t:'Ketik nama, nomor invoice, atau nomor VA untuk menemukan tagihan.' },
+    { el:'#chipPb', j:'Saring status', t:'Tampilkan tagihan yang lunas, belum dibayar, kedaluwarsa, atau gagal. Angkanya menunjukkan jumlah.' },
+    { el:'#muatUlang', j:'Muat ulang', t:'Perbarui daftar dengan status pembayaran terbaru.' },
+    { el:pasT(kepalaT('tabelPb')), j:'Daftar tagihan', t:'Setiap tagihan Virtual Account tercatat beserta paket, nominal, dan statusnya.' },
+    { el:'#tabelPb [data-trx]', j:'Lihat detail', t:'Buka rincian transaksi pembayaran.' },
+    { el:'#halaman .halaman', j:'Halaman', t:'Pindah halaman bila tagihan lebih dari sepuluh.' }, BANTU_T] },
+  { kunci:'obbayar-o-pembayaran-detail', aktif:() => S.tampilan === 'operator' && S.layar === 'pembayaran-detail', langkah:() => [
+    { el:'#kembaliPb', j:'Kembali', t:'Kembali ke Verifikasi Pembayaran.' },
+    { el:'#statusTrx', j:'Status pembayaran', t:'Lencana ini menunjukkan status tagihan saat ini.' },
+    { el:pasT('#rinciTrx', 'dt, b, span'), j:'Rincian transaksi', t:'Metode, nomor VA, nominal, dan waktu tagihan tercantum di sini.' }, BANTU_T] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-OB-65') })));
 /* ---------------- hash: #langkah-N (Enterprise langsung), #trial-N (Trial lalu Upgrade), #pelanggan, #operator, atau kunci layar ---------------- */
 function bacaHash(h) {
   const m = /^(langkah|trial)-(\d)$/.exec(h);

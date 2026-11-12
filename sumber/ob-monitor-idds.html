@@ -522,6 +522,9 @@ const remah = (...jejak) => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"
 
 /* ---------------- daftar penyesuaian ---------------- */
 const UBAH = [
+  { kode:'IDDS-OB-62', versi:'v2', bukanHE:true, judul:'Tour guide Dasbor Admin dan Manajemen Onboarding',
+    isi:'Saat staf Onboarding pertama kali membuka setiap layar, tur singkat menjelaskan isinya. Dasbor Admin: empat angka ringkasan beserta Lihat Detail, Pendaftaran Terbaru, Transaksi Terbaru, dan Pemilihan Produk Terbaru. Manajemen Onboarding: pencarian, saringan tahap, daftar pendaftar, dan halaman. Detail Pendaftar: tombol Kembali, data pendaftar, Provisi Manual (bila pendaftar ada di tahap Proses Aktivasi), dan riwayat sembilan tahap pendaftaran. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat staf Onboarding pertama kali membuka Dasbor Admin, Manajemen Onboarding, dan Detail Pendaftar.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'IDDS-OB-11', judul:'Kerangka staf: menu samping pola Sidebar IDDS, remah, dan menu akun berbahasa Indonesia',
     isi:'Grup menu "NAVIGATION" menjadi "Utama", menu "Dashboard" menjadi "Dasbor", dan remah "Home" menjadi "Beranda" (IDDS Breadcrumb). Urutan menu tetap seperti live. Menu bertingkat live (Verifikasi, Menu, Daftar Pengguna, Peran Pengguna) tampil sebagai grup tersendiri agar menu cukup dua tingkat; tombol grup memakai aria-expanded. Ikon menu berupa ikon garis satu warna. Kerangka menu samping mengikuti pola Sidebar IDDS dengan warna brand E-PPAT tetap: label grup kecil berhuruf biasa dengan chevron buka/tutup, menu berupa ikon dan label dengan tanda arahkan dan tanda menu aktif, paling banyak dua tingkat (grup lalu menu), dan kartu profil pengguna (inisial, nama, peran) di bagian bawah dengan versi aplikasi di bawahnya. Tombol di samping logo menciutkan menu menjadi ikon saja; nama menu tampil sebagai tooltip dan tetap dibacakan pembaca layar. Pilihan ciut diingat peramban. Di layar sempit menu tetap berupa laci. Berlaku juga di aplikasi pelanggan (Dasbor, Riwayat Transaksi). Menu akun memakai IDDS Action Dropdown dengan kepala nama dan peran ("Admin Contoh · Admin") serta pilihan "Keluar". Menu akun dapat dipakai dengan papan ketik (panah dan Esc).',
     lama:'Menu samping gelap ala live dengan label grup berhuruf kapital, tanpa kartu profil pengguna, dan tanpa mode ciut. Menu bertingkat tiga (grup, menu induk, submenu). Menu samping memakai grup "NAVIGATION" dan "PENGATURAN" serta menu "Dashboard". Remah berbunyi "Home › Dashboard", dan avatar menampilkan "SYSADMIN · Admin".', ke:'dasbor', sorot:'#sidebar' },
@@ -943,10 +946,34 @@ $('#bukaUbah').addEventListener('click', () => {
 function lihat(u) {
   const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke === 'tur') { pindah('dasbor', () => setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300)); return; }
   pindah(u.ke, sorot);
 }
 $('#aturUlang').addEventListener('click', () => { DATA = contohPendaftar(); const l = S.layar; S = S0(); S.layar = l; gambar(); gambarMenu(); toast('Data contoh dikembalikan ke awal.'); });
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
+/* ---------------- tour guide per layar (IDDS-OB-62, komponen tur-bersama) ---------------- */
+const terlihatO = s => [...document.querySelectorAll(s)].find(x => x.offsetParent);
+const dekatO = (s, p) => () => { const e = terlihatO(s); return e && (e.closest(p) || e); };
+/* bagian yang lebih tinggi dari ruang tersisa: sorot judulnya saja agar kotak keterangan tidak menutupinya */
+const pasO = f => () => { const e = typeof f === 'function' ? f() : terlihatO(f); if (!e || e.getBoundingClientRect().height <= innerHeight - (matchMedia('(max-width:760px)').matches ? 360 : 300)) return e; return [...e.querySelectorAll('thead, h2, h3, .eb')].find(x => x.offsetParent) || e; };
+const tabelO = id => () => terlihatO(id + ' thead') || terlihatO(id + ' tbody tr');
+[
+  { kunci:'obm-dasbor', aktif:() => S.layar === 'dasbor', langkah:() => [
+    { el:() => { const k = terlihatO('#kpi'); return k && k.getBoundingClientRect().height > innerHeight - 360 ? k.querySelector('.ina-card') : k; }, j:'Ringkasan', t:'Empat angka utama: total pendaftaran, anggota yang perlu diverifikasi, transaksi Virtual Account, dan order paket. Tekan Lihat Detail untuk membuka daftarnya.' },
+    { el:dekatO('#jdDaftar', 'section'), j:'Pendaftaran terbaru', t:'Pendaftar terbaru yang masih menunggu. Tekan Lihat Semua untuk membuka Manajemen Onboarding.' },
+    { el:dekatO('#jdTrans', 'section'), j:'Transaksi terbaru', t:'Tagihan pembayaran terbaru beserta statusnya.' },
+    { el:dekatO('#jdProduk', 'section'), j:'Pemilihan produk terbaru', t:'Paket Trial atau Enterprise yang baru dipilih pendaftar.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { kunci:'obm-onboarding', aktif:() => S.layar === 'onboarding', langkah:() => [
+    { el:dekatO('#cariOb', '.baris > div'), j:'Cari pendaftar', t:'Ketik nama, email, atau ID PPAT untuk menemukan pendaftar.' },
+    { el:'#chipTahap', j:'Saring tahap', t:'Pilih tahap pendaftaran untuk menampilkan pendaftar di tahap itu. Angka menunjukkan jumlahnya.' },
+    { el:tabelO('#tabelOb'), j:'Daftar pendaftar', t:'Kolom Status menunjukkan tahap terakhir setiap pendaftar. Tekan Lihat detail untuk membuka riwayat tahapnya.' },
+    { el:'.halaman', j:'Halaman', t:'Pindah halaman untuk melihat pendaftar lainnya.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+  { get kunci() { return terlihatO('#blokProvisi') ? 'obm-detail-provisi' : 'obm-detail'; }, aktif:() => S.layar === 'onboarding-detail', langkah:() => [
+    { el:'#kembaliOb', j:'Kembali', t:'Kembali ke Manajemen Onboarding tanpa kehilangan saringan.' },
+    { el:dekatO('#jdRingkas', 'section'), j:'Data pendaftar', t:'Ringkasan pendaftar: tahap saat ini, ID PPAT, alamat aplikasi, dan kontak.' },
+    { el:'#blokProvisi', j:'Provisi manual', t:'Jalankan provisi bila aplikasi kantor belum aktif setelah pembayaran lunas. Sebelum dijalankan, Anda diminta mengonfirmasi.' },
+    { el:pasO('#riwayatTahap'), j:'Riwayat tahap', t:'Sembilan tahap pendaftaran beserta waktu selesainya. Tahap yang sedang berjalan ditandai.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] }
+].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-OB-62') })));
 const awal = (location.hash || '').slice(1); if (RENDER[awal]) S.layar = awal;
 window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (RENDER[h] && h !== S.layar) pindah(h); });
 gambar();

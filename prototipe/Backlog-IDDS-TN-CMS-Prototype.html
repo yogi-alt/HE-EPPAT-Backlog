@@ -787,6 +787,7 @@ body .protobar{z-index:1001}
 .bantu-istilah dd{margin:0;color:var(--ina-content-secondary)}
 ol.bantu-langkah{padding-left:22px}
 @media (max-width:760px){ .bantu-istilah{grid-template-columns:1fr} .bantu-istilah dd{margin-bottom:6px} }
+.status-idds{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 </style>
 <style id="versi-proto-css">.versi-proto{display:inline-block;padding:3px 10px;border-radius:999px;background:#E6EDEA;color:#0f1a17;font:600 11px/16px Inter,sans-serif}.versi-ubah{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;background:var(--ina-primary-100,#dcebe5);color:var(--ina-primary-700,#1b5e4a);font:600 11px/18px Inter,sans-serif;vertical-align:middle}</style>
 </head>
@@ -936,6 +937,9 @@ const UBAH = [
   { kode:'IDDS-TN-41', judul:'Tema Tampilan: tiga preset tema IDDS (E-PPAT, INAgov, Default)',
     isi:'Preset Brand dibagi dua kelompok IDDS Radio. Kelompok teratas "Preset tema IDDS" berlencana "Sesuai IDDS" dan direkomendasikan. Isinya "E-PPAT (bawaan)" (hijau #3D6B5E, menggantikan "e-PPAT Teal"), "INAgov" (biru #0956C3, brand bawaan IDDS), dan "Default IDDS" (abu-abu netral bawaan IDDS). Ketiganya dikonfirmasi Peruri sebagai penyedia IDDS. Setiap kartu punya contoh warna dan keterangan kapan dipakai. Memilih preset langsung mengubah Pratinjau Langsung: wadah pratinjau memakai data-brand yang sama dengan aplikasi (eppat, inagov, atau tanpa data-brand untuk Default). Preset live lainnya tetap ada di kelompok "Warna lain (di luar brand IDDS)" dengan keterangan "Warna ini bukan brand resmi IDDS. Pastikan kontrasnya lulus sebelum dipakai." Crimson dan Burgundy diberi peringatan kecil karena IDDS memakai merah untuk galat dan aksi hapus. Label Navy Blue menjadi "Biru dongker". Mode Kustom, penanda belum disimpan, konfirmasi Batal, dan Toast simpan tetap.',
     lama:'Sembilan preset warna bebas dalam satu daftar tanpa pembeda brand IDDS: Navy Dark, e-PPAT Teal (bawaan), Navy Blue ("Biru dongker standar IDDS"), Sky Blue, Deep Blue, Royal Blue, Crimson, Steel Blue, dan Burgundy. Label "Navy Blue: standar IDDS" tidak akurat karena standar IDDS adalah Default netral dan INAgov biru #0956C3. Merah (Crimson, Burgundy) dapat dipilih sebagai warna utama tanpa peringatan, padahal berisiko salah makna.', ke:'tema', sorot:'#presetTema' },
+  { kode:'IDDS-TN-67', versi:'v2', bukanHE:true, judul:'Tema Tampilan: Warna Status mengikuti IDDS',
+    isi:'Bagian Warna Status di tab Sidebar & Navbar tidak lagi berisi isian warna. Bagian ini menampilkan contoh lencana IDDS (Berhasil / selesai, Peringatan, Bahaya / gagal, Informasi, Netral) dengan keterangan bahwa warna lencana, pesan, dan penanda status mengikuti IDDS agar maknanya sama di semua layanan. Contoh lencana di Pratinjau Langsung juga memakai varian IDDS. Warna brand, sidebar, navbar, dan konten tetap dapat diatur.',
+    lama:'Tab Sidebar & Navbar memuat isian Warna Status (berhasil, peringatan, bahaya, informasi, netral) yang mengubah warna lencana, pesan, dan penanda status, sehingga warna yang sama dapat bermakna berbeda di tiap kantor dan kontrasnya tidak terjamin.', ke:'tema-status', sorot:'#warnaStatus', sumber:'Keputusan 12 Nov 2026 (warna lencana ikut IDDS)' },
   { kode:'IDDS-TN-64', versi:'v2', bukanHE:true, judul:'Tour guide Konten Situs',
     isi:'Setiap layar Konten Situs memiliki tur singkat. Halaman Depan menyorot jumlah halaman, Impor tata letak, Buat halaman, kartu halaman, sakelar Tayang di situs, Ubah tata letak, dan menu aksi. Penyusun tata letak menyorot tombol Kembali, status simpan, Simpan tata letak, panel Komponen, kanvas, dan panel Properti. Tema Tampilan memiliki tur per tab (Brand & Warna, Sidebar & Navbar, Konten, Logo & Aset, Komponen) beserta Pratinjau Langsung dan tombol Simpan. Master Konten memiliki tur untuk Slider, Menu, dan Footer. Artikel & Halaman menyorot saringan jenis, Tambah artikel/halaman, dan daftar. Pustaka Media menyorot kotak unggah, kartu berkas, dan Salin URL. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
     lama:'Tidak ada panduan saat pengguna pertama kali membuka menu Konten Situs.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
@@ -1369,13 +1373,15 @@ function temaBrand() {
       <div class="grid-warna">${WARNA_KUSTOM.map(([k, l]) => `<div class="kartu-warna">${isianWarna('w-' + k, l, w[k], `data-warna-kustom="${k}"`)}
         ${k === 'brand_primary' ? lencanaKontras(w[k], '#ffffff', 'teks putih di atas warna utama') : k === 'content_primary' ? lencanaKontras(w[k], w.background_primary, 'Teks utama di atas Latar') : k === 'content_secondary' ? lencanaKontras(w[k], w.background_primary, 'Teks sekunder di atas Latar') : ''}</div>`).join('')}</div>${usulan('IDDS-TN-20')}</div>`;
 }
+/* warna status mengikuti varian Badge IDDS (keputusan 12 Nov 2026, IDDS-TN-67) */
+const VARIAN_STATUS = { success:'success', warning:'warning', danger:'error', info:'info', neutral:'neutral' };
 const kartuWarnaKosong = (grp, [k, l, ph], ob = TEMA.chrome) => `<div class="kartu-warna"><div class="lbl">${l}${ob[k] ? tombol('Kosongkan', 'tertiary', 'sm', `data-kosongkan="${grp}:${k}" aria-label="Kosongkan ${esc(l)}"`) : ''}</div>
   <div class="warna-isian"><input type="color" value="${ob[k] || ph.toLowerCase()}" aria-label="Pilih ${esc(l)}" data-warna-chrome="${grp}:${k}" data-warna-pick><div class="ina-text-field__wrapper ina-text-field__wrapper--size-md"><input type="text" class="ina-text-field__input mono" value="${esc(ob[k])}" placeholder="${ph} (bawaan)" aria-label="${esc(l)}" data-warna-chrome="${grp}:${k}"></div></div></div>`;
 function temaChrome() {
   const c = TEMA.chrome, sbBg = c.sidebar_bg || (presetIdds() && TEMA.preset_brand !== 'eppat' ? '#141414' : '#2C3C42'), sbTx = c.sidebar_text || (presetIdds() && TEMA.preset_brand !== 'eppat' ? '#D0D0D0' : '#C7D0CE');
   return `<div class="sub-bagian" style="margin-top:0">${subJudul('Warna Sidebar', 'Kosongkan untuk mengikuti preset.')}<div class="grid-warna">${CHROME.sidebar.map(f => kartuWarnaKosong('chrome', f)).join('')}</div>${lencanaKontras(sbTx.toLowerCase(), sbBg.toLowerCase(), 'teks menu di atas latar sidebar')}</div>
     <div class="sub-bagian">${subJudul('Warna Navbar', 'Warna bilah atas aplikasi. Kosongkan untuk mengikuti preset.')}<div class="grid-warna">${CHROME.navbar.map(f => kartuWarnaKosong('chrome', f)).join('')}</div></div>
-    <div class="sub-bagian">${subJudul('Warna Status', 'Warna lencana, pesan, dan penanda status (berhasil, peringatan, bahaya, informasi, netral). Latar dan garis tepinya dibuat otomatis. Kosongkan untuk mengikuti bawaan.')}<div class="grid-warna">${CHROME.status.map(f => kartuWarnaKosong('status', f, TEMA.status)).join('')}</div></div>`;
+    <div class="sub-bagian ditandai" id="warnaStatus">${subJudul('Warna Status', 'Warna lencana, pesan, dan penanda status mengikuti INA Digital Design System (IDDS) agar maknanya sama di semua layanan, sehingga tidak dapat diubah di sini.')}<div class="status-idds">${CHROME.status.map(([k, l]) => badge(l, VARIAN_STATUS[k])).join('')}</div>${usulan('IDDS-TN-67')}</div>`;
 }
 const kartuAset = (k, l, v, ph) => `<div class="kartu-aset"><span class="thumb" style="${v ? `background-image:url('${v}')` : ''}">${v ? '' : ik('gambar', 20)}</span><div class="isi"><b>${l}</b>
   <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md" style="margin-top:6px"><input type="text" class="ina-text-field__input" value="${esc(v && v.startsWith('data:') ? '/uploads/' + (MEDIA.find(m => m.url === v)?.nama || 'gambar') : v)}" placeholder="${ph}" aria-label="URL ${esc(l)}" data-aset-url="${k}"></div>
@@ -1414,7 +1420,7 @@ function pratinjauTema() {
         <div class="bd" style="color:${w.content_primary}"><span class="bar" style="width:70%"></span><span class="bar" style="width:45%"></span>
           <div class="tb"><span style="background:${idds ? 'var(--ina-primary-500)' : w.brand_primary};color:#fff;border-radius:${TEMA.button.shape === 'pill' ? 999 : TEMA.button.shape === 'square' ? 0 : rad}px">Simpan</span><span style="border:1px solid ${w.stroke_secondary};border-radius:${TEMA.button.shape === 'pill' ? 999 : TEMA.button.shape === 'square' ? 0 : rad}px">Batal</span></div>
           <span style="padding:5px 8px;border:1px solid ${w.stroke_primary};border-radius:${rad}px;background:${w.background_primary};color:${w.content_secondary}">Contoh isian</span>
-          <div class="st">${CHROME.status.map(([k, l, d]) => `<i style="color:${st[k] || d};background:${(st[k] || d)}1a">${l.split(' ')[0]}</i>`).join('')}</div></div></div></div>
+          <div class="st">${CHROME.status.map(([k, l]) => badge(l.split(' ')[0], VARIAN_STATUS[k], 'sm')).join('')}</div></div></div></div>
     <div class="status-simpan ${kotor ? 'ada' : ''}" aria-live="polite">${kotor ? `${ik('info', 14)} Ada perubahan belum disimpan` : `${ik('centang', 14)} Tersimpan`}</div>
     ${tombol('Simpan', 'primary', 'md', `id="temaSimpan" ${kotor ? '' : 'disabled'}`, ik('simpan', 16))}${tombol('Batal', 'secondary', 'md', `id="temaBatal" ${kotor ? '' : 'disabled'}`)}</aside>`;
 }
@@ -1937,6 +1943,7 @@ $('#bukaUbah').addEventListener('click', () => {
 function lihat(u) {
   const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke === 'tema-status') { pindah('tema', () => { S.temaTab = 'chrome'; gambar(); setTimeout(sorot, 50); }); return; }
   if (u.ke === 'tur') { pindah('landing', () => setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300)); return; }
   if (u.ke === 'builder') { pindah('landing', () => { bukaBuilder('landing', HAL[0].id); S.builder.pilih = S.builder.blok[2]?.id || null; segarBuilder(); sorot(); }); return; }
   if (u.ke === 'pilihMedia') { pindah('posts', () => dialogPost(POST[0])); return; }
@@ -1957,7 +1964,7 @@ function lihat(u) {
       { el:pas('#warnaKustom', 'h3'), j:'Warna kustom', t:'Atur warna utama, teks, latar, dan garis tepi. Lencana kontras menunjukkan apakah teks tetap mudah dibaca.' }],
     chrome:[{ el:pas(sub('Warna Sidebar')), j:'Warna sidebar', t:'Atur warna menu samping. Kosongkan isian untuk mengikuti preset.' },
       { el:pas(sub('Warna Navbar')), j:'Warna navbar', t:'Atur warna bilah atas aplikasi. Kosongkan isian untuk mengikuti preset.' },
-      { el:pas(sub('Warna Status')), j:'Warna status', t:'Atur warna penanda status. Kosongkan isian untuk mengikuti bawaan.' }],
+      { el:pas(sub('Warna Status')), j:'Warna status', t:'Warna lencana dan pesan status mengikuti IDDS, sehingga tidak dapat diubah. Contoh lencana menunjukkan arti setiap warna.' }],
     konten:[{ el:pas(sub('Latar Konten')), j:'Latar konten', t:'Atur warna atau gambar latar area konten. Bila memakai gambar, atur juga mode, posisi, dan kepekatannya.' }],
     aset:[{ el:() => lihatEl('#halaman .kartu-aset'), j:'Logo dan gambar', t:'Isi alamat gambar, atau tekan Pilih dari media untuk memakai berkas dari Pustaka Media. Gunakan PNG atau SVG berlatar transparan.' }],
     komponen:[{ el:() => lihatEl('#halaman .sub-bagian .tab-wadah'), j:'Jenis komponen', t:'Pilih komponen yang ingin diatur, misalnya Tombol, Formulir, atau Halaman Masuk.' },
@@ -2593,11 +2600,18 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
   /* Klien memakai halaman tanda tangan miliknya */
   if (berkas === 'HE-EAW' && sesi.aktif === 'ROLE_KLIEN') { location.replace(LANDAS.ROLE_KLIEN); return; }
 
-  /* penjaga halaman */
-  if (!halamanBoleh(sesi)) {
-    document.body.insertAdjacentHTML('beforeend', `<div class="sesi-tolak" role="alert"><div class="sesi-tolak-kartu"><h2>Halaman tidak tersedia</h2><p>Peran ${sesi.label} tidak memiliki akses ke halaman ini.</p>
-      <div class="sesi-tolak-aksi"><a class="ina-button ina-button--primary ina-button--md" href="${LANDAS[sesi.aktif]}">Ke halaman utama</a><button type="button" class="ina-button ina-button--secondary ina-button--md" data-sesi-keluar>Keluar</button></div></div></div>`);
-  }
+  /* penjaga halaman: diperiksa saat dimuat dan setiap kali layar berpindah di dalam halaman
+     (prototipe berpindah layar lewat history.replaceState, yang tidak memicu hashchange) */
+  const tolakHtml = navigasi => `<div class="sesi-tolak" role="alert"${navigasi ? ' data-navigasi="1"' : ''}><div class="sesi-tolak-kartu"><h2>Halaman tidak tersedia</h2><p>Peran ${sesi.label} tidak memiliki akses ke halaman ini.</p>
+      <div class="sesi-tolak-aksi"><a class="ina-button ina-button--primary ina-button--md" href="${LANDAS[sesi.aktif]}">Ke halaman utama</a><button type="button" class="ina-button ina-button--secondary ina-button--md" data-sesi-keluar>Keluar</button></div></div></div>`;
+  if (!halamanBoleh(sesi)) document.body.insertAdjacentHTML('beforeend', tolakHtml(false));
+  const periksaHalaman = () => {
+    const ada = document.querySelector('.sesi-tolak');
+    if (!halamanBoleh(sesi)) { if (!ada) document.body.insertAdjacentHTML('beforeend', tolakHtml(true)); }
+    else if (ada && ada.dataset.navigasi) ada.remove(); /* kembali ke layar yang boleh dibuka */
+  };
+  ['pushState', 'replaceState'].forEach(m => { const asli = history[m]; history[m] = function () { const hasil = asli.apply(this, arguments); setTimeout(periksaHalaman, 0); return hasil; }; });
+  addEventListener('hashchange', periksaHalaman); addEventListener('popstate', periksaHalaman);
 })();
 </script>
 
