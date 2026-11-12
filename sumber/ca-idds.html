@@ -324,20 +324,6 @@ body .protobar{z-index:1001}
 .status-kartu .stepper-v{display:none}
 .status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
 
-/* tour guide: walkthrough dengan coach marks (HE-ORDER-23) */
-.tur{position:fixed;inset:0;z-index:2000}
-.tur-tirai{position:absolute;inset:0}
-.tur-sorot{position:fixed;border-radius:12px;box-shadow:0 0 0 9999px rgba(15,23,30,.58);outline:2px solid var(--ina-primary-300,#9cc3b4);outline-offset:2px;transition:top .25s,left .25s,width .25s,height .25s;pointer-events:none}
-.tur-kotak{position:fixed;width:min(360px,calc(100vw - 32px));background:var(--ina-background-primary,#fff);color:var(--ina-content-primary);border-radius:12px;box-shadow:0 12px 32px rgba(15,23,30,.28);padding:16px 16px 14px}
-.tur-kotak h2{margin:2px 0 6px;font-size:16px;line-height:22px;font-weight:600}
-.tur-kotak p{margin:0;font-size:14px;line-height:20px;color:var(--ina-content-secondary)}
-.tur-langkah{font-size:12px;font-weight:600;color:var(--ina-primary-primary,#3d6b5e)}
-.tur-titik{display:flex;gap:6px;margin-top:12px}
-.tur-titik span{width:6px;height:6px;border-radius:999px;background:var(--ina-stroke-primary,#d0d5d3)}
-.tur-titik span.on{background:var(--ina-primary-primary,#3d6b5e);width:16px}
-.tur-kaki{display:flex;align-items:center;gap:8px;margin-top:14px}
-.tur-kaki [data-tur=lewati]{margin-right:auto}
-@media (max-width:760px){.tur-kotak{left:16px!important;right:16px;top:auto!important;bottom:16px;width:auto}}
 </style>
 <style id="ca-css">
 .jalur{display:block;font-size:12px;line-height:17px;margin-top:2px}
@@ -617,6 +603,9 @@ const UBAH = [
   { kode:'HE-CA-13', versi:'v2', bukanHE:true, judul:'Data pribadi dari Onboarding terkunci saat mengajukan CA',
     isi:'Untuk Super Admin + PPAT yang mendaftar lewat Onboarding, Data Diri (KTP) sudah terisi dari pendaftaran Onboarding: NIK, jenis kelamin, tempat dan tanggal lahir, kewarganegaraan, nomor HP, dan foto KTP. Isian tersebut terkunci dengan keterangan "Dari pendaftaran Onboarding", nama di tab Akun tidak dapat diubah, dan alert menjelaskan agar menghubungi admin E-PPAT bila ada yang salah. Pengajuan CA memakai data ini tanpa diisi ulang, sama seperti TERA.',
     lama:'Data diri untuk registrasi CA diisi ulang walaupun sudah ada dari pendaftaran Onboarding.', ke:'datadiri-ob', sorot:'#kunciOb', sumber:'MoM Workshop HE 03/11/2026' },
+  { kode:'HE-CA-14', versi:'v2', bukanHE:true, judul:'Tour guide Akun Saya dan Registrasi CA',
+    isi:'Saat pengguna pertama kali membuka layar atau tab Akun Saya, tur singkat menjelaskan isinya. Pada layar awal, tur menunjukkan lonceng Notifikasi dan menu profil, tempat Registrasi CA dimulai. Tab Registrasi CA menyorot status sertifikat, tahap registrasi, langkah berikutnya sesuai keadaan, kelengkapan data, dan spesimen tanda tangan. Untuk PPAT, tur juga menjelaskan jalur TERA, Data TERA, dan spesimen stempel. Tab Akun, Keamanan, dan Data Diri (KTP) masing-masing memiliki tur sendiri. Bentuk dan perilakunya sama dengan tur Permohonan AJB: muncul sekali, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka Akun Saya dan Registrasi CA.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
     isi:'Tab, kartu, stepper, alert, lencana, tombol, tooltip, drawer, modal, isian, File Upload, Action Dropdown, toast, dan spinner memakai komponen INA Digital Design System dengan brand E-PPAT.',
     lama:'Tab, kartu status, dan kotak pesan dibuat sendiri.', ke:'siap', sorot:null, sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' }
@@ -1317,6 +1306,7 @@ $('#bukaUbah').addEventListener('click', () => {
 });
 function lihat(u) {
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke === 'tur') { window.TurBersama && window.TurBersama.mulai(); return; }
   if (u.ke === 'keamanan') { bukaAkun('aman'); const el = $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } return; }
   if (u.ke === 'datadiri') { setKondisi('kurang'); bukaDataDiri(); return; }
   if (u.ke === 'kurang-drawer') { setKondisi('kurang'); bukaDataDiri(); pilihKtpDd(); $('#f-ddKtp')?.scrollIntoView({ block:'center' }); return; }
@@ -1332,6 +1322,80 @@ $('#aturUlang').addEventListener('click', () => { setKondisi('kurang'); S.sesi =
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+/* ---------------- tour guide (HE-CA-14, komponen tur-bersama) ----------------
+   Layar awal dan setiap tab Akun Saya punya tur sendiri; isi langkah mengikuti keadaan sertifikat dan peran. */
+(() => {
+  const muat = s => () => { const el = [...document.querySelectorAll(s)].find(x => x.getClientRects().length); if (!el) return null; return el.getBoundingClientRect().height < innerHeight - 300 ? el : el.querySelector('h2, h3, h4') || el; };
+  const grup = j => () => { const s = [...document.querySelectorAll('#kartuDataDiri .grup-dd')].find(x => x.querySelector('h4')?.textContent.trim() === j); return s && (s.getBoundingClientRect().height < innerHeight - 300 ? s : s.querySelector('h4')); };
+  const bantuan = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan dan pertanyaan umum ada di sini. Tur ini juga dapat diputar ulang dari Bantuan.' };
+  const tabTeks = () => { const n = [...document.querySelectorAll('.tab-akun [data-tab]')].filter(b => b.getClientRects().length).map(b => b.textContent.trim()); return `Akun Saya terdiri atas tab ${n.slice(0, -1).join(', ')}, dan ${n[n.length - 1]}. Setiap tab memiliki tur sendiri.`; };
+  const BERIKUT = {
+    kurang:'Data diri Anda belum lengkap. Klik Lengkapi di tab Data Diri. Data ini dikirim ke Peruri, sehingga Anda tidak perlu mengetik ulang di portal Peruri.',
+    siap:'Data diri sudah lengkap. Klik tombol Ajukan untuk membuka portal Peruri dan memulai eKYC.',
+    ekyc:'Selesaikan eKYC di portal Peruri. Tautan yang sama juga dikirim ke email Anda.',
+    periksa:'Peruri sedang memeriksa identitas Anda. Anda tidak perlu melakukan apa pun dan akan diberi tahu setelah sertifikat aktif.',
+    aktif:'Sertifikat sudah aktif. Masukkan spesimen tanda tangan untuk menyelesaikan registrasi.',
+    selesai:'Registrasi selesai. Anda sudah dapat menandatangani akta secara elektronik.',
+    kedaluwarsa:'Sertifikat sudah kedaluwarsa. Ajukan registrasi ulang, lalu selesaikan eKYC kembali.' };
+  const teksTera = () => !T.ikut ? 'TERA kantor tidak ikut didaftarkan. Klik Daftarkan TERA bila kantor ingin mendaftarkannya sekarang.'
+    : T.status === 'rejected' ? 'Pendaftaran TERA ditolak. Klik Perbaiki pada setiap bagian, lalu ajukan ulang. Sertifikat elektronik (TTE) tidak terpengaruh.'
+    : 'Status stempel elektronik (TERA) kantor dan langkah berikutnya untuk TERA. Prosesnya berjalan terpisah dari sertifikat elektronik.';
+  const teksSpesimen = () => S.kondisi === 'selesai' ? 'Gambar tanda tangan yang tampil pada akta. Klik Ubah spesimen untuk menggantinya.' : caAktif() ? 'Klik Masukkan spesimen untuk membuat gambar tanda tangan yang tampil pada akta.' : 'Spesimen tanda tangan dapat dibuat setelah sertifikat elektronik aktif.';
+  const teksStempel = () => T.stempel ? 'Isi dan warna stempel kantor yang tampil pada akta. Klik Ubah spesimen stempel untuk menggantinya.' : posTera() === 3 ? 'TERA sudah disetujui. Klik Buat spesimen stempel untuk mengatur isi dan warna stempel.' : 'Spesimen stempel dapat dibuat setelah TERA kantor disetujui Peruri.';
+  const LANGKAH = {
+    awal:() => [
+      { el:'#bannerCa', j:'Pengingat sertifikat elektronik', t:'Sertifikat elektronik (CA) Anda belum aktif. Klik Buka Registrasi CA untuk melanjutkan pendaftarannya.' },
+      { el:'header.top .notif-jangkar', j:'Notifikasi', t:'Pemberitahuan pendaftaran sertifikat elektronik muncul di sini. Klik notifikasinya untuk membuka Registrasi CA.' },
+      { el:'#user', j:'Menu profil', t:'Buka Akun Saya dari menu ini untuk mengelola data diri, keamanan akun, dan registrasi CA.' },
+      { el:'.kosong-akta', j:'Akta untuk ditandatangani', t:'Akta yang perlu Anda tanda tangani akan muncul di sini setelah kantor PPAT memulai proses tanda tangan elektronik.' },
+      bantuan],
+    akun:() => [
+      { el:'.tab-akun', j:'Tab Akun Saya', t:tabTeks() },
+      { el:'#alertKelengkapan', j:'Kelengkapan data diri', t:'Data diri yang diperlukan untuk registrasi CA. Ikuti tombol di dalamnya untuk melanjutkan.' },
+      { el:'#kartuAkunUbah', j:'Ubah nama akun', t:'Tulis nama sesuai KTP agar nama Anda di akta benar, lalu klik Simpan perubahan.' },
+      { el:'#kartuAkun', j:'Informasi akun', t:'Nama, email, nomor HP, dan ID akun Anda. Email diubah oleh admin kantor, sedangkan nomor HP diubah di tab Data Diri (KTP).' },
+      { el:'#ubahAkun', j:'Ubah nama', t:'Ubah nama agar sesuai KTP, karena nama ini tercetak di akta.' },
+      { el:'#kartuAkun .kartu-kepala .ket-kunci', j:'Nama terkunci', t:'Nama diambil dari pendaftaran Onboarding yang sudah diverifikasi, sehingga tidak dapat diubah di sini.' },
+      bantuan],
+    aman:() => [
+      { el:'.tab-akun', j:'Tab Akun Saya', t:tabTeks() },
+      { el:() => $('#kartuPassword')?.previousElementSibling, j:'Verifikasi dua langkah (2FA)', t:'Aktifkan 2FA agar saat masuk Anda juga diminta kode dari aplikasi autentikator.' },
+      { el:muat('#kartuPassword'), j:'Ganti kata sandi', t:'Isi kata sandi saat ini dan kata sandi baru. Tombol Ganti kata sandi aktif setelah semua syarat terpenuhi.' },
+      { el:muat('#kartuSesi'), j:'Perangkat yang sedang masuk', t:'Keluarkan perangkat yang tidak Anda kenali atau tidak dipakai lagi.' },
+      bantuan],
+    data:() => [
+      { el:'.tab-akun', j:'Tab Akun Saya', t:tabTeks() },
+      { el:'#kartuDataDiri > .kartu-kepala', j:'Data Diri (KTP)', t:'Data ini menjadi identitas Anda di akta dan dikirim otomatis ke Peruri saat registrasi sertifikat elektronik (CA).' },
+      { el:'#kunciOb', j:'Data dari Onboarding', t:'Isian bertanda kunci diambil dari pendaftaran Onboarding, sehingga tidak dapat diubah di sini. Hubungi admin E-PPAT bila ada yang salah.' },
+      { el:'#alertKelengkapan', j:'Isian wajib', t:kurangSemua().length ? 'Isian wajib yang masih kosong ditandai kuning. Klik Ke isian berikutnya untuk langsung menujunya.' : 'Data diri sudah lengkap. Klik Kembali ke Registrasi CA untuk melanjutkan.' },
+      { el:'#alertTolakDiri', j:'Perbaikan untuk TERA', t:'Bagian Data Diri yang ditolak pada pendaftaran TERA. Perbaiki isiannya, simpan, lalu kembali ke Registrasi CA & TERA.' },
+      { el:grup('Identitas sesuai KTP'), j:'Identitas sesuai KTP', t:'Isi sesuai yang tertulis di KTP. Tanggal lahir dan jenis kelamin terisi otomatis dari NIK.' },
+      { el:grup('Alamat sesuai KTP'), j:'Alamat sesuai KTP', t:'Alamat ini tercetak di akta sebagai tempat tinggal Anda.' },
+      { el:grup('Kontak dan domisili'), j:'Kontak dan domisili', t:'Nomor HP dipakai Peruri untuk mengirim kode OTP saat registrasi CA.' },
+      { el:grup('Foto KTP'), j:'Foto KTP', t:OB_DIRI ? 'Foto KTP dari pendaftaran Onboarding dipakai untuk registrasi CA.' : 'Unggah foto KTP yang tajam. Foto ini dikirim ke Peruri agar data Anda terisi otomatis di portalnya.' },
+      { el:'#kartuDataDiri > .kartu-kaki', j:'Simpan Data Diri', t:'Keterangan di sebelah kiri menunjukkan apakah ada perubahan yang belum disimpan. Klik Simpan Data Diri setelah selesai.' },
+      bantuan],
+    ca:() => [
+      { el:'.tab-akun', j:'Tab Akun Saya', t:tabTeks() },
+      { el:'#kartuCa > .kartu-kepala', j:PPAT_T ? 'Status TTE dan TERA' : 'Status sertifikat', t:PPAT_T ? 'Lencana menunjukkan status sertifikat elektronik (TTE) Anda dan stempel elektronik (TERA) kantor.' : 'Lencana menunjukkan status sertifikat elektronik (CA) Anda.' },
+      { el:muat('#kartuCa .ina-stepper'), j:'Tahap registrasi', t:PPAT_T ? 'Registrasi terdiri atas empat tahap. Setiap tahap menampilkan status jalur TTE dan jalur TERA.' : 'Registrasi terdiri atas empat tahap. Tahap yang sedang berjalan ditandai.' },
+      { el:'#langkahBerikut', j:'Langkah berikutnya', t:BERIKUT[S.kondisi] },
+      { el:muat('#alertTera'), j:'Stempel elektronik (TERA)', t:teksTera() },
+      { el:'#kelengkapan', j:'Kelengkapan data diri', t:'Data yang dikirim ke Peruri. Data yang belum diisi ditandai dan dapat dilengkapi di tab Data Diri (KTP).' },
+      { el:'#kartuCa .kirim', j:'Data yang dikirim ke Peruri', t:'Periksa data ini sebelum mengajukan. Data sudah terisi di portal Peruri, sehingga Anda tidak perlu mengetik ulang.' },
+      { el:muat('#dataTera'), j:'Data TERA', t:'Isi hanya data yang belum ada di Data Diri (KTP): ID PPAT atau nomor SK, rekening PPAT, dan SK PPAT terakhir.' },
+      { el:'#tautanBaru', j:'Buat tautan baru', t:'Klik bila tautan eKYC sudah kedaluwarsa. Tautan baru juga dikirim ke email Anda.' },
+      { el:'#cekStatus', j:'Cek status sertifikat', t:'Klik untuk memperbarui status dari Peruri. Waktu pengecekan terakhir tampil di sebelahnya.' },
+      { el:'#kartuSpesimen', j:'Spesimen tanda tangan', t:teksSpesimen() },
+      { el:'#kartuStempel', j:'Spesimen stempel (TERA)', t:teksStempel() },
+      bantuan]
+  };
+  (window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+    get kunci() { return S.layar === 'eaw' ? 'ca-awal' : 'ca-tab-' + S.tab; }, tanda:usulan('HE-CA-14'),
+    aktif:() => !!$('#halaman h1'),
+    langkah:() => (S.layar === 'eaw' ? LANGKAH.awal : LANGKAH[S.tab] || LANGKAH.akun)()
+  });
+})();
 /* spesimen yang sudah disimpan tetap berlaku; #spesimen=KODE datang dari proses tanda tangan */
 const spesimenAda = AJB.spesimen(EMAIL_P), dariTtd = location.hash.match(/^#spesimen=([^&]+)(&ke=eaw)?$/);
 if (spesimenAda) { setKondisi('selesai'); AJB.simpanSpesimen(EMAIL_P, spesimenAda); S.spesimen = spesimenAda === 'contoh' ? '' : spesimenAda; }

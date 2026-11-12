@@ -496,6 +496,9 @@ const UBAH = [
   { kode:'HE-UMUM-01', judul:'Komponen IDDS dengan brand E-PPAT',
     isi:'Tabel, tab, tombol, menu (Action Dropdown), tooltip, alert, lencana, dialog, laci, toast, dan isian memakai komponen INA Digital Design System dengan brand E-PPAT.',
     lama:'Komponen dibuat sendiri.', ke:'editor', sorot:null, sumber:'Laporan HE INA Digital hlm. 33, 40 (Kesimpulan no. 1)' },
+  { kode:'HE-MINUTA-12', versi:'v2', bukanHE:true, judul:'Tour guide Penyusunan Akta',
+    isi:'Saat pengguna pertama kali membuka editor naskah, tur singkat menyorot kepala naskah, penanda variabel dan nilai berbeda, bilah menu, bilah alat, tombol langkah berikutnya sesuai peran (Beritahu PPAT untuk Asisten, Finalisasi Akta untuk PPAT), panel Navigasi, kertas, panel Bagian, tombol Simpan, dan tombol Bantuan. Akta final mendapat tur singkat untuk mode hanya baca. Bentuk dan perilakunya sama dengan tur Permohonan AJB: muncul sekali per peran, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka editor naskah.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-MINUTA-11', versi:'v2', bukanHE:true, judul:'Nilai berbeda dari data order, ringkasan naskah, dan Navigasi seperti live',
     isi:'Kepala naskah menampilkan penanda "1 nilai berbeda dari data order · Lihat" seperti live. Penanda membuka dialog IDDS yang menyebut variabel, bagiannya, nilai di data order, dan nilai di naskah, dengan pilihan Kembalikan ke data order atau Terapkan ke data order. Kanan bilah menu memuat ringkasan "Para Pihak · Objek · Dokumen · bagian · variabel belum terisi". Navigasi memiliki tab Akta dan Lampiran (0) serta kotak "Cari judul bagian" yang langsung menyaring daftar.',
     lama:'Prototipe v2 belum menandai isian variabel yang berbeda dari data order, belum menampilkan ringkasan isi naskah, dan Navigasi belum memiliki tab Lampiran maupun pencarian judul bagian.', ke:'beda', sorot:'#penandaBeda', sumber:'Penelusuran live Perdana Niaga 9 Nov 2026 (kepala Naskah Akta, panel Variabel, Navigasi)' },
@@ -1671,6 +1674,7 @@ $('#bukaUbah').addEventListener('click', () => {
 });
 function lihat(u) {
   S.ubah = false; S.draf = null;
+  if (u.ke === 'tur') { if (S.layar !== 'detail' || final()) buka('ORD-CONTOH-004'); setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 100); return; }
   if (u.ke === 'bantuan') { if (S.layar !== 'detail') buka('ORD-CONTOH-004'); bukaBantuan(); return; }
   if (u.ke === 'editor' || u.ke === 'tataletak') buka('ORD-CONTOH-004', 4);
   if (u.ke === 'variabel') { buka('ORD-CONTOH-004', 2); togglePop('var'); }
@@ -1707,6 +1711,34 @@ let tunda;
 window.addEventListener('resize', () => { const s = sempit(); if (s !== lebarLalu && S.layar === 'detail') { lebarLalu = s; S.nav = !s; S.panel = !s; gambar(); } lebarLalu = s;
   /* lebar kertas berubah → potong ulang halaman */
   clearTimeout(tunda); tunda = setTimeout(() => { if (S.layar === 'detail' && !S.ubah && !document.activeElement?.closest('#panelDok')) gambar(); }, 250); });
+/* ---------------- tour guide (HE-MINUTA-12, komponen tur-bersama) ---------------- */
+(window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+  get kunci() { return final() ? 'minuta-final' : 'minuta-' + S.peran; },
+  aktif:() => S.layar === 'detail' && !!$('#kertas'), tanda:usulan('HE-MINUTA-12'),
+  langkah:() => { const fin = final(), ppat = S.peran === 'ppat'; return fin ? [
+    { el:'.dok-kiri', j:'Akta final', t:'Akta ini sudah difinalisasi. Kode, jenis akta, dan statusnya tampil di sini.' },
+    { el:'.pita', j:'Hanya baca', t:'Naskah akta final tidak dapat diubah. Nomor akta tercantum di kotak ini.' },
+    { el:'#aksiAtas', j:'Pratinjau Akta', t:'Buka Pratinjau Akta untuk melihat akta lengkap dengan data yang sudah terisi.' },
+    { el:'#kanvas', j:'Naskah akta', t:'Isi naskah tetap dapat dibaca dan digulir, tetapi tidak dapat disunting.' },
+    { el:'#bukaBantuan', j:'Bantuan', t:'Panduan dan pertanyaan umum ada di sini. Tur ini juga dapat diputar ulang dari Bantuan.' }
+  ] : [
+    { el:'.dok-kiri', j:'Naskah akta', t:'Kode permohonan, jenis akta, status naskah, dan keterangan simpan tampil di sini.' },
+    { el:'.pita', j:'Yang dapat Anda lakukan', t:ppat ? 'Kotak ini menjelaskan peran Anda: menyunting pasal dan memfinalisasi akta.' : 'Kotak ini menjelaskan peran Anda: menyunting isi pasal, lalu memberi tahu PPAT setelah selesai.' },
+    { el:'#penandaVar', j:'Variabel belum terisi', t:'Penanda ini menghitung variabel yang datanya belum ada. Klik penanda untuk melompat ke variabel tersebut.' },
+    { el:'#penandaBeda', j:'Nilai berbeda', t:'Penanda ini muncul bila isi naskah berbeda dengan data permohonan. Klik penanda untuk melihat dan memilih nilai yang benar.' },
+    { el:'#menuBar', j:'Menu naskah', t:'Menu File, Edit, Tampilan, Sisipkan, Format, Alat, dan Bantuan berisi semua perintah editor.' },
+    { el:'#bilahAlat', j:'Bilah alat', t:'Bilah ini memformat teks, menyisipkan variabel, menjalankan Cek Ejaan, dan membuka Pengaturan halaman.' },
+    { el:'#aksiAtas', j:ppat ? 'Finalisasi Akta' : 'Beritahu PPAT', t:ppat ? 'Periksa naskah di Pratinjau Akta. Setelah sesuai, Finalisasi Akta memberi nomor dan tanggal akta, lalu mengunci naskah.' : 'Periksa naskah di Pratinjau Akta. Setelah selesai, Beritahu PPAT agar PPAT memeriksa dan memfinalisasi akta.' },
+    { el:'.bar-hp', j:'Navigasi dan Bagian', t:'Di layar kecil, panel Navigasi dan panel Bagian dibuka dari kedua tombol ini.' },
+    { el:'#navDok', j:'Navigasi', t:'Daftar ini memuat semua bagian naskah. Klik bagian untuk melompat ke sana, atau tambahkan pasal dan catatan baru. Tab Lampiran masih segera hadir.' },
+    { el:'.rel.kiri', j:'Buka Navigasi', t:'Panel Navigasi sedang ditutup. Tombol ini membukanya kembali.' },
+    { el:'#kanvas', j:'Kertas naskah', t:'Klik bagian di kertas untuk menyuntingnya, lalu tekan Simpan di bawah kertas. Variabel tampil sebagai label dan terisi dari data permohonan.' },
+    { el:'.rel.kanan', j:'Buka panel Bagian', t:'Panel Bagian sedang ditutup. Tombol ini membukanya kembali.' },
+    { el:'#panelDok', j:'Panel Bagian', t:'Panel ini mengatur bagian yang dipilih. Tab Pengaturan Dokumen mengatur kertas, margin, huruf, serta kop dan kaki halaman.' },
+    { el:'.kaki-kanvas', j:'Simpan perubahan', t:'Perubahan pada bagian yang dipilih disimpan dengan tombol Simpan. Keterangan di kiri menunjukkan apakah ada perubahan yang belum disimpan.' },
+    { el:'#bukaBantuan', j:'Bantuan', t:'Panduan dan pertanyaan umum ada di sini. Tur ini juga dapat diputar ulang dari Bantuan.' }
+  ]; }
+});
 MINUTA.forEach(x => pastikan(x.kode));
 S.peran = peranAwal();
 buka(pastikan(AJB.kode()) ? AJB.kode() : 'ORD-CONTOH-004');

@@ -213,11 +213,11 @@ setCustomTheme(eppatTheme);</code></pre>
     </article>
     <article class="item" id="b2-3">
       <div class="item-kepala"><h3><span class="no">2.3</span> Header</h3></div>
-      <p class="aturan">Header setinggi 64 px, berlatar <code>--ina-background-primary</code>, dan tetap di atas saat halaman digulir. Urutan dari kiri: tombol menu (hanya untuk ponsel), ruang kosong, tombol &quot;Lihat Landing&quot; (secondary), tombol Notifikasi (tertiary, ikon saja dengan <code>aria-label</code>), lalu avatar dengan nama dan peran. Prototipe tidak membuat menu avatar; ikuti perilaku menu avatar di live.</p>
+      <p class="aturan">Header setinggi 64 px, berlatar <code>--ina-background-primary</code>, dan tetap di atas saat halaman digulir. Urutan dari kiri: tombol menu (hanya untuk ponsel), ruang kosong, tombol &quot;Lihat landing&quot; (secondary), tombol Notifikasi (tertiary, ikon saja dengan <code>aria-label</code>), lalu avatar dengan nama dan peran. Prototipe tidak membuat menu avatar; ikuti perilaku menu avatar di live.</p>
       <pre class="kode"><code>&lt;header class=&quot;top&quot;&gt;
   &lt;button class=&quot;ina-button ina-button--tertiary ina-button--md&quot; aria-label=&quot;Menu&quot;&gt;…&lt;/button&gt;
   &lt;div class=&quot;spacer&quot;&gt;&lt;/div&gt;
-  &lt;button class=&quot;ina-button ina-button--secondary ina-button--md&quot;&gt;&lt;svg aria-hidden=&quot;true&quot;&gt;…&lt;/svg&gt;&lt;span&gt;Lihat Landing&lt;/span&gt;&lt;/button&gt;
+  &lt;button class=&quot;ina-button ina-button--secondary ina-button--md&quot;&gt;&lt;svg aria-hidden=&quot;true&quot;&gt;…&lt;/svg&gt;&lt;span&gt;Lihat landing&lt;/span&gt;&lt;/button&gt;
   &lt;button class=&quot;ina-button ina-button--tertiary ina-button--md&quot; aria-label=&quot;Notifikasi&quot;&gt;…&lt;/button&gt;
   &lt;div class=&quot;user&quot;&gt;&lt;span class=&quot;ina-avatar ina-avatar--circle ava&quot;&gt;A&lt;/span&gt;
     &lt;span class=&quot;uname&quot;&gt;Asisten Contoh&lt;/span&gt;&lt;span class=&quot;urole&quot;&gt;Asisten&lt;/span&gt;&lt;/div&gt;
@@ -274,7 +274,7 @@ setCustomTheme(eppatTheme);</code></pre>
     <article class="item" id="b2-9">
       <div class="item-kepala"><h3><span class="no">2.9</span> Keadaan kosong</h3><div class="kodehe"><span>HE-EAW-07</span></div></div>
       <p class="aturan">Tabel kosong tetap menampilkan tajuk kolom dan satu baris <code>ina-table__empty-cell</code> berisi kalimat singkat. Bedakan &quot;belum ada data&quot; dan &quot;hasil pencarian tidak cocok&quot;. Untuk hasil pencarian kosong, sediakan tombol untuk menghapus pencarian dan saringan.</p>
-      <div class="contoh"><span class="lbl">Contoh</span><p>Belum ada para pihak.</p><p>Tidak ada order yang cocok.</p><p>Tombol: Hapus Pencarian dan Saringan</p></div>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Belum ada para pihak.</p><p>Tidak ada order yang cocok.</p><p>Tombol: Hapus pencarian dan saringan</p></div>
       <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› tab Para Pihak</span></li><li><a href="Backlog-HE-EAW-Prototype.html">Backlog-HE-EAW-Prototype</a> <span class="ket">› daftar akta</span></li></ul></div>
     </article>
     <article class="item" id="b2-10">
@@ -288,11 +288,11 @@ setCustomTheme(eppatTheme);</code></pre>
     </article>
     <article class="item" id="b2-11">
       <div class="item-kepala"><h3><span class="no">2.11</span> Keadaan gagal dan data terbaru</h3><div class="kodehe"><span>IDDS-TN-28</span></div></div>
-      <p class="aturan">Bila data gagal dimuat, tampilkan IDDS Alert critical berisi penyebab dan tombol &quot;Coba Lagi&quot;. Halaman ringkasan menampilkan waktu pembaruan dan tombol &quot;Muat Ulang&quot;.</p>
+      <p class="aturan">Bila data gagal dimuat, tampilkan IDDS Alert critical berisi penyebab dan tombol &quot;Coba lagi&quot;. Halaman ringkasan menampilkan waktu pembaruan dan tombol &quot;Muat ulang&quot;.</p>
       <pre class="kode"><code>&lt;div class=&quot;ina-alert ina-alert--critical&quot; role=&quot;status&quot;&gt;&lt;div class=&quot;ina-alert__content&quot;&gt;&lt;div class=&quot;ina-alert__text-section&quot;&gt;
   &lt;div class=&quot;ina-alert__title&quot;&gt;Dashboard gagal dimuat&lt;/div&gt;
   &lt;div class=&quot;ina-alert__description&quot;&gt;Periksa koneksi internet Anda, lalu coba lagi.&lt;/div&gt;&lt;/div&gt;
-  &lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--secondary ina-button--sm&quot;&gt;Coba Lagi&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--secondary ina-button--sm&quot;&gt;Coba lagi&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;span class=&quot;diperbarui&quot;&gt;Diperbarui pukul 09.25 WIB&lt;/span&gt;</code></pre>
       <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard">Backlog-IDDS-TN-EPPAT-Prototype#dashboard</a></li></ul></div>
@@ -310,9 +310,9 @@ setCustomTheme(eppatTheme);</code></pre>
     <h2 id="h-b3"><span class="no">3</span>Komponen IDDS dan kapan dipakai</h2>
     <article class="item" id="b3-1">
       <div class="item-kepala"><h3><span class="no">3.1</span> Button: hierarki</h3><div class="kodehe"><span>HE-ORDER-05</span></div></div>
-      <p class="aturan">Satu area hanya punya satu tombol primary untuk aksi utama. Aksi pendamping memakai secondary. Aksi ringan atau berisiko rendah (Batal di daftar, Kirim Ulang, Muat Ulang) memakai tertiary. Tautan di dalam teks memakai varian link. Ukuran: sm di tabel, md di formulir dan dialog, lg di kartu Masuk.</p>
-      <pre class="kode"><code>&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--primary ina-button--md&quot;&gt;Buat Permohonan&lt;/button&gt;
-&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--secondary ina-button--md&quot;&gt;Muat Ulang&lt;/button&gt;
+      <p class="aturan">Satu area hanya punya satu tombol primary untuk aksi utama. Aksi pendamping memakai secondary. Aksi ringan atau berisiko rendah (Batal di daftar, Kirim ulang, Muat ulang) memakai tertiary. Tautan di dalam teks memakai varian link. Ukuran: sm di tabel, md di formulir dan dialog, lg di kartu Masuk.</p>
+      <pre class="kode"><code>&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--primary ina-button--md&quot;&gt;Buat permohonan&lt;/button&gt;
+&lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--secondary ina-button--md&quot;&gt;Muat ulang&lt;/button&gt;
 &lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--tertiary ina-button--sm&quot;&gt;Batalkan Pilihan&lt;/button&gt;
 &lt;button type=&quot;button&quot; class=&quot;ina-button ina-button--link ina-button--sm&quot;&gt;Lengkapi&lt;/button&gt;</code></pre>
       <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› daftar order</span></li></ul></div>
@@ -643,8 +643,8 @@ Tombol: Tetap di Sini · Tinggalkan</code></pre>
     </article>
     <article class="item" id="b4-11">
       <div class="item-kepala"><h3><span class="no">4.11</span> Kurangi langkah berulang</h3><div class="kodehe"><span>HE-ORDER-03</span><span>HE-USER-02</span><span>HE-UMUM-03</span></div></div>
-      <p class="aturan">Sediakan jalan pintas untuk pekerjaan berulang. Contoh: &quot;Simpan &amp; Tambah Lagi&quot; di dialog Tambah Para Pihak, aksi massal Aktifkan/Tangguhkan untuk user terpilih, dan impor user dari berkas.</p>
-      <div class="contoh"><span class="lbl">Contoh</span><p>Tombol dialog: Batal · Simpan &amp; Tambah Lagi · Simpan</p></div>
+      <p class="aturan">Sediakan jalan pintas untuk pekerjaan berulang. Contoh: &quot;Simpan &amp; tambah lagi&quot; di dialog Tambah Para Pihak, aksi massal Aktifkan/Tangguhkan untuk user terpilih, dan impor user dari berkas.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Tombol dialog: Batal · Simpan &amp; tambah lagi · Simpan</p></div>
       <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a> <span class="ket">› Tambah Para Pihak</span></li><li><a href="Backlog-HE-USER-Prototype.html">Backlog-HE-USER-Prototype</a></li></ul></div>
     </article>
     <article class="item" id="b4-12">
@@ -731,8 +731,8 @@ pemicu.focus();</code></pre>
     </article>
     <article class="item" id="b6-4">
       <div class="item-kepala"><h3><span class="no">6.4</span> Huruf kapital</h3><div class="kodehe"><span>IDDS-TN-06</span></div></div>
-      <p class="aturan">Label tombol memakai Huruf Kapital di Setiap Kata, kecuali kata tugas (dan, ke, di, untuk). Judul halaman dan judul kartu mengikuti nama menu. Judul dialog, pesan, teks bantuan, dan isi Toast memakai huruf kapital hanya di awal kalimat dan nama diri.</p>
-      <div class="contoh"><span class="lbl">Contoh</span><p>Tombol: Buat Permohonan · Simpan &amp; Tambah Lagi · Kembali ke Halaman Masuk · Muat Ulang · Coba Lagi</p><p>Dialog: Hapus pihak?</p><p>Toast: Narahubung tersimpan.</p></div>
+      <p class="aturan">Ikuti aturan tipografi resmi IDDS (design.inadigital.go.id › Landasan › Tipografi). Judul halaman dan judul kartu memakai Title Case dan mengikuti nama menu. Label tombol, judul dialog, pesan, teks bantuan, dan isi Toast memakai huruf kapital hanya di awal kalimat dan pada nama diri (sentence case), misalnya "Muat ulang" dan "Simpan &amp; tambah lagi". Nama menu, layar, dan lembar di dalam label tetap berhuruf kapital, misalnya "Buka Permohonan AJB". Huruf besar semua hanya untuk singkatan resmi, misalnya PPAT, NIB, dan CA.</p>
+      <div class="contoh"><span class="lbl">Contoh</span><p>Tombol: Buat permohonan · Simpan &amp; tambah lagi · Kembali ke halaman masuk · Muat ulang · Coba lagi</p><p>Dialog: Hapus pihak?</p><p>Toast: Narahubung tersimpan.</p></div>
       <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a></li><li><a href="Backlog-IDDS-TN-MASUK-Prototype.html">Backlog-IDDS-TN-MASUK-Prototype</a></li></ul></div>
     </article>
     <article class="item" id="b6-5">
@@ -794,7 +794,7 @@ Dibuat 26 Okt 2026</code></pre>
       <p class="aturan">Periksa setiap halaman baru atau yang diubah.</p>
       <pre class="kode cek" aria-label="Daftar periksa, dapat disalin ke deskripsi PR"><code>- [ ] Breadcrumb, satu H1, dan subjudul satu kalimat SPOK bertitik
 - [ ] Tombol Bantuan di kanan judul membuka Drawer khusus halaman
-- [ ] Ada keadaan kosong, memuat, dan gagal (dengan Coba Lagi)
+- [ ] Ada keadaan kosong, memuat, dan gagal (dengan Coba lagi)
 - [ ] Halaman tidak bergeser ke samping di lebar 360 px; tabel lebar digulir di dalam wadahnya</code></pre>
       <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-HE-ORDER-Prototype.html">Backlog-HE-ORDER-Prototype</a></li></ul></div>
     </article>
@@ -831,7 +831,7 @@ Dibuat 26 Okt 2026</code></pre>
       <div class="item-kepala"><h3><span class="no">7.6</span> Bahasa</h3><div class="kodehe"><span>IDDS-TN-37</span></div></div>
       <p class="aturan">Baca ulang semua teks yang tampil.</p>
       <pre class="kode cek" aria-label="Daftar periksa, dapat disalin ke deskripsi PR"><code>- [ ] Kata baku: kata sandi, unggah, unduh, nonaktif, kedaluwarsa, e-Meterai
-- [ ] Tombol Huruf Kapital di Setiap Kata; pesan berhuruf kapital di awal kalimat
+- [ ] Tombol, pesan, dan teks bantuan sentence case; judul halaman Title Case; huruf besar semua hanya untuk singkatan resmi
 - [ ] Tanggal 26 Okt 2026 / 26 Oktober 2026, waktu 09.25 WIB, uang Rp10.000
 - [ ] Tanpa istilah developer dan tanpa catatan tim di layar</code></pre>
       <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html">Backlog-IDDS-TN-EPPAT-Prototype</a></li><li><a href="Backlog-IDDS-TN-CMS-Prototype.html">Backlog-IDDS-TN-CMS-Prototype</a></li></ul></div>
@@ -919,7 +919,7 @@ Dibuat 26 Okt 2026</code></pre>
     </article>
     <article class="item" id="b8-14">
       <div class="item-kepala"><h3><span class="no">8.14</span> Tenant · Akta</h3><div class="kodehe"><span>IDDS-TN-27 s.d. 37</span></div></div>
-      <p class="aturan">Salin kartu dan grafik Dashboard dengan Muat Ulang dan Coba Lagi, validasi Profil Kantor, Toggle layanan berkonfirmasi, kolom Salinan, alasan tombol nonaktif, kirim dan cabut tautan, serta status e-Meterai.</p>
+      <p class="aturan">Salin kartu dan grafik Dashboard dengan Muat ulang dan Coba lagi, validasi Profil Kantor, Toggle layanan berkonfirmasi, kolom Salinan, alasan tombol nonaktif, kirim dan cabut tautan, serta status e-Meterai.</p>
       <div class="contoh"><span class="lbl">Contoh</span><p>Pola: dasbor, unggah, status sistem</p></div>
       <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-TN-EPPAT-Prototype.html">Backlog-IDDS-TN-EPPAT-Prototype</a></li></ul></div>
     </article>
@@ -931,7 +931,7 @@ Dibuat 26 Okt 2026</code></pre>
     </article>
     <article class="item" id="b8-16">
       <div class="item-kepala"><h3><span class="no">8.16</span> Platform · Monitoring</h3><div class="kodehe"><span>IDDS-PL-11 s.d. 20</span></div></div>
-      <p class="aturan">Salin kerangka platform (sidebar tanpa kartu kantor, header tanpa Lihat Landing), status sistem dengan waktu pemeriksaan, subjudul yang sesuai isi untuk halaman hanya baca, saringan log berlabel, dan label aktivitas berbahasa Indonesia.</p>
+      <p class="aturan">Salin kerangka platform (sidebar tanpa kartu kantor, header tanpa Lihat landing), status sistem dengan waktu pemeriksaan, subjudul yang sesuai isi untuk halaman hanya baca, saringan log berlabel, dan label aktivitas berbahasa Indonesia.</p>
       <div class="contoh"><span class="lbl">Contoh</span><p>Pola: kerangka platform, tabel hanya baca</p></div>
       <div class="acuan"><span class="lbl">Acuan</span><ul><li><a href="Backlog-IDDS-PL-MONITORING-Prototype.html">Backlog-IDDS-PL-MONITORING-Prototype</a></li></ul></div>
     </article>

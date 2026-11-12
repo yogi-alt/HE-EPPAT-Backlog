@@ -54,6 +54,12 @@ if (html.includes('id="toastWadah"') && !html.includes('id="kabar-bersama-js"'))
   const i = html.lastIndexOf('</body>');
   html = i < 0 ? html + kb : html.slice(0, i) + kb + '\n' + html.slice(i);
 }
+// Tur bersama: tour guide semua modul (muncul pertama kali, putar ulang dari Bantuan) untuk prototipe yang mendaftarkan TUR_ANTRE.
+if (html.includes('TUR_ANTRE') && !html.includes('id="tur-bersama-js"')) {
+  const tb = fs.readFileSync(path.join(d, 'tur-bersama.html'), 'utf8');
+  const i = html.lastIndexOf('</body>');
+  html = i < 0 ? html + tb : html.slice(0, i) + tb + '\n' + html.slice(i);
+}
 // Penanda versi (versi.json): label di protobar sesudah tautan "Daftar prototipe" + lencana "Baru di vN" di Daftar perubahan.
 {
   const V = JSON.parse(fs.readFileSync(path.join(d, 'versi.json'), 'utf8'));

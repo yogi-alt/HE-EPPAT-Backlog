@@ -193,6 +193,9 @@ const UBAH = [
   { kode:'HE-VERIF-05', judul:'Detail verifikasi: navigasi konsisten dan langkah berikutnya jelas',
     isi:'Judul ganda "Verifikasi Berkas" di daftar dihapus. Tombol Kembali dan identitas permohonan memakai pola yang sama dengan prototipe Penandatanganan Akta. Tab memakai IDDS Tab Horizontal selebar halaman dengan lencana status. Setelah satu bagian terverifikasi, toast menunjukkan bagian berikutnya dan tab berpindah otomatis. Setelah ketiganya selesai, IDDS Alert menyatakan permohonan siap penyusunan dengan tombol "Buka Permohonan AJB".',
     lama:'Judul "Verifikasi Akta" muncul dua kali di daftar. Letak tombol Kembali berbeda dengan halaman lain (bukti HE). Tab buatan sendiri dengan simbol; setelah verifikasi hanya muncul toast, tanpa arahan ke bagian berikutnya atau ke tahap drafting.', ke:'harga-011', sorot:'#tabVerif', sumber:'Laporan HE UX Metric Lab, Highlight #5 (skor 54,5; PDF hlm. 15)' },
+  { kode:'HE-VERIF-06', versi:'v2', bukanHE:true, judul:'Tour guide Verifikasi Berkas',
+    isi:'Saat pengguna pertama kali membuka Verifikasi Berkas, tur singkat menyorot identitas permohonan, status verifikasi, tiga tab bagian, isi tab yang sedang dibuka, dan tombol Bantuan. Bentuk dan perilakunya sama dengan tur Permohonan AJB: muncul sekali, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka Verifikasi Berkas.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-UMUM-02', judul:'Bantuan untuk Verifikasi Berkas',
     isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi urutan tiga verifikasi, pertanyaan umum (sertifikat elektronik belum aktif, pihak tanpa akun, sumber NJOP, harga di bawah NJOP, salah verifikasi), dan kontak dukungan.',
     lama:'Tidak ada panduan atau bantuan di halaman ini (skor Help & Documentation halaman: 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
@@ -538,6 +541,7 @@ $('#bukaUbah').addEventListener('click', () => {
   });
 });
 function lihat(u) {
+  if (u.ke === 'tur') { window.TurBersama && window.TurBersama.mulai(); return; }
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
   if (u.ke === 'tunggu') buka('ORD-CONTOH-010');
   if (u.ke === 'pihak-010') { const x = DATA.find(y => y.kode === 'ORD-CONTOH-010'); if (!x.dicek) x.dicek = '26 Okt 2026, 08.30'; buka('ORD-CONTOH-010', 'pihak'); }
@@ -550,6 +554,18 @@ $('#aturUlang').addEventListener('click', () => { AJB.hapus(); location.reload()
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+/* ---------------- tour guide (HE-VERIF-06, komponen tur-bersama) ---------------- */
+const ISI_TAB = { pihak:'Tekan Cek sertifikat semua pihak untuk memuat status sertifikat elektronik setiap pihak.', objek:'Periksa data objek tanah, lalu tandai terverifikasi. Anda akan diminta mengonfirmasi sebelum status berubah.', harga:'Isi NJOP dan luas tanah untuk membandingkan nilai NJOP dengan harga jual. Catatan wajib diisi bila harga di bawah NJOP.' };
+(window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+  kunci:'verif-detail', aktif:() => !!$('#tabVerif') && !(window.SESI_PROTO && window.SESI_PROTO.aktif === 'ROLE_KLIEN'), tanda:usulan('HE-VERIF-06'),
+  langkah:() => [
+    { el:'.det-atas', j:'Permohonan yang diperiksa', t:'Kode, jenis akta, dan klien tampil di sini. Tombol Kembali membawa Anda ke stepper Permohonan AJB.' },
+    { el:() => $('#infoTunggu') || $('#selesaiSemua'), j:'Status verifikasi', t:$('#infoTunggu') ? 'Kotak ini menyebut bagian yang belum diverifikasi, lama permohonan menunggu, dan dampaknya ke tahap berikutnya.' : LIHAT ? 'Kotak ini menyatakan tahap Verifikasi Berkas sudah selesai dan halaman ini hanya untuk dilihat.' : 'Kotak ini menyatakan ketiga verifikasi selesai dan permohonan siap masuk tahap penyusunan.' },
+    { el:'#tabVerif', j:'Tiga bagian verifikasi', t:'Para pihak, objek tanah, dan harga diverifikasi di tab masing-masing. Lencana menunjukkan status setiap bagian.' },
+    { el:() => $('#tabVerif') && $('#tabVerif').nextElementSibling, j:'Isi bagian', t:LIHAT ? 'Hasil verifikasi bagian ini dapat dilihat, tetapi tidak dapat diubah lagi.' : ISI_TAB[S.tab] },
+    { el:'#bukaBantuan', j:'Bantuan', t:'Panduan dan pertanyaan umum ada di sini. Tur ini juga dapat diputar ulang dari Bantuan.' }
+  ]
+});
 const kodeAwal = AJB.kode();
 DATA.forEach(x => pastikan(x.kode));
 buka(pastikan(kodeAwal) ? kodeAwal : 'ORD-CONTOH-003');

@@ -324,20 +324,6 @@ body .protobar{z-index:1001}
 .status-kartu .stepper-v{display:none}
 .status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
 
-/* tour guide: walkthrough dengan coach marks (HE-ORDER-23) */
-.tur{position:fixed;inset:0;z-index:2000}
-.tur-tirai{position:absolute;inset:0}
-.tur-sorot{position:fixed;border-radius:12px;box-shadow:0 0 0 9999px rgba(15,23,30,.58);outline:2px solid var(--ina-primary-300,#9cc3b4);outline-offset:2px;transition:top .25s,left .25s,width .25s,height .25s;pointer-events:none}
-.tur-kotak{position:fixed;width:min(360px,calc(100vw - 32px));background:var(--ina-background-primary,#fff);color:var(--ina-content-primary);border-radius:12px;box-shadow:0 12px 32px rgba(15,23,30,.28);padding:16px 16px 14px}
-.tur-kotak h2{margin:2px 0 6px;font-size:16px;line-height:22px;font-weight:600}
-.tur-kotak p{margin:0;font-size:14px;line-height:20px;color:var(--ina-content-secondary)}
-.tur-langkah{font-size:12px;font-weight:600;color:var(--ina-primary-primary,#3d6b5e)}
-.tur-titik{display:flex;gap:6px;margin-top:12px}
-.tur-titik span{width:6px;height:6px;border-radius:999px;background:var(--ina-stroke-primary,#d0d5d3)}
-.tur-titik span.on{background:var(--ina-primary-primary,#3d6b5e);width:16px}
-.tur-kaki{display:flex;align-items:center;gap:8px;margin-top:14px}
-.tur-kaki [data-tur=lewati]{margin-right:auto}
-@media (max-width:760px){.tur-kotak{left:16px!important;right:16px;top:auto!important;bottom:16px;width:auto}}
 </style>
 <style id="eaw-css">
 /* ===== E-Akta Wizard (PPAT) — komponen IDDS + brand E-PPAT (HE-UMUM-01)
@@ -484,6 +470,10 @@ body:has(#otpWaktu) .protobar{position:relative;z-index:3000} /* tombol simulasi
 .tab-dok.ina-tab-horizontal{display:flex;flex-direction:row;align-items:flex-end;gap:4px}
 .tab-dok .tanya{align-self:center;flex:none}
 .tab-dok > .ina-tab-horizontal__container{width:auto;flex:0 1 auto;min-width:0}
+/* layar sempit: ketiga tab dokumen turun ke baris berikutnya agar semuanya terlihat dan halaman tidak bergulir mendatar */
+.tab-dok{max-width:100%}
+.tab-dok .ina-tab-horizontal__tab{white-space:nowrap}
+@media (max-width:760px){.tab-dok > .ina-tab-horizontal__container{flex-wrap:wrap;height:auto}}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .sal-kepala{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:20px 0 10px}
 .sal-kepala span{font-size:14px;color:var(--ina-content-secondary)}
@@ -698,6 +688,9 @@ const UBAH = [
   { kode:'HE-EAW-09', judul:'Langkah e-Meterai: aktivasi diperiksa dan pemakaian kuota dikonfirmasi',
     isi:'Bila email akun e-Meterai kantor belum disimpan, nonaktifkan tombol Buat Nomor Seri dan tampilkan IDDS Alert yang mengarahkan ke menu Aktivasi e-Meterai. Bila sudah aktif, tampilkan akun e-Meterai yang dipakai di panel. Sebelum nomor seri dibuat atau dibuat ulang, tampilkan IDDS Modal Confirmation "Pakai 1 kuota e-Meterai?" yang menyebut biaya Rp10.000 dan akun Peruri yang dipakai. Bila kuota habis, tampilkan IDDS Alert critical yang menetap di bawah tombol dengan tautan pembelian kuota di e-Meterai.co.id. Gunakan label berbahasa Indonesia: "Buat Nomor Seri", "Bubuhkan e-Meterai", dan "Nomor seri e-Meterai". Perilaku ini dapat dicoba melalui simulasi "e-Meterai" di bilah atas.',
     lama:'Wizard tidak membaca email aktivasi e-Meterai dan tidak menampilkan sisa kuota. Tombol "1. Generate SN (kuota)" selalu aktif dan langsung memakai 1 kuota (Rp10.000) tanpa konfirmasi; tombol "Generate Ulang SN" juga tanpa konfirmasi. Email yang belum diisi atau kuota yang habis baru diketahui dari toast pesan server atau "Gagal generate SN meterai." yang hilang sendiri. Label memakai bahasa Inggris dan ejaan "E-Materai".', ke:'meterai', sorot:'#alertMeterai', sumber:'Penelusuran live (bukan temuan HE)', bukanHE:true },
+  { kode:'HE-EAW-15', versi:'v2', bukanHE:true, judul:'Tour guide Penandatanganan Akta',
+    isi:'Saat pengguna pertama kali membuka Penandatanganan Akta, tur singkat menyorot identitas akta, tab Minuta Lembar Pertama, Minuta Lembar Kedua, dan Salinan, kesiapan sertifikat elektronik penanda tangan, urutan langkah Stempel TERA, Tanda Tangan Elektronik, dan e-Meterai, penampil PDF, panel langkah, dan tombol Bantuan. Tab Salinan mendapat tur sendiri saat pertama dibuka. Akun yang belum berperan PPAT diberi tahu batas tindakannya. Bentuk dan perilakunya sama dengan tur Permohonan AJB: muncul sekali, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka Penandatanganan Akta.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-EAW-14', versi:'v2', bukanHE:true, judul:'Minuta Lembar Pertama, Minuta Lembar Kedua, dan Salinan',
     isi:'Salinan tidak lagi diunggah: satu Salinan Akta dibuat otomatis dari minuta final dan melalui langkah yang sama, hanya ditandatangani PPAT. Akta ditandatangani dalam tiga dokumen berurutan, sama dengan dokumen di Arsip Akta: Minuta Lembar Pertama (disimpan di kantor PPAT), Minuta Lembar Kedua (ke Kantor Pertanahan), lalu Salinan. Setiap minuta melalui Stempel TERA, Tanda Tangan Elektronik semua penanda tangan, dan e-Meterai. Tab Minuta Lembar Kedua terbuka setelah Lembar Pertama selesai, dan tab Salinan terbuka setelah kedua rangkap tuntas, dengan alasan dan tombol ke tab sebelumnya. Halaman pertama dokumen menyebut lembarnya. Status di Permohonan AJB dan Arsip Akta mengikuti setiap lembar.',
     lama:'Hanya ada tab Minuta dan Salinan; minuta dianggap satu dokumen, padahal Arsip Akta dan Renvooi memakai dua rangkap minuta.', ke:'minuta2', sorot:'#kartuLangkah', sumber:'Acuan prototipe Perdana Niaga (Order APHT) dan live Arsip Akta' },
@@ -1507,6 +1500,7 @@ $('#bukaUbah').addEventListener('click', () => {
   });
 });
 function lihat(u) {
+  if (u.ke === 'tur') { if (S.layar !== 'detail') buka('ORD-CONTOH-007'); setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 100); return; }
   if (u.ke === 'bantuan') { if (S.layar !== 'detail') buka('ORD-CONTOH-007'); bukaBantuan(); return; }
   if (u.ke === 'ttd') buka('ORD-CONTOH-007');
   if (u.ke === 'konfirm-tera') { aturSim('aktif', S.emeterai); buka('ORD-CONTOH-004'); konfirmTera(); return; }
@@ -1548,6 +1542,43 @@ $('#simSpesimen').addEventListener('click', e => { S.tanpaSpesimen = !S.tanpaSpe
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+/* ---------------- tour guide (HE-EAW-15, komponen tur-bersama) ---------------- */
+const TUR_BANTUAN = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan dan pertanyaan umum ada di sini. Tur ini juga dapat diputar ulang dari Bantuan.' };
+/* panel kanan berbeda per langkah dan keadaan; setiap langkah tur hanya tampil bila bagiannya ada di layar */
+const TUR_PANEL = [
+  { el:'#kartuBerikut', j:'Langkah berikutnya', t:'Kartu ini menyebut tindakan berikutnya beserta tombolnya. Bila tombol belum aktif, alasannya tertulis di bawah tombol. Sistem meminta konfirmasi sebelum stempel, tanda tangan, atau e-Meterai dibubuhkan.' },
+  { el:'#alertTera', j:'Status TERA kantor', t:'Stempel TERA belum dapat dibubuhkan karena TERA kantor belum aktif. Tautan di kotak ini membuka pendaftaran TERA.' },
+  { el:'#alertMeterai', j:'Status e-Meterai', t:'e-Meterai belum dapat dibubuhkan. Kotak ini menyebut sebabnya dan cara menyelesaikannya.' },
+  { el:'.ruang .panel .terkunci', j:'Langkah terkunci', t:'Langkah ini terbuka setelah langkah sebelumnya selesai. Klik langkah yang sedang berjalan di stepper untuk melanjutkan.' },
+  { el:'.ruang .panel ul.pihak', j:'Penanda tangan', t:'Tanda tangan dilakukan berurutan sesuai daftar. Setiap penanda tangan perlu posisi di PDF dan sertifikat elektronik aktif.' },
+  { el:'.ruang .panel .kartu-seret', j:'Posisi di PDF', t:'Seret kartu ini ke halaman PDF, atau tekan Tempatkan di halaman ini, untuk menentukan posisi stempel atau tanda tangan.' },
+  { el:'.ruang .panel .sukses', j:'Langkah selesai', t:'Kotak ini menyatakan langkah sudah selesai. Hasilnya dapat diunduh dari tombol di bawahnya.' },
+  { el:'#infoMeterai', j:'Akun e-Meterai', t:'Kotak ini menunjukkan akun e-Meterai yang dipakai, beserta nomor seri bila sudah dibuat.' }
+];
+const TUR_PERAN = { el:'#hanyaLihat', j:'Peran Anda', t:'Akun Anda belum berperan PPAT. Anda dapat menentukan posisi kotak dan mengirim OTP ke para pihak, sedangkan stempel, tanda tangan PPAT, dan e-Meterai dilakukan PPAT.' };
+(window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+  get kunci() { return S.tab === 'salinan' ? 'eaw-salinan' : 'eaw-minuta'; },
+  aktif:() => S.layar === 'detail' && !!$('.tab-dok') && !$('.sal-memuat'), tanda:usulan('HE-EAW-15'),
+  langkah:() => S.tab === 'salinan' ? [
+    { el:'#infoSalinan', j:'Salinan akta', t:'Salinan dibuat dari minuta final, lalu distempel TERA, ditandatangani PPAT, dan dibubuhi e-Meterai.' },
+    TUR_PERAN,
+    { el:'#kartuLangkahSal', j:'Urutan langkah', t:'Langkahnya berurutan: Stempel TERA, Tanda Tangan Elektronik, lalu e-Meterai. Langkah berikutnya terbuka setelah langkah sebelumnya selesai.' },
+    { el:'.ruang .penampil', j:'Dokumen salinan', t:'Penampil PDF langsung menuju posisi stempel dan tanda tangan pada langkah yang sedang berjalan.' },
+    ...TUR_PANEL,
+    { el:'.kelola-atas', j:'Kirim salinan', t:'Setelah semua langkah selesai, salinan dapat dikirim ke para pihak melalui email.' },
+    TUR_BANTUAN
+  ] : [
+    { el:'.det-atas', j:'Akta yang ditandatangani', t:'Kode, jenis akta, klien, dan nomor akta tampil di sini. Tombol Kembali membawa Anda ke stepper Permohonan AJB.' },
+    TUR_PERAN,
+    { el:'.tab-dok', j:'Tab dokumen', t:'Minuta Lembar Pertama, Minuta Lembar Kedua, dan Salinan ditandatangani berurutan. Tab berikutnya terbuka setelah tab sebelumnya selesai.' },
+    { el:'#tabTerkunci', j:'Tab terkunci', t:'Tab ini terbuka setelah Minuta Lembar Pertama selesai ditandatangani. Tombol di kotak ini membawa Anda ke tab tersebut.' },
+    { el:'#kesiapan', j:'Kesiapan penanda tangan', t:'Kotak ini menyebut penanda tangan yang belum memiliki sertifikat elektronik aktif, agar dapat diselesaikan sebelum tanda tangan.' },
+    { el:'#kartuLangkah', j:'Urutan langkah', t:'Langkahnya berurutan: Stempel TERA, Tanda Tangan Elektronik, lalu e-Meterai. Status setiap langkah tampil di stepper. Klik langkah untuk melihat isinya.' },
+    { el:'.ruang .penampil', j:'Dokumen akta', t:'Penampil PDF langsung menuju posisi stempel dan tanda tangan pada langkah yang sedang berjalan.' },
+    ...TUR_PANEL,
+    TUR_BANTUAN
+  ]
+});
 ORDER.forEach(x => pastikan(x.kode));
 const kodeAwal = AJB.kode(), aktaAwal = pastikan(kodeAwal);
 if (aktaAwal) aktaAwal.pihak.forEach(p => { if (!AJB.ambil(kodeAwal).eawData) p.ca = true; }); /* contoh CA belum aktif (HE-EAW-06) tetap dibuka lewat Lihat di layar */

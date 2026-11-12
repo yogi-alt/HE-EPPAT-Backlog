@@ -324,20 +324,6 @@ body .protobar{z-index:1001}
 .status-kartu .stepper-v{display:none}
 .status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
 
-/* tour guide: walkthrough dengan coach marks (HE-ORDER-23) */
-.tur{position:fixed;inset:0;z-index:2000}
-.tur-tirai{position:absolute;inset:0}
-.tur-sorot{position:fixed;border-radius:12px;box-shadow:0 0 0 9999px rgba(15,23,30,.58);outline:2px solid var(--ina-primary-300,#9cc3b4);outline-offset:2px;transition:top .25s,left .25s,width .25s,height .25s;pointer-events:none}
-.tur-kotak{position:fixed;width:min(360px,calc(100vw - 32px));background:var(--ina-background-primary,#fff);color:var(--ina-content-primary);border-radius:12px;box-shadow:0 12px 32px rgba(15,23,30,.28);padding:16px 16px 14px}
-.tur-kotak h2{margin:2px 0 6px;font-size:16px;line-height:22px;font-weight:600}
-.tur-kotak p{margin:0;font-size:14px;line-height:20px;color:var(--ina-content-secondary)}
-.tur-langkah{font-size:12px;font-weight:600;color:var(--ina-primary-primary,#3d6b5e)}
-.tur-titik{display:flex;gap:6px;margin-top:12px}
-.tur-titik span{width:6px;height:6px;border-radius:999px;background:var(--ina-stroke-primary,#d0d5d3)}
-.tur-titik span.on{background:var(--ina-primary-primary,#3d6b5e);width:16px}
-.tur-kaki{display:flex;align-items:center;gap:8px;margin-top:14px}
-.tur-kaki [data-tur=lewati]{margin-right:auto}
-@media (max-width:760px){.tur-kotak{left:16px!important;right:16px;top:auto!important;bottom:16px;width:auto}}
 </style>
 <style id="user-css">
 /* ===== Daftar User (Super Admin) — komponen IDDS + brand E-PPAT (HE-UMUM-01)
@@ -609,6 +595,12 @@ const UBAH = [
   { kode:'HE-USER-15', judul:'Aksi Nonaktifkan dengan konfirmasi',
     isi:'Menu aksi dan aksi massal memiliki Nonaktifkan, dengan dialog konfirmasi yang menjelaskan bedanya dengan Tangguhkan. Tooltip Status Akun dan Bantuan memakai definisi yang sama: Ditangguhkan berarti akses dihentikan sementara, Non-aktif berarti akun berhenti dipakai.',
     lama:'Tidak ada aksi Nonaktifkan. Status Non-aktif hanya dapat dipilih di isian Status Akun pada Ubah Data, tanpa konfirmasi.', ke:'daftar', sorot:'#kolomStatus', sumber:'Usulan tim, diskusi 5 Nov 2026 (bukan temuan HE)', versi:'v2' },
+  { kode:'HE-USER-16', versi:'v2', bukanHE:true, judul:'Tour guide Daftar Pengguna',
+    isi:'Saat pengguna pertama kali membuka Daftar Pengguna, tur singkat menyorot saringan status dan peran, pencarian, tombol Impor dari berkas dan Tambah pengguna, kolom Status Sertifikat dan Status Akun, menu aksi, lalu tombol Bantuan. Pengguna yang hanya dapat melihat mendapat tur tanpa tombol pengelolaan. Bentuk dan perilakunya sama dengan tur Permohonan AJB: muncul sekali, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka Daftar Pengguna.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
+  { kode:'HE-USER-17', versi:'v2', bukanHE:true, judul:'Tour guide layar undangan akun',
+    isi:'Saat pengguna yang diundang membuka tautan di email undangan, tur singkat menjelaskan layar Buat kata sandi: isian kata sandi, syarat yang tercentang langsung, isian ulangi kata sandi, dan tombol simpan. Setelah kata sandi tersimpan, tur di layar Akun aktif menjelaskan pilihan Lanjut Registrasi CA atau melewatinya. Tur muncul sekali per pengguna yang diundang dan dapat dilewati.',
+    lama:'Tidak ada panduan saat pengguna yang diundang membuat kata sandi dan mengaktifkan akunnya.', ke:'tur-undangan', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-UMUM-03', judul:'Daftar Pengguna: impor pengguna klien dari berkas',
     isi:'Tombol "Impor dari berkas" membuka dialog tiga langkah: unduh templat CSV, unggah berkas (IDDS File Upload), lalu pratinjau. Baris yang bermasalah ditandai beserta alasannya (email tidak valid, email sudah terdaftar, nama kosong) dan tidak ikut disimpan. Klien hasil impor langsung dapat dipilih sebagai pihak di Permohonan AJB.',
     lama:'Pengguna klien hanya dapat ditambahkan satu per satu.', ke:'impor', sorot:null, sumber:'Laporan HE INA Digital hlm. 23, 40 (Kesimpulan no. 5) + keputusan tim 23 Okt 2026' },
@@ -1023,6 +1015,7 @@ function surelUndangan(u) {
 }
 const kepalaUndangan = judul => `<div class="undangan-kepala"><span class="undangan-ikon">${ik('kunciKey', 22)}</span><div><small>Undangan Akun</small><h2>${judul}</h2></div></div>`;
 function layarSandi(u) {
+  emailUndangan = u.email;
   const W = $('#lapisanUndangan');
   W.innerHTML = `<div class="undangan"><div class="undangan-kartu ditandai" id="kartuSandi">${kepalaUndangan('Buat kata sandi')}
     <p class="undangan-teks">Buat kata sandi untuk akun ${esc(u.email)}.</p>
@@ -1247,6 +1240,8 @@ $('#bukaUbah').addEventListener('click', () => {
 });
 function lihat(u) {
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
+  if (u.ke === 'tur') { window.TurBersama && window.TurBersama.mulai(); return; }
+  if (u.ke === 'tur-undangan') { layarSandi(USER.find(x => x.status === 'INVITED') || USER[0]); setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300); return; }
   if (u.ke === 'tambah') { dialogUser('create'); $(u.sorot)?.scrollIntoView({ block:'center' }); return; }
   if (u.ke === 'undangan') { surelUndangan(USER.find(x => x.status === 'INVITED') || USER[0]); return; }
   if (u.ke === 'ubah-ca') { dialogUser('edit', USER.find(x => x.id === 10) || USER[0]); $(u.sorot)?.scrollIntoView({ block:'center' }); return; }
@@ -1267,6 +1262,46 @@ $('#aturUlang').addEventListener('click', () => { $('#lapisanUndangan').innerHTM
 $('#sakelarPenanda').addEventListener('click', e => { const on = document.body.classList.toggle('penanda'); e.currentTarget.setAttribute('aria-pressed', on); });
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
+/* ---------------- tour guide (HE-USER-16, komponen tur-bersama) ---------------- */
+(window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+  kunci:BISA_ATUR ? 'user-atur' : 'user-lihat', tanda:usulan('HE-USER-16'),
+  aktif:() => !!$('#kolomStatus') && !$('#lapisanUndangan').innerHTML.trim(),
+  langkah:() => { const hp = matchMedia('(max-width:760px)').matches, sel = n => () => [...document.querySelectorAll('.tabel-wadah tbody tr[data-id] td:nth-child(' + n + ') .ina-badge')].find(x => x.getClientRects().length), baris = hp ? 'kartu' : 'baris'; return [
+    { el:'.info-lihat', j:'Hanya dapat dilihat', t:'Pengguna dan peran hanya dapat diatur oleh Super Admin. Anda tetap dapat mencari dan melihat daftar ini.' },
+    { el:'.alat .kiri', j:'Saring pengguna', t:window.PAKET_TRIAL ? 'Saring daftar menurut status akun dan peran. Angka di sebelahnya menunjukkan jumlah pengguna dari batas paket Trial.' : 'Saring daftar menurut status akun dan peran. Jumlah pengguna yang tampil ada di sebelahnya.' },
+    { el:'.alat .kanan .ina-input-search', j:'Cari pengguna', t:'Ketik nama atau email untuk menemukan pengguna.' },
+    { el:'#impor', j:'Impor dari berkas', t:'Tambahkan banyak pengguna sekaligus dari berkas CSV. Baris yang bermasalah ditampilkan beserta alasannya dan tidak ikut disimpan.' },
+    { el:'#tambah', j:'Tambah pengguna', t:'Tambahkan satu pengguna. Pengguna menerima email undangan lalu membuat kata sandinya sendiri.' },
+    { el:'#bilahMassal', j:'Aksi untuk pengguna terpilih', t:'Aktifkan, tangguhkan, atau nonaktifkan semua pengguna yang dicentang sekaligus.' },
+    { el:hp ? '.tabel-wadah tbody tr[data-id]' : '.tabel-wadah thead', j:'Daftar pengguna', t:BISA_ATUR ? 'Setiap ' + baris + ' berisi satu akun beserta peran dan statusnya. Centang beberapa pengguna untuk mengubah status akunnya sekaligus. Akun Super Admin tidak dapat dicentang.' : 'Setiap ' + baris + ' berisi satu akun pegawai kantor atau klien beserta peran dan statusnya.' },
+    { el:hp ? sel(6) : '#kolomCa', j:'Status Sertifikat', t:hp ? 'Ketuk lencana ini untuk melihat arti status sertifikat elektronik pengguna.' : 'Arahkan kursor ke judul kolom atau lencananya untuk melihat arti setiap status sertifikat elektronik.' },
+    { el:hp ? sel(7) : '#kolomStatus', j:'Status Akun', t:hp ? 'Ketuk lencana ini untuk melihat arti status akun: Aktif, Diundang, Ditangguhkan, atau Non-aktif.' : 'Arahkan kursor ke judul kolom atau lencananya untuk melihat arti Aktif, Diundang, Ditangguhkan, dan Non-aktif.' },
+    { el:'.aksi-wadah [data-menu]', j:'Menu aksi', t:'Klik untuk mengubah data, mengirim ulang undangan atau tautan kata sandi, serta menangguhkan, mengaktifkan, atau menonaktifkan akun.' },
+    { el:'#bukaBantuan', j:'Bantuan', t:'Panduan dan pertanyaan umum ada di sini. Tur ini juga dapat diputar ulang dari Bantuan.' }
+  ]; }
+});
+/* tur layar undangan (HE-USER-17): pengguna yang diundang membuka tautan email; tanda sudah dilihat per email pengguna itu */
+let emailUndangan = '';
+(window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+  kunci:'user-undangan-sandi', email:() => emailUndangan, tanda:usulan('HE-USER-17'),
+  aktif:() => !!$('#kartuSandi'),
+  langkah:() => [
+    { el:'#kartuSandi .undangan-kepala', j:'Undangan akun', t:'Administrator kantor sudah membuatkan akun untuk Anda. Di layar ini Anda cukup membuat kata sandi sendiri.' },
+    { el:'#f-sandiBaru', j:'Kata sandi', t:'Ketik kata sandi baru. Tekan ikon mata untuk melihat kata sandi yang Anda ketik.' },
+    { el:'#syaratPw', j:'Syarat kata sandi', t:'Setiap syarat langsung dicentang saat terpenuhi, sehingga Anda tahu yang masih kurang.' },
+    { el:'#f-sandiUlang', j:'Ulangi kata sandi', t:'Ketik ulang kata sandi yang sama. Bila berbeda, pesan galat tampil di bawah isian.' },
+    { el:'#simpanSandi', j:'Simpan kata sandi', t:'Tombol aktif setelah semua syarat terpenuhi dan kedua kata sandi sama. Setelah disimpan, akun Anda langsung aktif.' }
+  ]
+});
+(window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+  kunci:'user-undangan-aktif', email:() => emailUndangan, tanda:usulan('HE-USER-17'),
+  aktif:() => !!$('#kartuAktif'),
+  langkah:() => [
+    { el:'#kartuAktif .undangan-teks', j:'Akun aktif', t:'Kata sandi sudah tersimpan dan akun Anda aktif. Anda dapat masuk ke E-PPAT dengan email dan kata sandi ini.' },
+    { el:'#lanjutCa', j:'Registrasi CA', t:'Sertifikat elektronik (CA) diperlukan untuk menandatangani akta secara elektronik. Tombol ini membuka registrasi CA.' },
+    { el:'#lewatiCa', j:'Lewati dulu', t:'Registrasi CA dapat diselesaikan nanti melalui Akun Saya.' }
+  ]
+});
 gambar();
 })();
 </script>

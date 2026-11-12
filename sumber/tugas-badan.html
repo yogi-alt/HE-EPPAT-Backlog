@@ -105,7 +105,10 @@ const UBAH = [
     lama:'Status akun hanya terlihat di Akun Saya.', ke:'akun', sorot:'#kartuAkun', sumber:'Live tenant, 6 Nov 2026' },
   { kode:'HE-TUGAS-03', versi:'v2', bukanHE:true, judul:'Tugas Saya Klien: akta yang perlu ditandatangani',
     isi:'Klien dan para pihak hanya melihat akta yang mencantumkan mereka, dengan tombol Tanda tangani.',
-    lama:'Klien mencari akta di daftar Penandatanganan Akta.', ke:'akun', sorot:'#kartuAkun', sumber:'Live tenant, 6 Nov 2026' }
+    lama:'Klien mencari akta di daftar Penandatanganan Akta.', ke:'akun', sorot:'#kartuAkun', sumber:'Live tenant, 6 Nov 2026' },
+  { kode:'HE-TUGAS-04', versi:'v2', bukanHE:true, judul:'Tour guide Tugas Saya',
+    isi:'Saat pengguna pertama kali membuka Tugas Saya, tur singkat menyorot kartu status akun, kartu kelompok pekerjaan, saringan, daftar tugas, dan tombol Bantuan. Klien melihat kartu akun dan daftar akta yang perlu ditandatangani. Bentuk dan perilakunya sama dengan tur Permohonan AJB: muncul sekali, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka Tugas Saya.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
 ];
 const NAV = [ /* sidebar seragam semua prototipe staf (sidebar-seragam.js) */
   { g:'', ik:'tb_stack_2', m:[['Tugas Saya','tb_clipboard_check','tugas']] },
@@ -302,10 +305,25 @@ $('#bukaUbah').addEventListener('click', () => {
     const b = e.target.closest('[data-lihat]'); if (!b) return; e.stopPropagation(); $('#lapisan').innerHTML = ''; lihat(UBAH[+b.dataset.lihat]);
   });
 });
-function lihat(u) { const el = $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } }
+function lihat(u) { if (u.ke === 'tur') { window.TurBersama && window.TurBersama.mulai(); return; } const el = $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } }
 $('#bukaUbah').textContent = `Daftar perubahan (${UBAH.length})`;
 $('#aturUlang').addEventListener('click', () => { AJB.hapus(); location.reload(); });
 addEventListener('pageshow', e => { if (e.persisted) location.reload(); });
+/* ---------------- tour guide (HE-TUGAS-04, komponen tur-bersama) ---------------- */
+(window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+  kunci:KLIEN ? 'tugas-klien' : 'tugas-staf', aktif:() => !!$('#kartuAkun'), tanda:usulan('HE-TUGAS-04'),
+  langkah:() => KLIEN ? [
+    { el:'#kartuAkun', j:'Kesiapan akun', t:'Kartu ini menunjukkan data diri, sertifikat CA, dan akta yang menunggu tanda tangan Anda.' },
+    { el:'#blokKlien', j:'Akta yang perlu ditandatangani', t:'Akta yang mencantumkan Anda tampil di sini. Tekan Tanda tangani untuk membuka akta tersebut.' },
+    { el:'#bukaBantuan', j:'Bantuan', t:'Panduan dan pertanyaan umum ada di sini. Tur ini juga dapat diputar ulang dari Bantuan.' }
+  ] : [
+    { el:'#kartuAkun', j:'Kesiapan akun', t:TANPA_CA ? 'Kartu ini menunjukkan kelengkapan data diri dan KTP Anda.' : 'Kartu ini menunjukkan data diri, sertifikat CA, dan akta yang menunggu tanda tangan Anda.' },
+    { el:'#kartuKelompok', j:'Kelompok pekerjaan', t:'Pekerjaan dikelompokkan menurut tahap permohonan. Klik kartu untuk menampilkan daftarnya.' },
+    { el:'.blok-tugas .saring-t', j:'Cari dan saring', t:'Cari tugas berdasarkan kode atau nama, lalu saring menurut layanan dan tahap.' },
+    { el:'.blok-tugas .tabel-wadah', j:'Daftar tugas', t:S.tab === 'renvooi' ? 'Akta final yang perlu ditutup tampil di sini. Klik baris untuk membuka Renvooi dan menutup akta tersebut.' : S.tab === 'ttd' ? 'Klik baris untuk membuka permohonan, lalu susun penanda tangan dan pantau tanda tangan akta tersebut.' : 'Klik baris untuk membuka tahap permohonan tersebut di Permohonan AJB.' },
+    { el:'#bukaBantuan', j:'Bantuan', t:'Panduan dan pertanyaan umum ada di sini. Tur ini juga dapat diputar ulang dari Bantuan.' }
+  ]
+});
 gambar();
 })();
 </script>

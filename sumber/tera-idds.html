@@ -375,6 +375,9 @@ const UBAH = [
   { kode:'HE-TERA-10', versi:'v2', bukanHE:true, judul:'Unggah SK PPAT terakhir dan batas ukuran berkas',
     isi:'Identitas Perseorangan meminta unggahan SK PPAT terakhir (wajib). Unggahan SK PPAT dan Scan KTP menyebut format dan batas ukuran: PDF, JPG, atau PNG, maks. 1 MB.',
     lama:'Tidak ada unggahan SK PPAT, dan unggahan KTP tidak menyebut batas ukuran.', ke:'tera', sorot:'#f-sk_ppat', sumber:'Masukan Peruri, 9 Nov 2026' },
+  { kode:'HE-TERA-11', versi:'v2', bukanHE:true, judul:'Tour guide Ringkasan dan Registrasi TERA',
+    isi:'Saat pengguna pertama kali membuka Ringkasan atau formulir Registrasi TERA, tur singkat menjelaskan isinya. Pada Ringkasan, tur menyorot pengingat TERA, angka ringkasan, aksi cepat, aktivitas terbaru, lonceng Notifikasi, dan menu profil. Pada formulir, tur menyorot tab Akun Saya, dokumen yang perlu disiapkan, tahap pendaftaran sesuai status, Identitas Perseorangan, data terkunci, Pendaftaran Stempel, dan tombol simpan. Bentuk dan perilakunya sama dengan tur Permohonan AJB: muncul sekali, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat pengguna pertama kali membuka Ringkasan dan Registrasi TERA.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-TERA-07', judul:'Registrasi TERA: tahapan proses dan perkiraan waktu',
     isi:'Bagian atas menampilkan empat tahap beserta perkiraan waktunya, lalu satu kalimat tentang langkah berikutnya. Dialog konfirmasi juga menyebut perkiraan waktu sampai stempel aktif. Jika pendaftaran ditolak, alasannya ikut ditampilkan.',
     lama:'Hanya lencana status dan kalimat "Data pendaftaran tersimpan. Pengajuan ke Peruri dilakukan manual oleh admin platform (API registrasi TERA belum tersedia)."', ke:'tera', sorot:'#tahap', sumber:'Laporan HE INA Digital hlm. 20' }
@@ -832,6 +835,7 @@ $('#bukaUbah').addEventListener('click', () => {
 });
 function lihat(u) {
   S.menuProfil = false; S.galat = {};
+  if (u.ke === 'tur') { window.TurBersama && window.TurBersama.mulai(); return; }
   if (u.ke === 'bantuan') { S.layar = 'akun'; S.tab = 'tera'; gambar(); bukaBantuan(); return; }
   if (u.ke === 'dashboard') { S.status = 'belum'; S.ingatTutup = false; S.form = KOSONG(); S.simpanan = null; S.layar = 'akun'; pindahLayar('dashboard'); }
   else if (u.ke === 'tutup-ingat') { S.status = 'belum'; S.ingatTutup = false; S.form = KOSONG(); S.simpanan = null; S.layar = 'akun'; pindahLayar('dashboard'); $('#tutupIngat').click(); return; }
@@ -845,6 +849,45 @@ function lihat(u) {
   if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); }
 }
 
+/* ---------------- tour guide (HE-TERA-11, komponen tur-bersama) ----------------
+   Layar Ringkasan dan formulir Registrasi TERA punya tur sendiri; isi langkah mengikuti status TERA. */
+(() => {
+  const PPAT_S = !!(window.SESI_PROTO && window.SESI_PROTO.peran.includes('ROLE_PPAT'));
+  const muat = el => el && (el.getBoundingClientRect().height < innerHeight - 300 ? el : el.querySelector('.eb, h3, h2') || el);
+  const bagian = j => () => muat([...document.querySelectorAll('#tera > .kartu')].find(k => k.querySelector('.eb')?.textContent.trim() === j));
+  const bantuan = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan dan pertanyaan umum ada di sini. Tur ini juga dapat diputar ulang dari Bantuan.' };
+  const TAHAP = {
+    belum:'Lengkapi data di bawah, lalu klik Simpan Pendaftaran.',
+    pending:'Admin E-PPAT sedang memeriksa data Anda. Anda masih dapat mengubahnya selama tahap ini.',
+    submitted:'Peruri sedang memproses pendaftaran. Anda tidak perlu melakukan apa pun sampai stempel aktif.',
+    active:'Stempel elektronik kantor sudah aktif dan siap dibubuhkan pada akta.',
+    rejected:'Alasan penolakan tampil di bawah tahapan. Perbaiki data, lalu ajukan ulang.' };
+  const LANGKAH = {
+    ringkasan:() => [
+      { el:'#teraIngat', j:'Pengingat TERA', t:'Stempel elektronik (TERA) kantor belum didaftarkan. Klik Daftar TERA untuk membuka formulir pendaftarannya.' },
+      { el:'.kpi', j:'Ringkasan kantor', t:'Jumlah pengguna, pengguna aktif, dan aktivitas terbaru di kantor Anda.' },
+      { el:'.dasbor-dua > .kartu:nth-child(1)', j:'Aksi cepat', t:'Pintasan untuk mengelola pengguna, peran dan izin, serta pengaturan sistem.' },
+      { el:'.dasbor-dua > .kartu:nth-child(2)', j:'Aktivitas terbaru', t:'Aksi terakhir pengguna di kantor Anda.' },
+      { el:'header.top .notif-jangkar', j:'Notifikasi', t:PPAT_S ? 'Pemberitahuan untuk akun dan kantor Anda muncul di sini, termasuk pendaftaran TERA. Klik notifikasinya untuk membuka pendaftaran.' : 'Pemberitahuan untuk akun dan kantor Anda muncul di sini.' },
+      { el:'#user', j:'Menu profil', t:PPAT_S ? 'Buka Akun Saya dari menu ini. Pendaftaran TERA ada di tab Registrasi CA & TERA.' : 'Buka Akun Saya dari menu ini untuk mengelola akun Anda.' },
+      bantuan],
+    daftar:() => [
+      { el:'#akunTab', j:'Tab Akun Saya', t:perluTindakan() || kotor() ? 'Akun Saya terdiri atas beberapa tab. Titik pada tab Registrasi TERA menandai pendaftaran yang belum selesai atau perubahan yang belum disimpan.' : 'Akun Saya terdiri atas beberapa tab. Pendaftaran stempel kantor ada di tab Registrasi TERA.' },
+      { el:'#teraKepala .judul-tera', j:'Pendaftaran TERA', t:'TERA adalah stempel resmi kantor pada setiap akta elektronik. Klik Lihat panduan pendaftaran bila Anda memerlukan petunjuk.' + (S.status !== 'belum' ? ' Lencana di sebelah judul menunjukkan statusnya.' : '') },
+      { el:'#teraKepala .siapkan', j:'Siapkan dokumen', t:'Siapkan dokumen ini sebelum mengisi formulir.' },
+      { el:() => muat($('#tahap')), j:'Tahap pendaftaran', t:'Pendaftaran melewati empat tahap beserta perkiraan waktunya. ' + TAHAP[S.status] },
+      { el:bagian('Identitas Perseorangan'), j:'Identitas Perseorangan', t:KUNCI_DIRI.length ? 'Data diri sudah terisi, jadi Anda cukup melengkapi isian yang belum terkunci, misalnya SK PPAT terakhir.' : 'Isi data PPAT pemilik stempel sesuai KTP dan SK pengangkatan. Arahkan kursor ke tanda tanya untuk melihat penjelasan istilah.' },
+      { el:'#diriKunci', j:'Data terkunci', t:'Isian bertanda kunci diambil dari ' + ASAL_DIRI + ', sehingga tidak dapat diubah di sini. Hubungi admin E-PPAT bila ada yang salah.' },
+      { el:bagian('Pendaftaran Stempel'), j:'Pendaftaran Stempel', t:'Atur teks dan warna stempel. Pratinjau menunjukkan gambaran stempel yang tampil pada akta.' },
+      { el:'#fKaki', j:S.status === 'belum' ? 'Simpan Pendaftaran' : 'Perbarui Pendaftaran', t:Object.keys(S.galat).length ? 'Isian yang salah ditandai merah. Klik namanya di sini untuk langsung menujunya.' : S.status === 'belum' ? 'Sistem memeriksa isian, lalu menampilkan ringkasan untuk Anda periksa sebelum pendaftaran disimpan.' : 'Klik Perbarui Pendaftaran untuk menyimpan perubahan data.' },
+      bantuan]
+  };
+  (window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+    get kunci() { return S.layar === 'dashboard' ? 'tera-ringkasan' : 'tera-daftar'; }, tanda:usulan('HE-TERA-11'),
+    aktif:() => !!$('#halaman h1') && (S.layar === 'dashboard' || S.tab === 'tera'),
+    langkah:() => (S.layar === 'dashboard' ? LANGKAH.ringkasan : LANGKAH.daftar)()
+  });
+})();
 $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('open'); $('#scrim').classList.toggle('on'); });
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
 { const st = AJB.teraStatus(); if (st && st !== 'belum') { S.status = st; S.form = TERISI(); S.simpanan = { ...S.form }; } } /* status kantor bersama */

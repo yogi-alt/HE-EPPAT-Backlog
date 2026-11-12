@@ -324,20 +324,6 @@ body .protobar{z-index:1001}
 .status-kartu .stepper-v{display:none}
 .status-kartu .stepper-v .ina-stepper__separator{min-height:24px;height:24px}
 
-/* tour guide: walkthrough dengan coach marks (HE-ORDER-23) */
-.tur{position:fixed;inset:0;z-index:2000}
-.tur-tirai{position:absolute;inset:0}
-.tur-sorot{position:fixed;border-radius:12px;box-shadow:0 0 0 9999px rgba(15,23,30,.58);outline:2px solid var(--ina-primary-300,#9cc3b4);outline-offset:2px;transition:top .25s,left .25s,width .25s,height .25s;pointer-events:none}
-.tur-kotak{position:fixed;width:min(360px,calc(100vw - 32px));background:var(--ina-background-primary,#fff);color:var(--ina-content-primary);border-radius:12px;box-shadow:0 12px 32px rgba(15,23,30,.28);padding:16px 16px 14px}
-.tur-kotak h2{margin:2px 0 6px;font-size:16px;line-height:22px;font-weight:600}
-.tur-kotak p{margin:0;font-size:14px;line-height:20px;color:var(--ina-content-secondary)}
-.tur-langkah{font-size:12px;font-weight:600;color:var(--ina-primary-primary,#3d6b5e)}
-.tur-titik{display:flex;gap:6px;margin-top:12px}
-.tur-titik span{width:6px;height:6px;border-radius:999px;background:var(--ina-stroke-primary,#d0d5d3)}
-.tur-titik span.on{background:var(--ina-primary-primary,#3d6b5e);width:16px}
-.tur-kaki{display:flex;align-items:center;gap:8px;margin-top:14px}
-.tur-kaki [data-tur=lewati]{margin-right:auto}
-@media (max-width:760px){.tur-kotak{left:16px!important;right:16px;top:auto!important;bottom:16px;width:auto}}
 </style>
 <style id="eawk-css">
 /* ===== E-Akta Wizard (Klien) — komponen IDDS + brand E-PPAT (HE-UMUM-01)
@@ -616,6 +602,9 @@ const UBAH = [
   { kode:'HE-EAWK-07', judul:'Daftar akta Klien: panduan singkat untuk pengguna baru',
     isi:'Di atas daftar akta ada kartu "Pertama kali menandatangani akta elektronik?" berisi tiga langkah singkat dan tombol "Lihat panduan lengkap". Kartu dapat ditutup dan panduan tetap dapat dibuka lagi melalui tombol Bantuan.',
     lama:'Tidak ada tutorial atau panduan awal. Instruksi baru muncul setelah pengguna membuka akta tertentu, sehingga pengguna baru tidak mendapat gambaran menyeluruh.', ke:'panduan', sorot:'#panduanAwal', sumber:'Laporan HE INA Digital hlm. 37 (Temuan 2)' },
+  { kode:'HE-EAWK-10', versi:'v2', bukanHE:true, judul:'Tour guide Penandatanganan Akta (Klien)',
+    isi:'Saat Klien pertama kali membuka daftar akta, tur singkat menyorot panduan singkat, cari dan saring, daftar akta, dan tombol Bantuan. Saat pertama membuka akta, tur menyorot tombol kembali, kartu Langkah berikutnya, keterangan lembar minuta, pintasan ke halaman tanda tangan, penampil PDF, status dan peran, urutan tanda tangan, dan kontak kantor PPAT. Bentuk dan perilakunya sama dengan tur Permohonan AJB: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat Klien pertama kali membuka Penandatanganan Akta.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-EAWK-08', versi:'v2', bukanHE:true, judul:'Tanda tangan ditahan sampai spesimen dimasukkan',
     isi:'Saat giliran tanda tangan tiba dan spesimen belum ada, kartu Langkah berikutnya memberi tahu bahwa spesimen harus dimasukkan terlebih dahulu, walaupun sertifikat sudah aktif. Tombol Masukkan spesimen membuka Registrasi CA, lalu pengguna kembali ke akta yang sama.',
     lama:'Pengguna dengan sertifikat aktif dapat menandatangani tanpa spesimen.', ke:'spesimen', sorot:'#kartuBerikut', sumber:'Masukan Peruri, 6 Nov 2026' },
@@ -1042,6 +1031,7 @@ $('#bukaUbah').addEventListener('click', () => {
   });
 });
 function lihat(u) {
+  if (u.ke === 'tur') { setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 100); return; }
   if (u.ke === 'lembar2') { buka('ORD-CONTOH-021'); const el = $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } return; }
   if (u.ke === 'bantuan') { bukaBantuan(); return; }
   if (u.ke === 'daftar') keDaftar();
@@ -1065,6 +1055,30 @@ $('#burger').addEventListener('click', () => { $('#sidebar').classList.toggle('o
 $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on'); });
 gambarSpesimen();
 gambar();
+/* ---------------- tour guide (HE-EAWK-10, komponen tur-bersama) ---------------- */
+const TUR_BANTUAN = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan dan pertanyaan umum ada di sini. Tur ini juga dapat diputar ulang dari Bantuan.' };
+(window.TUR_ANTRE = window.TUR_ANTRE || []).push({
+  get kunci() { return S.layar === 'daftar' ? 'eawk-daftar' : 'eawk-detail'; },
+  aktif:() => S.layar === 'daftar' ? !!$('#saringAkta') : !!$('#kartuBerikut'), tanda:usulan('HE-EAWK-10'),
+  langkah:() => { const x = S.layar === 'detail' ? o() : null; return S.layar === 'daftar' ? [
+    { el:'#panduanAwal', j:'Panduan singkat', t:'Tiga langkah tanda tangan elektronik dijelaskan di sini. Kartu ini dapat ditutup dan dibuka lagi dari Bantuan.' },
+    { el:'#saringAkta', j:'Cari dan saring', t:'Cari akta berdasarkan kode, jenis akta, atau peran, lalu saring menurut status dan urutkan daftarnya.' },
+    { el:'.daftar-akta', j:'Daftar akta', t:'Akta yang perlu tindakan Anda ditandai. Klik kartu untuk membuka akta. Tulisan Tanda tangani muncul saat giliran Anda tiba.' },
+    { el:'.kosong-akta', j:'Tidak ada akta yang cocok', t:'Ubah kata kunci, atau tekan Hapus pencarian dan saringan untuk menampilkan semua akta.' },
+    TUR_BANTUAN
+  ] : [
+    { el:'.kembali', j:'Kembali ke daftar', t:'Tombol ini membawa Anda ke daftar akta.' },
+    { el:'#kartuBerikut', j:'Langkah berikutnya', t:x && x.state === 'OTP_TERKIRIM' && bisaTtd(x) ? 'Kode OTP sudah dikirim ke email Anda. Masukkan kode untuk menandatangani, atau kirim ulang bila kodenya kedaluwarsa.' : x && bisaTtd(x) ? 'Giliran Anda sudah tiba. Ikuti tiga langkah di kartu ini: periksa akta, kirim kode OTP, lalu masukkan kode untuk menandatangani.' : 'Kartu ini menyebut keadaan akta dan tindakan Anda berikutnya. Bila belum ada tindakan, kartu ini menjelaskan yang sedang ditunggu.' },
+    { el:'#ketLembar', j:'Lembar minuta', t:'Akta dibuat dua rangkap. Kotak ini menyebut lembar yang sedang Anda tanda tangani.' },
+    { el:'#barisLompat', j:'Lompat ke tanda tangan', t:'Pintasan ini membawa penampil ke halaman tanda tangan Anda atau ke halaman pertama.' },
+    { el:'.ruang .penampil', j:'Dokumen akta', t:'Baca seluruh isi akta di sini sebelum menandatangani. Posisi tanda tangan Anda ditandai di halamannya.' },
+    { el:'.ruang .dok-belum', j:'Dokumen belum siap', t:'Akta dapat dibaca dan ditandatangani setelah Kantor PPAT membubuhkan stempel elektronik.' },
+    { el:() => { const k = $('.ruang .panel .kd-info'); return k && k.closest('.ina-card'); }, j:'Status dan peran Anda', t:'Kartu ini menunjukkan status akta, peran Anda, dan urutan giliran Anda.' },
+    { el:() => [...document.querySelectorAll('.ruang .panel .ina-card')].find(c => /Urutan tanda tangan/.test(c.textContent) && !c.querySelector('.ina-card')), j:'Urutan tanda tangan', t:'Para pihak menandatangani satu per satu sesuai urutan ini. Lencana menunjukkan siapa yang sudah dan belum menandatangani.' },
+    { el:'#kontakKantor', j:'Kontak kantor PPAT', t:'Hubungi kantor PPAT dari kartu ini bila ada pertanyaan tentang akta.' },
+    TUR_BANTUAN
+  ]; }
+});
 const aktaAwal = (location.hash.match(/^#akta=(.+)$/) || [])[1];
 if (AKTA.some(x => x.kode === aktaAwal)) buka(aktaAwal);
 })();

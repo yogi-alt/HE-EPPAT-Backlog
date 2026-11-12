@@ -99,8 +99,8 @@
         },
         {
           "topik": "Header",
-          "aturan": "Header setinggi 64 px, berlatar `--ina-background-primary`, dan tetap di atas saat halaman digulir. Urutan dari kiri: tombol menu (hanya untuk ponsel), ruang kosong, tombol \"Lihat Landing\" (secondary), tombol Notifikasi (tertiary, ikon saja dengan `aria-label`), lalu avatar dengan nama dan peran. Prototipe tidak membuat menu avatar; ikuti perilaku menu avatar di live.",
-          "contoh": "<header class=\"top\">\n  <button class=\"ina-button ina-button--tertiary ina-button--md\" aria-label=\"Menu\">…</button>\n  <div class=\"spacer\"></div>\n  <button class=\"ina-button ina-button--secondary ina-button--md\"><svg aria-hidden=\"true\">…</svg><span>Lihat Landing</span></button>\n  <button class=\"ina-button ina-button--tertiary ina-button--md\" aria-label=\"Notifikasi\">…</button>\n  <div class=\"user\"><span class=\"ina-avatar ina-avatar--circle ava\">A</span>\n    <span class=\"uname\">Asisten Contoh</span><span class=\"urole\">Asisten</span></div>\n</header>",
+          "aturan": "Header setinggi 64 px, berlatar `--ina-background-primary`, dan tetap di atas saat halaman digulir. Urutan dari kiri: tombol menu (hanya untuk ponsel), ruang kosong, tombol \"Lihat landing\" (secondary), tombol Notifikasi (tertiary, ikon saja dengan `aria-label`), lalu avatar dengan nama dan peran. Prototipe tidak membuat menu avatar; ikuti perilaku menu avatar di live.",
+          "contoh": "<header class=\"top\">\n  <button class=\"ina-button ina-button--tertiary ina-button--md\" aria-label=\"Menu\">…</button>\n  <div class=\"spacer\"></div>\n  <button class=\"ina-button ina-button--secondary ina-button--md\"><svg aria-hidden=\"true\">…</svg><span>Lihat landing</span></button>\n  <button class=\"ina-button ina-button--tertiary ina-button--md\" aria-label=\"Notifikasi\">…</button>\n  <div class=\"user\"><span class=\"ina-avatar ina-avatar--circle ava\">A</span>\n    <span class=\"uname\">Asisten Contoh</span><span class=\"urole\">Asisten</span></div>\n</header>",
           "acuan": "prototipe/Backlog-HE-ORDER-Prototype.html › header",
           "kode": ""
         },
@@ -142,7 +142,7 @@
         {
           "topik": "Keadaan kosong",
           "aturan": "Tabel kosong tetap menampilkan tajuk kolom dan satu baris `ina-table__empty-cell` berisi kalimat singkat. Bedakan \"belum ada data\" dan \"hasil pencarian tidak cocok\". Untuk hasil pencarian kosong, sediakan tombol untuk menghapus pencarian dan saringan.",
-          "contoh": "Belum ada para pihak.\nTidak ada order yang cocok.\nTombol: Hapus Pencarian dan Saringan",
+          "contoh": "Belum ada para pihak.\nTidak ada order yang cocok.\nTombol: Hapus pencarian dan saringan",
           "acuan": "prototipe/Backlog-HE-ORDER-Prototype.html › tab Para Pihak; prototipe/Backlog-HE-EAW-Prototype.html › daftar akta",
           "kode": "HE-EAW-07"
         },
@@ -155,8 +155,8 @@
         },
         {
           "topik": "Keadaan gagal dan data terbaru",
-          "aturan": "Bila data gagal dimuat, tampilkan IDDS Alert critical berisi penyebab dan tombol \"Coba Lagi\". Halaman ringkasan menampilkan waktu pembaruan dan tombol \"Muat Ulang\".",
-          "contoh": "<div class=\"ina-alert ina-alert--critical\" role=\"status\"><div class=\"ina-alert__content\"><div class=\"ina-alert__text-section\">\n  <div class=\"ina-alert__title\">Dashboard gagal dimuat</div>\n  <div class=\"ina-alert__description\">Periksa koneksi internet Anda, lalu coba lagi.</div></div>\n  <button type=\"button\" class=\"ina-button ina-button--secondary ina-button--sm\">Coba Lagi</button></div></div>\n\n<span class=\"diperbarui\">Diperbarui pukul 09.25 WIB</span>",
+          "aturan": "Bila data gagal dimuat, tampilkan IDDS Alert critical berisi penyebab dan tombol \"Coba lagi\". Halaman ringkasan menampilkan waktu pembaruan dan tombol \"Muat ulang\".",
+          "contoh": "<div class=\"ina-alert ina-alert--critical\" role=\"status\"><div class=\"ina-alert__content\"><div class=\"ina-alert__text-section\">\n  <div class=\"ina-alert__title\">Dashboard gagal dimuat</div>\n  <div class=\"ina-alert__description\">Periksa koneksi internet Anda, lalu coba lagi.</div></div>\n  <button type=\"button\" class=\"ina-button ina-button--secondary ina-button--sm\">Coba lagi</button></div></div>\n\n<span class=\"diperbarui\">Diperbarui pukul 09.25 WIB</span>",
           "acuan": "prototipe/Backlog-IDDS-TN-EPPAT-Prototype.html#dashboard",
           "kode": "IDDS-TN-28"
         },
@@ -175,8 +175,8 @@
       "isi": [
         {
           "topik": "Button: hierarki",
-          "aturan": "Satu area hanya punya satu tombol primary untuk aksi utama. Aksi pendamping memakai secondary. Aksi ringan atau berisiko rendah (Batal di daftar, Kirim Ulang, Muat Ulang) memakai tertiary. Tautan di dalam teks memakai varian link. Ukuran: sm di tabel, md di formulir dan dialog, lg di kartu Masuk.",
-          "contoh": "<button type=\"button\" class=\"ina-button ina-button--primary ina-button--md\">Buat Permohonan</button>\n<button type=\"button\" class=\"ina-button ina-button--secondary ina-button--md\">Muat Ulang</button>\n<button type=\"button\" class=\"ina-button ina-button--tertiary ina-button--sm\">Batalkan Pilihan</button>\n<button type=\"button\" class=\"ina-button ina-button--link ina-button--sm\">Lengkapi</button>",
+          "aturan": "Satu area hanya punya satu tombol primary untuk aksi utama. Aksi pendamping memakai secondary. Aksi ringan atau berisiko rendah (Batal di daftar, Kirim ulang, Muat ulang) memakai tertiary. Tautan di dalam teks memakai varian link. Ukuran: sm di tabel, md di formulir dan dialog, lg di kartu Masuk.",
+          "contoh": "<button type=\"button\" class=\"ina-button ina-button--primary ina-button--md\">Buat permohonan</button>\n<button type=\"button\" class=\"ina-button ina-button--secondary ina-button--md\">Muat ulang</button>\n<button type=\"button\" class=\"ina-button ina-button--tertiary ina-button--sm\">Batalkan Pilihan</button>\n<button type=\"button\" class=\"ina-button ina-button--link ina-button--sm\">Lengkapi</button>",
           "acuan": "prototipe/Backlog-HE-ORDER-Prototype.html › daftar order",
           "kode": "HE-ORDER-05"
         },
@@ -412,8 +412,8 @@
         },
         {
           "topik": "Kurangi langkah berulang",
-          "aturan": "Sediakan jalan pintas untuk pekerjaan berulang. Contoh: \"Simpan & Tambah Lagi\" di dialog Tambah Para Pihak, aksi massal Aktifkan/Tangguhkan untuk user terpilih, dan impor user dari berkas.",
-          "contoh": "Tombol dialog: Batal · Simpan & Tambah Lagi · Simpan",
+          "aturan": "Sediakan jalan pintas untuk pekerjaan berulang. Contoh: \"Simpan & tambah lagi\" di dialog Tambah Para Pihak, aksi massal Aktifkan/Tangguhkan untuk user terpilih, dan impor user dari berkas.",
+          "contoh": "Tombol dialog: Batal · Simpan & tambah lagi · Simpan",
           "acuan": "prototipe/Backlog-HE-ORDER-Prototype.html › Tambah Para Pihak; prototipe/Backlog-HE-USER-Prototype.html",
           "kode": "HE-ORDER-03 / HE-USER-02 / HE-UMUM-03"
         },
@@ -515,8 +515,8 @@
         },
         {
           "topik": "Huruf kapital",
-          "aturan": "Label tombol memakai Huruf Kapital di Setiap Kata, kecuali kata tugas (dan, ke, di, untuk). Judul halaman dan judul kartu mengikuti nama menu. Judul dialog, pesan, teks bantuan, dan isi Toast memakai huruf kapital hanya di awal kalimat dan nama diri.",
-          "contoh": "Tombol: Buat Permohonan · Simpan & Tambah Lagi · Kembali ke Halaman Masuk · Muat Ulang · Coba Lagi\nDialog: Hapus pihak?\nToast: Narahubung tersimpan.",
+          "aturan": "Ikuti aturan tipografi resmi IDDS (design.inadigital.go.id › Landasan › Tipografi). Judul halaman dan judul kartu memakai Title Case dan mengikuti nama menu. Label tombol, judul dialog, pesan, teks bantuan, dan isi Toast memakai huruf kapital hanya di awal kalimat dan pada nama diri (sentence case), misalnya \"Muat ulang\" dan \"Simpan & tambah lagi\". Nama menu, layar, dan lembar di dalam label tetap berhuruf kapital, misalnya \"Buka Permohonan AJB\". Huruf besar semua hanya untuk singkatan resmi, misalnya PPAT, NIB, dan CA.",
+          "contoh": "Tombol: Buat permohonan · Simpan & tambah lagi · Kembali ke halaman masuk · Muat ulang · Coba lagi\nDialog: Hapus pihak?\nToast: Narahubung tersimpan.",
           "acuan": "prototipe/Backlog-HE-ORDER-Prototype.html; prototipe/Backlog-IDDS-TN-MASUK-Prototype.html",
           "kode": "IDDS-TN-06"
         },
@@ -578,7 +578,7 @@
         {
           "topik": "Kerangka halaman",
           "aturan": "Periksa setiap halaman baru atau yang diubah.",
-          "contoh": "- [ ] Breadcrumb, satu H1, dan subjudul satu kalimat SPOK bertitik\n- [ ] Tombol Bantuan di kanan judul membuka Drawer khusus halaman\n- [ ] Ada keadaan kosong, memuat, dan gagal (dengan Coba Lagi)\n- [ ] Halaman tidak bergeser ke samping di lebar 360 px; tabel lebar digulir di dalam wadahnya",
+          "contoh": "- [ ] Breadcrumb, satu H1, dan subjudul satu kalimat SPOK bertitik\n- [ ] Tombol Bantuan di kanan judul membuka Drawer khusus halaman\n- [ ] Ada keadaan kosong, memuat, dan gagal (dengan Coba lagi)\n- [ ] Halaman tidak bergeser ke samping di lebar 360 px; tabel lebar digulir di dalam wadahnya",
           "acuan": "prototipe/Backlog-HE-ORDER-Prototype.html",
           "kode": "HE-UMUM-02"
         },
@@ -606,7 +606,7 @@
         {
           "topik": "Bahasa",
           "aturan": "Baca ulang semua teks yang tampil.",
-          "contoh": "- [ ] Kata baku: kata sandi, unggah, unduh, nonaktif, kedaluwarsa, e-Meterai\n- [ ] Tombol Huruf Kapital di Setiap Kata; pesan berhuruf kapital di awal kalimat\n- [ ] Tanggal 26 Okt 2026 / 26 Oktober 2026, waktu 09.25 WIB, uang Rp10.000\n- [ ] Tanpa istilah developer dan tanpa catatan tim di layar",
+          "contoh": "- [ ] Kata baku: kata sandi, unggah, unduh, nonaktif, kedaluwarsa, e-Meterai\n- [ ] Tombol, pesan, dan teks bantuan sentence case; judul halaman Title Case; huruf besar semua hanya untuk singkatan resmi\n- [ ] Tanggal 26 Okt 2026 / 26 Oktober 2026, waktu 09.25 WIB, uang Rp10.000\n- [ ] Tanpa istilah developer dan tanpa catatan tim di layar",
           "acuan": "prototipe/Backlog-IDDS-TN-EPPAT-Prototype.html; prototipe/Backlog-IDDS-TN-CMS-Prototype.html",
           "kode": "IDDS-TN-37"
         }
@@ -709,7 +709,7 @@
         },
         {
           "topik": "Tenant · Akta",
-          "aturan": "Salin kartu dan grafik Dashboard dengan Muat Ulang dan Coba Lagi, validasi Profil Kantor, Toggle layanan berkonfirmasi, kolom Salinan, alasan tombol nonaktif, kirim dan cabut tautan, serta status e-Meterai.",
+          "aturan": "Salin kartu dan grafik Dashboard dengan Muat ulang dan Coba lagi, validasi Profil Kantor, Toggle layanan berkonfirmasi, kolom Salinan, alasan tombol nonaktif, kirim dan cabut tautan, serta status e-Meterai.",
           "contoh": "Pola: dasbor, unggah, status sistem",
           "acuan": "prototipe/Backlog-IDDS-TN-EPPAT-Prototype.html",
           "kode": "IDDS-TN-27 s.d. 37"
@@ -723,7 +723,7 @@
         },
         {
           "topik": "Platform · Monitoring",
-          "aturan": "Salin kerangka platform (sidebar tanpa kartu kantor, header tanpa Lihat Landing), status sistem dengan waktu pemeriksaan, subjudul yang sesuai isi untuk halaman hanya baca, saringan log berlabel, dan label aktivitas berbahasa Indonesia.",
+          "aturan": "Salin kerangka platform (sidebar tanpa kartu kantor, header tanpa Lihat landing), status sistem dengan waktu pemeriksaan, subjudul yang sesuai isi untuk halaman hanya baca, saringan log berlabel, dan label aktivitas berbahasa Indonesia.",
           "contoh": "Pola: kerangka platform, tabel hanya baca",
           "acuan": "prototipe/Backlog-IDDS-PL-MONITORING-Prototype.html",
           "kode": "IDDS-PL-11 s.d. 20"
