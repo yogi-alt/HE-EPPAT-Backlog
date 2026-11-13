@@ -5733,17 +5733,35 @@
       "fitur": "Platform · Sistem (penyesuaian IDDS)",
       "judul": "Setting Theme: Warna Status mengikuti IDDS",
       "saat_ini": "Tab Sidebar & Navbar memuat isian Warna Status (berhasil, peringatan, bahaya, informasi, netral) yang mengubah warna lencana, pesan, dan penanda status, sehingga warna yang sama dapat bermakna berbeda dan kontrasnya tidak terjamin.",
-      "usulan": "Ganti isian Warna Status dengan contoh lencana IDDS yang tidak dapat diubah (Berhasil / selesai, Peringatan, Bahaya / gagal, Informasi, Netral) dan keterangan bahwa warna lencana, pesan, dan penanda status mengikuti IDDS agar maknanya sama di semua layanan. Contoh lencana di Pratinjau Langsung juga memakai varian IDDS. Warna brand, sidebar, navbar, dan konten tetap dapat diatur. Polanya sama dengan Tema Tampilan tenant (IDDS-TN-67).",
+      "usulan": "Taruh bagian Warna Status di akhir tab Brand & Warna seperti aplikasi live, berisi contoh lencana IDDS yang tidak dapat diubah (Berhasil / selesai, Peringatan, Bahaya / gagal, Informasi, Netral) dan keterangan bahwa lencana dan banner status memakai warna sentimen IDDS sehingga tidak diatur dari tema. Contoh lencana di Pratinjau Langsung juga memakai varian IDDS. Polanya sama dengan Tema Tampilan tenant (IDDS-TN-67).",
       "prinsip": "H4 Consistency and Standards",
       "halaman": "Keputusan 12 Nov 2026",
       "prioritas": "Sedang",
-      "layar": "dev-app.eppat.id/platform › Setting Theme › Sidebar & Navbar › Warna Status",
+      "layar": "dev-app.eppat.id/platform › Setting Theme › Brand & Warna › Warna Status",
       "acuan": "prototipe/Backlog-IDDS-PL-SISTEM-Prototype.html › Daftar penyesuaian › IDDS-PL-83",
       "selesai_bila": "Warna Status tidak dapat diubah dan menampilkan varian Badge IDDS; lencana di seluruh aplikasi tidak berubah walaupun tema diganti.",
       "status": "Prototipe siap",
       "catatan": "Menindaklanjuti keputusan warna lencana status ikut IDDS (Panduan IDDS butir 1.10).",
       "tanggal": "2026-11-12",
       "sumber": "Keputusan 12 Nov 2026 (warna lencana ikut IDDS)",
+      "versi": "v2"
+    },
+    {
+      "kode": "IDDS-PL-84",
+      "fitur": "Platform · Sistem (penyesuaian IDDS)",
+      "judul": "Pengaturan Umum: kontak dukungan",
+      "saat_ini": "Kontak dukungan di panel Bantuan ditulis tetap di aplikasi, tidak dapat diatur admin platform.",
+      "usulan": "Tambahkan bagian Kontak dukungan di tab Umum berisi Email, Telepon / WhatsApp, dan Jam layanan, seperti aplikasi live. Isian ini tampil di panel Bantuan setiap halaman kantor PPAT dan boleh dikosongkan. Email diperiksa formatnya saat disimpan, dengan pesan galat di bawah isian.",
+      "prinsip": "H10 Help and Documentation",
+      "halaman": "Live Platform, 12 Nov 2026",
+      "prioritas": "Sedang",
+      "layar": "dev-app.eppat.id/platform › Pengaturan Global › Umum › Kontak dukungan",
+      "acuan": "prototipe/Backlog-IDDS-PL-SISTEM-Prototype.html › Daftar penyesuaian › IDDS-PL-84",
+      "selesai_bila": "Kontak dukungan dapat diatur dan tampil di panel Bantuan semua kantor PPAT.",
+      "status": "Prototipe siap",
+      "catatan": "Mengikuti aplikasi live Perdana Niaga (12 Nov 2026). Daftar lintas order Peruri tetap tanpa Biaya & PNBP karena alur Peruri 6 tahap.",
+      "tanggal": "2026-11-12",
+      "sumber": "Live Platform, 12 Nov 2026",
       "versi": "v2"
     },
     {
@@ -7613,6 +7631,18 @@
       "kode": "IDDS-TN-63",
       "perubahan": "Simulasi sesi memeriksa izin setiap kali layar berpindah (history.replaceState/pushState, hashchange), bukan hanya saat halaman dimuat; peran tanpa akses yang berpindah lewat tombol di dalam halaman kini mendapat \"Halaman tidak tersedia\".",
       "berkas": "sumber/sesi-bersama.html"
+    },
+    {
+      "tanggal": "2026-11-12",
+      "kode": "IDDS-PL-84",
+      "perubahan": "Ditambahkan: Pengaturan Umum memuat Kontak dukungan seperti live; ejaan Renvooi di daftar lintas order.",
+      "berkas": "sumber/pl-sistem-badan.html"
+    },
+    {
+      "tanggal": "2026-11-12",
+      "kode": "IDDS-PL-83",
+      "perubahan": "Warna Status dipindah ke tab Brand & Warna seperti live; Setting Theme mendapat tombol Upload di samping Pilih dari media.",
+      "berkas": "sumber/pl-sistem-badan.html"
     }
   ]
 }
