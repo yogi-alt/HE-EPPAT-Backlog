@@ -1104,7 +1104,7 @@
       "fitur": "Registrasi CA (Klien)",
       "judul": "Masa berlaku sertifikat tampil dan registrasi selesai setelah spesimen",
       "saat_ini": "Status hanya tertulis Aktif tanpa tanggal berakhir. eKYC dan Pemeriksaan Peruri adalah dua langkah terpisah, dan spesimen tidak menjadi bagian stepper.",
-      "usulan": "Status sertifikat menyebut tanggal berakhir (berlaku 1 tahun sejak aktif) di Registrasi CA, Permohonan AJB, Verifikasi Berkas, Penandatanganan Akta, Daftar Pengguna, dan Profil Kantor. Stepper menjadi empat langkah: Lengkapi data diri, Ajukan ke Peruri, Verifikasi & Pemeriksaan Peruri, dan Spesimen tanda tangan. Registrasi selesai setelah spesimen disimpan.",
+      "usulan": "Status sertifikat menyebut tanggal berakhir (berlaku 1 tahun sejak aktif) di Registrasi CA, Permohonan AJB, Verifikasi Berkas, Penandatanganan Akta, Daftar Pengguna, dan Profil Kantor. Stepper menjadi empat langkah: Lengkapi data diri, Ajukan ke Peruri, Verifikasi & Pemeriksaan Peruri, dan Spesimen tanda tangan. Registrasi selesai setelah spesimen disimpan. Kartu Spesimen tanda tangan baru tampil saat pengguna masuk tahap 4 (Spesimen tanda tangan); di tahap 1–3 kartu disembunyikan karena stepper sudah menjelaskan tahap ini.",
       "prinsip": "H1 Visibility of System Status; H8 Aesthetic and Minimalist Design",
       "halaman": "34, 35",
       "prioritas": "Tinggi",
@@ -1113,7 +1113,7 @@
       "selesai_bila": "Pengguna melihat tanggal berakhir sertifikat dan registrasi berstatus selesai hanya setelah spesimen disimpan.",
       "status": "Prototipe siap",
       "catatan": "Masukan Peruri 6 Nov 2026. Tanggal berakhir di prototipe adalah data contoh.",
-      "tanggal": "2026-11-06",
+      "tanggal": "2026-11-13",
       "sumber": "Masukan Peruri",
       "versi": "v2"
     },
@@ -1140,7 +1140,7 @@
       "fitur": "Registrasi CA (Klien)",
       "judul": "Registrasi CA dan TERA dalam satu stepper",
       "saat_ini": "Registrasi CA dan Registrasi TERA berada di dua tab dengan stepper dan formulir masing-masing, sehingga data diri diisi dua kali.",
-      "usulan": "Untuk PPAT dan Super Admin + PPAT, tab digabung menjadi Registrasi CA & TERA dengan satu stepper: Lengkapi data diri, Ajukan ke Peruri, Verifikasi & Pemeriksaan Peruri, Spesimen tanda tangan & stempel. Setiap tahap menampilkan jalur TTE dan jalur TERA karena keduanya selesai pada waktu berbeda; tahap selesai bila kedua jalur selesai. Data TERA cukup ID PPAT, rekening PPAT, dan SK PPAT terakhir; data diri lain memakai Data Diri (KTP). CA dan TERA diajukan bersama dalam satu dialog. Spesimen tanda tangan dapat dibuat begitu CA aktif; spesimen stempel (isi, warna, logo, pratinjau) setelah TERA disetujui. Penolakan TERA menampilkan alasan dan bagian yang diperbaiki tanpa memengaruhi CA. TERA dapat tidak diikutkan (TERA milik kantor). Notifikasi CA dan TERA digabung bila keduanya belum aktif. Asisten dan Klien tetap melihat Registrasi CA saja.",
+      "usulan": "Untuk PPAT dan Super Admin + PPAT, tab digabung menjadi Registrasi CA & TERA dengan satu stepper: Lengkapi data diri, Ajukan ke Peruri, Verifikasi & Pemeriksaan Peruri, Spesimen tanda tangan & stempel. Setiap tahap menampilkan jalur TTE dan jalur TERA karena keduanya selesai pada waktu berbeda; tahap selesai bila kedua jalur selesai. Data TERA cukup ID PPAT, rekening PPAT, dan SK PPAT terakhir; data diri lain memakai Data Diri (KTP). CA dan TERA diajukan bersama dalam satu dialog. Spesimen tanda tangan dapat dibuat begitu CA aktif; spesimen stempel (isi, warna, logo, pratinjau) setelah TERA disetujui. Penolakan TERA menampilkan alasan dan bagian yang diperbaiki tanpa memengaruhi CA. TERA dapat tidak diikutkan (TERA milik kantor). Notifikasi CA dan TERA digabung bila keduanya belum aktif. Asisten dan Klien tetap melihat Registrasi CA saja. Kartu Spesimen tanda tangan dan Spesimen stempel (TERA) baru tampil saat jalur TTE atau jalur TERA masuk tahap 4, lalu setiap kartu terkunci sesuai syaratnya: tanda tangan sampai CA aktif, stempel sampai TERA disetujui. Bila sertifikat kedaluwarsa, kartu tersembunyi lagi sampai tahap 4 tercapai kembali.",
       "prinsip": "H1 Visibility of System Status; H8 Aesthetic and Minimalist Design",
       "halaman": "Masukan 9 Nov 2026",
       "prioritas": "Tinggi",
@@ -1149,7 +1149,7 @@
       "selesai_bila": "PPAT mendaftarkan CA dan TERA dari satu tab dan satu stepper, dan status kedua jalur terlihat di setiap tahap.",
       "status": "Prototipe siap",
       "catatan": "Masukan Peruri 9 Nov 2026 (MoM 03/11: Stepper TERA/TTE disatukan). Peruri mengonfirmasi bahwa data stempel (isi, warna, logo) diisi setelah TERA disetujui, tidak diperlukan saat pendaftaran.",
-      "tanggal": "2026-11-09",
+      "tanggal": "2026-11-13",
       "sumber": "Masukan Peruri",
       "versi": "v2"
     },
@@ -7643,6 +7643,12 @@
       "kode": "IDDS-PL-83",
       "perubahan": "Warna Status dipindah ke tab Brand & Warna seperti live; Setting Theme mendapat tombol Upload di samping Pilih dari media.",
       "berkas": "sumber/pl-sistem-badan.html"
+    },
+    {
+      "tanggal": "2026-11-13",
+      "kode": "HE-CA-11",
+      "perubahan": "Kartu spesimen tanda tangan dan stempel baru tampil saat masuk tahap 4 (per jalur TTE atau TERA); di tahap 1–3 disembunyikan. Keputusan pengguna 13 Nov 2026.",
+      "berkas": "sumber/ca-badan.html"
     }
   ]
 }
