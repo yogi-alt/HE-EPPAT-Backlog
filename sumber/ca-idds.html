@@ -1327,7 +1327,7 @@ $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('op
 /* ---------------- tour guide (HE-CA-14, komponen tur-bersama) ----------------
    Layar awal dan setiap tab Akun Saya punya tur sendiri; isi langkah mengikuti keadaan sertifikat dan peran. */
 (() => {
-  const muat = s => () => { const el = [...document.querySelectorAll(s)].find(x => x.getClientRects().length); if (!el) return null; return el.getBoundingClientRect().height < innerHeight - 300 ? el : el.querySelector('h2, h3, h4') || el; };
+  const muat = s => () => { const el = [...document.querySelectorAll(s)].find(x => x.getClientRects().length); if (!el) return null; return el.getBoundingClientRect().height < innerHeight - (matchMedia('(max-width:760px)').matches ? 420 : 300) ? el : el.querySelector('h2, h3, h4') || el; }; /* di layar sempit kotak keterangan lebih tinggi, dan kartu di dasar halaman tidak dapat digulir lebih jauh */
   const grup = j => () => { const s = [...document.querySelectorAll('#kartuDataDiri .grup-dd')].find(x => x.querySelector('h4')?.textContent.trim() === j); return s && (s.getBoundingClientRect().height < innerHeight - 300 ? s : s.querySelector('h4')); };
   const bantuan = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan dan pertanyaan umum ada di sini. Tur ini juga dapat diputar ulang dari Bantuan.' };
   const tabTeks = () => { const n = [...document.querySelectorAll('.tab-akun [data-tab]')].filter(b => b.getClientRects().length).map(b => b.textContent.trim()); return `Akun Saya terdiri atas tab ${n.slice(0, -1).join(', ')}, dan ${n[n.length - 1]}. Setiap tab memiliki tur sendiri.`; };
