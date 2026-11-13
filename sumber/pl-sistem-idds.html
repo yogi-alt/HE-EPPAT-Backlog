@@ -502,6 +502,8 @@ ol.bantu-langkah{padding-left:22px}
 .user .menu-kepala span{font-size:12px;color:var(--ina-content-secondary)}
 .cek-lintas{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px 16px;margin-top:8px}
 .status-idds{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.kontak-dd{grid-template-columns:repeat(3,1fr)}
+@media (max-width:760px){.kontak-dd{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -625,6 +627,9 @@ const UBAH = [
   { kode:'IDDS-PL-73', versi:'v2', bukanHE:true, judul:'Pengaturan Umum: mode pemeliharaan',
     isi:'Tab Umum memiliki sakelar mode pemeliharaan dengan pesan dan perkiraan waktu kembali dibuka. Saat diaktifkan muncul konfirmasi karena berlaku untuk semua kantor.',
     lama:'Mode pemeliharaan belum ada di prototipe.', ke:'pengaturan', tab:'umum', sorot:'#pgPelihara', sumber:'Live Platform, 6 Nov 2026' },
+  { kode:'IDDS-PL-84', versi:'v2', bukanHE:true, judul:'Pengaturan Umum: kontak dukungan',
+    isi:'Tab Umum memuat bagian Kontak dukungan berisi Email, Telepon / WhatsApp, dan Jam layanan. Isian ini tampil di panel Bantuan setiap halaman kantor PPAT, dan boleh dikosongkan bila belum ada. Email diperiksa formatnya saat disimpan. Sama dengan aplikasi live.',
+    lama:'Kontak dukungan di panel Bantuan ditulis tetap di aplikasi, tidak dapat diatur admin platform.', ke:'pengaturan', tab:'umum', sorot:'#pgKontak', sumber:'Live Platform, 12 Nov 2026' },
   { kode:'IDDS-PL-74', versi:'v2', bukanHE:true, judul:'Pengaturan Umum: daftar lintas order di sidebar',
     isi:'Sakelar menentukan menu lintas order yang tampil di sidebar kantor. Bawaan Peruri mati, karena pekerjaan dibuka dari Permohonan AJB.',
     lama:'Pengaturan ini belum ada di prototipe.', ke:'pengaturan', tab:'umum', sorot:'#pgLintas', sumber:'Live Platform, 6 Nov 2026' },
@@ -638,8 +643,8 @@ const UBAH = [
     isi:'Tab baru untuk memilih hasil simulasi pengiriman ke ATR/BPN: berhasil, ditolak, atau lambat.',
     lama:'Tab ini belum ada di prototipe.', ke:'pengaturan', tab:'bpn', sorot:'#kartuPg', sumber:'Live Platform, 6 Nov 2026' },
   { kode:'IDDS-PL-83', versi:'v2', bukanHE:true, judul:'Setting Theme: Warna Status mengikuti IDDS',
-    isi:'Bagian Warna Status di tab Sidebar & Navbar tidak lagi berisi isian warna. Bagian ini menampilkan contoh lencana IDDS (Berhasil / selesai, Peringatan, Bahaya / gagal, Informasi, Netral) dengan keterangan bahwa warna lencana, pesan, dan penanda status mengikuti IDDS agar maknanya sama di semua layanan. Contoh lencana di Pratinjau Langsung juga memakai varian IDDS. Polanya sama dengan Tema Tampilan tenant (IDDS-TN-67).',
-    lama:'Tab Sidebar & Navbar memuat isian Warna Status (berhasil, peringatan, bahaya, informasi, netral) yang mengubah warna lencana, pesan, dan penanda status, sehingga warna yang sama dapat bermakna berbeda dan kontrasnya tidak terjamin.', ke:'tema-status', sorot:'#warnaStatus', sumber:'Keputusan 12 Nov 2026 (warna lencana ikut IDDS)' },
+    isi:'Bagian Warna Status pindah ke akhir tab Brand & Warna, seperti di aplikasi live, dan tidak lagi berisi isian warna. Bagian ini menampilkan contoh lencana IDDS (Berhasil / selesai, Peringatan, Bahaya / gagal, Informasi, Netral) dengan keterangan bahwa warna lencana, pesan, dan penanda status mengikuti IDDS agar maknanya sama di semua layanan. Contoh lencana di Pratinjau Langsung juga memakai varian IDDS. Polanya sama dengan Tema Tampilan tenant (IDDS-TN-67).',
+    lama:'Prototipe sebelumnya menaruh isian Warna Status (berhasil, peringatan, bahaya, informasi, netral) di tab Sidebar & Navbar. Isian itu yang mengubah warna lencana, pesan, dan penanda status, sehingga warna yang sama dapat bermakna berbeda dan kontrasnya tidak terjamin.', ke:'tema-status', sorot:'#warnaStatus', sumber:'Keputusan 12 Nov 2026 (warna lencana ikut IDDS)' },
   { kode:'IDDS-PL-82', versi:'v2', bukanHE:true, judul:'Tour guide Setting Theme, Pengaturan Global, dan Akun Saya',
     isi:'Saat admin platform pertama kali membuka setiap halaman dan tab, tur singkat menjelaskan isinya. Setting Theme punya tur per tab (Brand & Warna, Sidebar & Navbar, Konten, Logo & Aset, Komponen, dan sub-bagian Halaman Masuk) dengan Pratinjau Langsung serta Simpan atau Batal. Pengaturan Global punya tur per tab (Umum, Email, WhatsApp, Peruri CA, AI & Baca Berkas, ATR/BPN): isian utama, kirim uji, status simpan, dan Simpan yang berlaku untuk semua kantor PPAT. Akun Saya punya tur untuk data akun, ubah data, dan Keamanan (2FA termasuk langkah penyiapannya, ganti kata sandi, perangkat yang sedang masuk). Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
     lama:'Tidak ada panduan saat admin platform pertama kali membuka Setting Theme, Pengaturan Global, dan Akun Saya.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
@@ -721,7 +726,7 @@ const lencanaKontras = (a, b, ket) => { const r = rasio(a, b); if (r == null) re
 
 /* ---------------- Pengaturan Global (model live: general, email, whatsapp, peruri, ai) ---------------- */
 const PG0 = () => ({
-  umum:{ onboarding_url:'https://onboarding.contoh.id', pelihara:false, pesan:'Sistem sedang dalam pemeliharaan.', kembali:'', lintas_verif:false, lintas_susun:false, lintas_ttd:false, lintas_renvoi:false, lintas_arsip:false },
+  umum:{ onboarding_url:'https://onboarding.contoh.id', kontak_email:'', kontak_hp:'', kontak_jam:'', pelihara:false, pesan:'Sistem sedang dalam pemeliharaan.', kembali:'', lintas_verif:false, lintas_susun:false, lintas_ttd:false, lintas_renvoi:false, lintas_arsip:false },
   email:{ provider:'smtp', host:'smtp.contoh.id', port:'587', username:'notifikasi@contoh.id', password:'', encryption:'tls', brevo_key:'', from_email:'notifikasi@contoh.id', from_name:'E-PPAT' },
   wa:{ provider:'oca', template:'OTP_REGISTRASI', url:'https://wa.contoh.id/api/v2/push/message', token:'' },
   peruri:{ provider:'active', system_id:'EPPAT-CONTOH', base_url:'https://esign.contoh.id/esign', gateway_url:'https://gateway.contoh.id/gateway/digitalSignatureOnPremise/1.0', jwt:'/jwt/token', api_key:'', onboarding:'/generateOnboardingLink/v2', check:'/checkCertificate/v1', tera_email:'', meterai_akun:'emeterai@contoh.id', mode:'', pungut_nik:'', pungut_nama:'' },
@@ -736,7 +741,7 @@ const bedaPg = t => Object.keys(PG[t]).filter(k => String(PG[t][k]) !== String(P
 const pgKotor = t => bedaPg(t).length > 0;
 /* isian per tab: id, label, jenis pemeriksaan, wajib bila */
 const ISIAN = {
-  umum:[{ k:'onboarding_url', id:'gOnb', l:'URL aplikasi onboarding', jenis:'url', tanpaSlash:true }, { k:'pesan', id:'gPesan', l:'Pesan pemeliharaan', wajib:f => f.pelihara }],
+  umum:[{ k:'onboarding_url', id:'gOnb', l:'URL aplikasi onboarding', jenis:'url', tanpaSlash:true }, { k:'kontak_email', id:'gKEmail', l:'Email', jenis:'email', boleh:true }, { k:'pesan', id:'gPesan', l:'Pesan pemeliharaan', wajib:f => f.pelihara }],
   email:[{ k:'host', id:'eHost', l:'Host SMTP', jenis:'host', wajib:f => f.provider === 'smtp' }, { k:'port', id:'ePort', l:'Port', jenis:'port', wajib:f => f.provider === 'smtp' }, { k:'username', id:'eUser', l:'Nama pengguna' },
     { k:'password', id:'ePw', l:'Kata sandi SMTP', rahasia:true }, { k:'brevo_key', id:'eBrevo', l:'Brevo API key', rahasia:true, wajib:f => f.provider === 'brevo_api' },
     { k:'from_email', id:'eFrom', l:'Email pengirim', jenis:'email', wajib:() => true }, { k:'from_name', id:'eNama', l:'Nama pengirim' }],
@@ -858,7 +863,8 @@ function temaBrand() {
       ${grupPreset('Preset tema IDDS', 'Direkomendasikan. Ketiga tema ini dikonfirmasi Peruri sebagai penyedia IDDS.', PRESET_IDDS, true)}${grupPreset('Warna lain (di luar brand IDDS)', 'Warna ini bukan brand resmi IDDS. Pastikan kontrasnya lulus sebelum dipakai.', PRESET_LAIN, false)}${usulan('IDDS-PL-42')}</div>` : ''}
     <div class="sub-bagian ditandai" id="warnaKustom">${subJudul('Warna Kustom', TEMA.mode === 'preset' ? 'Warna dari preset terpilih. Mengubah salah satu warna memindah sumber warna ke Kustom.' : 'Warna inti aplikasi: warna utama, teks, latar, dan garis tepi.')}
       <div class="grid-warna">${WARNA_KUSTOM.map(([k, l]) => `<div class="kartu-warna">${isianWarna('w-' + k, l, w[k], `data-warna-kustom="${k}"`)}
-        ${k === 'brand_primary' ? lencanaKontras(w[k], '#ffffff', 'teks putih di atas warna utama') : k === 'content_primary' ? lencanaKontras(w[k], w.background_primary, 'Teks utama di atas Latar') : k === 'content_secondary' ? lencanaKontras(w[k], w.background_primary, 'Teks sekunder di atas Latar') : ''}</div>`).join('')}</div>${usulan('IDDS-PL-33')}</div>`;
+        ${k === 'brand_primary' ? lencanaKontras(w[k], '#ffffff', 'teks putih di atas warna utama') : k === 'content_primary' ? lencanaKontras(w[k], w.background_primary, 'Teks utama di atas Latar') : k === 'content_secondary' ? lencanaKontras(w[k], w.background_primary, 'Teks sekunder di atas Latar') : ''}</div>`).join('')}</div>${usulan('IDDS-PL-33')}</div>
+    <div class="sub-bagian ditandai" id="warnaStatus">${subJudul('Warna Status', 'Lencana dan banner status (Penyusunan, Penandatanganan, peringatan, galat) memakai warna sentimen IDDS agar maknanya sama di semua layanan. Warnanya tidak diatur dari tema.')}<div class="status-idds">${CHROME.status.map(([k, l]) => badge(l, VARIAN_STATUS[k])).join('')}</div>${usulan('IDDS-PL-83')}</div>`;
 }
 /* warna status mengikuti varian Badge IDDS (keputusan 12 Nov 2026, IDDS-PL-83) */
 const VARIAN_STATUS = { success:'success', warning:'warning', danger:'error', info:'info', neutral:'neutral' };
@@ -867,12 +873,11 @@ const kartuWarnaKosong = (grp, [k, l, ph], ob = TEMA.chrome) => `<div class="kar
 function temaChrome() {
   const c = TEMA.chrome, sbBg = c.sidebar_bg || (presetIdds() && TEMA.preset_brand !== 'eppat' ? '#141414' : '#2C3C42'), sbTx = c.sidebar_text || (presetIdds() && TEMA.preset_brand !== 'eppat' ? '#D0D0D0' : '#C7D0CE');
   return `<div class="sub-bagian" style="margin-top:0">${subJudul('Warna Sidebar', 'Kosongkan untuk mengikuti preset.')}<div class="grid-warna">${CHROME.sidebar.map(f => kartuWarnaKosong('chrome', f)).join('')}</div>${lencanaKontras(sbTx.toLowerCase(), sbBg.toLowerCase(), 'teks menu di atas latar sidebar')}</div>
-    <div class="sub-bagian">${subJudul('Warna Navbar', 'Warna bilah atas aplikasi. Kosongkan untuk mengikuti preset.')}<div class="grid-warna">${CHROME.navbar.map(f => kartuWarnaKosong('chrome', f)).join('')}</div></div>
-    <div class="sub-bagian ditandai" id="warnaStatus">${subJudul('Warna Status', 'Warna lencana, pesan, dan penanda status mengikuti INA Digital Design System (IDDS) agar maknanya sama di semua layanan, sehingga tidak dapat diubah di sini.')}<div class="status-idds">${CHROME.status.map(([k, l]) => badge(l, VARIAN_STATUS[k])).join('')}</div>${usulan('IDDS-PL-83')}</div>`;
+    <div class="sub-bagian">${subJudul('Warna Navbar', 'Warna bilah atas aplikasi. Kosongkan untuk mengikuti preset.')}<div class="grid-warna">${CHROME.navbar.map(f => kartuWarnaKosong('chrome', f)).join('')}</div></div>`;
 }
 const kartuAset = (k, l, v, ph) => `<div class="kartu-aset"><span class="thumb" style="${v ? `background-image:url('${v}')` : ''}">${v ? '' : ik('gambar', 20)}</span><div class="isi"><b>${l}</b>
   <div class="ina-text-field__wrapper ina-text-field__wrapper--size-md" style="margin-top:6px"><input type="text" class="ina-text-field__input" value="${esc(v && v.startsWith('data:') ? '/uploads/' + (MEDIA.find(m => m.url === v)?.nama || 'gambar') : v)}" placeholder="${ph}" aria-label="URL ${esc(l)}" data-aset-url="${k}"></div>
-  <div class="aksi-baris">${tombol('Pilih dari media', 'secondary', 'sm', `data-aset-pilih="${k}" data-label="${esc(l)}"`, ik('gambar', 14))}${v ? tombol('Kosongkan', 'tertiary', 'sm', `data-aset-kosong="${k}" aria-label="Kosongkan ${esc(l)}"`) : ''}</div></div></div>`;
+  <div class="aksi-baris">${tombol('Upload', 'secondary', 'sm', `data-aset-unggah="${k}" aria-label="Upload ${esc(l)}"`, ik('unggah', 14))}${tombol('Pilih dari media', 'secondary', 'sm', `data-aset-pilih="${k}" data-label="${esc(l)}"`, ik('gambar', 14))}${v ? tombol('Kosongkan', 'tertiary', 'sm', `data-aset-kosong="${k}" aria-label="Kosongkan ${esc(l)}"`) : ''}</div></div></div>`;
 function temaKonten() {
   const c = TEMA.chrome;
   return `<div class="sub-bagian" style="margin-top:0">${subJudul('Latar Konten', 'Warna dan gambar latar area konten. Kosongkan untuk mengikuti preset.')}
@@ -957,13 +962,15 @@ const isi = (t, k) => PGF[t][k];
 const atrPg = (t, k, x = '') => `data-pg="${t}.${k}" ${x}`;
 function tabUmum() {
   const f = PGF.umum;
-  return `${kepala('gear', 'Pengaturan Umum', 'Tombol peningkatan paket di semua kantor PPAT membuka alamat aplikasi onboarding ini. Kosongkan alamat untuk menyembunyikan tombol.')}
+  return `${kepala('gear', 'Pengaturan Umum', 'Alamat aplikasi onboarding, kontak dukungan, mode pemeliharaan, dan menu lintas order. Berlaku untuk semua kantor PPAT.')}
     <div class="form-dd"><div class="lebar">${tf('gOnb', 'URL aplikasi onboarding', isi('umum', 'onboarding_url'), 'Contoh: https://onboarding.contoh.id', false, 'Tulis tanpa garis miring (/) di akhir. Tombol "Mulai berlangganan" di kantor paket Gratis membuka alamat ini.', atrPg('umum', 'onboarding_url', 'inputmode="url" autocomplete="off"'), 'url')}</div></div>
+    <div class="uji ditandai" id="pgKontak"><h3>Kontak dukungan</h3><p>Tampil di panel Bantuan setiap halaman kantor PPAT. Kosongkan bila belum ada.${usulan('IDDS-PL-84')}</p>
+      <div class="form-dd kontak-dd" style="margin-top:12px">${tf('gKEmail', 'Email', isi('umum', 'kontak_email'), 'bantuan@domain.id', false, '', atrPg('umum', 'kontak_email', 'inputmode="email" autocomplete="off"'), 'email')}${tf('gKHp', 'Telepon / WhatsApp', isi('umum', 'kontak_hp'), '08xx-xxxx-xxxx', false, '', atrPg('umum', 'kontak_hp', 'inputmode="tel" autocomplete="off"'), 'tel')}${tf('gKJam', 'Jam layanan', isi('umum', 'kontak_jam'), 'Senin–Jumat, 08.00–17.00 WIB', false, '', atrPg('umum', 'kontak_jam', 'autocomplete="off"'))}</div></div>
     <div class="uji ditandai" id="pgPelihara"><h3>Mode pemeliharaan</h3><p>Berlaku untuk semua kantor PPAT. Pengguna melihat halaman pemeliharaan dan tidak dapat masuk. Admin kantor dan admin platform tetap dapat masuk.${usulan('IDDS-PL-73')}</p>
       ${cekBox('gPelihara', f.pelihara, 'Aktifkan mode pemeliharaan aplikasi', '', atrPg('umum', 'pelihara'))}
       ${f.pelihara ? `<div class="form-dd" style="margin-top:12px">${tf('gPesan', 'Pesan pemeliharaan', f.pesan, 'Contoh: Sistem sedang dalam pemeliharaan.', true, '', atrPg('umum', 'pesan'))}${tf('gKembali', 'Perkiraan kembali dibuka', f.kembali, '', false, '', atrPg('umum', 'kembali'), 'datetime-local')}</div>` : ''}</div>
     <div class="uji ditandai" id="pgLintas"><h3>Daftar lintas order di sidebar</h3><p>Berlaku untuk semua kantor PPAT. Saat dimatikan, menunya hilang dari sidebar, tetapi halaman kerjanya tetap terbuka lewat tombol di Permohonan AJB.${usulan('IDDS-PL-74')}</p>
-      <div class="cek-lintas">${[['lintas_verif', 'Verifikasi Berkas'], ['lintas_susun', 'Penyusunan Akta'], ['lintas_ttd', 'Penandatanganan Akta'], ['lintas_renvoi', 'Renvoi'], ['lintas_arsip', 'Arsip Akta']].map(([k, l]) => cekBox('g-' + k, f[k], l, '', atrPg('umum', k))).join('')}</div></div>`;
+      <div class="cek-lintas">${[['lintas_verif', 'Verifikasi Berkas'], ['lintas_susun', 'Penyusunan Akta'], ['lintas_ttd', 'Penandatanganan Akta'], ['lintas_renvoi', 'Renvooi'], ['lintas_arsip', 'Arsip Akta']].map(([k, l]) => cekBox('g-' + k, f[k], l, '', atrPg('umum', k))).join('')}</div></div>`;
 }
 function tabEmail() {
   const f = PGF.email, smtp = f.provider === 'smtp';
@@ -1284,6 +1291,7 @@ H.addEventListener('click', e => {
   const ts = t.closest('[data-tema-sub]'); if (ts) { S.temaSub = ts.dataset.temaSub; gambar(); $(`[data-tema-sub="${S.temaSub}"]`).focus(); return; }
   const tm = t.closest('[data-tema-mode]'); if (tm) { const v = tm.dataset.temaMode; if (v === 'custom' && TEMA.mode !== 'custom') TEMA.custom = { ...warnaAktif() }; TEMA.mode = v; gambar(); return; }
   const kz = t.closest('[data-kosongkan]'); if (kz) { const [g, k] = kz.dataset.kosongkan.split(':'); TEMA[g][k] = ''; gambar(); return; }
+  const au = t.closest('[data-aset-unggah]'); if (au) { const k = au.dataset.asetUnggah; const m = { id:idBaru(), nama:`gambar-baru-${nId}.jpg`, mime:'image/jpeg', size:156000, url:gbr('Gambar Baru', '#6a5733', '#3d6b5e') }; MEDIA.unshift(m); taruh(TEMA, k, m.url); if (k === 'chrome.content_bg_image' && !TEMA.chrome.content_bg_opacity) TEMA.chrome.content_bg_opacity = 100; gambar(); toast(`"${m.nama}" terunggah dan dipasang.`, 'positive', 4000, 'Simulasi: berkas juga masuk Pustaka Media.'); return; }
   const ap = t.closest('[data-aset-pilih]'); if (ap) { const k = ap.dataset.asetPilih; pilihMedia(ap.dataset.label, m => { taruh(TEMA, k, m.url); if (k === 'chrome.content_bg_image' && !TEMA.chrome.content_bg_opacity) TEMA.chrome.content_bg_opacity = 100; gambar(); }); return; }
   const ak = t.closest('[data-aset-kosong]'); if (ak) { taruh(TEMA, ak.dataset.asetKosong, ''); gambar(); return; }
   if (t.closest('#temaSimpan')) { TEMA_F = salinObj(TEMA); gambar(); toast('Tema platform tersimpan.', 'positive', 3500, 'Tampilan baru berlaku untuk area platform dan halaman Masuk platform.'); return; }
@@ -1514,7 +1522,7 @@ function lihat(u) {
   const sorot = () => { const el = u.sorot && $(u.sorot); if (el) { el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); } };
   const kePg = (tab, lanjut) => pindah('pengaturan', () => { if (S.pgTab !== tab) jagaTabPg(() => { S.pgTab = tab; gambar(); lanjut(); }); else lanjut(); });
   if (u.ke === 'bantuan') { kePg(u.tab, bukaBantuan); return; }
-  if (u.ke === 'tema-status') { pindah('tema', () => { S.temaTab = 'chrome'; gambar(); setTimeout(sorot, 50); }); return; }
+  if (u.ke === 'tema-status') { pindah('tema', () => { S.temaTab = 'brand'; gambar(); setTimeout(sorot, 50); }); return; }
   if (u.ke === 'tur') { pindah('tema', () => setTimeout(() => window.TurBersama && window.TurBersama.mulai(), 300)); return; }
   if (u.ke === 'pgGalat') { kePg('peruri', () => { PGF.peruri.base_url = 'esign.peruri.perdananiaga.com/esign'; PGF.peruri.gateway_url = 'https://apgdev.peruri.co.id:19044/gateway/digitalSignatureOnPremise/1.0'; PGF.peruri.tera_email = 'tera@yopmail'; gambar(); simpanPg('peruri'); sorot(); }); return; }
   if (u.ke === 'pgNonaktif') { kePg('ai', () => { PGF.ai.status = 'disabled'; gambar(); simpanPg('ai'); }); return; }
@@ -1536,10 +1544,10 @@ const TUR_BANTUAN = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan per
     const isi = {
       brand:[{ el:turPas(turH3('Sumber warna'), 'h3'), j:'Sumber warna', t:'Pakai preset bawaan sebagai titik awal, atau pilih Kustom untuk mengatur warna sendiri.' },
         { el:turPas('#presetTema', 'h3'), j:'Preset brand', t:'Preset tema IDDS direkomendasikan. Warna di luar brand IDDS perlu dicek kontrasnya sebelum dipakai.' },
-        { el:turPas('#warnaKustom', 'h3'), j:'Warna kustom', t:'Atur warna utama, teks, latar, dan garis tepi. Lencana kontras menunjukkan apakah teks tetap mudah dibaca.' }],
+        { el:turPas('#warnaKustom', 'h3'), j:'Warna kustom', t:'Atur warna utama, teks, latar, dan garis tepi. Lencana kontras menunjukkan apakah teks tetap mudah dibaca.' },
+        { el:turPas(turH3('Warna Status'), 'h3'), j:'Warna status', t:'Warna lencana dan banner status mengikuti IDDS, sehingga tidak diatur dari tema. Contoh lencana menunjukkan arti setiap warna.' }],
       chrome:[{ el:turPas(turH3('Warna Sidebar'), 'h3'), j:'Warna sidebar', t:'Atur warna menu samping. Kosongkan isian untuk mengikuti preset.' },
-        { el:turPas(turH3('Warna Navbar'), 'h3'), j:'Warna navbar', t:'Atur warna bilah atas aplikasi. Kosongkan isian untuk mengikuti preset.' },
-        { el:turPas(turH3('Warna Status'), 'h3'), j:'Warna status', t:'Warna lencana dan pesan status mengikuti IDDS, sehingga tidak dapat diubah. Contoh lencana menunjukkan arti setiap warna.' }],
+        { el:turPas(turH3('Warna Navbar'), 'h3'), j:'Warna navbar', t:'Atur warna bilah atas aplikasi. Kosongkan isian untuk mengikuti preset.' }],
       konten:[{ el:turPas(turH3('Latar Konten'), 'h3'), j:'Latar konten', t:'Atur latar area konten di bawah menu dan bilah atas.' }],
       aset:[{ el:turPas(turH3('Logo'), 'h3'), j:'Logo dan gambar', t:'Ganti logo dan gambar platform. Pilih berkas dari pustaka media atau tulis alamatnya.' }],
       komponen:[{ el:() => turTampak('#halaman [data-tema-sub]')?.parentElement, j:'Jenis komponen', t:'Pilih komponen yang ingin diatur gayanya, misalnya tombol, formulir, atau halaman masuk.' },
@@ -1554,6 +1562,7 @@ const TUR_BANTUAN = { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan per
   { get kunci() { return 'plsis-pg-' + S.pgTab; }, aktif:() => S.layar === 'pengaturan', langkah:() => {
     const isi = {
       umum:[{ el:() => document.getElementById('f-gOnb') || document.getElementById('gOnb')?.closest('.ina-text-field, .ina-select-dropdown, .ina-password-input, .ina-select, div'), j:'URL aplikasi onboarding', t:'Tombol Mulai berlangganan di kantor paket Gratis membuka alamat ini. Kosongkan untuk menyembunyikan tombolnya.' },
+        { el:'#pgKontak', j:'Kontak dukungan', t:'Email, telepon, dan jam layanan ini tampil di panel Bantuan semua kantor PPAT. Kosongkan bila belum ada.' },
         { el:'#pgPelihara', j:'Mode pemeliharaan', t:'Saat aktif, pengguna di semua kantor PPAT tidak dapat masuk. Admin kantor dan admin platform tetap dapat masuk.' },
         { el:'#pgLintas', j:'Daftar lintas order', t:'Pilih menu lintas order yang tampil di sidebar semua kantor PPAT.' }],
       email:[{ el:() => document.getElementById('f-eProv') || document.getElementById('eProv')?.closest('.ina-text-field, .ina-select-dropdown, .ina-password-input, .ina-select, div'), j:'Penyedia email', t:'Pilih SMTP atau Brevo API untuk mengirim email OTP, notifikasi, dan salinan akta.' },
