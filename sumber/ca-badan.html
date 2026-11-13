@@ -268,7 +268,7 @@ const UBAH = [
     isi:'Tombol Bantuan di kanan judul membuka IDDS Drawer berisi urutan registrasi, pertanyaan umum (apa itu CA, apa yang dilakukan di portal Peruri, berapa lama, tautan kedaluwarsa, CA kedaluwarsa), dan kontak dukungan.',
     lama:'Tidak ada panduan atau bantuan selama proses registrasi (skor Help & Documentation: 0).', ke:'bantuan', sorot:null, sumber:'Laporan HE INA Digital hlm. 19, 20, 40 (Kesimpulan no. 2)' },
   { kode:'HE-CA-11', versi:'v2', bukanHE:true, judul:'Registrasi CA dan TERA dalam satu stepper',
-    isi:'Untuk PPAT dan Super Admin + PPAT, tab Registrasi CA dan Registrasi TERA digabung menjadi Registrasi CA & TERA dengan satu stepper: Lengkapi data diri, Ajukan ke Peruri, Verifikasi & Pemeriksaan Peruri, Spesimen tanda tangan & stempel. Setiap tahap menampilkan jalur TTE dan jalur TERA karena keduanya selesai pada waktu berbeda. Data TERA cukup ID PPAT, rekening, dan SK PPAT; data diri lain memakai Data Diri (KTP). Keduanya diajukan bersama. Spesimen tanda tangan dapat dibuat begitu CA aktif; spesimen stempel setelah TERA disetujui. Penolakan TERA menampilkan alasannya tanpa memengaruhi CA. Status TERA dapat disimulasikan di bilah atas.',
+    isi:'Untuk PPAT dan Super Admin + PPAT, tab Registrasi CA dan Registrasi TERA digabung menjadi Registrasi CA & TERA dengan satu stepper: Lengkapi data diri, Ajukan ke Peruri, Verifikasi & Pemeriksaan Peruri, Spesimen tanda tangan & stempel. Setiap tahap menampilkan jalur TTE dan jalur TERA karena keduanya selesai pada waktu berbeda. Data TERA cukup ID PPAT, rekening, dan SK PPAT; data diri lain memakai Data Diri (KTP). Keduanya diajukan bersama. Kartu spesimen baru tampil saat masuk tahap 4, Spesimen tanda tangan & stempel; di tahap sebelumnya stepper sudah menjelaskan tahap ini. Spesimen tanda tangan dapat dibuat begitu CA aktif; spesimen stempel setelah TERA disetujui, dan kartunya terkunci sampai saat itu. Penolakan TERA menampilkan alasannya tanpa memengaruhi CA. Status TERA dapat disimulasikan di bilah atas.',
     lama:'Registrasi CA dan Registrasi TERA berada di dua tab dengan stepper dan formulir masing-masing; data diri diisi dua kali.', ke:'tera-gabung', sorot:'#kartuCa', sumber:'Masukan Peruri, 9 Nov 2026' },
   { kode:'HE-CA-12', versi:'v2', bukanHE:true, judul:'Penolakan TERA: bagian yang salah dan cara memperbaikinya',
     isi:'Saat TERA ditolak, alert menyebut siapa yang menolak (admin E-PPAT atau Peruri) dan tanggalnya, lalu daftar bagian yang salah. Setiap bagian memuat letak, alasan, cara memperbaiki, dan tombol Perbaiki yang membawa ke isiannya, termasuk bila isiannya ada di Data Diri (KTP). Isian yang ditolak ditandai merah. Bagian yang sudah diubah bertanda centang, dan Ajukan Ulang TERA aktif setelah semua bagian diperbaiki. Status sertifikat elektronik tidak terpengaruh. Simulasi tersedia untuk 1 dan 2 alasan.',
@@ -551,7 +551,7 @@ function tabCa() {
         <span class="waktu" id="hasilCek" aria-live="polite">${S.hasilCek || (['ekyc', 'periksa', 'aktif', 'selesai'].includes(kd) ? `Terakhir dicek ${S.dicek}` : '')}${usulan('HE-CA-05')}</span>
       </div>
     </div>
-    ${kartuSpesimen()}${kartuStempel()}`;
+    ${tahapSpesimen() ? kartuSpesimen() + kartuStempel() : ""}`;
 }
 function kelengkapan() {
   const n = kurang().length;
@@ -565,6 +565,8 @@ function dataKirim() {
     <dl class="kv"><dt>Nama</dt><dd>${esc(p.nama)}</dd><dt>NIK</dt><dd>${esc(p.nik) || '—'}</dd><dt>Tempat, tanggal lahir</dt><dd>${esc(p.tempat)}, ${tglId(p.tgl)}</dd><dt>Nomor HP</dt><dd>${esc(p.hp)}</dd><dt>Email</dt><dd>${esc(p.email)}</dd><dt>Foto KTP</dt><dd>${esc(p.ktp)}</dd></dl>
     <p class="alasan">Data ini sudah terisi di portal Peruri, sehingga Anda cukup memeriksanya tanpa mengetik ulang.</p></div>`;
 }
+/* kartu spesimen baru tampil saat jalur TTE atau TERA masuk tahap 4 (Spesimen tanda tangan & stempel); sebelumnya stepper sudah menjelaskan tahap ini */
+const tahapSpesimen = () => POSISI[S.kondisi] >= 3 || (posTera() ?? -1) >= 3;
 function kartuSpesimen() {
   const aktif = caAktif(), ada = S.kondisi === 'selesai';
   return `<div class="ina-card ina-card--variant-basic kartu ditandai" id="kartuSpesimen"><div class="kartu-kepala"><span class="ikon-bulat">${ik('pena', 20)}</span><div>
