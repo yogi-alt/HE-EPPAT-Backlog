@@ -2412,7 +2412,7 @@
       "fitur": "Tenant · Masuk & Daftar (penyesuaian IDDS)",
       "judul": "Verifikasi OTP: masa berlaku kode terlihat di layar",
       "saat_ini": "Hanya ada tombol \"Kirim ulang\" dengan jeda 60 detik. Masa berlaku kode tidak disebut di layar.",
-      "usulan": "Setiap kanal (Email dan WhatsApp) menampilkan hitung mundur \"Kode berlaku 4:59\" yang berubah kuning saat sisa waktunya kurang dari 1 menit. Jeda \"Kirim ulang dalam 0:59\" tampil sejak kode dikirim. Saat waktu habis, kolom kode dan tombol Verifikasi nonaktif, lalu muncul pesan \"Kode sudah kedaluwarsa\". Tombol \"Kirim Ulang\" memulai hitungan baru. Pola sama dengan HE-LOGIN-01, HE-EAW-04, dan HE-EAWK-05. Durasi 5 menit adalah angka contoh; masa berlaku sebenarnya mengikuti server.",
+      "usulan": "Setiap kanal (Email dan WhatsApp) menampilkan hitung mundur \"Kode berlaku 4:59\" yang berubah kuning saat sisa waktunya kurang dari 1 menit. Jeda \"Kirim ulang dalam 0:59\" tampil sejak kode dikirim. Saat waktu habis, kolom kode dan tombol Verifikasi nonaktif, lalu muncul pesan \"Kode sudah kedaluwarsa\". Tombol \"Kirim Ulang\" memulai hitungan baru. Pola sama dengan HE-LOGIN-01, HE-EAW-04, dan HE-EAWK-05. Kode berlaku 5 menit sesuai keputusan Workshop HE 3 Nov 2026, dan hitung mundur mengikuti sisa waktu dari server.",
       "prinsip": "Penyesuaian IDDS (Kesimpulan HE hal. 40 no. 1)",
       "halaman": "Tidak dinilai HE",
       "prioritas": "Sedang",
@@ -2420,8 +2420,8 @@
       "acuan": "prototipe/Backlog-IDDS-TN-MASUK-Prototype.html › Daftar penyesuaian › IDDS-TN-07",
       "selesai_bila": "Setiap kanal OTP pendaftaran menampilkan sisa masa berlaku kode, dan kode yang kedaluwarsa tidak dapat dipakai.",
       "status": "Prototipe siap",
-      "catatan": "Durasi 5 menit di prototipe adalah angka contoh (sama dengan Email OTP Onboarding); masa berlaku sebenarnya dari server tenant perlu dikonfirmasi tim.",
-      "tanggal": "2026-10-26"
+      "catatan": "Masukan Peruri (MoM Workshop HE 3 Nov 2026): kode OTP berlaku 5 menit, sama dengan Email OTP Onboarding.",
+      "tanggal": "2026-11-16"
     },
     {
       "kode": "IDDS-TN-08",
@@ -7655,6 +7655,12 @@
       "kode": "HE-UMUM-01",
       "perubahan": "Label diseragamkan dengan prototipe setelah QA 13 Nov 2026: Pratinjau akta, Unduh PDF, Renvooi, serta tombol, saringan, dan lencana sentence case (Mulai berlangganan, Pilih file, Lihat semua, Periksa ulang, Semua status, Belum dibayar, Belum/Sudah verifikasi). Butir terkait: IDDS-TN-09, IDDS-TN-33, IDDS-PL-12, IDDS-PL-13, IDDS-OB-13, IDDS-OB-19, IDDS-OB-21, IDDS-OB-28, IDDS-OB-51, HE-TRIAL-03, HE-TRIAL-04, HE-TRIAL-06, HE-TRIAL-09, IDDS-PL-71, IDDS-PL-80, IDDS-TN-57, IDDS-TN-65.",
       "berkas": "sumber/*-badan.html; sumber/sesi-bersama.html"
+    },
+    {
+      "tanggal": "2026-11-16",
+      "kode": "IDDS-TN-07",
+      "perubahan": "Masa berlaku kode OTP ditetapkan 5 menit sesuai MoM Workshop HE 3 Nov 2026; keterangan \"angka contoh\" dihapus.",
+      "berkas": "sumber/tn-masuk-badan.html"
     }
   ]
 }
