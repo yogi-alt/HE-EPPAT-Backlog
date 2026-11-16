@@ -623,7 +623,7 @@ ol.bantu-langkah{padding-left:22px}
 .syarat-chip{display:inline-block;padding:0 6px;border-radius:5px;background:var(--ina-warning-100,#fef3c7);color:var(--ina-warning-700,#6b4c00);font:500 11px/18px Inter,sans-serif;text-align:left}
 .bag .isi-bag .var-chip.ina-badge{white-space:normal}
 .lbl-bag .ina-badge{font-family:Inter,sans-serif}
-/* Preview Akta */
+/* Pratinjau Akta */
 .pratinjau-akta{margin-top:16px;border:1px solid var(--ina-stroke-primary);border-radius:16px;overflow:hidden;background:var(--ina-background-primary)}
 .pr-kepala{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 16px;background:var(--ina-primary-500);color:#fff}
 .pr-aksi{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px}
@@ -834,7 +834,7 @@ const UBAH = [
     isi:'Subjudul menjadi "Daftar layanan PPAT beserta formulir, template akta, dan rel status ordernya." Kolom mengikuti live: Kode, Nama Layanan, Formulir, Template, Order, Rel Status, Urutan, dan Status. Rel Status menampilkan jumlah tahap, rangkaian tahap, dan siapa yang membuat order. Kolom istilah punya tooltip "?". Rangkaian tahap memakai tahap Peruri.',
     lama:'Daftar hanya memuat Kode, Nama Layanan, Urutan, dan Status. Formulir, template, jumlah order, dan rel status tidak terlihat.', ke:'jenis', sorot:'#tabelJenis' },
   { kode:'IDDS-PL-61', versi:'v2', bukanHE:true, sumber:LIVE, judul:'Panduan Jenis Akta memuat tujuh langkah dan pertanyaan live',
-    isi:'Panduan menjelaskan alur dari Tambah Jenis Akta sampai Rel Status: tambah layanan, tambah template, susun Pasal, sisipkan Variabel, atur Pengaturan Halaman, uji dengan Skenario dan Preview Akta, lalu atur tahap. Pertanyaan umum menjawab beda Catatan, Pasal, dan Bagian Otomatis, kalimat untuk kasus tertentu, sebutan "selanjutnya disebut PIHAK PERTAMA", tanda tangan berdampingan, serta arti Simpan sebagai Draft dan Kunci Template.',
+    isi:'Panduan menjelaskan alur dari Tambah Jenis Akta sampai Rel Status: tambah layanan, tambah template, susun Pasal, sisipkan Variabel, atur Pengaturan Halaman, uji dengan Skenario dan Pratinjau Akta, lalu atur tahap. Pertanyaan umum menjawab beda Catatan, Pasal, dan Bagian Otomatis, kalimat untuk kasus tertentu, sebutan "selanjutnya disebut PIHAK PERTAMA", tanda tangan berdampingan, serta arti Simpan sebagai Draft dan Kunci Template.',
     lama:'Bantuan hanya menjelaskan Kode, Urutan, dan status.', ke:'bantuan', sorot:null },
   { kode:'IDDS-PL-62', versi:'v2', bukanHE:true, sumber:LIVE, judul:'Impor dan ekspor layanan serta rancangan penuh dengan laporan hasil',
     isi:'Tombol atas memuat Impor layanan, Ekspor layanan, Impor rancangan penuh, dan Ekspor rancangan penuh. Tombol "?" membuka penjelasan isi tiap berkas. Ekspor menyebut isi berkas sebelum diunduh. Impor tidak menimpa data: kode yang sudah ada dilewati, sedangkan formulir dan template dibuat baru. Sesudah impor, laporan menyebut yang masuk, dilewati, dan harus dipasang sendiri. Berkas yang belum dipilih ditandai di bawah isiannya.',
@@ -863,15 +863,15 @@ const UBAH = [
   { kode:'IDDS-PL-70', versi:'v2', bukanHE:true, sumber:LIVE, judul:'Pengaturan Dokumen memuat kertas, footer, pemenggalan, dan hitungan baris',
     isi:'Tab Pengaturan Halaman memuat Ukuran Kertas, Orientasi, Margin, Huruf, Spasi Baris, hitungan baris per halaman, Footer dengan isi cepat dan kolom, Pemenggalan halaman, Garis Merah, serta kotak paraf. Setiap perubahan langsung terlihat di kertas. Nilai yang salah ditandai di bawah isiannya saat Simpan Pengaturan. Variabel footer ditawarkan dengan nama yang terbaca.',
     lama:'Pengaturan halaman belum ada di prototipe.', ke:'atur', sorot:'#panelDok' },
-  { kode:'IDDS-PL-71', versi:'v2', bukanHE:true, sumber:LIVE, judul:'Skenario dan Preview Akta untuk menguji template tanpa order',
-    isi:'Tab Skenario punya keadaan kosong yang menjelaskan langkahnya, tombol Skenario kosong, dan Rakit semua. Hasil rakit menyebut jumlah bagian dan temuan. Preview Akta menampilkan halaman berisi data contoh, dengan pengatur ukuran, Download PDF, dan Kembali. Tab Pratinjau di live digabung dengan tombol Preview akta agar tidak ada dua pintu untuk tampilan yang sama.',
-    lama:'Skenario dan Preview Akta belum ada di prototipe.', ke:'skenario', sorot:'#panelDok' },
+  { kode:'IDDS-PL-71', versi:'v2', bukanHE:true, sumber:LIVE, judul:'Skenario dan Pratinjau Akta untuk menguji template tanpa order',
+    isi:'Tab Skenario punya keadaan kosong yang menjelaskan langkahnya, tombol Skenario kosong, dan Rakit semua. Hasil rakit menyebut jumlah bagian dan temuan. Pratinjau Akta menampilkan halaman berisi data contoh, dengan pengatur ukuran, Unduh PDF, dan Kembali. Tab Pratinjau di live digabung dengan tombol Pratinjau akta agar tidak ada dua pintu untuk tampilan yang sama.',
+    lama:'Skenario dan Pratinjau Akta belum ada di prototipe.', ke:'skenario', sorot:'#panelDok' },
   { kode:'IDDS-PL-72', versi:'v2', bukanHE:true, sumber:LIVE, judul:'Simpan sebagai Draft dan Kunci Template dengan daftar periksa',
     isi:'Kepala editor menampilkan versi template dan status simpan. Pita "n hal perlu diperiksa sebelum Kunci Template" menyebut semua hal yang tersisa dan menyediakan tombol untuk membukanya. Tooltip menjelaskan alasan Kunci Template nonaktif. Kunci Template meminta konfirmasi yang menyebut versi baru dan dampaknya bagi order, lalu lencana berubah menjadi Siap vN.',
     lama:'Status template dan penguncian belum ada di prototipe. Di live, pita hanya menyebut skenario dan tombol Kunci template nonaktif tanpa penjelasan.', ke:'kunci', sorot:'#aksiAtas' },
   { kode:'IDDS-PL-80', versi:'v2', bukanHE:true, judul:'Tour guide Jenis Akta, Template & Variabel, dan Editor Pasal',
-    isi:'Saat admin platform pertama kali membuka setiap layar, tur singkat menjelaskan isinya. Jenis Akta: Tambah jenis akta, impor dan ekspor, daftar jenis akta, dan aksi per layanan. Template & Variabel memiliki tur per tab: Template (daftar template, Tambah template, Impor berkas), Variabel (asal variabel, pencarian, Variabel dokumen, impor dan ekspor, kelompok variabel), dan Rel Status (status rel, urutan tahap, Tambah tahap, Pulihkan rel bawaan, Salin rel, Simpan rel, Terbit). Editor Pasal: status simpan, Simpan sebagai draft, Kunci template, Preview akta, hal yang perlu diperiksa, bilah alat, daftar bagian, kertas naskah, dan panel editor; saat sebuah bagian disunting, tur menjelaskan panel bagian serta Simpan dan Batal. Preview akta: jumlah halaman, data contoh, Download PDF, dan Kembali. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
-    lama:'Tidak ada panduan saat admin platform pertama kali membuka Jenis Akta, Template & Variabel, Editor Pasal, dan Preview akta.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
+    isi:'Saat admin platform pertama kali membuka setiap layar, tur singkat menjelaskan isinya. Jenis Akta: Tambah jenis akta, impor dan ekspor, daftar jenis akta, dan aksi per layanan. Template & Variabel memiliki tur per tab: Template (daftar template, Tambah template, Impor berkas), Variabel (asal variabel, pencarian, Variabel dokumen, impor dan ekspor, kelompok variabel), dan Rel Status (status rel, urutan tahap, Tambah tahap, Pulihkan rel bawaan, Salin rel, Simpan rel, Terbit). Editor Pasal: status simpan, Simpan sebagai draft, Kunci template, Pratinjau akta, hal yang perlu diperiksa, bilah alat, daftar bagian, kertas naskah, dan panel editor; saat sebuah bagian disunting, tur menjelaskan panel bagian serta Simpan dan Batal. Pratinjau akta: jumlah halaman, data contoh, Unduh PDF, dan Kembali. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    lama:'Tidak ada panduan saat admin platform pertama kali membuka Jenis Akta, Template & Variabel, Editor Pasal, dan Pratinjau akta.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' }
 ];
 
 /* ---------------- data contoh (isi mengikuti rekaman live Platform; tahap memakai tahap Peruri) ---------------- */
@@ -966,7 +966,7 @@ const VAR0 = () => [
   V('HIBAH', 'nama_pemberi_hibah', 'Nama Pemberi Hibah', 'Para Pihak', { lencana:'Referensi user' }), V('HIBAH', 'nama_penerima_hibah', 'Nama Penerima Hibah', 'Para Pihak', { lencana:'Referensi user' }), V('HIBAH', 'nomor_sertipikat', 'Nomor Sertipikat', 'Objek')
 ];
 const URUT_TAB = ['Narahubung', 'Para Pihak', 'Objek', 'Dokumen', 'Global · Sistem', 'Variabel Dokumen'];
-/* nilai contoh untuk Skenario dan Preview Akta */
+/* nilai contoh untuk Skenario dan Pratinjau Akta */
 const CONTOH = { penjual_nama:'Contoh Pihak Pertama', pembeli_nama:'Contoh Pihak Kedua', penjual_gelar:'Tuan', pembeli_gelar:'Nyonya', penjual_tempat_lahir:'Kota Contoh', pembeli_tempat_lahir:'Kota Contoh', penjual_tanggal_lahir:'1 Januari 1980', pembeli_tanggal_lahir:'2 Februari 1985', penjual_pekerjaan:'Karyawan Swasta', pembeli_pekerjaan:'Wiraswasta', penjual_nik:'3200000000000001', pembeli_nik:'3200000000000002', saksi1_gelar:'Tuan', saksi1_nama:'Contoh Saksi Satu', saksi1_nik:'3200000000000003', saksi2_gelar:'Nyonya', saksi2_nama:'Contoh Saksi Dua', saksi2_nik:'3200000000000004', jenis_hak:'Hak Milik', surat_ukur_nomor:'00001/Contoh/2020', surat_ukur_tanggal:'3 Maret 2020', luas_tanah:'120', lokasi_tanah:'Jalan Contoh Nomor 1', desa_kelurahan:'Kelurahan Contoh', kecamatan:'Kecamatan Contoh', kabupaten_kota:'Kota Contoh', provinsi:'Provinsi Contoh', harga_jual:'500.000.000', ppat_nama:'Contoh PPAT, S.H., M.Kn.', ppat_wilayah:'Kota Contoh', var_hari:'Jumat', var_tanggal:'6 November 2026', var_pukul:'10.00 WIB', deed_number:'01/2026', kantor_pengadilan:'Kota Contoh', jenis_akta:'Akta Jual Beli', nomor_dokumen:'01/2026', tanggal_cetak:'6 November 2026' };
 let nid = 100;
 const beriId = (tpl, vars) => { tpl.forEach(t => t.bag.forEach(b => { b.id = ++nid; })); vars.forEach(v => { v.id = ++nid; }); };
@@ -1399,7 +1399,7 @@ const statusSimpan = () => `<span class="status-simpan ${S.ubah ? 'belum' : ''}"
 const aksiAtas = t => `<div class="dok-aksi ditandai" id="aksiAtas">
   ${denganTip(tombol('Simpan sebagai draft', 'secondary', 'md', 'id="simpanDraft"', ik('simpan', 16)), 'Tombol ini menyimpan naskah tanpa mengubah versi yang dipakai order.')}
   ${denganTip(tombol('Kunci template', 'secondary', 'md', `id="kunciTpl" ${bisaKunci(t) ? '' : 'disabled'}`, ik('kunci', 16)), alasanKunci(t))}
-  ${denganTip(tombol('Preview akta', 'primary', 'md', 'id="previewAkta"', ik('mata', 16)), 'Tombol ini menampilkan akta berisi data contoh.', 'bottom-end')}${usulan('IDDS-PL-72')}</div>`;
+  ${denganTip(tombol('Pratinjau akta', 'primary', 'md', 'id="previewAkta"', ik('mata', 16)), 'Tombol ini menampilkan akta berisi data contoh.', 'bottom-end')}${usulan('IDDS-PL-72')}</div>`;
 const pitaPeriksa = t => { const M = masalah(t); return `<div id="pitaPeriksa">${M.length ? `<div class="pita">${alert('caution', `${M.length} hal perlu diperiksa sebelum Kunci Template`, `<ul class="daftar-periksa">${M.map(m => `<li><span>${esc(m.teks)}</span>${tombol(m.aksi, 'secondary', 'sm', `data-periksa="${m.kunci}"`)}</li>`).join('')}</ul>`)}</div>` : ''}</div>`; };
 
 /* variabel & syarat di kertas: label yang terbaca, bukan kode mentah */
@@ -1478,7 +1478,7 @@ function panelBagian(t) {
       ${cekTanya('b_garis', d.garis, 'Garis putus-putus', 'Sisa baris diisi garis putus-putus agar tidak dapat ditambah tulisan.')}
       ${cekTanya('b_merah', d.merah, 'Pakai garis merah', 'Bagian ini ikut digaris merah saat sakelar Garis Merah di Pengaturan Dokumen menyala.')}</div>
     <p class="ket-kecil">Garis merah tetap dikendalikan sakelar utama di Pengaturan Dokumen. Sakelar di sini menentukan bagian yang dikeluarkan saat sakelar utama menyala.</p>
-    <div class="f-baris">${pilihan('b_fungsi', `Fungsi bagian (opsional)${tanya('Fungsi bagian', 'Fungsi menentukan perlakuan khusus bagian ini di salinan.')}`, [['biasa', 'Biasa'], ['ttd', 'Tanda tangan'], ['renvoi', 'Keterangan renvoi']], d.fungsi, 'Pilih Tanda tangan untuk bagian yang di salinan diganti tulisan "ttd". Pilih Keterangan renvoi untuk tempat catatan coretan atau tambahan.')}</div>
+    <div class="f-baris">${pilihan('b_fungsi', `Fungsi bagian (opsional)${tanya('Fungsi bagian', 'Fungsi menentukan perlakuan khusus bagian ini di salinan.')}`, [['biasa', 'Biasa'], ['ttd', 'Tanda tangan'], ['renvoi', 'Keterangan renvooi']], d.fungsi, 'Pilih Tanda tangan untuk bagian yang di salinan diganti tulisan "ttd". Pilih Keterangan renvooi untuk tempat catatan coretan atau tambahan.')}</div>
     <div class="f-baris">${pilihan('b_muncul', `Muncul di${tanya('Muncul di', 'Pilihan ini menentukan dokumen yang memuat bagian ini.')}`, [['semua', 'Minuta & Salinan'], ['minuta', 'Hanya Minuta'], ['salinan', 'Hanya Salinan']], d.muncul, 'Hanya Minuta berarti bagian dilewati saat salinan dibuat. Hanya Salinan berarti sebaliknya.')}</div>
     ${d.type === 'otomatis' ? `<div class="grup-p"><h4>Potongan kalimat</h4><p class="ket-kecil">Sistem merakit bagian ini dari potongan kalimat sesuai data order. Potongan bersyarat tertulis hanya bila kondisinya terpenuhi.</p>
       ${d.potongan.map((p, i) => `<div class="potong"><div class="f-baris">${pilihan('p_k' + i, 'Tertulis bila', [['', 'Selalu'], ...KONDISI], p.kondisi)}</div>
@@ -1531,8 +1531,8 @@ function panelSkenario(t) {
   const L = t.skenario;
   return `<h3 class="atur-judul">Skenario</h3><p class="ket-kecil" style="margin-top:0">Isian karangan untuk memeriksa template tanpa membuat order. Skenario disimpan bersama template dan ikut berpindah bila template disalin.</p>
     <div class="aksi-sk">${tombol('Skenario kosong', 'secondary', 'sm', 'id="skKosong"', ik('plus', 14))}${tombol('Rakit semua', 'primary', 'sm', `id="skRakit" ${L.length ? '' : 'disabled'}`, ik('kilau', 14))}</div>
-    ${L.length ? `<ul class="sk-daftar">${L.map((s, i) => `<li><div><b>${esc(s.nama)}</b><div class="kc">${s.hasil ? `Dirakit: ${s.hasil.bagian} bagian, ${s.hasil.temuan ? `${s.hasil.temuan} hal perlu dicek` : 'tanpa temuan'}` : 'Belum dirakit'}</div></div>${s.hasil ? (s.hasil.temuan ? badge('Perlu dicek', 'warning', 'sm') : badge('Lolos', 'success', 'sm')) : ''}${tombol(ik('sampah', 15), 'tertiary', 'sm', `class="bahaya-ikon" data-hapus-sk="${i}" aria-label="Hapus skenario ${esc(s.nama)}" title="Hapus skenario"`)}</li>`).join('')}</ul>${L.some(s => s.hasil) ? `<p class="ket-kecil">Periksa hasilnya di Preview Akta.</p>` : ''}`
-      : `<div class="sk-kosong"><b>Belum ada skenario</b><p>Skenario adalah data contoh untuk menguji template tanpa membuat order.</p><ol><li>Tekan <b>Skenario kosong</b> dan buat satu skenario untuk kasus yang paling sering, misalnya 1 penjual perorangan dan 1 pembeli.</li><li>Tambah skenario lain untuk kasus khusus, misalnya penjual ahli waris atau perseroan.</li><li>Tekan <b>Rakit semua</b>, lalu periksa hasilnya di <b>Preview akta</b>.</li></ol></div>`}${usulan('IDDS-PL-71')}`;
+    ${L.length ? `<ul class="sk-daftar">${L.map((s, i) => `<li><div><b>${esc(s.nama)}</b><div class="kc">${s.hasil ? `Dirakit: ${s.hasil.bagian} bagian, ${s.hasil.temuan ? `${s.hasil.temuan} hal perlu dicek` : 'tanpa temuan'}` : 'Belum dirakit'}</div></div>${s.hasil ? (s.hasil.temuan ? badge('Perlu dicek', 'warning', 'sm') : badge('Lolos', 'success', 'sm')) : ''}${tombol(ik('sampah', 15), 'tertiary', 'sm', `class="bahaya-ikon" data-hapus-sk="${i}" aria-label="Hapus skenario ${esc(s.nama)}" title="Hapus skenario"`)}</li>`).join('')}</ul>${L.some(s => s.hasil) ? `<p class="ket-kecil">Periksa hasilnya di Pratinjau Akta.</p>` : ''}`
+      : `<div class="sk-kosong"><b>Belum ada skenario</b><p>Skenario adalah data contoh untuk menguji template tanpa membuat order.</p><ol><li>Tekan <b>Skenario kosong</b> dan buat satu skenario untuk kasus yang paling sering, misalnya 1 penjual perorangan dan 1 pembeli.</li><li>Tambah skenario lain untuk kasus khusus, misalnya penjual ahli waris atau perseroan.</li><li>Tekan <b>Rakit semua</b>, lalu periksa hasilnya di <b>Pratinjau akta</b>.</li></ol></div>`}${usulan('IDDS-PL-71')}`;
 }
 function panelKanan(t) {
   const tab = (k, l) => `<button type="button" role="tab" data-tabk="${k}" aria-selected="${S.tabK === k}" class="ina-tab-horizontal__tab ina-tab-horizontal__tab--size-md ina-tab-horizontal__tab--variant-outline ${S.tabK === k ? 'ina-tab-horizontal__tab--selected' : ''}">${l}</button>`;
@@ -1554,7 +1554,7 @@ function layarPasal() {
       ${pitaPeriksa(t)}${bilahAlat()}
       <div class="kerja ditandai ${S.laci ? 'laci-' + S.laci : ''}" id="ruangKerja">${panelKiri(t)}
         <div class="kanvas" id="kanvas"><div class="bar-hp">${tombol(`Bagian (${t.bag.length})`, 'secondary', 'sm', 'data-laci="nav"', ik('daftar', 15))}${tombol('Panel', 'secondary', 'sm', 'data-laci="panel"', ik('gear', 15))}</div>
-          <div class="kanvas-isi">${kertasHTML(t)}<p class="catatan-kertas">Batas halaman yang persis terlihat di Preview Akta.</p></div>${kakiKanvas()}</div>
+          <div class="kanvas-isi">${kertasHTML(t)}<p class="catatan-kertas">Batas halaman yang persis terlihat di Pratinjau Akta.</p></div>${kakiKanvas()}</div>
         ${panelKanan(t)}${S.laci ? '<div class="scrim-laci" data-tutup-laci></div>' : ''}</div>${usulan('IDDS-PL-68')}
     </section>`;
 }
@@ -1642,7 +1642,7 @@ function dialogSkenario() {
 function rakitSemua() {
   const t = tplAktif(), temuan = t.bag.reduce((n, b) => n + periksa(isiTeks(b), t.jenis).length, 0);
   t.skenario.forEach(s => { s.hasil = { bagian:t.bag.length, temuan }; }); t.diuji = true; S.tabK = 'skenario'; gambar();
-  toast(`${t.skenario.length} skenario dirakit.`, 'positive', 4000, 'Periksa hasilnya di Preview Akta.');
+  toast(`${t.skenario.length} skenario dirakit.`, 'positive', 4000, 'Periksa hasilnya di Pratinjau Akta.');
 }
 /* draft & kunci (IDDS-PL-72) */
 function simpanAtur(diam) {
@@ -1667,12 +1667,12 @@ function konfirmKunci() {
     isi:`<div class="modal-gap"><p>Isi template menjadi versi <b>v${v}</b>.${usulan('IDDS-PL-72')}</p><ul class="dampak"><li>Order baru memakai versi v${v}.</li><li>Order yang sedang berjalan tetap memakai versi lamanya.</li><li>Perubahan berikutnya perlu dikunci lagi menjadi versi baru.</li></ul></div>`,
     tombol:[['Batal', 'secondary', null], ['Kunci template', 'primary', () => { t.versi = v; t.status = 'siap'; t.adaUbah = false; gambar(); toast(`${t.name} dikunci menjadi v${v}.`, 'positive', 4000, 'Order baru memakai versi ini.'); }]] });
 }
-/* Preview Akta (IDDS-PL-71) */
+/* Pratinjau Akta (IDDS-PL-71) */
 function layarPreview(t) {
-  return `<section class="pratinjau-akta ditandai" id="pratinjauAkta" aria-label="Preview Akta ${esc(t.name)}">
+  return `<section class="pratinjau-akta ditandai" id="pratinjauAkta" aria-label="Pratinjau Akta ${esc(t.name)}">
     <div class="pr-kepala"><b>${t.code} — ${esc(t.name)}</b><span class="pr-aksi"><span id="prHal">— halaman</span>
       ${tombol('−', 'secondary', 'sm', 'data-zoom="-10" aria-label="Perkecil"')}<span aria-live="polite">${S.zoom}%</span>${tombol('+', 'secondary', 'sm', 'data-zoom="10" aria-label="Perbesar"')}
-      ${tombol('Download PDF', 'secondary', 'sm', 'id="unduhPdf"', ik('unduh', 14))}${tombol('Kembali', 'secondary', 'sm', 'id="tutupPreview"', ik('kiri', 14))}</span></div>
+      ${tombol('Unduh PDF', 'secondary', 'sm', 'id="unduhPdf"', ik('unduh', 14))}${tombol('Kembali', 'secondary', 'sm', 'id="tutupPreview"', ik('kiri', 14))}</span></div>
     ${t.skenario.length ? '' : `<div class="pita pr-pita">${alert('info', '', 'Belum ada skenario, jadi data tampil sebagai nama isiannya. Buat skenario agar akta terisi data contoh.')}</div>`}
     <div class="pr-kanvas" id="prKanvas"><div class="kertas pr-lembar" id="prLembar"></div></div>${usulan('IDDS-PL-71')}</section>`;
 }
@@ -2046,13 +2046,13 @@ const FAQ_ALUR = [
   ['Bagaimana menulis "selanjutnya disebut PIHAK PERTAMA" sekali per kelompok?', 'Pakai Bagian Otomatis. Tulis sebutan itu pada potongan kalimat terakhir kelompok, sehingga kalimatnya tertulis sekali walau pihaknya lebih dari satu.'],
   ['Bagaimana menaruh tanda tangan berdampingan?', 'Pakai Bagian Otomatis dengan Fungsi bagian <b>Tanda tangan</b>. Sistem menyusun kolom tanda tangan sesuai jumlah penanda tangan.'],
   ['Apa arti Simpan sebagai Draft dan Kunci Template?', '<b>Simpan sebagai draft</b> menyimpan naskah tanpa mengubah versi yang dipakai order. <b>Kunci template</b> menjadikan naskah versi baru. Order baru memakai versi itu, sedangkan order yang berjalan tetap memakai versi lamanya.'],
-  ['Bagaimana memeriksa hasil sebelum dikunci?', 'Buat skenario di tab <b>Skenario</b>, tekan <b>Rakit semua</b>, lalu buka <b>Preview akta</b>. Pita di atas kertas menyebut hal yang masih perlu diperiksa.'],
+  ['Bagaimana memeriksa hasil sebelum dikunci?', 'Buat skenario di tab <b>Skenario</b>, tekan <b>Rakit semua</b>, lalu buka <b>Pratinjau akta</b>. Pita di atas kertas menyebut hal yang masih perlu diperiksa.'],
   ['Di mana mengatur kertas, margin, dan footer?', 'Di tab <b>Pengaturan Halaman</b> pada editor Pasal. Setiap perubahan langsung terlihat di kertas.']
 ];
 const BANTUAN = {
   jenis:() => ({ judul:'Panduan Jenis Akta', isi:`<p>Jenis Akta adalah daftar layanan yang dapat dipesan kantor PPAT. Setiap layanan punya formulir, template akta yang dirakit dari data order, dan rel status yang dilalui ordernya.${usulan('IDDS-PL-61')}</p>
     <h4 class="bantu-sub">Langkah menyiapkan layanan</h4>
-    ${lgkh(['<b>Tambah jenis akta</b>: isi nama layanan dan pilih formulirnya dari Form Design. Kode dibuat otomatis.', 'Buka <b>Template &amp; variabel</b>, lalu di tab <b>Template</b> tambah atau impor template. Tandai satu template sebagai <b>Utama</b>.', 'Tekan <b>Pasal</b> untuk menyusun isi akta. Catatan dan Pasal diketik seperti dokumen, sedangkan <b>Bagian Otomatis</b> dirakit dari potongan kalimat sesuai data order.', 'Sisipkan data order lewat tombol <b>Variabel</b> di bilah alat.', 'Atur kertas, margin, dan footer di <b>Pengaturan Halaman</b>.', 'Uji dengan <b>Skenario</b> dan <b>Preview akta</b>, lalu tekan <b>Kunci template</b> agar order baru memakai versi ini.', 'Atur tahap order di tab <b>Rel Status</b>.'])}
+    ${lgkh(['<b>Tambah jenis akta</b>: isi nama layanan dan pilih formulirnya dari Form Design. Kode dibuat otomatis.', 'Buka <b>Template &amp; variabel</b>, lalu di tab <b>Template</b> tambah atau impor template. Tandai satu template sebagai <b>Utama</b>.', 'Tekan <b>Pasal</b> untuk menyusun isi akta. Catatan dan Pasal diketik seperti dokumen, sedangkan <b>Bagian Otomatis</b> dirakit dari potongan kalimat sesuai data order.', 'Sisipkan data order lewat tombol <b>Variabel</b> di bilah alat.', 'Atur kertas, margin, dan footer di <b>Pengaturan Halaman</b>.', 'Uji dengan <b>Skenario</b> dan <b>Pratinjau akta</b>, lalu tekan <b>Kunci template</b> agar order baru memakai versi ini.', 'Atur tahap order di tab <b>Rel Status</b>.'])}
     <h4 class="bantu-sub">Istilah</h4>
     ${istilah([['Kode', 'Pengenal tetap layanan. Kode dibuat dari nama dan tidak dapat diubah.'], ['Rel Status', 'Rangkaian tahap yang dilalui order layanan ini.'], ['Urutan', 'Posisi layanan di daftar. Angka kecil tampil lebih dulu.'], ['Aktif', 'Layanan dapat dipilih kantor PPAT saat membuat order.'], ['Nonaktif', 'Layanan disembunyikan dari order baru, tetapi datanya tetap tersimpan.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -2075,7 +2075,7 @@ const BANTUAN = {
     ${kontak()}` }; },
   pasal:() => ({ judul:'Panduan Editor Pasal', isi:`<p>Susun isi template per bagian. Daftar bagian ada di kiri, naskah tampil sebagai kertas di tengah, dan setelan ada di panel kanan.</p>
     <h4 class="bantu-sub">Langkah menyusun bagian</h4>
-    ${lgkh(['Klik <b>Tambah pasal</b>, <b>Tambah catatan</b>, atau <b>Tambah bagian otomatis</b>.', 'Isi Judul di panel Bagian, lalu ketik isinya di kertas. Klik <b>Variabel</b> untuk menyisipkan data order.', 'Klik <b>Simpan</b>. Bila pengecek menemukan masalah, pilih <b>Perbaiki dulu</b>.', 'Buat skenario, tekan <b>Rakit semua</b>, lalu periksa <b>Preview akta</b>.', 'Klik <b>Kunci template</b> agar order baru memakai versi ini.'])}
+    ${lgkh(['Klik <b>Tambah pasal</b>, <b>Tambah catatan</b>, atau <b>Tambah bagian otomatis</b>.', 'Isi Judul di panel Bagian, lalu ketik isinya di kertas. Klik <b>Variabel</b> untuk menyisipkan data order.', 'Klik <b>Simpan</b>. Bila pengecek menemukan masalah, pilih <b>Perbaiki dulu</b>.', 'Buat skenario, tekan <b>Rakit semua</b>, lalu periksa <b>Pratinjau akta</b>.', 'Klik <b>Kunci template</b> agar order baru memakai versi ini.'])}
     <h4 class="bantu-sub">Istilah</h4>
     ${istilah([['Wajib', 'Bagian selalu ada di akta.'], ['Tampilkan judul di dokumen', 'Judul bagian ikut tercetak di akta.'], ['Fungsi bagian', 'Perlakuan khusus di salinan, misalnya tanda tangan diganti tulisan "ttd".'], ['Muncul di', 'Dokumen yang memuat bagian ini: minuta, salinan, atau keduanya.'], ['Perlu dicek', 'Bagian berisi tulisan yang ditandai pengecek isi.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
@@ -2138,7 +2138,7 @@ $('#bukaUbah').addEventListener('click', () => {
       { el:'#statusSimpan', j:'Status simpan', t:'Menunjukkan apakah perubahan sudah tersimpan.' },
       { el:'#simpanDraft', j:'Simpan sebagai draft', t:'Simpan perubahan tanpa mengunci template.' },
       { el:'#kunciTpl', j:'Kunci template', t:'Kunci template setelah semua hal yang perlu diperiksa selesai. Template terkunci dapat dipakai layanan.' },
-      { el:'#previewAkta', j:'Preview akta', t:'Lihat hasil akta dengan data contoh dari skenario.' },
+      { el:'#previewAkta', j:'Pratinjau akta', t:'Lihat hasil akta dengan data contoh dari skenario.' },
       { el:pasT('#pitaPeriksa', '.ina-alert__title, h4, b'), j:'Yang perlu diperiksa', t:'Daftar ini menyebut hal yang harus dibereskan sebelum template dikunci. Tombol di setiap baris membawa Anda ke bagiannya.' },
       { el:'#bilahAlat', j:'Bilah alat', t:'Atur format teks, sisipkan variabel, dan tandai teks bersyarat.' },
       { el:'[data-laci="nav"]', j:'Daftar bagian', t:'Buka daftar bagian dan lampiran naskah dari tombol ini.' },
@@ -2152,7 +2152,7 @@ $('#bukaUbah').addEventListener('click', () => {
       { el:'#prHal', j:'Jumlah halaman', t:'Jumlah halaman akta yang dihasilkan tampil di sini.' },
       { el:'.pr-pita', j:'Data contoh', t:'Data di preview berasal dari skenario. Bila belum ada skenario, isian tampil sebagai nama variabelnya.' },
       { el:pasT('#prKanvas', '.hal, .pr-lembar > *'), j:'Hasil akta', t:'Akta tampil per halaman seperti hasil cetak.' },
-      { el:'#unduhPdf', j:'Download PDF', t:'Unduh hasil preview sebagai PDF.' },
+      { el:'#unduhPdf', j:'Unduh PDF', t:'Unduh hasil preview sebagai PDF.' },
       { el:'#tutupPreview', j:'Kembali ke editor', t:'Tutup preview dan lanjutkan menyunting naskah.' },
       BANTUAN_T] }
   ].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-PL-80') })));

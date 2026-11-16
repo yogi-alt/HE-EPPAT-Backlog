@@ -842,8 +842,8 @@ const UBAH = [
     isi:'Daftar memakai IDDS Input Search, Table, dan Pagination. Kolom Status yang selalu "Selesai" diganti kolom "Salinan" yang menunjukkan langkah berikutnya: "Belum ada scan", "Siap dikirim", atau "Terkirim ke N pihak". Judul kolom ditulis lengkap ("Tanggal Akta").',
     lama:'Kolom Status selalu "Selesai" untuk semua baris sehingga tidak membantu. Judul kolom "Tgl Akta" disingkat. Pencarian memanggil server pada setiap ketikan.', ke:'salinan', sorot:'#tabelSalinan' },
   { kode:'IDDS-TN-33', judul:'Detail salinan: unggah, renvoi, dan alasan tombol nonaktif terlihat',
-    isi:'Hasil pindai (scan) akta diunggah lewat IDDS File Upload: seret-lepas, PDF maks. 20 MB, dan pesan galat di bawah kotak unggah. Alasan "Kirim salinan" belum aktif tampil sebagai teks bantuan di bawah tombol, bukan hanya tooltip. Catatan Renvoi memakai IDDS Badge "Belum disimpan" dan meminta konfirmasi bila halaman ditinggalkan sebelum disimpan. Tombol hapus hasil pindai berlabel nama berkas.',
-    lama:'Alasan tombol nonaktif hanya ada di atribut title sehingga tidak terjangkau di layar sentuh dan pembaca layar. Perubahan renvoi hilang tanpa peringatan saat kembali ke daftar. Tombol hapus hasil pindai hanya berupa ikon tanpa label.', ke:'detail', sorot:'#kartuInfo' },
+    isi:'Hasil pindai (scan) akta diunggah lewat IDDS File Upload: seret-lepas, PDF maks. 20 MB, dan pesan galat di bawah kotak unggah. Alasan "Kirim salinan" belum aktif tampil sebagai teks bantuan di bawah tombol, bukan hanya tooltip. Catatan Renvooi memakai IDDS Badge "Belum disimpan" dan meminta konfirmasi bila halaman ditinggalkan sebelum disimpan. Tombol hapus hasil pindai berlabel nama berkas.',
+    lama:'Alasan tombol nonaktif hanya ada di atribut title sehingga tidak terjangkau di layar sentuh dan pembaca layar. Perubahan renvooi hilang tanpa peringatan saat kembali ke daftar. Tombol hapus hasil pindai hanya berupa ikon tanpa label.', ke:'detail', sorot:'#kartuInfo' },
   { kode:'IDDS-TN-34', judul:'Kirim Salinan dan Riwayat: validasi email dan konfirmasi cabut',
     isi:'Dialog Kirim memakai IDDS Checkbox untuk setiap penerima. Peran ditulis "Pihak Pertama/Pihak Kedua/Saksi", bukan kode, dan format email diperiksa di bawah isiannya. Sebelum mengirim, tampil ringkasan jumlah penerima. Di Riwayat, "Cabut tautan" meminta konfirmasi lewat IDDS Modal Confirmation karena tindakan ini tidak dapat dibatalkan.',
     lama:'Peran tampil sebagai kode mentah (PENJUAL, PEMBELI). Format email tidak diperiksa di dialog ini, berbeda dengan dialog kirim di E-Akta Wizard. "Cabut" langsung dijalankan tanpa konfirmasi.', ke:'kirim', sorot:null },
@@ -934,14 +934,14 @@ $('#nav').addEventListener('click', e => {
   pindah(a.dataset.ke);
   $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('on');
 });
-/* penjaga perubahan belum disimpan (Profil Kantor, Catatan Renvoi, email e-Meterai) */
+/* penjaga perubahan belum disimpan (Profil Kantor, Catatan Renvooi, email e-Meterai) */
 const emKotor = () => S.layar === 'emeterai' && !!$('#emEmail') && $('#emEmail').value.trim() !== EMET.disimpan;
 const adaKotor = () => (S.layar === 'profil' && profKotor().length) || (S.detail && S.renvoiKotor) || emKotor();
 function jaga(lanjut) {
   if (!adaKotor()) { lanjut(); return; }
   const prof = S.layar === 'profil', em = emKotor();
   dialog({ judul:'Tinggalkan halaman ini?', konfirmasi:true,
-    isi:`<p>${prof ? `Ada ${profKotor().length} perubahan profil kantor yang belum disimpan.` : em ? 'Email akun e-Meterai belum disimpan.' : 'Catatan renvoi belum disimpan.'} Perubahan itu akan hilang.${usulan(prof ? 'IDDS-TN-29' : em ? 'IDDS-TN-35' : 'IDDS-TN-33')}</p>`,
+    isi:`<p>${prof ? `Ada ${profKotor().length} perubahan profil kantor yang belum disimpan.` : em ? 'Email akun e-Meterai belum disimpan.' : 'Catatan renvooi belum disimpan.'} Perubahan itu akan hilang.${usulan(prof ? 'IDDS-TN-29' : em ? 'IDDS-TN-35' : 'IDDS-TN-33')}</p>`,
     tombol:[['Tetap di sini', 'secondary', null], ['Tinggalkan', 'primary', () => { PROFIL = salinObj(PROFIL_F); S.renvoiKotor = false; lanjut(); }]] });
 }
 function pindah(ke, lanjut) { jaga(() => { S.layar = ke; S.detail = null; S.galatP = {}; history.replaceState(null, '', '#' + ke); gambar(); window.scrollTo({ top:0 }); lanjut && lanjut(); }); }
@@ -1077,9 +1077,9 @@ function layarDetail() {
           <div class="ina-file-upload__text"><div class="ina-file-upload__title">Seret berkas ke sini atau klik untuk memilih</div><div class="ina-file-upload__description">PDF hasil pindai akta yang sudah ditandatangani. Ukuran maksimal 20 MB.</div></div><span class="ina-file-upload__button">Pilih Berkas</span></div></div>
           <div class="ina-file-upload__error-message" id="galatScan"></div></div>
         ${s.scan.length ? `<ul class="berkas">${s.scan.map(b => `<li>${ik('dok', 18)}<span class="isi"><a href="#" data-buka-scan="${b.id}">${esc(b.nama)}</a><div class="ket" style="font-size:12.5px">${String(b.mb).replace('.', ',')} MB</div></span>${tIkon('sampah', `Hapus ${b.nama}`, `data-hapus-scan="${b.id}"`, 'secondary')}</li>`).join('')}</ul>` : '<p class="kosong-kotak f-baris">Belum ada scan.</p>'}</section>
-      <section class="blok" aria-labelledby="jdRenvoi"><div class="baris-atas"><h2 id="jdRenvoi" style="margin:0;display:flex;gap:8px;align-items:center">${ik('edit', 18)} Catatan Renvoi / Perbaikan</h2>${S.renvoiKotor ? badge('Belum disimpan', 'warning', 'sm') : ''}</div>
+      <section class="blok" aria-labelledby="jdRenvoi"><div class="baris-atas"><h2 id="jdRenvoi" style="margin:0;display:flex;gap:8px;align-items:center">${ik('edit', 18)} Catatan Renvooi / Perbaikan</h2>${S.renvoiKotor ? badge('Belum disimpan', 'warning', 'sm') : ''}</div>
         <p class="ket">Catatan koreksi yang <b>tercetak pada salinan akta</b> sebelum penutup. Minuta asli tidak berubah.</p>
-        <div class="f-baris">${editorMini('renvoi', s.renvoi, 'Catatan renvoi')}</div>
+        <div class="f-baris">${editorMini('renvoi', s.renvoi, 'Catatan renvooi')}</div>
         <div class="ina-text-field__helper-text">Contoh: — Coretan: pada halaman 3 baris 12, kata "Budi" diganti menjadi "Budhi". —</div>
         <div class="kaki-form" style="margin-top:12px">${tombol('Simpan catatan', 'primary', 'md', `id="simpanRenvoi" ${S.renvoiKotor ? '' : 'disabled'}`, ik('simpan', 16))}</div></section>
     </div>`;
@@ -1192,7 +1192,7 @@ H.addEventListener('click', e => {
   const hs = t.closest('[data-hapus-scan]'); if (hs) { const b = s.scan.find(x => x.id === +hs.dataset.hapusScan);
     dialog({ judul:'Hapus scan akta?', konfirmasi:true, isi:`<p>Hapus <b>${esc(b.nama)}</b>? Tindakan ini tidak dapat dibatalkan.${s.scan.length === 1 ? ' Tanpa scan, Kirim Salinan dinonaktifkan.' : ''}</p>`, bahaya:true, tombol:[['Batal', 'secondary', null], ['Hapus', 'primary', () => { s.scan = s.scan.filter(x => x !== b); gambar(); toast('Scan dihapus.', 'positive'); }]] }); return; }
   if (t.closest('[data-buka-scan]')) { e.preventDefault(); toast('Berkas dibuka di tab baru (simulasi).'); return; }
-  if (t.closest('#simpanRenvoi')) { s.renvoi = $('#renvoi').innerHTML; S.renvoiKotor = false; gambar(); toast('Catatan renvoi disimpan.', 'positive'); return; }
+  if (t.closest('#simpanRenvoi')) { s.renvoi = $('#renvoi').innerHTML; S.renvoiKotor = false; gambar(); toast('Catatan renvooi disimpan.', 'positive'); return; }
   const fm = t.closest('[data-format]'); if (fm) { const ed = $('#' + fm.dataset.editor); ed.focus(); document.execCommand(fm.dataset.format); ed.dispatchEvent(new Event('input', { bubbles:true })); return; }
   /* e-Meterai */
   if (t.closest('#simpanEmet')) { simpanEmet(); return; }
@@ -1328,7 +1328,7 @@ const BANTUAN = {
   salinan:() => ({ judul:'Bantuan Salinan Akta', isi:`<p>Akta yang sudah difinalisasi di Penyusunan Akta muncul di sini untuk dicetak dan dikirim salinannya ke para pihak.</p>
     <h4 class="bantu-sub">Langkah</h4>
     ${lgkh(['Buka akta, lalu klik <b>Unduh salinan</b> untuk mencetak.', 'Tanda tangani salinan, pindai, lalu unggah scan-nya (PDF, ukuran maksimal 20 MB).', 'Klik <b>Kirim salinan</b>, pilih penerima, dan pastikan emailnya benar.'])}
-    ${istilah([['Salinan akta', 'Turunan akta untuk para pihak; minuta asli tetap disimpan kantor.'], ['Renvoi', 'Catatan perbaikan (coretan, tambahan, penggantian kata) yang tercetak pada salinan.'], ['Tautan salinan', 'Alamat unduhan yang dikirim lewat email, berlaku 7 hari.']])}
+    ${istilah([['Salinan akta', 'Turunan akta untuk para pihak; minuta asli tetap disimpan kantor.'], ['Renvooi', 'Catatan perbaikan (coretan, tambahan, penggantian kata) yang tercetak pada salinan.'], ['Tautan salinan', 'Alamat unduhan yang dikirim lewat email, berlaku 7 hari.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('a', [
       ['Mengapa akta saya tidak ada di daftar?', 'Hanya akta yang sudah difinalisasi di Penyusunan Akta yang muncul. Periksa status permohonan di Permohonan AJB.'],
@@ -1983,9 +1983,9 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
       const ke = (uk, lbl) => `<a class="ina-button ina-button--primary ina-button--${uk}" href="${HAL_UPGRADE}">${lbl}</a>`;
       const kepala = $('header .spacer'), lencana = `<span class="ina-badge ina-badge--soft ina-badge--info ina-badge--sm ina-badge--rounded-full" id="lencanaTrial"><span><span class="lt-opsi">Paket </span>Trial<span class="lt-opsi"> · sisa ${sisa} hari</span></span></span>`;
       if (kepala) kepala.insertAdjacentHTML('afterend', lencana); else if (pemicu) pemicu.insertAdjacentHTML('beforebegin', lencana);
-      if (!ditutup('eppat-trial-spanduk')) spanduk('caution', 'eppat-trial-spanduk', `<b>Paket Trial, sisa ${sisa} hari.</b> Semua menu dapat dibuka. Tanda tangan dan stempel elektronik aktif setelah upgrade ke Enterprise.`, ke('sm', 'Mulai Berlangganan'));
+      if (!ditutup('eppat-trial-spanduk')) spanduk('caution', 'eppat-trial-spanduk', `<b>Paket Trial, sisa ${sisa} hari.</b> Semua menu dapat dibuka. Tanda tangan dan stempel elektronik aktif setelah upgrade ke Enterprise.`, ke('sm', 'Mulai berlangganan'));
       /* di atas kartu profil yang menempel di bawah, agar tombol selalu terlihat walaupun menu panjang */
-      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai Berlangganan</span></a></div>`); });
+      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai berlangganan</span></a></div>`); });
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pasangTombol); else pasangTombol();
       if (bar) bar.insertAdjacentHTML('afterbegin', `<span>Perjalanan: langkah 9 dari 19, coba menu lalu tekan Mulai berlangganan.</span><button class="pil" id="simBatas" aria-pressed="${!!t.batas}" title="Mengisi kuota pengguna dan transaksi Trial sampai penuh">Batas paket: ${t.batas ? 'tercapai' : 'belum tercapai'}</button>`);
       const b = $('#simBatas'); if (b) b.addEventListener('click', () => { simpanTrial({ ...bacaTrial(), batas:!t.batas }); location.reload(); });
@@ -2006,8 +2006,12 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
     if (!halamanBoleh(sesi)) { if (!ada) document.body.insertAdjacentHTML('beforeend', tolakHtml(true)); }
     else if (ada && ada.dataset.navigasi) ada.remove(); /* kembali ke layar yang boleh dibuka */
   };
-  ['pushState', 'replaceState'].forEach(m => { const asli = history[m]; history[m] = function () { const hasil = asli.apply(this, arguments); setTimeout(periksaHalaman, 0); return hasil; }; });
-  addEventListener('hashchange', periksaHalaman); addEventListener('popstate', periksaHalaman);
+  /* selama layar penolakan tampil, dialog dan laci halaman ditutup (mis. "Lihat di layar" yang membuka dialog setelah berpindah layar) */
+  const tutupLapisan = () => { if (!document.querySelector('.sesi-tolak')) return; ['lapisan', 'lapisanDrawer'].forEach(id => { const l = document.getElementById(id); if (l && l.innerHTML.trim()) l.innerHTML = ''; }); };
+  ['lapisan', 'lapisanDrawer'].forEach(id => { const l = document.getElementById(id); if (l) new MutationObserver(tutupLapisan).observe(l, { childList:true }); });
+  const periksaDanTutup = () => { periksaHalaman(); tutupLapisan(); };
+  ['pushState', 'replaceState'].forEach(m => { const asli = history[m]; history[m] = function () { const hasil = asli.apply(this, arguments); setTimeout(periksaDanTutup, 0); return hasil; }; });
+  addEventListener('hashchange', periksaDanTutup); addEventListener('popstate', periksaDanTutup);
 })();
 </script>
 

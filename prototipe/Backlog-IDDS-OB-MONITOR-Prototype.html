@@ -745,7 +745,7 @@ const UBAH = [
     isi:'Halaman berjudul "Dasbor Admin" dengan subjudul satu kalimat yang sesuai isi: "Pantau ringkasan pendaftaran, verifikasi, dan pembayaran calon PPAT." Empat kartu ringkasan memakai IDDS Card dengan ikon garis. Tautan "Lihat detail" di setiap kartu membuka menu terkait. Untuk pembaca layar, tautan itu menyebut tujuannya, misalnya "Lihat detail Perlu Verifikasi Anggota di Verifikasi Anggota". Keterangan kartu memakai bahasa sehari-hari: "Menunggu verifikasi anggota" dan "Semua tagihan pembayaran".',
     lama:'Judul berbunyi "Dashboard Admin" dengan subjudul "Selamat datang kembali, SYSADMIN. Berikut ringkasan aktivitas sistem hari ini.", padahal angka kartu adalah jumlah keseluruhan, bukan hari ini. Tautan "Detail" tidak menyebut tujuan. Keterangan kartu berbunyi "Status pending verifikasi" dan "Total invoice pembayaran".', ke:'dasbor', sorot:'#kpi' },
   { kode:'IDDS-OB-13', judul:'Dasbor: tiga daftar terbaru dengan lencana berbahasa Indonesia',
-    isi:'Daftar Pendaftaran Terbaru, Transaksi Terbaru, dan Pemilihan Produk Terbaru memakai IDDS Badge berlabel Indonesia. Lencananya adalah "Menunggu" (kuning), "Lunas" dan "Disetujui" (hijau), "Belum Dibayar" (kuning), serta paket "Trial" dan "Enterprise". Nominal ditulis "Rp3.500.000" tanpa spasi. Tombol "Lihat semua" menyebut daftar tujuannya untuk pembaca layar. Tombol itu membuka Manajemen Onboarding, Verifikasi Pembayaran, atau Verifikasi Produk.',
+    isi:'Daftar Pendaftaran Terbaru, Transaksi Terbaru, dan Pemilihan Produk Terbaru memakai IDDS Badge berlabel Indonesia. Lencananya adalah "Menunggu" (kuning), "Lunas" dan "Disetujui" (hijau), "Belum dibayar" (kuning), serta paket "Trial" dan "Enterprise". Nominal ditulis "Rp3.500.000" tanpa spasi. Tombol "Lihat semua" menyebut daftar tujuannya untuk pembaca layar. Tombol itu membuka Manajemen Onboarding, Verifikasi Pembayaran, atau Verifikasi Produk.',
     lama:'Lencana berisi kode mentah "Pending", "PAID", "UNPAID", "APPROVED", "TRIAL", dan "ENTERPRISE". Nominal ditulis dengan spasi ("Rp 1").', ke:'dasbor', sorot:'#terbaru' },
   { kode:'IDDS-OB-14', judul:'Manajemen Onboarding: subjudul sesuai isi dan pencarian berlabel',
     isi:'Subjudul menyebut tindakan yang benar-benar dapat dilakukan di halaman ini: "Pantau tahap pendaftaran setiap calon PPAT, dari pendaftaran sampai selesai." Pencarian memakai IDDS Input Search dengan label "Cari pendaftar" yang terlihat. Hasil tersaring langsung, dan jumlah pendaftar yang tampil diumumkan di kanan (aria-live).',
@@ -763,7 +763,7 @@ const UBAH = [
     isi:'Tombol "Provision Manual" menjadi "Provisi Manual" dengan keterangan kapan tombol itu dipakai. Tombol hanya tampil setelah pembayaran lunas. Sebelum provisi berjalan, IDDS Modal konfirmasi menjelaskan dampaknya, dan tombol konfirmasinya berwarna merah. Selama berjalan, tombol berlabel "Memproses…" dan nonaktif. Setelah selesai, waktu dan pelaku provisi terakhir tampil di halaman, dan IDDS Toast mengumumkan hasilnya.',
     lama:'Tombol "Provision Manual" berbahasa Inggris di kepala modal tanpa penjelasan kapan dipakai dan apa dampaknya.', ke:'onboarding-detail', sorot:'#blokProvisi' },
   { kode:'IDDS-OB-19', judul:'Monitoring Onboarding: bahasa dan istilah baku',
-    isi:'Kode dan istilah Inggris diganti: "Pending" menjadi "Menunggu", "PAID" menjadi "Lunas", "UNPAID" menjadi "Belum Dibayar", "APPROVED" menjadi "Disetujui", dan "TRIAL/ENTERPRISE" menjadi "Trial/Enterprise". "Timeline Status" menjadi "Riwayat Tahap", "Detail Riwayat" menjadi "Detail Pendaftar", "Menunggu..." menjadi "Belum dimulai", dan "Home" menjadi "Beranda". "User" menjadi "Pengguna" (kolom Nama Pengguna), dan "Provision Manual" menjadi "Provisi Manual". Tahap "Login Pertama" menjadi "Masuk Pertama", dan "Verifikasi Asosiasi" menjadi "Verifikasi Anggota". Nama tahap ini sama dengan nama menu dan progres pelanggan di chip, lencana, stepper, dan Bantuan. Nominal ditulis tanpa spasi ("Rp3.500.000"), dan tanggal memuat tahun.',
+    isi:'Kode dan istilah Inggris diganti: "Pending" menjadi "Menunggu", "PAID" menjadi "Lunas", "UNPAID" menjadi "Belum dibayar", "APPROVED" menjadi "Disetujui", dan "TRIAL/ENTERPRISE" menjadi "Trial/Enterprise". "Timeline Status" menjadi "Riwayat Tahap", "Detail Riwayat" menjadi "Detail Pendaftar", "Menunggu..." menjadi "Belum dimulai", dan "Home" menjadi "Beranda". "User" menjadi "Pengguna" (kolom Nama Pengguna), dan "Provision Manual" menjadi "Provisi Manual". Tahap "Login Pertama" menjadi "Masuk Pertama", dan "Verifikasi Asosiasi" menjadi "Verifikasi Anggota". Nama tahap ini sama dengan nama menu dan progres pelanggan di chip, lencana, stepper, dan Bantuan. Nominal ditulis tanpa spasi ("Rp3.500.000"), dan tanggal memuat tahun.',
     lama:'Istilah campuran masih dipakai, misalnya "Dashboard Admin", "Home", "Pending", "PAID", "APPROVED", "Timeline Status", "Provision Manual", dan "Rp 1".', ke:'dasbor', sorot:null },
   { kode:'IDDS-OB-20', judul:'Monitoring Onboarding: Bantuan di setiap halaman',
     isi:'Dasbor, Manajemen Onboarding, dan Detail Pendaftar memiliki tombol Bantuan di kanan judul. Tombol ini membuka IDDS Drawer berisi penjelasan halaman, langkah, arti tahap dan istilah, pertanyaan umum (IDDS Accordion), serta kontak dukungan.',
@@ -918,7 +918,7 @@ function layarDasbor() {
     ['Order Trial / Enterprise', JUMLAH_ORDER, 'Anggota memilih paket produk', 'kotak', OB_VER + '#produk', 'Verifikasi Produk']];
   const baru = DATA.filter(p => p.st === 0).slice(0, 5);
   const daftar = (id, judul, ikon, isi, ke, tujuan, sendiri) => `<section class="blok" aria-labelledby="${id}"><div class="blok-atas"><h2 id="${id}">${ik(ikon, 18)}${judul}</h2>
-      <a href="${ke}" class="ina-button ina-button--tertiary ina-button--sm" ${sendiri ? `data-ke-layar="${ke.slice(1)}"` : ''} aria-label="Lihat semua ${judul.toLowerCase()} di ${tujuan}">Lihat Semua</a></div>
+      <a href="${ke}" class="ina-button ina-button--tertiary ina-button--sm" ${sendiri ? `data-ke-layar="${ke.slice(1)}"` : ''} aria-label="Lihat semua ${judul.toLowerCase()} di ${tujuan}">Lihat semua</a></div>
       <ul class="terbaru">${isi || '<li class="kosong-li">Belum ada data.</li>'}</ul></section>`;
   return `${remah(['Dasbor'])}<h1>Dasbor Admin</h1><p class="sub">Pantau ringkasan pendaftaran, verifikasi, dan pembayaran calon PPAT.</p>
     <div class="kpi ditandai" id="kpi">${kartu.map(([t, n, s, i, ke, tujuan]) => `<div class="ina-card ina-card--variant-basic"><small>${t}</small><i>${ik(i)}</i><b>${n.toLocaleString('id-ID')}</b>
@@ -926,7 +926,7 @@ function layarDasbor() {
     ${usulan('IDDS-OB-12')}
     <div class="tiga-daftar ditandai" id="terbaru">
       ${daftar('jdDaftar', 'Pendaftaran Terbaru', 'users', baru.map(p => `<li><span><span class="nm">${esc(p.nama)}</span><span class="sl">${p.id}</span></span><span class="lencana">${badge('Menunggu', 'warning', 'sm')}</span></li>`).join(''), '#onboarding', 'Manajemen Onboarding', true)}
-      ${daftar('jdTrans', 'Transaksi Terbaru', 'kartu', TRANSAKSI.map(t => `<li><span><span class="nm">${esc(t.nama)}</span><span class="sl">${rupiah(t.nominal)}</span></span><span class="lencana">${t.lunas ? badge('Lunas', 'success', 'sm') : badge('Belum Dibayar', 'warning', 'sm')}</span></li>`).join(''), OB_VER + '#pembayaran', 'Verifikasi Pembayaran')}
+      ${daftar('jdTrans', 'Transaksi Terbaru', 'kartu', TRANSAKSI.map(t => `<li><span><span class="nm">${esc(t.nama)}</span><span class="sl">${rupiah(t.nominal)}</span></span><span class="lencana">${t.lunas ? badge('Lunas', 'success', 'sm') : badge('Belum dibayar', 'warning', 'sm')}</span></li>`).join(''), OB_VER + '#pembayaran', 'Verifikasi Pembayaran')}
       ${daftar('jdProduk', 'Pemilihan Produk Terbaru', 'kotak', PRODUK.map(o => `<li><span><span class="nm">${esc(o.nama)}</span><span class="sl">${o.order}</span></span><span class="lencana">${badge(NM_PAKET[o.paket], o.paket === 'ENTERPRISE' ? 'info' : 'neutral', 'sm')}${badge('Disetujui', 'success', 'sm')}</span></li>`).join(''), OB_VER + '#produk', 'Verifikasi Produk')}
     </div>${usulan('IDDS-OB-13')}`;
 }
@@ -1105,12 +1105,12 @@ const BANTUAN = {
     <h4 class="bantu-sub">Isi halaman</h4>
     <ul class="bantu-langkah"><li><b>Total Pendaftaran</b>: semua akun yang pernah mendaftar.</li><li><b>Perlu Verifikasi Anggota</b>: pendaftar yang menunggu pemeriksaan data keanggotaan.</li><li><b>Transaksi Virtual Account</b>: semua tagihan pembayaran yang pernah dibuat.</li><li><b>Order Trial / Enterprise</b>: jumlah pemilihan paket.</li><li><b>Tiga daftar terbaru</b>: lima pendaftaran, transaksi, dan pemilihan produk terakhir.</li></ul>
     <h4 class="bantu-sub">Arti lencana</h4>
-    ${istilah([['Menunggu', 'Pendaftar baru mengisi formulir dan belum menyelesaikan tahap berikutnya.'], ['Lunas', 'Tagihan sudah dibayar.'], ['Belum Dibayar', 'Tagihan sudah dibuat, tetapi belum dibayar.'], ['Disetujui', 'Pemilihan paket sudah disetujui.'], ['Trial / Enterprise', 'Paket yang dipilih pendaftar.']])}
+    ${istilah([['Menunggu', 'Pendaftar baru mengisi formulir dan belum menyelesaikan tahap berikutnya.'], ['Lunas', 'Tagihan sudah dibayar.'], ['Belum dibayar', 'Tagihan sudah dibuat, tetapi belum dibayar.'], ['Disetujui', 'Pemilihan paket sudah disetujui.'], ['Trial / Enterprise', 'Paket yang dipilih pendaftar.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('d', [
       ['Apakah angka di kartu hanya untuk hari ini?', 'Tidak. Angka di kartu adalah jumlah keseluruhan sejak portal dipakai.'],
       ['Bagaimana melihat pendaftar yang perlu diverifikasi?', 'Klik "Lihat detail" di kartu Perlu Verifikasi Anggota. Halaman Verifikasi Anggota akan terbuka.'],
-      ['Mengapa tagihan berstatus Belum Dibayar?', 'Pendaftar belum mentransfer ke nomor Virtual Account. Tagihan dapat kedaluwarsa bila tidak dibayar sampai batas waktunya. Periksa di Verifikasi Pembayaran.'],
+      ['Mengapa tagihan berstatus Belum dibayar?', 'Pendaftar belum mentransfer ke nomor Virtual Account. Tagihan dapat kedaluwarsa bila tidak dibayar sampai batas waktunya. Periksa di Verifikasi Pembayaran.'],
       ['Apa beda Trial dan Enterprise?', 'Trial adalah paket coba gratis dengan batas waktu dan transaksi. Enterprise adalah paket berbayar. Rinciannya ada di Pengaturan › Harga Produk.'],
       ['Bagaimana melihat daftar lengkap?', 'Klik "Lihat semua" di kanan atas setiap daftar.'],
       ['Mengapa angka belum berubah?', 'Angka dimuat saat halaman dibuka. Muat ulang halaman untuk melihat data terbaru.']])}
@@ -1173,7 +1173,7 @@ const tabelO = id => () => terlihatO(id + ' thead') || terlihatO(id + ' tbody tr
 [
   { kunci:'obm-dasbor', aktif:() => S.layar === 'dasbor', langkah:() => [
     { el:() => { const k = terlihatO('#kpi'); return k && k.getBoundingClientRect().height > innerHeight - 360 ? k.querySelector('.ina-card') : k; }, j:'Ringkasan', t:'Empat angka utama: total pendaftaran, anggota yang perlu diverifikasi, transaksi Virtual Account, dan order paket. Tekan Lihat Detail untuk membuka daftarnya.' },
-    { el:dekatO('#jdDaftar', 'section'), j:'Pendaftaran terbaru', t:'Pendaftar terbaru yang masih menunggu. Tekan Lihat Semua untuk membuka Manajemen Onboarding.' },
+    { el:dekatO('#jdDaftar', 'section'), j:'Pendaftaran terbaru', t:'Pendaftar terbaru yang masih menunggu. Tekan Lihat semua untuk membuka Manajemen Onboarding.' },
     { el:dekatO('#jdTrans', 'section'), j:'Transaksi terbaru', t:'Tagihan pembayaran terbaru beserta statusnya.' },
     { el:dekatO('#jdProduk', 'section'), j:'Pemilihan produk terbaru', t:'Paket Trial atau Enterprise yang baru dipilih pendaftar.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
   { kunci:'obm-onboarding', aktif:() => S.layar === 'onboarding', langkah:() => [

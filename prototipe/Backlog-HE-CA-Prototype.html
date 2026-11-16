@@ -1058,7 +1058,7 @@ function unggahKtp(nama, id) {
   return `<div class="ina-file-upload" id="f-${id}Ktp"><div class="ina-file-upload__label">Foto / Scan KTP<span class="ina-text-field__required">*</span></div>
     <div class="ina-file-upload__dropzone" role="button" tabindex="0" data-pilih-ktp="${id}" aria-label="Pilih foto KTP"><div class="ina-file-upload__content"><div class="ina-file-upload__icon">${ik('unggah', 24)}</div>
       <div class="ina-file-upload__text"><div class="ina-file-upload__title">Seret foto KTP ke sini atau klik untuk memilih</div><div class="ina-file-upload__description">JPG/PNG maks. 1 MB, sisi terpanjang minimal 600 piksel, tajam dan tidak gelap — seluruh bagian KTP harus terlihat. Dipakai untuk registrasi sertifikat elektronik (CA) agar data Anda terisi otomatis di portal Peruri.</div></div>
-      <span class="ina-file-upload__button">Pilih File</span></div></div>
+      <span class="ina-file-upload__button">Pilih file</span></div></div>
     <div class="ina-file-upload__files" id="berkas-${id}">${nama ? berkasKtp(nama, '420 KB', '') : ''}</div>
     <div class="ina-file-upload__errors"><div class="ina-file-upload__error-message" id="h-${id}Ktp"></div></div></div>`;
 }
@@ -1181,7 +1181,7 @@ function kartuDataTera() {
   return `<section class="grup-dd kartu-tera ditandai" id="dataTera"><h4>${ik('stempel', 16)} Data TERA</h4><p class="ket-grup">Hanya data yang belum ada di Data Diri (KTP). Nama, NIK, tempat dan tanggal lahir, nomor HP, dan foto KTP memakai Data Diri.${usulan('HE-CA-11')}</p>
     <div class="form-dd">${tf('idppat', 'ID PPAT / Nomor SK', 'Sesuai surat SK')}${tf('rekening', 'Rekening PPAT', 'Nomor rekening atas nama PPAT')}
       <div class="ina-file-upload ${tolakSk ? 'berkas-galat' : ''}" id="f-tsk"><div class="ina-file-upload__label">SK PPAT Terakhir<span class="ina-text-field__required">*</span></div>
-        <div class="berkas-baris">${tombol(T.sk ? 'Ganti File' : 'Pilih file', 'secondary', 'sm', 'data-unggah-sk', ik('unggahB', 14))}<span class="nama ${T.sk ? 'ada' : ''}">${T.sk ? '&#10003; ' + esc(T.sk) : 'Belum ada file.'}</span></div>
+        <div class="berkas-baris">${tombol(T.sk ? 'Ganti file' : 'Pilih file', 'secondary', 'sm', 'data-unggah-sk', ik('unggahB', 14))}<span class="nama ${T.sk ? 'ada' : ''}">${T.sk ? '&#10003; ' + esc(T.sk) : 'Belum ada file.'}</span></div>
         <div class="ina-text-field__bottom-area"><div class="ina-text-field__helper-text ${galatSk || tolakSk ? 'ina-text-field__helper-text--error' : betulSk ? 'ket-betul' : ''}">${galatSk ? 'SK PPAT terakhir wajib diunggah.' : tolakSk ? `Ditolak: ${BUTIR_TOLAK.sk.alasan} ${BUTIR_TOLAK.sk.cara}` : betulSk ? `${ik('centang', 12)} Sudah diganti. PDF, JPG, atau PNG, maks. 1 MB.` : 'PDF, JPG, atau PNG, maks. 1 MB.'}</div></div></div></div>
     ${T.status === 'belum' ? `<label class="ina-checkbox cek ikut-tera" for="ikutTera"><input type="checkbox" id="ikutTera" class="ina-checkbox__input peer" checked data-ikut-tera="0"><div class="ina-checkbox__box ina-checkbox__box--checked">${ik('centang', 12)}</div><div class="ina-checkbox__content"><span class="ina-checkbox__label">Daftarkan juga stempel elektronik (TERA) kantor</span><span class="ina-checkbox__description">Hapus centang bila TERA kantor didaftarkan nanti.</span></div></label>` : ''}
   </section>`;
@@ -2218,9 +2218,9 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
       const ke = (uk, lbl) => `<a class="ina-button ina-button--primary ina-button--${uk}" href="${HAL_UPGRADE}">${lbl}</a>`;
       const kepala = $('header .spacer'), lencana = `<span class="ina-badge ina-badge--soft ina-badge--info ina-badge--sm ina-badge--rounded-full" id="lencanaTrial"><span><span class="lt-opsi">Paket </span>Trial<span class="lt-opsi"> · sisa ${sisa} hari</span></span></span>`;
       if (kepala) kepala.insertAdjacentHTML('afterend', lencana); else if (pemicu) pemicu.insertAdjacentHTML('beforebegin', lencana);
-      if (!ditutup('eppat-trial-spanduk')) spanduk('caution', 'eppat-trial-spanduk', `<b>Paket Trial, sisa ${sisa} hari.</b> Semua menu dapat dibuka. Tanda tangan dan stempel elektronik aktif setelah upgrade ke Enterprise.`, ke('sm', 'Mulai Berlangganan'));
+      if (!ditutup('eppat-trial-spanduk')) spanduk('caution', 'eppat-trial-spanduk', `<b>Paket Trial, sisa ${sisa} hari.</b> Semua menu dapat dibuka. Tanda tangan dan stempel elektronik aktif setelah upgrade ke Enterprise.`, ke('sm', 'Mulai berlangganan'));
       /* di atas kartu profil yang menempel di bawah, agar tombol selalu terlihat walaupun menu panjang */
-      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai Berlangganan</span></a></div>`); });
+      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai berlangganan</span></a></div>`); });
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pasangTombol); else pasangTombol();
       if (bar) bar.insertAdjacentHTML('afterbegin', `<span>Perjalanan: langkah 9 dari 19, coba menu lalu tekan Mulai berlangganan.</span><button class="pil" id="simBatas" aria-pressed="${!!t.batas}" title="Mengisi kuota pengguna dan transaksi Trial sampai penuh">Batas paket: ${t.batas ? 'tercapai' : 'belum tercapai'}</button>`);
       const b = $('#simBatas'); if (b) b.addEventListener('click', () => { simpanTrial({ ...bacaTrial(), batas:!t.batas }); location.reload(); });
@@ -2241,8 +2241,12 @@ a.notif-item.belum:hover{background:var(--ina-primary-50,#eaf1ef)}
     if (!halamanBoleh(sesi)) { if (!ada) document.body.insertAdjacentHTML('beforeend', tolakHtml(true)); }
     else if (ada && ada.dataset.navigasi) ada.remove(); /* kembali ke layar yang boleh dibuka */
   };
-  ['pushState', 'replaceState'].forEach(m => { const asli = history[m]; history[m] = function () { const hasil = asli.apply(this, arguments); setTimeout(periksaHalaman, 0); return hasil; }; });
-  addEventListener('hashchange', periksaHalaman); addEventListener('popstate', periksaHalaman);
+  /* selama layar penolakan tampil, dialog dan laci halaman ditutup (mis. "Lihat di layar" yang membuka dialog setelah berpindah layar) */
+  const tutupLapisan = () => { if (!document.querySelector('.sesi-tolak')) return; ['lapisan', 'lapisanDrawer'].forEach(id => { const l = document.getElementById(id); if (l && l.innerHTML.trim()) l.innerHTML = ''; }); };
+  ['lapisan', 'lapisanDrawer'].forEach(id => { const l = document.getElementById(id); if (l) new MutationObserver(tutupLapisan).observe(l, { childList:true }); });
+  const periksaDanTutup = () => { periksaHalaman(); tutupLapisan(); };
+  ['pushState', 'replaceState'].forEach(m => { const asli = history[m]; history[m] = function () { const hasil = asli.apply(this, arguments); setTimeout(periksaDanTutup, 0); return hasil; }; });
+  addEventListener('hashchange', periksaDanTutup); addEventListener('popstate', periksaDanTutup);
 })();
 </script>
 

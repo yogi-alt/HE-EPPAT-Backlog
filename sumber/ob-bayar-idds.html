@@ -693,7 +693,7 @@ const UBAH = [
     isi:'Sesuai arahan, pembayaran tidak melalui admin: status Lunas hanya datang dari bank setelah pelanggan mentransfer ke VA. Tombol "Simulasikan Pembayaran Sukses" dihapus dari Detail Transaksi operator. Tombol "SIMULASI BAYAR (KHUSUS SANDBOX)" dihapus dari kartu VA pelanggan, baik di Dasbor (jalur Enterprise langsung) maupun di halaman Upgrade ke Enterprise (jalur Trial lalu Upgrade). Di lingkungan uji, transfer disimulasikan dari luar layar aplikasi. Di prototipe, tombol itu digantikan tombol bilah prototipe "Simulasikan Transfer dari Bank", sehingga pelakunya tercatat Bank, bukan Operator. Detail Transaksi operator hanya untuk melihat data. Halaman itu memuat Riwayat Status tagihan (waktu, pelaku, kejadian, catatan) yang sama dengan rekam jejak.',
     lama:'Modal Detail Transaksi menampilkan tombol hijau utama "Simulasikan Pembayaran Sukses" di samping "Tutup", tanpa penanda lingkungan uji dan tanpa konfirmasi. Dasbor pelanggan juga memuat tombol "SIMULASI BAYAR (KHUSUS SANDBOX)", dan tombol yang sama ada di kartu VA halaman Upgrade ke Enterprise (bukti 26 Okt 23.05). Setelah lunas (26 Okt 22.45), modal hanya menambah "Waktu Pembayaran (Paid At)" tanpa riwayat siapa atau apa yang mengubah status.', ke:{ t:'operator', layar:'pembayaran-detail', langkah:6 }, sorot:'#blokRiwayatTrx' },
   { kode:'IDDS-OB-51', judul:'Riwayat Transaksi dan tagihan bermasalah: status jelas dan jalan keluar',
-    isi:'Bila batas waktu lewat, pelanggan melihat IDDS Alert "Tagihan kedaluwarsa" yang melarang transfer ke nomor lama. Alert itu memuat tombol "Buat tagihan baru" yang meminta konfirmasi. Tagihan lama tetap tercatat "Kedaluwarsa" di Riwayat Transaksi dan Verifikasi Pembayaran. Di Riwayat Transaksi, metode ditulis "Virtual Account BRI" dan status berupa lencana ("Lunas"). Untuk tagihan yang sudah dibayar, kolom Jatuh Tempo tetap ada tetapi berisi "Tidak berlaku (sudah dibayar)", dan waktu bayar tertulis di kolom Detail Transaksi. Bila bank menolak transfer, alert "Pembayaran gagal" menyebut alasannya. Tombol "Coba lagi" mengembalikan tagihan ke "Belum Dibayar" selama belum kedaluwarsa.',
+    isi:'Bila batas waktu lewat, pelanggan melihat IDDS Alert "Tagihan kedaluwarsa" yang melarang transfer ke nomor lama. Alert itu memuat tombol "Buat tagihan baru" yang meminta konfirmasi. Tagihan lama tetap tercatat "Kedaluwarsa" di Riwayat Transaksi dan Verifikasi Pembayaran. Di Riwayat Transaksi, metode ditulis "Virtual Account BRI" dan status berupa lencana ("Lunas"). Untuk tagihan yang sudah dibayar, kolom Jatuh Tempo tetap ada tetapi berisi "Tidak berlaku (sudah dibayar)", dan waktu bayar tertulis di kolom Detail Transaksi. Bila bank menolak transfer, alert "Pembayaran gagal" menyebut alasannya. Tombol "Coba lagi" mengembalikan tagihan ke "Belum dibayar" selama belum kedaluwarsa.',
     lama:'Verifikasi Pembayaran memiliki saringan "Expired" (25) dan "Failed" (0), tetapi layar pelanggan untuk tagihan kedaluwarsa atau gagal tidak teramati. Kartu VA hanya bertuliskan "Lakukan transfer sebelum batas waktu habis." Setelah lunas, Riwayat Transaksi menampilkan metode "VIRTUAL_ACCOUNT" dan status "LUNAS" berhuruf kapital. Jatuh Tempo "27 Okt 2026, 14.53" tetap tampil walaupun tagihan sudah "Dibayar: 26 Okt 2026, 22.45".', ke:{ t:'pelanggan', layar:'dasbor', langkah:4, cabang:'kedaluwarsa' }, sorot:'#kartuVa' },
   { kode:'IDDS-OB-52', judul:'Ganti paket atau bank sebelum membayar dengan konfirmasi',
     isi:'Tombol "Ganti paket" (Ringkasan Pesanan) dan "Ganti bank pembayaran" (kartu VA) membuka IDDS Modal Confirmation bila VA sudah terbit. Dialog menjelaskan bahwa tagihan lama dibatalkan dan tidak boleh ditransfer lagi. Tombol konfirmasi berwarna merah. Tagihan lama tercatat "Dibatalkan" di Riwayat Transaksi dan Verifikasi Pembayaran.',
@@ -768,7 +768,7 @@ function contohTransaksi() {
       va:'14629' + String(20608832 + i * 7351913).padStart(11, '0').slice(-11), nominal:3500000, status:st, dibuat:i === 0 ? null : dibuat, batas:i === 0 ? null : dibuat + 864e5, bayar:st === 'lunas' ? dibuat + 4 * 6e4 : null }; });
 }
 let TRANSAKSI = contohTransaksi();
-const LBL_BAYAR = { lunas:['Lunas', 'success'], belum:['Belum Dibayar', 'warning'], kedaluwarsa:['Kedaluwarsa', 'warning'], gagal:['Gagal', 'error'], batal:['Dibatalkan', 'neutral'] };
+const LBL_BAYAR = { lunas:['Lunas', 'success'], belum:['Belum dibayar', 'warning'], kedaluwarsa:['Kedaluwarsa', 'warning'], gagal:['Gagal', 'error'], batal:['Dibatalkan', 'neutral'] };
 const lencanaBayar = (s, uk = 'sm') => badge(LBL_BAYAR[s][0], LBL_BAYAR[s][1], uk);
 const NM_PAKET = { TRIAL:'Trial', ENTERPRISE:'Enterprise' };
 const lencanaPaket = k => badge(NM_PAKET[k], k === 'ENTERPRISE' ? 'info' : 'neutral', 'sm');
@@ -921,7 +921,7 @@ function aksiGagal() {
   catat('Bank', nf('tunggu'), 'Pembayaran gagal', `Bank BRI menolak transfer ke VA ${t.va}: saldo rekening pengirim tidak cukup. Tagihan tetap berlaku sampai ${tglJam(t.batas)}.`);
   masukF('tunggu');
 }
-function aksiCobaLagi() { const t = tAktif(); maju(1); t.status = 'belum'; t.alasan = ''; catat('Pelanggan', nf('tunggu'), 'Coba Lagi', `Tagihan ${t.invoice} kembali Belum Dibayar. Transfer ulang ke VA yang sama sebelum ${tglJam(t.batas)}.`); masukF('tunggu'); }
+function aksiCobaLagi() { const t = tAktif(); maju(1); t.status = 'belum'; t.alasan = ''; catat('Pelanggan', nf('tunggu'), 'Coba Lagi', `Tagihan ${t.invoice} kembali Belum dibayar. Transfer ulang ke VA yang sama sebelum ${tglJam(t.batas)}.`); masukF('tunggu'); }
 function aksiTagihanBaru() {
   const lama = tAktif(); maju(1);
   catat('Pelanggan', nf('va'), 'Buat Tagihan Baru', `Tagihan lama ${lama.invoice} tetap tercatat Kedaluwarsa.`);
@@ -1382,7 +1382,7 @@ function blokPaketOp() {
     ${SIM.up[0].selesai ? `<h3>Progres Upgrade ke Enterprise</h3>${stepperUp()}` : ''}${usulan('IDDS-OB-60')}</section>`;
 }
 /* Verifikasi Pembayaran (salin ob-verif) — tagihan simulasi di urutan teratas */
-const SARING_PB = [['semua', 'Semua Status'], ['lunas', 'Lunas'], ['belum', 'Belum Dibayar'], ['kedaluwarsa', 'Kedaluwarsa'], ['gagal', 'Gagal']];
+const SARING_PB = [['semua', 'Semua status'], ['lunas', 'Lunas'], ['belum', 'Belum dibayar'], ['kedaluwarsa', 'Kedaluwarsa'], ['gagal', 'Gagal']];
 const semuaTrx = () => SIM.tagihan.map((t, i) => ({ ...t, p:P0(), key:'s:' + i, sim:true })).reverse().concat(TRANSAKSI.map((t, i) => ({ ...t, key:'t:' + i })));
 const tampilPb = () => { const q = S.pb.cari.trim().toLowerCase(); return semuaTrx().filter(t => (S.pb.saring === 'semua' || t.status === S.pb.saring) && (!q || `${t.p.nama} ${t.invoice} ${t.va}`.toLowerCase().includes(q))); };
 function layarPembayaran() {
@@ -1528,7 +1528,7 @@ document.addEventListener('click', e => {
   if (t.closest('#salinVa')) { salinTeks(tAktif().va, 'Nomor Virtual Account disalin.'); return; }
   if (t.closest('#cekBayar')) { S.memuat = 'bayar'; gambar(); setTimeout(() => { S.memuat = ''; aksiCek(); gambar(); $('#cekBayar')?.focus(); }, 500); return; }
   if (t.closest('#tagihanBaru')) { konfirmasiTagihanBaru(); return; }
-  if (t.closest('#cobaLagi')) { aksiCobaLagi(); gambar(); $('#cekBayar')?.focus(); toast('Tagihan kembali Belum Dibayar. Silakan transfer ulang.'); return; }
+  if (t.closest('#cobaLagi')) { aksiCobaLagi(); gambar(); $('#cekBayar')?.focus(); toast('Tagihan kembali Belum dibayar. Silakan transfer ulang.'); return; }
   if (t.closest('#gantiBank')) { konfirmasiGantiBank(); return; }
   if (t.closest('#tombolGanti')) { konfirmasiGantiPaket(); return; }
   if (t.closest('#cekStatus')) { S.memuat = 'cek'; gambar(); setTimeout(() => { S.memuat = ''; catat('Pelanggan', SIM.langkah, 'Cek Progres Registrasi', `Belum ada perubahan. Tahap ${labelTahap()}.`); gambar(); $('#cekStatus')?.focus(); toast(`Belum ada perubahan · dicek ${jam(SIM.jam)}`, 'default', 4500, `Tahap saat ini: ${labelTahap()}.`); }, 500); return; }
@@ -1684,7 +1684,7 @@ const kontak = () => `<h4 class="bantu-sub">Kontak dukungan ${usulan('IDDS-OB-55
 const lgkh = a => `<ol class="bantu-langkah">${a.map(x => `<li>${x}</li>`).join('')}</ol>`;
 const istilah = a => `<dl class="bantu-istilah">${a.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
 const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
-const ARTI_STATUS = [['Belum Dibayar', 'Tagihan sudah dibuat dan menunggu transfer.'], ['Lunas', 'Bank sudah mengonfirmasi pembayaran.'], ['Kedaluwarsa', 'Tagihan tidak dibayar sampai batas waktu. Perlu tagihan baru.'], ['Gagal', 'Bank menolak transfer. Tagihan dapat dibayar ulang selama belum kedaluwarsa.'], ['Dibatalkan', 'Tagihan dibatalkan karena paket atau bank diganti.']];
+const ARTI_STATUS = [['Belum dibayar', 'Tagihan sudah dibuat dan menunggu transfer.'], ['Lunas', 'Bank sudah mengonfirmasi pembayaran.'], ['Kedaluwarsa', 'Tagihan tidak dibayar sampai batas waktu. Perlu tagihan baru.'], ['Gagal', 'Bank menolak transfer. Tagihan dapat dibayar ulang selama belum kedaluwarsa.'], ['Dibatalkan', 'Tagihan dibatalkan karena paket atau bank diganti.']];
 const FAQ_REKAM = ['Bagaimana membaca rekam jejak simulasi?', 'Rekam jejak ada di tombol "Rekam Jejak" pada bilah prototipe. Setiap baris berisi waktu (jam simulasi), pelaku (Pelanggan, Operator, Sistem, atau Bank), langkah, status order, status tahap, dan catatan. Baris baru dibacakan pembaca layar. Gunakan Unduh (.csv) atau Salin untuk membagikannya ke tim.'];
 const BANTUAN = {
   pelanggan:() => ({ judul:'Bantuan Pembayaran', isi:`<p>Setelah memilih paket Enterprise, Anda membayar tagihan melalui Virtual Account. Aplikasi kantor disiapkan setelah pembayaran lunas. Bila memilih Trial, aplikasi kantor langsung aktif selama 30 hari dan Anda dapat upgrade ke Enterprise kapan saja.</p>
@@ -1713,7 +1713,7 @@ const BANTUAN = {
     <h4 class="bantu-sub">Arti status tagihan</h4>${istilah(ARTI_STATUS)}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('o', [
-      ['Pelanggan sudah transfer, tetapi status belum Lunas. Apa yang harus dilakukan?', 'Verifikasi otomatis paling lama 10 menit. Klik Muat ulang. Bila setelah 10 menit status tetap Belum Dibayar, minta bukti transfer dan teruskan ke tim dukungan.'],
+      ['Pelanggan sudah transfer, tetapi status belum Lunas. Apa yang harus dilakukan?', 'Verifikasi otomatis paling lama 10 menit. Klik Muat ulang. Bila setelah 10 menit status tetap Belum dibayar, minta bukti transfer dan teruskan ke tim dukungan.'],
       ['Berapa lama batas waktu Virtual Account?', '24 jam sejak VA dibuat. Waktunya tertulis di baris Waktu Pembuatan VA dan Batas Waktu.'],
       ['Pelanggan mentransfer nominal yang salah. Bagaimana?', 'VA hanya menerima nominal yang persis sama, jadi transfer itu ditolak bank dan status tidak berubah. Bila saldo pelanggan terpotong, teruskan bukti transfer ke tim dukungan.'],
       ['Pelanggan ingin mengganti bank. Apa dampaknya?', 'Tagihan lama berstatus Dibatalkan dan tagihan baru dibuat. Keduanya tampil di daftar transaksi.'],

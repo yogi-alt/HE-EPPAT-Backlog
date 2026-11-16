@@ -579,7 +579,7 @@ function dialogBatas(judul, isi) {
   w.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-tutup></div><div class="ina-modal__container"><div class="ina-modal__dialog ina-modal__dialog--size-md" role="dialog" aria-modal="true" aria-labelledby="batasJudul">
     <div class="ina-modal__header"><h2 class="ina-modal__title" id="batasJudul">${judul}</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-tutup>${ik('x', 22)}</button></div>
     <div class="ina-modal__body"><p>${isi} Data Anda tetap ada.${usulan('HE-TRIAL-04')}</p></div>
-    <div class="ina-modal__footer">${tombol('Nanti saja', 'secondary', 'md', 'data-tutup')}<a class="ina-button ina-button--primary ina-button--md" href="${window.PAKET_TRIAL.upgrade}">Mulai Berlangganan</a></div></div></div></div>`;
+    <div class="ina-modal__footer">${tombol('Nanti saja', 'secondary', 'md', 'data-tutup')}<a class="ina-button ina-button--primary ina-button--md" href="${window.PAKET_TRIAL.upgrade}">Mulai berlangganan</a></div></div></div></div>`;
   w.addEventListener('click', e => { if (e.target.closest('[data-tutup]')) w.remove(); });
   document.body.appendChild(w); w.querySelector('[data-tutup].ina-button').focus();
   return true;
@@ -1187,7 +1187,7 @@ function kartuKtp() {
       <div class="ina-file-upload__dropzone" id="pilihKtp"><input type="file" class="ina-file-upload__input" id="berkasKtp" accept="image/jpeg,image/png,image/webp" aria-labelledby="lblKtp">
         <div class="ina-file-upload__content"><div class="ina-file-upload__icon">${ik('unggah', 24)}</div>
         <div class="ina-file-upload__text"><div class="ina-file-upload__title">Seret foto KTP ke sini atau klik untuk memilih</div><div class="ina-file-upload__description">NIK, jenis kelamin, tempat dan tanggal lahir, pekerjaan, kewarganegaraan, serta alamat akan terisi otomatis. JPG, PNG, atau WebP, maksimal 10 MB. Foto ini juga dipakai untuk registrasi sertifikat elektronik (CA).</div></div>
-        <button type="button" class="ina-file-upload__button" id="tombolKtp" aria-describedby="lblKtp">Pilih File</button></div></div>
+        <button type="button" class="ina-file-upload__button" id="tombolKtp" aria-describedby="lblKtp">Pilih file</button></div></div>
       ${k.nama && !k.tolak ? berkasKtp(k) : ''}${tolak}</div>
     <div id="statusKtp" aria-live="polite">${status}</div></div>`;
 }

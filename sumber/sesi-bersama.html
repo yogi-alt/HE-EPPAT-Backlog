@@ -226,9 +226,9 @@
       const ke = (uk, lbl) => `<a class="ina-button ina-button--primary ina-button--${uk}" href="${HAL_UPGRADE}">${lbl}</a>`;
       const kepala = $('header .spacer'), lencana = `<span class="ina-badge ina-badge--soft ina-badge--info ina-badge--sm ina-badge--rounded-full" id="lencanaTrial"><span><span class="lt-opsi">Paket </span>Trial<span class="lt-opsi"> · sisa ${sisa} hari</span></span></span>`;
       if (kepala) kepala.insertAdjacentHTML('afterend', lencana); else if (pemicu) pemicu.insertAdjacentHTML('beforebegin', lencana);
-      if (!ditutup('eppat-trial-spanduk')) spanduk('caution', 'eppat-trial-spanduk', `<b>Paket Trial, sisa ${sisa} hari.</b> Semua menu dapat dibuka. Tanda tangan dan stempel elektronik aktif setelah upgrade ke Enterprise.`, ke('sm', 'Mulai Berlangganan'));
+      if (!ditutup('eppat-trial-spanduk')) spanduk('caution', 'eppat-trial-spanduk', `<b>Paket Trial, sisa ${sisa} hari.</b> Semua menu dapat dibuka. Tanda tangan dan stempel elektronik aktif setelah upgrade ke Enterprise.`, ke('sm', 'Mulai berlangganan'));
       /* di atas kartu profil yang menempel di bawah, agar tombol selalu terlihat walaupun menu panjang */
-      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai Berlangganan</span></a></div>`); });
+      const pasangTombol = () => setTimeout(() => { const w = $('.sb-profil'); if (w && !w.querySelector('.sb-trial')) w.insertAdjacentHTML('afterbegin', `<div class="sb-trial"><a class="ina-button ina-button--primary ina-button--md" href="${HAL_UPGRADE}" aria-label="Mulai berlangganan">${svg(I_PANAH)}<span class="sb-trial-teks">Mulai berlangganan</span></a></div>`); });
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pasangTombol); else pasangTombol();
       if (bar) bar.insertAdjacentHTML('afterbegin', `<span>Perjalanan: langkah 9 dari 19, coba menu lalu tekan Mulai berlangganan.</span><button class="pil" id="simBatas" aria-pressed="${!!t.batas}" title="Mengisi kuota pengguna dan transaksi Trial sampai penuh">Batas paket: ${t.batas ? 'tercapai' : 'belum tercapai'}</button>`);
       const b = $('#simBatas'); if (b) b.addEventListener('click', () => { simpanTrial({ ...bacaTrial(), batas:!t.batas }); location.reload(); });
@@ -249,7 +249,11 @@
     if (!halamanBoleh(sesi)) { if (!ada) document.body.insertAdjacentHTML('beforeend', tolakHtml(true)); }
     else if (ada && ada.dataset.navigasi) ada.remove(); /* kembali ke layar yang boleh dibuka */
   };
-  ['pushState', 'replaceState'].forEach(m => { const asli = history[m]; history[m] = function () { const hasil = asli.apply(this, arguments); setTimeout(periksaHalaman, 0); return hasil; }; });
-  addEventListener('hashchange', periksaHalaman); addEventListener('popstate', periksaHalaman);
+  /* selama layar penolakan tampil, dialog dan laci halaman ditutup (mis. "Lihat di layar" yang membuka dialog setelah berpindah layar) */
+  const tutupLapisan = () => { if (!document.querySelector('.sesi-tolak')) return; ['lapisan', 'lapisanDrawer'].forEach(id => { const l = document.getElementById(id); if (l && l.innerHTML.trim()) l.innerHTML = ''; }); };
+  ['lapisan', 'lapisanDrawer'].forEach(id => { const l = document.getElementById(id); if (l) new MutationObserver(tutupLapisan).observe(l, { childList:true }); });
+  const periksaDanTutup = () => { periksaHalaman(); tutupLapisan(); };
+  ['pushState', 'replaceState'].forEach(m => { const asli = history[m]; history[m] = function () { const hasil = asli.apply(this, arguments); setTimeout(periksaDanTutup, 0); return hasil; }; });
+  addEventListener('hashchange', periksaDanTutup); addEventListener('popstate', periksaDanTutup);
 })();
 </script>

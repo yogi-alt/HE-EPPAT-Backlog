@@ -717,7 +717,7 @@ const UBAH = [
     isi:'Empat kartu ringkasan (Total PPAT, PPAT Aktif, PPAT Ditangguhkan, Total Pengguna) memakai IDDS Card dengan ikon garis. Keterangan kartu memakai bahasa biasa: "Kantor PPAT terdaftar", "Berstatus aktif", "Berstatus ditangguhkan", dan "Di semua kantor PPAT". Kartu PPAT Baru (30 hari) menyebut periode hitungnya.',
     lama:'Keterangan kartu memakai kode dan istilah teknis: "Tenant terdaftar", "Status ACTIVE", "Status SUSPENDED".', ke:'dasbor', sorot:'#kpi' },
   { kode:'IDDS-PL-12', judul:'Dasbor: status sistem dengan waktu pemeriksaan',
-    isi:'Kartu Status Sistem menampilkan hasil dengan ikon dan teks ("Sehat" atau "Terganggu"), komponen yang diperiksa ("Basis data & Redis"), dan waktu pemeriksaan terakhir. Tombol "Periksa Ulang" menjalankan pemeriksaan lagi dan menampilkan "Memeriksa…" selama berjalan. Perubahan status diumumkan ke pembaca layar (aria-live).',
+    isi:'Kartu Status Sistem menampilkan hasil dengan ikon dan teks ("Sehat" atau "Terganggu"), komponen yang diperiksa ("Basis data & Redis"), dan waktu pemeriksaan terakhir. Tombol "Periksa ulang" menjalankan pemeriksaan lagi dan menampilkan "Memeriksa…" selama berjalan. Perubahan status diumumkan ke pembaca layar (aria-live).',
     lama:'Status hanya diperiksa sekali saat halaman dibuka, tanpa waktu pemeriksaan dan tanpa cara memeriksa ulang. Status buruk berlabel "Degraded".', ke:'dasbor', sorot:'#kartuStatus' },
   { kode:'IDDS-PL-13', judul:'Dasbor: aktivitas dan PPAT teramai dapat ditindaklanjuti',
     isi:'Aktivitas lintas-PPAT memakai nama aktivitas yang sama dengan Log Aktivitas (misalnya "Masuk", "Unduh dokumen akta"). Aktivitas gagal diberi IDDS Badge "Gagal", bukan hanya titik merah. Kantor PPAT ditampilkan dengan IDDS Badge berisi alamatnya. Tombol "Lihat semua" membuka Log Aktivitas. Setiap kantor di "PPAT teramai" dapat diklik untuk membuka Daftar PPAT dengan pencarian kantor tersebut.',
@@ -897,7 +897,7 @@ function layarDasbor() {
         <div class="isi"><div class="eb" id="jdStatus">Status sistem</div>
           <div class="nilai" aria-live="polite">${stTeks}</div>
           <span class="kt">Basis data &amp; Redis · ${st === 'periksa' ? 'sedang diperiksa' : `diperiksa pukul ${jam(S.waktuCek)}`}</span></div>
-        ${tombol(st === 'periksa' ? 'Memeriksa…' : 'Periksa Ulang', 'secondary', 'sm', `id="periksaUlang" ${st === 'periksa' ? 'disabled' : ''}`, ik('ulang', 14))}${usulan('IDDS-PL-12')}
+        ${tombol(st === 'periksa' ? 'Memeriksa…' : 'Periksa ulang', 'secondary', 'sm', `id="periksaUlang" ${st === 'periksa' ? 'disabled' : ''}`, ik('ulang', 14))}${usulan('IDDS-PL-12')}
       </section>
       <section class="kartu-st" aria-labelledby="jdBaru">
         <span class="bulat">${ik('naik', 20)}</span>
@@ -1122,8 +1122,8 @@ const BANTUAN = {
     ${istilah([['Platform', 'Aktivitas admin platform, bukan aktivitas kantor PPAT.'], ['/t/…', 'Alamat kantor PPAT di E-PPAT, misalnya /t/ppat-contoh-satu.'], ['Redis', 'Layanan penyimpanan sementara yang dipakai aplikasi, misalnya untuk sesi masuk.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('d', [
-      ['Apa arti status sistem Terganggu?', 'Basis data atau Redis tidak menjawab saat diperiksa. Pengguna bisa gagal masuk atau menyimpan data. Klik "Periksa Ulang" setelah beberapa saat; bila tetap terganggu, hubungi tim teknis.'],
-      ['Kapan status sistem diperiksa?', 'Saat dasbor dibuka dan setiap kali Anda mengklik "Periksa Ulang". Waktu pemeriksaan terakhir tertulis di kartu.'],
+      ['Apa arti status sistem Terganggu?', 'Basis data atau Redis tidak menjawab saat diperiksa. Pengguna bisa gagal masuk atau menyimpan data. Klik "Periksa ulang" setelah beberapa saat; bila tetap terganggu, hubungi tim teknis.'],
+      ['Kapan status sistem diperiksa?', 'Saat dasbor dibuka dan setiap kali Anda mengklik "Periksa ulang". Waktu pemeriksaan terakhir tertulis di kartu.'],
       ['Mengapa ada kantor PPAT yang ditangguhkan?', 'Biasanya karena masa berlaku paket sudah lewat atau kantor dinonaktifkan oleh operator. Lihat kolom Masa Berlaku di Daftar PPAT.'],
       ['Bagaimana menangguhkan atau mengaktifkan kantor PPAT?', 'Tidak dari sini. Status kantor diatur di aplikasi Onboarding (konsol operator).'],
       ['Apa arti aktivitas bertanda Gagal?', 'Aktivitas tidak berhasil, misalnya kata sandi salah saat masuk. Beberapa kegagalan berturut-turut dari akun yang sama perlu diperiksa di Log Aktivitas.'],

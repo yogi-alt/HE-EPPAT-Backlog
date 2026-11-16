@@ -537,7 +537,7 @@ function temaBrand() {
     <div class="sub-bagian ditandai" id="warnaKustom">${subJudul('Warna Kustom', TEMA.mode === 'preset' ? 'Warna dari preset terpilih. Mengubah salah satu warna memindah sumber warna ke Kustom.' : 'Warna inti aplikasi: warna utama, teks, latar, dan garis tepi.')}
       <div class="grid-warna">${WARNA_KUSTOM.map(([k, l]) => `<div class="kartu-warna">${isianWarna('w-' + k, l, w[k], `data-warna-kustom="${k}"`)}
         ${k === 'brand_primary' ? lencanaKontras(w[k], '#ffffff', 'teks putih di atas warna utama') : k === 'content_primary' ? lencanaKontras(w[k], w.background_primary, 'Teks utama di atas Latar') : k === 'content_secondary' ? lencanaKontras(w[k], w.background_primary, 'Teks sekunder di atas Latar') : ''}</div>`).join('')}</div>${usulan('IDDS-PL-33')}</div>
-    <div class="sub-bagian ditandai" id="warnaStatus">${subJudul('Warna Status', 'Lencana dan banner status (Penyusunan, Penandatanganan, peringatan, galat) memakai warna sentimen IDDS agar maknanya sama di semua layanan. Warnanya tidak diatur dari tema.')}<div class="status-idds">${CHROME.status.map(([k, l]) => badge(l, VARIAN_STATUS[k])).join('')}</div>${usulan('IDDS-PL-83')}</div>`;
+    <div class="sub-bagian ditandai" id="warnaStatus">${subJudul('Warna Status', 'Warna lencana, banner, dan penanda status mengikuti INA Digital Design System (IDDS) agar maknanya sama di semua layanan, sehingga tidak diatur dari tema.')}<div class="status-idds">${CHROME.status.map(([k, l]) => badge(l, VARIAN_STATUS[k])).join('')}</div>${usulan('IDDS-PL-83')}</div>`;
 }
 /* warna status mengikuti varian Badge IDDS (keputusan 12 Nov 2026, IDDS-PL-83) */
 const VARIAN_STATUS = { success:'success', warning:'warning', danger:'error', info:'info', neutral:'neutral' };

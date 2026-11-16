@@ -789,7 +789,7 @@ const UBAH = [
     isi:'Saat staf Onboarding pertama kali membuka setiap layar, tur singkat menjelaskan isinya. Verifikasi Anggota: pencarian, saringan status verifikasi, daftar anggota, dan halaman. Detail Verifikasi: tombol Kembali, status verifikasi, tombol Setujui dan Tolak (bila menunggu keputusan), foto atau logo, tab PPAT dan Kantor PPAT beserta tombol simpannya, lokasi kantor, dan info kontak. Verifikasi Produk: pencarian, saringan produk, dan daftar order. Verifikasi Pembayaran: pencarian, waktu pembaruan dan Muat ulang, saringan status, dan daftar transaksi; Detail Transaksi: status dan rincian invoice. Bentuk dan perilakunya sama dengan tur modul lain: muncul sekali per layar, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
     lama:'Tidak ada panduan saat staf Onboarding pertama kali membuka Verifikasi Anggota, Verifikasi Produk, Verifikasi Pembayaran, dan layar detailnya.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'IDDS-OB-21', judul:'Verifikasi Anggota: subjudul sesuai isi, pencarian berlabel, dan saringan IDDS Chip',
-    isi:'Subjudul menyebut tindakan yang dapat dilakukan: "Periksa data anggota yang mendaftar, lalu setujui atau tolak verifikasinya." Pencarian memakai IDDS Input Search dengan label "Cari anggota" yang terlihat, dan jumlah anggota yang tampil diumumkan (aria-live). Saringan Semua, Belum Verifikasi, dan Sudah Verifikasi memakai IDDS Chip dalam grup berlabel, lengkap dengan jumlahnya. Chip terpilih ditandai aria-pressed dan dapat dipilih dengan papan ketik.',
+    isi:'Subjudul menyebut tindakan yang dapat dilakukan: "Periksa data anggota yang mendaftar, lalu setujui atau tolak verifikasinya." Pencarian memakai IDDS Input Search dengan label "Cari anggota" yang terlihat, dan jumlah anggota yang tampil diumumkan (aria-live). Saringan Semua, Belum verifikasi, dan Sudah verifikasi memakai IDDS Chip dalam grup berlabel, lengkap dengan jumlahnya. Chip terpilih ditandai aria-pressed dan dapat dipilih dengan papan ketik.',
     lama:'Subjudul berbunyi "Kelola dan verifikasi anggota yang mendaftar.". Kotak cari hanya berisi teks contoh "Cari nama, email, ID PPAT..." tanpa label. Saringan berupa pil bergaya khusus.', ke:'anggota', sorot:'#saringAg' },
   { kode:'IDDS-OB-22', judul:'Verifikasi Anggota: tabel, lencana status, dan aksi yang jelas',
     isi:'Tabel memakai IDDS Table dengan kolom tetap: No, ID PPAT, Nama Pengguna, URL Web, Kontak, Status, dan Aksi. Judul kolom "Nama User" dibakukan menjadi "Nama Pengguna". Warna lencana status konsisten: "Sudah Diverifikasi" hijau, "Menunggu Verifikasi" kuning, dan "Ditolak" merah. Tombol "Lihat detail" menyebut nama anggota (aria-label). Navigasi memakai IDDS Pagination dengan teks "Menampilkan 1–10 dari 24". Pencarian atau saringan tanpa hasil menawarkan "Hapus pencarian" atau "Tampilkan semua".',
@@ -810,7 +810,7 @@ const UBAH = [
     isi:'Subjudul berbunyi "Lihat calon PPAT yang sudah memilih paket Enterprise atau Trial." Pencarian memakai label "Cari order" yang terlihat. Saringan Semua Produk, Enterprise, dan Trial memakai IDDS Chip dengan jumlahnya. Kode paket mentah ditampilkan sebagai lencana "Enterprise" dan "Trial", dan status "Aktif" berlencana hijau. Seperti di live, baris tidak memiliki aksi. Bantuan menjelaskan bahwa status paket berubah secara otomatis.',
     lama:'Subjudul berbunyi "Daftar user yang telah sampai pada tahap memilih produk Enterprise atau Trial.". Lencana berisi kode mentah "ENTERPRISE" dan "TRIAL". Teks contoh pencarian terpotong ("kode orde").', ke:'produk', sorot:'#tabelPr' },
   { kode:'IDDS-OB-28', judul:'Verifikasi Pembayaran: status berbahasa Indonesia, nominal baku, dan tombol Muat ulang',
-    isi:'Subjudul sesuai isi: "Pantau tagihan Virtual Account calon PPAT dan status pembayarannya." Chip saringan menjadi "Semua Status", "Lunas", "Belum Dibayar", "Kedaluwarsa", dan "Gagal". Warna lencana: Lunas hijau, Belum Dibayar dan Kedaluwarsa kuning, serta Gagal merah. Paket dan metode ditulis "Enterprise" dan "Virtual Account", sedangkan nominal ditulis "Rp3.500.000". Tombol "Reload" menjadi "Muat ulang" yang menampilkan "Memuat…" lalu waktu pembaruan terakhir. Tombol "Lihat detail" menyebut nomor tagihan. Kolom "Nama User" menjadi "Nama Pengguna".',
+    isi:'Subjudul sesuai isi: "Pantau tagihan Virtual Account calon PPAT dan status pembayarannya." Chip saringan menjadi "Semua status", "Lunas", "Belum dibayar", "Kedaluwarsa", dan "Gagal". Warna lencana: Lunas hijau, Belum dibayar dan Kedaluwarsa kuning, serta Gagal merah. Paket dan metode ditulis "Enterprise" dan "Virtual Account", sedangkan nominal ditulis "Rp3.500.000". Tombol "Reload" menjadi "Muat ulang" yang menampilkan "Memuat…" lalu waktu pembaruan terakhir. Tombol "Lihat detail" menyebut nomor tagihan. Kolom "Nama User" menjadi "Nama Pengguna".',
     lama:'Subjudul menyebut "simulasi tagihan" yang tidak ada di halaman. Chip berbunyi "Paid (Lunas)", "Unpaid (Belum Bayar)", "Expired", dan "Failed". Lencana berisi "PAID"/"UNPAID", metode ditulis "VIRTUAL ACCOUNT", dan nominal "Rp 1". Tombol "Reload" tidak menampilkan status.', ke:'pembayaran', sorot:'#saringPb' },
   { kode:'IDDS-OB-29', judul:'Detail Transaksi Pembayaran: halaman detail dengan label berbahasa Indonesia',
     isi:'Detail dibuka sebagai halaman (Beranda › Verifikasi Pembayaran › Detail Transaksi Pembayaran). Tombol "Kembali ke Verifikasi Pembayaran" mengembalikan saringan, halaman tabel, dan fokus ke baris asal. Status tagihan tampil sebagai lencana. Label dibakukan menjadi "Waktu Pembuatan VA" dan "Waktu Pembayaran". Nilai kosong ditulis "Belum ada" atau "Belum dibayar", bukan "-".',
@@ -889,7 +889,7 @@ function contohTransaksi() {
       va:'14629' + String(20608832 + i * 7351913).padStart(11, '0').slice(-11), nominal:3500000, status:st, dibuat:i === 0 ? null : dibuat, bayar:st === 'lunas' ? dibuat + 4 * 6e4 : null }; });
 }
 let PRODUK = contohProduk(), TRANSAKSI = contohTransaksi();
-const LBL_BAYAR = { lunas:['Lunas', 'success'], belum:['Belum Dibayar', 'warning'], kedaluwarsa:['Kedaluwarsa', 'warning'], gagal:['Gagal', 'error'] };
+const LBL_BAYAR = { lunas:['Lunas', 'success'], belum:['Belum dibayar', 'warning'], kedaluwarsa:['Kedaluwarsa', 'warning'], gagal:['Gagal', 'error'] };
 const lencanaBayar = (s, uk = 'sm') => badge(LBL_BAYAR[s][0], LBL_BAYAR[s][1], uk);
 
 /* ---------------- keadaan ---------------- */
@@ -1001,7 +1001,7 @@ const kosongBaris = (kol, cari, nmSaring, benda) => `<tr><td colspan="${kol}" cl
   : nmSaring ? `Belum ada ${benda} di saringan ${nmSaring}.<div style="margin-top:10px">${tombol('Tampilkan semua', 'secondary', 'sm', 'data-tampil-semua')}</div>` : `Belum ada ${benda}.`}</td></tr>`;
 
 /* ---------------- layar: Verifikasi Anggota ---------------- */
-const SARING_AG = [['semua', 'Semua'], ['belum', 'Belum Verifikasi'], ['sudah', 'Sudah Verifikasi']];
+const SARING_AG = [['semua', 'Semua'], ['belum', 'Belum verifikasi'], ['sudah', 'Sudah verifikasi']];
 const cocokAg = (p, k) => k === 'semua' || (k === 'sudah' ? p.verif === 'sudah' : p.verif !== 'sudah');
 const tampilAg = () => { const q = S.ag.cari.trim().toLowerCase(); return anggota().filter(p => cocokAg(p, S.ag.saring) && (!q || `${p.nama} ${p.email} ${p.id}`.toLowerCase().includes(q))); };
 function layarAnggota() {
@@ -1164,7 +1164,7 @@ function layarProduk() {
 }
 
 /* ---------------- layar: Verifikasi Pembayaran ---------------- */
-const SARING_PB = [['semua', 'Semua Status'], ['lunas', 'Lunas'], ['belum', 'Belum Dibayar'], ['kedaluwarsa', 'Kedaluwarsa'], ['gagal', 'Gagal']];
+const SARING_PB = [['semua', 'Semua status'], ['lunas', 'Lunas'], ['belum', 'Belum dibayar'], ['kedaluwarsa', 'Kedaluwarsa'], ['gagal', 'Gagal']];
 const tampilPb = () => { const q = S.pb.cari.trim().toLowerCase(); return TRANSAKSI.filter(t => (S.pb.saring === 'semua' || t.status === S.pb.saring) && (!q || `${t.p.nama} ${t.invoice} ${t.va}`.toLowerCase().includes(q))); };
 function layarPembayaran() {
   const { n, hal, awal, isi } = potongHal(tampilPb(), S.pb);
@@ -1415,13 +1415,13 @@ const fq = (p, a) => a.map(([q, j], i) => faq(p + i, q, j)).join('');
 const BANTUAN = {
   anggota:() => ({ judul:'Bantuan Verifikasi Anggota', isi:`<p>Verifikasi Anggota menampilkan calon PPAT yang sudah masuk pertama kali. Di sini Anda memeriksa data keanggotaan mereka sebelum mereka dapat memilih paket.</p>
     <h4 class="bantu-sub">Langkah memverifikasi</h4>
-    ${lgkh(['Pilih chip <b>Belum Verifikasi</b> untuk melihat anggota yang perlu diperiksa.', 'Klik <b>Lihat detail</b> pada baris anggota.', 'Periksa data PPAT, data kantor, dan kontak.', 'Klik <b>Setujui</b> bila data sesuai, atau <b>Tolak</b> dan tulis alasannya.'])}
+    ${lgkh(['Pilih chip <b>Belum verifikasi</b> untuk melihat anggota yang perlu diperiksa.', 'Klik <b>Lihat detail</b> pada baris anggota.', 'Periksa data PPAT, data kantor, dan kontak.', 'Klik <b>Setujui</b> bila data sesuai, atau <b>Tolak</b> dan tulis alasannya.'])}
     <h4 class="bantu-sub">Arti status</h4>
     ${istilah([['Menunggu Verifikasi', 'Anggota sudah masuk pertama kali dan menunggu diperiksa.'], ['Sudah Diverifikasi', 'Data anggota sudah disetujui. Anggota dapat memilih paket.'], ['Ditolak', 'Data anggota tidak disetujui. Anggota menerima alasan penolakan lewat email.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('a', [
       ['Siapa yang muncul di daftar ini?', 'Calon PPAT yang sudah memverifikasi email dan masuk pertama kali. Pendaftar yang belum sampai tahap itu hanya terlihat di Manajemen Onboarding.'],
-      ['Anggota yang ditolak masuk saringan mana?', 'Saringan Belum Verifikasi dan Semua, karena verifikasinya belum selesai.'],
+      ['Anggota yang ditolak masuk saringan mana?', 'Saringan Belum verifikasi dan Semua, karena verifikasinya belum selesai.'],
       ['Bagaimana mencari anggota tertentu?', 'Ketik nama, email, atau ID PPAT di kotak Cari anggota. Hasil langsung tersaring.'],
       ['Apakah keputusan verifikasi dapat dibatalkan?', 'Tidak dari halaman ini. Hubungi tim dukungan bila keputusan perlu diubah.'],
       ['Apa yang dibuka tautan di kolom URL Web?', 'Aplikasi E-PPAT kantor anggota. Aplikasi baru dapat dipakai setelah pendaftaran selesai.'],
@@ -1458,13 +1458,13 @@ const BANTUAN = {
     ${kontak()}` }),
   pembayaran:() => ({ judul:'Bantuan Verifikasi Pembayaran', isi:`<p>Verifikasi Pembayaran menampilkan semua tagihan Virtual Account untuk paket Enterprise beserta status pembayarannya.</p>
     <h4 class="bantu-sub">Langkah memeriksa tagihan</h4>
-    ${lgkh(['Pilih status di chip saringan, misalnya <b>Belum Dibayar</b>.', 'Ketik nama, nomor invoice, atau nomor VA di kotak <b>Cari transaksi</b>.', 'Klik <b>Lihat detail</b> untuk melihat rincian tagihan.', 'Klik <b>Muat ulang</b> untuk mengambil status pembayaran terbaru.'])}
+    ${lgkh(['Pilih status di chip saringan, misalnya <b>Belum dibayar</b>.', 'Ketik nama, nomor invoice, atau nomor VA di kotak <b>Cari transaksi</b>.', 'Klik <b>Lihat detail</b> untuk melihat rincian tagihan.', 'Klik <b>Muat ulang</b> untuk mengambil status pembayaran terbaru.'])}
     <h4 class="bantu-sub">Arti status</h4>
-    ${istilah([['Lunas', 'Tagihan sudah dibayar.'], ['Belum Dibayar', 'Tagihan sudah dibuat dan menunggu dibayar.'], ['Kedaluwarsa', 'Tagihan tidak dibayar sampai batas waktunya. Anggota perlu membuat tagihan baru.'], ['Gagal', 'Pembayaran ditolak bank atau terjadi gangguan.']])}
+    ${istilah([['Lunas', 'Tagihan sudah dibayar.'], ['Belum dibayar', 'Tagihan sudah dibuat dan menunggu dibayar.'], ['Kedaluwarsa', 'Tagihan tidak dibayar sampai batas waktunya. Anggota perlu membuat tagihan baru.'], ['Gagal', 'Pembayaran ditolak bank atau terjadi gangguan.']])}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${fq('b', [
       ['Apakah status pembayaran berubah sendiri?', 'Ya. Status berubah saat bank mengirim konfirmasi. Klik Muat ulang untuk melihat status terbaru.'],
-      ['Anggota sudah membayar, tetapi status masih Belum Dibayar. Apa yang harus dilakukan?', 'Klik Muat ulang. Bila status tetap sama setelah 15 menit, minta bukti transfer dan hubungi tim dukungan.'],
+      ['Anggota sudah membayar, tetapi status masih Belum dibayar. Apa yang harus dilakukan?', 'Klik Muat ulang. Bila status tetap sama setelah 15 menit, minta bukti transfer dan hubungi tim dukungan.'],
       ['Apa yang harus dilakukan bila tagihan kedaluwarsa?', 'Minta anggota masuk ke portal dan memilih paket lagi agar tagihan baru dibuat.'],
       ['Apa arti angka di kolom VA / Kode?', 'Nomor Virtual Account tujuan transfer untuk tagihan itu.'],
       ['Apakah saya dapat mengubah status secara manual?', 'Tidak. Status hanya berubah dari konfirmasi bank agar catatan pembayaran tetap sah.'],
@@ -1544,12 +1544,12 @@ const langkahKeputusan = () => [
     { el:dekatO('#cariPb', '.baris > div'), j:'Cari transaksi', t:'Ketik nama, nomor invoice, atau nomor Virtual Account untuk menemukan transaksi.' },
     { el:'#ketMuat', j:'Waktu pembaruan', t:'Waktu data terakhir dimuat dari sistem pembayaran.' },
     { el:'#muatUlang', j:'Muat ulang', t:'Perbarui daftar dengan status pembayaran terbaru.' },
-    { el:'#chipPb', j:'Saring status pembayaran', t:'Tampilkan transaksi Lunas, Belum Dibayar, Kedaluwarsa, atau Gagal. Angka menunjukkan jumlahnya.' },
+    { el:'#chipPb', j:'Saring status pembayaran', t:'Tampilkan transaksi Lunas, Belum dibayar, Kedaluwarsa, atau Gagal. Angka menunjukkan jumlahnya.' },
     { el:tabelO('#tabelPb'), j:'Daftar transaksi', t:'Tekan Lihat detail untuk membuka rincian invoice.' },
     { el:'.halaman', j:'Halaman', t:'Pindah halaman untuk melihat transaksi lainnya.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
   { kunci:'obv-trx', aktif:() => S.layar === 'pembayaran-detail', langkah:() => [
     { el:'#kembaliPb', j:'Kembali', t:'Kembali ke Verifikasi Pembayaran tanpa kehilangan saringan.' },
-    { el:'#statusTrx', j:'Status pembayaran', t:'Status tagihan ini: Lunas, Belum Dibayar, Kedaluwarsa, atau Gagal.' },
+    { el:'#statusTrx', j:'Status pembayaran', t:'Status tagihan ini: Lunas, Belum dibayar, Kedaluwarsa, atau Gagal.' },
     { el:pasO('#blokTrx'), j:'Rincian transaksi', t:'Invoice, pengguna, paket, metode pembayaran, nomor Virtual Account, dan nominal tagihan.' }, { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman dan pertanyaan umum ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] }
 ].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { tanda:usulan('IDDS-OB-63') })));
 const awal = (location.hash || '').slice(1); if (RENDER[awal]) S.layar = awal;

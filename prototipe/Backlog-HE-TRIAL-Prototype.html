@@ -1045,7 +1045,7 @@ function kartuKtp() {
       <div class="ina-file-upload__dropzone" id="pilihKtp"><input type="file" class="ina-file-upload__input" id="berkasKtp" accept="image/jpeg,image/png,image/webp" aria-labelledby="lblKtp">
         <div class="ina-file-upload__content"><div class="ina-file-upload__icon">${ik('unggah', 24)}</div>
         <div class="ina-file-upload__text"><div class="ina-file-upload__title">Seret foto KTP ke sini atau klik untuk memilih</div><div class="ina-file-upload__description">NIK, nama, tempat dan tanggal lahir, serta kewarganegaraan akan terisi otomatis. JPG, PNG, atau WebP, maksimal 10 MB. Foto hanya dibaca untuk mengisi data dan tidak disimpan.</div></div>
-        <button type="button" class="ina-file-upload__button" id="tombolKtp" aria-describedby="lblKtp">Pilih File</button></div></div>
+        <button type="button" class="ina-file-upload__button" id="tombolKtp" aria-describedby="lblKtp">Pilih file</button></div></div>
       ${k.nama && !k.tolak ? berkasKtp(k) : ''}${tolak}</div>
     <div id="statusKtp" aria-live="polite">${status}</div></div>`;
 }
@@ -1502,7 +1502,8 @@ function kartuVa() {
     <div class="tombol-blok">${tombol('Cek status pembayaran', 'primary', 'md', `id="cekBayar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'bayar' ? spinner : ik('ulang', 16))}${tombol('Ganti bank pembayaran', 'tertiary', 'md', 'id="gantiBank"')}</div></div></section>`;
 }
 function layarBayar() {
-  if (!DB.dipesan) { S.layar = 'dasbor'; return layarDasbor(); }
+  /* dibuka langsung (pil bilah prototipe atau alamat) sebelum memilih paket: isi data contoh seperti pil Setelah lunas dan Selesai */
+  if (!DB.dipesan) { DB.dipesan = 'enterprise'; DB.metodeBayar = 'va'; DB.bank = 'BRI'; DB.va = { no:'1462900000000001', ref:'REF-CONTOH-0001', habis:Date.now() + 86400000, sampai:'27 Okt 2026, 09.21' }; setTimeout(jalankanJamVa, 0); }
   if (DB.lunas) { S.layar = 'lunas'; return layarLunas(); }
   return `${heroDb()}${kartuTahap()}<div class="dua-kol" style="margin-top:16px">${kartuRingkasan()}${kartuMetode()}</div>${kartuBantuan()}`;
 }
@@ -1878,7 +1879,7 @@ function bukaHash(h) {
   }
   if (LAYAR.some(([k]) => k === h)) S.layar = siapkan(h);
 }
-/* datang dari Mulai Berlangganan: kartu Upgrade langsung terlihat */
+/* datang dari Mulai berlangganan: kartu Upgrade langsung terlihat */
 const sorotUpgrade = () => setTimeout(() => { const el = $('#kartuTrial'); if (!el) return; el.scrollIntoView({ block:'center', behavior:'smooth' }); el.classList.add('sorot'); setTimeout(() => el.classList.remove('sorot'), 2400); }, 300);
 function selesaiMasukPortal() {
   portal = true; const tujuan = S.balik; S.balik = '';
@@ -1909,7 +1910,7 @@ document.addEventListener('click', e => {
   if (t.closest('#batalPerpanjang')) { ke('riwayat'); toast('Perpanjangan dibatalkan. Tidak ada tagihan yang dibuat.'); return; }
   if (t.closest('#lanjutPerpanjang')) { toast('Langkah berikutnya sama dengan Pilih Bank dan Bayar Virtual Account. Tagihan dibuat saat Anda menekan Buat Virtual Account.', 'default', 5000); return; }
   if (t.closest('#simBank')) { transferBank(); return; }
-  if (t.closest('#simPortal')) { portal = !portal; simpanTrial(); gambarBar(); toast(portal ? 'Sesi portal aktif: Mulai Berlangganan langsung membuka Dasbor.' : 'Sesi portal berakhir: Mulai Berlangganan meminta masuk lebih dulu.'); return; }
+  if (t.closest('#simPortal')) { portal = !portal; simpanTrial(); gambarBar(); toast(portal ? 'Sesi portal aktif: Mulai berlangganan langsung membuka Dasbor.' : 'Sesi portal berakhir: Mulai berlangganan meminta masuk lebih dulu.'); return; }
   if (t.closest('#bukaPeta')) { bukaPeta(); }
 });
 
@@ -2031,7 +2032,7 @@ function gambarBar() {
   const n = posisiPeta(), [judul, aksi] = PETA[n - 1], bayar = S.layar === 'upgrade' && DB.va && !DB.ent;
   $('#barPerjalanan').innerHTML = `<span>Perjalanan:</span><b>Langkah ${n} dari ${PETA.length} · ${judul}</b><span class="sep">&bull;</span><span>${aksi}</span>
     ${bayar ? '<button class="pil utama" id="simBank">Simulasikan Transfer dari Bank</button>' : ''}
-    <span class="kanan">${DB.trial && !DB.ent ? `<button class="pil" id="simPortal" aria-pressed="${portal}" title="Mengatur apakah Mulai Berlangganan meminta masuk portal lebih dulu">Sesi portal: ${portal ? 'aktif' : 'berakhir'}</button>` : ''}<button class="pil" id="bukaPeta">Peta perjalanan</button></span>`;
+    <span class="kanan">${DB.trial && !DB.ent ? `<button class="pil" id="simPortal" aria-pressed="${portal}" title="Mengatur apakah Mulai berlangganan meminta masuk portal lebih dulu">Sesi portal: ${portal ? 'aktif' : 'berakhir'}</button>` : ''}<button class="pil" id="bukaPeta">Peta perjalanan</button></span>`;
 }
 function bukaPeta() {
   const n = posisiPeta();
@@ -2043,7 +2044,7 @@ const pilAktif = () => S.layar === 'dasbor' ? (DB.ent ? 'enterprise' : DB.trial 
 const bantuanDasborAsli = BANTUAN.dasbor;
 const FAQ_TRIAL = [['Berapa lama Paket Trial berlaku?', '30 hari sejak Trial aktif. Sisa masa dan tanggal berakhirnya tampil di kartu Paket Trial aktif di Dasbor.'],
   ['Apa batas Paket Trial?', 'Trial berisi 10 transaksi dan paling banyak 5 pengguna, termasuk akun pemilik. Semua menu dapat dibuka. Tanda tangan dan stempel elektronik belum termasuk.'],
-  ['Bagaimana cara upgrade ke Enterprise?', 'Tekan Upgrade sekarang di Dasbor atau Mulai Berlangganan di aplikasi kantor. Pilih Virtual Account, pilih BRI, tekan Buat Virtual Account, lalu transfer sebelum batas waktu. Trial tetap berjalan selama pembayaran belum diterima.'],
+  ['Bagaimana cara upgrade ke Enterprise?', 'Tekan Upgrade sekarang di Dasbor atau Mulai berlangganan di aplikasi kantor. Pilih Virtual Account, pilih BRI, tekan Buat Virtual Account, lalu transfer sebelum batas waktu. Trial tetap berjalan selama pembayaran belum diterima.'],
   ['Apakah data saya hilang setelah upgrade?', 'Tidak. Pengguna, order, dan alamat aplikasi tetap sama. Anda juga tidak perlu mendaftar ulang.'],
   ['Apakah saya menerima email aktivasi lagi setelah upgrade?', 'Tidak. Setelah upgrade, Anda menerima email Pembayaran Berhasil Diterima. Gunakan alamat aplikasi dan kata sandi yang sama.']];
 BANTUAN.dasbor = () => DB.trial ? { judul:DB.ent ? 'Bantuan Paket Enterprise' : 'Bantuan Paket Trial', isi:`<p>${DB.ent ? 'Paket Enterprise kantor Anda sudah aktif.' : 'Paket Trial kantor Anda sudah aktif dan aplikasi siap digunakan.'}</p><h4 class="bantu-sub">Pertanyaan umum</h4>${fq('t', FAQ_TRIAL)}${kontak()}` } : bantuanDasborAsli();
@@ -2059,7 +2060,7 @@ UBAH.push(
   { kode:'HE-TRIAL-02', bukanHE:true, versi:'v2', judul:'Email aktivasi tanpa kata sandi dan hanya sekali',
     isi:'Email Akun e-PPAT Anda Sudah Aktif dikirim sekali saat Trial aktif dan tidak memuat kata sandi. Saat upgrade, pengguna hanya menerima instruksi pembayaran dan Pembayaran Berhasil Diterima.',
     lama:'Email memuat kata sandi dalam teks biasa dan terkirim dua kali (saat Trial dan setelah upgrade). Email pembayaran menyebut konfigurasi instansi maksimal 1x24 jam, padahal aplikasi sudah aktif. Dasbor meminta "Cek email Anda untuk mendapatkan password login".', ke:'tr-aktif', sorot:'#emailTrial', sumber:SUMBER_TRIAL },
-  { kode:'HE-TRIAL-03', bukanHE:true, versi:'v2', judul:'Tenant: satu istilah Trial, sisa masa terlihat, dan Mulai Berlangganan selalu ada',
+  { kode:'HE-TRIAL-03', bukanHE:true, versi:'v2', judul:'Tenant: satu istilah Trial, sisa masa terlihat, dan Mulai berlangganan selalu ada',
     isi:'Lencana Paket Trial dengan sisa hari tampil di header portal dan tenant, lalu hilang setelah upgrade. Spanduk memakai istilah Trial dan menampilkan sisa hari. Tombol Mulai berlangganan selalu ada di bawah menu. Spanduk TERA tidak tampil untuk Super Admin karena TERA didaftarkan peran PPAT. Lihat dengan masuk sebagai Super Admin Trial.',
     lama:'Portal menyebut Trial, tenant menyebut Paket Gratis. Header tidak menunjukkan paket yang sedang dipakai, dan spanduk tidak menampilkan sisa hari. Spanduk TERA tetap meminta pendaftaran walaupun paket belum memuat tanda tangan dan stempel elektronik.', ke:'tr-aktif', sorot:null, sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-04', bukanHE:true, versi:'v2', judul:'Batas paket dicegah sebelum mengisi formulir',
@@ -2068,9 +2069,9 @@ UBAH.push(
   { kode:'HE-TRIAL-05', bukanHE:true, versi:'v2', judul:'Masuk ke Aplikasi langsung membuka halaman Masuk',
     isi:'Tombol Masuk ke aplikasi e-PPAT membuka halaman Masuk tenant. Bila sesi tenant masih ada, tombol langsung membuka Dasbor.',
     lama:'Tombol membuka tab baru berisi Halaman Depan tenant, dan footer menampilkan pesan teknis "Master footer yang dipilih tidak ditemukan". Pengguna harus menekan Masuk lagi untuk melihat formulir.', ke:'tr-aktif', sorot:'#kartuSiap', sumber:SUMBER_TRIAL },
-  { kode:'HE-TRIAL-06', bukanHE:true, versi:'v2', judul:'Mulai Berlangganan kembali ke Dasbor portal, tagihan dibuat saat Buat Virtual Account',
-    isi:'Bila sesi portal masih aktif, Mulai Berlangganan langsung membuka Dasbor portal tanpa masuk ulang. Bila berakhir, pengguna masuk dulu, lalu kembali ke Dasbor yang sama. Kartu Upgrade disorot dan langkah berikutnya menunjuk ke Upgrade Sekarang. Membuka halaman Upgrade tidak membuat order.',
-    lama:'Mulai Berlangganan langsung membuka halaman Upgrade. Alur masuk lalu kembali sudah ada di live dengan pesan "Silakan login terlebih dahulu untuk melanjutkan upgrade". Namun, membuka halaman Upgrade langsung memanggil renew-subscription walaupun pengguna belum memilih pembayaran.', ke:'tr-masuk', sorot:'#pesanBalik', sumber:SUMBER_TRIAL },
+  { kode:'HE-TRIAL-06', bukanHE:true, versi:'v2', judul:'Mulai berlangganan kembali ke Dasbor portal, tagihan dibuat saat Buat Virtual Account',
+    isi:'Bila sesi portal masih aktif, Mulai berlangganan langsung membuka Dasbor portal tanpa masuk ulang. Bila berakhir, pengguna masuk dulu, lalu kembali ke Dasbor yang sama. Kartu Upgrade disorot dan langkah berikutnya menunjuk ke Upgrade Sekarang. Membuka halaman Upgrade tidak membuat order.',
+    lama:'Mulai berlangganan langsung membuka halaman Upgrade. Alur masuk lalu kembali sudah ada di live dengan pesan "Silakan login terlebih dahulu untuk melanjutkan upgrade". Namun, membuka halaman Upgrade langsung memanggil renew-subscription walaupun pengguna belum memilih pembayaran.', ke:'tr-masuk', sorot:'#pesanBalik', sumber:SUMBER_TRIAL },
   { kode:'HE-TRIAL-07', bukanHE:true, versi:'v2', judul:'Progres Upgrade dan pesan berhasil setelah lunas',
     isi:'Progres Upgrade menunjukkan posisi pengguna dalam empat tahap, terpisah dari Progres Registrasi sehingga waktunya selalu urut. Setelah lunas, Dasbor menampilkan pesan berhasil, nomor order, masa berlaku, dan tombol Kembali ke Aplikasi e-PPAT.',
     lama:'Setelah bayar, halaman pindah ke Dasbor tanpa pesan berhasil. Proses Pembayaran dan Lunas (07.59) tampil sebelum Proses Administrasi dan Selesai (07.57). Lencana tetap "STATUS AKUN: ONBOARDING".', ke:'tr-ent', sorot:'#pesanBerhasil', sumber:SUMBER_TRIAL },

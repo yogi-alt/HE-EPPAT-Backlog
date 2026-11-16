@@ -826,7 +826,7 @@ function kartuKtp() {
       <div class="ina-file-upload__dropzone" id="pilihKtp"><input type="file" class="ina-file-upload__input" id="berkasKtp" accept="image/jpeg,image/png,image/webp" aria-labelledby="lblKtp">
         <div class="ina-file-upload__content"><div class="ina-file-upload__icon">${ik('unggah', 24)}</div>
         <div class="ina-file-upload__text"><div class="ina-file-upload__title">Seret foto KTP ke sini atau klik untuk memilih</div><div class="ina-file-upload__description">NIK, jenis kelamin, tempat dan tanggal lahir, pekerjaan, kewarganegaraan, serta alamat akan terisi otomatis. JPG, PNG, atau WebP, maksimal 10 MB. Foto ini juga dipakai untuk registrasi sertifikat elektronik (CA).</div></div>
-        <button type="button" class="ina-file-upload__button" id="tombolKtp" aria-describedby="lblKtp">Pilih File</button></div></div>
+        <button type="button" class="ina-file-upload__button" id="tombolKtp" aria-describedby="lblKtp">Pilih file</button></div></div>
       ${k.nama && !k.tolak ? berkasKtp(k) : ''}${tolak}</div>
     <div id="statusKtp" aria-live="polite">${status}</div></div>`;
 }
@@ -1125,7 +1125,7 @@ function dialogImpor() {
       <div class="ina-file-upload" id="f-impor"><div class="ina-file-upload__label">Berkas pengguna<span class="ina-text-field__required">*</span></div>
         <div class="ina-file-upload__dropzone" role="button" tabindex="0" id="pilihBerkas" aria-label="Pilih berkas CSV atau Excel"><div class="ina-file-upload__content"><div class="ina-file-upload__icon">${ik('unggah', 24)}</div>
           <div class="ina-file-upload__text"><div class="ina-file-upload__title">Seret berkas ke sini atau klik untuk memilih</div><div class="ina-file-upload__description">CSV atau Excel (.xlsx), maks. 500 baris. Gunakan templat agar kolomnya sesuai.</div></div>
-          <span class="ina-file-upload__button">Pilih File</span></div></div>
+          <span class="ina-file-upload__button">Pilih file</span></div></div>
         <div class="ina-file-upload__files" id="berkasImpor"></div></div>
       <div id="pratinjau"></div></div>`,
     tombol:[['Batal', 'secondary', null], ['Simpan pengguna valid', 'primary', () => simpanImpor(), true]] });

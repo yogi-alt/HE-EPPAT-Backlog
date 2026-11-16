@@ -483,7 +483,7 @@ function kartuKtp() {
       <div class="ina-file-upload__dropzone" id="pilihKtp"><input type="file" class="ina-file-upload__input" id="berkasKtp" accept="image/jpeg,image/png,image/webp" aria-labelledby="lblKtp">
         <div class="ina-file-upload__content"><div class="ina-file-upload__icon">${ik('unggah', 24)}</div>
         <div class="ina-file-upload__text"><div class="ina-file-upload__title">Seret foto KTP ke sini atau klik untuk memilih</div><div class="ina-file-upload__description">NIK, nama, tempat dan tanggal lahir, serta kewarganegaraan akan terisi otomatis. JPG, PNG, atau WebP, maksimal 10 MB. Foto hanya dibaca untuk mengisi data dan tidak disimpan.</div></div>
-        <button type="button" class="ina-file-upload__button" id="tombolKtp" aria-describedby="lblKtp">Pilih File</button></div></div>
+        <button type="button" class="ina-file-upload__button" id="tombolKtp" aria-describedby="lblKtp">Pilih file</button></div></div>
       ${k.nama && !k.tolak ? berkasKtp(k) : ''}${tolak}</div>
     <div id="statusKtp" aria-live="polite">${status}</div></div>`;
 }
@@ -937,7 +937,8 @@ function kartuVa() {
     <div class="tombol-blok">${tombol('Cek status pembayaran', 'primary', 'md', `id="cekBayar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'bayar' ? spinner : ik('ulang', 16))}${tombol('Ganti bank pembayaran', 'tertiary', 'md', 'id="gantiBank"')}</div></div></section>`;
 }
 function layarBayar() {
-  if (!DB.dipesan) { S.layar = 'dasbor'; return layarDasbor(); }
+  /* dibuka langsung (pil bilah prototipe atau alamat) sebelum memilih paket: isi data contoh seperti pil Setelah lunas dan Selesai */
+  if (!DB.dipesan) { DB.dipesan = 'enterprise'; DB.metodeBayar = 'va'; DB.bank = 'BRI'; DB.va = { no:'1462900000000001', ref:'REF-CONTOH-0001', habis:Date.now() + 86400000, sampai:'27 Okt 2026, 09.21' }; setTimeout(jalankanJamVa, 0); }
   if (DB.lunas) { S.layar = 'lunas'; return layarLunas(); }
   return `${heroDb()}${kartuTahap()}<div class="dua-kol" style="margin-top:16px">${kartuRingkasan()}${kartuMetode()}</div>${kartuBantuan()}`;
 }
