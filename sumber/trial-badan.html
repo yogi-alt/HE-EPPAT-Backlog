@@ -1069,7 +1069,7 @@ function ke(layar) { if (layar !== 'dasbor') S.keUpgrade = false; S.layar = siap
 /* jaga perubahan formulir pendaftaran (HE-REG-01) */
 function jaga(lanjut) {
   if (S.layar !== 'daftar' || !S.ubah) { lanjut(); return; }
-  dialog({ judul:'Tinggalkan pendaftaran?', konfirmasi:true, isi:`<p>Data yang sudah Anda isi di formulir pendaftaran akan hilang. Anda perlu mengisinya lagi bila ingin mendaftar.${usulan('HE-REG-01')}</p>`,
+  dialog({ judul:'Tinggalkan pendaftaran?', konfirmasi:true, bahaya:true, isi:`<p>Data yang sudah Anda isi di formulir pendaftaran akan hilang. Anda perlu mengisinya lagi bila ingin mendaftar.${usulan('HE-REG-01')}</p>`,
     tombol:[['Lanjutkan mengisi', 'secondary', null], ['Tinggalkan', 'primary', () => { S.ubah = false; S.setuju = false; lanjut(); }]] });
 }
 
@@ -1223,13 +1223,13 @@ document.addEventListener('click', e => {
   const b = tg.getAttribute('aria-expanded') !== 'true';
   tg.setAttribute('aria-expanded', b); tg.querySelector('.ina-accordion__icon').classList.toggle('ina-accordion__icon--open', b); tg.nextElementSibling.classList.toggle('ina-accordion__content--open', b);
 });
-function dialog({ judul, isi, tombol: tb, lebar, konfirmasi }) {
+function dialog({ judul, isi, tombol: tb, lebar, konfirmasi, bahaya }) {
   const L = $('#lapisan');
   L.innerHTML = `<div class="ina-modal"><div class="ina-modal__backdrop" data-i="-1"></div><div class="ina-modal__container">
     <div class="ina-modal__dialog ina-modal__dialog--size-${lebar ? 'lg' : 'md'} ${konfirmasi ? 'ina-modal-confirmation' : ''}" role="${konfirmasi ? 'alertdialog' : 'dialog'}" aria-modal="true" aria-labelledby="dlgJudul">
       <div class="ina-modal__header"><h2 class="ina-modal__title" id="dlgJudul">${judul}</h2><button type="button" class="ina-modal__close-button" aria-label="Tutup dialog" data-i="-1">${ik('x', 22)}</button></div>
       <div class="ina-modal__body">${isi}</div>
-      <div class="ina-modal__footer">${tb.map(([t, h], i) => `<button type="button" class="ina-button ina-button--${h} ina-button--md" data-i="${i}">${t}</button>`).join('')}</div></div></div></div>`;
+      <div class="ina-modal__footer">${tb.map(([t, h], i) => `<button type="button" class="ina-button ina-button--${h} ina-button--md" data-i="${i}" ${bahaya && i === tb.length - 1 ? 'style="background:var(--ina-negative-600);border-color:var(--ina-negative-600)"' : ''}>${t}</button>`).join('')}</div></div></div></div>`;
   L.querySelector('.ina-modal__footer .ina-button:last-child').focus();
   L.onclick = e => { const b = e.target.closest('[data-i]'); if (!b) return; e.stopPropagation(); const i = +b.dataset.i; L.innerHTML = ''; if (i >= 0 && tb[i][2]) tb[i][2](); };
 }
