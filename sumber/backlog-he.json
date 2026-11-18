@@ -2281,16 +2281,16 @@
       "fitur": "Dashboard (Onboarding)",
       "judul": "Tour guide Registrasi, Masuk, Pembayaran, dan Riwayat Transaksi",
       "saat_ini": "Tur hanya ada di Dasbor saat memilih paket. Layar Registrasi, Masuk, Verifikasi dua langkah, Pembayaran, Setelah lunas, Selesai, dan Riwayat Transaksi tidak memiliki panduan.",
-      "usulan": "Pasang tur di layar pelanggan lainnya. Registrasi: langkah pendaftaran, isi otomatis dari KTP, data diri, email, syarat kata sandi, ID PPAT, alamat aplikasi, persetujuan, Daftar sekarang. Masuk: email dan kata sandi, Lupa kata sandi, Masuk, Daftar sekarang. Verifikasi dua langkah: pilihan Aplikasi Authenticator atau Email OTP; layar kode: isian kode, masa berlaku, kirim ulang, Verifikasi. Pembayaran punya tur per keadaan: pilih metode, pilih bank, dan nomor Virtual Account (batas waktu, Cek status pembayaran, Ganti bank). Setelah lunas: pembayaran diterima, email aktivasi, Cek progres. Selesai: aplikasi siap. Riwayat Transaksi: daftar tagihan. Kartu yang lebih tinggi dari ruang layar disorot judulnya. Tur muncul sekali per pengguna per layar, dapat dilewati (Lewati tur atau Esc), dan dapat diputar ulang dari Bantuan › Mulai tur halaman ini.",
+      "usulan": "Pasang tur di layar pelanggan lainnya. Registrasi: langkah pendaftaran, isi otomatis dari KTP, data diri, email, syarat kata sandi, ID PPAT, alamat aplikasi, persetujuan, Daftar sekarang. Masuk: email dan kata sandi, Lupa kata sandi, Masuk, Daftar sekarang. Verifikasi dua langkah: pilihan Aplikasi Authenticator atau Email OTP; layar kode: isian kode, masa berlaku, kirim ulang, Verifikasi. Pembayaran punya tur per keadaan: pilih metode, pilih bank, dan menunggu pembayaran. Tur menunggu pembayaran berisi sembilan langkah yang sama dengan Backlog-IDDS-OB-BAYAR: Ringkasan pesanan, Nomor Virtual Account dengan tombol Salin, Batas waktu pembayaran, Cara bayar, Cek status pembayaran, Hasil cek pembayaran (setelah pelanggan menekan Cek status pembayaran), Ganti paket atau bank, Progres registrasi, dan Bantuan. Kartu Virtual Account memuat Cara bayar per kanal (ATM, BRImo, Internet Banking, dan bank lain) dalam IDDS Accordion. Setelah lunas: pembayaran diterima, email aktivasi, Cek progres. Selesai: aplikasi siap. Riwayat Transaksi: daftar tagihan. Kartu yang lebih tinggi dari ruang layar disorot judulnya. Tur muncul sekali per pengguna per layar, dapat dilewati (Lewati tur atau Esc), dan dapat diputar ulang dari Bantuan › Mulai tur halaman ini.",
       "prinsip": "H10 Help and Documentation",
       "halaman": "Masukan Workshop HE 03/11/2026",
       "prioritas": "Sedang",
       "layar": "dev.eppat.id/register; /login › Verifikasi Dua Langkah; /dashboard › Pembayaran, Setelah lunas, Selesai; Riwayat Transaksi",
       "acuan": "prototipe/Backlog-HE-ONBOARDING-Prototype.html › Daftar perubahan › HE-OB-07; prototipe/Backlog-HE-TRIAL-Prototype.html",
-      "selesai_bila": "Setiap layar dan keadaan pembayaran punya tur sendiri yang muncul sekali dan dapat diputar ulang dari Bantuan.",
+      "selesai_bila": "Setiap layar dan keadaan pembayaran punya tur sendiri yang muncul sekali dan dapat diputar ulang dari Bantuan. Tur menunggu pembayaran sama persis dengan Backlog-IDDS-OB-BAYAR: sembilan langkah dengan urutan dan judul yang sama.",
       "status": "Prototipe siap",
       "catatan": "Komponen bersama sumber/tur-bersama.html. Cek email, Verifikasi berhasil, dan kode cadangan (tidak dipakai lagi) tidak diberi tur karena isinya satu pesan.",
-      "tanggal": "2026-11-12",
+      "tanggal": "2026-11-18",
       "sumber": "MoM Workshop HE 03/11/2026",
       "versi": "v2"
     },
@@ -4646,16 +4646,16 @@
       "fitur": "Onboarding · Simulasi Pembayaran (penyesuaian IDDS)",
       "judul": "Tour guide Simulasi Pembayaran pelanggan dan operator",
       "saat_ini": "Tidak ada panduan saat pelanggan atau operator pertama kali membuka layar pembayaran dan verifikasi pembayaran.",
-      "usulan": "Pasang tur per layar dan keadaan. Pelanggan: Dasbor per tahap (pilih paket, metode pembayaran, pilih bank, nomor Virtual Account dan batas waktu, menunggu pembayaran, pembayaran diterima, proses aktivasi, aplikasi siap), Dasbor Trial dengan sisa masa Trial dan Upgrade, Upgrade ke Enterprise, Riwayat Transaksi, Perpanjang Langganan. Operator: Manajemen Onboarding, Detail Pendaftar, Verifikasi Pembayaran, Detail Transaksi. Di Dasbor pelanggan, Bantuan dibuka lewat kartu \"Butuh bantuan?\". Tur muncul sekali per pengguna per layar, dapat dilewati (Lewati tur atau Esc), dan dapat diputar ulang dari Bantuan › Mulai tur halaman ini.",
+      "usulan": "Pasang tur per layar dan keadaan. Pelanggan: Dasbor per tahap (pilih paket, metode pembayaran, pilih bank, menunggu pembayaran, pembayaran diterima, proses aktivasi, aplikasi siap), Dasbor Trial dengan sisa masa Trial dan Upgrade, Upgrade ke Enterprise, Riwayat Transaksi, Perpanjang Langganan. Operator: Manajemen Onboarding, Detail Pendaftar, Verifikasi Pembayaran, Detail Transaksi. Saat menunggu pembayaran, tur Dasbor berisi sembilan langkah yang sama dengan Backlog-HE-ONBOARDING: Ringkasan pesanan, Nomor Virtual Account dengan tombol Salin, Batas waktu pembayaran, Cara bayar, Cek status pembayaran, Hasil cek pembayaran (setelah pelanggan menekan Cek status pembayaran), Ganti paket atau bank, Progres registrasi, dan Bantuan. Tur Detail Pendaftar sama dengan Backlog-IDDS-OB-MONITOR. Di Dasbor pelanggan, Bantuan dibuka lewat kartu \"Butuh bantuan?\". Tur muncul sekali per pengguna per layar, dapat dilewati (Lewati tur atau Esc), dan dapat diputar ulang dari Bantuan › Mulai tur halaman ini.",
       "prinsip": "H10 Help and Documentation",
       "halaman": "Masukan Workshop HE 03/11/2026",
       "prioritas": "Sedang",
       "layar": "dev.eppat.id › Dasbor pelanggan (Pembayaran, Lunas, Aktivasi, Trial); Upgrade ke Enterprise; Riwayat Transaksi; Perpanjang Langganan; Manajemen Onboarding; Verifikasi Pembayaran",
       "acuan": "prototipe/Backlog-IDDS-OB-BAYAR-Prototype.html › Daftar penyesuaian › IDDS-OB-65",
-      "selesai_bila": "Setiap tahap simulasi dan layar operator punya tur sendiri yang muncul sekali dan dapat diputar ulang dari Bantuan.",
+      "selesai_bila": "Setiap tahap simulasi dan layar operator punya tur sendiri yang muncul sekali dan dapat diputar ulang dari Bantuan. Tur menunggu pembayaran sama persis dengan Backlog-HE-ONBOARDING: sembilan langkah dengan urutan dan judul yang sama.",
       "status": "Prototipe siap",
       "catatan": "Komponen bersama sumber/tur-bersama.html. Dialog tidak diberi tur, sama dengan modul lain.",
-      "tanggal": "2026-11-12",
+      "tanggal": "2026-11-18",
       "sumber": "MoM Workshop HE 03/11/2026",
       "versi": "v2"
     },
@@ -7661,6 +7661,18 @@
       "kode": "IDDS-TN-07",
       "perubahan": "Masa berlaku kode OTP ditetapkan 5 menit sesuai MoM Workshop HE 3 Nov 2026; keterangan \"angka contoh\" dihapus.",
       "berkas": "sumber/tn-masuk-badan.html"
+    },
+    {
+      "tanggal": "2026-11-18",
+      "kode": "IDDS-OB-65",
+      "perubahan": "Tur menunggu pembayaran diselaraskan dengan Backlog-HE-ONBOARDING menjadi sembilan langkah: Ringkasan pesanan, Nomor Virtual Account dengan tombol Salin, Batas waktu pembayaran, Cara bayar, Cek status pembayaran, Hasil cek pembayaran (setelah pelanggan menekan Cek status pembayaran), Ganti paket atau bank, Progres registrasi, dan Bantuan. Langkah Status akun dan Langkah berikutnya dihapus dari tur ini. Tur Detail Pendaftar disamakan dengan Backlog-IDDS-OB-MONITOR, termasuk langkah Provisi manual.",
+      "berkas": "sumber/ob-bayar-badan.html"
+    },
+    {
+      "tanggal": "2026-11-18",
+      "kode": "HE-OB-07",
+      "perubahan": "Tur menunggu pembayaran diselaraskan dengan Backlog-IDDS-OB-BAYAR menjadi sembilan langkah. Kartu Virtual Account kini memuat Cara bayar per kanal dalam IDDS Accordion, sama dengan Backlog-IDDS-OB-BAYAR, menggantikan tiga baris panduan umum.",
+      "berkas": "sumber/onboard-badan.html; sumber/trial-badan.html"
     }
   ]
 }

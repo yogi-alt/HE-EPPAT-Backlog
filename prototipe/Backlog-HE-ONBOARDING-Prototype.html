@@ -763,7 +763,10 @@ body.mode-app .ob{display:none}
 .kv-va div{padding:10px 14px;border:1px solid var(--ina-stroke-primary);border-radius:12px;font-size:13px;color:var(--ina-content-secondary)}
 .kv-va div b{display:block;margin-top:2px;font-size:14px;color:var(--ina-content-primary);word-break:break-all}
 .kv-va .lebar{grid-column:1/-1}
-.panduan-va{margin:12px 0 0;padding:12px 16px 12px 34px;border:1px solid var(--ina-stroke-primary);border-radius:12px;font-size:14px;line-height:24px}
+.cara-bayar{margin-top:14px}
+.cara-bayar h4{margin:0 0 2px;font:600 14px Inter,sans-serif;color:var(--ina-content-primary)}
+.cara-bayar .ket-cara{margin:0 0 6px;font-size:12.5px;color:var(--ina-content-secondary)}
+.cara-bayar .ina-accordion__body ol{margin:0;padding-left:20px;font-size:14px;line-height:22px}
 .tombol-blok{display:flex;flex-direction:column;gap:10px;margin-top:14px}
 .tombol-blok .ina-button{justify-content:center}
 .siap-ikon{width:56px;height:56px;border-radius:999px;display:grid;place-items:center;background:var(--ina-positive-100);color:var(--ina-content-positive);margin-bottom:10px}
@@ -933,7 +936,7 @@ const UBAH = [
     isi:'Saat pelanggan pertama kali masuk Dasbor, tur singkat menyorot Progres Registrasi, Langkah berikutnya, Pilih Paket, tombol Cek progres registrasi, dan tombol Bantuan. Bentuk dan perilakunya sama dengan tur di Permohonan AJB: bagian lain diredupkan, kotak keterangan berisi posisi langkah, Sebelumnya, Lanjut, dan Lewati tur, muncul sekali per pengguna, dapat ditutup dengan Esc, dan dapat diputar ulang dari Bantuan. Tur untuk Super Admin dan Operator menyusul.',
     lama:'Tidak ada panduan saat pelanggan pertama kali masuk Dasbor.', ke:'tur', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-OB-07', versi:'v2', bukanHE:true, judul:'Tour guide Registrasi, Masuk, Pembayaran, dan Riwayat Transaksi',
-    isi:'Tur singkat juga muncul di layar lain yang dilalui pelanggan. Registrasi: langkah pendaftaran, isi otomatis dari KTP, data diri, email, syarat kata sandi, ID PPAT, alamat aplikasi, persetujuan, dan tombol Daftar sekarang. Masuk: isian email dan kata sandi, Lupa kata sandi, dan Daftar sekarang. Verifikasi dua langkah: pilihan Aplikasi Authenticator atau Email OTP, lalu isian kode, masa berlaku, dan kirim ulang. Pembayaran: ringkasan pesanan, ganti paket, metode pembayaran, lalu nomor Virtual Account, batas waktu, dan cek status pembayaran. Setelah lunas: email aktivasi dan Cek progres. Selesai: aplikasi siap. Riwayat Transaksi: daftar tagihan. Setiap layar dan keadaan punya tur sendiri yang muncul sekali, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
+    isi:'Tur singkat juga muncul di layar lain yang dilalui pelanggan. Registrasi: langkah pendaftaran, isi otomatis dari KTP, data diri, email, syarat kata sandi, ID PPAT, alamat aplikasi, persetujuan, dan tombol Daftar sekarang. Masuk: isian email dan kata sandi, Lupa kata sandi, dan Daftar sekarang. Verifikasi dua langkah: pilihan Aplikasi Authenticator atau Email OTP, lalu isian kode, masa berlaku, dan kirim ulang. Pembayaran: ringkasan pesanan, ganti paket, dan metode pembayaran. Saat menunggu pembayaran, tur berisi sembilan langkah yang sama dengan Backlog-IDDS-OB-BAYAR: ringkasan pesanan, nomor Virtual Account dengan tombol Salin, batas waktu pembayaran, cara bayar, cek status pembayaran, hasil cek pembayaran, ganti paket atau bank, progres registrasi, dan Bantuan. Kartu Virtual Account memuat Cara bayar per kanal (ATM, BRImo, Internet Banking, dan bank lain). Setelah lunas: email aktivasi dan Cek progres. Selesai: aplikasi siap. Riwayat Transaksi: daftar tagihan. Setiap layar dan keadaan punya tur sendiri yang muncul sekali, dapat dilewati, dan dapat diputar ulang dari Bantuan.',
     lama:'Tur hanya ada di Dasbor saat memilih paket. Layar Registrasi, Masuk, Verifikasi dua langkah, Pembayaran, Setelah lunas, Selesai, dan Riwayat Transaksi tidak memiliki panduan.', ke:'tur-daftar', sorot:null, sumber:'MoM Workshop HE 03/11/2026' },
   { kode:'HE-OB-01', judul:'Dashboard Onboarding: hasil cek status jelas dan dapat ditutup',
     isi:'"Check Status Terbaru" diganti menjadi "Cek progres registrasi", sama dengan nama stepper "Progres Registrasi Anda" (masukan Peruri 4 Nov 2026). Tombol ini tidak ditampilkan lagi setelah semua tahap di stepper selesai (masukan Peruri 4 Nov 2026). Hasilnya ditampilkan sebagai IDDS Toast yang dapat ditutup, berisi jam pengecekan dan tahap saat ini (mis. "Belum ada perubahan · Tahap: Proses Pembayaran"). Bila ada perubahan, tahap yang berubah disorot di stepper.',
@@ -1349,7 +1352,17 @@ const pas = f => () => { const e = typeof f === 'function' ? f() : terlihat(f); 
     { el:'#otpUlang', j:'Kirim ulang kode', t:'Bila kode tidak masuk atau masa berlakunya habis, minta kode baru di sini.' },
     { el:'#kirimOtp', j:'Verifikasi', t:'Tekan setelah kode lengkap. Setelah berhasil, Anda masuk ke Dasbor.' },
     { el:'#kembaliMasuk', j:'Kembali ke halaman masuk', t:'Kembali bila ingin masuk dengan akun lain.' }, { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
-  { get kunci() { return DB.va ? 'ob-bayar-va' : DB.metodeBayar ? 'ob-bayar-bank' : 'ob-bayar'; }, aktif:() => S.layar === 'bayar', langkah:() => [
+  { get kunci() { return DB.va ? 'ob-bayar-va' : DB.metodeBayar ? 'ob-bayar-bank' : 'ob-bayar'; }, aktif:() => S.layar === 'bayar', langkah:() => DB.va ? [
+    /* menunggu pembayaran: satu tur 9 langkah, sama dengan Backlog-IDDS-OB-BAYAR (keputusan 18 Nov 2026) */
+    { el:pas(kartuH3('Ringkasan Pesanan')), j:'Ringkasan pesanan', t:'Paket yang Anda pilih beserta harga dan fiturnya.' },
+    { el:'.no-va', j:'Nomor Virtual Account', t:'Transfer tagihan ke nomor ini. Tekan Salin agar nomor tidak salah ketik.' },
+    { el:dekat('#sisaVa', '.ina-alert'), j:'Batas waktu pembayaran', t:'Selesaikan transfer sebelum waktu ini habis. Setelah batas waktu, tagihan kedaluwarsa dan Anda perlu membuat Virtual Account baru.' },
+    { el:() => terlihat('.cara-bayar h4'), j:'Cara bayar', t:'Buka langkah transfer sesuai kanal yang Anda pakai: ATM, mobile banking, internet banking, atau bank lain.' },
+    { el:'#cekBayar', j:'Cek status pembayaran', t:'Pembayaran diverifikasi otomatis. Tekan tombol ini untuk memperbarui statusnya.' },
+    { el:'#hasilCekBayar', j:'Hasil cek pembayaran', t:'Hasil pengecekan terakhir tampil di sini. Bila pembayaran belum terdeteksi, transfer Anda belum masuk. Tunggu beberapa menit setelah transfer, lalu cek lagi.' },
+    { el:'#gantiBank', j:'Ganti paket atau bank', t:'Ganti bank di sini, atau tekan Ganti paket di Ringkasan pesanan. Keduanya hanya dapat dilakukan sebelum pembayaran diterima.' },
+    { el:pas('#kartuTahap'), j:'Progres registrasi', t:'Tahap Pembayaran sedang berjalan. Tahap berikutnya terbuka setelah pembayaran diterima.' },
+    { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] : [
     { el:'#kartuTahap', j:'Progres registrasi', t:'Tahap Pembayaran sedang berjalan. Tahap berikutnya terbuka setelah pembayaran diterima.' },
     { el:pas(kartuH3('Ringkasan Pesanan')), j:'Ringkasan pesanan', t:'Paket yang Anda pilih beserta harga dan fiturnya.' },
     { el:'#gantiPaket', j:'Ganti paket', t:'Paket masih dapat diganti selama pembayaran belum diterima.' },
@@ -1466,13 +1479,20 @@ function kartuMetode() {
 }
 I.chev = '<path d="M9 6l6 6l-6 6" />';
 function sisaVa() { const s = Math.max(0, Math.round((DB.va.habis - Date.now()) / 1000)); return `${String(Math.floor(s / 3600)).padStart(2, '0')}:${String(Math.floor(s % 3600 / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; }
+/* Cara bayar per kanal: sama dengan Backlog-IDDS-OB-BAYAR (sumber/ob-bayar-badan.html) */
+const CARA = () => [
+  ['ATM BRI', ['Pilih Transaksi Lain, lalu Pembayaran, lalu Lainnya, lalu BRIVA.', 'Masukkan nomor Virtual Account.', 'Periksa nama "Pembayaran e-PPAT" dan nominal, lalu pilih Ya.']],
+  ['BRImo', ['Masuk ke BRImo, lalu pilih BRIVA.', 'Masukkan nomor Virtual Account.', 'Periksa nominal, lalu masukkan PIN.']],
+  ['Internet Banking BRI', ['Pilih Pembayaran, lalu BRIVA.', 'Masukkan nomor Virtual Account.', 'Periksa nominal, lalu masukkan kode m-Token.']],
+  ['Bank lain', ['Pilih transfer antarbank.', 'Pilih bank BRI (kode 002), lalu masukkan nomor Virtual Account sebagai nomor tujuan.', `Masukkan nominal persis ${PAKET[DB.dipesan].harga}, lalu konfirmasi.`]]];
+const faqHalaman = (id, q, isi) => `<div class="ina-accordion"><button type="button" class="ina-accordion__toggle" aria-expanded="false" aria-controls="${id}"><div class="ina-accordion__title">${q}</div><div class="ina-accordion__toggler"><svg class="ina-accordion__icon" width="24" height="24" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></div></button><div id="${id}" class="ina-accordion__content"><div class="ina-accordion__body">${isi}</div></div></div>`;
 function kartuVa() {
   return `<section class="ina-card ina-card--variant-basic kartu-db" style="margin-top:0"><div class="ina-card__content">
     <div class="tagihan"><span><h3>${DB.bank} Virtual Account</h3><p class="ket">Pembayaran terverifikasi otomatis</p></span><span class="jml">TAGIHAN<b>${PAKET[DB.dipesan].harga}</b></span></div>
     ${alert('caution', 'Selesaikan pembayaran dalam <span id="sisaVa">' + sisaVa() + '</span>', `Lakukan transfer sebelum ${DB.va.sampai}. Setelah batas waktu, buat Virtual Account baru.`)}
     <div class="no-va"><span>NOMOR VIRTUAL ACCOUNT<b>${DB.va.no}</b></span>${tombol('Salin', 'secondary', 'sm', 'id="salinVa"', ik('salin', 14))}</div>
     <div class="kv-va"><div>Nama VA<b>Pembayaran e-PPAT</b></div><div>Berlaku sampai<b>${DB.va.sampai}</b></div><div class="lebar">Referensi<b>${DB.va.ref}</b></div></div>
-    <ol class="panduan-va"><li>Lakukan transfer sesuai nominal di atas melalui kanal bank yang Anda pilih.</li><li>Pastikan nomor Virtual Account yang dimasukkan benar.</li><li>Pembayaran akan diverifikasi secara otomatis oleh sistem.</li></ol>
+    <div class="cara-bayar"><h4>Cara bayar</h4><p class="ket-cara">${est('Urutan menu dapat berbeda di tiap aplikasi bank.')}</p>${CARA().map(([k, l], i) => faqHalaman('cara-' + i, k, `<ol>${l.map(x => `<li>${x}</li>`).join('')}</ol>`)).join('')}</div>
     ${DB.hasilCek ? `<div id="hasilCekBayar">${alert('caution', 'Pembayaran belum terdeteksi', `Dicek pukul ${DB.hasilCek}. Bila Anda baru saja mentransfer, tunggu beberapa menit lalu cek lagi.`)}</div>` : ''}
     <div class="tombol-blok">${tombol('Cek status pembayaran', 'primary', 'md', `id="cekBayar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'bayar' ? spinner : ik('ulang', 16))}${tombol('Ganti bank pembayaran', 'tertiary', 'md', 'id="gantiBank"')}</div></div></section>`;
 }
@@ -1713,7 +1733,7 @@ function drawer({ judul, isi }) {
 }
 document.addEventListener('click', e => {
   if (e.target.closest('[data-tutup-drawer]')) { $('#lapisanDrawer').innerHTML = ''; return; }
-  const tg = e.target.closest('#lapisanDrawer .ina-accordion__toggle'); if (!tg) return;
+  const tg = e.target.closest('.ina-accordion__toggle'); if (!tg) return; /* akordeon di drawer Bantuan dan di halaman (Cara bayar) */
   const b = tg.getAttribute('aria-expanded') !== 'true';
   tg.setAttribute('aria-expanded', b); tg.querySelector('.ina-accordion__icon').classList.toggle('ina-accordion__icon--open', b); tg.nextElementSibling.classList.toggle('ina-accordion__content--open', b);
 });
