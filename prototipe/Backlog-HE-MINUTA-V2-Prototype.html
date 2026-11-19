@@ -3277,7 +3277,7 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
     t = t || berlaku(); if (!t || T.aktif) return false;
     const L = (t.langkah() || []).filter(l => tampak(cari(l.el)));
     if (!L.length) return false;
-    T.aktif = t; T.i = 0; T.langkah = L;
+    T.aktif = t; T.kunciAktif = kunciLS(t); T.i = 0; T.langkah = L;
     document.body.insertAdjacentHTML('beforeend', '<div class="tur" id="tur" role="dialog" aria-modal="true" aria-labelledby="turJudul"><div class="tur-tirai"></div><div class="tur-sorot"></div><div class="tur-kotak" aria-live="polite"></div></div>');
     tampil(); return true;
   }
@@ -3339,8 +3339,9 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
     jadwal = setTimeout(() => {
       jadwal = null;
       if (T.aktif) return;
-      const t = berlaku(); if (!t || sudah(t) || T.dicek.has(t.kunci) || lapisanTerbuka()) return;
-      if (mulai(t)) T.dicek.add(t.kunci);
+      /* T.dicek memakai kunci per akun: akun lain di peramban yang sama tetap mendapat turnya tanpa muat ulang */
+      const t = berlaku(); if (!t || sudah(t) || T.dicek.has(kunciLS(t)) || lapisanTerbuka()) return;
+      if (mulai(t)) T.dicek.add(kunciLS(t));
     }, Math.max(0, Math.min(800, awalJadwal + 1200 - kini)));
   }
   /* Bantuan: tombol "Mulai tur halaman ini" paling atas di laci Bantuan bila layar ini punya tur */
@@ -3350,9 +3351,10 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
     const u = t.tanda || '';
     isi.insertAdjacentHTML('afterbegin', `<p class="tur-bantuan">${tombol(svg('<path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />') + 'Mulai tur halaman ini', 'secondary', 'data-mulai-tur')}${u}</p>`);
   }
-  /* layar berganti saat tur berjalan (mis. tombol Kembali peramban): tur ditutup tanpa ditandai sudah dilihat */
+  /* layar berganti saat tur berjalan (mis. tombol Kembali peramban): tur ditutup tanpa ditandai sudah dilihat,
+     dan dilepas dari T.dicek agar muncul lagi saat pengguna kembali ke layar itu */
   const masihBerlaku = () => { try { return !document.querySelector('.sesi-tolak') && T.aktif.aktif(); } catch (e) { return false; } };
-  new MutationObserver(() => { if (!DAFTAR.length) return; sisipBantuan(); if (T.aktif) { if (masihBerlaku()) letak(); else { T.aktif = null; $('#tur')?.remove(); cek(); } } else cek(); }).observe(document.body, { childList:true, subtree:true });
+  new MutationObserver(() => { if (!DAFTAR.length) return; sisipBantuan(); if (T.aktif) { if (masihBerlaku()) letak(); else { T.dicek.delete(T.kunciAktif); T.aktif = null; $('#tur')?.remove(); cek(); } } else cek(); }).observe(document.body, { childList:true, subtree:true });
   document.addEventListener('click', e => {
     if (!DAFTAR.length) return;
     const b = e.target.closest('#tur [data-tur]');

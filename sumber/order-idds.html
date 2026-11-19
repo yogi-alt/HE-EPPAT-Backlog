@@ -895,7 +895,7 @@ function langkahTur() {
     { el:'#bukaBantuan', j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan ada di sini, termasuk tombol untuk memutar ulang tur ini.' }
   ]
 });
-(window.TUR_ANTRE = window.TUR_ANTRE || []).push({ kunci:'ajb-detail', aktif:() => S.layar === 'detail' && !!turPeran(), langkah:langkahTur, tanda:usulan('HE-ORDER-23') });
+(window.TUR_ANTRE = window.TUR_ANTRE || []).push({ get kunci() { return 'ajb-detail-' + (turPeran() || 'klien'); }, aktif:() => S.layar === 'detail' && !!turPeran(), langkah:langkahTur, tanda:usulan('HE-ORDER-23') });
 function buka(kode, tab = 'kontak') { S.layar = 'detail'; S.aktif = kode; S.tab = tab; gambar(); window.scrollTo({ top:0 }); }
 
 /* ---------------- interaksi ---------------- */
