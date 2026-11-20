@@ -49,7 +49,8 @@
 
   function kabar(teks, ket) {
     const w = document.getElementById('toastWadah'); if (!w) return;
-    w.innerHTML = `<div class="ina-toast ina-toast--state-default ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${svg('<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" />')}</div>
+    /* data-kabar="popup": pesan tur tidak terikat kartu, jadi tetap popup (kabar-bersama tidak memindahkannya) */
+    w.innerHTML = `<div data-kabar="popup" class="ina-toast ina-toast--state-default ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${svg('<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" />')}</div>
       <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p><p class="ina-toast__description">${ket}</p></div></div></div>`;
     clearTimeout(kabar.w); kabar.w = setTimeout(() => { w.innerHTML = ''; }, 4000);
   }

@@ -1435,8 +1435,10 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
      Pesan hasil tindakan pengguna ("Email verifikasi dikirim ulang.", "Perubahan disimpan.", …) tidak lagi muncul sebagai
      toast di kanan bawah, tetapi sebagai IDDS Alert di bagian atas kartu tempat tombol diklik, agar tidak terlewat.
      Urutan wadah: kartu/dialog/laci tempat tombol diklik → kartu yang sama setelah layar digambar ulang → dialog/laci
-     yang terbuka → kartu utama halaman → atas isi halaman.
-     Pesan milik kontrol prototipe (protobar, Daftar perubahan, "Lihat di layar", teks yang menyebut "prototipe") tetap toast. -->
+     yang terbuka. Bila tindakan tidak terjadi di kartu (mis. tur, menu atas), pesan tampil sebagai popup (toast),
+     tidak lagi sebagai kotak selebar halaman di puncak isi (aturan Yogi 20 Nov 2026, IDDS-OB-66).
+     Pesan milik kontrol prototipe (protobar, Daftar perubahan, "Lihat di layar", teks yang menyebut "prototipe") dan
+     toast bertanda data-kabar="popup" (mis. "Tur dilewati.") tetap toast. -->
 <style id="kabar-bersama-css">
 .kabar-sisip{text-align:left;flex:none;width:100%;grid-column:1/-1;box-sizing:border-box;margin:0 0 16px}
 .kabar-sisip .ina-alert__content{flex:1;min-width:0}
@@ -1455,14 +1457,18 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
   };
   const svg = (p, s) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
   const tampak = el => !!el && el.isConnected && el.getClientRects().length > 0;
-  let asal = null, jejak = null;
-  /* catat tombol yang terakhir dipakai beserta kartunya, untuk menemukan kartu yang sama bila layar digambar ulang */
+  let asal = null, jejak = null, induk = null;
+  const LAPIS = '.ina-modal, .ina-drawer, #lapisan, #lapisanDrawer, #tur';
+  /* catat tombol yang terakhir dipakai beserta kartunya, untuk menemukan kartu yang sama bila layar digambar ulang.
+     induk = kartu halaman (di luar dialog/laci) tempat tindakan dimulai: tombol konfirmasi di dialog
+     ("Jalankan provisi", "Setujui", …) menaruh pesannya di kartu itu setelah dialog tertutup. */
   const catat = e => {
     asal = e.target instanceof Element ? e.target : null;
     const k = asal && !asal.closest(LUAR) ? asal.closest(KARTU) : null;
-    if (!k) { jejak = null; return; }
+    if (!k) { jejak = null; if (asal && !asal.closest(LAPIS)) induk = null; return; }
     const pemilih = k.id ? '#' + CSS.escape(k.id) : k.tagName.toLowerCase() + (k.classList[0] ? '.' + CSS.escape(k.classList[0]) : '');
     jejak = { pemilih, ke:[...document.querySelectorAll(pemilih)].indexOf(k) };
+    if (!asal.closest(LAPIS)) induk = jejak;
   };
   document.addEventListener('pointerdown', catat, true);
   document.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') catat(e); }, true);
@@ -1472,16 +1478,15 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
     if (jejak) { const k = document.querySelectorAll(jejak.pemilih)[jejak.ke]; if (tampak(k)) return isiKartu(k); }
     const lap = [...document.querySelectorAll('.ina-modal__body, .ina-drawer__content')].filter(tampak).pop();
     if (lap) return lap;
-    const utama = document.querySelector('#halaman .ob-kartu');
-    if (tampak(utama)) return utama;
-    return [document.getElementById('halamanApp'), document.getElementById('halaman'), document.querySelector('main')].find(tampak) || null;
+    if (induk) { const k = document.querySelectorAll(induk.pemilih)[induk.ke]; if (tampak(k)) return isiKartu(k); }
+    return null; /* tanpa kartu: tetap popup */
   }
   function sisipkan() {
     const t = wadah.querySelector('.ina-toast');
     if (!t) return;
     const judul = (t.querySelector('.ina-toast__title') || {}).textContent || '';
     const desk = (t.querySelector('.ina-toast__description') || {}).textContent || '';
-    const meta = (asal && asal.isConnected && asal.closest(META)) || /prototipe/i.test(judul + ' ' + desk);
+    const meta = (asal && asal.isConnected && asal.closest(META)) || /prototipe/i.test(judul + ' ' + desk) || !!t.closest('[data-kabar="popup"]');
     const tujuan = meta ? null : cariWadah();
     if (!tujuan) return; /* tetap toast */
     const jenis = t.className.includes('state-positive') ? 'success' : 'info';
@@ -1553,7 +1558,8 @@ button.sb-profil-btn:hover{background:var(--ina-eppat-sidebar-hover)}
 
   function kabar(teks, ket) {
     const w = document.getElementById('toastWadah'); if (!w) return;
-    w.innerHTML = `<div class="ina-toast ina-toast--state-default ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${svg('<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" />')}</div>
+    /* data-kabar="popup": pesan tur tidak terikat kartu, jadi tetap popup (kabar-bersama tidak memindahkannya) */
+    w.innerHTML = `<div data-kabar="popup" class="ina-toast ina-toast--state-default ina-toast--style-solid ina-toast--visible" role="status"><div class="ina-toast__icon">${svg('<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" />')}</div>
       <div class="ina-toast__content"><div class="ina-toast__text-area"><p class="ina-toast__title">${teks}</p><p class="ina-toast__description">${ket}</p></div></div></div>`;
     clearTimeout(kabar.w); kabar.w = setTimeout(() => { w.innerHTML = ''; }, 4000);
   }

@@ -119,9 +119,9 @@ function kartuTrial() {
       ${DB.va ? '<p class="ket" style="margin-top:6px">Tagihan upgrade sudah dibuat. Trial tetap berjalan sampai pembayaran diterima.</p>' : ''}
       <div class="tombol-blok">${tombol(DB.va ? 'Lanjutkan upgrade' : 'Upgrade sekarang', 'primary', 'md', 'id="upgradeSekarang"', ik('panah', 16))}</div></div>${usulan('HE-TRIAL-01')}</div></section>`;
 }
-function kartuEntAktif() {
+function kartuEntAktif(pesan = '') {
   const p = PAKET.enterprise;
-  return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuEntAktif" style="margin-top:0"><div class="ina-card__content"><div class="eb">Paket Enterprise aktif</div><h3>${p.lencana[0]}</h3>
+  return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuEntAktif" style="margin-top:0"><div class="ina-card__content">${pesan}<div class="eb">Paket Enterprise aktif</div><h3>${p.lencana[0]}</h3>
     <ul class="fitur-ok">${p.fitur.map(x => `<li>${ik('centang', 14)}${x}</li>`).join('')}</ul>
     <div class="akses"><small>Berlaku hingga</small><b>${tglPendek(hinggaEnt())}</b></div>${usulan('HE-TRIAL-07')}</div></section>`;
 }
@@ -135,8 +135,8 @@ const emailLunas = () => `<div class="email-pratinjau"><div class="kep">Dari: e-
     Silakan masuk dengan alamat aplikasi dan kata sandi yang sama.</div></div>`;
 function layarDasborTrial() {
   const ent = !!DB.ent;
-  const sukses = ent ? `<div class="berikut-db ditandai" id="pesanBerhasil">${alert('success', 'Pembayaran berhasil. Paket Enterprise aktif', `Tagihan ${DB.va.invoice} sebesar ${HARGA()} lunas pada ${tglJam(DB.ent)}. Paket Enterprise berlaku sampai ${tglPendek(hinggaEnt())}. Sisa masa Trial tidak berlaku lagi.`)}${usulan('HE-TRIAL-07')}</div>` : '';
-  return `${heroTrial()}${sukses}${kartuTahapTrial()}${DB.va || ent ? kartuProgresUp() : ''}<div class="dua-kol" style="margin-top:16px">${kartuSiapTrial()}${ent ? kartuEntAktif() : kartuTrial()}</div>
+  const sukses = ent ? `<div class="ditandai" id="pesanBerhasil" style="margin:0 0 16px">${alert('success', 'Pembayaran berhasil. Paket Enterprise aktif', `Tagihan ${DB.va.invoice} sebesar ${HARGA()} lunas pada ${tglJam(DB.ent)}. Paket Enterprise berlaku sampai ${tglPendek(hinggaEnt())}. Sisa masa Trial tidak berlaku lagi.`)}${usulan('HE-TRIAL-07')}</div>` : '';
+  return `${heroTrial()}${kartuTahapTrial()}${DB.va || ent ? kartuProgresUp() : ''}<div class="dua-kol" style="margin-top:16px">${kartuSiapTrial()}${ent ? kartuEntAktif(sukses) : kartuTrial()}</div>
     <section class="ina-card ina-card--variant-basic kartu-db ditandai" id="emailTrial"><div class="ina-card__content"><h3>Email yang Anda terima${usulan('HE-TRIAL-02')}</h3><p class="ket">${ent ? 'Upgrade hanya mengirim email pembayaran. Email aktivasi tidak dikirim ulang.' : 'Email ini dikirim sekali saat Trial aktif.'}</p><div>${ent ? emailLunas() : emailAktif()}</div></div></section>
     ${kartuBantuan()}`;
 }
