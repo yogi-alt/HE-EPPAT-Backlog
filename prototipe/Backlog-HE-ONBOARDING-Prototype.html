@@ -1380,7 +1380,7 @@ const pas = f => () => { const e = typeof f === 'function' ? f() : terlihat(f); 
   { kunci:'ob-selesai', aktif:() => S.layar === 'selesai', langkah:() => [
     { el:pas('#kartuSiap'), j:'Aplikasi siap', t:'Aplikasi e-PPAT kantor Anda sudah aktif. Alamat aplikasi dan email untuk masuk tercantum di sini.' },
     { el:'#masukApp', j:'Masuk ke aplikasi', t:'Buka aplikasi kantor Anda, lalu masuk dengan email dan kata sandi pendaftaran.' },
-    { el:'#emailAktif', j:'Email aktivasi', t:'Ini contoh email aktivasi yang dikirim ke alamat email Anda.' }, { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
+    { el:pas('#emailAktif'), j:'Email aktivasi', t:'Email ini berisi alamat aplikasi dan email untuk masuk. Kata sandi tidak pernah dikirim lewat email.' }, { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
   { kunci:'ob-riwayat', aktif:() => S.layar === 'riwayat', langkah:() => [
     { el:'#tabelRiwayat', j:'Riwayat transaksi', t:'Semua tagihan paket tercatat di sini beserta metode dan status pembayarannya.' },
     { el:'#bukaPerpanjang', j:'Perpanjang langganan', t:'Perpanjang paket Enterprise untuk satu tahun berikutnya dari sini.' }, { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] }
@@ -1421,7 +1421,7 @@ I.muat = '<path d="M12 3a9 9 0 1 0 9 9" />';
 I.ulang = '<path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />';
 I.telepon = '<path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />';
 const remahApp = t => `<nav class="ina-breadcrumb" aria-label="Breadcrumb"><ol class="ina-breadcrumb__list"><li class="ina-breadcrumb__item"><a href="#" class="ina-breadcrumb__link" data-ke="dasbor"><span class="ina-breadcrumb__text">Beranda</span></a><span class="ina-breadcrumb__separator" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6l-6 6" /></svg></span></li><li class="ina-breadcrumb__item"><span class="ina-breadcrumb__link ina-breadcrumb__link--active"><span class="ina-breadcrumb__text">${t}</span></span></li></ol></nav>`;
-const TGL = ['26 Okt, 09.10', '26 Okt, 09.12', '26 Okt, 09.15', '26 Okt, 09.15'];
+const TGL = ['26 Okt 2026, 09.10', '26 Okt 2026, 09.12', '26 Okt 2026, 09.15', '26 Okt 2026, 09.15']; /* tanggal stepper dengan tahun, sama dengan OB-BAYAR dan OB-MONITOR (keputusan 20 Nov) */
 function heroDb() {
   return `<section class="hero-db"><div>${badge(DB.aktif ? 'Status akun: Aktif' : DB.lunas ? 'Status akun: Diproses' : 'Status akun: Onboarding', DB.aktif ? 'success' : DB.lunas ? 'info' : 'success', 'sm')}<h2>Selamat Datang di Portal e-PPAT</h2><p>${DB.aktif ? `Aplikasi e-PPAT kantor Anda sudah aktif. Paket ${PAKET[DB.dipesan || 'enterprise'].n} berlaku.` : `Selesaikan langkah-langkah di bawah ini untuk mengaktifkan akun PPAT ${PAKET[DB.dipesan || 'enterprise'].n} Anda.`}</p></div>
     ${DB.aktif ? '' : `<span>${tombol('Cek progres registrasi', 'secondary', 'md', `id="cekStatus" ${S.memuat === 'cek' ? 'disabled' : ''}`, S.memuat === 'cek' ? spinner : ik('ulang', 16))}${usulan('HE-OB-01')}</span>`}</section>`; /* semua tahap selesai: tidak ada status yang perlu dicek (masukan Peruri 4 Nov 2026) */
@@ -1430,7 +1430,7 @@ function heroDb() {
    Tahap Verifikasi Anggota (indeks 3) sedang ditahan E-PPAT, jadi tidak ditampilkan ke pelanggan; nomor tetap urut. */
 const TAMPIL = [0, 1, 4, 5, 6, 7, 8]; /* tanpa Masuk Pertama (indeks 2): sesudah Verifikasi Data langsung Pilih Produk (masukan Peruri 4 Nov 2026) */
 function kartuTahap() {
-  const p = posisiTahap(), waktu = i => i < 4 ? TGL[i] : i === 4 && DB.dipesan ? '26 Okt, 09.20' : i === 5 && DB.lunas ? '26 Okt, 09.31' : i === 6 && DB.lunas ? '26 Okt, 09.31' : i >= 7 && DB.aktif ? '27 Okt, 10.05' : '';
+  const p = posisiTahap(), waktu = i => i < 4 ? TGL[i] : i === 4 && DB.dipesan ? '26 Okt 2026, 09.20' : i === 5 && DB.lunas ? '26 Okt 2026, 09.31' : i === 6 && DB.lunas ? '26 Okt 2026, 09.31' : i >= 7 && DB.aktif ? '27 Okt 2026, 10.05' : '';
   const BERIKUT = {
     4:['Pilih paket layanan', 'Pilih Trial atau Enterprise di bawah, lalu tekan Lanjut pembayaran. Paket masih dapat diganti sebelum pembayaran diterima.'],
     5:['Selesaikan pembayaran', `Bayar tagihan melalui Virtual Account sebelum batas waktu. Pembayaran terverifikasi otomatis setelah transfer.`],
@@ -1446,7 +1446,7 @@ function kartuTahap() {
 function kartuBantuan() {
   return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="bantuanDb"><div class="ina-card__content bantuan-db">
     <span class="isi"><h3>Butuh bantuan?</h3><p class="ket">Hubungi Hotline Digital Product Peruri di 1500159 atau Asisten Virtual TAMARA +62-811-1067-5555.</p></span>
-    ${usulan('HE-OB-03')}</div></section>`;
+    ${tombol('Lihat bantuan', 'secondary', 'md', 'data-bantuan', ik('bantu', 16))}${usulan('HE-OB-03')}</div></section>`;
 }
 function layarDasbor() {
   if (DB.aktif) { S.layar = 'selesai'; return layarSelesai(); }
@@ -1493,7 +1493,7 @@ function kartuVa() {
     <div class="no-va"><span>NOMOR VIRTUAL ACCOUNT<b>${DB.va.no}</b></span>${tombol('Salin', 'secondary', 'sm', 'id="salinVa"', ik('salin', 14))}</div>
     <div class="kv-va"><div>Nama VA<b>Pembayaran e-PPAT</b></div><div>Berlaku sampai<b>${DB.va.sampai}</b></div><div class="lebar">Referensi<b>${DB.va.ref}</b></div></div>
     <div class="cara-bayar"><h4>Cara bayar</h4><p class="ket-cara">${est('Urutan menu dapat berbeda di tiap aplikasi bank.')}</p>${CARA().map(([k, l], i) => faqHalaman('cara-' + i, k, `<ol>${l.map(x => `<li>${x}</li>`).join('')}</ol>`)).join('')}</div>
-    ${DB.hasilCek ? `<div id="hasilCekBayar">${alert('caution', 'Pembayaran belum terdeteksi', `Dicek pukul ${DB.hasilCek}. Bila Anda baru saja mentransfer, tunggu beberapa menit lalu cek lagi.`)}</div>` : ''}
+    ${DB.hasilCek ? `<div id="hasilCekBayar">${alert('caution', 'Pembayaran belum terdeteksi', `Dicek pukul ${DB.hasilCek}. Bila Anda baru saja mentransfer, tunggu paling lama 10 menit, lalu cek lagi.`)}</div>` : ''}
     <div class="tombol-blok">${tombol('Cek status pembayaran', 'primary', 'md', `id="cekBayar" ${S.memuat ? 'disabled' : ''}`, S.memuat === 'bayar' ? spinner : ik('ulang', 16))}${tombol('Ganti bank pembayaran', 'tertiary', 'md', 'id="gantiBank"')}</div></div></section>`;
 }
 function layarBayar() {
@@ -1523,7 +1523,7 @@ function layarSelesai() {
     <div class="dua-kol" style="margin-top:16px">
       <section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuSiap" style="margin-top:0"><div class="ina-card__content"><span class="siap-ikon">${ik('centangL', 28)}</span><h3>Aplikasi e-PPAT Anda Siap!</h3><p class="ket">Akun aplikasi e-PPAT Anda telah berhasil dibuat dan siap digunakan.</p>
         <div class="akses"><small>Alamat aplikasi e-PPAT Anda</small><a href="#" class="url-kantor" data-luar="Aplikasi kantor">https://${url}</a></div>
-        <div class="tombol-blok">${tombol('Masuk ke aplikasi e-PPAT', 'primary', 'md', 'data-luar="Masuk ke aplikasi e-PPAT"', ik('masuk', 16))}${tombol('Lupa kata sandi?', 'link', 'md', 'data-luar="Lupa kata sandi"')}</div>
+        <div class="tombol-blok">${tombol('Masuk ke aplikasi e-PPAT', 'primary', 'md', 'id="masukApp" data-luar="Masuk ke aplikasi e-PPAT"', ik('masuk', 16))}${tombol('Lupa kata sandi?', 'link', 'md', 'data-luar="Lupa kata sandi"')}</div>
         <div style="margin-top:12px">${alert('info', '', 'Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kata sandi tidak pernah dikirim melalui email.')}</div>
         <div class="ditandai" id="emailAktif" style="margin-top:14px"><div class="email-pratinjau"><div class="kep">Dari: e-PPAT &lt;noreply@eppat.id&gt; · Subjek: Akun e-PPAT Anda Sudah Aktif</div>
           <div class="isi">Yth. Bapak/Ibu Contoh PPAT Baru,<br>Instansi e-PPAT untuk kantor Anda telah berhasil dibuat dan siap digunakan.

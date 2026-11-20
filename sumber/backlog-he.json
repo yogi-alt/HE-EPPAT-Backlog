@@ -4356,7 +4356,7 @@
       "catatan": "",
       "judul": "Tagihan VA: batas waktu lengkap, hitung mundur, tombol Salin, cara bayar per kanal, dan hasil Cek Status",
       "saat_ini": "Kartu \"BRI Virtual Account · Pembayaran Terverifikasi\" berisi \"Selesaikan Pembayaran Dalam 23:59:24\" dan \"Berlaku sampai 13 Okt, 14.10\" tanpa tahun. Label tertulis \"Reference\", dan nominal \"Rp 1\". \"Panduan Pembayaran\" berisi tiga kalimat umum yang sama untuk semua kanal. Hasil Cek Status Pembayaran (bukti 26 Okt 23.05, halaman Upgrade) hanya berupa kotak \"Pembayaran belum terdeteksi. Silakan transfer terlebih dahulu.\" tanpa jam pengecekan (lihat IDDS-OB-58).",
-      "usulan": "Kartu tagihan menampilkan nomor VA, nominal \"Rp3.500.000\", hitung mundur, dan batas waktu lengkap dengan tahun (\"27 Okt 2026, 14.53\"). Tombol \"Salin\" menyebut nomornya untuk pembaca layar. Panduan umum diganti dengan cara bayar per kanal BRI dalam IDDS Accordion (ATM, BRImo, Internet Banking, bank lain). Label \"Reference\" menjadi \"Referensi\". Cek Status Pembayaran menampilkan \"Belum ada pembayaran masuk\" beserta jam pengecekan dan perkiraan waktu verifikasi. Perkiraannya paling lama 10 menit setelah transfer, sesuai email instruksi di live.",
+      "usulan": "Kartu tagihan menampilkan nomor VA, nominal \"Rp3.500.000\", hitung mundur, dan batas waktu lengkap dengan tahun (\"27 Okt 2026, 14.53\"). Tombol \"Salin\" menyebut nomornya untuk pembaca layar. Panduan umum diganti dengan cara bayar per kanal BRI dalam IDDS Accordion (ATM, BRImo, Internet Banking, bank lain). Label \"Reference\" menjadi \"Referensi\". Cek Status Pembayaran menampilkan \"Pembayaran belum terdeteksi\" beserta jam pengecekan dan perkiraan waktu verifikasi. Perkiraannya paling lama 10 menit setelah transfer, sesuai email instruksi di live.",
       "acuan": "prototipe/Backlog-IDDS-OB-BAYAR-Prototype.html › Daftar penyesuaian › IDDS-OB-47",
       "status": "Prototipe siap",
       "tanggal": "2026-10-26"
@@ -4532,7 +4532,7 @@
       "catatan": "",
       "judul": "Cek Status Pembayaran: hasil lengkap dan pesan berhasil setelah bayar",
       "saat_ini": "Di halaman Upgrade, kartu \"BRI Virtual Account · Pembayaran Terverifikasi\" menampilkan hitung mundur \"23:59:54\", \"Berlaku sampai 27 Okt, 23.05\" tanpa tahun, dan label \"Reference\". Kartu juga memuat tombol \"Cek Status Pembayaran\", \"SIMULASI BAYAR (KHUSUS SANDBOX)\", dan \"Ganti bank pembayaran\". Menekan Cek Status Pembayaran hanya memunculkan kotak \"Pembayaran belum terdeteksi. Silakan transfer terlebih dahulu.\" tanpa jam pengecekan atau perkiraan waktu verifikasi. Setelah dibayar (23.06), halaman langsung pindah ke Dasbor tanpa pesan berhasil. Kartu berganti menjadi \"PAKET ENTERPRISE AKTIF\" dan \"Berlaku hingga: 26 Oktober 2027\".",
-      "usulan": "Cek Status Pembayaran menampilkan indikator memuat saat memeriksa. Setelah itu, IDDS Alert \"Belum ada pembayaran masuk\" tampil beserta jam pengecekan dan perkiraan verifikasi (paling lama 10 menit setelah transfer), lalu diumumkan ke pembaca layar. Tagihan menulis batas waktu lengkap dengan tahun (\"27 Okt 2026, 14.54\") dan label \"Referensi\". Setelah bank mengonfirmasi, pelanggan kembali ke Dasbor dengan IDDS Alert sukses \"Pembayaran berhasil. Paket Enterprise aktif\". Alert itu berisi nomor order, nominal, waktu bayar, dan masa berlaku. Kartu sisa masa Trial diganti kartu \"Paket Enterprise aktif\" dengan \"Berlaku hingga 26 Okt 2027\". Tombol \"SIMULASI BAYAR (KHUSUS SANDBOX)\" tidak ada di layar pelanggan. Di prototipe, transfer disimulasikan lewat tombol bilah prototipe \"Simulasikan Transfer dari Bank\" (pelaku Bank).",
+      "usulan": "Cek Status Pembayaran menampilkan indikator memuat saat memeriksa. Setelah itu, IDDS Alert kuning \"Pembayaran belum terdeteksi\" tampil beserta jam pengecekan dan perkiraan verifikasi (paling lama 10 menit setelah transfer), lalu diumumkan ke pembaca layar. Tagihan menulis batas waktu lengkap dengan tahun (\"27 Okt 2026, 14.54\") dan label \"Referensi\". Setelah bank mengonfirmasi, pelanggan kembali ke Dasbor dengan IDDS Alert sukses \"Pembayaran berhasil. Paket Enterprise aktif\". Alert itu berisi nomor order, nominal, waktu bayar, dan masa berlaku. Kartu sisa masa Trial diganti kartu \"Paket Enterprise aktif\" dengan \"Berlaku hingga 26 Okt 2027\". Tombol \"SIMULASI BAYAR (KHUSUS SANDBOX)\" tidak ada di layar pelanggan. Di prototipe, transfer disimulasikan lewat tombol bilah prototipe \"Simulasikan Transfer dari Bank\" (pelaku Bank).",
       "acuan": "prototipe/Backlog-IDDS-OB-BAYAR-Prototype.html › Daftar penyesuaian › IDDS-OB-58",
       "status": "Prototipe siap",
       "tanggal": "2026-10-26"
@@ -7673,6 +7673,12 @@
       "kode": "HE-OB-07",
       "perubahan": "Tur menunggu pembayaran diselaraskan dengan Backlog-IDDS-OB-BAYAR menjadi sembilan langkah. Kartu Virtual Account kini memuat Cara bayar per kanal dalam IDDS Accordion, sama dengan Backlog-IDDS-OB-BAYAR, menggantikan tiga baris panduan umum.",
       "berkas": "sumber/onboard-badan.html; sumber/trial-badan.html"
+    },
+    {
+      "tanggal": "2026-11-20",
+      "kode": "IDDS-OB-58",
+      "perubahan": "Judul hasil Cek status pembayaran diseragamkan dengan Backlog-HE-ONBOARDING, Backlog-HE-TRIAL, dan live menjadi IDDS Alert kuning \"Pembayaran belum terdeteksi\". Setelah upgrade selesai, kotak Langkah berikutnya tidak ditampilkan, sama dengan Backlog-HE-TRIAL dan live.",
+      "berkas": "sumber/ob-bayar-badan.html; sumber/onboard-badan.html"
     }
   ]
 }

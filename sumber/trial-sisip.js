@@ -86,7 +86,7 @@ function heroTrial() {
   return `<section class="hero-db"><div><span class="ditandai" id="lencanaAkun">${badge(ent ? 'Status akun: Aktif' : 'Status akun: Trial aktif', ent ? 'success' : 'info', 'sm')}${usulan('HE-TRIAL-01')}</span><h2>Selamat Datang di Portal e-PPAT</h2><p>${ent ? 'Aplikasi e-PPAT kantor Anda sudah aktif. Paket Enterprise berlaku.' : `Paket Trial Anda aktif sampai ${tglJam(DB.trial.akhir)}. Upgrade ke Enterprise kapan saja untuk akses penuh.`}</p></div></section>`;
 }
 function kartuTahapTrial() {
-  const ket = i => i < 4 ? TGL[i] : i === 4 ? tglJam(DB.trial.mulai).replace(/ 2026,/, ',') : i === 5 || i === 6 ? 'Tidak perlu (Trial gratis)' : tglJam(DB.trial.mulai).replace(/ 2026,/, ',');
+  const ket = i => i < 4 ? TGL[i] : i === 4 ? tglJam(DB.trial.mulai) : i === 5 || i === 6 ? 'Tidak perlu (Trial gratis)' : tglJam(DB.trial.mulai);
   const B = DB.ent ? null : DB.va ? ['Selesaikan pembayaran upgrade', `Transfer ke Virtual Account sebelum batas waktu. Trial tetap berjalan sampai pembayaran diterima.<div style="margin-top:8px">${tombol('Lanjutkan upgrade', 'primary', 'sm', 'data-ke-upgrade', ik('panah', 14))}</div>`]
     : S.keUpgrade ? ['Lanjutkan upgrade ke Enterprise', `Tekan Upgrade sekarang untuk memilih pembayaran. Trial tetap berjalan sampai pembayaran diterima.<div style="margin-top:8px">${tombol('Upgrade sekarang', 'primary', 'sm', 'data-ke-upgrade', ik('panah', 14))}</div>`]
     : ['Masuk ke aplikasi kantor', 'Gunakan Trial sebagai Super Admin dengan email dan kata sandi pendaftaran. Upgrade ke Enterprise kapan saja; data dan alamat aplikasi tetap sama.'];
@@ -97,7 +97,7 @@ function kartuTahapTrial() {
 const UP = ['Upgrade dimulai', 'Proses Pembayaran', 'Lunas', 'Enterprise aktif'];
 function kartuProgresUp() {
   const u = DB.up || {}, kini = DB.ent ? UP.length : DB.va ? 1 : 0;
-  const ket = i => i === 0 ? tglJam(u.mulai).replace(/ 2026,/, ',') : i === 1 ? (DB.va ? (u.va ? tglJam(u.va).replace(/ 2026,/, ',') : 'Sedang berjalan') : '—') : DB.ent ? tglJam(u.lunas).replace(/ 2026,/, ',') : '—';
+  const ket = i => i === 0 ? tglJam(u.mulai) : i === 1 ? (DB.va ? (u.va ? tglJam(u.va) : 'Sedang berjalan') : '—') : DB.ent ? tglJam(u.lunas) : '—';
   return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="progresUpgrade"><div class="ina-card__content"><h3>Progres Upgrade ke Enterprise${usulan('HE-TRIAL-07')}</h3>
     ${stepperH(UP, kini, n => `<small>${ket(n)}</small>`, 'Tahapan upgrade')}</div></section>`;
 }
@@ -253,7 +253,15 @@ UBAH.push(
 
 /* tur Dasbor Trial, Upgrade, dan Perpanjang (HE-TRIAL-10) */
 [
-  { get kunci() { return DB.ent ? 'tr-dasbor-ent' : 'tr-dasbor'; }, aktif:() => S.layar === 'dasbor' && !!DB.trial, langkah:() => [
+  { get kunci() { return DB.ent ? 'tr-dasbor-ent' : 'tr-dasbor'; }, aktif:() => S.layar === 'dasbor' && !!DB.trial, langkah:() => DB.ent ? [
+    /* Enterprise aktif setelah upgrade: tur baku, sama dengan Backlog-IDDS-OB-BAYAR (keputusan 20 Nov 2026) */
+    { el:'#kartuTahap', j:'Progres registrasi', t:'Semua tahap pendaftaran sudah selesai.' },
+    { el:pas('#progresUpgrade'), j:'Progres upgrade', t:'Upgrade ke Enterprise sudah selesai.' },
+    { el:pas('#kartuSiap'), j:'Aplikasi siap', t:'Aplikasi e-PPAT kantor Anda sudah aktif. Alamat aplikasi dan email untuk masuk tercantum di sini.' },
+    { el:'#masukApp', j:'Masuk ke aplikasi', t:'Buka aplikasi kantor Anda, lalu masuk dengan email dan kata sandi pendaftaran.' },
+    { el:'#pesanBerhasil', j:'Pembayaran berhasil', t:'Paket Enterprise sudah aktif. Data dan alamat aplikasi dari masa Trial tetap dipakai.' },
+    { el:'#kartuEntAktif', j:'Paket Enterprise aktif', t:'Masa berlaku paket Enterprise tercantum di sini.' },
+    { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] : [
     { el:'#kartuTahap', j:'Progres registrasi', t:'Pendaftaran kantor Anda berjalan melalui beberapa tahap. Tahap yang sedang berjalan ditandai di sini.' },
     { el:'#langkahDb', j:'Langkah berikutnya', t:'Kotak ini menyebut hal yang perlu Anda lakukan sekarang.' },
     { el:'#kartuTrial', j:'Paket Trial aktif', t:'Kartu ini menunjukkan sisa masa Trial dan tanggal berakhirnya.' },
@@ -271,8 +279,8 @@ UBAH.push(
     { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] },
   { kunci:'tr-perpanjang', aktif:() => S.layar === 'perpanjang', langkah:() => [
     { el:pas(kartuH3('Ringkasan Pesanan')), j:'Ringkasan pesanan', t:'Paket Enterprise yang akan diperpanjang untuk satu tahun berikutnya.' },
-    { el:kartuH3('Pilih Metode Pembayaran'), j:'Metode pembayaran', t:'Langkah pembayarannya sama dengan pembayaran upgrade.' },
-    { el:'#lanjutPerpanjang', j:'Lanjutkan perpanjangan', t:'Tekan untuk melanjutkan ke pembayaran.' },
+    { el:kartuH3('Pilih Metode Pembayaran'), j:'Metode pembayaran', t:'Langkahnya sama dengan pembayaran pertama. Order perpanjangan baru dibuat saat Anda menekan Buat Virtual Account.' },
+    { el:'#lanjutPerpanjang', j:'Lanjut pilih bank', t:'Tekan untuk memilih bank Virtual Account. Langkah berikutnya sama dengan pembayaran pertama.' },
     { el:'#batalPerpanjang', j:'Batal', t:'Kembali tanpa memperpanjang langganan.' },
     { el:() => terlihat('#tombolBantuan') || terlihat('#bantuanDb'), j:'Bantuan', t:'Panduan halaman, pertanyaan umum, dan kontak dukungan Peruri ada di sini, termasuk tombol untuk memutar ulang tur ini.' }] }
 ].forEach(t => (window.TUR_ANTRE = window.TUR_ANTRE || []).push(Object.assign(t, { email:() => S.email || AKUN.email, tanda:usulan('HE-TRIAL-10') })));

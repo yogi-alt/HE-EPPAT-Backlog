@@ -411,7 +411,7 @@ body .protobar{z-index:1001}
 .ket-toggle{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--ina-content-primary);cursor:pointer}
 .ket-toggle .ina-toggle:focus-visible{outline:2px solid var(--ina-primary-500);outline-offset:2px;border-radius:999px}
 #tabelKontak .ina-table__cell{white-space:normal;vertical-align:middle}
-#tabelKontak .kontak-isi{overflow-wrap:anywhere}
+.kontak-isi{overflow-wrap:anywhere} /* email kontak = teks biasa, bukan tautan (keputusan 20 Nov) */
 .foto-tombol .nama-kantor{display:block;font:600 14px Inter,sans-serif;color:var(--ina-content-primary);text-align:center;padding:0 8px}
 .foto-tombol .kode-kantor{display:block;margin-top:2px;font:12px ui-monospace,Menlo,monospace;color:var(--ina-content-secondary);text-align:center}
 /* tab Kantor PPAT: markup, teks, dan perilaku disalin dari Profil Saya (OB-MASUK) */
@@ -843,7 +843,7 @@ function layarDetailAnggota() {
           <div class="form-grid">${tf('ppatKode', 'Kode', f.kode, '', true, 'Kode dibuat sistem dan tidak dapat diubah.', 'disabled')}
             ${pilihan('ppatJk', 'Jenis Kelamin', [['L', 'Laki-laki'], ['P', 'Perempuan']], f.jk)}<div></div>
             ${tf('ppatDepan', 'Nama Depan', f.depan, 'Contoh: Calon', true)}${tf('ppatTengah', 'Nama Tengah', f.tengah)}${tf('ppatBelakang', 'Nama Belakang', f.belakang)}</div>
-          <div class="form-kaki"><span class="ket-simpan" aria-live="polite" id="ketSimpanPpat">${f.simpan ? `Tersimpan ${tglJam(f.simpan)}.` : ''}</span>${tombol('Simpan PPAT', 'primary', 'md', 'id="simpanPpat"')}</div>${usulan('IDDS-OB-24')}</section>
+          <div class="form-kaki"><span class="ket-simpan" aria-live="polite" id="ketSimpanPpat">${f.simpan ? `Tersimpan ${tglJam(f.simpan)}.` : ''}</span>${tombol('Simpan PPAT', 'primary', 'md', 'id="simpanPpat"', ik('simpan', 16))}</div>${usulan('IDDS-OB-24')}</section>
         <section class="blok ditandai" id="panel-kantor" role="tabpanel" aria-labelledby="tab-kantor" ${S.tab === 'kantor' ? '' : 'hidden'}>${panelKantor(p, f)}${usulan('IDDS-OB-24')}</section>
         <section class="blok ditandai" id="blokKontak" aria-labelledby="jdKontak" ${S.tab === 'kantor' ? 'hidden' : ''}><div class="blok-atas"><h2 id="jdKontak" style="display:flex;align-items:center;gap:8px">${ik('telepon', 18)}Info Kontak</h2>${tombol('Tambah kontak', 'primary', 'md', 'id="tambahKontak"', ik('tambah', 16))}</div>
           <div class="tabel-wadah" style="margin-top:14px"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" id="tabelKontak" aria-label="Kontak ${esc(p.nama)}">
@@ -865,7 +865,7 @@ function blokKontakKantor(p) {
     <div class="tabel-wadah"><div class="tabel-gulir"><div class="ina-table"><table class="ina-table__container tb" aria-label="Info kontak kantor">
       <thead class="ina-table__header"><tr>${['No.', 'Akun / Nomor', 'Jenis Kontak', 'Status', 'Aksi'].map(th).join('')}</tr></thead>
       <tbody class="ina-table__body">${L.length ? L.map((k, i) => `<tr class="ina-table__row"><td class="ina-table__cell">${i + 1}.</td>
-        <td class="ina-table__cell"><span class="kd" style="cursor:auto">${esc(k.nilai)}</span></td>
+        <td class="ina-table__cell"><span class="kontak-isi">${esc(k.nilai)}</span></td>
         <td class="ina-table__cell">${badge(`${ik(k.jenis === 'email' ? 'surat' : 'telepon', 12)} ${k.jenis === 'email' ? 'Email' : 'Telepon'}`, 'neutral', 'sm')}</td>
         <td class="ina-table__cell">${toggle('tglK-' + i, k.aktif ? 'Aktif' : 'Nonaktif', k.aktif, `data-kontak-ktr="${i}"`, `Status aktif ${k.nilai}`)}</td>
         <td class="ina-table__cell">${tombol(ik('pensil', 16), 'tertiary', 'sm', `class="ikon-saja" data-ubah-kontak-ktr="${i}" aria-label="Ubah kontak ${esc(k.nilai)}"`)}</td></tr>`).join('')

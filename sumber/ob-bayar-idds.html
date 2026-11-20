@@ -681,7 +681,7 @@ const UBAH = [
     isi:'Di layar Pilih Metode Pembayaran, QRIS dan Transfer Bank tampil sebagai pilihan nonaktif berlencana "Segera hadir". Alasannya tertulis di bawah pilihan, yaitu "Belum tersedia. Gunakan Virtual Account.", dan juga dibacakan pembaca layar (aria-describedby). Daftar bank Virtual Account tidak lagi memuat QRIS, sehingga status QRIS seragam di kedua layar. BRI Virtual Account (kode bank 002) terpilih otomatis seperti di live, sedangkan BCA, BNI, dan Mandiri tetap "Segera hadir".',
     lama:'Di layar Pilih Metode Pembayaran, QRIS berlabel "COMING SOON". Setelah Virtual Account diklik, QRIS muncul di daftar bank sebagai pilihan aktif tanpa label ("Scan dari aplikasi bank atau e-wallet mana pun"), sementara bank lain berlabel "Segera hadir" (temuan #2). Pola yang sama terulang di halaman Upgrade ke Enterprise (bukti 26 Okt 23.05). Subjudulnya berbunyi "QRIS atau Virtual Account sesuai pilihan.", dan "QRIS — Scan dari aplikasi bank atau e-wallet mana pun" muncul di antara bank.', ke:{ t:'pelanggan', layar:'dasbor', langkah:2 }, sorot:'#metodeBayar' },
   { kode:'IDDS-OB-47', judul:'Tagihan VA: batas waktu lengkap, hitung mundur, tombol Salin, cara bayar per kanal, dan hasil Cek Status',
-    isi:'Kartu tagihan menampilkan nomor VA, nominal "Rp3.500.000", hitung mundur, dan batas waktu lengkap dengan tahun ("27 Okt 2026, 14.53"). Tombol "Salin" menyebut nomornya untuk pembaca layar. Panduan umum diganti dengan cara bayar per kanal BRI dalam IDDS Accordion (ATM, BRImo, Internet Banking, bank lain). Label "Reference" menjadi "Referensi". Cek Status Pembayaran menampilkan "Belum ada pembayaran masuk" beserta jam pengecekan dan perkiraan waktu verifikasi. Perkiraannya paling lama 10 menit setelah transfer, sesuai email instruksi di live.',
+    isi:'Kartu tagihan menampilkan nomor VA, nominal "Rp3.500.000", hitung mundur, dan batas waktu lengkap dengan tahun ("27 Okt 2026, 14.53"). Tombol "Salin" menyebut nomornya untuk pembaca layar. Panduan umum diganti dengan cara bayar per kanal BRI dalam IDDS Accordion (ATM, BRImo, Internet Banking, bank lain). Label "Reference" menjadi "Referensi". Cek Status Pembayaran menampilkan "Pembayaran belum terdeteksi" beserta jam pengecekan dan perkiraan waktu verifikasi. Perkiraannya paling lama 10 menit setelah transfer, sesuai email instruksi di live.',
     lama:'Kartu "BRI Virtual Account · Pembayaran Terverifikasi" berisi "Selesaikan Pembayaran Dalam 23:59:24" dan "Berlaku sampai 13 Okt, 14.10" tanpa tahun. Label tertulis "Reference", dan nominal "Rp 1". "Panduan Pembayaran" berisi tiga kalimat umum yang sama untuk semua kanal. Hasil Cek Status Pembayaran (bukti 26 Okt 23.05, halaman Upgrade) hanya berupa kotak "Pembayaran belum terdeteksi. Silakan transfer terlebih dahulu." tanpa jam pengecekan (lihat IDDS-OB-58).', ke:{ t:'pelanggan', layar:'dasbor', langkah:5 }, sorot:'#kartuVa' },
   { kode:'IDDS-OB-48', judul:'Riwayat tahap tersinkron: Proses Pembayaran "Sedang berjalan" sejak VA dibuat',
     isi:'Pelanggan melihat Progres Registrasi Anda dalam tujuh tahap bernomor urut, sesuai masukan Peruri. Operator melihat sembilan tahap di Detail Pendaftar dari data yang sama. Tahap Proses Pembayaran bertanda "Sedang berjalan sejak 26 Okt 2026, 14.53" begitu VA dibuat. Sebelum VA dibuat, tahap itu bertanda "Menunggu tagihan dibuat". Tagihan kedaluwarsa atau gagal ditandai "Tertahan" beserta sebabnya. Proses Aktivasi bertanda "Dimulai otomatis setelah lunas". Waktu tahap dicatat saat kejadian: Proses Pembayaran mulai saat VA dibuat dan selesai saat bank mengonfirmasi, sehingga tahap tidak lagi bertanggal sama. Progres pelanggan menampilkan sembilan tahap, termasuk Verifikasi Anggota, sama dengan tampilan operator. Status pendaftar di tabel memakai nama tahap baku ("Pilih Produk"). Detail Transaksi memuat Riwayat Status tagihan yang sama dengan rekam jejak.',
@@ -714,7 +714,7 @@ const UBAH = [
     isi:'Halaman Upgrade ke Enterprise memakai remah "Beranda › Upgrade ke Enterprise", subjudul satu kalimat, dan email akun ("Akun: calon.satu@contoh.id"). Ringkasan Pesanan menampilkan paket Enterprise "Rp3.500.000" dan tombol "Kembali ke Dasbor". Ringkasan juga mencatat bahwa Trial tetap berjalan sampai pembayaran diterima serta data dan alamat aplikasi tidak berubah. Progres Upgrade menunjukkan posisi pelanggan dengan IDDS Stepper empat tahap: Upgrade dimulai, Proses Pembayaran, Lunas, dan Enterprise aktif. Pilihan metode dan bank sama dengan IDDS-OB-46: QRIS dan Transfer Bank nonaktif dengan alasan, daftar bank tanpa QRIS, dan BRI terpilih otomatis.',
     lama:'Halaman /upgrade-to-enterprise memakai remah "Home › Upgrade ke Enterprise" dan subjudul "Selesaikan pembayaran untuk melanjutkan akses penuh e-PPAT.". Baris "Akun:" berisi email akun. Bagian "Ringkasan Pesanan — Detail paket berlangganan yang Anda pilih." menampilkan Enterprise "AKSES PENUH" "Rp 1". Bagian "Pilih Metode Pembayaran — Pilih metode untuk membayar tagihan Anda." memuat Virtual Account, QRIS "COMING SOON", dan Transfer Bank "COMING SOON". Halaman tidak menyebut nasib Trial selama upgrade dan tidak menampilkan progres upgrade.', ke:{ t:'pelanggan', layar:'upgrade', jalur:'trial', langkah:3 }, sorot:'#ringkasUpgrade' },
   { kode:'IDDS-OB-58', judul:'Cek Status Pembayaran: hasil lengkap dan pesan berhasil setelah bayar',
-    isi:'Cek Status Pembayaran menampilkan indikator memuat saat memeriksa. Setelah itu, IDDS Alert "Belum ada pembayaran masuk" tampil beserta jam pengecekan dan perkiraan verifikasi (paling lama 10 menit setelah transfer), lalu diumumkan ke pembaca layar. Tagihan menulis batas waktu lengkap dengan tahun ("27 Okt 2026, 14.54") dan label "Referensi". Setelah bank mengonfirmasi, pelanggan kembali ke Dasbor dengan IDDS Alert sukses "Pembayaran berhasil. Paket Enterprise aktif". Alert itu berisi nomor order, nominal, waktu bayar, dan masa berlaku. Kartu sisa masa Trial diganti kartu "Paket Enterprise aktif" dengan "Berlaku hingga 26 Okt 2027". Tombol "SIMULASI BAYAR (KHUSUS SANDBOX)" tidak ada di layar pelanggan. Di prototipe, transfer disimulasikan lewat tombol bilah prototipe "Simulasikan Transfer dari Bank" (pelaku Bank).',
+    isi:'Cek Status Pembayaran menampilkan indikator memuat saat memeriksa. Setelah itu, IDDS Alert kuning "Pembayaran belum terdeteksi" tampil beserta jam pengecekan dan perkiraan verifikasi (paling lama 10 menit setelah transfer), lalu diumumkan ke pembaca layar. Tagihan menulis batas waktu lengkap dengan tahun ("27 Okt 2026, 14.54") dan label "Referensi". Setelah bank mengonfirmasi, pelanggan kembali ke Dasbor dengan IDDS Alert sukses "Pembayaran berhasil. Paket Enterprise aktif". Alert itu berisi nomor order, nominal, waktu bayar, dan masa berlaku. Kartu sisa masa Trial diganti kartu "Paket Enterprise aktif" dengan "Berlaku hingga 26 Okt 2027". Tombol "SIMULASI BAYAR (KHUSUS SANDBOX)" tidak ada di layar pelanggan. Di prototipe, transfer disimulasikan lewat tombol bilah prototipe "Simulasikan Transfer dari Bank" (pelaku Bank).',
     lama:'Di halaman Upgrade, kartu "BRI Virtual Account · Pembayaran Terverifikasi" menampilkan hitung mundur "23:59:54", "Berlaku sampai 27 Okt, 23.05" tanpa tahun, dan label "Reference". Kartu juga memuat tombol "Cek status pembayaran", "SIMULASI BAYAR (KHUSUS SANDBOX)", dan "Ganti bank pembayaran". Menekan Cek Status Pembayaran hanya memunculkan kotak "Pembayaran belum terdeteksi. Silakan transfer terlebih dahulu." tanpa jam pengecekan atau perkiraan waktu verifikasi. Setelah dibayar (23.06), halaman langsung pindah ke Dasbor tanpa pesan berhasil. Kartu berganti menjadi "PAKET ENTERPRISE AKTIF" dan "Berlaku hingga: 26 Oktober 2027".', ke:{ t:'pelanggan', layar:'upgrade', jalur:'trial', langkah:6 }, sorot:'#hasilCekBayar' },
   { kode:'IDDS-OB-59', judul:'Riwayat Transaksi: Trial dan Upgrade tercatat dengan nama yang benar',
     isi:'Riwayat Transaksi memuat baris Trial (ORD-TRIAL-…) dengan "Paket Trial 30 hari", metode "Gratis", "Rp0", Jatuh Tempo "Tidak berlaku (gratis)", dan lencana "Gratis". Keterangannya menyebut tanggal berakhir atau tanggal diganti Enterprise. Baris ORD-UPGRADE-… berketerangan "Upgrade ke Enterprise", bukan perpanjangan. Metode ditulis "Virtual Account BRI", status berupa lencana "Lunas", dan Jatuh Tempo berisi "Tidak berlaku (sudah dibayar)". Di sisi operator, Verifikasi Pembayaran memuat order yang sama, dan Detail Transaksi menulis Jenis Order "Upgrade dari Trial ke Enterprise".',
@@ -885,7 +885,7 @@ function aksiBank() {
 }
 function aksiCek() {
   maju(fase() === 'va' ? 5 : 2); SIM.hasilCek = SIM.jam;
-  catat('Pelanggan', nf('tunggu'), 'Cek Status Pembayaran', `Belum ada pembayaran masuk (dicek ${jam(SIM.jam)}). Hasil tampil di kartu tagihan.`);
+  catat('Pelanggan', nf('tunggu'), 'Cek Status Pembayaran', `Pembayaran belum terdeteksi (dicek ${jam(SIM.jam)}). Hasil tampil di kartu tagihan.`);
   masukF('tunggu');
 }
 function aksiBayar() {
@@ -1128,21 +1128,21 @@ function kartuTahap() {
   const L = SIM.langkah, t = tAktif(), f = fase();
   if (diTrial()) {
     const B = f === 'trial' ? ['Gunakan Trial atau upgrade', `Trial berlaku sampai ${tglJam(SIM.trial.akhir)}. Upgrade ke Enterprise kapan saja; data dan alamat aplikasi tetap sama.`, '']
-      : f === 'aktif' ? ['Gunakan aplikasi kantor', `Paket Enterprise aktif sampai ${tglPendek(hinggaEnt())}. Masuk ke aplikasi kantor melalui tombol di bawah.`, '']
+      : f === 'aktif' ? null /* setelah upgrade tidak ada Langkah berikutnya, sama dengan TRIAL dan live (keputusan 20 Nov) */
       : ['Selesaikan pembayaran upgrade', 'Lanjutkan di halaman Upgrade ke Enterprise. Trial tetap berjalan sampai pembayaran diterima.', `<span>${tombol('Lanjutkan upgrade', 'primary', 'sm', 'id="lanjutUpgradeTahap" data-ke-p="upgrade"', ik('panah', 14))}</span>`];
     return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuTahap"><div class="ina-card__content"><h3>Progres Registrasi Anda${usulan('IDDS-OB-48')}${usulan('IDDS-OB-60')}</h3>
       ${stepperDua(SIM.tahap, 'Progres registrasi', true, TAHAP, ketTahap, TAMPIL)}
-      <div class="berikut-db" id="langkahDb">${alert('info', `Langkah berikutnya: ${B[0]}`, B[1], B[2])}</div></div></section>`;
+      ${B ? `<div class="berikut-db" id="langkahDb">${alert('info', `Langkah berikutnya: ${B[0]}`, B[1], B[2])}</div>` : ''}</div></section>`;
   }
   const B = L === 1 ? ['Pilih paket layanan', 'Pilih Trial atau Enterprise di bawah. Trial langsung aktif dengan Aktifkan Trial Gratis; Enterprise dilanjutkan dengan Lanjut Pembayaran. Paket masih dapat diganti sebelum pembayaran diterima.']
     : L <= 3 ? ['Pilih cara pembayaran', 'Pilih Virtual Account, lalu bank. Tagihan baru dibuat setelah Anda menekan Buat Virtual Account.']
     : L <= 5 ? (t.status === 'kedaluwarsa' ? ['Buat tagihan baru', 'Tagihan sebelumnya kedaluwarsa. Buat tagihan baru, lalu bayar sebelum batas waktunya.'] : t.status === 'gagal' ? ['Ulangi pembayaran', 'Transfer sebelumnya ditolak bank. Periksa alasannya, lalu coba lagi.'] : ['Selesaikan pembayaran', `Bayar sebelum ${tglJam(t.batas)}. Pembayaran terverifikasi otomatis paling lama 10 menit setelah transfer berhasil.`])
     : L === 6 ? ['Pembayaran diterima', 'Sistem memulai Proses Aktivasi secara otomatis.']
     : L === 7 ? ['Tunggu proses aktivasi', `Tim Peruri menyiapkan aplikasi kantor Anda (perkiraan ${est('± 1 hari kerja')}). Anda akan menerima email berisi alamat aplikasi. Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran.`]
-    : ['Aplikasi kantor aktif', 'Masuk ke aplikasi kantor Anda melalui tombol di bawah.'];
+    : null; /* aplikasi aktif: tanpa Langkah berikutnya, sama dengan ONBOARDING */
   return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuTahap"><div class="ina-card__content"><h3>Progres Registrasi Anda${usulan('IDDS-OB-48')}</h3>
     ${stepperDua(SIM.tahap, 'Progres registrasi', true, TAHAP, ketTahap, TAMPIL)}
-    <div class="berikut-db" id="langkahDb">${alert('info', `Langkah berikutnya: ${B[0]}`, `${lencanaWaktu(L)}${B[1]}`)}</div></div></section>`;
+    ${B ? `<div class="berikut-db" id="langkahDb">${alert('info', `Langkah berikutnya: ${B[0]}`, `${lencanaWaktu(L)}${B[1]}`)}</div>` : ''}</div></section>`;
 }
 function kartuBantuan() {
   return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="bantuanDb"><div class="ina-card__content bantuan-db">
@@ -1196,7 +1196,7 @@ function kartuVa() {
     <div class="no-va"><span>NOMOR VIRTUAL ACCOUNT<b>${t.va}</b></span>${tombol('Salin', 'secondary', 'sm', `id="salinVa" aria-label="Salin nomor Virtual Account ${t.va}"`, ik('salin', 14))}</div>
     <div class="kv-va"><div>Nama VA<b>Pembayaran e-PPAT</b></div><div>Berlaku sampai<b>${tglJam(t.batas)}</b></div><div class="lebar">Referensi<b>${t.ref}</b></div></div>
     <div class="cara-bayar"><h4>Cara bayar</h4><p class="ket-cara">${est('Urutan menu dapat berbeda di tiap aplikasi bank.')}</p>${CARA.map(([k, l], i) => faqHalaman('cara-' + i, k, `<ol>${l.map(x => `<li>${x}</li>`).join('')}</ol>`)).join('')}</div>
-    ${L === 5 && st === 'belum' && SIM.hasilCek ? `<div id="hasilCekBayar"${diTrial() ? ' class="ditandai"' : ''}>${alert('info', 'Belum ada pembayaran masuk', `Dicek ${tglJam(SIM.hasilCek)}. Bila Anda baru saja mentransfer, tunggu paling lama 10 menit, lalu cek lagi.`)}${diTrial() ? usulan('IDDS-OB-58') : ''}</div>` : ''}
+    ${L === 5 && st === 'belum' && SIM.hasilCek ? `<div id="hasilCekBayar"${diTrial() ? ' class="ditandai"' : ''}>${alert('caution', 'Pembayaran belum terdeteksi', `Dicek ${tglJam(SIM.hasilCek)}. Bila Anda baru saja mentransfer, tunggu paling lama 10 menit, lalu cek lagi.`)}${diTrial() ? usulan('IDDS-OB-58') : ''}</div>` : ''}
     <div class="tombol-blok">${aksi}${tombol('Ganti bank pembayaran', 'tertiary', 'md', 'id="gantiBank"')}</div>${usulan('IDDS-OB-47')}${usulan('IDDS-OB-51')}</div></section>`;
 }
 function emailBayar() {
@@ -1221,7 +1221,7 @@ function kartuSiapTrial() {
     <div style="margin-top:12px">${alert('info', '', 'Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kata sandi tidak pernah dikirim melalui email.')}</div>
     <div class="ditandai" id="emailAktivasi" style="margin-top:14px"><div class="email-pratinjau"><div class="kep">Dari: e-PPAT &lt;noreply@eppat.id&gt; · ${tglJam(SIM.trial.mulai)} · Subjek: Akun e-PPAT Anda Sudah Aktif</div>
       <div class="isi">Yth. Bapak/Ibu Calon PPAT Contoh Satu,<br>Instansi e-PPAT untuk kantor Anda telah berhasil dibuat. Paket Trial aktif sampai ${tglJam(SIM.trial.akhir)}.
-        <div class="kotak"><small>ALAMAT APLIKASI</small>${URL0}<small style="margin-top:8px">EMAIL LOGIN</small>calon.satu@contoh.id</div>
+        <div class="kotak"><small>ALAMAT APLIKASI</small>${URL0}<small style="margin-top:8px">EMAIL UNTUK MASUK</small>calon.satu@contoh.id</div>
         ${tombol('Masuk ke aplikasi e-PPAT', 'primary', 'sm', 'data-luar="Masuk ke aplikasi e-PPAT"')}<p style="margin:10px 0 0;font-size:12.5px;color:var(--ina-content-secondary)">Masuk dengan email di atas dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kami tidak pernah mengirim kata sandi melalui email. Bila lupa, pilih <b>Lupa kata sandi?</b> di halaman masuk.</p></div></div>
       ${ent ? '<p class="ket" id="catatanEmailSekali" style="margin-top:8px">Email ini hanya dikirim sekali, saat Trial aktif. Upgrade tidak mengirim ulang email aktivasi; alamat aplikasi dan kata sandi tetap.</p>' : ''}${usulan('IDDS-OB-60')}</div></div></section>`;
 }
@@ -1284,7 +1284,7 @@ function layarDasbor() {
       <div style="margin-top:12px">${alert('info', '', 'Masuk dengan email dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kata sandi tidak pernah dikirim melalui email.')}</div>
       <div class="ditandai" id="emailAktivasi" style="margin-top:14px"><div class="email-pratinjau"><div class="kep">Dari: e-PPAT &lt;noreply@eppat.id&gt; · Subjek: Akun e-PPAT Anda Sudah Aktif</div>
         <div class="isi">Yth. Bapak/Ibu Calon PPAT Contoh Satu,<br>Instansi e-PPAT untuk kantor Anda telah berhasil dibuat dan siap digunakan.
-          <div class="kotak"><small>ALAMAT APLIKASI</small>${URL0}<small style="margin-top:8px">EMAIL LOGIN</small>calon.satu@contoh.id</div>
+          <div class="kotak"><small>ALAMAT APLIKASI</small>${URL0}<small style="margin-top:8px">EMAIL UNTUK MASUK</small>calon.satu@contoh.id</div>
           ${tombol('Masuk ke aplikasi e-PPAT', 'primary', 'sm', 'data-luar="Masuk ke aplikasi e-PPAT"')}<p style="margin:10px 0 0;font-size:12.5px;color:var(--ina-content-secondary)">Masuk dengan email di atas dan kata sandi yang Anda buat saat pendaftaran. Demi keamanan, kami tidak pernah mengirim kata sandi melalui email. Bila lupa, pilih <b>Lupa kata sandi?</b> di halaman masuk.</p></div></div></div>${usulan('IDDS-OB-54')}</div></section>
     <section class="ina-card ina-card--variant-basic kartu-db" style="margin-top:0"><div class="ina-card__content"><div class="eb">Paket ${pk.n} aktif</div><h3>${pk.lencana[0]}</h3>
       <ul class="fitur-ok">${pk.fitur.map(f => `<li>${ik('centang', 14)}${f}</li>`).join('')}</ul>
@@ -1784,8 +1784,26 @@ const BAYAR_T = () => [
   { el:'#cekBayar', j:'Cek status pembayaran', t:'Pembayaran diverifikasi otomatis. Tekan tombol ini untuk memperbarui statusnya.' },
   { el:'#gantiBank', j:'Ganti bank pembayaran', t:'Pilih bank lain bila perlu.' }
 ];
+/* tur baku per keadaan, sama dengan Backlog-HE-ONBOARDING dan Backlog-HE-TRIAL (keputusan 20 Nov 2026) */
+const BANTU_B = { ...BANTU_DB, j:'Bantuan' };
+const RING_B = { el:pasT(kartuH3T('Ringkasan Pesanan'), 'h3'), j:'Ringkasan pesanan', t:'Paket yang Anda pilih beserta harga dan fiturnya.' };
+const GANTI_B = { el:'#gantiPaket', j:'Ganti paket', t:'Paket masih dapat diganti selama pembayaran belum diterima.' };
+const PROG_BAYAR = { el:pasT('#kartuTahap', 'h3'), j:'Progres registrasi', t:'Tahap Pembayaran sedang berjalan. Tahap berikutnya terbuka setelah pembayaran diterima.' };
+const SIAP_B = [
+  { el:pasT('#kartuSiap', 'h3'), j:'Aplikasi siap', t:'Aplikasi e-PPAT kantor Anda sudah aktif. Alamat aplikasi dan email untuk masuk tercantum di sini.' },
+  { el:'#masukApp', j:'Masuk ke aplikasi', t:'Buka aplikasi kantor Anda, lalu masuk dengan email dan kata sandi pendaftaran.' }];
+const TUR_BAKU = {
+  'enterprise-metode':() => [PROG_BAYAR, RING_B, GANTI_B, { el:pasT('#metodeBayar', 'h3'), j:'Metode pembayaran', t:'Pilih cara membayar tagihan. Metode yang bertanda Segera hadir belum dapat dipakai.' }, BANTU_B],
+  'enterprise-bank':() => [PROG_BAYAR, RING_B, GANTI_B, { el:pasT('#pilihBank', 'h3'), j:'Metode pembayaran', t:'Pilih bank Virtual Account. Bank yang bertanda Segera hadir belum dapat dipakai.' },
+    { el:'#buatVa', j:'Buat Virtual Account', t:'Nomor Virtual Account dibuat setelah Anda memilih bank.' }, BANTU_B],
+  'enterprise-selesai':() => [...SIAP_B, { el:pasT('#emailAktivasi', 'b, h4'), j:'Email aktivasi', t:'Email ini berisi alamat aplikasi dan email untuk masuk. Kata sandi tidak pernah dikirim lewat email.' }, BANTU_B],
+  'trial-aktif':() => [{ el:pasT('#kartuTahap', 'h3'), j:'Progres registrasi', t:'Semua tahap pendaftaran sudah selesai.' },
+    { el:pasT('#progresUpgrade', 'h3'), j:'Progres upgrade', t:'Upgrade ke Enterprise sudah selesai.' }, ...SIAP_B,
+    { el:'#pesanBerhasil', j:'Pembayaran berhasil', t:'Paket Enterprise sudah aktif. Data dan alamat aplikasi dari masa Trial tetap dipakai.' },
+    { el:pasT('#kartuEntAktif', 'h3'), j:'Paket Enterprise aktif', t:'Masa berlaku paket Enterprise tercantum di sini.' }, BANTU_B]
+};
 [
-  { get kunci() { return 'obbayar-p-dasbor-' + SIM.jalur + '-' + fase(); }, aktif:() => S.tampilan === 'pelanggan' && S.layar === 'dasbor', langkah:() => terlihatT('#kartuVa') ? VA_T() : [
+  { get kunci() { return 'obbayar-p-dasbor-' + SIM.jalur + '-' + fase(); }, aktif:() => S.tampilan === 'pelanggan' && S.layar === 'dasbor', langkah:() => terlihatT('#kartuVa') ? VA_T() : TUR_BAKU[SIM.jalur + '-' + fase()] ? TUR_BAKU[SIM.jalur + '-' + fase()]() : [
     { el:'#pesanBerhasil', j:'Pembayaran berhasil', t:'Paket Enterprise sudah aktif. Data dan alamat aplikasi dari masa Trial tetap dipakai.' },
     { el:'#lencanaAkun', j:'Status akun', t:'Lencana ini menunjukkan status akun Anda saat ini.' },
     { el:pasT('#kartuTahap', 'h3'), j:'Progres registrasi', t:'Pendaftaran kantor Anda berjalan melalui beberapa tahap. Tahap yang sedang berjalan ditandai di sini.' },
