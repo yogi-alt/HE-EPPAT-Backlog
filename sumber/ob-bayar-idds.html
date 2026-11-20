@@ -1236,9 +1236,9 @@ function kartuTrial() {
       ${f === 'trial' ? '' : '<p class="ket" style="margin-top:6px">Tagihan upgrade sudah dibuat. Trial tetap berjalan sampai pembayaran diterima.</p>'}
       <div class="tombol-blok">${f === 'trial' ? tombol('Upgrade sekarang', 'primary', 'md', 'id="upgradeSekarang"', ik('panah', 16)) : tombol('Lanjutkan upgrade', 'primary', 'md', 'id="lanjutUpgrade" data-ke-p="upgrade"', ik('panah', 16))}</div></div>${usulan('IDDS-OB-56')}</div></section>`;
 }
-function kartuEntAktif() {
+function kartuEntAktif(pesan = '') {
   const p = PAKET.enterprise;
-  return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuEntAktif" style="margin-top:0"><div class="ina-card__content"><div class="eb">Paket Enterprise aktif</div><h3>${p.lencana[0]}</h3>
+  return `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="kartuEntAktif" style="margin-top:0"><div class="ina-card__content">${pesan}<div class="eb">Paket Enterprise aktif</div><h3>${p.lencana[0]}</h3>
     <ul class="fitur-ok">${p.fitur.map(x => `<li>${ik('centang', 14)}${x}</li>`).join('')}</ul>
     <div class="akses"><small>Berlaku hingga</small><b>${tglPendek(hinggaEnt())}</b></div>${usulan('IDDS-OB-58')}</div></section>`;
 }
@@ -1251,8 +1251,8 @@ function emailBayarUp() {
 }
 function layarDasborTrial() {
   const ent = fase() === 'aktif', t = tAktif();
-  const sukses = ent && t ? `<div class="berikut-db ditandai" id="pesanBerhasil">${alert('success', 'Pembayaran berhasil. Paket Enterprise aktif', `Tagihan ${t.invoice} sebesar ${rupiah(t.nominal)} lunas pada ${tglJam(t.bayar)}. Paket Enterprise berlaku sampai ${tglPendek(hinggaEnt())}. Sisa masa Trial tidak berlaku lagi.`)}${usulan('IDDS-OB-58')}</div>` : '';
-  return `${heroDb()}${sukses}${kartuTahap()}${SIM.up[0].selesai ? kartuProgresUp() : ''}<div class="dua-kol" style="margin-top:16px">${kartuSiapTrial()}${ent ? kartuEntAktif() : kartuTrial()}</div>
+  const sukses = ent && t ? `<div class="ditandai" id="pesanBerhasil" style="margin:0 0 16px">${alert('success', 'Pembayaran berhasil. Paket Enterprise aktif', `Tagihan ${t.invoice} sebesar ${rupiah(t.nominal)} lunas pada ${tglJam(t.bayar)}. Paket Enterprise berlaku sampai ${tglPendek(hinggaEnt())}. Sisa masa Trial tidak berlaku lagi.`)}${usulan('IDDS-OB-58')}</div>` : '';
+  return `${heroDb()}${kartuTahap()}${SIM.up[0].selesai ? kartuProgresUp() : ''}<div class="dua-kol" style="margin-top:16px">${kartuSiapTrial()}${ent ? kartuEntAktif(sukses) : kartuTrial()}</div>
     ${ent && t ? `<section class="ina-card ina-card--variant-basic kartu-db ditandai" id="emailLunas"><div class="ina-card__content"><h3>Email yang Anda terima${usulan('IDDS-OB-60')}</h3><p class="ket">Upgrade hanya mengirim email pembayaran. Email aktivasi tidak dikirim ulang.</p><div>${emailBayarUp()}</div></div></section>` : ''}${kartuBantuan()}`;
 }
 function layarUpgrade() {
