@@ -1095,8 +1095,8 @@ function langkahBerikut() {
   const k = S.kondisi, n = kurang().length, m = S.memuat;
   const B = {
     kurang:['caution', `Lengkapi ${n} data diri`, 'Data ini dikirim ke Peruri saat registrasi, sehingga Anda tidak perlu mengetik ulang di portal Peruri.', tombol('Lengkapi di tab Data Diri', 'primary', 'md', 'data-lengkapi', ik('panah', 16))],
-    siap:['info', ajukanBersama() ? 'Ajukan registrasi CA & TERA' : 'Ajukan registrasi CA', `Data diri Anda sudah lengkap. ${ajukanBersama() ? 'Data TERA ikut diajukan dalam pengajuan yang sama. ' : ''}Setelah diajukan, portal Peruri terbuka di tab baru untuk ${istilah('eKYC', 'EKYC')}. Tautan yang sama juga dikirim ke email Anda.`, tombol(ajukanBersama() ? 'Ajukan Registrasi CA & TERA' : 'Ajukan Registrasi CA', 'primary', 'md', `id="ajukan" ${m === 'ajukan' ? 'disabled' : ''}`, m === 'ajukan' ? spinner : ik('tamengcek', 16))],
-    ekyc:['info', 'Selesaikan eKYC di portal Peruri', `Di portal Peruri Anda akan (1) menyetujui syarat layanan, (2) memasukkan kode OTP dari email dan SMS, (3) memeriksa data pribadi yang sudah terisi, (4) mengambil ${istilah('swafoto', 'SWAFOTO')}, dan (5) mengirim pengajuan. Tautan yang sama ada di email dari no-reply-digital@peruri.co.id dan berlaku sampai ${est('27 Okt 2026, 09.15')}.`, tombol('Lanjutkan eKYC di Peruri', 'primary', 'md', 'id="lanjutEkyc"', ik('luar', 16))],
+    siap:['info', ajukanBersama() ? 'Ajukan registrasi CA & TERA' : 'Ajukan registrasi CA', `Data diri Anda sudah lengkap. ${ajukanBersama() ? 'Data TERA ikut diajukan dalam pengajuan yang sama. ' : ''}Setelah diajukan, Peruri mengirim email ke ${esc(EMAIL_P)} untuk melanjutkan ${istilah('eKYC', 'EKYC')}.`, tombol(ajukanBersama() ? 'Ajukan Registrasi CA & TERA' : 'Ajukan Registrasi CA', 'primary', 'md', `id="ajukan" ${m === 'ajukan' ? 'disabled' : ''}`, m === 'ajukan' ? spinner : ik('tamengcek', 16))],
+    ekyc:['info', 'Buka email dari Peruri untuk eKYC', `Pendaftaran sudah terkirim ke Peruri. Buka email dari no-reply-digital@peruri.co.id di ${esc(EMAIL_P)}, lalu ikuti tautannya. Di sana Anda akan (1) menyetujui syarat layanan, (2) memasukkan kode OTP dari email dan SMS, (3) memeriksa data pribadi yang sudah terisi, (4) mengambil ${istilah('swafoto', 'SWAFOTO')}, dan (5) mengirim pengajuan. Tautan di email berlaku sampai ${est('27 Okt 2026, 09.15')}.`, ''],
     periksa:['info', 'Menunggu pemeriksaan Peruri', `eKYC Anda sudah selesai. Peruri sedang memeriksa identitas Anda, biasanya ${est('± 1 hari kerja')}. Anda akan menerima notifikasi dan email setelah sertifikat elektronik aktif. Anda tidak perlu membuka tautan lagi.`, ''],
     aktif:['info', 'Masukkan spesimen tanda tangan', `Sertifikat elektronik Anda aktif sampai <b>${CA_SAMPAI}</b> (berlaku 1 tahun). Registrasi selesai setelah Anda memasukkan ${istilah('spesimen', 'SPESIMEN')} tanda tangan.`, tombol('Masukkan spesimen', 'primary', 'md', 'data-spesimen', ik('pena', 16))],
     selesai:['success', 'Registrasi CA selesai', `Sertifikat elektronik Anda aktif sampai <b>${CA_SAMPAI}</b> (berlaku 1 tahun). Anda sudah dapat menandatangani akta secara elektronik.`, S.dariTtd ? `<a class="ina-button ina-button--primary ina-button--md" href="${S.dariTtd}">Kembali ke Penandatanganan Akta</a>` : ''],
@@ -1299,12 +1299,12 @@ const ringkas = rows => `<dl class="ringkas">${rows.map(([k, v]) => `<dt>${k}</d
 function konfirmAjukan() {
   const p = S.profil, bersama = ajukanBersama();
   dialog({ judul:S.kondisi === 'kedaluwarsa' ? 'Ajukan registrasi ulang?' : bersama ? 'Ajukan registrasi CA & TERA?' : 'Ajukan registrasi CA?', konfirmasi:true, kunciUtama:'#setuju',
-    isi:`<p>Data berikut akan dikirim ke Peruri. Setelah itu, portal Peruri akan terbuka di tab baru untuk verifikasi identitas. Tautan yang sama juga dikirim ke email Anda.</p>
+    isi:`<p>Data berikut akan dikirim ke Peruri. Setelah itu, Peruri mengirim email ke <b>${esc(EMAIL_P)}</b> untuk verifikasi identitas (eKYC).</p>
       ${ringkas([['Nama', esc(p.nama)], ['NIK', esc(p.nik) || '—'], ['Tempat, tanggal lahir', `${esc(p.tempat)}, ${tglId(p.tgl)}`], ['Nomor HP', esc(p.hp)], ['Foto KTP', esc(p.ktp)], ...(bersama ? [['ID PPAT / Nomor SK', esc(T.idppat)], ['Rekening PPAT', esc(T.rekening)], ['SK PPAT', esc(T.sk)]] : [])])}
       ${bersama ? `<p>Sertifikat elektronik dan TERA diproses terpisah. Sertifikat elektronik aktif lebih dulu (${est('± 1 hari kerja')}) dan tidak menunggu TERA (${est('± 4–7 hari kerja')}).</p>` : ''}
       <label class="ina-checkbox cek" for="setuju"><input type="checkbox" id="setuju" class="ina-checkbox__input peer"><div class="ina-checkbox__box ina-checkbox__box--unchecked"></div><div class="ina-checkbox__content"><span class="ina-checkbox__label">Data di atas sesuai dengan KTP saya.</span></div></label>`,
-    tombol:[['Ubah data','secondary',() => { bukaDataDiri(); }],['Ajukan & buka Portal Peruri','primary',() => {
-      tunggu('ajukan', 900, () => { S.kondisi = 'ekyc'; setKondisi('ekyc'); if (bersama) setTera('pending'); S.dicek = 'baru saja'; gambar(); toast(bersama ? 'Registrasi CA & TERA diajukan.' : 'Registrasi CA diajukan.', 'positive', 4500, 'Portal Peruri dibuka di tab baru (disimulasikan). Selesaikan eKYC di sana.'); });
+    tombol:[['Ubah data','secondary',() => { bukaDataDiri(); }],['Ajukan','primary',() => {
+      tunggu('ajukan', 900, () => { S.kondisi = 'ekyc'; setKondisi('ekyc'); if (bersama) setTera('pending'); S.dicek = 'baru saja'; gambar(); toast(bersama ? 'Registrasi CA & TERA diajukan.' : 'Registrasi CA diajukan.', 'positive', 4500, `Pendaftaran terkirim ke Peruri. Buka email dari Peruri di ${EMAIL_P} untuk melanjutkan eKYC.`); });
     }]] });
 }
 function cekStatus() {
@@ -1344,8 +1344,9 @@ H.addEventListener('click', e => {
   const pb = t.closest('[data-perbaiki]'); if (pb) { const k = pb.dataset.perbaiki;
     if (k === 'tempat') { S.tab = 'data'; gambar(); const el = $('#dTempat'); el?.scrollIntoView({ block:'center' }); el?.focus({ preventScroll:true }); return; }
     $('#f-tsk')?.scrollIntoView({ block:'center', behavior:'smooth' }); $('#f-tsk [data-unggah-sk]')?.focus({ preventScroll:true }); return; }
+  /* alur 24 Nov: tidak ada lagi tombol ke portal Peruri; eKYC dilanjutkan dari email Peruri. Simulasi eKYC selesai lewat pilihan kondisi di bilah prototipe. */
   if (t.closest('#lanjutEkyc')) { dialog({ judul:'Portal Peruri (simulasi)', isi:'<p>Di live, tombol ini membuka portal Peruri di tab baru untuk memasukkan kode OTP dan mengambil swafoto.</p><p>Pilih hasil untuk melanjutkan simulasi.</p>', tombol:[['Belum selesai','secondary',null],['eKYC selesai','primary',() => { setKondisi('periksa'); gambar(); toast('eKYC selesai.', 'positive', 4000, 'Peruri sedang memeriksa identitas Anda.'); }]] }); return; }
-  if (t.closest('#tautanBaru')) { toast('Tautan eKYC baru dibuat.', 'positive', 3500, `Berlaku sampai ${'27 Okt 2026, 09.15'}.`); return; }
+  if (t.closest('#tautanBaru')) { toast('Tautan eKYC baru dikirim ke email Anda.', 'positive', 3500, `Berlaku sampai ${'27 Okt 2026, 09.15'}.`); return; }
   if (t.closest('#cekStatus')) { cekStatus(); return; }
   if (t.closest('[data-spesimen]')) { dialogSpesimen(); return; }
   const lu = t.closest('[data-luar]'); if (lu) { toast(`${lu.dataset.luar} tidak disimulasikan di prototipe.`); return; }
@@ -1518,14 +1519,14 @@ function bukaBantuan() {
     <ol class="bantu-langkah">
       <li><b>Lengkapi data diri:</b> NIK, tempat dan tanggal lahir, nomor HP, serta foto KTP.</li>
       <li><b>Ajukan registrasi CA:</b> data Anda dikirim otomatis ke Peruri.</li>
-      <li><b>Selesaikan eKYC di portal Peruri</b>: setujui syarat layanan, masukkan kode OTP dari email dan SMS, periksa data pribadi, ambil swafoto, lalu kirim pengajuan. Tautannya juga dikirim ke email Anda.</li>
+      <li><b>Selesaikan eKYC dari email Peruri</b>: buka email dari Peruri, ikuti tautannya, setujui syarat layanan, masukkan kode OTP dari email dan SMS, periksa data pribadi, ambil swafoto, lalu kirim pengajuan.</li>
       <li><b>Tunggu pemeriksaan Peruri</b> (${est('± 1 hari kerja')}). Anda akan diberi tahu setelah sertifikat elektronik aktif.</li>
     </ol>
     ${PPAT_T ? `<h4 class="bantu-sub">Stempel elektronik (TERA) kantor</h4><ol class="bantu-langkah"><li><b>Lengkapi data TERA:</b> ID PPAT, rekening PPAT, dan SK PPAT terakhir. Data diri lainnya memakai Data Diri (KTP).</li><li><b>Ajukan bersama CA</b> atau sendiri bila CA sudah aktif.</li><li><b>Tunggu pemeriksaan:</b> admin E-PPAT (${est('± 1–2 hari kerja')}), lalu Peruri (${est('± 3–5 hari kerja')}). Sertifikat elektronik tidak menunggu TERA.</li><li><b>Buat spesimen stempel</b> setelah TERA disetujui.</li></ol>` : ''}
     <h4 class="bantu-sub">Pertanyaan umum</h4>
     ${faq(1, 'Apa itu sertifikat elektronik (CA)?', 'Sertifikat dari Peruri yang membuktikan bahwa tanda tangan elektronik pada akta benar-benar milik Anda.')}
     ${faq(2, 'Apa yang dilakukan di portal Peruri?', 'Anda menyetujui syarat layanan, memasukkan kode OTP dari email dan SMS, memeriksa data pribadi, mengambil swafoto, lalu mengirim pengajuan. Data diri Anda sudah terisi otomatis sehingga Anda tidak perlu mengetik ulang. Bila portal tampil dalam bahasa Inggris, pilih ID di kanan atas.')}
-    ${faq(3, 'Tautan eKYC sudah kedaluwarsa', 'Klik "Buat tautan baru" di tab Registrasi CA, lalu klik "Lanjutkan eKYC di Peruri".')}
+    ${faq(3, 'Tautan eKYC sudah kedaluwarsa', 'Klik "Buat tautan baru" di tab Registrasi CA. Tautan baru dikirim ke email Anda; buka email itu, lalu ikuti tautannya.')}
     ${faq(4, 'Status tidak berubah setelah eKYC', 'Pemeriksaan Peruri biasanya selesai dalam satu hari kerja. Anda dapat menekan "Cek status sertifikat" untuk memperbarui status.')}
     ${faq(5, 'Sertifikat saya kedaluwarsa', 'Ajukan registrasi ulang. Data diri Anda masih tersimpan sehingga Anda cukup menyelesaikan eKYC kembali.')}
     <h4 class="bantu-sub">Kontak dukungan ${usulan('HE-UMUM-02')}</h4>
@@ -1578,8 +1579,8 @@ $('#scrim').addEventListener('click', () => { $('#sidebar').classList.remove('op
   const tabTeks = () => { const n = [...document.querySelectorAll('.tab-akun [data-tab]')].filter(b => b.getClientRects().length).map(b => b.textContent.trim()); return `Akun Saya terdiri atas tab ${n.slice(0, -1).join(', ')}, dan ${n[n.length - 1]}. Setiap tab memiliki tur sendiri.`; };
   const BERIKUT = {
     kurang:'Data diri Anda belum lengkap. Klik Lengkapi di tab Data Diri. Data ini dikirim ke Peruri, sehingga Anda tidak perlu mengetik ulang di portal Peruri.',
-    siap:'Data diri sudah lengkap. Klik tombol Ajukan untuk membuka portal Peruri dan memulai eKYC.',
-    ekyc:'Selesaikan eKYC di portal Peruri. Tautan yang sama juga dikirim ke email Anda.',
+    siap:'Data diri sudah lengkap. Klik tombol Ajukan untuk mengirim pendaftaran ke Peruri. Setelah itu, Peruri mengirim email untuk eKYC.',
+    ekyc:'Buka email dari Peruri di alamat email akun Anda, lalu ikuti tautannya untuk menyelesaikan eKYC.',
     periksa:'Peruri sedang memeriksa identitas Anda. Anda tidak perlu melakukan apa pun dan akan diberi tahu setelah sertifikat aktif.',
     aktif:'Sertifikat sudah aktif. Masukkan spesimen tanda tangan untuk menyelesaikan registrasi.',
     selesai:'Registrasi selesai. Anda sudah dapat menandatangani akta secara elektronik.',

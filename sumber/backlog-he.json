@@ -968,13 +968,13 @@
       "fitur": "Registrasi CA (Klien)",
       "judul": "Tab Registrasi CA: tahapan dan perkiraan waktu terlihat",
       "saat_ini": "Layar hanya menampilkan lencana status (\"Belum Registrasi\", \"Sedang Diproses\") dan paragraf panjang tanpa perkiraan waktu. Tombol Lanjutkan eKYC, Buat Ulang Link, dan Cek Status CA tampil sejajar tanpa penanda aksi yang perlu dilakukan.",
-      "usulan": "Tampilkan IDDS Stepper 4 langkah berstatus di kartu Sertifikat Elektronik: (1) Lengkapi data diri, (2) Ajukan ke Peruri, (3) Verifikasi di portal Peruri (eKYC), dan (4) Pemeriksaan Peruri ± 1 hari kerja. Langkah 3 terdiri atas 5 tahap: setujui syarat, OTP email dan SMS, periksa data pribadi, swafoto, dan kirim pengajuan. Di bawah stepper, tampilkan IDDS Alert \"Langkah berikutnya: …\" dengan satu tombol sesuai status: Lengkapi data, Ajukan Registrasi CA, Lanjutkan eKYC di Peruri, atau Registrasi Ulang. Saat pengajuan diperiksa Peruri, tampilkan perkiraan waktu dan pemberitahuan bahwa pengguna akan diberi tahu melalui notifikasi dan email.",
+      "usulan": "Tampilkan IDDS Stepper 4 langkah berstatus di kartu Sertifikat Elektronik: (1) Lengkapi data diri, (2) Ajukan ke Peruri, (3) Verifikasi di portal Peruri (eKYC), dan (4) Pemeriksaan Peruri ± 1 hari kerja. Langkah 3 terdiri atas 5 tahap: setujui syarat, OTP email dan SMS, periksa data pribadi, swafoto, dan kirim pengajuan. Di bawah stepper, tampilkan IDDS Alert \"Langkah berikutnya: …\" dengan satu tombol sesuai status: Lengkapi data, Ajukan Registrasi CA, atau Registrasi Ulang. Ajukan hanya mengirim pendaftaran dari data yang sudah diisi; aplikasi tidak membuka portal Peruri di tab baru. Setelah diajukan, pemberitahuan berhasil tampil di dalam kartu dan meminta pengguna membuka email dari Peruri di alamat email akunnya untuk melanjutkan eKYC. Saat menunggu eKYC, Langkah berikutnya mengarahkan ke email Peruri tanpa tombol utama; Buat tautan baru dan Cek status sertifikat tetap tersedia. Saat pengajuan diperiksa Peruri, tampilkan perkiraan waktu dan pemberitahuan bahwa pengguna akan diberi tahu melalui notifikasi dan email.",
       "prinsip": "H1 Visibility of System Status; H8 Aesthetic and Minimalist Design",
       "halaman": "34, 35",
       "prioritas": "Tinggi",
       "layar": "Akun Saya › tab Registrasi CA",
       "acuan": "prototipe/Backlog-HE-CA-Prototype.html › Daftar perubahan › HE-CA-01",
-      "selesai_bila": "Pada status menunggu eKYC, stepper menandai langkah 3 sebagai aktif dengan perkiraan waktu, dan layar hanya menampilkan satu tombol utama \"Lanjutkan eKYC di Peruri\".",
+      "selesai_bila": "Pada status menunggu eKYC, stepper menandai langkah 3 sebagai aktif dengan perkiraan waktu, dan Langkah berikutnya mengarahkan pengguna ke email dari Peruri di alamat email akunnya, tanpa tombol yang membuka portal Peruri. Setelah Ajukan, tidak ada tab baru yang terbuka.",
       "status": "Prototipe siap",
       "catatan": "Perkiraan waktu masih berupa contoh; portal Peruri staging mencantumkan ±1 menit per tahap, sedangkan angka resmi pemeriksaan Peruri belum ada. Notifikasi saat sertifikat elektronik aktif perlu dikonfirmasi tim teknis. Masa berlaku tautan onboarding tidak tercantum di email maupun di E-PPAT (penelusuran 26 Okt 2026) sehingga perlu data dari Peruri.",
       "tanggal": "2026-10-26",
@@ -7679,6 +7679,12 @@
       "kode": "IDDS-OB-58",
       "perubahan": "Judul hasil Cek status pembayaran diseragamkan dengan Backlog-HE-ONBOARDING, Backlog-HE-TRIAL, dan live menjadi IDDS Alert kuning \"Pembayaran belum terdeteksi\". Setelah upgrade selesai, kotak Langkah berikutnya tidak ditampilkan, sama dengan Backlog-HE-TRIAL dan live.",
       "berkas": "sumber/ob-bayar-badan.html; sumber/onboard-badan.html"
+    },
+    {
+      "tanggal": "2026-11-24",
+      "kode": "HE-CA-01",
+      "perubahan": "Alur Ajukan registrasi CA diubah sesuai keputusan Yogi 24 Nov: aplikasi hanya mengirim pendaftaran, lalu pengguna melanjutkan eKYC dari email Peruri. Portal Peruri tidak lagi dibuka di tab baru, dan tombol Lanjutkan eKYC di Peruri dihapus. Tombol dialog menjadi Ajukan.",
+      "berkas": "sumber/ca-badan.html"
     }
   ]
 }
