@@ -1104,7 +1104,7 @@ document.addEventListener('change', e => {
 });
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && S.layar === 'masuk' && e.target.closest('.ob-kartu input')) kirimMasuk(); });
 
-function galat(id, pesan) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); w?.classList.add('ina-text-field__wrapper--status-error'); if (h) { h.textContent = pesan; h.classList.add('ina-text-field__helper-text--error'); } }
+function galat(id, pesan) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); w?.classList.remove('ina-text-field__wrapper--status-success'); w?.classList.add('ina-text-field__wrapper--status-error'); if (h) { h.textContent = pesan; h.classList.remove('ina-text-field__helper-text--success'); h.classList.add('ina-text-field__helper-text--error'); } }
 function bersih(id) { const w = $(`#f-${id} .ina-text-field__wrapper`), h = $(`#h-${id}`); if (!w) return; w.classList.remove('ina-text-field__wrapper--status-error'); if (h && id !== 'rTenant') { h.classList.remove('ina-text-field__helper-text--error'); h.textContent = h.dataset.bantu || ''; } }
 function setPw(id, pesan, jenis) { const w = $(`#f-${id} .ina-password-input__wrapper`), h = $(`#h-${id}`); if (!w) return; w.className = `ina-password-input__wrapper ina-password-input__wrapper--size-md ina-password-input__wrapper--${jenis || 'neutral'}`; h.textContent = pesan; h.className = `ina-password-input__status-message ${jenis ? 'ina-password-input__status-message--' + jenis : ''}`; }
 function cekPwDaftar() {
@@ -1115,13 +1115,15 @@ function cekPwDaftar() {
 }
 let jt;
 function cekTenant(i) {
-  const v = i.value = i.value.toLowerCase().replace(/[^a-z0-9-]/g, ''), h = $('#h-rTenant');
-  clearTimeout(jt); h.classList.remove('ina-text-field__helper-text--error');
+  const v = i.value = i.value.toLowerCase().replace(/[^a-z0-9-]/g, ''), h = $('#h-rTenant'), w = $('#f-rTenant .ina-text-field__wrapper');
+  /* URL tersedia = status success IDDS (bingkai, teks, dan centang hijau); tidak tersedia = status error (masukan QA 25 Nov) */
+  const sukses = on => { w?.classList.toggle('ina-text-field__wrapper--status-success', on); h.classList.toggle('ina-text-field__helper-text--success', on); };
+  clearTimeout(jt); h.classList.remove('ina-text-field__helper-text--error'); sukses(false);
   if (!v) { h.textContent = h.dataset.bantu; return; }
   h.textContent = 'Memeriksa ketersediaan…';
   jt = setTimeout(() => { const ujung = /^-|-$/.test(v), pakai = TENANT_TERPAKAI.includes(v) || v.length < 3 || ujung;
     h.innerHTML = pakai ? (v.length < 3 ? 'URL Tenant minimal 3 karakter.' : ujung ? 'URL Tenant tidak boleh diawali atau diakhiri tanda hubung.' : `dev-app.eppat.id/t/${v} sudah dipakai. Coba nama lain.`) : `${ik('centang', 12)} dev-app.eppat.id/t/<b>${v}</b> tersedia.`;
-    h.classList.toggle('ina-text-field__helper-text--error', pakai); S.cekTenant = pakai ? '' : v; }, 500);
+    h.classList.toggle('ina-text-field__helper-text--error', pakai); sukses(!pakai); S.cekTenant = pakai ? '' : v; }, 500);
 }
 function kirimDaftar() {
   const v = id => ($('#' + id)?.value ?? '').trim(); let ada = false;
